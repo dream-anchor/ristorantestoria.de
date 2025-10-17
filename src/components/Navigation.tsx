@@ -46,9 +46,11 @@ const Navigation = () => {
                   </Link>
                 ))}
               </div>
-            </SheetContent>
+          </SheetContent>
           </Sheet>
-          <span className="font-serif text-xl font-bold">STORIA</span>
+          <Link to="/" className="font-serif text-xl font-bold hover:text-accent-foreground transition-colors">
+            STORIA
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
