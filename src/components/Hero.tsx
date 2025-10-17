@@ -18,7 +18,7 @@ const Hero = () => {
           className="bg-primary text-primary-foreground hover:bg-accent transition-colors px-8 py-6 text-lg"
           asChild
         >
-          <a href="#reservation">HIER RESERVIEREN</a>
+          <a href="/reservierung">HIER RESERVIEREN</a>
         </Button>
       </div>
     </section>
