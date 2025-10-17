@@ -22,13 +22,15 @@ const ImageCard = ({ image, title, subtitle, className = "" }: ImageCardProps) =
         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
       {(title || subtitle) && (
-        <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-6 text-center">
-          {title && (
-            <h3 className="text-white text-2xl md:text-3xl font-semibold mb-3">{title}</h3>
-          )}
-          {subtitle && (
-            <p className="text-white text-base md:text-lg font-medium whitespace-pre-line leading-relaxed">{subtitle}</p>
-          )}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-none">
+          <div className="bg-black/80 backdrop-blur-sm px-6 py-4 rounded-lg">
+            {title && (
+              <h3 className="text-white text-xl md:text-2xl font-semibold mb-2">{title}</h3>
+            )}
+            {subtitle && (
+              <p className="text-white text-sm md:text-base font-medium whitespace-pre-line leading-relaxed">{subtitle}</p>
+            )}
+          </div>
         </div>
       )}
     </div>
