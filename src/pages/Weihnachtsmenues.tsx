@@ -89,7 +89,7 @@ const Weihnachtsmenues = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
-                <a href="tel:+4989515196">089 51519696</a>
+                <a href="tel:+498951519696">+49 89 51519696</a>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a href="mailto:info@ristorantestoria.de">{t.christmas.sendEmail}</a>

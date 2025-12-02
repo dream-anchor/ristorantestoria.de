@@ -67,9 +67,9 @@ const Footer = () => {
             <div className="space-y-4 text-center md:text-left">
               <h3 className="font-serif font-medium text-base tracking-[0.2em] uppercase mb-6 text-primary-foreground/90">{t.footer.contact}</h3>
               <div className="space-y-2.5 text-sm font-sans text-primary-foreground/60">
-                <a href="tel:+4989515196" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
+              <a href="tel:+498951519696" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
                   <Phone className="h-3.5 w-3.5" />
-                  089 51519696
+                  +49 89 51519696
                 </a>
                 <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
                   <Mail className="h-3.5 w-3.5" />

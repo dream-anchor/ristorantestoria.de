@@ -24,9 +24,9 @@ const Datenschutz = () => {
                 <strong>Speranza GmbH</strong><br />
                 Karlstraße 47a<br />
                 80333 München<br />
-                Telefon:{" "}
+              Telefon:{" "}
                 <a href="tel:+498951519696" className="text-primary hover:underline">
-                  089 51519696
+                  +49 89 51519696
                 </a><br />
                 E-Mail:{" "}
                 <a href="mailto:info@ristorantestoria.de" className="text-primary hover:underline">

@@ -17,8 +17,8 @@ const Kontakt = () => {
       <SEO 
         title={language === 'de' ? 'Kontakt & Anfahrt' : 'Contact & Directions'}
         description={language === 'de' 
-          ? 'Kontakt zum Restaurant STORIA München. Adresse: Karlstraße 47a, 80333 München. Telefon: 089 515196. Öffnungszeiten und Anfahrt.'
-          : 'Contact STORIA restaurant Munich. Address: Karlstraße 47a, 80333 Munich. Phone: 089 515196. Opening hours and directions.'}
+          ? 'Kontakt zum Restaurant STORIA München. Adresse: Karlstraße 47a, 80333 München. Telefon: +49 89 51519696. Öffnungszeiten und Anfahrt.'
+          : 'Contact STORIA restaurant Munich. Address: Karlstraße 47a, 80333 Munich. Phone: +49 89 51519696. Opening hours and directions.'}
         canonical="/kontakt"
       />
       <StructuredData 
@@ -54,8 +54,8 @@ const Kontakt = () => {
                 <Phone className="h-5 w-5 text-primary mt-1" />
                 <div>
                   <p className="font-medium">{t.contact.phone}</p>
-                  <a href="tel:+4989515196" className="text-muted-foreground hover:text-primary">
-                    089 51519696
+                  <a href="tel:+498951519696" className="text-muted-foreground hover:text-primary">
+                    +49 89 51519696
                   </a>
                 </div>
               </div>

@@ -26,7 +26,7 @@ const FloatingActions = () => {
   }, []);
 
   const copyToClipboard = async () => {
-    await navigator.clipboard.writeText("+49 89 515196");
+    await navigator.clipboard.writeText("+49 89 51519696");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -40,7 +40,7 @@ const FloatingActions = () => {
       {/* Telefon Button */}
       {isMobile ? (
         <a
-          href="tel:+4989515196"
+          href="tel:+498951519696"
           className={buttonClasses}
         >
           <Phone className="h-5 w-5" />
@@ -56,7 +56,7 @@ const FloatingActions = () => {
           </PopoverTrigger>
           <PopoverContent side="left" className="w-auto p-3">
             <div className="flex items-center gap-3">
-              <span className="font-medium whitespace-nowrap">+49 89 515196</span>
+              <span className="font-medium whitespace-nowrap">+49 89 51519696</span>
               <Button
                 size="sm"
                 variant="outline"
