@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-const Menu = () => {
+const Getraenke = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
@@ -17,44 +17,50 @@ const Menu = () => {
         </div>
       </div>
       <Navigation />
-      
+
       <main className="container mx-auto px-4 py-12 flex-grow">
-        <h1 className="text-4xl font-bold mb-8">Menü</h1>
-        
+        <h1 className="text-4xl font-serif font-bold mb-8">Getränkekarte</h1>
+
         <div className="max-w-4xl mx-auto">
-          <p className="text-lg text-muted-foreground text-center mb-8">
-            Unsere aktuelle Speisekarte finden Sie vor Ort. 
-            Wir freuen uns auf Ihren Besuch!
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Antipasti</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Weine</h2>
               <p className="text-muted-foreground">
-                Italienische Vorspeisen mit frischen Zutaten aus dem Cilento
+                Erlesene italienische Weine aus ausgewählten Regionen – 
+                vom frischen Weißwein bis zum vollmundigen Rotwein.
               </p>
             </div>
-            
+
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Pizza</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Aperitivi</h2>
               <p className="text-muted-foreground">
-                Traditionelle neapolitanische Pizza nach g.t.S.-Standard
+                Klassische italienische Aperitifs – Aperol Spritz, Negroni, 
+                Bellini und mehr.
               </p>
             </div>
-            
+
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Pasta</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Digestivi</h2>
               <p className="text-muted-foreground">
-                Hausgemachte Pasta mit authentischen Saucen
+                Der perfekte Abschluss – Grappa, Limoncello und 
+                weitere italienische Spezialitäten.
               </p>
             </div>
-            
+
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Dolci</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Caffè</h2>
               <p className="text-muted-foreground">
-                Italienische Desserts und süße Verführungen
+                Echter italienischer Kaffee – Espresso, Cappuccino, 
+                Latte Macchiato und mehr.
               </p>
             </div>
+          </div>
+
+          <div className="bg-secondary p-6 rounded-lg text-center">
+            <h3 className="font-serif font-bold text-lg mb-2">STORIA Notturno</h3>
+            <p className="text-muted-foreground">
+              Late Night Aperitivo täglich von 21:00 - 22:30 Uhr
+            </p>
           </div>
         </div>
       </main>
@@ -64,4 +70,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Getraenke;

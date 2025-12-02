@@ -6,10 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Reservierung from "./pages/Reservierung";
 import Menu from "./pages/Menu";
-import Events from "./pages/Events";
-import Philosophie from "./pages/Philosophie";
+import Mittagsmenu from "./pages/Mittagsmenu";
+import Speisekarte from "./pages/Speisekarte";
+import Getraenke from "./pages/Getraenke";
+import BesondereAnlaesse from "./pages/BesondereAnlaesse";
+import Weihnachtsmenues from "./pages/Weihnachtsmenues";
 import Kontakt from "./pages/Kontakt";
 import Catering from "./pages/Catering";
+import UeberUns from "./pages/UeberUns";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,10 +28,14 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/reservierung" element={<Reservierung />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/philosophie" element={<Philosophie />} />
+          <Route path="/mittagsmenu" element={<Mittagsmenu />} />
+          <Route path="/speisekarte" element={<Speisekarte />} />
+          <Route path="/getraenke" element={<Getraenke />} />
+          <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
+          <Route path="/weihnachtsmenues" element={<Weihnachtsmenues />} />
           <Route path="/kontakt" element={<Kontakt />} />
           <Route path="/catering" element={<Catering />} />
+          <Route path="/ueber-uns" element={<UeberUns />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
