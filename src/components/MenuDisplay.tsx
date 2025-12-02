@@ -61,12 +61,12 @@ const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
       {(menu.title || menu.subtitle) && (
         <div className="text-center mb-12">
           {menu.title && (
-            <h2 className="text-2xl md:text-3xl font-serif font-semibold tracking-wide mb-2">
+            <h2 className="text-3xl md:text-4xl font-serif font-semibold tracking-wide mb-2">
               {menu.title}
             </h2>
           )}
           {menu.subtitle && (
-            <p className="text-muted-foreground italic">{menu.subtitle}</p>
+            <p className="text-lg text-muted-foreground italic">{menu.subtitle}</p>
           )}
           <div className="w-24 h-px bg-primary/30 mx-auto mt-6" />
         </div>
@@ -82,11 +82,11 @@ const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
             <div key={category.id} className="space-y-6">
               {/* Category Header */}
               <div className="text-center">
-                <h3 className="text-xl font-serif font-medium tracking-[0.15em] uppercase text-primary">
+                <h3 className="text-2xl font-serif font-medium tracking-[0.15em] uppercase text-primary">
                   ~ {categoryName} ~
                 </h3>
                 {categoryDescription && (
-                  <p className="text-sm text-muted-foreground mt-2 italic">
+                  <p className="text-base text-muted-foreground mt-2 italic">
                     {categoryDescription}
                   </p>
                 )}
@@ -102,18 +102,18 @@ const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
                   return (
                     <div key={item.id} className="group">
                       <div className="flex justify-between items-baseline gap-4">
-                        <span className="font-serif font-medium text-foreground">
+                        <span className="font-serif font-medium text-lg text-foreground">
                           {itemName}
                         </span>
                         <span className="flex-shrink-0 border-b border-dotted border-border flex-grow mx-2" />
                         {priceDisplay && (
-                          <span className="font-medium text-foreground whitespace-nowrap">
+                          <span className="font-medium text-lg text-foreground whitespace-nowrap">
                             {priceDisplay}
                           </span>
                         )}
                       </div>
                       {itemDescription && (
-                        <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                        <p className="text-base text-muted-foreground mt-1 leading-relaxed">
                           {itemDescription}
                         </p>
                       )}
@@ -129,7 +129,7 @@ const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
       {/* Footer note */}
       {menu.categories.length > 0 && (
         <div className="mt-12 pt-8 border-t border-border/50 text-center">
-          <p className="text-xs text-muted-foreground italic">
+          <p className="text-sm text-muted-foreground italic">
             {t.menuDisplay?.allergenNote || "Allergene und Zusatzstoffe auf Anfrage"}
           </p>
         </div>
