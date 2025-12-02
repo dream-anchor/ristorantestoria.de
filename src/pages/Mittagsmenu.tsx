@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import MenuDisplay from "@/components/MenuDisplay";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -21,28 +22,12 @@ const Mittagsmenu = () => {
       <Navigation />
 
       <main className="container mx-auto px-4 py-12 flex-grow">
-        <h1 className="text-4xl font-serif font-bold mb-8">{t.lunchMenu.title}</h1>
+        <h1 className="text-4xl font-serif font-bold mb-4 text-center">{t.lunchMenu.title}</h1>
+        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          {t.lunchMenu.description}
+        </p>
 
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-card p-8 rounded-lg border border-border mb-8">
-            <h2 className="text-2xl font-serif font-bold mb-4">{t.lunchMenu.ourOffer}</h2>
-            <p className="text-muted-foreground mb-6">
-              {t.lunchMenu.description}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {t.lunchMenu.hours}
-            </p>
-          </div>
-
-          <div className="bg-secondary p-6 rounded-lg text-center">
-            <p className="text-muted-foreground">
-              {t.lunchMenu.currentMenu}
-            </p>
-            <a href="tel:+4989515196" className="text-primary hover:underline mt-2 inline-block">
-              {t.lunchMenu.callNow}: 089 51519696
-            </a>
-          </div>
-        </div>
+        <MenuDisplay menuType="lunch" />
       </main>
 
       <Footer />

@@ -143,4 +143,9 @@ export const de = {
     notturnoDesc: "Late Night Aperitivo",
     notturnoHours: "21:00 - 22:30 Uhr",
   },
+  menuDisplay: {
+    noMenu: "Das aktuelle Menü ist derzeit nicht verfügbar.",
+    callForMenu: "Rufen Sie uns an: 089 51519696",
+    allergenNote: "Allergene und Zusatzstoffe auf Anfrage",
+  },
 };
