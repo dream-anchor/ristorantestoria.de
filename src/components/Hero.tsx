@@ -4,24 +4,31 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
-    <section className="bg-background border-b border-border">
+    <section className="bg-background border-b border-border" aria-labelledby="hero-heading">
       <div className="container mx-auto px-4 py-16 md:py-24 text-center">
-        <Link to="/">
+        <Link to="/" aria-label={language === 'de' ? 'Zur Startseite' : 'Go to homepage'}>
           <img 
             src={storiaLogo} 
-            alt="STORIA" 
+            alt="STORIA - Ristorante Pizzeria Bar München Logo" 
             className="h-32 md:h-48 mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer"
           />
         </Link>
         <p className="text-lg md:text-xl text-muted-foreground mb-8 tracking-widest uppercase">
           {t.hero.subtitle}
         </p>
-        <h1 className="text-2xl md:text-3xl font-medium mb-10">
-          {t.hero.location}
+        <h1 id="hero-heading" className="text-2xl md:text-3xl font-medium mb-10">
+          {language === 'de' 
+            ? 'Italienisches Restaurant im Herzen von München' 
+            : 'Italian Restaurant in the Heart of Munich'}
         </h1>
+        <p className="sr-only">
+          {language === 'de'
+            ? 'STORIA bietet authentische italienische Küche, frische Pasta, Pizza aus dem Holzofen und erlesene Weine in der Karlstraße München.'
+            : 'STORIA offers authentic Italian cuisine, fresh pasta, wood-fired pizza, and fine wines on Karlstraße Munich.'}
+        </p>
         <Button 
           size="lg" 
           className="bg-primary text-primary-foreground hover:bg-accent transition-colors px-10 py-6 text-base tracking-widest uppercase"

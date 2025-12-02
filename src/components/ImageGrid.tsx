@@ -10,19 +10,21 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ImageCardProps {
   image: string;
+  alt: string;
   title?: string;
   subtitle?: string;
   className?: string;
   imageClassName?: string;
 }
 
-const ImageCard = ({ image, title, subtitle, className = "", imageClassName = "" }: ImageCardProps) => {
+const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "" }: ImageCardProps) => {
   return (
     <div className={`relative overflow-hidden group ${className}`}>
       <img 
         src={image} 
-        alt={title || ""} 
+        alt={alt} 
         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageClassName}`}
+        loading="lazy"
       />
       {(title || subtitle) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-none">
@@ -48,30 +50,54 @@ const ImageCard = ({ image, title, subtitle, className = "", imageClassName = ""
 };
 
 const ImageGrid = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const altTexts = language === 'de' ? {
+    weinservice: 'Professioneller Weinservice im Restaurant STORIA München - Sommelier präsentiert erlesene italienische Weine',
+    pasta: 'Hausgemachte frische Pasta im Restaurant STORIA München - Authentische italienische Küche',
+    drinks: 'Handgefertigte Cocktails und Aperitivo an der Bar des STORIA München',
+    meeresfruchte: 'Frische Meeresfrüchte und Fischgerichte im italienischen Restaurant STORIA',
+    aussen: 'Gemütliche Außenterrasse des Restaurant STORIA in der Münchner Innenstadt',
+    hausAussen: 'Historisches Gebäude und Eingang des Ristorante STORIA in der Karlstraße München',
+    tiramisu: 'Hausgemachtes Tiramisu und italienische Desserts im STORIA München',
+    menschenAussen: 'Gäste genießen italienische Küche auf der Terrasse des STORIA München',
+  } : {
+    weinservice: 'Professional wine service at STORIA restaurant Munich - Sommelier presenting fine Italian wines',
+    pasta: 'Homemade fresh pasta at STORIA restaurant Munich - Authentic Italian cuisine',
+    drinks: 'Handcrafted cocktails and aperitivo at the STORIA Munich bar',
+    meeresfruchte: 'Fresh seafood and fish dishes at Italian restaurant STORIA',
+    aussen: 'Cozy outdoor terrace of restaurant STORIA in Munich city center',
+    hausAussen: 'Historic building and entrance of Ristorante STORIA on Karlstraße Munich',
+    tiramisu: 'Homemade tiramisu and Italian desserts at STORIA Munich',
+    menschenAussen: 'Guests enjoying Italian cuisine on the terrace of STORIA Munich',
+  };
 
   return (
-    <section className="bg-background py-12">
+    <section className="bg-background py-12" aria-label={language === 'de' ? 'Bildergalerie Restaurant STORIA' : 'Image Gallery Restaurant STORIA'}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Row 1 */}
           <ImageCard 
             image={weinserviceImage} 
+            alt={altTexts.weinservice}
             className="aspect-square"
             imageClassName="object-right"
           />
           <ImageCard 
             image={pastaImage} 
+            alt={altTexts.pasta}
             title={t.imageGrid.openingHoursTitle}
             subtitle={t.imageGrid.openingHoursText}
             className="aspect-square"
           />
           <ImageCard 
             image={drinksImage} 
+            alt={altTexts.drinks}
             className="aspect-square"
           />
           <ImageCard 
             image={aperitivoImage} 
+            alt={altTexts.meeresfruchte}
             title={t.imageGrid.notturnoTitle}
             subtitle={t.imageGrid.notturnoText}
             className="aspect-square"
@@ -80,21 +106,25 @@ const ImageGrid = () => {
           {/* Row 2 */}
           <ImageCard 
             image={breakfastImage} 
+            alt={altTexts.aussen}
             title={t.imageGrid.breakfastTitle}
             subtitle={t.imageGrid.breakfastText}
             className="aspect-square"
           />
           <ImageCard 
             image={restaurantImage} 
+            alt={altTexts.hausAussen}
             className="aspect-square"
             imageClassName="object-bottom"
           />
           <ImageCard 
             image={dessertImage} 
+            alt={altTexts.tiramisu}
             className="aspect-square"
           />
           <ImageCard 
             image={terrasseImage} 
+            alt={altTexts.menschenAussen}
             className="aspect-square"
           />
         </div>

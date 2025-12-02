@@ -3,15 +3,32 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import MenuDisplay from "@/components/MenuDisplay";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Mittagsmenu = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
+    <>
+      <SEO 
+        title={language === 'de' ? 'Mittagsmenü' : 'Lunch Menu'}
+        description={language === 'de' 
+          ? 'Wechselndes Mittagsmenü im Restaurant STORIA München. Frische italienische Küche zu günstigen Mittagspreisen, Mo-Fr.'
+          : 'Changing lunch menu at STORIA restaurant Munich. Fresh Italian cuisine at affordable lunch prices, Mon-Fri.'}
+        canonical="/mittagsmenu"
+      />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: language === 'de' ? 'Mittagsmenü' : 'Lunch Menu', url: '/mittagsmenu' }
+        ]} 
+      />
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
           <Link to="/">
@@ -36,8 +53,9 @@ const Mittagsmenu = () => {
         <MenuDisplay menuType="lunch" />
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

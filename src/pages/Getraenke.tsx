@@ -3,15 +3,32 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import MenuDisplay from "@/components/MenuDisplay";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Getraenke = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
+    <>
+      <SEO 
+        title={language === 'de' ? 'Getränkekarte' : 'Drinks Menu'}
+        description={language === 'de' 
+          ? 'Getränkekarte des Restaurant STORIA München. Italienische Weine, Cocktails, Aperitivo und erfrischende Getränke.'
+          : 'Drinks menu at STORIA restaurant Munich. Italian wines, cocktails, aperitivo and refreshing beverages.'}
+        canonical="/getraenke"
+      />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: language === 'de' ? 'Getränke' : 'Drinks', url: '/getraenke' }
+        ]} 
+      />
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
           <Link to="/">
@@ -33,8 +50,9 @@ const Getraenke = () => {
         <MenuDisplay menuType="drinks" />
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

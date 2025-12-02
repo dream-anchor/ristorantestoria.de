@@ -4,11 +4,13 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ConsentOpenTable from "@/components/ConsentOpenTable";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Reservierung = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [iframeHeight, setIframeHeight] = useState(1100);
 
   useEffect(() => {
@@ -24,8 +26,23 @@ const Reservierung = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
+    <>
+      <SEO 
+        title={language === 'de' ? 'Tisch reservieren' : 'Book a Table'}
+        description={language === 'de' 
+          ? 'Online Tischreservierung im Restaurant STORIA München. Reservieren Sie jetzt Ihren Tisch für authentische italienische Küche.'
+          : 'Online table reservation at STORIA restaurant Munich. Book your table now for authentic Italian cuisine.'}
+        canonical="/reservierung"
+      />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: language === 'de' ? 'Reservierung' : 'Reservation', url: '/reservierung' }
+        ]} 
+      />
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
           <Link to="/">
@@ -54,8 +71,9 @@ const Reservierung = () => {
         </div>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 
