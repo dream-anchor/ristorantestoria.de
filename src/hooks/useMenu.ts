@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
-export type MenuType = 'lunch' | 'food' | 'drinks';
+export type MenuType = 'lunch' | 'food' | 'drinks' | 'christmas' | 'valentines';
 
 export interface MenuItem {
   id: string;

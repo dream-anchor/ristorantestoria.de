@@ -15,6 +15,8 @@ const menuTypeLabels: Record<MenuType, string> = {
   lunch: "Mittagsmenü",
   food: "Speisekarte",
   drinks: "Getränkekarte",
+  christmas: "Weihnachtsmenü",
+  valentines: "Valentinstag-Menü",
 };
 
 const MenuStatusCard = ({ menuType, menuLabel, viewPath }: MenuStatusCardProps) => {
