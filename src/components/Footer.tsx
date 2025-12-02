@@ -10,70 +10,54 @@ const Footer = () => {
 
   return (
     <footer className="bg-primary text-primary-foreground">
-      {/* La Mamma */}
+      {/* La Famiglia Speranza */}
       <div className="border-b border-primary-foreground/20">
         <div className="container mx-auto px-4 py-10">
-          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6 tracking-wide">{t.footer.theMamma}</h2>
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8 tracking-wide">{t.footer.theFamily}</h2>
           
-          <div className="max-w-xl mx-auto text-center">
-            <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
-              <video 
-                src={mammaVideo}
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-                className="w-full h-full object-cover"
-              />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {/* Mamma */}
+            <div className="text-center">
+              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+                <video 
+                  src={mammaVideo}
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg md:text-xl font-serif font-semibold mb-1 tracking-wide">{t.footer.mammaSperanza}</h3>
+              <p className="text-primary-foreground/60 text-sm italic">{t.footer.mammaNickname}</p>
             </div>
-            <h3 className="text-xl md:text-2xl font-serif font-semibold mb-1 tracking-wide">{t.footer.mammaSperanza}</h3>
-            <p className="text-primary-foreground/60 text-sm italic mb-3">{t.footer.mammaNickname}</p>
-            <p className="text-primary-foreground/80 text-sm font-sans leading-relaxed max-w-md mx-auto">
-              {t.footer.mammaBio}
-            </p>
-          </div>
-        </div>
-      </div>
 
-      {/* Die Fratelli */}
-      <div className="border-b border-primary-foreground/20">
-        <div className="container mx-auto px-4 py-10">
-          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6 tracking-wide">{t.footer.theFratelli}</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {/* Domenico */}
             <div className="text-center">
-              <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
                 <img 
                   src={domenicoImage} 
                   alt="Domenico Speranza" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl md:text-2xl font-serif font-semibold mb-1 tracking-wide">Domenico Speranza</h3>
-              <p className="text-primary-foreground/60 text-sm italic mb-3">{t.footer.domenicoNickname}</p>
-              <p className="text-primary-foreground/80 text-sm font-sans leading-relaxed max-w-xs mx-auto">
-                {t.footer.domenicoBio}
-              </p>
+              <h3 className="text-lg md:text-xl font-serif font-semibold mb-1 tracking-wide">Domenico Speranza</h3>
+              <p className="text-primary-foreground/60 text-sm italic">{t.footer.domenicoNickname}</p>
             </div>
 
             {/* Nicola */}
             <div className="text-center">
-              <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
                 <img 
                   src={nicolaImage} 
                   alt="Nicola Speranza" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl md:text-2xl font-serif font-semibold mb-1 tracking-wide">Nicola Speranza</h3>
-              <p className="text-primary-foreground/60 text-sm italic mb-3">{t.footer.nicolaNickname}</p>
-              <p className="text-primary-foreground/80 text-sm font-sans leading-relaxed max-w-xs mx-auto">
-                {t.footer.nicolaBio}
-              </p>
+              <h3 className="text-lg md:text-xl font-serif font-semibold mb-1 tracking-wide">Nicola Speranza</h3>
+              <p className="text-primary-foreground/60 text-sm italic">{t.footer.nicolaNickname}</p>
             </div>
           </div>
-
         </div>
       </div>
 
