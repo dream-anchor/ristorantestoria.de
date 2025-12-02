@@ -30,6 +30,7 @@ import Haftungsausschluss from "./pages/Haftungsausschluss";
 import FloatingActions from "./components/FloatingActions";
 import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop />
             <FloatingActions />
             <CookieBanner />
             <CookieSettingsButton />

@@ -43,8 +43,8 @@ const Impressum = () => {
             {/* Vertretung */}
             <section>
               <p>
-                <strong>Vertreten durch den Geschäftsführer:</strong><br />
-                Domenico Speranza
+                <strong>Vertreten durch die Geschäftsführerin:</strong><br />
+                Agnese Lettieri
               </p>
             </section>
 
@@ -75,10 +75,10 @@ const Impressum = () => {
             {/* Inhaltlich Verantwortlicher */}
             <section>
               <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                Inhaltlich Verantwortlicher gemäß § 18 Abs. 2 MStV
+                Inhaltlich Verantwortliche gemäß § 18 Abs. 2 MStV
               </h2>
               <p>
-                Domenico Speranza<br />
+                Agnese Lettieri<br />
                 Karlstraße 47a<br />
                 80333 München
               </p>
