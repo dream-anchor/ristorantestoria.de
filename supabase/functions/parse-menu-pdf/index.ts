@@ -49,15 +49,26 @@ serve(async (req) => {
 
     console.log(`Parsing menu PDF for type: ${menuType}, base64 length: ${pdfBase64.length}`);
 
-    const systemPrompt = `Du bist ein präziser Menü-Parser für ein italienisches Restaurant. Deine Aufgabe ist es, den Inhalt eines Menü-PDFs EXAKT zu extrahieren.
+    const systemPrompt = `Du bist ein präziser Menü-Parser für ein italienisches Restaurant. Deine Aufgabe ist es, den Inhalt eines Menü-PDFs EXAKT zu extrahieren UND automatisch ins Englische zu übersetzen.
 
-WICHTIGE REGELN:
-1. Übernimm ALLE Texte WÖRTLICH - keine Umformulierungen oder Korrekturen
+WICHTIGE REGELN FÜR EXTRAKTION:
+1. Übernimm ALLE deutschen Texte WÖRTLICH - keine Umformulierungen oder Korrekturen
 2. Preise müssen EXAKT übernommen werden (z.B. "12,50" oder "€12,50")
 3. Behalte die Kategorien-Struktur bei (z.B. "Vorspeisen", "Pasta", "Pizza", etc.)
 4. Bei Unklarheiten: lieber original übernehmen als interpretieren
-5. Extrahiere auch englische Übersetzungen falls vorhanden, sonst lasse name_en und description_en leer
-6. Erkenne Preise auch wenn sie in verschiedenen Formaten angegeben sind (€, EUR, ohne Währung)
+5. Erkenne Preise auch wenn sie in verschiedenen Formaten angegeben sind (€, EUR, ohne Währung)
+
+AUTOMATISCHE ENGLISCHE ÜBERSETZUNG (PFLICHT):
+6. Übersetze ALLE deutschen Texte automatisch ins Englische für die _en Felder:
+   - name → name_en (z.B. "Vorspeisen" → "Starters", "Hauptgerichte" → "Main Courses")
+   - description → description_en (vollständige Übersetzung der Beschreibung)
+7. Bei italienischen Kategorie-Namen wie "Antipasti", "Primi Piatti", "Dolci":
+   - Behalte sie im name Feld (Deutsch)
+   - Für name_en: füge englische Übersetzung hinzu (z.B. "Antipasti - Starters", "Dolci - Desserts")
+8. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
+   - name: Original beibehalten
+   - name_en: Original beibehalten (italienische Gerichtnamen sind international)
+   - description_en: Deutsche Beschreibung ins Englische übersetzen
 
 Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.`;
 
