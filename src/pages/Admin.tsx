@@ -90,6 +90,7 @@ const Admin = () => {
           {/* Mittagsmenü */}
           <CollapsibleMenuCard
             title="Mittagsmenü"
+            menuId={lunchMenu?.id}
             isPublished={lunchMenu?.is_published}
             defaultOpen={true}
           >
@@ -100,6 +101,7 @@ const Admin = () => {
           {/* Speisekarte */}
           <CollapsibleMenuCard
             title="Speisekarte"
+            menuId={foodMenu?.id}
             isPublished={foodMenu?.is_published}
           >
             <MenuStatusCard menuType="food" menuLabel="Speisekarte" viewPath="/speisekarte" />
@@ -109,6 +111,7 @@ const Admin = () => {
           {/* Getränkekarte */}
           <CollapsibleMenuCard
             title="Getränkekarte"
+            menuId={drinksMenu?.id}
             isPublished={drinksMenu?.is_published}
           >
             <MenuStatusCard menuType="drinks" menuLabel="Getränkekarte" viewPath="/getraenke" />
