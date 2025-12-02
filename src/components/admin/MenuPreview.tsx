@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Trash2, Plus, GripVertical } from "lucide-react";
 
@@ -166,11 +167,12 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
                       onChange={(e) => updateItem(catIndex, itemIndex, 'price_display', e.target.value)}
                       placeholder="Preis"
                     />
-                    <Input
+                    <Textarea
                       value={item.description || ''}
                       onChange={(e) => updateItem(catIndex, itemIndex, 'description', e.target.value)}
                       placeholder="Beschreibung (optional)"
-                      className="md:col-span-3"
+                      className="md:col-span-3 min-h-[60px] resize-y"
+                      rows={2}
                     />
                   </div>
                   <Button
