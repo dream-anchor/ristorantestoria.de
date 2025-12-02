@@ -1,6 +1,31 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
+export interface ParsedMenuItem {
+  name: string;
+  name_en: string;
+  description: string;
+  description_en: string;
+  price: number | null;
+  price_display: string;
+  sort_order: number;
+}
+
+export interface ParsedMenuCategory {
+  name: string;
+  name_en: string;
+  description: string;
+  description_en: string;
+  sort_order: number;
+  items: ParsedMenuItem[];
+}
+
+export interface ParsedMenu {
+  title: string;
+  subtitle: string;
+  categories: ParsedMenuCategory[];
+}
+
 export interface SpecialMenu {
   id: string;
   title: string | null;
@@ -142,6 +167,163 @@ export const useDeleteSpecialMenu = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['special-menus'] });
+    },
+  });
+};
+
+export const useMenuContent = (menuId: string | undefined) => {
+  return useQuery({
+    queryKey: ['menu-content', menuId],
+    queryFn: async (): Promise<ParsedMenu | null> => {
+      if (!menuId) return null;
+      
+      // Load menu data
+      const { data: menu, error: menuError } = await supabase
+        .from('menus')
+        .select('*')
+        .eq('id', menuId)
+        .maybeSingle();
+      
+      if (menuError) throw menuError;
+      if (!menu) return null;
+
+      // Load categories
+      const { data: categories, error: catError } = await supabase
+        .from('menu_categories')
+        .select('*')
+        .eq('menu_id', menuId)
+        .order('sort_order');
+      
+      if (catError) throw catError;
+
+      // Load items for all categories
+      const categoryIds = categories?.map(c => c.id) || [];
+      let items: any[] = [];
+      
+      if (categoryIds.length > 0) {
+        const { data: itemsData, error: itemsError } = await supabase
+          .from('menu_items')
+          .select('*')
+          .in('category_id', categoryIds)
+          .order('sort_order');
+        
+        if (itemsError) throw itemsError;
+        items = itemsData || [];
+      }
+
+      // Convert to ParsedMenu format
+      return {
+        title: menu.title || '',
+        subtitle: menu.subtitle || '',
+        categories: categories?.map(cat => ({
+          name: cat.name,
+          name_en: cat.name_en || '',
+          description: cat.description || '',
+          description_en: cat.description_en || '',
+          sort_order: cat.sort_order || 0,
+          items: items
+            .filter(item => item.category_id === cat.id)
+            .map(item => ({
+              name: item.name,
+              name_en: item.name_en || '',
+              description: item.description || '',
+              description_en: item.description_en || '',
+              price: item.price,
+              price_display: item.price_display || '',
+              sort_order: item.sort_order || 0,
+            })),
+        })) || [],
+      };
+    },
+    enabled: !!menuId,
+    staleTime: 0,
+  });
+};
+
+export const useSaveMenuContent = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ menuId, data }: { menuId: string; data: ParsedMenu }) => {
+      // Update menu title/subtitle
+      const { error: menuError } = await supabase
+        .from('menus')
+        .update({
+          title: data.title,
+          subtitle: data.subtitle,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', menuId);
+
+      if (menuError) throw menuError;
+
+      // Get existing categories to delete them
+      const { data: existingCategories } = await supabase
+        .from('menu_categories')
+        .select('id')
+        .eq('menu_id', menuId);
+
+      if (existingCategories && existingCategories.length > 0) {
+        const categoryIds = existingCategories.map(c => c.id);
+        
+        // Delete existing items
+        await supabase
+          .from('menu_items')
+          .delete()
+          .in('category_id', categoryIds);
+
+        // Delete existing categories
+        await supabase
+          .from('menu_categories')
+          .delete()
+          .eq('menu_id', menuId);
+      }
+
+      // Insert new categories and items
+      for (let catIndex = 0; catIndex < data.categories.length; catIndex++) {
+        const category = data.categories[catIndex];
+        
+        const { data: newCategory, error: catError } = await supabase
+          .from('menu_categories')
+          .insert({
+            menu_id: menuId,
+            name: category.name,
+            name_en: category.name_en || null,
+            description: category.description || null,
+            description_en: category.description_en || null,
+            sort_order: catIndex,
+          })
+          .select()
+          .single();
+
+        if (catError) throw catError;
+
+        // Insert items for this category
+        if (category.items.length > 0) {
+          const itemsToInsert = category.items.map((item, itemIndex) => ({
+            category_id: newCategory.id,
+            name: item.name,
+            name_en: item.name_en || null,
+            description: item.description || null,
+            description_en: item.description_en || null,
+            price: item.price,
+            price_display: item.price_display || null,
+            sort_order: itemIndex,
+          }));
+
+          const { error: itemsError } = await supabase
+            .from('menu_items')
+            .insert(itemsToInsert);
+
+          if (itemsError) throw itemsError;
+        }
+      }
+
+      return { success: true };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['special-menus'] });
+      queryClient.invalidateQueries({ queryKey: ['menu-content'] });
     },
   });
 };
