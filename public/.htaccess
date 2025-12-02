@@ -7,6 +7,10 @@ RewriteEngine On
 # Leite exakt /cms/reservations/ nach /reservierung um
 RewriteRule ^cms/reservations/?$ /reservierung [R=301,L]
 
+# Leite /cms/ und alle anderen /cms/*-Pfade zur Startseite um
+RewriteRule ^cms/?$ / [R=301,L]
+RewriteRule ^cms/(.*)$ / [R=301,L]
+
 # ============================================
 # 2. SPA-Routing (React Router)
 # ============================================
