@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import Index from "./pages/Index";
 import Reservierung from "./pages/Reservierung";
 import Menu from "./pages/Menu";
@@ -19,38 +20,56 @@ import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
+import CookieRichtlinie from "./pages/CookieRichtlinie";
+import AGBRestaurant from "./pages/AGBRestaurant";
+import AGBGutscheine from "./pages/AGBGutscheine";
+import Widerrufsbelehrung from "./pages/Widerrufsbelehrung";
+import Zahlungsinformationen from "./pages/Zahlungsinformationen";
+import Lebensmittelhinweise from "./pages/Lebensmittelhinweise";
+import Haftungsausschluss from "./pages/Haftungsausschluss";
 import FloatingActions from "./components/FloatingActions";
+import CookieBanner from "./components/CookieBanner";
+import CookieSettingsButton from "./components/CookieSettingsButton";
 
 const queryClient = new QueryClient();
 
-// Root App component
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <LanguageProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <FloatingActions />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/reservierung" element={<Reservierung />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/mittagsmenu" element={<Mittagsmenu />} />
-            <Route path="/speisekarte" element={<Speisekarte />} />
-            <Route path="/getraenke" element={<Getraenke />} />
-            <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
-            <Route path="/weihnachtsmenues" element={<Weihnachtsmenues />} />
-            <Route path="/kontakt" element={<Kontakt />} />
-            <Route path="/catering" element={<Catering />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/impressum" element={<Impressum />} />
-            <Route path="/datenschutz" element={<Datenschutz />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <CookieConsentProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <FloatingActions />
+            <CookieBanner />
+            <CookieSettingsButton />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/reservierung" element={<Reservierung />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/mittagsmenu" element={<Mittagsmenu />} />
+              <Route path="/speisekarte" element={<Speisekarte />} />
+              <Route path="/getraenke" element={<Getraenke />} />
+              <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
+              <Route path="/weihnachtsmenues" element={<Weihnachtsmenues />} />
+              <Route path="/kontakt" element={<Kontakt />} />
+              <Route path="/catering" element={<Catering />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/impressum" element={<Impressum />} />
+              <Route path="/datenschutz" element={<Datenschutz />} />
+              <Route path="/cookies" element={<CookieRichtlinie />} />
+              <Route path="/agb" element={<AGBRestaurant />} />
+              <Route path="/agb-gutscheine" element={<AGBGutscheine />} />
+              <Route path="/widerruf" element={<Widerrufsbelehrung />} />
+              <Route path="/zahlung" element={<Zahlungsinformationen />} />
+              <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
+              <Route path="/disclaimer" element={<Haftungsausschluss />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </CookieConsentProvider>
       </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>

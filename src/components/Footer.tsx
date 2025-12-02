@@ -104,12 +104,19 @@ const Footer = () => {
           <p className="text-sm font-sans text-primary-foreground/40">
             © {new Date().getFullYear()} {t.footer.copyright}
           </p>
-          <div className="flex items-center justify-center gap-6 mt-4 text-xs font-sans text-primary-foreground/30">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-xs font-sans text-primary-foreground/30">
             <Link to="/impressum" className="hover:text-primary-foreground/60 transition-colors">{t.footer.imprint}</Link>
             <span className="opacity-50">·</span>
             <Link to="/datenschutz" className="hover:text-primary-foreground/60 transition-colors">{t.footer.privacy}</Link>
             <span className="opacity-50">·</span>
-            <Link to="/admin" className="hover:text-primary-foreground/60 transition-colors">Admin</Link>
+            <Link to="/cookies" className="hover:text-primary-foreground/60 transition-colors">{t.legal.cookies}</Link>
+            <span className="opacity-50">·</span>
+            <Link to="/agb" className="hover:text-primary-foreground/60 transition-colors">{t.legal.agb}</Link>
+            <span className="opacity-50">·</span>
+            <Link to="/lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</Link>
+          </div>
+          <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
+            <Link to="/admin" className="hover:text-primary-foreground/40 transition-colors">Admin</Link>
           </div>
         </div>
       </div>
