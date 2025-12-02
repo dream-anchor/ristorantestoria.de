@@ -1,5 +1,5 @@
 import weinserviceImage from "@/assets/weinservice.webp";
-import pastaImage from "@/assets/pasta.jpg";
+import ravioliImage from "@/assets/ravioli.webp";
 import drinksImage from "@/assets/cocktails.webp";
 import breakfastImage from "@/assets/aussen.webp";
 import restaurantImage from "@/assets/haus-aussen-2.webp";
@@ -54,7 +54,7 @@ const ImageGrid = () => {
 
   const altTexts = language === 'de' ? {
     weinservice: 'Professioneller Weinservice im Restaurant STORIA München - Sommelier präsentiert erlesene italienische Weine',
-    pasta: 'Hausgemachte frische Pasta im Restaurant STORIA München - Authentische italienische Küche',
+    ravioli: 'Handgemachte Ravioli mit frischer Tomatensauce im Restaurant STORIA München',
     drinks: 'Handgefertigte Cocktails und Aperitivo an der Bar des STORIA München',
     meeresfruchte: 'Frische Meeresfrüchte und Fischgerichte im italienischen Restaurant STORIA',
     aussen: 'Gemütliche Außenterrasse des Restaurant STORIA in der Münchner Innenstadt',
@@ -63,7 +63,7 @@ const ImageGrid = () => {
     menschenAussen: 'Gäste genießen italienische Küche auf der Terrasse des STORIA München',
   } : {
     weinservice: 'Professional wine service at STORIA restaurant Munich - Sommelier presenting fine Italian wines',
-    pasta: 'Homemade fresh pasta at STORIA restaurant Munich - Authentic Italian cuisine',
+    ravioli: 'Handmade ravioli with fresh tomato sauce at STORIA restaurant Munich',
     drinks: 'Handcrafted cocktails and aperitivo at the STORIA Munich bar',
     meeresfruchte: 'Fresh seafood and fish dishes at Italian restaurant STORIA',
     aussen: 'Cozy outdoor terrace of restaurant STORIA in Munich city center',
@@ -84,8 +84,8 @@ const ImageGrid = () => {
             imageClassName="object-right"
           />
           <ImageCard 
-            image={pastaImage} 
-            alt={altTexts.pasta}
+            image={ravioliImage} 
+            alt={altTexts.ravioli}
             title={t.imageGrid.openingHoursTitle}
             subtitle={t.imageGrid.openingHoursText}
             className="aspect-square"

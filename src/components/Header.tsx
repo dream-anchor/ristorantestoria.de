@@ -1,8 +1,11 @@
 import { Phone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useScrolled } from "@/hooks/useScrolled";
 
 const Header = () => {
+  const isScrolled = useScrolled();
+
   return (
     <header className="border-b border-border bg-background">
       <div className="container mx-auto px-4 py-3">
@@ -19,7 +22,9 @@ const Header = () => {
               <Mail className="h-4 w-4" />
               <span className="hidden sm:inline">info@ristorantestoria.de</span>
             </a>
-            <LanguageSwitcher />
+            <div className={`transition-opacity duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       </div>

@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/collapsible";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
+import { useScrolled } from "@/hooks/useScrolled";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 interface NavChild {
   label: string;
@@ -30,6 +32,7 @@ const Navigation = () => {
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const { t, language } = useLanguage();
   const { data: specialMenus } = usePublishedSpecialMenus();
+  const isScrolled = useScrolled();
 
   // Dynamische Kinder für "Besondere Anlässe" basierend auf veröffentlichten Menüs
   const specialOccasionsChildren: NavChild[] = specialMenus && specialMenus.length > 0
@@ -169,6 +172,10 @@ const Navigation = () => {
                     </Link>
                   )
                 )}
+                {/* Language Switcher im Mobile Menu */}
+                <div className="mt-4 px-4">
+                  <LanguageSwitcher />
+                </div>
               </div>
             </SheetContent>
           </Sheet>
@@ -178,10 +185,16 @@ const Navigation = () => {
           >
             STORIA
           </Link>
+          {/* Language Switcher Mobile (außerhalb Sheet) */}
+          <div className={`transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+            <LanguageSwitcher />
+          </div>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center justify-center">
+        <div className="hidden lg:flex items-center justify-between">
+          <div className="w-24" /> {/* Spacer für Balance */}
+          <div className="flex items-center justify-center">
           {navItems.map((item) =>
             item.children ? (
               <div
@@ -262,6 +275,11 @@ const Navigation = () => {
               </Link>
             )
           )}
+          </div>
+          {/* Language Switcher Desktop - rechts */}
+          <div className={`w-24 flex justify-end transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     </nav>
