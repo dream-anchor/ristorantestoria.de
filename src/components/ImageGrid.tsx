@@ -5,6 +5,7 @@ import breakfastImage from "@/assets/aussen.webp";
 import restaurantImage from "@/assets/restaurant.jpg";
 import aperitivoImage from "@/assets/meeresfruchte.webp";
 import dessertImage from "@/assets/tiramisu.webp";
+import terrasseImage from "@/assets/menschen-aussen.jpeg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ImageCardProps {
@@ -87,6 +88,10 @@ const ImageGrid = () => {
           />
           <ImageCard 
             image={dessertImage} 
+            className="aspect-square"
+          />
+          <ImageCard 
+            image={terrasseImage} 
             className="aspect-square"
           />
         </div>
