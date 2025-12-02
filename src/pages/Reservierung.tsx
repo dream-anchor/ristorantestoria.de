@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ConsentOpenTable from "@/components/ConsentOpenTable";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -45,12 +46,10 @@ const Reservierung = () => {
         </p>
         
         <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border shadow-lg overflow-hidden">
-          <iframe 
+          <ConsentOpenTable 
             src="https://www.opentable.de/booking/restref/availability?rid=115809&restref=115809&lang=de-DE&color=1&r3uid=cfe&dark=false&partysize=2&ot_source=Restaurant%20website"
-            className="w-full border-0 transition-[height] duration-300"
-            style={{ height: `${iframeHeight}px` }}
-            title="OpenTable Reservierung"
-            allow="geolocation"
+            className="transition-[height] duration-300"
+            height={iframeHeight}
           />
         </div>
       </main>

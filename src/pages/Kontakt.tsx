@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -100,14 +101,9 @@ const Kontakt = () => {
         {/* Google Maps */}
         <div id="map" className="max-w-4xl mx-auto mt-8">
           <div className="bg-card rounded-lg border border-border overflow-hidden">
-            <iframe
+            <ConsentGoogleMaps
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.063!2d11.5628!3d48.1447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e75f0a0c3c6e7%3A0x8c0b2b0b0b0b0b0b!2sKarlstra%C3%9Fe%2047a%2C%2080333%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde"
-              width="100%"
-              height="400"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              height={400}
               title="STORIA Ristorante Standort"
               className="w-full"
             />
