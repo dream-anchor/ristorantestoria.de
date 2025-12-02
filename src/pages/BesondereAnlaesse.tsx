@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -11,9 +12,22 @@ import MenuDisplay from "@/components/MenuDisplay";
 
 const BesondereAnlaesse = () => {
   const { t } = useLanguage();
+  const location = useLocation();
   const { data: specialMenus, isLoading } = usePublishedSpecialMenus();
 
   const hasPublishedMenus = specialMenus && specialMenus.length > 0;
+
+  // Smooth scroll to anchor when navigating with hash
+  useEffect(() => {
+    if (location.hash && !isLoading) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location.hash, isLoading, specialMenus]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -43,7 +57,11 @@ const BesondereAnlaesse = () => {
           ) : hasPublishedMenus ? (
             <div className="space-y-12 mb-12">
               {specialMenus.map((menu) => (
-                <div key={menu.id} className="bg-card p-8 rounded-lg border border-border">
+                <div 
+                  key={menu.id} 
+                  id={menu.id}
+                  className="bg-card p-8 rounded-lg border border-border scroll-mt-24"
+                >
                   <MenuDisplay menuType="special" menuId={menu.id} />
                 </div>
               ))}

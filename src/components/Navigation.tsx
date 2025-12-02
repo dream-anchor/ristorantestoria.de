@@ -9,6 +9,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
 
 interface NavChild {
   label: string;
@@ -27,6 +28,15 @@ const Navigation = () => {
   const [openMenus, setOpenMenus] = useState<string[]>([]);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const { t } = useLanguage();
+  const { data: specialMenus } = usePublishedSpecialMenus();
+
+  // Dynamische Kinder für "Besondere Anlässe" basierend auf veröffentlichten Menüs
+  const specialOccasionsChildren: NavChild[] = specialMenus && specialMenus.length > 0
+    ? specialMenus.map(menu => ({
+        label: menu.title?.toUpperCase() || 'MENÜ',
+        path: `/besondere-anlaesse#${menu.id}`
+      }))
+    : [{ label: t.nav.specialOccasions, path: "/besondere-anlaesse" }];
 
   const navItems: NavItem[] = [
     { label: t.nav.reservation, path: "/reservierung" },
@@ -40,7 +50,7 @@ const Navigation = () => {
     },
     {
       label: t.nav.specialOccasions,
-      children: [{ label: t.nav.christmasMenus, path: "/weihnachtsmenues" }],
+      children: specialOccasionsChildren,
     },
     { label: t.nav.catering, path: "/catering" },
     { label: t.nav.contact, path: "/kontakt" },
