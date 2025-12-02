@@ -4,7 +4,7 @@ import drinksImage from "@/assets/drinks.jpg";
 import breakfastImage from "@/assets/breakfast.jpg";
 import restaurantImage from "@/assets/restaurant.jpg";
 import aperitivoImage from "@/assets/aperitivo.jpg";
-import dessertImage from "@/assets/dessert.jpg";
+import dessertImage from "@/assets/tiramisu.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ImageCardProps {
