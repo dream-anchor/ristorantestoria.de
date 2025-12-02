@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -13,7 +14,9 @@ const Catering = () => {
       <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
-          <img src={storiaLogo} alt="STORIA" className="h-24 md:h-32 mx-auto mb-4" />
+          <Link to="/">
+            <img src={storiaLogo} alt="STORIA" className="h-24 md:h-32 mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
+          </Link>
           <p className="text-lg text-muted-foreground tracking-wide">
             {t.hero.subtitle}
           </p>
