@@ -1,17 +1,24 @@
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { useAdminMenus } from "@/hooks/useAdminMenus";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import storiaLogo from "@/assets/storia-logo.webp";
 import MenuUploader from "@/components/admin/MenuUploader";
 import MenuStatusCard from "@/components/admin/MenuStatusCard";
-import { LogOut, FileText, ExternalLink } from "lucide-react";
+import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
+import { LogOut, ExternalLink } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
 
 const Admin = () => {
   const navigate = useNavigate();
   const { user, isAdmin, loading, signOut } = useAdminAuth();
+  const { data: menus } = useAdminMenus();
+
+  const lunchMenu = menus?.find((m) => m.menu_type === "lunch");
+  const foodMenu = menus?.find((m) => m.menu_type === "food");
+  const drinksMenu = menus?.find((m) => m.menu_type === "drinks");
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
@@ -79,36 +86,34 @@ const Admin = () => {
           </p>
         </div>
 
-        <div className="grid gap-8">
+        <div className="grid gap-4">
           {/* Mittagsmenü */}
-          <div className="bg-card rounded-lg border border-border p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-serif font-semibold">Mittagsmenü</h3>
-            </div>
+          <CollapsibleMenuCard
+            title="Mittagsmenü"
+            isPublished={lunchMenu?.is_published}
+            defaultOpen={true}
+          >
             <MenuStatusCard menuType="lunch" menuLabel="Mittagsmenü" viewPath="/mittagsmenu" />
             <MenuUploader menuType="lunch" menuLabel="Mittagsmenü" />
-          </div>
+          </CollapsibleMenuCard>
 
           {/* Speisekarte */}
-          <div className="bg-card rounded-lg border border-border p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-serif font-semibold">Speisekarte</h3>
-            </div>
+          <CollapsibleMenuCard
+            title="Speisekarte"
+            isPublished={foodMenu?.is_published}
+          >
             <MenuStatusCard menuType="food" menuLabel="Speisekarte" viewPath="/speisekarte" />
             <MenuUploader menuType="food" menuLabel="Speisekarte" />
-          </div>
+          </CollapsibleMenuCard>
 
           {/* Getränkekarte */}
-          <div className="bg-card rounded-lg border border-border p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-serif font-semibold">Getränkekarte</h3>
-            </div>
+          <CollapsibleMenuCard
+            title="Getränkekarte"
+            isPublished={drinksMenu?.is_published}
+          >
             <MenuStatusCard menuType="drinks" menuLabel="Getränkekarte" viewPath="/getraenke" />
             <MenuUploader menuType="drinks" menuLabel="Getränkekarte" />
-          </div>
+          </CollapsibleMenuCard>
         </div>
 
         {/* Besondere Anlässe Section */}
