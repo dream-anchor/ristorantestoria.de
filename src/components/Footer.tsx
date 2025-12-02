@@ -104,6 +104,8 @@ const Footer = () => {
             <Link to="/impressum" className="hover:text-primary-foreground/70 transition-colors">{t.footer.imprint}</Link>
             <span>·</span>
             <Link to="/datenschutz" className="hover:text-primary-foreground/70 transition-colors">{t.footer.privacy}</Link>
+            <span>·</span>
+            <Link to="/admin" className="hover:text-primary-foreground/70 transition-colors">Admin</Link>
           </div>
         </div>
       </div>
