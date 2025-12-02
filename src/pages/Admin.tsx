@@ -92,7 +92,6 @@ const Admin = () => {
             title="Mittagsmenü"
             menuId={lunchMenu?.id}
             isPublished={lunchMenu?.is_published}
-            defaultOpen={true}
           >
             <MenuStatusCard menuType="lunch" menuLabel="Mittagsmenü" viewPath="/mittagsmenu" />
             <MenuUploader menuType="lunch" menuLabel="Mittagsmenü" />
