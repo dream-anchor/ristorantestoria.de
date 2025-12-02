@@ -53,11 +53,11 @@ const NotFound = () => {
             <p className="text-sm text-muted-foreground mb-4">Oder kontaktieren Sie uns direkt:</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center text-sm">
               <a 
-                href="tel:+4989515196" 
+                href="tel:+498951519696" 
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
               >
                 <Phone className="h-4 w-4" />
-                +49 89 515196
+                +49 89 51519696
               </a>
               <a 
                 href="mailto:info@ristorantestoria.de" 

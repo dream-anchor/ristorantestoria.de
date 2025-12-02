@@ -59,7 +59,7 @@ const Reservierung = () => {
         <h1 className="text-4xl font-bold mb-4 text-center">{t.reservation.title}</h1>
         <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
           {t.reservation.description}{' '}
-          <a href="tel:+4989515196" className="text-primary hover:underline font-medium">089 51519696</a>
+          <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>
         </p>
         
         <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border shadow-lg overflow-hidden">

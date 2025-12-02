@@ -45,7 +45,7 @@ const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
             {t.menuDisplay?.noMenu || "Das aktuelle Menü ist derzeit nicht verfügbar."}
           </p>
           <a 
-            href="tel:+4989515196" 
+            href="tel:+498951519696" 
             className="text-primary hover:underline mt-3 inline-block font-medium"
           >
             {t.menuDisplay?.callForMenu || "Rufen Sie uns an: 089 51519696"}

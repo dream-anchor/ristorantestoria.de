@@ -108,8 +108,8 @@ const Zahlungsinformationen = () => {
               </p>
               <p className="mt-2">
                 <strong>Telefon:</strong>{" "}
-                <a href="tel:+4989515196" className="text-primary hover:underline">
-                  089 51519696
+                <a href="tel:+498951519696" className="text-primary hover:underline">
+                  +49 89 51519696
                 </a>
                 <br />
                 <strong>E-Mail:</strong>{" "}

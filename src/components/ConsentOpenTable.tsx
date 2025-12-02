@@ -45,8 +45,8 @@ const ConsentOpenTable = ({ src, title = "OpenTable Reservierung", className = "
         <p className="text-sm text-muted-foreground mt-6">
           {t.cookies.alternativeBooking}
         </p>
-        <a href="tel:+4989515196" className="text-primary hover:underline font-medium mt-1">
-          089 51519696
+        <a href="tel:+498951519696" className="text-primary hover:underline font-medium mt-1">
+          +49 89 51519696
         </a>
       </div>
     );

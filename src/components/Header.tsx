@@ -14,9 +14,9 @@ const Header = () => {
             STORIA
           </Link>
           <div className="flex items-center gap-4 md:gap-6 text-base text-foreground/80 font-medium">
-            <a href="tel:+4989515196" className="flex items-center gap-2 hover:text-foreground transition-colors">
+            <a href="tel:+498951519696" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">089 51519696</span>
+              <span className="hidden sm:inline">+49 89 51519696</span>
             </a>
             <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="h-4 w-4" />

@@ -31,7 +31,7 @@ const Widerrufsbelehrung = () => {
                 Speranza GmbH<br />
                 Karlstraße 47a<br />
                 80333 München<br />
-                Telefon: 089 51519696<br />
+                Telefon: +49 89 51519696<br />
                 E-Mail: info@ristorantestoria.de
               </p>
               <p>

@@ -151,7 +151,7 @@ export const en = {
   },
   menuDisplay: {
     noMenu: "The current menu is not available at the moment.",
-    callForMenu: "Call us: 089 51519696",
+    callForMenu: "Call us: +49 89 51519696",
     allergenNote: "Allergens and additives available upon request",
   },
   cookies: {

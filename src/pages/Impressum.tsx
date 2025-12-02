@@ -37,7 +37,7 @@ const Impressum = () => {
               <p>
                 <strong>Telefon:</strong>{" "}
                 <a href="tel:+498951519696" className="text-primary hover:underline">
-                  089 51519696
+                  +49 89 51519696
                 </a>
               </p>
               <p>
