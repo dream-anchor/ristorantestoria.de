@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import storiaLogo from "@/assets/storia-logo.webp";
 import MenuUploader from "@/components/admin/MenuUploader";
+import MenuStatusCard from "@/components/admin/MenuStatusCard";
 import { LogOut, FileText } from "lucide-react";
 
 const Admin = () => {
@@ -74,6 +75,7 @@ const Admin = () => {
               <FileText className="h-5 w-5 text-primary" />
               <h3 className="text-lg font-serif font-semibold">Mittagsmenü</h3>
             </div>
+            <MenuStatusCard menuType="lunch" menuLabel="Mittagsmenü" viewPath="/mittagsmenu" />
             <MenuUploader menuType="lunch" menuLabel="Mittagsmenü" />
           </div>
 
@@ -83,6 +85,7 @@ const Admin = () => {
               <FileText className="h-5 w-5 text-primary" />
               <h3 className="text-lg font-serif font-semibold">Speisekarte</h3>
             </div>
+            <MenuStatusCard menuType="food" menuLabel="Speisekarte" viewPath="/speisekarte" />
             <MenuUploader menuType="food" menuLabel="Speisekarte" />
           </div>
 
@@ -92,6 +95,7 @@ const Admin = () => {
               <FileText className="h-5 w-5 text-primary" />
               <h3 className="text-lg font-serif font-semibold">Getränkekarte</h3>
             </div>
+            <MenuStatusCard menuType="drinks" menuLabel="Getränkekarte" viewPath="/getraenke" />
             <MenuUploader menuType="drinks" menuLabel="Getränkekarte" />
           </div>
         </div>
