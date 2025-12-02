@@ -25,11 +25,12 @@ export const de = {
   },
   footer: {
     theFamily: "La Famiglia Speranza",
+    theFratelli: "Die Fratelli",
+    founders: "Gründer",
     theMamma: "La Mamma",
     mammaSperanza: "Mamma Speranza",
     mammaNickname: "La Mamma",
     mammaBio: "In Rofrano verwurzelt, ist sie das Herz der Familie und die Quelle jener Leidenschaft, die ihre Söhne in sich tragen. Mit Wärme, Geduld und einem untrüglichen Gefühl für gute Zutaten hat sie ihnen die Liebe zur italienischen Küche mitgegeben. Ihre traditionelle Art zu kochen, ihre Offenheit und ihr Sinn für Gemeinschaft prägen bis heute das Familienverständnis von Gastfreundschaft. In ihrer Küche entstand jene Mischung aus Qualität, Authentizität und Hingabe, die Domenico und Nicola bis heute begleitet.",
-    theFratelli: "Die Fratelli",
     contact: "Kontakt",
     openingHours: "Öffnungszeiten",
     legal: "Rechtliches",

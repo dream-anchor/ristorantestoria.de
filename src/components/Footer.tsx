@@ -12,10 +12,24 @@ const Footer = () => {
     <footer className="bg-primary text-primary-foreground">
       {/* La Famiglia Speranza */}
       <div className="border-b border-primary-foreground/20">
-        <div className="container mx-auto px-4 py-10">
-          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8 tracking-wide">{t.footer.theFamily}</h2>
+        <div className="container mx-auto px-4 py-10 text-center">
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold tracking-wide">{t.footer.theFamily}</h2>
+          <p className="text-lg md:text-xl font-serif tracking-wide mt-2">{t.footer.theFratelli}</p>
+          <p className="text-sm text-primary-foreground/60 mt-1 mb-8">{t.footer.founders}</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {/* Domenico */}
+            <div className="text-center">
+              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+                <img 
+                  src={domenicoImage} 
+                  alt="Domenico Speranza" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-wide">Domenico</h3>
+            </div>
+
             {/* Mamma */}
             <div className="text-center">
               <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
@@ -28,21 +42,7 @@ const Footer = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-serif font-semibold mb-1 tracking-wide">{t.footer.mammaSperanza}</h3>
-              <p className="text-primary-foreground/60 text-sm italic">{t.footer.mammaNickname}</p>
-            </div>
-
-            {/* Domenico */}
-            <div className="text-center">
-              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
-                <img 
-                  src={domenicoImage} 
-                  alt="Domenico Speranza" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-lg md:text-xl font-serif font-semibold mb-1 tracking-wide">Domenico Speranza</h3>
-              <p className="text-primary-foreground/60 text-sm italic">{t.footer.domenicoNickname}</p>
+              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-wide">Mamma</h3>
             </div>
 
             {/* Nicola */}
@@ -54,8 +54,7 @@ const Footer = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-serif font-semibold mb-1 tracking-wide">Nicola Speranza</h3>
-              <p className="text-primary-foreground/60 text-sm italic">{t.footer.nicolaNickname}</p>
+              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-wide">Nicola</h3>
             </div>
           </div>
         </div>
