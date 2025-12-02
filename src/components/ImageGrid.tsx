@@ -13,15 +13,16 @@ interface ImageCardProps {
   title?: string;
   subtitle?: string;
   className?: string;
+  imageClassName?: string;
 }
 
-const ImageCard = ({ image, title, subtitle, className = "" }: ImageCardProps) => {
+const ImageCard = ({ image, title, subtitle, className = "", imageClassName = "" }: ImageCardProps) => {
   return (
     <div className={`relative overflow-hidden group ${className}`}>
       <img 
         src={image} 
         alt={title || ""} 
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageClassName}`}
       />
       {(title || subtitle) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-none">
@@ -85,6 +86,7 @@ const ImageGrid = () => {
           <ImageCard 
             image={restaurantImage} 
             className="aspect-square"
+            imageClassName="object-bottom"
           />
           <ImageCard 
             image={dessertImage} 
