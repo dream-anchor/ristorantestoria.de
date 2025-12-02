@@ -60,35 +60,37 @@ const Footer = () => {
 
       {/* Kontakt & Öffnungszeiten */}
       <div className="container mx-auto px-4 py-14">
-        <div className="max-w-2xl mx-auto text-center space-y-10">
-          {/* Kontakt */}
-          <div className="space-y-4">
-            <h3 className="font-serif font-semibold text-lg tracking-widest uppercase mb-6">{t.footer.contact}</h3>
-            <div className="space-y-2 text-sm font-sans text-primary-foreground/70">
-              <a href="tel:+4989515196" className="flex items-center justify-center gap-2 hover:text-primary-foreground transition-colors">
-                <Phone className="h-4 w-4" />
-                089 51519696
-              </a>
-              <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center gap-2 hover:text-primary-foreground transition-colors">
-                <Mail className="h-4 w-4" />
-                info@ristorantestoria.de
-              </a>
-              <div className="flex items-center justify-center gap-2">
-                <MapPin className="h-4 w-4" />
-                Augustenstraße 37, 80333 München
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+            {/* Kontakt */}
+            <div className="space-y-4 text-center md:text-left">
+              <h3 className="font-serif font-semibold text-lg tracking-widest uppercase mb-6">{t.footer.contact}</h3>
+              <div className="space-y-2 text-sm font-sans text-primary-foreground/70">
+                <a href="tel:+4989515196" className="flex items-center justify-center md:justify-start gap-2 hover:text-primary-foreground transition-colors">
+                  <Phone className="h-4 w-4" />
+                  089 51519696
+                </a>
+                <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center md:justify-start gap-2 hover:text-primary-foreground transition-colors">
+                  <Mail className="h-4 w-4" />
+                  info@ristorantestoria.de
+                </a>
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <MapPin className="h-4 w-4" />
+                  Karlstr. 47a, 80333 München
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Öffnungszeiten */}
-          <div className="space-y-4">
-            <h3 className="font-serif font-semibold text-lg tracking-widest uppercase mb-6">{t.footer.openingHours}</h3>
-            <div className="space-y-1 text-sm font-sans text-primary-foreground/70">
-              <div className="flex items-center justify-center gap-2">
-                <Clock className="h-4 w-4" />
-                <span>{t.footer.monFri}: 09:00 – 01:00</span>
+            {/* Öffnungszeiten */}
+            <div className="space-y-4 text-center md:text-right">
+              <h3 className="font-serif font-semibold text-lg tracking-widest uppercase mb-6">{t.footer.openingHours}</h3>
+              <div className="space-y-1 text-sm font-sans text-primary-foreground/70">
+                <div className="flex items-center justify-center md:justify-end gap-2">
+                  <Clock className="h-4 w-4" />
+                  <span>{t.footer.monFri}: 09:00 – 01:00</span>
+                </div>
+                <p>{t.footer.satSun}: 12:00 – 01:00</p>
               </div>
-              <p>{t.footer.satSun}: 12:00 – 01:00</p>
             </div>
           </div>
         </div>
