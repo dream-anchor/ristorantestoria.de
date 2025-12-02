@@ -1,0 +1,49 @@
+RewriteEngine On
+
+# ============================================
+# 1. Spezielle Weiterleitungen (MÜSSEN VOR dem SPA-Fallback stehen!)
+# ============================================
+
+# Leite exakt /cms/reservations/ nach /reservierung um
+RewriteRule ^cms/reservations/?$ /reservierung [R=301,L]
+
+# ============================================
+# 2. SPA-Routing (React Router)
+# ============================================
+
+# Wenn die angeforderte Ressource als Datei existiert, direkt ausliefern
+RewriteCond %{REQUEST_FILENAME} !-f
+# Wenn die angeforderte Ressource als Verzeichnis existiert, direkt ausliefern
+RewriteCond %{REQUEST_FILENAME} !-d
+# Ansonsten alle Anfragen an index.html weiterleiten
+RewriteRule ^ /index.html [L]
+
+# ============================================
+# 3. MIME-Types für korrekte Dateiauslieferung
+# ============================================
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType text/css .css
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+</IfModule>
+
+# ============================================
+# 4. GZIP-Komprimierung für bessere Performance
+# ============================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# ============================================
+# 5. Browser-Caching für statische Assets
+# ============================================
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
