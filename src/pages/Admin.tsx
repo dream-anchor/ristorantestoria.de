@@ -6,7 +6,8 @@ import { toast } from "sonner";
 import storiaLogo from "@/assets/storia-logo.webp";
 import MenuUploader from "@/components/admin/MenuUploader";
 import MenuStatusCard from "@/components/admin/MenuStatusCard";
-import { LogOut, FileText, ExternalLink, Gift } from "lucide-react";
+import { LogOut, FileText, ExternalLink } from "lucide-react";
+import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -111,37 +112,7 @@ const Admin = () => {
         </div>
 
         {/* Besondere Anlässe Section */}
-        <div className="mt-12 mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Gift className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-serif font-semibold">Besondere Anlässe</h2>
-          </div>
-          <p className="text-muted-foreground">
-            Laden Sie Menükarten für besondere Anlässe hoch.
-          </p>
-        </div>
-
-        <div className="grid gap-8 md:grid-cols-2">
-          {/* Weihnachtsmenü */}
-          <div className="bg-card rounded-lg border border-border p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-serif font-semibold">Weihnachtsmenü</h3>
-            </div>
-            <MenuStatusCard menuType="christmas" menuLabel="Weihnachtsmenü" viewPath="/weihnachtsmenues" />
-            <MenuUploader menuType="christmas" menuLabel="Weihnachtsmenü" />
-          </div>
-
-          {/* Valentinstag-Menü */}
-          <div className="bg-card rounded-lg border border-border p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-serif font-semibold">Valentinstag-Menü</h3>
-            </div>
-            <MenuStatusCard menuType="valentines" menuLabel="Valentinstag-Menü" viewPath="/weihnachtsmenues" />
-            <MenuUploader menuType="valentines" menuLabel="Valentinstag-Menü" />
-          </div>
-        </div>
+        <SpecialOccasionsManager />
       </main>
     </div>
   );

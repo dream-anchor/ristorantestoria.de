@@ -4,12 +4,14 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Upload, Loader2, Check, Eye } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import MenuPreview from "./MenuPreview";
 import type { MenuType } from "@/hooks/useMenu";
 
 interface MenuUploaderProps {
   menuType: MenuType;
   menuLabel: string;
+  existingMenuId?: string; // For special occasions that already have an ID
 }
 
 interface ParsedCategory {
@@ -37,7 +39,8 @@ interface ParsedMenu {
   categories: ParsedCategory[];
 }
 
-const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
+const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps) => {
+  const queryClient = useQueryClient();
   const [file, setFile] = useState<File | null>(null);
   const [isParsing, setIsParsing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -113,17 +116,10 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
 
     setIsSaving(true);
     try {
-      // First, check if menu exists
-      const { data: existingMenu } = await supabase
-        .from('menus')
-        .select('id')
-        .eq('menu_type', menuType)
-        .single();
-
       let menuId: string;
 
-      if (existingMenu) {
-        // Update existing menu
+      if (existingMenuId) {
+        // Use the provided existing menu ID (for special occasions)
         const { error: updateError } = await supabase
           .from('menus')
           .update({
@@ -132,10 +128,10 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
             is_published: false,
             updated_at: new Date().toISOString(),
           })
-          .eq('id', existingMenu.id);
+          .eq('id', existingMenuId);
 
         if (updateError) throw updateError;
-        menuId = existingMenu.id;
+        menuId = existingMenuId;
 
         // Delete old categories (cascade deletes items)
         await supabase
@@ -143,20 +139,49 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
           .delete()
           .eq('menu_id', menuId);
       } else {
-        // Create new menu
-        const { data: newMenu, error: insertError } = await supabase
+        // Check if menu exists by type (for standard menus)
+        const { data: existingMenu } = await supabase
           .from('menus')
-          .insert({
-            menu_type: menuType,
-            title: parsedData.title,
-            subtitle: parsedData.subtitle,
-            is_published: false,
-          })
-          .select()
-          .single();
+          .select('id')
+          .eq('menu_type', menuType)
+          .maybeSingle();
 
-        if (insertError) throw insertError;
-        menuId = newMenu.id;
+        if (existingMenu) {
+          // Update existing menu
+          const { error: updateError } = await supabase
+            .from('menus')
+            .update({
+              title: parsedData.title,
+              subtitle: parsedData.subtitle,
+              is_published: false,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', existingMenu.id);
+
+          if (updateError) throw updateError;
+          menuId = existingMenu.id;
+
+          // Delete old categories (cascade deletes items)
+          await supabase
+            .from('menu_categories')
+            .delete()
+            .eq('menu_id', menuId);
+        } else {
+          // Create new menu
+          const { data: newMenu, error: insertError } = await supabase
+            .from('menus')
+            .insert({
+              menu_type: menuType,
+              title: parsedData.title,
+              subtitle: parsedData.subtitle,
+              is_published: false,
+            })
+            .select()
+            .single();
+
+          if (insertError) throw insertError;
+          menuId = newMenu.id;
+        }
       }
 
       // Insert categories and items
@@ -205,6 +230,15 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
         .eq('id', menuId);
 
       if (publishError) throw publishError;
+
+      // Invalidate relevant queries to refresh data
+      queryClient.invalidateQueries({ queryKey: ['special-menus'] });
+      queryClient.invalidateQueries({ queryKey: ['published-special-menus'] });
+      queryClient.invalidateQueries({ queryKey: ['admin-menus'] });
+      queryClient.invalidateQueries({ queryKey: ['menu', menuType] });
+      if (existingMenuId) {
+        queryClient.invalidateQueries({ queryKey: ['menu-by-id', existingMenuId] });
+      }
 
       toast.success(`${menuLabel} erfolgreich veröffentlicht!`);
       setFile(null);

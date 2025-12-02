@@ -1,13 +1,18 @@
-import { useMenu, MenuType } from "@/hooks/useMenu";
+import { useMenu, useMenuById, MenuType } from "@/hooks/useMenu";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface MenuDisplayProps {
   menuType: MenuType;
+  menuId?: string; // Optional: for fetching specific menu by ID (used for special occasions)
 }
 
-const MenuDisplay = ({ menuType }: MenuDisplayProps) => {
-  const { data: menu, isLoading, error } = useMenu(menuType);
+const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
+  // Use menuId if provided (for special menus), otherwise fetch by type
+  const menuByType = useMenu(menuType);
+  const menuById = useMenuById(menuId);
+  
+  const { data: menu, isLoading, error } = menuId ? menuById : menuByType;
   const { language, t } = useLanguage();
 
   if (isLoading) {
