@@ -57,36 +57,16 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
     }
   };
 
-  const extractTextFromPdf = async (file: File): Promise<string> => {
-    // For now, we'll read the file as text (basic extraction)
-    // In production, you might want to use a proper PDF parser
-    const arrayBuffer = await file.arrayBuffer();
-    const bytes = new Uint8Array(arrayBuffer);
-    
-    // Simple text extraction from PDF (works for text-based PDFs)
-    let text = '';
-    let inText = false;
-    let textContent = '';
-    
-    for (let i = 0; i < bytes.length; i++) {
-      const char = String.fromCharCode(bytes[i]);
-      textContent += char;
-    }
-    
-    // Extract text between parentheses (PDF text objects)
-    const textMatches = textContent.match(/\(([^)]+)\)/g);
-    if (textMatches) {
-      text = textMatches.map(m => m.slice(1, -1)).join(' ');
-    }
-    
-    // If no text found via parentheses, try stream content
-    if (!text || text.length < 50) {
-      // Return raw content for AI to parse
-      const decoder = new TextDecoder('utf-8', { fatal: false });
-      text = decoder.decode(arrayBuffer);
-    }
-    
-    return text;
+  const convertToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = (reader.result as string).split(',')[1];
+        resolve(base64);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   };
 
   const handleParse = async () => {
@@ -97,17 +77,12 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
 
     setIsParsing(true);
     try {
-      // Extract text content from PDF
-      const pdfContent = await extractTextFromPdf(file);
-      
-      if (!pdfContent || pdfContent.length < 20) {
-        toast.error('PDF-Inhalt konnte nicht gelesen werden. Bitte stellen Sie sicher, dass das PDF Text enthält.');
-        return;
-      }
+      // Convert PDF to Base64 for multimodal AI processing
+      const pdfBase64 = await convertToBase64(file);
 
       // Send to edge function for AI parsing
       const { data, error } = await supabase.functions.invoke('parse-menu-pdf', {
-        body: { pdfContent, menuType }
+        body: { pdfBase64, menuType }
       });
 
       if (error) {
