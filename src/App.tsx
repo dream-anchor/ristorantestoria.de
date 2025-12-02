@@ -15,6 +15,8 @@ import Weihnachtsmenues from "./pages/Weihnachtsmenues";
 import Kontakt from "./pages/Kontakt";
 import Catering from "./pages/Catering";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
+import AdminLogin from "./pages/AdminLogin";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +38,8 @@ const App = () => (
             <Route path="/weihnachtsmenues" element={<Weihnachtsmenues />} />
             <Route path="/kontakt" element={<Kontakt />} />
             <Route path="/catering" element={<Catering />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
