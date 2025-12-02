@@ -31,7 +31,7 @@ const FloatingActions = () => {
 
   if (!isVisible) return null;
 
-  const buttonClasses = "bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-4 shadow-lg transition-all hover:scale-105";
+  const buttonClasses = "bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl px-4 py-3 shadow-lg transition-all hover:scale-105 flex flex-col items-center gap-1";
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 animate-fade-in">
@@ -40,18 +40,16 @@ const FloatingActions = () => {
         <a
           href="tel:+4989515196"
           className={buttonClasses}
-          title="Anrufen"
         >
-          <Phone className="h-6 w-6" />
+          <Phone className="h-5 w-5" />
+          <span className="text-xs font-medium">Anrufen</span>
         </a>
       ) : (
         <Popover>
           <PopoverTrigger asChild>
-            <button
-              className={buttonClasses}
-              title="Telefonnummer"
-            >
-              <Phone className="h-6 w-6" />
+            <button className={buttonClasses}>
+              <Phone className="h-5 w-5" />
+              <span className="text-xs font-medium">Anrufen</span>
             </button>
           </PopoverTrigger>
           <PopoverContent side="left" className="w-auto p-3">
@@ -78,9 +76,9 @@ const FloatingActions = () => {
       <Link
         to="/reservierung"
         className={buttonClasses}
-        title="Reservieren"
       >
-        <UtensilsCrossed className="h-6 w-6" />
+        <UtensilsCrossed className="h-5 w-5" />
+        <span className="text-xs font-medium">Reservieren</span>
       </Link>
     </div>
   );
