@@ -11,28 +11,26 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       {/* La Famiglia Speranza */}
-      <div className="border-b border-primary-foreground/20">
-        <div className="container mx-auto px-4 py-10 text-center">
-          <h2 className="text-2xl md:text-3xl font-serif font-semibold tracking-wide">{t.footer.theFamily}</h2>
-          <p className="text-lg md:text-xl font-serif tracking-wide mt-2">{t.footer.theFratelli}</p>
-          <p className="text-sm text-primary-foreground/60 mt-1 mb-8">{t.footer.founders}</p>
+      <div className="border-b border-primary-foreground/10">
+        <div className="container mx-auto px-4 py-16 text-center">
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold tracking-widest uppercase mb-12">{t.footer.theFamily}</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16">
             {/* Domenico */}
             <div className="text-center">
-              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <div className="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-primary-foreground/30 shadow-lg">
                 <img 
                   src={domenicoImage} 
                   alt="Domenico Speranza" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-wide">Domenico</h3>
+              <p className="text-base font-serif tracking-wide text-primary-foreground/80">Domenico</p>
             </div>
 
             {/* Mamma */}
             <div className="text-center">
-              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-primary-foreground/30 shadow-xl">
                 <video 
                   src={mammaVideo}
                   autoPlay 
@@ -42,40 +40,40 @@ const Footer = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-wide">Mamma</h3>
+              <p className="text-base font-serif tracking-wide text-primary-foreground/80">Mamma</p>
             </div>
 
             {/* Nicola */}
             <div className="text-center">
-              <div className="w-36 h-36 md:w-40 md:h-40 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <div className="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-full overflow-hidden ring-2 ring-primary-foreground/30 shadow-lg">
                 <img 
                   src={nicolaImage} 
                   alt="Nicola Speranza" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-wide">Nicola</h3>
+              <p className="text-base font-serif tracking-wide text-primary-foreground/80">Nicola</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Kontakt & Info */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+      {/* Kontakt & Öffnungszeiten */}
+      <div className="container mx-auto px-4 py-14">
+        <div className="max-w-2xl mx-auto text-center space-y-10">
           {/* Kontakt */}
-          <div>
-            <h3 className="font-serif font-semibold text-xl mb-5 tracking-wide">{t.footer.contact}</h3>
-            <div className="space-y-3 text-base font-sans text-primary-foreground/80">
-              <a href="tel:+4989515196" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary-foreground transition-colors">
+          <div className="space-y-4">
+            <h3 className="font-serif font-semibold text-lg tracking-widest uppercase mb-6">{t.footer.contact}</h3>
+            <div className="space-y-2 text-sm font-sans text-primary-foreground/70">
+              <a href="tel:+4989515196" className="flex items-center justify-center gap-2 hover:text-primary-foreground transition-colors">
                 <Phone className="h-4 w-4" />
                 089 51519696
               </a>
-              <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center md:justify-start gap-3 hover:text-primary-foreground transition-colors">
+              <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center gap-2 hover:text-primary-foreground transition-colors">
                 <Mail className="h-4 w-4" />
                 info@ristorantestoria.de
               </a>
-              <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="flex items-center justify-center gap-2">
                 <MapPin className="h-4 w-4" />
                 Augustenstraße 37, 80333 München
               </div>
@@ -83,30 +81,28 @@ const Footer = () => {
           </div>
 
           {/* Öffnungszeiten */}
-          <div>
-            <h3 className="font-serif font-semibold text-xl mb-5 tracking-wide">{t.footer.openingHours}</h3>
-            <div className="space-y-2 text-base font-sans text-primary-foreground/80">
-              <div className="flex items-center justify-center md:justify-start gap-3">
+          <div className="space-y-4">
+            <h3 className="font-serif font-semibold text-lg tracking-widest uppercase mb-6">{t.footer.openingHours}</h3>
+            <div className="space-y-1 text-sm font-sans text-primary-foreground/70">
+              <div className="flex items-center justify-center gap-2">
                 <Clock className="h-4 w-4" />
-                <span>{t.footer.monFri}: 09:00 - 01:00</span>
+                <span>{t.footer.monFri}: 09:00 – 01:00</span>
               </div>
-              <div className="pl-7">{t.footer.satSun}: 12:00 - 01:00</div>
-            </div>
-          </div>
-
-          {/* Links */}
-          <div>
-            <h3 className="font-serif font-semibold text-xl mb-5 tracking-wide">{t.footer.legal}</h3>
-            <div className="space-y-3 text-base font-sans text-primary-foreground/80">
-              <Link to="/impressum" className="block hover:text-primary-foreground transition-colors">{t.footer.imprint}</Link>
-              <Link to="/datenschutz" className="block hover:text-primary-foreground transition-colors">{t.footer.privacy}</Link>
+              <p>{t.footer.satSun}: 12:00 – 01:00</p>
             </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-primary-foreground/20 mt-10 pt-8 text-center text-base font-sans text-primary-foreground/60">
-          <p>© {new Date().getFullYear()} {t.footer.copyright}</p>
+        {/* Copyright & Legal */}
+        <div className="border-t border-primary-foreground/10 mt-12 pt-8 text-center">
+          <p className="text-sm font-sans text-primary-foreground/50">
+            © {new Date().getFullYear()} {t.footer.copyright}
+          </p>
+          <div className="flex items-center justify-center gap-6 mt-4 text-xs font-sans text-primary-foreground/40">
+            <Link to="/impressum" className="hover:text-primary-foreground/70 transition-colors">{t.footer.imprint}</Link>
+            <span>·</span>
+            <Link to="/datenschutz" className="hover:text-primary-foreground/70 transition-colors">{t.footer.privacy}</Link>
+          </div>
         </div>
       </div>
     </footer>
