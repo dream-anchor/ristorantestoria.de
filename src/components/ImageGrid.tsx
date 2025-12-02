@@ -89,6 +89,7 @@ const ImageGrid = () => {
             title={t.imageGrid.openingHoursTitle}
             subtitle={t.imageGrid.openingHoursText}
             className="aspect-square"
+            imageClassName="object-bottom"
           />
           <ImageCard 
             image={drinksImage} 

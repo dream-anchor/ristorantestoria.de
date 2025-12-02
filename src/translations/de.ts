@@ -8,8 +8,8 @@ export const de = {
     openingHoursText: "Mo - Fr 09.00 - 01.00 Uhr\nSa - So 12.00 - 1.00 Uhr",
     notturnoTitle: "STORIA Notturno",
     notturnoText: "Late Night Aperitivo – stile italiano\n21.00-22.30 Uhr",
-    breakfastTitle: "Mo-So ab 9.00 Uhr:",
-    breakfastText: "Frühstücken im STORIA",
+    breakfastTitle: "Mo-Fr ab 09.00 Uhr",
+    breakfastText: "Ihr erster Kaffee im Storia",
   },
   nav: {
     reservation: "RESERVIERUNG",
