@@ -110,18 +110,22 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="text-sm font-medium">Titel</label>
-            <Input
+            <Textarea
               value={data.title || ''}
               onChange={(e) => updateTitle(e.target.value)}
               placeholder="Menü-Titel"
+              className="min-h-[40px] resize-y"
+              rows={1}
             />
           </div>
           <div>
             <label className="text-sm font-medium">Untertitel</label>
-            <Input
+            <Textarea
               value={data.subtitle || ''}
               onChange={(e) => updateSubtitle(e.target.value)}
               placeholder="Zusätzliche Info"
+              className="min-h-[40px] resize-y"
+              rows={1}
             />
           </div>
         </div>
@@ -134,11 +138,12 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <GripVertical className="h-4 w-4 text-muted-foreground" />
-                <Input
+                <Textarea
                   value={category.name}
                   onChange={(e) => updateCategory(catIndex, 'name', e.target.value)}
-                  className="font-semibold w-auto"
+                  className="font-semibold min-h-[40px] resize-y flex-1"
                   placeholder="Kategoriename"
+                  rows={1}
                 />
               </div>
               <Button
@@ -156,11 +161,12 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
               {category.items.map((item, itemIndex) => (
                 <div key={itemIndex} className="flex items-start gap-3 p-3 bg-secondary/50 rounded">
                   <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-2">
-                    <Input
+                    <Textarea
                       value={item.name}
                       onChange={(e) => updateItem(catIndex, itemIndex, 'name', e.target.value)}
                       placeholder="Gericht"
-                      className="md:col-span-2"
+                      className="md:col-span-2 min-h-[40px] resize-y"
+                      rows={1}
                     />
                     <Input
                       value={item.price_display}
