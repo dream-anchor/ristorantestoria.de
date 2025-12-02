@@ -5,13 +5,15 @@ import Footer from "@/components/Footer";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
 import MenuDisplay from "@/components/MenuDisplay";
 
 const BesondereAnlaesse = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const location = useLocation();
   const { data: specialMenus, isLoading } = usePublishedSpecialMenus();
 
@@ -30,8 +32,23 @@ const BesondereAnlaesse = () => {
   }, [location.hash, isLoading, specialMenus]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
+    <>
+      <SEO 
+        title={language === 'de' ? 'Besondere Anlässe' : 'Special Occasions'}
+        description={language === 'de' 
+          ? 'Besondere Anlässe im Restaurant STORIA München. Festmenüs für Weihnachten, Silvester und weitere Feierlichkeiten.'
+          : 'Special occasions at STORIA restaurant Munich. Festive menus for Christmas, New Year and other celebrations.'}
+        canonical="/besondere-anlaesse"
+      />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: language === 'de' ? 'Besondere Anlässe' : 'Special Occasions', url: '/besondere-anlaesse' }
+        ]} 
+      />
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
           <Link to="/">
@@ -109,8 +126,9 @@ const BesondereAnlaesse = () => {
         </div>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

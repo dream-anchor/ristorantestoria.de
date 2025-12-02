@@ -3,15 +3,32 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import MenuDisplay from "@/components/MenuDisplay";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Speisekarte = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
+    <>
+      <SEO 
+        title={language === 'de' ? 'Speisekarte' : 'Menu'}
+        description={language === 'de' 
+          ? 'Speisekarte des italienischen Restaurants STORIA München. Frische Pasta, Pizza aus dem Holzofen, Antipasti und Desserts.'
+          : 'Menu of Italian restaurant STORIA Munich. Fresh pasta, wood-fired pizza, antipasti and desserts.'}
+        canonical="/speisekarte"
+      />
+      <StructuredData 
+        type="breadcrumb" 
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: language === 'de' ? 'Speisekarte' : 'Menu', url: '/speisekarte' }
+        ]} 
+      />
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
           <Link to="/">
@@ -33,8 +50,9 @@ const Speisekarte = () => {
         <MenuDisplay menuType="food" />
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

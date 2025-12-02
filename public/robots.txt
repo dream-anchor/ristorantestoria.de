@@ -1,3 +1,10 @@
+# STORIA Ristorante - robots.txt
+# https://ristorantestoria.de
+
+# Sitemap
+Sitemap: https://ristorantestoria.de/sitemap.xml
+
+# Standard Crawlers
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +17,38 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# AI Crawlers (GEO Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# General
 User-agent: *
 Allow: /
+
+# Disallow Admin Area
+User-agent: *
+Disallow: /admin
+Disallow: /admin-login
+
+# Disallow Asset Files
+User-agent: *
+Disallow: /*.js$
+Disallow: /*.css$
