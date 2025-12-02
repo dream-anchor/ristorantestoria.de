@@ -4,12 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
@@ -30,9 +24,9 @@ const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [openMenus, setOpenMenus] = useState<string[]>([]);
+  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
   const navItems: NavItem[] = [
-    { label: "STARTSEITE", path: "/" },
     { label: "RESERVIERUNG", path: "/reservierung" },
     {
       label: "MENÜ",
@@ -152,21 +146,28 @@ const Navigation = () => {
         <div className="hidden lg:flex items-center">
           {navItems.map((item) =>
             item.children ? (
-              <DropdownMenu key={item.label}>
-                <DropdownMenuTrigger
-                  className={`flex items-center gap-1 whitespace-nowrap px-4 py-4 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors outline-none ${
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => setHoveredMenu(item.label)}
+                onMouseLeave={() => setHoveredMenu(null)}
+              >
+                <button
+                  className={`flex items-center gap-1 whitespace-nowrap px-4 py-4 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors ${
                     isActive(item) ? "bg-accent text-accent-foreground" : ""
                   }`}
                 >
                   {item.label}
-                  <ChevronDown className="h-4 w-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-primary text-primary-foreground border-accent">
-                  {item.children.map((child) => (
-                    <DropdownMenuItem key={child.path} asChild>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${hoveredMenu === item.label ? "rotate-180" : ""}`} />
+                </button>
+                
+                {hoveredMenu === item.label && (
+                  <div className="absolute top-full left-0 bg-primary text-primary-foreground border border-accent rounded-md shadow-lg min-w-[180px] z-50">
+                    {item.children.map((child) => (
                       <Link
+                        key={child.path}
                         to={child.path}
-                        className={`w-full cursor-pointer ${
+                        className={`block px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors first:rounded-t-md last:rounded-b-md ${
                           location.pathname === child.path
                             ? "bg-accent text-accent-foreground"
                             : ""
@@ -174,10 +175,10 @@ const Navigation = () => {
                       >
                         {child.label}
                       </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    ))}
+                  </div>
+                )}
+              </div>
             ) : (
               <Link
                 key={item.path}

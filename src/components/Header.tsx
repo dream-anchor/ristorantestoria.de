@@ -10,7 +10,7 @@ const Header = () => {
           <Link to="/" className="hover:opacity-80 transition-opacity">
             <img src={storiaLogo} alt="STORIA" className="h-12 md:h-14" />
           </Link>
-          <div className="flex items-center gap-4 md:gap-6 text-sm text-muted-foreground">
+          <div className="flex items-center gap-4 md:gap-6 text-base text-foreground/80 font-medium">
             <a href="tel:+4989515196" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">089 51519696</span>

@@ -53,11 +53,6 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="text-center mt-8">
-            <Link to="/ueber-uns" className="text-primary-foreground/80 hover:text-primary-foreground underline">
-              Mehr über uns erfahren
-            </Link>
-          </div>
         </div>
       </div>
 
