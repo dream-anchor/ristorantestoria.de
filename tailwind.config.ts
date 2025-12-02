@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        'serif': ['Crimson Pro', 'serif'],
+        'serif': ['Cormorant Garamond', 'serif'],
         'sans': ['Inter', 'sans-serif'],
       },
       colors: {
