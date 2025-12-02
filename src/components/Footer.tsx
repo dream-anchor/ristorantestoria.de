@@ -21,10 +21,14 @@ const Footer = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-serif font-bold mb-2">Domenico Speranza</h3>
+              <h3 className="text-xl font-serif font-bold mb-1">Domenico Speranza</h3>
+              <p className="text-primary-foreground/60 text-sm italic mb-3">Mimmo</p>
               <p className="text-primary-foreground/80 text-sm leading-relaxed">
-                Wo Domenico sich zeigt, scheint die Sonne. Er ist der Sonnenschein im Service, 
-                die gute Seele des Hauses – das Herz von STORIA.
+                Aufgewachsen in der süditalienischen Provinz Rofrano, entdeckte er früh seine 
+                Leidenschaft für die Gastronomie – eine Begeisterung, die ihn bis heute begleitet. 
+                Mit Professionalität, Charme und großer Flexibilität versteht er es, Menschen zu 
+                begeistern. Sein Gespür für die Wünsche seiner Gäste macht ihn zu einem Gastgeber 
+                aus Leidenschaft.
               </p>
             </div>
 
@@ -37,10 +41,14 @@ const Footer = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-serif font-bold mb-2">Nicola Speranza</h3>
+              <h3 className="text-xl font-serif font-bold mb-1">Nicola Speranza</h3>
+              <p className="text-primary-foreground/60 text-sm italic mb-3">Fratello / Bruder</p>
               <p className="text-primary-foreground/80 text-sm leading-relaxed">
-                Nicola kreiert magische Gerichte, die allesamt ein Ziel haben: Den Gast in unser 
-                geliebtes Italien zu entführen. Er ist die Leidenschaft in der Küche – das Feuer von STORIA.
+                Ebenfalls in Rofrano aufgewachsen, verbindet er die Liebe zur guten Küche mit 
+                großer Sorgfalt im Detail. Mit seinem Können und seinem feinen Gespür unterstützt 
+                er das Küchenteam und schafft Gerichte, die durch Kreativität und echte Leidenschaft 
+                begeistern. Hochwertige Produkte, klare Aromen und authentische italienische 
+                Kochkunst prägen seinen Stil.
               </p>
             </div>
           </div>
