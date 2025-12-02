@@ -90,6 +90,7 @@ const Footer = () => {
                   <span>{t.footer.monFri}: 09:00 – 01:00</span>
                 </div>
                 <p>{t.footer.satSun}: 12:00 – 01:00</p>
+                <p className="pt-2 italic text-primary-foreground/70">{t.footer.welcomeMessage}</p>
               </div>
             </div>
           </div>

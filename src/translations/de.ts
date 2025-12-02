@@ -43,6 +43,7 @@ export const de = {
     nicolaBio: "Ebenfalls in Rofrano aufgewachsen, verbindet er die Liebe zur guten Küche mit großer Sorgfalt im Detail. Mit seinem Können und seinem feinen Gespür unterstützt er das Küchenteam und schafft Gerichte, die durch Kreativität und echte Leidenschaft begeistern. Hochwertige Produkte, klare Aromen und authentische italienische Kochkunst prägen seinen Stil.",
     monFri: "Mo - Fr",
     satSun: "Sa - So",
+    welcomeMessage: "Wir freuen uns auf Ihren Besuch",
   },
   reservation: {
     title: "Tisch reservieren",
