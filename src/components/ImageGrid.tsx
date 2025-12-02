@@ -58,6 +58,7 @@ const ImageGrid = () => {
           <ImageCard 
             image={weinserviceImage} 
             className="aspect-square"
+            imageClassName="object-right"
           />
           <ImageCard 
             image={pastaImage} 
