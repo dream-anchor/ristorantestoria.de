@@ -2,7 +2,7 @@ import chefsImage from "@/assets/chefs.jpg";
 import pastaImage from "@/assets/pasta.jpg";
 import drinksImage from "@/assets/drinks.jpg";
 import breakfastImage from "@/assets/aussen.webp";
-import restaurantImage from "@/assets/restaurant.jpg";
+import restaurantImage from "@/assets/haus-aussen-2.webp";
 import aperitivoImage from "@/assets/meeresfruchte.webp";
 import dessertImage from "@/assets/tiramisu.webp";
 import terrasseImage from "@/assets/menschen-aussen.jpeg";
