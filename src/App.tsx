@@ -20,6 +20,7 @@ import AdminLogin from "./pages/AdminLogin";
 
 const queryClient = new QueryClient();
 
+// Root App component
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
