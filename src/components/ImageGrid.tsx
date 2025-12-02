@@ -1,4 +1,4 @@
-import chefsImage from "@/assets/chefs.jpg";
+import weinserviceImage from "@/assets/weinservice.webp";
 import pastaImage from "@/assets/pasta.jpg";
 import drinksImage from "@/assets/cocktails.webp";
 import breakfastImage from "@/assets/aussen.webp";
@@ -56,7 +56,7 @@ const ImageGrid = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Row 1 */}
           <ImageCard 
-            image={chefsImage} 
+            image={weinserviceImage} 
             className="aspect-square"
           />
           <ImageCard 
