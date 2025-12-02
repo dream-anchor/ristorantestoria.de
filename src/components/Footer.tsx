@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import domenicoImage from "@/assets/domenico-speranza.webp";
+import storiaLogo from "@/assets/storia-logo.webp";
 import nicolaImage from "@/assets/nicola-speranza.webp";
 import mammaVideo from "@/assets/lamamma.mp4";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -60,8 +61,8 @@ const Footer = () => {
 
       {/* Kontakt & Öffnungszeiten */}
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-center">
             {/* Kontakt */}
             <div className="space-y-4 text-center md:text-left">
               <h3 className="font-serif font-medium text-base tracking-[0.2em] uppercase mb-6 text-primary-foreground/90">{t.footer.contact}</h3>
@@ -82,6 +83,15 @@ const Footer = () => {
                   Karlstr. 47a, 80333 München
                 </Link>
               </div>
+            </div>
+
+            {/* STORIA Logo - Mitte */}
+            <div className="flex items-center justify-center order-first md:order-none py-6 md:py-0">
+              <img 
+                src={storiaLogo}
+                alt="STORIA"
+                className="h-16 md:h-20 brightness-0 invert opacity-20"
+              />
             </div>
 
             {/* Öffnungszeiten */}
