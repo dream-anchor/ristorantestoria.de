@@ -169,7 +169,7 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
             name_en: category.name_en || null,
             description: category.description || null,
             description_en: category.description_en || null,
-            sort_order: category.sort_order,
+            sort_order: Math.floor(category.sort_order),
           })
           .select()
           .single();
@@ -188,7 +188,7 @@ const MenuUploader = ({ menuType, menuLabel }: MenuUploaderProps) => {
               description_en: item.description_en || null,
               price: item.price,
               price_display: item.price_display,
-              sort_order: item.sort_order,
+              sort_order: Math.floor(item.sort_order),
             });
 
           if (itemError) throw itemError;
