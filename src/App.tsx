@@ -17,6 +17,7 @@ import Catering from "./pages/Catering";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+import FloatingActions from "./components/FloatingActions";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <FloatingActions />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/reservierung" element={<Reservierung />} />
