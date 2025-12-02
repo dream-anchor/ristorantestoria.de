@@ -114,8 +114,8 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
               value={data.title || ''}
               onChange={(e) => updateTitle(e.target.value)}
               placeholder="Menü-Titel"
-              className="min-h-[40px] resize-y"
-              rows={1}
+              className="min-h-[80px] resize-y"
+              rows={3}
             />
           </div>
           <div>
@@ -124,8 +124,8 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
               value={data.subtitle || ''}
               onChange={(e) => updateSubtitle(e.target.value)}
               placeholder="Zusätzliche Info"
-              className="min-h-[40px] resize-y"
-              rows={1}
+              className="min-h-[80px] resize-y"
+              rows={3}
             />
           </div>
         </div>
@@ -141,9 +141,9 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
                 <Textarea
                   value={category.name}
                   onChange={(e) => updateCategory(catIndex, 'name', e.target.value)}
-                  className="font-semibold min-h-[40px] resize-y flex-1"
+                  className="font-semibold min-h-[80px] resize-y flex-1"
                   placeholder="Kategoriename"
-                  rows={1}
+                  rows={3}
                 />
               </div>
               <Button
@@ -165,8 +165,8 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
                       value={item.name}
                       onChange={(e) => updateItem(catIndex, itemIndex, 'name', e.target.value)}
                       placeholder="Gericht"
-                      className="md:col-span-2 min-h-[40px] resize-y"
-                      rows={1}
+                      className="md:col-span-2 min-h-[80px] resize-y"
+                      rows={3}
                     />
                     <Input
                       value={item.price_display}
@@ -177,8 +177,8 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
                       value={item.description || ''}
                       onChange={(e) => updateItem(catIndex, itemIndex, 'description', e.target.value)}
                       placeholder="Beschreibung (optional)"
-                      className="md:col-span-3 min-h-[60px] resize-y"
-                      rows={2}
+                      className="md:col-span-3 min-h-[80px] resize-y"
+                      rows={3}
                     />
                   </div>
                   <Button
