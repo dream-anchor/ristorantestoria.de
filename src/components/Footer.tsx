@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, Heart } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import domenicoImage from "@/assets/domenico-speranza.webp";
 import nicolaImage from "@/assets/nicola-speranza.webp";
+import mammaVideo from "@/assets/lamamma.mp4";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
@@ -11,16 +12,23 @@ const Footer = () => {
     <footer className="bg-primary text-primary-foreground">
       {/* La Mamma */}
       <div className="border-b border-primary-foreground/20">
-        <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl md:text-4xl font-serif font-semibold text-center mb-12 tracking-wide">{t.footer.theMamma}</h2>
+        <div className="container mx-auto px-4 py-10">
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6 tracking-wide">{t.footer.theMamma}</h2>
           
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="w-40 h-40 md:w-48 md:h-48 mx-auto mb-6 rounded-full bg-primary-foreground/10 flex items-center justify-center ring-4 ring-primary-foreground/20">
-              <Heart className="w-16 h-16 text-primary-foreground/40" />
+          <div className="max-w-xl mx-auto text-center">
+            <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <video 
+                src={mammaVideo}
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </div>
-            <h3 className="text-2xl md:text-3xl font-serif font-semibold mb-1 tracking-wide">{t.footer.mammaSperanza}</h3>
-            <p className="text-primary-foreground/60 text-base italic mb-4">{t.footer.mammaNickname}</p>
-            <p className="text-primary-foreground/80 text-base font-sans leading-relaxed max-w-xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-serif font-semibold mb-1 tracking-wide">{t.footer.mammaSperanza}</h3>
+            <p className="text-primary-foreground/60 text-sm italic mb-3">{t.footer.mammaNickname}</p>
+            <p className="text-primary-foreground/80 text-sm font-sans leading-relaxed max-w-md mx-auto">
               {t.footer.mammaBio}
             </p>
           </div>
@@ -29,38 +37,38 @@ const Footer = () => {
 
       {/* Die Fratelli */}
       <div className="border-b border-primary-foreground/20">
-        <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl md:text-4xl font-serif font-semibold text-center mb-12 tracking-wide">{t.footer.theFratelli}</h2>
+        <div className="container mx-auto px-4 py-10">
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6 tracking-wide">{t.footer.theFratelli}</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {/* Domenico */}
             <div className="text-center">
-              <div className="w-52 h-52 md:w-56 md:h-56 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
                 <img 
                   src={domenicoImage} 
                   alt="Domenico Speranza" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl md:text-3xl font-serif font-semibold mb-1 tracking-wide">Domenico Speranza</h3>
-              <p className="text-primary-foreground/60 text-base italic mb-4">{t.footer.domenicoNickname}</p>
-              <p className="text-primary-foreground/80 text-base font-sans leading-relaxed max-w-sm mx-auto">
+              <h3 className="text-xl md:text-2xl font-serif font-semibold mb-1 tracking-wide">Domenico Speranza</h3>
+              <p className="text-primary-foreground/60 text-sm italic mb-3">{t.footer.domenicoNickname}</p>
+              <p className="text-primary-foreground/80 text-sm font-sans leading-relaxed max-w-xs mx-auto">
                 {t.footer.domenicoBio}
               </p>
             </div>
 
             {/* Nicola */}
             <div className="text-center">
-              <div className="w-52 h-52 md:w-56 md:h-56 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
+              <div className="w-28 h-28 md:w-32 md:h-32 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary-foreground/20">
                 <img 
                   src={nicolaImage} 
                   alt="Nicola Speranza" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl md:text-3xl font-serif font-semibold mb-1 tracking-wide">Nicola Speranza</h3>
-              <p className="text-primary-foreground/60 text-base italic mb-4">{t.footer.nicolaNickname}</p>
-              <p className="text-primary-foreground/80 text-base font-sans leading-relaxed max-w-sm mx-auto">
+              <h3 className="text-xl md:text-2xl font-serif font-semibold mb-1 tracking-wide">Nicola Speranza</h3>
+              <p className="text-primary-foreground/60 text-sm italic mb-3">{t.footer.nicolaNickname}</p>
+              <p className="text-primary-foreground/80 text-sm font-sans leading-relaxed max-w-xs mx-auto">
                 {t.footer.nicolaBio}
               </p>
             </div>
