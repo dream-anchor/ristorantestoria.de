@@ -36,10 +36,10 @@ serve(async (req) => {
   }
 
   try {
-    const { pdfContent, menuType } = await req.json();
+    const { pdfBase64, menuType } = await req.json();
     
-    if (!pdfContent) {
-      throw new Error('PDF content is required');
+    if (!pdfBase64) {
+      throw new Error('PDF Base64 content is required');
     }
 
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
@@ -47,7 +47,7 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    console.log(`Parsing menu PDF for type: ${menuType}`);
+    console.log(`Parsing menu PDF for type: ${menuType}, base64 length: ${pdfBase64.length}`);
 
     const systemPrompt = `Du bist ein präziser Menü-Parser für ein italienisches Restaurant. Deine Aufgabe ist es, den Inhalt eines Menü-PDFs EXAKT zu extrahieren.
 
@@ -71,7 +71,21 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
         model: 'google/gemini-2.5-flash',
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: `Extrahiere den folgenden Menü-Inhalt:\n\n${pdfContent}` }
+          { 
+            role: 'user', 
+            content: [
+              {
+                type: 'image_url',
+                image_url: {
+                  url: `data:application/pdf;base64,${pdfBase64}`
+                }
+              },
+              {
+                type: 'text',
+                text: 'Extrahiere den kompletten Menü-Inhalt aus diesem PDF. Übernimm alle Gerichte, Beschreibungen und Preise EXAKT wie im Dokument.'
+              }
+            ]
+          }
         ],
         tools: [
           {
