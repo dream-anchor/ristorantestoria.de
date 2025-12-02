@@ -24,6 +24,7 @@ export const de = {
     reserveButton: "HIER RESERVIEREN",
   },
   footer: {
+    theFamily: "La Famiglia Speranza",
     theMamma: "La Mamma",
     mammaSperanza: "Mamma Speranza",
     mammaNickname: "La Mamma",

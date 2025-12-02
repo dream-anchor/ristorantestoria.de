@@ -24,6 +24,7 @@ export const en = {
     reserveButton: "RESERVE NOW",
   },
   footer: {
+    theFamily: "The Speranza Family",
     theMamma: "La Mamma",
     mammaSperanza: "Mamma Speranza",
     mammaNickname: "La Mamma",
