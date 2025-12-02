@@ -107,19 +107,6 @@ const CollapsibleMenuCard = ({
                 ) : (
                   <p className="text-muted-foreground">Keine Daten vorhanden</p>
                 )}
-                <div className="flex gap-2 pt-4">
-                  <Button
-                    onClick={handleSaveEdit}
-                    disabled={saveMenuContent.isPending || !editData}
-                  >
-                    <Save className="h-4 w-4 mr-2" />
-                    {saveMenuContent.isPending ? "Speichern..." : "Änderungen speichern"}
-                  </Button>
-                  <Button variant="outline" onClick={handleCancelEdit}>
-                    <X className="h-4 w-4 mr-2" />
-                    Abbrechen
-                  </Button>
-                </div>
               </div>
             ) : (
               children
@@ -127,6 +114,25 @@ const CollapsibleMenuCard = ({
           </div>
         </CollapsibleContent>
       </div>
+      
+      {/* Floating Save Bar */}
+      {isEditing && (
+        <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border p-4 shadow-lg z-50">
+          <div className="container mx-auto flex justify-end gap-2">
+            <Button variant="outline" onClick={handleCancelEdit}>
+              <X className="h-4 w-4 mr-2" />
+              Abbrechen
+            </Button>
+            <Button
+              onClick={handleSaveEdit}
+              disabled={saveMenuContent.isPending || !editData}
+            >
+              <Save className="h-4 w-4 mr-2" />
+              {saveMenuContent.isPending ? "Speichern..." : "Änderungen speichern"}
+            </Button>
+          </div>
+        </div>
+      )}
     </Collapsible>
   );
 };
