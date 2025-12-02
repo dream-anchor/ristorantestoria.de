@@ -1,4 +1,12 @@
 export const en = {
+  imageGrid: {
+    openingHoursTitle: "Opening Hours:",
+    openingHoursText: "Mon - Fri 09:00 AM - 01:00 AM\nSat - Sun 12:00 PM - 01:00 AM",
+    notturnoTitle: "STORIA Notturno",
+    notturnoText: "Late Night Aperitivo – Italian style\n9:00 PM - 10:30 PM",
+    breakfastTitle: "Mon-Sun from 9:00 AM:",
+    breakfastText: "Breakfast at STORIA",
+  },
   nav: {
     reservation: "RESERVATION",
     menu: "MENU",

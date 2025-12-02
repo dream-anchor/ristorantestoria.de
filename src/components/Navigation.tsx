@@ -88,7 +88,7 @@ const Navigation = () => {
                       onOpenChange={() => toggleMobileMenu(item.label)}
                     >
                       <CollapsibleTrigger
-                        className={`flex items-center justify-between w-full px-4 py-3 text-sm font-medium rounded-md transition-colors ${
+                        className={`flex items-center justify-between w-full px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors ${
                           isActive(item)
                             ? "bg-accent text-accent-foreground"
                             : "hover:bg-accent/50 hover:text-accent-foreground"
@@ -107,7 +107,7 @@ const Navigation = () => {
                             key={child.path}
                             to={child.path}
                             onClick={() => setIsOpen(false)}
-                            className={`block px-4 py-2 text-sm rounded-md transition-colors ${
+                            className={`block px-4 py-2 text-sm tracking-wider rounded-md transition-colors ${
                               location.pathname === child.path
                                 ? "bg-accent text-accent-foreground"
                                 : "hover:bg-accent/50 hover:text-accent-foreground"
@@ -123,7 +123,7 @@ const Navigation = () => {
                       key={item.path}
                       to={item.path!}
                       onClick={() => setIsOpen(false)}
-                      className={`px-4 py-3 text-sm font-medium rounded-md transition-colors ${
+                      className={`px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors ${
                         location.pathname === item.path
                           ? "bg-accent text-accent-foreground"
                           : "hover:bg-accent/50 hover:text-accent-foreground"
@@ -155,23 +155,28 @@ const Navigation = () => {
                 onMouseLeave={() => setHoveredMenu(null)}
               >
                 <button
-                  className={`flex items-center gap-1 whitespace-nowrap px-4 py-4 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors ${
-                    isActive(item) ? "bg-accent text-accent-foreground" : ""
+                  className={`group flex items-center gap-1 whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative ${
+                    isActive(item) ? "text-accent-foreground" : ""
                   }`}
                 >
-                  {item.label}
+                  <span className="relative">
+                    {item.label}
+                    <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary-foreground transform transition-transform duration-300 origin-left ${
+                      isActive(item) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    }`} />
+                  </span>
                   <ChevronDown className={`h-4 w-4 transition-transform ${hoveredMenu === item.label ? "rotate-180" : ""}`} />
                 </button>
                 
                 {hoveredMenu === item.label && (
-                  <div className="absolute top-full left-0 bg-primary text-primary-foreground border border-accent rounded-md shadow-lg min-w-[180px] z-50">
+                  <div className="absolute top-full left-0 bg-primary text-primary-foreground border border-primary-foreground/20 rounded-sm shadow-lg min-w-[200px] z-50 animate-fade-in">
                     {item.children.map((child) => (
                       <Link
                         key={child.path}
                         to={child.path}
-                        className={`block px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors first:rounded-t-md last:rounded-b-md ${
+                        className={`block px-5 py-3 text-sm tracking-wider hover:bg-primary-foreground/10 transition-colors first:rounded-t-sm last:rounded-b-sm ${
                           location.pathname === child.path
-                            ? "bg-accent text-accent-foreground"
+                            ? "bg-primary-foreground/10"
                             : ""
                         }`}
                       >
@@ -185,13 +190,14 @@ const Navigation = () => {
               <Link
                 key={item.path}
                 to={item.path!}
-                className={`whitespace-nowrap px-4 py-4 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors ${
-                  location.pathname === item.path
-                    ? "bg-accent text-accent-foreground"
-                    : ""
-                }`}
+                className={`group whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative`}
               >
-                {item.label}
+                <span className="relative">
+                  {item.label}
+                  <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary-foreground transform transition-transform duration-300 origin-left ${
+                    location.pathname === item.path ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`} />
+                </span>
               </Link>
             )
           )}

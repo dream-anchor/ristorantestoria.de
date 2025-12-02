@@ -5,6 +5,7 @@ import breakfastImage from "@/assets/breakfast.jpg";
 import restaurantImage from "@/assets/restaurant.jpg";
 import aperitivoImage from "@/assets/aperitivo.jpg";
 import dessertImage from "@/assets/dessert.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ImageCardProps {
   image: string;
@@ -19,16 +20,23 @@ const ImageCard = ({ image, title, subtitle, className = "" }: ImageCardProps) =
       <img 
         src={image} 
         alt={title || ""} 
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
       {(title || subtitle) && (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-none">
-          <div className="bg-black/80 backdrop-blur-sm px-6 py-4 rounded-lg">
+          <div className="bg-primary/85 backdrop-blur-sm px-8 py-5 rounded-sm">
             {title && (
-              <h3 className="text-white text-xl md:text-2xl font-semibold mb-2">{title}</h3>
+              <h3 className="text-primary-foreground text-lg md:text-xl font-serif font-semibold mb-2 tracking-wide">{title}</h3>
             )}
             {subtitle && (
-              <p className="text-white text-sm md:text-base font-medium whitespace-pre-line leading-relaxed">{subtitle}</p>
+              <p className="text-primary-foreground/90 text-sm md:text-base font-medium leading-relaxed">
+                {subtitle.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < subtitle.split('\n').length - 1 && <br />}
+                  </span>
+                ))}
+              </p>
             )}
           </div>
         </div>
@@ -38,8 +46,10 @@ const ImageCard = ({ image, title, subtitle, className = "" }: ImageCardProps) =
 };
 
 const ImageGrid = () => {
+  const { t } = useLanguage();
+
   return (
-    <section className="bg-background py-8">
+    <section className="bg-background py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Row 1 */}
@@ -49,8 +59,8 @@ const ImageGrid = () => {
           />
           <ImageCard 
             image={pastaImage} 
-            title="Öffnungszeiten:"
-            subtitle="Mo - Fr 09.00 - 01.00 Uhr\nSa - So 12.00 - 1.00 Uhr"
+            title={t.imageGrid.openingHoursTitle}
+            subtitle={t.imageGrid.openingHoursText}
             className="aspect-square"
           />
           <ImageCard 
@@ -59,16 +69,16 @@ const ImageGrid = () => {
           />
           <ImageCard 
             image={aperitivoImage} 
-            title="STORIA Notturno"
-            subtitle="Late Night Aperitivo – stile italiano\n21.00-22.30 Uhr"
+            title={t.imageGrid.notturnoTitle}
+            subtitle={t.imageGrid.notturnoText}
             className="aspect-square"
           />
 
           {/* Row 2 */}
           <ImageCard 
             image={breakfastImage} 
-            title="Mo-So ab 9.00 Uhr:"
-            subtitle="Frühstücken im STORIA"
+            title={t.imageGrid.breakfastTitle}
+            subtitle={t.imageGrid.breakfastText}
             className="aspect-square"
           />
           <ImageCard 

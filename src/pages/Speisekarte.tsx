@@ -25,30 +25,30 @@ const Speisekarte = () => {
 
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-card p-6 rounded-lg border border-border">
-              <h2 className="text-2xl font-serif font-bold mb-4">{t.foodMenu.antipasti}</h2>
-              <p className="text-muted-foreground">
+            <div className="bg-card p-8 rounded-sm border border-border shadow-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-serif font-semibold mb-4 tracking-wide">{t.foodMenu.antipasti}</h2>
+              <p className="text-muted-foreground leading-relaxed">
                 {t.foodMenu.antipastiDesc}
               </p>
             </div>
 
-            <div className="bg-card p-6 rounded-lg border border-border">
-              <h2 className="text-2xl font-serif font-bold mb-4">{t.foodMenu.pizza}</h2>
-              <p className="text-muted-foreground">
+            <div className="bg-card p-8 rounded-sm border border-border shadow-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-serif font-semibold mb-4 tracking-wide">{t.foodMenu.pizza}</h2>
+              <p className="text-muted-foreground leading-relaxed">
                 {t.foodMenu.pizzaDesc}
               </p>
             </div>
 
-            <div className="bg-card p-6 rounded-lg border border-border">
-              <h2 className="text-2xl font-serif font-bold mb-4">{t.foodMenu.pasta}</h2>
-              <p className="text-muted-foreground">
+            <div className="bg-card p-8 rounded-sm border border-border shadow-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-serif font-semibold mb-4 tracking-wide">{t.foodMenu.pasta}</h2>
+              <p className="text-muted-foreground leading-relaxed">
                 {t.foodMenu.pastaDesc}
               </p>
             </div>
 
-            <div className="bg-card p-6 rounded-lg border border-border">
-              <h2 className="text-2xl font-serif font-bold mb-4">{t.foodMenu.dolci}</h2>
-              <p className="text-muted-foreground">
+            <div className="bg-card p-8 rounded-sm border border-border shadow-sm hover:shadow-md transition-shadow">
+              <h2 className="text-2xl font-serif font-semibold mb-4 tracking-wide">{t.foodMenu.dolci}</h2>
+              <p className="text-muted-foreground leading-relaxed">
                 {t.foodMenu.dolciDesc}
               </p>
             </div>
