@@ -19,6 +19,7 @@ interface NavChild {
 interface NavItem {
   label: string;
   path?: string;
+  externalUrl?: string;
   children?: NavChild[];
 }
 
@@ -52,7 +53,7 @@ const Navigation = () => {
       label: t.nav.specialOccasions,
       children: specialOccasionsChildren,
     },
-    { label: t.nav.catering, path: "/catering" },
+    { label: t.nav.catering, externalUrl: "https://www.events-storia.de/" },
     { label: t.nav.contact, path: "/kontakt" },
   ];
 
@@ -142,6 +143,17 @@ const Navigation = () => {
                         ))}
                       </CollapsibleContent>
                     </Collapsible>
+                  ) : item.externalUrl ? (
+                    <a
+                      key={item.label}
+                      href={item.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsOpen(false)}
+                      className="px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors hover:bg-accent/50 hover:text-accent-foreground"
+                    >
+                      {item.label}
+                    </a>
                   ) : (
                     <Link
                       key={item.path}
@@ -222,6 +234,19 @@ const Navigation = () => {
                   </div>
                 )}
               </div>
+            ) : item.externalUrl ? (
+              <a
+                key={item.label}
+                href={item.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative"
+              >
+                <span className="relative">
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-foreground transform transition-transform duration-300 origin-left scale-x-0 group-hover:scale-x-100" />
+                </span>
+              </a>
             ) : (
               <Link
                 key={item.path}
