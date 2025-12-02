@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Phone, UtensilsCrossed, Copy, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Popover,
   PopoverContent,
@@ -13,6 +14,7 @@ const FloatingActions = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [copied, setCopied] = useState(false);
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +33,7 @@ const FloatingActions = () => {
 
   if (!isVisible) return null;
 
-  const buttonClasses = "bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl px-4 py-3 shadow-lg transition-all hover:scale-105 flex flex-col items-center gap-1";
+  const buttonClasses = "bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl px-5 py-3 shadow-lg transition-all hover:scale-105 flex flex-col items-center gap-1";
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 animate-fade-in">
@@ -42,14 +44,14 @@ const FloatingActions = () => {
           className={buttonClasses}
         >
           <Phone className="h-5 w-5" />
-          <span className="text-xs font-medium">Anrufen</span>
+          <span className="text-sm font-semibold">{t.floatingActions.call}</span>
         </a>
       ) : (
         <Popover>
           <PopoverTrigger asChild>
             <button className={buttonClasses}>
               <Phone className="h-5 w-5" />
-              <span className="text-xs font-medium">Anrufen</span>
+              <span className="text-sm font-semibold">{t.floatingActions.call}</span>
             </button>
           </PopoverTrigger>
           <PopoverContent side="left" className="w-auto p-3">
@@ -78,7 +80,7 @@ const FloatingActions = () => {
         className={buttonClasses}
       >
         <UtensilsCrossed className="h-5 w-5" />
-        <span className="text-xs font-medium">Reservieren</span>
+        <span className="text-sm font-semibold">{t.floatingActions.reserve}</span>
       </Link>
     </div>
   );

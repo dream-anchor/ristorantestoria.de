@@ -1,4 +1,8 @@
 export const de = {
+  floatingActions: {
+    call: "Anrufen",
+    reserve: "Reservieren",
+  },
   imageGrid: {
     openingHoursTitle: "Öffnungszeiten:",
     openingHoursText: "Mo - Fr 09.00 - 01.00 Uhr\nSa - So 12.00 - 1.00 Uhr",
