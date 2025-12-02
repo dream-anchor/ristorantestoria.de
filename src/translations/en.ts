@@ -43,6 +43,7 @@ export const en = {
     nicolaBio: "Also raised in Rofrano, he combines his love of good cuisine with great attention to detail. With his skill and fine sense, he supports the kitchen team and creates dishes that inspire through creativity and genuine passion. High-quality products, clear flavors and authentic Italian culinary art define his style.",
     monFri: "Mon - Fri",
     satSun: "Sat - Sun",
+    welcomeMessage: "We look forward to your visit",
   },
   reservation: {
     title: "Reserve a Table",
