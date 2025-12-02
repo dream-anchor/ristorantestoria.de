@@ -24,6 +24,10 @@ export const en = {
     reserveButton: "RESERVE NOW",
   },
   footer: {
+    theMamma: "La Mamma",
+    mammaSperanza: "Mamma Speranza",
+    mammaNickname: "La Mamma",
+    mammaBio: "Rooted in Rofrano, she is the heart of the family and the source of the passion her sons carry within them. With warmth, patience, and an unerring sense for good ingredients, she instilled in them the love of Italian cuisine. Her traditional way of cooking, her openness, and her sense of community continue to shape the family's understanding of hospitality to this day. In her kitchen, that mixture of quality, authenticity, and dedication was born that still accompanies Domenico and Nicola today.",
     theFratelli: "The Fratelli",
     contact: "Contact",
     openingHours: "Opening Hours",
