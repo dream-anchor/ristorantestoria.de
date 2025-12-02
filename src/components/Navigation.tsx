@@ -8,6 +8,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface NavChild {
   label: string;
@@ -25,23 +26,24 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openMenus, setOpenMenus] = useState<string[]>([]);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   const navItems: NavItem[] = [
-    { label: "RESERVIERUNG", path: "/reservierung" },
+    { label: t.nav.reservation, path: "/reservierung" },
     {
-      label: "MENÜ",
+      label: t.nav.menu,
       children: [
-        { label: "MITTAGSMENÜ", path: "/mittagsmenu" },
-        { label: "SPEISEKARTE", path: "/speisekarte" },
-        { label: "GETRÄNKE", path: "/getraenke" },
+        { label: t.nav.lunchMenu, path: "/mittagsmenu" },
+        { label: t.nav.foodMenu, path: "/speisekarte" },
+        { label: t.nav.drinks, path: "/getraenke" },
       ],
     },
     {
-      label: "BESONDERE ANLÄSSE",
-      children: [{ label: "WEIHNACHTSMENÜS", path: "/weihnachtsmenues" }],
+      label: t.nav.specialOccasions,
+      children: [{ label: t.nav.christmasMenus, path: "/weihnachtsmenues" }],
     },
-    { label: "CATERING & EVENTS", path: "/catering" },
-    { label: "KONTAKT", path: "/kontakt" },
+    { label: t.nav.catering, path: "/catering" },
+    { label: t.nav.contact, path: "/kontakt" },
   ];
 
   const toggleMobileMenu = (label: string) => {
@@ -143,7 +145,7 @@ const Navigation = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center">
+        <div className="hidden lg:flex items-center justify-center">
           {navItems.map((item) =>
             item.children ? (
               <div

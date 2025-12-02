@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Reservierung from "./pages/Reservierung";
 import Menu from "./pages/Menu";
@@ -20,24 +21,26 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/reservierung" element={<Reservierung />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/mittagsmenu" element={<Mittagsmenu />} />
-          <Route path="/speisekarte" element={<Speisekarte />} />
-          <Route path="/getraenke" element={<Getraenke />} />
-          <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
-          <Route path="/weihnachtsmenues" element={<Weihnachtsmenues />} />
-          <Route path="/kontakt" element={<Kontakt />} />
-          <Route path="/catering" element={<Catering />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <LanguageProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/reservierung" element={<Reservierung />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/mittagsmenu" element={<Mittagsmenu />} />
+            <Route path="/speisekarte" element={<Speisekarte />} />
+            <Route path="/getraenke" element={<Getraenke />} />
+            <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
+            <Route path="/weihnachtsmenues" element={<Weihnachtsmenues />} />
+            <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/catering" element={<Catering />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
