@@ -34,7 +34,7 @@ const Datenschutz = () => {
                 </a>
               </p>
               <p className="mt-2">
-                <strong>Vertreten durch:</strong> Domenico Speranza
+                <strong>Vertreten durch:</strong> Agnese Lettieri
               </p>
             </section>
 

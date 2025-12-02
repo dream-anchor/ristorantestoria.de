@@ -1,7 +1,7 @@
 export const en = {
   floatingActions: {
     call: "Call",
-    reserve: "Reserve",
+    reserve: "Book now",
   },
   imageGrid: {
     openingHoursTitle: "Opening Hours:",
