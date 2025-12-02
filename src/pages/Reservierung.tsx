@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -6,6 +7,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const Reservierung = () => {
   const { t } = useLanguage();
+  const [iframeHeight, setIframeHeight] = useState(1100);
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin.includes('opentable')) {
+        if (event.data?.height && typeof event.data.height === 'number') {
+          setIframeHeight(Math.max(event.data.height, 900));
+        }
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -30,7 +44,8 @@ const Reservierung = () => {
         <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border shadow-lg overflow-hidden">
           <iframe 
             src="https://www.opentable.de/booking/restref/availability?rid=115809&restref=115809&lang=de-DE&color=1&r3uid=cfe&dark=false&partysize=2&ot_source=Restaurant%20website"
-            className="w-full h-[900px] border-0"
+            className="w-full border-0 transition-[height] duration-300"
+            style={{ height: `${iframeHeight}px` }}
             title="OpenTable Reservierung"
             allow="geolocation"
           />
