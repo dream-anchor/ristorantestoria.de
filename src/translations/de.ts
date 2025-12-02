@@ -51,7 +51,8 @@ export const de = {
   lunchMenu: {
     title: "Mittagsmenü",
     ourOffer: "Unser Mittagsangebot",
-    description: "Genießen Sie unsere täglich wechselnden Mittagsgerichte – frisch zubereitet mit Liebe und Leidenschaft. Schnell, lecker und perfekt für die Mittagspause.",
+    greeting: "~ Buon Appetito ~",
+    description: "Jeden Tag bereiten wir für Sie frische Mittagsgerichte zu –\nmit Liebe, Leidenschaft und den besten Zutaten Italiens.\nDer perfekte Genuss für Ihre Mittagspause.",
     hours: "Montag bis Freitag von 11:30 bis 14:30 Uhr",
     currentMenu: "Das aktuelle Mittagsmenü erhalten Sie vor Ort oder auf Anfrage.",
     callNow: "Jetzt anrufen",

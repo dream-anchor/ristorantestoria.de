@@ -51,7 +51,8 @@ export const en = {
   lunchMenu: {
     title: "Lunch Menu",
     ourOffer: "Our Lunch Offer",
-    description: "Enjoy our daily changing lunch dishes – freshly prepared with love and passion. Fast, delicious and perfect for your lunch break.",
+    greeting: "~ Buon Appetito ~",
+    description: "Every day we prepare fresh lunch dishes for you –\nwith love, passion and the finest ingredients from Italy.\nThe perfect delight for your lunch break.",
     hours: "Monday to Friday from 11:30 AM to 2:30 PM",
     currentMenu: "The current lunch menu is available on-site or upon request.",
     callNow: "Call now",

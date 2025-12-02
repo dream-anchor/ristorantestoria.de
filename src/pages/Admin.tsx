@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import storiaLogo from "@/assets/storia-logo.webp";
 import MenuUploader from "@/components/admin/MenuUploader";
 import MenuStatusCard from "@/components/admin/MenuStatusCard";
-import { LogOut, FileText } from "lucide-react";
+import { LogOut, FileText, ExternalLink } from "lucide-react";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -46,16 +46,26 @@ const Admin = () => {
       <header className="border-b border-border bg-card">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <img src={storiaLogo} alt="STORIA" className="h-10" />
+            <Link to="/">
+              <img src={storiaLogo} alt="STORIA" className="h-10 hover:opacity-80 transition-opacity cursor-pointer" />
+            </Link>
             <div>
               <h1 className="font-serif font-semibold">Admin-Dashboard</h1>
               <p className="text-sm text-muted-foreground">{user.email}</p>
             </div>
           </div>
-          <Button variant="outline" size="sm" onClick={handleSignOut}>
-            <LogOut className="h-4 w-4 mr-2" />
-            Abmelden
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Zur Webseite
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleSignOut}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Abmelden
+            </Button>
+          </div>
         </div>
       </header>
 
