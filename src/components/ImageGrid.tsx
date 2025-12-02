@@ -1,7 +1,7 @@
 import chefsImage from "@/assets/chefs.jpg";
 import pastaImage from "@/assets/pasta.jpg";
 import drinksImage from "@/assets/drinks.jpg";
-import breakfastImage from "@/assets/aussen.webp";
+import hausAussenImage from "@/assets/haus-aussen.webp";
 import restaurantImage from "@/assets/restaurant.jpg";
 import aperitivoImage from "@/assets/meeresfruchte.webp";
 import dessertImage from "@/assets/tiramisu.webp";
@@ -77,9 +77,7 @@ const ImageGrid = () => {
 
           {/* Row 2 */}
           <ImageCard 
-            image={breakfastImage} 
-            title={t.imageGrid.breakfastTitle}
-            subtitle={t.imageGrid.breakfastText}
+            image={hausAussenImage} 
             className="aspect-square"
           />
           <ImageCard 
