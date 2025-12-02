@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import storiaLogo from "@/assets/storia-logo.webp";
 
 const Menu = () => {
   return (
@@ -8,9 +9,7 @@ const Menu = () => {
       <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
-          <h1 className="font-serif text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-            STORIA
-          </h1>
+          <img src={storiaLogo} alt="STORIA" className="h-24 md:h-32 mx-auto mb-4" />
           <p className="text-lg text-muted-foreground tracking-wide">
             RISTORANTE · PIZZERIA · BAR
           </p>
