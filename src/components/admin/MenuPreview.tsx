@@ -25,7 +25,9 @@ interface MenuCategory {
 
 interface ParsedMenu {
   title: string;
+  title_en: string;
   subtitle: string;
+  subtitle_en: string;
   categories: MenuCategory[];
 }
 
@@ -39,8 +41,16 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
     onUpdate({ ...data, title: value });
   };
 
+  const updateTitleEn = (value: string) => {
+    onUpdate({ ...data, title_en: value });
+  };
+
   const updateSubtitle = (value: string) => {
     onUpdate({ ...data, subtitle: value });
+  };
+
+  const updateSubtitleEn = (value: string) => {
+    onUpdate({ ...data, subtitle_en: value });
   };
 
   const updateCategory = (catIndex: number, field: keyof MenuCategory, value: string) => {
@@ -106,10 +116,10 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
           Vorschau & Bearbeitung
         </h4>
 
-        {/* Title & Subtitle */}
+        {/* Title & Subtitle - German */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-medium">Titel</label>
+            <label className="text-sm font-medium">Titel (Deutsch)</label>
             <Textarea
               value={data.title || ''}
               onChange={(e) => updateTitle(e.target.value)}
@@ -119,11 +129,35 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
             />
           </div>
           <div>
-            <label className="text-sm font-medium">Untertitel</label>
+            <label className="text-sm font-medium">Titel (English)</label>
+            <Textarea
+              value={data.title_en || ''}
+              onChange={(e) => updateTitleEn(e.target.value)}
+              placeholder="Menu Title"
+              className="min-h-[80px] resize-y"
+              rows={3}
+            />
+          </div>
+        </div>
+
+        {/* Subtitle - German & English */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm font-medium">Untertitel (Deutsch)</label>
             <Textarea
               value={data.subtitle || ''}
               onChange={(e) => updateSubtitle(e.target.value)}
               placeholder="Zusätzliche Info"
+              className="min-h-[80px] resize-y"
+              rows={3}
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium">Untertitel (English)</label>
+            <Textarea
+              value={data.subtitle_en || ''}
+              onChange={(e) => updateSubtitleEn(e.target.value)}
+              placeholder="Additional Info"
               className="min-h-[80px] resize-y"
               rows={3}
             />

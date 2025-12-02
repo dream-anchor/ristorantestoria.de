@@ -26,7 +26,9 @@ interface MenuCategory {
 
 interface ParsedMenu {
   title: string;
+  title_en: string;
   subtitle: string;
+  subtitle_en: string;
   categories: MenuCategory[];
 }
 
@@ -107,8 +109,10 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
               parameters: {
                 type: 'object',
                 properties: {
-                  title: { type: 'string', description: 'Titel des Menüs (z.B. "Business Lunch", "Speisekarte")' },
-                  subtitle: { type: 'string', description: 'Untertitel oder Zusatzinfo (z.B. Öffnungszeiten)' },
+                  title: { type: 'string', description: 'Titel des Menüs auf Deutsch (z.B. "Business Lunch", "Speisekarte")' },
+                  title_en: { type: 'string', description: 'Titel des Menüs auf Englisch (z.B. "Business Lunch", "Menu")' },
+                  subtitle: { type: 'string', description: 'Untertitel oder Zusatzinfo auf Deutsch (z.B. Öffnungszeiten)' },
+                  subtitle_en: { type: 'string', description: 'Untertitel oder Zusatzinfo auf Englisch' },
                   categories: {
                     type: 'array',
                     items: {
@@ -140,7 +144,7 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
                     }
                   }
                 },
-                required: ['title', 'categories']
+                required: ['title', 'title_en', 'categories']
               }
             }
           }

@@ -22,14 +22,18 @@ export interface ParsedMenuCategory {
 
 export interface ParsedMenu {
   title: string;
+  title_en: string;
   subtitle: string;
+  subtitle_en: string;
   categories: ParsedMenuCategory[];
 }
 
 export interface SpecialMenu {
   id: string;
   title: string | null;
+  title_en: string | null;
   subtitle: string | null;
+  subtitle_en: string | null;
   is_published: boolean;
   published_at: string | null;
   created_at: string | null;
@@ -74,7 +78,9 @@ export const useSpecialMenus = () => {
         return {
           id: menu.id,
           title: menu.title,
+          title_en: menu.title_en,
           subtitle: menu.subtitle,
+          subtitle_en: menu.subtitle_en,
           is_published: menu.is_published || false,
           published_at: menu.published_at,
           created_at: menu.created_at,
@@ -214,7 +220,9 @@ export const useMenuContent = (menuId: string | undefined) => {
       // Convert to ParsedMenu format
       return {
         title: menu.title || '',
+        title_en: menu.title_en || '',
         subtitle: menu.subtitle || '',
+        subtitle_en: menu.subtitle_en || '',
         categories: categories?.map(cat => ({
           name: cat.name,
           name_en: cat.name_en || '',
@@ -250,7 +258,9 @@ export const useSaveMenuContent = () => {
         .from('menus')
         .update({
           title: data.title,
+          title_en: data.title_en,
           subtitle: data.subtitle,
+          subtitle_en: data.subtitle_en,
           updated_at: new Date().toISOString(),
         })
         .eq('id', menuId);

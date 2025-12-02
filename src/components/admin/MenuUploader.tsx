@@ -35,7 +35,9 @@ interface ParsedItem {
 
 interface ParsedMenu {
   title: string;
+  title_en: string;
   subtitle: string;
+  subtitle_en: string;
   categories: ParsedCategory[];
 }
 
