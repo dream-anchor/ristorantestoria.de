@@ -88,16 +88,12 @@ const SpecialMenuCard = ({ menu, onDelete, isDeleting }: SpecialMenuCardProps) =
     }
   };
 
-  const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <div className="bg-card rounded-lg border border-border">
-        {/* Collapsible Header */}
-        <div className="flex items-center justify-between p-6">
-          <CollapsibleTrigger className="flex-1 flex items-center gap-3 hover:bg-muted/50 -m-2 p-2 rounded-lg transition-colors cursor-pointer">
+        {/* Collapsible Header - matching CollapsibleMenuCard layout */}
+        <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors rounded-lg cursor-pointer">
+          <div className="flex items-center gap-3">
             <FileText className="h-5 w-5 text-primary" />
             <div className="text-left">
               <h3 className="text-lg font-serif font-semibold">
@@ -107,13 +103,30 @@ const SpecialMenuCard = ({ menu, onDelete, isDeleting }: SpecialMenuCardProps) =
                 <p className="text-sm text-muted-foreground">{menu.subtitle}</p>
               )}
             </div>
-          </CollapsibleTrigger>
+          </div>
           
-          <div className="flex items-center gap-2 ml-4">
+          <div className="flex items-center gap-3">
+            {/* Edit Button - same position as CollapsibleMenuCard */}
+            {hasContent && !isEditing && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleStartEdit();
+                }}
+                className="h-8 w-8 p-0"
+              >
+                <Pencil className="h-4 w-4" />
+              </Button>
+            )}
+            
             <Badge variant={menu.is_published ? "default" : "secondary"}>
               {menu.is_published ? "Veröffentlicht" : "Entwurf"}
             </Badge>
-            <div onClick={handleDelete}>
+            
+            {/* Delete Button - only for special menus */}
+            <div onClick={(e) => e.stopPropagation()}>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
@@ -141,17 +154,14 @@ const SpecialMenuCard = ({ menu, onDelete, isDeleting }: SpecialMenuCardProps) =
                 </AlertDialogContent>
               </AlertDialog>
             </div>
-            <CollapsibleTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <ChevronDown
-                  className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${
-                    isOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </Button>
-            </CollapsibleTrigger>
+            
+            <ChevronDown
+              className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${
+                isOpen ? "rotate-180" : ""
+              }`}
+            />
           </div>
-        </div>
+        </CollapsibleTrigger>
 
         {/* Collapsible Content */}
         <CollapsibleContent>
@@ -183,23 +193,15 @@ const SpecialMenuCard = ({ menu, onDelete, isDeleting }: SpecialMenuCardProps) =
               </div>
             )}
 
-            {/* Action Buttons */}
-            {!isEditing && (
+            {/* Action Buttons - removed duplicate Edit button */}
+            {!isEditing && menu.is_published && (
               <div className="flex gap-2 mb-4">
-                {menu.is_published && (
-                  <Button variant="outline" size="sm" asChild>
-                    <Link to="/besondere-anlaesse">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Auf Website ansehen
-                    </Link>
-                  </Button>
-                )}
-                {hasContent && (
-                  <Button variant="outline" size="sm" onClick={handleStartEdit}>
-                    <Pencil className="h-4 w-4 mr-2" />
-                    Bearbeiten
-                  </Button>
-                )}
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/besondere-anlaesse">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Auf Website ansehen
+                  </Link>
+                </Button>
               </div>
             )}
 
