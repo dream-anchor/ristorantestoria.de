@@ -1,10 +1,11 @@
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 
 const Catering = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
@@ -18,8 +19,8 @@ const Catering = () => {
       </div>
       <Navigation />
       
-      <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8">Veranstaltungen & Catering</h1>
+      <main className="container mx-auto px-4 py-12 flex-grow">
+        <h1 className="text-4xl font-bold mb-8">Catering & Events</h1>
         
         <div className="max-w-4xl mx-auto">
           <div className="bg-card p-8 rounded-lg border border-border mb-8">
@@ -68,7 +69,7 @@ const Catering = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
-                <a href="tel:08951519696">089 51519696</a>
+                <a href="tel:+4989515196">089 51519696</a>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <a href="mailto:info@ristorantestoria.de">E-Mail senden</a>
@@ -78,12 +79,7 @@ const Catering = () => {
         </div>
       </main>
 
-      <footer className="bg-muted border-t border-border py-8 mt-12">
-        <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          <p className="mb-2">STORIA - Ristorante · Pizzeria · Bar</p>
-          <p>Im Herzen von München</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

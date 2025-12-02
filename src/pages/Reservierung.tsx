@@ -7,6 +7,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { toast } from "sonner";
 
 const Reservierung = () => {
@@ -23,7 +24,7 @@ const Reservierung = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
@@ -37,13 +38,13 @@ const Reservierung = () => {
       </div>
       <Navigation />
       
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 flex-grow">
         <h1 className="text-4xl font-bold mb-8">Reservierung</h1>
         
         <div className="max-w-3xl mx-auto bg-card p-8 rounded-lg border border-border">
           <h2 className="text-2xl font-semibold mb-6">Bequem online reservieren</h2>
           <p className="text-muted-foreground mb-8">
-            Bitte reservieren Sie hier oder unter der Nummer <a href="tel:08951519696" className="text-primary hover:underline">089 51519696</a>. 
+            Bitte reservieren Sie hier oder unter der Nummer <a href="tel:+4989515196" className="text-primary hover:underline">089 51519696</a>. 
             Bei kurzfristigen Reservierungen oder Reservierungen für mehr als 6 Personen empfehlen wir Ihnen anzurufen.
           </p>
           <p className="text-muted-foreground mb-8">
@@ -88,7 +89,7 @@ const Reservierung = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="phone">Telephone</Label>
+                <Label htmlFor="phone">Telefon</Label>
                 <Input 
                   id="phone" 
                   type="tel"
@@ -116,7 +117,7 @@ const Reservierung = () => {
             </div>
 
             <div>
-              <Label htmlFor="requests">Special requests</Label>
+              <Label htmlFor="requests">Besondere Wünsche</Label>
               <Textarea 
                 id="requests"
                 value={requests}
@@ -129,21 +130,10 @@ const Reservierung = () => {
               Reservierung abschicken
             </Button>
           </form>
-
-          <div className="mt-8 text-center">
-            <a href="/events" className="text-primary hover:underline">
-              Zum Eventkalender
-            </a>
-          </div>
         </div>
       </main>
 
-      <footer className="bg-muted border-t border-border py-8 mt-12">
-        <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          <p className="mb-2">STORIA - Ristorante · Pizzeria · Bar</p>
-          <p>Im Herzen von München</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

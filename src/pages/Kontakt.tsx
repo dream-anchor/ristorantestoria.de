@@ -1,10 +1,11 @@
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const Kontakt = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <div className="bg-background border-b border-border">
         <div className="container mx-auto px-4 py-8 text-center">
@@ -18,7 +19,7 @@ const Kontakt = () => {
       </div>
       <Navigation />
       
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 flex-grow">
         <h1 className="text-4xl font-bold mb-8">Kontakt</h1>
         
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -30,7 +31,7 @@ const Kontakt = () => {
                 <Phone className="h-5 w-5 text-primary mt-1" />
                 <div>
                   <p className="font-medium">Telefon</p>
-                  <a href="tel:08951519696" className="text-muted-foreground hover:text-primary">
+                  <a href="tel:+4989515196" className="text-muted-foreground hover:text-primary">
                     089 51519696
                   </a>
                 </div>
@@ -51,8 +52,8 @@ const Kontakt = () => {
                 <div>
                   <p className="font-medium">Adresse</p>
                   <p className="text-muted-foreground">
-                    Im Herzen von München<br />
-                    Maxvorstadt
+                    Augustenstraße 37<br />
+                    80333 München
                   </p>
                 </div>
               </div>
@@ -92,12 +93,7 @@ const Kontakt = () => {
         </div>
       </main>
 
-      <footer className="bg-muted border-t border-border py-8 mt-12">
-        <div className="container mx-auto px-4 text-center text-muted-foreground text-sm">
-          <p className="mb-2">STORIA - Ristorante · Pizzeria · Bar</p>
-          <p>Im Herzen von München</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
