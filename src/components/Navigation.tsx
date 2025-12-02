@@ -27,13 +27,13 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openMenus, setOpenMenus] = useState<string[]>([]);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { data: specialMenus } = usePublishedSpecialMenus();
 
   // Dynamische Kinder für "Besondere Anlässe" basierend auf veröffentlichten Menüs
   const specialOccasionsChildren: NavChild[] = specialMenus && specialMenus.length > 0
     ? specialMenus.map(menu => ({
-        label: menu.title?.toUpperCase() || 'MENÜ',
+        label: (language === 'en' && menu.title_en ? menu.title_en : menu.title)?.toUpperCase() || 'MENÜ',
         path: `/besondere-anlaesse#${menu.id}`
       }))
     : [{ label: t.nav.specialOccasions, path: "/besondere-anlaesse" }];

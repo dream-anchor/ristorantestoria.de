@@ -120,7 +120,9 @@ export type Database = {
           pdf_url: string | null
           published_at: string | null
           subtitle: string | null
+          subtitle_en: string | null
           title: string | null
+          title_en: string | null
           updated_at: string | null
         }
         Insert: {
@@ -131,7 +133,9 @@ export type Database = {
           pdf_url?: string | null
           published_at?: string | null
           subtitle?: string | null
+          subtitle_en?: string | null
           title?: string | null
+          title_en?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -142,7 +146,9 @@ export type Database = {
           pdf_url?: string | null
           published_at?: string | null
           subtitle?: string | null
+          subtitle_en?: string | null
           title?: string | null
+          title_en?: string | null
           updated_at?: string | null
         }
         Relationships: []
