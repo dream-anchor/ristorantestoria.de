@@ -19,7 +19,7 @@ const Hero = () => {
         <p className="text-lg md:text-xl text-muted-foreground mb-8 tracking-widest uppercase">
           {t.hero.subtitle}
         </p>
-        <h1 className="text-2xl md:text-3xl font-medium mb-10 italic">
+        <h1 className="text-2xl md:text-3xl font-medium mb-10">
           {t.hero.location}
         </h1>
         <Button 
