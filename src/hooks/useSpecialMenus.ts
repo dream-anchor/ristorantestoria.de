@@ -335,6 +335,7 @@ export const useSaveMenuContent = () => {
       queryClient.invalidateQueries({ queryKey: ['special-menus'] });
       queryClient.invalidateQueries({ queryKey: ['menu-content'] });
       queryClient.invalidateQueries({ queryKey: ['admin-menus'] });
+      queryClient.invalidateQueries({ queryKey: ['published-special-menus'] });
     },
   });
 };
