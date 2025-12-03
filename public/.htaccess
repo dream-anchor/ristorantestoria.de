@@ -25,6 +25,8 @@ RewriteRule ^ /index.html [L]
   AddType image/webp .webp
   AddType image/svg+xml .svg
   AddType font/woff2 .woff2
+  AddType application/xml .xml
+  AddType text/plain .txt
 </IfModule>
 
 # ============================================
