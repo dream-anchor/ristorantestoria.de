@@ -110,7 +110,7 @@ const AGBGutscheine = () => {
               <p>
                 Für digitale Gutscheine gilt ein 14-tägiges Widerrufsrecht. Weitere Informationen 
                 finden Sie in unserer{" "}
-                <Link to="/widerruf" className="text-primary hover:underline">
+                <Link to="/widerrufsbelehrung" className="text-primary hover:underline">
                   Widerrufsbelehrung
                 </Link>.
               </p>

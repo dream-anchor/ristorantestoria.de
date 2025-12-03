@@ -120,7 +120,7 @@ const CookieBanner = () => {
           </div>
 
           <div className="px-4 pb-4 text-center">
-            <Link to="/cookies" className="text-xs text-muted-foreground hover:text-foreground underline">
+            <Link to="/cookie-richtlinie" className="text-xs text-muted-foreground hover:text-foreground underline">
               {t.cookies.moreInfo}
             </Link>
           </div>
@@ -160,7 +160,7 @@ const CookieBanner = () => {
             <Link to="/datenschutz" className="text-xs text-muted-foreground hover:text-foreground underline mr-3">
               {t.footer.privacy}
             </Link>
-            <Link to="/cookies" className="text-xs text-muted-foreground hover:text-foreground underline">
+            <Link to="/cookie-richtlinie" className="text-xs text-muted-foreground hover:text-foreground underline">
               {t.cookies.moreInfo}
             </Link>
           </div>

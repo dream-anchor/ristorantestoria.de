@@ -63,13 +63,13 @@ const App = () => (
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/impressum" element={<Impressum />} />
               <Route path="/datenschutz" element={<Datenschutz />} />
-              <Route path="/cookies" element={<CookieRichtlinie />} />
-              <Route path="/agb" element={<AGBRestaurant />} />
+              <Route path="/cookie-richtlinie" element={<CookieRichtlinie />} />
+              <Route path="/agb-restaurant" element={<AGBRestaurant />} />
               <Route path="/agb-gutscheine" element={<AGBGutscheine />} />
-              <Route path="/widerruf" element={<Widerrufsbelehrung />} />
-              <Route path="/zahlung" element={<Zahlungsinformationen />} />
+              <Route path="/widerrufsbelehrung" element={<Widerrufsbelehrung />} />
+              <Route path="/zahlungsinformationen" element={<Zahlungsinformationen />} />
               <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
-              <Route path="/disclaimer" element={<Haftungsausschluss />} />
+              <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
               <Route path="/ueber-uns" element={<UeberUns />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
