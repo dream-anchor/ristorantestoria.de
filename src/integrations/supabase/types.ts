@@ -119,6 +119,7 @@ export type Database = {
           menu_type: Database["public"]["Enums"]["menu_type"]
           pdf_url: string | null
           published_at: string | null
+          sort_order: number | null
           subtitle: string | null
           subtitle_en: string | null
           title: string | null
@@ -132,6 +133,7 @@ export type Database = {
           menu_type: Database["public"]["Enums"]["menu_type"]
           pdf_url?: string | null
           published_at?: string | null
+          sort_order?: number | null
           subtitle?: string | null
           subtitle_en?: string | null
           title?: string | null
@@ -145,6 +147,7 @@ export type Database = {
           menu_type?: Database["public"]["Enums"]["menu_type"]
           pdf_url?: string | null
           published_at?: string | null
+          sort_order?: number | null
           subtitle?: string | null
           subtitle_en?: string | null
           title?: string | null

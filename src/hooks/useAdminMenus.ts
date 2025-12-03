@@ -10,6 +10,7 @@ export interface AdminMenu {
   is_published: boolean;
   updated_at: string;
   published_at: string | null;
+  sort_order: number;
   category_count: number;
   item_count: number;
 }
@@ -22,7 +23,7 @@ export const useAdminMenus = () => {
       const { data: menus, error: menuError } = await supabase
         .from('menus')
         .select('*')
-        .order('menu_type');
+        .order('sort_order', { ascending: true });
 
       if (menuError) {
         console.error('Error fetching menus:', menuError);
@@ -69,6 +70,7 @@ export const useAdminMenus = () => {
           is_published: menu.is_published || false,
           updated_at: menu.updated_at || menu.created_at || '',
           published_at: menu.published_at,
+          sort_order: menu.sort_order || 0,
           category_count: menuCategories.length,
           item_count: menuItems.length,
         };

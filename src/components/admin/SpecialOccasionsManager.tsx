@@ -2,13 +2,38 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Gift, Plus } from "lucide-react";
 import { useSpecialMenus, useCreateSpecialMenu, useDeleteSpecialMenu } from "@/hooks/useSpecialMenus";
+import { useUpdateMenuOrder } from "@/hooks/useUpdateMenuOrder";
 import SpecialMenuCard from "./SpecialMenuCard";
+import SortableMenuCard from "./SortableMenuCard";
 import { toast } from "sonner";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
 
 const SpecialOccasionsManager = () => {
   const { data: specialMenus, isLoading } = useSpecialMenus();
   const createMutation = useCreateSpecialMenu();
   const deleteMutation = useDeleteSpecialMenu();
+  const updateOrderMutation = useUpdateMenuOrder();
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   const handleAddNew = async () => {
     try {
@@ -30,6 +55,31 @@ const SpecialOccasionsManager = () => {
     }
   };
 
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id && specialMenus) {
+      const oldIndex = specialMenus.findIndex((m) => m.id === active.id);
+      const newIndex = specialMenus.findIndex((m) => m.id === over.id);
+
+      const reorderedMenus = arrayMove(specialMenus, oldIndex, newIndex);
+      
+      // Start sort_order at 100 to separate from standard menus
+      const updates = reorderedMenus.map((menu, index) => ({
+        id: menu.id,
+        sort_order: index + 100,
+      }));
+
+      try {
+        await updateOrderMutation.mutateAsync(updates);
+        toast.success("Reihenfolge gespeichert");
+      } catch (error) {
+        toast.error("Fehler beim Speichern der Reihenfolge");
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <div className="mt-12">
       {/* Header */}
@@ -41,6 +91,7 @@ const SpecialOccasionsManager = () => {
           </div>
           <p className="text-muted-foreground">
             Fügen Sie beliebig viele Anlass-Menüs hinzu – Weihnachten, Valentinstag, Ostern, Silvester oder andere besondere Events.
+            <span className="block text-sm mt-1">Ziehen Sie die Karten, um die Reihenfolge zu ändern.</span>
           </p>
         </div>
         <Button onClick={handleAddNew} disabled={createMutation.isPending}>
@@ -56,16 +107,28 @@ const SpecialOccasionsManager = () => {
           <Skeleton className="h-64" />
         </div>
       ) : specialMenus && specialMenus.length > 0 ? (
-        <div className="grid gap-6 md:grid-cols-2">
-          {specialMenus.map((menu) => (
-            <SpecialMenuCard
-              key={menu.id}
-              menu={menu}
-              onDelete={handleDelete}
-              isDeleting={deleteMutation.isPending}
-            />
-          ))}
-        </div>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={specialMenus.map((m) => m.id)}
+            strategy={rectSortingStrategy}
+          >
+            <div className="grid gap-6 md:grid-cols-2">
+              {specialMenus.map((menu) => (
+                <SortableMenuCard key={menu.id} id={menu.id}>
+                  <SpecialMenuCard
+                    menu={menu}
+                    onDelete={handleDelete}
+                    isDeleting={deleteMutation.isPending}
+                  />
+                </SortableMenuCard>
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
       ) : (
         <div className="bg-card rounded-lg border border-border p-8 text-center">
           <Gift className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
