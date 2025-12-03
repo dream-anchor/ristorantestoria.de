@@ -2,12 +2,18 @@ import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface StructuredDataProps {
-  type?: 'restaurant' | 'menu' | 'faq' | 'breadcrumb';
+  type?: 'restaurant' | 'menu' | 'faq' | 'breadcrumb' | 'event';
   breadcrumbs?: Array<{ name: string; url: string }>;
   faqItems?: Array<{ question: string; answer: string }>;
+  eventData?: {
+    name: string;
+    description: string;
+    startDate: string;
+    endDate: string;
+  };
 }
 
-const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: StructuredDataProps) => {
+const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData }: StructuredDataProps) => {
   const { language } = useLanguage();
 
   const restaurantSchema = {
@@ -23,7 +29,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: Structur
     telephone: '+49-89-515196',
     email: 'info@ristorantestoria.de',
     image: [
-      'https://ristorantestoria.de/og-image.jpg',
+      'https://iieethejhwfsyzhbweps.supabase.co/storage/v1/object/public/menu-pdfs/og-image.jpg',
     ],
     logo: 'https://ristorantestoria.de/storia-logo.webp',
     priceRange: '€€',
@@ -59,6 +65,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: Structur
     ],
     sameAs: [
       'https://www.instagram.com/ristorantestoria/',
+      'https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen',
     ],
     founder: [
       {
@@ -77,6 +84,41 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: Structur
       reviewCount: '250',
       bestRating: '5',
       worstRating: '1',
+    },
+  };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://ristorantestoria.de/#website',
+    name: 'STORIA - Ristorante • Pizzeria • Bar',
+    url: 'https://ristorantestoria.de',
+    publisher: {
+      '@id': 'https://ristorantestoria.de/#restaurant',
+    },
+    inLanguage: ['de-DE', 'en-US'],
+  };
+
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://ristorantestoria.de/#organization',
+    name: 'Speranza GmbH',
+    url: 'https://ristorantestoria.de',
+    logo: 'https://ristorantestoria.de/storia-logo.webp',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+49-89-515196',
+      contactType: 'reservations',
+      availableLanguage: ['German', 'English', 'Italian'],
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Karlstraße 47a',
+      addressLocality: 'München',
+      postalCode: '80333',
+      addressRegion: 'Bayern',
+      addressCountry: 'DE',
     },
   };
 
@@ -109,7 +151,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: Structur
     '@type': 'LocalBusiness',
     '@id': 'https://ristorantestoria.de/#localbusiness',
     name: 'STORIA - Ristorante • Pizzeria • Bar',
-    image: 'https://ristorantestoria.de/og-image.jpg',
+    image: 'https://iieethejhwfsyzhbweps.supabase.co/storage/v1/object/public/menu-pdfs/og-image.jpg',
     telephone: '+49-89-515196',
     email: 'info@ristorantestoria.de',
     address: {
@@ -130,6 +172,36 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: Structur
     priceRange: '€€',
   };
 
+  const eventSchema = eventData ? {
+    '@context': 'https://schema.org',
+    '@type': 'FoodEvent',
+    name: eventData.name,
+    description: eventData.description,
+    startDate: eventData.startDate,
+    endDate: eventData.endDate,
+    location: {
+      '@type': 'Restaurant',
+      name: 'STORIA - Ristorante • Pizzeria • Bar',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Karlstraße 47a',
+        addressLocality: 'München',
+        postalCode: '80333',
+        addressCountry: 'DE',
+      },
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: 'Speranza GmbH',
+      url: 'https://ristorantestoria.de',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: 'https://ristorantestoria.de/reservierung',
+      availability: 'https://schema.org/InStock',
+    },
+  } : null;
+
   return (
     <Helmet>
       {type === 'restaurant' && (
@@ -139,6 +211,12 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: Structur
           </script>
           <script type="application/ld+json">
             {JSON.stringify(localBusinessSchema)}
+          </script>
+          <script type="application/ld+json">
+            {JSON.stringify(websiteSchema)}
+          </script>
+          <script type="application/ld+json">
+            {JSON.stringify(organizationSchema)}
           </script>
         </>
       )}
@@ -150,6 +228,11 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems }: Structur
       {faqSchema && (
         <script type="application/ld+json">
           {JSON.stringify(faqSchema)}
+        </script>
+      )}
+      {eventSchema && (
+        <script type="application/ld+json">
+          {JSON.stringify(eventSchema)}
         </script>
       )}
     </Helmet>
