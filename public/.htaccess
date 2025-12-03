@@ -1,26 +1,32 @@
 RewriteEngine On
 
 # ============================================
-# 1. Spezielle Weiterleitungen (MÜSSEN VOR dem SPA-Fallback stehen!)
+# 1. Spezielle Weiterleitungen (Query-String)
 # ============================================
-
-# Impressum Query-String Redirect (alte WordPress-URL)
 RewriteCond %{QUERY_STRING} ^page_id=2881$
 RewriteRule ^$ /impressum? [R=301,L]
 
 # ============================================
-# 2. SPA-Routing (React Router)
+# 2. 301 Redirects für alte URLs (VOR dem SPA-Fallback!)
 # ============================================
+RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
+RewriteRule ^cms/speisekarte$ /speisekarte [R=301,L]
+RewriteRule ^cms/1753-2$ /kontakt [R=301,L]
+RewriteRule ^cms/wp-content/uploads/2025/12/Mittagskarte-01\.12\.2025\.pdf$ /mittagsmenu [R=301,L]
+RewriteRule ^cms/getraenke$ /getraenke [R=301,L]
+RewriteRule ^cms/weihnachtsmenues-2$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
+RewriteRule ^cms/impressum$ /impressum [R=301,L]
+RewriteRule ^cms/our-team$ /#la-famiglia [R=301,NE,L]
 
-# Wenn die angeforderte Ressource als Datei existiert, direkt ausliefern
+# ============================================
+# 3. SPA-Routing (React Router)
+# ============================================
 RewriteCond %{REQUEST_FILENAME} !-f
-# Wenn die angeforderte Ressource als Verzeichnis existiert, direkt ausliefern
 RewriteCond %{REQUEST_FILENAME} !-d
-# Ansonsten alle Anfragen an index.html weiterleiten
 RewriteRule ^ /index.html [L]
 
 # ============================================
-# 3. MIME-Types für korrekte Dateiauslieferung
+# 4. MIME-Types für korrekte Dateiauslieferung
 # ============================================
 <IfModule mod_mime.c>
   AddType application/javascript .js
@@ -33,14 +39,14 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 4. GZIP-Komprimierung für bessere Performance
+# 5. GZIP-Komprimierung für bessere Performance
 # ============================================
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
 </IfModule>
 
 # ============================================
-# 5. Browser-Caching für statische Assets
+# 6. Browser-Caching für statische Assets
 # ============================================
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -52,7 +58,7 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 6. Erzwungene MIME-Types für spezifische Dateien
+# 7. Erzwungene MIME-Types für spezifische Dateien
 # ============================================
 <FilesMatch "\.xml$">
   ForceType application/xml
@@ -63,15 +69,3 @@ RewriteRule ^ /index.html [L]
     Header set Content-Type "application/xml; charset=UTF-8"
   </FilesMatch>
 </IfModule>
-
-# ============================================
-# 7. 301 Redirects für alte URLs
-# ============================================
-Redirect 301 /weihnachtsmenues /besondere-anlaesse/weihnachtsmenues
-Redirect 301 /cms/speisekarte /speisekarte
-Redirect 301 /cms/1753-2 /kontakt
-Redirect 301 /cms/wp-content/uploads/2025/12/Mittagskarte-01.12.2025.pdf /mittagsmenu
-Redirect 301 /cms/getraenke /getraenke
-Redirect 301 /cms/weihnachtsmenues-2 /besondere-anlaesse/weihnachtsmenues
-Redirect 301 /cms/impressum /impressum
-Redirect 301 /cms/our-team /#la-famiglia
