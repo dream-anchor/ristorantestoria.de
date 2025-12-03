@@ -38,6 +38,7 @@ export interface SpecialMenu {
   published_at: string | null;
   created_at: string | null;
   updated_at: string | null;
+  sort_order: number;
   category_count: number;
   item_count: number;
 }
@@ -50,7 +51,7 @@ export const useSpecialMenus = () => {
         .from('menus')
         .select('*')
         .eq('menu_type', 'special')
-        .order('created_at', { ascending: false });
+        .order('sort_order', { ascending: true });
 
       if (error) throw error;
       if (!menus || menus.length === 0) return [];
@@ -85,6 +86,7 @@ export const useSpecialMenus = () => {
           published_at: menu.published_at,
           created_at: menu.created_at,
           updated_at: menu.updated_at,
+          sort_order: menu.sort_order || 0,
           category_count: menuCategories.length,
           item_count: menuItems.length,
         };
@@ -103,7 +105,7 @@ export const usePublishedSpecialMenus = () => {
         .select('*')
         .eq('menu_type', 'special')
         .eq('is_published', true)
-        .order('created_at', { ascending: false });
+        .order('sort_order', { ascending: true });
 
       if (error) throw error;
       return menus || [];
@@ -117,12 +119,25 @@ export const useCreateSpecialMenu = () => {
 
   return useMutation({
     mutationFn: async () => {
+      // Get the highest sort_order of existing special menus
+      const { data: existingMenus } = await supabase
+        .from('menus')
+        .select('sort_order')
+        .eq('menu_type', 'special')
+        .order('sort_order', { ascending: false })
+        .limit(1);
+
+      const nextSortOrder = existingMenus && existingMenus.length > 0 
+        ? (existingMenus[0].sort_order || 99) + 1 
+        : 100;
+
       const { data, error } = await supabase
         .from('menus')
         .insert({
           menu_type: 'special',
           title: 'Neuer Anlass',
           is_published: false,
+          sort_order: nextSortOrder,
         })
         .select()
         .single();
