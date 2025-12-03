@@ -56,6 +56,14 @@ const Footer = () => {
               <p className="text-lg font-serif italic tracking-wider text-primary-foreground/90">Nicola</p>
             </div>
           </div>
+          
+          {/* Discover Restaurant Link */}
+          <Link 
+            to="/ueber-uns"
+            className="mt-10 inline-flex items-center gap-2 text-base font-serif italic text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors"
+          >
+            ~ {t.footer.discoverRestaurant} ~
+          </Link>
         </div>
       </div>
 
@@ -133,8 +141,6 @@ const Footer = () => {
             <Link to="/agb-restaurant" className="hover:text-primary-foreground/60 transition-colors">{t.legal.agb}</Link>
             <span className="opacity-50">·</span>
             <Link to="/lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</Link>
-            <span className="opacity-50">·</span>
-            <Link to="/ueber-uns" className="hover:text-primary-foreground/60 transition-colors">{t.footer.aboutUs}</Link>
           </div>
           <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
             <Link to="/admin" className="hover:text-primary-foreground/40 transition-colors">Admin</Link>
