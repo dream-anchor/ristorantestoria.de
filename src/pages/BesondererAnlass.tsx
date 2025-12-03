@@ -82,13 +82,6 @@ const BesondererAnlass = () => {
         <Navigation />
 
         <main className="container mx-auto px-4 py-12 flex-grow">
-          {/* Breadcrumb Navigation */}
-          <nav className="mb-6 text-sm text-muted-foreground">
-            <Link to="/besondere-anlaesse" className="hover:text-foreground transition-colors">
-              ← {language === 'de' ? 'Alle besonderen Anlässe' : 'All special occasions'}
-            </Link>
-          </nav>
-
           <div className="max-w-4xl mx-auto">
             <div className="bg-card p-8 rounded-lg border border-border mb-8">
               <MenuDisplay menuType="special" menuId={menu.id} />
