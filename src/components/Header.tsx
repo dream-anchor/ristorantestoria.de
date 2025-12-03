@@ -23,7 +23,7 @@ const Header = () => {
               <span className="hidden sm:inline">info@ristorantestoria.de</span>
             </a>
             <a 
-              href="https://www.instagram.com/ristorantestoria/" 
+              href="https://www.instagram.com/ristorante_storia/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-foreground transition-colors"

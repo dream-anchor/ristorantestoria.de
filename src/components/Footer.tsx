@@ -83,7 +83,7 @@ const Footer = () => {
                   Karlstr. 47a, 80333 München
                 </Link>
                 <a 
-                  href="https://www.instagram.com/ristorantestoria/" 
+                  href="https://www.instagram.com/ristorante_storia/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"

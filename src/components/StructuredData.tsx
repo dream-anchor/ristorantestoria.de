@@ -64,7 +64,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
       },
     ],
     sameAs: [
-      'https://www.instagram.com/ristorantestoria/',
+      'https://www.instagram.com/ristorante_storia/',
       'https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen',
     ],
     founder: [
