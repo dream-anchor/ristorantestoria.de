@@ -12,7 +12,7 @@ import Mittagsmenu from "./pages/Mittagsmenu";
 import Speisekarte from "./pages/Speisekarte";
 import Getraenke from "./pages/Getraenke";
 import BesondereAnlaesse from "./pages/BesondereAnlaesse";
-import Weihnachtsmenues from "./pages/Weihnachtsmenues";
+import BesondererAnlass from "./pages/BesondererAnlass";
 import Kontakt from "./pages/Kontakt";
 import Catering from "./pages/Catering";
 import NotFound from "./pages/NotFound";
@@ -56,7 +56,7 @@ const App = () => (
               <Route path="/speisekarte" element={<Speisekarte />} />
               <Route path="/getraenke" element={<Getraenke />} />
               <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
-              <Route path="/weihnachtsmenues" element={<Weihnachtsmenues />} />
+              <Route path="/besondere-anlaesse/:slug" element={<BesondererAnlass />} />
               <Route path="/kontakt" element={<Kontakt />} />
               <Route path="/catering" element={<Catering />} />
               <Route path="/admin" element={<Admin />} />

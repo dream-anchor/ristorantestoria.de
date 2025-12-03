@@ -47,7 +47,7 @@ const Navigation = () => {
   const specialOccasionsChildren: NavChild[] = specialMenus && specialMenus.length > 0
     ? specialMenus.map(menu => ({
         label: (language === 'en' && menu.title_en ? menu.title_en : menu.title)?.toUpperCase() || 'MENÜ',
-        path: `/besondere-anlaesse#${menu.id}`
+        path: `/besondere-anlaesse/${(menu as any).slug || menu.id}`
       }))
     : [{ label: t.nav.specialOccasions, path: "/besondere-anlaesse" }];
 
@@ -145,21 +145,7 @@ const Navigation = () => {
                           <Link
                             key={child.path}
                             to={child.path}
-                            onClick={(e) => {
-                              setIsOpen(false);
-                              // Manuelles Scrolling für Anker-Links
-                              if (child.path.includes('#')) {
-                                const [basePath, hash] = child.path.split('#');
-                                const element = document.getElementById(hash);
-                                if (element) {
-                                  e.preventDefault();
-                                  window.history.pushState(null, '', child.path);
-                                  setTimeout(() => {
-                                    element.scrollIntoView({ behavior: 'smooth' });
-                                  }, 100);
-                                }
-                              }
-                            }}
+                            onClick={() => setIsOpen(false)}
                             className={`block px-4 py-2 text-sm tracking-wider rounded-md transition-colors ${
                               location.pathname === child.path
                                 ? "bg-accent text-accent-foreground"
@@ -248,18 +234,6 @@ const Navigation = () => {
                       <Link
                         key={child.path}
                         to={child.path}
-                        onClick={(e) => {
-                          // Manuelles Scrolling für Anker-Links
-                          if (child.path.includes('#')) {
-                            const [basePath, hash] = child.path.split('#');
-                            const element = document.getElementById(hash);
-                            if (element) {
-                              e.preventDefault();
-                              window.history.pushState(null, '', child.path);
-                              element.scrollIntoView({ behavior: 'smooth' });
-                            }
-                          }
-                        }}
                         className={`block px-5 py-3 text-sm tracking-wider hover:bg-primary-foreground/10 transition-colors first:rounded-t-sm last:rounded-b-sm ${
                           location.pathname === child.path
                             ? "bg-primary-foreground/10"

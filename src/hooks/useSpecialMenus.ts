@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { slugify, generateUniqueSlug } from "@/lib/slugify";
 
 export interface ParsedMenuItem {
   name: string;
@@ -34,6 +35,7 @@ export interface SpecialMenu {
   title_en: string | null;
   subtitle: string | null;
   subtitle_en: string | null;
+  slug: string | null;
   is_published: boolean;
   published_at: string | null;
   created_at: string | null;
@@ -82,6 +84,7 @@ export const useSpecialMenus = () => {
           title_en: menu.title_en,
           subtitle: menu.subtitle,
           subtitle_en: menu.subtitle_en,
+          slug: (menu as any).slug || null,
           is_published: menu.is_published || false,
           published_at: menu.published_at,
           created_at: menu.created_at,
@@ -131,14 +134,26 @@ export const useCreateSpecialMenu = () => {
         ? (existingMenus[0].sort_order || 99) + 1 
         : 100;
 
+      // Generate unique slug
+      const baseSlug = slugify('Neuer Anlass');
+      const uniqueSlug = await generateUniqueSlug(baseSlug, async (slug) => {
+        const { data } = await supabase
+          .from('menus')
+          .select('id')
+          .eq('slug', slug)
+          .maybeSingle();
+        return !!data;
+      });
+
       const { data, error } = await supabase
         .from('menus')
         .insert({
           menu_type: 'special',
           title: 'Neuer Anlass',
+          slug: uniqueSlug,
           is_published: false,
           sort_order: nextSortOrder,
-        })
+        } as any)
         .select()
         .single();
 
@@ -268,7 +283,19 @@ export const useSaveMenuContent = () => {
 
   return useMutation({
     mutationFn: async ({ menuId, data }: { menuId: string; data: ParsedMenu }) => {
-      // Update menu title/subtitle
+      // Generate new slug from title
+      const baseSlug = slugify(data.title);
+      const uniqueSlug = await generateUniqueSlug(baseSlug, async (slug) => {
+        const { data: existing } = await supabase
+          .from('menus')
+          .select('id')
+          .eq('slug', slug)
+          .neq('id', menuId)
+          .maybeSingle();
+        return !!existing;
+      });
+
+      // Update menu title/subtitle/slug
       const { error: menuError } = await supabase
         .from('menus')
         .update({
@@ -276,8 +303,9 @@ export const useSaveMenuContent = () => {
           title_en: data.title_en,
           subtitle: data.subtitle,
           subtitle_en: data.subtitle_en,
+          slug: uniqueSlug,
           updated_at: new Date().toISOString(),
-        })
+        } as any)
         .eq('id', menuId);
 
       if (menuError) throw menuError;
@@ -351,6 +379,26 @@ export const useSaveMenuContent = () => {
       queryClient.invalidateQueries({ queryKey: ['menu-content'] });
       queryClient.invalidateQueries({ queryKey: ['admin-menus'] });
       queryClient.invalidateQueries({ queryKey: ['published-special-menus'] });
+      queryClient.invalidateQueries({ queryKey: ['special-menu'] });
     },
+  });
+};
+
+export const useSpecialMenuBySlug = (slug: string) => {
+  return useQuery({
+    queryKey: ['special-menu', slug],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('menus')
+        .select('*')
+        .eq('slug', slug)
+        .eq('is_published', true)
+        .maybeSingle();
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!slug,
+    staleTime: 5 * 60 * 1000,
   });
 };

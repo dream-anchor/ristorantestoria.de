@@ -61,7 +61,7 @@
     <priority>0.6</priority>
   </url>
   
-  <!-- Besondere Anlässe -->
+  <!-- Besondere Anlässe (Übersicht) -->
   <url>
     <loc>https://ristorantestoria.de/besondere-anlaesse</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://ristorantestoria.de/besondere-anlaesse"/>
@@ -73,9 +73,19 @@
   
   <!-- Weihnachtsmenüs -->
   <url>
-    <loc>https://ristorantestoria.de/weihnachtsmenues</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://ristorantestoria.de/weihnachtsmenues"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ristorantestoria.de/weihnachtsmenues"/>
+    <loc>https://ristorantestoria.de/besondere-anlaesse/weihnachtsmenues</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://ristorantestoria.de/besondere-anlaesse/weihnachtsmenues"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ristorantestoria.de/besondere-anlaesse/weihnachtsmenues"/>
+    <lastmod>2025-12-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Silvesterparty -->
+  <url>
+    <loc>https://ristorantestoria.de/besondere-anlaesse/silvesterparty</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://ristorantestoria.de/besondere-anlaesse/silvesterparty"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ristorantestoria.de/besondere-anlaesse/silvesterparty"/>
     <lastmod>2025-12-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
