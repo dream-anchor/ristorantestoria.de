@@ -17,8 +17,8 @@ const Kontakt = () => {
       <SEO 
         title={language === 'de' ? 'Kontakt & Anfahrt' : 'Contact & Directions'}
         description={language === 'de' 
-          ? 'Kontakt zum Restaurant STORIA München. Adresse: Karlstraße 47a, 80333 München. Telefon: +49 89 51519696. Öffnungszeiten und Anfahrt.'
-          : 'Contact STORIA restaurant Munich. Address: Karlstraße 47a, 80333 Munich. Phone: +49 89 51519696. Opening hours and directions.'}
+          ? 'Kontakt zum Ristorante STORIA – Ihr Italiener Maxvorstadt München. Adresse: Karlstraße 47a, 80333 München. Reservierung in unserer Pizzeria unter +49 89 51519696.'
+          : 'Contact STORIA – your Italian restaurant in Maxvorstadt Munich. Address: Karlstraße 47a, 80333 Munich. Reservations at +49 89 51519696.'}
         canonical="/kontakt"
       />
       <StructuredData 

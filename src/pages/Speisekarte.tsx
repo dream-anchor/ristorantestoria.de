@@ -16,8 +16,8 @@ const Speisekarte = () => {
       <SEO 
         title={language === 'de' ? 'Speisekarte' : 'Menu'}
         description={language === 'de' 
-          ? 'Speisekarte des italienischen Restaurants STORIA München. Frische Pasta, Pizza aus dem Holzofen, Antipasti und Desserts.'
-          : 'Menu of Italian restaurant STORIA Munich. Fresh pasta, wood-fired pizza, antipasti and desserts.'}
+          ? 'Speisekarte der Pizzeria Maxvorstadt STORIA. Pizza München Innenstadt aus dem Steinofen, frische Pasta, Antipasti – authentisches Ristorante in München.'
+          : 'Menu of STORIA pizzeria in Maxvorstadt Munich. Stone-oven pizza, fresh pasta, antipasti – authentic Italian ristorante.'}
         canonical="/speisekarte"
       />
       <StructuredData 
