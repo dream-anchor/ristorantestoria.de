@@ -100,15 +100,6 @@ const Footer = () => {
                 alt="STORIA"
                 className="h-16 md:h-20 brightness-0 invert opacity-20"
               />
-              <a 
-                href="https://www.instagram.com/ristorante_storia/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="mt-4 flex items-center gap-2 text-sm font-sans text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-              >
-                <Instagram className="h-4 w-4" />
-                {t.footer.instagram}
-              </a>
             </div>
 
             {/* Öffnungszeiten */}
@@ -143,6 +134,15 @@ const Footer = () => {
             <Link to="/lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</Link>
           </div>
           <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
+            <a 
+              href="https://www.instagram.com/ristorante_storia/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-primary-foreground/40 transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="h-3.5 w-3.5" />
+            </a>
             <Link to="/admin" className="hover:text-primary-foreground/40 transition-colors">Admin</Link>
           </div>
         </div>
