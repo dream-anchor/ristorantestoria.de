@@ -26,8 +26,8 @@ const FloatingActions = () => {
       // Sichtbar wenn gescrollt > 100px
       const hasScrolled = scrollY > 100;
       
-      // Am Footer wenn weniger als 300px bis zum Ende
-      const nearBottom = scrollY + windowHeight >= documentHeight - 300;
+      // Am Footer wenn ganz unten (50px Puffer)
+      const nearBottom = scrollY + windowHeight >= documentHeight - 50;
       
       setIsVisible(hasScrolled && !nearBottom);
     };
