@@ -48,6 +48,7 @@ export const en = {
     monFri: "Mon - Fri",
     satSun: "Sat - Sun",
     welcomeMessage: "We look forward to your visit",
+    aboutUs: "About us",
   },
   reservation: {
     title: "Reserve a Table",

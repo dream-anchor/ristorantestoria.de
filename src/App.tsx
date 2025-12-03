@@ -27,6 +27,7 @@ import Widerrufsbelehrung from "./pages/Widerrufsbelehrung";
 import Zahlungsinformationen from "./pages/Zahlungsinformationen";
 import Lebensmittelhinweise from "./pages/Lebensmittelhinweise";
 import Haftungsausschluss from "./pages/Haftungsausschluss";
+import UeberUns from "./pages/UeberUns";
 import FloatingActions from "./components/FloatingActions";
 import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
@@ -69,6 +70,7 @@ const App = () => (
               <Route path="/zahlung" element={<Zahlungsinformationen />} />
               <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
               <Route path="/disclaimer" element={<Haftungsausschluss />} />
+              <Route path="/ueber-uns" element={<UeberUns />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

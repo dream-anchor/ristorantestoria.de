@@ -124,6 +124,8 @@ const Footer = () => {
             <Link to="/agb" className="hover:text-primary-foreground/60 transition-colors">{t.legal.agb}</Link>
             <span className="opacity-50">·</span>
             <Link to="/lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</Link>
+            <span className="opacity-50">·</span>
+            <Link to="/ueber-uns" className="hover:text-primary-foreground/60 transition-colors">{t.footer.aboutUs}</Link>
           </div>
           <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
             <Link to="/admin" className="hover:text-primary-foreground/40 transition-colors">Admin</Link>
