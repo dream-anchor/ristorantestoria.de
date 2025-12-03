@@ -35,6 +35,13 @@ const UeberUns = () => {
               <p>{t.about.p6}</p>
               <p>{t.about.p7}</p>
               <p>{t.about.p8}</p>
+              
+              {/* Unterschrift */}
+              <div className="pt-8 text-right">
+                <span className="font-signature text-3xl md:text-4xl text-foreground/80 italic">
+                  Domenico Speranza
+                </span>
+              </div>
             </div>
           </div>
         </main>
