@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
+import { usePublishedStandardMenus } from "@/hooks/usePublishedStandardMenus";
 import { useScrolled } from "@/hooks/useScrolled";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -25,6 +26,13 @@ interface NavItem {
   children?: NavChild[];
 }
 
+// Mapping von menu_type zu Route
+const menuTypeConfig: Record<string, { path: string }> = {
+  lunch: { path: '/mittagsmenu' },
+  food: { path: '/speisekarte' },
+  drinks: { path: '/getraenke' },
+};
+
 const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +40,7 @@ const Navigation = () => {
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const { t, language } = useLanguage();
   const { data: specialMenus } = usePublishedSpecialMenus();
+  const { data: standardMenus } = usePublishedStandardMenus();
   const isScrolled = useScrolled();
 
   // Dynamische Kinder für "Besondere Anlässe" basierend auf veröffentlichten Menüs
@@ -42,15 +51,31 @@ const Navigation = () => {
       }))
     : [{ label: t.nav.specialOccasions, path: "/besondere-anlaesse" }];
 
+  // Mapping von menu_type zu Label (Translation-basiert)
+  const menuTypeLabels: Record<string, string> = {
+    lunch: t.nav.lunchMenu,
+    food: t.nav.foodMenu,
+    drinks: t.nav.drinks,
+  };
+
+  // Dynamische Kinder für "Menü" basierend auf sort_order aus der Datenbank
+  const menuChildren: NavChild[] = standardMenus && standardMenus.length > 0
+    ? standardMenus.map(menu => ({
+        label: menuTypeLabels[menu.menu_type] || menu.title || 'MENÜ',
+        path: menuTypeConfig[menu.menu_type]?.path || '/speisekarte',
+      }))
+    : [
+        // Fallback während des Ladens
+        { label: t.nav.lunchMenu, path: "/mittagsmenu" },
+        { label: t.nav.foodMenu, path: "/speisekarte" },
+        { label: t.nav.drinks, path: "/getraenke" },
+      ];
+
   const navItems: NavItem[] = [
     { label: t.nav.reservation, path: "/reservierung" },
     {
       label: t.nav.menu,
-      children: [
-        { label: t.nav.lunchMenu, path: "/mittagsmenu" },
-        { label: t.nav.foodMenu, path: "/speisekarte" },
-        { label: t.nav.drinks, path: "/getraenke" },
-      ],
+      children: menuChildren,
     },
     {
       label: t.nav.specialOccasions,
