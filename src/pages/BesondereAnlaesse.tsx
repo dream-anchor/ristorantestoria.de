@@ -1,133 +1,34 @@
-import Header from "@/components/Header";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
-import SEO from "@/components/SEO";
-import StructuredData from "@/components/StructuredData";
-import storiaLogo from "@/assets/storia-logo.webp";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
 
 const BesondereAnlaesse = () => {
-  const { t, language } = useLanguage();
+  const navigate = useNavigate();
   const { data: specialMenus, isLoading } = usePublishedSpecialMenus();
 
-  const hasPublishedMenus = specialMenus && specialMenus.length > 0;
+  useEffect(() => {
+    if (isLoading) return;
 
+    if (specialMenus && specialMenus.length > 0) {
+      // Zum ersten veröffentlichten Special-Menü weiterleiten
+      const firstMenu = specialMenus[0];
+      const slug = (firstMenu as any).slug || firstMenu.id;
+      navigate(`/besondere-anlaesse/${slug}`, { replace: true });
+    } else {
+      // Keine Special-Menüs → zur Speisekarte
+      navigate('/speisekarte', { replace: true });
+    }
+  }, [specialMenus, isLoading, navigate]);
+
+  // Loading-State anzeigen während Redirect vorbereitet wird
   return (
-    <>
-      <SEO 
-        title={language === 'de' ? 'Besondere Anlässe' : 'Special Occasions'}
-        description={language === 'de' 
-          ? 'Besondere Anlässe im Restaurant STORIA München. Festmenüs für Weihnachten, Silvester und weitere Feierlichkeiten.'
-          : 'Special occasions at STORIA restaurant Munich. Festive menus for Christmas, New Year and other celebrations.'}
-        canonical="/besondere-anlaesse"
-      />
-      <StructuredData 
-        type="breadcrumb" 
-        breadcrumbs={[
-          { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Besondere Anlässe' : 'Special Occasions', url: '/besondere-anlaesse' }
-        ]} 
-      />
-      <div className="min-h-screen bg-background flex flex-col">
-        <Header />
-      <div className="bg-background border-b border-border">
-        <div className="container mx-auto px-4 py-8 text-center">
-          <Link to="/">
-            <img src={storiaLogo} alt="STORIA" className="h-24 md:h-32 mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
-          </Link>
-          <p className="text-lg text-muted-foreground tracking-wide">
-            {t.hero.subtitle}
-          </p>
-        </div>
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="text-center space-y-4">
+        <Skeleton className="h-8 w-48 mx-auto" />
+        <Skeleton className="h-4 w-32 mx-auto" />
       </div>
-      <Navigation />
-
-      <main className="container mx-auto px-4 py-12 flex-grow">
-        <h1 className="text-4xl font-serif font-bold mb-8">{t.specialOccasions.title}</h1>
-
-        <div className="max-w-4xl mx-auto">
-          {/* Dynamic Menus from Database */}
-          {isLoading ? (
-            <div className="space-y-8 mb-12">
-              <Skeleton className="h-64" />
-              <Skeleton className="h-64" />
-            </div>
-          ) : hasPublishedMenus ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {specialMenus.map((menu) => {
-                const menuTitle = language === 'en' && menu.title_en ? menu.title_en : menu.title;
-                const menuSubtitle = language === 'en' && menu.subtitle_en ? menu.subtitle_en : menu.subtitle;
-                return (
-                  <Link 
-                    key={menu.id} 
-                    to={`/besondere-anlaesse/${(menu as any).slug || menu.id}`}
-                    className="group"
-                  >
-                    <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-colors h-full">
-                      <h2 className="text-2xl font-serif font-bold mb-2 group-hover:text-primary transition-colors">
-                        {menuTitle || t.specialOccasions.title}
-                      </h2>
-                      {menuSubtitle && (
-                        <p className="text-muted-foreground">{menuSubtitle}</p>
-                      )}
-                      <span className="inline-block mt-4 text-primary text-sm font-medium">
-                        {language === 'de' ? 'Menü ansehen →' : 'View menu →'}
-                      </span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          ) : (
-            /* Fallback static content when no menus are published */
-            <>
-              <div className="bg-card p-8 rounded-lg border border-border mb-8">
-                <h2 className="text-2xl font-serif font-bold mb-4">{t.specialOccasions.celebrateTitle}</h2>
-                <p className="text-muted-foreground mb-6">
-                  {t.specialOccasions.celebrateDesc}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <Link to="/catering" className="group">
-                  <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-colors h-full">
-                    <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
-                      {t.specialOccasions.cateringEvents}
-                    </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {t.specialOccasions.cateringEventsDesc}
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            </>
-          )}
-
-          {/* Contact CTA - Always visible */}
-          <div className="bg-secondary p-8 rounded-lg text-center">
-            <h3 className="text-xl font-bold mb-4">{t.specialOccasions.interested}</h3>
-            <p className="text-muted-foreground mb-6">
-              {t.specialOccasions.contactUs}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <a href="tel:+498951519696">+49 89 51519696</a>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <a href="mailto:info@ristorantestoria.de">{t.specialOccasions.sendEmail}</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </main>
-
-        <Footer />
-      </div>
-    </>
+    </div>
   );
 };
 
