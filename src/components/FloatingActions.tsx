@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Phone, UtensilsCrossed, Copy, Check } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -15,6 +15,10 @@ const FloatingActions = () => {
   const [copied, setCopied] = useState(false);
   const isMobile = useIsMobile();
   const { t } = useLanguage();
+  const location = useLocation();
+
+  // Nicht auf Admin-Seiten anzeigen
+  if (location.pathname.startsWith('/admin')) return null;
 
   useEffect(() => {
     const handleScroll = () => {
