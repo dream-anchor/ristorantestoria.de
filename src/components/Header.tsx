@@ -1,4 +1,4 @@
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -21,6 +21,14 @@ const Header = () => {
             <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="h-4 w-4" />
               <span className="hidden sm:inline">info@ristorantestoria.de</span>
+            </a>
+            <a 
+              href="https://www.instagram.com/ristorantestoria/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-foreground transition-colors"
+            >
+              <Instagram className="h-4 w-4" />
             </a>
             <div className={`transition-opacity duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
               <LanguageSwitcher />

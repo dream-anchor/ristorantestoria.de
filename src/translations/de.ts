@@ -49,6 +49,7 @@ export const de = {
     satSun: "Sa - So",
     welcomeMessage: "Wir freuen uns auf Ihren Besuch",
     aboutUs: "Über uns",
+    instagram: "Instagram",
   },
   reservation: {
     title: 'Tisch reservieren',

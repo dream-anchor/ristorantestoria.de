@@ -49,6 +49,7 @@ export const en = {
     satSun: "Sat - Sun",
     welcomeMessage: "We look forward to your visit",
     aboutUs: "About us",
+    instagram: "Instagram",
   },
   reservation: {
     title: 'Reserve a Table',
