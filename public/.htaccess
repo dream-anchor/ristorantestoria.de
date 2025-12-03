@@ -10,13 +10,6 @@ RewriteRule ^$ /impressum? [R=301,L]
 # 2. 301 Redirects für alte URLs (VOR dem SPA-Fallback!)
 # ============================================
 RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
-RewriteRule ^cms/speisekarte$ /speisekarte [R=301,L]
-RewriteRule ^cms/1753-2$ /kontakt [R=301,L]
-RewriteRule ^cms/wp-content/uploads/2025/12/Mittagskarte-01\.12\.2025\.pdf$ /mittagsmenu [R=301,L]
-RewriteRule ^cms/getraenke$ /getraenke [R=301,L]
-RewriteRule ^cms/weihnachtsmenues-2$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
-RewriteRule ^cms/impressum$ /impressum [R=301,L]
-RewriteRule ^cms/our-team$ /#la-famiglia [R=301,NE,L]
 
 # ============================================
 # 3. SPA-Routing (React Router)
