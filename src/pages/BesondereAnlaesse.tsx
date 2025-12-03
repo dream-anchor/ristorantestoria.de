@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import SEO from "@/components/SEO";
@@ -10,26 +9,12 @@ import StructuredData from "@/components/StructuredData";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
-import MenuDisplay from "@/components/MenuDisplay";
 
 const BesondereAnlaesse = () => {
   const { t, language } = useLanguage();
-  const location = useLocation();
   const { data: specialMenus, isLoading } = usePublishedSpecialMenus();
 
   const hasPublishedMenus = specialMenus && specialMenus.length > 0;
-
-  // Smooth scroll to anchor when navigating with hash
-  useEffect(() => {
-    if (location.hash && !isLoading) {
-      const element = document.getElementById(location.hash.slice(1));
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
-  }, [location.hash, isLoading, specialMenus]);
 
   return (
     <>
@@ -72,16 +57,30 @@ const BesondereAnlaesse = () => {
               <Skeleton className="h-64" />
             </div>
           ) : hasPublishedMenus ? (
-            <div className="space-y-12 mb-12">
-              {specialMenus.map((menu) => (
-                <div 
-                  key={menu.id} 
-                  id={menu.id}
-                  className="bg-card p-8 rounded-lg border border-border scroll-mt-24"
-                >
-                  <MenuDisplay menuType="special" menuId={menu.id} />
-                </div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+              {specialMenus.map((menu) => {
+                const menuTitle = language === 'en' && menu.title_en ? menu.title_en : menu.title;
+                const menuSubtitle = language === 'en' && menu.subtitle_en ? menu.subtitle_en : menu.subtitle;
+                return (
+                  <Link 
+                    key={menu.id} 
+                    to={`/besondere-anlaesse/${(menu as any).slug || menu.id}`}
+                    className="group"
+                  >
+                    <div className="bg-card p-6 rounded-lg border border-border hover:border-primary transition-colors h-full">
+                      <h2 className="text-2xl font-serif font-bold mb-2 group-hover:text-primary transition-colors">
+                        {menuTitle || t.specialOccasions.title}
+                      </h2>
+                      {menuSubtitle && (
+                        <p className="text-muted-foreground">{menuSubtitle}</p>
+                      )}
+                      <span className="inline-block mt-4 text-primary text-sm font-medium">
+                        {language === 'de' ? 'Menü ansehen →' : 'View menu →'}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           ) : (
             /* Fallback static content when no menus are published */

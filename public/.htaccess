@@ -60,3 +60,8 @@ RewriteRule ^ /index.html [L]
     Header set Content-Type "application/xml; charset=UTF-8"
   </FilesMatch>
 </IfModule>
+
+# ============================================
+# 7. 301 Redirects für alte URLs
+# ============================================
+Redirect 301 /weihnachtsmenues /besondere-anlaesse/weihnachtsmenues
