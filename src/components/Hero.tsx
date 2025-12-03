@@ -26,8 +26,8 @@ const Hero = () => {
         </h1>
         <p className="sr-only">
           {language === 'de'
-            ? 'STORIA bietet authentische italienische Küche, frische Pasta, Pizza aus dem Holzofen und erlesene Weine in der Karlstraße München.'
-            : 'STORIA offers authentic Italian cuisine, fresh pasta, wood-fired pizza, and fine wines on Karlstraße Munich.'}
+            ? 'STORIA – Ihr Italiener in der Maxvorstadt und Ristorante Pizzeria in München. Pizzeria Maxvorstadt mit authentischer italienischer Küche, Pizza München Innenstadt aus dem Steinofen und hausgemachter Pasta. La Storia – Trattoria München.'
+            : 'STORIA – Your Italian restaurant in Maxvorstadt and Ristorante Pizzeria in Munich. Pizzeria Maxvorstadt with authentic Italian cuisine, wood-fired pizza and homemade pasta. La Storia – Italian trattoria Munich.'}
         </p>
         <Button 
           size="lg" 

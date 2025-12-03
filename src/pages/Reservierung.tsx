@@ -30,8 +30,8 @@ const Reservierung = () => {
       <SEO 
         title={language === 'de' ? 'Tisch reservieren' : 'Book a Table'}
         description={language === 'de' 
-          ? 'Online Tischreservierung im Restaurant STORIA München. Reservieren Sie jetzt Ihren Tisch für authentische italienische Küche.'
-          : 'Online table reservation at STORIA restaurant Munich. Book your table now for authentic Italian cuisine.'}
+          ? 'Tischreservierung bei La Storia – Ristorante Pizzeria in München Maxvorstadt. Reservieren Sie Ihren Tisch beim beliebten Italiener online oder telefonisch.'
+          : 'Table reservation at La Storia – Ristorante Pizzeria in Munich Maxvorstadt. Book your table at the popular Italian restaurant online or by phone.'}
         canonical="/reservierung"
       />
       <StructuredData 

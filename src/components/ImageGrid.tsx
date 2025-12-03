@@ -53,23 +53,23 @@ const ImageGrid = () => {
   const { t, language } = useLanguage();
 
   const altTexts = language === 'de' ? {
-    weinservice: 'Professioneller Weinservice im Restaurant STORIA München - Sommelier präsentiert erlesene italienische Weine',
-    ravioli: 'Handgemachte Ravioli mit frischer Tomatensauce im Restaurant STORIA München',
-    drinks: 'Handgefertigte Cocktails und Aperitivo an der Bar des STORIA München',
-    meeresfruchte: 'Frische Meeresfrüchte und Fischgerichte im italienischen Restaurant STORIA',
-    aussen: 'Gemütliche Außenterrasse des Restaurant STORIA in der Münchner Innenstadt',
-    hausAussen: 'Historisches Gebäude und Eingang des Ristorante STORIA in der Karlstraße München',
-    tiramisu: 'Hausgemachtes Tiramisu und italienische Desserts im STORIA München',
-    menschenAussen: 'Gäste genießen italienische Küche auf der Terrasse des STORIA München',
+    weinservice: 'Professioneller Weinservice im Ristorante STORIA – Italiener Maxvorstadt München',
+    ravioli: 'Handgemachte Ravioli in der Pizzeria Maxvorstadt – Ristorante Pizzeria STORIA',
+    drinks: 'Handgefertigte Cocktails und Aperitivo in der Trattoria München STORIA',
+    meeresfruchte: 'Frische Meeresfrüchte und Fischgerichte – La Storia München',
+    aussen: 'Gemütliche Außenterrasse der Trattoria München – STORIA Münchner Innenstadt',
+    hausAussen: 'Historisches Gebäude des Ristorante STORIA – Italiener Maxvorstadt Karlstraße München',
+    tiramisu: 'Hausgemachtes Tiramisu im Ristorante Pizzeria STORIA München',
+    menschenAussen: 'Gäste genießen italienische Küche – Pizza München Innenstadt auf der Terrasse',
   } : {
-    weinservice: 'Professional wine service at STORIA restaurant Munich - Sommelier presenting fine Italian wines',
-    ravioli: 'Handmade ravioli with fresh tomato sauce at STORIA restaurant Munich',
-    drinks: 'Handcrafted cocktails and aperitivo at the STORIA Munich bar',
-    meeresfruchte: 'Fresh seafood and fish dishes at Italian restaurant STORIA',
-    aussen: 'Cozy outdoor terrace of restaurant STORIA in Munich city center',
-    hausAussen: 'Historic building and entrance of Ristorante STORIA on Karlstraße Munich',
-    tiramisu: 'Homemade tiramisu and Italian desserts at STORIA Munich',
-    menschenAussen: 'Guests enjoying Italian cuisine on the terrace of STORIA Munich',
+    weinservice: 'Professional wine service at Ristorante STORIA – Italian restaurant Maxvorstadt Munich',
+    ravioli: 'Handmade ravioli at Pizzeria Maxvorstadt – Ristorante Pizzeria STORIA',
+    drinks: 'Handcrafted cocktails and aperitivo at Italian trattoria STORIA Munich',
+    meeresfruchte: 'Fresh seafood and fish dishes – La Storia Munich',
+    aussen: 'Cozy outdoor terrace of Italian trattoria – STORIA Munich city center',
+    hausAussen: 'Historic building of Ristorante STORIA – Italian restaurant Maxvorstadt Karlstraße Munich',
+    tiramisu: 'Homemade tiramisu at Ristorante Pizzeria STORIA Munich',
+    menschenAussen: 'Guests enjoying Italian cuisine – stone-oven pizza on the terrace',
   };
 
   return (

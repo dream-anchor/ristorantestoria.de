@@ -25,8 +25,8 @@ const SEO = ({
   const fullTitle = title ? `${title} | ${siteTitle}` : `${siteTitle} im Herzen von München`;
   
   const defaultDescription = language === 'de' 
-    ? 'Authentisches italienisches Restaurant STORIA in München. Frische Pasta, Pizza aus dem Holzofen, erlesene Weine. Frühstück, Mittagstisch und Late Night Aperitivo in der Karlstraße.'
-    : 'Authentic Italian restaurant STORIA in Munich. Fresh pasta, wood-fired pizza, fine wines. Breakfast, lunch, and late night aperitivo on Karlstraße.';
+    ? 'STORIA – Italiener Maxvorstadt | Authentisches Ristorante & Pizzeria in München. Frische Pasta, Pizza München Innenstadt aus dem Holzofen, erlesene Weine. Trattoria München mit italienischem Flair.'
+    : 'STORIA – Italian restaurant in Maxvorstadt Munich. Authentic ristorante & pizzeria with fresh pasta, wood-fired pizza, and fine wines. Italian trattoria atmosphere.';
   
   const metaDescription = description || defaultDescription;
   const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
