@@ -50,6 +50,7 @@ export const en = {
     welcomeMessage: "We look forward to your visit",
     aboutUs: "About us",
     instagram: "Instagram",
+    discoverRestaurant: "Discover our restaurant",
   },
   reservation: {
     title: 'Reserve a Table',

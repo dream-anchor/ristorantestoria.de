@@ -50,6 +50,7 @@ export const de = {
     welcomeMessage: "Wir freuen uns auf Ihren Besuch",
     aboutUs: "Über uns",
     instagram: "Instagram",
+    discoverRestaurant: "Unser Restaurant entdecken",
   },
   reservation: {
     title: 'Tisch reservieren',
