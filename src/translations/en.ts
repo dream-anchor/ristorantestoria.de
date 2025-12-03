@@ -145,7 +145,7 @@ export const en = {
     monFri: "Monday - Friday",
     satSun: "Saturday - Sunday",
     breakfast: "Breakfast",
-    breakfastHours: "Mon-Sun from 9:00 AM",
+    breakfastHours: "Mon-Fri from 9:00 AM",
     notturno: "STORIA Notturno",
     notturnoDesc: "Late Night Aperitivo",
     notturnoHours: "9:00 PM - 10:30 PM",
