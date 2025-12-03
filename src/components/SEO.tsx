@@ -15,7 +15,7 @@ const SEO = ({
   description,
   canonical,
   type = 'website',
-  image = 'https://iieethejhwfsyzhbweps.supabase.co/storage/v1/object/public/menu-pdfs/og-image.jpg',
+  image = 'https://ristorantestoria.de/og-image.jpg',
   noIndex = false,
 }: SEOProps) => {
   const { language } = useLanguage();
