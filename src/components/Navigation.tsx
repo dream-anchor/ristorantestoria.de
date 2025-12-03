@@ -190,12 +190,6 @@ const Navigation = () => {
               </div>
             </SheetContent>
           </Sheet>
-          <Link
-            to="/"
-            className="font-serif text-xl font-bold hover:text-accent-foreground transition-colors"
-          >
-            STORIA
-          </Link>
           {/* Language Switcher Mobile (außerhalb Sheet) */}
           <div className={`transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
             <LanguageSwitcher />
