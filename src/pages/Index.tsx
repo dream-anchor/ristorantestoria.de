@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import ImageGrid from "@/components/ImageGrid";
+import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
@@ -63,6 +64,7 @@ const Index = () => {
         <Hero />
         <Navigation />
         <ImageGrid />
+        <AboutSection />
         <Footer />
       </div>
     </>
