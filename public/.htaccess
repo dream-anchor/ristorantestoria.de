@@ -1,6 +1,19 @@
 RewriteEngine On
 
 # ============================================
+# 0. HTTPS + WWW Kanonisierung (SEO)
+# ============================================
+# Alle Anfragen auf https://www.ristorantestoria.de umleiten
+
+# Schritt 1: HTTP zu HTTPS erzwingen
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Schritt 2: Non-www zu www umleiten (nur bei HTTPS)
+RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
+
+# ============================================
 # 1. Spezielle Weiterleitungen (Query-String)
 # ============================================
 RewriteCond %{QUERY_STRING} ^page_id=2881$
