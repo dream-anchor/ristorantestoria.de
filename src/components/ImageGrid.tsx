@@ -81,7 +81,7 @@ const ImageGrid = () => {
             image={weinserviceImage} 
             alt={altTexts.weinservice}
             className="aspect-square"
-            imageClassName="object-right"
+            imageClassName="object-center"
           />
           <ImageCard 
             image={ravioliImage} 
