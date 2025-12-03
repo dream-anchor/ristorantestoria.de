@@ -10,10 +10,10 @@ const UeberUns = () => {
   return (
     <>
       <SEO 
-        title={language === 'de' ? "Über uns | STORIA München" : "About us | STORIA Munich"}
+        title={language === 'de' ? "Über uns | STORIA – Italiener Maxvorstadt München" : "About us | STORIA – Italian Restaurant Maxvorstadt Munich"}
         description={language === 'de' 
-          ? "Erfahren Sie mehr über das Ristorante STORIA im Herzen von München. Authentische italienische Küche, herzliche Gastfreundschaft und unvergessliche Momente."
-          : "Learn more about Ristorante STORIA in the heart of Munich. Authentic Italian cuisine, warm hospitality and unforgettable moments."
+          ? "STORIA – Ihr Italiener in der Maxvorstadt. Authentische Pizzeria & Ristorante in München mit Pizza aus dem Steinofen, hausgemachter Pasta und italienischem Trattoria-Flair."
+          : "STORIA – Your Italian restaurant in Maxvorstadt. Authentic pizzeria & ristorante in Munich with stone-oven pizza, homemade pasta and Italian trattoria atmosphere."
         }
         canonical="/ueber-uns"
       />
