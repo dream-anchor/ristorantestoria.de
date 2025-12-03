@@ -58,7 +58,8 @@ const Reservierung = () => {
       <main className="container mx-auto px-4 py-12 flex-grow">
         <h1 className="text-4xl font-bold mb-4 text-center">{t.reservation.title}</h1>
         <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
-          {t.reservation.description}{' '}
+          {t.reservation.description}
+          <br />
           <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>
         </p>
         
