@@ -35,7 +35,7 @@ import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
-// App component with all providers
+// App component with all providers and contexts
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
