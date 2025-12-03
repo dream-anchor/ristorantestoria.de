@@ -17,9 +17,6 @@ const FloatingActions = () => {
   const { t } = useLanguage();
   const location = useLocation();
 
-  // Nicht auf Admin-Seiten anzeigen
-  if (location.pathname.startsWith('/admin')) return null;
-
   useEffect(() => {
     const handleScroll = () => {
       setIsVisible(window.scrollY > 100);
@@ -34,6 +31,9 @@ const FloatingActions = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  // Nicht auf Admin-Seiten anzeigen
+  if (location.pathname.startsWith('/admin')) return null;
 
   if (!isVisible) return null;
 
