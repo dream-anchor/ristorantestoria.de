@@ -47,3 +47,16 @@ RewriteRule ^ /index.html [L]
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
+
+# ============================================
+# 6. Erzwungene MIME-Types für spezifische Dateien
+# ============================================
+<FilesMatch "\.xml$">
+  ForceType application/xml
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  <FilesMatch "sitemap\.xml$">
+    Header set Content-Type "application/xml; charset=UTF-8"
+  </FilesMatch>
+</IfModule>
