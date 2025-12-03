@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       {/* La Famiglia Speranza */}
-      <div className="border-b border-primary-foreground/5">
+      <div id="la-famiglia" className="border-b border-primary-foreground/5">
         <div className="container mx-auto px-4 py-20 text-center">
           <h2 className="text-xl md:text-2xl font-serif font-medium tracking-[0.3em] uppercase mb-14 text-primary-foreground/90">{t.footer.theFamily}</h2>
           
