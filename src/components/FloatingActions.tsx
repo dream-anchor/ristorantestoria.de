@@ -19,7 +19,17 @@ const FloatingActions = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 100);
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Sichtbar wenn gescrollt > 100px
+      const hasScrolled = scrollY > 100;
+      
+      // Am Footer wenn weniger als 300px bis zum Ende
+      const nearBottom = scrollY + windowHeight >= documentHeight - 300;
+      
+      setIsVisible(hasScrolled && !nearBottom);
     };
 
     window.addEventListener("scroll", handleScroll);

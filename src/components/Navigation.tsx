@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Menu, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -39,6 +39,11 @@ const Navigation = () => {
   const [openMenus, setOpenMenus] = useState<string[]>([]);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   const { t, language } = useLanguage();
+
+  // Mobile: Alle Untermenüs standardmäßig aufklappen
+  useEffect(() => {
+    setOpenMenus([t.nav.menu, t.nav.specialOccasions]);
+  }, [t.nav.menu, t.nav.specialOccasions]);
   const { data: specialMenus } = usePublishedSpecialMenus();
   const { data: standardMenus } = usePublishedStandardMenus();
   const isScrolled = useScrolled();

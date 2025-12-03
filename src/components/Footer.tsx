@@ -90,25 +90,25 @@ const Footer = () => {
                   <MapPin className="h-3.5 w-3.5" />
                   Karlstr. 47a, 80333 München
                 </Link>
-                <a 
-                  href="https://www.instagram.com/ristorante_storia/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"
-                >
-                  <Instagram className="h-3.5 w-3.5" />
-                  {t.footer.instagram}
-                </a>
               </div>
             </div>
 
             {/* STORIA Logo - Mitte */}
-            <div className="flex items-center justify-center order-first md:order-none py-6 md:py-0">
+            <div className="flex flex-col items-center justify-center order-first md:order-none py-6 md:py-0">
               <img 
                 src={storiaLogo}
                 alt="STORIA"
                 className="h-16 md:h-20 brightness-0 invert opacity-20"
               />
+              <a 
+                href="https://www.instagram.com/ristorante_storia/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-4 flex items-center gap-2 text-sm font-sans text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+              >
+                <Instagram className="h-4 w-4" />
+                {t.footer.instagram}
+              </a>
             </div>
 
             {/* Öffnungszeiten */}
