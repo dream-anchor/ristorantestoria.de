@@ -6,6 +6,7 @@ import { FileText, Pencil, Save, X } from "lucide-react";
 import { useMenuContent, useSaveMenuContent, ParsedMenu } from "@/hooks/useSpecialMenus";
 import MenuPreview from "./MenuPreview";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 interface CollapsibleMenuCardProps {
   title: string;
@@ -57,30 +58,33 @@ const CollapsibleMenuCard = ({
   return (
     <>
       <div className="bg-card rounded-lg border border-border">
-        <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <FileText className="h-5 w-5 text-primary" />
-            <h3 className="text-lg font-serif font-semibold">{title}</h3>
+        <div className="p-4 md:p-6 flex items-center justify-between">
+          <div className="flex items-center gap-3 min-w-0">
+            <FileText className="h-5 w-5 text-primary flex-shrink-0" />
+            <h3 className="text-base md:text-lg font-serif font-semibold truncate">{title}</h3>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
             {menuId && !isEditing && (
               <Button
                 variant="ghost"
-                size="sm"
+                size="icon"
                 onClick={handleStartEdit}
-                className="h-8 w-8 p-0"
+                className="h-10 w-10 touch-manipulation"
               >
                 <Pencil className="h-4 w-4" />
               </Button>
             )}
             {isPublished !== undefined && (
-              <Badge variant={isPublished ? "default" : "secondary"}>
+              <Badge variant={isPublished ? "default" : "secondary"} className="text-xs">
                 {isPublished ? "Veröffentlicht" : "Entwurf"}
               </Badge>
             )}
           </div>
         </div>
-        <div className="px-6 pb-6 pt-2 border-t border-border">
+        <div className={cn(
+          "px-4 md:px-6 pb-4 md:pb-6 pt-2 border-t border-border",
+          isEditing && "pb-28 md:pb-24" // Extra padding for floating save bar
+        )}>
           {isEditing ? (
             <div className="space-y-4">
               {isLoading ? (
@@ -100,20 +104,26 @@ const CollapsibleMenuCard = ({
         </div>
       </div>
       
-      {/* Floating Save Bar */}
+      {/* Floating Save Bar - iOS Safe Area aware */}
       {isEditing && (
-        <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border p-4 shadow-lg z-50">
-          <div className="container mx-auto flex justify-end gap-2">
-            <Button variant="outline" onClick={handleCancelEdit}>
+        <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50"
+             style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+          <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-end gap-2">
+            <Button 
+              variant="outline" 
+              onClick={handleCancelEdit}
+              className="w-full sm:w-auto h-12 sm:h-10 order-2 sm:order-1 touch-manipulation"
+            >
               <X className="h-4 w-4 mr-2" />
               Abbrechen
             </Button>
             <Button
               onClick={handleSaveEdit}
               disabled={saveMenuContent.isPending || !editData}
+              className="w-full sm:w-auto h-12 sm:h-10 order-1 sm:order-2 touch-manipulation"
             >
               <Save className="h-4 w-4 mr-2" />
-              {saveMenuContent.isPending ? "Speichern..." : "Änderungen speichern"}
+              {saveMenuContent.isPending ? "Speichern..." : "Speichern"}
             </Button>
           </div>
         </div>

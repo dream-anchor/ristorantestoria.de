@@ -115,3 +115,53 @@ All colors MUST be HSL.
     @apply font-sans;
   }
 }
+
+/* Touch optimizations for mobile devices */
+@layer utilities {
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  /* Prevent text selection during drag */
+  [data-sortable],
+  [aria-label*="Ziehen"],
+  [aria-label*="Sortieren"] {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  /* Better tap highlighting */
+  button, 
+  [role="button"], 
+  input, 
+  textarea, 
+  select,
+  a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Larger minimum touch targets and prevent iOS zoom */
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    min-height: 44px;
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Ensure buttons are touch-friendly */
+  button,
+  [role="button"] {
+    min-height: 44px;
+  }
+}
+
+/* Safe area padding for notched devices */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
