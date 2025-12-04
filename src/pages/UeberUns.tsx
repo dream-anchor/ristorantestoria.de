@@ -37,7 +37,7 @@ const UeberUns = () => {
               <p>{t.about.p8}</p>
               
               {/* Unterschrift */}
-              <div className="pt-8 text-left">
+              <div className="text-left">
                 <p className="text-foreground/70 mb-2">
                   {language === 'de' ? 'Wir freuen uns auf Sie.' : 'We look forward to seeing you.'}
                 </p>
