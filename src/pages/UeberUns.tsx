@@ -37,7 +37,10 @@ const UeberUns = () => {
               <p>{t.about.p8}</p>
               
               {/* Unterschrift */}
-              <div className="pt-8 text-right">
+              <div className="pt-8 text-left">
+                <p className="text-foreground/70 mb-2">
+                  {language === 'de' ? 'Wir freuen uns auf Ihren Besuch.' : 'We look forward to your visit.'}
+                </p>
                 <span className="font-signature text-3xl md:text-4xl text-foreground/80 italic">
                   Domenico Speranza
                 </span>
