@@ -255,18 +255,19 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
   };
 
   return (
-    <div className="space-y-6">
-      {/* Upload Section */}
-      <div className="flex items-center gap-4">
+    <div className="space-y-4 md:space-y-6">
+      {/* Upload Section - Stacked on mobile */}
+      <div className="flex flex-col sm:flex-row gap-3">
         <Input
           type="file"
           accept=".pdf"
           onChange={handleFileChange}
-          className="flex-1"
+          className="flex-1 h-12 text-base"
         />
         <Button
           onClick={handleParse}
           disabled={!file || isParsing}
+          className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
         >
           {isParsing ? (
             <>
@@ -283,17 +284,18 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
       </div>
 
       {file && (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs md:text-sm text-muted-foreground truncate">
           Ausgewählt: {file.name}
         </p>
       )}
 
-      {/* Preview Toggle */}
+      {/* Preview Toggle & Publish - Stacked on mobile */}
       {parsedData && (
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button
             variant="outline"
             onClick={() => setShowPreview(!showPreview)}
+            className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
           >
             <Eye className="h-4 w-4 mr-2" />
             {showPreview ? 'Vorschau ausblenden' : 'Vorschau anzeigen'}
@@ -301,6 +303,7 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
           <Button
             onClick={handlePublish}
             disabled={isSaving}
+            className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
           >
             {isSaving ? (
               <>

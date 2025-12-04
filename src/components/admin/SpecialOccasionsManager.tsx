@@ -11,6 +11,7 @@ import {
   closestCenter,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
   DragEndEvent,
@@ -29,7 +30,17 @@ const SpecialOccasionsManager = () => {
   const updateOrderMutation = useUpdateMenuOrder();
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 200,
+        tolerance: 5,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -81,20 +92,24 @@ const SpecialOccasionsManager = () => {
   };
 
   return (
-    <div className="mt-12">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+    <div className="mt-8 md:mt-12">
+      {/* Header - Mobile responsive */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <Gift className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-serif font-semibold">Besondere Anlässe</h2>
+            <Gift className="h-5 w-5 md:h-6 md:w-6 text-primary" />
+            <h2 className="text-xl md:text-2xl font-serif font-semibold">Besondere Anlässe</h2>
           </div>
-          <p className="text-muted-foreground">
-            Fügen Sie beliebig viele Anlass-Menüs hinzu – Weihnachten, Valentinstag, Ostern, Silvester oder andere besondere Events.
-            <span className="block text-sm mt-1">Ziehen Sie die Karten, um die Reihenfolge zu ändern.</span>
+          <p className="text-sm text-muted-foreground">
+            Fügen Sie beliebig viele Anlass-Menüs hinzu.
+            <span className="block text-xs mt-1">Halten und ziehen zum Sortieren.</span>
           </p>
         </div>
-        <Button onClick={handleAddNew} disabled={createMutation.isPending}>
+        <Button 
+          onClick={handleAddNew} 
+          disabled={createMutation.isPending}
+          className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
+        >
           <Plus className="h-4 w-4 mr-2" />
           {createMutation.isPending ? "Erstellen..." : "Hinzufügen"}
         </Button>
@@ -102,7 +117,7 @@ const SpecialOccasionsManager = () => {
 
       {/* Menu Cards */}
       {isLoading ? (
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 md:gap-6 md:grid-cols-2">
           <Skeleton className="h-64" />
           <Skeleton className="h-64" />
         </div>
@@ -116,7 +131,7 @@ const SpecialOccasionsManager = () => {
             items={specialMenus.map((m) => m.id)}
             strategy={rectSortingStrategy}
           >
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2">
               {specialMenus.map((menu) => (
                 <SortableMenuCard key={menu.id} id={menu.id}>
                   <SpecialMenuCard
@@ -130,13 +145,17 @@ const SpecialOccasionsManager = () => {
           </SortableContext>
         </DndContext>
       ) : (
-        <div className="bg-card rounded-lg border border-border p-8 text-center">
-          <Gift className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+        <div className="bg-card rounded-lg border border-border p-6 md:p-8 text-center">
+          <Gift className="h-10 w-10 md:h-12 md:w-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-serif font-semibold mb-2">Keine Anlässe vorhanden</h3>
-          <p className="text-muted-foreground mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             Klicken Sie auf "Hinzufügen", um Ihr erstes Anlass-Menü zu erstellen.
           </p>
-          <Button onClick={handleAddNew} disabled={createMutation.isPending}>
+          <Button 
+            onClick={handleAddNew} 
+            disabled={createMutation.isPending}
+            className="h-12 sm:h-10 touch-manipulation"
+          >
             <Plus className="h-4 w-4 mr-2" />
             Ersten Anlass erstellen
           </Button>

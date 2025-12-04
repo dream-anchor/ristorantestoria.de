@@ -26,15 +26,21 @@ const SortableMenuCard = ({ id, children }: SortableMenuCardProps) => {
 
   return (
     <div ref={setNodeRef} style={style} className="relative group">
+      {/* Touch-optimized drag handle - 44x44px minimum touch target */}
       <div
         {...attributes}
         {...listeners}
-        className="absolute left-2 top-4 z-10 cursor-grab active:cursor-grabbing p-1 rounded hover:bg-muted transition-colors"
-        aria-label="Drag to reorder"
+        className="absolute left-0 top-0 bottom-0 z-10 cursor-grab active:cursor-grabbing 
+                   flex items-center justify-center w-12 md:w-10 
+                   touch-manipulation select-none
+                   hover:bg-muted/50 active:bg-muted transition-colors
+                   rounded-l-lg"
+        aria-label="Ziehen zum Sortieren"
+        style={{ touchAction: 'none' }}
       >
-        <GripVertical className="h-5 w-5 text-muted-foreground" />
+        <GripVertical className="h-6 w-6 md:h-5 md:w-5 text-muted-foreground" />
       </div>
-      <div className="pl-8">
+      <div className="pl-12 md:pl-10">
         {children}
       </div>
     </div>

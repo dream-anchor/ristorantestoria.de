@@ -17,6 +17,7 @@ import {
   closestCenter,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
   DragEndEvent,
@@ -35,7 +36,17 @@ const Admin = () => {
   const updateOrderMutation = useUpdateMenuOrder();
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 200,
+        tolerance: 5,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -45,10 +56,6 @@ const Admin = () => {
   const standardMenus = menus?.filter((m) => 
     m.menu_type === "lunch" || m.menu_type === "food" || m.menu_type === "drinks"
   ) || [];
-
-  const lunchMenu = menus?.find((m) => m.menu_type === "lunch");
-  const foodMenu = menus?.find((m) => m.menu_type === "food");
-  const drinksMenu = menus?.find((m) => m.menu_type === "drinks");
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
@@ -122,39 +129,56 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      {/* Header - Mobile optimized */}
       <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="container mx-auto px-4 py-3">
+          {/* Row 1: Logo and Buttons */}
+          <div className="flex items-center justify-between">
             <Link to="/">
-              <img src={storiaLogo} alt="STORIA" className="h-10 hover:opacity-80 transition-opacity cursor-pointer" />
+              <img 
+                src={storiaLogo} 
+                alt="STORIA" 
+                className="h-8 md:h-10 hover:opacity-80 transition-opacity cursor-pointer" 
+              />
             </Link>
-            <div>
-              <h1 className="font-serif font-semibold">Admin-Dashboard</h1>
-              <p className="text-sm text-muted-foreground">{user.email}</p>
+            <div className="flex items-center gap-2">
+              {/* Desktop: Full buttons */}
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
+                <Link to="/">
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Zur Webseite
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleSignOut} className="hidden sm:flex">
+                <LogOut className="h-4 w-4 mr-2" />
+                Abmelden
+              </Button>
+              {/* Mobile: Icon-only buttons */}
+              <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
+                <Link to="/">
+                  <ExternalLink className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="icon" onClick={handleSignOut} className="sm:hidden h-10 w-10">
+                <LogOut className="h-4 w-4" />
+              </Button>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/">
-                <ExternalLink className="h-4 w-4 mr-2" />
-                Zur Webseite
-              </Link>
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleSignOut}>
-              <LogOut className="h-4 w-4 mr-2" />
-              Abmelden
-            </Button>
+          {/* Row 2: Title and Email */}
+          <div className="mt-2">
+            <h1 className="font-serif font-semibold text-lg md:text-xl">Admin-Dashboard</h1>
+            <p className="text-xs md:text-sm text-muted-foreground truncate">{user.email}</p>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-serif font-semibold mb-2">Menü-Verwaltung</h2>
-          <p className="text-muted-foreground">
+      <main className="container mx-auto px-4 py-6 md:py-8">
+        <div className="mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-serif font-semibold mb-2">Menü-Verwaltung</h2>
+          <p className="text-sm md:text-base text-muted-foreground">
             Laden Sie PDF-Dateien hoch, um die Menükarten zu aktualisieren.
+            <span className="block text-xs mt-1 sm:hidden">Halten und ziehen zum Sortieren.</span>
           </p>
         </div>
 
