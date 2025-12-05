@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import ReservationCTA from "@/components/ReservationCTA";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
@@ -50,13 +51,28 @@ const BesondererAnlass = () => {
   const menuTitle = language === 'en' && menu.title_en ? menu.title_en : menu.title || '';
   const menuSubtitle = language === 'en' && menu.subtitle_en ? menu.subtitle_en : menu.subtitle || '';
 
+  // SEO-optimized description based on slug
+  const getSeoDescription = () => {
+    if (slug?.includes('weihnacht')) {
+      return language === 'de'
+        ? `${menuTitle} im STORIA München: Italienische Weihnachtsfeier in der Maxvorstadt. Festliche Menüs für Firmenfeier, Familie & Freunde. Jetzt reservieren!`
+        : `${menuTitle} at STORIA Munich: Italian Christmas celebration in Maxvorstadt. Festive menus for corporate events, family & friends. Book now!`;
+    }
+    if (slug?.includes('silvester')) {
+      return language === 'de'
+        ? `${menuTitle} im STORIA München: Silvester feiern in der Maxvorstadt. Italienisches Restaurant für Ihren Jahreswechsel. Jetzt Tisch sichern!`
+        : `${menuTitle} at STORIA Munich: Celebrate New Year's Eve in Maxvorstadt. Italian restaurant for your celebration. Secure your table now!`;
+    }
+    return language === 'de'
+      ? `${menuTitle} im STORIA München Maxvorstadt. Feiern Sie besondere Anlässe mit authentischer italienischer Küche. Jetzt reservieren!`
+      : `${menuTitle} at STORIA Munich Maxvorstadt. Celebrate special occasions with authentic Italian cuisine. Book now!`;
+  };
+
   return (
     <>
       <SEO 
-        title={menuTitle}
-        description={menuSubtitle || (language === 'de' 
-          ? `${menuTitle} im Restaurant STORIA München. Feiern Sie besondere Anlässe mit uns.`
-          : `${menuTitle} at STORIA restaurant Munich. Celebrate special occasions with us.`)}
+        title={`${menuTitle} – Italienisches Restaurant München`}
+        description={getSeoDescription()}
         canonical={`/besondere-anlaesse/${slug}`}
       />
       <StructuredData 
@@ -65,14 +81,14 @@ const BesondererAnlass = () => {
           { name: 'Home', url: '/' },
           { name: language === 'de' ? 'Besondere Anlässe' : 'Special Occasions', url: '/besondere-anlaesse' },
           { name: menuTitle, url: `/besondere-anlaesse/${slug}` }
-        ]} 
+        ]}
       />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">
           <div className="container mx-auto px-4 py-8 text-center">
             <Link to="/">
-              <img src={storiaLogo} alt="STORIA" className="h-24 md:h-32 mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
+              <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München" className="h-24 md:h-32 mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
             </Link>
             <p className="text-lg text-muted-foreground tracking-wide">
               {t.hero.subtitle}
@@ -89,7 +105,7 @@ const BesondererAnlass = () => {
 
             {/* Contact CTA */}
             <div className="bg-secondary p-8 rounded-lg text-center">
-              <h3 className="text-xl font-bold mb-4">{t.specialOccasions.interested}</h3>
+              <h2 className="text-xl font-bold mb-4">{t.specialOccasions.interested}</h2>
               <p className="text-muted-foreground mb-6">
                 {t.specialOccasions.contactUs}
               </p>
@@ -102,6 +118,8 @@ const BesondererAnlass = () => {
                 </Button>
               </div>
             </div>
+
+            <ReservationCTA />
           </div>
         </main>
 
