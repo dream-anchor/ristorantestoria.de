@@ -187,4 +187,54 @@
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
+  
+  <!-- SEO Landingpages -->
+  <url>
+    <loc>https://ristorantestoria.de/lunch-muenchen-maxvorstadt</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ristorantestoria.de/aperitivo-muenchen</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ristorantestoria.de/romantisches-dinner-muenchen</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ristorantestoria.de/eventlocation-muenchen-maxvorstadt</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ristorantestoria.de/firmenfeier-muenchen</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ristorantestoria.de/geburtstagsfeier-muenchen</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ristorantestoria.de/neapolitanische-pizza-muenchen</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
