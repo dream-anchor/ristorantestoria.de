@@ -33,6 +33,15 @@ import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
 import ScrollToTop from "./components/ScrollToTop";
 
+// SEO Landingpages
+import LunchMuenchen from "./pages/seo/LunchMuenchen";
+import AperitivoMuenchen from "./pages/seo/AperitivoMuenchen";
+import RomantischesDinner from "./pages/seo/RomantischesDinner";
+import EventlocationMuenchen from "./pages/seo/EventlocationMuenchen";
+import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
+import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
+import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
+
 const queryClient = new QueryClient();
 
 // App component with all providers and contexts
@@ -71,6 +80,16 @@ const App = () => (
               <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
               <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
               <Route path="/ueber-uns" element={<UeberUns />} />
+              
+              {/* SEO Landingpages - nicht im Hauptmenü verlinkt */}
+              <Route path="/lunch-muenchen-maxvorstadt" element={<LunchMuenchen />} />
+              <Route path="/aperitivo-muenchen" element={<AperitivoMuenchen />} />
+              <Route path="/romantisches-dinner-muenchen" element={<RomantischesDinner />} />
+              <Route path="/eventlocation-muenchen-maxvorstadt" element={<EventlocationMuenchen />} />
+              <Route path="/firmenfeier-muenchen" element={<FirmenfeierMuenchen />} />
+              <Route path="/geburtstagsfeier-muenchen" element={<GeburtstagsfeierMuenchen />} />
+              <Route path="/neapolitanische-pizza-muenchen" element={<NeapolitanischePizza />} />
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
