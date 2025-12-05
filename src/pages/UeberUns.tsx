@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import ReservationCTA from "@/components/ReservationCTA";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const UeberUns = () => {
@@ -10,10 +11,10 @@ const UeberUns = () => {
   return (
     <>
       <SEO 
-        title={language === 'de' ? "Über uns | STORIA – Italiener Maxvorstadt München" : "About us | STORIA – Italian Restaurant Maxvorstadt Munich"}
+        title={language === 'de' ? "Über uns – La Famiglia Speranza" : "About Us – La Famiglia Speranza"}
         description={language === 'de' 
-          ? "STORIA – Ihr Italiener in der Maxvorstadt. Ristorante Pizzeria in München mit Pizza aus dem Steinofen, hausgemachter Pasta und italienischem Trattoria-Flair."
-          : "STORIA – Your Italian restaurant in Maxvorstadt. Ristorante Pizzeria in Munich with stone-oven pizza, homemade pasta and Italian trattoria atmosphere."
+          ? "STORIA – Ihr Italiener in der Maxvorstadt München. Ristorante Pizzeria mit neapolitanischer Pizza, hausgemachter Pasta und italienischem Trattoria-Flair. La Famiglia Speranza."
+          : "STORIA – Your Italian restaurant in Maxvorstadt Munich. Ristorante Pizzeria with Neapolitan pizza, homemade pasta and Italian trattoria atmosphere. La Famiglia Speranza."
         }
         canonical="/ueber-uns"
       />
@@ -46,6 +47,8 @@ const UeberUns = () => {
                 </span>
               </div>
             </div>
+            
+            <ReservationCTA />
           </div>
         </main>
         <Footer />

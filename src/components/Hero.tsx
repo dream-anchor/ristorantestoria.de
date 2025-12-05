@@ -21,13 +21,13 @@ const Hero = () => {
         </p>
         <h1 id="hero-heading" className="text-2xl md:text-3xl font-medium mb-10">
           {language === 'de' 
-            ? 'Im Herzen von München' 
-            : 'In the Heart of Munich'}
+            ? 'Italienisches Restaurant in der Maxvorstadt' 
+            : 'Italian Restaurant in Maxvorstadt'}
         </h1>
         <p className="sr-only">
           {language === 'de'
-            ? 'STORIA – Ihr Italiener in der Maxvorstadt und Ristorante Pizzeria in München. Pizzeria Maxvorstadt mit authentischer italienischer Küche, Pizza München Innenstadt aus dem Steinofen und hausgemachter Pasta. La Storia – Trattoria München.'
-            : 'STORIA – Your Italian restaurant in Maxvorstadt and Ristorante Pizzeria in Munich. Pizzeria Maxvorstadt with authentic Italian cuisine, wood-fired pizza and homemade pasta. La Storia – Italian trattoria Munich.'}
+            ? 'STORIA – Ihr Italiener in der Maxvorstadt München nahe Königsplatz, TU München und Pinakotheken. Ristorante Pizzeria mit neapolitanischer Pizza aus dem Steinofen, hausgemachter Pasta und Aperitivo. Nur wenige Gehminuten vom Hauptbahnhof. La Storia – Trattoria München Karlstraße.'
+            : 'STORIA – Your Italian restaurant in Maxvorstadt Munich near Königsplatz, TU Munich and Pinakothek museums. Ristorante Pizzeria with Neapolitan stone-oven pizza, homemade pasta and aperitivo. Just minutes from the main train station. La Storia – Italian trattoria Munich Karlstraße.'}
         </p>
         <Button 
           size="lg" 

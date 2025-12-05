@@ -83,12 +83,12 @@ const Footer = () => {
                   <Mail className="h-3.5 w-3.5" />
                   info@ristorantestoria.de
                 </a>
-                <Link 
+              <Link 
                   to="/kontakt#map" 
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"
                 >
                   <MapPin className="h-3.5 w-3.5" />
-                  Karlstr. 47a, 80333 München
+                  <span>Karlstr. 47a, 80333 München<br /><span className="text-xs opacity-70">Nähe Königsplatz & Hauptbahnhof</span></span>
                 </Link>
               </div>
             </div>

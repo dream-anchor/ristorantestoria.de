@@ -86,9 +86,24 @@
     <loc>https://ristorantestoria.de/besondere-anlaesse/silvesterparty</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://ristorantestoria.de/besondere-anlaesse/silvesterparty"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ristorantestoria.de/besondere-anlaesse/silvesterparty"/>
-    <lastmod>2025-12-03</lastmod>
+    <lastmod>2025-12-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
+  </url>
+  
+  <!-- SEO-freundliche Redirect-URLs (canonical auf Hauptseiten) -->
+  <url>
+    <loc>https://ristorantestoria.de/weihnachtsmenues</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://ristorantestoria.de/silvesterparty</loc>
+    <lastmod>2025-12-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <!-- Kontakt -->
