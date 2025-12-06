@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
+import ElfsightReviews from "@/components/ElfsightReviews";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -111,6 +112,7 @@ const FirmenfeierMuenchen = () => {
             </div>
 
             <ReservationCTA />
+            <ElfsightReviews />
           </article>
         </main>
 
