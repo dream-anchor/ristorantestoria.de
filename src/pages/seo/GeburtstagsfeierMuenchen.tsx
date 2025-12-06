@@ -6,9 +6,8 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
-import storiaLogo from "@/assets/storia-logo.webp";
-import tiramisuImage from "@/assets/tiramisu.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PartyPopper, Users, Cake, Star } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -16,8 +15,73 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// New SEO components
+import ParallaxHero from "@/components/seo/ParallaxHero";
+import USPTeaser, { USPItem } from "@/components/seo/USPTeaser";
+import FoodGallery from "@/components/seo/FoodGallery";
+import LocalSEOBlock from "@/components/seo/LocalSEOBlock";
+import SocialProof from "@/components/seo/SocialProof";
+import CTAIntermediate from "@/components/seo/CTAIntermediate";
+
+// Images
+import tiramisuImage from "@/assets/tiramisu.webp";
+import cocktailsImage from "@/assets/cocktails.webp";
+import pastaImage from "@/assets/pasta.jpg";
+import menschenAussenImage from "@/assets/menschen-aussen.jpeg";
+
 const GeburtstagsfeierMuenchen = () => {
   const { language } = useLanguage();
+
+  const uspItems: USPItem[] = [
+    {
+      icon: PartyPopper,
+      title: language === 'de' ? 'Geburtstags-Specials' : 'Birthday Specials',
+      description: language === 'de' ? 'Torte, Serenade, Dekoration' : 'Cake, serenade, decoration',
+    },
+    {
+      icon: Users,
+      title: language === 'de' ? '8-60 Personen' : '8-60 People',
+      description: language === 'de' ? 'Kleine bis große Feiern' : 'Small to large parties',
+    },
+    {
+      icon: Cake,
+      title: language === 'de' ? 'Torte willkommen' : 'Cake Welcome',
+      description: language === 'de' ? 'Mitbringen oder organisieren' : 'Bring or we organize',
+    },
+    {
+      icon: Star,
+      title: language === 'de' ? 'Persönlich betreut' : 'Personal Service',
+      description: language === 'de' ? 'Individuelle Wünsche möglich' : 'Individual requests possible',
+    },
+  ];
+
+  const galleryImages = [
+    { src: tiramisuImage, alt: language === 'de' ? 'Hausgemachtes Tiramisu' : 'Homemade tiramisu' },
+    { src: cocktailsImage, alt: language === 'de' ? 'Geburtstags-Cocktails' : 'Birthday cocktails' },
+    { src: pastaImage, alt: language === 'de' ? 'Geburtstags-Menü' : 'Birthday menu' },
+    { src: menschenAussenImage, alt: language === 'de' ? 'Feier auf der Terrasse' : 'Party on terrace' },
+  ];
+
+  const testimonials = [
+    {
+      quote: language === 'de' 
+        ? "Mein 50. Geburtstag war unvergesslich! Das Team hat alles perfekt organisiert."
+        : "My 50th birthday was unforgettable! The team organized everything perfectly.",
+      author: "Petra S.",
+    },
+    {
+      quote: language === 'de'
+        ? "Die Überraschungsfeier für meinen Mann war ein voller Erfolg. Danke STORIA!"
+        : "The surprise party for my husband was a complete success. Thank you STORIA!",
+      author: "Maria K.",
+    },
+    {
+      quote: language === 'de'
+        ? "Tanti Auguri! Die italienische Geburtstagsserenade war das Highlight des Abends."
+        : "Tanti Auguri! The Italian birthday serenade was the highlight of the evening.",
+      author: "Familie Huber",
+    },
+  ];
 
   const faqItems = language === 'de' ? [
     {
@@ -38,7 +102,7 @@ const GeburtstagsfeierMuenchen = () => {
     },
     {
       question: "Wie weit im Voraus sollte ich für eine Geburtstagsfeier reservieren?",
-      answer: "Wir empfehlen, 2-4 Wochen im Voraus zu reservieren, besonders am Wochenende. Für größere Gruppen (ab 20 Personen) oder Exklusiv-Buchungen sollten Sie 4-6 Wochen einplanen. Im Dezember empfehlen wir noch frühere Buchung."
+      answer: "Wir empfehlen, 2-4 Wochen im Voraus zu reservieren, besonders am Wochenende. Für größere Gruppen (ab 20 Personen) oder Exklusiv-Buchungen sollten Sie 4-6 Wochen einplanen."
     }
   ] : [
     {
@@ -59,7 +123,7 @@ const GeburtstagsfeierMuenchen = () => {
     },
     {
       question: "How far in advance should I book for a birthday party?",
-      answer: "We recommend booking 2-4 weeks in advance, especially on weekends. For larger groups (from 20 people) or exclusive bookings, you should plan 4-6 weeks. In December, we recommend booking even earlier."
+      answer: "We recommend booking 2-4 weeks in advance, especially on weekends. For larger groups (from 20 people) or exclusive bookings, you should plan 4-6 weeks."
     }
   ];
 
@@ -81,256 +145,218 @@ const GeburtstagsfeierMuenchen = () => {
       />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <div className="bg-background border-b border-border">
-          <div className="container mx-auto px-4 py-8 text-center">
-            <Link to="/">
-              <img src={storiaLogo} alt="STORIA – Restaurant für Geburtstagsfeiern München" className="h-24 md:h-32 mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
-            </Link>
-            <p className="text-lg text-muted-foreground tracking-wide">
-              RISTORANTE · PIZZERIA · BAR
-            </p>
-          </div>
-        </div>
         <Navigation />
         
-        <main className="container mx-auto px-4 py-12 flex-grow">
-          <article className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-center">
-              {language === 'de' ? 'Geburtstag feiern München – Ihre Party im STORIA' : 'Birthday Party Munich – Your Celebration at STORIA'}
-            </h1>
-            
-            <p className="text-lg text-muted-foreground mb-8 text-center max-w-3xl mx-auto">
-              {language === 'de'
-                ? 'Tanti Auguri! Feiern Sie Ihren Geburtstag im STORIA – mit italienischer Herzlichkeit, exquisiter Küche und besonderem Ambiente. Unser Restaurant in der Münchner Maxvorstadt bietet den perfekten Rahmen für unvergessliche Geburtstagsfeiern von 10 bis 60 Gästen.'
-                : 'Tanti Auguri! Celebrate your birthday at STORIA – with Italian warmth, exquisite cuisine and special ambiance. Our restaurant in Munich\'s Maxvorstadt offers the perfect setting for unforgettable birthday parties from 10 to 60 guests.'}
-            </p>
+        {/* 1. Parallax Hero */}
+        <ParallaxHero
+          image={tiramisuImage}
+          headline={language === 'de' ? 'Geburtstag feiern München' : 'Birthday Party Munich'}
+          subheadline={language === 'de' 
+            ? 'Tanti Auguri! – Feiern Sie italienisch mit Familie & Freunden'
+            : 'Tanti Auguri! – Celebrate Italian style with family & friends'}
+          primaryCTA={{ text: language === 'de' ? 'Feier anfragen' : 'Inquire About Party', href: '/kontakt' }}
+          secondaryCTA={{ text: language === 'de' ? 'Anrufen' : 'Call', href: 'tel:+498951519696' }}
+        />
 
-            {/* Hero Image */}
-            <div className="rounded-lg overflow-hidden mb-12">
-              <img 
-                src={tiramisuImage} 
-                alt={language === 'de' ? 'Hausgemachtes Tiramisu – Dessert für Ihre Geburtstagsfeier im STORIA München' : 'Homemade tiramisu – Dessert for your birthday party at STORIA Munich'}
-                className="w-full h-64 md:h-80 object-cover"
-              />
+        {/* 2. USP Teaser */}
+        <USPTeaser items={uspItems} />
+        
+        <main className="flex-grow">
+          {/* 3. Main Content */}
+          <section className="container mx-auto px-4 py-12">
+            <article className="max-w-4xl mx-auto">
+              {/* Tanti Auguri Section */}
+              <div className="bg-card p-8 rounded-lg border border-border mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
+                  {language === 'de' ? 'Tanti Auguri! – Feiern auf Italienisch' : 'Tanti Auguri! – Celebrate Italian Style'}
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  {language === 'de'
+                    ? 'In Italien wird der Geburtstag mit Familie, Freunden und gutem Essen gefeiert – genau das möchten wir im STORIA für Sie möglich machen. Unsere italienische Herzlichkeit, die warme Atmosphäre und die Liebe zum Detail sorgen dafür, dass Ihr Ehrentag zu einem unvergesslichen Erlebnis wird.'
+                    : 'In Italy, birthdays are celebrated with family, friends and good food – that\'s exactly what we want to make possible for you at STORIA. Our Italian warmth, the cozy atmosphere and attention to detail ensure that your special day becomes an unforgettable experience.'}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Was wir bieten' : 'What We Offer'}</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>✓ {language === 'de' ? 'Platz für 10 bis 60 Gäste' : 'Space for 10 to 60 guests'}</li>
+                      <li>✓ {language === 'de' ? 'Individuelle Menügestaltung' : 'Individual menu design'}</li>
+                      <li>✓ {language === 'de' ? 'Torte mitbringen oder organisieren' : 'Bring your own cake or we organize'}</li>
+                      <li>✓ {language === 'de' ? 'Persönliche Grußkarte vom Team' : 'Personal greeting card from team'}</li>
+                      <li>✓ {language === 'de' ? 'Dekoration nach Absprache' : 'Decoration by arrangement'}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Besondere Extras' : 'Special Extras'}</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>✓ {language === 'de' ? 'Prosecco für das Geburtstagskind' : 'Prosecco for the birthday person'}</li>
+                      <li>✓ {language === 'de' ? '"Tanti Auguri"-Serenade' : '"Tanti Auguri" serenade'}</li>
+                      <li>✓ {language === 'de' ? 'Dessert-Überraschung' : 'Dessert surprise'}</li>
+                      <li>✓ {language === 'de' ? 'Blumen am Tisch (auf Anfrage)' : 'Flowers at table (on request)'}</li>
+                      <li>✓ {language === 'de' ? 'Menükarten mit Namen' : 'Menu cards with names'}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Group Sizes */}
+              <section className="mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6 text-center">
+                  {language === 'de' ? 'Die richtige Größe für Ihre Feier' : 'The Right Size for Your Celebration'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-card p-6 rounded-lg border border-border text-center">
+                    <p className="text-3xl font-serif font-bold text-primary mb-2">10-15</p>
+                    <p className="font-semibold mb-2">{language === 'de' ? 'Personen' : 'People'}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Großer Tisch im Restaurant. Ideal für intime Feiern im Freundeskreis.'
+                        : 'Large table in the restaurant. Ideal for intimate celebrations with friends.'}
+                    </p>
+                  </div>
+                  <div className="bg-card p-6 rounded-lg border-2 border-primary text-center">
+                    <div className="text-xs text-primary font-semibold mb-1">{language === 'de' ? 'BELIEBT' : 'POPULAR'}</div>
+                    <p className="text-3xl font-serif font-bold text-primary mb-2">15-30</p>
+                    <p className="font-semibold mb-2">{language === 'de' ? 'Personen' : 'People'}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Separierter Bereich. Perfekt für Familienfeiern und runde Geburtstage.'
+                        : 'Separated area. Perfect for family celebrations and milestone birthdays.'}
+                    </p>
+                  </div>
+                  <div className="bg-card p-6 rounded-lg border border-border text-center">
+                    <p className="text-3xl font-serif font-bold text-primary mb-2">30-60</p>
+                    <p className="font-semibold mb-2">{language === 'de' ? 'Personen' : 'People'}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Exklusiv-Buchung möglich. Das ganze Restaurant für Ihre große Feier.'
+                        : 'Exclusive booking possible. The whole restaurant for your big celebration.'}
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              {/* Popular Menus */}
+              <section className="bg-secondary/50 p-8 rounded-lg mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
+                  {language === 'de' ? 'Beliebte Geburtstags-Menüs' : 'Popular Birthday Menus'}
+                </h2>
+                <div className="space-y-4">
+                  <div className="bg-background p-4 rounded-lg">
+                    <h3 className="font-serif font-semibold mb-2">{language === 'de' ? 'Antipasti-Platte zum Teilen' : 'Antipasti Platter to Share'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Bruschetta, Carpaccio, Burrata – perfekt zum gemeinsamen Genießen.'
+                        : 'Bruschetta, carpaccio, burrata – perfect for sharing and enjoying together.'}
+                    </p>
+                  </div>
+                  <div className="bg-background p-4 rounded-lg">
+                    <h3 className="font-serif font-semibold mb-2">{language === 'de' ? 'Pizza-Party' : 'Pizza Party'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Verschiedene Pizzen aus unserem Steinofen – locker, gesellig und lecker.'
+                        : 'Various pizzas from our stone oven – casual, convivial and delicious.'}
+                    </p>
+                  </div>
+                  <div className="bg-background p-4 rounded-lg">
+                    <h3 className="font-serif font-semibold mb-2">{language === 'de' ? 'Klassisches 3-Gang-Menü' : 'Classic 3-Course Menu'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Antipasto, Pasta oder Hauptgang, Dolce – ein festliches Menü für besondere Anlässe.'
+                        : 'Antipasto, pasta or main course, dolce – a festive menu for special occasions.'}
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              {/* CTA Section */}
+              <section className="bg-primary/5 p-8 rounded-lg text-center mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
+                  {language === 'de' ? 'Jetzt Geburtstagsfeier planen' : 'Plan Your Birthday Party Now'}
+                </h2>
+                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                  {language === 'de'
+                    ? 'Tanti Auguri! Kontaktieren Sie uns und wir machen Ihren Geburtstag unvergesslich.'
+                    : 'Tanti Auguri! Contact us and we\'ll make your birthday unforgettable.'}
+                </p>
+                <div className="flex flex-wrap gap-4 justify-center">
+                  <Button size="lg" asChild>
+                    <a href="tel:+498951519696">+49 89 51519696</a>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <a href="mailto:info@ristorantestoria.de">{language === 'de' ? 'E-Mail senden' : 'Send Email'}</a>
+                  </Button>
+                </div>
+              </section>
+            </article>
+          </section>
+
+          {/* 4. CTA Intermediate */}
+          <CTAIntermediate 
+            headline={language === 'de' ? 'Bereit zu feiern?' : 'Ready to Celebrate?'}
+            text={language === 'de' 
+              ? 'Reservieren Sie jetzt für Ihre unvergessliche Geburtstagsfeier im STORIA.'
+              : 'Book now for your unforgettable birthday party at STORIA.'}
+            primaryCTA={{ text: language === 'de' ? 'Jetzt anfragen' : 'Inquire Now', href: '/kontakt' }}
+            secondaryCTA={{ text: language === 'de' ? 'Speisekarte' : 'Menu', href: '/speisekarte' }}
+          />
+
+          {/* 5. Food Gallery */}
+          <FoodGallery images={galleryImages} />
+
+          {/* 6. Local SEO Block */}
+          <LocalSEOBlock
+            title={language === 'de' ? 'Feiern im Herzen Münchens' : 'Celebrate in the Heart of Munich'}
+            description={language === 'de'
+              ? 'Das STORIA in der Münchner Maxvorstadt ist perfekt erreichbar für Gäste aus der ganzen Stadt. Nur 3 Minuten vom Königsplatz und 5 Minuten vom Hauptbahnhof – ideal für Geburtstagsfeiern mit Freunden und Familie.'
+              : 'STORIA in Munich\'s Maxvorstadt is perfectly accessible for guests from all over the city. Just 3 minutes from Königsplatz and 5 minutes from the main station – ideal for birthday parties with friends and family.'}
+          />
+
+          {/* 7. Social Proof */}
+          <SocialProof testimonials={testimonials} />
+
+          {/* 8. FAQ Section */}
+          <section className="container mx-auto px-4 py-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-card p-8 rounded-lg border border-border mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
+                  {language === 'de' ? 'Häufige Fragen zur Geburtstagsfeier' : 'Frequently Asked Questions'}
+                </h2>
+                <Accordion type="single" collapsible className="w-full">
+                  {faqItems.map((item, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-left">{item.question}</AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+
+              {/* Cross Links */}
+              <section className="text-center mb-10">
+                <h3 className="font-serif text-lg mb-4 text-muted-foreground">
+                  {language === 'de' ? 'Entdecken Sie mehr' : 'Discover More'}
+                </h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <Link to="/eventlocation-muenchen-maxvorstadt" className="text-sm text-primary hover:underline">
+                    {language === 'de' ? 'Eventlocation →' : 'Event Location →'}
+                  </Link>
+                  <span className="text-muted-foreground">•</span>
+                  <Link to="/firmenfeier-muenchen" className="text-sm text-primary hover:underline">
+                    {language === 'de' ? 'Firmenfeiern →' : 'Corporate Events →'}
+                  </Link>
+                  <span className="text-muted-foreground">•</span>
+                  <Link to="/speisekarte" className="text-sm text-primary hover:underline">
+                    {language === 'de' ? 'Speisekarte →' : 'Menu →'}
+                  </Link>
+                </div>
+              </section>
+
+              <ReservationCTA />
             </div>
-
-            {/* Tanti Auguri */}
-            <section className="bg-card p-8 rounded-lg border border-border mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
-                {language === 'de' ? 'Tanti Auguri! – Feiern auf Italienisch' : 'Tanti Auguri! – Celebrate Italian Style'}
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                {language === 'de'
-                  ? 'In Italien wird der Geburtstag mit Familie, Freunden und gutem Essen gefeiert – genau das möchten wir im STORIA für Sie möglich machen. Unsere italienische Herzlichkeit, die warme Atmosphäre und die Liebe zum Detail sorgen dafür, dass Ihr Ehrentag zu einem unvergesslichen Erlebnis wird.'
-                  : 'In Italy, birthdays are celebrated with family, friends and good food – that\'s exactly what we want to make possible for you at STORIA. Our Italian warmth, the cozy atmosphere and attention to detail ensure that your special day becomes an unforgettable experience.'}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Was wir bieten' : 'What We Offer'}</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>✓ {language === 'de' ? 'Platz für 10 bis 60 Gäste' : 'Space for 10 to 60 guests'}</li>
-                    <li>✓ {language === 'de' ? 'Individuelle Menügestaltung' : 'Individual menu design'}</li>
-                    <li>✓ {language === 'de' ? 'Torte mitbringen oder organisieren' : 'Bring your own cake or we organize'}</li>
-                    <li>✓ {language === 'de' ? 'Persönliche Grußkarte vom Team' : 'Personal greeting card from team'}</li>
-                    <li>✓ {language === 'de' ? 'Dekoration nach Absprache' : 'Decoration by arrangement'}</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Besondere Extras' : 'Special Extras'}</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>✓ {language === 'de' ? 'Prosecco für das Geburtstagskind' : 'Prosecco for the birthday person'}</li>
-                    <li>✓ {language === 'de' ? '"Tanti Auguri"-Serenade' : '"Tanti Auguri" serenade'}</li>
-                    <li>✓ {language === 'de' ? 'Dessert-Überraschung' : 'Dessert surprise'}</li>
-                    <li>✓ {language === 'de' ? 'Blumen am Tisch (auf Anfrage)' : 'Flowers at table (on request)'}</li>
-                    <li>✓ {language === 'de' ? 'Menükarten mit Namen' : 'Menu cards with names'}</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Gruppengrößen */}
-            <section className="mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6 text-center">
-                {language === 'de' ? 'Die richtige Größe für Ihre Feier' : 'The Right Size for Your Celebration'}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-card p-6 rounded-lg border border-border text-center">
-                  <p className="text-3xl font-serif font-bold text-primary mb-2">10-15</p>
-                  <p className="font-semibold mb-2">{language === 'de' ? 'Personen' : 'People'}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Großer Tisch im Restaurant. Ideal für intime Feiern im Freundeskreis.'
-                      : 'Large table in the restaurant. Ideal for intimate celebrations with friends.'}
-                  </p>
-                </div>
-                <div className="bg-card p-6 rounded-lg border-2 border-primary text-center">
-                  <div className="text-xs text-primary font-semibold mb-1">{language === 'de' ? 'BELIEBT' : 'POPULAR'}</div>
-                  <p className="text-3xl font-serif font-bold text-primary mb-2">15-30</p>
-                  <p className="font-semibold mb-2">{language === 'de' ? 'Personen' : 'People'}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Separierter Bereich im Restaurant. Perfekt für Familienfeiern und runde Geburtstage.'
-                      : 'Separated area in the restaurant. Perfect for family celebrations and milestone birthdays.'}
-                  </p>
-                </div>
-                <div className="bg-card p-6 rounded-lg border border-border text-center">
-                  <p className="text-3xl font-serif font-bold text-primary mb-2">30-60</p>
-                  <p className="font-semibold mb-2">{language === 'de' ? 'Personen' : 'People'}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Exklusiv-Buchung möglich. Das ganze Restaurant für Ihre große Feier.'
-                      : 'Exclusive booking possible. The whole restaurant for your big celebration.'}
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* Beliebte Menüs */}
-            <section className="bg-secondary/50 p-8 rounded-lg mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
-                {language === 'de' ? 'Beliebte Geburtstags-Menüs' : 'Popular Birthday Menus'}
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                {language === 'de'
-                  ? 'Lassen Sie sich und Ihre Gäste mit exquisiter italienischer Küche verwöhnen. Hier sind einige beliebte Optionen für Ihre Geburtstagsfeier:'
-                  : 'Treat yourself and your guests to exquisite Italian cuisine. Here are some popular options for your birthday celebration:'}
-              </p>
-              <div className="space-y-4">
-                <div className="bg-background p-4 rounded-lg">
-                  <h3 className="font-serif font-semibold mb-2">{language === 'de' ? 'Antipasti-Platte zum Teilen' : 'Antipasti Platter to Share'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Bruschetta, Carpaccio, Burrata, italienische Salumi – perfekt zum gemeinsamen Genießen und Anstoßen.'
-                      : 'Bruschetta, carpaccio, burrata, Italian salumi – perfect for sharing and toasting together.'}
-                  </p>
-                </div>
-                <div className="bg-background p-4 rounded-lg">
-                  <h3 className="font-serif font-semibold mb-2">{language === 'de' ? 'Pizza-Party' : 'Pizza Party'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Verschiedene Pizzen aus unserem Steinofen für die ganze Runde. Locker, gesellig und lecker – ideal für entspannte Feiern.'
-                      : 'Various pizzas from our stone oven for the whole group. Casual, convivial and delicious – ideal for relaxed celebrations.'}
-                  </p>
-                </div>
-                <div className="bg-background p-4 rounded-lg">
-                  <h3 className="font-serif font-semibold mb-2">{language === 'de' ? 'Klassisches 3-Gang-Menü' : 'Classic 3-Course Menu'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Antipasto, Pasta oder Hauptgang nach Wahl, Dolce – ein festliches Menü für besondere Anlässe.'
-                      : 'Antipasto, pasta or main course of your choice, dolce – a festive menu for special occasions.'}
-                  </p>
-                </div>
-                <div className="bg-background p-4 rounded-lg">
-                  <h3 className="font-serif font-semibold mb-2">{language === 'de' ? 'Süßer Abschluss' : 'Sweet Finale'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Unser hausgemachtes Tiramisu, Panna Cotta oder eine Torte Ihrer Wahl – der krönende Abschluss Ihrer Feier.'
-                      : 'Our homemade tiramisu, panna cotta or a cake of your choice – the crowning finale of your celebration.'}
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* Tipps für Ihre Feier */}
-            <section className="bg-card p-8 rounded-lg border border-border mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
-                {language === 'de' ? 'Tipps für Ihre Geburtstagsfeier' : 'Tips for Your Birthday Party'}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">{language === 'de' ? 'Rechtzeitig planen' : 'Plan Ahead'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Reservieren Sie 2-4 Wochen im Voraus, besonders für Wochenenden. So können wir alles perfekt vorbereiten.'
-                      : 'Book 2-4 weeks in advance, especially for weekends. This way we can prepare everything perfectly.'}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">{language === 'de' ? 'Gästezahl bekannt geben' : 'Confirm Guest Count'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Teilen Sie uns die finale Gästezahl spätestens 3 Tage vorher mit. Kleine Änderungen sind meist kein Problem.'
-                      : 'Let us know the final guest count at least 3 days before. Small changes are usually no problem.'}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">{language === 'de' ? 'Menü-Vorauswahl' : 'Pre-Select Menu'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Bei größeren Gruppen empfehlen wir eine Menü-Vorauswahl. Das vereinfacht den Ablauf und Sie können entspannt genießen.'
-                      : 'For larger groups, we recommend pre-selecting the menu. This simplifies the process and you can enjoy relaxed.'}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2">{language === 'de' ? 'Besonderheiten mitteilen' : 'Communicate Special Needs'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Allergien, Unverträglichkeiten oder besondere Wünsche? Teilen Sie uns diese vorab mit – wir kümmern uns darum.'
-                      : 'Allergies, intolerances or special requests? Let us know in advance – we\'ll take care of it.'}
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* CTA */}
-            <section className="bg-primary/5 p-8 rounded-lg text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
-                {language === 'de' ? 'Jetzt Geburtstag planen' : 'Plan Your Birthday Now'}
-              </h2>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                {language === 'de'
-                  ? 'Reservieren Sie frühzeitig für Ihre Geburtstagsfeier. Wir freuen uns, Ihren besonderen Tag unvergesslich zu machen!'
-                  : 'Book early for your birthday celebration. We look forward to making your special day unforgettable!'}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild>
-                  <a href="tel:+498951519696">+49 89 51519696</a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <a href="mailto:info@ristorantestoria.de">{language === 'de' ? 'E-Mail senden' : 'Send Email'}</a>
-                </Button>
-              </div>
-            </section>
-
-            {/* FAQ Section */}
-            <section className="bg-card p-8 rounded-lg border border-border mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
-                {language === 'de' ? 'Häufige Fragen zur Geburtstagsfeier' : 'Frequently Asked Questions'}
-              </h2>
-              <Accordion type="single" collapsible className="w-full">
-                {faqItems.map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left">{item.question}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {item.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </section>
-
-            {/* Cross Links */}
-            <section className="text-center mb-10">
-              <h3 className="font-serif text-lg mb-4 text-muted-foreground">
-                {language === 'de' ? 'Entdecken Sie mehr' : 'Discover More'}
-              </h3>
-              <div className="flex flex-wrap justify-center gap-3">
-                <Link to="/speisekarte" className="text-sm text-primary hover:underline">
-                  {language === 'de' ? 'Speisekarte ansehen →' : 'View Menu →'}
-                </Link>
-                <span className="text-muted-foreground">•</span>
-                <Link to="/eventlocation-muenchen-maxvorstadt" className="text-sm text-primary hover:underline">
-                  {language === 'de' ? 'Eventlocation →' : 'Event Location →'}
-                </Link>
-                <span className="text-muted-foreground">•</span>
-                <Link to="/neapolitanische-pizza-muenchen" className="text-sm text-primary hover:underline">
-                  {language === 'de' ? 'Pizza-Party →' : 'Pizza Party →'}
-                </Link>
-              </div>
-            </section>
-
-            <ReservationCTA />
-          </article>
+          </section>
         </main>
 
         <Footer />
