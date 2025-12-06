@@ -65,8 +65,8 @@ const Index = () => {
         <Hero />
         <Navigation />
         <ImageGrid />
-        <InternalLinks />
         <ElfsightReviews />
+        <InternalLinks />
         <Footer />
       </div>
     </>
