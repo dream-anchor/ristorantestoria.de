@@ -24,7 +24,9 @@ RewriteRule ^$ /impressum? [R=301,L]
 # ============================================
 RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
 RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
-RewriteRule ^ristorantestoria-de/?$ / [R=301,L]
+# Redirect für alte Subdomain-URL (mit Unterverzeichnissen)
+RewriteCond %{REQUEST_URI} ^/ristorantestoria-de(/.*)?$ [NC]
+RewriteRule ^ristorantestoria-de(/.*)?$ / [R=301,L]
 
 # ============================================
 # 3. SPA-Routing (React Router)

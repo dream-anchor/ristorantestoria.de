@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ConsentOpenTable from "@/components/ConsentOpenTable";
+import ElfsightReviews from "@/components/ElfsightReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -72,6 +73,8 @@ const Reservierung = () => {
               height={iframeHeight}
             />
           </div>
+
+          <ElfsightReviews />
         </main>
 
         <Footer />
