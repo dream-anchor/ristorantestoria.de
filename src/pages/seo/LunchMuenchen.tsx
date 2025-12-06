@@ -6,9 +6,8 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
-import storiaLogo from "@/assets/storia-logo.webp";
-import pastaImage from "@/assets/pasta.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Clock, Leaf, MapPin, Euro } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -16,8 +15,73 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// New SEO components
+import ParallaxHero from "@/components/seo/ParallaxHero";
+import USPTeaser, { USPItem } from "@/components/seo/USPTeaser";
+import FoodGallery from "@/components/seo/FoodGallery";
+import LocalSEOBlock from "@/components/seo/LocalSEOBlock";
+import SocialProof from "@/components/seo/SocialProof";
+import CTAIntermediate from "@/components/seo/CTAIntermediate";
+
+// Images
+import pastaImage from "@/assets/pasta.jpg";
+import ravioliImage from "@/assets/ravioli.webp";
+import tiramisuImage from "@/assets/tiramisu.webp";
+import weinserviceImage from "@/assets/weinservice.webp";
+
 const LunchMuenchen = () => {
   const { language } = useLanguage();
+
+  const uspItems: USPItem[] = [
+    {
+      icon: Clock,
+      title: language === 'de' ? 'Schnell (30 Min.)' : 'Quick (30 min)',
+      description: language === 'de' ? 'Perfekt für die Mittagspause' : 'Perfect for lunch break',
+    },
+    {
+      icon: Leaf,
+      title: language === 'de' ? 'Frische Zutaten' : 'Fresh Ingredients',
+      description: language === 'de' ? 'Täglich frisch zubereitet' : 'Freshly prepared daily',
+    },
+    {
+      icon: MapPin,
+      title: language === 'de' ? 'Nahe Hbf & TU' : 'Near Station & TU',
+      description: language === 'de' ? '5 Min. vom Hauptbahnhof' : '5 min from main station',
+    },
+    {
+      icon: Euro,
+      title: language === 'de' ? 'Faire Preise' : 'Fair Prices',
+      description: language === 'de' ? 'Qualität zum fairen Preis' : 'Quality at fair prices',
+    },
+  ];
+
+  const galleryImages = [
+    { src: pastaImage, alt: language === 'de' ? 'Frische Pasta zum Lunch' : 'Fresh pasta for lunch' },
+    { src: ravioliImage, alt: language === 'de' ? 'Hausgemachte Ravioli' : 'Homemade ravioli' },
+    { src: tiramisuImage, alt: language === 'de' ? 'Tiramisu zum Dessert' : 'Tiramisu for dessert' },
+    { src: weinserviceImage, alt: language === 'de' ? 'Weinservice am Tisch' : 'Wine service at table' },
+  ];
+
+  const testimonials = [
+    {
+      quote: language === 'de' 
+        ? "Bester Lunch-Spot in der Maxvorstadt! Schnell, lecker, authentisch."
+        : "Best lunch spot in Maxvorstadt! Quick, delicious, authentic.",
+      author: "Thomas M.",
+    },
+    {
+      quote: language === 'de'
+        ? "Perfekt für die Mittagspause – frische Pasta und super Service."
+        : "Perfect for lunch break – fresh pasta and great service.",
+      author: "Sandra K.",
+    },
+    {
+      quote: language === 'de'
+        ? "Unser Team-Lieblingsplatz für Business-Lunch. Immer wieder gerne!"
+        : "Our team's favorite place for business lunch. Always happy to return!",
+      author: "Michael B.",
+    },
+  ];
 
   const faqItems = language === 'de' ? [
     {
@@ -81,196 +145,164 @@ const LunchMuenchen = () => {
       />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <div className="bg-background border-b border-border">
-          <div className="container mx-auto px-4 py-8 text-center">
-            <Link to="/">
-              <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Maxvorstadt" className="h-24 md:h-32 mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
-            </Link>
-            <p className="text-lg text-muted-foreground tracking-wide">
-              RISTORANTE · PIZZERIA · BAR
-            </p>
-          </div>
-        </div>
         <Navigation />
         
-        <main className="container mx-auto px-4 py-12 flex-grow">
-          <article className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-center">
-              {language === 'de' ? 'Lunch München Maxvorstadt – Italienischer Mittagstisch im STORIA' : 'Lunch Munich Maxvorstadt – Italian Lunch at STORIA'}
-            </h1>
-            
-            <p className="text-lg text-muted-foreground mb-8 text-center max-w-3xl mx-auto">
-              {language === 'de'
-                ? 'Genießen Sie Ihre Mittagspause im STORIA – Ihrem Italiener in der Münchner Maxvorstadt. Frisch zubereitete Pasta, authentische Pizza aus dem Steinofen und wechselnde Tagesgerichte erwarten Sie nur wenige Gehminuten vom Hauptbahnhof, der TU München und dem Königsplatz entfernt.'
-                : 'Enjoy your lunch break at STORIA – your Italian restaurant in Munich\'s Maxvorstadt. Freshly prepared pasta, authentic stone-oven pizza and changing daily specials await you just a few minutes walk from the main station, TU Munich and Königsplatz.'}
-            </p>
+        {/* 1. Parallax Hero */}
+        <ParallaxHero
+          image={pastaImage}
+          headline={language === 'de' ? 'Lunch München Maxvorstadt' : 'Lunch Munich Maxvorstadt'}
+          subheadline={language === 'de' 
+            ? 'Frisch, schnell & authentisch italienisch – nur 3 Minuten vom Königsplatz'
+            : 'Fresh, quick & authentically Italian – just 3 minutes from Königsplatz'}
+          primaryCTA={{ text: language === 'de' ? 'Tisch reservieren' : 'Book a Table', href: '/reservierung' }}
+          secondaryCTA={{ text: language === 'de' ? 'Mittagsmenü ansehen' : 'View Lunch Menu', href: '/mittagsmenu' }}
+        />
 
-            {/* Hero Image */}
-            <div className="rounded-lg overflow-hidden mb-12">
-              <img 
-                src={pastaImage} 
-                alt={language === 'de' ? 'Frische Pasta zum Lunch im STORIA München Maxvorstadt' : 'Fresh pasta for lunch at STORIA Munich Maxvorstadt'}
-                className="w-full h-64 md:h-80 object-cover"
-              />
+        {/* 2. USP Teaser */}
+        <USPTeaser items={uspItems} />
+        
+        <main className="flex-grow">
+          {/* 3. Main Content */}
+          <section className="container mx-auto px-4 py-12">
+            <article className="max-w-4xl mx-auto">
+              {/* Business Lunch Section */}
+              <div className="bg-card p-8 rounded-lg border border-border mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
+                  {language === 'de' ? 'Ihr Business Lunch in der Maxvorstadt' : 'Your Business Lunch in Maxvorstadt'}
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  {language === 'de'
+                    ? 'Das STORIA ist seit Jahren die erste Wahl für Berufstätige, Studenten und Anwohner der Maxvorstadt, die einen qualitativ hochwertigen Mittagstisch in entspannter Atmosphäre suchen. Unsere Küche bereitet jeden Tag frische italienische Gerichte zu – von klassischer Pasta bis zur neapolitanischen Pizza.'
+                    : 'STORIA has been the first choice for professionals, students and residents of Maxvorstadt for years who are looking for a high-quality lunch in a relaxed atmosphere. Our kitchen prepares fresh Italian dishes every day – from classic pasta to Neapolitan pizza.'}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Unser Mittagsangebot' : 'Our Lunch Offer'}</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>✓ {language === 'de' ? 'Wechselndes Tagesmenü Mo-Fr' : 'Changing daily menu Mon-Fri'}</li>
+                      <li>✓ {language === 'de' ? 'Frische Pasta & Risotto' : 'Fresh pasta & risotto'}</li>
+                      <li>✓ {language === 'de' ? 'Pizza aus dem Steinofen' : 'Stone-oven pizza'}</li>
+                      <li>✓ {language === 'de' ? 'Leichte Salate & Antipasti' : 'Light salads & antipasti'}</li>
+                      <li>✓ {language === 'de' ? 'Italienischer Espresso' : 'Italian espresso'}</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Warum STORIA?' : 'Why STORIA?'}</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>✓ {language === 'de' ? 'Schneller Service (30-45 Min.)' : 'Quick service (30-45 min)'}</li>
+                      <li>✓ {language === 'de' ? 'Frische Zubereitung à la minute' : 'Fresh preparation à la minute'}</li>
+                      <li>✓ {language === 'de' ? 'Attraktive Mittagspreise' : 'Attractive lunch prices'}</li>
+                      <li>✓ {language === 'de' ? 'Vegetarische & vegane Optionen' : 'Vegetarian & vegan options'}</li>
+                      <li>✓ {language === 'de' ? 'Gemütliches Ambiente' : 'Cozy atmosphere'}</li>
+                    </ul>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground/70 italic border-t border-border pt-4">
+                  {language === 'de' ? 'Mittagszeit: Montag bis Freitag, 11:30 – 14:30 Uhr | Samstag & Sonntag: 12:00 – 15:00 Uhr' : 'Lunch hours: Monday to Friday, 11:30 AM – 2:30 PM | Saturday & Sunday: 12:00 – 3:00 PM'}
+                </p>
+              </div>
+
+              {/* Für wen ideal */}
+              <section className="mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6 text-center">
+                  {language === 'de' ? 'Der perfekte Lunch für...' : 'The Perfect Lunch for...'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-card p-6 rounded-lg border border-border text-center">
+                    <h3 className="font-serif font-semibold text-lg mb-3">{language === 'de' ? 'Berufstätige' : 'Professionals'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Schneller, qualitativ hochwertiger Mittagstisch für die Pause zwischen Meetings. Ideal für Teams aus den umliegenden Büros und Kanzleien.'
+                        : 'Quick, high-quality lunch for the break between meetings. Ideal for teams from surrounding offices and law firms.'}
+                    </p>
+                  </div>
+                  <div className="bg-card p-6 rounded-lg border border-border text-center">
+                    <h3 className="font-serif font-semibold text-lg mb-3">{language === 'de' ? 'Studenten' : 'Students'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Faire Preise und großzügige Portionen. Die perfekte Alternative zur Mensa für Studenten der TU München und LMU.'
+                        : 'Fair prices and generous portions. The perfect alternative to the cafeteria for students of TU Munich and LMU.'}
+                    </p>
+                  </div>
+                  <div className="bg-card p-6 rounded-lg border border-border text-center">
+                    <h3 className="font-serif font-semibold text-lg mb-3">{language === 'de' ? 'Kulturfreunde' : 'Culture Enthusiasts'}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de'
+                        ? 'Stärken Sie sich vor oder nach dem Museumsbesuch. Die Pinakotheken und das Lenbachhaus sind nur wenige Gehminuten entfernt.'
+                        : 'Fuel up before or after your museum visit. The Pinakothek museums and Lenbachhaus are just a few minutes walk away.'}
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </article>
+          </section>
+
+          {/* 4. CTA Intermediate */}
+          <CTAIntermediate 
+            headline={language === 'de' ? 'Bereit für Ihren Lunch?' : 'Ready for Your Lunch?'}
+            text={language === 'de' 
+              ? 'Reservieren Sie jetzt Ihren Tisch – nur wenige Minuten vom Königsplatz entfernt.'
+              : 'Book your table now – just a few minutes from Königsplatz.'}
+            primaryCTA={{ text: language === 'de' ? 'Jetzt reservieren' : 'Book Now', href: '/reservierung' }}
+            secondaryCTA={{ text: language === 'de' ? 'Mittagsmenü' : 'Lunch Menu', href: '/mittagsmenu' }}
+          />
+
+          {/* 5. Food Gallery */}
+          <FoodGallery images={galleryImages} />
+
+          {/* 6. Local SEO Block */}
+          <LocalSEOBlock
+            title={language === 'de' ? 'Ihr Italiener in der Maxvorstadt' : 'Your Italian in Maxvorstadt'}
+            description={language === 'de'
+              ? 'Das STORIA liegt im Herzen von München, in der Karlstraße 47a. Nur 3 Minuten vom Königsplatz, 5 Minuten vom Hauptbahnhof und 8 Minuten von der TU München entfernt. Perfekt erreichbar mit U2/U8 (Königsplatz) oder zu Fuß aus den umliegenden Büros der Brienner Straße und Gabelsbergerstraße.'
+              : 'STORIA is located in the heart of Munich, at Karlstraße 47a. Just 3 minutes from Königsplatz, 5 minutes from the main station and 8 minutes from TU Munich. Perfectly accessible by U2/U8 (Königsplatz) or on foot from surrounding offices on Brienner Straße and Gabelsbergerstraße.'}
+          />
+
+          {/* 7. Social Proof */}
+          <SocialProof testimonials={testimonials} />
+
+          {/* 8. FAQ Section */}
+          <section className="container mx-auto px-4 py-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-card p-8 rounded-lg border border-border mb-10">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
+                  {language === 'de' ? 'Häufige Fragen zum Lunch' : 'Frequently Asked Questions'}
+                </h2>
+                <Accordion type="single" collapsible className="w-full">
+                  {faqItems.map((item, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-left">{item.question}</AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+
+              {/* Cross Links */}
+              <section className="text-center mb-10">
+                <h3 className="font-serif text-lg mb-4 text-muted-foreground">
+                  {language === 'de' ? 'Entdecken Sie mehr' : 'Discover More'}
+                </h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <Link to="/aperitivo-muenchen" className="text-sm text-primary hover:underline">
+                    {language === 'de' ? 'Aperitivo nach dem Lunch →' : 'Aperitivo after lunch →'}
+                  </Link>
+                  <span className="text-muted-foreground">•</span>
+                  <Link to="/neapolitanische-pizza-muenchen" className="text-sm text-primary hover:underline">
+                    {language === 'de' ? 'Unsere Steinofen-Pizza →' : 'Our stone-oven pizza →'}
+                  </Link>
+                  <span className="text-muted-foreground">•</span>
+                  <Link to="/firmenfeier-muenchen" className="text-sm text-primary hover:underline">
+                    {language === 'de' ? 'Team-Lunch für Firmen →' : 'Team lunch for companies →'}
+                  </Link>
+                </div>
+              </section>
+
+              <ReservationCTA />
             </div>
-
-            {/* Mittagsangebot */}
-            <section className="bg-card p-8 rounded-lg border border-border mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
-                {language === 'de' ? 'Ihr Business Lunch in der Maxvorstadt' : 'Your Business Lunch in Maxvorstadt'}
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                {language === 'de'
-                  ? 'Das STORIA ist seit Jahren die erste Wahl für Berufstätige, Studenten und Anwohner der Maxvorstadt, die einen qualitativ hochwertigen Mittagstisch in entspannter Atmosphäre suchen. Unsere Küche bereitet jeden Tag frische italienische Gerichte zu – von klassischer Pasta bis zur neapolitanischen Pizza.'
-                  : 'STORIA has been the first choice for professionals, students and residents of Maxvorstadt for years who are looking for a high-quality lunch in a relaxed atmosphere. Our kitchen prepares fresh Italian dishes every day – from classic pasta to Neapolitan pizza.'}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Unser Mittagsangebot' : 'Our Lunch Offer'}</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>✓ {language === 'de' ? 'Wechselndes Tagesmenü Mo-Fr' : 'Changing daily menu Mon-Fri'}</li>
-                    <li>✓ {language === 'de' ? 'Frische Pasta & Risotto' : 'Fresh pasta & risotto'}</li>
-                    <li>✓ {language === 'de' ? 'Pizza aus dem Steinofen' : 'Stone-oven pizza'}</li>
-                    <li>✓ {language === 'de' ? 'Leichte Salate & Antipasti' : 'Light salads & antipasti'}</li>
-                    <li>✓ {language === 'de' ? 'Italienischer Espresso' : 'Italian espresso'}</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-3">{language === 'de' ? 'Warum STORIA?' : 'Why STORIA?'}</h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>✓ {language === 'de' ? 'Schneller Service (30-45 Min.)' : 'Quick service (30-45 min)'}</li>
-                    <li>✓ {language === 'de' ? 'Frische Zubereitung à la minute' : 'Fresh preparation à la minute'}</li>
-                    <li>✓ {language === 'de' ? 'Attraktive Mittagspreise' : 'Attractive lunch prices'}</li>
-                    <li>✓ {language === 'de' ? 'Vegetarische & vegane Optionen' : 'Vegetarian & vegan options'}</li>
-                    <li>✓ {language === 'de' ? 'Gemütliches Ambiente' : 'Cozy atmosphere'}</li>
-                  </ul>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground/70 italic border-t border-border pt-4">
-                {language === 'de' ? 'Mittagszeit: Montag bis Freitag, 11:30 – 14:30 Uhr | Samstag & Sonntag: 12:00 – 15:00 Uhr' : 'Lunch hours: Monday to Friday, 11:30 AM – 2:30 PM | Saturday & Sunday: 12:00 – 3:00 PM'}
-              </p>
-            </section>
-
-            {/* Perfekte Lage */}
-            <section className="bg-secondary/50 p-8 rounded-lg mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
-                {language === 'de' ? 'Perfekte Lage für Ihren Lunch' : 'Perfect Location for Your Lunch'}
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                {language === 'de'
-                  ? 'Ob Sie an der TU München studieren, im Königsplatz-Viertel arbeiten oder geschäftlich am Hauptbahnhof unterwegs sind – das STORIA liegt ideal für Ihre Mittagspause. Unsere zentrale Lage in der Karlstraße 47a macht uns zur perfekten Wahl für alle, die authentische italienische Küche in München suchen.'
-                  : 'Whether you study at TU Munich, work in the Königsplatz district or are on business at the main station – STORIA is ideally located for your lunch break. Our central location at Karlstraße 47a makes us the perfect choice for anyone looking for authentic Italian cuisine in Munich.'}
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="text-center p-4 bg-background rounded-lg">
-                  <p className="text-2xl font-serif font-bold text-primary">3 Min.</p>
-                  <p className="text-sm text-muted-foreground">{language === 'de' ? 'zum Königsplatz' : 'to Königsplatz'}</p>
-                </div>
-                <div className="text-center p-4 bg-background rounded-lg">
-                  <p className="text-2xl font-serif font-bold text-primary">5 Min.</p>
-                  <p className="text-sm text-muted-foreground">{language === 'de' ? 'zum Hauptbahnhof' : 'to Main Station'}</p>
-                </div>
-                <div className="text-center p-4 bg-background rounded-lg">
-                  <p className="text-2xl font-serif font-bold text-primary">8 Min.</p>
-                  <p className="text-sm text-muted-foreground">{language === 'de' ? 'zur TU München' : 'to TU Munich'}</p>
-                </div>
-                <div className="text-center p-4 bg-background rounded-lg">
-                  <p className="text-2xl font-serif font-bold text-primary">7 Min.</p>
-                  <p className="text-sm text-muted-foreground">{language === 'de' ? 'zu den Pinakotheken' : 'to Pinakothek museums'}</p>
-                </div>
-              </div>
-              <p className="text-muted-foreground">
-                {language === 'de'
-                  ? 'Die Maxvorstadt ist Münchens Universitäts- und Kulturviertel. Mit unserer Lage zwischen Hauptbahnhof und Königsplatz sind wir ideal erreichbar – ob mit U-Bahn (U2/U8 Königsplatz, U1/U2/U4/U5 Hauptbahnhof), S-Bahn oder zu Fuß aus den umliegenden Büros in der Karlstraße, Brienner Straße und Gabelsbergerstraße.'
-                  : 'Maxvorstadt is Munich\'s university and cultural district. With our location between the main station and Königsplatz, we are easily accessible – whether by U-Bahn (U2/U8 Königsplatz, U1/U2/U4/U5 Main Station), S-Bahn or on foot from the surrounding offices on Karlstraße, Brienner Straße and Gabelsbergerstraße.'}
-              </p>
-            </section>
-
-            {/* Für wen ideal */}
-            <section className="mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6 text-center">
-                {language === 'de' ? 'Der perfekte Lunch für...' : 'The Perfect Lunch for...'}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-card p-6 rounded-lg border border-border text-center">
-                  <h3 className="font-serif font-semibold text-lg mb-3">{language === 'de' ? 'Berufstätige' : 'Professionals'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Schneller, qualitativ hochwertiger Mittagstisch für die Pause zwischen Meetings. Ideal für Teams aus den umliegenden Büros und Kanzleien.'
-                      : 'Quick, high-quality lunch for the break between meetings. Ideal for teams from surrounding offices and law firms.'}
-                  </p>
-                </div>
-                <div className="bg-card p-6 rounded-lg border border-border text-center">
-                  <h3 className="font-serif font-semibold text-lg mb-3">{language === 'de' ? 'Studenten' : 'Students'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Faire Preise und großzügige Portionen. Die perfekte Alternative zur Mensa für Studenten der TU München und LMU.'
-                      : 'Fair prices and generous portions. The perfect alternative to the cafeteria for students of TU Munich and LMU.'}
-                  </p>
-                </div>
-                <div className="bg-card p-6 rounded-lg border border-border text-center">
-                  <h3 className="font-serif font-semibold text-lg mb-3">{language === 'de' ? 'Kulturfreunde' : 'Culture Enthusiasts'}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {language === 'de'
-                      ? 'Stärken Sie sich vor oder nach dem Museumsbesuch. Die Pinakotheken und das Lenbachhaus sind nur wenige Gehminuten entfernt.'
-                      : 'Fuel up before or after your museum visit. The Pinakothek museums and Lenbachhaus are just a few minutes walk away.'}
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 justify-center mb-12">
-              <Button size="lg" asChild>
-                <Link to="/mittagsmenu">{language === 'de' ? 'Aktuelles Mittagsmenü' : 'Current Lunch Menu'}</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/speisekarte">{language === 'de' ? 'Vollständige Speisekarte' : 'Full Menu'}</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</Link>
-              </Button>
-            </div>
-
-            {/* FAQ Section */}
-            <section className="bg-card p-8 rounded-lg border border-border mb-10">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6">
-                {language === 'de' ? 'Häufige Fragen zum Lunch' : 'Frequently Asked Questions'}
-              </h2>
-              <Accordion type="single" collapsible className="w-full">
-                {faqItems.map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left">{item.question}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {item.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </section>
-
-            {/* Cross Links */}
-            <section className="text-center mb-10">
-              <h3 className="font-serif text-lg mb-4 text-muted-foreground">
-                {language === 'de' ? 'Entdecken Sie mehr' : 'Discover More'}
-              </h3>
-              <div className="flex flex-wrap justify-center gap-3">
-                <Link to="/aperitivo-muenchen" className="text-sm text-primary hover:underline">
-                  {language === 'de' ? 'Aperitivo nach dem Lunch →' : 'Aperitivo after lunch →'}
-                </Link>
-                <span className="text-muted-foreground">•</span>
-                <Link to="/neapolitanische-pizza-muenchen" className="text-sm text-primary hover:underline">
-                  {language === 'de' ? 'Unsere Steinofen-Pizza →' : 'Our stone-oven pizza →'}
-                </Link>
-                <span className="text-muted-foreground">•</span>
-                <Link to="/firmenfeier-muenchen" className="text-sm text-primary hover:underline">
-                  {language === 'de' ? 'Team-Lunch für Firmen →' : 'Team lunch for companies →'}
-                </Link>
-              </div>
-            </section>
-
-            <ReservationCTA />
-          </article>
+          </section>
         </main>
 
         <Footer />
