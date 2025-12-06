@@ -7,7 +7,17 @@ import mammaVideo from "@/assets/lamamma.mp4";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const seoLinks = [
+    { to: "/lunch-muenchen-maxvorstadt", de: "Lunch München", en: "Lunch Munich" },
+    { to: "/aperitivo-muenchen", de: "Aperitivo München", en: "Aperitivo Munich" },
+    { to: "/romantisches-dinner-muenchen", de: "Romantisches Dinner", en: "Romantic Dinner" },
+    { to: "/eventlocation-muenchen-maxvorstadt", de: "Eventlocation", en: "Event Location" },
+    { to: "/firmenfeier-muenchen", de: "Firmenfeier", en: "Corporate Events" },
+    { to: "/geburtstagsfeier-muenchen", de: "Geburtstagsfeier", en: "Birthday Party" },
+    { to: "/neapolitanische-pizza-muenchen", de: "Neapolitanische Pizza", en: "Neapolitan Pizza" },
+  ];
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -117,8 +127,28 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* SEO Landing Page Links */}
+        <div className="border-t border-primary-foreground/5 mt-14 pt-10">
+          <h3 className="text-center font-serif text-sm tracking-[0.15em] uppercase mb-6 text-primary-foreground/50">
+            {language === 'de' ? 'Entdecken Sie mehr' : 'Discover More'}
+          </h3>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-primary-foreground/40">
+            {seoLinks.map((link, index) => (
+              <span key={link.to} className="flex items-center">
+                <Link 
+                  to={link.to} 
+                  className="hover:text-primary-foreground/70 transition-colors"
+                >
+                  {language === 'de' ? link.de : link.en}
+                </Link>
+                {index < seoLinks.length - 1 && <span className="ml-4 opacity-30">·</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* Copyright & Legal */}
-        <div className="border-t border-primary-foreground/5 mt-14 pt-10 text-center">
+        <div className="border-t border-primary-foreground/5 mt-10 pt-10 text-center">
           <p className="text-sm font-sans text-primary-foreground/40">
             © {new Date().getFullYear()} {t.footer.copyright}
           </p>
