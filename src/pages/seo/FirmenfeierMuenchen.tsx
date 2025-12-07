@@ -10,9 +10,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar } from "lucide-react";
 
 // Images
-import menschenAussen from "@/assets/menschen-aussen.jpeg";
-import weinservice from "@/assets/weinservice.webp";
-import pasta from "@/assets/pasta.jpg";
+import firmenfeierEvent from "@/assets/firmenfeier-event.webp";
+import weihnachtsfeierEvent from "@/assets/weihnachtsfeier-event.webp";
+import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-event.webp";
 import hausAussen from "@/assets/haus-aussen-2.webp";
 
 const FirmenfeierMuenchen = () => {
@@ -70,9 +70,9 @@ const FirmenfeierMuenchen = () => {
   ];
 
   const galleryImages = [
-    { src: menschenAussen, alt: language === 'de' ? 'Team-Event auf der Terrasse im STORIA München' : 'Team event on the terrace at STORIA Munich' },
-    { src: weinservice, alt: language === 'de' ? 'Eleganter Weinservice bei Firmenfeier' : 'Elegant wine service at corporate event' },
-    { src: pasta, alt: language === 'de' ? 'Authentische italienische Küche für Events' : 'Authentic Italian cuisine for events' },
+    { src: weihnachtsfeierEvent, alt: language === 'de' ? 'Weihnachtsfeier mit Gästen im STORIA München' : 'Christmas party with guests at STORIA Munich' },
+    { src: firmenfeierEvent, alt: language === 'de' ? 'Elegante Tafel für Firmenevents' : 'Elegant table setting for corporate events' },
+    { src: geburtstagsfeierEvent, alt: language === 'de' ? 'Festliche Dekoration für Events' : 'Festive decoration for events' },
     { src: hausAussen, alt: language === 'de' ? 'STORIA Restaurant Außenansicht Maxvorstadt' : 'STORIA restaurant exterior Maxvorstadt' }
   ];
 
@@ -99,8 +99,8 @@ const FirmenfeierMuenchen = () => {
         {/* Hero Section with Full Image */}
         <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
           <img 
-            src={menschenAussen} 
-            alt={language === 'de' ? 'Firmenfeier im STORIA München' : 'Corporate event at STORIA Munich'}
+            src={firmenfeierEvent} 
+            alt={language === 'de' ? 'Elegante Firmenfeier im STORIA München' : 'Elegant corporate event at STORIA Munich'}
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/60" />
