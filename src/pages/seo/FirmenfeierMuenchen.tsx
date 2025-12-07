@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import { EventInquiryForm } from "@/components/EventInquiryForm";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight } from "lucide-react";
@@ -372,35 +373,43 @@ const FirmenfeierMuenchen = () => {
             </div>
           </section>
 
-          {/* Final CTA with Urgency */}
-          <section className="py-16 md:py-20">
-            <div className="container mx-auto px-4 text-center max-w-2xl">
-              <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-lg">
-                <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-medium mb-6">
-                  <seasonalUrgency.icon className="w-4 h-4" />
-                  {seasonalUrgency.text}
+          {/* Final CTA with Inquiry Form */}
+          <section className="py-16 md:py-20 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
+                {/* Left: Info & Contact */}
+                <div className="text-center lg:text-left">
+                  <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <seasonalUrgency.icon className="w-4 h-4" />
+                    {seasonalUrgency.text}
+                  </div>
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold mb-4">
+                    {language === 'de' ? 'Sichern Sie sich jetzt Ihren Wunschtermin' : 'Secure your preferred date now'}
+                  </h2>
+                  <p className="text-muted-foreground mb-8 text-lg">
+                    {language === 'de'
+                      ? 'Füllen Sie das Formular aus oder kontaktieren Sie uns direkt – wir erstellen Ihnen ein individuelles Angebot.'
+                      : 'Fill out the form or contact us directly – we will create a customized offer for you.'}
+                  </p>
+                  <div className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      {language === 'de' ? 'Oder rufen Sie uns direkt an:' : 'Or call us directly:'}
+                    </p>
+                    <Button size="lg" variant="outline" className="text-base" asChild>
+                      <a href="tel:+498951519696">
+                        <Phone className="w-5 h-5 mr-2" />
+                        +49 89 51519696
+                      </a>
+                    </Button>
+                  </div>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
-                  {language === 'de' ? 'Sichern Sie sich jetzt Ihren Wunschtermin' : 'Secure your preferred date now'}
-                </h2>
-                <p className="text-muted-foreground mb-8">
-                  {language === 'de'
-                    ? 'Kontaktieren Sie uns für ein unverbindliches Angebot – wir beraten Sie gerne persönlich.'
-                    : 'Contact us for a non-binding offer – we are happy to advise you personally.'}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="text-base" asChild>
-                    <a href="tel:+498951519696">
-                      <Phone className="w-5 h-5 mr-2" />
-                      +49 89 51519696
-                    </a>
-                  </Button>
-                  <Button size="lg" variant="outline" className="text-base" asChild>
-                    <a href="mailto:info@ristorantestoria.de">
-                      <Mail className="w-5 h-5 mr-2" />
-                      {language === 'de' ? 'E-Mail senden' : 'Send Email'}
-                    </a>
-                  </Button>
+
+                {/* Right: Inquiry Form */}
+                <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
+                  <h3 className="text-xl font-serif font-semibold mb-6 text-center">
+                    {language === 'de' ? 'Unverbindliche Anfrage' : 'Non-binding inquiry'}
+                  </h3>
+                  <EventInquiryForm />
                 </div>
               </div>
             </div>
