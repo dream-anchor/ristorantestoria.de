@@ -7,13 +7,13 @@ import StructuredData from "@/components/StructuredData";
 import ElfsightReviews from "@/components/ElfsightReviews";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar } from "lucide-react";
+import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight } from "lucide-react";
 
 // Images
 import firmenfeierEvent from "@/assets/firmenfeier-event.webp";
 import weihnachtsfeierEvent from "@/assets/weihnachtsfeier-event.webp";
 import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-event.webp";
-import hausAussen from "@/assets/haus-aussen-2.webp";
+import sommerfestEvent from "@/assets/sommerfest-event.webp";
 
 const FirmenfeierMuenchen = () => {
   const { language } = useLanguage();
@@ -71,9 +71,14 @@ const FirmenfeierMuenchen = () => {
 
   const galleryImages = [
     { src: weihnachtsfeierEvent, alt: language === 'de' ? 'Weihnachtsfeier mit Gästen im STORIA München' : 'Christmas party with guests at STORIA Munich' },
-    { src: firmenfeierEvent, alt: language === 'de' ? 'Elegante Tafel für Firmenevents' : 'Elegant table setting for corporate events' },
-    { src: geburtstagsfeierEvent, alt: language === 'de' ? 'Festliche Dekoration für Events' : 'Festive decoration for events' },
-    { src: hausAussen, alt: language === 'de' ? 'STORIA Restaurant Außenansicht Maxvorstadt' : 'STORIA restaurant exterior Maxvorstadt' }
+    { src: sommerfestEvent, alt: language === 'de' ? 'Sommerfest auf der Terrasse mit Weinservice' : 'Summer party on the terrace with wine service' },
+    { src: geburtstagsfeierEvent, alt: language === 'de' ? 'Festliche Dekoration für Events' : 'Festive decoration for events' }
+  ];
+
+  const menuHighlights = [
+    { icon: ChefHat, text: language === 'de' ? 'Hausgemachte Pasta-Variationen' : 'Homemade pasta variations' },
+    { icon: Utensils, text: language === 'de' ? 'Frische Antipasti-Auswahl' : 'Fresh antipasti selection' },
+    { icon: Wine, text: language === 'de' ? 'Erlesene italienische Weine' : 'Fine Italian wines' }
   ];
 
   return (
@@ -194,26 +199,60 @@ const FirmenfeierMuenchen = () => {
                   </div>
                 ))}
               </div>
+              
+              {/* CTA after Benefits */}
+              <div className="text-center mt-12">
+                <Button size="lg" variant="outline" asChild>
+                  <a href="tel:+498951519696">
+                    <Phone className="w-5 h-5 mr-2" />
+                    {language === 'de' ? 'Jetzt Termin anfragen' : 'Request a date now'}
+                  </a>
+                </Button>
+              </div>
             </div>
           </section>
 
-          {/* Event Gallery */}
+          {/* Event Gallery - Emotional Visual Section */}
           <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-12">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
                 {language === 'de' ? 'Einblicke in unsere Events' : 'Insights into Our Events'}
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+                {language === 'de' 
+                  ? 'So feiern unsere Gäste – von Weihnachtsfeiern bis Sommerfesten.' 
+                  : 'This is how our guests celebrate – from Christmas parties to summer events.'}
+              </p>
+              
+              {/* Dynamic Gallery Layout - 3 Images */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
                 {galleryImages.map((image, index) => (
-                  <div key={index} className="aspect-square overflow-hidden rounded-lg">
+                  <div 
+                    key={index} 
+                    className={`overflow-hidden rounded-lg ${index === 1 ? 'md:scale-105 md:z-10 shadow-xl' : ''}`}
+                  >
                     <img 
                       src={image.src} 
                       alt={image.alt}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
                 ))}
+              </div>
+
+              {/* CTA after Gallery */}
+              <div className="text-center mt-12">
+                <p className="text-muted-foreground mb-4">
+                  {language === 'de' ? 'Haben Sie Fragen zu Ihrer Veranstaltung?' : 'Do you have questions about your event?'}
+                </p>
+                <a 
+                  href="tel:+498951519696" 
+                  className="text-primary hover:underline font-semibold inline-flex items-center gap-2"
+                >
+                  <Phone className="w-4 h-4" />
+                  +49 89 51519696
+                </a>
               </div>
             </div>
           </section>
@@ -242,6 +281,40 @@ const FirmenfeierMuenchen = () => {
                     </span>
                   </div>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Menu Teaser Section */}
+          <section className="py-16 md:py-20 bg-secondary/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
+                  {language === 'de' ? 'Kulinarische Highlights für Ihr Event' : 'Culinary Highlights for Your Event'}
+                </h2>
+                <p className="text-muted-foreground mb-10 max-w-2xl mx-auto">
+                  {language === 'de' 
+                    ? 'Authentisch italienische Küche – frisch zubereitet von unserer Küche für Ihre Gäste.' 
+                    : 'Authentic Italian cuisine – freshly prepared by our kitchen for your guests.'}
+                </p>
+                
+                <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
+                  {menuHighlights.map((item, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <item.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <span className="font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Button variant="outline" asChild>
+                  <Link to="/speisekarte">
+                    {language === 'de' ? 'Unsere Speisekarte entdecken' : 'Discover our menu'}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </section>
