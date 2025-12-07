@@ -78,6 +78,26 @@ export const EventInquiryForm = () => {
 
       if (error) throw error;
 
+      // Send email notification (fire-and-forget, don't block on failure)
+      try {
+        await supabase.functions.invoke('send-inquiry-notification', {
+          body: {
+            company_name: data.company_name.trim(),
+            contact_name: data.contact_name.trim(),
+            email: data.email.trim().toLowerCase(),
+            phone: data.phone?.trim() || null,
+            guest_count: data.guest_count,
+            event_type: data.event_type,
+            preferred_date: data.preferred_date || null,
+            message: data.message?.trim() || null,
+          },
+        });
+        console.log('Email notification sent successfully');
+      } catch (emailError) {
+        // Log but don't fail the submission
+        console.error('Error sending email notification:', emailError);
+      }
+
       setIsSubmitted(true);
       toast({
         title: language === 'de' ? 'Anfrage gesendet!' : 'Inquiry sent!',

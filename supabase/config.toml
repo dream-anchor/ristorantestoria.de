@@ -2,3 +2,6 @@ project_id = "iieethejhwfsyzhbweps"
 
 [functions.parse-menu-pdf]
 verify_jwt = true
+
+[functions.send-inquiry-notification]
+verify_jwt = false

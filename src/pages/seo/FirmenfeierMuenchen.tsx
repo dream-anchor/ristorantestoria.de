@@ -8,7 +8,7 @@ import ElfsightReviews from "@/components/ElfsightReviews";
 import { EventInquiryForm } from "@/components/EventInquiryForm";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight } from "lucide-react";
+import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight, Clock } from "lucide-react";
 
 // Images
 import firmenfeierEvent from "@/assets/firmenfeier-event.webp";
@@ -385,29 +385,41 @@ const FirmenfeierMuenchen = () => {
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
                 {/* Left: Info & Contact */}
-                <div className="text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-medium mb-6">
-                    <SeasonalIcon className="w-4 h-4" />
-                    {seasonalUrgency.text}
+                <div className="text-center lg:text-left space-y-6">
+                  {/* Pulsing Urgency Badge */}
+                  <div className="inline-flex items-center gap-2 bg-destructive/15 text-destructive px-5 py-2.5 rounded-full text-sm font-semibold">
+                    <SeasonalIcon className="w-5 h-5 animate-pulse" />
+                    {language === 'de' 
+                      ? 'Nur noch wenige Weihnachtstermine verfügbar!' 
+                      : 'Only a few Christmas dates left!'}
                   </div>
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold mb-4">
-                    {language === 'de' ? 'Sichern Sie sich jetzt Ihren Wunschtermin' : 'Secure your preferred date now'}
+                  
+                  {/* Headline */}
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold">
+                    {language === 'de' ? 'Jetzt Ihren Wunschtermin sichern' : 'Secure your preferred date now'}
                   </h2>
-                  <p className="text-muted-foreground mb-8 text-lg">
-                    {language === 'de'
-                      ? 'Füllen Sie das Formular aus oder kontaktieren Sie uns direkt – wir erstellen Ihnen ein individuelles Angebot.'
-                      : 'Fill out the form or contact us directly – we will create a customized offer for you.'}
-                  </p>
-                  <div className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      {language === 'de' ? 'Oder rufen Sie uns direkt an:' : 'Or call us directly:'}
+                  
+                  {/* Trust Signal */}
+                  <div className="flex items-center justify-center lg:justify-start gap-2 text-muted-foreground">
+                    <Clock className="w-4 h-4" />
+                    <span>{language === 'de' ? 'Antwort innerhalb von 24 Stunden' : 'Response within 24 hours'}</span>
+                  </div>
+                  
+                  {/* Phone Card */}
+                  <div className="bg-card border border-border rounded-xl p-5 lg:inline-block w-full lg:w-auto">
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {language === 'de' ? 'Lieber persönlich sprechen?' : 'Prefer to speak in person?'}
                     </p>
-                    <Button size="lg" variant="outline" className="text-base" asChild>
-                      <a href="tel:+498951519696">
-                        <Phone className="w-5 h-5 mr-2" />
-                        +49 89 51519696
-                      </a>
-                    </Button>
+                    <a 
+                      href="tel:+498951519696" 
+                      className="flex items-center justify-center lg:justify-start gap-2 text-xl font-semibold text-primary hover:underline"
+                    >
+                      <Phone className="w-5 h-5" />
+                      +49 89 51519696
+                    </a>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {language === 'de' ? 'Mo-Fr 9-22 Uhr · Sa-So 12-22 Uhr' : 'Mon-Fri 9am-10pm · Sat-Sun 12pm-10pm'}
+                    </p>
                   </div>
                 </div>
 
