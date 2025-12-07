@@ -15,8 +15,45 @@ import weihnachtsfeierEvent from "@/assets/weihnachtsfeier-event.webp";
 import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-event.webp";
 import sommerfestEvent from "@/assets/sommerfest-event.webp";
 
+const getSeasonalUrgency = (language: string) => {
+  const now = new Date();
+  const month = now.getMonth() + 1; // 1-12
+  const day = now.getDate();
+  
+  // Weihnachtszeit: 15. Oktober bis 24. Dezember
+  if ((month === 10 && day >= 15) || month === 11 || (month === 12 && day <= 24)) {
+    return {
+      icon: TreePine,
+      text: language === 'de' ? 'Weihnachtstermine sind schnell ausgebucht!' : 'Christmas dates book up fast!'
+    };
+  }
+  
+  // Winter/Frühling: 25. Dezember bis 31. März → Frühjahrsfeste
+  if ((month === 12 && day >= 25) || month <= 3) {
+    return {
+      icon: PartyPopper,
+      text: language === 'de' ? 'Frühjahrstermine sind gefragt!' : 'Spring dates are in demand!'
+    };
+  }
+  
+  // Sommer: April bis September → Sommerfeste
+  if (month >= 4 && month <= 9) {
+    return {
+      icon: Sun,
+      text: language === 'de' ? 'Sommerfesttermine sind schnell ausgebucht!' : 'Summer party dates book up fast!'
+    };
+  }
+  
+  // Herbst (vor Weihnachtszeit): Oktober bis 14. Oktober
+  return {
+    icon: Briefcase,
+    text: language === 'de' ? 'Beliebte Termine sind schnell vergeben!' : 'Popular dates book up fast!'
+  };
+};
+
 const FirmenfeierMuenchen = () => {
   const { language } = useLanguage();
+  const seasonalUrgency = getSeasonalUrgency(language);
 
   const benefits = [
     {
@@ -261,7 +298,7 @@ const FirmenfeierMuenchen = () => {
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
-                {language === 'de' ? 'Unsere beliebtesten Formate' : 'Our Most Popular Formats'}
+                {language === 'de' ? 'Die beliebtesten Anlässe unserer Gäste' : 'Our Guests\' Most Popular Occasions'}
               </h2>
               <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
                 {language === 'de' 
@@ -338,8 +375,8 @@ const FirmenfeierMuenchen = () => {
             <div className="container mx-auto px-4 text-center max-w-2xl">
               <div className="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-lg">
                 <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-medium mb-6">
-                  <TreePine className="w-4 h-4" />
-                  {language === 'de' ? 'Weihnachtstermine sind schnell ausgebucht!' : 'Christmas dates book up fast!'}
+                  <seasonalUrgency.icon className="w-4 h-4" />
+                  {seasonalUrgency.text}
                 </div>
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
                   {language === 'de' ? 'Sichern Sie sich jetzt Ihren Wunschtermin' : 'Secure your preferred date now'}
