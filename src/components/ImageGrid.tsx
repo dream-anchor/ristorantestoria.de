@@ -27,13 +27,13 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
         loading="lazy"
       />
       {(title || subtitle) && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-none">
-          <div className="bg-primary/85 backdrop-blur-sm px-8 py-5 rounded-sm">
+        <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 pointer-events-none">
+          <div className="bg-neutral-800/60 backdrop-blur-sm px-4 py-3 md:px-5 md:py-4">
             {title && (
-              <h3 className="text-primary-foreground text-lg md:text-xl font-serif font-semibold mb-2 tracking-wide">{title}</h3>
+              <h3 className="text-white text-base md:text-lg font-serif font-semibold mb-1 tracking-wide">{title}</h3>
             )}
             {subtitle && (
-              <p className="text-primary-foreground/90 text-sm md:text-base font-medium leading-relaxed">
+              <p className="text-white/90 text-xs md:text-sm font-medium leading-relaxed">
                 {subtitle.split('\n').map((line, i) => (
                   <span key={i}>
                     {line}
