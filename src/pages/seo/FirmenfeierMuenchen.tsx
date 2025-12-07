@@ -55,6 +55,7 @@ const getSeasonalUrgency = (language: string) => {
 const FirmenfeierMuenchen = () => {
   const { language } = useLanguage();
   const seasonalUrgency = getSeasonalUrgency(language);
+  const SeasonalIcon = seasonalUrgency.icon;
 
   const benefits = [
     {
@@ -380,7 +381,7 @@ const FirmenfeierMuenchen = () => {
                 {/* Left: Info & Contact */}
                 <div className="text-center lg:text-left">
                   <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-medium mb-6">
-                    <seasonalUrgency.icon className="w-4 h-4" />
+                    <SeasonalIcon className="w-4 h-4" />
                     {seasonalUrgency.text}
                   </div>
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold mb-4">
