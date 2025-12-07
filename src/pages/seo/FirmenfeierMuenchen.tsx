@@ -383,51 +383,11 @@ const FirmenfeierMuenchen = () => {
           {/* Final CTA with Inquiry Form */}
           <section className="py-16 md:py-20 bg-muted/30">
             <div className="container mx-auto px-4">
-              <div className="max-w-2xl mx-auto">
-                {/* Centered CTA Content */}
-                <div className="text-center space-y-6 mb-10">
-                  {/* Pulsing Urgency Badge */}
-                  <div className="inline-flex items-center gap-2 bg-destructive/15 text-destructive px-5 py-2.5 rounded-full text-sm font-semibold">
-                    <SeasonalIcon className="w-5 h-5 animate-pulse" />
-                    {language === 'de' 
-                      ? 'Nur noch wenige Weihnachtstermine verfügbar!' 
-                      : 'Only a few Christmas dates left!'}
-                  </div>
-                  
-                  {/* Headline */}
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold">
-                    {language === 'de' ? 'Jetzt Ihren Wunschtermin sichern' : 'Secure your preferred date now'}
-                  </h2>
-                  
-                  {/* Trust Signal */}
-                  <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                    <Clock className="w-4 h-4" />
-                    <span>{language === 'de' ? 'Antwort innerhalb von 24 Stunden' : 'Response within 24 hours'}</span>
-                  </div>
-                  
-                  {/* Phone Card */}
-                  <div className="bg-card border border-border rounded-xl p-5 inline-block">
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {language === 'de' ? 'Lieber persönlich sprechen?' : 'Prefer to speak in person?'}
-                    </p>
-                    <a 
-                      href="tel:+498951519696" 
-                      className="flex items-center justify-center gap-2 text-xl font-semibold text-primary hover:underline"
-                    >
-                      <Phone className="w-5 h-5" />
-                      +49 89 51519696
-                    </a>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      {language === 'de' ? 'Mo-Fr 9-22 Uhr · Sa-So 12-22 Uhr' : 'Mon-Fri 9am-10pm · Sat-Sun 12pm-10pm'}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Inquiry Form */}
+              <div className="max-w-xl mx-auto">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
+                  {language === 'de' ? 'Jetzt unverbindlich anfragen' : 'Send your inquiry now'}
+                </h2>
                 <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
-                  <h3 className="text-xl font-serif font-semibold mb-6 text-center">
-                    {language === 'de' ? 'Unverbindliche Anfrage' : 'Non-binding inquiry'}
-                  </h3>
                   <EventInquiryForm />
                 </div>
               </div>
