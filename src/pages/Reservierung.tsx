@@ -7,6 +7,7 @@ import ConsentOpenTable from "@/components/ConsentOpenTable";
 import ElfsightReviews from "@/components/ElfsightReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import BackToLandingPage from "@/components/BackToLandingPage";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -57,6 +58,7 @@ const Reservierung = () => {
         <Navigation />
         
         <main className="container mx-auto px-4 py-12 flex-grow">
+          <BackToLandingPage />
           <h1 className="text-4xl font-bold mb-4 text-center">
             {language === 'de' ? 'Tisch reservieren – Ristorante München Maxvorstadt' : 'Book a Table – Italian Restaurant Munich Maxvorstadt'}
           </h1>

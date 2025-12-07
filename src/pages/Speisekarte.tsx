@@ -6,6 +6,7 @@ import MenuDisplay from "@/components/MenuDisplay";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
+import BackToLandingPage from "@/components/BackToLandingPage";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -43,6 +44,7 @@ const Speisekarte = () => {
         <Navigation />
 
         <main className="container mx-auto px-4 py-12 flex-grow">
+          <BackToLandingPage />
           <h1 className="text-4xl font-serif font-bold mb-4 text-center">
             {language === 'de' ? 'Speisekarte – Ristorante München Maxvorstadt' : 'Menu – Italian Restaurant Munich Maxvorstadt'}
           </h1>

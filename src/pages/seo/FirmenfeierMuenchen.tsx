@@ -31,13 +31,13 @@ const FirmenfeierMuenchen = () => {
     },
     {
       icon: Users,
-      title: language === 'de' ? '10–80 Personen' : '10–80 Guests',
+      title: language === 'de' ? '6–300 Personen' : '6–300 Guests',
       description: language === 'de' ? 'Flexibel für jede Teamgröße' : 'Flexible for any team size'
     },
     {
       icon: Sun,
-      title: language === 'de' ? 'Sonnige Terrasse' : 'Sunny Terrace',
-      description: language === 'de' ? 'Perfekt für Sommerfeste' : 'Perfect for summer events'
+      title: language === 'de' ? 'Überdachte Terrasse' : 'Covered Terrace',
+      description: language === 'de' ? 'Bei jedem Wetter genießen' : 'Enjoy in any weather'
     },
     {
       icon: TreePine,
@@ -147,11 +147,11 @@ const FirmenfeierMuenchen = () => {
               </div>
               <div className="flex items-center gap-2">
                 <PartyPopper className="w-5 h-5" />
-                <span>{language === 'de' ? '500+ Firmenfeiern' : '500+ Corporate Events'}</span>
+                <span>{language === 'de' ? '100+ Firmenfeiern' : '100+ Corporate Events'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                <span>{language === 'de' ? 'Seit 1985 in München' : 'Since 1985 in Munich'}</span>
+                <span>{language === 'de' ? 'Seit 1995 in München und Bayern' : 'Since 1995 in Munich and Bavaria'}</span>
               </div>
             </div>
           </div>
@@ -310,7 +310,7 @@ const FirmenfeierMuenchen = () => {
                 </div>
 
                 <Button variant="outline" asChild>
-                  <Link to="/speisekarte">
+                  <Link to="/speisekarte?from=firmenfeier-muenchen">
                     {language === 'de' ? 'Unsere Speisekarte entdecken' : 'Discover our menu'}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>

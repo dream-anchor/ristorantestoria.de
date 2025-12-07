@@ -6,6 +6,7 @@ import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
+import BackToLandingPage from "@/components/BackToLandingPage";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -44,6 +45,7 @@ const Kontakt = () => {
         <Navigation />
         
         <main className="container mx-auto px-4 py-12 flex-grow">
+          <BackToLandingPage />
           <h1 className="text-4xl font-bold mb-4 text-center">
             {language === 'de' ? 'Kontakt & Anfahrt – Italiener nahe Königsplatz München' : 'Contact & Directions – Italian Restaurant near Königsplatz Munich'}
           </h1>
