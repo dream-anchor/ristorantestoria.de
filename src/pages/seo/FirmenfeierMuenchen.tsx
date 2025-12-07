@@ -230,15 +230,18 @@ const FirmenfeierMuenchen = () => {
                 {language === 'de' ? 'Warum STORIA für Ihre Firmenfeier?' : 'Why STORIA for Your Corporate Event?'}
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="text-center p-4">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <benefit.icon className="w-7 h-7 md:w-8 md:h-8 text-primary" />
+                {benefits.map((benefit, index) => {
+                  const BenefitIcon = benefit.icon;
+                  return (
+                    <div key={index} className="text-center p-4">
+                      <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                        <BenefitIcon className="w-7 h-7 md:w-8 md:h-8 text-primary" />
+                      </div>
+                      <h3 className="font-semibold mb-1">{benefit.title}</h3>
+                      <p className="text-sm text-muted-foreground">{benefit.description}</p>
                     </div>
-                    <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               
               {/* CTA after Benefits */}
@@ -340,14 +343,17 @@ const FirmenfeierMuenchen = () => {
                 </p>
                 
                 <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
-                  {menuHighlights.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                        <item.icon className="w-5 h-5 text-primary" />
+                  {menuHighlights.map((item, index) => {
+                    const ItemIcon = item.icon;
+                    return (
+                      <div key={index} className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                          <ItemIcon className="w-5 h-5 text-primary" />
+                        </div>
+                        <span className="font-medium">{item.text}</span>
                       </div>
-                      <span className="font-medium">{item.text}</span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <Button variant="outline" asChild>
