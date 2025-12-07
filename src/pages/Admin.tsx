@@ -12,6 +12,7 @@ import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
 import SortableMenuCard from "@/components/admin/SortableMenuCard";
 import { LogOut, ExternalLink } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
+import EventInquiriesManager from "@/components/admin/EventInquiriesManager";
 import {
   DndContext,
   closestCenter,
@@ -217,6 +218,9 @@ const Admin = () => {
 
         {/* Besondere Anlässe Section */}
         <SpecialOccasionsManager />
+
+        {/* Event-Anfragen Section */}
+        <EventInquiriesManager />
       </main>
     </div>
   );
