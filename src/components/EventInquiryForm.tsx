@@ -64,6 +64,7 @@ export const EventInquiryForm = () => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
+      // @ts-ignore - table exists but types not yet regenerated
       const { error } = await supabase.from('event_inquiries').insert({
         company_name: data.company_name.trim(),
         contact_name: data.contact_name.trim(),
