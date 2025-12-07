@@ -145,32 +145,34 @@ const FirmenfeierMuenchen = () => {
             alt={language === 'de' ? 'Elegante Firmenfeier im STORIA München' : 'Elegant corporate event at STORIA Munich'}
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
-          <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
-            <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase">
-              {language === 'de' ? 'Firmenevents im STORIA' : 'Corporate Events at STORIA'}
-            </p>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
-              {language === 'de' 
-                ? <>Feiern Sie mit Ihrem Team –<br className="hidden md:block" /> wir kümmern uns um den Rest</>
-                : <>Celebrate with your team –<br className="hidden md:block" /> we take care of the rest</>
-              }
-            </h1>
-            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-              {language === 'de'
-                ? 'Weihnachtsfeier, Team-Building oder Business-Dinner – authentisch italienisch in der Maxvorstadt.'
-                : 'Christmas party, team building or business dinner – authentically Italian in Maxvorstadt.'}
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-white/90 text-base md:text-lg px-8 py-6"
-              asChild
-            >
-              <a href="tel:+498951519696">
-                <Phone className="w-5 h-5 mr-2" />
-                {language === 'de' ? 'Jetzt unverbindlich anfragen' : 'Inquire now – no obligation'}
-              </a>
-            </Button>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+            <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12">
+              <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase">
+                {language === 'de' ? 'Firmenevents im STORIA' : 'Corporate Events at STORIA'}
+              </p>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
+                {language === 'de' 
+                  ? <>Feiern Sie mit Ihrem Team –<br className="hidden md:block" /> wir kümmern uns um den Rest</>
+                  : <>Celebrate with your team –<br className="hidden md:block" /> we take care of the rest</>
+                }
+              </h1>
+              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                {language === 'de'
+                  ? 'Weihnachtsfeier, Team-Building oder Business-Dinner – authentisch italienisch in der Maxvorstadt.'
+                  : 'Christmas party, team building or business dinner – authentically Italian in Maxvorstadt.'}
+              </p>
+              <Button 
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90 text-base md:text-lg px-8 py-6"
+                asChild
+              >
+                <a href="tel:+498951519696">
+                  <Phone className="w-5 h-5 mr-2" />
+                  {language === 'de' ? 'Jetzt unverbindlich anfragen' : 'Inquire now – no obligation'}
+                </a>
+              </Button>
+            </div>
           </div>
         </section>
 
