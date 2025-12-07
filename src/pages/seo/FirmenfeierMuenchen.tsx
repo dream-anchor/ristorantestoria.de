@@ -383,9 +383,9 @@ const FirmenfeierMuenchen = () => {
           {/* Final CTA with Inquiry Form */}
           <section className="py-16 md:py-20 bg-muted/30">
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
-                {/* Left: Info & Contact */}
-                <div className="text-center lg:text-left space-y-6">
+              <div className="max-w-2xl mx-auto">
+                {/* Centered CTA Content */}
+                <div className="text-center space-y-6 mb-10">
                   {/* Pulsing Urgency Badge */}
                   <div className="inline-flex items-center gap-2 bg-destructive/15 text-destructive px-5 py-2.5 rounded-full text-sm font-semibold">
                     <SeasonalIcon className="w-5 h-5 animate-pulse" />
@@ -400,19 +400,19 @@ const FirmenfeierMuenchen = () => {
                   </h2>
                   
                   {/* Trust Signal */}
-                  <div className="flex items-center justify-center lg:justify-start gap-2 text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground">
                     <Clock className="w-4 h-4" />
                     <span>{language === 'de' ? 'Antwort innerhalb von 24 Stunden' : 'Response within 24 hours'}</span>
                   </div>
                   
                   {/* Phone Card */}
-                  <div className="bg-card border border-border rounded-xl p-5 lg:inline-block w-full lg:w-auto">
+                  <div className="bg-card border border-border rounded-xl p-5 inline-block">
                     <p className="text-sm text-muted-foreground mb-2">
                       {language === 'de' ? 'Lieber persönlich sprechen?' : 'Prefer to speak in person?'}
                     </p>
                     <a 
                       href="tel:+498951519696" 
-                      className="flex items-center justify-center lg:justify-start gap-2 text-xl font-semibold text-primary hover:underline"
+                      className="flex items-center justify-center gap-2 text-xl font-semibold text-primary hover:underline"
                     >
                       <Phone className="w-5 h-5" />
                       +49 89 51519696
@@ -423,7 +423,7 @@ const FirmenfeierMuenchen = () => {
                   </div>
                 </div>
 
-                {/* Right: Inquiry Form */}
+                {/* Inquiry Form */}
                 <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
                   <h3 className="text-xl font-serif font-semibold mb-6 text-center">
                     {language === 'de' ? 'Unverbindliche Anfrage' : 'Non-binding inquiry'}
