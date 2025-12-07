@@ -145,9 +145,9 @@ const FirmenfeierMuenchen = () => {
             alt={language === 'de' ? 'Elegante Firmenfeier im STORIA München' : 'Elegant corporate event at STORIA Munich'}
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
-          <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-            <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase opacity-90">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
+          <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto [text-shadow:_0_2px_12px_rgba(0,0,0,0.8)]">
+            <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase">
               {language === 'de' ? 'Firmenevents im STORIA' : 'Corporate Events at STORIA'}
             </p>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
@@ -156,7 +156,7 @@ const FirmenfeierMuenchen = () => {
                 : <>Celebrate with your team –<br className="hidden md:block" /> we take care of the rest</>
               }
             </h1>
-            <p className="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
               {language === 'de'
                 ? 'Weihnachtsfeier, Team-Building oder Business-Dinner – authentisch italienisch in der Maxvorstadt.'
                 : 'Christmas party, team building or business dinner – authentically Italian in Maxvorstadt.'}
