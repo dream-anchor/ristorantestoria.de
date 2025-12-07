@@ -20,9 +20,7 @@ const Hero = () => {
           {t.hero.subtitle}
         </p>
         <h1 id="hero-heading" className="text-2xl md:text-3xl font-medium mb-10">
-          {language === 'de' 
-            ? 'Italienisches Restaurant in der Maxvorstadt' 
-            : 'Italian Restaurant in Maxvorstadt'}
+          {t.hero.location}
         </h1>
         <p className="sr-only">
           {language === 'de'
