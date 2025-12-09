@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,7 +16,23 @@ const AperitivoMuenchen = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Aperitivo München – Italienische After-Work Bar' : 'Aperitivo Munich – Italian After-Work Bar'}
+        description={language === 'de' 
+          ? 'Aperitivo im STORIA München: Spritz, Negroni & italienische Antipasti in der Maxvorstadt. STORIA Notturno – Late Night Aperitivo täglich ab 22:00 Uhr.'
+          : 'Aperitivo at STORIA Munich: Spritz, Negroni & Italian antipasti in Maxvorstadt. STORIA Notturno – Late Night Aperitivo daily from 10pm.'}
+        sections={[
+          { heading: 'STORIA Notturno – Late Night Aperitivo', content: [
+            language === 'de' ? 'Täglich ab 22:00 Uhr bis 01:00 Uhr' : 'Daily from 10pm until 1am',
+            language === 'de' ? 'Aperol Spritz, Hugo, Negroni & Cocktails' : 'Aperol Spritz, Hugo, Negroni & cocktails',
+            language === 'de' ? 'Italienische Antipasti & kleine Gerichte' : 'Italian antipasti & small dishes'
+          ]},
+          { heading: language === 'de' ? 'Perfekt für' : 'Perfect for', content: language === 'de' 
+            ? 'After-Work Drinks mit Kollegen, entspannte Abende mit Freunden oder als Auftakt für einen schönen Abend in München.'
+            : 'After-work drinks with colleagues, relaxed evenings with friends or as a start to a beautiful evening in Munich.' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Aperitivo München – Italienische Bar Maxvorstadt' : 'Aperitivo Munich – Italian Bar Maxvorstadt'}
         description={language === 'de' 
           ? 'Aperitivo München im STORIA: Aperol Spritz, Negroni & italienische Cocktails in der Maxvorstadt. Late Night Aperitivo 21-22:30 Uhr. Jetzt Tisch reservieren!'

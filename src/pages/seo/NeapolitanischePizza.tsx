@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,7 +16,24 @@ const NeapolitanischePizza = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Neapolitanische Pizza München – Pizzeria Maxvorstadt' : 'Neapolitan Pizza Munich – Pizzeria Maxvorstadt'}
+        description={language === 'de' 
+          ? 'Neapolitanische Pizza im STORIA München: Authentische Pizza nach original Rezept aus dem Holzofen. Pizzeria in der Maxvorstadt nahe Hauptbahnhof & Königsplatz.'
+          : 'Neapolitan pizza at STORIA Munich: Authentic pizza according to original recipe from the wood oven. Pizzeria in Maxvorstadt near main station & Königsplatz.'}
+        sections={[
+          { heading: language === 'de' ? 'Unsere Philosophie' : 'Our Philosophy', content: language === 'de' 
+            ? 'Echte neapolitanische Pizza nach traditionellem Rezept: 24-Stunden Teigführung, San Marzano Tomaten, Fior di Latte Mozzarella und frisches Basilikum.'
+            : 'Authentic Neapolitan pizza according to traditional recipe: 24-hour dough preparation, San Marzano tomatoes, Fior di Latte mozzarella and fresh basil.' },
+          { heading: language === 'de' ? 'Beliebte Pizzen' : 'Popular Pizzas', content: [
+            'Pizza Margherita – Der Klassiker aus Neapel',
+            'Pizza Diavola – Mit scharfer Salami',
+            'Pizza Quattro Formaggi – Vier-Käse-Pizza',
+            'Pizza Frutti di Mare – Mit frischen Meeresfrüchten'
+          ]}
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Neapolitanische Pizza München – Steinofen Pizzeria' : 'Neapolitan Pizza Munich – Stone Oven Pizzeria'}
         description={language === 'de' 
           ? 'Neapolitanische Pizza München im STORIA: Authentische Pizza aus dem Steinofen in der Maxvorstadt. Pizzeria nahe Königsplatz. Jetzt Tisch reservieren!'

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import StaticBotContent from "@/components/StaticBotContent";
 import { EventInquiryForm } from "@/components/EventInquiryForm";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -122,7 +123,27 @@ const FirmenfeierMuenchen = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Firmenfeier München – Team-Event im italienischen Restaurant' : 'Corporate Event Munich – Team Event at Italian Restaurant'}
+        description={language === 'de' 
+          ? 'Firmenfeier im STORIA München: Weihnachtsfeiern, Team-Events & Business-Dinner für 6-300 Personen. Zentrale Lage Maxvorstadt nahe Hauptbahnhof. Überdachte Terrasse, individuelle Menüs.'
+          : 'Corporate event at STORIA Munich: Christmas parties, team events & business dinners for 6-300 guests. Central location Maxvorstadt near main station. Covered terrace, custom menus.'}
+        sections={[
+          { heading: language === 'de' ? 'Unsere Vorteile' : 'Our Benefits', content: [
+            language === 'de' ? 'Zentrale Lage – 5 Min. vom Hauptbahnhof' : 'Central location – 5 min from main station',
+            language === 'de' ? 'Individuelle Menüs auf Ihre Wünsche abgestimmt' : 'Custom menus tailored to your needs',
+            language === 'de' ? 'Kapazität für 6–300 Personen' : 'Capacity for 6–300 guests',
+            language === 'de' ? 'Überdachte Terrasse für jedes Wetter' : 'Covered terrace for any weather'
+          ]},
+          { heading: language === 'de' ? 'Beliebte Event-Formate' : 'Popular Event Formats', content: [
+            language === 'de' ? 'After-Work Events mit Aperitivo & Antipasti' : 'After-work events with aperitivo & antipasti',
+            language === 'de' ? 'Weihnachtsfeiern mit festlichem Menü' : 'Christmas parties with festive menu',
+            language === 'de' ? 'Sommerfeste auf der Terrasse' : 'Summer parties on the terrace'
+          ]},
+          { heading: language === 'de' ? 'Kontakt' : 'Contact', content: language === 'de' ? 'Jetzt unverbindlich anfragen: +49 89 51519696' : 'Inquire now: +49 89 51519696' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Firmenfeier München – Team-Event im Italiener' : 'Corporate Event Munich – Team Event at Italian Restaurant'}
         description={language === 'de' 
           ? 'Firmenfeier München im STORIA: Team-Events, Weihnachtsfeiern & Business-Dinner in der Maxvorstadt. Italienisches Restaurant nahe Hauptbahnhof. Jetzt anfragen!'

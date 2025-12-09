@@ -8,6 +8,7 @@ import ElfsightReviews from "@/components/ElfsightReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import BackToLandingPage from "@/components/BackToLandingPage";
+import StaticBotContent from "@/components/StaticBotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -29,7 +30,17 @@ const Reservierung = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Tisch reservieren – STORIA München Maxvorstadt' : 'Book a Table – STORIA Munich Maxvorstadt'}
+        description={language === 'de' 
+          ? 'Reservieren Sie Ihren Tisch im STORIA München Maxvorstadt. Italienisches Restaurant nahe Königsplatz & Pinakotheken. Online-Reservierung über OpenTable oder telefonisch unter +49 89 51519696.'
+          : 'Book your table at STORIA Munich Maxvorstadt. Italian restaurant near Königsplatz & Pinakothek museums. Online booking via OpenTable or call +49 89 51519696.'}
+        sections={[
+          { heading: language === 'de' ? 'Online reservieren' : 'Book online', content: language === 'de' ? 'Nutzen Sie unser OpenTable-Widget für schnelle Online-Reservierungen.' : 'Use our OpenTable widget for quick online reservations.' },
+          { heading: language === 'de' ? 'Telefonisch reservieren' : 'Phone reservation', content: '+49 89 51519696' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Tisch reservieren – Ristorante München' : 'Book a Table – Italian Restaurant Munich'}
         description={language === 'de' 
           ? 'Tisch reservieren im STORIA München Maxvorstadt: Italienisches Restaurant nahe Königsplatz & Pinakotheken. Jetzt einfach über OpenTable buchen!'
