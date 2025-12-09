@@ -62,6 +62,69 @@
     <meta name="geo.placename" content="München" />
     <meta name="geo.position" content="48.1456;11.5656" />
     <meta name="ICBM" content="48.1456, 11.5656" />
+    
+    <!-- Static JSON-LD Schema for AI crawlers (ChatGPT, Perplexity, etc.) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "STORIA - Ristorante • Pizzeria • Bar",
+      "description": "Authentisches italienisches Restaurant in München Maxvorstadt. Frische Pasta, Pizza aus dem Holzofen, erlesene Weine. Frühstück, Mittagstisch und Late Night Aperitivo in der Karlstraße – nahe Königsplatz, TU München und Pinakotheken.",
+      "url": "https://ristorantestoria.de",
+      "telephone": "+49-89-515196",
+      "email": "info@ristorantestoria.de",
+      "image": "https://ristorantestoria.de/og-image.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Karlstraße 47a",
+        "addressLocality": "München",
+        "addressRegion": "Bayern",
+        "postalCode": "80333",
+        "addressCountry": "DE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 48.1456,
+        "longitude": 11.5656
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "01:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday"],
+          "opens": "12:00",
+          "closes": "01:00"
+        }
+      ],
+      "priceRange": "€€",
+      "servesCuisine": ["Italian", "Pizza", "Pasta"],
+      "acceptsReservations": "True",
+      "hasMenu": [
+        {
+          "@type": "Menu",
+          "name": "Speisekarte",
+          "url": "https://ristorantestoria.de/speisekarte"
+        },
+        {
+          "@type": "Menu",
+          "name": "Mittagsmenü",
+          "url": "https://ristorantestoria.de/mittagsmenu"
+        },
+        {
+          "@type": "Menu",
+          "name": "Getränkekarte",
+          "url": "https://ristorantestoria.de/getraenke"
+        }
+      ],
+      "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
+      "currenciesAccepted": "EUR"
+    }
+    </script>
   </head>
 
   <body>
