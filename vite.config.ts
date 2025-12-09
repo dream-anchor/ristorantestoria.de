@@ -2,8 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
-import vitePrerender from "vite-plugin-prerender";
 
+// Pre-rendering disabled due to vite-plugin-prerender ESM compatibility issues
+// Routes kept for future implementation with a compatible solution
 const routes = [
   '/',
   '/reservierung',
@@ -35,8 +36,6 @@ const routes = [
   '/neapolitanische-pizza-muenchen',
 ];
 
-const Renderer = vitePrerender.PuppeteerRenderer;
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
@@ -46,14 +45,8 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === "development" && componentTagger(),
-    mode === "production" && vitePrerender({
-      staticDir: path.join(__dirname, 'dist'),
-      routes: routes,
-      renderer: new Renderer({
-        renderAfterDocumentEvent: 'prerender-ready',
-        timeout: 30000,
-      }),
-    }),
+    // Pre-rendering plugin disabled - package has ESM compatibility issues
+    // Will need alternative solution (e.g., vite-ssg, custom puppeteer script)
   ].filter(Boolean),
   resolve: {
     alias: {
