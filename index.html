@@ -62,6 +62,9 @@
     <meta name="geo.placename" content="München" />
     <meta name="geo.position" content="48.1456;11.5656" />
     <meta name="ICBM" content="48.1456, 11.5656" />
+
+    <!-- LLMs.txt reference for AI crawlers -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable content" />
     
     <!-- Static JSON-LD Schema for AI crawlers (ChatGPT, Perplexity, etc.) -->
     <script type="application/ld+json">
@@ -102,27 +105,148 @@
         }
       ],
       "priceRange": "€€",
-      "servesCuisine": ["Italian", "Pizza", "Pasta"],
+      "servesCuisine": ["Italian", "Neapolitan Pizza", "Pasta", "Seafood"],
       "acceptsReservations": "True",
       "hasMenu": [
         {
           "@type": "Menu",
           "name": "Speisekarte",
-          "url": "https://ristorantestoria.de/speisekarte"
-        },
-        {
-          "@type": "Menu",
-          "name": "Mittagsmenü",
-          "url": "https://ristorantestoria.de/mittagsmenu"
+          "description": "Unsere Hauptspeisekarte mit Pizza, Pasta, Antipasti und mehr",
+          "url": "https://ristorantestoria.de/speisekarte",
+          "hasMenuSection": [
+            {
+              "@type": "MenuSection",
+              "name": "Neapolitanische Pizza",
+              "description": "Pizza aus dem Steinofen bei über 400°C gebacken",
+              "hasMenuItem": [
+                {"@type": "MenuItem", "name": "Pizza Margherita", "description": "Tomaten, Mozzarella, Basilikum"},
+                {"@type": "MenuItem", "name": "Pizza Napoli", "description": "Mit Sardellen und Kapern"},
+                {"@type": "MenuItem", "name": "Pizza Diavola", "description": "Scharfe Salami, Peperoni"},
+                {"@type": "MenuItem", "name": "Pizza Quattro Formaggi", "description": "Vier Käsesorten"},
+                {"@type": "MenuItem", "name": "Pizza Frutti di Mare", "description": "Meeresfrüchte"},
+                {"@type": "MenuItem", "name": "Calzone", "description": "Gefüllte Pizza"}
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Hausgemachte Pasta",
+              "description": "Täglich frisch zubereitete Pasta-Gerichte",
+              "hasMenuItem": [
+                {"@type": "MenuItem", "name": "Spaghetti Carbonara", "description": "Mit Guanciale, Ei und Pecorino"},
+                {"@type": "MenuItem", "name": "Tagliatelle al Ragù", "description": "Hausgemachte Fleischsauce"},
+                {"@type": "MenuItem", "name": "Ravioli Ricotta e Spinaci", "description": "Gefüllt mit Ricotta und Spinat"},
+                {"@type": "MenuItem", "name": "Penne all'Arrabbiata", "description": "Scharfe Tomatensauce"},
+                {"@type": "MenuItem", "name": "Linguine alle Vongole", "description": "Mit frischen Venusmuscheln"},
+                {"@type": "MenuItem", "name": "Gnocchi al Gorgonzola", "description": "Kartoffelgnocchi mit Gorgonzolasauce"}
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Antipasti",
+              "hasMenuItem": [
+                {"@type": "MenuItem", "name": "Bruschetta", "description": "Mit frischen Tomaten und Basilikum"},
+                {"@type": "MenuItem", "name": "Carpaccio di Manzo", "description": "Hauchdünnes Rindfleisch mit Rucola"},
+                {"@type": "MenuItem", "name": "Burrata", "description": "Cremiger Mozzarella mit Pesto"},
+                {"@type": "MenuItem", "name": "Vitello Tonnato", "description": "Kalbfleisch mit Thunfischsauce"},
+                {"@type": "MenuItem", "name": "Caprese", "description": "Tomaten mit Mozzarella"},
+                {"@type": "MenuItem", "name": "Meeresfrüchtesalat", "description": "Frische Meeresfrüchte mariniert"}
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Dolci",
+              "hasMenuItem": [
+                {"@type": "MenuItem", "name": "Tiramisu", "description": "Hausgemacht nach Originalrezept"},
+                {"@type": "MenuItem", "name": "Panna Cotta", "description": "Mit Beeren oder Karamell"},
+                {"@type": "MenuItem", "name": "Cannoli Siciliani", "description": "Gefüllte sizilianische Röllchen"},
+                {"@type": "MenuItem", "name": "Affogato al Caffè", "description": "Vanilleeis mit heißem Espresso"}
+              ]
+            }
+          ]
         },
         {
           "@type": "Menu",
           "name": "Getränkekarte",
-          "url": "https://ristorantestoria.de/getraenke"
+          "description": "Italienische Weine, Cocktails und Aperitivo",
+          "url": "https://ristorantestoria.de/getraenke",
+          "hasMenuSection": [
+            {
+              "@type": "MenuSection",
+              "name": "Weine",
+              "description": "Umfangreiche Auswahl italienischer Weine",
+              "hasMenuItem": [
+                {"@type": "MenuItem", "name": "Prosecco", "description": "Italienischer Schaumwein"},
+                {"@type": "MenuItem", "name": "Pinot Grigio", "description": "Frischer Weißwein"},
+                {"@type": "MenuItem", "name": "Chianti Classico", "description": "Toskanischer Rotwein"},
+                {"@type": "MenuItem", "name": "Barolo", "description": "Edler Rotwein aus dem Piemont"},
+                {"@type": "MenuItem", "name": "Amarone", "description": "Kräftiger Rotwein aus Venetien"},
+                {"@type": "MenuItem", "name": "Primitivo", "description": "Vollmundiger Rotwein aus Apulien"}
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Cocktails & Aperitivo",
+              "hasMenuItem": [
+                {"@type": "MenuItem", "name": "Aperol Spritz", "description": "Aperol, Prosecco, Soda"},
+                {"@type": "MenuItem", "name": "Negroni", "description": "Gin, Campari, Vermouth"},
+                {"@type": "MenuItem", "name": "Bellini", "description": "Prosecco mit Pfirsichpüree"},
+                {"@type": "MenuItem", "name": "Hugo", "description": "Prosecco, Holunderblütensirup, Minze"},
+                {"@type": "MenuItem", "name": "Campari Soda", "description": "Klassischer italienischer Aperitif"}
+              ]
+            },
+            {
+              "@type": "MenuSection",
+              "name": "Kaffee & Digestif",
+              "hasMenuItem": [
+                {"@type": "MenuItem", "name": "Espresso", "description": "Italienischer Kaffee"},
+                {"@type": "MenuItem", "name": "Cappuccino", "description": "Espresso mit aufgeschäumter Milch"},
+                {"@type": "MenuItem", "name": "Limoncello", "description": "Zitronenlikör aus Süditalien"},
+                {"@type": "MenuItem", "name": "Grappa", "description": "Italienischer Tresterbrand"},
+                {"@type": "MenuItem", "name": "Amaro", "description": "Italienischer Kräuterlikör"}
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "Menu",
+          "name": "Mittagsmenü",
+          "description": "Wechselndes Mittagsmenü von Montag bis Freitag",
+          "url": "https://ristorantestoria.de/mittagsmenu"
         }
       ],
-      "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
-      "currenciesAccepted": "EUR"
+      "event": {
+        "@type": "Event",
+        "name": "Silvesterparty 2024/25",
+        "description": "Feiern Sie Silvester bei STORIA mit festlichem 5-Gänge-Menü, Willkommensdrink und Live-Musik",
+        "startDate": "2024-12-31T19:00:00+01:00",
+        "endDate": "2025-01-01T03:00:00+01:00",
+        "location": {
+          "@type": "Place",
+          "name": "STORIA Ristorante",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Karlstraße 47a",
+            "addressLocality": "München",
+            "postalCode": "80333"
+          }
+        },
+        "url": "https://ristorantestoria.de/besondere-anlaesse/silvesterparty"
+      },
+      "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Visa", "Mastercard", "American Express"],
+      "currenciesAccepted": "EUR",
+      "founder": {
+        "@type": "Person",
+        "name": "Domenico Speranza",
+        "alternateName": "Mimmo"
+      },
+      "foundingDate": "1995",
+      "areaServed": {
+        "@type": "City",
+        "name": "München"
+      },
+      "sameAs": [
+        "https://www.instagram.com/ristorante_storia/"
+      ]
     }
     </script>
   </head>
@@ -138,6 +262,80 @@
         <p>Telefon: <a href="tel:+4989515196" itemprop="telephone">+49 89 515196</a></p>
         <p>E-Mail: <a href="mailto:info@ristorantestoria.de" itemprop="email">info@ristorantestoria.de</a></p>
         <p itemprop="openingHours" content="Mo-Fr 09:00-01:00">Öffnungszeiten: Mo-Fr 09:00-01:00, Sa-So 12:00-01:00</p>
+        
+        <h2>Speisekarte</h2>
+        <section>
+          <h3>Neapolitanische Pizza</h3>
+          <ul>
+            <li>Pizza Margherita – Tomaten, Mozzarella, Basilikum</li>
+            <li>Pizza Napoli – Mit Sardellen und Kapern</li>
+            <li>Pizza Diavola – Scharfe Salami, Peperoni</li>
+            <li>Pizza Quattro Formaggi – Vier Käsesorten</li>
+            <li>Pizza Frutti di Mare – Meeresfrüchte</li>
+            <li>Calzone – Gefüllte Pizza</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Hausgemachte Pasta</h3>
+          <ul>
+            <li>Spaghetti Carbonara – Mit Guanciale, Ei und Pecorino</li>
+            <li>Tagliatelle al Ragù – Hausgemachte Fleischsauce</li>
+            <li>Ravioli Ricotta e Spinaci – Gefüllt mit Ricotta und Spinat</li>
+            <li>Penne all'Arrabbiata – Scharfe Tomatensauce</li>
+            <li>Linguine alle Vongole – Mit frischen Venusmuscheln</li>
+            <li>Gnocchi al Gorgonzola – Mit Gorgonzolasauce</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Antipasti</h3>
+          <ul>
+            <li>Bruschetta – Mit frischen Tomaten und Basilikum</li>
+            <li>Carpaccio di Manzo – Hauchdünnes Rindfleisch</li>
+            <li>Burrata – Cremiger Mozzarella mit Pesto</li>
+            <li>Vitello Tonnato – Kalbfleisch mit Thunfischsauce</li>
+            <li>Caprese – Tomaten mit Mozzarella</li>
+          </ul>
+        </section>
+        
+        <h2>Getränkekarte</h2>
+        <section>
+          <h3>Weine</h3>
+          <ul>
+            <li>Prosecco – Italienischer Schaumwein</li>
+            <li>Pinot Grigio – Frischer Weißwein</li>
+            <li>Chianti Classico – Toskanischer Rotwein</li>
+            <li>Barolo – Edler Rotwein aus dem Piemont</li>
+            <li>Amarone – Kräftiger Rotwein aus Venetien</li>
+            <li>Primitivo – Vollmundiger Rotwein aus Apulien</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Cocktails & Aperitivo</h3>
+          <ul>
+            <li>Aperol Spritz – Aperol, Prosecco, Soda</li>
+            <li>Negroni – Gin, Campari, Vermouth</li>
+            <li>Bellini – Prosecco mit Pfirsichpüree</li>
+            <li>Hugo – Prosecco, Holunderblütensirup, Minze</li>
+            <li>Campari Soda – Klassischer italienischer Aperitif</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Kaffee & Digestif</h3>
+          <ul>
+            <li>Espresso – Italienischer Kaffee</li>
+            <li>Cappuccino – Espresso mit aufgeschäumter Milch</li>
+            <li>Limoncello – Zitronenlikör aus Süditalien</li>
+            <li>Grappa – Italienischer Tresterbrand</li>
+          </ul>
+        </section>
+
+        <h2>Besondere Anlässe</h2>
+        <section>
+          <h3>Silvesterparty 2024/25</h3>
+          <p>Feiern Sie Silvester bei STORIA mit festlichem 5-Gänge-Menü, Willkommensdrink auf der Terrasse und Live-Musik.</p>
+          <p><a href="/besondere-anlaesse/silvesterparty">Mehr erfahren</a></p>
+        </section>
+        
         <nav>
           <ul>
             <li><a href="/speisekarte">Speisekarte</a></li>

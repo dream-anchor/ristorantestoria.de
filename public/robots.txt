@@ -4,6 +4,10 @@
 # Sitemap
 Sitemap: https://ristorantestoria.de/sitemap.xml
 
+# LLMs.txt for AI Crawlers
+# https://llmstxt.org/
+LLMs-Txt: https://ristorantestoria.de/llms.txt
+
 # Standard Crawlers
 User-agent: Googlebot
 Allow: /
