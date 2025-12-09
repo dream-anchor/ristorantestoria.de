@@ -10,9 +10,11 @@ import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const EventlocationMuenchen = () => {
   const { language } = useLanguage();
+  usePrerenderReady(true);
 
   return (
     <>

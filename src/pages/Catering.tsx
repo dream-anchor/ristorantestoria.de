@@ -8,9 +8,11 @@ import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Catering = () => {
   const { t, language } = useLanguage();
+  usePrerenderReady(true);
 
   return (
     <>

@@ -10,9 +10,13 @@ import ReservationCTA from "@/components/ReservationCTA";
 import BotContent from "@/components/BotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useMenu } from "@/hooks/useMenu";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Mittagsmenu = () => {
   const { t, language } = useLanguage();
+  const { data: menu, isLoading } = useMenu('lunch');
+  usePrerenderReady(!isLoading && !!menu);
 
   return (
     <>

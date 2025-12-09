@@ -4,9 +4,11 @@ import { Home, Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import storiaLogo from "@/assets/storia-logo.webp";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const NotFound = () => {
   const location = useLocation();
+  usePrerenderReady(true);
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
