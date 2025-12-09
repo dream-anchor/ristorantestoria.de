@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,7 +16,23 @@ const LunchMuenchen = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Lunch München Maxvorstadt – Italienisches Mittagessen' : 'Lunch Munich Maxvorstadt – Italian Lunch'}
+        description={language === 'de' 
+          ? 'Mittagessen im STORIA München Maxvorstadt: Täglich wechselnde italienische Gerichte, frische Pasta & knusprige Pizza. Ideal für Berufstätige nahe Hauptbahnhof & TU München.'
+          : 'Lunch at STORIA Munich Maxvorstadt: Daily changing Italian dishes, fresh pasta & crispy pizza. Ideal for professionals near main station & TU Munich.'}
+        sections={[
+          { heading: language === 'de' ? 'Unser Mittagsangebot' : 'Our Lunch Offer', content: [
+            language === 'de' ? 'Täglich wechselnde Gerichte ab 11:30 Uhr' : 'Daily changing dishes from 11:30am',
+            language === 'de' ? 'Frische Pasta, Pizza & Salate' : 'Fresh pasta, pizza & salads',
+            language === 'de' ? 'Schneller Service für die Mittagspause' : 'Quick service for lunch break'
+          ]},
+          { heading: language === 'de' ? 'Lage' : 'Location', content: language === 'de' 
+            ? 'Zentral in der Maxvorstadt – nur 5 Minuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.'
+            : 'Centrally in Maxvorstadt – just 5 minutes from main station, Königsplatz and TU Munich.' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Lunch München Maxvorstadt – Italienischer Mittagstisch' : 'Lunch Munich Maxvorstadt – Italian Lunch'}
         description={language === 'de' 
           ? 'Lunch München Maxvorstadt im STORIA: Italienischer Mittagstisch Mo-Fr, frische Pasta & Pizza nahe Hauptbahnhof. Mittagsmenü ab 11:30 Uhr. Jetzt Tisch reservieren!'

@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,7 +16,23 @@ const RomantischesDinner = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Romantisches Dinner München – Italienisches Restaurant' : 'Romantic Dinner Munich – Italian Restaurant'}
+        description={language === 'de' 
+          ? 'Romantisches Dinner im STORIA München: Candlelight-Atmosphäre, italienische Spezialitäten & erlesene Weine in der Maxvorstadt. Perfekt für Jahrestage, Valentinstag & besondere Anlässe.'
+          : 'Romantic dinner at STORIA Munich: Candlelight atmosphere, Italian specialties & fine wines in Maxvorstadt. Perfect for anniversaries, Valentine\'s Day & special occasions.'}
+        sections={[
+          { heading: language === 'de' ? 'Perfekt für' : 'Perfect for', content: [
+            language === 'de' ? 'Jahrestage & besondere Anlässe' : 'Anniversaries & special occasions',
+            language === 'de' ? 'Valentinstag & Heiratsanträge' : 'Valentine\'s Day & proposals',
+            language === 'de' ? 'Romantische Abende zu zweit' : 'Romantic evenings for two'
+          ]},
+          { heading: language === 'de' ? 'Unsere Highlights' : 'Our Highlights', content: language === 'de' 
+            ? 'Hausgemachte Pasta, frische Meeresfrüchte, erlesene italienische Weine und unser berühmtes Tiramisu – serviert in eleganter Atmosphäre.'
+            : 'Homemade pasta, fresh seafood, fine Italian wines and our famous tiramisu – served in elegant atmosphere.' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Romantisches Dinner München – Date Night Italiener' : 'Romantic Dinner Munich – Date Night Italian'}
         description={language === 'de' 
           ? 'Romantisches Dinner München im STORIA: Date Night im italienischen Ambiente. Candlelight, exquisite Küche & Weine in der Maxvorstadt. Jetzt Tisch reservieren!'

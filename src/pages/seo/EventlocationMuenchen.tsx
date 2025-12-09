@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,7 +16,23 @@ const EventlocationMuenchen = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Eventlocation München Maxvorstadt – Italienisches Restaurant' : 'Event Location Munich Maxvorstadt – Italian Restaurant'}
+        description={language === 'de' 
+          ? 'Eventlocation im STORIA München: Feiern Sie private Events, Geburtstage & Jubiläen in authentisch italienischem Ambiente. Maxvorstadt nahe Hauptbahnhof, Kapazität 6-80 Personen.'
+          : 'Event location at STORIA Munich: Celebrate private events, birthdays & anniversaries in authentic Italian ambiance. Maxvorstadt near main station, capacity 6-80 guests.'}
+        sections={[
+          { heading: language === 'de' ? 'Ideal für' : 'Ideal for', content: [
+            language === 'de' ? 'Geburtstagsfeiern & Jubiläen' : 'Birthday parties & anniversaries',
+            language === 'de' ? 'Familienfeiern & Taufen' : 'Family celebrations & baptisms',
+            language === 'de' ? 'Private Dinner & besondere Anlässe' : 'Private dinners & special occasions'
+          ]},
+          { heading: language === 'de' ? 'Unsere Location' : 'Our Location', content: language === 'de' 
+            ? 'Elegantes Restaurant mit überdachter Terrasse in der Maxvorstadt. Zentrale Lage, 5 Minuten vom Hauptbahnhof.'
+            : 'Elegant restaurant with covered terrace in Maxvorstadt. Central location, 5 minutes from main station.' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Eventlocation München Maxvorstadt – Restaurant für Events' : 'Event Location Munich Maxvorstadt – Restaurant for Events'}
         description={language === 'de' 
           ? 'Eventlocation München: STORIA in der Maxvorstadt für Ihre Veranstaltung. Italienisches Restaurant für Feiern, Events & Gruppen nahe Königsplatz. Jetzt anfragen!'

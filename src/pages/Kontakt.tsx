@@ -7,6 +7,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
+import StaticBotContent from "@/components/StaticBotContent";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,7 +17,17 @@ const Kontakt = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Kontakt & Anfahrt – STORIA München' : 'Contact & Directions – STORIA Munich'}
+        description={language === 'de' 
+          ? 'STORIA Kontakt: Karlstraße 47a, 80333 München Maxvorstadt. Telefon: +49 89 51519696, E-Mail: info@ristorantestoria.de. Nähe Hauptbahnhof, Königsplatz & TU München.'
+          : 'STORIA Contact: Karlstraße 47a, 80333 Munich Maxvorstadt. Phone: +49 89 51519696, Email: info@ristorantestoria.de. Near main station, Königsplatz & TU Munich.'}
+        sections={[
+          { heading: language === 'de' ? 'Öffnungszeiten' : 'Opening Hours', content: [language === 'de' ? 'Montag bis Freitag: 09:00 - 01:00 Uhr' : 'Monday to Friday: 9am - 1am', language === 'de' ? 'Samstag & Sonntag: 12:00 - 01:00 Uhr' : 'Saturday & Sunday: 12pm - 1am'] },
+          { heading: language === 'de' ? 'Anfahrt' : 'Getting here', content: language === 'de' ? 'Zentral in der Maxvorstadt, wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.' : 'Centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Kontakt & Anfahrt – Pizza Maxvorstadt' : 'Contact & Directions – Italian Restaurant Munich'}
         description={language === 'de' 
           ? 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr 9-1 Uhr. Jetzt anrufen: +49 89 51519696!'

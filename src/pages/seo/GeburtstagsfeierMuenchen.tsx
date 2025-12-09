@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import ElfsightReviews from "@/components/ElfsightReviews";
+import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,7 +16,23 @@ const GeburtstagsfeierMuenchen = () => {
 
   return (
     <>
-      <SEO 
+      <StaticBotContent
+        title={language === 'de' ? 'Geburtstagsfeier München – Italienisches Restaurant' : 'Birthday Party Munich – Italian Restaurant'}
+        description={language === 'de' 
+          ? 'Geburtstagsfeier im STORIA München: Feiern Sie Ihren besonderen Tag mit italienischer Küche in der Maxvorstadt. Individuelle Menüs, Torte & Dekoration möglich.'
+          : 'Birthday party at STORIA Munich: Celebrate your special day with Italian cuisine in Maxvorstadt. Custom menus, cake & decoration possible.'}
+        sections={[
+          { heading: language === 'de' ? 'Unser Angebot' : 'Our Offer', content: [
+            language === 'de' ? 'Individuelle Menüzusammenstellung' : 'Individual menu composition',
+            language === 'de' ? 'Geburtstagstorte auf Wunsch' : 'Birthday cake on request',
+            language === 'de' ? 'Dekoration & persönliche Betreuung' : 'Decoration & personal service'
+          ]},
+          { heading: language === 'de' ? 'Für jede Feier' : 'For Every Celebration', content: language === 'de' 
+            ? 'Ob kleine Runde mit Familie oder große Party mit Freunden – wir gestalten Ihre Geburtstagsfeier nach Ihren Wünschen.'
+            : 'Whether a small gathering with family or a big party with friends – we design your birthday celebration according to your wishes.' }
+        ]}
+      />
+      <SEO
         title={language === 'de' ? 'Geburtstag feiern München – Party im Italiener' : 'Birthday Party Munich – Celebration at Italian Restaurant'}
         description={language === 'de' 
           ? 'Geburtstag feiern München im STORIA: Italienisches Restaurant in der Maxvorstadt für Ihre Geburtstagsfeier. Individuelle Menüs & stilvolles Ambiente. Jetzt reservieren!'
