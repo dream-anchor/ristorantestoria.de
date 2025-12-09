@@ -8,6 +8,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
+import BotContent from "@/components/BotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -32,6 +33,7 @@ const Speisekarte = () => {
         ]} 
       />
       <MenuStructuredData menuType="food" />
+      <BotContent menuType="food" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">
