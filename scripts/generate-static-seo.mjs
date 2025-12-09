@@ -1,44 +1,25 @@
 // scripts/generate-static-seo.mjs
-// Wird im GitHub-Workflow VOR `npm run build` ausgeführt
-// und ersetzt den NOSCRIPT-Platzhalter in index.html durch
-// einen statischen, SEO-/KI-freundlichen Textblock.
+// Läuft im GitHub-Workflow VOR `npm run build`.
+// Liest Menüdaten aus Supabase und erzeugt einen
+// statischen, SEO-/KI-freundlichen Textblock im <noscript>-Bereich
+// der index.html. Bei Fehlern wird ein statischer Fallback genutzt.
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createClient } from "@supabase/supabase-js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function main() {
-  const indexPath = path.join(__dirname, "..", "index.html"); // ggf. anpassen, wenn index woanders liegt
-  let html = fs.readFileSync(indexPath, "utf-8");
+const START_MARKER = "<!-- NOSCRIPT_CONTENT_START -->";
+const END_MARKER = "<!-- NOSCRIPT_CONTENT_END -->";
 
-  const startMarker = "<!-- NOSCRIPT_CONTENT_START -->";
-  const endMarker = "<!-- NOSCRIPT_CONTENT_END -->";
-
-  const startIdx = html.indexOf(startMarker);
-  const endIdx = html.indexOf(endMarker);
-
-  if (startIdx === -1 || endIdx === -1) {
-    console.error("NOSCRIPT-Marker in index.html nicht gefunden.");
-    process.exit(1);
-  }
-
-  const before = html.slice(0, startIdx + startMarker.length);
-  const after = html.slice(endIdx);
-
-  const noscriptContent = buildNoscriptHtml();
-
-  const newHtml = `${before}\n${noscriptContent}\n${after}`;
-  fs.writeFileSync(indexPath, newHtml, "utf-8");
-
-  console.log("Static SEO noscript content injected into index.html");
-}
-
-// Statischer Textblock – hier können wir später noch Menüdaten ergänzen
-function buildNoscriptHtml() {
-  return `
+/**
+ * Fallback-HTML, falls Supabase nicht erreichbar ist.
+ * (Deine bisherige statische Version)
+ */
+const STATIC_FALLBACK_HTML = `
 <article itemscope itemtype="https://schema.org/Restaurant">
   <h1 itemprop="name">STORIA – Ristorante • Pizzeria • Bar in München Maxvorstadt</h1>
   <p itemprop="description">
@@ -131,7 +112,178 @@ function buildNoscriptHtml() {
   <p itemprop="priceRange">Preisniveau: €€</p>
 </article>
 `.trim();
+
+/**
+ * Hauptablauf: index.html laden, NOSCRIPT-Bereich ersetzen, wieder speichern.
+ */
+async function main() {
+  const indexPath = path.join(__dirname, "..", "index.html");
+  let html = fs.readFileSync(indexPath, "utf-8");
+
+  const startIdx = html.indexOf(START_MARKER);
+  const endIdx = html.indexOf(END_MARKER);
+
+  if (startIdx === -1 || endIdx === -1) {
+    console.error("NOSCRIPT-Marker in index.html nicht gefunden.");
+    process.exit(1);
+  }
+
+  const before = html.slice(0, startIdx + START_MARKER.length);
+  const after = html.slice(endIdx);
+
+  const noscriptContent = await buildNoscriptHtmlFromSupabase().catch((err) => {
+    console.error("Fehler beim Generieren des dynamischen NOSCRIPT-HTML:", err);
+    console.error("Verwende statischen Fallback-Content.");
+    return STATIC_FALLBACK_HTML;
+  });
+
+  const newHtml = `${before}\n${noscriptContent}\n${after}`;
+  fs.writeFileSync(indexPath, newHtml, "utf-8");
+
+  console.log("Static SEO noscript content injected into index.html");
 }
 
-main();
+/**
+ * Holt Menüs + Kategorien + Items aus Supabase
+ * und baut ein gut lesbares HTML für <noscript>.
+ */
+async function buildNoscriptHtmlFromSupabase() {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+  if (!supabaseUrl || !serviceRoleKey) {
+    console.warn("SUPABASE_URL oder SUPABASE_SERVICE_ROLE_KEY fehlt – Fallback wird genutzt.");
+    return STATIC_FALLBACK_HTML;
+  }
+
+  const supabase = createClient(supabaseUrl, serviceRoleKey);
+
+  const { data: menus, error: menusError } = await supabase
+    .from("menus")
+    .select("id, slug, title, description, menu_type")
+    .order("menu_type", { ascending: true })
+    .order("title", { ascending: true });
+
+  if (menusError) {
+    console.error("Fehler beim Laden der Menüs:", menusError);
+    return STATIC_FALLBACK_HTML;
+  }
+
+  const { data: categories, error: catError } = await supabase
+    .from("menu_categories")
+    .select("id, menu_id, title, sort")
+    .order("sort", { ascending: true });
+
+  if (catError) {
+    console.error("Fehler beim Laden der Kategorien:", catError);
+    return STATIC_FALLBACK_HTML;
+  }
+
+  const { data: items, error: itemsError } = await supabase
+    .from("menu_items")
+    .select("id, category_id, title, description, price, sort")
+    .order("sort", { ascending: true });
+
+  if (itemsError) {
+    console.error("Fehler beim Laden der Gerichte:", itemsError);
+    return STATIC_FALLBACK_HTML;
+  }
+
+  // Daten in Maps aufbereiten
+  const categoriesByMenuId = new Map();
+  for (const cat of categories || []) {
+    if (!categoriesByMenuId.has(cat.menu_id)) {
+      categoriesByMenuId.set(cat.menu_id, []);
+    }
+    categoriesByMenuId.get(cat.menu_id).push(cat);
+  }
+
+  const itemsByCategoryId = new Map();
+  for (const item of items || []) {
+    if (!itemsByCategoryId.has(item.category_id)) {
+      itemsByCategoryId.set(item.category_id, []);
+    }
+    itemsByCategoryId.get(item.category_id).push(item);
+  }
+
+  // HTML aufbauen
+  let html = `<article itemscope itemtype="https://schema.org/Restaurant">
+  <h1 itemprop="name">STORIA – Ristorante • Pizzeria • Bar in München Maxvorstadt</h1>
+  <p>
+    Diese HTML-Version der Speisekarten wird automatisch aus der Datenbank generiert,
+    damit Suchmaschinen und KI-Sucher (z.&nbsp;B. ChatGPT, Perplexity, Bing Copilot)
+    alle aktuellen Menüs textbasiert lesen können.
+  </p>`;
+
+  // Menüs in sinnvoller Reihenfolge sortieren (erst food/lunch/drinks, dann special)
+  const orderedMenus = [...(menus || [])].sort((a, b) => {
+    const order = { food: 1, lunch: 2, drinks: 3, special: 4 };
+    const oa = order[a.menu_type] ?? 99;
+    const ob = order[b.menu_type] ?? 99;
+    if (oa !== ob) return oa - ob;
+    return (a.title || "").localeCompare(b.title || "", "de");
+  });
+
+  for (const menu of orderedMenus) {
+    const menuCats = categoriesByMenuId.get(menu.id) || [];
+
+    html += `
+  <section aria-label="Speisekarte – ${escapeHtml(menu.title || "")}">
+    <h2>${escapeHtml(menu.title || "")}</h2>`;
+
+    if (menu.description) {
+      html += `
+    <p>${escapeHtml(menu.description)}</p>`;
+    }
+
+    for (const cat of menuCats) {
+      const catItems = itemsByCategoryId.get(cat.id) || [];
+      if (!catItems.length) continue;
+
+      html += `
+    <section aria-label="${escapeHtml(cat.title)}">
+      <h3>${escapeHtml(cat.title)}</h3>
+      <ul>`;
+
+      for (const item of catItems) {
+        const title = escapeHtml(item.title || "");
+        const desc = item.description ? ` – ${escapeHtml(item.description)}` : "";
+        const price = item.price ? ` (${escapeHtml(item.price)})` : "";
+
+        html += `
+        <li><strong>${title}</strong>${desc}${price}</li>`;
+      }
+
+      html += `
+      </ul>
+    </section>`;
+    }
+
+    html += `
+  </section>`;
+  }
+
+  html += `
+  <p itemprop="servesCuisine">Italienische Küche, neapolitanische Pizza, Pasta, Fisch &amp; Aperitivo.</p>
+  <p itemprop="priceRange">Preisniveau: €€</p>
+</article>`;
+
+  return html.trim();
+}
+
+/**
+ * Einfache HTML-Escaping-Funktion für Textinhalte.
+ */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+main().catch((err) => {
+  console.error("Unerwarteter Fehler in generate-static-seo.mjs:", err);
+  process.exit(1);
+});
