@@ -32,6 +32,7 @@ import FloatingActions from "./components/FloatingActions";
 import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
 import ScrollToTop from "./components/ScrollToTop";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 // SEO Landingpages
 import LunchMuenchen from "./pages/seo/LunchMuenchen";
@@ -53,6 +54,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <GoogleAnalytics />
             <ScrollToTop />
             <FloatingActions />
             <CookieBanner />
