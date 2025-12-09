@@ -149,6 +149,43 @@ const Datenschutz = () => {
                   https://policies.google.com/privacy
                 </a>
               </p>
+
+              <h3 className="text-lg font-semibold mt-4 mb-2">Google Analytics</h3>
+              <p>
+                Wir nutzen Google Analytics, einen Webanalysedienst der Google Ireland Limited 
+                ("Google"), Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics 
+                verwendet Cookies, die eine Analyse der Nutzung der Website ermöglichen.
+              </p>
+              <p className="mt-2">
+                Die durch Cookies erzeugten Informationen über Ihre Nutzung dieser Website 
+                werden in der Regel an einen Server von Google in den USA übertragen und dort 
+                gespeichert. Wir haben die IP-Anonymisierung aktiviert, sodass Ihre IP-Adresse 
+                von Google innerhalb der EU/EWR vor der Übertragung gekürzt wird.
+              </p>
+              <p className="mt-2">
+                <strong>Zweck:</strong> Analyse des Nutzerverhaltens zur Verbesserung unseres Angebots.
+              </p>
+              <p className="mt-2">
+                <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung über Cookie-Banner).
+              </p>
+              <p className="mt-2">
+                <strong>Speicherdauer:</strong> Die Daten werden nach 14 Monaten automatisch gelöscht.
+              </p>
+              <p className="mt-2">
+                <strong>Widerruf:</strong> Sie können Ihre Einwilligung jederzeit über die Cookie-Einstellungen 
+                widerrufen. Bereits gesetzte Cookies können Sie in Ihren Browsereinstellungen löschen.
+              </p>
+              <p className="mt-2">
+                Weitere Informationen finden Sie in der Datenschutzerklärung von Google:{" "}
+                <a 
+                  href="https://policies.google.com/privacy" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  https://policies.google.com/privacy
+                </a>
+              </p>
             </section>
 
             {/* 8. Speicherdauer */}
