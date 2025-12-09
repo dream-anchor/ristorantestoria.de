@@ -22,6 +22,7 @@ const NeapolitanischePizza = () => {
           : 'Neapolitan pizza Munich at STORIA: Authentic stone-oven pizza in Maxvorstadt. Pizzeria near Königsplatz. Book your table now!'}
         canonical="/neapolitanische-pizza-muenchen"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MenuDisplay from "@/components/MenuDisplay";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -22,13 +23,15 @@ const Speisekarte = () => {
           : 'STORIA Munich menu: Neapolitan stone-oven pizza, homemade pasta & antipasti. Italian restaurant Maxvorstadt near Königsplatz. Book your table now!'}
         canonical="/speisekarte"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
-        type="menu" 
+        type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: language === 'de' ? 'Speisekarte' : 'Menu', url: '/speisekarte' }
         ]} 
       />
+      <MenuStructuredData menuType="food" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">

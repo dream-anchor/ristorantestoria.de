@@ -22,6 +22,7 @@ const RomantischesDinner = () => {
           : 'Romantic dinner Munich at STORIA: Date night in Italian ambiance. Candlelight, exquisite cuisine & wines in Maxvorstadt. Book your table now!'}
         canonical="/romantisches-dinner-muenchen"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

@@ -28,7 +28,9 @@ export interface Menu {
   id: string;
   menu_type: MenuType;
   title: string | null;
+  title_en: string | null;
   subtitle: string | null;
+  subtitle_en: string | null;
   is_published: boolean;
   categories: MenuCategory[];
 }
@@ -102,7 +104,9 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
     id: menu.id,
     menu_type: menu.menu_type as MenuType,
     title: menu.title,
+    title_en: menu.title_en,
     subtitle: menu.subtitle,
+    subtitle_en: menu.subtitle_en,
     is_published: menu.is_published || false,
     categories: categoriesWithItems,
   };

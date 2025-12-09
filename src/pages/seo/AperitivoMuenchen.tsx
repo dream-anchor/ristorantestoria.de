@@ -22,6 +22,7 @@ const AperitivoMuenchen = () => {
           : 'Aperitivo Munich at STORIA: Aperol Spritz, Negroni & Italian cocktails in Maxvorstadt. Late Night Aperitivo 9-10:30 PM. Book your table now!'}
         canonical="/aperitivo-muenchen"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

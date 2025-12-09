@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MenuDisplay from "@/components/MenuDisplay";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,13 +22,15 @@ const Mittagsmenu = () => {
           : 'Lunch menu at STORIA Munich Maxvorstadt: Fresh Italian cuisine Mon-Fri at great prices. Lunch near main station & Königsplatz. Enjoy your lunch break!'}
         canonical="/mittagsmenu"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
-        type="menu" 
+        type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: language === 'de' ? 'Mittagsmenü' : 'Lunch Menu', url: '/mittagsmenu' }
         ]} 
       />
+      <MenuStructuredData menuType="lunch" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">

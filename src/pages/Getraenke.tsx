@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MenuDisplay from "@/components/MenuDisplay";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,13 +22,15 @@ const Getraenke = () => {
           : 'STORIA drinks menu: Aperitivo Munich, Italian wines & cocktails. Late Night Aperitivo 9-10:30 PM. Bar in Maxvorstadt. Book your table now!'}
         canonical="/getraenke"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
-        type="menu" 
+        type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: language === 'de' ? 'Getränke' : 'Drinks', url: '/getraenke' }
         ]} 
       />
+      <MenuStructuredData menuType="drinks" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">
