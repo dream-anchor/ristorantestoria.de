@@ -11,9 +11,13 @@ import BackToLandingPage from "@/components/BackToLandingPage";
 import BotContent from "@/components/BotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useMenu } from "@/hooks/useMenu";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Speisekarte = () => {
   const { t, language } = useLanguage();
+  const { data: menu, isLoading } = useMenu('food');
+  usePrerenderReady(!isLoading && !!menu);
 
   return (
     <>

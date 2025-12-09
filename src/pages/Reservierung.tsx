@@ -11,10 +11,12 @@ import BackToLandingPage from "@/components/BackToLandingPage";
 import StaticBotContent from "@/components/StaticBotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Reservierung = () => {
   const { t, language } = useLanguage();
   const [iframeHeight, setIframeHeight] = useState(1100);
+  usePrerenderReady(true);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {

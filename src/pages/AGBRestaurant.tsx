@@ -1,8 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const AGBRestaurant = () => {
+  usePrerenderReady(true);
   return (
     <div className="min-h-screen bg-background">
       <Header />

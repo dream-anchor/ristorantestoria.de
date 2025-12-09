@@ -11,9 +11,11 @@ import StaticBotContent from "@/components/StaticBotContent";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Kontakt = () => {
   const { t, language } = useLanguage();
+  usePrerenderReady(true);
 
   return (
     <>

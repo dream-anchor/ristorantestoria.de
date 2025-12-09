@@ -5,9 +5,11 @@ import SEO from "@/components/SEO";
 import ReservationCTA from "@/components/ReservationCTA";
 import StaticBotContent from "@/components/StaticBotContent";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const UeberUns = () => {
   const { t, language } = useLanguage();
+  usePrerenderReady(true);
 
   return (
     <>

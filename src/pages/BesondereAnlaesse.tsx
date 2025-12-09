@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const BesondereAnlaesse = () => {
   const navigate = useNavigate();
   const { data: specialMenus, isLoading } = usePublishedSpecialMenus();
+  usePrerenderReady(!isLoading);
 
   useEffect(() => {
     if (isLoading) return;

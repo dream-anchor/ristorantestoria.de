@@ -14,11 +14,13 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
 import MenuDisplay from "@/components/MenuDisplay";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const BesondererAnlass = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t, language } = useLanguage();
   const { data: menu, isLoading, error } = useSpecialMenuBySlug(slug || '');
+  usePrerenderReady(!isLoading && !!menu);
 
   // Scroll to top on mount
   useEffect(() => {

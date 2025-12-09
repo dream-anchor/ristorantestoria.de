@@ -9,9 +9,11 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import HomeBotContent from "@/components/HomeBotContent";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Index = () => {
   const { language } = useLanguage();
+  usePrerenderReady(true);
 
   const faqItems = language === 'de' ? [
     {

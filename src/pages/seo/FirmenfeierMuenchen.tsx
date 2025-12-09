@@ -9,6 +9,7 @@ import StaticBotContent from "@/components/StaticBotContent";
 import { EventInquiryForm } from "@/components/EventInquiryForm";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight, Clock } from "lucide-react";
 
 // Images
@@ -55,6 +56,7 @@ const getSeasonalUrgency = (language: string) => {
 
 const FirmenfeierMuenchen = () => {
   const { language } = useLanguage();
+  usePrerenderReady(true);
   const seasonalUrgency = getSeasonalUrgency(language);
   const SeasonalIcon = seasonalUrgency.icon;
 
