@@ -24,8 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate static SEO content
+        run: node ./scripts/generate-static-seo.mjs
+
       - name: Build project
-        run: npm run build      # erzeugt ./dist
+        run: npm run build
 
       - name: Deploy via SFTP to IONOS
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
