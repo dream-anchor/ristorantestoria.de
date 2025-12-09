@@ -62,8 +62,8 @@ const Index = () => {
       <SEO canonical="/" />
       <StructuredData type="restaurant" faqItems={faqItems} />
       <div className="min-h-screen bg-background flex flex-col">
-        <HomeBotContent />
         <Header />
+        <HomeBotContent />
         <Hero />
         <Navigation />
         <ImageGrid />
