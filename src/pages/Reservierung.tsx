@@ -36,6 +36,7 @@ const Reservierung = () => {
           : 'Book a table at STORIA Munich Maxvorstadt: Italian restaurant near Königsplatz & Pinakothek museums. Easy booking via OpenTable!'}
         canonical="/reservierung"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

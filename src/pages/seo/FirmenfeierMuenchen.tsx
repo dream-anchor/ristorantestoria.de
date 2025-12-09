@@ -129,6 +129,7 @@ const FirmenfeierMuenchen = () => {
           : 'Corporate event Munich at STORIA: Team events, Christmas parties & business dinners in Maxvorstadt. Italian restaurant near main station. Inquire now!'}
         canonical="/firmenfeier-muenchen"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

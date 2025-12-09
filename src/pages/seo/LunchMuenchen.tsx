@@ -22,6 +22,7 @@ const LunchMuenchen = () => {
           : 'Lunch Munich Maxvorstadt at STORIA: Italian lunch Mon-Fri, fresh pasta & pizza near main station. Lunch menu from 11:30 AM. Book your table now!'}
         canonical="/lunch-muenchen-maxvorstadt"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

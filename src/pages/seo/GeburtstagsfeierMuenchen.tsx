@@ -22,6 +22,7 @@ const GeburtstagsfeierMuenchen = () => {
           : 'Birthday party Munich at STORIA: Italian restaurant in Maxvorstadt for your birthday celebration. Individual menus & stylish ambiance. Book now!'}
         canonical="/geburtstagsfeier-muenchen"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

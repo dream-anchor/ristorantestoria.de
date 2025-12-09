@@ -22,6 +22,7 @@ const EventlocationMuenchen = () => {
           : 'Event location Munich: STORIA in Maxvorstadt for your celebration. Italian restaurant for parties, events & groups near Königsplatz. Inquire now!'}
         canonical="/eventlocation-muenchen-maxvorstadt"
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

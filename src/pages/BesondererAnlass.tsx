@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -75,6 +76,7 @@ const BesondererAnlass = () => {
         description={getSeoDescription()}
         canonical={`/besondere-anlaesse/${slug}`}
       />
+      <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[
@@ -83,6 +85,7 @@ const BesondererAnlass = () => {
           { name: menuTitle, url: `/besondere-anlaesse/${slug}` }
         ]}
       />
+      <MenuStructuredData menuId={menu.id} />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">
