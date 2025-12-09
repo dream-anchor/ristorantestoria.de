@@ -26,6 +26,9 @@ jobs:
 
       - name: Generate static SEO content
         run: node ./scripts/generate-static-seo.mjs
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
 
       - name: Build project
         run: npm run build
