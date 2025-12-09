@@ -2,16 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import prerender from "@prerenderer/rollup-plugin";
 
-// Pre-rendering disabled due to vite-plugin-prerender ESM compatibility issues
-// Routes kept for future implementation with a compatible solution
 const routes = [
   '/',
   '/reservierung',
   '/speisekarte',
   '/mittagsmenu',
   '/getraenke',
-  '/besondere-anlaesse',
   '/besondere-anlaesse/weihnachtsmenues',
   '/besondere-anlaesse/silvesterparty',
   '/kontakt',
@@ -26,7 +24,6 @@ const routes = [
   '/lebensmittelhinweise',
   '/haftungsausschluss',
   '/catering',
-  // SEO Landing Pages
   '/lunch-muenchen-maxvorstadt',
   '/aperitivo-muenchen',
   '/romantisches-dinner-muenchen',
@@ -45,8 +42,20 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     mode === "development" && componentTagger(),
-    // Pre-rendering plugin disabled - package has ESM compatibility issues
-    // Will need alternative solution (e.g., vite-ssg, custom puppeteer script)
+    mode === "production" && prerender({
+      routes: routes,
+      renderer: '@prerenderer/renderer-puppeteer',
+      rendererOptions: {
+        renderAfterDocumentEvent: 'prerender-ready',
+        timeout: 30000,
+      },
+      postProcess(renderedRoute) {
+        // Fix URLs for production
+        renderedRoute.html = renderedRoute.html
+          .replace(/http:/ig, 'https:')
+          .replace(/(https:\/\/)?(localhost|127\.0\.0\.1):\d*/ig, 'https://ristorantestoria.de');
+      },
+    }),
   ].filter(Boolean),
   resolve: {
     alias: {
