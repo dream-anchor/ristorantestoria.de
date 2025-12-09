@@ -14,13 +14,30 @@ RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
 RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
 
 # ============================================
-# 1. Spezielle Weiterleitungen (Query-String)
+# 1. PRERENDER.IO - Bot-Erkennung für SEO
+# ============================================
+<IfModule mod_headers.c>
+    RequestHeader set X-Prerender-Token "HIER_DEINEN_TOKEN_EINFUEGEN"
+</IfModule>
+
+# Bot User-Agents erkennen und zu Prerender.io weiterleiten
+RewriteCond %{HTTP_USER_AGENT} googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator|whatsapp|redditbot|applebot|flipboard|tumblr|bitlybot|skypeuripreview|nuzzel|discordbot|google\ page\ speed|qwantify|telegrambot|ia_archiver|GPTBot|ChatGPT-User|Google-Extended|anthropic-ai|Claude-Web|PerplexityBot|YouBot [NC,OR]
+RewriteCond %{QUERY_STRING} _escaped_fragment_
+
+# Keine statischen Dateien prerendern
+RewriteCond %{REQUEST_URI} !\.(js|css|xml|less|png|jpg|jpeg|gif|pdf|txt|ico|rss|zip|mp3|rar|exe|wmv|avi|ppt|mpg|mpeg|tif|wav|mov|psd|ai|xls|mp4|m4a|swf|dat|dmg|iso|flv|m4v|torrent|ttf|woff|woff2|svg|webp|webm|mp4)$ [NC]
+
+# Weiterleitung zu Prerender.io (302 für IONOS Kompatibilität)
+RewriteRule ^(.*)$ https://service.prerender.io/https://www.ristorantestoria.de/$1 [R=302,L]
+
+# ============================================
+# 2. Spezielle Weiterleitungen (Query-String)
 # ============================================
 RewriteCond %{QUERY_STRING} ^page_id=2881$
 RewriteRule ^$ /impressum? [R=301,L]
 
 # ============================================
-# 2. 301 Redirects für alte URLs (VOR dem SPA-Fallback!)
+# 3. 301 Redirects für alte URLs (VOR dem SPA-Fallback!)
 # ============================================
 RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
 RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
@@ -29,7 +46,7 @@ RewriteCond %{REQUEST_URI} ^/ristorantestoria-de(/.*)?$ [NC]
 RewriteRule ^ristorantestoria-de(/.*)?$ / [R=301,L]
 
 # ============================================
-# 3. SPA-Routing (React Router)
+# 4. SPA-Routing (React Router)
 # ============================================
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
