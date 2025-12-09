@@ -9,6 +9,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
+import BotContent from "@/components/BotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
@@ -86,6 +87,7 @@ const BesondererAnlass = () => {
         ]}
       />
       <MenuStructuredData menuId={menu.id} />
+      <BotContent menuId={menu.id} />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">

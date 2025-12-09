@@ -7,6 +7,7 @@ import ElfsightReviews from "@/components/ElfsightReviews";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import HomeBotContent from "@/components/HomeBotContent";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
@@ -60,6 +61,7 @@ const Index = () => {
     <>
       <SEO canonical="/" />
       <StructuredData type="restaurant" faqItems={faqItems} />
+      <HomeBotContent />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <Hero />
