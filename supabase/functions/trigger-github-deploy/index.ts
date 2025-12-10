@@ -106,8 +106,9 @@ async function generateSeoHtml(supabaseUrl: string, serviceRoleKey: string): Pro
     itemsByCategoryId.set(item.category_id, arr);
   }
 
-  // HTML generieren
+  // HTML generieren - mit sr-only Inline-Styles für unsichtbare aber crawler-lesbare Inhalte
   let html = `
+<div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
 <article itemscope itemtype="https://schema.org/Restaurant">
   <h1 itemprop="name">Ristorante STORIA – Italienisches Restaurant München Maxvorstadt</h1>
   <p itemprop="description">
@@ -173,12 +174,13 @@ async function generateSeoHtml(supabaseUrl: string, serviceRoleKey: string): Pro
     </section>`;
     }
 
-    html += `
+  html += `
   </section>`;
   }
 
   html += `
-</article>`;
+</article>
+</div>`;
 
   return html;
 }
