@@ -24,42 +24,30 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Inject SEO content from payload (if available)
+      - name: Inject SEO content from payload
         if: github.event_name == 'repository_dispatch' && github.event.client_payload.seo_html
         run: |
-          echo "SEO-HTML aus Edge Function Payload erhalten"
-          
-          # Marker für die Injection
-          START_MARKER="<!-- BOT_CONTENT_START -->"
-          END_MARKER="<!-- BOT_CONTENT_END -->"
-          
-          # SEO-HTML aus dem Payload in eine temporäre Datei schreiben
-          cat << 'SEOHTML_EOF' > /tmp/seo-content.html
-          ${{ github.event.client_payload.seo_html }}
-          SEOHTML_EOF
-          
-          # SEO-HTML in index.html injizieren
-          if grep -q "$START_MARKER" index.html; then
-            # Existierende Marker ersetzen
-            sed -i "/$START_MARKER/,/$END_MARKER/{
-              /$START_MARKER/{
-                r /tmp/seo-content.html
-                a\\$END_MARKER
-              }
-              d
-            }" index.html
-            # Start-Marker wieder hinzufügen
-            sed -i "s|$END_MARKER|$START_MARKER\n$(cat /tmp/seo-content.html)\n$END_MARKER|" index.html || true
-          fi
-          
-          echo "SEO-Inhalt erfolgreich injiziert"
-
-      - name: Generate static SEO content (fallback)
-        if: github.event_name != 'repository_dispatch' || !github.event.client_payload.seo_html
-        run: node ./scripts/generate-static-seo.mjs
+          node -e "
+          const fs = require('fs');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const seo = process.env.SEO_HTML;
+          if (!seo) {
+            console.log('No SEO content in payload');
+            process.exit(0);
+          }
+          const result = html.replace(
+            /<!-- BOT_CONTENT_START -->[\s\S]*?<!-- BOT_CONTENT_END -->/,
+            '<!-- BOT_CONTENT_START -->\n' + seo + '\n<!-- BOT_CONTENT_END -->'
+          );
+          fs.writeFileSync('index.html', result);
+          console.log('SEO content injected:', seo.length, 'chars');
+          "
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SEO_HTML: ${{ github.event.client_payload.seo_html }}
+
+      - name: Log if no SEO payload (regular push)
+        if: github.event_name != 'repository_dispatch'
+        run: echo "Regular push - no SEO payload injection"
 
       - name: Build project
         run: npm run build
