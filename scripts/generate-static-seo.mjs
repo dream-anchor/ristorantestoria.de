@@ -17,7 +17,6 @@ const END_MARKER = "<!-- NOSCRIPT_CONTENT_END -->";
 
 /**
  * Fallback-HTML, falls Supabase nicht erreichbar ist.
- * (Deine bisherige statische Version)
  */
 const STATIC_FALLBACK_HTML = `
 <article itemscope itemtype="https://schema.org/Restaurant">
@@ -158,9 +157,10 @@ async function buildNoscriptHtmlFromSupabase() {
 
   const supabase = createClient(supabaseUrl, serviceRoleKey);
 
+  // MENUS: title bleibt, description => subtitle
   const { data: menus, error: menusError } = await supabase
     .from("menus")
-    .select("id, slug, title, description, menu_type")
+    .select("id, slug, title, subtitle, menu_type")
     .order("menu_type", { ascending: true })
     .order("title", { ascending: true });
 
@@ -169,20 +169,22 @@ async function buildNoscriptHtmlFromSupabase() {
     return STATIC_FALLBACK_HTML;
   }
 
+  // KATEGORIEN: name, description, sort_order
   const { data: categories, error: catError } = await supabase
     .from("menu_categories")
-    .select("id, menu_id, title, sort")
-    .order("sort", { ascending: true });
+    .select("id, menu_id, name, description, sort_order")
+    .order("sort_order", { ascending: true });
 
   if (catError) {
     console.error("Fehler beim Laden der Kategorien:", catError);
     return STATIC_FALLBACK_HTML;
   }
 
+  // ITEMS: name, description, price, price_display, sort_order
   const { data: items, error: itemsError } = await supabase
     .from("menu_items")
-    .select("id, category_id, title, description, price, sort")
-    .order("sort", { ascending: true });
+    .select("id, category_id, name, description, price, price_display, sort_order")
+    .order("sort_order", { ascending: true });
 
   if (itemsError) {
     console.error("Fehler beim Laden der Gerichte:", itemsError);
@@ -215,7 +217,7 @@ async function buildNoscriptHtmlFromSupabase() {
     alle aktuellen Menüs textbasiert lesen können.
   </p>`;
 
-  // Menüs in sinnvoller Reihenfolge sortieren (erst food/lunch/drinks, dann special)
+  // Menüs sinnvoll sortieren
   const orderedMenus = [...(menus || [])].sort((a, b) => {
     const order = { food: 1, lunch: 2, drinks: 3, special: 4 };
     const oa = order[a.menu_type] ?? 99;
@@ -231,24 +233,36 @@ async function buildNoscriptHtmlFromSupabase() {
   <section aria-label="Speisekarte – ${escapeHtml(menu.title || "")}">
     <h2>${escapeHtml(menu.title || "")}</h2>`;
 
-    if (menu.description) {
+    const menuDesc = menu.subtitle || "";
+    if (menuDesc) {
       html += `
-    <p>${escapeHtml(menu.description)}</p>`;
+    <p>${escapeHtml(menuDesc)}</p>`;
     }
 
     for (const cat of menuCats) {
       const catItems = itemsByCategoryId.get(cat.id) || [];
       if (!catItems.length) continue;
 
+      const catTitle = cat.name || "";
+      const catDesc = cat.description || "";
+
       html += `
-    <section aria-label="${escapeHtml(cat.title)}">
-      <h3>${escapeHtml(cat.title)}</h3>
+    <section aria-label="${escapeHtml(catTitle)}">
+      <h3>${escapeHtml(catTitle)}</h3>`;
+
+      if (catDesc) {
+        html += `
+      <p>${escapeHtml(catDesc)}</p>`;
+      }
+
+      html += `
       <ul>`;
 
       for (const item of catItems) {
-        const title = escapeHtml(item.title || "");
+        const title = escapeHtml(item.name || "");
         const desc = item.description ? ` – ${escapeHtml(item.description)}` : "";
-        const price = item.price ? ` (${escapeHtml(item.price)})` : "";
+        const priceStr = item.price_display || item.price || "";
+        const price = priceStr ? ` (${escapeHtml(priceStr)})` : "";
 
         html += `
         <li><strong>${title}</strong>${desc}${price}</li>`;
@@ -272,7 +286,7 @@ async function buildNoscriptHtmlFromSupabase() {
 }
 
 /**
- * Einfache HTML-Escaping-Funktion für Textinhalte.
+ * Einfaches HTML-Escaping.
  */
 function escapeHtml(str) {
   return String(str)
