@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { slugify, generateUniqueSlug } from "@/lib/slugify";
+import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 
 export interface ParsedMenuItem {
   name: string;
@@ -380,6 +381,9 @@ export const useSaveMenuContent = () => {
       queryClient.invalidateQueries({ queryKey: ['admin-menus'] });
       queryClient.invalidateQueries({ queryKey: ['published-special-menus'] });
       queryClient.invalidateQueries({ queryKey: ['special-menu'] });
+      
+      // Trigger GitHub deploy for SEO update
+      triggerGitHubDeploy();
     },
   });
 };
