@@ -26,7 +26,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
       ? 'Authentisches italienisches Restaurant in München mit frischer Pasta, Pizza aus dem Holzofen und erlesenen Weinen.'
       : 'Authentic Italian restaurant in Munich with fresh pasta, wood-fired pizza, and fine wines.',
     url: 'https://ristorantestoria.de',
-    telephone: '+49-89-515196',
+    telephone: '+49 89 51519696',
     email: 'info@ristorantestoria.de',
     image: [
       'https://iieethejhwfsyzhbweps.supabase.co/storage/v1/object/public/menu-pdfs/og-image.jpg',
@@ -34,7 +34,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     logo: 'https://ristorantestoria.de/storia-logo.webp',
     priceRange: '€€',
     servesCuisine: ['Italian', 'Pizza', 'Pasta', 'Mediterranean'],
-    acceptsReservations: 'True',
+    acceptsReservations: true,
     hasMenu: 'https://ristorantestoria.de/speisekarte',
     address: {
       '@type': 'PostalAddress',
@@ -108,7 +108,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     logo: 'https://ristorantestoria.de/storia-logo.webp',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+49-89-515196',
+      telephone: '+49 89 51519696',
       contactType: 'reservations',
       availableLanguage: ['German', 'English', 'Italian'],
     },
@@ -152,7 +152,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     '@id': 'https://ristorantestoria.de/#localbusiness',
     name: 'STORIA - Ristorante • Pizzeria • Bar',
     image: 'https://iieethejhwfsyzhbweps.supabase.co/storage/v1/object/public/menu-pdfs/og-image.jpg',
-    telephone: '+49-89-515196',
+    telephone: '+49 89 51519696',
     email: 'info@ristorantestoria.de',
     address: {
       '@type': 'PostalAddress',
