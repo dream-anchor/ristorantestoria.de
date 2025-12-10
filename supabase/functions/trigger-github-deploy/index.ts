@@ -458,37 +458,37 @@ async function generateSeoHtml(supabaseUrl: string, serviceRoleKey: string): Pro
     <p>${escapeHtml(menuDesc)}</p>`;
     }
 
+    // Max. 3 Beispiel-Gerichte pro Kategorie (SEO-Optimierung: kein Hidden Text Spam)
+    const MAX_ITEMS_PER_CATEGORY = 3;
+
     for (const cat of menuCats) {
       const catItems = itemsByCategoryId.get(cat.id) || [];
       if (!catItems.length) continue;
 
       const catTitle = cat.name || "";
-      const catDesc = cat.description || "";
+      const displayItems = catItems.slice(0, MAX_ITEMS_PER_CATEGORY);
 
       html += `
     <section aria-label="${escapeHtml(catTitle)}">
-      <h3>${escapeHtml(catTitle)}</h3>`;
-
-      if (catDesc) {
-        html += `
-      <p>${escapeHtml(catDesc)}</p>`;
-      }
-
-      html += `
+      <h3>${escapeHtml(catTitle)}</h3>
       <ul>`;
 
-      for (const item of catItems) {
-        const title = escapeHtml(item.name || "");
-        const desc = item.description ? ` – ${escapeHtml(item.description)}` : "";
-        const priceStr = item.price_display || item.price || "";
-        const price = priceStr ? ` (${escapeHtml(String(priceStr))})` : "";
-
+      for (const item of displayItems) {
+        // Nur Namen, keine Beschreibung/Preis
         html += `
-        <li><strong>${title}</strong>${desc}${price}</li>`;
+        <li>${escapeHtml(item.name || "")}</li>`;
       }
 
       html += `
-      </ul>
+      </ul>`;
+
+      // Hinweis wenn mehr Gerichte existieren
+      if (catItems.length > MAX_ITEMS_PER_CATEGORY) {
+        html += `
+      <p>Weitere Gerichte in dieser Kategorie verfügbar</p>`;
+      }
+
+      html += `
     </section>`;
     }
 
