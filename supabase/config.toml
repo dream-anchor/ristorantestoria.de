@@ -5,3 +5,6 @@ verify_jwt = true
 
 [functions.send-inquiry-notification]
 verify_jwt = false
+
+[functions.trigger-github-deploy]
+verify_jwt = true

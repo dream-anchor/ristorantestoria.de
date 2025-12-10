@@ -7,6 +7,7 @@ import { Upload, Loader2, Check, Eye } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import MenuPreview from "./MenuPreview";
 import type { MenuType } from "@/hooks/useMenu";
+import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 
 interface MenuUploaderProps {
   menuType: MenuType;
@@ -246,6 +247,9 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
       setFile(null);
       setParsedData(null);
       setShowPreview(false);
+      
+      // Trigger GitHub deploy for SEO update
+      triggerGitHubDeploy();
     } catch (err) {
       console.error('Save error:', err);
       toast.error('Fehler beim Speichern des Menüs');
