@@ -35,28 +35,28 @@ const Menu = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Antipasti</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Antipasti</h2>
               <p className="text-muted-foreground">
                 Italienische Vorspeisen mit frischen Zutaten aus dem Cilento
               </p>
             </div>
             
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Pizza</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Pizza</h2>
               <p className="text-muted-foreground">
                 Traditionelle neapolitanische Pizza nach g.t.S.-Standard
               </p>
             </div>
             
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Pasta</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Pasta</h2>
               <p className="text-muted-foreground">
                 Hausgemachte Pasta mit authentischen Saucen
               </p>
             </div>
             
             <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-2xl font-serif font-bold mb-4">Dolci</h3>
+              <h2 className="text-2xl font-serif font-bold mb-4">Dolci</h2>
               <p className="text-muted-foreground">
                 Italienische Desserts und süße Verführungen
               </p>

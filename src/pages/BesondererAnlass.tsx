@@ -107,7 +107,16 @@ const BesondererAnlass = () => {
         <main className="container mx-auto px-4 py-12 flex-grow">
           <div className="max-w-4xl mx-auto">
             <div className="bg-card p-8 rounded-lg border border-border mb-8">
-              <MenuDisplay menuType="special" menuId={menu.id} />
+              <div className="text-center mb-12">
+                <h1 className="text-3xl md:text-4xl font-serif font-semibold tracking-wide mb-2">
+                  {menuTitle}
+                </h1>
+                {menuSubtitle && (
+                  <p className="text-lg text-muted-foreground italic">{menuSubtitle}</p>
+                )}
+                <div className="w-24 h-px bg-primary/30 mx-auto mt-6" />
+              </div>
+              <MenuDisplay menuType="special" menuId={menu.id} showTitle={false} />
             </div>
 
             {/* Contact CTA */}
