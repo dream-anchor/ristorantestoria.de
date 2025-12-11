@@ -10,11 +10,12 @@ import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza, Users, Receipt, Building } from "lucide-react";
+import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza, Users, Receipt, Building, CalendarClock, BadgeCheck } from "lucide-react";
 
 // Images
 import businessLunchAtmosphere from "@/assets/business-lunch-atmosphere.webp";
 import businessLunchFood from "@/assets/business-lunch-food.webp";
+import ravioliImage from "@/assets/ravioli-lunch.webp";
 
 const LunchMuenchen = () => {
   const { language } = useLanguage();
@@ -75,17 +76,20 @@ const LunchMuenchen = () => {
     {
       title: language === 'de' ? 'Pasta-Klassiker' : 'Pasta Classics',
       description: language === 'de' ? 'Regelmäßig wechselnde Kreationen aus frischen Zutaten' : 'Regularly changing creations from fresh ingredients',
-      icon: ChefHat
+      icon: ChefHat,
+      badge: null
     },
     {
       title: language === 'de' ? 'Pizza aus dem Steinofen' : 'Stone Oven Pizza',
       description: language === 'de' ? 'Knusprig & authentisch neapolitanisch' : 'Crispy & authentically Neapolitan',
-      icon: Pizza
+      icon: Pizza,
+      badge: language === 'de' ? 'Beliebt' : 'Popular'
     },
     {
       title: language === 'de' ? 'Insalata & Antipasti' : 'Salads & Antipasti',
       description: language === 'de' ? 'Leichte Gerichte für die schnelle Pause' : 'Light dishes for a quick break',
-      icon: Salad
+      icon: Salad,
+      badge: null
     }
   ];
 
@@ -165,7 +169,7 @@ const LunchMuenchen = () => {
               </p>
               <Button 
                 size="lg" 
-                className="bg-white text-primary hover:bg-white/90 text-base md:text-lg px-8 py-6"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 text-base md:text-lg px-8 py-6 shadow-lg"
                 asChild
               >
                 <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
@@ -181,6 +185,10 @@ const LunchMuenchen = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 text-sm md:text-base">
               <div className="flex items-center gap-2">
+                <BadgeCheck className="w-5 h-5" />
+                <span>{language === 'de' ? 'Seit 1995 in München' : 'Since 1995 in Munich'}</span>
+              </div>
+              <div className="flex items-center gap-2">
                 <Users className="w-5 h-5" />
                 <span>{language === 'de' ? 'Ideal für Teams ab 2 Personen' : 'Ideal for teams of 2+'}</span>
               </div>
@@ -188,10 +196,20 @@ const LunchMuenchen = () => {
                 <Receipt className="w-5 h-5" />
                 <span>{language === 'de' ? 'Firmenrechnung möglich' : 'Company invoice available'}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5" />
-                <span>Mo–Fr 11:30–14:30</span>
-              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Urgency Banner */}
+        <section className="bg-muted/50 border-b border-border py-3">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <CalendarClock className="w-4 h-4 text-primary" />
+              <span>
+                {language === 'de' 
+                  ? 'Beliebte Zeiten (12:00–13:00) schnell ausgebucht – am besten vorab reservieren' 
+                  : 'Peak times (12:00–13:00) book up fast – reserve ahead'}
+              </span>
             </div>
           </div>
         </section>
@@ -321,8 +339,13 @@ const LunchMuenchen = () => {
                   return (
                     <div 
                       key={index} 
-                      className="bg-card border border-border rounded-lg p-6 text-center hover:shadow-lg transition-shadow"
+                      className={`relative bg-card border rounded-lg p-6 text-center hover:shadow-lg transition-shadow ${offer.badge ? 'border-primary border-2' : 'border-border'}`}
                     >
+                      {offer.badge && (
+                        <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                          {offer.badge}
+                        </span>
+                      )}
                       <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                         <OfferIcon className="w-7 h-7 text-primary" />
                       </div>
@@ -349,8 +372,8 @@ const LunchMuenchen = () => {
               <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                   <img 
-                    src={businessLunchAtmosphere}
-                    alt={language === 'de' ? 'Geschäftsleute beim Business Lunch im STORIA München' : 'Business professionals at lunch in STORIA Munich'}
+                    src={ravioliImage}
+                    alt={language === 'de' ? 'Frische hausgemachte Ravioli – Business Lunch im STORIA München' : 'Fresh homemade ravioli – Business lunch at STORIA Munich'}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -439,7 +462,7 @@ const LunchMuenchen = () => {
                   : '"STORIA is our regular spot for team lunches – fast, delicious and the perfect atmosphere for business talks."'}
               </blockquote>
               <p className="opacity-80">
-                — {language === 'de' ? 'Marketing-Team, Agentur Maxvorstadt' : 'Marketing team, Agency Maxvorstadt'}
+                — {language === 'de' ? 'Thomas K., Teamleiter bei einer Münchner Digitalagentur' : 'Thomas K., Team Lead at a Munich Digital Agency'}
               </p>
             </div>
           </section>
