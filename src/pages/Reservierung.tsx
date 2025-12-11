@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import ConsentOpenTable from "@/components/ConsentOpenTable";
+import ReservationBooking from "@/components/ReservationBooking";
 import ElfsightReviews from "@/components/ElfsightReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
@@ -15,20 +14,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Reservierung = () => {
   const { t, language } = useLanguage();
-  const [iframeHeight, setIframeHeight] = useState(1100);
   usePrerenderReady(true);
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.origin.includes('opentable')) {
-        if (event.data?.height && typeof event.data.height === 'number') {
-          setIframeHeight(Math.max(event.data.height, 900));
-        }
-      }
-    };
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
 
   return (
     <>
@@ -78,21 +64,15 @@ const Reservierung = () => {
           </h1>
           <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
             {language === 'de' 
-              ? <>Reservieren Sie bequem online oder rufen Sie uns an unter <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Schnelle Anfragen auch per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+              ? 'Wählen Sie Ihre Wunschzeit und reservieren Sie bequem über OpenTable.'
               : language === 'it'
-              ? <>Prenotate comodamente online o chiamateci al <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Richieste rapide anche via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+              ? 'Scegliete l\'orario desiderato e prenotate comodamente tramite OpenTable.'
               : language === 'fr'
-              ? <>Réservez facilement en ligne ou appelez-nous au <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Demandes rapides aussi via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
-              : <>Book online or call us at <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Quick inquiries also via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
+              ? 'Choisissez votre horaire et réservez facilement via OpenTable.'
+              : 'Choose your preferred time and book conveniently via OpenTable.'}
           </p>
           
-          <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border shadow-lg overflow-hidden">
-            <ConsentOpenTable 
-              src="https://www.opentable.de/booking/restref/availability?rid=115809&restref=115809&lang=de-DE&color=1&r3uid=cfe&dark=false&partysize=2&ot_source=Restaurant%20website"
-              className="transition-[height] duration-300"
-              height={iframeHeight}
-            />
-          </div>
+          <ReservationBooking />
 
           <ElfsightReviews />
         </main>
