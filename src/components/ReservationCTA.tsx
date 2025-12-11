@@ -13,8 +13,8 @@ const ReservationCTA = () => {
       </h2>
       <p className="text-muted-foreground mb-6 max-w-md mx-auto">
         {language === 'de' 
-          ? 'Sichern Sie sich Ihren Platz im STORIA München Maxvorstadt – Ihr Italiener nahe Königsplatz.' 
-          : 'Secure your spot at STORIA Munich Maxvorstadt – your Italian restaurant near Königsplatz.'}
+          ? <>Sichern Sie sich Ihren Platz im STORIA München Maxvorstadt – oder schreiben Sie uns direkt per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+          : <>Secure your spot at STORIA Munich Maxvorstadt – or message us directly via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Button size="lg" asChild>

@@ -77,11 +77,9 @@ const Reservierung = () => {
             {language === 'de' ? 'Tisch reservieren – Ristorante München Maxvorstadt' : 'Book a Table – Italian Restaurant Munich Maxvorstadt'}
           </h1>
           <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
-            {t.reservation.description}
-            <br />
-            <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>
-            {' · '}
-            <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp</a>
+            {language === 'de' 
+              ? <>Reservieren Sie bequem online oder rufen Sie uns an unter <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>. Für schnelle Anfragen auch per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+              : <>Book online or call us at <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>. For quick inquiries also via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
           </p>
           
           <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border shadow-lg overflow-hidden">

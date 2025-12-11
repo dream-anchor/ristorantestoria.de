@@ -447,8 +447,8 @@ const LunchMuenchen = () => {
               </h3>
               <p className="text-muted-foreground mb-6">
                 {language === 'de' 
-                  ? 'Für Gruppen ab 8 Personen und geschlossene Gesellschaften kontaktieren Sie uns direkt oder entdecken Sie unsere Event-Angebote.' 
-                  : 'For groups of 8+ and private events, contact us directly or discover our event offerings.'}
+                  ? <>Für Gruppen ab 8 Personen kontaktieren Sie uns gerne telefonisch oder direkt per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+                  : <>For groups of 8+ contact us by phone or directly via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="outline" asChild>
@@ -492,8 +492,8 @@ const LunchMuenchen = () => {
               </h2>
               <p className="text-xl mb-8 opacity-90">
                 {language === 'de' 
-                  ? 'Reservieren Sie jetzt und genießen Sie italienische Qualität in zentraler Lage.' 
-                  : 'Reserve now and enjoy Italian quality in a central location.'}
+                  ? <>Reservieren Sie jetzt und genießen Sie italienische Qualität – oder schreiben Sie uns direkt per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">WhatsApp →</a></>
+                  : <>Reserve now and enjoy Italian quality – or message us directly via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">WhatsApp →</a></>}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" className="text-lg px-8 py-6" asChild>

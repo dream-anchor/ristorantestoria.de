@@ -334,8 +334,10 @@ const FirmenfeierMuenchen = () => {
 
               {/* CTA after Gallery */}
               <div className="text-center mt-12">
-                <p className="text-muted-foreground mb-4">
-                  {language === 'de' ? 'Haben Sie Fragen zu Ihrer Veranstaltung?' : 'Do you have questions about your event?'}
+              <p className="text-muted-foreground mb-4">
+                {language === 'de' 
+                  ? <>Fragen zu Ihrer Veranstaltung? Schreiben Sie uns per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+                  : <>Questions about your event? Message us via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
                 </p>
                 <a 
                   href="tel:+498951519696" 
