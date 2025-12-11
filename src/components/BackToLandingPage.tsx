@@ -56,7 +56,7 @@ const BackToLandingPage = () => {
   return (
     <div className="mb-6">
       <Button variant="ghost" size="sm" asChild className="text-muted-foreground hover:text-foreground">
-        <Link to={landingPage.path}>
+        <Link to={landingPage.path} state={{ fromLunch: fromSlug === 'lunch-muenchen-maxvorstadt' }}>
           <ArrowLeft className="w-4 h-4 mr-2" />
           {language === 'de' ? `Zurück zu ${pageName}` : `Back to ${pageName}`}
         </Link>
