@@ -73,9 +73,11 @@ const Index = () => {
         <HomeBotContent />
         <Hero />
         <Navigation />
-        <ImageGrid />
-        <ElfsightReviews />
-        <InternalLinks />
+        <main>
+          <ImageGrid />
+          <ElfsightReviews />
+          <InternalLinks />
+        </main>
         <Footer />
       </div>
     </>
