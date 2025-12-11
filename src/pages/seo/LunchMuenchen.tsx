@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -15,11 +16,27 @@ import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad,
 // Images
 import businessLunchAtmosphere from "@/assets/business-lunch-atmosphere.webp";
 import businessLunchFood from "@/assets/business-lunch-food.webp";
-import ravioliImage from "@/assets/ravioli-lunch.webp";
+import menschenAussen from "@/assets/menschen-aussen.jpeg";
 
 const LunchMuenchen = () => {
   const { language } = useLanguage();
+  const location = useLocation();
   usePrerenderReady(true);
+
+  // Scroll position restoration
+  useEffect(() => {
+    const savedPosition = sessionStorage.getItem('lunchScrollPosition');
+    if (savedPosition && location.state?.fromLunch) {
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedPosition));
+        sessionStorage.removeItem('lunchScrollPosition');
+      }, 100);
+    }
+  }, [location]);
+
+  const handleMenuClick = () => {
+    sessionStorage.setItem('lunchScrollPosition', String(window.scrollY));
+  };
 
   const benefits = [
     {
@@ -203,14 +220,18 @@ const LunchMuenchen = () => {
         {/* Urgency Banner */}
         <section className="bg-muted/50 border-b border-border py-3">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <Link 
+              to="/reservierung?from=lunch-muenchen-maxvorstadt" 
+              className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+            >
               <CalendarClock className="w-4 h-4 text-primary" />
-              <span>
+              <span className="underline-offset-2 group-hover:underline">
                 {language === 'de' 
                   ? 'Beliebte Zeiten (12:00–13:00) schnell ausgebucht – am besten vorab reservieren' 
                   : 'Peak times (12:00–13:00) book up fast – reserve ahead'}
               </span>
-            </div>
+              <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
           </div>
         </section>
 
@@ -233,7 +254,7 @@ const LunchMuenchen = () => {
                   : 'Starter, main course and dessert – the complete Italian lunch experience at a fair price.'}
               </p>
               <Button variant="default" size="lg" asChild>
-                <Link to="/mittags-menu?from=lunch-muenchen-maxvorstadt">
+                <Link to="/mittags-menu?from=lunch-muenchen-maxvorstadt" onClick={handleMenuClick}>
                   {language === 'de' ? 'Menü ansehen' : 'View menu'}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
@@ -372,8 +393,8 @@ const LunchMuenchen = () => {
               <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                   <img 
-                    src={ravioliImage}
-                    alt={language === 'de' ? 'Frische hausgemachte Ravioli – Business Lunch im STORIA München' : 'Fresh homemade ravioli – Business lunch at STORIA Munich'}
+                    src={menschenAussen}
+                    alt={language === 'de' ? 'Gäste genießen Business Lunch auf der Terrasse – STORIA München' : 'Guests enjoying business lunch on the terrace – STORIA Munich'}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
