@@ -192,7 +192,33 @@ serve(async (req) => {
     });
 
     // Filter out empty texts
-    const validTexts = textsToCheck.filter(t => t.text && t.text.trim().length > 0);
+    const nonEmptyTexts = textsToCheck.filter(t => t.text && t.text.trim().length > 0);
+
+    // Filter out IT/FR texts that are just copies of German (fallback translations)
+    const filterDuplicateFallbacks = (texts: typeof textsToCheck) => {
+      return texts.filter(t => {
+        // Always keep DE and EN entries
+        if (t.location.language === 'de' || t.location.language === 'en') {
+          return true;
+        }
+        // For IT/FR: check if text is identical to DE version (would indicate fallback copy)
+        const deVersion = texts.find(d => 
+          d.location.type === t.location.type &&
+          d.location.categoryIndex === t.location.categoryIndex &&
+          d.location.itemIndex === t.location.itemIndex &&
+          d.location.field === t.location.field &&
+          d.location.language === 'de'
+        );
+        // If IT/FR text is identical to DE, it's a fallback - skip spell checking it
+        if (deVersion && deVersion.text.trim() === t.text.trim()) {
+          console.log(`Skipping fallback text (${t.location.language}): "${t.text.substring(0, 50)}..."`);
+          return false;
+        }
+        return true;
+      });
+    };
+
+    const validTexts = filterDuplicateFallbacks(nonEmptyTexts);
 
     if (validTexts.length === 0) {
       return new Response(JSON.stringify({ errors: [] }), {
@@ -200,12 +226,14 @@ serve(async (req) => {
       });
     }
 
-    console.log(`Checking ${validTexts.length} text fields...`);
+    console.log(`Checking ${validTexts.length} text fields (filtered from ${nonEmptyTexts.length})...`);
 
     const prompt = `Du bist ein professioneller Lektor für Restaurant-Menüs. Prüfe die folgenden Texte auf Rechtschreib-, Grammatik- und Zeichensetzungsfehler.
 
 WICHTIGE REGELN:
-1. Italienische Fachbegriffe und Gerichtsnamen sind KORREKT und dürfen NICHT als Fehler markiert werden:
+1. **STORIA ist der Restaurantname und darf NIEMALS als Fehler markiert oder übersetzt werden!**
+   "STORIA" ist KEIN Rechtschreibfehler, es ist der Name des Restaurants. Niemals "Geschichte", "History", "Storia" oder andere Übersetzungen vorschlagen!
+2. Italienische Fachbegriffe und Gerichtsnamen sind KORREKT und dürfen NICHT als Fehler markiert werden:
    - Antipasti, Bruschetta, Carpaccio, Tiramisu, Risotto, Gnocchi, Tagliatelle, Pappardelle, Penne, Rigatoni, Fusilli, Farfalle, Orecchiette
    - Bolognese, Carbonara, Arrabbiata, Puttanesca, Marinara, Primavera, Alfredo, Pesto, Ragù, Sugo
    - Prosciutto, Mozzarella, Burrata, Gorgonzola, Parmigiano, Pecorino, Mascarpone, Ricotta
@@ -214,10 +242,10 @@ WICHTIGE REGELN:
    - Espresso, Cappuccino, Latte, Macchiato, Americano, Ristretto
    - Prosecco, Chianti, Barolo, Amarone, Grappa, Limoncello, Sambuca
    - con, alla, al, del, della, e, di, ai, alle (italienische Präpositionen)
-2. Prüfe jeden Text in seiner jeweiligen Sprache (de=Deutsch, en=Englisch, it=Italienisch, fr=Französisch)
-3. Bei italienischen Texten: Nur echte Fehler markieren, italienische Wörter sind korrekt
-4. Gib NUR echte Fehler zurück, keine stilistischen Vorschläge
-5. Wenn ein Text korrekt ist, füge ihn NICHT zur Fehlerliste hinzu
+3. Prüfe jeden Text in seiner jeweiligen Sprache (de=Deutsch, en=Englisch, it=Italienisch, fr=Französisch)
+4. Bei italienischen Texten: Nur echte Fehler markieren, italienische Wörter sind korrekt
+5. Gib NUR echte Fehler zurück, keine stilistischen Vorschläge
+6. Wenn ein Text korrekt ist, füge ihn NICHT zur Fehlerliste hinzu
 
 Texte zum Prüfen (JSON-Format):
 ${JSON.stringify(validTexts.map((t, i) => ({ index: i, text: t.text, language: t.location.language, context: t.context })), null, 2)}
