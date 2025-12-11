@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -23,6 +23,7 @@ interface NavItem {
   label: string;
   path?: string;
   externalUrl?: string;
+  external?: boolean;
   children?: NavChild[];
 }
 
@@ -94,8 +95,9 @@ const Navigation = () => {
       label: t.nav.specialOccasions,
       children: specialOccasionsChildren,
     },
-    { label: t.nav.catering, externalUrl: "https://www.events-storia.de/" },
     { label: t.nav.contact, path: "/kontakt" },
+    // Externer Link am Ende mit visueller Unterscheidung
+    { label: t.nav.catering, externalUrl: "https://www.events-storia.de/", external: true },
   ];
 
   const toggleMobileMenu = (label: string) => {
@@ -171,16 +173,26 @@ const Navigation = () => {
                       </CollapsibleContent>
                     </Collapsible>
                   ) : item.externalUrl ? (
-                    <a
-                      key={item.label}
-                      href={item.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsOpen(false)}
-                      className="px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors hover:bg-accent/50 hover:text-accent-foreground"
-                    >
-                      {item.label}
-                    </a>
+                    <div key={item.label}>
+                      {/* Horizontale Trennlinie für externe Links (Mobile) */}
+                      {item.external && (
+                        <div className="mx-4 my-2 border-t border-primary-foreground/30" />
+                      )}
+                      <a
+                        href={item.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsOpen(false)}
+                        className={`flex items-center justify-between px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors ${
+                          item.external 
+                            ? "text-primary-foreground/70 hover:text-primary-foreground hover:bg-accent/50" 
+                            : "hover:bg-accent/50 hover:text-accent-foreground"
+                        }`}
+                      >
+                        <span>{item.label}</span>
+                        {item.external && <ExternalLink className="h-4 w-4" />}
+                      </a>
+                    </div>
                   ) : (
                     <Link
                       key={item.path}
@@ -254,18 +266,26 @@ const Navigation = () => {
                 )}
               </div>
             ) : item.externalUrl ? (
-              <a
-                key={item.label}
-                href={item.externalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative"
-              >
-                <span className="relative">
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-foreground transform transition-transform duration-300 origin-left scale-x-0 group-hover:scale-x-100" />
-                </span>
-              </a>
+              <div key={item.label} className="flex items-center">
+                {/* Vertikaler Separator für externe Links (Desktop) */}
+                {item.external && (
+                  <span className="text-primary-foreground/30 px-1">|</span>
+                )}
+                <a
+                  href={item.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group flex items-center gap-1.5 whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative ${
+                    item.external ? "text-primary-foreground/70 hover:text-primary-foreground" : ""
+                  }`}
+                >
+                  <span className="relative">
+                    {item.label}
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-foreground transform transition-transform duration-300 origin-left scale-x-0 group-hover:scale-x-100" />
+                  </span>
+                  {item.external && <ExternalLink className="h-3.5 w-3.5" />}
+                </a>
+              </div>
             ) : (
               <Link
                 key={item.path}
