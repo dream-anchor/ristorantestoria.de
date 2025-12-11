@@ -7,8 +7,12 @@ export interface MenuItem {
   id: string;
   name: string;
   name_en: string | null;
+  name_it: string | null;
+  name_fr: string | null;
   description: string | null;
   description_en: string | null;
+  description_it: string | null;
+  description_fr: string | null;
   price: number | null;
   price_display: string | null;
   sort_order: number;
@@ -18,8 +22,12 @@ export interface MenuCategory {
   id: string;
   name: string;
   name_en: string | null;
+  name_it: string | null;
+  name_fr: string | null;
   description: string | null;
   description_en: string | null;
+  description_it: string | null;
+  description_fr: string | null;
   sort_order: number;
   items: MenuItem[];
 }
@@ -29,8 +37,12 @@ export interface Menu {
   menu_type: MenuType;
   title: string | null;
   title_en: string | null;
+  title_it: string | null;
+  title_fr: string | null;
   subtitle: string | null;
   subtitle_en: string | null;
+  subtitle_it: string | null;
+  subtitle_fr: string | null;
   is_published: boolean;
   categories: MenuCategory[];
 }
@@ -83,8 +95,12 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
     id: cat.id,
     name: cat.name,
     name_en: cat.name_en,
+    name_it: (cat as any).name_it || null,
+    name_fr: (cat as any).name_fr || null,
     description: cat.description,
     description_en: cat.description_en,
+    description_it: (cat as any).description_it || null,
+    description_fr: (cat as any).description_fr || null,
     sort_order: cat.sort_order || 0,
     items: (items || [])
       .filter(item => item.category_id === cat.id)
@@ -92,8 +108,12 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
         id: item.id,
         name: item.name,
         name_en: item.name_en,
+        name_it: (item as any).name_it || null,
+        name_fr: (item as any).name_fr || null,
         description: item.description,
         description_en: item.description_en,
+        description_it: (item as any).description_it || null,
+        description_fr: (item as any).description_fr || null,
         price: item.price ? parseFloat(item.price.toString()) : null,
         price_display: item.price_display,
         sort_order: item.sort_order || 0,
@@ -105,8 +125,12 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
     menu_type: menu.menu_type as MenuType,
     title: menu.title,
     title_en: menu.title_en,
+    title_it: (menu as any).title_it || null,
+    title_fr: (menu as any).title_fr || null,
     subtitle: menu.subtitle,
     subtitle_en: menu.subtitle_en,
+    subtitle_it: (menu as any).subtitle_it || null,
+    subtitle_fr: (menu as any).subtitle_fr || null,
     is_published: menu.is_published || false,
     categories: categoriesWithItems,
   };

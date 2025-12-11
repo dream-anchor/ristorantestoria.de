@@ -8,8 +8,12 @@ const corsHeaders = {
 interface MenuItem {
   name: string;
   name_en: string;
+  name_it: string;
+  name_fr: string;
   description: string;
   description_en: string;
+  description_it: string;
+  description_fr: string;
   price: number | null;
   price_display: string;
   sort_order: number;
@@ -18,8 +22,12 @@ interface MenuItem {
 interface MenuCategory {
   name: string;
   name_en: string;
+  name_it: string;
+  name_fr: string;
   description: string;
   description_en: string;
+  description_it: string;
+  description_fr: string;
   sort_order: number;
   items: MenuItem[];
 }
@@ -27,8 +35,12 @@ interface MenuCategory {
 interface ParsedMenu {
   title: string;
   title_en: string;
+  title_it: string;
+  title_fr: string;
   subtitle: string;
   subtitle_en: string;
+  subtitle_it: string;
+  subtitle_fr: string;
   categories: MenuCategory[];
 }
 
@@ -51,7 +63,7 @@ serve(async (req) => {
 
     console.log(`Parsing menu PDF for type: ${menuType}, base64 length: ${pdfBase64.length}`);
 
-    const systemPrompt = `Du bist ein präziser Menü-Parser für ein italienisches Restaurant. Deine Aufgabe ist es, den Inhalt eines Menü-PDFs EXAKT zu extrahieren UND automatisch ins Englische zu übersetzen.
+    const systemPrompt = `Du bist ein präziser Menü-Parser für ein italienisches Restaurant. Deine Aufgabe ist es, den Inhalt eines Menü-PDFs EXAKT zu extrahieren UND automatisch in Englisch, Italienisch und Französisch zu übersetzen.
 
 WICHTIGE REGELN FÜR EXTRAKTION:
 1. Übernimm ALLE deutschen Texte WÖRTLICH - keine Umformulierungen oder Korrekturen
@@ -60,17 +72,19 @@ WICHTIGE REGELN FÜR EXTRAKTION:
 4. Bei Unklarheiten: lieber original übernehmen als interpretieren
 5. Erkenne Preise auch wenn sie in verschiedenen Formaten angegeben sind (€, EUR, ohne Währung)
 
-AUTOMATISCHE ENGLISCHE ÜBERSETZUNG (PFLICHT):
-6. Übersetze ALLE deutschen Texte automatisch ins Englische für die _en Felder:
-   - name → name_en (z.B. "Vorspeisen" → "Starters", "Hauptgerichte" → "Main Courses")
-   - description → description_en (vollständige Übersetzung der Beschreibung)
+AUTOMATISCHE ÜBERSETZUNG IN 3 SPRACHEN (PFLICHT):
+6. Übersetze ALLE deutschen Texte automatisch für die _en, _it und _fr Felder:
+   - name → name_en (Englisch), name_it (Italienisch), name_fr (Französisch)
+   - description → description_en, description_it, description_fr
 7. Bei italienischen Kategorie-Namen wie "Antipasti", "Primi Piatti", "Dolci":
-   - Behalte sie im name Feld (Deutsch)
-   - Für name_en: füge englische Übersetzung hinzu (z.B. "Antipasti - Starters", "Dolci - Desserts")
+   - Behalte sie im deutschen name Feld
+   - Für name_en: füge englische Übersetzung hinzu (z.B. "Antipasti - Starters")
+   - Für name_it: behalte den italienischen Namen
+   - Für name_fr: füge französische Übersetzung hinzu (z.B. "Antipasti - Entrées")
 8. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
    - name: Original beibehalten
-   - name_en: Original beibehalten (italienische Gerichtnamen sind international)
-   - description_en: Deutsche Beschreibung ins Englische übersetzen
+   - name_en, name_it, name_fr: Original beibehalten (italienische Gerichtnamen sind international)
+   - description_en, description_it, description_fr: Deutsche Beschreibung übersetzen
 
 Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.`;
 
@@ -95,7 +109,7 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
               },
               {
                 type: 'text',
-                text: 'Extrahiere den kompletten Menü-Inhalt aus diesem PDF. Übernimm alle Gerichte, Beschreibungen und Preise EXAKT wie im Dokument.'
+                text: 'Extrahiere den kompletten Menü-Inhalt aus diesem PDF. Übernimm alle Gerichte, Beschreibungen und Preise EXAKT wie im Dokument. Übersetze automatisch in EN, IT und FR.'
               }
             ]
           }
@@ -105,36 +119,48 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
             type: 'function',
             function: {
               name: 'extract_menu',
-              description: 'Extrahiert strukturierte Menü-Daten aus dem PDF-Inhalt',
+              description: 'Extrahiert strukturierte Menü-Daten aus dem PDF-Inhalt mit Übersetzungen',
               parameters: {
                 type: 'object',
                 properties: {
-                  title: { type: 'string', description: 'Titel des Menüs auf Deutsch (z.B. "Business Lunch", "Speisekarte")' },
-                  title_en: { type: 'string', description: 'Titel des Menüs auf Englisch (z.B. "Business Lunch", "Menu")' },
-                  subtitle: { type: 'string', description: 'Untertitel oder Zusatzinfo auf Deutsch (z.B. Öffnungszeiten)' },
-                  subtitle_en: { type: 'string', description: 'Untertitel oder Zusatzinfo auf Englisch' },
+                  title: { type: 'string', description: 'Titel des Menüs auf Deutsch' },
+                  title_en: { type: 'string', description: 'Titel auf Englisch' },
+                  title_it: { type: 'string', description: 'Titel auf Italienisch' },
+                  title_fr: { type: 'string', description: 'Titel auf Französisch' },
+                  subtitle: { type: 'string', description: 'Untertitel auf Deutsch' },
+                  subtitle_en: { type: 'string', description: 'Untertitel auf Englisch' },
+                  subtitle_it: { type: 'string', description: 'Untertitel auf Italienisch' },
+                  subtitle_fr: { type: 'string', description: 'Untertitel auf Französisch' },
                   categories: {
                     type: 'array',
                     items: {
                       type: 'object',
                       properties: {
-                        name: { type: 'string', description: 'Kategoriename auf Deutsch' },
-                        name_en: { type: 'string', description: 'Kategoriename auf Englisch (falls vorhanden)' },
-                        description: { type: 'string', description: 'Kategoriebeschreibung auf Deutsch' },
-                        description_en: { type: 'string', description: 'Kategoriebeschreibung auf Englisch' },
-                        sort_order: { type: 'number', description: 'Sortierreihenfolge' },
+                        name: { type: 'string' },
+                        name_en: { type: 'string' },
+                        name_it: { type: 'string' },
+                        name_fr: { type: 'string' },
+                        description: { type: 'string' },
+                        description_en: { type: 'string' },
+                        description_it: { type: 'string' },
+                        description_fr: { type: 'string' },
+                        sort_order: { type: 'number' },
                         items: {
                           type: 'array',
                           items: {
                             type: 'object',
                             properties: {
-                              name: { type: 'string', description: 'Gerichtname auf Deutsch' },
-                              name_en: { type: 'string', description: 'Gerichtname auf Englisch' },
-                              description: { type: 'string', description: 'Beschreibung auf Deutsch' },
-                              description_en: { type: 'string', description: 'Beschreibung auf Englisch' },
-                              price: { type: 'number', description: 'Preis als Zahl (z.B. 12.50)' },
-                              price_display: { type: 'string', description: 'Preis als formatierter String (z.B. "€12,50")' },
-                              sort_order: { type: 'number', description: 'Sortierreihenfolge' }
+                              name: { type: 'string' },
+                              name_en: { type: 'string' },
+                              name_it: { type: 'string' },
+                              name_fr: { type: 'string' },
+                              description: { type: 'string' },
+                              description_en: { type: 'string' },
+                              description_it: { type: 'string' },
+                              description_fr: { type: 'string' },
+                              price: { type: 'number' },
+                              price_display: { type: 'string' },
+                              sort_order: { type: 'number' }
                             },
                             required: ['name', 'price_display', 'sort_order']
                           }
@@ -144,7 +170,7 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
                     }
                   }
                 },
-                required: ['title', 'title_en', 'categories']
+                required: ['title', 'title_en', 'title_it', 'title_fr', 'categories']
               }
             }
           }
@@ -182,7 +208,7 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
     }
 
     const parsedMenu: ParsedMenu = JSON.parse(toolCall.function.arguments);
-    console.log(`Parsed ${parsedMenu.categories.length} categories`);
+    console.log(`Parsed ${parsedMenu.categories.length} categories with IT/FR translations`);
 
     return new Response(JSON.stringify({ 
       success: true, 
