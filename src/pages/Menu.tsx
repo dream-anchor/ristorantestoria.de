@@ -8,7 +8,7 @@ const Menu = () => {
   return (
     <>
       <SEO 
-        title="Menü" 
+        title="Menükarte – Alle Speisen" 
         description="Das Menü von STORIA Restaurant München: Antipasti, Pizza, Pasta und Dolci – authentische italienische Küche in der Maxvorstadt."
         canonical="/menu"
       />
