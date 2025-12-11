@@ -12,7 +12,10 @@ const Hero = () => {
         <Link to="/" aria-label={language === 'de' ? 'Zur Startseite' : 'Go to homepage'}>
           <img 
             src={storiaLogo} 
-            alt="STORIA - Ristorante Pizzeria Bar München Logo" 
+            alt="STORIA – Ristorante Pizzeria Bar München Logo"
+            width={192}
+            height={192}
+            loading="eager"
             className="h-32 md:h-48 mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer"
           />
         </Link>
