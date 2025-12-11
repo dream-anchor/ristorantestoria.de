@@ -13,7 +13,8 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza, Users, Receipt, Building } from "lucide-react";
 
 // Images
-import ravioliImage from "@/assets/ravioli-lunch.webp";
+import businessLunchAtmosphere from "@/assets/business-lunch-atmosphere.webp";
+import businessLunchFood from "@/assets/business-lunch-food.webp";
 
 const LunchMuenchen = () => {
   const { language } = useLanguage();
@@ -138,8 +139,8 @@ const LunchMuenchen = () => {
         {/* Hero Section with Full Image */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
           <img 
-            src={ravioliImage} 
-            alt={language === 'de' ? 'Frische Ravioli mit Tomatensugo – Business Lunch im STORIA München' : 'Fresh ravioli with tomato sugo – Business lunch at STORIA Munich'}
+            src={businessLunchAtmosphere} 
+            alt={language === 'de' ? 'Business Lunch im STORIA München – Geschäftsleute beim italienischen Mittagessen' : 'Business lunch at STORIA Munich – professionals enjoying Italian cuisine'}
             width={1200}
             height={800}
             loading="eager"
@@ -330,6 +331,38 @@ const LunchMuenchen = () => {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          </section>
+
+          {/* Business Lunch Galerie */}
+          <section className="py-16 md:py-20 bg-card">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
+                {language === 'de' ? 'Ihr Business-Lunch-Erlebnis' : 'Your Business Lunch Experience'}
+              </h2>
+              <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
+                {language === 'de' 
+                  ? 'Professionelle Atmosphäre, authentisch italienische Küche.' 
+                  : 'Professional atmosphere, authentic Italian cuisine.'}
+              </p>
+              <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+                  <img 
+                    src={businessLunchAtmosphere}
+                    alt={language === 'de' ? 'Geschäftsleute beim Business Lunch im STORIA München' : 'Business professionals at lunch in STORIA Munich'}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+                  <img 
+                    src={businessLunchFood}
+                    alt={language === 'de' ? 'Italienische Gerichte für Ihr Business Lunch' : 'Italian dishes for your business lunch'}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </section>
