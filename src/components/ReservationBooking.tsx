@@ -1,18 +1,23 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { CalendarIcon, Clock, Users, ExternalLink, Phone, MessageCircle } from "lucide-react";
 import { format, addDays } from "date-fns";
 import { de, enUS, it, fr } from "date-fns/locale";
 
 const ReservationBooking = () => {
   const { t, language } = useLanguage();
+  const isMobile = useIsMobile();
   const [date, setDate] = useState<Date | undefined>(addDays(new Date(), 1));
   const [time, setTime] = useState("19:00");
   const [guests, setGuests] = useState("2");
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const getLocale = () => {
     switch (language) {
@@ -49,20 +54,89 @@ const ReservationBooking = () => {
 
   const handleOpenTable = () => {
     window.open(buildOpenTableUrl(), "_blank", "noopener,noreferrer");
+    setIsConfirmOpen(false);
   };
 
-  return (
-    <div className="max-w-2xl mx-auto">
-      <div className="bg-card rounded-2xl border border-border shadow-lg overflow-hidden">
-        {/* Header */}
-        <div className="bg-primary/5 px-6 py-5 border-b border-border">
-          <h2 className="text-xl font-semibold text-foreground text-center">
-            {t.reservationBooking.title}
-          </h2>
-          <p className="text-sm text-muted-foreground text-center mt-1">
-            {t.reservationBooking.subtitle}
-          </p>
+  const handleBookClick = () => {
+    setIsConfirmOpen(true);
+  };
+
+  const formattedDate = date ? format(date, "EEEE, d. MMMM yyyy", { locale: getLocale() }) : "";
+
+  const ConfirmationContent = () => (
+    <div className="space-y-6">
+      {/* Reservation Summary */}
+      <div className="bg-secondary/50 rounded-xl p-4 space-y-3">
+        <div className="flex items-center gap-3">
+          <CalendarIcon className="h-5 w-5 text-primary" />
+          <span className="font-medium">{formattedDate}</span>
         </div>
+        <div className="flex items-center gap-3">
+          <Clock className="h-5 w-5 text-primary" />
+          <span className="font-medium">{time} {t.reservationBooking.clock}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Users className="h-5 w-5 text-primary" />
+          <span className="font-medium">
+            {guests} {parseInt(guests) === 1 ? t.reservationBooking.person : t.reservationBooking.persons}
+          </span>
+        </div>
+      </div>
+
+      {/* Continue Button */}
+      <Button 
+        onClick={handleOpenTable}
+        className="w-full h-12 text-base font-semibold gap-2"
+        size="lg"
+      >
+        {t.reservationBooking.confirmButton}
+        <ExternalLink className="h-4 w-4" />
+      </Button>
+
+      <p className="text-xs text-muted-foreground text-center">
+        {t.reservationBooking.confirmDescription}
+      </p>
+
+      {/* Alternative Contact */}
+      <div className="border-t border-border pt-4">
+        <p className="text-sm text-muted-foreground text-center mb-3">
+          {t.reservationBooking.alternativeTitle}
+        </p>
+        <div className="flex flex-col sm:flex-row gap-2 justify-center">
+          <a 
+            href="tel:+498951519696"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-border bg-background hover:bg-secondary/50 transition-colors text-sm font-medium"
+          >
+            <Phone className="h-4 w-4 text-primary" />
+            +49 89 51519696
+          </a>
+          <a 
+            href="https://wa.me/491636033912"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-border bg-background hover:bg-secondary/50 transition-colors text-sm font-medium"
+          >
+            <MessageCircle className="h-4 w-4 text-[#25D366]" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      <div className="max-w-2xl mx-auto">
+        <div className="bg-card rounded-2xl border border-border shadow-lg overflow-hidden">
+          {/* Header */}
+          <div className="bg-primary/5 px-6 py-5 border-b border-border">
+            <h2 className="text-xl font-semibold text-foreground text-center">
+              {t.reservationBooking.title}
+            </h2>
+            <p className="text-sm text-muted-foreground text-center mt-1">
+              {t.reservationBooking.subtitle}
+            </p>
+          </div>
 
         {/* Booking Form */}
         <div className="p-6 space-y-5">
@@ -139,7 +213,7 @@ const ReservationBooking = () => {
 
           {/* OpenTable Button */}
           <Button 
-            onClick={handleOpenTable}
+            onClick={handleBookClick}
             className="w-full h-12 text-base font-semibold gap-2"
             size="lg"
           >
@@ -178,6 +252,39 @@ const ReservationBooking = () => {
         </div>
       </div>
     </div>
+
+    {/* Desktop: Dialog */}
+    {!isMobile && (
+      <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>{t.reservationBooking.confirmTitle}</DialogTitle>
+            <DialogDescription>
+              {t.reservationBooking.confirmSubtitle}
+            </DialogDescription>
+          </DialogHeader>
+          <ConfirmationContent />
+        </DialogContent>
+      </Dialog>
+    )}
+
+    {/* Mobile: Drawer */}
+    {isMobile && (
+      <Drawer open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+        <DrawerContent>
+          <DrawerHeader className="text-left">
+            <DrawerTitle>{t.reservationBooking.confirmTitle}</DrawerTitle>
+            <DrawerDescription>
+              {t.reservationBooking.confirmSubtitle}
+            </DrawerDescription>
+          </DrawerHeader>
+          <div className="px-4 pb-6">
+            <ConfirmationContent />
+          </div>
+        </DrawerContent>
+      </Drawer>
+    )}
+  </>
   );
 };
 

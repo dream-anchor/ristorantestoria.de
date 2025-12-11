@@ -127,6 +127,10 @@ export const de = {
     bookNow: 'Bei OpenTable reservieren',
     openTableNote: 'Sie werden zu OpenTable weitergeleitet, um Ihre Reservierung abzuschließen.',
     alternativeTitle: 'Oder kontaktieren Sie uns direkt:',
+    confirmTitle: 'Ihre Reservierung',
+    confirmSubtitle: 'Überprüfen Sie Ihre Auswahl',
+    confirmButton: 'Jetzt reservieren →',
+    confirmDescription: 'Sie werden zu OpenTable weitergeleitet',
   },
   lunchMenu: {
     title: 'Mittagsmenü',
