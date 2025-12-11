@@ -8,7 +8,7 @@ import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
 import StaticBotContent from "@/components/StaticBotContent";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -91,6 +91,22 @@ const Kontakt = () => {
                     <a href="mailto:info@ristorantestoria.de" className="text-muted-foreground hover:text-primary">
                       info@ristorantestoria.de
                     </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <MessageCircle className="h-5 w-5 text-[#25D366] mt-1" />
+                  <div>
+                    <p className="font-medium">{t.contact.whatsapp}</p>
+                    <a 
+                      href="https://wa.me/491636033912" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-[#25D366]"
+                    >
+                      {t.contact.whatsappChat}
+                    </a>
+                    <p className="text-xs text-muted-foreground/70 mt-0.5">{t.contact.whatsappHint}</p>
                   </div>
                 </div>
 

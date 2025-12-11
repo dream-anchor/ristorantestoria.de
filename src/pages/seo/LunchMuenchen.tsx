@@ -11,7 +11,7 @@ import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza, Users, Receipt, Building, CalendarClock, BadgeCheck } from "lucide-react";
+import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza, Users, Receipt, Building, CalendarClock, BadgeCheck, MessageCircle } from "lucide-react";
 
 // Images
 import businessLunchAtmosphere from "@/assets/business-lunch-atmosphere.webp";
@@ -160,8 +160,8 @@ const LunchMuenchen = () => {
         {/* Hero Section with Full Image */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
           <img 
-            src={businessLunchAtmosphere} 
-            alt={language === 'de' ? 'Business Lunch im STORIA München – Geschäftsleute beim italienischen Mittagessen' : 'Business lunch at STORIA Munich – professionals enjoying Italian cuisine'}
+            src={menschenAussen} 
+            alt={language === 'de' ? 'Gäste genießen Business Lunch auf der Terrasse – STORIA München' : 'Guests enjoying business lunch on the terrace – STORIA Munich'}
             width={1200}
             height={800}
             loading="eager"
@@ -393,8 +393,8 @@ const LunchMuenchen = () => {
               <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                   <img 
-                    src={menschenAussen}
-                    alt={language === 'de' ? 'Gäste genießen Business Lunch auf der Terrasse – STORIA München' : 'Guests enjoying business lunch on the terrace – STORIA Munich'}
+                    src={businessLunchAtmosphere}
+                    alt={language === 'de' ? 'Business Lunch Atmosphäre im STORIA Restaurant München' : 'Business lunch atmosphere at STORIA Restaurant Munich'}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -505,6 +505,12 @@ const LunchMuenchen = () => {
                     <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
                       {language === 'de' ? 'Online reservieren' : 'Reserve online'}
                     </Link>
+                  </Button>
+                  <Button size="lg" variant="outline" className="text-[#25D366] border-[#25D366] hover:bg-[#25D366]/10" asChild>
+                    <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="w-5 h-5 mr-2" />
+                      WhatsApp
+                    </a>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
                     <a href="tel:+498951519696">

@@ -8,6 +8,7 @@ import ReservationCTA from "@/components/ReservationCTA";
 import ElfsightReviews from "@/components/ElfsightReviews";
 import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -124,6 +125,12 @@ const EventlocationMuenchen = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>
                   <a href="tel:+498951519696">+49 89 51519696</a>
+                </Button>
+                <Button size="lg" variant="outline" className="text-[#25D366] border-[#25D366] hover:bg-[#25D366]/10" asChild>
+                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    WhatsApp
+                  </a>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <a href="mailto:info@ristorantestoria.de">{language === 'de' ? 'E-Mail senden' : 'Send Email'}</a>

@@ -1,4 +1,4 @@
-import { Phone, Mail, Instagram } from "lucide-react";
+import { Phone, Mail, Instagram, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -21,6 +21,15 @@ const Header = () => {
             <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="h-4 w-4" />
               <span className="hidden sm:inline">info@ristorantestoria.de</span>
+            </a>
+            <a 
+              href="https://wa.me/491636033912" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-[#25D366] transition-colors"
+              title="WhatsApp"
+            >
+              <MessageCircle className="h-4 w-4" />
             </a>
             <a 
               href="https://www.instagram.com/ristorante_storia/" 
