@@ -4,22 +4,22 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { MessageCircle } from "lucide-react";
 
 const ReservationCTA = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="bg-primary/10 p-8 rounded-lg text-center mt-12">
       <h2 className="text-xl md:text-2xl font-serif font-semibold mb-3">
-        {language === 'de' ? 'Jetzt Tisch reservieren' : 'Book Your Table Now'}
+        {t.reservationCta.title}
       </h2>
       <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-        {language === 'de' 
-          ? <>Sichern Sie sich Ihren Platz im STORIA München Maxvorstadt – oder schreiben Sie uns direkt per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
-          : <>Secure your spot at STORIA Munich Maxvorstadt – or message us directly via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
+        {t.reservationCta.description}{' '}
+        {t.reservationCta.descriptionWhatsapp}{' '}
+        <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a>
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Button size="lg" asChild>
           <Link to="/reservierung">
-            {language === 'de' ? 'Über OpenTable reservieren' : 'Book via OpenTable'}
+            {t.reservationCta.reserveButton}
           </Link>
         </Button>
         <Button size="lg" variant="outline" className="text-[#25D366] border-[#25D366] hover:bg-[#25D366]/10" asChild>

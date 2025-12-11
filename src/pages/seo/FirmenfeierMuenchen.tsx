@@ -10,7 +10,7 @@ import { EventInquiryForm } from "@/components/EventInquiryForm";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight, MessageCircle } from "lucide-react";
 
 // Images
 import firmenfeierEvent from "@/assets/firmenfeier-event.webp";
@@ -18,138 +18,50 @@ import weihnachtsfeierEvent from "@/assets/weihnachtsfeier-event.webp";
 import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-event.webp";
 import sommerfestEvent from "@/assets/sommerfest-event.webp";
 
-const getSeasonalUrgency = (language: string) => {
-  const now = new Date();
-  const month = now.getMonth() + 1; // 1-12
-  const day = now.getDate();
-  
-  // Weihnachtszeit: 15. Oktober bis 24. Dezember
-  if ((month === 10 && day >= 15) || month === 11 || (month === 12 && day <= 24)) {
-    return {
-      icon: TreePine,
-      text: language === 'de' ? 'Weihnachtstermine sind schnell ausgebucht!' : 'Christmas dates book up fast!'
-    };
-  }
-  
-  // Winter/Frühling: 25. Dezember bis 31. März → Frühjahrsfeste
-  if ((month === 12 && day >= 25) || month <= 3) {
-    return {
-      icon: PartyPopper,
-      text: language === 'de' ? 'Frühjahrstermine sind gefragt!' : 'Spring dates are in demand!'
-    };
-  }
-  
-  // Sommer: April bis September → Sommerfeste
-  if (month >= 4 && month <= 9) {
-    return {
-      icon: Sun,
-      text: language === 'de' ? 'Sommerfesttermine sind schnell ausgebucht!' : 'Summer party dates book up fast!'
-    };
-  }
-  
-  // Herbst (vor Weihnachtszeit): Oktober bis 14. Oktober
-  return {
-    icon: Briefcase,
-    text: language === 'de' ? 'Beliebte Termine sind schnell vergeben!' : 'Popular dates book up fast!'
-  };
-};
-
 const FirmenfeierMuenchen = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
   usePrerenderReady(true);
-  const seasonalUrgency = getSeasonalUrgency(language);
-  const SeasonalIcon = seasonalUrgency.icon;
 
   const benefits = [
-    {
-      icon: MapPin,
-      title: language === 'de' ? 'Zentrale Lage' : 'Central Location',
-      description: language === 'de' ? '5 Min. vom Hauptbahnhof' : '5 min from main station'
-    },
-    {
-      icon: Utensils,
-      title: language === 'de' ? 'Individuelle Menüs' : 'Custom Menus',
-      description: language === 'de' ? 'Auf Ihre Wünsche abgestimmt' : 'Tailored to your needs'
-    },
-    {
-      icon: Users,
-      title: language === 'de' ? '6–300 Personen' : '6–300 Guests',
-      description: language === 'de' ? 'Flexibel für jede Teamgröße' : 'Flexible for any team size'
-    },
-    {
-      icon: Sun,
-      title: language === 'de' ? 'Überdachte Terrasse' : 'Covered Terrace',
-      description: language === 'de' ? 'Bei jedem Wetter genießen' : 'Enjoy in any weather'
-    },
-    {
-      icon: TreePine,
-      title: language === 'de' ? 'Weihnachtsfeiern' : 'Christmas Parties',
-      description: language === 'de' ? 'Festliche Atmosphäre' : 'Festive atmosphere'
-    },
-    {
-      icon: Briefcase,
-      title: language === 'de' ? 'Business-Dinner' : 'Business Dinners',
-      description: language === 'de' ? 'Professioneller Rahmen' : 'Professional setting'
-    }
+    { icon: MapPin, title: t.seo.firmenfeier.solution1Title, description: t.seo.firmenfeier.solution1Desc },
+    { icon: Utensils, title: t.seo.firmenfeier.solution3Title, description: t.seo.firmenfeier.solution3Desc },
+    { icon: Users, title: t.seo.firmenfeier.guests6_300, description: t.seo.firmenfeier.solution2Desc },
+    { icon: Sun, title: t.seo.firmenfeier.solution2Title, description: t.seo.firmenfeier.solution2Desc },
+    { icon: TreePine, title: t.seo.firmenfeier.galleryChristmas, description: t.seo.firmenfeier.heroDescription },
+    { icon: Briefcase, title: t.seo.firmenfeier.solution4Title, description: t.seo.firmenfeier.solution4Desc },
   ];
 
   const eventPackages = [
-    {
-      title: language === 'de' ? 'After-Work' : 'After-Work',
-      description: language === 'de' ? 'Aperitivo, Antipasti & entspannte Atmosphäre' : 'Aperitivo, antipasti & relaxed atmosphere',
-      details: language === 'de' ? 'Ab 10 Personen' : 'From 10 guests'
-    },
-    {
-      title: language === 'de' ? 'Weihnachtsfeier' : 'Christmas Party',
-      description: language === 'de' ? 'Festliches Menü mit traditionellen Spezialitäten' : 'Festive menu with traditional specialties',
-      details: language === 'de' ? 'Bis 80 Personen' : 'Up to 80 guests'
-    },
-    {
-      title: language === 'de' ? 'Sommerfest' : 'Summer Party',
-      description: language === 'de' ? 'Terrasse, frische Küche & italienisches Flair' : 'Terrace, fresh cuisine & Italian flair',
-      details: language === 'de' ? 'Ideal für Teams' : 'Ideal for teams'
-    }
+    { title: t.seo.firmenfeier.package1Title, description: t.seo.firmenfeier.package1Desc, details: t.seo.firmenfeier.package1Price },
+    { title: t.seo.firmenfeier.package2Title, description: t.seo.firmenfeier.package2Desc, details: t.seo.firmenfeier.package2Price },
+    { title: t.seo.firmenfeier.package3Title, description: t.seo.firmenfeier.package3Desc, details: t.seo.firmenfeier.package3Price },
   ];
 
   const galleryImages = [
-    { src: weihnachtsfeierEvent, alt: language === 'de' ? 'Weihnachtsfeier mit Gästen im STORIA München' : 'Christmas party with guests at STORIA Munich' },
-    { src: sommerfestEvent, alt: language === 'de' ? 'Sommerfest auf der Terrasse mit Weinservice' : 'Summer party on the terrace with wine service' },
-    { src: geburtstagsfeierEvent, alt: language === 'de' ? 'Festliche Dekoration für Events' : 'Festive decoration for events' }
+    { src: weihnachtsfeierEvent, alt: t.seo.firmenfeier.galleryChristmas },
+    { src: sommerfestEvent, alt: t.seo.firmenfeier.gallerySummer },
+    { src: geburtstagsfeierEvent, alt: t.seo.firmenfeier.galleryBirthday },
   ];
 
   const menuHighlights = [
-    { icon: ChefHat, text: language === 'de' ? 'Hausgemachte Pasta-Variationen' : 'Homemade pasta variations' },
-    { icon: Utensils, text: language === 'de' ? 'Frische Antipasti-Auswahl' : 'Fresh antipasti selection' },
-    { icon: Wine, text: language === 'de' ? 'Erlesene italienische Weine' : 'Fine Italian wines' }
+    { icon: ChefHat, text: t.seo.firmenfeier.culinaryDesc },
+    { icon: Utensils, text: t.seo.firmenfeier.culinaryDesc },
+    { icon: Wine, text: t.seo.firmenfeier.culinaryDesc },
   ];
 
   return (
     <>
       <StaticBotContent
-        title={language === 'de' ? 'Firmenfeier München – Team-Event im italienischen Restaurant' : 'Corporate Event Munich – Team Event at Italian Restaurant'}
-        description={language === 'de' 
-          ? 'Firmenfeier im STORIA München: Weihnachtsfeiern, Team-Events & Business-Dinner für 6-300 Personen. Zentrale Lage Maxvorstadt nahe Hauptbahnhof. Überdachte Terrasse, individuelle Menüs.'
-          : 'Corporate event at STORIA Munich: Christmas parties, team events & business dinners for 6-300 guests. Central location Maxvorstadt near main station. Covered terrace, custom menus.'}
+        title={t.seo.firmenfeier.heroTitle}
+        description={t.seo.firmenfeier.heroDescription}
         sections={[
-          { heading: language === 'de' ? 'Unsere Vorteile' : 'Our Benefits', content: [
-            language === 'de' ? 'Zentrale Lage – 5 Min. vom Hauptbahnhof' : 'Central location – 5 min from main station',
-            language === 'de' ? 'Individuelle Menüs auf Ihre Wünsche abgestimmt' : 'Custom menus tailored to your needs',
-            language === 'de' ? 'Kapazität für 6–300 Personen' : 'Capacity for 6–300 guests',
-            language === 'de' ? 'Überdachte Terrasse für jedes Wetter' : 'Covered terrace for any weather'
-          ]},
-          { heading: language === 'de' ? 'Beliebte Event-Formate' : 'Popular Event Formats', content: [
-            language === 'de' ? 'After-Work Events mit Aperitivo & Antipasti' : 'After-work events with aperitivo & antipasti',
-            language === 'de' ? 'Weihnachtsfeiern mit festlichem Menü' : 'Christmas parties with festive menu',
-            language === 'de' ? 'Sommerfeste auf der Terrasse' : 'Summer parties on the terrace'
-          ]},
-          { heading: language === 'de' ? 'Kontakt' : 'Contact', content: language === 'de' ? 'Jetzt unverbindlich anfragen: +49 89 51519696' : 'Inquire now: +49 89 51519696' }
+          { heading: t.seo.firmenfeier.solutionTitle, content: [t.seo.firmenfeier.solution1Title, t.seo.firmenfeier.solution2Title, t.seo.firmenfeier.solution3Title, t.seo.firmenfeier.solution4Title] },
+          { heading: t.seo.firmenfeier.packagesTitle, content: [t.seo.firmenfeier.package1Title, t.seo.firmenfeier.package2Title, t.seo.firmenfeier.package3Title] },
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Firmenfeier – Team-Events' : 'Corporate Events – Team Parties'}
-        description={language === 'de' 
-          ? 'Firmenfeier München im STORIA: Team-Events, Weihnachtsfeiern & Business-Dinner in der Maxvorstadt. Italienisches Restaurant nahe Hauptbahnhof. Jetzt anfragen!'
-          : 'Corporate event Munich at STORIA: Team events, Christmas parties & business dinners in Maxvorstadt. Italian restaurant near main station. Inquire now!'}
+        title={t.seo.firmenfeier.heroTitle}
+        description={t.seo.firmenfeier.heroDescription}
         canonical="/firmenfeier-muenchen"
       />
       <StructuredData type="restaurant" />
@@ -157,7 +69,7 @@ const FirmenfeierMuenchen = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Firmenfeier München' : 'Corporate Event Munich', url: '/firmenfeier-muenchen' }
+          { name: t.internalLinks.corporateEvent, url: '/firmenfeier-muenchen' }
         ]} 
       />
       
@@ -168,7 +80,7 @@ const FirmenfeierMuenchen = () => {
         <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
           <img 
             src={firmenfeierEvent} 
-            alt={language === 'de' ? 'Elegante Firmenfeier im STORIA München' : 'Elegant corporate event at STORIA Munich'}
+            alt={t.seo.firmenfeier.heroTitle}
             width={1200}
             height={800}
             loading="eager"
@@ -178,18 +90,13 @@ const FirmenfeierMuenchen = () => {
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12">
               <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase">
-                {language === 'de' ? 'Firmenevents im STORIA' : 'Corporate Events at STORIA'}
+                {t.seo.firmenfeier.heroSubtitle}
               </p>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
-                {language === 'de' 
-                  ? <>Feiern Sie mit Ihrem Team –<br className="hidden md:block" /> wir kümmern uns um den Rest</>
-                  : <>Celebrate with your team –<br className="hidden md:block" /> we take care of the rest</>
-                }
+                {t.seo.firmenfeier.heroTitle}
               </h1>
               <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-                {language === 'de'
-                  ? 'Weihnachtsfeier, Team-Building oder Business-Dinner – authentisch italienisch in der Maxvorstadt.'
-                  : 'Christmas party, team building or business dinner – authentically Italian in Maxvorstadt.'}
+                {t.seo.firmenfeier.heroDescription}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
@@ -199,7 +106,7 @@ const FirmenfeierMuenchen = () => {
                 >
                   <a href="tel:+498951519696">
                     <Phone className="w-5 h-5 mr-2" />
-                    {language === 'de' ? 'Jetzt anrufen' : 'Call now'}
+                    {t.floatingActions.call}
                   </a>
                 </Button>
                 <Button 
@@ -227,11 +134,11 @@ const FirmenfeierMuenchen = () => {
               </div>
               <div className="flex items-center gap-2">
                 <PartyPopper className="w-5 h-5" />
-                <span>{language === 'de' ? '100+ Firmenfeiern' : '100+ Corporate Events'}</span>
+                <span>{t.seo.firmenfeier.events100}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                <span>{language === 'de' ? 'Seit 1995 in München und Bayern' : 'Since 1995 in Munich and Bavaria'}</span>
+                <span>{t.seo.firmenfeier.since1995}</span>
               </div>
             </div>
           </div>
@@ -245,19 +152,13 @@ const FirmenfeierMuenchen = () => {
           <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <p className="text-lg md:text-xl text-muted-foreground mb-4">
-                {language === 'de' 
-                  ? 'Catering-Suche, Location-Stress, Menü-Abstimmung mit 40 Kollegen?' 
-                  : 'Catering search, location stress, menu coordination with 40 colleagues?'}
+                {t.seo.firmenfeier.painTitle}
               </p>
               <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
-                {language === 'de' 
-                  ? 'Bei uns ist alles aus einer Hand.' 
-                  : 'With us, everything is from one source.'}
+                {t.seo.firmenfeier.pain1}
               </h2>
               <p className="text-muted-foreground">
-                {language === 'de'
-                  ? 'Lehnen Sie sich zurück – von der Planung bis zum letzten Espresso kümmern wir uns um jedes Detail.'
-                  : 'Sit back – from planning to the last espresso, we take care of every detail.'}
+                {t.seo.firmenfeier.pain2}
               </p>
             </div>
           </section>
@@ -266,7 +167,7 @@ const FirmenfeierMuenchen = () => {
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-12">
-                {language === 'de' ? 'Warum STORIA für Ihre Firmenfeier?' : 'Why STORIA for Your Corporate Event?'}
+                {t.seo.firmenfeier.solutionTitle}
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
                 {benefits.map((benefit, index) => {
@@ -288,7 +189,7 @@ const FirmenfeierMuenchen = () => {
                 <Button size="lg" variant="outline" asChild>
                   <a href="tel:+498951519696">
                     <Phone className="w-5 h-5 mr-2" />
-                    {language === 'de' ? 'Jetzt Termin anfragen' : 'Request a date now'}
+                    {t.floatingActions.call}
                   </a>
                 </Button>
                 <Button size="lg" variant="outline" className="text-[#25D366] border-[#25D366] hover:bg-[#25D366]/10" asChild>
@@ -301,19 +202,17 @@ const FirmenfeierMuenchen = () => {
             </div>
           </section>
 
-          {/* Event Gallery - Emotional Visual Section */}
+          {/* Event Gallery */}
           <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
-                {language === 'de' ? 'Einblicke in unsere Events' : 'Insights into Our Events'}
+                {t.seo.firmenfeier.galleryTitle}
               </h2>
               <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-                {language === 'de' 
-                  ? 'So feiern unsere Gäste – von Weihnachtsfeiern bis Sommerfesten.' 
-                  : 'This is how our guests celebrate – from Christmas parties to summer events.'}
+                {t.seo.firmenfeier.galleryChristmas}, {t.seo.firmenfeier.gallerySummer}
               </p>
               
-              {/* Dynamic Gallery Layout - 3 Images */}
+              {/* Gallery Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
                 {galleryImages.map((image, index) => (
                   <div 
@@ -334,10 +233,9 @@ const FirmenfeierMuenchen = () => {
 
               {/* CTA after Gallery */}
               <div className="text-center mt-12">
-              <p className="text-muted-foreground mb-4">
-                {language === 'de' 
-                  ? <>Fragen zu Ihrer Veranstaltung? Schreiben Sie uns per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
-                  : <>Questions about your event? Message us via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
+                <p className="text-muted-foreground mb-4">
+                  {t.seo.firmenfeier.contactWhatsapp}{' '}
+                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a>
                 </p>
                 <a 
                   href="tel:+498951519696" 
@@ -353,99 +251,65 @@ const FirmenfeierMuenchen = () => {
           {/* Event Packages */}
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
-                {language === 'de' ? 'Die beliebtesten Anlässe unserer Gäste' : 'Our Guests\' Most Popular Occasions'}
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-12">
+                {t.seo.firmenfeier.packagesTitle}
               </h2>
-              <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-                {language === 'de' 
-                  ? 'Jedes Event wird individuell auf Ihre Wünsche abgestimmt.' 
-                  : 'Each event is individually tailored to your wishes.'}
-              </p>
               <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {eventPackages.map((pkg, index) => (
-                  <div 
-                    key={index} 
-                    className="bg-card border border-border rounded-lg p-6 text-center hover:shadow-lg transition-shadow"
-                  >
-                    <h3 className="text-xl font-serif font-semibold mb-3">{pkg.title}</h3>
+                  <div key={index} className="bg-card p-6 rounded-lg border border-border text-center">
+                    <h3 className="text-xl font-semibold mb-2">{pkg.title}</h3>
                     <p className="text-muted-foreground mb-4">{pkg.description}</p>
-                    <span className="inline-block bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">
-                      {pkg.details}
-                    </span>
+                    <p className="text-primary font-semibold">{pkg.details}</p>
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Menu Teaser Section */}
+          {/* Culinary Section */}
+          <section className="py-16 md:py-20 bg-secondary/30">
+            <div className="container mx-auto px-4 text-center max-w-3xl">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
+                {t.seo.firmenfeier.culinaryTitle}
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                {t.seo.firmenfeier.culinaryDesc}
+              </p>
+              <Button asChild>
+                <Link to="/speisekarte">
+                  {t.seo.firmenfeier.culinaryButton}
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </section>
+
+          {/* Testimonial */}
+          <section className="py-16 md:py-20">
+            <div className="container mx-auto px-4 text-center max-w-3xl">
+              <blockquote className="text-xl md:text-2xl font-serif italic mb-4">
+                "{t.seo.firmenfeier.testimonial1Quote}"
+              </blockquote>
+              <p className="text-muted-foreground">– {t.seo.firmenfeier.testimonial1Author}</p>
+            </div>
+          </section>
+
+          <ElfsightReviews />
+
+          {/* Contact Form Section */}
           <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
-                  {language === 'de' ? 'Kulinarische Highlights für Ihr Event' : 'Culinary Highlights for Your Event'}
+              <div className="max-w-2xl mx-auto">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
+                  {t.seo.firmenfeier.contactTitle}
                 </h2>
-                <p className="text-muted-foreground mb-10 max-w-2xl mx-auto">
-                  {language === 'de' 
-                    ? 'Authentisch italienische Küche – frisch zubereitet von unserer Küche für Ihre Gäste.' 
-                    : 'Authentic Italian cuisine – freshly prepared by our kitchen for your guests.'}
+                <p className="text-center text-muted-foreground mb-8">
+                  {t.seo.firmenfeier.contactDesc}
                 </p>
-                
-                <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
-                  {menuHighlights.map((item, index) => {
-                    const ItemIcon = item.icon;
-                    return (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                          <ItemIcon className="w-5 h-5 text-primary" />
-                        </div>
-                        <span className="font-medium">{item.text}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <Button variant="outline" asChild>
-                  <Link to="/speisekarte?from=firmenfeier-muenchen">
-                    {language === 'de' ? 'Unsere Speisekarte entdecken' : 'Discover our menu'}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <EventInquiryForm />
               </div>
             </div>
           </section>
-
-          {/* Testimonial Section */}
-          <section className="py-16 md:py-20 bg-primary text-primary-foreground">
-            <div className="container mx-auto px-4 text-center max-w-3xl">
-              <blockquote className="text-xl md:text-2xl font-serif italic mb-6">
-                {language === 'de'
-                  ? '"Unsere Weihnachtsfeier war perfekt organisiert. Das Team war begeistert von der Atmosphäre und dem Essen!"'
-                  : '"Our Christmas party was perfectly organized. The team was thrilled with the atmosphere and the food!"'}
-              </blockquote>
-              <p className="opacity-80">
-                — Marketing-Abteilung, Münchner Unternehmen
-              </p>
-            </div>
-          </section>
-
-          {/* Final CTA with Inquiry Form */}
-          <section className="py-16 md:py-20 bg-muted/30">
-            <div className="container mx-auto px-4">
-              <div className="max-w-xl mx-auto">
-                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
-                  {language === 'de' ? 'Jetzt unverbindlich anfragen' : 'Send your inquiry now'}
-                </h2>
-                <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-lg">
-                  <EventInquiryForm />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Elfsight Reviews */}
-          <ElfsightReviews />
-          
         </main>
 
         <Footer />
