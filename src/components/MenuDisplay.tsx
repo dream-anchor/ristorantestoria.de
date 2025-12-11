@@ -5,9 +5,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 interface MenuDisplayProps {
   menuType: MenuType;
   menuId?: string; // Optional: for fetching specific menu by ID (used for special occasions)
+  showTitle?: boolean; // Optional: hide title when H1 is rendered externally (default: true)
 }
 
-const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
+const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) => {
   // Use menuId if provided (for special menus), otherwise fetch by type
   const menuByType = useMenu(menuType);
   const menuById = useMenuById(menuId);
@@ -58,7 +59,7 @@ const MenuDisplay = ({ menuType, menuId }: MenuDisplayProps) => {
   return (
     <div className="max-w-3xl mx-auto">
       {/* Menu Header */}
-      {(menu.title || menu.subtitle) && (
+      {showTitle && (menu.title || menu.subtitle) && (
         <div className="text-center mb-12">
           {menu.title && (
             <h2 className="text-3xl md:text-4xl font-serif font-semibold tracking-wide mb-2">
