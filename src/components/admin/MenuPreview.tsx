@@ -3,33 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Trash2, Plus, GripVertical } from "lucide-react";
-
-interface MenuItem {
-  name: string;
-  name_en: string;
-  description: string;
-  description_en: string;
-  price: number | null;
-  price_display: string;
-  sort_order: number;
-}
-
-interface MenuCategory {
-  name: string;
-  name_en: string;
-  description: string;
-  description_en: string;
-  sort_order: number;
-  items: MenuItem[];
-}
-
-interface ParsedMenu {
-  title: string;
-  title_en: string;
-  subtitle: string;
-  subtitle_en: string;
-  categories: MenuCategory[];
-}
+import { ParsedMenu, ParsedMenuCategory, ParsedMenuItem } from "@/hooks/useSpecialMenus";
 
 interface MenuPreviewProps {
   data: ParsedMenu;
@@ -53,13 +27,13 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
     onUpdate({ ...data, subtitle_en: value });
   };
 
-  const updateCategory = (catIndex: number, field: keyof MenuCategory, value: string) => {
+  const updateCategory = (catIndex: number, field: keyof ParsedMenuCategory, value: string) => {
     const newCategories = [...data.categories];
     newCategories[catIndex] = { ...newCategories[catIndex], [field]: value };
     onUpdate({ ...data, categories: newCategories });
   };
 
-  const updateItem = (catIndex: number, itemIndex: number, field: keyof MenuItem, value: string | number | null) => {
+  const updateItem = (catIndex: number, itemIndex: number, field: keyof ParsedMenuItem, value: string | number | null) => {
     const newCategories = [...data.categories];
     const newItems = [...newCategories[catIndex].items];
     newItems[itemIndex] = { ...newItems[itemIndex], [field]: value };
@@ -76,11 +50,15 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
 
   const addItem = (catIndex: number) => {
     const newCategories = [...data.categories];
-    const newItem: MenuItem = {
+    const newItem: ParsedMenuItem = {
       name: 'Neues Gericht',
       name_en: '',
+      name_it: '',
+      name_fr: '',
       description: '',
       description_en: '',
+      description_it: '',
+      description_fr: '',
       price: 0,
       price_display: '€0,00',
       sort_order: newCategories[catIndex].items.length,
@@ -98,11 +76,15 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
   };
 
   const addCategory = () => {
-    const newCategory: MenuCategory = {
+    const newCategory: ParsedMenuCategory = {
       name: 'Neue Kategorie',
       name_en: '',
+      name_it: '',
+      name_fr: '',
       description: '',
       description_en: '',
+      description_it: '',
+      description_fr: '',
       sort_order: data.categories.length,
       items: [],
     };

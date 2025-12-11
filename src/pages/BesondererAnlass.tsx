@@ -52,8 +52,16 @@ const BesondererAnlass = () => {
     return <Navigate to="/besondere-anlaesse" replace />;
   }
 
-  const menuTitle = language === 'en' && menu.title_en ? menu.title_en : menu.title || '';
-  const menuSubtitle = language === 'en' && menu.subtitle_en ? menu.subtitle_en : menu.subtitle || '';
+  // Helper für lokalisierte Texte
+  const getLocalizedText = (de: string | null, en?: string | null, it?: string | null, fr?: string | null) => {
+    if (language === 'it' && it) return it;
+    if (language === 'fr' && fr) return fr;
+    if (language === 'en' && en) return en;
+    return de || '';
+  };
+
+  const menuTitle = getLocalizedText(menu.title, menu.title_en, menu.title_it, menu.title_fr);
+  const menuSubtitle = getLocalizedText(menu.subtitle, menu.subtitle_en, menu.subtitle_it, menu.subtitle_fr);
 
   // SEO-optimized description based on slug
   const getSeoDescription = () => {
