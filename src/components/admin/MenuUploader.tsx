@@ -18,8 +18,12 @@ interface MenuUploaderProps {
 interface ParsedCategory {
   name: string;
   name_en: string;
+  name_it: string;
+  name_fr: string;
   description: string;
   description_en: string;
+  description_it: string;
+  description_fr: string;
   sort_order: number;
   items: ParsedItem[];
 }
@@ -27,8 +31,12 @@ interface ParsedCategory {
 interface ParsedItem {
   name: string;
   name_en: string;
+  name_it: string;
+  name_fr: string;
   description: string;
   description_en: string;
+  description_it: string;
+  description_fr: string;
   price: number | null;
   price_display: string;
   sort_order: number;
@@ -37,8 +45,12 @@ interface ParsedItem {
 interface ParsedMenu {
   title: string;
   title_en: string;
+  title_it: string;
+  title_fr: string;
   subtitle: string;
   subtitle_en: string;
+  subtitle_it: string;
+  subtitle_fr: string;
   categories: ParsedCategory[];
 }
 
@@ -127,7 +139,13 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
           .from('menus')
           .update({
             title: parsedData.title,
+            title_en: parsedData.title_en,
+            title_it: parsedData.title_it,
+            title_fr: parsedData.title_fr,
             subtitle: parsedData.subtitle,
+            subtitle_en: parsedData.subtitle_en,
+            subtitle_it: parsedData.subtitle_it,
+            subtitle_fr: parsedData.subtitle_fr,
             is_published: false,
             updated_at: new Date().toISOString(),
           })
@@ -155,7 +173,13 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
             .from('menus')
             .update({
               title: parsedData.title,
+              title_en: parsedData.title_en,
+              title_it: parsedData.title_it,
+              title_fr: parsedData.title_fr,
               subtitle: parsedData.subtitle,
+              subtitle_en: parsedData.subtitle_en,
+              subtitle_it: parsedData.subtitle_it,
+              subtitle_fr: parsedData.subtitle_fr,
               is_published: false,
               updated_at: new Date().toISOString(),
             })
@@ -176,7 +200,13 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
             .insert({
               menu_type: menuType,
               title: parsedData.title,
+              title_en: parsedData.title_en,
+              title_it: parsedData.title_it,
+              title_fr: parsedData.title_fr,
               subtitle: parsedData.subtitle,
+              subtitle_en: parsedData.subtitle_en,
+              subtitle_it: parsedData.subtitle_it,
+              subtitle_fr: parsedData.subtitle_fr,
               is_published: false,
             })
             .select()
@@ -195,8 +225,12 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
             menu_id: menuId,
             name: category.name,
             name_en: category.name_en || null,
+            name_it: category.name_it || null,
+            name_fr: category.name_fr || null,
             description: category.description || null,
             description_en: category.description_en || null,
+            description_it: category.description_it || null,
+            description_fr: category.description_fr || null,
             sort_order: Math.floor(category.sort_order),
           })
           .select()
@@ -212,8 +246,12 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
               category_id: newCat.id,
               name: item.name,
               name_en: item.name_en || null,
+              name_it: item.name_it || null,
+              name_fr: item.name_fr || null,
               description: item.description || null,
               description_en: item.description_en || null,
+              description_it: item.description_it || null,
+              description_fr: item.description_fr || null,
               price: item.price,
               price_display: item.price_display,
               sort_order: Math.floor(item.sort_order),

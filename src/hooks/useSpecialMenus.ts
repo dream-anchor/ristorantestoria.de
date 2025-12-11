@@ -6,8 +6,12 @@ import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 export interface ParsedMenuItem {
   name: string;
   name_en: string;
+  name_it: string;
+  name_fr: string;
   description: string;
   description_en: string;
+  description_it: string;
+  description_fr: string;
   price: number | null;
   price_display: string;
   sort_order: number;
@@ -16,8 +20,12 @@ export interface ParsedMenuItem {
 export interface ParsedMenuCategory {
   name: string;
   name_en: string;
+  name_it: string;
+  name_fr: string;
   description: string;
   description_en: string;
+  description_it: string;
+  description_fr: string;
   sort_order: number;
   items: ParsedMenuItem[];
 }
@@ -25,8 +33,12 @@ export interface ParsedMenuCategory {
 export interface ParsedMenu {
   title: string;
   title_en: string;
+  title_it: string;
+  title_fr: string;
   subtitle: string;
   subtitle_en: string;
+  subtitle_it: string;
+  subtitle_fr: string;
   categories: ParsedMenuCategory[];
 }
 
@@ -34,8 +46,12 @@ export interface SpecialMenu {
   id: string;
   title: string | null;
   title_en: string | null;
+  title_it: string | null;
+  title_fr: string | null;
   subtitle: string | null;
   subtitle_en: string | null;
+  subtitle_it: string | null;
+  subtitle_fr: string | null;
   slug: string | null;
   is_published: boolean;
   published_at: string | null;
@@ -83,8 +99,12 @@ export const useSpecialMenus = () => {
           id: menu.id,
           title: menu.title,
           title_en: menu.title_en,
+          title_it: menu.title_it,
+          title_fr: menu.title_fr,
           subtitle: menu.subtitle,
           subtitle_en: menu.subtitle_en,
+          subtitle_it: menu.subtitle_it,
+          subtitle_fr: menu.subtitle_fr,
           slug: (menu as any).slug || null,
           is_published: menu.is_published || false,
           published_at: menu.published_at,
@@ -252,21 +272,33 @@ export const useMenuContent = (menuId: string | undefined) => {
       return {
         title: menu.title || '',
         title_en: menu.title_en || '',
+        title_it: menu.title_it || '',
+        title_fr: menu.title_fr || '',
         subtitle: menu.subtitle || '',
         subtitle_en: menu.subtitle_en || '',
+        subtitle_it: menu.subtitle_it || '',
+        subtitle_fr: menu.subtitle_fr || '',
         categories: categories?.map(cat => ({
           name: cat.name,
           name_en: cat.name_en || '',
+          name_it: cat.name_it || '',
+          name_fr: cat.name_fr || '',
           description: cat.description || '',
           description_en: cat.description_en || '',
+          description_it: cat.description_it || '',
+          description_fr: cat.description_fr || '',
           sort_order: cat.sort_order || 0,
           items: items
             .filter(item => item.category_id === cat.id)
             .map(item => ({
               name: item.name,
               name_en: item.name_en || '',
+              name_it: item.name_it || '',
+              name_fr: item.name_fr || '',
               description: item.description || '',
               description_en: item.description_en || '',
+              description_it: item.description_it || '',
+              description_fr: item.description_fr || '',
               price: item.price,
               price_display: item.price_display || '',
               sort_order: item.sort_order || 0,
@@ -302,8 +334,12 @@ export const useSaveMenuContent = () => {
         .update({
           title: data.title,
           title_en: data.title_en,
+          title_it: data.title_it,
+          title_fr: data.title_fr,
           subtitle: data.subtitle,
           subtitle_en: data.subtitle_en,
+          subtitle_it: data.subtitle_it,
+          subtitle_fr: data.subtitle_fr,
           slug: uniqueSlug,
           updated_at: new Date().toISOString(),
         } as any)
@@ -343,8 +379,12 @@ export const useSaveMenuContent = () => {
             menu_id: menuId,
             name: category.name,
             name_en: category.name_en || null,
+            name_it: category.name_it || null,
+            name_fr: category.name_fr || null,
             description: category.description || null,
             description_en: category.description_en || null,
+            description_it: category.description_it || null,
+            description_fr: category.description_fr || null,
             sort_order: catIndex,
           })
           .select()
@@ -358,8 +398,12 @@ export const useSaveMenuContent = () => {
             category_id: newCategory.id,
             name: item.name,
             name_en: item.name_en || null,
+            name_it: item.name_it || null,
+            name_fr: item.name_fr || null,
             description: item.description || null,
             description_en: item.description_en || null,
+            description_it: item.description_it || null,
+            description_fr: item.description_fr || null,
             price: item.price,
             price_display: item.price_display || null,
             sort_order: itemIndex,

@@ -48,10 +48,18 @@ const Navigation = () => {
   const { data: standardMenus } = usePublishedStandardMenus();
   const isScrolled = useScrolled();
 
+  // Helper für lokalisierte Menü-Titel
+  const getLocalizedMenuTitle = (menu: any) => {
+    if (language === 'it' && menu.title_it) return menu.title_it;
+    if (language === 'fr' && menu.title_fr) return menu.title_fr;
+    if (language === 'en' && menu.title_en) return menu.title_en;
+    return menu.title || '';
+  };
+
   // Dynamische Kinder für "Besondere Anlässe" basierend auf veröffentlichten Menüs
   const specialOccasionsChildren: NavChild[] = specialMenus && specialMenus.length > 0
     ? specialMenus.map(menu => ({
-        label: (language === 'en' && menu.title_en ? menu.title_en : menu.title)?.toUpperCase() || 'MENÜ',
+        label: getLocalizedMenuTitle(menu).toUpperCase() || 'MENÜ',
         path: `/besondere-anlaesse/${(menu as any).slug || menu.id}`
       }))
     : [{ label: t.nav.specialOccasions, path: "/besondere-anlaesse" }];
