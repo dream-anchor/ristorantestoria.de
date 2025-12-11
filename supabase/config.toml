@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.trigger-github-deploy]
 verify_jwt = true
+
+[functions.spell-check-menu]
+verify_jwt = true

@@ -3,16 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Upload, Loader2, Check, Eye } from "lucide-react";
+import { Upload, Loader2, Check, Eye, SpellCheck } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import MenuPreview from "./MenuPreview";
+import SpellCheckResults, { SpellingError } from "./SpellCheckResults";
 import type { MenuType } from "@/hooks/useMenu";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface MenuUploaderProps {
   menuType: MenuType;
   menuLabel: string;
-  existingMenuId?: string; // For special occasions that already have an ID
+  existingMenuId?: string;
 }
 
 interface ParsedCategory {
@@ -55,12 +57,19 @@ interface ParsedMenu {
 }
 
 const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps) => {
+  const { t } = useLanguage();
   const queryClient = useQueryClient();
   const [file, setFile] = useState<File | null>(null);
   const [isParsing, setIsParsing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [parsedData, setParsedData] = useState<ParsedMenu | null>(null);
   const [showPreview, setShowPreview] = useState(false);
+  
+  // Spell check state
+  const [isSpellChecking, setIsSpellChecking] = useState(false);
+  const [spellCheckErrors, setSpellCheckErrors] = useState<SpellingError[]>([]);
+  const [showSpellCheck, setShowSpellCheck] = useState(false);
+  const [spellCheckComplete, setSpellCheckComplete] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -72,6 +81,9 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
       setFile(selectedFile);
       setParsedData(null);
       setShowPreview(false);
+      setShowSpellCheck(false);
+      setSpellCheckComplete(false);
+      setSpellCheckErrors([]);
     }
   };
 
@@ -87,6 +99,38 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
     });
   };
 
+  const runSpellCheck = async (menuData: ParsedMenu) => {
+    setIsSpellChecking(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('spell-check-menu', {
+        body: { menuData }
+      });
+
+      if (error) {
+        console.error('Spell check error:', error);
+        toast.error(t.spellCheck?.errorRunning || 'Fehler bei der Rechtschreibprüfung');
+        return;
+      }
+
+      const errors = data?.errors || [];
+      setSpellCheckErrors(errors);
+      setSpellCheckComplete(true);
+      
+      if (errors.length > 0) {
+        setShowSpellCheck(true);
+        toast.info(`${errors.length} ${t.spellCheck?.errorsFound || 'Fehler gefunden'}`);
+      } else {
+        toast.success(t.spellCheck?.noErrors || 'Keine Rechtschreibfehler gefunden!');
+        setShowPreview(true);
+      }
+    } catch (err) {
+      console.error('Spell check failed:', err);
+      toast.error(t.spellCheck?.errorRunning || 'Fehler bei der Rechtschreibprüfung');
+    } finally {
+      setIsSpellChecking(false);
+    }
+  };
+
   const handleParse = async () => {
     if (!file) {
       toast.error('Bitte wählen Sie zuerst eine Datei');
@@ -95,25 +139,19 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
 
     setIsParsing(true);
     try {
-      // Convert PDF to Base64 for multimodal AI processing
       const pdfBase64 = await convertToBase64(file);
-
-      // Send to edge function for AI parsing
       const { data, error } = await supabase.functions.invoke('parse-menu-pdf', {
         body: { pdfBase64, menuType }
       });
 
-      if (error) {
-        throw error;
-      }
-
-      if (data.error) {
-        throw new Error(data.error);
-      }
+      if (error) throw error;
+      if (data.error) throw new Error(data.error);
 
       setParsedData(data.data);
-      setShowPreview(true);
-      toast.success('Menü erfolgreich analysiert! Bitte überprüfen Sie die Daten.');
+      toast.success('Menü erfolgreich analysiert! Starte Rechtschreibprüfung...');
+      
+      // Automatically run spell check after parsing
+      await runSpellCheck(data.data);
     } catch (err) {
       console.error('Parse error:', err);
       toast.error(err instanceof Error ? err.message : 'Fehler beim Analysieren der PDF');
@@ -126,6 +164,64 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
     setParsedData(updatedData);
   };
 
+  const applySpellingCorrection = (error: SpellingError) => {
+    if (!parsedData) return;
+
+    const newData = { ...parsedData };
+    const { location, suggestion } = error;
+    
+    // Helper to get language-specific field name
+    const getFieldKey = (baseField: string, lang: string): string => {
+      if (lang === 'de') return baseField;
+      return `${baseField}_${lang}`;
+    };
+
+    if (location.type === 'title') {
+      const key = getFieldKey('title', location.language) as keyof ParsedMenu;
+      (newData as any)[key] = suggestion;
+    } else if (location.type === 'subtitle') {
+      const key = getFieldKey('subtitle', location.language) as keyof ParsedMenu;
+      (newData as any)[key] = suggestion;
+    } else if (location.type === 'category' && location.categoryIndex !== undefined) {
+      const cat = { ...newData.categories[location.categoryIndex] };
+      const key = getFieldKey(location.field, location.language) as keyof ParsedCategory;
+      (cat as any)[key] = suggestion;
+      newData.categories[location.categoryIndex] = cat;
+    } else if (location.type === 'item' && location.categoryIndex !== undefined && location.itemIndex !== undefined) {
+      const cat = { ...newData.categories[location.categoryIndex] };
+      const item = { ...cat.items[location.itemIndex] };
+      const key = getFieldKey(location.field, location.language) as keyof ParsedItem;
+      (item as any)[key] = suggestion;
+      cat.items[location.itemIndex] = item;
+      newData.categories[location.categoryIndex] = cat;
+    }
+
+    setParsedData(newData);
+  };
+
+  const handleAcceptError = (error: SpellingError) => {
+    applySpellingCorrection(error);
+    toast.success(t.spellCheck?.correctionApplied || 'Korrektur angewendet');
+  };
+
+  const handleRejectError = (errorId: string) => {
+    // Just mark as processed, don't apply correction
+  };
+
+  const handleAcceptAll = () => {
+    spellCheckErrors.forEach(error => applySpellingCorrection(error));
+    toast.success(t.spellCheck?.allCorrectionsApplied || 'Alle Korrekturen angewendet');
+  };
+
+  const handleRejectAll = () => {
+    // Just close spell check without applying any corrections
+  };
+
+  const handleSpellCheckClose = () => {
+    setShowSpellCheck(false);
+    setShowPreview(true);
+  };
+
   const handlePublish = async () => {
     if (!parsedData) return;
 
@@ -134,7 +230,6 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
       let menuId: string;
 
       if (existingMenuId) {
-        // Use the provided existing menu ID (for special occasions)
         const { error: updateError } = await supabase
           .from('menus')
           .update({
@@ -154,13 +249,11 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
         if (updateError) throw updateError;
         menuId = existingMenuId;
 
-        // Delete old categories (cascade deletes items)
         await supabase
           .from('menu_categories')
           .delete()
           .eq('menu_id', menuId);
       } else {
-        // Check if menu exists by type (for standard menus)
         const { data: existingMenu } = await supabase
           .from('menus')
           .select('id')
@@ -168,7 +261,6 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
           .maybeSingle();
 
         if (existingMenu) {
-          // Update existing menu
           const { error: updateError } = await supabase
             .from('menus')
             .update({
@@ -188,13 +280,11 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
           if (updateError) throw updateError;
           menuId = existingMenu.id;
 
-          // Delete old categories (cascade deletes items)
           await supabase
             .from('menu_categories')
             .delete()
             .eq('menu_id', menuId);
         } else {
-          // Create new menu
           const { data: newMenu, error: insertError } = await supabase
             .from('menus')
             .insert({
@@ -217,7 +307,6 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
         }
       }
 
-      // Insert categories and items
       for (const category of parsedData.categories) {
         const { data: newCat, error: catError } = await supabase
           .from('menu_categories')
@@ -238,7 +327,6 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
 
         if (catError) throw catError;
 
-        // Insert items
         for (const item of category.items) {
           const { error: itemError } = await supabase
             .from('menu_items')
@@ -261,7 +349,6 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
         }
       }
 
-      // Publish the menu
       const { error: publishError } = await supabase
         .from('menus')
         .update({
@@ -272,7 +359,6 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
 
       if (publishError) throw publishError;
 
-      // Invalidate relevant queries to refresh data
       queryClient.invalidateQueries({ queryKey: ['special-menus'] });
       queryClient.invalidateQueries({ queryKey: ['published-special-menus'] });
       queryClient.invalidateQueries({ queryKey: ['admin-menus'] });
@@ -285,8 +371,10 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
       setFile(null);
       setParsedData(null);
       setShowPreview(false);
+      setShowSpellCheck(false);
+      setSpellCheckComplete(false);
+      setSpellCheckErrors([]);
       
-      // Trigger GitHub deploy for SEO update
       triggerGitHubDeploy();
     } catch (err) {
       console.error('Save error:', err);
@@ -298,7 +386,7 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
 
   return (
     <div className="space-y-4 md:space-y-6">
-      {/* Upload Section - Stacked on mobile */}
+      {/* Upload Section */}
       <div className="flex flex-col sm:flex-row gap-3">
         <Input
           type="file"
@@ -308,13 +396,18 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
         />
         <Button
           onClick={handleParse}
-          disabled={!file || isParsing}
+          disabled={!file || isParsing || isSpellChecking}
           className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
         >
           {isParsing ? (
             <>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
               Analysieren...
+            </>
+          ) : isSpellChecking ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              {t.spellCheck?.checking || 'Prüfe...'}
             </>
           ) : (
             <>
@@ -331,8 +424,20 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
         </p>
       )}
 
-      {/* Preview Toggle & Publish - Stacked on mobile */}
-      {parsedData && (
+      {/* Spell Check Results */}
+      {showSpellCheck && parsedData && (
+        <SpellCheckResults
+          errors={spellCheckErrors}
+          onAccept={handleAcceptError}
+          onReject={handleRejectError}
+          onAcceptAll={handleAcceptAll}
+          onRejectAll={handleRejectAll}
+          onClose={handleSpellCheckClose}
+        />
+      )}
+
+      {/* Preview Toggle & Publish */}
+      {parsedData && !showSpellCheck && (
         <div className="flex flex-col sm:flex-row gap-3">
           <Button
             variant="outline"
@@ -342,6 +447,17 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
             <Eye className="h-4 w-4 mr-2" />
             {showPreview ? 'Vorschau ausblenden' : 'Vorschau anzeigen'}
           </Button>
+          {spellCheckComplete && (
+            <Button
+              variant="outline"
+              onClick={() => runSpellCheck(parsedData)}
+              disabled={isSpellChecking}
+              className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
+            >
+              <SpellCheck className="h-4 w-4 mr-2" />
+              {t.spellCheck?.runAgain || 'Erneut prüfen'}
+            </Button>
+          )}
           <Button
             onClick={handlePublish}
             disabled={isSaving}
@@ -363,7 +479,7 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
       )}
 
       {/* Preview */}
-      {showPreview && parsedData && (
+      {showPreview && parsedData && !showSpellCheck && (
         <MenuPreview
           data={parsedData}
           onUpdate={handleUpdateParsedData}

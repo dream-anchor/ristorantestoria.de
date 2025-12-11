@@ -2,8 +2,12 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Trash2, Plus, GripVertical } from "lucide-react";
+import { Trash2, Plus, GripVertical, SpellCheck, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { ParsedMenu, ParsedMenuCategory, ParsedMenuItem } from "@/hooks/useSpecialMenus";
+import { useLanguage } from "@/contexts/LanguageContext";
+import SpellCheckResults, { SpellingError } from "./SpellCheckResults";
 
 interface MenuPreviewProps {
   data: ParsedMenu;
@@ -11,6 +15,11 @@ interface MenuPreviewProps {
 }
 
 const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
+  const { t } = useLanguage();
+  const [isSpellChecking, setIsSpellChecking] = useState(false);
+  const [spellCheckErrors, setSpellCheckErrors] = useState<SpellingError[]>([]);
+  const [showSpellCheck, setShowSpellCheck] = useState(false);
+
   const updateTitle = (value: string) => {
     onUpdate({ ...data, title: value });
   };
@@ -91,12 +100,113 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
     onUpdate({ ...data, categories: [...data.categories, newCategory] });
   };
 
+  const runSpellCheck = async () => {
+    setIsSpellChecking(true);
+    try {
+      const { data: result, error } = await supabase.functions.invoke('spell-check-menu', {
+        body: { menuData: data }
+      });
+
+      if (error) {
+        console.error('Spell check error:', error);
+        toast.error(t.spellCheck?.errorRunning || 'Fehler bei der Rechtschreibprüfung');
+        return;
+      }
+
+      const errors = result?.errors || [];
+      setSpellCheckErrors(errors);
+      
+      if (errors.length > 0) {
+        setShowSpellCheck(true);
+        toast.info(`${errors.length} ${t.spellCheck?.errorsFound || 'Fehler gefunden'}`);
+      } else {
+        toast.success(t.spellCheck?.noErrors || 'Keine Rechtschreibfehler gefunden!');
+      }
+    } catch (err) {
+      console.error('Spell check failed:', err);
+      toast.error(t.spellCheck?.errorRunning || 'Fehler bei der Rechtschreibprüfung');
+    } finally {
+      setIsSpellChecking(false);
+    }
+  };
+
+  const applySpellingCorrection = (error: SpellingError) => {
+    const newData = { ...data };
+    const { location, suggestion } = error;
+    
+    const getFieldKey = (baseField: string, lang: string): string => {
+      if (lang === 'de') return baseField;
+      return `${baseField}_${lang}`;
+    };
+
+    if (location.type === 'title') {
+      const key = getFieldKey('title', location.language) as keyof ParsedMenu;
+      (newData as any)[key] = suggestion;
+    } else if (location.type === 'subtitle') {
+      const key = getFieldKey('subtitle', location.language) as keyof ParsedMenu;
+      (newData as any)[key] = suggestion;
+    } else if (location.type === 'category' && location.categoryIndex !== undefined) {
+      const cat = { ...newData.categories[location.categoryIndex] };
+      const key = getFieldKey(location.field, location.language) as keyof ParsedMenuCategory;
+      (cat as any)[key] = suggestion;
+      newData.categories[location.categoryIndex] = cat;
+    } else if (location.type === 'item' && location.categoryIndex !== undefined && location.itemIndex !== undefined) {
+      const cat = { ...newData.categories[location.categoryIndex] };
+      const item = { ...cat.items[location.itemIndex] };
+      const key = getFieldKey(location.field, location.language) as keyof ParsedMenuItem;
+      (item as any)[key] = suggestion;
+      cat.items[location.itemIndex] = item;
+      newData.categories[location.categoryIndex] = cat;
+    }
+
+    onUpdate(newData);
+  };
+
+  const handleAcceptError = (error: SpellingError) => {
+    applySpellingCorrection(error);
+    toast.success(t.spellCheck?.correctionApplied || 'Korrektur angewendet');
+  };
+
+  const handleAcceptAll = () => {
+    spellCheckErrors.forEach(error => applySpellingCorrection(error));
+    toast.success(t.spellCheck?.allCorrectionsApplied || 'Alle Korrekturen angewendet');
+  };
+
+  if (showSpellCheck) {
+    return (
+      <SpellCheckResults
+        errors={spellCheckErrors}
+        onAccept={handleAcceptError}
+        onReject={() => {}}
+        onAcceptAll={handleAcceptAll}
+        onRejectAll={() => {}}
+        onClose={() => setShowSpellCheck(false)}
+      />
+    );
+  }
+
   return (
     <div className="border border-border rounded-lg p-4 md:p-6 space-y-6 bg-secondary/30">
       <div className="space-y-4">
-        <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
-          Vorschau & Bearbeitung
-        </h4>
+        <div className="flex items-center justify-between">
+          <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
+            Vorschau & Bearbeitung
+          </h4>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={runSpellCheck}
+            disabled={isSpellChecking}
+            className="gap-2"
+          >
+            {isSpellChecking ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <SpellCheck className="h-4 w-4" />
+            )}
+            {t.spellCheck?.runCheck || 'Rechtschreibprüfung'}
+          </Button>
+        </div>
 
         {/* Title & Subtitle - German */}
         <div className="grid grid-cols-1 gap-4">
@@ -151,7 +261,7 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
       <div className="space-y-6">
         {data.categories.map((category, catIndex) => (
           <div key={catIndex} className="border border-border rounded-lg p-3 md:p-4 bg-background">
-            {/* Category Header - Touch optimized */}
+            {/* Category Header */}
             <div className="flex items-start justify-between gap-2 mb-4">
               <div className="flex items-start gap-2 flex-1 min-w-0">
                 <div className="pt-2 touch-manipulation cursor-grab flex-shrink-0">
@@ -178,14 +288,13 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
               </Button>
             </div>
 
-            {/* Items - Touch optimized */}
+            {/* Items */}
             <div className="space-y-4 ml-0 sm:ml-6">
               {category.items.map((item, itemIndex) => (
                 <div 
                   key={itemIndex} 
                   className="flex flex-col gap-3 p-3 md:p-4 bg-secondary/50 rounded-lg relative"
                 >
-                  {/* Delete button - Top right, larger for touch */}
                   <Button
                     variant="ghost"
                     size="icon"
@@ -195,7 +304,6 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
                     <Trash2 className="h-5 w-5" />
                   </Button>
                   
-                  {/* Fields - Stacked on mobile */}
                   <div className="pr-12">
                     <label className="text-xs font-medium text-muted-foreground mb-1 block">Gericht</label>
                     <Textarea
