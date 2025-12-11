@@ -16,6 +16,14 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
   const { data: menu, isLoading, error } = menuId ? menuById : menuByType;
   const { language, t } = useLanguage();
 
+  // Helper to get localized text with fallback chain
+  const getLocalizedText = (de: string | null, en: string | null, it: string | null, fr: string | null): string | null => {
+    if (language === 'it' && it) return it;
+    if (language === 'fr' && fr) return fr;
+    if (language === 'en' && en) return en;
+    return de; // Fallback to German
+  };
+
   if (isLoading) {
     return (
       <div className="max-w-3xl mx-auto space-y-8">
@@ -76,8 +84,8 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
       {/* Categories */}
       <div className="space-y-12">
         {menu.categories.map((category) => {
-          const categoryName = language === 'en' && category.name_en ? category.name_en : category.name;
-          const categoryDescription = language === 'en' && category.description_en ? category.description_en : category.description;
+          const categoryName = getLocalizedText(category.name, category.name_en, category.name_it, category.name_fr);
+          const categoryDescription = getLocalizedText(category.description, category.description_en, category.description_it, category.description_fr);
 
           return (
             <div key={category.id} className="space-y-6">
@@ -95,9 +103,9 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
 
               {/* Items */}
               <div className="space-y-4">
-                {category.items.map((item) => {
-                  const itemName = language === 'en' && item.name_en ? item.name_en : item.name;
-                  const itemDescription = language === 'en' && item.description_en ? item.description_en : item.description;
+              {category.items.map((item) => {
+                  const itemName = getLocalizedText(item.name, item.name_en, item.name_it, item.name_fr);
+                  const itemDescription = getLocalizedText(item.description, item.description_en, item.description_it, item.description_fr);
                   const priceDisplay = item.price_display || (item.price ? `€${item.price.toFixed(2).replace('.', ',')}` : null);
 
                   return (

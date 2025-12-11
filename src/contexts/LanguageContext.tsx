@@ -1,8 +1,10 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { de } from "@/translations/de";
 import { en } from "@/translations/en";
+import { it } from "@/translations/it";
+import { fr } from "@/translations/fr";
 
-type Language = "de" | "en";
+export type Language = "de" | "en" | "it" | "fr";
 type Translations = typeof de;
 
 interface LanguageContextType {
@@ -19,6 +21,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const translations = {
     de,
     en,
+    it,
+    fr,
   };
 
   const t = translations[language];

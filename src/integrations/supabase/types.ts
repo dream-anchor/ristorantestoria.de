@@ -58,30 +58,42 @@ export type Database = {
           created_at: string | null
           description: string | null
           description_en: string | null
+          description_fr: string | null
+          description_it: string | null
           id: string
           menu_id: string
           name: string
           name_en: string | null
+          name_fr: string | null
+          name_it: string | null
           sort_order: number | null
         }
         Insert: {
           created_at?: string | null
           description?: string | null
           description_en?: string | null
+          description_fr?: string | null
+          description_it?: string | null
           id?: string
           menu_id: string
           name: string
           name_en?: string | null
+          name_fr?: string | null
+          name_it?: string | null
           sort_order?: number | null
         }
         Update: {
           created_at?: string | null
           description?: string | null
           description_en?: string | null
+          description_fr?: string | null
+          description_it?: string | null
           id?: string
           menu_id?: string
           name?: string
           name_en?: string | null
+          name_fr?: string | null
+          name_it?: string | null
           sort_order?: number | null
         }
         Relationships: [
@@ -101,11 +113,15 @@ export type Database = {
           created_at: string | null
           description: string | null
           description_en: string | null
+          description_fr: string | null
+          description_it: string | null
           id: string
           is_vegan: boolean | null
           is_vegetarian: boolean | null
           name: string
           name_en: string | null
+          name_fr: string | null
+          name_it: string | null
           price: number | null
           price_display: string | null
           sort_order: number | null
@@ -116,11 +132,15 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           description_en?: string | null
+          description_fr?: string | null
+          description_it?: string | null
           id?: string
           is_vegan?: boolean | null
           is_vegetarian?: boolean | null
           name: string
           name_en?: string | null
+          name_fr?: string | null
+          name_it?: string | null
           price?: number | null
           price_display?: string | null
           sort_order?: number | null
@@ -131,11 +151,15 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           description_en?: string | null
+          description_fr?: string | null
+          description_it?: string | null
           id?: string
           is_vegan?: boolean | null
           is_vegetarian?: boolean | null
           name?: string
           name_en?: string | null
+          name_fr?: string | null
+          name_it?: string | null
           price?: number | null
           price_display?: string | null
           sort_order?: number | null
@@ -162,8 +186,12 @@ export type Database = {
           sort_order: number | null
           subtitle: string | null
           subtitle_en: string | null
+          subtitle_fr: string | null
+          subtitle_it: string | null
           title: string | null
           title_en: string | null
+          title_fr: string | null
+          title_it: string | null
           updated_at: string | null
         }
         Insert: {
@@ -177,8 +205,12 @@ export type Database = {
           sort_order?: number | null
           subtitle?: string | null
           subtitle_en?: string | null
+          subtitle_fr?: string | null
+          subtitle_it?: string | null
           title?: string | null
           title_en?: string | null
+          title_fr?: string | null
+          title_it?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -192,8 +224,12 @@ export type Database = {
           sort_order?: number | null
           subtitle?: string | null
           subtitle_en?: string | null
+          subtitle_fr?: string | null
+          subtitle_it?: string | null
           title?: string | null
           title_en?: string | null
+          title_fr?: string | null
+          title_it?: string | null
           updated_at?: string | null
         }
         Relationships: []

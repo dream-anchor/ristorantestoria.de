@@ -62,7 +62,7 @@ const Reservierung = () => {
         <div className="bg-background border-b border-border">
           <div className="container mx-auto px-4 py-8 text-center">
             <Link to="/">
-              <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
+              <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 w-auto mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
             </Link>
             <p className="text-lg text-muted-foreground tracking-wide font-sans">
               {t.hero.subtitle}
@@ -78,8 +78,12 @@ const Reservierung = () => {
           </h1>
           <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
             {language === 'de' 
-              ? <>Reservieren Sie bequem online oder rufen Sie uns an unter <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>. Für schnelle Anfragen auch per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
-              : <>Book online or call us at <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>. For quick inquiries also via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
+              ? <>Reservieren Sie bequem online oder rufen Sie uns an unter <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Schnelle Anfragen auch per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+              : language === 'it'
+              ? <>Prenotate comodamente online o chiamateci al <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Richieste rapide anche via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+              : language === 'fr'
+              ? <>Réservez facilement en ligne ou appelez-nous au <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Demandes rapides aussi via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+              : <>Book online or call us at <a href="tel:+498951519696" className="text-primary hover:underline font-medium">+49 89 51519696</a>.<br />Quick inquiries also via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
           </p>
           
           <div className="max-w-4xl mx-auto bg-card rounded-lg border border-border shadow-lg overflow-hidden">
