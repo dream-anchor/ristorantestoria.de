@@ -16,7 +16,7 @@ const Hero = () => {
             width={192}
             height={192}
             loading="eager"
-            className="h-32 md:h-48 mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer"
+            className="h-32 md:h-48 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer"
           />
         </Link>
         <p className="text-lg md:text-xl text-muted-foreground mb-8 tracking-widest uppercase">
