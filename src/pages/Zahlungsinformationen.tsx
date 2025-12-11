@@ -1,12 +1,19 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import SEO from "@/components/SEO";
 import { CreditCard, Banknote, Smartphone, Gift } from "lucide-react";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Zahlungsinformationen = () => {
   usePrerenderReady(true);
   return (
+    <>
+      <SEO 
+        title="Zahlungsinformationen" 
+        description="Zahlungsmöglichkeiten bei STORIA Restaurant München. Akzeptierte Zahlungsmittel: Bar, EC, Kreditkarte, Apple Pay, Google Pay und Gutscheine."
+        canonical="/zahlungsinformationen"
+      />
     <div className="min-h-screen bg-background">
       <Header />
       
@@ -133,6 +140,7 @@ const Zahlungsinformationen = () => {
       <Footer />
       <FloatingActions />
     </div>
+    </>
   );
 };
 

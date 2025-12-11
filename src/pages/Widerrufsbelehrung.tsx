@@ -1,11 +1,18 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import SEO from "@/components/SEO";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Widerrufsbelehrung = () => {
   usePrerenderReady(true);
   return (
+    <>
+      <SEO 
+        title="Widerrufsbelehrung" 
+        description="Widerrufsbelehrung der Speranza GmbH (STORIA Restaurant München). Informationen zum Widerrufsrecht bei Online-Bestellungen und Gutscheinkäufen."
+        canonical="/widerrufsbelehrung"
+      />
     <div className="min-h-screen bg-background">
       <Header />
       
@@ -131,6 +138,7 @@ const Widerrufsbelehrung = () => {
       <Footer />
       <FloatingActions />
     </div>
+    </>
   );
 };
 

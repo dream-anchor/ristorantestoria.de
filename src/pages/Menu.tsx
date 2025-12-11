@@ -1,10 +1,17 @@
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import storiaLogo from "@/assets/storia-logo.webp";
 
 const Menu = () => {
   return (
+    <>
+      <SEO 
+        title="Menü" 
+        description="Das Menü von STORIA Restaurant München: Antipasti, Pizza, Pasta und Dolci – authentische italienische Küche in der Maxvorstadt."
+        canonical="/menu"
+      />
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <div className="bg-background border-b border-border">
@@ -60,6 +67,7 @@ const Menu = () => {
 
       <Footer />
     </div>
+    </>
   );
 };
 

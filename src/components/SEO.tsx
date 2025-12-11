@@ -19,7 +19,7 @@ const SEO = ({
   noIndex = false,
 }: SEOProps) => {
   const { language } = useLanguage();
-  const baseUrl = 'https://ristorantestoria.de';
+  const baseUrl = 'https://www.ristorantestoria.de';
   
   const siteTitle = 'STORIA – Italienisches Restaurant München Maxvorstadt';
   const fullTitle = title ? `${title} | STORIA München` : siteTitle;

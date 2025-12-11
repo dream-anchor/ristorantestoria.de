@@ -1,11 +1,18 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import SEO from "@/components/SEO";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const CookieRichtlinie = () => {
   usePrerenderReady(true);
   return (
+    <>
+      <SEO 
+        title="Cookie-Richtlinie" 
+        description="Cookie-Richtlinie von STORIA Restaurant München. Informationen zu Cookies, Consent-System und Ihren Wahlmöglichkeiten gemäß DSGVO und TTDSG."
+        canonical="/cookie-richtlinie"
+      />
     <div className="min-h-screen bg-background">
       <Header />
       
@@ -159,6 +166,7 @@ const CookieRichtlinie = () => {
       <Footer />
       <FloatingActions />
     </div>
+    </>
   );
 };
 

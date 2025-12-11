@@ -1,11 +1,18 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import SEO from "@/components/SEO";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Haftungsausschluss = () => {
   usePrerenderReady(true);
   return (
+    <>
+      <SEO 
+        title="Haftungsausschluss" 
+        description="Haftungsausschluss (Disclaimer) der Speranza GmbH (STORIA Restaurant München). Informationen zu Haftung, Urheberrecht und externen Links."
+        canonical="/haftungsausschluss"
+      />
     <div className="min-h-screen bg-background">
       <Header />
       
@@ -143,6 +150,7 @@ const Haftungsausschluss = () => {
       <Footer />
       <FloatingActions />
     </div>
+    </>
   );
 };
 
