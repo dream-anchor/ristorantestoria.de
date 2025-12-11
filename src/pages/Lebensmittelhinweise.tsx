@@ -1,11 +1,18 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import SEO from "@/components/SEO";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Lebensmittelhinweise = () => {
   usePrerenderReady(true);
   return (
+    <>
+      <SEO 
+        title="Lebensmittelinformationen" 
+        description="Allergen- und Zusatzstoffkennzeichnung gemäß EU-LMIV bei STORIA Restaurant München. Alle 14 Hauptallergene und Zusatzstoffe transparent erklärt."
+        canonical="/lebensmittelhinweise"
+      />
     <div className="min-h-screen bg-background">
       <Header />
       
@@ -199,6 +206,7 @@ const Lebensmittelhinweise = () => {
       <Footer />
       <FloatingActions />
     </div>
+    </>
   );
 };
 

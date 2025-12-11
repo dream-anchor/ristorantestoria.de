@@ -13,6 +13,7 @@ import SortableMenuCard from "@/components/admin/SortableMenuCard";
 import { LogOut, ExternalLink } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
 import EventInquiriesManager from "@/components/admin/EventInquiriesManager";
+import SEO from "@/components/SEO";
 import {
   DndContext,
   closestCenter,
@@ -129,6 +130,12 @@ const Admin = () => {
   }
 
   return (
+    <>
+      <SEO 
+        title="Admin Dashboard" 
+        canonical="/admin"
+        noIndex={true}
+      />
     <div className="min-h-screen bg-background">
       {/* Header - Mobile optimized */}
       <header className="border-b border-border bg-card">
@@ -223,6 +230,7 @@ const Admin = () => {
         <EventInquiriesManager />
       </main>
     </div>
+    </>
   );
 };
 

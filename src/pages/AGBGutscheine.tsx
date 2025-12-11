@@ -1,12 +1,19 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const AGBGutscheine = () => {
   usePrerenderReady(true);
   return (
+    <>
+      <SEO 
+        title="AGB Gutscheine" 
+        description="Allgemeine Geschäftsbedingungen für Gutscheine bei STORIA Restaurant München. Informationen zu Kauf, Einlösung und Gültigkeit von STORIA-Gutscheinen."
+        canonical="/agb-gutscheine"
+      />
     <div className="min-h-screen bg-background">
       <Header />
       
@@ -151,6 +158,7 @@ const AGBGutscheine = () => {
       <Footer />
       <FloatingActions />
     </div>
+    </>
   );
 };
 

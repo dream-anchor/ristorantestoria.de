@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { z } from "zod";
 import storiaLogo from "@/assets/storia-logo.webp";
+import SEO from "@/components/SEO";
 
 const loginSchema = z.object({
   email: z.string().email("Ungültige E-Mail-Adresse"),
@@ -65,6 +66,12 @@ const AdminLogin = () => {
   }
 
   return (
+    <>
+      <SEO 
+        title="Admin Login" 
+        canonical="/admin/login"
+        noIndex={true}
+      />
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
@@ -111,6 +118,7 @@ const AdminLogin = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 
