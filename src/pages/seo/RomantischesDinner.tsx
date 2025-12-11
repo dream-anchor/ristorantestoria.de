@@ -94,8 +94,9 @@ const RomantischesDinner = () => {
               </h2>
               <p className="text-muted-foreground mb-4">
                 {language === 'de'
-                  ? 'Ob Jahrestag, Verlobung oder einfach ein besonderer Abend zu zweit – im STORIA schaffen wir den perfekten Rahmen für Ihre romantischen Momente. Zentral in der Maxvorstadt, nahe den Pinakotheken.'
-                  : 'Whether anniversary, engagement or simply a special evening for two – at STORIA we create the perfect setting for your romantic moments. Central in Maxvorstadt, near the Pinakothek museums.'}
+                  ? <>Ob Jahrestag, Verlobung oder einfach ein besonderer Abend zu zweit – im STORIA schaffen wir den perfekten Rahmen für Ihre romantischen Momente. Beginnen Sie mit einem <Link to="/aperitivo-muenchen" className="text-primary hover:underline">italienischen Aperitivo</Link> und genießen Sie unsere <Link to="/neapolitanische-pizza-muenchen" className="text-primary hover:underline">neapolitanische Pizza</Link> oder feine Pasta. Erfahren Sie mehr <Link to="/ueber-uns" className="text-primary hover:underline">über unsere Familie Speranza</Link>.</>
+                  : <>Whether anniversary, engagement or simply a special evening for two – at STORIA we create the perfect setting for your romantic moments. Start with an <Link to="/aperitivo-muenchen" className="text-primary hover:underline">Italian aperitivo</Link> and enjoy our <Link to="/neapolitanische-pizza-muenchen" className="text-primary hover:underline">Neapolitan pizza</Link> or fine pasta. Learn more <Link to="/ueber-uns" className="text-primary hover:underline">about the Speranza family</Link>.</>
+                }
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <Button asChild>
