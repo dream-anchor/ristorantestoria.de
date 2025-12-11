@@ -28,7 +28,7 @@ interface NavItem {
 
 // Mapping von menu_type zu Route
 const menuTypeConfig: Record<string, { path: string }> = {
-  lunch: { path: '/mittagsmenu' },
+  lunch: { path: '/mittags-menu' },
   food: { path: '/speisekarte' },
   drinks: { path: '/getraenke' },
 };
@@ -69,9 +69,9 @@ const Navigation = () => {
         label: menuTypeLabels[menu.menu_type] || menu.title || 'MENÜ',
         path: menuTypeConfig[menu.menu_type]?.path || '/speisekarte',
       }))
-    : [
+      : [
         // Fallback während des Ladens
-        { label: t.nav.lunchMenu, path: "/mittagsmenu" },
+        { label: t.nav.lunchMenu, path: "/mittags-menu" },
         { label: t.nav.foodMenu, path: "/speisekarte" },
         { label: t.nav.drinks, path: "/getraenke" },
       ];

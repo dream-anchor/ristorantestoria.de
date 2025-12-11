@@ -101,7 +101,7 @@ const LunchMuenchen = () => {
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <Button asChild>
-                  <Link to="/mittagsmenu">{language === 'de' ? 'Aktuelles Mittagsmenü' : 'Current Lunch Menu'}</Link>
+                  <Link to="/mittags-menu">{language === 'de' ? 'Aktuelles Mittagsmenü' : 'Current Lunch Menu'}</Link>
                 </Button>
                 <Button variant="outline" asChild>
                   <Link to="/speisekarte">{language === 'de' ? 'Zur Speisekarte' : 'View Full Menu'}</Link>
