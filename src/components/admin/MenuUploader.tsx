@@ -99,6 +99,29 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
     });
   };
 
+  // Check for missing IT/FR translations
+  const detectMissingTranslations = (menuData: ParsedMenu): { it: boolean; fr: boolean } => {
+    let missingIt = false;
+    let missingFr = false;
+
+    // Check title/subtitle
+    if (!menuData.title_it) missingIt = true;
+    if (!menuData.title_fr) missingFr = true;
+
+    // Check categories and items
+    for (const cat of menuData.categories) {
+      if (!cat.name_it) missingIt = true;
+      if (!cat.name_fr) missingFr = true;
+      for (const item of cat.items) {
+        if (!item.name_it) missingIt = true;
+        if (!item.name_fr) missingFr = true;
+      }
+      if (missingIt && missingFr) break;
+    }
+
+    return { it: missingIt, fr: missingFr };
+  };
+
   const runSpellCheck = async (menuData: ParsedMenu) => {
     setIsSpellChecking(true);
     try {
@@ -433,6 +456,7 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
           onAcceptAll={handleAcceptAll}
           onRejectAll={handleRejectAll}
           onClose={handleSpellCheckClose}
+          missingTranslations={detectMissingTranslations(parsedData)}
         />
       )}
 

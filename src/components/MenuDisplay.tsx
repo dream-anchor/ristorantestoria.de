@@ -64,18 +64,22 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
     );
   }
 
+  // Get localized title and subtitle
+  const menuTitle = getLocalizedText(menu.title, menu.title_en, menu.title_it, menu.title_fr);
+  const menuSubtitle = getLocalizedText(menu.subtitle, menu.subtitle_en, menu.subtitle_it, menu.subtitle_fr);
+
   return (
     <div className="max-w-3xl mx-auto">
       {/* Menu Header */}
-      {showTitle && (menu.title || menu.subtitle) && (
+      {showTitle && (menuTitle || menuSubtitle) && (
         <div className="text-center mb-12">
-          {menu.title && (
+          {menuTitle && (
             <h2 className="text-3xl md:text-4xl font-serif font-semibold tracking-wide mb-2">
-              {menu.title}
+              {menuTitle}
             </h2>
           )}
-          {menu.subtitle && (
-            <p className="text-lg text-muted-foreground italic">{menu.subtitle}</p>
+          {menuSubtitle && (
+            <p className="text-lg text-muted-foreground italic">{menuSubtitle}</p>
           )}
           <div className="w-24 h-px bg-primary/30 mx-auto mt-6" />
         </div>

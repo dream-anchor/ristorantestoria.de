@@ -207,8 +207,35 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
       throw new Error('Invalid AI response format');
     }
 
-    const parsedMenu: ParsedMenu = JSON.parse(toolCall.function.arguments);
-    console.log(`Parsed ${parsedMenu.categories.length} categories with IT/FR translations`);
+    const rawMenu: ParsedMenu = JSON.parse(toolCall.function.arguments);
+    
+    // Ensure all IT/FR fields have fallback values (use DE if missing)
+    const ensureTranslations = (menu: ParsedMenu): ParsedMenu => {
+      return {
+        ...menu,
+        title_it: menu.title_it || menu.title || '',
+        title_fr: menu.title_fr || menu.title || '',
+        subtitle_it: menu.subtitle_it || menu.subtitle || '',
+        subtitle_fr: menu.subtitle_fr || menu.subtitle || '',
+        categories: menu.categories.map(cat => ({
+          ...cat,
+          name_it: cat.name_it || cat.name || '',
+          name_fr: cat.name_fr || cat.name || '',
+          description_it: cat.description_it || cat.description || '',
+          description_fr: cat.description_fr || cat.description || '',
+          items: cat.items.map(item => ({
+            ...item,
+            name_it: item.name_it || item.name || '',
+            name_fr: item.name_fr || item.name || '',
+            description_it: item.description_it || item.description || '',
+            description_fr: item.description_fr || item.description || '',
+          }))
+        }))
+      };
+    };
+
+    const parsedMenu = ensureTranslations(rawMenu);
+    console.log(`Parsed ${parsedMenu.categories.length} categories with IT/FR translations (fallback applied)`);
 
     return new Response(JSON.stringify({ 
       success: true, 
