@@ -8,6 +8,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BotContent from "@/components/BotContent";
+import BackToLandingPage from "@/components/BackToLandingPage";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMenu } from "@/hooks/useMenu";
@@ -52,6 +53,7 @@ const Mittagsmenu = () => {
         <Navigation />
 
         <main className="container mx-auto px-4 py-12 flex-grow">
+          <BackToLandingPage />
           <h1 className="text-4xl font-serif font-bold mb-6 text-center">
             {language === 'de' ? 'Mittagsmenü – Lunch München Maxvorstadt' : 'Lunch Menu – Italian Lunch Munich Maxvorstadt'}
           </h1>

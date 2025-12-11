@@ -10,10 +10,10 @@ import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { MapPin, Clock, Utensils, Star, Coffee, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza } from "lucide-react";
+import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza, Users, Receipt, Building } from "lucide-react";
 
 // Images
-import pastaImage from "@/assets/pasta.jpg";
+import ravioliImage from "@/assets/ravioli-lunch.webp";
 
 const LunchMuenchen = () => {
   const { language } = useLanguage();
@@ -23,7 +23,7 @@ const LunchMuenchen = () => {
     {
       icon: Clock,
       title: language === 'de' ? 'Schneller Service' : 'Quick Service',
-      description: language === 'de' ? 'In 15 Min. auf dem Tisch' : 'Served in 15 minutes'
+      description: language === 'de' ? 'Zuverlässig & pünktlich' : 'Reliable & on time'
     },
     {
       icon: MapPin,
@@ -43,19 +43,37 @@ const LunchMuenchen = () => {
     {
       icon: ChefHat,
       title: language === 'de' ? 'Wechselnde Gerichte' : 'Changing Dishes',
-      description: language === 'de' ? 'Täglich neue Auswahl' : 'New selection daily'
+      description: language === 'de' ? 'Regelmäßig neue Auswahl' : 'Regularly new selection'
+    }
+  ];
+
+  const businessBenefits = [
+    {
+      icon: Receipt,
+      title: language === 'de' ? 'Firmenrechnung' : 'Company Invoice',
+      description: language === 'de' ? 'Unkomplizierte Rechnungsstellung' : 'Easy invoicing'
     },
     {
-      icon: Coffee,
-      title: language === 'de' ? 'Espresso inklusive' : 'Espresso Included',
-      description: language === 'de' ? 'Italienischer Abschluss' : 'Italian finish'
+      icon: Users,
+      title: language === 'de' ? 'Team-Reservierung' : 'Team Booking',
+      description: language === 'de' ? 'Gruppentische für 2–20 Personen' : 'Group tables for 2-20 people'
+    },
+    {
+      icon: Clock,
+      title: language === 'de' ? 'Zuverlässiger Service' : 'Reliable Service',
+      description: language === 'de' ? 'Pünktlich zurück ins Büro' : 'Back to office on time'
+    },
+    {
+      icon: Building,
+      title: language === 'de' ? 'Zentrale Lage' : 'Central Location',
+      description: language === 'de' ? '5 Min. vom Hbf – ideal für Kundenbesuche' : '5 min from station – ideal for client visits'
     }
   ];
 
   const lunchOffers = [
     {
-      title: language === 'de' ? 'Pasta des Tages' : 'Pasta of the Day',
-      description: language === 'de' ? 'Täglich wechselnde Pasta-Kreation aus frischen Zutaten' : 'Daily changing pasta creation from fresh ingredients',
+      title: language === 'de' ? 'Pasta-Klassiker' : 'Pasta Classics',
+      description: language === 'de' ? 'Regelmäßig wechselnde Kreationen aus frischen Zutaten' : 'Regularly changing creations from fresh ingredients',
       icon: ChefHat
     },
     {
@@ -81,28 +99,28 @@ const LunchMuenchen = () => {
       <StaticBotContent
         title={language === 'de' ? 'Lunch München Maxvorstadt – Italienisches Mittagessen' : 'Lunch Munich Maxvorstadt – Italian Lunch'}
         description={language === 'de' 
-          ? 'Mittagessen im STORIA München Maxvorstadt: Täglich wechselnde italienische Gerichte, frische Pasta & knusprige Pizza. Ideal für Berufstätige nahe Hauptbahnhof & TU München.'
-          : 'Lunch at STORIA Munich Maxvorstadt: Daily changing Italian dishes, fresh pasta & crispy pizza. Ideal for professionals near main station & TU Munich.'}
+          ? 'Mittagessen im STORIA München Maxvorstadt: Regelmäßig wechselnde italienische Gerichte, frische Pasta & knusprige Pizza. Ideal für Berufstätige und Teams nahe Hauptbahnhof & TU München.'
+          : 'Lunch at STORIA Munich Maxvorstadt: Regularly changing Italian dishes, fresh pasta & crispy pizza. Ideal for professionals and teams near main station & TU Munich.'}
         sections={[
           { heading: language === 'de' ? 'Unsere Vorteile' : 'Our Benefits', content: [
-            language === 'de' ? 'Schneller Service – in 15 Minuten auf dem Tisch' : 'Quick service – served in 15 minutes',
+            language === 'de' ? 'Schneller & zuverlässiger Service' : 'Quick & reliable service',
             language === 'de' ? 'Zentrale Lage – 5 Min. vom Hauptbahnhof' : 'Central location – 5 min from main station',
-            language === 'de' ? 'Täglich wechselnde Gerichte' : 'Daily changing dishes',
+            language === 'de' ? 'Regelmäßig wechselnde Gerichte' : 'Regularly changing dishes',
             language === 'de' ? 'Faire Mittagspreise' : 'Fair lunch prices'
           ]},
-          { heading: language === 'de' ? 'Mittagsangebot' : 'Lunch Offer', content: [
-            language === 'de' ? 'Pasta des Tages – täglich frisch' : 'Pasta of the day – fresh daily',
-            language === 'de' ? 'Pizza aus dem Steinofen' : 'Stone oven pizza',
-            language === 'de' ? 'Frische Salate & Antipasti' : 'Fresh salads & antipasti'
+          { heading: language === 'de' ? 'Für Firmenkunden' : 'For Business Clients', content: [
+            language === 'de' ? 'Firmenrechnung möglich' : 'Company invoicing available',
+            language === 'de' ? 'Team-Reservierungen für 2–20 Personen' : 'Team reservations for 2-20 people',
+            language === 'de' ? 'Ideal für Geschäftsessen & Kundenbesuche' : 'Ideal for business meals & client visits'
           ]},
           { heading: language === 'de' ? 'Öffnungszeiten Mittag' : 'Lunch Hours', content: language === 'de' ? 'Mo–Fr 11:30–14:30 Uhr' : 'Mon–Fri 11:30 AM–2:30 PM' }
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Lunch Maxvorstadt – Mittagsmenü' : 'Lunch Maxvorstadt – Lunch Menu'}
+        title={language === 'de' ? 'Lunch Maxvorstadt – Business Lunch & Mittagsmenü' : 'Lunch Maxvorstadt – Business Lunch & Menu'}
         description={language === 'de' 
-          ? 'Mittagsmenü im STORIA München: Italienischer Lunch Mo–Fr in der Maxvorstadt. Frische Pasta & Pizza nahe Hauptbahnhof. Jetzt Tisch reservieren!'
-          : 'Lunch menu at STORIA Munich: Italian lunch Mon-Fri in Maxvorstadt. Fresh pasta & pizza near main station. Book your table!'}
+          ? 'Business Lunch im STORIA München: Italienischer Mittagstisch Mo–Fr in der Maxvorstadt. Ideal für Teams & Geschäftsessen nahe Hauptbahnhof. Jetzt Tisch reservieren!'
+          : 'Business lunch at STORIA Munich: Italian lunch Mon-Fri in Maxvorstadt. Ideal for teams & business meals near main station. Book your table!'}
         canonical="/lunch-muenchen-maxvorstadt"
       />
       <StructuredData type="restaurant" />
@@ -118,10 +136,10 @@ const LunchMuenchen = () => {
         <Header />
         
         {/* Hero Section with Full Image */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
           <img 
-            src={pastaImage} 
-            alt={language === 'de' ? 'Frische Pasta im STORIA München – Italienischer Mittagstisch' : 'Fresh pasta at STORIA Munich – Italian lunch'}
+            src={ravioliImage} 
+            alt={language === 'de' ? 'Frische Ravioli mit Tomatensugo – Business Lunch im STORIA München' : 'Fresh ravioli with tomato sugo – Business lunch at STORIA Munich'}
             width={1200}
             height={800}
             loading="eager"
@@ -131,18 +149,18 @@ const LunchMuenchen = () => {
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12">
               <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase">
-                {language === 'de' ? 'Mittagstisch im STORIA' : 'Lunch at STORIA'}
+                {language === 'de' ? 'Business Lunch in der Maxvorstadt' : 'Business Lunch in Maxvorstadt'}
               </p>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
                 {language === 'de' 
-                  ? <>Mittagspause auf Italienisch –<br className="hidden md:block" /> frisch, schnell & lecker</>
-                  : <>Italian lunch break –<br className="hidden md:block" /> fresh, fast & delicious</>
+                  ? <>Der perfekte Ort für<br className="hidden md:block" /> Ihr Geschäftsessen</>
+                  : <>The perfect place for<br className="hidden md:block" /> your business meal</>
                 }
               </h1>
               <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
                 {language === 'de'
-                  ? 'Genießen Sie authentisch italienische Küche in der Maxvorstadt – nur 5 Minuten vom Hauptbahnhof.'
-                  : 'Enjoy authentic Italian cuisine in Maxvorstadt – just 5 minutes from the main station.'}
+                  ? 'Ob Teamessen, Kundenbesuch oder schnelle Pause zwischen Meetings – genießen Sie italienische Qualität in zentraler Lage.'
+                  : 'Whether team meal, client visit or quick break between meetings – enjoy Italian quality in a central location.'}
               </p>
               <Button 
                 size="lg" 
@@ -162,12 +180,12 @@ const LunchMuenchen = () => {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 text-sm md:text-base">
               <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 fill-current" />
-                <span>{language === 'de' ? 'Seit 1995 in München' : 'Since 1995 in Munich'}</span>
+                <Users className="w-5 h-5" />
+                <span>{language === 'de' ? 'Ideal für Teams ab 2 Personen' : 'Ideal for teams of 2+'}</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5" />
-                <span>{language === 'de' ? '5 Min. vom Hbf' : '5 min from station'}</span>
+                <Receipt className="w-5 h-5" />
+                <span>{language === 'de' ? 'Firmenrechnung möglich' : 'Company invoice available'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-5 h-5" />
@@ -180,35 +198,86 @@ const LunchMuenchen = () => {
         <Navigation />
         
         <main className="flex-grow">
+
+          {/* 3-Gänge Mittagsmenü Highlight */}
+          <section className="py-12 md:py-16 bg-card border-b border-border">
+            <div className="container mx-auto px-4 text-center max-w-3xl">
+              <span className="text-sm uppercase tracking-wider text-primary font-medium mb-2 block">
+                {language === 'de' ? 'Unser Tipp' : 'Our Recommendation'}
+              </span>
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
+                {language === 'de' ? '3-Gänge Mittagsmenü' : '3-Course Lunch Menu'}
+              </h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                {language === 'de' 
+                  ? 'Vorspeise, Hauptgang und Dessert – das komplette italienische Mittags-Erlebnis zu einem fairen Preis.' 
+                  : 'Starter, main course and dessert – the complete Italian lunch experience at a fair price.'}
+              </p>
+              <Button variant="default" size="lg" asChild>
+                <Link to="/mittags-menu?from=lunch-muenchen-maxvorstadt">
+                  {language === 'de' ? 'Menü ansehen' : 'View menu'}
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </section>
           
           {/* Pain Points Section */}
           <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <p className="text-lg md:text-xl text-muted-foreground mb-4">
                 {language === 'de' 
-                  ? 'Keine Zeit für lange Mittagspausen? Immer dasselbe Essen in der Kantine?' 
-                  : 'No time for long lunch breaks? Always the same food in the canteen?'}
+                  ? 'Teamessen organisieren kostet Zeit? Wichtiger Kundenbesuch steht an?' 
+                  : 'Organizing team meals takes time? Important client visit coming up?'}
               </p>
               <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
                 {language === 'de' 
-                  ? 'Bei uns genießen Sie authentisch italienisch – schnell serviert.' 
-                  : 'With us, enjoy authentic Italian – served quickly.'}
+                  ? 'Bei uns finden Sie den perfekten Rahmen für geschäftliche Anlässe.' 
+                  : 'With us, you\'ll find the perfect setting for business occasions.'}
               </h2>
               <p className="text-muted-foreground">
                 {language === 'de'
-                  ? 'Frisch zubereitet, fair bepreist und in entspannter Atmosphäre – die perfekte Auszeit vom Arbeitsalltag.'
-                  : 'Freshly prepared, fairly priced and in a relaxed atmosphere – the perfect break from work.'}
+                  ? 'Professionell, aber entspannt – italienische Gastfreundschaft trifft auf Business-Effizienz.'
+                  : 'Professional yet relaxed – Italian hospitality meets business efficiency.'}
               </p>
             </div>
           </section>
 
-          {/* Benefits Grid */}
+          {/* Business Benefits */}
           <section className="py-16 md:py-20">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
+                {language === 'de' ? 'Vorteile für Firmenkunden' : 'Benefits for Business Clients'}
+              </h2>
+              <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+                {language === 'de' 
+                  ? 'Wir machen Ihr Business-Lunch unkompliziert.' 
+                  : 'We make your business lunch effortless.'}
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
+                {businessBenefits.map((benefit, index) => {
+                  const BenefitIcon = benefit.icon;
+                  return (
+                    <div key={index} className="text-center p-4">
+                      <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                        <BenefitIcon className="w-7 h-7 md:w-8 md:h-8 text-primary" />
+                      </div>
+                      <h3 className="font-semibold mb-1">{benefit.title}</h3>
+                      <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          {/* Benefits Grid */}
+          <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-12">
                 {language === 'de' ? 'Warum STORIA für Ihre Mittagspause?' : 'Why STORIA for Your Lunch Break?'}
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 max-w-5xl mx-auto">
                 {benefits.map((benefit, index) => {
                   const BenefitIcon = benefit.icon;
                   return (
@@ -227,7 +296,7 @@ const LunchMuenchen = () => {
               <div className="text-center mt-12">
                 <Button size="lg" variant="outline" asChild>
                   <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
-                    {language === 'de' ? 'Jetzt Tisch reservieren' : 'Reserve a table now'}
+                    {language === 'de' ? 'Jetzt für Ihr Team reservieren' : 'Reserve for your team now'}
                   </Link>
                 </Button>
               </div>
@@ -235,15 +304,15 @@ const LunchMuenchen = () => {
           </section>
 
           {/* Lunch Offers */}
-          <section className="py-16 md:py-20 bg-secondary/30">
+          <section className="py-16 md:py-20">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
                 {language === 'de' ? 'Unser Mittagsangebot' : 'Our Lunch Offer'}
               </h2>
               <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
                 {language === 'de' 
-                  ? 'Täglich frisch zubereitet – für die perfekte Mittagspause.' 
-                  : 'Freshly prepared daily – for the perfect lunch break.'}
+                  ? 'Frisch zubereitet – für die perfekte Mittagspause.' 
+                  : 'Freshly prepared – for the perfect lunch break.'}
               </p>
               <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {lunchOffers.map((offer, index) => {
@@ -266,7 +335,7 @@ const LunchMuenchen = () => {
           </section>
 
           {/* Menu Teaser Section */}
-          <section className="py-16 md:py-20">
+          <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto text-center">
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
@@ -274,8 +343,8 @@ const LunchMuenchen = () => {
                 </h2>
                 <p className="text-muted-foreground mb-10 max-w-2xl mx-auto">
                   {language === 'de' 
-                    ? 'Entdecken Sie unsere wechselnden Tagesgerichte und Klassiker.' 
-                    : 'Discover our changing daily dishes and classics.'}
+                    ? 'Entdecken Sie unsere regelmäßig wechselnden Gerichte und Klassiker.' 
+                    : 'Discover our regularly changing dishes and classics.'}
                 </p>
                 
                 <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
@@ -302,16 +371,42 @@ const LunchMuenchen = () => {
             </div>
           </section>
 
+          {/* Cross-Selling: Catering & Events */}
+          <section className="py-12 md:py-16 bg-card border-y border-border">
+            <div className="container mx-auto px-4 text-center max-w-3xl">
+              <h3 className="text-xl md:text-2xl font-serif font-semibold mb-4">
+                {language === 'de' ? 'Größere Gruppe? Firmenfeier geplant?' : 'Larger group? Planning a company event?'}
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                {language === 'de' 
+                  ? 'Für Gruppen ab 8 Personen und geschlossene Gesellschaften kontaktieren Sie uns direkt oder entdecken Sie unsere Event-Angebote.' 
+                  : 'For groups of 8+ and private events, contact us directly or discover our event offerings.'}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="outline" asChild>
+                  <Link to="/firmenfeier-muenchen">
+                    {language === 'de' ? 'Firmenfeier planen' : 'Plan company event'}
+                  </Link>
+                </Button>
+                <Button variant="outline" asChild>
+                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">
+                    {language === 'de' ? 'Catering & Events' : 'Catering & Events'}
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </section>
+
           {/* Testimonial Section */}
           <section className="py-16 md:py-20 bg-primary text-primary-foreground">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <blockquote className="text-xl md:text-2xl font-serif italic mb-6">
                 {language === 'de'
-                  ? '"Mein Lieblingsort für die Mittagspause – schnell, lecker und das Team ist super freundlich!"'
-                  : '"My favorite place for lunch – fast, delicious and the team is super friendly!"'}
+                  ? '"Das STORIA ist unser festes Stammlokal für Teamessen – schnell, lecker und die perfekte Atmosphäre für Geschäftsgespräche."'
+                  : '"STORIA is our regular spot for team lunches – fast, delicious and the perfect atmosphere for business talks."'}
               </blockquote>
               <p className="opacity-80">
-                — {language === 'de' ? 'Stammgast aus der Maxvorstadt' : 'Regular guest from Maxvorstadt'}
+                — {language === 'de' ? 'Marketing-Team, Agentur Maxvorstadt' : 'Marketing team, Agency Maxvorstadt'}
               </p>
             </div>
           </section>
@@ -321,7 +416,7 @@ const LunchMuenchen = () => {
             <div className="container mx-auto px-4">
               <div className="max-w-2xl mx-auto text-center">
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
-                  {language === 'de' ? 'Reservieren Sie Ihren Mittagstisch' : 'Reserve Your Lunch Table'}
+                  {language === 'de' ? 'Reservieren Sie für Ihr Team' : 'Reserve for Your Team'}
                 </h2>
                 <p className="text-muted-foreground mb-8">
                   {language === 'de' 
@@ -341,6 +436,11 @@ const LunchMuenchen = () => {
                     </a>
                   </Button>
                 </div>
+                <p className="text-sm text-muted-foreground mt-6">
+                  {language === 'de' 
+                    ? 'Für Gruppen ab 8 Personen empfehlen wir eine telefonische Anfrage.' 
+                    : 'For groups of 8+, we recommend calling directly.'}
+                </p>
               </div>
             </div>
           </section>

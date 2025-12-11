@@ -19,7 +19,7 @@ const landingPageNames: Record<string, { de: string; en: string; path: string }>
     en: 'Event Location Munich',
     path: '/eventlocation-muenchen-maxvorstadt'
   },
-  'lunch-muenchen': { 
+  'lunch-muenchen-maxvorstadt': { 
     de: 'Lunch München', 
     en: 'Lunch Munich',
     path: '/lunch-muenchen-maxvorstadt'
