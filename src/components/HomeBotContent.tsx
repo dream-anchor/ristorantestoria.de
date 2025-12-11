@@ -48,7 +48,7 @@ const HomeBotContent = () => {
         <h2>{language === 'de' ? 'Unser Angebot' : 'Our Offerings'}</h2>
         <ul>
           <li><a href="/speisekarte">{language === 'de' ? 'Speisekarte' : 'Menu'}</a></li>
-          <li><a href="/mittagsmenu">{language === 'de' ? 'Mittagsmenü' : 'Lunch Menu'}</a></li>
+          <li><a href="/mittags-menu">{language === 'de' ? 'Mittagsmenü' : 'Lunch Menu'}</a></li>
           <li><a href="/getraenke">{language === 'de' ? 'Getränkekarte' : 'Drinks Menu'}</a></li>
           <li><a href="/besondere-anlaesse">{language === 'de' ? 'Besondere Anlässe' : 'Special Occasions'}</a></li>
           <li><a href="/reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</a></li>

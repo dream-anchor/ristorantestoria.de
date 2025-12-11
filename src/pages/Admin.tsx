@@ -94,7 +94,7 @@ const Admin = () => {
 
   const getMenuViewPath = (menuType: string) => {
     switch (menuType) {
-      case "lunch": return "/mittagsmenu";
+      case "lunch": return "/mittags-menu";
       case "food": return "/speisekarte";
       case "drinks": return "/getraenke";
       default: return "/";

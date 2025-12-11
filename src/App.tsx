@@ -63,7 +63,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/reservierung" element={<Reservierung />} />
               <Route path="/menu" element={<Menu />} />
-              <Route path="/mittagsmenu" element={<Mittagsmenu />} />
+              <Route path="/mittags-menu" element={<Mittagsmenu />} />
               <Route path="/speisekarte" element={<Speisekarte />} />
               <Route path="/getraenke" element={<Getraenke />} />
               <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />

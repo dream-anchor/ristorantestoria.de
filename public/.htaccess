@@ -22,6 +22,7 @@ RewriteRule ^$ /impressum? [R=301,L]
 # ============================================
 # 2. 301 Redirects für alte URLs (VOR dem SPA-Fallback!)
 # ============================================
+RewriteRule ^mittagsmenu$ /mittags-menu [R=301,L]
 RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
 RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
 # Redirect für alte Subdomain-URL (mit Unterverzeichnissen)

@@ -98,7 +98,7 @@ const MenuStructuredData = ({ menuType, menuId }: MenuStructuredDataProps) => {
     hasMenuSection: menuSections,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://ristorantestoria.de${menuType === 'food' ? '/speisekarte' : menuType === 'lunch' ? '/mittagsmenu' : menuType === 'drinks' ? '/getraenke' : '/besondere-anlaesse'}`,
+      '@id': `https://www.ristorantestoria.de${menuType === 'food' ? '/speisekarte' : menuType === 'lunch' ? '/mittags-menu' : menuType === 'drinks' ? '/getraenke' : '/besondere-anlaesse'}`,
     },
   };
 

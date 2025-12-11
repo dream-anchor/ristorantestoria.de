@@ -25,14 +25,14 @@ const Mittagsmenu = () => {
         description={language === 'de' 
           ? 'Mittagsmenü im STORIA München Maxvorstadt: Frische italienische Küche Mo-Fr zu attraktiven Preisen. Lunch nahe Hauptbahnhof & Königsplatz. Jetzt Mittagstisch genießen!'
           : 'Lunch menu at STORIA Munich Maxvorstadt: Fresh Italian cuisine Mon-Fri at great prices. Lunch near main station & Königsplatz. Enjoy your lunch break!'}
-        canonical="/mittagsmenu"
+        canonical="/mittags-menu"
       />
       <StructuredData type="restaurant" />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Mittagsmenü' : 'Lunch Menu', url: '/mittagsmenu' }
+          { name: language === 'de' ? 'Mittagsmenü' : 'Lunch Menu', url: '/mittags-menu' }
         ]} 
       />
       <MenuStructuredData menuType="lunch" />
