@@ -116,7 +116,7 @@ const Footer = () => {
                 width={80}
                 height={80}
                 loading="lazy"
-                className="h-16 md:h-20 brightness-0 invert opacity-20"
+                className="h-16 md:h-20 w-auto brightness-0 invert opacity-20"
               />
             </div>
 
