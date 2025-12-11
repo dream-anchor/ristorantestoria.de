@@ -75,7 +75,7 @@ const BesondererAnlass = () => {
   return (
     <>
       <SEO 
-        title={`${menuTitle} – Italienisches Restaurant München`}
+        title={menuTitle}
         description={getSeoDescription()}
         canonical={`/besondere-anlaesse/${slug}`}
       />

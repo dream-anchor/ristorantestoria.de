@@ -36,7 +36,7 @@ const NeapolitanischePizza = () => {
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Neapolitanische Pizza München – Steinofen Pizzeria' : 'Neapolitan Pizza Munich – Stone Oven Pizzeria'}
+        title={language === 'de' ? 'Neapolitanische Pizza – Steinofen' : 'Neapolitan Pizza – Stone Oven'}
         description={language === 'de' 
           ? 'Neapolitanische Pizza München im STORIA: Authentische Pizza aus dem Steinofen in der Maxvorstadt. Pizzeria nahe Königsplatz. Jetzt Tisch reservieren!'
           : 'Neapolitan pizza Munich at STORIA: Authentic stone-oven pizza in Maxvorstadt. Pizzeria near Königsplatz. Book your table now!'}

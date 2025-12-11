@@ -35,7 +35,7 @@ const RomantischesDinner = () => {
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Romantisches Dinner München – Date Night Italiener' : 'Romantic Dinner Munich – Date Night Italian'}
+        title={language === 'de' ? 'Romantisches Dinner – Date Night' : 'Romantic Dinner – Date Night'}
         description={language === 'de' 
           ? 'Romantisches Dinner München im STORIA: Date Night im italienischen Ambiente. Candlelight, exquisite Küche & Weine in der Maxvorstadt. Jetzt Tisch reservieren!'
           : 'Romantic dinner Munich at STORIA: Date night in Italian ambiance. Candlelight, exquisite cuisine & wines in Maxvorstadt. Book your table now!'}

@@ -35,7 +35,7 @@ const GeburtstagsfeierMuenchen = () => {
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Geburtstag feiern München – Party im Italiener' : 'Birthday Party Munich – Celebration at Italian Restaurant'}
+        title={language === 'de' ? 'Geburtstagsfeier – Feiern im Italiener' : 'Birthday Party – Italian Celebration'}
         description={language === 'de' 
           ? 'Geburtstag feiern München im STORIA: Italienisches Restaurant in der Maxvorstadt für Ihre Geburtstagsfeier. Individuelle Menüs & stilvolles Ambiente. Jetzt reservieren!'
           : 'Birthday party Munich at STORIA: Italian restaurant in Maxvorstadt for your birthday celebration. Individual menus & stylish ambiance. Book now!'}

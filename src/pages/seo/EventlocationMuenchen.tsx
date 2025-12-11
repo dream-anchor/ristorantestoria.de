@@ -35,7 +35,7 @@ const EventlocationMuenchen = () => {
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Eventlocation München Maxvorstadt – Restaurant für Events' : 'Event Location Munich Maxvorstadt – Restaurant for Events'}
+        title={language === 'de' ? 'Eventlocation – Feiern & Events' : 'Event Location – Parties & Events'}
         description={language === 'de' 
           ? 'Eventlocation München: STORIA in der Maxvorstadt für Ihre Veranstaltung. Italienisches Restaurant für Feiern, Events & Gruppen nahe Königsplatz. Jetzt anfragen!'
           : 'Event location Munich: STORIA in Maxvorstadt for your celebration. Italian restaurant for parties, events & groups near Königsplatz. Inquire now!'}

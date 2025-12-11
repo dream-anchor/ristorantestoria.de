@@ -146,7 +146,7 @@ const FirmenfeierMuenchen = () => {
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Firmenfeier München – Team-Event im Italiener' : 'Corporate Event Munich – Team Event at Italian Restaurant'}
+        title={language === 'de' ? 'Firmenfeier – Team-Events' : 'Corporate Events – Team Parties'}
         description={language === 'de' 
           ? 'Firmenfeier München im STORIA: Team-Events, Weihnachtsfeiern & Business-Dinner in der Maxvorstadt. Italienisches Restaurant nahe Hauptbahnhof. Jetzt anfragen!'
           : 'Corporate event Munich at STORIA: Team events, Christmas parties & business dinners in Maxvorstadt. Italian restaurant near main station. Inquire now!'}
