@@ -10,7 +10,7 @@ import { EventInquiryForm } from "@/components/EventInquiryForm";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight, Clock } from "lucide-react";
+import { MapPin, Users, Utensils, TreePine, Briefcase, Sun, Phone, Mail, Star, PartyPopper, Calendar, ChefHat, Wine, ArrowRight, Clock, MessageCircle } from "lucide-react";
 
 // Images
 import firmenfeierEvent from "@/assets/firmenfeier-event.webp";
@@ -191,16 +191,28 @@ const FirmenfeierMuenchen = () => {
                   ? 'Weihnachtsfeier, Team-Building oder Business-Dinner – authentisch italienisch in der Maxvorstadt.'
                   : 'Christmas party, team building or business dinner – authentically Italian in Maxvorstadt.'}
               </p>
-              <Button 
-                size="lg" 
-                className="bg-white text-primary hover:bg-white/90 text-base md:text-lg px-8 py-6"
-                asChild
-              >
-                <a href="tel:+498951519696">
-                  <Phone className="w-5 h-5 mr-2" />
-                  {language === 'de' ? 'Jetzt unverbindlich anfragen' : 'Inquire now – no obligation'}
-                </a>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-primary hover:bg-white/90 text-base md:text-lg px-8 py-6"
+                  asChild
+                >
+                  <a href="tel:+498951519696">
+                    <Phone className="w-5 h-5 mr-2" />
+                    {language === 'de' ? 'Jetzt anrufen' : 'Call now'}
+                  </a>
+                </Button>
+                <Button 
+                  size="lg" 
+                  className="bg-[#25D366] hover:bg-[#20BD5A] text-white text-base md:text-lg px-8 py-6"
+                  asChild
+                >
+                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    WhatsApp
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -272,11 +284,17 @@ const FirmenfeierMuenchen = () => {
               </div>
               
               {/* CTA after Benefits */}
-              <div className="text-center mt-12">
+              <div className="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="outline" asChild>
                   <a href="tel:+498951519696">
                     <Phone className="w-5 h-5 mr-2" />
                     {language === 'de' ? 'Jetzt Termin anfragen' : 'Request a date now'}
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" className="text-[#25D366] border-[#25D366] hover:bg-[#25D366]/10" asChild>
+                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    WhatsApp
                   </a>
                 </Button>
               </div>

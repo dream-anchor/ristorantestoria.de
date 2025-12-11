@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
 import domenicoImage from "@/assets/domenico-speranza.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
 import nicolaImage from "@/assets/nicola-speranza.webp";
@@ -88,6 +88,15 @@ const Footer = () => {
                 <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
                   <Mail className="h-3.5 w-3.5" />
                   info@ristorantestoria.de
+                </a>
+                <a 
+                  href="https://wa.me/491636033912" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center md:justify-start gap-2.5 hover:text-[#25D366] transition-colors"
+                >
+                  <MessageCircle className="h-3.5 w-3.5" />
+                  WhatsApp
                 </a>
               <Link 
                   to="/kontakt#map" 

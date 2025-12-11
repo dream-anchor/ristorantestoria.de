@@ -2,6 +2,7 @@ export const de = {
   floatingActions: {
     call: "Anrufen",
     reserve: "Reservieren",
+    whatsapp: "WhatsApp",
   },
   imageGrid: {
     openingHoursTitle: "Öffnungszeiten:",
@@ -142,6 +143,9 @@ export const de = {
     contactUs: "Kontaktieren Sie uns",
     phone: "Telefon",
     email: "E-Mail",
+    whatsapp: "WhatsApp",
+    whatsappHint: "Schnelle Antwort",
+    whatsappChat: "Chat starten",
     address: "Adresse",
     openingHours: "Öffnungszeiten",
     monFri: "Montag - Freitag",
