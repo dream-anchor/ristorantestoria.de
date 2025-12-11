@@ -38,8 +38,8 @@ const NeapolitanischePizza = () => {
       <SEO
         title={language === 'de' ? 'Neapolitanische Pizza – Steinofen' : 'Neapolitan Pizza – Stone Oven'}
         description={language === 'de' 
-          ? 'Neapolitanische Pizza München im STORIA: Authentische Pizza aus dem Steinofen in der Maxvorstadt. Pizzeria nahe Königsplatz. Jetzt Tisch reservieren!'
-          : 'Neapolitan pizza Munich at STORIA: Authentic stone-oven pizza in Maxvorstadt. Pizzeria near Königsplatz. Book your table now!'}
+          ? 'Neapolitanische Pizza im STORIA München: Authentisch aus dem Steinofen in der Maxvorstadt. Nahe Königsplatz. Jetzt Tisch reservieren!'
+          : 'Neapolitan pizza at STORIA Munich: Authentic stone-oven pizza in Maxvorstadt. Traditional recipe near Königsplatz. Book now!'}
         canonical="/neapolitanische-pizza-muenchen"
       />
       <StructuredData type="restaurant" />

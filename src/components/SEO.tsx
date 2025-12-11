@@ -25,8 +25,8 @@ const SEO = ({
   const fullTitle = title ? `${title} | STORIA München` : siteTitle;
   
   const defaultDescription = language === 'de' 
-    ? 'STORIA – Ihr Italiener in der Maxvorstadt München. Neapolitanische Pizza aus dem Steinofen, frische Pasta & Aperitivo. Nähe Königsplatz & Hauptbahnhof. Jetzt Tisch reservieren!'
-    : 'STORIA – Your Italian restaurant in Maxvorstadt Munich. Neapolitan stone-oven pizza, fresh pasta & aperitivo. Near Königsplatz & main station. Book your table now!';
+    ? 'STORIA München: Italiener in der Maxvorstadt. Neapolitanische Pizza, frische Pasta & Aperitivo nahe Königsplatz. Jetzt reservieren!'
+    : 'STORIA Munich: Italian restaurant in Maxvorstadt. Neapolitan pizza, fresh pasta & aperitivo near Königsplatz. Book now!';
   
   const metaDescription = description || defaultDescription;
   const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;

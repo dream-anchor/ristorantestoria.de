@@ -45,8 +45,8 @@ const Reservierung = () => {
       <SEO
         title={language === 'de' ? 'Tisch reservieren – Ristorante München' : 'Book a Table – Italian Restaurant Munich'}
         description={language === 'de' 
-          ? 'Tisch reservieren im STORIA München Maxvorstadt: Italienisches Restaurant nahe Königsplatz & Pinakotheken. Jetzt einfach über OpenTable buchen!'
-          : 'Book a table at STORIA Munich Maxvorstadt: Italian restaurant near Königsplatz & Pinakothek museums. Easy booking via OpenTable!'}
+          ? 'Tisch reservieren im STORIA München: Italiener in der Maxvorstadt nahe Königsplatz. Online über OpenTable oder telefonisch buchen!'
+          : 'Book a table at STORIA Munich: Italian restaurant in Maxvorstadt near Königsplatz. Reserve online via OpenTable or by phone!'}
         canonical="/reservierung"
       />
       <StructuredData type="restaurant" />

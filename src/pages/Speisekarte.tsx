@@ -24,8 +24,8 @@ const Speisekarte = () => {
       <SEO 
         title={language === 'de' ? 'Speisekarte – Pizza & Pasta' : 'Menu – Pizza & Pasta'}
         description={language === 'de' 
-          ? 'Speisekarte STORIA München: Neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta & Antipasti. Ristorante Maxvorstadt nahe Königsplatz. Jetzt Tisch reservieren!'
-          : 'STORIA Munich menu: Neapolitan stone-oven pizza, homemade pasta & antipasti. Italian restaurant Maxvorstadt near Königsplatz. Book your table now!'}
+          ? 'STORIA Speisekarte: Neapolitanische Pizza, hausgemachte Pasta & Antipasti. Italiener in der Maxvorstadt nahe Königsplatz. Jetzt reservieren!'
+          : 'STORIA menu: Neapolitan stone-oven pizza, fresh pasta & antipasti. Italian restaurant Maxvorstadt near Königsplatz. Book now!'}
         canonical="/speisekarte"
       />
       <StructuredData type="restaurant" />
