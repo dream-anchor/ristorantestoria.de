@@ -104,8 +104,21 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     '@type': 'Organization',
     '@id': 'https://ristorantestoria.de/#organization',
     name: 'Speranza GmbH',
+    description: language === 'de'
+      ? 'Speranza GmbH betreibt das STORIA – Ristorante • Pizzeria • Bar in München Maxvorstadt. Authentische italienische Küche seit 1995.'
+      : 'Speranza GmbH operates STORIA – Ristorante • Pizzeria • Bar in Munich Maxvorstadt. Authentic Italian cuisine since 1995.',
     url: 'https://ristorantestoria.de',
-    logo: 'https://ristorantestoria.de/storia-logo.webp',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://ristorantestoria.de/storia-logo.webp',
+      width: 512,
+      height: 512,
+    },
+    sameAs: [
+      'https://www.instagram.com/ristorante_storia/',
+      'https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen',
+    ],
+    foundingDate: '1995-01-01',
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+49 89 51519696',
