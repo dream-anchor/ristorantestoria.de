@@ -11,12 +11,11 @@ import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { MapPin, Clock, Utensils, Star, ChefHat, Euro, Phone, ArrowRight, Salad, Pizza, Users, Receipt, Building, CalendarClock, BadgeCheck, MessageCircle } from "lucide-react";
+import { MapPin, Clock, Utensils, Star, ChefHat, Euro, ArrowRight, Salad, Pizza, Users, Receipt, Building, CalendarClock, BadgeCheck, MessageCircle } from "lucide-react";
 
 // Images
 import businessLunchAtmosphere from "@/assets/business-lunch-atmosphere.webp";
 import businessLunchFood from "@/assets/business-lunch-food.webp";
-import menschenAussen from "@/assets/menschen-aussen.jpeg";
 
 const LunchMuenchen = () => {
   const { language } = useLanguage();
@@ -160,8 +159,8 @@ const LunchMuenchen = () => {
         {/* Hero Section with Full Image */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
           <img 
-            src={menschenAussen} 
-            alt={language === 'de' ? 'Gäste genießen Business Lunch auf der Terrasse – STORIA München' : 'Guests enjoying business lunch on the terrace – STORIA Munich'}
+            src={businessLunchAtmosphere} 
+            alt={language === 'de' ? 'Business Lunch Atmosphäre im STORIA Restaurant München Maxvorstadt' : 'Business lunch atmosphere at STORIA Restaurant Munich Maxvorstadt'}
             width={1200}
             height={800}
             loading="eager"
@@ -379,7 +378,7 @@ const LunchMuenchen = () => {
             </div>
           </section>
 
-          {/* Business Lunch Galerie */}
+          {/* Business Lunch Food Image */}
           <section className="py-16 md:py-20 bg-card">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
@@ -390,19 +389,11 @@ const LunchMuenchen = () => {
                   ? 'Professionelle Atmosphäre, authentisch italienische Küche.' 
                   : 'Professional atmosphere, authentic Italian cuisine.'}
               </p>
-              <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-                  <img 
-                    src={businessLunchAtmosphere}
-                    alt={language === 'de' ? 'Business Lunch Atmosphäre im STORIA Restaurant München' : 'Business lunch atmosphere at STORIA Restaurant Munich'}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+              <div className="max-w-3xl mx-auto">
+                <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
                   <img 
                     src={businessLunchFood}
-                    alt={language === 'de' ? 'Italienische Gerichte für Ihr Business Lunch' : 'Italian dishes for your business lunch'}
+                    alt={language === 'de' ? 'Italienische Gerichte für Ihr Business Lunch im STORIA München' : 'Italian dishes for your business lunch at STORIA Munich'}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -488,48 +479,42 @@ const LunchMuenchen = () => {
             </div>
           </section>
 
-          {/* Final CTA */}
-          <section className="py-16 md:py-20 bg-muted/30">
-            <div className="container mx-auto px-4">
-              <div className="max-w-2xl mx-auto text-center">
-                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
-                  {language === 'de' ? 'Reservieren Sie für Ihr Team' : 'Reserve for Your Team'}
-                </h2>
-                <p className="text-muted-foreground mb-8">
-                  {language === 'de' 
-                    ? 'Sichern Sie sich Ihren Platz und genießen Sie Ihre Mittagspause ohne Wartezeit.' 
-                    : 'Secure your spot and enjoy your lunch break without waiting.'}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" asChild>
-                    <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
-                      {language === 'de' ? 'Online reservieren' : 'Reserve online'}
-                    </Link>
-                  </Button>
-                  <Button size="lg" variant="outline" className="text-[#25D366] border-[#25D366] hover:bg-[#25D366]/10" asChild>
-                    <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
-                      <MessageCircle className="w-5 h-5 mr-2" />
-                      WhatsApp
-                    </a>
-                  </Button>
-                  <Button size="lg" variant="outline" asChild>
-                    <a href="tel:+498951519696">
-                      <Phone className="w-5 h-5 mr-2" />
-                      +49 89 51519696
-                    </a>
-                  </Button>
-                </div>
-                <p className="text-sm text-muted-foreground mt-6">
-                  {language === 'de' 
-                    ? 'Für Gruppen ab 8 Personen empfehlen wir eine telefonische Anfrage.' 
-                    : 'For groups of 8+, we recommend calling directly.'}
-                </p>
-              </div>
-            </div>
-          </section>
-
           {/* Elfsight Reviews */}
           <ElfsightReviews />
+
+          {/* Final Funnel CTA - Last element before Footer */}
+          <section className="py-20 md:py-24 bg-primary text-primary-foreground">
+            <div className="container mx-auto px-4 text-center max-w-3xl">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
+                {language === 'de' 
+                  ? 'Bereit für Ihren nächsten Business Lunch?' 
+                  : 'Ready for your next business lunch?'}
+              </h2>
+              <p className="text-xl mb-8 opacity-90">
+                {language === 'de' 
+                  ? 'Reservieren Sie jetzt und genießen Sie italienische Qualität in zentraler Lage.' 
+                  : 'Reserve now and enjoy Italian quality in a central location.'}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" variant="secondary" className="text-lg px-8 py-6" asChild>
+                  <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
+                    {language === 'de' ? 'Jetzt Tisch reservieren' : 'Reserve a table now'}
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8 py-6" asChild>
+                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    WhatsApp
+                  </a>
+                </Button>
+              </div>
+              <p className="text-sm mt-8 opacity-70">
+                {language === 'de' 
+                  ? 'Für Gruppen ab 8 Personen empfehlen wir eine telefonische Anfrage: +49 89 51519696' 
+                  : 'For groups of 8+, we recommend calling: +49 89 51519696'}
+              </p>
+            </div>
+          </section>
           
         </main>
 
