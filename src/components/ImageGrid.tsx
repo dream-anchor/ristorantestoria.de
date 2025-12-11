@@ -77,6 +77,9 @@ const ImageGrid = () => {
   return (
     <section className="bg-background py-12" aria-label={language === 'de' ? 'Bildergalerie Restaurant STORIA' : 'Image Gallery Restaurant STORIA'}>
       <div className="container mx-auto px-4">
+        <h2 className="sr-only">
+          {language === 'de' ? 'Einblicke ins STORIA' : 'Glimpses of STORIA'}
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Row 1 */}
           <ImageCard 
