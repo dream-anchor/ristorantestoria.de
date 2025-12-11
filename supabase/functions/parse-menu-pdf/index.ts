@@ -63,7 +63,7 @@ serve(async (req) => {
 
     console.log(`Parsing menu PDF for type: ${menuType}, base64 length: ${pdfBase64.length}`);
 
-    const systemPrompt = `Du bist ein präziser Menü-Parser für ein italienisches Restaurant. Deine Aufgabe ist es, den Inhalt eines Menü-PDFs EXAKT zu extrahieren UND automatisch in Englisch, Italienisch und Französisch zu übersetzen.
+    const systemPrompt = `Du bist ein präziser Menü-Parser für das italienische Restaurant "STORIA" in München. Deine Aufgabe ist es, den Inhalt eines Menü-PDFs EXAKT zu extrahieren UND automatisch in Englisch, Italienisch und Französisch zu übersetzen.
 
 WICHTIGE REGELN FÜR EXTRAKTION:
 1. Übernimm ALLE deutschen Texte WÖRTLICH - keine Umformulierungen oder Korrekturen
@@ -72,19 +72,27 @@ WICHTIGE REGELN FÜR EXTRAKTION:
 4. Bei Unklarheiten: lieber original übernehmen als interpretieren
 5. Erkenne Preise auch wenn sie in verschiedenen Formaten angegeben sind (€, EUR, ohne Währung)
 
-AUTOMATISCHE ÜBERSETZUNG IN 3 SPRACHEN (PFLICHT):
-6. Übersetze ALLE deutschen Texte automatisch für die _en, _it und _fr Felder:
-   - name → name_en (Englisch), name_it (Italienisch), name_fr (Französisch)
-   - description → description_en, description_it, description_fr
-7. Bei italienischen Kategorie-Namen wie "Antipasti", "Primi Piatti", "Dolci":
-   - Behalte sie im deutschen name Feld
-   - Für name_en: füge englische Übersetzung hinzu (z.B. "Antipasti - Starters")
-   - Für name_it: behalte den italienischen Namen
-   - Für name_fr: füge französische Übersetzung hinzu (z.B. "Antipasti - Entrées")
-8. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
+PFLICHT: ÜBERSETZUNG IN ALLE 4 SPRACHEN (DE, EN, IT, FR):
+6. Du MUSST alle Felder in ALLEN 4 SPRACHEN ausfüllen - KEINE leeren Felder erlaubt!
+   - Deutsche Felder (name, description, title, subtitle) - Original aus PDF
+   - Englische Felder (_en) - Übersetzung ins Englische
+   - Italienische Felder (_it) - Übersetzung ins Italienische  
+   - Französische Felder (_fr) - Übersetzung ins Französische
+7. WICHTIG: Lasse KEINE Übersetzungsfelder leer! Alle _en, _it, _fr Felder MÜSSEN ausgefüllt sein!
+8. Der Restaurantname "STORIA" darf NIEMALS übersetzt werden - er bleibt immer "STORIA"!
+
+REGELN FÜR ITALIENISCHE BEGRIFFE:
+9. Bei italienischen Kategorie-Namen wie "Antipasti", "Primi Piatti", "Dolci":
    - name: Original beibehalten
-   - name_en, name_it, name_fr: Original beibehalten (italienische Gerichtnamen sind international)
-   - description_en, description_it, description_fr: Deutsche Beschreibung übersetzen
+   - name_en: Englische Erklärung hinzufügen (z.B. "Antipasti - Starters")
+   - name_it: Italienischen Namen beibehalten
+   - name_fr: Französische Erklärung hinzufügen (z.B. "Antipasti - Entrées")
+10. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
+   - name, name_en, name_it, name_fr: Original beibehalten (italienische Gerichtnamen sind international)
+   - description: Deutsche Beschreibung übernehmen
+   - description_en: Deutsche Beschreibung ins Englische übersetzen
+   - description_it: Deutsche Beschreibung ins Italienische übersetzen
+   - description_fr: Deutsche Beschreibung ins Französische übersetzen
 
 Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.`;
 
@@ -109,7 +117,7 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
               },
               {
                 type: 'text',
-                text: 'Extrahiere den kompletten Menü-Inhalt aus diesem PDF. Übernimm alle Gerichte, Beschreibungen und Preise EXAKT wie im Dokument. Übersetze automatisch in EN, IT und FR.'
+                text: 'Extrahiere den kompletten Menü-Inhalt aus diesem PDF. Übernimm alle Gerichte, Beschreibungen und Preise EXAKT wie im Dokument. WICHTIG: Fülle ALLE Übersetzungsfelder (_en, _it, _fr) aus - keine leeren Felder! Der Restaurantname "STORIA" darf nicht übersetzt werden!'
               }
             ]
           }
@@ -119,31 +127,31 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
             type: 'function',
             function: {
               name: 'extract_menu',
-              description: 'Extrahiert strukturierte Menü-Daten aus dem PDF-Inhalt mit Übersetzungen',
+              description: 'Extrahiert strukturierte Menü-Daten aus dem PDF-Inhalt mit vollständigen Übersetzungen in DE, EN, IT, FR',
               parameters: {
                 type: 'object',
                 properties: {
                   title: { type: 'string', description: 'Titel des Menüs auf Deutsch' },
-                  title_en: { type: 'string', description: 'Titel auf Englisch' },
-                  title_it: { type: 'string', description: 'Titel auf Italienisch' },
-                  title_fr: { type: 'string', description: 'Titel auf Französisch' },
+                  title_en: { type: 'string', description: 'Titel auf Englisch (PFLICHT)' },
+                  title_it: { type: 'string', description: 'Titel auf Italienisch (PFLICHT)' },
+                  title_fr: { type: 'string', description: 'Titel auf Französisch (PFLICHT)' },
                   subtitle: { type: 'string', description: 'Untertitel auf Deutsch' },
-                  subtitle_en: { type: 'string', description: 'Untertitel auf Englisch' },
-                  subtitle_it: { type: 'string', description: 'Untertitel auf Italienisch' },
-                  subtitle_fr: { type: 'string', description: 'Untertitel auf Französisch' },
+                  subtitle_en: { type: 'string', description: 'Untertitel auf Englisch (PFLICHT)' },
+                  subtitle_it: { type: 'string', description: 'Untertitel auf Italienisch (PFLICHT)' },
+                  subtitle_fr: { type: 'string', description: 'Untertitel auf Französisch (PFLICHT)' },
                   categories: {
                     type: 'array',
                     items: {
                       type: 'object',
                       properties: {
                         name: { type: 'string' },
-                        name_en: { type: 'string' },
-                        name_it: { type: 'string' },
-                        name_fr: { type: 'string' },
+                        name_en: { type: 'string', description: 'PFLICHT - Englische Übersetzung' },
+                        name_it: { type: 'string', description: 'PFLICHT - Italienische Übersetzung' },
+                        name_fr: { type: 'string', description: 'PFLICHT - Französische Übersetzung' },
                         description: { type: 'string' },
-                        description_en: { type: 'string' },
-                        description_it: { type: 'string' },
-                        description_fr: { type: 'string' },
+                        description_en: { type: 'string', description: 'PFLICHT - Englische Übersetzung' },
+                        description_it: { type: 'string', description: 'PFLICHT - Italienische Übersetzung' },
+                        description_fr: { type: 'string', description: 'PFLICHT - Französische Übersetzung' },
                         sort_order: { type: 'number' },
                         items: {
                           type: 'array',
@@ -151,22 +159,22 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
                             type: 'object',
                             properties: {
                               name: { type: 'string' },
-                              name_en: { type: 'string' },
-                              name_it: { type: 'string' },
-                              name_fr: { type: 'string' },
+                              name_en: { type: 'string', description: 'PFLICHT - Englische Übersetzung' },
+                              name_it: { type: 'string', description: 'PFLICHT - Italienische Übersetzung' },
+                              name_fr: { type: 'string', description: 'PFLICHT - Französische Übersetzung' },
                               description: { type: 'string' },
-                              description_en: { type: 'string' },
-                              description_it: { type: 'string' },
-                              description_fr: { type: 'string' },
+                              description_en: { type: 'string', description: 'PFLICHT - Englische Übersetzung' },
+                              description_it: { type: 'string', description: 'PFLICHT - Italienische Übersetzung' },
+                              description_fr: { type: 'string', description: 'PFLICHT - Französische Übersetzung' },
                               price: { type: 'number' },
                               price_display: { type: 'string' },
                               sort_order: { type: 'number' }
                             },
-                            required: ['name', 'price_display', 'sort_order']
+                            required: ['name', 'name_en', 'name_it', 'name_fr', 'price_display', 'sort_order']
                           }
                         }
                       },
-                      required: ['name', 'sort_order', 'items']
+                      required: ['name', 'name_en', 'name_it', 'name_fr', 'sort_order', 'items']
                     }
                   }
                 },
@@ -209,37 +217,33 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
 
     const rawMenu: ParsedMenu = JSON.parse(toolCall.function.arguments);
     
-    // Ensure all IT/FR fields have fallback values (use DE if missing)
-    const ensureTranslations = (menu: ParsedMenu): ParsedMenu => {
-      return {
-        ...menu,
-        title_it: menu.title_it || menu.title || '',
-        title_fr: menu.title_fr || menu.title || '',
-        subtitle_it: menu.subtitle_it || menu.subtitle || '',
-        subtitle_fr: menu.subtitle_fr || menu.subtitle || '',
-        categories: menu.categories.map(cat => ({
-          ...cat,
-          name_it: cat.name_it || cat.name || '',
-          name_fr: cat.name_fr || cat.name || '',
-          description_it: cat.description_it || cat.description || '',
-          description_fr: cat.description_fr || cat.description || '',
-          items: cat.items.map(item => ({
-            ...item,
-            name_it: item.name_it || item.name || '',
-            name_fr: item.name_fr || item.name || '',
-            description_it: item.description_it || item.description || '',
-            description_fr: item.description_fr || item.description || '',
-          }))
-        }))
-      };
+    // Log missing translations for debugging
+    const checkMissingTranslations = (menu: ParsedMenu) => {
+      let missingCount = 0;
+      if (!menu.title_it || menu.title_it === menu.title) missingCount++;
+      if (!menu.title_fr || menu.title_fr === menu.title) missingCount++;
+      menu.categories.forEach(cat => {
+        if (!cat.name_it || cat.name_it === cat.name) missingCount++;
+        if (!cat.name_fr || cat.name_fr === cat.name) missingCount++;
+        cat.items.forEach(item => {
+          if (!item.name_it || item.name_it === item.name) missingCount++;
+          if (!item.name_fr || item.name_fr === item.name) missingCount++;
+        });
+      });
+      if (missingCount > 0) {
+        console.log(`Warning: ${missingCount} IT/FR translations may be missing or identical to DE`);
+      }
     };
-
-    const parsedMenu = ensureTranslations(rawMenu);
-    console.log(`Parsed ${parsedMenu.categories.length} categories with IT/FR translations (fallback applied)`);
+    
+    checkMissingTranslations(rawMenu);
+    
+    // Do NOT apply fallback - let the spell checker detect missing translations
+    // This way the admin sees which translations are actually missing
+    console.log(`Parsed ${rawMenu.categories.length} categories`);
 
     return new Response(JSON.stringify({ 
       success: true, 
-      data: parsedMenu 
+      data: rawMenu 
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
