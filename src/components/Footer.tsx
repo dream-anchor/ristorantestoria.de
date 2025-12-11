@@ -22,7 +22,10 @@ const Footer = () => {
               <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-5 rounded-full overflow-hidden ring-1 ring-primary-foreground/20 shadow-xl transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src={domenicoImage} 
-                  alt="Domenico Speranza" 
+                  alt="Domenico Speranza – Gründer Ristorante STORIA München" 
+                  width={176}
+                  height={176}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -49,7 +52,10 @@ const Footer = () => {
               <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-5 rounded-full overflow-hidden ring-1 ring-primary-foreground/20 shadow-xl transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src={nicolaImage} 
-                  alt="Nicola Speranza" 
+                  alt="Nicola Speranza – Ristorante STORIA München"
+                  width={176}
+                  height={176}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -97,7 +103,10 @@ const Footer = () => {
             <div className="flex flex-col items-center justify-center order-first md:order-none py-6 md:py-0">
               <img 
                 src={storiaLogo}
-                alt="STORIA"
+                alt="STORIA – Italienisches Restaurant München Logo"
+                width={80}
+                height={80}
+                loading="lazy"
                 className="h-16 md:h-20 brightness-0 invert opacity-20"
               />
             </div>

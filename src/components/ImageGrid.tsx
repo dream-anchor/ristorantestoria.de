@@ -22,7 +22,9 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
     <div className={`relative overflow-hidden group ${className}`}>
       <img 
         src={image} 
-        alt={alt} 
+        alt={alt}
+        width={400}
+        height={400}
         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageClassName}`}
         loading="lazy"
       />

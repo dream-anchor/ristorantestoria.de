@@ -169,6 +169,9 @@ const FirmenfeierMuenchen = () => {
           <img 
             src={firmenfeierEvent} 
             alt={language === 'de' ? 'Elegante Firmenfeier im STORIA München' : 'Elegant corporate event at STORIA Munich'}
+            width={1200}
+            height={800}
+            loading="eager"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -302,8 +305,10 @@ const FirmenfeierMuenchen = () => {
                     <img 
                       src={image.src} 
                       alt={image.alt}
-                      className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
+                      width={600}
+                      height={450}
                       loading="lazy"
+                      className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 ))}
