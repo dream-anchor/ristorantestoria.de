@@ -119,8 +119,8 @@ const EventlocationMuenchen = () => {
               </h2>
               <p className="text-muted-foreground mb-6">
                 {language === 'de'
-                  ? 'Kontaktieren Sie uns für ein individuelles Angebot für Ihre Veranstaltung.'
-                  : 'Contact us for a customized offer for your event.'}
+                  ? <>Kontaktieren Sie uns für ein individuelles Angebot – oder schreiben Sie uns direkt per <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>
+                  : <>Contact us for a customized offer – or message us directly via <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:underline font-medium">WhatsApp →</a></>}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>
