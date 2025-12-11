@@ -10,6 +10,7 @@ import SpellCheckResults, { SpellingError } from "./SpellCheckResults";
 import type { MenuType } from "@/hooks/useMenu";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
 
 interface MenuUploaderProps {
   menuType: MenuType;
@@ -407,8 +408,14 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
     }
   };
 
+  // Show sticky bar when parsedData exists and not in spell check view
+  const showStickyBar = parsedData && !showSpellCheck;
+
   return (
-    <div className="space-y-4 md:space-y-6">
+    <div className={cn(
+      "space-y-4 md:space-y-6",
+      showStickyBar && "pb-28 md:pb-24"
+    )}>
       {/* Upload Section */}
       <div className="flex flex-col sm:flex-row gap-3">
         <Input
@@ -460,54 +467,63 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
         />
       )}
 
-      {/* Preview Toggle & Publish */}
-      {parsedData && !showSpellCheck && (
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Button
-            variant="outline"
-            onClick={() => setShowPreview(!showPreview)}
-            className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
-          >
-            <Eye className="h-4 w-4 mr-2" />
-            {showPreview ? 'Vorschau ausblenden' : 'Vorschau anzeigen'}
-          </Button>
-          {spellCheckComplete && (
-            <Button
-              variant="outline"
-              onClick={() => runSpellCheck(parsedData)}
-              disabled={isSpellChecking}
-              className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
-            >
-              <SpellCheck className="h-4 w-4 mr-2" />
-              {t.spellCheck?.runAgain || 'Erneut prüfen'}
-            </Button>
-          )}
-          <Button
-            onClick={handlePublish}
-            disabled={isSaving}
-            className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
-          >
-            {isSaving ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Speichern...
-              </>
-            ) : (
-              <>
-                <Check className="h-4 w-4 mr-2" />
-                Veröffentlichen
-              </>
-            )}
-          </Button>
-        </div>
-      )}
-
       {/* Preview */}
       {showPreview && parsedData && !showSpellCheck && (
         <MenuPreview
           data={parsedData}
           onUpdate={handleUpdateParsedData}
         />
+      )}
+
+      {/* Floating Sticky Action Bar */}
+      {showStickyBar && (
+        <div 
+          className="fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+        >
+          <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-end gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setShowPreview(!showPreview)}
+              className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
+            >
+              <Eye className="h-4 w-4 mr-2" />
+              {showPreview ? 'Vorschau ausblenden' : 'Vorschau anzeigen'}
+            </Button>
+            
+            {spellCheckComplete && (
+              <Button
+                variant="outline"
+                onClick={() => runSpellCheck(parsedData)}
+                disabled={isSpellChecking}
+                className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
+              >
+                <SpellCheck className="h-4 w-4 mr-2" />
+                {t.spellCheck?.runAgain || 'Erneut prüfen'}
+              </Button>
+            )}
+            
+            {spellCheckComplete && (
+              <Button
+                onClick={handlePublish}
+                disabled={isSaving}
+                className="w-full sm:w-auto h-12 sm:h-10 touch-manipulation"
+              >
+                {isSaving ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Speichern...
+                  </>
+                ) : (
+                  <>
+                    <Check className="h-4 w-4 mr-2" />
+                    Veröffentlichen
+                  </>
+                )}
+              </Button>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
