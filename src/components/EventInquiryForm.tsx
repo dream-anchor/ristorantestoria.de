@@ -26,7 +26,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export const EventInquiryForm = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,19 +46,19 @@ export const EventInquiryForm = () => {
   });
 
   const guestCountOptions = [
-    { value: '6-20', label: '6-20' },
-    { value: '21-50', label: '21-50' },
-    { value: '51-100', label: '51-100' },
-    { value: '100+', label: '100+' },
+    { value: '6-20', label: t.eventForm.guestCount6_20 },
+    { value: '21-50', label: t.eventForm.guestCount21_50 },
+    { value: '51-100', label: t.eventForm.guestCount51_100 },
+    { value: '100+', label: t.eventForm.guestCount100plus },
   ];
 
   const eventTypeOptions = [
-    { value: 'weihnachtsfeier', label: language === 'de' ? 'Weihnachtsfeier' : 'Christmas Party' },
-    { value: 'sommerfest', label: language === 'de' ? 'Sommerfest' : 'Summer Party' },
+    { value: 'weihnachtsfeier', label: t.eventForm.eventTypeChristmas },
+    { value: 'sommerfest', label: t.eventForm.eventTypeSummer },
     { value: 'team-building', label: 'Team-Building' },
     { value: 'business-dinner', label: 'Business-Dinner' },
-    { value: 'jubilaeum', label: language === 'de' ? 'Firmenjubiläum' : 'Company Anniversary' },
-    { value: 'sonstiges', label: language === 'de' ? 'Sonstiges' : 'Other' },
+    { value: 'firmenfeier', label: t.eventForm.eventTypeCorporate },
+    { value: 'sonstiges', label: t.eventForm.eventTypeOther },
   ];
 
   const onSubmit = async (data: FormData) => {
@@ -100,18 +100,14 @@ export const EventInquiryForm = () => {
 
       setIsSubmitted(true);
       toast({
-        title: language === 'de' ? 'Anfrage gesendet!' : 'Inquiry sent!',
-        description: language === 'de' 
-          ? 'Wir melden uns schnellstmöglich bei Ihnen.' 
-          : 'We will get back to you as soon as possible.',
+        title: t.eventForm.successTitle,
+        description: t.eventForm.successMessage,
       });
     } catch (error) {
       console.error('Error submitting inquiry:', error);
       toast({
-        title: language === 'de' ? 'Fehler' : 'Error',
-        description: language === 'de' 
-          ? 'Bitte versuchen Sie es erneut oder rufen Sie uns an.' 
-          : 'Please try again or give us a call.',
+        title: t.eventForm.errorTitle,
+        description: t.eventForm.errorMessage,
         variant: 'destructive',
       });
     } finally {
@@ -124,12 +120,10 @@ export const EventInquiryForm = () => {
       <div className="text-center py-12">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-2xl font-serif font-semibold mb-2">
-          {language === 'de' ? 'Vielen Dank!' : 'Thank you!'}
+          {t.eventForm.successTitle}
         </h3>
         <p className="text-muted-foreground">
-          {language === 'de' 
-            ? 'Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden.'
-            : 'We received your inquiry and will get back to you within 24 hours.'}
+          {t.eventForm.successMessage}
         </p>
       </div>
     );
@@ -144,9 +138,9 @@ export const EventInquiryForm = () => {
             name="company_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{language === 'de' ? 'Firma *' : 'Company *'}</FormLabel>
+                <FormLabel>{t.eventForm.companyLabel} *</FormLabel>
                 <FormControl>
-                  <Input placeholder={language === 'de' ? 'Firmenname' : 'Company name'} {...field} />
+                  <Input placeholder={t.eventForm.companyPlaceholder} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -157,9 +151,9 @@ export const EventInquiryForm = () => {
             name="contact_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{language === 'de' ? 'Ansprechpartner *' : 'Contact person *'}</FormLabel>
+                <FormLabel>{t.eventForm.contactLabel} *</FormLabel>
                 <FormControl>
-                  <Input placeholder={language === 'de' ? 'Ihr Name' : 'Your name'} {...field} />
+                  <Input placeholder={t.eventForm.contactPlaceholder} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -173,9 +167,9 @@ export const EventInquiryForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>E-Mail *</FormLabel>
+                <FormLabel>{t.eventForm.emailLabel} *</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="email@firma.de" {...field} />
+                  <Input type="email" placeholder={t.eventForm.emailPlaceholder} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -186,9 +180,9 @@ export const EventInquiryForm = () => {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{language === 'de' ? 'Telefon (optional)' : 'Phone (optional)'}</FormLabel>
+                <FormLabel>{t.eventForm.phoneLabel}</FormLabel>
                 <FormControl>
-                  <Input type="tel" placeholder="+49 89 ..." {...field} />
+                  <Input type="tel" placeholder={t.eventForm.phonePlaceholder} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -202,17 +196,17 @@ export const EventInquiryForm = () => {
             name="guest_count"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{language === 'de' ? 'Personenanzahl *' : 'Number of guests *'}</FormLabel>
+                <FormLabel>{t.eventForm.guestCountLabel} *</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={language === 'de' ? 'Bitte wählen' : 'Please select'} />
+                      <SelectValue placeholder={t.eventForm.guestCountPlaceholder} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
                     {guestCountOptions.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
-                        {option.label} {language === 'de' ? 'Personen' : 'guests'}
+                        {option.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -226,11 +220,11 @@ export const EventInquiryForm = () => {
             name="event_type"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{language === 'de' ? 'Veranstaltungsart *' : 'Event type *'}</FormLabel>
+                <FormLabel>{t.eventForm.eventTypeLabel} *</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={language === 'de' ? 'Bitte wählen' : 'Please select'} />
+                      <SelectValue placeholder={t.eventForm.eventTypePlaceholder} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -252,7 +246,7 @@ export const EventInquiryForm = () => {
           name="preferred_date"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{language === 'de' ? 'Wunschtermin (optional)' : 'Preferred date (optional)'}</FormLabel>
+              <FormLabel>{t.eventForm.dateLabel}</FormLabel>
               <FormControl>
                 <Input type="date" {...field} />
               </FormControl>
@@ -266,12 +260,10 @@ export const EventInquiryForm = () => {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{language === 'de' ? 'Nachricht (optional)' : 'Message (optional)'}</FormLabel>
+              <FormLabel>{t.eventForm.messageLabel}</FormLabel>
               <FormControl>
                 <Textarea 
-                  placeholder={language === 'de' 
-                    ? 'Besondere Wünsche, Fragen, Anmerkungen...' 
-                    : 'Special requests, questions, comments...'} 
+                  placeholder={t.eventForm.messagePlaceholder} 
                   rows={3}
                   {...field} 
                 />
@@ -285,21 +277,15 @@ export const EventInquiryForm = () => {
           {isSubmitting ? (
             <>
               <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-              {language === 'de' ? 'Wird gesendet...' : 'Sending...'}
+              {t.eventForm.submitting}
             </>
           ) : (
             <>
               <Send className="w-5 h-5 mr-2" />
-              {language === 'de' ? 'Unverbindlich anfragen' : 'Send inquiry'}
+              {t.eventForm.submitButton}
             </>
           )}
         </Button>
-
-        <p className="text-xs text-muted-foreground text-center">
-          {language === 'de' 
-            ? '* Pflichtfelder. Wir melden uns innerhalb von 24 Stunden.'
-            : '* Required fields. We will respond within 24 hours.'}
-        </p>
       </form>
     </Form>
   );

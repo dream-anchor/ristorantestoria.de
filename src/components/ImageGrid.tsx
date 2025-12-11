@@ -52,45 +52,25 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
 };
 
 const ImageGrid = () => {
-  const { t, language } = useLanguage();
-
-  const altTexts = language === 'de' ? {
-    weinservice: 'Professioneller Weinservice im Ristorante STORIA – Italiener Maxvorstadt München',
-    ravioli: 'Handgemachte Ravioli in der Pizzeria Maxvorstadt – Ristorante Pizzeria STORIA',
-    drinks: 'Handgefertigte Cocktails und Aperitivo in der Trattoria München STORIA',
-    meeresfruchte: 'Frische Meeresfrüchte und Fischgerichte – La Storia München',
-    aussen: 'Gemütliche Außenterrasse der Trattoria München – STORIA Münchner Innenstadt',
-    hausAussen: 'Historisches Gebäude des Ristorante STORIA – Italiener Maxvorstadt Karlstraße München',
-    tiramisu: 'Hausgemachtes Tiramisu im Ristorante Pizzeria STORIA München',
-    menschenAussen: 'Gäste genießen italienische Küche – Pizza München Innenstadt auf der Terrasse',
-  } : {
-    weinservice: 'Professional wine service at Ristorante STORIA – Italian restaurant Maxvorstadt Munich',
-    ravioli: 'Handmade ravioli at Pizzeria Maxvorstadt – Ristorante Pizzeria STORIA',
-    drinks: 'Handcrafted cocktails and aperitivo at Italian trattoria STORIA Munich',
-    meeresfruchte: 'Fresh seafood and fish dishes – La Storia Munich',
-    aussen: 'Cozy outdoor terrace of Italian trattoria – STORIA Munich city center',
-    hausAussen: 'Historic building of Ristorante STORIA – Italian restaurant Maxvorstadt Karlstraße Munich',
-    tiramisu: 'Homemade tiramisu at Ristorante Pizzeria STORIA Munich',
-    menschenAussen: 'Guests enjoying Italian cuisine – stone-oven pizza on the terrace',
-  };
+  const { t } = useLanguage();
 
   return (
-    <section className="bg-background py-12" aria-label={language === 'de' ? 'Bildergalerie Restaurant STORIA' : 'Image Gallery Restaurant STORIA'}>
+    <section className="bg-background py-12" aria-label={t.imageGrid.altTerrasse}>
       <div className="container mx-auto px-4">
         <h2 className="sr-only">
-          {language === 'de' ? 'Einblicke ins STORIA' : 'Glimpses of STORIA'}
+          {t.internalLinks.title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Row 1 */}
           <ImageCard 
             image={weinserviceImage} 
-            alt={altTexts.weinservice}
+            alt={t.imageGrid.altWine}
             className="aspect-square"
             imageClassName="object-center"
           />
           <ImageCard 
             image={ravioliImage} 
-            alt={altTexts.ravioli}
+            alt={t.imageGrid.altPasta}
             title={t.imageGrid.openingHoursTitle}
             subtitle={t.imageGrid.openingHoursText}
             className="aspect-square"
@@ -98,12 +78,12 @@ const ImageGrid = () => {
           />
           <ImageCard 
             image={drinksImage} 
-            alt={altTexts.drinks}
+            alt={t.imageGrid.altWine}
             className="aspect-square"
           />
           <ImageCard 
             image={aperitivoImage} 
-            alt={altTexts.meeresfruchte}
+            alt={t.imageGrid.altDessert}
             title={t.imageGrid.notturnoTitle}
             subtitle={t.imageGrid.notturnoText}
             className="aspect-square"
@@ -112,25 +92,25 @@ const ImageGrid = () => {
           {/* Row 2 */}
           <ImageCard 
             image={breakfastImage} 
-            alt={altTexts.aussen}
+            alt={t.imageGrid.altTerrasse}
             title={t.imageGrid.breakfastTitle}
             subtitle={t.imageGrid.breakfastText}
             className="aspect-square"
           />
           <ImageCard 
             image={restaurantImage} 
-            alt={altTexts.hausAussen}
+            alt={t.imageGrid.altTerrasse}
             className="aspect-square"
             imageClassName="object-bottom"
           />
           <ImageCard 
             image={dessertImage} 
-            alt={altTexts.tiramisu}
+            alt={t.imageGrid.altDessert}
             className="aspect-square"
           />
           <ImageCard 
             image={terrasseImage} 
-            alt={altTexts.menschenAussen}
+            alt={t.imageGrid.altTerrasse}
             className="aspect-square"
           />
         </div>

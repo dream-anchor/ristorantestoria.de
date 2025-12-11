@@ -17,23 +17,53 @@ const Kontakt = () => {
   const { t, language } = useLanguage();
   usePrerenderReady(true);
 
+  // SEO titles and descriptions per language
+  const seoContent = {
+    de: {
+      title: 'Kontakt & Anfahrt – Pizza Maxvorstadt',
+      description: 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr 9-1 Uhr. Jetzt anrufen: +49 89 51519696!',
+      h1: 'Kontakt & Anfahrt – Italiener nahe Königsplatz München',
+      intro: 'Besuchen Sie uns in der Karlstraße 47a – zentral in der Maxvorstadt, nur wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.',
+      nearLocation: 'Nähe Königsplatz & Hauptbahnhof',
+    },
+    en: {
+      title: 'Contact & Directions – Italian Restaurant Munich',
+      description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Near main station, Königsplatz & TU Munich. Open Mon-Fri 9am-1am. Call now: +49 89 51519696!',
+      h1: 'Contact & Directions – Italian Restaurant near Königsplatz Munich',
+      intro: 'Visit us at Karlstraße 47a – centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.',
+      nearLocation: 'Near Königsplatz & main station',
+    },
+    it: {
+      title: 'Contatto & Come Raggiungerci – Ristorante Italiano Monaco',
+      description: 'STORIA Monaco contatto: Karlstraße 47a, Maxvorstadt. Vicino alla stazione centrale, Königsplatz & TU Monaco. Aperto Lun-Ven 9-1. Chiamaci: +49 89 51519696!',
+      h1: 'Contatto & Come Raggiungerci – Ristorante Italiano vicino Königsplatz Monaco',
+      intro: 'Visitateci in Karlstraße 47a – posizione centrale a Maxvorstadt, a pochi minuti a piedi dalla stazione centrale, Königsplatz e TU Monaco.',
+      nearLocation: 'Vicino Königsplatz & stazione centrale',
+    },
+    fr: {
+      title: 'Contact & Itinéraire – Restaurant Italien Munich',
+      description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Près de la gare centrale, Königsplatz & TU Munich. Ouvert Lun-Ven 9h-1h. Appelez: +49 89 51519696!',
+      h1: 'Contact & Itinéraire – Restaurant Italien près de Königsplatz Munich',
+      intro: 'Rendez-nous visite au Karlstraße 47a – au centre de Maxvorstadt, à quelques minutes à pied de la gare centrale, Königsplatz et TU Munich.',
+      nearLocation: 'Près de Königsplatz & gare centrale',
+    },
+  };
+
+  const content = seoContent[language] || seoContent.de;
+
   return (
     <>
       <StaticBotContent
-        title={language === 'de' ? 'Kontakt & Anfahrt – STORIA München' : 'Contact & Directions – STORIA Munich'}
-        description={language === 'de' 
-          ? 'STORIA Kontakt: Karlstraße 47a, 80333 München Maxvorstadt. Telefon: +49 89 51519696, E-Mail: info@ristorantestoria.de. Nähe Hauptbahnhof, Königsplatz & TU München.'
-          : 'STORIA Contact: Karlstraße 47a, 80333 Munich Maxvorstadt. Phone: +49 89 51519696, Email: info@ristorantestoria.de. Near main station, Königsplatz & TU Munich.'}
+        title={content.title}
+        description={content.description}
         sections={[
-          { heading: language === 'de' ? 'Öffnungszeiten' : 'Opening Hours', content: [language === 'de' ? 'Montag bis Freitag: 09:00 - 01:00 Uhr' : 'Monday to Friday: 9am - 1am', language === 'de' ? 'Samstag & Sonntag: 12:00 - 01:00 Uhr' : 'Saturday & Sunday: 12pm - 1am'] },
-          { heading: language === 'de' ? 'Anfahrt' : 'Getting here', content: language === 'de' ? 'Zentral in der Maxvorstadt, wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.' : 'Centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.' }
+          { heading: t.contact.openingHours, content: [`${t.contact.monFri}: 09:00 - 01:00`, `${t.contact.satSun}: 12:00 - 01:00`] },
+          { heading: t.contact.address, content: content.intro }
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Kontakt & Anfahrt – Pizza Maxvorstadt' : 'Contact & Directions – Italian Restaurant Munich'}
-        description={language === 'de' 
-          ? 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr 9-1 Uhr. Jetzt anrufen: +49 89 51519696!'
-          : 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Near main station, Königsplatz & TU Munich. Open Mon-Fri 9am-1am. Call now: +49 89 51519696!'}
+        title={content.title}
+        description={content.description}
         canonical="/kontakt"
       />
       <StructuredData type="restaurant" />
@@ -41,7 +71,7 @@ const Kontakt = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Kontakt' : 'Contact', url: '/kontakt' }
+          { name: t.contact.title, url: '/kontakt' }
         ]} 
       />
       <div className="min-h-screen bg-background flex flex-col">
@@ -61,12 +91,10 @@ const Kontakt = () => {
         <main className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
           <h1 className="text-4xl font-bold mb-4 text-center">
-            {language === 'de' ? 'Kontakt & Anfahrt – Italiener nahe Königsplatz München' : 'Contact & Directions – Italian Restaurant near Königsplatz Munich'}
+            {content.h1}
           </h1>
           <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {language === 'de'
-              ? 'Besuchen Sie uns in der Karlstraße 47a – zentral in der Maxvorstadt, nur wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.'
-              : 'Visit us at Karlstraße 47a – centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.'}
+            {content.intro}
           </p>
           
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -119,7 +147,7 @@ const Kontakt = () => {
                       80333 München
                     </p>
                     <p className="text-sm text-muted-foreground/70 mt-1 italic">
-                      {language === 'de' ? 'Nähe Königsplatz & Hauptbahnhof' : 'Near Königsplatz & main station'}
+                      {content.nearLocation}
                     </p>
                   </div>
                 </div>
