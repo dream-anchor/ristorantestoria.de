@@ -20,7 +20,7 @@ const Catering = () => {
         title={language === 'de' ? 'Catering & Events – Eventlocation München' : 'Catering & Events – Event Location Munich'}
         description={language === 'de' 
           ? 'Italienisches Catering München & Eventlocation Maxvorstadt: Firmenfeiern, Hochzeiten, Geburtstage. STORIA – Ihr Partner für unvergessliche Events!'
-          : 'Italian catering Munich & event location Maxvorstadt: Corporate events, weddings, birthdays. STORIA – your partner for unforgettable events!'}
+          : 'Italian catering Munich & event location Maxvorstadt: Corporate parties, weddings & birthdays. STORIA – your partner for events!'}
         canonical="/catering"
       />
       <StructuredData 

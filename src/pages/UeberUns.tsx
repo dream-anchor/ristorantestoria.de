@@ -32,8 +32,8 @@ const UeberUns = () => {
       <SEO
         title={language === 'de' ? "Über uns – La Famiglia Speranza" : "About Us – La Famiglia Speranza"}
         description={language === 'de' 
-          ? "STORIA – Ihr Italiener in der Maxvorstadt München. Ristorante Pizzeria mit neapolitanischer Pizza, hausgemachter Pasta und italienischem Trattoria-Flair. La Famiglia Speranza."
-          : "STORIA – Your Italian restaurant in Maxvorstadt Munich. Ristorante Pizzeria with Neapolitan pizza, homemade pasta and Italian trattoria atmosphere. La Famiglia Speranza."
+          ? "STORIA – Italienisches Restaurant der Familie Speranza. Neapolitanische Pizza & Pasta mit Trattoria-Flair in München Maxvorstadt."
+          : "STORIA – Italian restaurant by the Speranza family. Neapolitan pizza & pasta with trattoria atmosphere in Munich Maxvorstadt."
         }
         canonical="/ueber-uns"
       />

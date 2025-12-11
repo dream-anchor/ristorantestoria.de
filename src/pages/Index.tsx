@@ -61,7 +61,12 @@ const Index = () => {
 
   return (
     <>
-      <SEO canonical="/" />
+      <SEO 
+        canonical="/" 
+        description={language === 'de' 
+          ? 'STORIA München: Italiener in der Maxvorstadt. Pizza aus dem Steinofen, Pasta & Aperitivo. Nahe Königsplatz. Jetzt reservieren!'
+          : 'STORIA Munich: Italian restaurant in Maxvorstadt. Neapolitan pizza, fresh pasta & aperitivo. Near Königsplatz. Reserve now!'}
+      />
       <StructuredData type="restaurant" faqItems={faqItems} />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
