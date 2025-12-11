@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, X, CheckCheck, XCircle, SpellCheck, ArrowRight } from "lucide-react";
+import { Check, X, CheckCheck, XCircle, SpellCheck, ArrowRight, AlertTriangle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export interface SpellingError {
@@ -26,6 +26,7 @@ interface SpellCheckResultsProps {
   onAcceptAll: () => void;
   onRejectAll: () => void;
   onClose: () => void;
+  missingTranslations?: { it: boolean; fr: boolean };
 }
 
 const languageFlags: Record<string, string> = {
@@ -49,9 +50,16 @@ const SpellCheckResults = ({
   onAcceptAll,
   onRejectAll,
   onClose,
+  missingTranslations,
 }: SpellCheckResultsProps) => {
   const { t, language } = useLanguage();
   const [processedIds, setProcessedIds] = useState<Set<string>>(new Set());
+
+  // Check for missing translations
+  const hasMissingTranslations = missingTranslations && (missingTranslations.it || missingTranslations.fr);
+  const missingLangs: string[] = [];
+  if (missingTranslations?.it) missingLangs.push(language === 'de' ? 'Italienisch' : language === 'en' ? 'Italian' : language === 'it' ? 'Italiano' : 'Italien');
+  if (missingTranslations?.fr) missingLangs.push(language === 'de' ? 'Französisch' : language === 'en' ? 'French' : language === 'it' ? 'Francese' : 'Français');
 
   const remainingErrors = useMemo(() => 
     errors.filter(e => !processedIds.has(e.id)),
@@ -87,12 +95,33 @@ const SpellCheckResults = ({
     return labels[type]?.[language] || type;
   };
 
+  // Missing translations warning component
+  const MissingTranslationsWarning = () => hasMissingTranslations ? (
+    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">
+      <AlertTriangle className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
+      <div className="text-sm">
+        <p className="font-medium text-amber-800">
+          {language === 'de' ? 'Fehlende Übersetzungen' : 
+           language === 'en' ? 'Missing translations' :
+           language === 'it' ? 'Traduzioni mancanti' : 'Traductions manquantes'}
+        </p>
+        <p className="text-amber-700">
+          {language === 'de' ? `${missingLangs.join(' und ')} Übersetzungen fehlen teilweise. Laden Sie das PDF erneut hoch, um alle Übersetzungen zu generieren.` :
+           language === 'en' ? `${missingLangs.join(' and ')} translations are partially missing. Re-upload the PDF to generate all translations.` :
+           language === 'it' ? `Le traduzioni ${missingLangs.join(' e ')} mancano parzialmente. Ricarica il PDF per generare tutte le traduzioni.` :
+           `Les traductions ${missingLangs.join(' et ')} sont partiellement manquantes. Rechargez le PDF pour générer toutes les traductions.`}
+        </p>
+      </div>
+    </div>
+  ) : null;
+
   if (errors.length === 0) {
     return (
-      <div className="border border-green-200 bg-green-50 rounded-lg p-6 text-center">
+      <div className="border border-green-200 bg-green-50 rounded-lg p-6 text-center space-y-4">
         <CheckCheck className="h-12 w-12 text-green-500 mx-auto mb-3" />
         <h3 className="font-semibold text-green-800 text-lg">{t.spellCheck?.noErrors || 'Keine Fehler gefunden!'}</h3>
         <p className="text-green-600 text-sm mt-1">{t.spellCheck?.allCorrect || 'Alle Texte sind korrekt.'}</p>
+        <MissingTranslationsWarning />
         <Button onClick={onClose} className="mt-4">
           {t.spellCheck?.continueToPreview || 'Weiter zur Vorschau'}
         </Button>
@@ -102,6 +131,13 @@ const SpellCheckResults = ({
 
   return (
     <div className="border border-border rounded-lg bg-secondary/30 overflow-hidden">
+      {/* Missing Translations Warning */}
+      {hasMissingTranslations && (
+        <div className="p-4 border-b border-border">
+          <MissingTranslationsWarning />
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-background border-b border-border p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
