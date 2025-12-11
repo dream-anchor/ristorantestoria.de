@@ -74,11 +74,6 @@ const CollapsibleMenuCard = ({
                 <Pencil className="h-4 w-4" />
               </Button>
             )}
-            {isPublished !== undefined && (
-              <Badge variant={isPublished ? "default" : "secondary"} className="text-xs">
-                {isPublished ? "Veröffentlicht" : "Entwurf"}
-              </Badge>
-            )}
           </div>
         </div>
         <div className={cn(
