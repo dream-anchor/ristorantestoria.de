@@ -59,8 +59,9 @@ const Speisekarte = () => {
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             {language === 'de' 
-              ? 'Authentische italienische Küche – neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta und frische Antipasti. Frisch zubereitet mit Liebe und Leidenschaft.'
-              : 'Authentic Italian cuisine – Neapolitan stone-oven pizza, homemade pasta and fresh antipasti. Freshly prepared with love and passion.'}
+              ? <>Authentische italienische Küche – <Link to="/neapolitanische-pizza-muenchen" className="text-primary hover:underline">neapolitanische Pizza aus dem Steinofen</Link>, hausgemachte Pasta und frische Antipasti. Genießen Sie dazu unsere <Link to="/getraenke" className="text-primary hover:underline">erlesenen italienischen Weine</Link>. Unter der Woche empfehlen wir unser <Link to="/mittags-menu" className="text-primary hover:underline">günstiges Mittagsmenü</Link>.</>
+              : <>Authentic Italian cuisine – <Link to="/neapolitanische-pizza-muenchen" className="text-primary hover:underline">Neapolitan stone-oven pizza</Link>, homemade pasta and fresh antipasti. Enjoy our <Link to="/getraenke" className="text-primary hover:underline">fine Italian wines</Link> with your meal. On weekdays, we recommend our <Link to="/mittags-menu" className="text-primary hover:underline">affordable lunch menu</Link>.</>
+            }
           </p>
 
           <MenuDisplay menuType="food" />

@@ -94,8 +94,9 @@ const GeburtstagsfeierMuenchen = () => {
               </h2>
               <p className="text-muted-foreground mb-4">
                 {language === 'de'
-                  ? 'Im STORIA feiern wir Geburtstage mit italienischer Herzlichkeit. Lassen Sie sich und Ihre Gäste mit exquisiter Küche verwöhnen – von Pizza über Pasta bis zu feinen Dolci. Unser Team sorgt dafür, dass Ihr Ehrentag zu einem besonderen Erlebnis wird.'
-                  : 'At STORIA, we celebrate birthdays with Italian warmth. Let yourself and your guests be pampered with exquisite cuisine – from pizza to pasta to fine dolci. Our team ensures your special day becomes an unforgettable experience.'}
+                  ? <>Im STORIA feiern wir Geburtstage mit italienischer Herzlichkeit. Lassen Sie sich und Ihre Gäste mit exquisiter Küche verwöhnen – von Pizza über Pasta bis zu feinen Dolci. Für größere Gruppen empfehlen wir unsere <Link to="/eventlocation-muenchen-maxvorstadt" className="text-primary hover:underline">Eventlocation mit überdachter Terrasse</Link>. Planen Sie eine <Link to="/firmenfeier-muenchen" className="text-primary hover:underline">Firmenfeier oder ein Team-Event</Link>? Sprechen Sie uns an!</>
+                  : <>At STORIA, we celebrate birthdays with Italian warmth. Let yourself and your guests be pampered with exquisite cuisine – from pizza to pasta to fine dolci. For larger groups, we recommend our <Link to="/eventlocation-muenchen-maxvorstadt" className="text-primary hover:underline">event location with covered terrace</Link>. Planning a <Link to="/firmenfeier-muenchen" className="text-primary hover:underline">corporate event or team celebration</Link>? Contact us!</>
+                }
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <Button asChild>

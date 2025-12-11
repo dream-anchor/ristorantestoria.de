@@ -88,6 +88,12 @@ const LunchMuenchen = () => {
               <p className="text-sm text-muted-foreground/70 italic">
                 {language === 'de' ? 'Mittagszeit: Mo-Fr 11:30 – 14:30 Uhr' : 'Lunch hours: Mon-Fri 11:30 AM – 2:30 PM'}
               </p>
+              <p className="text-sm text-muted-foreground mt-4">
+                {language === 'de' 
+                  ? <>Auch abends sind Sie herzlich willkommen: Erleben Sie unser <Link to="/aperitivo-muenchen" className="text-primary hover:underline">italienisches Aperitivo</Link> oder genießen Sie ein <Link to="/romantisches-dinner-muenchen" className="text-primary hover:underline">romantisches Dinner zu zweit</Link>.</>
+                  : <>You're also welcome in the evening: Experience our <Link to="/aperitivo-muenchen" className="text-primary hover:underline">Italian aperitivo</Link> or enjoy a <Link to="/romantisches-dinner-muenchen" className="text-primary hover:underline">romantic dinner for two</Link>.</>
+                }
+              </p>
             </div>
 
             <div className="bg-secondary/50 p-8 rounded-lg mb-8">
