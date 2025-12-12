@@ -52,10 +52,27 @@ const ConsentElfsightReviews = () => {
 
   return (
     <section className="container mx-auto px-4 py-12">
+      {/* Überschrift */}
+      <div className="text-center mb-8">
+        <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-2">
+          {t.reviews.title}
+        </h2>
+        <p className="text-muted-foreground">
+          {t.reviews.subtitle}
+        </p>
+      </div>
+      
+      {/* Elfsight Widget */}
       <div 
         className="elfsight-app-e58a6302-8498-4ada-9e27-e0a0ee5288ad" 
         data-elfsight-app-lazy 
       />
+      
+      {/* Catering-Hinweis */}
+      <p className="text-center text-muted-foreground mt-8 italic">
+        {t.reviews.deliveryNote}<br />
+        {t.reviews.deliveryNote2}
+      </p>
     </section>
   );
 };
