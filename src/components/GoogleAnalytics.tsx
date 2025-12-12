@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLocation } from "react-router-dom";
 
-const GA_MEASUREMENT_ID = "G-P7H48RC2W1";
+const GA_MEASUREMENT_ID = "G-G44C983YRJ";
 
 declare global {
   interface Window {
