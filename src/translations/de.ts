@@ -277,9 +277,7 @@ export const de = {
   },
   reviews: {
     title: "Das sagen unsere Gäste",
-    subtitle: "Echte Bewertungen von Google, TheFork & mehr",
-    deliveryNote: "Auf Wunsch liefern wir Ihnen diese Küche auch nach Hause,",
-    deliveryNote2: "ins Büro oder zum Event.",
+    subtitle: "Gäste-Bewertungen von Google & TheFork",
   },
   about: {
     title: 'STORIA - IM HERZEN VON MÜNCHEN',

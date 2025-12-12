@@ -277,9 +277,7 @@ export const it = {
   },
   reviews: {
     title: "Cosa Dicono i Nostri Ospiti",
-    subtitle: "Recensioni reali da Google, TheFork e altro",
-    deliveryNote: "Su richiesta, consegniamo questa cucina anche a casa vostra,",
-    deliveryNote2: "in ufficio o al vostro evento.",
+    subtitle: "Recensioni degli ospiti da Google & TheFork",
   },
   about: {
     title: 'STORIA - NEL CUORE DI MONACO',
