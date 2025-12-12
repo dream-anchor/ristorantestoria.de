@@ -275,6 +275,12 @@ export const de = {
     foodInfo: "Lebensmittelinfo",
     disclaimer: "Disclaimer",
   },
+  reviews: {
+    title: "Das sagen unsere Gäste",
+    subtitle: "Echte Bewertungen von Google, TheFork & mehr",
+    deliveryNote: "Auf Wunsch liefern wir Ihnen diese Küche auch nach Hause,",
+    deliveryNote2: "ins Büro oder zum Event.",
+  },
   about: {
     title: 'STORIA - IM HERZEN VON MÜNCHEN',
     greeting: 'Wir freuen uns auf Sie.',

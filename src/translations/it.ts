@@ -275,6 +275,12 @@ export const it = {
     foodInfo: "Info Alimenti",
     disclaimer: "Disclaimer",
   },
+  reviews: {
+    title: "Cosa Dicono i Nostri Ospiti",
+    subtitle: "Recensioni reali da Google, TheFork e altro",
+    deliveryNote: "Su richiesta, consegniamo questa cucina anche a casa vostra,",
+    deliveryNote2: "in ufficio o al vostro evento.",
+  },
   about: {
     title: 'STORIA - NEL CUORE DI MONACO',
     greeting: 'Vi aspettiamo.',

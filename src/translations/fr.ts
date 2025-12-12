@@ -275,6 +275,12 @@ export const fr = {
     foodInfo: "Info Aliments",
     disclaimer: "Disclaimer",
   },
+  reviews: {
+    title: "Ce Que Disent Nos Clients",
+    subtitle: "Avis réels de Google, TheFork et plus",
+    deliveryNote: "Sur demande, nous livrons aussi cette cuisine chez vous,",
+    deliveryNote2: "au bureau ou à votre événement.",
+  },
   about: {
     title: 'STORIA - AU CŒUR DE MUNICH',
     greeting: 'Nous nous réjouissons de vous voir.',
