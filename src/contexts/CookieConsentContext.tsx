@@ -1,5 +1,13 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
+// TypeScript Declaration für Google Analytics
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+    dataLayer: unknown[];
+  }
+}
+
 interface CookieConsent {
   necessary: boolean;
   statistics: boolean;
@@ -28,6 +36,18 @@ const CONSENT_DURATION_DAYS = 365;
 
 const CookieConsentContext = createContext<CookieConsentContextType | undefined>(undefined);
 
+// Funktion zum Aktualisieren des Google Consent Mode
+const updateGoogleConsent = (consentData: CookieConsent) => {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('consent', 'update', {
+      'analytics_storage': consentData.statistics ? 'granted' : 'denied',
+      'ad_storage': consentData.marketing ? 'granted' : 'denied',
+      'ad_user_data': consentData.marketing ? 'granted' : 'denied',
+      'ad_personalization': consentData.marketing ? 'granted' : 'denied',
+    });
+  }
+};
+
 export const CookieConsentProvider = ({ children }: { children: ReactNode }) => {
   const [consent, setConsent] = useState<CookieConsent | null>(null);
   const [showBanner, setShowBanner] = useState(false);
@@ -44,6 +64,7 @@ export const CookieConsentProvider = ({ children }: { children: ReactNode }) => 
         
         if (daysDiff < CONSENT_DURATION_DAYS && parsed.version === CONSENT_VERSION) {
           setConsent(parsed);
+          updateGoogleConsent(parsed); // Google über gespeicherte Einwilligung informieren
           setShowBanner(false);
         } else {
           localStorage.removeItem(CONSENT_KEY);
@@ -59,10 +80,22 @@ export const CookieConsentProvider = ({ children }: { children: ReactNode }) => 
   }, []);
 
   const saveConsent = (newConsent: CookieConsent) => {
+    // Prüfen ob externe oder Statistik-Cookies von granted zu denied wechseln
+    const wasExternalOrStatsGranted = consent?.external === true || consent?.statistics === true;
+    const isNowDenied = newConsent.external === false && newConsent.statistics === false;
+    
     localStorage.setItem(CONSENT_KEY, JSON.stringify(newConsent));
     setConsent(newConsent);
     setShowBanner(false);
     setShowSettings(false);
+    
+    // Google Consent aktualisieren
+    updateGoogleConsent(newConsent);
+    
+    // Page Reload wenn Cookies widerrufen wurden (um geladene Scripts zu entfernen)
+    if (wasExternalOrStatsGranted && isNowDenied) {
+      window.location.reload();
+    }
   };
 
   const acceptAll = () => {
