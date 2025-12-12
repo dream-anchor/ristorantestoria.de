@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import ImageGrid from "@/components/ImageGrid";
 import InternalLinks from "@/components/InternalLinks";
-import ElfsightReviews from "@/components/ElfsightReviews";
+import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
@@ -75,7 +75,7 @@ const Index = () => {
         <Navigation />
         <main>
           <ImageGrid />
-          <ElfsightReviews />
+          <ConsentElfsightReviews />
           <InternalLinks />
         </main>
         <Footer />
