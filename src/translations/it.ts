@@ -262,6 +262,9 @@ export const it = {
     openTableBlockedDesc: "Per proteggere la vostra privacy, i contenuti esterni vengono caricati solo dopo il vostro consenso. Attivando OpenTable, i dati vengono trasmessi a OpenTable.",
     enableOpenTable: "Attiva OpenTable",
     alternativeBooking: "In alternativa, potete prenotare telefonicamente:",
+    reviewsBlocked: "Recensioni clienti",
+    reviewsBlockedDesc: "Per visualizzare le recensioni esterne da es. Google e TheFork, abbiamo bisogno del vostro consenso.",
+    enableReviews: "Attiva recensioni",
   },
   legal: {
     cookies: "Cookie",

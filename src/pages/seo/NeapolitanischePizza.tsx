@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
-import ElfsightReviews from "@/components/ElfsightReviews";
+import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
 import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -138,7 +138,7 @@ const NeapolitanischePizza = () => {
             </div>
 
             <ReservationCTA />
-            <ElfsightReviews />
+            <ConsentElfsightReviews />
           </article>
         </main>
 

@@ -262,6 +262,9 @@ export const fr = {
     openTableBlockedDesc: "Pour protéger votre vie privée, le contenu externe n'est chargé qu'après votre consentement. Lorsque vous activez OpenTable, des données sont transmises à OpenTable.",
     enableOpenTable: "Activer OpenTable",
     alternativeBooking: "Alternativement, vous pouvez réserver par téléphone:",
+    reviewsBlocked: "Avis clients",
+    reviewsBlockedDesc: "Pour afficher les avis externes de par ex. Google et TheFork, nous avons besoin de votre consentement.",
+    enableReviews: "Activer les avis",
   },
   legal: {
     cookies: "Cookies",

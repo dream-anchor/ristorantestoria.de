@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import ElfsightReviews from "@/components/ElfsightReviews";
+import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
 import StaticBotContent from "@/components/StaticBotContent";
 import { EventInquiryForm } from "@/components/EventInquiryForm";
 import { Button } from "@/components/ui/button";
@@ -294,7 +294,7 @@ const FirmenfeierMuenchen = () => {
             </div>
           </section>
 
-          <ElfsightReviews />
+          <ConsentElfsightReviews />
 
           {/* Contact Form Section */}
           <section className="py-16 md:py-20 bg-secondary/30">
