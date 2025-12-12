@@ -67,12 +67,6 @@ const ConsentElfsightReviews = () => {
         className="elfsight-app-e58a6302-8498-4ada-9e27-e0a0ee5288ad" 
         data-elfsight-app-lazy 
       />
-      
-      {/* Catering-Hinweis */}
-      <p className="text-center text-muted-foreground mt-8 italic">
-        {t.reviews.deliveryNote}<br />
-        {t.reviews.deliveryNote2}
-      </p>
     </section>
   );
 };
