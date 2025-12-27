@@ -10,8 +10,9 @@ const Header = () => {
     <header className="border-b border-border bg-background">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link to="/" className="font-serif text-2xl md:text-3xl font-bold hover:opacity-80 transition-opacity">
-            STORIA
+          <Link to="/" className="flex flex-col items-start hover:opacity-80 transition-opacity">
+            <span className="text-xs md:text-sm font-light tracking-widest uppercase text-muted-foreground">Hallo</span>
+            <span className="font-serif text-2xl md:text-3xl font-bold -mt-1">STORIA</span>
           </Link>
           <div className="flex items-center gap-4 md:gap-6 text-base text-foreground/80 font-medium">
             <a href="tel:+498951519696" className="flex items-center gap-2 hover:text-foreground transition-colors">
