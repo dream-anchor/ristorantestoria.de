@@ -84,10 +84,10 @@ const ReservationBooking = () => {
     
     return allTimeSlots.filter(slot => {
       const [slotHour, slotMinute] = slot.split(':').map(Number);
-      // Allow booking if slot is at least 30 minutes in the future
       const slotTotalMinutes = slotHour * 60 + slotMinute;
-      const currentTotalMinutes = currentHour * 60 + currentMinute + 30; // 30 min buffer
-      return slotTotalMinutes > currentTotalMinutes;
+      const currentTotalMinutes = currentHour * 60 + currentMinute;
+      // Can book until the exact time (22:30 bookable until 22:30, not at 22:31)
+      return slotTotalMinutes >= currentTotalMinutes;
     });
   };
 
