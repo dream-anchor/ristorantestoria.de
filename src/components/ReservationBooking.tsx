@@ -68,28 +68,50 @@ const ReservationBooking = () => {
     }
   };
 
-  const allTimeSlots = [
-    // Mittagszeit
-    "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00",
-    // Abendzeit
-    "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30"
+  // Regular time slots (15-minute intervals)
+  const lunchSlots = [
+    "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15"
   ];
+  
+  const dinnerSlots = [
+    "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30"
+  ];
+
+  // New Year's Eve special slots (only 19:00-20:00)
+  const newYearsEveSlots = ["19:00", "19:15", "19:30", "19:45", "20:00"];
+
+  // Check if date is New Year's Eve
+  const isNewYearsEve = (checkDate: Date): boolean => {
+    return checkDate.getMonth() === 11 && checkDate.getDate() === 31;
+  };
+
+  // Get all time slots based on the selected date
+  const getAllTimeSlotsForDate = (): string[] => {
+    if (!date) return [...lunchSlots, ...dinnerSlots];
+    
+    if (isNewYearsEve(date)) {
+      return newYearsEveSlots;
+    }
+    
+    return [...lunchSlots, ...dinnerSlots];
+  };
 
   // Filter time slots: if selected date is today, only show future times
   const getAvailableTimeSlots = () => {
+    const allSlots = getAllTimeSlotsForDate();
+    
     if (!date || !isToday(date)) {
-      return allTimeSlots;
+      return allSlots;
     }
     
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
     
-    return allTimeSlots.filter(slot => {
+    return allSlots.filter(slot => {
       const [slotHour, slotMinute] = slot.split(':').map(Number);
       const slotTotalMinutes = slotHour * 60 + slotMinute;
       const currentTotalMinutes = currentHour * 60 + currentMinute;
-      // Can book until the exact time (22:30 bookable until 22:30, not at 22:31)
       return slotTotalMinutes >= currentTotalMinutes;
     });
   };
