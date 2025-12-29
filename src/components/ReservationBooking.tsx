@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { CalendarIcon, Clock, Users, ExternalLink, Phone, MessageCircle } from "lucide-react";
-import { format, addDays, isSameDay } from "date-fns";
+import { format, addDays, isSameDay, isToday, startOfDay } from "date-fns";
 import { de, enUS, it, fr } from "date-fns/locale";
 
 // Calculate Easter Sunday using the Anonymous Gregorian algorithm
@@ -53,7 +53,7 @@ const isClosedDay = (date: Date): boolean => {
 const ReservationBooking = () => {
   const { t, language } = useLanguage();
   const isMobile = useIsMobile();
-  const [date, setDate] = useState<Date | undefined>(addDays(new Date(), 1));
+  const [date, setDate] = useState<Date | undefined>(new Date()); // Default to today
   const [time, setTime] = useState("19:00");
   const [guests, setGuests] = useState("2");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -67,10 +67,31 @@ const ReservationBooking = () => {
     }
   };
 
-  const timeSlots = [
+  const allTimeSlots = [
     "11:30", "12:00", "12:30", "13:00", "13:30", "14:00",
     "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"
   ];
+
+  // Filter time slots: if selected date is today, only show future times
+  const getAvailableTimeSlots = () => {
+    if (!date || !isToday(date)) {
+      return allTimeSlots;
+    }
+    
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    
+    return allTimeSlots.filter(slot => {
+      const [slotHour, slotMinute] = slot.split(':').map(Number);
+      // Allow booking if slot is at least 30 minutes in the future
+      const slotTotalMinutes = slotHour * 60 + slotMinute;
+      const currentTotalMinutes = currentHour * 60 + currentMinute + 30; // 30 min buffer
+      return slotTotalMinutes > currentTotalMinutes;
+    });
+  };
+
+  const timeSlots = getAvailableTimeSlots();
 
   const guestOptions = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
@@ -201,7 +222,7 @@ const ReservationBooking = () => {
                     mode="single"
                     selected={date}
                     onSelect={setDate}
-                    disabled={(date) => date < new Date() || isClosedDay(date)}
+                    disabled={(date) => startOfDay(date) < startOfDay(new Date()) || isClosedDay(date)}
                     locale={getLocale()}
                     initialFocus
                     className="pointer-events-auto"
