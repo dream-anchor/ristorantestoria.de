@@ -8,8 +8,47 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { CalendarIcon, Clock, Users, ExternalLink, Phone, MessageCircle } from "lucide-react";
-import { format, addDays } from "date-fns";
+import { format, addDays, isSameDay } from "date-fns";
 import { de, enUS, it, fr } from "date-fns/locale";
+
+// Calculate Easter Sunday using the Anonymous Gregorian algorithm
+const getEasterSunday = (year: number): Date => {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31) - 1; // 0-indexed month
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(year, month, day);
+};
+
+// Get all closed days (Ruhetage) for a given year
+const getClosedDays = (year: number): Date[] => {
+  const easterSunday = getEasterSunday(year);
+  const easterMonday = addDays(easterSunday, 1);
+  
+  return [
+    new Date(year, 11, 24), // 24. Dezember
+    new Date(year, 11, 25), // 25. Dezember
+    easterSunday,
+    easterMonday,
+  ];
+};
+
+// Check if a date is a closed day
+const isClosedDay = (date: Date): boolean => {
+  const year = date.getFullYear();
+  const closedDays = getClosedDays(year);
+  return closedDays.some(closedDay => isSameDay(date, closedDay));
+};
 
 const ReservationBooking = () => {
   const { t, language } = useLanguage();
@@ -162,9 +201,10 @@ const ReservationBooking = () => {
                     mode="single"
                     selected={date}
                     onSelect={setDate}
-                    disabled={(date) => date < new Date()}
+                    disabled={(date) => date < new Date() || isClosedDay(date)}
                     locale={getLocale()}
                     initialFocus
+                    className="pointer-events-auto"
                   />
                 </PopoverContent>
               </Popover>
