@@ -57,6 +57,7 @@ const ReservationBooking = () => {
   const [time, setTime] = useState("19:00");
   const [guests, setGuests] = useState("2");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
   const getLocale = () => {
     switch (language) {
@@ -210,7 +211,7 @@ const ReservationBooking = () => {
                 <CalendarIcon className="h-4 w-4 text-primary" />
                 {t.reservationBooking.date}
               </label>
-              <Popover>
+              <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -223,7 +224,10 @@ const ReservationBooking = () => {
                   <Calendar
                     mode="single"
                     selected={date}
-                    onSelect={setDate}
+                    onSelect={(selectedDate) => {
+                      setDate(selectedDate);
+                      setIsDatePickerOpen(false);
+                    }}
                     disabled={(date) => startOfDay(date) < startOfDay(new Date()) || isClosedDay(date)}
                     locale={getLocale()}
                     initialFocus
