@@ -3,38 +3,53 @@ RewriteEngine On
 # ============================================
 # 0. HTTPS + WWW Kanonisierung (SEO)
 # ============================================
-# Alle Anfragen auf https://www.ristorantestoria.de umleiten
-
-# Schritt 1: HTTP zu HTTPS erzwingen
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-# Schritt 2: Non-www zu www umleiten (nur bei HTTPS)
 RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
 RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
 
 # ============================================
-# 1. Spezielle Weiterleitungen (Query-String)
+# 1. Canonical Redirect: /ristorantestoria-de/... → /...
+# ============================================
+# Entfernt den Ordnernamen aus der URL (301 Redirect)
+RewriteCond %{THE_REQUEST} \s/ristorantestoria-de/(\S*)\s [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/ristorantestoria-de\s [NC]
+RewriteRule ^ / [R=301,L]
+
+# ============================================
+# 2. Spezielle Weiterleitungen (Query-String)
 # ============================================
 RewriteCond %{QUERY_STRING} ^page_id=2881$
 RewriteRule ^$ /impressum? [R=301,L]
 
 # ============================================
-# 2. 301 Redirects für alte URLs (VOR dem SPA-Fallback!)
+# 3. 301 Redirects für alte URLs
 # ============================================
 RewriteRule ^mittagsmenu$ /mittags-menu [R=301,L]
 RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
 RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
 
 # ============================================
-# 3. SPA-Routing (React Router)
+# 4. Interne Rewrites auf /ristorantestoria-de/
 # ============================================
+# Bedient Requests aus dem Unterordner, ohne die URL zu ändern
+
+# Wenn die Datei im Unterordner existiert (Assets, etc.)
+RewriteCond %{REQUEST_URI} !^/ristorantestoria-de/
+RewriteCond %{DOCUMENT_ROOT}/ristorantestoria-de%{REQUEST_URI} -f
+RewriteRule ^(.*)$ /ristorantestoria-de/$1 [L]
+
+# SPA-Fallback: Alle anderen Routen → index.html im Unterordner
+RewriteCond %{REQUEST_URI} !^/ristorantestoria-de/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ /index.html [L]
+RewriteRule ^ /ristorantestoria-de/index.html [L]
 
 # ============================================
-# 4. MIME-Types für korrekte Dateiauslieferung
+# 5. MIME-Types
 # ============================================
 <IfModule mod_mime.c>
   AddType application/javascript .js
@@ -47,14 +62,14 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 5. GZIP-Komprimierung für bessere Performance
+# 6. GZIP-Komprimierung
 # ============================================
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
 </IfModule>
 
 # ============================================
-# 6. Browser-Caching für statische Assets
+# 7. Browser-Caching
 # ============================================
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -63,17 +78,4 @@ RewriteRule ^ /index.html [L]
   ExpiresByType font/woff2 "access plus 1 year"
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
-</IfModule>
-
-# ============================================
-# 7. Erzwungene MIME-Types für spezifische Dateien
-# ============================================
-<FilesMatch "\.xml$">
-  ForceType application/xml
-</FilesMatch>
-
-<IfModule mod_headers.c>
-  <FilesMatch "sitemap\.xml$">
-    Header set Content-Type "application/xml; charset=UTF-8"
-  </FilesMatch>
 </IfModule>
