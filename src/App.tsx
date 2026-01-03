@@ -1,4 +1,4 @@
-import React from "react"; // Explizit React importieren für die JSX Types
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -46,39 +46,60 @@ import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 
 const queryClient = new QueryClient();
 
-// --- CRAWLER DETECTION ---
+// --- 1. CRAWLER ERKENNUNG ---
+// Wir prüfen UserAgent ODER das spezifische Flag von react-snap
 const isSnap = navigator.userAgent === "ReactSnap" || (window as any).snapSaveState;
 
-// --- CRASH FIX (Polyfill) ---
-// Verhindert den "reading 'add'" Fehler bei SVGs im Crawler
-if (isSnap && typeof document !== "undefined") {
-  const originalCreateElementNS = document.createElementNS;
-  document.createElementNS = function (namespace, qualifiedName) {
-    const element = originalCreateElementNS.call(document, namespace, qualifiedName);
-    if (element && !element.classList) {
-      // Mock classList für Elemente, die es im Headless Chrome nicht haben (oft SVGs)
-      (element as any).classList = {
-        add: () => {},
-        remove: () => {},
-        toggle: () => {},
-        contains: () => false,
-      };
-    }
-    return element;
+// --- 2. DER "HAMMER" FIX (Prototype Patching) ---
+// Das hier löst den "reading 'add'" Fehler endgültig.
+// Wir warten nicht auf React, sondern patchen SVGElement direkt im Browser-Kern.
+if (isSnap && typeof window !== "undefined") {
+  // Mock-Objekt für classList
+  const mockClassList = {
+    add: () => {},
+    remove: () => {},
+    toggle: () => {},
+    contains: () => false,
+    replace: () => {},
+    item: () => null,
+    length: 0,
+    toString: () => "",
+    value: "", // Wichtig für manche Libraries
   };
+
+  // Fix für SVGElemente (Icons, Grafiken)
+  if (window.SVGElement && !("classList" in SVGElement.prototype)) {
+    Object.defineProperty(SVGElement.prototype, "classList", {
+      get() {
+        return mockClassList;
+      },
+      configurable: true,
+    });
+  }
+
+  // Sicherheitsnetz: Auch HTMLElement patchen, falls der Headless-Browser sehr alt ist
+  if (window.HTMLElement && !("classList" in HTMLElement.prototype)) {
+    Object.defineProperty(HTMLElement.prototype, "classList", {
+      get() {
+        return mockClassList;
+      },
+      configurable: true,
+    });
+  }
 }
 
 const App = () => {
-  // --- CRAWLER VERSION (Stabilisiert) ---
+  // --- VERSION FÜR DEN CRAWLER (Minimalistisch & Sicher) ---
   if (isSnap) {
     return (
       <QueryClientProvider client={queryClient}>
-        {/* WICHTIG: Tooltip & Cookie Provider MÜSSEN bleiben, sonst crashen die Hooks in den Pages */}
+        {/* WICHTIG: TooltipProvider MUSS drin bleiben wegen Hooks, aber wir deaktivieren den Inhalt. */}
         <TooltipProvider delayDuration={0} disableHoverableContent>
           <LanguageProvider>
+            {/* CookieProvider MUSS drin bleiben, weil useCookieConsent() genutzt wird */}
             <CookieConsentProvider>
               <BrowserRouter>
-                {/* Overlay-UI ausblenden, aber Context bereitstellen */}
+                {/* Overlay-Elemente (Toaster, Analytics) komplett entfernen */}
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/reservierung" element={<Reservierung />} />
@@ -122,7 +143,7 @@ const App = () => {
     );
   }
 
-  // --- NORMALE VERSION (Volle Features) ---
+  // --- NORMALE VERSION FÜR ECHTE BESUCHER ---
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
