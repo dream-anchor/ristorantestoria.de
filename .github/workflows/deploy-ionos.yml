@@ -1,4 +1,4 @@
-name: Deploy to IONOS (SFTP - ristorantestoria.de)
+name: Deploy Lovable SSG to IONOS (SFTP)
 
 on:
   push:
@@ -16,115 +16,54 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Lovable empfiehlt Node 20 für das SSG Script
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Google Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      # ✅ Configure react-snap (Kombination aus Lovable + Delay)
-      - name: Inject react-snap config
-        shell: bash
-        run: |
-          set -e
-          npm i -D react-snap
-
-          npm pkg set scripts.postbuild="react-snap"
-          npm pkg set reactSnap.source="dist"
-          npm pkg set reactSnap.crawl=true
-          npm pkg set reactSnap.minifyHtml=true
-          
-          # Stabilität:
-          npm pkg set reactSnap.timeout=120000
-          # Backend-Requests erlauben (für Menü-Daten), aber Consent-gated Scripts werden eh nicht geladen
-          npm pkg set reactSnap.skipThirdPartyRequests=false
-          
-          # Warten auf DOM-Signal statt fester Delay
-          npm pkg set reactSnap.waitForSelector='html[data-prerender-ready="true"]'
-          npm pkg set reactSnap.delay=8000
-
-          # --- ROUTEN DEFINITION ---
-          npm pkg set reactSnap.include[0]="/"
-          npm pkg set reactSnap.include[1]="/reservierung"
-          npm pkg set reactSnap.include[2]="/menu"
-          npm pkg set reactSnap.include[3]="/mittags-menu"
-          npm pkg set reactSnap.include[4]="/speisekarte"
-          npm pkg set reactSnap.include[5]="/getraenke"
-          npm pkg set reactSnap.include[6]="/besondere-anlaesse"
-          npm pkg set reactSnap.include[7]="/kontakt"
-          npm pkg set reactSnap.include[8]="/catering"
-          npm pkg set reactSnap.include[9]="/ueber-uns"
-          
-          npm pkg set reactSnap.include[10]="/impressum"
-          npm pkg set reactSnap.include[11]="/datenschutz"
-          npm pkg set reactSnap.include[12]="/cookie-richtlinie"
-          npm pkg set reactSnap.include[13]="/agb-restaurant"
-          npm pkg set reactSnap.include[14]="/agb-gutscheine"
-          npm pkg set reactSnap.include[15]="/widerrufsbelehrung"
-          npm pkg set reactSnap.include[16]="/zahlungsinformationen"
-          npm pkg set reactSnap.include[17]="/lebensmittelhinweise"
-          npm pkg set reactSnap.include[18]="/haftungsausschluss"
-
-          npm pkg set reactSnap.include[19]="/lunch-muenchen-maxvorstadt"
-          npm pkg set reactSnap.include[20]="/aperitivo-muenchen"
-          npm pkg set reactSnap.include[21]="/romantisches-dinner-muenchen"
-          npm pkg set reactSnap.include[22]="/eventlocation-muenchen-maxvorstadt"
-          npm pkg set reactSnap.include[23]="/firmenfeier-muenchen"
-          npm pkg set reactSnap.include[24]="/geburtstagsfeier-muenchen"
-          npm pkg set reactSnap.include[25]="/neapolitanische-pizza-muenchen"
-
-          npm pkg set reactSnap.include[26]="/besondere-anlaesse/weihnachtsmenues"
-          npm pkg set reactSnap.include[27]="/besondere-anlaesse/silvesterparty"
-
-          # Puppeteer Config
-          npm pkg set reactSnap.puppeteerExecutablePath="/usr/bin/google-chrome"
-          npm pkg set reactSnap.puppeteerArgs[0]="--no-sandbox"
-          npm pkg set reactSnap.puppeteerArgs[1]="--disable-setuid-sandbox"
-
-      - name: Verify Supabase secrets are set
-        run: |
-          if [ -z "$VITE_SUPABASE_URL" ]; then
-            echo "❌ VITE_SUPABASE_URL is not set!"
-            exit 1
-          fi
-          if [ -z "$VITE_SUPABASE_PUBLISHABLE_KEY" ]; then
-            echo "❌ VITE_SUPABASE_PUBLISHABLE_KEY is not set!"
-            exit 1
-          fi
-          echo "✅ Supabase secrets are configured"
-        env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-
+      # --- SEO INJECTION ---
+      # Wir injizieren SEO VOR dem Build in die Source index.html
       - name: Inject SEO content from payload
         if: github.event_name == 'repository_dispatch' && github.event.client_payload.seo_html
         run: |
           node -e "
           const fs = require('fs');
+          // Wir bearbeiten die Source-Datei, damit der Build sie später nutzt
           const html = fs.readFileSync('index.html', 'utf8');
           const seo = process.env.SEO_HTML;
           if (!seo) { console.log('No SEO payload'); process.exit(0); }
-          const result = html.replace(/[\\s\\S]*?/, '\\n' + seo + '\\n');
+          
+          // Platzhalter ersetzen (angepasst an Lovable SSG Struktur)
+          // Falls noch nicht da ist, hängen wir es in den Head
+          let result = html;
+          if (html.includes('')) {
+             // SEO Content VOR dem App-Content einfügen oder in den Head
+             result = html.replace('</head>', seo + '\n</head>');
+          } else {
+             result = html.replace('', seo);
+          }
+          
           fs.writeFileSync('index.html', result);
           "
         env:
           SEO_HTML: ${{ github.event.client_payload.seo_html }}
 
-      - name: Build project (with Secrets!)
+      # --- BUILD PROZESS (SSG) ---
+      # Führt build:client -> build:server -> build:prerender aus
+      # Chrom/Puppeteer ist NICHT mehr nötig, da Lovable jetzt Node.js nutzt
+      - name: Build Project (SSG)
         run: npm run build
         env: 
-          # WICHTIG: Hier übergeben wir die Secrets an den Build-Prozess
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          # WICHTIG: Mapping von ANON zu PUBLISHABLE beibehalten
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      - name: Deploy via SFTP
+      # --- DEPLOY ZU IONOS ---
+      - name: Deploy via SFTP to IONOS
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ${{ secrets.IONOS_SFTP_HOST }}
@@ -132,11 +71,14 @@ jobs:
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
           port: 22
           sftp_only: true
-          local_path: "./dist/*"
+          # Der Build Output liegt im 'dist' Ordner
+          local_path: "./dist/*" 
           remote_path: "/ristorantestoria-de"
           delete_remote_files: true
 
-      - name: Upload .htaccess
+      # --- HTACCESS UPLOAD ---
+      # Die .htaccess ist weiterhin wichtig für Weiterleitungen und Caching
+      - name: Upload .htaccess to subfolder
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ${{ secrets.IONOS_SFTP_HOST }}
