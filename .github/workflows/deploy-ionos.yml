@@ -24,31 +24,32 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # ✅ Chrome für react-snap installieren
       - name: Install Google Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      # ✅ Inject react-snap + Configure Routes
-      - name: Inject react-snap (CI only)
+      # ✅ Configure react-snap (Kombination aus Lovable + Delay)
+      - name: Inject react-snap config
         shell: bash
         run: |
           set -e
-
           npm i -D react-snap
 
           npm pkg set scripts.postbuild="react-snap"
-
           npm pkg set reactSnap.source="dist"
           npm pkg set reactSnap.crawl=true
           npm pkg set reactSnap.minifyHtml=true
           
-          # NEU: Wir warten 4000ms (4 Sekunden) auf jeder Seite, 
-          # damit React sicher fertig ist, bevor der Snapshot gemacht wird.
-          npm pkg set reactSnap.delay=4000
+          # LOVABLE TIPPS (Stabilität):
+          npm pkg set reactSnap.timeout=60000        # 60 sek Timeout (länger warten)
+          npm pkg set reactSnap.skipThirdPartyRequests=true # Keine Analytics/Maps laden (verhindert Crashes)
+          
+          # MEIN TIPP (Warten auf Daten):
+          # Wir geben der Seite 5 Sekunden Zeit, um Supabase-Daten zu laden
+          npm pkg set reactSnap.delay=5000
 
-          # --- HAUPTSEITEN ---
+          # --- ROUTEN DEFINITION ---
           npm pkg set reactSnap.include[0]="/"
           npm pkg set reactSnap.include[1]="/reservierung"
           npm pkg set reactSnap.include[2]="/menu"
@@ -59,8 +60,7 @@ jobs:
           npm pkg set reactSnap.include[7]="/kontakt"
           npm pkg set reactSnap.include[8]="/catering"
           npm pkg set reactSnap.include[9]="/ueber-uns"
-
-          # --- RECHTLICHES ---
+          
           npm pkg set reactSnap.include[10]="/impressum"
           npm pkg set reactSnap.include[11]="/datenschutz"
           npm pkg set reactSnap.include[12]="/cookie-richtlinie"
@@ -71,7 +71,6 @@ jobs:
           npm pkg set reactSnap.include[17]="/lebensmittelhinweise"
           npm pkg set reactSnap.include[18]="/haftungsausschluss"
 
-          # --- SEO LANDINGPAGES ---
           npm pkg set reactSnap.include[19]="/lunch-muenchen-maxvorstadt"
           npm pkg set reactSnap.include[20]="/aperitivo-muenchen"
           npm pkg set reactSnap.include[21]="/romantisches-dinner-muenchen"
@@ -80,11 +79,10 @@ jobs:
           npm pkg set reactSnap.include[24]="/geburtstagsfeier-muenchen"
           npm pkg set reactSnap.include[25]="/neapolitanische-pizza-muenchen"
 
-          # --- BEKANNTE SLUGS ---
           npm pkg set reactSnap.include[26]="/besondere-anlaesse/weihnachtsmenues"
           npm pkg set reactSnap.include[27]="/besondere-anlaesse/silvesterparty"
 
-          # --- PUPPETEER CONFIG ---
+          # Puppeteer Config
           npm pkg set reactSnap.puppeteerExecutablePath="/usr/bin/google-chrome"
           npm pkg set reactSnap.puppeteerArgs[0]="--no-sandbox"
           npm pkg set reactSnap.puppeteerArgs[1]="--disable-setuid-sandbox"
@@ -96,28 +94,21 @@ jobs:
           const fs = require('fs');
           const html = fs.readFileSync('index.html', 'utf8');
           const seo = process.env.SEO_HTML;
-          if (!seo) {
-            console.log('No SEO content in payload');
-            process.exit(0);
-          }
-          const result = html.replace(
-            /[\\s\\S]*?/,
-            '\\n' + seo + '\\n'
-          );
+          if (!seo) { console.log('No SEO payload'); process.exit(0); }
+          const result = html.replace(/[\\s\\S]*?/, '\\n' + seo + '\\n');
           fs.writeFileSync('index.html', result);
-          console.log('SEO content injected:', seo.length, 'chars');
           "
         env:
           SEO_HTML: ${{ github.event.client_payload.seo_html }}
 
-      - name: Log if no SEO payload (regular push)
-        if: github.event_name != 'repository_dispatch'
-        run: echo "Regular push - no SEO payload injection"
-
-      - name: Build project
+      - name: Build project (with Secrets!)
         run: npm run build
+        env: 
+          # WICHTIG: Hier übergeben wir die Secrets an den Build-Prozess
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      - name: Deploy via SFTP to IONOS
+      - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ${{ secrets.IONOS_SFTP_HOST }}
@@ -129,7 +120,7 @@ jobs:
           remote_path: "/ristorantestoria-de"
           delete_remote_files: true
 
-      - name: Upload .htaccess to subfolder
+      - name: Upload .htaccess
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ${{ secrets.IONOS_SFTP_HOST }}
