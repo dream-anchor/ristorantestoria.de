@@ -45,20 +45,31 @@ import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 
 const queryClient = new QueryClient();
 
+// Hier prüfen wir, ob react-snap gerade die Seite crawlt
+const isSnap = navigator.userAgent === "ReactSnap";
+
 // App component with all providers and contexts
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <LanguageProvider>
         <CookieConsentProvider>
-          <Toaster />
-          <Sonner />
+          {/* Diese Elemente verursachen oft Fehler beim Crawlen, daher blenden wir sie für den Bot aus */}
+          {!isSnap && <Toaster />}
+          {!isSnap && <Sonner />}
+
           <BrowserRouter>
-            <GoogleAnalytics />
-            <ScrollToTop />
-            <FloatingActions />
-            <CookieBanner />
-            <CookieSettingsButton />
+            {/* Analytics stört den Bot -> ausblenden */}
+            {!isSnap && <GoogleAnalytics />}
+
+            {/* ScrollToTop stört den Bot -> ausblenden */}
+            {!isSnap && <ScrollToTop />}
+
+            {/* UI-Elemente, die auf dem statischen Bild nicht nötig sind */}
+            {!isSnap && <FloatingActions />}
+            {!isSnap && <CookieBanner />}
+            {!isSnap && <CookieSettingsButton />}
+
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/reservierung" element={<Reservierung />} />
@@ -82,7 +93,7 @@ const App = () => (
               <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
               <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
               <Route path="/ueber-uns" element={<UeberUns />} />
-              
+
               {/* SEO Landingpages - nicht im Hauptmenü verlinkt */}
               <Route path="/lunch-muenchen-maxvorstadt" element={<LunchMuenchen />} />
               <Route path="/aperitivo-muenchen" element={<AperitivoMuenchen />} />
@@ -91,7 +102,7 @@ const App = () => (
               <Route path="/firmenfeier-muenchen" element={<FirmenfeierMuenchen />} />
               <Route path="/geburtstagsfeier-muenchen" element={<GeburtstagsfeierMuenchen />} />
               <Route path="/neapolitanische-pizza-muenchen" element={<NeapolitanischePizza />} />
-              
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
