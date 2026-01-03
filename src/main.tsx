@@ -1,26 +1,21 @@
-// NEUE VERSION (Static / Hydration Support)
-import { createRoot, hydrateRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import "./index.css";
 
-const container = document.getElementById("root");
-
-if (container && container.hasChildNodes()) {
-  // Wenn HTML schon da ist (durch react-snap generiert) -> Hydrate
-  hydrateRoot(
-    container,
-    <HelmetProvider>
+const root = document.getElementById("root")!;
+const app = (
+  <HelmetProvider>
+    <BrowserRouter>
       <App />
-    </HelmetProvider>
-  );
+    </BrowserRouter>
+  </HelmetProvider>
+);
+
+// Use hydration for SSR in production
+if (import.meta.env.PROD) {
+  hydrateRoot(root, app);
 } else {
-  // Wenn leer (lokale Entwicklung oder Fallback) -> Render
-  if (container) {
-    createRoot(container).render(
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    );
-  }
+  createRoot(root).render(app);
 }

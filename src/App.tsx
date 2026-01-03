@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import Index from "./pages/Index";
@@ -53,48 +53,47 @@ const App = () => (
         <CookieConsentProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
-            <GoogleAnalytics />
-            <ScrollToTop />
-            <FloatingActions />
-            <CookieBanner />
-            <CookieSettingsButton />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/reservierung" element={<Reservierung />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/mittags-menu" element={<Mittagsmenu />} />
-              <Route path="/speisekarte" element={<Speisekarte />} />
-              <Route path="/getraenke" element={<Getraenke />} />
-              <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
-              <Route path="/besondere-anlaesse/:slug" element={<BesondererAnlass />} />
-              <Route path="/kontakt" element={<Kontakt />} />
-              <Route path="/catering" element={<Catering />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/impressum" element={<Impressum />} />
-              <Route path="/datenschutz" element={<Datenschutz />} />
-              <Route path="/cookie-richtlinie" element={<CookieRichtlinie />} />
-              <Route path="/agb-restaurant" element={<AGBRestaurant />} />
-              <Route path="/agb-gutscheine" element={<AGBGutscheine />} />
-              <Route path="/widerrufsbelehrung" element={<Widerrufsbelehrung />} />
-              <Route path="/zahlungsinformationen" element={<Zahlungsinformationen />} />
-              <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
-              <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
-              <Route path="/ueber-uns" element={<UeberUns />} />
+          <GoogleAnalytics />
+          <ScrollToTop />
+          <FloatingActions />
+          <CookieBanner />
+          <CookieSettingsButton />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/reservierung" element={<Reservierung />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/mittags-menu" element={<Mittagsmenu />} />
+            <Route path="/speisekarte" element={<Speisekarte />} />
+            <Route path="/getraenke" element={<Getraenke />} />
+            <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
+            <Route path="/besondere-anlaesse/:slug" element={<BesondererAnlass />} />
+            <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/catering" element={<Catering />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/impressum" element={<Impressum />} />
+            <Route path="/datenschutz" element={<Datenschutz />} />
+            <Route path="/cookie-richtlinie" element={<CookieRichtlinie />} />
+            <Route path="/agb-restaurant" element={<AGBRestaurant />} />
+            <Route path="/agb-gutscheine" element={<AGBGutscheine />} />
+            <Route path="/widerrufsbelehrung" element={<Widerrufsbelehrung />} />
+            <Route path="/zahlungsinformationen" element={<Zahlungsinformationen />} />
+            <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
+            <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
+            <Route path="/ueber-uns" element={<UeberUns />} />
 
-              {/* SEO Landingpages - nicht im Hauptmenü verlinkt */}
-              <Route path="/lunch-muenchen-maxvorstadt" element={<LunchMuenchen />} />
-              <Route path="/aperitivo-muenchen" element={<AperitivoMuenchen />} />
-              <Route path="/romantisches-dinner-muenchen" element={<RomantischesDinner />} />
-              <Route path="/eventlocation-muenchen-maxvorstadt" element={<EventlocationMuenchen />} />
-              <Route path="/firmenfeier-muenchen" element={<FirmenfeierMuenchen />} />
-              <Route path="/geburtstagsfeier-muenchen" element={<GeburtstagsfeierMuenchen />} />
-              <Route path="/neapolitanische-pizza-muenchen" element={<NeapolitanischePizza />} />
+            {/* SEO Landingpages - nicht im Hauptmenü verlinkt */}
+            <Route path="/lunch-muenchen" element={<LunchMuenchen />} />
+            <Route path="/aperitivo-muenchen" element={<AperitivoMuenchen />} />
+            <Route path="/romantisches-dinner-muenchen" element={<RomantischesDinner />} />
+            <Route path="/eventlocation-muenchen" element={<EventlocationMuenchen />} />
+            <Route path="/firmenfeier-muenchen" element={<FirmenfeierMuenchen />} />
+            <Route path="/geburtstagsfeier-muenchen" element={<GeburtstagsfeierMuenchen />} />
+            <Route path="/neapolitanische-pizza-muenchen" element={<NeapolitanischePizza />} />
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </CookieConsentProvider>
       </LanguageProvider>
     </TooltipProvider>
