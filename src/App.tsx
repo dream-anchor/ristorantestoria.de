@@ -1,3 +1,4 @@
+import React from "react"; // Explizit React importieren für die JSX Types
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -45,64 +46,83 @@ import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 
 const queryClient = new QueryClient();
 
-// --- ROBUSTE CRAWLER ERKENNUNG ---
-// Wir prüfen UserAgent UND ob window.snapSaveState existiert (spezifisch für react-snap)
+// --- CRAWLER DETECTION ---
 const isSnap = navigator.userAgent === "ReactSnap" || (window as any).snapSaveState;
 
+// --- CRASH FIX (Polyfill) ---
+// Verhindert den "reading 'add'" Fehler bei SVGs im Crawler
+if (isSnap && typeof document !== "undefined") {
+  const originalCreateElementNS = document.createElementNS;
+  document.createElementNS = function (namespace, qualifiedName) {
+    const element = originalCreateElementNS.call(document, namespace, qualifiedName);
+    if (element && !element.classList) {
+      // Mock classList für Elemente, die es im Headless Chrome nicht haben (oft SVGs)
+      (element as any).classList = {
+        add: () => {},
+        remove: () => {},
+        toggle: () => {},
+        contains: () => false,
+      };
+    }
+    return element;
+  };
+}
+
 const App = () => {
-  // Wenn der Crawler aktiv ist, rendern wir eine "nackte" Version ohne Provider, die DOM-Manipulationen machen.
+  // --- CRAWLER VERSION (Stabilisiert) ---
   if (isSnap) {
     return (
       <QueryClientProvider client={queryClient}>
-        {/* WICHTIG: TooltipProvider und CookieConsentProvider hier WEGLASSEN.
-            Sie verursachen oft den "undefined reading add" Fehler im Headless Mode.
-            Wir rendern nur LanguageProvider (für Text) und Router.
-        */}
-        <LanguageProvider>
-          <BrowserRouter>
-            <Routes>
-              {/* Alle Seiten ganz normal rendern */}
-              <Route path="/" element={<Index />} />
-              <Route path="/reservierung" element={<Reservierung />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/mittags-menu" element={<Mittagsmenu />} />
-              <Route path="/speisekarte" element={<Speisekarte />} />
-              <Route path="/getraenke" element={<Getraenke />} />
-              <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
-              <Route path="/besondere-anlaesse/:slug" element={<BesondererAnlass />} />
-              <Route path="/kontakt" element={<Kontakt />} />
-              <Route path="/catering" element={<Catering />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/impressum" element={<Impressum />} />
-              <Route path="/datenschutz" element={<Datenschutz />} />
-              <Route path="/cookie-richtlinie" element={<CookieRichtlinie />} />
-              <Route path="/agb-restaurant" element={<AGBRestaurant />} />
-              <Route path="/agb-gutscheine" element={<AGBGutscheine />} />
-              <Route path="/widerrufsbelehrung" element={<Widerrufsbelehrung />} />
-              <Route path="/zahlungsinformationen" element={<Zahlungsinformationen />} />
-              <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
-              <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
-              <Route path="/ueber-uns" element={<UeberUns />} />
+        {/* WICHTIG: Tooltip & Cookie Provider MÜSSEN bleiben, sonst crashen die Hooks in den Pages */}
+        <TooltipProvider delayDuration={0} disableHoverableContent>
+          <LanguageProvider>
+            <CookieConsentProvider>
+              <BrowserRouter>
+                {/* Overlay-UI ausblenden, aber Context bereitstellen */}
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/reservierung" element={<Reservierung />} />
+                  <Route path="/menu" element={<Menu />} />
+                  <Route path="/mittags-menu" element={<Mittagsmenu />} />
+                  <Route path="/speisekarte" element={<Speisekarte />} />
+                  <Route path="/getraenke" element={<Getraenke />} />
+                  <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
+                  <Route path="/besondere-anlaesse/:slug" element={<BesondererAnlass />} />
+                  <Route path="/kontakt" element={<Kontakt />} />
+                  <Route path="/catering" element={<Catering />} />
+                  <Route path="/admin" element={<Admin />} />
+                  <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route path="/impressum" element={<Impressum />} />
+                  <Route path="/datenschutz" element={<Datenschutz />} />
+                  <Route path="/cookie-richtlinie" element={<CookieRichtlinie />} />
+                  <Route path="/agb-restaurant" element={<AGBRestaurant />} />
+                  <Route path="/agb-gutscheine" element={<AGBGutscheine />} />
+                  <Route path="/widerrufsbelehrung" element={<Widerrufsbelehrung />} />
+                  <Route path="/zahlungsinformationen" element={<Zahlungsinformationen />} />
+                  <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
+                  <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
+                  <Route path="/ueber-uns" element={<UeberUns />} />
 
-              {/* SEO Landingpages */}
-              <Route path="/lunch-muenchen-maxvorstadt" element={<LunchMuenchen />} />
-              <Route path="/aperitivo-muenchen" element={<AperitivoMuenchen />} />
-              <Route path="/romantisches-dinner-muenchen" element={<RomantischesDinner />} />
-              <Route path="/eventlocation-muenchen-maxvorstadt" element={<EventlocationMuenchen />} />
-              <Route path="/firmenfeier-muenchen" element={<FirmenfeierMuenchen />} />
-              <Route path="/geburtstagsfeier-muenchen" element={<GeburtstagsfeierMuenchen />} />
-              <Route path="/neapolitanische-pizza-muenchen" element={<NeapolitanischePizza />} />
+                  {/* SEO Landingpages */}
+                  <Route path="/lunch-muenchen-maxvorstadt" element={<LunchMuenchen />} />
+                  <Route path="/aperitivo-muenchen" element={<AperitivoMuenchen />} />
+                  <Route path="/romantisches-dinner-muenchen" element={<RomantischesDinner />} />
+                  <Route path="/eventlocation-muenchen-maxvorstadt" element={<EventlocationMuenchen />} />
+                  <Route path="/firmenfeier-muenchen" element={<FirmenfeierMuenchen />} />
+                  <Route path="/geburtstagsfeier-muenchen" element={<GeburtstagsfeierMuenchen />} />
+                  <Route path="/neapolitanische-pizza-muenchen" element={<NeapolitanischePizza />} />
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </LanguageProvider>
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </CookieConsentProvider>
+          </LanguageProvider>
+        </TooltipProvider>
       </QueryClientProvider>
     );
   }
 
-  // --- NORMALE USER EXPERIENCE (Volles Programm) ---
+  // --- NORMALE VERSION (Volle Features) ---
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
