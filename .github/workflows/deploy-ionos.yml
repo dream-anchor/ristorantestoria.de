@@ -24,27 +24,63 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # ✅ Install modern Chrome (needed for react-snap / puppeteer)
+      # ✅ Chrome für react-snap installieren
       - name: Install Google Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      # ✅ Inject react-snap + force modern Chrome (CI only)
+      # ✅ react-snap konfigurieren & Routen definieren
       - name: Inject react-snap (CI only)
         shell: bash
         run: |
           set -e
-
           npm i -D react-snap
 
           npm pkg set scripts.postbuild="react-snap"
-
           npm pkg set reactSnap.source="dist"
           npm pkg set reactSnap.crawl=true
           npm pkg set reactSnap.minifyHtml=true
-          npm pkg set reactSnap.include[0]="/"
 
+          # --- HAUPTSEITEN ---
+          npm pkg set reactSnap.include[0]="/"
+          npm pkg set reactSnap.include[1]="/reservierung"
+          npm pkg set reactSnap.include[2]="/menu"
+          npm pkg set reactSnap.include[3]="/mittags-menu"
+          npm pkg set reactSnap.include[4]="/speisekarte"
+          npm pkg set reactSnap.include[5]="/getraenke"
+          npm pkg set reactSnap.include[6]="/besondere-anlaesse"
+          npm pkg set reactSnap.include[7]="/kontakt"
+          npm pkg set reactSnap.include[8]="/catering"
+          npm pkg set reactSnap.include[9]="/ueber-uns"
+
+          # --- RECHTLICHES ---
+          npm pkg set reactSnap.include[10]="/impressum"
+          npm pkg set reactSnap.include[11]="/datenschutz"
+          npm pkg set reactSnap.include[12]="/cookie-richtlinie"
+          npm pkg set reactSnap.include[13]="/agb-restaurant"
+          npm pkg set reactSnap.include[14]="/agb-gutscheine"
+          npm pkg set reactSnap.include[15]="/widerrufsbelehrung"
+          npm pkg set reactSnap.include[16]="/zahlungsinformationen"
+          npm pkg set reactSnap.include[17]="/lebensmittelhinweise"
+          npm pkg set reactSnap.include[18]="/haftungsausschluss"
+
+          # --- SEO LANDINGPAGES ---
+          npm pkg set reactSnap.include[19]="/lunch-muenchen-maxvorstadt"
+          npm pkg set reactSnap.include[20]="/aperitivo-muenchen"
+          npm pkg set reactSnap.include[21]="/romantisches-dinner-muenchen"
+          npm pkg set reactSnap.include[22]="/eventlocation-muenchen-maxvorstadt"
+          npm pkg set reactSnap.include[23]="/firmenfeier-muenchen"
+          npm pkg set reactSnap.include[24]="/geburtstagsfeier-muenchen"
+          npm pkg set reactSnap.include[25]="/neapolitanische-pizza-muenchen"
+
+          # --- BEKANNTE SLUGS (Besondere Anlässe) ---
+          # Da :slug dynamisch ist, müssen wir bekannte Events manuell hinzufügen,
+          # damit sie statisch werden (basierend auf deiner alten .htaccess).
+          npm pkg set reactSnap.include[26]="/besondere-anlaesse/weihnachtsmenues"
+          npm pkg set reactSnap.include[27]="/besondere-anlaesse/silvesterparty"
+
+          # --- PUPPETEER CONFIG ---
           npm pkg set reactSnap.puppeteerExecutablePath="/usr/bin/google-chrome"
           npm pkg set reactSnap.puppeteerArgs[0]="--no-sandbox"
           npm pkg set reactSnap.puppeteerArgs[1]="--disable-setuid-sandbox"
@@ -61,8 +97,8 @@ jobs:
             process.exit(0);
           }
           const result = html.replace(
-            /<!-- BOT_CONTENT_START -->[\\s\\S]*?<!-- BOT_CONTENT_END -->/,
-            '<!-- BOT_CONTENT_START -->\\n' + seo + '\\n<!-- BOT_CONTENT_END -->'
+            /[\\s\\S]*?/,
+            '\\n' + seo + '\\n'
           );
           fs.writeFileSync('index.html', result);
           console.log('SEO content injected:', seo.length, 'chars');
@@ -74,7 +110,7 @@ jobs:
         if: github.event_name != 'repository_dispatch'
         run: echo "Regular push - no SEO payload injection"
 
-      - name: Build project (includes prerender via postbuild)
+      - name: Build project
         run: npm run build
 
       - name: Deploy via SFTP to IONOS
@@ -100,4 +136,3 @@ jobs:
           local_path: "./public/.htaccess"
           remote_path: "/ristorantestoria-de/.htaccess"
           delete_remote_files: false
-
