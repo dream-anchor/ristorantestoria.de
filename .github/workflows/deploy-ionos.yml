@@ -30,17 +30,23 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      # ✅ react-snap konfigurieren & Routen definieren
+      # ✅ Inject react-snap + Configure Routes
       - name: Inject react-snap (CI only)
         shell: bash
         run: |
           set -e
+
           npm i -D react-snap
 
           npm pkg set scripts.postbuild="react-snap"
+
           npm pkg set reactSnap.source="dist"
           npm pkg set reactSnap.crawl=true
           npm pkg set reactSnap.minifyHtml=true
+          
+          # NEU: Wir warten 4000ms (4 Sekunden) auf jeder Seite, 
+          # damit React sicher fertig ist, bevor der Snapshot gemacht wird.
+          npm pkg set reactSnap.delay=4000
 
           # --- HAUPTSEITEN ---
           npm pkg set reactSnap.include[0]="/"
@@ -74,9 +80,7 @@ jobs:
           npm pkg set reactSnap.include[24]="/geburtstagsfeier-muenchen"
           npm pkg set reactSnap.include[25]="/neapolitanische-pizza-muenchen"
 
-          # --- BEKANNTE SLUGS (Besondere Anlässe) ---
-          # Da :slug dynamisch ist, müssen wir bekannte Events manuell hinzufügen,
-          # damit sie statisch werden (basierend auf deiner alten .htaccess).
+          # --- BEKANNTE SLUGS ---
           npm pkg set reactSnap.include[26]="/besondere-anlaesse/weihnachtsmenues"
           npm pkg set reactSnap.include[27]="/besondere-anlaesse/silvesterparty"
 
