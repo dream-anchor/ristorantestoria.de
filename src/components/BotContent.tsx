@@ -20,7 +20,16 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
   const menu = menuId ? menuById : menuByType;
   const isLoading = menuId ? loadingById : loadingByType;
 
-  if (isLoading || !menu) return null;
+  // Static fallback for react-snap prerendering - ensures SEO content even during loading
+  if (isLoading || !menu) {
+    return (
+      <div className="sr-only" aria-hidden="true">
+        <p>Menü wird geladen... Besuchen Sie uns im Restaurant für die aktuelle Speisekarte.</p>
+        <p>STORIA – Ristorante • Pizzeria • Bar, Karlstraße 47a, 80333 München</p>
+        <p>Tel: +49 89 515196</p>
+      </div>
+    );
+  }
 
   const getLocalizedText = (de: string | null | undefined, en: string | null | undefined) => {
     if (language === 'en' && en) return en;

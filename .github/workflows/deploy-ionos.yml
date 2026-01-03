@@ -42,13 +42,13 @@ jobs:
           npm pkg set reactSnap.minifyHtml=true
           
           # Stabilität:
-          npm pkg set reactSnap.timeout=60000
+          npm pkg set reactSnap.timeout=120000
           # Backend-Requests erlauben (für Menü-Daten), aber Consent-gated Scripts werden eh nicht geladen
           npm pkg set reactSnap.skipThirdPartyRequests=false
           
           # Warten auf DOM-Signal statt fester Delay
           npm pkg set reactSnap.waitForSelector='html[data-prerender-ready="true"]'
-          npm pkg set reactSnap.delay=3000
+          npm pkg set reactSnap.delay=8000
 
           # --- ROUTEN DEFINITION ---
           npm pkg set reactSnap.include[0]="/"
