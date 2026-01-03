@@ -41,13 +41,14 @@ jobs:
           npm pkg set reactSnap.crawl=true
           npm pkg set reactSnap.minifyHtml=true
           
-          # LOVABLE TIPPS (Stabilität):
-          npm pkg set reactSnap.timeout=60000        # 60 sek Timeout (länger warten)
-          npm pkg set reactSnap.skipThirdPartyRequests=true # Keine Analytics/Maps laden (verhindert Crashes)
+          # Stabilität:
+          npm pkg set reactSnap.timeout=60000
+          # Backend-Requests erlauben (für Menü-Daten), aber Consent-gated Scripts werden eh nicht geladen
+          npm pkg set reactSnap.skipThirdPartyRequests=false
           
-          # MEIN TIPP (Warten auf Daten):
-          # Wir geben der Seite 5 Sekunden Zeit, um Supabase-Daten zu laden
-          npm pkg set reactSnap.delay=5000
+          # Warten auf DOM-Signal statt fester Delay
+          npm pkg set reactSnap.waitForSelector='html[data-prerender-ready="true"]'
+          npm pkg set reactSnap.delay=3000
 
           # --- ROUTEN DEFINITION ---
           npm pkg set reactSnap.include[0]="/"
@@ -86,6 +87,21 @@ jobs:
           npm pkg set reactSnap.puppeteerExecutablePath="/usr/bin/google-chrome"
           npm pkg set reactSnap.puppeteerArgs[0]="--no-sandbox"
           npm pkg set reactSnap.puppeteerArgs[1]="--disable-setuid-sandbox"
+
+      - name: Verify Supabase secrets are set
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ]; then
+            echo "❌ VITE_SUPABASE_URL is not set!"
+            exit 1
+          fi
+          if [ -z "$VITE_SUPABASE_PUBLISHABLE_KEY" ]; then
+            echo "❌ VITE_SUPABASE_PUBLISHABLE_KEY is not set!"
+            exit 1
+          fi
+          echo "✅ Supabase secrets are configured"
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Inject SEO content from payload
         if: github.event_name == 'repository_dispatch' && github.event.client_payload.seo_html
