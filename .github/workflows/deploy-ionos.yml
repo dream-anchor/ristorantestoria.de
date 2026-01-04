@@ -62,30 +62,19 @@ jobs:
           # WICHTIG: Mapping von ANON zu PUBLISHABLE beibehalten
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      # --- DEPLOY ZU IONOS ---
-      - name: Deploy via SFTP to IONOS
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-        with:
-          server: ${{ secrets.IONOS_SFTP_HOST }}
-          username: ${{ secrets.IONOS_SFTP_USER }}
-          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          port: 22
-          sftp_only: true
-          # Der Build Output liegt im 'dist' Ordner
-          local_path: "./dist/*" 
-          remote_path: "/ristorantestoria-de"
-          delete_remote_files: true
+      # --- HTACCESS IN DIST KOPIEREN ---
+      # Damit alles in einem Upload erledigt wird
+      - name: Copy .htaccess to dist
+        run: cp public/.htaccess dist/.htaccess
 
-      # --- HTACCESS UPLOAD ---
-      # Die .htaccess ist weiterhin wichtig für Weiterleitungen und Caching
-      - name: Upload .htaccess to subfolder
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+      # --- DEPLOY ZU IONOS ---
+      # Nutze FTP-Deploy-Action für zuverlässige rekursive Uploads
+      - name: Deploy via FTP to IONOS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.IONOS_SFTP_HOST }}
-          username: ${{ secrets.IONOS_SFTP_USER }}
-          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          port: 22
-          sftp_only: true
-          local_path: "./public/.htaccess"
-          remote_path: "/ristorantestoria-de/.htaccess"
-          delete_remote_files: false
+          server: ${{ secrets.IONOS_FTP_HOST }}
+          username: ${{ secrets.IONOS_FTP_USER }}
+          password: ${{ secrets.IONOS_FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: /ristorantestoria-de/
+          dangerous-clean-slate: true
