@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useCallback, useEffect, type React
 import { useLocation, useNavigate } from "react-router-dom";
 import { de } from "@/translations/de";
 import { en } from "@/translations/en";
-import { it } from "@/translations/it";
+import { it as italian } from "@/translations/it";
 import { fr } from "@/translations/fr";
 import { parseLocalizedPath, getLocalizedPath, SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from "@/config/routes";
 
@@ -109,7 +109,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const translations = {
     de,
     en,
-    it,
+    it: italian,
     fr,
   };
 

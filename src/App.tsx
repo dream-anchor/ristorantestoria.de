@@ -80,10 +80,10 @@ const routeComponents: Record<string, React.ComponentType> = {
 // Import translations for slug mapping
 import { de } from "@/translations/de";
 import { en } from "@/translations/en";
-import { it } from "@/translations/it";
+import { it as italian } from "@/translations/it";
 import { fr } from "@/translations/fr";
 
-const slugMaps = { de: de.slugs, en: en.slugs, it: it.slugs, fr: fr.slugs };
+const slugMaps = { de: de.slugs, en: en.slugs, it: italian.slugs, fr: fr.slugs };
 type Language = "de" | "en" | "it" | "fr";
 
 // Generate all routes for all languages
