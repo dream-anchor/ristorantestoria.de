@@ -72,9 +72,11 @@ jobs:
       - name: Deploy via FTP to IONOS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.IONOS_FTP_HOST }}
-          username: ${{ secrets.IONOS_FTP_USER }}
-          password: ${{ secrets.IONOS_FTP_PASSWORD }}
+          server: ${{ secrets.IONOS_SFTP_HOST }}
+          username: ${{ secrets.IONOS_SFTP_USER }}
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          protocol: sftp
+          port: 22
           local-dir: ./dist/
           server-dir: /ristorantestoria-de/
           dangerous-clean-slate: true
