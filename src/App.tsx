@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import Index from "./pages/Index";
@@ -45,6 +45,110 @@ import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 
 const queryClient = new QueryClient();
 
+// Route configuration with components
+const routeComponents: Record<string, React.ComponentType> = {
+  home: Index,
+  reservierung: Reservierung,
+  menu: Menu,
+  "mittags-menu": Mittagsmenu,
+  speisekarte: Speisekarte,
+  getraenke: Getraenke,
+  "besondere-anlaesse": BesondereAnlaesse,
+  kontakt: Kontakt,
+  catering: Catering,
+  "ueber-uns": UeberUns,
+  impressum: Impressum,
+  datenschutz: Datenschutz,
+  "cookie-richtlinie": CookieRichtlinie,
+  "agb-restaurant": AGBRestaurant,
+  "agb-gutscheine": AGBGutscheine,
+  widerrufsbelehrung: Widerrufsbelehrung,
+  zahlungsinformationen: Zahlungsinformationen,
+  lebensmittelhinweise: Lebensmittelhinweise,
+  haftungsausschluss: Haftungsausschluss,
+  "lunch-muenchen-maxvorstadt": LunchMuenchen,
+  "aperitivo-muenchen": AperitivoMuenchen,
+  "romantisches-dinner-muenchen": RomantischesDinner,
+  "eventlocation-muenchen-maxvorstadt": EventlocationMuenchen,
+  "firmenfeier-muenchen": FirmenfeierMuenchen,
+  "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
+  "neapolitanische-pizza-muenchen": NeapolitanischePizza,
+};
+
+// Import translations for slug mapping
+import { de } from "@/translations/de";
+import { en } from "@/translations/en";
+import { it } from "@/translations/it";
+import { fr } from "@/translations/fr";
+
+const slugMaps = { de: de.slugs, en: en.slugs, it: it.slugs, fr: fr.slugs };
+type Language = "de" | "en" | "it" | "fr";
+
+// Generate all routes for all languages
+const generateRoutes = () => {
+  const routes: Array<{ path: string; element: React.ReactNode }> = [];
+  
+  // German routes (no prefix)
+  for (const [baseSlug, Component] of Object.entries(routeComponents)) {
+    const germanSlug = slugMaps.de[baseSlug as keyof typeof slugMaps.de];
+    if (baseSlug === "home") {
+      routes.push({ path: "/", element: <Component /> });
+    } else if (germanSlug) {
+      routes.push({ path: `/${germanSlug}`, element: <Component /> });
+    }
+  }
+  
+  // Other languages with prefix
+  const otherLanguages: Language[] = ["en", "it", "fr"];
+  for (const lang of otherLanguages) {
+    const slugMap = slugMaps[lang];
+    
+    // Language root (e.g., /en, /it, /fr)
+    routes.push({ path: `/${lang}`, element: <Index /> });
+    
+    for (const [baseSlug, Component] of Object.entries(routeComponents)) {
+      if (baseSlug === "home") continue; // Already handled above
+      const localizedSlug = slugMap[baseSlug as keyof typeof slugMap];
+      if (localizedSlug) {
+        routes.push({ path: `/${lang}/${localizedSlug}`, element: <Component /> });
+      }
+    }
+  }
+  
+  return routes;
+};
+
+// Routes component with language-aware routing
+const AppRoutes = () => {
+  const routes = generateRoutes();
+  
+  return (
+    <Routes>
+      {/* Generated i18n routes */}
+      {routes.map(({ path, element }) => (
+        <Route key={path} path={path} element={element} />
+      ))}
+      
+      {/* Dynamic routes for special occasions */}
+      <Route path="/besondere-anlaesse/:slug" element={<BesondererAnlass />} />
+      <Route path="/en/special-occasions/:slug" element={<BesondererAnlass />} />
+      <Route path="/it/occasioni-speciali/:slug" element={<BesondererAnlass />} />
+      <Route path="/fr/occasions-speciales/:slug" element={<BesondererAnlass />} />
+      
+      {/* Admin routes (no i18n) */}
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      
+      {/* Legacy redirects - these are handled in .htaccess but also here for SPA */}
+      <Route path="/lunch-muenchen" element={<LunchMuenchen />} />
+      <Route path="/eventlocation-muenchen" element={<EventlocationMuenchen />} />
+      
+      {/* 404 catch-all - must be last */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+
 // App component with all providers and contexts
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -58,42 +162,7 @@ const App = () => (
           <FloatingActions />
           <CookieBanner />
           <CookieSettingsButton />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/reservierung" element={<Reservierung />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/mittags-menu" element={<Mittagsmenu />} />
-            <Route path="/speisekarte" element={<Speisekarte />} />
-            <Route path="/getraenke" element={<Getraenke />} />
-            <Route path="/besondere-anlaesse" element={<BesondereAnlaesse />} />
-            <Route path="/besondere-anlaesse/:slug" element={<BesondererAnlass />} />
-            <Route path="/kontakt" element={<Kontakt />} />
-            <Route path="/catering" element={<Catering />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/impressum" element={<Impressum />} />
-            <Route path="/datenschutz" element={<Datenschutz />} />
-            <Route path="/cookie-richtlinie" element={<CookieRichtlinie />} />
-            <Route path="/agb-restaurant" element={<AGBRestaurant />} />
-            <Route path="/agb-gutscheine" element={<AGBGutscheine />} />
-            <Route path="/widerrufsbelehrung" element={<Widerrufsbelehrung />} />
-            <Route path="/zahlungsinformationen" element={<Zahlungsinformationen />} />
-            <Route path="/lebensmittelhinweise" element={<Lebensmittelhinweise />} />
-            <Route path="/haftungsausschluss" element={<Haftungsausschluss />} />
-            <Route path="/ueber-uns" element={<UeberUns />} />
-
-            {/* SEO Landingpages - nicht im Hauptmenü verlinkt */}
-            <Route path="/lunch-muenchen" element={<LunchMuenchen />} />
-            <Route path="/aperitivo-muenchen" element={<AperitivoMuenchen />} />
-            <Route path="/romantisches-dinner-muenchen" element={<RomantischesDinner />} />
-            <Route path="/eventlocation-muenchen" element={<EventlocationMuenchen />} />
-            <Route path="/firmenfeier-muenchen" element={<FirmenfeierMuenchen />} />
-            <Route path="/geburtstagsfeier-muenchen" element={<GeburtstagsfeierMuenchen />} />
-            <Route path="/neapolitanische-pizza-muenchen" element={<NeapolitanischePizza />} />
-
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AppRoutes />
         </CookieConsentProvider>
       </LanguageProvider>
     </TooltipProvider>

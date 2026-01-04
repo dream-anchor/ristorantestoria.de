@@ -3,15 +3,12 @@ import path from "node:path";
 import url from "node:url";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-const toAbsolute = (p) => path.resolve(__dirname, p);
+const toAbsolute = (p) => path.resolve(__dirname, "..", p);
 
-const template = fs.readFileSync(toAbsolute("dist/index.html"), "utf-8");
-const { render } = await import("./dist/server/entry-server.js");
-
-// All supported languages
+const BASE_URL = "https://www.ristorantestoria.de";
 const LANGUAGES = ["de", "en", "it", "fr"];
 
-// Slug translations for all languages
+// Slug translations (same as prerender.js)
 const slugMaps = {
   de: {
     home: "",
@@ -127,74 +124,87 @@ const slugMaps = {
   },
 };
 
-// Dynamic routes (special occasions)
-const dynamicRoutes = [
-  "besondere-anlaesse/weihnachtsmenues",
-  "besondere-anlaesse/silvesterparty",
-];
-
-// Get localized path for a base slug
-const getLocalizedPath = (baseSlug, lang) => {
+// Get localized URL for a base slug
+const getLocalizedUrl = (baseSlug, lang) => {
   const slugMap = slugMaps[lang];
   const localizedSlug = slugMap[baseSlug] ?? baseSlug;
   
   if (lang === "de") {
-    return localizedSlug ? `/${localizedSlug}` : "/";
+    return localizedSlug ? `${BASE_URL}/${localizedSlug}` : BASE_URL;
   }
-  return localizedSlug ? `/${lang}/${localizedSlug}` : `/${lang}`;
+  return localizedSlug ? `${BASE_URL}/${lang}/${localizedSlug}` : `${BASE_URL}/${lang}`;
 };
 
-// Generate all routes for prerendering
-const generateRoutesToPrerender = () => {
-  const routes = [];
+// Generate sitemap XML
+const generateSitemap = () => {
+  const today = new Date().toISOString().split("T")[0];
   const baseSlugs = Object.keys(slugMaps.de);
   
-  for (const lang of LANGUAGES) {
-    for (const baseSlug of baseSlugs) {
-      const path = getLocalizedPath(baseSlug, lang);
-      routes.push(path);
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+`;
+
+  for (const baseSlug of baseSlugs) {
+    // Generate URLs for all languages for this page
+    const urls = LANGUAGES.map(lang => ({
+      lang,
+      url: getLocalizedUrl(baseSlug, lang)
+    }));
+    
+    // Create entry for each language version
+    for (const { lang, url } of urls) {
+      // Determine priority and changefreq based on page type
+      let priority = "0.5";
+      let changefreq = "monthly";
+      
+      if (baseSlug === "home") {
+        priority = "1.0";
+        changefreq = "weekly";
+      } else if (["reservierung", "speisekarte", "mittags-menu", "getraenke"].includes(baseSlug)) {
+        priority = "0.9";
+        changefreq = "weekly";
+      } else if (["kontakt", "ueber-uns", "besondere-anlaesse"].includes(baseSlug)) {
+        priority = "0.8";
+        changefreq = "monthly";
+      } else if (baseSlug.includes("muenchen")) {
+        priority = "0.7";
+        changefreq = "monthly";
+      } else if (["impressum", "datenschutz", "agb-restaurant", "agb-gutscheine"].includes(baseSlug)) {
+        priority = "0.3";
+        changefreq = "yearly";
+      }
+      
+      xml += `  <url>
+    <loc>${url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+`;
+      
+      // Add hreflang alternates
+      for (const alternate of urls) {
+        xml += `    <xhtml:link rel="alternate" hreflang="${alternate.lang}" href="${alternate.url}" />
+`;
+      }
+      // x-default points to German
+      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${getLocalizedUrl(baseSlug, "de")}" />
+`;
+      
+      xml += `  </url>
+`;
     }
   }
   
-  // Add dynamic routes for all languages
-  for (const dynamicRoute of dynamicRoutes) {
-    // German (no prefix)
-    routes.push(`/${dynamicRoute}`);
-    
-    // Other languages (with prefix) - using base slugs as they work with the router
-    routes.push(`/en/${dynamicRoute}`);
-    routes.push(`/it/${dynamicRoute}`);
-    routes.push(`/fr/${dynamicRoute}`);
-  }
+  xml += `</urlset>`;
   
-  // Admin routes (no i18n)
-  routes.push("/admin/login");
-  
-  return routes;
+  return xml;
 };
 
-const routesToPrerender = generateRoutesToPrerender();
+// Main
+const sitemap = generateSitemap();
+const outputPath = toAbsolute("public/sitemap.xml");
 
-console.log(`Prerendering ${routesToPrerender.length} routes...`);
-
-(async () => {
-  for (const url of routesToPrerender) {
-    try {
-      const appHtml = render(url);
-      const html = template.replace(`<!--app-html-->`, appHtml);
-
-      const filePath = `dist${url === "/" ? "/index" : url}.html`;
-      const absolutePath = toAbsolute(filePath);
-      
-      // Ensure directory exists before writing
-      fs.mkdirSync(path.dirname(absolutePath), { recursive: true });
-      
-      fs.writeFileSync(absolutePath, html);
-      console.log("pre-rendered:", filePath);
-    } catch (error) {
-      console.error(`Failed to prerender ${url}:`, error.message);
-    }
-  }
-  
-  console.log(`\nPrerendering complete! ${routesToPrerender.length} pages generated.`);
-})();
+fs.writeFileSync(outputPath, sitemap);
+console.log(`Sitemap generated at ${outputPath}`);
+console.log(`Total URLs: ${Object.keys(slugMaps.de).length * LANGUAGES.length}`);

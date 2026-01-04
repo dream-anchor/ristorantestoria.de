@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import LocalizedLink from "@/components/LocalizedLink";
 import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
 import domenicoImage from "@/assets/domenico-speranza.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -64,12 +64,12 @@ const Footer = () => {
           </div>
           
           {/* Discover Restaurant Link */}
-          <Link 
-            to="/ueber-uns"
+          <LocalizedLink 
+            to="ueber-uns"
             className="mt-10 inline-flex items-center gap-2 text-base font-serif italic text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors"
           >
             ~ {t.footer.discoverRestaurant} ~
-          </Link>
+          </LocalizedLink>
         </div>
       </div>
 
@@ -98,13 +98,13 @@ const Footer = () => {
                   <MessageCircle className="h-3.5 w-3.5" />
                   WhatsApp
                 </a>
-              <Link 
-                  to="/kontakt#map" 
+              <LocalizedLink 
+                  to="kontakt#map" 
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"
                 >
                   <MapPin className="h-3.5 w-3.5" />
                   <span>Karlstr. 47a, 80333 München<br /><span className="text-xs opacity-70">Nähe Königsplatz & Hauptbahnhof</span></span>
-                </Link>
+                </LocalizedLink>
               </div>
             </div>
 
@@ -141,15 +141,15 @@ const Footer = () => {
             © {new Date().getFullYear()} {t.footer.copyright}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-xs font-sans text-primary-foreground/30">
-            <Link to="/impressum" className="hover:text-primary-foreground/60 transition-colors">{t.footer.imprint}</Link>
+            <LocalizedLink to="impressum" className="hover:text-primary-foreground/60 transition-colors">{t.footer.imprint}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <Link to="/datenschutz" className="hover:text-primary-foreground/60 transition-colors">{t.footer.privacy}</Link>
+            <LocalizedLink to="datenschutz" className="hover:text-primary-foreground/60 transition-colors">{t.footer.privacy}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <Link to="/cookie-richtlinie" className="hover:text-primary-foreground/60 transition-colors">{t.legal.cookies}</Link>
+            <LocalizedLink to="cookie-richtlinie" className="hover:text-primary-foreground/60 transition-colors">{t.legal.cookies}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <Link to="/agb-restaurant" className="hover:text-primary-foreground/60 transition-colors">{t.legal.agb}</Link>
+            <LocalizedLink to="agb-restaurant" className="hover:text-primary-foreground/60 transition-colors">{t.legal.agb}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <Link to="/lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</Link>
+            <LocalizedLink to="lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</LocalizedLink>
           </div>
           <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
             <a 
@@ -161,7 +161,7 @@ const Footer = () => {
             >
               <Instagram className="h-3.5 w-3.5" />
             </a>
-            <Link to="/admin" className="hover:text-primary-foreground/40 transition-colors">Admin</Link>
+            <LocalizedLink to="admin" className="hover:text-primary-foreground/40 transition-colors">Admin</LocalizedLink>
           </div>
         </div>
       </div>

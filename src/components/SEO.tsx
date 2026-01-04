@@ -1,5 +1,7 @@
 import { Helmet } from '@/lib/helmetAsync';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { getLocalizedPath, parseLocalizedPath, SUPPORTED_LANGUAGES } from '@/config/routes';
+import { useLocation } from 'react-router-dom';
 
 interface SEOProps {
   title?: string;
@@ -18,7 +20,8 @@ const SEO = ({
   image = 'https://ristorantestoria.de/og-image.jpg',
   noIndex = false,
 }: SEOProps) => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
+  const location = useLocation();
   const baseUrl = 'https://www.ristorantestoria.de';
   
   const siteTitle = 'STORIA – Italienisches Restaurant München Maxvorstadt';
@@ -26,11 +29,37 @@ const SEO = ({
   
   const defaultDescription = language === 'de' 
     ? 'STORIA München: Italiener in der Maxvorstadt. Neapolitanische Pizza, frische Pasta & Aperitivo nahe Königsplatz. Jetzt reservieren!'
-    : 'STORIA Munich: Italian restaurant in Maxvorstadt. Neapolitan pizza, fresh pasta & aperitivo near Königsplatz. Book now!';
+    : language === 'en'
+    ? 'STORIA Munich: Italian restaurant in Maxvorstadt. Neapolitan pizza, fresh pasta & aperitivo near Königsplatz. Book now!'
+    : language === 'it'
+    ? 'STORIA Monaco: Ristorante italiano a Maxvorstadt. Pizza napoletana, pasta fresca & aperitivo vicino a Königsplatz. Prenota ora!'
+    : 'STORIA Munich: Restaurant italien à Maxvorstadt. Pizza napolitaine, pâtes fraîches & aperitivo près de Königsplatz. Réservez maintenant!';
   
   const metaDescription = description || defaultDescription;
-  const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
-  const alternateLanguage = language === 'de' ? 'en' : 'de';
+  
+  // Get the base slug for hreflang generation
+  const { baseSlug } = parseLocalizedPath(location.pathname);
+  
+  // Build canonical URL for current language
+  const currentPath = canonical || getLocalizedPath(baseSlug, language);
+  const canonicalUrl = `${baseUrl}${currentPath}`;
+  
+  // Generate hreflang URLs for all languages
+  const hreflangUrls = SUPPORTED_LANGUAGES.map(lang => ({
+    lang,
+    url: `${baseUrl}${getLocalizedPath(baseSlug, lang)}`
+  }));
+  
+  // x-default points to German version
+  const xDefaultUrl = `${baseUrl}${getLocalizedPath(baseSlug, 'de')}`;
+  
+  // Locale mapping for Open Graph
+  const ogLocaleMap: Record<string, string> = {
+    de: 'de_DE',
+    en: 'en_US',
+    it: 'it_IT',
+    fr: 'fr_FR',
+  };
 
   return (
     <Helmet>
@@ -41,11 +70,14 @@ const SEO = ({
       <meta name="author" content="Ristorante STORIA" />
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
       
-      {/* Canonical & Language Alternates */}
+      {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />
-      <link rel="alternate" hrefLang={language} href={canonicalUrl} />
-      <link rel="alternate" hrefLang={alternateLanguage} href={canonicalUrl} />
-      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+      
+      {/* Hreflang Tags for all languages */}
+      {hreflangUrls.map(({ lang, url }) => (
+        <link key={lang} rel="alternate" hrefLang={lang} href={url} />
+      ))}
+      <link rel="alternate" hrefLang="x-default" href={xDefaultUrl} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
@@ -55,8 +87,10 @@ const SEO = ({
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:locale" content={language === 'de' ? 'de_DE' : 'en_US'} />
-      <meta property="og:locale:alternate" content={language === 'de' ? 'en_US' : 'de_DE'} />
+      <meta property="og:locale" content={ogLocaleMap[language]} />
+      {SUPPORTED_LANGUAGES.filter(l => l !== language).map(lang => (
+        <meta key={lang} property="og:locale:alternate" content={ogLocaleMap[lang]} />
+      ))}
       <meta property="og:site_name" content="STORIA Ristorante" />
       
       {/* Twitter */}

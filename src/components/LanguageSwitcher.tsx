@@ -15,7 +15,7 @@ const languages: { code: Language; label: string; flag: string }[] = [
 ];
 
 const LanguageSwitcher = () => {
-  const { language, setLanguage } = useLanguage();
+  const { language, switchLanguage } = useLanguage();
   
   const currentLang = languages.find(l => l.code === language) || languages[0];
 
@@ -30,7 +30,7 @@ const LanguageSwitcher = () => {
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => setLanguage(lang.code)}
+            onClick={() => switchLanguage(lang.code)}
             className={`flex items-center gap-2 cursor-pointer ${
               language === lang.code ? "bg-primary/10 text-primary font-medium" : ""
             }`}
