@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import LocalizedLink from "@/components/LocalizedLink";
 
 const NotFound = () => {
   const location = useLocation();
@@ -39,15 +40,15 @@ const NotFound = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button asChild size="lg" className="gap-2">
-              <Link to="/">
+              <LocalizedLink to="home">
                 <Home className="h-4 w-4" />
                 Zur Startseite
-              </Link>
+              </LocalizedLink>
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2">
-              <Link to="/reservierung">
+              <LocalizedLink to="reservierung">
                 Tisch reservieren
-              </Link>
+              </LocalizedLink>
             </Button>
           </div>
           

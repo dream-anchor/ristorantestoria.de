@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getLocalizedPath } from "@/config/routes";
 
 const BesondereAnlaesse = () => {
   const navigate = useNavigate();
   const { data: specialMenus, isLoading } = usePublishedSpecialMenus();
+  const { language } = useLanguage();
   usePrerenderReady(!isLoading);
 
   useEffect(() => {
@@ -16,12 +19,14 @@ const BesondereAnlaesse = () => {
       // Zum ersten veröffentlichten Special-Menü weiterleiten
       const firstMenu = specialMenus[0];
       const slug = (firstMenu as any).slug || firstMenu.id;
-      navigate(`/besondere-anlaesse/${slug}`, { replace: true });
+      // Use localized path for special occasions
+      const basePath = language === "de" ? "" : `/${language}`;
+      navigate(`${basePath}/besondere-anlaesse/${slug}`, { replace: true });
     } else {
       // Keine Special-Menüs → zur Speisekarte
-      navigate('/speisekarte', { replace: true });
+      navigate(getLocalizedPath("speisekarte", language), { replace: true });
     }
-  }, [specialMenus, isLoading, navigate]);
+  }, [specialMenus, isLoading, navigate, language]);
 
   // Loading-State anzeigen während Redirect vorbereitet wird
   return (

@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { MessageCircle } from "lucide-react";
+import LocalizedLink from "@/components/LocalizedLink";
 
 const ReservationCTA = () => {
   const { t } = useLanguage();
@@ -18,9 +18,9 @@ const ReservationCTA = () => {
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Button size="lg" asChild>
-          <Link to="/reservierung">
+          <LocalizedLink to="reservierung">
             {t.reservationCta.reserveButton}
-          </Link>
+          </LocalizedLink>
         </Button>
         <Button size="lg" variant="outline" className="text-[#25D366] border-[#25D366] hover:bg-[#25D366]/10" asChild>
           <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">

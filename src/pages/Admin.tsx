@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useAdminMenus } from "@/hooks/useAdminMenus";
@@ -10,10 +10,22 @@ import MenuUploader from "@/components/admin/MenuUploader";
 import MenuStatusCard from "@/components/admin/MenuStatusCard";
 import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
 import SortableMenuCard from "@/components/admin/SortableMenuCard";
-import { LogOut, ExternalLink } from "lucide-react";
+import { LogOut, ExternalLink, Rocket, Loader2 } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
 import EventInquiriesManager from "@/components/admin/EventInquiriesManager";
 import SEO from "@/components/SEO";
+import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   DndContext,
   closestCenter,
@@ -36,6 +48,16 @@ const Admin = () => {
   const { user, isAdmin, loading, signOut } = useAdminAuth();
   const { data: menus } = useAdminMenus();
   const updateOrderMutation = useUpdateMenuOrder();
+  const [isDeploying, setIsDeploying] = useState(false);
+
+  const handleDeploy = async () => {
+    setIsDeploying(true);
+    try {
+      await triggerGitHubDeploy();
+    } finally {
+      setIsDeploying(false);
+    }
+  };
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -151,6 +173,30 @@ const Admin = () => {
             </Link>
             <div className="flex items-center gap-2">
               {/* Desktop: Full buttons */}
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="default" size="sm" disabled={isDeploying} className="hidden sm:flex">
+                    {isDeploying ? (
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <Rocket className="h-4 w-4 mr-2" />
+                    )}
+                    Deploy
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Website aktualisieren?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Die Website wird im Hintergrund neu gebaut und veröffentlicht. Dies kann einige Minuten dauern.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleDeploy}>Deploy starten</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
               <Button variant="outline" size="sm" asChild className="hidden sm:flex">
                 <Link to="/">
                   <ExternalLink className="h-4 w-4 mr-2" />
@@ -162,6 +208,29 @@ const Admin = () => {
                 Abmelden
               </Button>
               {/* Mobile: Icon-only buttons */}
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="default" size="icon" disabled={isDeploying} className="sm:hidden h-10 w-10">
+                    {isDeploying ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Rocket className="h-4 w-4" />
+                    )}
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Website aktualisieren?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Die Website wird im Hintergrund neu gebaut und veröffentlicht. Dies kann einige Minuten dauern.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleDeploy}>Deploy starten</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
               <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
                 <Link to="/">
                   <ExternalLink className="h-4 w-4" />

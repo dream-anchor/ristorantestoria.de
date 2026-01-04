@@ -115,8 +115,8 @@ jobs:
             cd $TARGET_DIR;
             pwd;
             
-            echo '=== Starting mirror upload ===';
-            mirror -R --verbose --parallel=4 ./dist .;
+            echo '=== Starting mirror upload with cleanup ===';
+            mirror -R --verbose --parallel=4 --delete --exclude-glob .well-known/ --exclude-glob .htaccess-backup/ ./dist .;
             
             echo '=== Postflight: Verifying upload ===';
             cls -la index.html;

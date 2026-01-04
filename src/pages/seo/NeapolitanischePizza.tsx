@@ -1,3 +1,4 @@
+import LocalizedLink from "@/components/LocalizedLink";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -105,10 +106,10 @@ const NeapolitanischePizza = () => {
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <Button asChild>
-                  <Link to="/speisekarte">{language === 'de' ? 'Speisekarte ansehen' : 'View Menu'}</Link>
+                  <LocalizedLink to="speisekarte">{language === 'de' ? 'Speisekarte ansehen' : 'View Menu'}</LocalizedLink>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link to="/reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</Link>
+                  <LocalizedLink to="reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</LocalizedLink>
                 </Button>
               </div>
             </div>
