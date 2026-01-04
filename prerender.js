@@ -1,200 +1,170 @@
+/**
+ * Prerender Script
+ * 
+ * Single Source of Truth: src/config/slugs.json + Supabase Database
+ * 
+ * This script generates static HTML files for all routes by:
+ * 1. Reading static routes from slugs.json
+ * 2. Fetching dynamic special menu routes from Supabase
+ */
+
 import fs from "node:fs";
 import path from "node:path";
-import url from "node:url";
+import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const toAbsolute = (p) => path.resolve(__dirname, p);
 
-const template = fs.readFileSync(toAbsolute("dist/index.html"), "utf-8");
-const { render } = await import("./dist/server/entry-server.js");
+// Import slugs from Single Source of Truth
+const require = createRequire(import.meta.url);
+const slugMaps = require("./src/config/slugs.json");
 
-// All supported languages
 const LANGUAGES = ["de", "en", "it", "fr"];
 
-// Slug translations for all languages
-const slugMaps = {
-  de: {
-    home: "",
-    reservierung: "reservierung",
-    menu: "menu",
-    "mittags-menu": "mittags-menu",
-    speisekarte: "speisekarte",
-    getraenke: "getraenke",
-    "besondere-anlaesse": "besondere-anlaesse",
-    kontakt: "kontakt",
-    catering: "catering",
-    "ueber-uns": "ueber-uns",
-    impressum: "impressum",
-    datenschutz: "datenschutz",
-    "cookie-richtlinie": "cookie-richtlinie",
-    "agb-restaurant": "agb-restaurant",
-    "agb-gutscheine": "agb-gutscheine",
-    widerrufsbelehrung: "widerrufsbelehrung",
-    zahlungsinformationen: "zahlungsinformationen",
-    lebensmittelhinweise: "lebensmittelhinweise",
-    haftungsausschluss: "haftungsausschluss",
-    "lunch-muenchen-maxvorstadt": "lunch-muenchen-maxvorstadt",
-    "aperitivo-muenchen": "aperitivo-muenchen",
-    "romantisches-dinner-muenchen": "romantisches-dinner-muenchen",
-    "eventlocation-muenchen-maxvorstadt": "eventlocation-muenchen-maxvorstadt",
-    "firmenfeier-muenchen": "firmenfeier-muenchen",
-    "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
-    "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
-  },
-  en: {
-    home: "",
-    reservierung: "reservation",
-    menu: "menu",
-    "mittags-menu": "lunch-menu",
-    speisekarte: "food-menu",
-    getraenke: "drinks",
-    "besondere-anlaesse": "special-occasions",
-    kontakt: "contact",
-    catering: "catering",
-    "ueber-uns": "about-us",
-    impressum: "imprint",
-    datenschutz: "privacy-policy",
-    "cookie-richtlinie": "cookie-policy",
-    "agb-restaurant": "terms-restaurant",
-    "agb-gutscheine": "terms-vouchers",
-    widerrufsbelehrung: "cancellation-policy",
-    zahlungsinformationen: "payment-info",
-    lebensmittelhinweise: "food-info",
-    haftungsausschluss: "disclaimer",
-    "lunch-muenchen-maxvorstadt": "lunch-munich",
-    "aperitivo-muenchen": "aperitivo-munich",
-    "romantisches-dinner-muenchen": "romantic-dinner-munich",
-    "eventlocation-muenchen-maxvorstadt": "event-venue-munich",
-    "firmenfeier-muenchen": "corporate-event-munich",
-    "geburtstagsfeier-muenchen": "birthday-party-munich",
-    "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
-  },
-  it: {
-    home: "",
-    reservierung: "prenotazione",
-    menu: "menu",
-    "mittags-menu": "menu-pranzo",
-    speisekarte: "menu-cibo",
-    getraenke: "bevande",
-    "besondere-anlaesse": "occasioni-speciali",
-    kontakt: "contatto",
-    catering: "catering",
-    "ueber-uns": "chi-siamo",
-    impressum: "note-legali",
-    datenschutz: "privacy",
-    "cookie-richtlinie": "cookie-policy",
-    "agb-restaurant": "termini-ristorante",
-    "agb-gutscheine": "termini-buoni",
-    widerrufsbelehrung: "diritto-recesso",
-    zahlungsinformationen: "info-pagamento",
-    lebensmittelhinweise: "info-alimenti",
-    haftungsausschluss: "disclaimer",
-    "lunch-muenchen-maxvorstadt": "pranzo-monaco",
-    "aperitivo-muenchen": "aperitivo-monaco",
-    "romantisches-dinner-muenchen": "cena-romantica-monaco",
-    "eventlocation-muenchen-maxvorstadt": "location-eventi-monaco",
-    "firmenfeier-muenchen": "evento-aziendale-monaco",
-    "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
-    "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
-  },
-  fr: {
-    home: "",
-    reservierung: "reservation",
-    menu: "menu",
-    "mittags-menu": "menu-dejeuner",
-    speisekarte: "carte",
-    getraenke: "boissons",
-    "besondere-anlaesse": "occasions-speciales",
-    kontakt: "contact",
-    catering: "traiteur",
-    "ueber-uns": "a-propos",
-    impressum: "mentions-legales",
-    datenschutz: "confidentialite",
-    "cookie-richtlinie": "politique-cookies",
-    "agb-restaurant": "cgv-restaurant",
-    "agb-gutscheine": "cgv-bons",
-    widerrufsbelehrung: "droit-retractation",
-    zahlungsinformationen: "infos-paiement",
-    lebensmittelhinweise: "infos-alimentaires",
-    haftungsausschluss: "avertissement",
-    "lunch-muenchen-maxvorstadt": "dejeuner-munich",
-    "aperitivo-muenchen": "aperitivo-munich",
-    "romantisches-dinner-muenchen": "diner-romantique-munich",
-    "eventlocation-muenchen-maxvorstadt": "lieu-evenement-munich",
-    "firmenfeier-muenchen": "evenement-entreprise-munich",
-    "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
-    "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
-  },
-};
+// Supabase configuration from environment
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-// Dynamic routes (special occasions)
-const dynamicRoutes = [
-  "besondere-anlaesse/weihnachtsmenues",
-  "besondere-anlaesse/silvesterparty",
-];
-
-// Get localized path for a base slug
-const getLocalizedPath = (baseSlug, lang) => {
-  const slugMap = slugMaps[lang];
-  const localizedSlug = slugMap[baseSlug] ?? baseSlug;
-  
-  if (lang === "de") {
-    return localizedSlug ? `/${localizedSlug}` : "/";
+/**
+ * Fetch dynamic special menu slugs from Supabase
+ */
+async function fetchDynamicSlugs() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.warn("⚠️  Supabase credentials not found. Skipping dynamic routes.");
+    return [];
   }
-  return localizedSlug ? `/${lang}/${localizedSlug}` : `/${lang}`;
-};
 
-// Generate all routes for prerendering
-const generateRoutesToPrerender = () => {
-  const routes = [];
-  const baseSlugs = Object.keys(slugMaps.de);
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/menus?menu_type=eq.special&is_published=eq.true&select=slug`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      console.warn(`⚠️  Failed to fetch dynamic slugs: ${response.status}`);
+      return [];
+    }
+
+    const menus = await response.json();
+    console.log(`📦 Found ${menus.length} published special menus`);
+    return menus.map((m) => m.slug);
+  } catch (error) {
+    console.error("❌ Error fetching dynamic slugs:", error.message);
+    return [];
+  }
+}
+
+/**
+ * Get localized path for a base slug
+ */
+function getLocalizedPath(baseSlug, lang) {
+  const localizedSlug = slugMaps[lang]?.[baseSlug];
+  if (localizedSlug === undefined) {
+    console.warn(`⚠️  No localized slug found for "${baseSlug}" in "${lang}"`);
+    return null;
+  }
   
-  for (const lang of LANGUAGES) {
-    for (const baseSlug of baseSlugs) {
-      const path = getLocalizedPath(baseSlug, lang);
-      routes.push(path);
+  if (localizedSlug === "") {
+    // Home page
+    return lang === "de" ? "/" : `/${lang}`;
+  }
+  
+  return lang === "de" ? `/${localizedSlug}` : `/${lang}/${localizedSlug}`;
+}
+
+/**
+ * Generate all routes to prerender
+ */
+async function generateRoutesToPrerender() {
+  const routes = [];
+
+  // Get static base slugs (excluding admin routes for now, we'll add them separately)
+  const staticBaseSlugs = Object.keys(slugMaps.de).filter(
+    (slug) => !slug.startsWith("admin")
+  );
+
+  // Generate static routes for all languages
+  for (const baseSlug of staticBaseSlugs) {
+    for (const lang of LANGUAGES) {
+      const localizedPath = getLocalizedPath(baseSlug, lang);
+      if (localizedPath) {
+        routes.push(localizedPath);
+      }
     }
   }
-  
-  // Add dynamic routes for all languages
-  for (const dynamicRoute of dynamicRoutes) {
-    // German (no prefix)
-    routes.push(`/${dynamicRoute}`);
-    
-    // Other languages (with prefix) - using base slugs as they work with the router
-    routes.push(`/en/${dynamicRoute}`);
-    routes.push(`/it/${dynamicRoute}`);
-    routes.push(`/fr/${dynamicRoute}`);
+
+  // Fetch dynamic routes from database
+  const dynamicSlugs = await fetchDynamicSlugs();
+  const parentSlugs = slugMaps.parentSlugs;
+
+  for (const menuSlug of dynamicSlugs) {
+    for (const lang of LANGUAGES) {
+      const parentSlug = parentSlugs[lang];
+      const routePath = lang === "de" 
+        ? `/${parentSlug}/${menuSlug}`
+        : `/${lang}/${parentSlug}/${menuSlug}`;
+      routes.push(routePath);
+    }
   }
-  
-  // Admin routes (no i18n)
+
+  // Add admin routes (only German)
+  routes.push("/admin");
   routes.push("/admin/login");
-  
+
   return routes;
-};
+}
 
-const routesToPrerender = generateRoutesToPrerender();
-
-console.log(`Prerendering ${routesToPrerender.length} routes...`);
-
+// Main execution
 (async () => {
+  const template = fs.readFileSync(toAbsolute("dist/index.html"), "utf-8");
+  const { render } = await import("./dist/server/entry-server.js");
+
+  const routesToPrerender = await generateRoutesToPrerender();
+
+  console.log(`\n🚀 Prerendering ${routesToPrerender.length} routes...\n`);
+
+  let successCount = 0;
+  let errorCount = 0;
+
   for (const url of routesToPrerender) {
     try {
       const appHtml = render(url);
       const html = template.replace(`<!--app-html-->`, appHtml);
 
-      const filePath = `dist${url === "/" ? "/index" : url}.html`;
-      const absolutePath = toAbsolute(filePath);
-      
-      // Ensure directory exists before writing
-      fs.mkdirSync(path.dirname(absolutePath), { recursive: true });
-      
-      fs.writeFileSync(absolutePath, html);
+      // Determine file path
+      let filePath;
+      if (url === "/") {
+        filePath = "dist/index.html";
+      } else {
+        const cleanUrl = url.endsWith("/") ? url.slice(0, -1) : url;
+        filePath = `dist${cleanUrl}.html`;
+      }
+
+      // Create directory if needed
+      const dir = path.dirname(toAbsolute(filePath));
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+
+      fs.writeFileSync(toAbsolute(filePath), html);
       console.log("pre-rendered:", filePath);
-    } catch (error) {
-      console.error(`Failed to prerender ${url}:`, error.message);
+      successCount++;
+    } catch (e) {
+      console.error(`❌ Error prerendering ${url}:`, e.message);
+      errorCount++;
     }
   }
-  
-  console.log(`\nPrerendering complete! ${routesToPrerender.length} pages generated.`);
+
+  console.log(`\n✅ Prerendering complete!`);
+  console.log(`   - Success: ${successCount}`);
+  console.log(`   - Errors: ${errorCount}`);
+  console.log(`   - Total routes: ${routesToPrerender.length}`);
 })();

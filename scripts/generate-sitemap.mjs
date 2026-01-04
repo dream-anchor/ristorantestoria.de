@@ -1,269 +1,226 @@
+/**
+ * Dynamic Sitemap Generator
+ * 
+ * Single Source of Truth: src/config/slugs.json + Supabase Database
+ * 
+ * This script automatically generates the sitemap by:
+ * 1. Reading static routes from slugs.json
+ * 2. Fetching dynamic special menu routes from Supabase
+ * 
+ * No manual route maintenance required!
+ */
+
 import fs from "node:fs";
 import path from "node:path";
-import url from "node:url";
+import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-const toAbsolute = (p) => path.resolve(__dirname, "..", p);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Import slugs from Single Source of Truth
+const require = createRequire(import.meta.url);
+const slugMaps = require("../src/config/slugs.json");
+
+// Configuration
 const BASE_URL = "https://www.ristorantestoria.de";
 const LANGUAGES = ["de", "en", "it", "fr"];
+const TODAY = new Date().toISOString().split("T")[0];
 
-// Slug translations (same as prerender.js)
-const slugMaps = {
-  de: {
-    home: "",
-    reservierung: "reservierung",
-    menu: "menu",
-    "mittags-menu": "mittags-menu",
-    speisekarte: "speisekarte",
-    getraenke: "getraenke",
-    "besondere-anlaesse": "besondere-anlaesse",
-    kontakt: "kontakt",
-    catering: "catering",
-    "ueber-uns": "ueber-uns",
-    impressum: "impressum",
-    datenschutz: "datenschutz",
-    "cookie-richtlinie": "cookie-richtlinie",
-    "agb-restaurant": "agb-restaurant",
-    "agb-gutscheine": "agb-gutscheine",
-    widerrufsbelehrung: "widerrufsbelehrung",
-    zahlungsinformationen: "zahlungsinformationen",
-    lebensmittelhinweise: "lebensmittelhinweise",
-    haftungsausschluss: "haftungsausschluss",
-    "lunch-muenchen-maxvorstadt": "lunch-muenchen-maxvorstadt",
-    "aperitivo-muenchen": "aperitivo-muenchen",
-    "romantisches-dinner-muenchen": "romantisches-dinner-muenchen",
-    "eventlocation-muenchen-maxvorstadt": "eventlocation-muenchen-maxvorstadt",
-    "firmenfeier-muenchen": "firmenfeier-muenchen",
-    "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
-    "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
-  },
-  en: {
-    home: "",
-    reservierung: "reservation",
-    menu: "menu",
-    "mittags-menu": "lunch-menu",
-    speisekarte: "food-menu",
-    getraenke: "drinks",
-    "besondere-anlaesse": "special-occasions",
-    kontakt: "contact",
-    catering: "catering",
-    "ueber-uns": "about-us",
-    impressum: "imprint",
-    datenschutz: "privacy-policy",
-    "cookie-richtlinie": "cookie-policy",
-    "agb-restaurant": "terms-restaurant",
-    "agb-gutscheine": "terms-vouchers",
-    widerrufsbelehrung: "cancellation-policy",
-    zahlungsinformationen: "payment-info",
-    lebensmittelhinweise: "food-info",
-    haftungsausschluss: "disclaimer",
-    "lunch-muenchen-maxvorstadt": "lunch-munich",
-    "aperitivo-muenchen": "aperitivo-munich",
-    "romantisches-dinner-muenchen": "romantic-dinner-munich",
-    "eventlocation-muenchen-maxvorstadt": "event-venue-munich",
-    "firmenfeier-muenchen": "corporate-event-munich",
-    "geburtstagsfeier-muenchen": "birthday-party-munich",
-    "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
-  },
-  it: {
-    home: "",
-    reservierung: "prenotazione",
-    menu: "menu",
-    "mittags-menu": "menu-pranzo",
-    speisekarte: "menu-cibo",
-    getraenke: "bevande",
-    "besondere-anlaesse": "occasioni-speciali",
-    kontakt: "contatto",
-    catering: "catering",
-    "ueber-uns": "chi-siamo",
-    impressum: "note-legali",
-    datenschutz: "privacy",
-    "cookie-richtlinie": "cookie-policy",
-    "agb-restaurant": "termini-ristorante",
-    "agb-gutscheine": "termini-buoni",
-    widerrufsbelehrung: "diritto-recesso",
-    zahlungsinformationen: "info-pagamento",
-    lebensmittelhinweise: "info-alimenti",
-    haftungsausschluss: "disclaimer",
-    "lunch-muenchen-maxvorstadt": "pranzo-monaco",
-    "aperitivo-muenchen": "aperitivo-monaco",
-    "romantisches-dinner-muenchen": "cena-romantica-monaco",
-    "eventlocation-muenchen-maxvorstadt": "location-eventi-monaco",
-    "firmenfeier-muenchen": "evento-aziendale-monaco",
-    "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
-    "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
-  },
-  fr: {
-    home: "",
-    reservierung: "reservation",
-    menu: "menu",
-    "mittags-menu": "menu-dejeuner",
-    speisekarte: "carte",
-    getraenke: "boissons",
-    "besondere-anlaesse": "occasions-speciales",
-    kontakt: "contact",
-    catering: "traiteur",
-    "ueber-uns": "a-propos",
-    impressum: "mentions-legales",
-    datenschutz: "confidentialite",
-    "cookie-richtlinie": "politique-cookies",
-    "agb-restaurant": "cgv-restaurant",
-    "agb-gutscheine": "cgv-bons",
-    widerrufsbelehrung: "droit-retractation",
-    zahlungsinformationen: "infos-paiement",
-    lebensmittelhinweise: "infos-alimentaires",
-    haftungsausschluss: "avertissement",
-    "lunch-muenchen-maxvorstadt": "dejeuner-munich",
-    "aperitivo-muenchen": "aperitivo-munich",
-    "romantisches-dinner-muenchen": "diner-romantique-munich",
-    "eventlocation-muenchen-maxvorstadt": "lieu-evenement-munich",
-    "firmenfeier-muenchen": "evenement-entreprise-munich",
-    "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
-    "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
-  },
+// Supabase configuration from environment
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+// Routes to exclude from sitemap (admin, internal)
+const EXCLUDED_ROUTES = ["admin", "admin/login"];
+
+// Priority configuration based on route type
+const getPriority = (baseSlug) => {
+  if (baseSlug === "home") return "1.0";
+  if (["reservierung", "speisekarte", "menu", "mittags-menu", "getraenke"].includes(baseSlug)) return "0.9";
+  if (["kontakt", "ueber-uns", "besondere-anlaesse", "catering"].includes(baseSlug)) return "0.8";
+  if (baseSlug.includes("muenchen")) return "0.7"; // SEO landing pages
+  if (["impressum", "datenschutz", "cookie-richtlinie", "agb-restaurant", "agb-gutscheine", 
+       "widerrufsbelehrung", "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss"].includes(baseSlug)) return "0.3";
+  return "0.6";
 };
 
-// Dynamic routes for special occasions subpages (fetched from database)
-const dynamicRoutes = [
-  {
-    id: "weihnachtsmenues",
-    translations: {
-      de: "besondere-anlaesse/weihnachtsmenues",
-      en: "special-occasions/christmas-menus",
-      it: "occasioni-speciali/menu-natale",
-      fr: "occasions-speciales/menus-noel",
-    },
-    priority: "0.7",
-    changefreq: "monthly",
-  },
-  {
-    id: "silvesterparty",
-    translations: {
-      de: "besondere-anlaesse/silvesterparty",
-      en: "special-occasions/new-years-eve",
-      it: "occasioni-speciali/capodanno",
-      fr: "occasions-speciales/reveillon",
-    },
-    priority: "0.7",
-    changefreq: "monthly",
-  },
-];
+// Change frequency based on route type
+const getChangeFreq = (baseSlug) => {
+  if (baseSlug === "home") return "daily";
+  if (["mittags-menu", "speisekarte", "getraenke"].includes(baseSlug)) return "weekly";
+  if (["reservierung", "kontakt"].includes(baseSlug)) return "monthly";
+  return "monthly";
+};
 
-// Get localized URL for a base slug
-const getLocalizedUrl = (baseSlug, lang) => {
-  const slugMap = slugMaps[lang];
-  const localizedSlug = slugMap[baseSlug] ?? baseSlug;
-  
-  if (lang === "de") {
-    return localizedSlug ? `${BASE_URL}/${localizedSlug}` : BASE_URL;
+/**
+ * Fetch dynamic special menu routes from Supabase
+ */
+async function fetchDynamicRoutes() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.warn("⚠️  Supabase credentials not found. Skipping dynamic routes.");
+    return [];
   }
-  return localizedSlug ? `${BASE_URL}/${lang}/${localizedSlug}` : `${BASE_URL}/${lang}`;
-};
 
-// Generate sitemap XML
-const generateSitemap = () => {
-  const today = new Date().toISOString().split("T")[0];
-  const baseSlugs = Object.keys(slugMaps.de);
-  
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-`;
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/menus?menu_type=eq.special&is_published=eq.true&select=slug`,
+      {
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-  // Generate URLs for static pages
-  for (const baseSlug of baseSlugs) {
-    const urls = LANGUAGES.map(lang => ({
-      lang,
-      url: getLocalizedUrl(baseSlug, lang)
+    if (!response.ok) {
+      console.warn(`⚠️  Failed to fetch dynamic routes: ${response.status}`);
+      return [];
+    }
+
+    const menus = await response.json();
+    const parentSlugs = slugMaps.parentSlugs;
+
+    console.log(`📦 Found ${menus.length} published special menus in database`);
+
+    return menus.map((menu) => ({
+      baseSlug: `special-menu-${menu.slug}`, // Unique identifier
+      slugs: {
+        de: `${parentSlugs.de}/${menu.slug}`,
+        en: `${parentSlugs.en}/${menu.slug}`,
+        it: `${parentSlugs.it}/${menu.slug}`,
+        fr: `${parentSlugs.fr}/${menu.slug}`,
+      },
+      priority: "0.7",
+      changefreq: "weekly",
     }));
-    
-    for (const { lang, url } of urls) {
-      let priority = "0.5";
-      let changefreq = "monthly";
-      
-      if (baseSlug === "home") {
-        priority = "1.0";
-        changefreq = "weekly";
-      } else if (["reservierung", "speisekarte", "mittags-menu", "getraenke"].includes(baseSlug)) {
-        priority = "0.9";
-        changefreq = "weekly";
-      } else if (["kontakt", "ueber-uns", "besondere-anlaesse"].includes(baseSlug)) {
-        priority = "0.8";
-        changefreq = "monthly";
-      } else if (baseSlug.includes("muenchen")) {
-        priority = "0.7";
-        changefreq = "monthly";
-      } else if (["impressum", "datenschutz", "agb-restaurant", "agb-gutscheine"].includes(baseSlug)) {
-        priority = "0.3";
-        changefreq = "yearly";
-      }
-      
-      xml += `  <url>
-    <loc>${url}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
-`;
-      
-      for (const alternate of urls) {
-        xml += `    <xhtml:link rel="alternate" hreflang="${alternate.lang}" href="${alternate.url}" />
-`;
-      }
-      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${getLocalizedUrl(baseSlug, "de")}" />
-`;
-      
-      xml += `  </url>
-`;
-    }
+  } catch (error) {
+    console.error("❌ Error fetching dynamic routes:", error.message);
+    return [];
   }
-
-  // Generate URLs for dynamic routes (special occasions subpages)
-  for (const route of dynamicRoutes) {
-    const urls = LANGUAGES.map(lang => {
-      const slug = route.translations[lang];
-      if (lang === "de") {
-        return { lang, url: `${BASE_URL}/${slug}` };
-      }
-      return { lang, url: `${BASE_URL}/${lang}/${slug}` };
-    });
-
-    for (const { lang, url } of urls) {
-      xml += `  <url>
-    <loc>${url}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${route.changefreq}</changefreq>
-    <priority>${route.priority}</priority>
-`;
-      
-      for (const alternate of urls) {
-        xml += `    <xhtml:link rel="alternate" hreflang="${alternate.lang}" href="${alternate.url}" />
-`;
-      }
-      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}/${route.translations.de}" />
-`;
-      
-      xml += `  </url>
-`;
-    }
-  }
-  
-  xml += `</urlset>`;
-  
-  return xml;
-};
-
-// Main
-const sitemap = generateSitemap();
-const outputPath = toAbsolute("dist/sitemap.xml");
-
-// Ensure dist directory exists
-if (!fs.existsSync(toAbsolute("dist"))) {
-  fs.mkdirSync(toAbsolute("dist"), { recursive: true });
 }
 
-fs.writeFileSync(outputPath, sitemap);
-const staticUrls = Object.keys(slugMaps.de).length * LANGUAGES.length;
-const dynamicUrls = dynamicRoutes.length * LANGUAGES.length;
-console.log(`Sitemap generated at ${outputPath}`);
-console.log(`Total URLs: ${staticUrls + dynamicUrls} (${staticUrls} static + ${dynamicUrls} dynamic)`);
+/**
+ * Build URL for a specific language
+ */
+function buildUrl(slug, lang) {
+  if (!slug) {
+    // Home page
+    return lang === "de" ? BASE_URL : `${BASE_URL}/${lang}`;
+  }
+  return lang === "de" ? `${BASE_URL}/${slug}` : `${BASE_URL}/${lang}/${slug}`;
+}
+
+/**
+ * Generate hreflang links for a route
+ */
+function generateHreflangLinks(slugs) {
+  const links = LANGUAGES.map((lang) => {
+    const url = buildUrl(slugs[lang], lang);
+    return `      <xhtml:link rel="alternate" hreflang="${lang}" href="${url}" />`;
+  });
+
+  // Add x-default (German)
+  const xDefaultUrl = buildUrl(slugs.de, "de");
+  links.push(`      <xhtml:link rel="alternate" hreflang="x-default" href="${xDefaultUrl}" />`);
+
+  return links.join("\n");
+}
+
+/**
+ * Generate a single URL entry
+ */
+function generateUrlEntry(url, lastmod, changefreq, priority, hreflangLinks) {
+  return `  <url>
+    <loc>${url}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+${hreflangLinks}
+  </url>`;
+}
+
+/**
+ * Main sitemap generation
+ */
+async function generateSitemap() {
+  console.log("🚀 Starting dynamic sitemap generation...\n");
+
+  // Get static routes from slugs.json (excluding admin routes)
+  const staticBaseSlugs = Object.keys(slugMaps.de).filter(
+    (slug) => !EXCLUDED_ROUTES.includes(slug)
+  );
+
+  console.log(`📄 Found ${staticBaseSlugs.length} static routes in slugs.json`);
+
+  // Fetch dynamic routes from database
+  const dynamicRoutes = await fetchDynamicRoutes();
+
+  // Collect all URL entries
+  const urlEntries = [];
+
+  // Process static routes
+  for (const baseSlug of staticBaseSlugs) {
+    const slugs = {
+      de: slugMaps.de[baseSlug],
+      en: slugMaps.en[baseSlug],
+      it: slugMaps.it[baseSlug],
+      fr: slugMaps.fr[baseSlug],
+    };
+
+    const priority = getPriority(baseSlug);
+    const changefreq = getChangeFreq(baseSlug);
+    const hreflangLinks = generateHreflangLinks(slugs);
+
+    // Generate URL entry for each language
+    for (const lang of LANGUAGES) {
+      const url = buildUrl(slugs[lang], lang);
+      urlEntries.push(generateUrlEntry(url, TODAY, changefreq, priority, hreflangLinks));
+    }
+  }
+
+  // Process dynamic routes (special menus from database)
+  for (const route of dynamicRoutes) {
+    const hreflangLinks = generateHreflangLinks(route.slugs);
+
+    for (const lang of LANGUAGES) {
+      const url = buildUrl(route.slugs[lang], lang);
+      urlEntries.push(generateUrlEntry(url, TODAY, route.changefreq, route.priority, hreflangLinks));
+    }
+  }
+
+  // Build final XML
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${urlEntries.join("\n")}
+</urlset>`;
+
+  // Write to dist/sitemap.xml
+  const distPath = path.resolve(__dirname, "../dist");
+  if (!fs.existsSync(distPath)) {
+    fs.mkdirSync(distPath, { recursive: true });
+  }
+
+  const outputPath = path.join(distPath, "sitemap.xml");
+  fs.writeFileSync(outputPath, sitemap, "utf-8");
+
+  // Statistics
+  const totalUrls = urlEntries.length;
+  const staticUrls = staticBaseSlugs.length * LANGUAGES.length;
+  const dynamicUrls = dynamicRoutes.length * LANGUAGES.length;
+
+  console.log("\n✅ Sitemap generated successfully!");
+  console.log(`📍 Output: ${outputPath}`);
+  console.log(`📊 Statistics:`);
+  console.log(`   - Static URLs: ${staticUrls} (${staticBaseSlugs.length} routes × ${LANGUAGES.length} languages)`);
+  console.log(`   - Dynamic URLs: ${dynamicUrls} (${dynamicRoutes.length} special menus × ${LANGUAGES.length} languages)`);
+  console.log(`   - Total URLs: ${totalUrls}`);
+  console.log(`   - File size: ${(Buffer.byteLength(sitemap, "utf-8") / 1024).toFixed(2)} KB`);
+}
+
+// Run
+generateSitemap().catch((error) => {
+  console.error("❌ Sitemap generation failed:", error);
+  process.exit(1);
+});
