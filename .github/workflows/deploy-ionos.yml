@@ -115,16 +115,8 @@ jobs:
             cd $TARGET_DIR;
             pwd;
             
-            echo '=== Starting mirror upload with cleanup ===';
-            mirror -R --verbose --parallel=4 --delete \
-              --exclude-glob .well-known/ \
-              --exclude-glob .htaccess-backup/ \
-              --exclude-glob cms/ \
-              --exclude-glob logs/ \
-              --exclude-glob wp-content/ \
-              --exclude-glob wp-admin/ \
-              --exclude-glob wp-includes/ \
-              --exclude-glob .sass-cache/ \
+            echo '=== Starting mirror upload (no delete for stability) ===';
+            mirror -R --verbose --parallel=4 \
               ./dist .;
             
             echo '=== Postflight: Verifying upload ===';
