@@ -1,10 +1,9 @@
 RewriteEngine On
 
 # ============================================
-# 0. HTTPS + WWW Kanonisierung (SEO)
+# 0. WWW Kanonisierung (SEO)
 # ============================================
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# HTTPS wird providerseitig bei IONOS erzwungen (nicht via .htaccess)
 
 RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
 RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
