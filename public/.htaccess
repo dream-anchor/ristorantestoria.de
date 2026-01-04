@@ -57,10 +57,16 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 6. Sitemap Content-Type
+# 6. Sitemap - Force XML Content-Type
 # ============================================
-<IfModule mod_headers.c>
-  <FilesMatch "sitemap\.xml$">
+<Files "sitemap.xml">
+  ForceType application/xml
+  <IfModule mod_headers.c>
     Header set Content-Type "application/xml; charset=UTF-8"
-  </FilesMatch>
-</IfModule>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </IfModule>
+</Files>
+
+# Ensure all XML files use UTF-8
+AddCharset UTF-8 .xml
