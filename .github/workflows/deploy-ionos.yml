@@ -89,16 +89,34 @@ jobs:
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess
 
-      # --- SICHERHEITSCHECK: Target Directory MUSS gesetzt sein ---
-      - name: Validate Target Directory
+      # --- SICHERHEITSCHECK: Target Directory ALLOWLIST ---
+      - name: Validate Target Directory (Allowlist)
         run: |
-          if [ -z "${{ secrets.IONOS_SFTP_TARGET_DIR }}" ]; then
+          TARGET="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
+          ALLOWED="ristorantestoria-de"
+          
+          # Check 1: Secret muss gesetzt sein
+          if [ -z "$TARGET" ]; then
             echo "::error::CRITICAL: IONOS_SFTP_TARGET_DIR secret is NOT set!"
             echo "::error::Deployment to webroot is FORBIDDEN to protect other sites."
-            echo "::error::Please set IONOS_SFTP_TARGET_DIR in GitHub Secrets (e.g., 'ristorantestoria-de')"
             exit 1
           fi
-          echo "✓ Target directory is set: ${{ secrets.IONOS_SFTP_TARGET_DIR }}"
+          
+          # Check 2: Webroot-Schutz (., /, leer)
+          if [ "$TARGET" = "." ] || [ "$TARGET" = "/" ]; then
+            echo "::error::BLOCKED: Deployment to webroot (. or /) is FORBIDDEN!"
+            exit 1
+          fi
+          
+          # Check 3: ALLOWLIST - Nur exakt dieser Ordner ist erlaubt
+          if [ "$TARGET" != "$ALLOWED" ]; then
+            echo "::error::CRITICAL: Target '$TARGET' is NOT in allowlist!"
+            echo "::error::Only deployment to '$ALLOWED' is permitted by this workflow."
+            echo "::error::This is a security measure to protect other sites on this server."
+            exit 1
+          fi
+          
+          echo "✓ Target directory validated: $TARGET (matches allowlist)"
 
       # --- DEPLOY ZU IONOS ---
       - name: Deploy via SFTP to IONOS
