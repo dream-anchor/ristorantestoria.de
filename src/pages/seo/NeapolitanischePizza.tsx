@@ -14,33 +14,27 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const NeapolitanischePizza = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
   usePrerenderReady(true);
 
   return (
     <>
       <StaticBotContent
-        title={language === 'de' ? 'Neapolitanische Pizza München – Pizzeria Maxvorstadt' : 'Neapolitan Pizza Munich – Pizzeria Maxvorstadt'}
-        description={language === 'de' 
-          ? 'Neapolitanische Pizza im STORIA München: Authentische Pizza nach original Rezept aus dem Holzofen. Pizzeria in der Maxvorstadt nahe Hauptbahnhof & Königsplatz.'
-          : 'Neapolitan pizza at STORIA Munich: Authentic pizza according to original recipe from the wood oven. Pizzeria in Maxvorstadt near main station & Königsplatz.'}
+        title={t.seo.neapolitanPizza.title}
+        description={t.seo.neapolitanPizza.description}
         sections={[
-          { heading: language === 'de' ? 'Unsere Philosophie' : 'Our Philosophy', content: language === 'de' 
-            ? 'Echte neapolitanische Pizza nach traditionellem Rezept: 24-Stunden Teigführung, San Marzano Tomaten, Fior di Latte Mozzarella und frisches Basilikum.'
-            : 'Authentic Neapolitan pizza according to traditional recipe: 24-hour dough preparation, San Marzano tomatoes, Fior di Latte mozzarella and fresh basil.' },
-          { heading: language === 'de' ? 'Beliebte Pizzen' : 'Popular Pizzas', content: [
-            'Pizza Margherita – Der Klassiker aus Neapel',
-            'Pizza Diavola – Mit scharfer Salami',
-            'Pizza Quattro Formaggi – Vier-Käse-Pizza',
-            'Pizza Frutti di Mare – Mit frischen Meeresfrüchten'
+          { heading: t.seo.neapolitanPizza.traditionTitle, content: t.seo.neapolitanPizza.traditionDesc },
+          { heading: t.seo.neapolitanPizza.varietyTitle, content: [
+            `${t.seo.neapolitanPizza.pizza1} – ${t.seo.neapolitanPizza.pizza1Desc}`,
+            `${t.seo.neapolitanPizza.pizza2} – ${t.seo.neapolitanPizza.pizza2Desc}`,
+            `${t.seo.neapolitanPizza.pizza3} – ${t.seo.neapolitanPizza.pizza3Desc}`,
+            `${t.seo.neapolitanPizza.pizza4} – ${t.seo.neapolitanPizza.pizza4Desc}`,
           ]}
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Neapolitanische Pizza – Steinofen' : 'Neapolitan Pizza – Stone Oven'}
-        description={language === 'de' 
-          ? 'Neapolitanische Pizza im STORIA München: Authentisch aus dem Steinofen in der Maxvorstadt. Nahe Königsplatz. Jetzt Tisch reservieren!'
-          : 'Neapolitan pizza at STORIA Munich: Authentic stone-oven pizza in Maxvorstadt. Traditional recipe near Königsplatz. Book now!'}
+        title={t.seo.neapolitanPizza.title}
+        description={t.seo.neapolitanPizza.description}
         canonical="/neapolitanische-pizza-muenchen"
       />
       <StructuredData type="restaurant" />
@@ -48,7 +42,7 @@ const NeapolitanischePizza = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Neapolitanische Pizza München' : 'Neapolitan Pizza Munich', url: '/neapolitanische-pizza-muenchen' }
+          { name: t.internalLinks.neapolitanPizza, url: '/neapolitanische-pizza-muenchen' }
         ]} 
       />
       <div className="min-h-screen bg-background flex flex-col">
@@ -59,7 +53,7 @@ const NeapolitanischePizza = () => {
               <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 w-auto mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
             </Link>
             <p className="text-lg text-muted-foreground tracking-wide">
-              RISTORANTE · PIZZERIA · BAR
+              {t.hero.subtitle}
             </p>
           </div>
         </div>
@@ -68,73 +62,53 @@ const NeapolitanischePizza = () => {
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-4xl mx-auto">
             <h1 className="text-4xl font-serif font-bold mb-6 text-center">
-              {language === 'de' ? 'Neapolitanische Pizza München – Steinofen Pizzeria STORIA' : 'Neapolitan Pizza Munich – Stone Oven Pizzeria STORIA'}
+              {t.seo.neapolitanPizza.title}
             </h1>
             
             <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
-              {language === 'de'
-                ? 'Erleben Sie echte neapolitanische Pizza im STORIA. Traditionell im Steinofen gebacken, mit San-Marzano-Tomaten und frischem Mozzarella – so wie in Napoli.'
-                : 'Experience authentic Neapolitan pizza at STORIA. Traditionally baked in a stone oven, with San Marzano tomatoes and fresh mozzarella – just like in Naples.'}
+              {t.seo.neapolitanPizza.description}
             </p>
 
             <div className="bg-card p-8 rounded-lg border border-border mb-8">
               <h2 className="text-2xl font-serif font-semibold mb-4">
-                {language === 'de' ? 'Unsere Pizza-Philosophie' : 'Our Pizza Philosophy'}
+                {t.seo.neapolitanPizza.traditionTitle}
               </h2>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                <li>✓ {language === 'de' ? 'Traditioneller Steinofen' : 'Traditional stone oven'}</li>
-                <li>✓ {language === 'de' ? 'San-Marzano-Tomaten aus Kampanien' : 'San Marzano tomatoes from Campania'}</li>
-                <li>✓ {language === 'de' ? 'Frischer Fior di Latte Mozzarella' : 'Fresh Fior di Latte mozzarella'}</li>
-                <li>✓ {language === 'de' ? '24-48 Stunden Teigruhe' : '24-48 hours dough fermentation'}</li>
-                <li>✓ {language === 'de' ? 'Italienisches Tipo-00-Mehl' : 'Italian Tipo 00 flour'}</li>
-              </ul>
+              <p className="text-muted-foreground mb-4">{t.seo.neapolitanPizza.traditionDesc}</p>
+              <h3 className="text-xl font-semibold mb-3">{t.seo.neapolitanPizza.ingredientsTitle}</h3>
+              <p className="text-muted-foreground mb-4">{t.seo.neapolitanPizza.ingredientsDesc}</p>
+              <h3 className="text-xl font-semibold mb-3">{t.seo.neapolitanPizza.ovenTitle}</h3>
+              <p className="text-muted-foreground">{t.seo.neapolitanPizza.ovenDesc}</p>
             </div>
 
             <div className="bg-secondary/50 p-8 rounded-lg mb-8">
               <h2 className="text-2xl font-serif font-semibold mb-4">
-                {language === 'de' ? 'Pizza wie in Napoli' : 'Pizza Like in Naples'}
-              </h2>
-              <p className="text-muted-foreground mb-4">
-                {language === 'de'
-                  ? 'Von der klassischen Margherita bis zur Quattro Formaggi – unsere Pizzen werden nach traditioneller neapolitanischer Art zubereitet. Der luftige Teig, die knusprige Kruste und die hochwertigen Zutaten machen jede Pizza zu einem Genuss.'
-                  : 'From the classic Margherita to Quattro Formaggi – our pizzas are prepared in traditional Neapolitan style. The airy dough, crispy crust and high-quality ingredients make every pizza a delight.'}
-              </p>
-              <p className="text-muted-foreground mb-4">
-                {language === 'de'
-                  ? 'Besuchen Sie uns in der Karlstraße 47a in der Maxvorstadt – nur wenige Gehminuten vom Königsplatz und dem Hauptbahnhof entfernt.'
-                  : 'Visit us at Karlstraße 47a in Maxvorstadt – just a few minutes walk from Königsplatz and the main station.'}
-              </p>
-              <div className="flex flex-wrap gap-4 mt-6">
-                <Button asChild>
-                  <LocalizedLink to="speisekarte">{language === 'de' ? 'Speisekarte ansehen' : 'View Menu'}</LocalizedLink>
-                </Button>
-                <Button variant="outline" asChild>
-                  <LocalizedLink to="reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</LocalizedLink>
-                </Button>
-              </div>
-            </div>
-
-            <div className="bg-card p-8 rounded-lg border border-border mb-8">
-              <h2 className="text-2xl font-serif font-semibold mb-4">
-                {language === 'de' ? 'Beliebte Pizzen' : 'Popular Pizzas'}
+                {t.seo.neapolitanPizza.varietyTitle}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-muted-foreground">
                 <div>
-                  <h3 className="font-semibold text-foreground">Margherita</h3>
-                  <p className="text-sm">{language === 'de' ? 'Tomaten, Mozzarella, Basilikum' : 'Tomatoes, mozzarella, basil'}</p>
+                  <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza1}</h3>
+                  <p className="text-sm">{t.seo.neapolitanPizza.pizza1Desc}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Diavola</h3>
-                  <p className="text-sm">{language === 'de' ? 'Scharfe Salami, Tomaten, Mozzarella' : 'Spicy salami, tomatoes, mozzarella'}</p>
+                  <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza2}</h3>
+                  <p className="text-sm">{t.seo.neapolitanPizza.pizza2Desc}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Quattro Formaggi</h3>
-                  <p className="text-sm">{language === 'de' ? 'Vier italienische Käsesorten' : 'Four Italian cheeses'}</p>
+                  <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza3}</h3>
+                  <p className="text-sm">{t.seo.neapolitanPizza.pizza3Desc}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Prosciutto e Rucola</h3>
-                  <p className="text-sm">{language === 'de' ? 'Parmaschinken, Rucola, Parmesan' : 'Parma ham, arugula, parmesan'}</p>
+                  <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza4}</h3>
+                  <p className="text-sm">{t.seo.neapolitanPizza.pizza4Desc}</p>
                 </div>
+              </div>
+              <div className="flex flex-wrap gap-4 mt-6">
+                <Button asChild>
+                  <LocalizedLink to="speisekarte">{t.seo.neapolitanPizza.menuButton}</LocalizedLink>
+                </Button>
+                <Button variant="outline" asChild>
+                  <LocalizedLink to="reservierung">{t.seo.neapolitanPizza.reserveButton}</LocalizedLink>
+                </Button>
               </div>
             </div>
 
