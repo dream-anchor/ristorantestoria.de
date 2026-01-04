@@ -61,7 +61,12 @@ const routesToPrerender = [
     const html = template.replace(`<!--app-html-->`, appHtml);
 
     const filePath = `dist${url === "/" ? "/index" : url}.html`;
-    fs.writeFileSync(toAbsolute(filePath), html);
+    const absolutePath = toAbsolute(filePath);
+    
+    // Ensure directory exists before writing
+    fs.mkdirSync(path.dirname(absolutePath), { recursive: true });
+    
+    fs.writeFileSync(absolutePath, html);
     console.log("pre-rendered:", filePath);
   }
 })();
