@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
+import LocalizedLink from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const InternalLinks = () => {
   const { t } = useLanguage();
 
   const links = [
-    { href: "/lunch-muenchen-maxvorstadt", label: t.internalLinks.lunchMunich },
-    { href: "/aperitivo-muenchen", label: t.internalLinks.aperitivoMunich },
-    { href: "/neapolitanische-pizza-muenchen", label: t.internalLinks.neapolitanPizza },
-    { href: "/romantisches-dinner-muenchen", label: t.internalLinks.romanticDinner },
-    { href: "/eventlocation-muenchen-maxvorstadt", label: t.internalLinks.eventLocation },
-    { href: "/firmenfeier-muenchen", label: t.internalLinks.corporateEvent },
-    { href: "/geburtstagsfeier-muenchen", label: t.internalLinks.birthdayParty },
+    { baseSlug: "lunch-muenchen-maxvorstadt", label: t.internalLinks.lunchMunich },
+    { baseSlug: "aperitivo-muenchen", label: t.internalLinks.aperitivoMunich },
+    { baseSlug: "neapolitanische-pizza-muenchen", label: t.internalLinks.neapolitanPizza },
+    { baseSlug: "romantisches-dinner-muenchen", label: t.internalLinks.romanticDinner },
+    { baseSlug: "eventlocation-muenchen-maxvorstadt", label: t.internalLinks.eventLocation },
+    { baseSlug: "firmenfeier-muenchen", label: t.internalLinks.corporateEvent },
+    { baseSlug: "geburtstagsfeier-muenchen", label: t.internalLinks.birthdayParty },
   ];
 
   return (
@@ -22,13 +22,13 @@ const InternalLinks = () => {
         </h2>
         <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
           {links.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
+            <LocalizedLink
+              key={link.baseSlug}
+              to={link.baseSlug}
               className="px-4 py-2 bg-background border border-border rounded-full text-sm text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
             >
               {link.label}
-            </Link>
+            </LocalizedLink>
           ))}
         </div>
       </div>

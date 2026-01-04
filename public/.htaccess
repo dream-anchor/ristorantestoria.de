@@ -29,6 +29,10 @@ RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
 RewriteRule ^ristorantestoria-de/(.*)$ /$1 [R=301,L]
 RewriteRule ^ristorantestoria-de$ / [R=301,L]
 
+# Legacy SEO URL redirects (shorter versions)
+RewriteRule ^lunch-muenchen$ /lunch-muenchen-maxvorstadt [R=301,L]
+RewriteRule ^eventlocation-muenchen$ /eventlocation-muenchen-maxvorstadt [R=301,L]
+
 # ============================================
 # 3. SSG + SPA-Routing (Prerendered Pages + React Router)
 # ============================================
@@ -37,6 +41,20 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
 RewriteRule ^(.+)$ $1.html [L]
+
+# Handle language prefixes (en/, it/, fr/)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/(en|it|fr)/(.+)$
+RewriteCond %{DOCUMENT_ROOT}/%1/%2.html -f
+RewriteRule ^(en|it|fr)/(.+)$ /$1/$2.html [L]
+
+# Language root pages (e.g., /en, /it, /fr -> /en/index.html)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/(en|it|fr)/?$
+RewriteCond %{DOCUMENT_ROOT}/%1/index.html -f
+RewriteRule ^(en|it|fr)/?$ /$1/index.html [L]
 
 # Fallback auf SPA für dynamische Routen
 RewriteCond %{REQUEST_FILENAME} !-f

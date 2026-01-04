@@ -1,15 +1,15 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { de } from "@/translations/de";
 import { en } from "@/translations/en";
 import { it } from "@/translations/it";
 import { fr } from "@/translations/fr";
+import { parseLocalizedPath, getLocalizedPath, SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from "@/config/routes";
 
 export type Language = "de" | "en" | "it" | "fr";
 type Translations = typeof de;
 
 const STORAGE_KEY = "storia-language";
-const SUPPORTED_LANGUAGES: Language[] = ["de", "en", "it", "fr"];
-const DEFAULT_LANGUAGE: Language = "de";
 
 const detectBrowserLanguage = (): Language => {
   // SSR-safe: return default language on server
@@ -48,12 +48,37 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: Translations;
+  /** Navigate to the same page in another language */
+  switchLanguage: (lang: Language) => void;
+  /** Get localized path for a base slug */
+  getPath: (baseSlug: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguageState] = useState<Language>(detectBrowserLanguage);
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Initialize language from URL, then localStorage, then browser
+  const [language, setLanguageState] = useState<Language>(() => {
+    // SSR-safe: check URL first
+    if (typeof window !== "undefined") {
+      const { language: urlLanguage } = parseLocalizedPath(location.pathname);
+      if (urlLanguage !== DEFAULT_LANGUAGE) {
+        return urlLanguage;
+      }
+    }
+    return detectBrowserLanguage();
+  });
+
+  // Sync language from URL changes
+  useEffect(() => {
+    const { language: urlLanguage } = parseLocalizedPath(location.pathname);
+    if (urlLanguage !== language) {
+      setLanguageState(urlLanguage);
+    }
+  }, [location.pathname]);
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
@@ -66,6 +91,27 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  /**
+   * Switch to another language and navigate to the same page
+   */
+  const switchLanguage = useCallback((targetLang: Language) => {
+    const { baseSlug } = parseLocalizedPath(location.pathname);
+    const newPath = getLocalizedPath(baseSlug, targetLang);
+    
+    // Preserve hash if present
+    const hash = location.hash || "";
+    
+    setLanguage(targetLang);
+    navigate(newPath + hash);
+  }, [location.pathname, location.hash, setLanguage, navigate]);
+
+  /**
+   * Get localized path for a base slug
+   */
+  const getPath = useCallback((baseSlug: string): string => {
+    return getLocalizedPath(baseSlug, language);
+  }, [language]);
+
   const translations = {
     de,
     en,
@@ -76,7 +122,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const t = translations[language];
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, switchLanguage, getPath }}>
       {children}
     </LanguageContext.Provider>
   );
