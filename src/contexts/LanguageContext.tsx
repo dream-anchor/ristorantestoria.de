@@ -60,16 +60,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // Initialize language from URL, then localStorage, then browser
+  // Initialize language from URL - works in both SSR and client
   const [language, setLanguageState] = useState<Language>(() => {
-    // SSR-safe: check URL first
-    if (typeof window !== "undefined") {
-      const { language: urlLanguage } = parseLocalizedPath(location.pathname);
-      if (urlLanguage !== DEFAULT_LANGUAGE) {
-        return urlLanguage;
-      }
-    }
-    return detectBrowserLanguage();
+    const { language: urlLanguage } = parseLocalizedPath(location.pathname);
+    return urlLanguage;
   });
 
   // Sync language from URL changes
