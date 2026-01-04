@@ -9,25 +9,39 @@ type Translations = typeof de;
 
 const STORAGE_KEY = "storia-language";
 const SUPPORTED_LANGUAGES: Language[] = ["de", "en", "it", "fr"];
+const DEFAULT_LANGUAGE: Language = "de";
 
 const detectBrowserLanguage = (): Language => {
+  // SSR-safe: return default language on server
+  if (typeof window === "undefined") {
+    return DEFAULT_LANGUAGE;
+  }
+
   // Check localStorage first
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved && SUPPORTED_LANGUAGES.includes(saved as Language)) {
-    return saved as Language;
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && SUPPORTED_LANGUAGES.includes(saved as Language)) {
+      return saved as Language;
+    }
+  } catch {
+    // localStorage may be blocked
   }
 
   // Detect from browser
-  const browserLanguages = navigator.languages || [navigator.language];
-  for (const lang of browserLanguages) {
-    const code = lang.split("-")[0].toLowerCase();
-    if (SUPPORTED_LANGUAGES.includes(code as Language)) {
-      return code as Language;
+  try {
+    const browserLanguages = navigator.languages || [navigator.language];
+    for (const lang of browserLanguages) {
+      const code = lang.split("-")[0].toLowerCase();
+      if (SUPPORTED_LANGUAGES.includes(code as Language)) {
+        return code as Language;
+      }
     }
+  } catch {
+    // navigator may not be available
   }
 
-  // Fallback to English
-  return "en";
+  // Fallback to default
+  return DEFAULT_LANGUAGE;
 };
 
 interface LanguageContextType {
@@ -43,7 +57,13 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem(STORAGE_KEY, lang);
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(STORAGE_KEY, lang);
+      } catch {
+        // localStorage may be blocked
+      }
+    }
   }, []);
 
   const translations = {
