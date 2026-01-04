@@ -27,15 +27,7 @@ const SEO = ({
   const siteTitle = 'STORIA – Italienisches Restaurant München Maxvorstadt';
   const fullTitle = title ? `${title} | STORIA München` : siteTitle;
   
-  const defaultDescription = language === 'de' 
-    ? 'STORIA München: Italiener in der Maxvorstadt. Neapolitanische Pizza, frische Pasta & Aperitivo nahe Königsplatz. Jetzt reservieren!'
-    : language === 'en'
-    ? 'STORIA Munich: Italian restaurant in Maxvorstadt. Neapolitan pizza, fresh pasta & aperitivo near Königsplatz. Book now!'
-    : language === 'it'
-    ? 'STORIA Monaco: Ristorante italiano a Maxvorstadt. Pizza napoletana, pasta fresca & aperitivo vicino a Königsplatz. Prenota ora!'
-    : 'STORIA Munich: Restaurant italien à Maxvorstadt. Pizza napolitaine, pâtes fraîches & aperitivo près de Königsplatz. Réservez maintenant!';
-  
-  const metaDescription = description || defaultDescription;
+  const metaDescription = description || t.pages.index.description;
   
   // Get the base slug for hreflang generation
   const { baseSlug } = parseLocalizedPath(location.pathname);

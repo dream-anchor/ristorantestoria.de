@@ -537,4 +537,84 @@ export const en = {
     "admin": "admin",
     "admin/login": "admin/login",
   },
+  pages: {
+    index: {
+      description: 'STORIA Munich: Italian restaurant in Maxvorstadt. Neapolitan pizza, fresh pasta & aperitivo. Near Königsplatz. Reserve now!',
+    },
+    speisekarte: {
+      title: 'Menu – Pizza & Pasta',
+      h1: 'Menu – Italian Restaurant Munich Maxvorstadt',
+      description: 'STORIA menu: Neapolitan stone-oven pizza, fresh pasta & antipasti. Italian restaurant Maxvorstadt near Königsplatz. Book now!',
+      intro: 'Authentic Italian cuisine – Neapolitan stone-oven pizza, homemade pasta and fresh antipasti. Enjoy our fine Italian wines with your meal. On weekdays, we recommend our affordable lunch menu.',
+      breadcrumb: 'Menu',
+    },
+    getraenke: {
+      title: 'Drinks Menu – Aperitivo Munich',
+      h1: 'Drinks Menu – Aperitivo & Wines in Munich',
+      description: 'STORIA drinks menu: Aperitivo, Italian wines & cocktails in Munich. Late Night Bar 9-10:30 PM. Maxvorstadt. Book now!',
+      intro: 'Exquisite Italian wines, classic cocktails and Late Night Aperitivo in a stylish atmosphere.',
+      breadcrumb: 'Drinks',
+    },
+    mittagsmenu: {
+      title: 'Lunch Menu – Italian Lunch Munich',
+      h1: 'Lunch Menu – Italian Lunch Munich Maxvorstadt',
+      description: 'Lunch menu at STORIA Munich Maxvorstadt: Fresh Italian cuisine Mon-Fri at great prices. Lunch near main station & Königsplatz. Enjoy your lunch break!',
+      breadcrumb: 'Lunch Menu',
+    },
+    catering: {
+      title: 'Catering & Events – Event Location Munich',
+      h1: 'Catering & Events – Event Location Munich Maxvorstadt',
+      description: 'Italian catering Munich & event location Maxvorstadt: Corporate parties, weddings & birthdays. STORIA – your partner for events!',
+      intro: 'Italian catering and stylish event location in Maxvorstadt – perfect for corporate events, weddings and private occasions.',
+      breadcrumb: 'Catering & Events',
+    },
+    ueberUns: {
+      title: 'About Us – La Famiglia Speranza',
+      description: 'STORIA – Italian restaurant by the Speranza family. Neapolitan pizza & pasta with trattoria atmosphere in Munich Maxvorstadt.',
+      breadcrumb: 'About Us',
+    },
+    reservierung: {
+      title: 'Reserve a Table – Restaurant Munich',
+      h1: 'Reserve a Table',
+      description: 'Reserve a table at STORIA Munich Maxvorstadt: Book online or call us. Your Italian restaurant near Königsplatz & main station. Secure your spot!',
+      breadcrumb: 'Reservation',
+    },
+    besondereAnlaesse: {
+      breadcrumb: 'Special Occasions',
+    },
+    kontakt: {
+      title: 'Contact – Restaurant Munich Maxvorstadt',
+      description: 'Contact STORIA Munich: Phone, email, WhatsApp. Your Italian restaurant in Maxvorstadt – Karlstraße 47a. Reserve your table now!',
+      breadcrumb: 'Contact',
+    },
+  },
+  common: {
+    backTo: 'Back to',
+    goToHomepage: 'Go to homepage',
+    openingHoursLabel: 'Opening Hours',
+    openingHoursText: 'Mon-Fri 9am-1am, Sat-Sun 12pm-1am',
+    seoDescription: 'STORIA – Your Italian restaurant in Maxvorstadt Munich near Königsplatz, TU Munich and Pinakothek museums. Ristorante Pizzeria with Neapolitan stone-oven pizza, homemade pasta and aperitivo. Just minutes from the main train station. La Storia – Italian trattoria Munich Karlstraße.',
+  },
+  faq: [
+    {
+      question: 'Where is Ristorante STORIA located?',
+      answer: 'STORIA – your Italian restaurant in Maxvorstadt – is located at Karlstraße 47a, 80333 Munich. Just a few minutes walk from Königsplatz, the Pinakothek museums and TU Munich, near the main train station.',
+    },
+    {
+      question: 'How can I make a reservation at STORIA?',
+      answer: 'You can book a table online via OpenTable on our reservation page or by calling +49 89 515196. As a popular pizzeria in Maxvorstadt, we especially recommend making a reservation for weekends.',
+    },
+    {
+      question: 'What does La Storia offer?',
+      answer: 'La Storia offers authentic Italian cuisine: Neapolitan stone-oven pizza, homemade pasta, fresh antipasti, fine fish, as well as exquisite wines and aperitivo.',
+    },
+    {
+      question: 'What are the opening hours of STORIA?',
+      answer: 'Our Italian trattoria in Munich is open Monday to Friday from 9:00 AM to 1:00 AM and Saturday/Sunday from 12:00 PM to 1:00 AM. Lunch is served Mon-Fri from 11:30 AM to 2:30 PM.',
+    },
+    {
+      question: 'Does Ristorante Pizzeria STORIA offer lunch menus?',
+      answer: 'Yes, we offer a changing lunch menu on weekdays at attractive prices – ideal for your lunch break in Maxvorstadt. Check our lunch menu page for current offerings.',
+    },
+  ],
 };

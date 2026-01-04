@@ -15,17 +15,15 @@ import { useMenu } from "@/hooks/useMenu";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Mittagsmenu = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { data: menu, isLoading } = useMenu('lunch');
   usePrerenderReady(!isLoading && !!menu);
 
   return (
     <>
       <SEO 
-        title={language === 'de' ? 'Mittagsmenü – Lunch München Maxvorstadt' : 'Lunch Menu – Italian Lunch Munich'}
-        description={language === 'de' 
-          ? 'Mittagsmenü im STORIA München Maxvorstadt: Frische italienische Küche Mo-Fr zu attraktiven Preisen. Lunch nahe Hauptbahnhof & Königsplatz. Jetzt Mittagstisch genießen!'
-          : 'Lunch menu at STORIA Munich Maxvorstadt: Fresh Italian cuisine Mon-Fri at great prices. Lunch near main station & Königsplatz. Enjoy your lunch break!'}
+        title={t.pages.mittagsmenu.title}
+        description={t.pages.mittagsmenu.description}
         canonical="/mittags-menu"
       />
       <StructuredData type="restaurant" />
@@ -33,7 +31,7 @@ const Mittagsmenu = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Mittagsmenü' : 'Lunch Menu', url: '/mittags-menu' }
+          { name: t.pages.mittagsmenu.breadcrumb, url: '/mittags-menu' }
         ]} 
       />
       <MenuStructuredData menuType="lunch" />
@@ -55,7 +53,7 @@ const Mittagsmenu = () => {
         <main className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
           <h1 className="text-4xl font-serif font-bold mb-6 text-center">
-            {language === 'de' ? 'Mittagsmenü – Lunch München Maxvorstadt' : 'Lunch Menu – Italian Lunch Munich Maxvorstadt'}
+            {t.pages.mittagsmenu.h1}
           </h1>
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <p className="text-xl font-serif italic text-primary mb-4">{t.lunchMenu.greeting}</p>

@@ -13,19 +13,18 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMenu } from "@/hooks/useMenu";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import LocalizedLink from "@/components/LocalizedLink";
 
 const Speisekarte = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { data: menu, isLoading } = useMenu('food');
   usePrerenderReady(!isLoading && !!menu);
 
   return (
     <>
       <SEO 
-        title={language === 'de' ? 'Speisekarte – Pizza & Pasta' : 'Menu – Pizza & Pasta'}
-        description={language === 'de' 
-          ? 'STORIA Speisekarte: Neapolitanische Pizza, hausgemachte Pasta & Antipasti. Italiener in der Maxvorstadt nahe Königsplatz. Jetzt reservieren!'
-          : 'STORIA menu: Neapolitan stone-oven pizza, fresh pasta & antipasti. Italian restaurant Maxvorstadt near Königsplatz. Book now!'}
+        title={t.pages.speisekarte.title}
+        description={t.pages.speisekarte.description}
         canonical="/speisekarte"
       />
       <StructuredData type="restaurant" />
@@ -33,7 +32,7 @@ const Speisekarte = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Speisekarte' : 'Menu', url: '/speisekarte' }
+          { name: t.pages.speisekarte.breadcrumb, url: '/speisekarte' }
         ]} 
       />
       <MenuStructuredData menuType="food" />
@@ -55,13 +54,10 @@ const Speisekarte = () => {
         <main className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
           <h1 className="text-4xl font-serif font-bold mb-4 text-center">
-            {language === 'de' ? 'Speisekarte – Ristorante München Maxvorstadt' : 'Menu – Italian Restaurant Munich Maxvorstadt'}
+            {t.pages.speisekarte.h1}
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            {language === 'de' 
-              ? <>Authentische italienische Küche – <Link to="/neapolitanische-pizza-muenchen" className="text-primary hover:underline">neapolitanische Pizza aus dem Steinofen</Link>, hausgemachte Pasta und frische Antipasti. Genießen Sie dazu unsere <Link to="/getraenke" className="text-primary hover:underline">erlesenen italienischen Weine</Link>. Unter der Woche empfehlen wir unser <Link to="/mittags-menu" className="text-primary hover:underline">günstiges Mittagsmenü</Link>.</>
-              : <>Authentic Italian cuisine – <Link to="/neapolitanische-pizza-muenchen" className="text-primary hover:underline">Neapolitan stone-oven pizza</Link>, homemade pasta and fresh antipasti. Enjoy our <Link to="/getraenke" className="text-primary hover:underline">fine Italian wines</Link> with your meal. On weekdays, we recommend our <Link to="/mittags-menu" className="text-primary hover:underline">affordable lunch menu</Link>.</>
-            }
+            {t.pages.speisekarte.intro}
           </p>
 
           <MenuDisplay menuType="food" />

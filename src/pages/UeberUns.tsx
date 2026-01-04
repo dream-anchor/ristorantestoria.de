@@ -8,16 +8,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const UeberUns = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   usePrerenderReady(true);
 
   return (
     <>
       <StaticBotContent
         title={t.about.title}
-        description={language === 'de' 
-          ? 'STORIA – Ihr Italiener in der Maxvorstadt München. Ristorante Pizzeria mit neapolitanischer Pizza, hausgemachter Pasta und italienischem Trattoria-Flair. La Famiglia Speranza.'
-          : 'STORIA – Your Italian restaurant in Maxvorstadt Munich. Ristorante Pizzeria with Neapolitan pizza, homemade pasta and Italian trattoria atmosphere. La Famiglia Speranza.'}
+        description={t.pages.ueberUns.description}
         sections={[
           { content: t.about.p1 },
           { content: t.about.p2 },
@@ -30,11 +28,8 @@ const UeberUns = () => {
         ]}
       />
       <SEO
-        title={language === 'de' ? "Über uns – La Famiglia Speranza" : "About Us – La Famiglia Speranza"}
-        description={language === 'de' 
-          ? "STORIA – Italienisches Restaurant der Familie Speranza. Neapolitanische Pizza & Pasta mit Trattoria-Flair in München Maxvorstadt."
-          : "STORIA – Italian restaurant by the Speranza family. Neapolitan pizza & pasta with trattoria atmosphere in Munich Maxvorstadt."
-        }
+        title={t.pages.ueberUns.title}
+        description={t.pages.ueberUns.description}
         canonical="/ueber-uns"
       />
       <div className="min-h-screen bg-background flex flex-col">
@@ -59,7 +54,7 @@ const UeberUns = () => {
               {/* Unterschrift */}
               <div className="text-left">
                 <p className="text-foreground/70 mb-2">
-                  {language === 'de' ? 'Wir freuen uns auf Sie.' : 'We look forward to seeing you.'}
+                  {t.about.greeting}
                 </p>
                 <span className="font-signature text-3xl md:text-4xl text-foreground/80 italic">
                   Domenico Speranza

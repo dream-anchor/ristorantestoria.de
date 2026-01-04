@@ -11,23 +11,21 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Catering = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   usePrerenderReady(true);
 
   return (
     <>
       <SEO 
-        title={language === 'de' ? 'Catering & Events – Eventlocation München' : 'Catering & Events – Event Location Munich'}
-        description={language === 'de' 
-          ? 'Italienisches Catering München & Eventlocation Maxvorstadt: Firmenfeiern, Hochzeiten, Geburtstage. STORIA – Ihr Partner für unvergessliche Events!'
-          : 'Italian catering Munich & event location Maxvorstadt: Corporate parties, weddings & birthdays. STORIA – your partner for events!'}
+        title={t.pages.catering.title}
+        description={t.pages.catering.description}
         canonical="/catering"
       />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: 'Catering & Events', url: '/catering' }
+          { name: t.pages.catering.breadcrumb, url: '/catering' }
         ]} 
       />
       <div className="min-h-screen bg-background flex flex-col">
@@ -46,12 +44,10 @@ const Catering = () => {
         
         <main className="container mx-auto px-4 py-12 flex-grow">
           <h1 className="text-4xl font-bold mb-4 text-center">
-            {language === 'de' ? 'Catering & Events – Eventlocation München Maxvorstadt' : 'Catering & Events – Event Location Munich Maxvorstadt'}
+            {t.pages.catering.h1}
           </h1>
           <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {language === 'de'
-              ? 'Italienisches Catering und stilvolle Eventlocation in der Maxvorstadt – perfekt für Firmenfeiern, Hochzeiten und private Anlässe.'
-              : 'Italian catering and stylish event location in Maxvorstadt – perfect for corporate events, weddings and private occasions.'}
+            {t.pages.catering.intro}
           </p>
           
           <div className="max-w-4xl mx-auto">

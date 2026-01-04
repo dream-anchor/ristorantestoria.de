@@ -14,7 +14,7 @@ interface StructuredDataProps {
 }
 
 const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData }: StructuredDataProps) => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   const restaurantSchema = {
     '@context': 'https://schema.org',
@@ -22,9 +22,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     '@id': 'https://ristorantestoria.de/#restaurant',
     name: 'STORIA - Ristorante • Pizzeria • Bar',
     alternateName: 'Ristorante STORIA',
-    description: language === 'de' 
-      ? 'Authentisches italienisches Restaurant in München mit frischer Pasta, Pizza aus dem Holzofen und erlesenen Weinen.'
-      : 'Authentic Italian restaurant in Munich with fresh pasta, wood-fired pizza, and fine wines.',
+    description: t.pages.index.description,
     url: 'https://ristorantestoria.de',
     telephone: '+49 89 51519696',
     email: 'info@ristorantestoria.de',
@@ -104,9 +102,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     '@type': 'Organization',
     '@id': 'https://ristorantestoria.de/#organization',
     name: 'Speranza GmbH',
-    description: language === 'de'
-      ? 'Speranza GmbH betreibt das STORIA – Ristorante • Pizzeria • Bar in München Maxvorstadt. Authentische italienische Küche seit 1995.'
-      : 'Speranza GmbH operates STORIA – Ristorante • Pizzeria • Bar in Munich Maxvorstadt. Authentic Italian cuisine since 1995.',
+    description: t.pages.index.description,
     url: 'https://ristorantestoria.de',
     logo: {
       '@type': 'ImageObject',

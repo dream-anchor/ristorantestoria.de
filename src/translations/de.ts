@@ -537,4 +537,84 @@ export const de = {
     "admin": "admin",
     "admin/login": "admin/login",
   },
+  pages: {
+    index: {
+      description: 'STORIA München: Italiener in der Maxvorstadt. Pizza aus dem Steinofen, Pasta & Aperitivo. Nahe Königsplatz. Jetzt reservieren!',
+    },
+    speisekarte: {
+      title: 'Speisekarte – Pizza & Pasta',
+      h1: 'Speisekarte – Ristorante München Maxvorstadt',
+      description: 'STORIA Speisekarte: Neapolitanische Pizza, hausgemachte Pasta & Antipasti. Italiener in der Maxvorstadt nahe Königsplatz. Jetzt reservieren!',
+      intro: 'Authentische italienische Küche – neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta und frische Antipasti. Genießen Sie dazu unsere erlesenen italienischen Weine. Unter der Woche empfehlen wir unser günstiges Mittagsmenü.',
+      breadcrumb: 'Speisekarte',
+    },
+    getraenke: {
+      title: 'Getränkekarte – Aperitivo München',
+      h1: 'Getränkekarte – Aperitivo & Weine in München',
+      description: 'STORIA Getränkekarte: Aperitivo, italienische Weine & Cocktails in München. Late Night Bar 21-22:30 Uhr. Maxvorstadt. Jetzt reservieren!',
+      intro: 'Erlesene italienische Weine, klassische Cocktails und Late Night Aperitivo in stilvollem Ambiente.',
+      breadcrumb: 'Getränke',
+    },
+    mittagsmenu: {
+      title: 'Mittagsmenü – Lunch München Maxvorstadt',
+      h1: 'Mittagsmenü – Lunch München Maxvorstadt',
+      description: 'Mittagsmenü im STORIA München Maxvorstadt: Frische italienische Küche Mo-Fr zu attraktiven Preisen. Lunch nahe Hauptbahnhof & Königsplatz. Jetzt Mittagstisch genießen!',
+      breadcrumb: 'Mittagsmenü',
+    },
+    catering: {
+      title: 'Catering & Events – Eventlocation München',
+      h1: 'Catering & Events – Eventlocation München Maxvorstadt',
+      description: 'Italienisches Catering München & Eventlocation Maxvorstadt: Firmenfeiern, Hochzeiten, Geburtstage. STORIA – Ihr Partner für unvergessliche Events!',
+      intro: 'Italienisches Catering und stilvolle Eventlocation in der Maxvorstadt – perfekt für Firmenfeiern, Hochzeiten und private Anlässe.',
+      breadcrumb: 'Catering & Events',
+    },
+    ueberUns: {
+      title: 'Über uns – La Famiglia Speranza',
+      description: 'STORIA – Italienisches Restaurant der Familie Speranza. Neapolitanische Pizza & Pasta mit Trattoria-Flair in München Maxvorstadt.',
+      breadcrumb: 'Über uns',
+    },
+    reservierung: {
+      title: 'Tisch reservieren – Restaurant München',
+      h1: 'Tisch reservieren',
+      description: 'Tisch reservieren im STORIA München Maxvorstadt: Online buchen oder anrufen. Ihr Italiener nahe Königsplatz & Hauptbahnhof. Jetzt Platz sichern!',
+      breadcrumb: 'Reservierung',
+    },
+    besondereAnlaesse: {
+      breadcrumb: 'Besondere Anlässe',
+    },
+    kontakt: {
+      title: 'Kontakt – Restaurant München Maxvorstadt',
+      description: 'Kontaktieren Sie das STORIA München: Telefon, E-Mail, WhatsApp. Ihr Italiener in der Maxvorstadt – Karlstraße 47a. Jetzt Tisch reservieren!',
+      breadcrumb: 'Kontakt',
+    },
+  },
+  common: {
+    backTo: 'Zurück zu',
+    goToHomepage: 'Zur Startseite',
+    openingHoursLabel: 'Öffnungszeiten',
+    openingHoursText: 'Mo-Fr 09:00-01:00, Sa-So 12:00-01:00',
+    seoDescription: 'STORIA – Ihr Italiener in der Maxvorstadt München nahe Königsplatz, TU München und Pinakotheken. Ristorante Pizzeria mit neapolitanischer Pizza aus dem Steinofen, hausgemachter Pasta und Aperitivo. Nur wenige Gehminuten vom Hauptbahnhof. La Storia – Trattoria München Karlstraße.',
+  },
+  faq: [
+    {
+      question: 'Wo befindet sich das Ristorante STORIA?',
+      answer: 'Das STORIA – Ihr Italiener in der Maxvorstadt – befindet sich in der Karlstraße 47a, 80333 München. Nur wenige Gehminuten vom Königsplatz, den Pinakotheken und der TU München entfernt, nahe dem Hauptbahnhof.',
+    },
+    {
+      question: 'Wie kann ich einen Tisch im STORIA reservieren?',
+      answer: 'Sie können einen Tisch online über OpenTable auf unserer Reservierungsseite buchen oder telefonisch unter +49 89 515196 reservieren. Als beliebte Pizzeria Maxvorstadt empfehlen wir besonders für Wochenenden eine vorherige Reservierung.',
+    },
+    {
+      question: 'Was bietet La Storia an?',
+      answer: 'La Storia bietet authentische italienische Küche: Neapolitanische Pizza München aus dem Steinofen, hausgemachte Pasta, frische Antipasti, feiner Fisch sowie erlesene Weine und Aperitivo.',
+    },
+    {
+      question: 'Was sind die Öffnungszeiten des STORIA?',
+      answer: 'Unsere Trattoria München hat Montag bis Freitag von 09:00 bis 01:00 Uhr und Samstag/Sonntag von 12:00 bis 01:00 Uhr geöffnet. Lunch München Maxvorstadt servieren wir Mo-Fr von 11:30 bis 14:30 Uhr.',
+    },
+    {
+      question: 'Bietet das Ristorante Pizzeria STORIA Mittagsmenüs an?',
+      answer: 'Ja, wir bieten wochentags ein wechselndes Mittagsmenü zu attraktiven Preisen an – ideal für Ihre Mittagspause in der Maxvorstadt. Schauen Sie auf unserer Mittagsmenü-Seite für die aktuellen Angebote.',
+    },
+  ],
 };
