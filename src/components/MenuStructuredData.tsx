@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from '@/lib/helmetAsync';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMenu, useMenuById, MenuType } from '@/hooks/useMenu';
 

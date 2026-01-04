@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode, isSsrBuild }) => ({
   server: {
     host: "::",
     port: 8080,
@@ -16,6 +16,14 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Use SSR-safe Supabase client during server build
+      ...(isSsrBuild && {
+        "@/integrations/supabase/client": path.resolve(__dirname, "./src/integrations/supabase/client.ssr.ts"),
+      }),
     },
+  },
+  ssr: {
+    // Bundle react-helmet-async to avoid CJS/ESM interop issues
+    noExternal: ["react-helmet-async"],
   },
 }));
