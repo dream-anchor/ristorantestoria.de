@@ -1,42 +1,31 @@
 RewriteEngine On
 
 # ============================================
-# ZERO-REDIRECT .htaccess
+# ULTRA-MINIMAL .htaccess für IONOS
 # ============================================
-# Alle 301-Redirects wurden entfernt, um Redirect-Loops zu vermeiden.
-# Weiterleitungen werden clientseitig (SPA) gehandhabt.
-# HTTPS und WWW-Kanonisierung erfolgen providerseitig bei IONOS.
+# Keine %{DOCUMENT_ROOT} Checks (IONOS-kompatibel)
+# Keine 301 Redirects (vermeidet Loops)
+# Nur einfache SPA-Fallback-Logik
 
 # ============================================
-# 1. SSG + SPA-Routing (Prerendered Pages + React Router)
+# 1. Error Documents (Fallback auf SPA)
 # ============================================
-# Prüfe zuerst ob eine prerenderte .html Version existiert
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
-RewriteRule ^(.+)$ $1.html [L]
+ErrorDocument 404 /index.html
+ErrorDocument 500 /index.html
 
-# Handle language prefixes (en/, it/, fr/)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^/(en|it|fr)/(.+)$
-RewriteCond %{DOCUMENT_ROOT}/%1/%2.html -f
-RewriteRule ^(en|it|fr)/(.+)$ /$1/$2.html [L]
+# ============================================
+# 2. SPA-Routing: Existierende Dateien ausliefern, Rest → index.html
+# ============================================
+# Wenn die Datei oder das Verzeichnis existiert → direkt ausliefern
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-# Language root pages (e.g., /en, /it, /fr -> /en/index.html)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^/(en|it|fr)/?$
-RewriteCond %{DOCUMENT_ROOT}/%1/index.html -f
-RewriteRule ^(en|it|fr)/?$ /$1/index.html [L]
-
-# Fallback auf SPA für dynamische Routen
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# Alles andere → SPA Fallback
 RewriteRule ^ /index.html [L]
 
 # ============================================
-# 2. MIME-Types für korrekte Dateiauslieferung
+# 3. MIME-Types für korrekte Dateiauslieferung
 # ============================================
 <IfModule mod_mime.c>
   AddType application/javascript .js
@@ -49,14 +38,14 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 3. GZIP-Komprimierung für bessere Performance
+# 4. GZIP-Komprimierung
 # ============================================
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
 </IfModule>
 
 # ============================================
-# 4. Browser-Caching für statische Assets
+# 5. Browser-Caching
 # ============================================
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -68,12 +57,8 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 5. Erzwungene MIME-Types für spezifische Dateien
+# 6. Sitemap Content-Type
 # ============================================
-<FilesMatch "\.xml$">
-  ForceType application/xml
-</FilesMatch>
-
 <IfModule mod_headers.c>
   <FilesMatch "sitemap\.xml$">
     Header set Content-Type "application/xml; charset=UTF-8"
