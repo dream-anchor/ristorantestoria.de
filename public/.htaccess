@@ -35,8 +35,8 @@ RewriteRule ^ristorantestoria-de$ / [R=301,L]
 # Prüfe zuerst ob eine prerenderte .html Version existiert
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*)$ $1.html [L]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
+RewriteRule ^(.+)$ $1.html [L]
 
 # Fallback auf SPA für dynamische Routen
 RewriteCond %{REQUEST_FILENAME} !-f
