@@ -116,7 +116,15 @@ jobs:
             pwd;
             
             echo '=== Starting mirror upload with cleanup ===';
-            mirror -R --verbose --parallel=4 --delete --exclude-glob .well-known/ --exclude-glob .htaccess-backup/ ./dist .;
+            mirror -R --verbose --parallel=4 --delete \
+              --exclude-glob .well-known/ \
+              --exclude-glob .htaccess-backup/ \
+              --exclude-glob cms/ \
+              --exclude-glob wp-content/ \
+              --exclude-glob wp-admin/ \
+              --exclude-glob wp-includes/ \
+              --exclude-glob .sass-cache/ \
+              ./dist .;
             
             echo '=== Postflight: Verifying upload ===';
             cls -la index.html;
