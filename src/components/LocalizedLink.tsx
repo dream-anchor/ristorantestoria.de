@@ -37,8 +37,20 @@ const LocalizedLink = ({ to, children, ...props }: LocalizedLinkProps) => {
     hash = `#${hash}`;
   }
   
+  // Remove leading slash if present (normalize input)
+  if (baseSlug.startsWith("/")) {
+    baseSlug = baseSlug.slice(1);
+  }
+  
+  // Handle query params
+  let queryString = "";
+  if (baseSlug.includes("?")) {
+    [baseSlug, queryString] = baseSlug.split("?");
+    queryString = `?${queryString}`;
+  }
+  
   // Get the localized path
-  const localizedPath = getLocalizedPath(baseSlug, language) + hash;
+  const localizedPath = getLocalizedPath(baseSlug, language) + queryString + hash;
   
   return <Link to={localizedPath} {...props}>{children}</Link>;
 };

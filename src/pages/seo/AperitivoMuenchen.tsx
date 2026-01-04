@@ -1,3 +1,4 @@
+import LocalizedLink from "@/components/LocalizedLink";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -98,16 +99,16 @@ const AperitivoMuenchen = () => {
               </h2>
               <p className="text-muted-foreground mb-4">
                 {language === 'de'
-                  ? <>Ob nach der Arbeit, vor dem Dinner oder als Ausklang eines schönen Abends – unser Aperitivo bringt italienische Lebensfreude in die Maxvorstadt. Genießen Sie anschließend ein <Link to="/romantisches-dinner-muenchen" className="text-primary hover:underline">romantisches Dinner</Link> oder entdecken Sie unsere <Link to="/speisekarte" className="text-primary hover:underline">hausgemachte Pasta und Pizza</Link>. Nur wenige Schritte vom Königsplatz und den Pinakotheken entfernt.</>
-                  : <>Whether after work, before dinner or as the end of a wonderful evening – our aperitivo brings Italian joie de vivre to Maxvorstadt. Afterwards, enjoy a <Link to="/romantisches-dinner-muenchen" className="text-primary hover:underline">romantic dinner</Link> or discover our <Link to="/speisekarte" className="text-primary hover:underline">homemade pasta and pizza</Link>. Just steps from Königsplatz and the Pinakothek museums.</>
+                  ? <>Ob nach der Arbeit, vor dem Dinner oder als Ausklang eines schönen Abends – unser Aperitivo bringt italienische Lebensfreude in die Maxvorstadt. Genießen Sie anschließend ein <LocalizedLink to="romantisches-dinner-muenchen" className="text-primary hover:underline">romantisches Dinner</LocalizedLink> oder entdecken Sie unsere <LocalizedLink to="speisekarte" className="text-primary hover:underline">hausgemachte Pasta und Pizza</LocalizedLink>. Nur wenige Schritte vom Königsplatz und den Pinakotheken entfernt.</>
+                  : <>Whether after work, before dinner or as the end of a wonderful evening – our aperitivo brings Italian joie de vivre to Maxvorstadt. Afterwards, enjoy a <LocalizedLink to="romantisches-dinner-muenchen" className="text-primary hover:underline">romantic dinner</LocalizedLink> or discover our <LocalizedLink to="speisekarte" className="text-primary hover:underline">homemade pasta and pizza</LocalizedLink>. Just steps from Königsplatz and the Pinakothek museums.</>
                 }
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <Button asChild>
-                  <Link to="/getraenke">{language === 'de' ? 'Getränkekarte ansehen' : 'View Drinks Menu'}</Link>
+                  <LocalizedLink to="getraenke">{language === 'de' ? 'Getränkekarte ansehen' : 'View Drinks Menu'}</LocalizedLink>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link to="/reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</Link>
+                  <LocalizedLink to="reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</LocalizedLink>
                 </Button>
               </div>
             </div>

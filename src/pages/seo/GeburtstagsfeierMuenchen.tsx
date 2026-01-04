@@ -1,3 +1,4 @@
+import LocalizedLink from "@/components/LocalizedLink";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -94,16 +95,16 @@ const GeburtstagsfeierMuenchen = () => {
               </h2>
               <p className="text-muted-foreground mb-4">
                 {language === 'de'
-                  ? <>Im STORIA feiern wir Geburtstage mit italienischer Herzlichkeit. Lassen Sie sich und Ihre Gäste mit exquisiter Küche verwöhnen – von Pizza über Pasta bis zu feinen Dolci. Für größere Gruppen empfehlen wir unsere <Link to="/eventlocation-muenchen-maxvorstadt" className="text-primary hover:underline">Eventlocation mit überdachter Terrasse</Link>. Planen Sie eine <Link to="/firmenfeier-muenchen" className="text-primary hover:underline">Firmenfeier oder ein Team-Event</Link>? Sprechen Sie uns an!</>
-                  : <>At STORIA, we celebrate birthdays with Italian warmth. Let yourself and your guests be pampered with exquisite cuisine – from pizza to pasta to fine dolci. For larger groups, we recommend our <Link to="/eventlocation-muenchen-maxvorstadt" className="text-primary hover:underline">event location with covered terrace</Link>. Planning a <Link to="/firmenfeier-muenchen" className="text-primary hover:underline">corporate event or team celebration</Link>? Contact us!</>
+                  ? <>Im STORIA feiern wir Geburtstage mit italienischer Herzlichkeit. Lassen Sie sich und Ihre Gäste mit exquisiter Küche verwöhnen – von Pizza über Pasta bis zu feinen Dolci. Für größere Gruppen empfehlen wir unsere <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="text-primary hover:underline">Eventlocation mit überdachter Terrasse</LocalizedLink>. Planen Sie eine <LocalizedLink to="firmenfeier-muenchen" className="text-primary hover:underline">Firmenfeier oder ein Team-Event</LocalizedLink>? Sprechen Sie uns an!</>
+                  : <>At STORIA, we celebrate birthdays with Italian warmth. Let yourself and your guests be pampered with exquisite cuisine – from pizza to pasta to fine dolci. For larger groups, we recommend our <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="text-primary hover:underline">event location with covered terrace</LocalizedLink>. Planning a <LocalizedLink to="firmenfeier-muenchen" className="text-primary hover:underline">corporate event or team celebration</LocalizedLink>? Contact us!</>
                 }
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <Button asChild>
-                  <Link to="/speisekarte">{language === 'de' ? 'Speisekarte ansehen' : 'View Menu'}</Link>
+                  <LocalizedLink to="speisekarte">{language === 'de' ? 'Speisekarte ansehen' : 'View Menu'}</LocalizedLink>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link to="/kontakt">{language === 'de' ? 'Kontakt aufnehmen' : 'Get in Touch'}</Link>
+                  <LocalizedLink to="kontakt">{language === 'de' ? 'Kontakt aufnehmen' : 'Get in Touch'}</LocalizedLink>
                 </Button>
               </div>
             </div>

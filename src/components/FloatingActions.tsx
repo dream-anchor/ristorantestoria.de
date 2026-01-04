@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Phone, UtensilsCrossed, Copy, Check } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
+import LocalizedLink from "@/components/LocalizedLink";
 import {
   Popover,
   PopoverContent,
@@ -103,13 +104,13 @@ const FloatingActions = () => {
       </a>
       
       {/* Reservierung Button */}
-      <Link
-        to="/reservierung"
+      <LocalizedLink
+        to="reservierung"
         className={buttonClasses}
       >
         <UtensilsCrossed className="h-5 w-5" />
         <span className="text-sm font-semibold">{t.floatingActions.reserve}</span>
-      </Link>
+      </LocalizedLink>
     </div>
   );
 };

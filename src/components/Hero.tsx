@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import LocalizedLink from "@/components/LocalizedLink";
 
 const Hero = () => {
   const { t, language } = useLanguage();
@@ -35,7 +36,7 @@ const Hero = () => {
           className="bg-primary text-primary-foreground hover:bg-accent transition-colors px-10 py-6 text-base tracking-widest uppercase"
           asChild
         >
-          <a href="/reservierung">{t.hero.reserveButton}</a>
+          <LocalizedLink to="reservierung">{t.hero.reserveButton}</LocalizedLink>
         </Button>
       </div>
     </section>

@@ -34,7 +34,15 @@ RewriteRule ^lunch-muenchen$ /lunch-muenchen-maxvorstadt [R=301,L]
 RewriteRule ^eventlocation-muenchen$ /eventlocation-muenchen-maxvorstadt [R=301,L]
 
 # ============================================
-# 3. SSG + SPA-Routing (Prerendered Pages + React Router)
+# 3. Trailing Slash Canonicalisierung (SEO)
+# ============================================
+# Entferne trailing slashes für konsistente URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^(.+)/$
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# ============================================
+# 4. SSG + SPA-Routing (Prerendered Pages + React Router)
 # ============================================
 # Prüfe zuerst ob eine prerenderte .html Version existiert
 RewriteCond %{REQUEST_FILENAME} !-f

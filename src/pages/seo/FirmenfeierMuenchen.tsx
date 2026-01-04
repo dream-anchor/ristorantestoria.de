@@ -1,3 +1,4 @@
+import LocalizedLink from "@/components/LocalizedLink";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -276,10 +277,10 @@ const FirmenfeierMuenchen = () => {
                 {t.seo.firmenfeier.culinaryDesc}
               </p>
               <Button asChild>
-                <Link to="/speisekarte">
+                <LocalizedLink to="speisekarte">
                   {t.seo.firmenfeier.culinaryButton}
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
+                </LocalizedLink>
               </Button>
             </div>
           </section>

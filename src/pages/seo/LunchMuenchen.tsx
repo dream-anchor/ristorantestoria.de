@@ -1,3 +1,4 @@
+import LocalizedLink from "@/components/LocalizedLink";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "@/components/Header";
@@ -112,9 +113,9 @@ const LunchMuenchen = () => {
                 className="bg-primary text-primary-foreground hover:bg-primary/90 text-base md:text-lg px-8 py-6 shadow-lg"
                 asChild
               >
-                <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
+                <LocalizedLink to="reservierung?from=lunch-muenchen-maxvorstadt">
                   {t.seo.lunch.urgencyButton}
-                </Link>
+                </LocalizedLink>
               </Button>
             </div>
           </div>
@@ -141,20 +142,20 @@ const LunchMuenchen = () => {
         </section>
 
         {/* Urgency Banner */}
-        <section className="bg-muted/50 border-b border-border py-3">
-          <div className="container mx-auto px-4">
-            <Link 
-              to="/reservierung?from=lunch-muenchen-maxvorstadt" 
-              className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
-            >
-              <CalendarClock className="w-4 h-4 text-primary" />
-              <span className="underline-offset-2 group-hover:underline">
-                {t.seo.lunch.urgencyTitle}
-              </span>
-              <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </Link>
-          </div>
-        </section>
+          <section className="bg-muted/50 border-b border-border py-3">
+            <div className="container mx-auto px-4">
+              <LocalizedLink 
+                to="reservierung?from=lunch-muenchen-maxvorstadt" 
+                className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+              >
+                <CalendarClock className="w-4 h-4 text-primary" />
+                <span className="underline-offset-2 group-hover:underline">
+                  {t.seo.lunch.urgencyTitle}
+                </span>
+                <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </LocalizedLink>
+            </div>
+          </section>
 
         <Navigation />
         
@@ -170,10 +171,10 @@ const LunchMuenchen = () => {
                 {t.seo.lunch.menuDesc}
               </p>
               <Button variant="default" size="lg" asChild>
-                <Link to="/mittags-menu?from=lunch-muenchen-maxvorstadt" onClick={handleMenuClick}>
+                <LocalizedLink to="mittags-menu?from=lunch-muenchen-maxvorstadt" onClick={handleMenuClick}>
                   {t.seo.lunch.menuButton}
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
+                </LocalizedLink>
               </Button>
             </div>
           </section>
@@ -225,9 +226,9 @@ const LunchMuenchen = () => {
               {/* CTA after Benefits */}
               <div className="text-center mt-12">
                 <Button size="lg" variant="outline" asChild>
-                  <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
+                  <LocalizedLink to="reservierung?from=lunch-muenchen-maxvorstadt">
                     {t.seo.lunch.urgencyButton}
-                  </Link>
+                  </LocalizedLink>
                 </Button>
               </div>
             </div>
@@ -271,10 +272,10 @@ const LunchMuenchen = () => {
                     {t.seo.lunch.menuTeaserDesc}
                   </p>
                   <Button asChild>
-                    <Link to="/speisekarte?from=lunch-muenchen-maxvorstadt">
+                    <LocalizedLink to="speisekarte?from=lunch-muenchen-maxvorstadt">
                       {t.seo.lunch.menuTeaserButton}
                       <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
+                    </LocalizedLink>
                   </Button>
                 </div>
                 <img 
@@ -300,14 +301,14 @@ const LunchMuenchen = () => {
                   <h3 className="text-lg font-semibold mb-2">{t.seo.lunch.crossSellCatering}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{t.seo.lunch.crossSellCateringDesc}</p>
                   <Button variant="outline" size="sm" asChild>
-                    <Link to="/catering">{t.seo.lunch.crossSellCateringButton}</Link>
+                    <LocalizedLink to="catering">{t.seo.lunch.crossSellCateringButton}</LocalizedLink>
                   </Button>
                 </div>
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="text-lg font-semibold mb-2">{t.seo.lunch.crossSellEvent}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{t.seo.lunch.crossSellEventDesc}</p>
                   <Button variant="outline" size="sm" asChild>
-                    <Link to="/firmenfeier-muenchen">{t.seo.lunch.crossSellEventButton}</Link>
+                    <LocalizedLink to="firmenfeier-muenchen">{t.seo.lunch.crossSellEventButton}</LocalizedLink>
                   </Button>
                 </div>
               </div>
@@ -337,9 +338,9 @@ const LunchMuenchen = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <Link to="/reservierung?from=lunch-muenchen-maxvorstadt">
+                  <LocalizedLink to="reservierung?from=lunch-muenchen-maxvorstadt">
                     {t.seo.lunch.ctaReserve}
-                  </Link>
+                  </LocalizedLink>
                 </Button>
                 <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
                   <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
