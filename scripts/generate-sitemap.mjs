@@ -124,6 +124,32 @@ const slugMaps = {
   },
 };
 
+// Dynamic routes for special occasions subpages (fetched from database)
+const dynamicRoutes = [
+  {
+    id: "weihnachtsmenues",
+    translations: {
+      de: "besondere-anlaesse/weihnachtsmenues",
+      en: "special-occasions/christmas-menus",
+      it: "occasioni-speciali/menu-natale",
+      fr: "occasions-speciales/menus-noel",
+    },
+    priority: "0.7",
+    changefreq: "monthly",
+  },
+  {
+    id: "silvesterparty",
+    translations: {
+      de: "besondere-anlaesse/silvesterparty",
+      en: "special-occasions/new-years-eve",
+      it: "occasioni-speciali/capodanno",
+      fr: "occasions-speciales/reveillon",
+    },
+    priority: "0.7",
+    changefreq: "monthly",
+  },
+];
+
 // Get localized URL for a base slug
 const getLocalizedUrl = (baseSlug, lang) => {
   const slugMap = slugMaps[lang];
@@ -145,16 +171,14 @@ const generateSitemap = () => {
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 `;
 
+  // Generate URLs for static pages
   for (const baseSlug of baseSlugs) {
-    // Generate URLs for all languages for this page
     const urls = LANGUAGES.map(lang => ({
       lang,
       url: getLocalizedUrl(baseSlug, lang)
     }));
     
-    // Create entry for each language version
     for (const { lang, url } of urls) {
-      // Determine priority and changefreq based on page type
       let priority = "0.5";
       let changefreq = "monthly";
       
@@ -182,13 +206,41 @@ const generateSitemap = () => {
     <priority>${priority}</priority>
 `;
       
-      // Add hreflang alternates
       for (const alternate of urls) {
         xml += `    <xhtml:link rel="alternate" hreflang="${alternate.lang}" href="${alternate.url}" />
 `;
       }
-      // x-default points to German
       xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${getLocalizedUrl(baseSlug, "de")}" />
+`;
+      
+      xml += `  </url>
+`;
+    }
+  }
+
+  // Generate URLs for dynamic routes (special occasions subpages)
+  for (const route of dynamicRoutes) {
+    const urls = LANGUAGES.map(lang => {
+      const slug = route.translations[lang];
+      if (lang === "de") {
+        return { lang, url: `${BASE_URL}/${slug}` };
+      }
+      return { lang, url: `${BASE_URL}/${lang}/${slug}` };
+    });
+
+    for (const { lang, url } of urls) {
+      xml += `  <url>
+    <loc>${url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${route.changefreq}</changefreq>
+    <priority>${route.priority}</priority>
+`;
+      
+      for (const alternate of urls) {
+        xml += `    <xhtml:link rel="alternate" hreflang="${alternate.lang}" href="${alternate.url}" />
+`;
+      }
+      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}/${route.translations.de}" />
 `;
       
       xml += `  </url>
@@ -211,5 +263,7 @@ if (!fs.existsSync(toAbsolute("dist"))) {
 }
 
 fs.writeFileSync(outputPath, sitemap);
+const staticUrls = Object.keys(slugMaps.de).length * LANGUAGES.length;
+const dynamicUrls = dynamicRoutes.length * LANGUAGES.length;
 console.log(`Sitemap generated at ${outputPath}`);
-console.log(`Total URLs: ${Object.keys(slugMaps.de).length * LANGUAGES.length}`);
+console.log(`Total URLs: ${staticUrls + dynamicUrls} (${staticUrls} static + ${dynamicUrls} dynamic)`);
