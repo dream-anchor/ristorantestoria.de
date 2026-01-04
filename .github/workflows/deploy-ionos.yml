@@ -89,14 +89,23 @@ jobs:
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess
 
+      # --- SICHERHEITSCHECK: Target Directory MUSS gesetzt sein ---
+      - name: Validate Target Directory
+        run: |
+          if [ -z "${{ secrets.IONOS_SFTP_TARGET_DIR }}" ]; then
+            echo "::error::CRITICAL: IONOS_SFTP_TARGET_DIR secret is NOT set!"
+            echo "::error::Deployment to webroot is FORBIDDEN to protect other sites."
+            echo "::error::Please set IONOS_SFTP_TARGET_DIR in GitHub Secrets (e.g., 'ristorantestoria-de')"
+            exit 1
+          fi
+          echo "✓ Target directory is set: ${{ secrets.IONOS_SFTP_TARGET_DIR }}"
+
       # --- DEPLOY ZU IONOS ---
-      # Nutze lftp für zuverlässiges SFTP mit rekursivem Upload
       - name: Deploy via SFTP to IONOS
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
           
-          # Target directory - use secret or fallback to current dir
-          TARGET_DIR="${SFTP_TARGET_DIR:-.}"
+          TARGET_DIR="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
           echo "Target directory: $TARGET_DIR"
           
           lftp -c "
