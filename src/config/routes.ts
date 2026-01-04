@@ -1,11 +1,11 @@
 import { de } from "@/translations/de";
 import { en } from "@/translations/en";
-import { it } from "@/translations/it";
+import { it as italian } from "@/translations/it";
 import { fr } from "@/translations/fr";
 import type { Language } from "@/contexts/LanguageContext";
 
 // All translation objects
-const translations = { de, en, it, fr };
+const translations = { de, en, it: italian, fr };
 
 // Supported languages
 export const SUPPORTED_LANGUAGES: Language[] = ["de", "en", "it", "fr"];
