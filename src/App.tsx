@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import Index from "./pages/Index";
@@ -33,6 +33,8 @@ import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
 import ScrollToTop from "./components/ScrollToTop";
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import NormalizePath from "./components/NormalizePath";
+import { RedirectFromLegacyPrefix } from "./components/LegacyRedirects";
 
 // SEO Landingpages
 import LunchMuenchen from "./pages/seo/LunchMuenchen";
@@ -139,9 +141,16 @@ const AppRoutes = () => {
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/login" element={<AdminLogin />} />
       
-      {/* Legacy redirects - these are handled in .htaccess but also here for SPA */}
-      <Route path="/lunch-muenchen" element={<LunchMuenchen />} />
-      <Route path="/eventlocation-muenchen" element={<EventlocationMuenchen />} />
+      {/* Legacy URL redirects (previously in .htaccess) */}
+      <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu" replace />} />
+      <Route path="/weihnachtsmenues" element={<Navigate to="/besondere-anlaesse/weihnachtsmenues" replace />} />
+      <Route path="/silvesterparty" element={<Navigate to="/besondere-anlaesse/silvesterparty" replace />} />
+      <Route path="/lunch-muenchen" element={<Navigate to="/lunch-muenchen-maxvorstadt" replace />} />
+      <Route path="/eventlocation-muenchen" element={<Navigate to="/eventlocation-muenchen-maxvorstadt" replace />} />
+      
+      {/* Legacy prefix removal: /ristorantestoria-de/* -> /* */}
+      <Route path="/ristorantestoria-de/*" element={<RedirectFromLegacyPrefix />} />
+      <Route path="/ristorantestoria-de" element={<Navigate to="/" replace />} />
       
       {/* 404 catch-all - must be last */}
       <Route path="*" element={<NotFound />} />
@@ -159,6 +168,7 @@ const App = () => (
           <Sonner />
           <GoogleAnalytics />
           <ScrollToTop />
+          <NormalizePath />
           <FloatingActions />
           <CookieBanner />
           <CookieSettingsButton />

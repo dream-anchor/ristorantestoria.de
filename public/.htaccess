@@ -1,43 +1,14 @@
 RewriteEngine On
 
 # ============================================
-# 0. WWW Kanonisierung (SEO)
+# ZERO-REDIRECT .htaccess
 # ============================================
-# Non-www zu www umleiten (HTTPS wird providerseitig bei IONOS erzwungen)
-
-RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
-RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
-
-# ============================================
-# 1. Spezielle Weiterleitungen (Query-String)
-# ============================================
-RewriteCond %{QUERY_STRING} ^page_id=2881$
-RewriteRule ^$ /impressum? [R=301,L]
+# Alle 301-Redirects wurden entfernt, um Redirect-Loops zu vermeiden.
+# Weiterleitungen werden clientseitig (SPA) gehandhabt.
+# HTTPS und WWW-Kanonisierung erfolgen providerseitig bei IONOS.
 
 # ============================================
-# 2. 301 Redirects für alte URLs (VOR dem SPA-Fallback!)
-# ============================================
-RewriteRule ^mittagsmenu$ /mittags-menu [R=301,L]
-RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
-RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
-# Redirect für alte Subdomain-URL (mit Unterverzeichnissen)
-RewriteRule ^ristorantestoria-de/(.*)$ /$1 [R=301,L]
-RewriteRule ^ristorantestoria-de$ / [R=301,L]
-
-# Legacy SEO URL redirects (shorter versions)
-RewriteRule ^lunch-muenchen$ /lunch-muenchen-maxvorstadt [R=301,L]
-RewriteRule ^eventlocation-muenchen$ /eventlocation-muenchen-maxvorstadt [R=301,L]
-
-# ============================================
-# 3. Trailing Slash Canonicalisierung (SEO)
-# ============================================
-# Entferne trailing slashes für konsistente URLs
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^(.+)/$
-RewriteRule ^(.+)/$ /$1 [R=301,L]
-
-# ============================================
-# 4. SSG + SPA-Routing (Prerendered Pages + React Router)
+# 1. SSG + SPA-Routing (Prerendered Pages + React Router)
 # ============================================
 # Prüfe zuerst ob eine prerenderte .html Version existiert
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -65,7 +36,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ /index.html [L]
 
 # ============================================
-# 4. MIME-Types für korrekte Dateiauslieferung
+# 2. MIME-Types für korrekte Dateiauslieferung
 # ============================================
 <IfModule mod_mime.c>
   AddType application/javascript .js
@@ -78,14 +49,14 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 5. GZIP-Komprimierung für bessere Performance
+# 3. GZIP-Komprimierung für bessere Performance
 # ============================================
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
 </IfModule>
 
 # ============================================
-# 6. Browser-Caching für statische Assets
+# 4. Browser-Caching für statische Assets
 # ============================================
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -97,7 +68,7 @@ RewriteRule ^ /index.html [L]
 </IfModule>
 
 # ============================================
-# 7. Erzwungene MIME-Types für spezifische Dateien
+# 5. Erzwungene MIME-Types für spezifische Dateien
 # ============================================
 <FilesMatch "\.xml$">
   ForceType application/xml
