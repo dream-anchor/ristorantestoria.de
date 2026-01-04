@@ -14,13 +14,15 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
     mode === "development" && componentTagger(),
   ].filter(Boolean),
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      // Use SSR-safe Supabase client during server build
-      ...(isSsrBuild && {
-        "@/integrations/supabase/client": path.resolve(__dirname, "./src/integrations/supabase/client.ssr.ts"),
-      }),
-    },
+    alias: [
+      // SSR-safe Supabase client (must come before generic @ alias)
+      ...(isSsrBuild ? [{
+        find: /^@\/integrations\/supabase\/client$/,
+        replacement: path.resolve(__dirname, "./src/integrations/supabase/client.ssr.ts"),
+      }] : []),
+      // Generic @ alias for all other imports
+      { find: /^@\//, replacement: path.resolve(__dirname, "./src") + "/" },
+    ],
   },
   ssr: {
     // Bundle react-helmet-async to avoid CJS/ESM interop issues
