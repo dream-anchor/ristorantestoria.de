@@ -1,18 +1,12 @@
 RewriteEngine On
 
 # ============================================
-# 0. HTTPS + WWW Kanonisierung (SEO)
+# 0. WWW Kanonisierung (SEO)
 # ============================================
-# Alle Anfragen auf https://www.ristorantestoria.de umleiten
+# Non-www zu www umleiten (HTTPS wird providerseitig bei IONOS erzwungen)
 
-# Schritt 1: Non-www zu www umleiten (immer sicher, da Host sich ändert)
 RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
 RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
-
-# Schritt 2: HTTP zu HTTPS nur wenn Proxy explizit http meldet
-# (Vermeidet Loop wenn %{HTTPS} immer off ist und kein Header gesetzt)
-RewriteCond %{HTTP:X-Forwarded-Proto} =http [NC]
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # ============================================
 # 1. Spezielle Weiterleitungen (Query-String)
