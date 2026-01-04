@@ -120,6 +120,7 @@ jobs:
               --exclude-glob .well-known/ \
               --exclude-glob .htaccess-backup/ \
               --exclude-glob cms/ \
+              --exclude-glob logs/ \
               --exclude-glob wp-content/ \
               --exclude-glob wp-admin/ \
               --exclude-glob wp-includes/ \
