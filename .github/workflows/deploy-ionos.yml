@@ -68,15 +68,19 @@ jobs:
         run: cp public/.htaccess dist/.htaccess
 
       # --- DEPLOY ZU IONOS ---
-      # Nutze FTP-Deploy-Action für zuverlässige rekursive Uploads
-      - name: Deploy via FTP to IONOS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.IONOS_SFTP_HOST }}
-          username: ${{ secrets.IONOS_SFTP_USER }}
-          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          protocol: sftp
-          port: 22
-          local-dir: ./dist/
-          server-dir: /ristorantestoria-de/
-          dangerous-clean-slate: true
+      # Nutze lftp für zuverlässiges SFTP mit rekursivem Upload
+      - name: Deploy via SFTP to IONOS
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:timeout 30;
+            set net:max-retries 3;
+            open -u $SFTP_USER,$SFTP_PASS sftp://$SFTP_HOST;
+            mirror -R --delete --verbose --parallel=4 ./dist /ristorantestoria-de;
+            bye
+          "
+        env:
+          SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
+          SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
+          SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
