@@ -203,7 +203,12 @@ const generateSitemap = () => {
 
 // Main
 const sitemap = generateSitemap();
-const outputPath = toAbsolute("public/sitemap.xml");
+const outputPath = toAbsolute("dist/sitemap.xml");
+
+// Ensure dist directory exists
+if (!fs.existsSync(toAbsolute("dist"))) {
+  fs.mkdirSync(toAbsolute("dist"), { recursive: true });
+}
 
 fs.writeFileSync(outputPath, sitemap);
 console.log(`Sitemap generated at ${outputPath}`);
