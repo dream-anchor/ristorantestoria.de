@@ -14,32 +14,22 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const RomantischesDinner = () => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
   usePrerenderReady(true);
 
   return (
     <>
       <StaticBotContent
-        title={language === 'de' ? 'Romantisches Dinner München – Italienisches Restaurant' : 'Romantic Dinner Munich – Italian Restaurant'}
-        description={language === 'de' 
-          ? 'Romantisches Dinner im STORIA München: Candlelight-Atmosphäre, italienische Spezialitäten & erlesene Weine in der Maxvorstadt. Perfekt für Jahrestage, Valentinstag & besondere Anlässe.'
-          : 'Romantic dinner at STORIA Munich: Candlelight atmosphere, Italian specialties & fine wines in Maxvorstadt. Perfect for anniversaries, Valentine\'s Day & special occasions.'}
+        title={t.seo.romanticDinner.title}
+        description={t.seo.romanticDinner.description}
         sections={[
-          { heading: language === 'de' ? 'Perfekt für' : 'Perfect for', content: [
-            language === 'de' ? 'Jahrestage & besondere Anlässe' : 'Anniversaries & special occasions',
-            language === 'de' ? 'Valentinstag & Heiratsanträge' : 'Valentine\'s Day & proposals',
-            language === 'de' ? 'Romantische Abende zu zweit' : 'Romantic evenings for two'
-          ]},
-          { heading: language === 'de' ? 'Unsere Highlights' : 'Our Highlights', content: language === 'de' 
-            ? 'Hausgemachte Pasta, frische Meeresfrüchte, erlesene italienische Weine und unser berühmtes Tiramisu – serviert in eleganter Atmosphäre.'
-            : 'Homemade pasta, fresh seafood, fine Italian wines and our famous tiramisu – served in elegant atmosphere.' }
+          { heading: t.seo.romanticDinner.atmosphereTitle, content: t.seo.romanticDinner.atmosphereDesc },
+          { heading: t.seo.romanticDinner.specialTitle, content: t.seo.romanticDinner.specialDesc }
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Romantisches Dinner – Date Night' : 'Romantic Dinner – Date Night'}
-        description={language === 'de' 
-          ? 'Romantisches Dinner München im STORIA: Date Night im italienischen Ambiente. Candlelight, exquisite Küche & Weine in der Maxvorstadt. Jetzt Tisch reservieren!'
-          : 'Romantic dinner Munich at STORIA: Date night in Italian ambiance. Candlelight, exquisite cuisine & wines in Maxvorstadt. Book your table now!'}
+        title={t.seo.romanticDinner.title}
+        description={t.seo.romanticDinner.description}
         canonical="/romantisches-dinner-muenchen"
       />
       <StructuredData type="restaurant" />
@@ -47,7 +37,7 @@ const RomantischesDinner = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Romantisches Dinner' : 'Romantic Dinner', url: '/romantisches-dinner-muenchen' }
+          { name: t.internalLinks.romanticDinner, url: '/romantisches-dinner-muenchen' }
         ]} 
       />
       <div className="min-h-screen bg-background flex flex-col">
@@ -58,7 +48,7 @@ const RomantischesDinner = () => {
               <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 w-auto mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
             </Link>
             <p className="text-lg text-muted-foreground tracking-wide">
-              RISTORANTE · PIZZERIA · BAR
+              {t.hero.subtitle}
             </p>
           </div>
         </div>
@@ -67,44 +57,42 @@ const RomantischesDinner = () => {
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-4xl mx-auto">
             <h1 className="text-4xl font-serif font-bold mb-6 text-center">
-              {language === 'de' ? 'Romantisches Dinner München – Date Night im STORIA' : 'Romantic Dinner Munich – Date Night at STORIA'}
+              {t.seo.romanticDinner.title}
             </h1>
             
             <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
-              {language === 'de'
-                ? 'Verbringen Sie einen unvergesslichen Abend zu zweit im STORIA. Italienische Romantik, exquisite Küche und erlesene Weine – der perfekte Rahmen für Ihre Date Night in München.'
-                : 'Spend an unforgettable evening for two at STORIA. Italian romance, exquisite cuisine and fine wines – the perfect setting for your date night in Munich.'}
+              {t.seo.romanticDinner.description}
             </p>
 
             <div className="bg-card p-8 rounded-lg border border-border mb-8">
               <h2 className="text-2xl font-serif font-semibold mb-4">
-                {language === 'de' ? 'Ihr romantischer Abend' : 'Your Romantic Evening'}
+                {t.seo.romanticDinner.atmosphereTitle}
               </h2>
-              <ul className="space-y-3 text-muted-foreground mb-6">
-                <li>✓ {language === 'de' ? 'Stilvolles italienisches Ambiente' : 'Stylish Italian ambiance'}</li>
-                <li>✓ {language === 'de' ? 'Ausgewählte Weine aus Italien' : 'Selected wines from Italy'}</li>
-                <li>✓ {language === 'de' ? 'Frische Pasta & Meeresfrüchte' : 'Fresh pasta & seafood'}</li>
-                <li>✓ {language === 'de' ? 'Hausgemachte Dolci' : 'Homemade dolci'}</li>
-                <li>✓ {language === 'de' ? 'Aufmerksamer, diskreter Service' : 'Attentive, discreet service'}</li>
-              </ul>
+              <p className="text-muted-foreground mb-4">{t.seo.romanticDinner.atmosphereDesc}</p>
+              
+              <h3 className="text-xl font-semibold mb-3">{t.seo.romanticDinner.menuTitle}</h3>
+              <p className="text-muted-foreground mb-4">{t.seo.romanticDinner.menuDesc}</p>
+              
+              <h3 className="text-xl font-semibold mb-3">{t.seo.romanticDinner.wineTitle}</h3>
+              <p className="text-muted-foreground">{t.seo.romanticDinner.wineDesc}</p>
             </div>
 
             <div className="bg-secondary/50 p-8 rounded-lg mb-8">
               <h2 className="text-2xl font-serif font-semibold mb-4">
-                {language === 'de' ? 'Perfekt für besondere Anlässe' : 'Perfect for Special Occasions'}
+                {t.seo.romanticDinner.specialTitle}
               </h2>
               <p className="text-muted-foreground mb-4">
-                {language === 'de'
-                  ? <>Ob Jahrestag, Verlobung oder einfach ein besonderer Abend zu zweit – im STORIA schaffen wir den perfekten Rahmen für Ihre romantischen Momente. Beginnen Sie mit einem <LocalizedLink to="aperitivo-muenchen" className="text-primary hover:underline">italienischen Aperitivo</LocalizedLink> und genießen Sie unsere <LocalizedLink to="neapolitanische-pizza-muenchen" className="text-primary hover:underline">neapolitanische Pizza</LocalizedLink> oder feine Pasta. Erfahren Sie mehr <LocalizedLink to="ueber-uns" className="text-primary hover:underline">über unsere Familie Speranza</LocalizedLink>.</>
-                  : <>Whether anniversary, engagement or simply a special evening for two – at STORIA we create the perfect setting for your romantic moments. Start with an <LocalizedLink to="aperitivo-muenchen" className="text-primary hover:underline">Italian aperitivo</LocalizedLink> and enjoy our <LocalizedLink to="neapolitanische-pizza-muenchen" className="text-primary hover:underline">Neapolitan pizza</LocalizedLink> or fine pasta. Learn more <LocalizedLink to="ueber-uns" className="text-primary hover:underline">about the Speranza family</LocalizedLink>.</>
-                }
+                {t.seo.romanticDinner.specialDesc}{' '}
+                <LocalizedLink to="aperitivo-muenchen" className="text-primary hover:underline">{t.internalLinks.aperitivoMunich}</LocalizedLink>{' '}
+                <LocalizedLink to="neapolitanische-pizza-muenchen" className="text-primary hover:underline">{t.internalLinks.neapolitanPizza}</LocalizedLink>{' '}
+                <LocalizedLink to="ueber-uns" className="text-primary hover:underline">{t.footer.aboutUs}</LocalizedLink>.
               </p>
               <div className="flex flex-wrap gap-4 mt-6">
                 <Button asChild>
-                  <LocalizedLink to="reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</LocalizedLink>
+                  <LocalizedLink to="reservierung">{t.seo.romanticDinner.reserveButton}</LocalizedLink>
                 </Button>
                 <Button variant="outline" asChild>
-                  <LocalizedLink to="speisekarte">{language === 'de' ? 'Speisekarte ansehen' : 'View Menu'}</LocalizedLink>
+                  <LocalizedLink to="speisekarte">{t.seo.romanticDinner.menuButton}</LocalizedLink>
                 </Button>
               </div>
             </div>
