@@ -537,4 +537,84 @@ export const it = {
     "admin": "admin",
     "admin/login": "admin/login",
   },
+  pages: {
+    index: {
+      description: 'STORIA Monaco: Ristorante italiano a Maxvorstadt. Pizza dal forno a pietra, pasta fresca & aperitivo. Vicino a Königsplatz. Prenota ora!',
+    },
+    speisekarte: {
+      title: 'Carta – Pizza & Pasta',
+      h1: 'Carta – Ristorante Italiano Monaco Maxvorstadt',
+      description: 'Carta STORIA: Pizza napoletana dal forno a pietra, pasta fresca & antipasti. Ristorante italiano Maxvorstadt vicino a Königsplatz. Prenota ora!',
+      intro: 'Autentica cucina italiana – pizza napoletana dal forno a pietra, pasta fatta in casa e antipasti freschi. Godetevi i nostri pregiati vini italiani. Durante la settimana consigliamo il nostro conveniente menu pranzo.',
+      breadcrumb: 'Carta',
+    },
+    getraenke: {
+      title: 'Carta Bevande – Aperitivo Monaco',
+      h1: 'Carta Bevande – Aperitivo & Vini a Monaco',
+      description: 'Carta bevande STORIA: Aperitivo, vini italiani & cocktail a Monaco. Late Night Bar 21:00-22:30. Maxvorstadt. Prenota ora!',
+      intro: 'Vini italiani pregiati, cocktail classici e Late Night Aperitivo in un\'atmosfera elegante.',
+      breadcrumb: 'Bevande',
+    },
+    mittagsmenu: {
+      title: 'Menu Pranzo – Pranzo Monaco Maxvorstadt',
+      h1: 'Menu Pranzo – Pranzo Italiano Monaco Maxvorstadt',
+      description: 'Menu pranzo da STORIA Monaco Maxvorstadt: Cucina italiana fresca Lun-Ven a prezzi convenienti. Pranzo vicino alla stazione centrale & Königsplatz. Godetevi la vostra pausa pranzo!',
+      breadcrumb: 'Menu Pranzo',
+    },
+    catering: {
+      title: 'Catering & Eventi – Location Eventi Monaco',
+      h1: 'Catering & Eventi – Location Eventi Monaco Maxvorstadt',
+      description: 'Catering italiano Monaco & location eventi Maxvorstadt: Feste aziendali, matrimoni, compleanni. STORIA – il vostro partner per eventi indimenticabili!',
+      intro: 'Catering italiano ed elegante location per eventi a Maxvorstadt – perfetta per feste aziendali, matrimoni e occasioni private.',
+      breadcrumb: 'Catering & Eventi',
+    },
+    ueberUns: {
+      title: 'Chi Siamo – La Famiglia Speranza',
+      description: 'STORIA – Ristorante italiano della famiglia Speranza. Pizza napoletana & pasta con atmosfera da trattoria a Monaco Maxvorstadt.',
+      breadcrumb: 'Chi Siamo',
+    },
+    reservierung: {
+      title: 'Prenota un Tavolo – Ristorante Monaco',
+      h1: 'Prenota un Tavolo',
+      description: 'Prenota un tavolo da STORIA Monaco Maxvorstadt: Prenota online o chiama. Il vostro ristorante italiano vicino a Königsplatz & stazione centrale. Assicuratevi il vostro posto!',
+      breadcrumb: 'Prenotazione',
+    },
+    besondereAnlaesse: {
+      breadcrumb: 'Occasioni Speciali',
+    },
+    kontakt: {
+      title: 'Contatto – Ristorante Monaco Maxvorstadt',
+      description: 'Contattate STORIA Monaco: Telefono, email, WhatsApp. Il vostro ristorante italiano a Maxvorstadt – Karlstraße 47a. Prenotate ora!',
+      breadcrumb: 'Contatto',
+    },
+  },
+  common: {
+    backTo: 'Torna a',
+    goToHomepage: 'Vai alla homepage',
+    openingHoursLabel: 'Orari di apertura',
+    openingHoursText: 'Lun-Ven 09:00-01:00, Sab-Dom 12:00-01:00',
+    seoDescription: 'STORIA – Il vostro ristorante italiano a Maxvorstadt Monaco vicino a Königsplatz, TU Monaco e musei Pinakothek. Ristorante Pizzeria con pizza napoletana dal forno a pietra, pasta fatta in casa e aperitivo. A pochi minuti dalla stazione centrale. La Storia – Trattoria italiana Monaco Karlstraße.',
+  },
+  faq: [
+    {
+      question: 'Dove si trova il Ristorante STORIA?',
+      answer: 'STORIA – il vostro ristorante italiano a Maxvorstadt – si trova in Karlstraße 47a, 80333 Monaco. A pochi minuti a piedi da Königsplatz, dai musei Pinakothek e dalla TU Monaco, vicino alla stazione centrale.',
+    },
+    {
+      question: 'Come posso prenotare un tavolo da STORIA?',
+      answer: 'Potete prenotare un tavolo online tramite OpenTable sulla nostra pagina prenotazioni o chiamando il +49 89 515196. Come popolare pizzeria a Maxvorstadt, consigliamo soprattutto di prenotare per i fine settimana.',
+    },
+    {
+      question: 'Cosa offre La Storia?',
+      answer: 'La Storia offre autentica cucina italiana: Pizza napoletana dal forno a pietra, pasta fatta in casa, antipasti freschi, pesce pregiato, oltre a vini scelti e aperitivo.',
+    },
+    {
+      question: 'Quali sono gli orari di apertura di STORIA?',
+      answer: 'La nostra trattoria italiana a Monaco è aperta dal lunedì al venerdì dalle 9:00 all\'1:00 e sabato/domenica dalle 12:00 all\'1:00. Il pranzo viene servito Lun-Ven dalle 11:30 alle 14:30.',
+    },
+    {
+      question: 'Il Ristorante Pizzeria STORIA offre menu pranzo?',
+      answer: 'Sì, offriamo un menu pranzo variabile nei giorni feriali a prezzi convenienti – ideale per la vostra pausa pranzo a Maxvorstadt. Consultate la nostra pagina menu pranzo per le offerte attuali.',
+    },
+  ],
 };

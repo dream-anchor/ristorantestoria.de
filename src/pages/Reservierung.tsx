@@ -13,26 +13,22 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Reservierung = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   usePrerenderReady(true);
 
   return (
     <>
       <StaticBotContent
-        title={language === 'de' ? 'Tisch reservieren – STORIA München Maxvorstadt' : 'Book a Table – STORIA Munich Maxvorstadt'}
-        description={language === 'de' 
-          ? 'Reservieren Sie Ihren Tisch im STORIA München Maxvorstadt. Italienisches Restaurant nahe Königsplatz & Pinakotheken. Online-Reservierung über OpenTable oder telefonisch unter +49 89 51519696.'
-          : 'Book your table at STORIA Munich Maxvorstadt. Italian restaurant near Königsplatz & Pinakothek museums. Online booking via OpenTable or call +49 89 51519696.'}
+        title={t.pages.reservierung.h1}
+        description={t.pages.reservierung.description}
         sections={[
-          { heading: language === 'de' ? 'Online reservieren' : 'Book online', content: language === 'de' ? 'Nutzen Sie unser OpenTable-Widget für schnelle Online-Reservierungen.' : 'Use our OpenTable widget for quick online reservations.' },
-          { heading: language === 'de' ? 'Telefonisch reservieren' : 'Phone reservation', content: '+49 89 51519696' }
+          { heading: t.reservationBooking.title, content: t.reservationBooking.openTableNote },
+          { heading: t.contact.phone, content: '+49 89 51519696' }
         ]}
       />
       <SEO
-        title={language === 'de' ? 'Tisch reservieren – Ristorante München' : 'Book a Table – Italian Restaurant Munich'}
-        description={language === 'de' 
-          ? 'Tisch reservieren im STORIA München: Italiener in der Maxvorstadt nahe Königsplatz. Online über OpenTable oder telefonisch buchen!'
-          : 'Book a table at STORIA Munich: Italian restaurant in Maxvorstadt near Königsplatz. Reserve online via OpenTable or by phone!'}
+        title={t.pages.reservierung.title}
+        description={t.pages.reservierung.description}
         canonical="/reservierung"
       />
       <StructuredData type="restaurant" />
@@ -40,7 +36,7 @@ const Reservierung = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Reservierung' : 'Reservation', url: '/reservierung' }
+          { name: t.pages.reservierung.breadcrumb, url: '/reservierung' }
         ]} 
       />
       <div className="min-h-screen bg-background flex flex-col">
@@ -60,16 +56,10 @@ const Reservierung = () => {
         <main className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
           <h1 className="text-4xl font-bold mb-4 text-center">
-            {language === 'de' ? 'Tisch reservieren – Ristorante München Maxvorstadt' : 'Book a Table – Italian Restaurant Munich Maxvorstadt'}
+            {t.pages.reservierung.h1}
           </h1>
           <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
-            {language === 'de' 
-              ? 'Wählen Sie Ihre Wunschzeit und reservieren Sie bequem über OpenTable.'
-              : language === 'it'
-              ? 'Scegliete l\'orario desiderato e prenotate comodamente tramite OpenTable.'
-              : language === 'fr'
-              ? 'Choisissez votre horaire et réservez facilement via OpenTable.'
-              : 'Choose your preferred time and book conveniently via OpenTable.'}
+            {t.reservationBooking.subtitle}
           </p>
           
           <ReservationBooking />

@@ -14,17 +14,15 @@ import { useMenu } from "@/hooks/useMenu";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Getraenke = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { data: menu, isLoading } = useMenu('drinks');
   usePrerenderReady(!isLoading && !!menu);
 
   return (
     <>
       <SEO 
-        title={language === 'de' ? 'Getränkekarte – Aperitivo München' : 'Drinks Menu – Aperitivo Munich'}
-        description={language === 'de' 
-          ? 'STORIA Getränkekarte: Aperitivo, italienische Weine & Cocktails in München. Late Night Bar 21-22:30 Uhr. Maxvorstadt. Jetzt reservieren!'
-          : 'STORIA drinks menu: Aperitivo, Italian wines & cocktails in Munich. Late Night Bar 9-10:30 PM. Maxvorstadt. Book now!'}
+        title={t.pages.getraenke.title}
+        description={t.pages.getraenke.description}
         canonical="/getraenke"
       />
       <StructuredData type="restaurant" />
@@ -32,7 +30,7 @@ const Getraenke = () => {
         type="breadcrumb" 
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Getränke' : 'Drinks', url: '/getraenke' }
+          { name: t.pages.getraenke.breadcrumb, url: '/getraenke' }
         ]} 
       />
       <MenuStructuredData menuType="drinks" />
@@ -53,12 +51,10 @@ const Getraenke = () => {
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <h1 className="text-4xl font-serif font-bold mb-4 text-center">
-            {language === 'de' ? 'Getränkekarte – Aperitivo & Weine in München' : 'Drinks Menu – Aperitivo & Wines in Munich'}
+            {t.pages.getraenke.h1}
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            {language === 'de'
-              ? 'Erlesene italienische Weine, klassische Cocktails und Late Night Aperitivo in stilvollem Ambiente.'
-              : 'Exquisite Italian wines, classic cocktails and Late Night Aperitivo in a stylish atmosphere.'}
+            {t.pages.getraenke.intro}
           </p>
 
           <MenuDisplay menuType="drinks" />

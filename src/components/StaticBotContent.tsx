@@ -16,7 +16,7 @@ interface StaticBotContentProps {
  * - sr-only div for JS-enabled crawlers like Googlebot
  */
 const StaticBotContent = ({ title, description, sections = [], includeContact = true }: StaticBotContentProps) => {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   const content = (
     <article itemScope itemType="https://schema.org/WebPage">
@@ -49,8 +49,7 @@ const StaticBotContent = ({ title, description, sections = [], includeContact = 
           <p itemProp="telephone">+49 89 51519696</p>
           <p itemProp="email">info@ristorantestoria.de</p>
           <p>
-            {language === 'de' ? 'Öffnungszeiten' : 'Opening Hours'}:{' '}
-            {language === 'de' ? 'Mo-Fr 09:00-01:00, Sa-So 12:00-01:00' : 'Mon-Fri 9am-1am, Sat-Sun 12pm-1am'}
+            {t.common.openingHoursLabel}: {t.common.openingHoursText}
           </p>
         </footer>
       )}
