@@ -1,3 +1,6 @@
+# Erzwinge UTF-8 für HTML-Dateien
+AddDefaultCharset UTF-8
+
 # ============================================
 # 0. WICHTIGSTER FIX FÜR SSG (Ordner -> index.html)
 # ============================================
