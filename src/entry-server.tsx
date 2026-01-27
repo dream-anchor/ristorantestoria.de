@@ -5,7 +5,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import App from './App'
 
 export function render(url: string, context: any) {
-  const helmetContext = {}
+  const helmetContext = {} as any
   
   const html = ReactDOMServer.renderToString(
     <React.StrictMode>
@@ -17,8 +17,7 @@ export function render(url: string, context: any) {
     </React.StrictMode>
   )
 
-  // WICHTIG: Das hier brauchen wir für SEO!
-  const { helmet } = helmetContext as any
+  const { helmet } = helmetContext
 
   return { html, helmet }
 }
