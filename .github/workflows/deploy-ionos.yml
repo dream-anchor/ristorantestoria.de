@@ -38,7 +38,7 @@ jobs:
           echo "=== Build Verification ==="
           ls -R dist/
           
-          # Wir prüfen auf .html Dateien (da dein Skript dist/menu/index.html erzeugt)
+          # Wir prüfen auf .html Dateien
           check_page() {
             if [ -f "dist/$1.html" ] || [ -f "dist/$1/index.html" ]; then
               echo "✓ $1 exists"
@@ -49,8 +49,7 @@ jobs:
           }
           
           check_page "index"
-          # Optional: weitere wichtige Seiten prüfen
-          # check_page "menu" 
+          # check_page "menu"
 
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
@@ -67,5 +66,32 @@ jobs:
           
           TARGET_DIR="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
           
-          # Sicherheits-Check: Nur in den vorgesehenen Ordner deployen
-          if [[ "$TARGET_DIR" != *"
+          # Sicherheits-Check
+          if [[ "$TARGET_DIR" != *"ristorantestoria-de"* ]]; then
+            echo "Security Stop: Target Directory looks wrong!"
+            exit 1
+          fi
+
+          # Wir nutzen '<<EOF', das ist robuster gegen Syntax-Fehler bei Anführungszeichen
+          lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" <<EOF
+          set sftp:auto-confirm yes
+          set net:timeout 60
+          set net:max-retries 5
+          set cmd:fail-exit yes
+          
+          echo "=== Ensure target directory exists: $TARGET_DIR ==="
+          mkdir -p "$TARGET_DIR"
+          
+          echo "=== Changing to target directory ==="
+          cd "$TARGET_DIR"
+          
+          echo "=== Starting upload ==="
+          mirror -R --verbose --parallel=4 --delete ./dist .
+          
+          bye
+          EOF
+        env:
+          SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
+          SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
+          SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          IONOS_SFTP_TARGET_DIR: ${{ secrets.IONOS_SFTP_TARGET_DIR }}
