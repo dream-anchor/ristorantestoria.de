@@ -1,5 +1,9 @@
 /**
- * Prerender Script (Optimized for SEO & Helmet)
+ * Prerender Script
+ * * Generates static HTML for IONOS (Apache)
+ * - Fetches routes from slugs.json & Supabase
+ * - Injects SEO (React Helmet)
+ * - Creates folder structures (e.g. /en/index.html) to prevent 403 errors
  */
 
 import fs from "node:fs";
@@ -11,14 +15,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const toAbsolute = (p) => path.resolve(__dirname, p);
 
-// Import slugs from Single Source of Truth
+// Create require to load JSON files in ESM
 const require = createRequire(import.meta.url);
-// Falls slugs.json fehlt, fangen wir das ab, damit der Build nicht crasht
+
+// 1. Load Slugs (Fail gracefully if missing)
 let slugMaps = { de: {}, parentSlugs: {} };
 try {
   slugMaps = require("./src/config/slugs.json");
 } catch (e) {
-  console.warn("⚠️ slugs.json not found, using basic routes.");
+  console.warn("⚠️ slugs.json not found or invalid. Using basic routes.");
 }
 
 const LANGUAGES = ["de", "en", "it", "fr"];
@@ -47,7 +52,11 @@ async function fetchDynamicSlugs() {
       }
     );
 
-    if (!response.ok) return [];
+    if (!response.ok) {
+      console.warn(`⚠️ Failed to fetch dynamic slugs: ${response.status}`);
+      return [];
+    }
+
     const menus = await response.json();
     console.log(`📦 Found ${menus.length} published special menus`);
     return menus.map((m) => m.slug);
@@ -64,7 +73,10 @@ function getLocalizedPath(baseSlug, lang) {
   const localizedSlug = slugMaps[lang]?.[baseSlug];
   if (localizedSlug === undefined) return null;
   
-  if (localizedSlug === "") return lang === "de" ? "/" : `/${lang}`;
+  if (localizedSlug === "") {
+    return lang === "de" ? "/" : `/${lang}`;
+  }
+  
   return lang === "de" ? `/${localizedSlug}` : `/${lang}/${localizedSlug}`;
 }
 
@@ -73,19 +85,22 @@ function getLocalizedPath(baseSlug, lang) {
  */
 async function generateRoutesToPrerender() {
   const routes = [];
-  
+
   // 1. Static Routes from slugs.json
   if (slugMaps.de) {
-    const staticBaseSlugs = Object.keys(slugMaps.de).filter(s => !s.startsWith("admin"));
+    const staticBaseSlugs = Object.keys(slugMaps.de).filter(
+      (slug) => !slug.startsWith("admin")
+    );
+
     for (const baseSlug of staticBaseSlugs) {
       for (const lang of LANGUAGES) {
-        const p = getLocalizedPath(baseSlug, lang);
-        if (p) routes.push(p);
+        const localizedPath = getLocalizedPath(baseSlug, lang);
+        if (localizedPath) routes.push(localizedPath);
       }
     }
   } else {
-    // Fallback falls slugs.json leer ist
-    routes.push("/"); 
+    // Fallback if slugs.json is missing
+    routes.push("/");
   }
 
   // 2. Dynamic Routes from Supabase
@@ -94,7 +109,8 @@ async function generateRoutesToPrerender() {
 
   for (const menuSlug of dynamicSlugs) {
     for (const lang of LANGUAGES) {
-      const parentSlug = parentSlugs[lang] || 'menu';
+      // Default fallback to 'menu' if parentSlugs is missing
+      const parentSlug = parentSlugs[lang] || "menu"; 
       const routePath = lang === "de" 
         ? `/${parentSlug}/${menuSlug}`
         : `/${lang}/${parentSlug}/${menuSlug}`;
@@ -102,7 +118,7 @@ async function generateRoutesToPrerender() {
     }
   }
 
-  return routes; // Admin routes lassen wir weg, da diese oft client-only sind
+  return routes;
 }
 
 // Main execution
@@ -111,49 +127,68 @@ async function generateRoutesToPrerender() {
   const { render } = await import("./dist/server/entry-server.js");
 
   const routesToPrerender = await generateRoutesToPrerender();
-  // Sicherstellen, dass Root dabei ist
+  
+  // Ensure root is always rendered
   if (!routesToPrerender.includes('/')) routesToPrerender.push('/');
 
   console.log(`\n🚀 Prerendering ${routesToPrerender.length} routes...\n`);
 
+  let successCount = 0;
+  let errorCount = 0;
+
   for (const url of routesToPrerender) {
     try {
-      // HIER IST DIE ÄNDERUNG: Wir holen HTML + Helmet
+      // 1. Render App & get Helmet data
+      // Note: entry-server.tsx must return { html, helmet }
       const { html, helmet } = render(url, {});
-      
-      // 1. App HTML einfügen (ersetzt <div id="root"> oder )
+
+      // 2. Inject HTML into Template
+      // Replaces OR <div id="root"></div>
       let finalHtml = template.replace(
-        /|<div id="root"><\/div>|<div id="root">\s*<\/div>/, 
+        /|<div id="root"><\/div>|<div id="root">\s*<\/div>/,
         `<div id="root">${html}</div>`
       );
 
-      // 2. SEO Meta Tags einfügen (Helmet)
+      // 3. Inject SEO Tags (Helmet)
       if (helmet) {
         const helmetHtml = `
-          ${helmet.title ? helmet.title.toString() : ''}
-          ${helmet.meta ? helmet.meta.toString() : ''}
-          ${helmet.link ? helmet.link.toString() : ''}
-          ${helmet.script ? helmet.script.toString() : ''}
+          ${helmet.title ? helmet.title.toString() : ""}
+          ${helmet.meta ? helmet.meta.toString() : ""}
+          ${helmet.link ? helmet.link.toString() : ""}
+          ${helmet.script ? helmet.script.toString() : ""}
         `;
-        finalHtml = finalHtml.replace('</head>', `${helmetHtml}</head>`);
+        finalHtml = finalHtml.replace("</head>", `${helmetHtml}</head>`);
       }
 
-      // Dateipfad bestimmen
-      let filePath = `dist${url === '/' ? '/index.html' : `${url}.html`}`;
-      
-      // Ordner erstellen
-      const dir = path.dirname(toAbsolute(filePath));
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      // 4. Determine File Path (Fix for IONOS 403)
+      // Instead of dist/en.html -> dist/en/index.html
+      const cleanUrl = url === '/' ? '' : url.replace(/\/$/, '');
+      const filePath = `dist${cleanUrl}/index.html`;
 
+      // 5. Create Directory
+      const dir = path.dirname(toAbsolute(filePath));
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+
+      // 6. Write File
       fs.writeFileSync(toAbsolute(filePath), finalHtml);
       console.log(`✓ Rendered: ${filePath}`);
-      
+      successCount++;
     } catch (e) {
-      console.error(`❌ Error rendering ${url}:`, e);
+      console.error(`❌ Error rendering ${url}:`, e.message);
+      errorCount++;
     }
   }
 
-  // Cleanup Server Folder
-  // fs.rmSync(toAbsolute('dist/server'), { recursive: true, force: true });
-  console.log(`\n✅ Prerendering done.`);
+  // Cleanup: Remove server build folder (not needed on hosting)
+  try {
+    fs.rmSync(toAbsolute('dist/server'), { recursive: true, force: true });
+  } catch (e) { 
+    // ignore cleanup errors 
+  }
+
+  console.log(`\n✅ Prerendering complete!`);
+  console.log(`   - Success: ${successCount}`);
+  console.log(`   - Errors: ${errorCount}`);
 })();
