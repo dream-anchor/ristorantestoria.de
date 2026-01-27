@@ -24,12 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # --- BUILD PROZESS ---
+      # --- BUILD PROZESS (SSG) ---
+      # Führt build:client -> build:server -> prerender aus
       - name: Build Project (SSG)
         run: npm run build
         env: 
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          # Dein Skript nutzt diesen Key Namen:
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       # --- BUILD VERIFICATION ---
@@ -38,7 +38,7 @@ jobs:
           echo "=== Build Verification ==="
           ls -R dist/
           
-          # Wir prüfen auf .html Dateien (da dein Skript dist/menu.html erzeugt)
+          # Wir prüfen auf .html Dateien (da dein Skript dist/menu/index.html erzeugt)
           check_page() {
             if [ -f "dist/$1.html" ] || [ -f "dist/$1/index.html" ]; then
               echo "✓ $1 exists"
@@ -49,11 +49,16 @@ jobs:
           }
           
           check_page "index"
-          # Optional: Prüfe nur Seiten, von denen du weißt, dass sie in slugs.json stehen
+          # Optional: weitere wichtige Seiten prüfen
           # check_page "menu" 
 
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
+
+      - name: Create Deploy Marker
+        run: |
+          echo "Build: $(date -u +%Y-%m-%dT%H:%M:%SZ)" > dist/__build_info.txt
+          echo "Commit: ${{ github.sha }}" >> dist/__build_info.txt
 
       # --- DEPLOY ZU IONOS ---
       - name: Deploy via SFTP to IONOS
@@ -62,31 +67,5 @@ jobs:
           
           TARGET_DIR="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
           
-          if [[ "$TARGET_DIR" != *"ristorantestoria-de"* ]]; then
-            echo "Security Stop: Target Directory looks wrong!"
-            exit 1
-          fi
-
-          lftp -c "
-            set sftp:auto-confirm yes;
-            set net:timeout 60;
-            set net:max-retries 5;
-            set cmd:fail-exit yes;
-            
-            open -u $SFTP_USER,$SFTP_PASS sftp://$SFTP_HOST;
-            
-            echo '=== Changing to target directory: $TARGET_DIR ===';
-            cd $TARGET_DIR || mkdir -p $TARGET_DIR; 
-            cd $TARGET_DIR;
-            
-            echo '=== Starting upload ===';
-            mirror -R --verbose --parallel=4 --delete \
-              ./dist .;
-            
-            bye
-          "
-        env:
-          SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
-          SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
-          SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          IONOS_SFTP_TARGET_DIR: ${{ secrets.IONOS_SFTP_TARGET_DIR }}
+          # Sicherheits-Check: Nur in den vorgesehenen Ordner deployen
+          if [[ "$TARGET_DIR" != *"
