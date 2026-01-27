@@ -1,11 +1,5 @@
 /**
- * Prerender Script
- * 
- * Single Source of Truth: src/config/slugs.json + Supabase Database
- * 
- * This script generates static HTML files for all routes by:
- * 1. Reading static routes from slugs.json
- * 2. Fetching dynamic special menu routes from Supabase
+ * Prerender Script (Optimized for SEO & Helmet)
  */
 
 import fs from "node:fs";
@@ -15,16 +9,21 @@ import { createRequire } from "node:module";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const toAbsolute = (p) => path.resolve(__dirname, p);
 
 // Import slugs from Single Source of Truth
 const require = createRequire(import.meta.url);
-const slugMaps = require("./src/config/slugs.json");
+// Falls slugs.json fehlt, fangen wir das ab, damit der Build nicht crasht
+let slugMaps = { de: {}, parentSlugs: {} };
+try {
+  slugMaps = require("./src/config/slugs.json");
+} catch (e) {
+  console.warn("⚠️ slugs.json not found, using basic routes.");
+}
 
 const LANGUAGES = ["de", "en", "it", "fr"];
 
-// Supabase configuration from environment
+// Supabase configuration
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
@@ -33,7 +32,7 @@ const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
  */
 async function fetchDynamicSlugs() {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.warn("⚠️  Supabase credentials not found. Skipping dynamic routes.");
+    console.warn("⚠️ Supabase credentials not found. Skipping dynamic routes.");
     return [];
   }
 
@@ -48,11 +47,7 @@ async function fetchDynamicSlugs() {
       }
     );
 
-    if (!response.ok) {
-      console.warn(`⚠️  Failed to fetch dynamic slugs: ${response.status}`);
-      return [];
-    }
-
+    if (!response.ok) return [];
     const menus = await response.json();
     console.log(`📦 Found ${menus.length} published special menus`);
     return menus.map((m) => m.slug);
@@ -67,16 +62,9 @@ async function fetchDynamicSlugs() {
  */
 function getLocalizedPath(baseSlug, lang) {
   const localizedSlug = slugMaps[lang]?.[baseSlug];
-  if (localizedSlug === undefined) {
-    console.warn(`⚠️  No localized slug found for "${baseSlug}" in "${lang}"`);
-    return null;
-  }
+  if (localizedSlug === undefined) return null;
   
-  if (localizedSlug === "") {
-    // Home page
-    return lang === "de" ? "/" : `/${lang}`;
-  }
-  
+  if (localizedSlug === "") return lang === "de" ? "/" : `/${lang}`;
   return lang === "de" ? `/${localizedSlug}` : `/${lang}/${localizedSlug}`;
 }
 
@@ -85,29 +73,28 @@ function getLocalizedPath(baseSlug, lang) {
  */
 async function generateRoutesToPrerender() {
   const routes = [];
-
-  // Get static base slugs (excluding admin routes for now, we'll add them separately)
-  const staticBaseSlugs = Object.keys(slugMaps.de).filter(
-    (slug) => !slug.startsWith("admin")
-  );
-
-  // Generate static routes for all languages
-  for (const baseSlug of staticBaseSlugs) {
-    for (const lang of LANGUAGES) {
-      const localizedPath = getLocalizedPath(baseSlug, lang);
-      if (localizedPath) {
-        routes.push(localizedPath);
+  
+  // 1. Static Routes from slugs.json
+  if (slugMaps.de) {
+    const staticBaseSlugs = Object.keys(slugMaps.de).filter(s => !s.startsWith("admin"));
+    for (const baseSlug of staticBaseSlugs) {
+      for (const lang of LANGUAGES) {
+        const p = getLocalizedPath(baseSlug, lang);
+        if (p) routes.push(p);
       }
     }
+  } else {
+    // Fallback falls slugs.json leer ist
+    routes.push("/"); 
   }
 
-  // Fetch dynamic routes from database
+  // 2. Dynamic Routes from Supabase
   const dynamicSlugs = await fetchDynamicSlugs();
-  const parentSlugs = slugMaps.parentSlugs;
+  const parentSlugs = slugMaps.parentSlugs || {};
 
   for (const menuSlug of dynamicSlugs) {
     for (const lang of LANGUAGES) {
-      const parentSlug = parentSlugs[lang];
+      const parentSlug = parentSlugs[lang] || 'menu';
       const routePath = lang === "de" 
         ? `/${parentSlug}/${menuSlug}`
         : `/${lang}/${parentSlug}/${menuSlug}`;
@@ -115,11 +102,7 @@ async function generateRoutesToPrerender() {
     }
   }
 
-  // Add admin routes (only German)
-  routes.push("/admin");
-  routes.push("/admin/login");
-
-  return routes;
+  return routes; // Admin routes lassen wir weg, da diese oft client-only sind
 }
 
 // Main execution
@@ -128,43 +111,49 @@ async function generateRoutesToPrerender() {
   const { render } = await import("./dist/server/entry-server.js");
 
   const routesToPrerender = await generateRoutesToPrerender();
+  // Sicherstellen, dass Root dabei ist
+  if (!routesToPrerender.includes('/')) routesToPrerender.push('/');
 
   console.log(`\n🚀 Prerendering ${routesToPrerender.length} routes...\n`);
 
-  let successCount = 0;
-  let errorCount = 0;
-
   for (const url of routesToPrerender) {
     try {
-      const appHtml = render(url);
-      const html = template.replace(`<!--app-html-->`, appHtml);
+      // HIER IST DIE ÄNDERUNG: Wir holen HTML + Helmet
+      const { html, helmet } = render(url, {});
+      
+      // 1. App HTML einfügen (ersetzt <div id="root"> oder )
+      let finalHtml = template.replace(
+        /|<div id="root"><\/div>|<div id="root">\s*<\/div>/, 
+        `<div id="root">${html}</div>`
+      );
 
-      // Determine file path
-      let filePath;
-      if (url === "/") {
-        filePath = "dist/index.html";
-      } else {
-        const cleanUrl = url.endsWith("/") ? url.slice(0, -1) : url;
-        filePath = `dist${cleanUrl}.html`;
+      // 2. SEO Meta Tags einfügen (Helmet)
+      if (helmet) {
+        const helmetHtml = `
+          ${helmet.title ? helmet.title.toString() : ''}
+          ${helmet.meta ? helmet.meta.toString() : ''}
+          ${helmet.link ? helmet.link.toString() : ''}
+          ${helmet.script ? helmet.script.toString() : ''}
+        `;
+        finalHtml = finalHtml.replace('</head>', `${helmetHtml}</head>`);
       }
 
-      // Create directory if needed
+      // Dateipfad bestimmen
+      let filePath = `dist${url === '/' ? '/index.html' : `${url}.html`}`;
+      
+      // Ordner erstellen
       const dir = path.dirname(toAbsolute(filePath));
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-      fs.writeFileSync(toAbsolute(filePath), html);
-      console.log("pre-rendered:", filePath);
-      successCount++;
+      fs.writeFileSync(toAbsolute(filePath), finalHtml);
+      console.log(`✓ Rendered: ${filePath}`);
+      
     } catch (e) {
-      console.error(`❌ Error prerendering ${url}:`, e.message);
-      errorCount++;
+      console.error(`❌ Error rendering ${url}:`, e);
     }
   }
 
-  console.log(`\n✅ Prerendering complete!`);
-  console.log(`   - Success: ${successCount}`);
-  console.log(`   - Errors: ${errorCount}`);
-  console.log(`   - Total routes: ${routesToPrerender.length}`);
+  // Cleanup Server Folder
+  // fs.rmSync(toAbsolute('dist/server'), { recursive: true, force: true });
+  console.log(`\n✅ Prerendering done.`);
 })();
