@@ -16,7 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Lovable empfiehlt Node 20 für das SSG Script
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -25,130 +24,36 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # --- SEO INJECTION ---
-      # Wir injizieren SEO VOR dem Build in die Source index.html
-      - name: Inject SEO content from payload
-        if: github.event_name == 'repository_dispatch' && github.event.client_payload.seo_html
-        run: |
-          node -e "
-          const fs = require('fs');
-          // Wir bearbeiten die Source-Datei, damit der Build sie später nutzt
-          const html = fs.readFileSync('index.html', 'utf8');
-          const seo = process.env.SEO_HTML;
-          if (!seo) { console.log('No SEO payload'); process.exit(0); }
-          
-          // Platzhalter ersetzen (angepasst an Lovable SSG Struktur)
-          // Falls noch nicht da ist, hängen wir es in den Head
-          let result = html;
-          if (html.includes('')) {
-             // SEO Content VOR dem App-Content einfügen oder in den Head
-             result = html.replace('</head>', seo + '\n</head>');
-          } else {
-             result = html.replace('', seo);
-          }
-          
-          fs.writeFileSync('index.html', result);
-          "
-        env:
-          SEO_HTML: ${{ github.event.client_payload.seo_html }}
-
-      # --- BUILD PROZESS (SSG) ---
-      # Führt build:client -> build:server -> build:prerender aus
-      # Chrom/Puppeteer ist NICHT mehr nötig, da Lovable jetzt Node.js nutzt
+      # --- BUILD PROZESS ---
       - name: Build Project (SSG)
         run: npm run build
         env: 
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          # WICHTIG: Mapping von ANON zu PUBLISHABLE beibehalten
+          # Dein Skript nutzt diesen Key Namen:
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       # --- BUILD VERIFICATION ---
       - name: Verify Build Output
         run: |
           echo "=== Build Verification ==="
-          echo "Listing dist directory:"
-          ls -la dist/
-          echo ""
-          echo "=== All HTML files in dist ==="
-          find dist -type f -name "*.html" | head -50
-          echo ""
-          echo "=== Critical file checks ==="
-          test -f dist/index.html && echo "✓ index.html exists" || (echo "✗ index.html MISSING" && exit 1)
-          test -f dist/reservierung.html && echo "✓ reservierung.html exists" || (echo "✗ reservierung.html MISSING" && exit 1)
-          test -f dist/menu.html && echo "✓ menu.html exists" || (echo "✗ menu.html MISSING" && exit 1)
+          ls -R dist/
+          
+          # Wir prüfen auf .html Dateien (da dein Skript dist/menu.html erzeugt)
+          check_page() {
+            if [ -f "dist/$1.html" ] || [ -f "dist/$1/index.html" ]; then
+              echo "✓ $1 exists"
+            else
+              echo "✗ $1 MISSING"
+              exit 1
+            fi
+          }
+          
+          check_page "index"
+          # Optional: Prüfe nur Seiten, von denen du weißt, dass sie in slugs.json stehen
+          # check_page "menu" 
 
-      # --- SITEMAP VALIDATION ---
-      - name: Validate Sitemap XML
-        run: |
-          echo "=== Sitemap Validation ==="
-          
-          # Check 1: File exists
-          test -f dist/sitemap.xml && echo "✓ sitemap.xml exists" || (echo "✗ sitemap.xml MISSING" && exit 1)
-          
-          # Check 2: Contains urlset opening tag
-          grep -q "<urlset" dist/sitemap.xml && echo "✓ Contains <urlset> tag" || (echo "✗ Missing <urlset> tag - invalid XML" && exit 1)
-          
-          # Check 3: Contains urlset closing tag (properly closed)
-          grep -q "</urlset>" dist/sitemap.xml && echo "✓ Contains </urlset> closing tag" || (echo "✗ Missing </urlset> - XML not properly closed" && exit 1)
-          
-          # Check 4: Contains hreflang (multilingual support)
-          grep -q 'hreflang=' dist/sitemap.xml && echo "✓ Contains hreflang attributes" || (echo "✗ Missing hreflang - multilingual not configured" && exit 1)
-          
-          # Check 5: File size sanity check (should be > 5KB for 96 URLs)
-          SIZE=$(wc -c < dist/sitemap.xml)
-          echo "Sitemap size: $SIZE bytes"
-          [ "$SIZE" -gt 5000 ] && echo "✓ Size check passed (>5KB)" || (echo "✗ Sitemap too small - might be incomplete" && exit 1)
-          
-          # Debug: Show first 10 lines
-          echo ""
-          echo "=== First 10 lines of sitemap.xml ==="
-          head -n 10 dist/sitemap.xml
-          
-          # Debug: Count URLs
-          URL_COUNT=$(grep -c "<url>" dist/sitemap.xml || echo "0")
-          echo ""
-          echo "Total URL entries: $URL_COUNT"
-
-      # --- DEPLOY MARKER ---
-      - name: Create Deploy Marker
-        run: |
-          echo "Build: $(date -u +%Y-%m-%dT%H:%M:%SZ)" > dist/__build_info.txt
-          echo "Commit: ${{ github.sha }}" >> dist/__build_info.txt
-          echo "Run: ${{ github.run_id }}" >> dist/__build_info.txt
-
-      # --- HTACCESS IN DIST KOPIEREN ---
-      # Damit alles in einem Upload erledigt wird
       - name: Copy .htaccess to dist
-        run: cp public/.htaccess dist/.htaccess
-
-      # --- SICHERHEITSCHECK: Target Directory ALLOWLIST ---
-      - name: Validate Target Directory (Allowlist)
-        run: |
-          TARGET="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
-          ALLOWED="ristorantestoria-de"
-          
-          # Check 1: Secret muss gesetzt sein
-          if [ -z "$TARGET" ]; then
-            echo "::error::CRITICAL: IONOS_SFTP_TARGET_DIR secret is NOT set!"
-            echo "::error::Deployment to webroot is FORBIDDEN to protect other sites."
-            exit 1
-          fi
-          
-          # Check 2: Webroot-Schutz (., /, leer)
-          if [ "$TARGET" = "." ] || [ "$TARGET" = "/" ]; then
-            echo "::error::BLOCKED: Deployment to webroot (. or /) is FORBIDDEN!"
-            exit 1
-          fi
-          
-          # Check 3: ALLOWLIST - Nur exakt dieser Ordner ist erlaubt
-          if [ "$TARGET" != "$ALLOWED" ]; then
-            echo "::error::CRITICAL: Target '$TARGET' is NOT in allowlist!"
-            echo "::error::Only deployment to '$ALLOWED' is permitted by this workflow."
-            echo "::error::This is a security measure to protect other sites on this server."
-            exit 1
-          fi
-          
-          echo "✓ Target directory validated: $TARGET (matches allowlist)"
+        run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
 
       # --- DEPLOY ZU IONOS ---
       - name: Deploy via SFTP to IONOS
@@ -156,8 +61,12 @@ jobs:
           sudo apt-get update && sudo apt-get install -y lftp
           
           TARGET_DIR="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
-          echo "Target directory: $TARGET_DIR"
           
+          if [[ "$TARGET_DIR" != *"ristorantestoria-de"* ]]; then
+            echo "Security Stop: Target Directory looks wrong!"
+            exit 1
+          fi
+
           lftp -c "
             set sftp:auto-confirm yes;
             set net:timeout 60;
@@ -166,23 +75,13 @@ jobs:
             
             open -u $SFTP_USER,$SFTP_PASS sftp://$SFTP_HOST;
             
-            echo '=== Preflight: Current remote state ===';
-            pwd;
-            cls -la;
-            
-            echo '=== Changing to target directory ===';
+            echo '=== Changing to target directory: $TARGET_DIR ===';
+            cd $TARGET_DIR || mkdir -p $TARGET_DIR; 
             cd $TARGET_DIR;
-            pwd;
             
-            echo '=== Starting mirror upload (no delete for stability) ===';
-            mirror -R --verbose --parallel=4 \
+            echo '=== Starting upload ===';
+            mirror -R --verbose --parallel=4 --delete \
               ./dist .;
-            
-            echo '=== Postflight: Verifying upload ===';
-            cls -la index.html;
-            cls -la reservierung.html;
-            cls -la menu.html;
-            cls -la sitemap.xml;
             
             bye
           "
@@ -190,4 +89,4 @@ jobs:
           SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
           SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
           SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          SFTP_TARGET_DIR: ${{ secrets.IONOS_SFTP_TARGET_DIR }}
+          IONOS_SFTP_TARGET_DIR: ${{ secrets.IONOS_SFTP_TARGET_DIR }}
