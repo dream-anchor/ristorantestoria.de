@@ -30,8 +30,12 @@ import {
   Trash2, 
   Eye,
   PartyPopper,
-  Clock
+  Clock,
+  AlertTriangle,
+  CheckCircle2,
+  RefreshCw
 } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const eventTypeLabels: Record<string, string> = {
   'weihnachtsfeier': 'Weihnachtsfeier',
@@ -39,6 +43,7 @@ const eventTypeLabels: Record<string, string> = {
   'team-building': 'Team-Building',
   'business-dinner': 'Business-Dinner',
   'jubilaeum': 'Firmenjubiläum',
+  'firmenfeier': 'Firmenfeier',
   'sonstiges': 'Sonstiges',
 };
 
@@ -114,8 +119,33 @@ const EventInquiriesManager = () => {
     );
   }
 
+  // Count failed notifications
+  const failedNotifications = inquiries?.filter(
+    (i) => i.notification_sent === false && i.notification_attempts !== null && i.notification_attempts > 0
+  ) || [];
+  
+  // Count pending notifications (not yet attempted)
+  const pendingNotifications = inquiries?.filter(
+    (i) => i.notification_sent !== true && (i.notification_attempts === null || i.notification_attempts === 0)
+  ) || [];
+
   return (
     <>
+      {/* Warning for failed notifications */}
+      {failedNotifications.length > 0 && (
+        <Alert variant="destructive" className="mt-8 mb-4">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertTitle>E-Mail-Benachrichtigung fehlgeschlagen!</AlertTitle>
+          <AlertDescription>
+            {failedNotifications.length === 1 
+              ? `1 Anfrage konnte nicht per E-Mail weitergeleitet werden.`
+              : `${failedNotifications.length} Anfragen konnten nicht per E-Mail weitergeleitet werden.`
+            }
+            {' '}Bitte manuell bearbeiten.
+          </AlertDescription>
+        </Alert>
+      )}
+      
       <Card className="mt-8">
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -137,67 +167,87 @@ const EventInquiriesManager = () => {
             </p>
           ) : (
             <div className="space-y-3">
-              {inquiries.map((inquiry) => (
-                <div
-                  key={inquiry.id}
-                  className="border border-border rounded-lg p-4 bg-card hover:bg-muted/50 transition-colors"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                    {/* Left: Main info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Building2 className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                        <span className="font-semibold truncate">{inquiry.company_name}</span>
-                        <Badge variant="outline" className="flex-shrink-0">
-                          {eventTypeLabels[inquiry.event_type] || inquiry.event_type}
-                        </Badge>
+              {inquiries.map((inquiry) => {
+                const notificationFailed = inquiry.notification_sent === false && 
+                  inquiry.notification_attempts !== null && inquiry.notification_attempts > 0;
+                const notificationSuccess = inquiry.notification_sent === true;
+                
+                return (
+                  <div
+                    key={inquiry.id}
+                    className={`border rounded-lg p-4 bg-card hover:bg-muted/50 transition-colors ${
+                      notificationFailed ? 'border-destructive' : 'border-border'
+                    }`}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                      {/* Left: Main info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Building2 className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                          <span className="font-semibold truncate">{inquiry.company_name}</span>
+                          <Badge variant="outline" className="flex-shrink-0">
+                            {eventTypeLabels[inquiry.event_type] || inquiry.event_type}
+                          </Badge>
+                          {/* Notification status indicator */}
+                          {notificationFailed && (
+                            <span className="flex items-center gap-1 text-xs text-destructive">
+                              <AlertTriangle className="h-3 w-3" />
+                              <span className="hidden sm:inline">E-Mail fehlgeschlagen</span>
+                            </span>
+                          )}
+                          {notificationSuccess && (
+                            <span className="flex items-center gap-1 text-xs text-green-600">
+                              <CheckCircle2 className="h-3 w-3" />
+                            </span>
+                          )}
+                        </div>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <Users className="h-3.5 w-3.5" />
+                            <span>{inquiry.guest_count} Personen</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CalendarDays className="h-3.5 w-3.5" />
+                            <span>{formatPreferredDate(inquiry.preferred_date)}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Mail className="h-3.5 w-3.5" />
+                            <a href={`mailto:${inquiry.email}`} className="hover:underline truncate">
+                              {inquiry.email}
+                            </a>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-3.5 w-3.5" />
+                            <span>{formatDate(inquiry.created_at)}</span>
+                          </div>
+                        </div>
                       </div>
                       
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                          <Users className="h-3.5 w-3.5" />
-                          <span>{inquiry.guest_count} Personen</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CalendarDays className="h-3.5 w-3.5" />
-                          <span>{formatPreferredDate(inquiry.preferred_date)}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Mail className="h-3.5 w-3.5" />
-                          <a href={`mailto:${inquiry.email}`} className="hover:underline truncate">
-                            {inquiry.email}
-                          </a>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Clock className="h-3.5 w-3.5" />
-                          <span>{formatDate(inquiry.created_at)}</span>
-                        </div>
+                      {/* Right: Actions */}
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setSelectedInquiry(inquiry)}
+                          className="h-9 w-9 p-0 sm:w-auto sm:px-3"
+                        >
+                          <Eye className="h-4 w-4" />
+                          <span className="hidden sm:inline ml-2">Details</span>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setDeleteId(inquiry.id)}
+                          className="h-9 w-9 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       </div>
                     </div>
-                    
-                    {/* Right: Actions */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setSelectedInquiry(inquiry)}
-                        className="h-9 w-9 p-0 sm:w-auto sm:px-3"
-                      >
-                        <Eye className="h-4 w-4" />
-                        <span className="hidden sm:inline ml-2">Details</span>
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setDeleteId(inquiry.id)}
-                        className="h-9 w-9 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </CardContent>

@@ -65,7 +65,7 @@ export const EventInquiryForm = () => {
     setIsSubmitting(true);
     try {
       // @ts-ignore - table exists but types not yet regenerated
-      const { error } = await supabase.from('event_inquiries').insert({
+      const { data: insertedData, error } = await supabase.from('event_inquiries').insert({
         company_name: data.company_name.trim(),
         contact_name: data.contact_name.trim(),
         email: data.email.trim().toLowerCase(),
@@ -74,14 +74,15 @@ export const EventInquiryForm = () => {
         event_type: data.event_type,
         preferred_date: data.preferred_date || null,
         message: data.message?.trim() || null,
-      });
+      }).select('id').single();
 
       if (error) throw error;
 
-      // Send email notification (fire-and-forget, don't block on failure)
+      // Send email notification with inquiry_id for status tracking
       try {
         await supabase.functions.invoke('send-inquiry-notification', {
           body: {
+            inquiry_id: insertedData?.id,
             company_name: data.company_name.trim(),
             contact_name: data.contact_name.trim(),
             email: data.email.trim().toLowerCase(),

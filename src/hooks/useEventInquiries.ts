@@ -12,6 +12,9 @@ export interface EventInquiry {
   preferred_date: string | null;
   message: string | null;
   created_at: string;
+  notification_sent: boolean | null;
+  notification_error: string | null;
+  notification_attempts: number | null;
 }
 
 export const useEventInquiries = () => {

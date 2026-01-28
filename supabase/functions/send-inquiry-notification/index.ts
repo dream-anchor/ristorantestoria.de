@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { SMTPClient } from "https://deno.land/x/denomailer@1.6.0/mod.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -7,6 +8,7 @@ const corsHeaders = {
 };
 
 interface InquiryData {
+  inquiry_id?: string;
   company_name: string;
   contact_name: string;
   email: string;
@@ -38,6 +40,91 @@ const formatDate = (dateString?: string): string => {
   });
 };
 
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 2000;
+
+async function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function sendEmailWithRetry(
+  smtpUser: string,
+  smtpPassword: string,
+  inquiry: InquiryData,
+  eventLabel: string,
+  htmlContent: string
+): Promise<{ success: boolean; error?: string; attempts: number }> {
+  let lastError: string | undefined;
+  
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      console.log(`SMTP attempt ${attempt}/${MAX_RETRIES}`);
+      
+      const client = new SMTPClient({
+        connection: {
+          hostname: "smtp.ionos.de",
+          port: 465,
+          tls: true,
+          auth: {
+            username: smtpUser,
+            password: smtpPassword,
+          },
+        },
+      });
+
+      await client.send({
+        from: smtpUser,
+        to: "info@ristorantestoria.de",
+        subject: `Neue Event-Anfrage: ${inquiry.company_name} - ${eventLabel}`,
+        content: "auto",
+        html: htmlContent,
+      });
+
+      await client.close();
+      
+      console.log(`Email sent successfully on attempt ${attempt}`);
+      return { success: true, attempts: attempt };
+    } catch (error: any) {
+      lastError = error.message || String(error);
+      console.error(`SMTP attempt ${attempt} failed:`, lastError);
+      
+      if (attempt < MAX_RETRIES) {
+        console.log(`Waiting ${RETRY_DELAY_MS}ms before retry...`);
+        await sleep(RETRY_DELAY_MS);
+      }
+    }
+  }
+  
+  return { success: false, error: lastError, attempts: MAX_RETRIES };
+}
+
+async function updateInquiryStatus(
+  supabase: any,
+  inquiryId: string,
+  success: boolean,
+  attempts: number,
+  error?: string
+): Promise<void> {
+  try {
+    const { error: updateError } = await supabase
+      .from('event_inquiries')
+      .update({
+        notification_sent: success,
+        notification_attempts: attempts,
+        notification_error: error || null,
+      })
+      .eq('id', inquiryId);
+    
+    if (updateError) {
+      console.error('Failed to update inquiry status:', updateError);
+    } else {
+      console.log(`Updated inquiry ${inquiryId}: sent=${success}, attempts=${attempts}`);
+    }
+  } catch (e) {
+    console.error('Error updating inquiry status:', e);
+  }
+}
+
 serve(async (req: Request): Promise<Response> => {
   console.log("Received request to send-inquiry-notification");
   
@@ -49,28 +136,24 @@ serve(async (req: Request): Promise<Response> => {
   try {
     const smtpUser = Deno.env.get("SMTP_USER");
     const smtpPassword = Deno.env.get("SMTP_PASSWORD");
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     
     if (!smtpUser || !smtpPassword) {
       throw new Error("SMTP credentials nicht konfiguriert");
     }
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error("Supabase credentials nicht konfiguriert");
+    }
 
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
     const inquiry: InquiryData = await req.json();
+    
     console.log("Processing inquiry for:", inquiry.company_name);
+    console.log("Inquiry ID:", inquiry.inquiry_id);
 
     const eventLabel = eventTypeLabels[inquiry.event_type] || inquiry.event_type;
-
-    // Create SMTP client for IONOS with STARTTLS
-    const client = new SMTPClient({
-      connection: {
-        hostname: "smtp.ionos.de",
-        port: 465,
-        tls: true,
-        auth: {
-          username: smtpUser,
-          password: smtpPassword,
-        },
-      },
-    });
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -136,23 +219,30 @@ serve(async (req: Request): Promise<Response> => {
       </html>
     `;
 
-    // Send email via IONOS SMTP
-    await client.send({
-      from: smtpUser,
-      to: "info@ristorantestoria.de",
-      subject: `Neue Event-Anfrage: ${inquiry.company_name} - ${eventLabel}`,
-      content: "auto",
-      html: htmlContent,
-    });
-
-    await client.close();
+    // Send email with retry logic
+    const result = await sendEmailWithRetry(smtpUser, smtpPassword, inquiry, eventLabel, htmlContent);
     
-    console.log("Email sent successfully via IONOS SMTP");
+    // Update inquiry status in database if we have an inquiry_id
+    if (inquiry.inquiry_id) {
+      await updateInquiryStatus(supabase, inquiry.inquiry_id, result.success, result.attempts, result.error);
+    }
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
+    if (result.success) {
+      console.log("Email sent successfully via IONOS SMTP");
+      return new Response(JSON.stringify({ success: true, attempts: result.attempts }), {
+        status: 200,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    } else {
+      console.error("All SMTP attempts failed:", result.error);
+      return new Response(
+        JSON.stringify({ success: false, error: result.error, attempts: result.attempts }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
   } catch (error: any) {
     console.error("Error in send-inquiry-notification function:", error);
     return new Response(
