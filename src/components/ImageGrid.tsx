@@ -84,8 +84,6 @@ const ImageGrid = () => {
           <ImageCard 
             image={aperitivoImage} 
             alt={t.imageGrid.altDessert}
-            title={t.imageGrid.notturnoTitle}
-            subtitle={t.imageGrid.notturnoText}
             className="aspect-square"
           />
 
