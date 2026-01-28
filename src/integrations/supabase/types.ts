@@ -24,6 +24,9 @@ export type Database = {
           guest_count: string
           id: string
           message: string | null
+          notification_attempts: number | null
+          notification_error: string | null
+          notification_sent: boolean | null
           phone: string | null
           preferred_date: string | null
         }
@@ -36,6 +39,9 @@ export type Database = {
           guest_count: string
           id?: string
           message?: string | null
+          notification_attempts?: number | null
+          notification_error?: string | null
+          notification_sent?: boolean | null
           phone?: string | null
           preferred_date?: string | null
         }
@@ -48,6 +54,9 @@ export type Database = {
           guest_count?: string
           id?: string
           message?: string | null
+          notification_attempts?: number | null
+          notification_error?: string | null
+          notification_sent?: boolean | null
           phone?: string | null
           preferred_date?: string | null
         }
