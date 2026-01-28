@@ -12,7 +12,6 @@ import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
 import SortableMenuCard from "@/components/admin/SortableMenuCard";
 import { LogOut, ExternalLink, Rocket, Loader2 } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
-import EventInquiriesManager from "@/components/admin/EventInquiriesManager";
 import SEO from "@/components/SEO";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 import {
@@ -294,9 +293,6 @@ const Admin = () => {
 
         {/* Besondere Anlässe Section */}
         <SpecialOccasionsManager />
-
-        {/* Event-Anfragen Section */}
-        <EventInquiriesManager />
       </main>
     </div>
     </>

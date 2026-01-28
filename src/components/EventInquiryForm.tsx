@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -64,39 +63,30 @@ export const EventInquiryForm = () => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      // @ts-ignore - table exists but types not yet regenerated
-      const { data: insertedData, error } = await supabase.from('event_inquiries').insert({
-        company_name: data.company_name.trim(),
-        contact_name: data.contact_name.trim(),
-        email: data.email.trim().toLowerCase(),
-        phone: data.phone?.trim() || null,
-        guest_count: data.guest_count,
-        event_type: data.event_type,
-        preferred_date: data.preferred_date || null,
-        message: data.message?.trim() || null,
-      }).select('id').single();
+      // Send to Events & Catering project's edge function
+      const EVENTS_PROJECT_URL = 'https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/receive-event-inquiry';
+      
+      const response = await fetch(EVENTS_PROJECT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          company_name: data.company_name.trim(),
+          contact_name: data.contact_name.trim(),
+          email: data.email.trim().toLowerCase(),
+          phone: data.phone?.trim() || null,
+          guest_count: data.guest_count,
+          event_type: data.event_type,
+          preferred_date: data.preferred_date || null,
+          message: data.message?.trim() || null,
+          source: 'ristorante-website', // Track where the inquiry came from
+        }),
+      });
 
-      if (error) throw error;
-
-      // Send email notification with inquiry_id for status tracking
-      try {
-        await supabase.functions.invoke('send-inquiry-notification', {
-          body: {
-            inquiry_id: insertedData?.id,
-            company_name: data.company_name.trim(),
-            contact_name: data.contact_name.trim(),
-            email: data.email.trim().toLowerCase(),
-            phone: data.phone?.trim() || null,
-            guest_count: data.guest_count,
-            event_type: data.event_type,
-            preferred_date: data.preferred_date || null,
-            message: data.message?.trim() || null,
-          },
-        });
-        console.log('Email notification sent successfully');
-      } catch (emailError) {
-        // Log but don't fail the submission
-        console.error('Error sending email notification:', emailError);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to submit inquiry');
       }
 
       setIsSubmitted(true);
