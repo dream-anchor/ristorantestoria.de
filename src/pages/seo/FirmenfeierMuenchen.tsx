@@ -179,7 +179,7 @@ const FirmenfeierMuenchen = () => {
                         <BenefitIcon className="w-7 h-7 md:w-8 md:h-8 text-primary" />
                       </div>
                       <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                      <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                      <p className="text-muted-foreground">{benefit.description}</p>
                     </div>
                   );
                 })}

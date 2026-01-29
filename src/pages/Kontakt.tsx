@@ -134,7 +134,7 @@ const Kontakt = () => {
                     >
                       {t.contact.whatsappChat}
                     </a>
-                    <p className="text-xs text-muted-foreground/70 mt-0.5">{t.contact.whatsappHint}</p>
+                    <p className="text-sm text-muted-foreground/70 mt-0.5">{t.contact.whatsappHint}</p>
                   </div>
                 </div>
 
