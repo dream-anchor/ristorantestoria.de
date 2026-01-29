@@ -1,82 +1,57 @@
 
-# Favicon-Fix für alle Seiten
 
-## Problem-Analyse
+# Plan: Verbesserte Lesbarkeit der Inhaltstexte
 
-Die FAQ-Seite (und potenziell andere Seiten) zeigt das falsche Lovable-Favicon statt des STORIA "S" Favicons.
+## Analyse des Problems
 
-### Ursache
-- `index.html` (Zeile 56) enthält das korrekte Favicon: `<link rel="icon" href="/favicon.png" type="image/png" />`
-- Die `SEO`-Komponente (`src/components/SEO.tsx`) wird auf allen Seiten verwendet, aber enthält **keine Favicon-Tags**
-- `react-helmet` kann bei clientseitigem Routing die `<head>`-Tags dynamisch überschreiben
-- Wenn das Favicon nicht explizit bei jeder Seitennavigation neu gesetzt wird, kann der Browser auf gecachte oder Standard-Werte zurückfallen
+Die Aperitivo-Landingpage (und vermutlich auch andere SEO-Landingpages) verwenden durchgehend:
+- `text-sm` (14px) für Beschreibungstexte - zu klein
+- `text-muted-foreground` (hsl 25 10% 35%) - relativ heller Grauton
+- Inter font-weight 400 (Regular) - kann auf Bildschirmen dünn wirken
 
-### Betroffene Dateien
-- `public/favicon.ico` wurde bereits früher gelöscht (siehe Memory `design/favicon-priority-fix`)
-- `public/favicon.png` existiert und enthält das korrekte STORIA "S" Logo
+Diese Kombination aus kleiner Schrift + heller Farbe + normalem Schriftgewicht führt zu schwer lesbarem Text.
 
----
+## Loesung
 
-## Lösung
+Die Beschreibungstexte von `text-sm` (14px) auf `text-base` (16px) erhoehen und die Schriftstaerke leicht anpassen.
 
-### Änderung in `src/components/SEO.tsx`
+### Aenderungen in `src/pages/seo/AperitivoMuenchen.tsx`
 
-Favicon- und Apple-Touch-Icon-Tags zur `<Helmet>`-Komponente hinzufügen. Dadurch werden diese Tags bei jeder Seitennavigation explizit gesetzt – für alle Seiten, alle Sprachen, automatisch.
+Die folgenden Klassen werden angepasst:
 
-**Vorher (Zeile 57-63):**
-```tsx
-return (
-  <Helmet>
-    {/* Primary Meta Tags */}
-    <html lang={language} />
-    <title>{fullTitle}</title>
-    <meta name="description" content={metaDescription} />
-    <meta name="author" content="Ristorante STORIA" />
-```
+| Stelle | Vorher | Nachher |
+|--------|--------|---------|
+| Drinks-Beschreibungen | `text-sm` | `text-base` |
+| Card-Beschreibungen | `text-sm` | `text-base` |
+| Origin/Herkunft-Texte | `text-xs` | `text-sm` |
+| Feature-Beschreibungen | `text-sm` | `text-base` |
+| Occasions-Beschreibungen | `text-sm` | `text-base` |
+| Location-Listen | `text-sm` | `text-base` |
+| FAQ-Antworten | Standard | `text-base` |
 
-**Nachher:**
-```tsx
-return (
-  <Helmet>
-    {/* Favicon - explizit setzen für alle Seiten */}
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    
-    {/* Primary Meta Tags */}
-    <html lang={language} />
-    <title>{fullTitle}</title>
-    <meta name="description" content={metaDescription} />
-    <meta name="author" content="Ristorante STORIA" />
-```
+### Betroffene Bereiche (ca. 25 Stellen)
 
----
+1. **Aperitivo Explained Cards** (Zeilen 279, 283, 287, 291): `text-sm` zu `text-base`
+2. **Spritz Drinks** (Zeile 317): `text-sm` zu `text-base`, Zeile 318: `text-xs` zu `text-sm`
+3. **Cocktails** (Zeilen 335-337): `text-sm` zu `text-base`, `text-xs` zu `text-sm`
+4. **Wines** (Zeile 351): `text-sm` zu `text-base`
+5. **Non-Alcoholic** (Zeile 367): `text-sm` zu `text-base`
+6. **Why Features** (Zeile 415): `text-sm` zu `text-base`
+7. **Occasions** (Zeile 432): `text-sm` zu `text-base`
+8. **Location Cards** (Zeilen 450, 459, 469): `text-sm` zu `text-base`
+9. **Related Content** (Zeilen in den Related-Cards): `text-sm` zu `text-base`
 
-## Warum diese Lösung funktioniert
+### Technische Umsetzung
 
-1. **Zentrale Komponente**: Die `SEO`-Komponente wird auf **allen Seiten** verwendet (Index, FAQ, Kontakt, Speisekarte, etc.)
-2. **Automatisch für neue Seiten**: Jede neue Seite, die die `SEO`-Komponente nutzt, erhält automatisch das korrekte Favicon
-3. **Alle Sprachen abgedeckt**: Da die SEO-Komponente sprachunabhängig ist, gilt dies für DE, EN, IT und FR
-4. **react-helmet Priorität**: `Helmet`-Tags haben Vorrang vor den statischen `index.html`-Tags und werden bei jeder Navigation aktualisiert
-5. **Keine Duplikate**: `react-helmet` ist intelligent genug, doppelte `<link rel="icon">` Tags zu verhindern
+Globaler Such-und-Ersetzen in der Komponente:
+- `text-muted-foreground text-sm` zu `text-muted-foreground`
+- `text-sm text-muted-foreground` zu `text-muted-foreground`
+- Einzelne `text-xs` zu `text-sm` fuer sekundaere Infos (Herkunft, Origins)
 
----
+### Ergebnis
 
-## Betroffene Seiten (alle nutzen SEO-Komponente)
+- Haupttexte: 16px statt 14px (bessere Lesbarkeit)
+- Sekundaere Texte: 14px statt 12px
+- Beibehaltung der Farbhierarchie (`text-muted-foreground`)
+- Keine Aenderung am Font-Weight (Inter Regular bleibt elegant)
 
-- Index (Startseite)
-- FAQ ← aktuell betroffen
-- Speisekarte, Mittagsmenü, Getränke
-- Reservierung, Kontakt
-- Über Uns, Impressum, Datenschutz
-- Alle SEO-Landingpages (Aperitivo, Firmenfeier, etc.)
-- Alle Sprachvarianten (/en/..., /it/..., /fr/...)
-
----
-
-## Änderungsumfang
-
-| Datei | Änderung |
-|-------|----------|
-| `src/components/SEO.tsx` | 2 Zeilen hinzufügen (Favicon + Apple-Touch-Icon) |
-
-**Minimale Änderung, maximale Wirkung** – eine zentrale Stelle, alle Seiten profitieren.
