@@ -334,7 +334,7 @@ const WildEssenMuenchen = () => {
                       )}
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{dish.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-3">{dish.description}</p>
+                    <p className="text-muted-foreground mb-3">{dish.description}</p>
                     <p className="text-primary font-semibold">{dish.price}</p>
                   </div>
                 ))}
@@ -380,7 +380,7 @@ const WildEssenMuenchen = () => {
                   <div key={index} className="text-center">
                     <div className="text-4xl mb-4">{feature.icon}</div>
                     <h3 className="font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    <p className="text-muted-foreground">{feature.description}</p>
                   </div>
                 ))}
               </div>
@@ -419,13 +419,13 @@ const WildEssenMuenchen = () => {
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     🍂 {t.seo.wild.seasonAutumn}
                   </h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.wild.seasonAutumnDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.wild.seasonAutumnDesc}</p>
                 </div>
                 <div className="bg-blue-50 dark:bg-blue-950/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     ❄️ {t.seo.wild.seasonWinter}
                   </h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.wild.seasonWinterDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.wild.seasonWinterDesc}</p>
                 </div>
               </div>
             </div>

@@ -87,19 +87,19 @@ const NeapolitanischePizza = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-muted-foreground">
                 <div>
                   <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza1}</h3>
-                  <p className="text-sm">{t.seo.neapolitanPizza.pizza1Desc}</p>
+                  <p className="text-base">{t.seo.neapolitanPizza.pizza1Desc}</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza2}</h3>
-                  <p className="text-sm">{t.seo.neapolitanPizza.pizza2Desc}</p>
+                  <p className="text-base">{t.seo.neapolitanPizza.pizza2Desc}</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza3}</h3>
-                  <p className="text-sm">{t.seo.neapolitanPizza.pizza3Desc}</p>
+                  <p className="text-base">{t.seo.neapolitanPizza.pizza3Desc}</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">{t.seo.neapolitanPizza.pizza4}</h3>
-                  <p className="text-sm">{t.seo.neapolitanPizza.pizza4Desc}</p>
+                  <p className="text-base">{t.seo.neapolitanPizza.pizza4Desc}</p>
                 </div>
               </div>
               <div className="flex flex-wrap gap-4 mt-6">

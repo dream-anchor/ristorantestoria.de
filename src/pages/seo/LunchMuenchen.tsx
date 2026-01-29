@@ -194,7 +194,7 @@ const LunchMuenchen = () => {
                         <BenefitIcon className="w-7 h-7 md:w-8 md:h-8 text-primary" />
                       </div>
                       <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                      <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                      <p className="text-muted-foreground">{benefit.description}</p>
                     </div>
                   );
                 })}
@@ -217,7 +217,7 @@ const LunchMuenchen = () => {
                         <BenefitIcon className="w-7 h-7 md:w-8 md:h-8 text-primary" />
                       </div>
                       <h3 className="font-semibold mb-1">{benefit.title}</h3>
-                      <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                      <p className="text-muted-foreground">{benefit.description}</p>
                     </div>
                   );
                 })}
@@ -252,7 +252,7 @@ const LunchMuenchen = () => {
                       )}
                       <OfferIcon className="w-10 h-10 text-primary mb-4" />
                       <h3 className="text-lg font-semibold mb-2">{offer.title}</h3>
-                      <p className="text-muted-foreground text-sm">{offer.description}</p>
+                      <p className="text-muted-foreground">{offer.description}</p>
                     </div>
                   );
                 })}
@@ -299,14 +299,14 @@ const LunchMuenchen = () => {
               <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="text-lg font-semibold mb-2">{t.seo.lunch.crossSellCatering}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">{t.seo.lunch.crossSellCateringDesc}</p>
+                  <p className="text-muted-foreground mb-4">{t.seo.lunch.crossSellCateringDesc}</p>
                   <Button variant="outline" size="sm" asChild>
                     <LocalizedLink to="catering">{t.seo.lunch.crossSellCateringButton}</LocalizedLink>
                   </Button>
                 </div>
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="text-lg font-semibold mb-2">{t.seo.lunch.crossSellEvent}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">{t.seo.lunch.crossSellEventDesc}</p>
+                  <p className="text-muted-foreground mb-4">{t.seo.lunch.crossSellEventDesc}</p>
                   <Button variant="outline" size="sm" asChild>
                     <LocalizedLink to="firmenfeier-muenchen">{t.seo.lunch.crossSellEventButton}</LocalizedLink>
                   </Button>
