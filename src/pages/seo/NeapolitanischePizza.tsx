@@ -12,6 +12,7 @@ import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import storiaLogo from "@/assets/storia-logo.webp";
+import neapolitanPizzaHero from "@/assets/neapolitan-pizza-hero.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, MessageCircle, MapPin, Clock, Star, Utensils, ArrowRight } from "lucide-react";
@@ -111,23 +112,33 @@ const NeapolitanischePizza = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-b from-primary/10 to-background py-16 md:py-24">
-          <div className="container mx-auto px-4 text-center">
+        <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+          <img 
+            src={neapolitanPizzaHero} 
+            alt="Authentische neapolitanische Pizza Margherita aus dem Steinofen"
+            width={1920}
+            height={1080}
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+          <div className="relative z-10 container mx-auto px-4 text-center">
+            <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12 max-w-4xl mx-auto text-white">
             <Link to="/">
               <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer" />
             </Link>
             
             <div className="flex flex-wrap justify-center gap-3 mb-6">
-              <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">{t.seo.neapolitanPizza.heroBadge1}</span>
-              <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">{t.seo.neapolitanPizza.heroBadge2}</span>
-              <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">{t.seo.neapolitanPizza.heroBadge3}</span>
+              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium">{t.seo.neapolitanPizza.heroBadge1}</span>
+              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium">{t.seo.neapolitanPizza.heroBadge2}</span>
+              <span className="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-medium">{t.seo.neapolitanPizza.heroBadge3}</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4">
               {t.seo.neapolitanPizza.heroTitle}
             </h1>
-            <p className="text-lg text-muted-foreground mb-2">{t.seo.neapolitanPizza.heroSubtitle}</p>
-            <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-lg text-white/80 mb-2">{t.seo.neapolitanPizza.heroSubtitle}</p>
+            <p className="text-lg text-white/80 mb-8 max-w-3xl mx-auto">
               {t.seo.neapolitanPizza.heroDescription}
             </p>
             
@@ -144,6 +155,7 @@ const NeapolitanischePizza = () => {
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </LocalizedLink>
               </Button>
+            </div>
             </div>
           </div>
         </section>
