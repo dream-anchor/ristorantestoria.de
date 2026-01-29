@@ -15,10 +15,11 @@ interface ImageCardProps {
   subtitle?: string;
   className?: string;
   imageClassName?: string;
+  externalLink?: string;
 }
 
-const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "" }: ImageCardProps) => {
-  return (
+const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink }: ImageCardProps) => {
+  const content = (
     <div className={`relative overflow-hidden group ${className}`}>
       <img 
         src={image} 
@@ -49,6 +50,21 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
       )}
     </div>
   );
+
+  if (externalLink) {
+    return (
+      <a 
+        href={externalLink} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block cursor-pointer"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return content;
 };
 
 const ImageGrid = () => {
@@ -84,6 +100,9 @@ const ImageGrid = () => {
           <ImageCard 
             image={aperitivoImage} 
             alt={t.imageGrid.altDessert}
+            title={t.imageGrid.cateringTitle}
+            subtitle={t.imageGrid.cateringText}
+            externalLink="https://www.events-storia.de"
             className="aspect-square"
           />
 

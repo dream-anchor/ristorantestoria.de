@@ -178,11 +178,6 @@ const Kontakt = () => {
                 <p className="text-sm text-muted-foreground">{t.contact.breakfastHours}</p>
               </div>
 
-              <div className="mt-4 p-4 bg-secondary rounded-lg">
-                <h3 className="font-semibold mb-2">{t.contact.notturno}</h3>
-                <p className="text-sm text-muted-foreground">{t.contact.notturnoDesc}</p>
-                <p className="text-sm text-muted-foreground">{t.contact.notturnoHours}</p>
-              </div>
             </div>
           </div>
 
