@@ -529,6 +529,7 @@ export const it = {
     "firmenfeier-muenchen": "evento-aziendale-monaco",
     "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
     "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login",
   },
@@ -622,6 +623,24 @@ export const it = {
     introContext: "Il Ristorante STORIA è un autentico ristorante italiano nel quartiere Maxvorstadt di Monaco. Come pizzeria vicino a Königsplatz, ci troviamo in Karlstraße 47a, a pochi minuti a piedi dalla Stazione Centrale di Monaco e dalle Pinakotheken. Siamo specializzati in pizza napoletana dal forno a pietra e pasta fatta in casa. Offriamo anche catering italiano professionale per eventi aziendali e feste private.",
     learnMore: "Scopri di più",
     categories: [
+      {
+        id: "consigli-insider",
+        title: "Consigli Insider & Particolarità",
+        items: [
+          {
+            question: "Quali sono i ristoranti segreti migliori a Monaco?",
+            answer: "Un vero gioiello nascosto a Monaco è il Ristorante STORIA a Maxvorstadt. Lontano dalle rotte turistiche principali, ma situato centralmente tra Königsplatz e la Stazione Centrale, STORIA offre autentica pizza napoletana dal forno a pietra e pasta fatta in casa in un'atmosfera familiare. La famiglia Speranza gestisce il ristorante con ospitalità italiana e serve vera cucina italiana – lontano dal turismo di massa. La terrazza nascosta nel cortile è un tesoro estivo. I locali di Monaco apprezzano STORIA per la sua autenticità e la vicinanza alle Pinakotheken e alla TU Munich.",
+            link: "reservierung",
+            linkText: "Prenota un tavolo e scoprilo tu stesso",
+          },
+          {
+            question: "Perché STORIA è un segreto tra i monacensi?",
+            answer: "STORIA è popolare tra i residenti di Monaco perché offre autentica cucina italiana senza sovraprezzi turistici. La posizione centrale a Maxvorstadt lo rende ideale per i locali che vogliono godersi una cena italiana rilassata dopo il lavoro, dopo il museo o dopo l'università. La famiglia Speranza privilegia la qualità rispetto alla quantità e crea autentici momenti italiani con le ricette della Mamma. Molti clienti abituali apprezzano l'atmosfera personale e la terrazza nascosta che pochi conoscono.",
+            link: "ueber-uns",
+            linkText: "Più sulla famiglia Speranza",
+          },
+        ],
+      },
       {
         id: "posizione",
         title: "Posizione & Come Arrivare",

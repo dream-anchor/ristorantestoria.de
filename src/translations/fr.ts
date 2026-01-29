@@ -529,6 +529,7 @@ export const fr = {
     "firmenfeier-muenchen": "evenement-entreprise-munich",
     "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
     "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login",
   },
@@ -622,6 +623,24 @@ export const fr = {
     introContext: "Le Ristorante STORIA est un authentique restaurant italien dans le quartier Maxvorstadt de Munich. En tant que pizzeria près de Königsplatz, nous sommes situés au Karlstraße 47a, à quelques minutes à pied de la Gare Centrale de Munich et des Pinakothèques. Nous sommes spécialisés dans la pizza napolitaine au four à pierre et les pâtes maison. Nous proposons également un service traiteur italien professionnel pour événements d'entreprise et fêtes privées.",
     learnMore: "En savoir plus",
     categories: [
+      {
+        id: "conseils-initie",
+        title: "Conseils d'Initié & Particularités",
+        items: [
+          {
+            question: "Quels sont les restaurants secrets à Munich?",
+            answer: "Un véritable joyau caché à Munich est le Ristorante STORIA à Maxvorstadt. À l'écart des routes touristiques principales, mais situé au centre entre Königsplatz et la Gare Centrale, STORIA propose une authentique pizza napolitaine au four à pierre et des pâtes maison dans une atmosphère familiale. La famille Speranza dirige le restaurant avec l'hospitalité italienne et sert une véritable cuisine italienne – loin du tourisme de masse. La terrasse cachée dans la cour est un trésor estival. Les Munichois apprécient STORIA pour son authenticité et sa proximité avec les Pinakothèques et TU Munich.",
+            link: "reservierung",
+            linkText: "Réservez une table et découvrez-le vous-même",
+          },
+          {
+            question: "Pourquoi STORIA est-il un secret parmi les Munichois?",
+            answer: "STORIA est populaire parmi les résidents de Munich car il offre une cuisine italienne authentique sans supplément touristique. L'emplacement central à Maxvorstadt le rend idéal pour les locaux qui veulent profiter d'un dîner italien détendu après le travail, après le musée ou après l'université. La famille Speranza privilégie la qualité plutôt que la quantité et crée de véritables moments italiens avec les recettes de Mamma. Beaucoup d'habitués apprécient l'atmosphère personnelle et la terrasse cachée que peu connaissent.",
+            link: "ueber-uns",
+            linkText: "En savoir plus sur la famille Speranza",
+          },
+        ],
+      },
       {
         id: "emplacement",
         title: "Emplacement & Accès",
