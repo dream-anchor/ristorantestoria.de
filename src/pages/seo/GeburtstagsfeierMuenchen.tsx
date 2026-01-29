@@ -151,10 +151,17 @@ const GeburtstagsfeierMuenchen = () => {
             </section>
 
             {/* Process */}
+            {/* Process */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.birthday.processTitle}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-                {processSteps.map((step, i) => (<div key={i} className="flex flex-col items-center text-center"><span className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-3">{i + 1}</span><h3 className="font-semibold mb-1">{step.title}</h3><p className="text-muted-foreground text-sm">{step.desc}</p></div>))}
+              <div className="flex flex-wrap justify-center gap-6">
+                {processSteps.map((step, i) => (
+                  <div key={i} className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(20%-0.96rem)] flex flex-col items-center text-center">
+                    <span className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-3">{i + 1}</span>
+                    <h3 className="font-semibold mb-1">{step.title}</h3>
+                    <p className="text-muted-foreground text-sm">{step.desc}</p>
+                  </div>
+                ))}
               </div>
             </section>
 
