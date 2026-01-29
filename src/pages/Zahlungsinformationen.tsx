@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingActions from "@/components/FloatingActions";
 import SEO from "@/components/SEO";
 import { CreditCard, Banknote, Smartphone, Gift } from "lucide-react";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -138,7 +137,6 @@ const Zahlungsinformationen = () => {
       </main>
 
       <Footer />
-      <FloatingActions />
     </div>
     </>
   );
