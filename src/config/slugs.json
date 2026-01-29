@@ -26,6 +26,7 @@
     "firmenfeier-muenchen": "firmenfeier-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
+    "wild-essen-muenchen": "wild-essen-muenchen",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -57,6 +58,7 @@
     "firmenfeier-muenchen": "corporate-event-munich",
     "geburtstagsfeier-muenchen": "birthday-party-munich",
     "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
+    "wild-essen-muenchen": "game-dishes-munich",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -88,6 +90,7 @@
     "firmenfeier-muenchen": "evento-aziendale-monaco",
     "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
     "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
+    "wild-essen-muenchen": "selvaggina-monaco",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -119,6 +122,7 @@
     "firmenfeier-muenchen": "evenement-entreprise-munich",
     "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
     "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
+    "wild-essen-muenchen": "gibier-munich",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
