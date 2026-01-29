@@ -81,8 +81,8 @@ const STATIC_PAGES = {
   },
 
   aperitivo: {
-    title: "Aperitivo München – STORIA Notturno",
-    description: "Late Night Aperitivo täglich 21-22:30. Aperol Spritz, Negroni, Antipasti in der Maxvorstadt.",
+    title: "Aperitivo München – Italienische Bar Maxvorstadt",
+    description: "Klassische italienische Aperitivi. Aperol Spritz, Negroni, Weine & Antipasti in der Maxvorstadt.",
     content: "La Dolce Vita nahe Königsplatz. After-Work & Abende mit Freunden."
   },
 

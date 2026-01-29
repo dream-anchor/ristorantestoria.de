@@ -23,11 +23,11 @@ const AperitivoMuenchen = () => {
         title={t.seo.aperitivo.title}
         description={t.seo.aperitivo.description}
         sections={[
-          { heading: t.seo.aperitivo.notturnoTitle, content: [
-            t.seo.aperitivo.notturnoItem1,
-            t.seo.aperitivo.notturnoItem2,
-            t.seo.aperitivo.notturnoItem3,
-            t.seo.aperitivo.notturnoItem4,
+          { heading: t.seo.aperitivo.aperitivoTitle, content: [
+            t.seo.aperitivo.aperitivoItem1,
+            t.seo.aperitivo.aperitivoItem2,
+            t.seo.aperitivo.aperitivoItem3,
+            t.seo.aperitivo.aperitivoItem4,
           ]},
           { heading: t.seo.aperitivo.dolceVitaTitle, content: t.seo.aperitivo.dolceVitaDesc }
         ]}
@@ -71,16 +71,16 @@ const AperitivoMuenchen = () => {
 
             <div className="bg-card p-8 rounded-lg border border-border mb-8">
               <h2 className="text-2xl font-serif font-semibold mb-4">
-                {t.seo.aperitivo.notturnoTitle}
+                {t.seo.aperitivo.aperitivoTitle}
               </h2>
               <p className="text-muted-foreground mb-4">
-                {t.seo.aperitivo.notturnoDesc}
+                {t.seo.aperitivo.aperitivoDesc}
               </p>
               <ul className="space-y-3 text-muted-foreground mb-6">
-                <li>✓ {t.seo.aperitivo.notturnoItem1}</li>
-                <li>✓ {t.seo.aperitivo.notturnoItem2}</li>
-                <li>✓ {t.seo.aperitivo.notturnoItem3}</li>
-                <li>✓ {t.seo.aperitivo.notturnoItem4}</li>
+                <li>✓ {t.seo.aperitivo.aperitivoItem1}</li>
+                <li>✓ {t.seo.aperitivo.aperitivoItem2}</li>
+                <li>✓ {t.seo.aperitivo.aperitivoItem3}</li>
+                <li>✓ {t.seo.aperitivo.aperitivoItem4}</li>
               </ul>
             </div>
 
