@@ -307,9 +307,9 @@ const AperitivoMuenchen = () => {
               {/* Spritz Section */}
               <div className="mb-12">
                 <h3 className="text-xl font-semibold mb-6 text-center">{t.seo.aperitivo.categorySpritz}</h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
                   {spritzDrinks.map((drink, idx) => (
-                    <div key={idx} className="bg-card p-4 rounded-lg border border-border">
+                    <div key={idx} className="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] bg-card p-4 rounded-lg border border-border">
                       <div className="flex justify-between items-start mb-2">
                         <h4 className="font-semibold">{drink.name}</h4>
                         {drink.badge && <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded">{drink.badge}</span>}
@@ -344,9 +344,9 @@ const AperitivoMuenchen = () => {
               {/* Wines Section */}
               <div className="mb-12">
                 <h3 className="text-xl font-semibold mb-6 text-center">{t.seo.aperitivo.categoryWines}</h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
                   {wines.map((wine, idx) => (
-                    <div key={idx} className="bg-card p-4 rounded-lg border border-border">
+                    <div key={idx} className="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] bg-card p-4 rounded-lg border border-border">
                       <h4 className="font-semibold mb-2">{wine.name}</h4>
                       <p className="text-muted-foreground mb-2">{wine.desc}</p>
                       <p className="text-primary font-semibold">{wine.price}</p>
@@ -407,9 +407,9 @@ const AperitivoMuenchen = () => {
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-12">
                 {t.seo.aperitivo.whyTitle}
               </h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
                 {whyFeatures.map((feature, idx) => (
-                  <div key={idx} className="text-center">
+                  <div key={idx} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] text-center">
                     <div className="text-4xl mb-4">{feature.icon}</div>
                     <h3 className="font-semibold mb-2">{feature.title}</h3>
                     <p className="text-muted-foreground">{feature.desc}</p>
