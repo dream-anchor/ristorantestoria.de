@@ -529,6 +529,7 @@ export const en = {
     "firmenfeier-muenchen": "corporate-event-munich",
     "geburtstagsfeier-muenchen": "birthday-party-munich",
     "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login",
   },
@@ -622,6 +623,24 @@ export const en = {
     introContext: "Ristorante STORIA is an authentic Italian restaurant in Munich's Maxvorstadt district. As a pizzeria near Königsplatz, we are located at Karlstraße 47a, just a few minutes walk from Munich Central Station and the Pinakothek museums. We specialize in Neapolitan stone-oven pizza and homemade pasta. We also offer professional Italian catering for corporate events and private celebrations.",
     learnMore: "Learn more",
     categories: [
+      {
+        id: "insider-tips",
+        title: "Insider Tips & Highlights",
+        items: [
+          {
+            question: "What are the best hidden gem restaurants in Munich?",
+            answer: "A true hidden gem in Munich is Ristorante STORIA in Maxvorstadt. Away from the main tourist routes, but centrally located between Königsplatz and the Central Station, STORIA offers authentic Neapolitan stone-oven pizza and homemade pasta in a family atmosphere. The Speranza family runs the restaurant with Italian hospitality and serves genuine Italian cuisine – far from mass tourism. The hidden courtyard terrace is a summer treasure. Munich locals appreciate STORIA for its authenticity and proximity to the Pinakothek museums and TU Munich.",
+            link: "reservierung",
+            linkText: "Book a table and discover it yourself",
+          },
+          {
+            question: "Why is STORIA a hidden gem among Munich locals?",
+            answer: "STORIA is popular with Munich residents because it offers authentic Italian cuisine without tourist markups. The central location in Maxvorstadt makes it ideal for locals who want to enjoy a relaxed Italian dinner after work, after the museum, or after university. The Speranza family values quality over quantity and creates genuine Italian moments with Mamma's recipes. Many regulars appreciate the personal atmosphere and the hidden terrace that few know about.",
+            link: "ueber-uns",
+            linkText: "More about the Speranza family",
+          },
+        ],
+      },
       {
         id: "location",
         title: "Location & Directions",

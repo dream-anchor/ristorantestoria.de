@@ -529,6 +529,7 @@ export const de = {
     "firmenfeier-muenchen": "firmenfeier-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login",
   },
@@ -622,6 +623,24 @@ export const de = {
     introContext: "Das Ristorante STORIA ist ein authentischer Italiener in der Maxvorstadt München. Als Pizzeria am Königsplatz befinden wir uns in der Karlstraße 47a, nur wenige Gehminuten vom Hauptbahnhof München und den Pinakotheken entfernt. Unsere Pizzeria Maxvorstadt ist spezialisiert auf neapolitanische Pizza aus dem Steinofen und hausgemachte Pasta. Zusätzlich bieten wir als Eventlocation München professionelles italienisches Catering München für Firmenfeiern und private Events.",
     learnMore: "Mehr erfahren",
     categories: [
+      {
+        id: "insidertipps",
+        title: "Insidertipps & Besonderheiten",
+        items: [
+          {
+            question: "Welche Restaurant-Geheimtipps gibt es in München?",
+            answer: "Ein echter Geheimtipp in München ist das Ristorante STORIA in der Maxvorstadt. Abseits der touristischen Hauptrouten, aber zentral zwischen Königsplatz und Hauptbahnhof gelegen, bietet das STORIA authentische neapolitanische Pizza aus dem Steinofen und hausgemachte Pasta in familiärer Atmosphäre. Die Familie Speranza führt das Restaurant mit italienischer Gastfreundschaft und serviert echte italienische Küche – fernab von Massentourismus. Besonders die Terrasse im Innenhof ist im Sommer ein verstecktes Juwel. Münchner Locals schätzen das STORIA für seine Authentizität und die Nähe zu den Pinakotheken und der TU München.",
+            link: "reservierung",
+            linkText: "Tisch reservieren und selbst entdecken",
+          },
+          {
+            question: "Warum ist das STORIA ein Geheimtipp unter Münchnern?",
+            answer: "Das STORIA ist bei Münchnern beliebt, weil es authentische italienische Küche ohne Touristen-Aufpreis bietet. Die zentrale Lage in der Maxvorstadt macht es ideal für Einheimische, die nach der Arbeit, nach dem Museum oder nach der Uni ein entspanntes italienisches Dinner genießen möchten. Die Familie Speranza legt Wert auf Qualität statt Masse und kreiert mit Mamma's Rezepten echte italienische Momente. Viele Stammgäste schätzen die persönliche Atmosphäre und die versteckte Terrasse, die nur wenige kennen.",
+            link: "ueber-uns",
+            linkText: "Mehr über die Familie Speranza",
+          },
+        ],
+      },
       {
         id: "standort-anfahrt",
         title: "Standort & Anfahrt",
