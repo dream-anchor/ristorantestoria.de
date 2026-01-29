@@ -1,14 +1,3 @@
-Hier ist der **neue, vollständige Code** für deine `prerender.js`.
-
-**Was ist neu?**
-
-1. **Erweiterte Datenbank-Abfrage:** Es werden jetzt *alle* publizierten Menüs geladen (nicht nur `special`), damit auch Valentinstag & Co. gefunden werden.
-2. **Manuelle Routen:** Ich habe die Liste `manualRoutes` hinzugefügt. Dort stehen jetzt fest drin: `/mittags-menu`, `/speisekarte`, `/getraenke`. Damit werden diese Seiten garantiert erstellt.
-3. **Verbesserte Pfad-Logik:** Das Skript unterscheidet jetzt sauber, ob ein Menü in `/besondere-anlaesse/` oder `/menu/` einsortiert werden soll.
-
-Kopiere diesen kompletten Block in deine `prerender.js` auf GitHub:
-
-```javascript
 /**
  * Prerender Script
  * * Generates static HTML for IONOS (Apache)
@@ -227,5 +216,3 @@ async function generateRoutesToPrerender() {
   console.log(`   - Success: ${successCount}`);
   console.log(`   - Errors: ${errorCount}`);
 })();
-
-```
