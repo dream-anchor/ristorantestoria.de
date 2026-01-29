@@ -77,7 +77,7 @@ const FAQ = () => {
         </div>
         <Navigation />
 
-        <main className="container mx-auto px-4 py-12 flex-grow">
+        <main className="container mx-auto px-4 py-16 md:py-20 flex-grow">
           <article className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
             <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
@@ -93,40 +93,40 @@ const FAQ = () => {
             </nav>
 
             {/* Header */}
-            <header className="text-center mb-10">
-              <h1 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+            <header className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 {t.faqPage.title}
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                 {t.faqPage.subtitle}
               </p>
             </header>
 
             {/* Intro Context for GEO */}
-            <div className="bg-secondary/50 p-6 rounded-lg mb-10">
-              <p className="text-muted-foreground leading-relaxed">
+            <div className="bg-secondary/50 p-6 md:p-8 rounded-lg mb-12">
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 {t.faqPage.introContext}
               </p>
             </div>
 
             {/* FAQ Categories */}
             {faqCategories.map((category: { title: string; id: string; items: Array<{ question: string; answer: string; link?: string; linkText?: string; externalLink?: string; externalLinkText?: string }> }, catIndex: number) => (
-              <section key={catIndex} id={category.id} className="mb-10">
-                <h2 className="text-2xl font-serif font-semibold mb-4 pb-2 border-b border-border">
+              <section key={catIndex} id={category.id} className="mb-12 md:mb-14">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-6 pb-3 border-b border-border">
                   {category.title}
                 </h2>
                 
-                <Accordion type="multiple" className="space-y-2">
+                <Accordion type="multiple" className="space-y-3">
                   {category.items.map((item, itemIndex) => (
                     <AccordionItem 
                       key={itemIndex} 
                       value={`${category.id}-${itemIndex}`}
-                      className="bg-card border border-border rounded-lg px-4"
+                      className="bg-card border border-border rounded-lg px-5 md:px-6"
                     >
-                      <AccordionTrigger className="text-left font-medium hover:no-underline py-4">
+                      <AccordionTrigger className="text-left text-base md:text-lg font-medium hover:no-underline py-5">
                         {item.question}
                       </AccordionTrigger>
-                      <AccordionContent className="text-muted-foreground pb-4">
+                      <AccordionContent className="text-base text-muted-foreground pb-5 leading-relaxed">
                         <p className="mb-2">{item.answer}</p>
                         {item.link && (
                           <LocalizedLink 
@@ -155,11 +155,11 @@ const FAQ = () => {
             ))}
 
             {/* CTA Box */}
-            <div className="bg-primary/5 border border-primary/20 rounded-lg p-6 md:p-8 text-center mt-12">
-              <h3 className="text-xl font-serif font-semibold mb-3">
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-8 md:p-10 text-center mt-16">
+              <h3 className="text-xl md:text-2xl font-serif font-semibold mb-4">
                 {t.faqPage.cta.title}
               </h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-lg text-muted-foreground mb-8">
                 {t.faqPage.cta.description}
               </p>
               <div className="flex flex-wrap justify-center gap-3">
@@ -184,38 +184,38 @@ const FAQ = () => {
             </div>
 
             {/* Quick Links */}
-            <section className="mt-12">
-              <h2 className="text-xl font-serif font-semibold mb-4">
+            <section className="mt-14 md:mt-16">
+              <h2 className="text-xl md:text-2xl font-serif font-semibold mb-6">
                 {t.faqPage.quickLinks.title}
               </h2>
-              <nav aria-label="Schnellzugriff" className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <nav aria-label="Schnellzugriff" className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <LocalizedLink 
                   to="reservierung" 
-                  className="p-3 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center"
+                  className="p-4 md:p-5 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center text-base font-medium"
                 >
                   {t.faqPage.quickLinks.reservation}
                 </LocalizedLink>
                 <LocalizedLink 
                   to="speisekarte" 
-                  className="p-3 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center"
+                  className="p-4 md:p-5 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center text-base font-medium"
                 >
                   {t.faqPage.quickLinks.menu}
                 </LocalizedLink>
                 <LocalizedLink 
                   to="mittags-menu" 
-                  className="p-3 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center"
+                  className="p-4 md:p-5 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center text-base font-medium"
                 >
                   {t.faqPage.quickLinks.lunchMenu}
                 </LocalizedLink>
                 <LocalizedLink 
                   to="getraenke" 
-                  className="p-3 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center"
+                  className="p-4 md:p-5 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center text-base font-medium"
                 >
                   {t.faqPage.quickLinks.drinks}
                 </LocalizedLink>
                 <LocalizedLink 
                   to="kontakt" 
-                  className="p-3 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center"
+                  className="p-4 md:p-5 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center text-base font-medium"
                 >
                   {t.faqPage.quickLinks.contact}
                 </LocalizedLink>
@@ -223,7 +223,7 @@ const FAQ = () => {
                   href="https://www.events-storia.de/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="p-3 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center inline-flex items-center justify-center gap-1"
+                  className="p-4 md:p-5 bg-card border border-border rounded-lg hover:border-primary transition-colors text-center text-base font-medium inline-flex items-center justify-center gap-1"
                 >
                   {t.faqPage.quickLinks.catering}
                   <ExternalLink className="h-3 w-3" />
