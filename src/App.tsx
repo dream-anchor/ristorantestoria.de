@@ -44,6 +44,7 @@ import EventlocationMuenchen from "./pages/seo/EventlocationMuenchen";
 import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
 import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
 import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
+import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
 import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient();
@@ -76,6 +77,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "firmenfeier-muenchen": FirmenfeierMuenchen,
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
+  "wild-essen-muenchen": WildEssenMuenchen,
   "faq": FAQ,
 };
 
