@@ -1146,23 +1146,23 @@ export const en = {
     birthday: {
       // SEO
       seoTitle: "Birthday Party Munich Maxvorstadt | STORIA Celebrate Birthday Königsplatz",
-      seoDescription: "Birthday party Munich: STORIA Maxvorstadt for 18th, 30th, 40th, 50th birthday. 10-80 guests, Italian cuisine, central at Königsplatz. Celebrate milestone birthdays unforgettably!",
+      seoDescription: "Birthday party Munich: STORIA Maxvorstadt for 18th, 30th, 40th, 50th birthday. 2-100 guests, authentic Italian cuisine, central at Königsplatz. Celebrate milestone birthdays unforgettably!",
       // Hero
       heroTitle: "Birthday Party Munich Maxvorstadt",
       heroSubtitle: "Celebrate milestone birthdays unforgettably | STORIA at Königsplatz",
-      heroBadge1: "🎂 10-80 Guests",
+      heroBadge1: "🎂 2-100 Guests",
       heroBadge2: "🍝 Italian Cuisine",
       heroBadge3: "🎉 Surprises possible",
-      heroDescription: "Celebrate your birthday in Munich at STORIA Maxvorstadt: Whether 18th, 30th, 40th or 50th birthday – we make your celebration unforgettable. With authentic Italian cuisine, flexible room concepts for 10-80 guests, central location at Königsplatz and special birthday service (cake, decoration, surprises).",
-      heroCta: "Inquire birthday party at STORIA Events",
+      heroDescription: "Celebrate your birthday in Munich at STORIA Maxvorstadt: Whether intimate dinner for two, 18th, 30th, 40th or 50th birthday – we make your celebration unforgettable. With authentic Italian cuisine, flexible room concepts for 2-100 guests, central location at Königsplatz and special birthday service.",
+      heroCta: "Inquire birthday party",
       heroCtaSecondary: "089 51519696",
-      heroEventsNote: "All birthday party inquiries are handled through our event website:",
+      heroEventsNote: "For groups of 20+ guests: Inquiry via our event website",
       heroEventsLink: "events-storia.de",
       // Intro
       introTitle: "Birthday Party Munich – STORIA for Unforgettable Birthdays",
-      introP1: "Looking to celebrate your birthday in Munich and searching for the perfect location? Ristorante STORIA in Maxvorstadt is the ideal address for birthday parties of all kinds: From 18th birthday to 30th, 40th and 50th birthday to big surprise parties – we make your special day unforgettable.",
-      introP2: "With flexible room concepts for 10 to 80 guests, exquisite Italian cuisine (no standard party catering!), central location at Königsplatz and special birthday service (birthday cake, decoration, surprises we gladly organize) your birthday party at STORIA becomes an experience you and your guests won't forget.",
-      introP3: "All birthday party bookings go through our specialized event website: events-storia.de. There you'll find detailed information about birthday packages, menus, prices and can submit your inquiry directly.",
+      introP1: "Looking to celebrate your birthday in Munich and searching for the perfect location? Ristorante STORIA in Maxvorstadt is the ideal address for birthday parties of all kinds: From intimate birthday dinner for two to 30th, 40th and 50th birthday to big surprise parties with up to 100 guests – we make your special day unforgettable.",
+      introP2: "For smaller celebrations up to 20 guests, you can reserve directly at the restaurant. For larger groups of 20+ guests, please use our event website events-storia.de – there you'll find all information about packages, menus and prices.",
+      introP3: "Our birthday menus are based on our authentic Italian cuisine: 3-course menus from €27.90 p.p., 4-course tasting menus from €55 p.p. – no standard party catering, but genuine Italian hospitality.",
       // Events CTA Block
       eventsCtaTitle: "🎉 Inquire Birthday Party at STORIA Events",
       eventsCtaDesc: "All information about our birthday packages, party menus, room concepts and prices can be found on our specialized event website:",
