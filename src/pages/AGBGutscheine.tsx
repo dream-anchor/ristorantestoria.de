@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import FloatingActions from "@/components/FloatingActions";
 import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -156,7 +155,6 @@ const AGBGutscheine = () => {
       </main>
 
       <Footer />
-      <FloatingActions />
     </div>
     </>
   );
