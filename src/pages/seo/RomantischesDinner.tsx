@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Heart, Clock } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
+import romanticDinnerHero from "@/assets/romantisches-dinner-hero.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -121,26 +122,35 @@ const RomantischesDinner = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-b from-primary/10 to-background">
-          <div className="container mx-auto px-4 py-16 text-center">
+        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+          <img 
+            src={romanticDinnerHero} 
+            alt={t.seo.romanticDinner.heroTitle}
+            width={1920}
+            height={1080}
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
+          <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/">
               <img src={storiaLogo} alt="STORIA Logo" width={128} height={128} loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer" />
             </Link>
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-3xl md:text-5xl font-serif font-bold mb-4">{t.seo.romanticDinner.heroTitle}</h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-6">{t.seo.romanticDinner.heroSubtitle}</p>
+            <div className="bg-black/50 backdrop-blur-sm rounded-2xl px-6 py-8 md:px-12 md:py-12 max-w-4xl mx-auto">
+              <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">{t.seo.romanticDinner.heroTitle}</h1>
+              <p className="text-lg md:text-xl text-white/90 mb-6">{t.seo.romanticDinner.heroSubtitle}</p>
               <div className="flex flex-wrap justify-center gap-3 mb-6">
-                <span className="bg-primary/20 px-4 py-2 rounded-full text-sm">{t.seo.romanticDinner.heroBadge1}</span>
-                <span className="bg-primary/20 px-4 py-2 rounded-full text-sm">{t.seo.romanticDinner.heroBadge2}</span>
-                <span className="bg-primary/20 px-4 py-2 rounded-full text-sm">{t.seo.romanticDinner.heroBadge3}</span>
+                <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{t.seo.romanticDinner.heroBadge1}</span>
+                <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{t.seo.romanticDinner.heroBadge2}</span>
+                <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{t.seo.romanticDinner.heroBadge3}</span>
               </div>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">{t.seo.romanticDinner.heroDescription}</p>
+              <p className="text-white/80 mb-8 max-w-2xl mx-auto">{t.seo.romanticDinner.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild>
+                <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                   <LocalizedLink to="reservierung"><Heart className="w-5 h-5 mr-2" />{t.seo.romanticDinner.heroCta}</LocalizedLink>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <a href="tel:+4989515196"><Phone className="w-5 h-5 mr-2" />089 515196</a>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
+                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
               </div>
             </div>
