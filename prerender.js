@@ -1,9 +1,21 @@
+Hier ist der **neue, vollständige Code** für deine `prerender.js`.
+
+**Was ist neu?**
+
+1. **Erweiterte Datenbank-Abfrage:** Es werden jetzt *alle* publizierten Menüs geladen (nicht nur `special`), damit auch Valentinstag & Co. gefunden werden.
+2. **Manuelle Routen:** Ich habe die Liste `manualRoutes` hinzugefügt. Dort stehen jetzt fest drin: `/mittags-menu`, `/speisekarte`, `/getraenke`. Damit werden diese Seiten garantiert erstellt.
+3. **Verbesserte Pfad-Logik:** Das Skript unterscheidet jetzt sauber, ob ein Menü in `/besondere-anlaesse/` oder `/menu/` einsortiert werden soll.
+
+Kopiere diesen kompletten Block in deine `prerender.js` auf GitHub:
+
+```javascript
 /**
  * Prerender Script
  * * Generates static HTML for IONOS (Apache)
  * - Fetches routes from slugs.json & Supabase
  * - Injects SEO (React Helmet)
  * - Creates folder structures (e.g. /en/index.html) to prevent 403 errors
+ * - Includes manual fix for specific menu pages
  */
 
 import fs from "node:fs";
@@ -33,7 +45,8 @@ const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 /**
- * Fetch dynamic special menu slugs from Supabase
+ * Fetch dynamic slugs from Supabase
+ * UPDATE: Fetches ALL published menus to ensure special events like Valentine's are found
  */
 async function fetchDynamicSlugs() {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
@@ -42,8 +55,9 @@ async function fetchDynamicSlugs() {
   }
 
   try {
+    // UPDATE: Removed "menu_type=eq.special" filter. We fetch all published menus.
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/menus?menu_type=eq.special&is_published=eq.true&select=slug`,
+      `${SUPABASE_URL}/rest/v1/menus?is_published=eq.true&select=slug,menu_type`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -58,8 +72,9 @@ async function fetchDynamicSlugs() {
     }
 
     const menus = await response.json();
-    console.log(`📦 Found ${menus.length} published special menus`);
-    return menus.map((m) => m.slug);
+    console.log(`📦 Found ${menus.length} published menus from DB`);
+    // Return objects with slug AND type
+    return menus.map((m) => ({ slug: m.slug, type: m.menu_type }));
   } catch (error) {
     console.error("❌ Error fetching dynamic slugs:", error.message);
     return [];
@@ -86,7 +101,17 @@ function getLocalizedPath(baseSlug, lang) {
 async function generateRoutesToPrerender() {
   const routes = [];
 
-  // 1. Static Routes from slugs.json
+  // 1. ADDED: Manual Static Routes (Fix for missing pages)
+  // These are hardcoded to ensure they always exist
+  const manualRoutes = [
+    "/mittags-menu",
+    "/speisekarte",
+    "/getraenke"
+    // Add translations if needed, e.g. "/en/lunch-menu"
+  ];
+  routes.push(...manualRoutes);
+
+  // 2. Static Routes from slugs.json
   if (slugMaps.de) {
     const staticBaseSlugs = Object.keys(slugMaps.de).filter(
       (slug) => !slug.startsWith("admin")
@@ -95,26 +120,39 @@ async function generateRoutesToPrerender() {
     for (const baseSlug of staticBaseSlugs) {
       for (const lang of LANGUAGES) {
         const localizedPath = getLocalizedPath(baseSlug, lang);
-        if (localizedPath) routes.push(localizedPath);
+        // Avoid duplicates if manual route already added it
+        if (localizedPath && !routes.includes(localizedPath)) {
+          routes.push(localizedPath);
+        }
       }
     }
   } else {
     // Fallback if slugs.json is missing
-    routes.push("/");
+    if (!routes.includes('/')) routes.push("/");
   }
 
-  // 2. Dynamic Routes from Supabase
-  const dynamicSlugs = await fetchDynamicSlugs();
+  // 3. Dynamic Routes from Supabase
+  const dynamicMenus = await fetchDynamicSlugs();
   const parentSlugs = slugMaps.parentSlugs || {};
 
-  for (const menuSlug of dynamicSlugs) {
+  for (const menu of dynamicMenus) {
     for (const lang of LANGUAGES) {
-      // Default fallback to 'menu' if parentSlugs is missing
-      const parentSlug = parentSlugs[lang] || "menu"; 
+      // Determine parent folder based on menu type
+      // Standard fallback is 'menu'
+      let parentSlug = parentSlugs[lang] || 'menu';
+      
+      // If it's a special event (like Valentine's), try to use special-events folder
+      if (menu.type === 'special') {
+         parentSlug = slugMaps[lang]?.['special-events'] || parentSlug; 
+      }
+
       const routePath = lang === "de" 
-        ? `/${parentSlug}/${menuSlug}`
-        : `/${lang}/${parentSlug}/${menuSlug}`;
-      routes.push(routePath);
+        ? `/${parentSlug}/${menu.slug}`
+        : `/${lang}/${parentSlug}/${menu.slug}`;
+      
+      if (!routes.includes(routePath)) {
+        routes.push(routePath);
+      }
     }
   }
 
@@ -139,11 +177,9 @@ async function generateRoutesToPrerender() {
   for (const url of routesToPrerender) {
     try {
       // 1. Render App & get Helmet data
-      // Note: entry-server.tsx must return { html, helmet }
       const { html, helmet } = render(url, {});
 
       // 2. Inject HTML into Template
-      // Replaces OR <div id="root"></div>
       let finalHtml = template.replace(
         /|<div id="root"><\/div>|<div id="root">\s*<\/div>/,
         `<div id="root">${html}</div>`
@@ -161,7 +197,6 @@ async function generateRoutesToPrerender() {
       }
 
       // 4. Determine File Path (Fix for IONOS 403)
-      // Instead of dist/en.html -> dist/en/index.html
       const cleanUrl = url === '/' ? '' : url.replace(/\/$/, '');
       const filePath = `dist${cleanUrl}/index.html`;
 
@@ -181,7 +216,7 @@ async function generateRoutesToPrerender() {
     }
   }
 
-  // Cleanup: Remove server build folder (not needed on hosting)
+  // Cleanup: Remove server build folder
   try {
     fs.rmSync(toAbsolute('dist/server'), { recursive: true, force: true });
   } catch (e) { 
@@ -192,3 +227,5 @@ async function generateRoutesToPrerender() {
   console.log(`   - Success: ${successCount}`);
   console.log(`   - Errors: ${errorCount}`);
 })();
+
+```
