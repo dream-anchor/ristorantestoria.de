@@ -55,6 +55,10 @@ const SEO = ({
 
   return (
     <Helmet>
+      {/* Favicon - explizit setzen für alle Seiten */}
+      <link rel="icon" href="/favicon.png" type="image/png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      
       {/* Primary Meta Tags */}
       <html lang={language} />
       <title>{fullTitle}</title>
