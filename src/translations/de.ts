@@ -506,7 +506,7 @@ export const de = {
       menuSubtitle: "Erhältlich in der Wildsaison (September bis Februar) – Verfügbarkeit bitte bei Reservierung erfragen",
       categoryAntipasti: "Antipasti – Wildvorspeisen",
       categoryPasta: "Primi Piatti – Pasta mit Wild",
-      categorySecondi: "Secondi di Cacciagione – Wild-Hauptgerichte",
+      categorySecondi: "Secondi di Cacciagione –\nWild-Hauptgerichte",
       badgeAutumn: "Herbst-Spezialität",
       badgeChefSpecial: "Chefs Special",
       dishDuckCarpaccio: "Zartes Entenbrust Carpaccio",

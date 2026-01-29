@@ -506,7 +506,7 @@ export const fr = {
       menuSubtitle: "Disponibles pendant la saison de chasse (septembre - février) – veuillez vous renseigner sur la disponibilité lors de la réservation",
       categoryAntipasti: "Antipasti de Gibier",
       categoryPasta: "Primi Piatti avec Gibier",
-      categorySecondi: "Secondi di Cacciagione – Plats Principaux de Gibier",
+      categorySecondi: "Secondi di Cacciagione –\nPlats Principaux de Gibier",
       badgeAutumn: "Spécialité d'Automne",
       badgeChefSpecial: "Chefs Special",
       dishDuckCarpaccio: "Tendre Carpaccio de Magret de Canard",

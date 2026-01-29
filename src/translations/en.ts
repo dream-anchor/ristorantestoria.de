@@ -506,7 +506,7 @@ export const en = {
       menuSubtitle: "Available during game season (September to February) – please inquire about availability when booking",
       categoryAntipasti: "Antipasti – Game Starters",
       categoryPasta: "Primi Piatti – Pasta with Game",
-      categorySecondi: "Secondi di Cacciagione – Game Main Courses",
+      categorySecondi: "Secondi di Cacciagione –\nGame Main Courses",
       badgeAutumn: "Autumn Special",
       badgeChefSpecial: "Chefs Special",
       dishDuckCarpaccio: "Tender Duck Breast Carpaccio",
