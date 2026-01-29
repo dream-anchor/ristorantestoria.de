@@ -11,3 +11,6 @@ verify_jwt = true
 
 [functions.spell-check-menu]
 verify_jwt = true
+
+[functions.update-landingpage-content]
+verify_jwt = false
