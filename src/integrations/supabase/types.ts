@@ -14,6 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
+      landingpage_content: {
+        Row: {
+          created_at: string | null
+          featured_items: Json | null
+          highlights_text_de: string | null
+          highlights_text_en: string | null
+          highlights_text_fr: string | null
+          highlights_text_it: string | null
+          id: string
+          intro_de: string | null
+          intro_en: string | null
+          intro_fr: string | null
+          intro_it: string | null
+          items_found_count: number | null
+          last_check: string | null
+          last_menu_hash: string | null
+          last_successful_update: string | null
+          menu_highlights: Json | null
+          page_slug: string
+          prices_summary: Json | null
+          season_info: Json | null
+          source_menu_ids: string[] | null
+          update_status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          featured_items?: Json | null
+          highlights_text_de?: string | null
+          highlights_text_en?: string | null
+          highlights_text_fr?: string | null
+          highlights_text_it?: string | null
+          id?: string
+          intro_de?: string | null
+          intro_en?: string | null
+          intro_fr?: string | null
+          intro_it?: string | null
+          items_found_count?: number | null
+          last_check?: string | null
+          last_menu_hash?: string | null
+          last_successful_update?: string | null
+          menu_highlights?: Json | null
+          page_slug: string
+          prices_summary?: Json | null
+          season_info?: Json | null
+          source_menu_ids?: string[] | null
+          update_status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          featured_items?: Json | null
+          highlights_text_de?: string | null
+          highlights_text_en?: string | null
+          highlights_text_fr?: string | null
+          highlights_text_it?: string | null
+          id?: string
+          intro_de?: string | null
+          intro_en?: string | null
+          intro_fr?: string | null
+          intro_it?: string | null
+          items_found_count?: number | null
+          last_check?: string | null
+          last_menu_hash?: string | null
+          last_successful_update?: string | null
+          menu_highlights?: Json | null
+          page_slug?: string
+          prices_summary?: Json | null
+          season_info?: Json | null
+          source_menu_ids?: string[] | null
+          update_status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       menu_categories: {
         Row: {
           created_at: string | null
