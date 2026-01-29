@@ -134,7 +134,7 @@ const RomantischesDinner = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/">
-              <img src={storiaLogo} alt="STORIA Logo" width={128} height={128} loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer" />
+              <img src={storiaLogo} alt="STORIA Logo" width={128} height={128} loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer brightness-0 invert" />
             </Link>
             <div className="bg-black/50 backdrop-blur-sm rounded-2xl px-6 py-8 md:px-12 md:py-12 max-w-4xl mx-auto">
               <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">{t.seo.romanticDinner.heroTitle}</h1>
