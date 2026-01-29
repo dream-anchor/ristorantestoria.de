@@ -16,6 +16,7 @@ import firmenfeierEvent from "@/assets/firmenfeier-event.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
+import { DynamicPackagesSection, DynamicCateringHighlights } from "@/components/DynamicPackagesSection";
 
 const EventlocationMuenchen = () => {
   const { t } = useLanguage();
@@ -224,6 +225,18 @@ const EventlocationMuenchen = () => {
               </div>
               <p className="text-center text-muted-foreground mt-6">{t.seo.eventlocation.roomsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">events-storia.de</a></p>
             </section>
+
+            {/* Dynamic Packages from Events Project */}
+            <DynamicPackagesSection 
+              pageSlug="eventlocation"
+              title="Event-Pakete"
+            />
+
+            {/* Dynamic Catering Highlights */}
+            <DynamicCateringHighlights 
+              pageSlug="eventlocation" 
+              title="Catering-Highlights" 
+            />
 
             {/* Why STORIA */}
             <section className="mb-16">
