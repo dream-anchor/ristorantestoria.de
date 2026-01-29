@@ -1,4 +1,34 @@
-export const it = {
+import { de } from "./de";
+
+/**
+ * Italian grammar convention: use "in STORIA" / "nel ristorante STORIA" instead of "al".
+ * Applied only to the Italian translations.
+ */
+const replaceAll = (s: string, search: string, replacement: string): string =>
+  s.split(search).join(replacement);
+
+const fixStoriaPhrases = (s: string): string => {
+  // Use split/join for broad TS target compatibility (String.replaceAll not available).
+  let out = s;
+  out = replaceAll(out, "Al ristorante STORIA", "Nel ristorante STORIA");
+  out = replaceAll(out, "al ristorante STORIA", "nel ristorante STORIA");
+  out = replaceAll(out, "Al STORIA", "In STORIA");
+  out = replaceAll(out, "al STORIA", "in STORIA");
+  return out;
+};
+
+const deepMapStrings = (value: unknown): unknown => {
+  if (typeof value === "string") return fixStoriaPhrases(value);
+  if (Array.isArray(value)) return value.map(deepMapStrings);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>).map(([k, v]) => [k, deepMapStrings(v)]),
+    );
+  }
+  return value;
+};
+
+const itBase = {
   floatingActions: {
     call: "Chiama",
     reserve: "Prenota",
@@ -822,49 +852,6 @@ export const it = {
       valentineCourse4Desc: "Crostata al cioccolato con gelato alla cannella e vaniglia fatto in casa su salsa ai lamponi",
       valentinePrice: "€ 65,90 a persona",
       valentinePriceNote: "Incl. abbinamento vini (4 bicchieri abbinati alle portate)",
-      valentineExtrasTitle: "🎁 Extra Opzionali:",
-      valentineExtra1: "🌹 Bouquet di rose (rose rosse): € 25,00",
-      valentineExtra2: "🍾 Champagne di benvenuto (bicchiere): € 13,80",
-      valentineExtra3: "🕯️ Decorazione tavolo: gratuita su richiesta",
-      valentineBadge: "Special San Valentino 2026",
-      valentineReserveTitle: "📞 Prenotazione per San Valentino 2026",
-      valentineReserveNote: "Il nostro menu San Valentino è molto popolare e i posti sono limitati. Raccomandiamo prenotazione anticipata – idealmente già a gennaio 2026.",
-      valentineFuture: "Il Menu San Valentino 2026 è un esempio del nostro special annuale di San Valentino. Negli anni futuri il nostro chef creerà ogni volta un nuovo menu San Valentino appositamente ideato.",
-      // Occasions
-      menuVegetaleTitle: "🌿 Menu 4 Portate «Vegetale»",
-      menuVegetaleSubtitle: "Per gli amanti della cucina vegetariana",
-      menuVegetaleCourse1: "Antipasto: Caprese con Burrata e Pomodori del Cuore di Bue",
-      menuVegetaleCourse2: "Primo: Risotto ai Funghi Porcini",
-      menuVegetaleCourse3: "Secondo: Melanzane alla Parmigiana",
-      menuVegetaleCourse4: "Dolce: Tiramisù fatto in casa",
-      menuVegetalePrice: "€ 89,00 a persona",
-      menuVegetaleWine: "Con abbinamento vini: € 34,00 extra",
-      menuMareTitle: "🐟 Menu 4 Portate «Mare»",
-      menuMareSubtitle: "Per gli amanti del pesce",
-      menuMareCourse1: "Antipasto: Carpaccio di Tonno con Capperi e Rucola",
-      menuMareCourse2: "Primo: Linguine allo Scoglio",
-      menuMareCourse3: "Secondo: Branzino al Forno con Patate",
-      menuMareCourse4: "Dolce: Panna Cotta con Frutti di Bosco",
-      menuMarePrice: "€ 96,00 a persona",
-      menuMareWine: "Con abbinamento vini: € 34,00 extra",
-      menuTerraTitle: "🥩 Menu 4 Portate «Terra»",
-      menuTerraSubtitle: "Per gli amanti della carne",
-      menuTerraCourse1: "Antipasto: Carpaccio di Manzo con Rucola e Parmigiano",
-      menuTerraCourse2: "Primo: Pappardelle con Ragù di Cervo",
-      menuTerraCourse3: "Secondo: Filetto di Manzo con Salsa al Barolo",
-      menuTerraCourse4: "Dolce: Semifreddo al Torroncino",
-      menuTerraPrice: "€ 96,00 a persona",
-      menuTerraWine: "Con abbinamento vini: € 34,00 extra",
-      menuNote: "💡 I menu possono variare stagionalmente. Chiedete il menu attuale alla prenotazione.",
-      valentineTitle: "❤️ Menu San Valentino 2026",
-      valentineIntro: "Il nostro speciale per San Valentino – disponibile intorno al 14 febbraio:",
-      valentineCourse1: "🥂 Benvenuto: Prosecco di benvenuto",
-      valentineCourse2: "🥗 Antipasto: Carpaccio di Manzo con Rucola, Parmigiano e Olio al Tartufo",
-      valentineCourse3: "🍝 Primo: Ravioli ripieni di Ricotta e Spinaci in Salsa di Burro e Salvia",
-      valentineCourse4: "🥩 Secondo: Filetto di Manzo o Pesce del Giorno con Contorni stagionali",
-      valentineCourse5: "🍫 Dolce: Cuore di Cioccolato con Lamponi",
-      valentinePrice: "€ 65,90 a persona",
-      valentineWine: "Abbinamento vini (4 bicchieri) incluso",
       valentineExtrasTitle: "🎁 Extra Opzionali:",
       valentineExtra1: "🌹 Bouquet di rose (rose rosse): € 25,00",
       valentineExtra2: "🍾 Champagne di benvenuto (bicchiere): € 13,80",
@@ -1763,3 +1750,22 @@ export const it = {
     },
   },
 };
+
+// Ensure key parity with German (source-of-truth) while keeping Italian overrides.
+// Any keys missing from itBase will fall back to German so the app compiles.
+export const it = deepMapStrings({
+  ...de,
+  ...itBase,
+  seo: {
+    ...de.seo,
+    ...itBase.seo,
+    lunch: { ...de.seo.lunch, ...itBase.seo.lunch },
+    firmenfeier: { ...de.seo.firmenfeier, ...itBase.seo.firmenfeier },
+    aperitivo: { ...de.seo.aperitivo, ...itBase.seo.aperitivo },
+    romanticDinner: { ...de.seo.romanticDinner, ...itBase.seo.romanticDinner },
+    eventlocation: { ...de.seo.eventlocation, ...itBase.seo.eventlocation },
+    birthday: { ...de.seo.birthday, ...itBase.seo.birthday },
+    neapolitanPizza: { ...de.seo.neapolitanPizza, ...itBase.seo.neapolitanPizza },
+    wild: { ...de.seo.wild, ...itBase.seo.wild },
+  },
+}) as typeof de;
