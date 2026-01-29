@@ -1,57 +1,93 @@
 
 
-# Plan: Verbesserte Lesbarkeit der Inhaltstexte
+# Plan: Globale Verbesserung der Textlesbarkeit
 
-## Analyse des Problems
+## Uebersicht
 
-Die Aperitivo-Landingpage (und vermutlich auch andere SEO-Landingpages) verwenden durchgehend:
-- `text-sm` (14px) für Beschreibungstexte - zu klein
-- `text-muted-foreground` (hsl 25 10% 35%) - relativ heller Grauton
-- Inter font-weight 400 (Regular) - kann auf Bildschirmen dünn wirken
+Die Schriftgroesse und Lesbarkeit der Inhaltstexte wird auf der gesamten Webseite vereinheitlicht. Alle `text-sm` (14px) Beschreibungstexte werden auf `text-base` (16px) erhoeht, und alle `text-xs` (12px) werden auf `text-sm` (14px) angepasst.
 
-Diese Kombination aus kleiner Schrift + heller Farbe + normalem Schriftgewicht führt zu schwer lesbarem Text.
+## Betroffene Dateien und Aenderungen
 
-## Loesung
+### SEO Landingpages
 
-Die Beschreibungstexte von `text-sm` (14px) auf `text-base` (16px) erhoehen und die Schriftstaerke leicht anpassen.
+| Datei | Aenderungen |
+|-------|-------------|
+| `src/pages/seo/LunchMuenchen.tsx` | 6 Stellen: Business Benefits (Z.197), Benefits Grid (Z.220), Lunch Offers (Z.255), Cross-Sell Cards (Z.302, 309) |
+| `src/pages/seo/FirmenfeierMuenchen.tsx` | 2 Stellen: Benefits Grid (Z.182) |
+| `src/pages/seo/WildEssenMuenchen.tsx` | 5+ Stellen: Wild dishes (Z.337), Features (Z.383), Season boxes (Z.422, 428) |
+| `src/pages/seo/NeapolitanischePizza.tsx` | 4 Stellen: Pizza descriptions (Z.90, 94, 98, 102) |
+| `src/pages/seo/RomantischesDinner.tsx` | Keine `text-sm` in Beschreibungen - bereits ok |
+| `src/pages/seo/GeburtstagsfeierMuenchen.tsx` | Keine `text-sm` in Beschreibungen - bereits ok |
+| `src/pages/seo/EventlocationMuenchen.tsx` | Keine `text-sm` in Beschreibungen - bereits ok |
 
-### Aenderungen in `src/pages/seo/AperitivoMuenchen.tsx`
+### Hauptseiten
 
-Die folgenden Klassen werden angepasst:
+| Datei | Aenderungen |
+|-------|-------------|
+| `src/pages/Kontakt.tsx` | 1 Stelle: WhatsApp Hinweis (Z.137) `text-xs` → `text-sm` |
 
-| Stelle | Vorher | Nachher |
-|--------|--------|---------|
-| Drinks-Beschreibungen | `text-sm` | `text-base` |
-| Card-Beschreibungen | `text-sm` | `text-base` |
-| Origin/Herkunft-Texte | `text-xs` | `text-sm` |
-| Feature-Beschreibungen | `text-sm` | `text-base` |
-| Occasions-Beschreibungen | `text-sm` | `text-base` |
-| Location-Listen | `text-sm` | `text-base` |
-| FAQ-Antworten | Standard | `text-base` |
+### Globale Komponenten
 
-### Betroffene Bereiche (ca. 25 Stellen)
+| Datei | Aenderungen |
+|-------|-------------|
+| `src/components/Footer.tsx` | Footer bleibt bei `text-sm` und `text-xs` (bewusst kompakter Stil fuer Footer, keine Aenderung) |
 
-1. **Aperitivo Explained Cards** (Zeilen 279, 283, 287, 291): `text-sm` zu `text-base`
-2. **Spritz Drinks** (Zeile 317): `text-sm` zu `text-base`, Zeile 318: `text-xs` zu `text-sm`
-3. **Cocktails** (Zeilen 335-337): `text-sm` zu `text-base`, `text-xs` zu `text-sm`
-4. **Wines** (Zeile 351): `text-sm` zu `text-base`
-5. **Non-Alcoholic** (Zeile 367): `text-sm` zu `text-base`
-6. **Why Features** (Zeile 415): `text-sm` zu `text-base`
-7. **Occasions** (Zeile 432): `text-sm` zu `text-base`
-8. **Location Cards** (Zeilen 450, 459, 469): `text-sm` zu `text-base`
-9. **Related Content** (Zeilen in den Related-Cards): `text-sm` zu `text-base`
+## Detaillierte Aenderungen
 
-### Technische Umsetzung
+### 1. LunchMuenchen.tsx (6 Aenderungen)
 
-Globaler Such-und-Ersetzen in der Komponente:
-- `text-muted-foreground text-sm` zu `text-muted-foreground`
-- `text-sm text-muted-foreground` zu `text-muted-foreground`
-- Einzelne `text-xs` zu `text-sm` fuer sekundaere Infos (Herkunft, Origins)
+```
+Zeile 197: text-sm text-muted-foreground → text-muted-foreground
+Zeile 220: text-sm text-muted-foreground → text-muted-foreground
+Zeile 255: text-muted-foreground text-sm → text-muted-foreground
+Zeile 302: text-muted-foreground text-sm → text-muted-foreground
+Zeile 309: text-muted-foreground text-sm → text-muted-foreground
+```
 
-### Ergebnis
+### 2. FirmenfeierMuenchen.tsx (1 Aenderung)
 
-- Haupttexte: 16px statt 14px (bessere Lesbarkeit)
-- Sekundaere Texte: 14px statt 12px
-- Beibehaltung der Farbhierarchie (`text-muted-foreground`)
-- Keine Aenderung am Font-Weight (Inter Regular bleibt elegant)
+```
+Zeile 182: text-sm text-muted-foreground → text-muted-foreground
+```
+
+### 3. WildEssenMuenchen.tsx (4 Aenderungen)
+
+```
+Zeile 337: text-muted-foreground text-sm → text-muted-foreground
+Zeile 383: text-sm text-muted-foreground → text-muted-foreground
+Zeile 422: text-muted-foreground text-sm → text-muted-foreground
+Zeile 428: text-muted-foreground text-sm → text-muted-foreground
+```
+
+### 4. NeapolitanischePizza.tsx (4 Aenderungen)
+
+```
+Zeile 90: text-sm → text-base
+Zeile 94: text-sm → text-base
+Zeile 98: text-sm → text-base
+Zeile 102: text-sm → text-base
+```
+
+### 5. Kontakt.tsx (1 Aenderung)
+
+```
+Zeile 137: text-xs text-muted-foreground/70 → text-sm text-muted-foreground/70
+```
+
+## Ausnahmen (keine Aenderung)
+
+- **Footer.tsx**: Bewusst kompakter Stil mit `text-sm` und `text-xs` fuer Kontaktinfos und Legal Links - Fusszeilen sind traditionell kleiner
+- **RomantischesDinner.tsx**, **GeburtstagsfeierMuenchen.tsx**, **EventlocationMuenchen.tsx**: Verwenden bereits Standard-Groesse fuer Beschreibungen
+- **Badge-Texte** (z.B. "Beliebt", "Chefs Special"): Bleiben bei `text-xs` da diese bewusst klein und kompakt sein sollen
+- **Kategorie-Labels** in WildEssenMuenchen (Z.331): Bleiben bei `text-xs` als Metadaten
+
+## Ergebnis
+
+Nach der Umsetzung:
+- Alle Hauptbeschreibungstexte: **16px** (text-base)
+- Sekundaere Hinweise: **14px** (text-sm)
+- UI-Elemente und Badges: **12px** (text-xs) - unveraendert
+- Footer: Kompakter Stil beibehalten
+
+Die Aenderung betrifft **5 Dateien** mit insgesamt **16 Einzelaenderungen**.
 
