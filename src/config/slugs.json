@@ -26,6 +26,7 @@
     "firmenfeier-muenchen": "firmenfeier-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
   },
@@ -56,6 +57,7 @@
     "firmenfeier-muenchen": "corporate-event-munich",
     "geburtstagsfeier-muenchen": "birthday-party-munich",
     "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
   },
@@ -86,6 +88,7 @@
     "firmenfeier-muenchen": "evento-aziendale-monaco",
     "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
     "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
   },
@@ -116,6 +119,7 @@
     "firmenfeier-muenchen": "evenement-entreprise-munich",
     "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
     "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
+    "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
   },

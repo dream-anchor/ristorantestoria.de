@@ -150,6 +150,8 @@ const Footer = () => {
             <LocalizedLink to="agb-restaurant" className="hover:text-primary-foreground/60 transition-colors">{t.legal.agb}</LocalizedLink>
             <span className="opacity-50">·</span>
             <LocalizedLink to="lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</LocalizedLink>
+            <span className="opacity-50">·</span>
+            <LocalizedLink to="faq" className="hover:text-primary-foreground/60 transition-colors font-medium">FAQ</LocalizedLink>
           </div>
           <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
             <a 

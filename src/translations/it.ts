@@ -612,4 +612,182 @@ export const it = {
       answer: 'Sì, offriamo un menu pranzo variabile nei giorni feriali a prezzi convenienti – ideale per la vostra pausa pranzo a Maxvorstadt. Consultate la nostra pagina menu pranzo per le offerte attuali.',
     },
   ],
+  faqPage: {
+    seo: {
+      title: "FAQ - Ristorante STORIA Maxvorstadt | Ristorante Italiano Monaco",
+      description: "Domande frequenti sul Ristorante STORIA: Pizzeria a Maxvorstadt vicino a Königsplatz e Stazione Centrale di Monaco. Prenotazione, menu, catering italiano, location eventi.",
+    },
+    title: "Domande Frequenti (FAQ)",
+    subtitle: "Risposte alle vostre domande sulla Pizzeria & Location Eventi a Königsplatz Monaco",
+    introContext: "Il Ristorante STORIA è un autentico ristorante italiano nel quartiere Maxvorstadt di Monaco. Come pizzeria vicino a Königsplatz, ci troviamo in Karlstraße 47a, a pochi minuti a piedi dalla Stazione Centrale di Monaco e dalle Pinakotheken. Siamo specializzati in pizza napoletana dal forno a pietra e pasta fatta in casa. Offriamo anche catering italiano professionale per eventi aziendali e feste private.",
+    learnMore: "Scopri di più",
+    categories: [
+      {
+        id: "posizione",
+        title: "Posizione & Come Arrivare",
+        items: [
+          {
+            question: "Dove posso mangiare italiano autentico a Monaco Maxvorstadt?",
+            answer: "STORIA si trova in Karlstraße 47a a Monaco Maxvorstadt, a pochi minuti a piedi da Königsplatz, TU Munich e dalla Stazione Centrale. Serviamo cucina italiana autentica con pizza napoletana dal forno a pietra e pasta fatta in casa.",
+            link: "kontakt",
+            linkText: "Come arrivare",
+          },
+          {
+            question: "Quale ristorante italiano è vicino a Königsplatz Monaco?",
+            answer: "Il Ristorante STORIA è un autentico ristorante italiano vicino a Königsplatz, a soli 5 minuti a piedi. Offriamo pizza napoletana, pasta fatta in casa e specialità italiane vicino alle Pinakotheken.",
+            link: "kontakt",
+            linkText: "Vedi posizione",
+          },
+          {
+            question: "C'è una buona pizzeria a Maxvorstadt?",
+            answer: "Sì, STORIA è una rinomata pizzeria a Maxvorstadt con autentica pizza napoletana dal forno a pietra. Come ristorante italiano a Maxvorstadt, siamo situati centralmente tra Königsplatz e la Stazione Centrale.",
+            link: "neapolitanische-pizza-muenchen",
+            linkText: "Le nostre specialità di pizza",
+          },
+          {
+            question: "Quale ristorante italiano è vicino alla Stazione Centrale di Monaco?",
+            answer: "Il Ristorante STORIA è un autentico ristorante italiano a soli 7 minuti dalla Stazione Centrale di Monaco. Ideale per viaggiatori e pranzi di lavoro, offriamo pizza napoletana, pasta fatta in casa e un veloce menu pranzo.",
+            link: "kontakt",
+            linkText: "Trovaci qui",
+          },
+          {
+            question: "Quale ristorante italiano è vicino alle Pinakotheken?",
+            answer: "STORIA a Maxvorstadt è raggiungibile a piedi da tutte e tre le Pinakotheken ed è ideale per una visita prima o dopo il museo. Offriamo cucina italiana autentica in un'atmosfera elegante.",
+          },
+        ],
+      },
+      {
+        id: "cibo-specialita",
+        title: "Cibo & Specialità",
+        items: [
+          {
+            question: "Dove posso trovare pizza napoletana autentica a Monaco?",
+            answer: "Da STORIA, la pizza napoletana viene cotta nel tradizionale forno a pietra, autentica come a Napoli. Scoprite le nostre specialità di pizza.",
+            link: "neapolitanische-pizza-muenchen",
+            linkText: "Alla pagina pizza",
+          },
+          {
+            question: "STORIA offre un menu pranzo?",
+            answer: "Sì, il ristorante offre un menu pranzo speciale. Dal lunedì al venerdì il ristorante apre alle 9.",
+            link: "mittags-menu",
+            linkText: "Al menu pranzo",
+          },
+          {
+            question: "STORIA ha pasta fatta in casa?",
+            answer: "Sì, STORIA è conosciuto per la sua pasta fatta in casa secondo ricette italiane tradizionali. Scoprite le nostre specialità di pasta.",
+            link: "speisekarte",
+            linkText: "Al menu",
+          },
+          {
+            question: "STORIA serve frutti di mare freschi?",
+            answer: "Sì, i frutti di mare freschi sono una delle specialità della casa. Provate i nostri piatti di pesce mediterranei e le specialità di mare.",
+            link: "speisekarte",
+            linkText: "Al menu",
+          },
+          {
+            question: "STORIA ha il Tiramisù fatto in casa?",
+            answer: "Sì, il Tiramisù fatto in casa è una delle specialità di dessert più amate del ristorante. Lasciatevi coccolare dal nostro autentico dolce italiano.",
+          },
+        ],
+      },
+      {
+        id: "bevande-aperitivo",
+        title: "Bevande & Aperitivo",
+        items: [
+          {
+            question: "STORIA serve Aperitivo?",
+            answer: "Sì, da STORIA potete gustare un autentico Aperitivo italiano – perfetto per il dopo lavoro.",
+            link: "aperitivo-muenchen",
+            linkText: "All'offerta Aperitivo",
+          },
+          {
+            question: "Quali vini italiani ci sono da STORIA?",
+            answer: "Il ristorante offre una selezione di vini italiani che si abbinano perfettamente alla cucina mediterranea. Scoprite la nostra carta bevande con vini pregiati da varie regioni italiane.",
+            link: "getraenke",
+            linkText: "Alla carta bevande",
+          },
+          {
+            question: "Posso prendere solo un caffè da STORIA?",
+            answer: "Sì, dal lunedì al venerdì potete gustare il vostro primo caffè da STORIA dalle 9. Serviamo autentico caffè italiano in un'atmosfera accogliente.",
+          },
+        ],
+      },
+      {
+        id: "prenotazione-orari",
+        title: "Prenotazione & Orari",
+        items: [
+          {
+            question: "Devo prenotare da STORIA?",
+            answer: "Le prenotazioni sono consigliate e possono essere effettuate online sulla nostra pagina prenotazioni o telefonicamente al +49 89 51519696.",
+            link: "reservierung",
+            linkText: "Prenota",
+          },
+          {
+            question: "STORIA è aperto nel weekend?",
+            answer: "Sì, sabato e domenica dalle 12:00 all'1:00. Durante la settimana il ristorante apre alle 9. Venite a trovarci per colazione, pranzo o cena.",
+          },
+        ],
+      },
+      {
+        id: "eventi-feste",
+        title: "Eventi & Feste",
+        items: [
+          {
+            question: "STORIA è adatto come location eventi a Monaco?",
+            answer: "Sì, STORIA è una popolare location eventi a Monaco per eventi aziendali, business events e feste private. Offriamo spazi eleganti con autentica cucina italiana.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "A Events STORIA",
+          },
+          {
+            question: "Posso affittare STORIA per eventi privati?",
+            answer: "Sì, siamo una location ideale per eventi privati a Monaco per compleanni, matrimoni e anniversari. Offriamo arrangiamenti personalizzati.",
+            link: "geburtstagsfeier-muenchen",
+            linkText: "Più sulle feste di compleanno",
+          },
+          {
+            question: "Dove posso prenotare una cena romantica italiana a Monaco?",
+            answer: "Il Ristorante STORIA a Maxvorstadt offre la cornice perfetta per una cena romantica con la sua atmosfera elegante e cucina autentica.",
+            link: "romantisches-dinner-muenchen",
+            linkText: "Alla cena romantica",
+          },
+          {
+            question: "STORIA offre catering italiano a Monaco?",
+            answer: "Sì, offriamo catering italiano a Monaco per eventi aziendali, matrimoni e feste private. Il nostro catering include pizza autentica, pasta e specialità mediterranee.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "Più sul catering",
+          },
+          {
+            question: "C'è catering aziendale italiano a Maxvorstadt?",
+            answer: "Sì, STORIA offre catering aziendale per business events, meeting e feste aziendali. Consegniamo autentica cucina italiana direttamente al vostro evento.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "Al catering aziendale",
+          },
+        ],
+      },
+      {
+        id: "ambiente",
+        title: "Ambiente & Strutture",
+        items: [
+          {
+            question: "STORIA ha una terrazza?",
+            answer: "Sì, il ristorante dispone di una terrazza, ideale per le calde giornate estive a Monaco. Godetevi l'atmosfera italiana all'aperto a Maxvorstadt.",
+          },
+        ],
+      },
+    ],
+    cta: {
+      title: "Avete altre domande?",
+      description: "Contattateci telefonicamente o via email. Siamo felici di aiutarvi!",
+      reserveButton: "Prenota ora",
+    },
+    quickLinks: {
+      title: "Altre Informazioni",
+      reservation: "Prenota un tavolo",
+      menu: "Menu",
+      lunchMenu: "Menu Pranzo",
+      drinks: "Carta Bevande",
+      contact: "Contatto & Come Arrivare",
+      catering: "Catering & Eventi",
+    },
+  },
 };

@@ -612,4 +612,182 @@ export const de = {
       answer: 'Ja, wir bieten wochentags ein wechselndes Mittagsmenü zu attraktiven Preisen an – ideal für Ihre Mittagspause in der Maxvorstadt. Schauen Sie auf unserer Mittagsmenü-Seite für die aktuellen Angebote.',
     },
   ],
+  faqPage: {
+    seo: {
+      title: "FAQ - Ristorante STORIA Maxvorstadt | Italiener Königsplatz München",
+      description: "Häufige Fragen zum Ristorante STORIA: Pizzeria Maxvorstadt nahe Königsplatz & Hauptbahnhof München. Reservierung, Speisekarte, italienisches Catering, Eventlocation für Firmenfeiern & private Events.",
+    },
+    title: "Häufig gestellte Fragen (FAQ)",
+    subtitle: "Antworten auf Ihre Fragen zur Pizzeria & Eventlocation am Königsplatz München",
+    introContext: "Das Ristorante STORIA ist ein authentischer Italiener in der Maxvorstadt München. Als Pizzeria am Königsplatz befinden wir uns in der Karlstraße 47a, nur wenige Gehminuten vom Hauptbahnhof München und den Pinakotheken entfernt. Unsere Pizzeria Maxvorstadt ist spezialisiert auf neapolitanische Pizza aus dem Steinofen und hausgemachte Pasta. Zusätzlich bieten wir als Eventlocation München professionelles italienisches Catering München für Firmenfeiern und private Events.",
+    learnMore: "Mehr erfahren",
+    categories: [
+      {
+        id: "standort-anfahrt",
+        title: "Standort & Anfahrt",
+        items: [
+          {
+            question: "Wo kann ich in München Maxvorstadt authentisch italienisch essen?",
+            answer: "Das STORIA befindet sich in der Karlstraße 47a in München Maxvorstadt, nur wenige Gehminuten vom Königsplatz, der TU München und dem Hauptbahnhof entfernt. Wir servieren authentische italienische Küche mit neapolitanischer Pizza aus dem Steinofen und hausgemachter Pasta.",
+            link: "kontakt",
+            linkText: "Zur Anfahrtsbeschreibung",
+          },
+          {
+            question: "Welcher Italiener liegt direkt am Königsplatz München?",
+            answer: "Das Ristorante STORIA ist ein authentischer Italiener am Königsplatz, nur 5 Gehminuten entfernt. Als etablierte Pizzeria Königsplatz bieten wir neapolitanische Pizza, hausgemachte Pasta und italienische Spezialitäten in direkter Nähe zu den Pinakotheken.",
+            link: "kontakt",
+            linkText: "Zum Standort",
+          },
+          {
+            question: "Gibt es eine gute Pizzeria in der Maxvorstadt?",
+            answer: "Ja, das STORIA ist eine renommierte Pizzeria Maxvorstadt mit authentischer neapolitanischer Pizza aus dem Steinofen. Als italienisches Restaurant Maxvorstadt befinden wir uns in der Karlstraße 47a, zentral gelegen zwischen Königsplatz und Hauptbahnhof.",
+            link: "neapolitanische-pizza-muenchen",
+            linkText: "Zu unseren Pizza-Spezialitäten",
+          },
+          {
+            question: "Welcher Italiener liegt in der Nähe des Münchner Hauptbahnhofs?",
+            answer: "Das Ristorante STORIA ist ein authentischer Italiener Hauptbahnhof München, nur 7 Gehminuten entfernt in der Maxvorstadt. Ideal für Bahnreisende und Geschäftsessen bieten wir neapolitanische Pizza, hausgemachte Pasta und ein schnelles Mittagsmenü.",
+            link: "kontakt",
+            linkText: "Hier finden Sie uns",
+          },
+          {
+            question: "Welches italienische Restaurant liegt in der Nähe der Pinakotheken?",
+            answer: "Das STORIA in der Maxvorstadt ist fußläufig von allen drei Pinakotheken erreichbar und ideal für einen Besuch vor oder nach dem Museumsbesuch. Wir bieten authentische italienische Küche in eleganter Atmosphäre.",
+          },
+        ],
+      },
+      {
+        id: "speisen-spezialitaeten",
+        title: "Speisen & Spezialitäten",
+        items: [
+          {
+            question: "Wo gibt es in München echte neapolitanische Pizza?",
+            answer: "Im STORIA wird neapolitanische Pizza nach traditioneller Art im Steinofen gebacken, authentisch wie in Neapel. Entdecken Sie unsere Pizza-Spezialitäten.",
+            link: "neapolitanische-pizza-muenchen",
+            linkText: "Zur Pizza-Seite",
+          },
+          {
+            question: "Bietet das STORIA ein Mittagsmenü an?",
+            answer: "Ja, das Restaurant bietet ein spezielles Mittagsmenü an. Montag bis Freitag ist das Restaurant ab 9 Uhr geöffnet.",
+            link: "mittags-menu",
+            linkText: "Zum Mittagsmenü",
+          },
+          {
+            question: "Gibt es im STORIA hausgemachte Pasta?",
+            answer: "Ja, das STORIA ist bekannt für seine hausgemachte Pasta nach traditionellen italienischen Rezepten. Entdecken Sie unsere Pasta-Spezialitäten.",
+            link: "speisekarte",
+            linkText: "Zur Speisekarte",
+          },
+          {
+            question: "Serviert das STORIA frische Meeresfrüchte?",
+            answer: "Ja, frische Meeresfrüchte gehören zu den Spezialitäten des Hauses. Probieren Sie unsere mediterranen Fischgerichte und Seafood-Spezialitäten.",
+            link: "speisekarte",
+            linkText: "Zur Speisekarte",
+          },
+          {
+            question: "Gibt es im STORIA hausgemachtes Tiramisu?",
+            answer: "Ja, das hausgemachte Tiramisu ist eine der beliebten Dessert-Spezialitäten des Restaurants. Lassen Sie sich von unserem authentischen italienischen Dolce verwöhnen.",
+          },
+        ],
+      },
+      {
+        id: "getraenke-aperitivo",
+        title: "Getränke & Aperitivo",
+        items: [
+          {
+            question: "Serviert das STORIA Aperitivo?",
+            answer: "Ja, Sie können im STORIA authentischen italienischen Aperitivo genießen – perfekt für den Feierabend.",
+            link: "aperitivo-muenchen",
+            linkText: "Zum Aperitivo-Angebot",
+          },
+          {
+            question: "Welche italienischen Weine gibt es im STORIA?",
+            answer: "Das Restaurant bietet eine Auswahl an italienischen Weinen, die perfekt zur mediterranen Küche passen. Entdecken Sie unsere Getränkekarte mit erlesenen Weinen aus verschiedenen Regionen Italiens.",
+            link: "getraenke",
+            linkText: "Zur Getränkekarte",
+          },
+          {
+            question: "Kann ich im STORIA auch nur einen Kaffee trinken?",
+            answer: "Ja, montags bis freitags können Sie ab 9 Uhr Ihren ersten Kaffee im STORIA genießen. Wir servieren authentischen italienischen Kaffee in gemütlicher Atmosphäre.",
+          },
+        ],
+      },
+      {
+        id: "reservierung-oeffnungszeiten",
+        title: "Reservierung & Öffnungszeiten",
+        items: [
+          {
+            question: "Muss ich im STORIA reservieren?",
+            answer: "Reservierungen sind empfohlen und können online über unsere Reservierungsseite oder telefonisch unter +49 89 51519696 vorgenommen werden.",
+            link: "reservierung",
+            linkText: "Zur Reservierung",
+          },
+          {
+            question: "Hat das STORIA am Wochenende geöffnet?",
+            answer: "Ja, Samstag und Sonntag von 12:00 bis 01:00 Uhr. Unter der Woche öffnet das Restaurant bereits um 9 Uhr. Besuchen Sie uns für Frühstück, Lunch oder Dinner.",
+          },
+        ],
+      },
+      {
+        id: "events-feiern",
+        title: "Events & Feiern",
+        items: [
+          {
+            question: "Eignet sich das STORIA als Eventlocation in München?",
+            answer: "Ja, das STORIA ist eine beliebte Eventlocation München und Eventlocation Maxvorstadt für Firmenfeiern, Business-Events und private Feiern. Als Firmenevent Location München bieten wir stilvolle Räumlichkeiten mit authentischer italienischer Küche.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "Zu Events STORIA",
+          },
+          {
+            question: "Kann ich das STORIA für private Events mieten?",
+            answer: "Ja, wir sind eine ideale private Events Location München für Geburtstage, Hochzeitsfeiern und Jubiläen. Als Geburtstag Location München bieten wir individuell angepasste Arrangements.",
+            link: "geburtstagsfeier-muenchen",
+            linkText: "Mehr zu Geburtstagsfeiern",
+          },
+          {
+            question: "Wo kann ich in München ein romantisches italienisches Dinner buchen?",
+            answer: "Das Ristorante STORIA Maxvorstadt bietet mit seiner eleganten Atmosphäre und authentischen Küche den perfekten Rahmen für ein romantisches Dinner.",
+            link: "romantisches-dinner-muenchen",
+            linkText: "Zum romantischen Dinner",
+          },
+          {
+            question: "Bietet das STORIA italienisches Catering in München an?",
+            answer: "Ja, wir bieten italienisches Catering München für Firmenevents, Hochzeiten und private Feiern. Unser Catering umfasst authentische Pizza, Pasta und mediterrane Spezialitäten.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "Mehr zum Catering",
+          },
+          {
+            question: "Gibt es italienisches Firmen-Catering in der Maxvorstadt?",
+            answer: "Ja, das STORIA bietet Firmen Catering italienisch und Catering Maxvorstadt für Business-Events, Meetings und Firmenfeiern. Wir liefern authentische italienische Küche direkt zu Ihrem Event.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "Zum Firmen-Catering",
+          },
+        ],
+      },
+      {
+        id: "ambiente-ausstattung",
+        title: "Ambiente & Ausstattung",
+        items: [
+          {
+            question: "Gibt es im STORIA eine Terrasse?",
+            answer: "Ja, das Restaurant verfügt über eine Terrasse, ideal für warme Sommertage in München. Genießen Sie italienisches Flair unter freiem Himmel in der Maxvorstadt.",
+          },
+        ],
+      },
+    ],
+    cta: {
+      title: "Haben Sie weitere Fragen?",
+      description: "Kontaktieren Sie uns gerne telefonisch oder per E-Mail. Wir helfen Ihnen gerne weiter!",
+      reserveButton: "Jetzt reservieren",
+    },
+    quickLinks: {
+      title: "Weitere Informationen",
+      reservation: "Tisch reservieren",
+      menu: "Speisekarte",
+      lunchMenu: "Mittagsmenü",
+      drinks: "Getränkekarte",
+      contact: "Kontakt & Anfahrt",
+      catering: "Catering & Events",
+    },
+  },
 };

@@ -612,4 +612,182 @@ export const en = {
       answer: 'Yes, we offer a changing lunch menu on weekdays at attractive prices – ideal for your lunch break in Maxvorstadt. Check our lunch menu page for current offerings.',
     },
   ],
+  faqPage: {
+    seo: {
+      title: "FAQ - Ristorante STORIA Maxvorstadt | Italian Restaurant Munich",
+      description: "Frequently asked questions about Ristorante STORIA: Pizzeria in Maxvorstadt near Königsplatz & Munich Central Station. Reservation, menu, Italian catering, event location.",
+    },
+    title: "Frequently Asked Questions (FAQ)",
+    subtitle: "Answers to your questions about the Pizzeria & Event Location at Königsplatz Munich",
+    introContext: "Ristorante STORIA is an authentic Italian restaurant in Munich's Maxvorstadt district. As a pizzeria near Königsplatz, we are located at Karlstraße 47a, just a few minutes walk from Munich Central Station and the Pinakothek museums. We specialize in Neapolitan stone-oven pizza and homemade pasta. We also offer professional Italian catering for corporate events and private celebrations.",
+    learnMore: "Learn more",
+    categories: [
+      {
+        id: "location",
+        title: "Location & Directions",
+        items: [
+          {
+            question: "Where can I eat authentic Italian food in Munich Maxvorstadt?",
+            answer: "STORIA is located at Karlstraße 47a in Munich Maxvorstadt, just a few minutes walk from Königsplatz, TU Munich and the Central Station. We serve authentic Italian cuisine with Neapolitan stone-oven pizza and homemade pasta.",
+            link: "kontakt",
+            linkText: "Get directions",
+          },
+          {
+            question: "Which Italian restaurant is near Königsplatz Munich?",
+            answer: "Ristorante STORIA is an authentic Italian restaurant near Königsplatz, just a 5-minute walk away. We offer Neapolitan pizza, homemade pasta and Italian specialties near the Pinakothek museums.",
+            link: "kontakt",
+            linkText: "View location",
+          },
+          {
+            question: "Is there a good pizzeria in Maxvorstadt?",
+            answer: "Yes, STORIA is a renowned pizzeria in Maxvorstadt with authentic Neapolitan stone-oven pizza. As an Italian restaurant in Maxvorstadt, we are centrally located between Königsplatz and the Central Station.",
+            link: "neapolitanische-pizza-muenchen",
+            linkText: "View our pizza specialties",
+          },
+          {
+            question: "Which Italian restaurant is near Munich Central Station?",
+            answer: "Ristorante STORIA is an authentic Italian restaurant just 7 minutes from Munich Central Station. Ideal for travelers and business lunches, we offer Neapolitan pizza, homemade pasta and a quick lunch menu.",
+            link: "kontakt",
+            linkText: "Find us here",
+          },
+          {
+            question: "Which Italian restaurant is near the Pinakothek museums?",
+            answer: "STORIA in Maxvorstadt is within walking distance of all three Pinakothek museums and ideal for a visit before or after the museum. We offer authentic Italian cuisine in an elegant atmosphere.",
+          },
+        ],
+      },
+      {
+        id: "food-specialties",
+        title: "Food & Specialties",
+        items: [
+          {
+            question: "Where can I find authentic Neapolitan pizza in Munich?",
+            answer: "At STORIA, Neapolitan pizza is baked in a traditional stone oven, authentic as in Naples. Discover our pizza specialties.",
+            link: "neapolitanische-pizza-muenchen",
+            linkText: "To the pizza page",
+          },
+          {
+            question: "Does STORIA offer a lunch menu?",
+            answer: "Yes, the restaurant offers a special lunch menu. Monday to Friday the restaurant opens at 9 AM.",
+            link: "mittags-menu",
+            linkText: "To the lunch menu",
+          },
+          {
+            question: "Does STORIA have homemade pasta?",
+            answer: "Yes, STORIA is known for its homemade pasta according to traditional Italian recipes. Discover our pasta specialties.",
+            link: "speisekarte",
+            linkText: "To the menu",
+          },
+          {
+            question: "Does STORIA serve fresh seafood?",
+            answer: "Yes, fresh seafood is one of the house specialties. Try our Mediterranean fish dishes and seafood specialties.",
+            link: "speisekarte",
+            linkText: "To the menu",
+          },
+          {
+            question: "Does STORIA have homemade Tiramisu?",
+            answer: "Yes, homemade Tiramisu is one of the popular dessert specialties of the restaurant. Let yourself be spoiled by our authentic Italian dolce.",
+          },
+        ],
+      },
+      {
+        id: "drinks-aperitivo",
+        title: "Drinks & Aperitivo",
+        items: [
+          {
+            question: "Does STORIA serve Aperitivo?",
+            answer: "Yes, you can enjoy authentic Italian Aperitivo at STORIA – perfect for after work.",
+            link: "aperitivo-muenchen",
+            linkText: "To the Aperitivo offer",
+          },
+          {
+            question: "What Italian wines are available at STORIA?",
+            answer: "The restaurant offers a selection of Italian wines that perfectly complement Mediterranean cuisine. Discover our drinks menu with fine wines from various Italian regions.",
+            link: "getraenke",
+            linkText: "To the drinks menu",
+          },
+          {
+            question: "Can I just have a coffee at STORIA?",
+            answer: "Yes, Monday to Friday you can enjoy your first coffee at STORIA from 9 AM. We serve authentic Italian coffee in a cozy atmosphere.",
+          },
+        ],
+      },
+      {
+        id: "reservation-hours",
+        title: "Reservation & Opening Hours",
+        items: [
+          {
+            question: "Do I need to make a reservation at STORIA?",
+            answer: "Reservations are recommended and can be made online via our reservation page or by phone at +49 89 51519696.",
+            link: "reservierung",
+            linkText: "Make a reservation",
+          },
+          {
+            question: "Is STORIA open on weekends?",
+            answer: "Yes, Saturday and Sunday from 12:00 PM to 1:00 AM. During the week the restaurant opens at 9 AM. Visit us for breakfast, lunch or dinner.",
+          },
+        ],
+      },
+      {
+        id: "events-celebrations",
+        title: "Events & Celebrations",
+        items: [
+          {
+            question: "Is STORIA suitable as an event venue in Munich?",
+            answer: "Yes, STORIA is a popular event location in Munich for corporate events, business events and private celebrations. We offer stylish premises with authentic Italian cuisine.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "To Events STORIA",
+          },
+          {
+            question: "Can I rent STORIA for private events?",
+            answer: "Yes, we are an ideal private event location in Munich for birthdays, weddings and anniversaries. We offer individually customized arrangements.",
+            link: "geburtstagsfeier-muenchen",
+            linkText: "More about birthday parties",
+          },
+          {
+            question: "Where can I book a romantic Italian dinner in Munich?",
+            answer: "Ristorante STORIA in Maxvorstadt offers the perfect setting for a romantic dinner with its elegant atmosphere and authentic cuisine.",
+            link: "romantisches-dinner-muenchen",
+            linkText: "To romantic dinner",
+          },
+          {
+            question: "Does STORIA offer Italian catering in Munich?",
+            answer: "Yes, we offer Italian catering in Munich for corporate events, weddings and private celebrations. Our catering includes authentic pizza, pasta and Mediterranean specialties.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "More about catering",
+          },
+          {
+            question: "Is there Italian corporate catering in Maxvorstadt?",
+            answer: "Yes, STORIA offers corporate catering for business events, meetings and company celebrations. We deliver authentic Italian cuisine directly to your event.",
+            externalLink: "https://www.events-storia.de/",
+            externalLinkText: "To corporate catering",
+          },
+        ],
+      },
+      {
+        id: "ambiance",
+        title: "Ambiance & Facilities",
+        items: [
+          {
+            question: "Does STORIA have a terrace?",
+            answer: "Yes, the restaurant has a terrace, ideal for warm summer days in Munich. Enjoy Italian flair outdoors in Maxvorstadt.",
+          },
+        ],
+      },
+    ],
+    cta: {
+      title: "Have more questions?",
+      description: "Feel free to contact us by phone or email. We are happy to help!",
+      reserveButton: "Book now",
+    },
+    quickLinks: {
+      title: "More Information",
+      reservation: "Book a table",
+      menu: "Food Menu",
+      lunchMenu: "Lunch Menu",
+      drinks: "Drinks Menu",
+      contact: "Contact & Directions",
+      catering: "Catering & Events",
+    },
+  },
 };
