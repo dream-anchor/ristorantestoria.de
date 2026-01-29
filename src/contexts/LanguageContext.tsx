@@ -1,3 +1,4 @@
+// LanguageContext - provides i18n support for DE/EN/IT/FR
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { de } from "@/translations/de";
