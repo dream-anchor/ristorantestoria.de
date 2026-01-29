@@ -16,6 +16,7 @@ import firmenfeierEvent from "@/assets/firmenfeier-event.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
+import { DynamicPackagesSection, DynamicCateringHighlights } from "@/components/DynamicPackagesSection";
 
 const FirmenfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -161,24 +162,37 @@ const FirmenfeierMuenchen = () => {
               </div>
             </section>
 
-            {/* Packages */}
-            <section className="mb-16">
-              <h2 className="text-3xl font-serif font-bold mb-4 text-center">{t.seo.firmenfeier.packagesTitle}</h2>
-              <p className="text-muted-foreground text-center mb-8">{t.seo.firmenfeier.packagesIntro}</p>
-              <div className="grid md:grid-cols-2 gap-6">
-                {packages.map((pkg, i) => (
-                  <Card key={i} className={pkg.badge ? "border-primary bg-primary/5 relative" : "border-border"}>
-                    {pkg.badge && <span className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded">{pkg.badge}</span>}
-                    <CardHeader className="pb-2"><CardTitle className="text-lg font-serif">{pkg.title}</CardTitle><p className="text-muted-foreground text-sm">{pkg.subtitle}</p></CardHeader>
-                    <CardContent>
-                      <ul className="text-sm space-y-1 mb-4">{pkg.items.map((item, j) => <li key={j} className="text-muted-foreground">• {item}</li>)}</ul>
-                      <p className="text-xs text-muted-foreground mb-2">{pkg.ideal}</p>
-                      <p className="font-bold text-primary">{pkg.price}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
+            {/* Dynamic Packages from Events Project */}
+            <DynamicPackagesSection 
+              pageSlug="firmenfeier"
+              title={t.seo.firmenfeier.packagesTitle}
+              subtitle={t.seo.firmenfeier.packagesIntro}
+              fallbackContent={
+                <section className="mb-16">
+                  <h2 className="text-3xl font-serif font-bold mb-4 text-center">{t.seo.firmenfeier.packagesTitle}</h2>
+                  <p className="text-muted-foreground text-center mb-8">{t.seo.firmenfeier.packagesIntro}</p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {packages.map((pkg, i) => (
+                      <Card key={i} className={pkg.badge ? "border-primary bg-primary/5 relative" : "border-border"}>
+                        {pkg.badge && <span className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded">{pkg.badge}</span>}
+                        <CardHeader className="pb-2"><CardTitle className="text-lg font-serif">{pkg.title}</CardTitle><p className="text-muted-foreground text-sm">{pkg.subtitle}</p></CardHeader>
+                        <CardContent>
+                          <ul className="text-sm space-y-1 mb-4">{pkg.items.map((item, j) => <li key={j} className="text-muted-foreground">• {item}</li>)}</ul>
+                          <p className="text-xs text-muted-foreground mb-2">{pkg.ideal}</p>
+                          <p className="font-bold text-primary">{pkg.price}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+              }
+            />
+
+            {/* Dynamic Catering Highlights */}
+            <DynamicCateringHighlights 
+              pageSlug="firmenfeier" 
+              title="Catering-Highlights" 
+            />
 
             {/* Process */}
             <section className="mb-16">
