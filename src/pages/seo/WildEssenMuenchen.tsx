@@ -328,7 +328,7 @@ const WildEssenMuenchen = () => {
                 {wildDishes.map((dish, index) => (
                   <div key={index} className="bg-card p-6 rounded-lg border border-border">
                     <div className="flex justify-between items-start mb-2">
-                      <span className="text-xs text-muted-foreground uppercase tracking-wide">{dish.category}</span>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wide whitespace-pre-line">{dish.category}</span>
                       {dish.badge && (
                         <span className="bg-amber-600 text-white text-xs px-2 py-1 rounded">{dish.badge}</span>
                       )}
