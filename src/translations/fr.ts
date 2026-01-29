@@ -25,6 +25,7 @@ export const fr = {
     eventLocation: "Lieu d'événement",
     corporateEvent: "Événement d'entreprise",
     birthdayParty: "Fête d'anniversaire",
+    gameDishesMunich: "Gibier Munich",
   },
   eventForm: {
     title: "Demande d'événement",

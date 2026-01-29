@@ -25,6 +25,7 @@ export const it = {
     eventLocation: "Location Eventi",
     corporateEvent: "Evento Aziendale",
     birthdayParty: "Festa di Compleanno",
+    gameDishesMunich: "Selvaggina Monaco",
   },
   eventForm: {
     title: "Richiesta Evento",
