@@ -276,19 +276,19 @@ const AperitivoMuenchen = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold text-lg mb-2">{t.seo.aperitivo.explainWhat}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.explainWhatDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.explainWhatDesc}</p>
                 </div>
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold text-lg mb-2">{t.seo.aperitivo.explainWhen}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.explainWhenDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.explainWhenDesc}</p>
                 </div>
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold text-lg mb-2">{t.seo.aperitivo.explainParts}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.explainPartsDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.explainPartsDesc}</p>
                 </div>
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold text-lg mb-2">{t.seo.aperitivo.explainVs}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.explainVsDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.explainVsDesc}</p>
                 </div>
               </div>
             </div>
@@ -314,8 +314,8 @@ const AperitivoMuenchen = () => {
                         <h4 className="font-semibold">{drink.name}</h4>
                         {drink.badge && <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded">{drink.badge}</span>}
                       </div>
-                      <p className="text-muted-foreground text-sm mb-2">{drink.desc}</p>
-                      {drink.origin && <p className="text-xs text-muted-foreground/70 mb-2">{drink.origin}</p>}
+                      <p className="text-muted-foreground mb-2">{drink.desc}</p>
+                      {drink.origin && <p className="text-sm text-muted-foreground/70 mb-2">{drink.origin}</p>}
                       <p className="text-primary font-semibold">{drink.price}</p>
                     </div>
                   ))}
@@ -332,9 +332,9 @@ const AperitivoMuenchen = () => {
                         <h4 className="font-semibold">{drink.name}</h4>
                         {drink.badge && <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded">{drink.badge}</span>}
                       </div>
-                      <p className="text-muted-foreground text-sm mb-2">{drink.desc}</p>
-                      {drink.origin && <p className="text-xs text-muted-foreground/70 mb-1">{drink.origin}</p>}
-                      {drink.taste && <p className="text-xs text-muted-foreground/70 mb-2">{drink.taste}</p>}
+                      <p className="text-muted-foreground mb-2">{drink.desc}</p>
+                      {drink.origin && <p className="text-sm text-muted-foreground/70 mb-1">{drink.origin}</p>}
+                      {drink.taste && <p className="text-sm text-muted-foreground/70 mb-2">{drink.taste}</p>}
                       <p className="text-primary font-semibold">{drink.price}</p>
                     </div>
                   ))}
@@ -348,7 +348,7 @@ const AperitivoMuenchen = () => {
                   {wines.map((wine, idx) => (
                     <div key={idx} className="bg-card p-4 rounded-lg border border-border">
                       <h4 className="font-semibold mb-2">{wine.name}</h4>
-                      <p className="text-muted-foreground text-sm mb-2">{wine.desc}</p>
+                      <p className="text-muted-foreground mb-2">{wine.desc}</p>
                       <p className="text-primary font-semibold">{wine.price}</p>
                     </div>
                   ))}
@@ -365,7 +365,7 @@ const AperitivoMuenchen = () => {
                         <h4 className="font-semibold">{drink.name}</h4>
                         <span className="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded">{t.seo.aperitivo.nonAlcoholicLabel}</span>
                       </div>
-                      <p className="text-muted-foreground text-sm mb-2">{drink.desc}</p>
+                      <p className="text-muted-foreground mb-2">{drink.desc}</p>
                       <p className="text-primary font-semibold">{drink.price}</p>
                     </div>
                   ))}
@@ -396,7 +396,7 @@ const AperitivoMuenchen = () => {
               <div className="bg-card p-6 rounded-lg border border-border">
                 <h3 className="font-semibold mb-2">{t.seo.aperitivo.openingTitle}</h3>
                 <p className="text-muted-foreground mb-2">{t.seo.aperitivo.openingHours}</p>
-                <p className="text-sm text-muted-foreground/70">{t.seo.aperitivo.openingNote}</p>
+                <p className="text-muted-foreground/70">{t.seo.aperitivo.openingNote}</p>
               </div>
             </div>
           </section>
@@ -412,7 +412,7 @@ const AperitivoMuenchen = () => {
                   <div key={idx} className="text-center">
                     <div className="text-4xl mb-4">{feature.icon}</div>
                     <h3 className="font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                    <p className="text-muted-foreground">{feature.desc}</p>
                   </div>
                 ))}
               </div>
@@ -429,7 +429,7 @@ const AperitivoMuenchen = () => {
                 {occasions.map((occasion, idx) => (
                   <div key={idx} className="bg-card p-6 rounded-lg border border-border">
                     <h3 className="font-semibold mb-2">{occasion.icon}</h3>
-                    <p className="text-muted-foreground text-sm">{occasion.desc}</p>
+                    <p className="text-muted-foreground">{occasion.desc}</p>
                   </div>
                 ))}
               </div>
@@ -447,7 +447,7 @@ const AperitivoMuenchen = () => {
               <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold mb-3">{t.seo.aperitivo.addressTitle}</h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-muted-foreground">
                     Ristorante STORIA<br />
                     Karlstraße 47a<br />
                     80333 München<br />
@@ -456,7 +456,7 @@ const AperitivoMuenchen = () => {
                 </div>
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold mb-3">{t.seo.aperitivo.nearbyTitle}</h3>
-                  <ul className="text-muted-foreground text-sm space-y-1">
+                  <ul className="text-muted-foreground space-y-1">
                     <li>{t.seo.aperitivo.nearbyKoenigsplatz}</li>
                     <li>{t.seo.aperitivo.nearbyHbf}</li>
                     <li>{t.seo.aperitivo.nearbyTU}</li>
@@ -466,7 +466,7 @@ const AperitivoMuenchen = () => {
                 </div>
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold mb-3">{t.seo.aperitivo.transitTitle}</h3>
-                  <ul className="text-muted-foreground text-sm space-y-1">
+                  <ul className="text-muted-foreground space-y-1">
                     <li>{t.seo.aperitivo.transitUbahn}</li>
                     <li>{t.seo.aperitivo.transitTram}</li>
                     <li>{t.seo.aperitivo.transitSbahn}</li>
@@ -504,19 +504,19 @@ const AperitivoMuenchen = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <LocalizedLink to="getraenke" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-1">{t.seo.aperitivo.relatedDrinks}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.relatedDrinksDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.relatedDrinksDesc}</p>
                 </LocalizedLink>
                 <LocalizedLink to="speisekarte" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-1">{t.seo.aperitivo.relatedFood}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.relatedFoodDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.relatedFoodDesc}</p>
                 </LocalizedLink>
                 <LocalizedLink to="romantisches-dinner-muenchen" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-1">{t.seo.aperitivo.relatedRomantic}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.relatedRomanticDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.relatedRomanticDesc}</p>
                 </LocalizedLink>
                 <LocalizedLink to="lunch-muenchen-maxvorstadt" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-1">{t.seo.aperitivo.relatedLunch}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.aperitivo.relatedLunchDesc}</p>
+                  <p className="text-muted-foreground">{t.seo.aperitivo.relatedLunchDesc}</p>
                 </LocalizedLink>
               </div>
             </div>
