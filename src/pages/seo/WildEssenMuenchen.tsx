@@ -24,8 +24,8 @@ import {
   Utensils
 } from "lucide-react";
 
-// Placeholder image - would be replaced with actual wild game image
-import meeresfruchte from "@/assets/meeresfruchte.webp";
+// Wild game hero image
+import wildVenisonHero from "@/assets/wild-venison-hero.webp";
 
 const WildEssenMuenchen = () => {
   const { t } = useLanguage();
@@ -193,7 +193,7 @@ const WildEssenMuenchen = () => {
             "hasMenuItem": [{
               "@type": "MenuItem",
               "name": "4 Gänge Menü Terra",
-              "description": "Entenbrust Carpaccio, Gnocchi mit Steinpilzen, Guance di Manzo brasate, Schokoladen-Soufflé",
+              "description": "Entenbrust Carpaccio, Pappardelle mit Hirschragout, Rosa gebratener Rehrücken, Semifreddo al Torroncino",
               "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "62.00" }
             }]
           }
@@ -206,7 +206,7 @@ const WildEssenMuenchen = () => {
         {/* Hero Section */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
           <img 
-            src={meeresfruchte} 
+            src={wildVenisonHero} 
             alt={t.seo.wild.heroImageAlt}
             width={1200}
             height={800}
@@ -242,8 +242,7 @@ const WildEssenMuenchen = () => {
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/20 text-base md:text-lg px-8 py-6"
+                  className="bg-white text-primary hover:bg-white/90 border-2 border-white text-base md:text-lg px-8 py-6"
                   asChild
                 >
                   <a href="tel:+498951519696">
@@ -587,8 +586,7 @@ const WildEssenMuenchen = () => {
                 </Button>
                 <Button 
                   size="lg" 
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/20"
+                  className="bg-white text-primary hover:bg-white/90 border-2 border-white"
                   asChild
                 >
                   <a href="tel:+498951519696">
