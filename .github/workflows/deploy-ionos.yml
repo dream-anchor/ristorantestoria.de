@@ -11,7 +11,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     concurrency:
       group: deploy-ionos
       cancel-in-progress: true
@@ -29,7 +29,6 @@ jobs:
         run: npm ci
 
       # --- BUILD PROZESS (SSG) ---
-      # Führt build:client -> build:server -> prerender aus
       - name: Build Project (SSG)
         run: npm run build
         env: 
@@ -42,7 +41,6 @@ jobs:
           echo "=== Build Verification ==="
           ls -R dist/
           
-          # Wir prüfen auf .html Dateien
           check_page() {
             if [ -f "dist/$1.html" ] || [ -f "dist/$1/index.html" ]; then
               echo "✓ $1 exists"
@@ -53,7 +51,6 @@ jobs:
           }
           
           check_page "index"
-          # check_page "menu"
 
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
@@ -74,11 +71,9 @@ jobs:
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
           dangerous-clean-slate: false
-      dangerous-clean-slate: false
-      state-name: .deployment-state.json
-      exclude: |
-        **/.git*
-        **/*.map
-        .deployment-state.json
-      log-level: verbose
-      timeout: 120000
+          state-name: .deployment-state.json
+          log-level: verbose
+          exclude: |
+            **/.git*
+            **/*.map
+            .deployment-state.json
