@@ -44,7 +44,7 @@ jobs:
           protocol: sftp
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
-          # Diese Datei ist der Schlüssel für inkrementelles (schnelles) Update:
+          # WICHTIG: Erstellt die Datei, damit GitHub weiß, was schon da ist
           state-name: .deployment-state.json
           dangerous-clean-slate: false
           log-level: verbose
