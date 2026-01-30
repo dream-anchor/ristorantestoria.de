@@ -21,7 +21,7 @@ const Index = () => {
         canonical="/" 
         description={t.pages.index.description}
       />
-      <StructuredData type="restaurant" faqItems={t.faq} />
+      <StructuredData type="restaurant" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <HomeBotContent />
