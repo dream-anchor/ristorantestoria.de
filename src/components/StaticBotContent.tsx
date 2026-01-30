@@ -19,9 +19,9 @@ const StaticBotContent = ({ title, description, sections = [], includeContact = 
   const { t } = useLanguage();
 
   const content = (
-    <article itemScope itemType="https://schema.org/WebPage">
-      <h1 itemProp="name">{title}</h1>
-      <p itemProp="description">{description}</p>
+    <article>
+      <h1>{title}</h1>
+      <p>{description}</p>
       
       {sections.map((section, index) => (
         <section key={index}>
@@ -39,15 +39,13 @@ const StaticBotContent = ({ title, description, sections = [], includeContact = 
       ))}
       
       {includeContact && (
-        <footer itemScope itemType="https://schema.org/LocalBusiness">
-          <p itemProp="name">STORIA – Ristorante • Pizzeria • Bar</p>
-          <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-            <span itemProp="streetAddress">Karlstraße 47a</span>,{' '}
-            <span itemProp="postalCode">80333</span>{' '}
-            <span itemProp="addressLocality">München</span>
-          </div>
-          <p itemProp="telephone">+49 89 51519696</p>
-          <p itemProp="email">info@ristorantestoria.de</p>
+        <footer>
+          <p>STORIA – Ristorante • Pizzeria • Bar</p>
+          <address>
+            Karlstraße 47a, 80333 München
+          </address>
+          <p>+49 89 51519696</p>
+          <p>info@ristorantestoria.de</p>
           <p>
             {t.common.openingHoursLabel}: {t.common.openingHoursText}
           </p>
