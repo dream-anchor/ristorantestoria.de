@@ -57,32 +57,37 @@ const HomeBotContent = () => {
       </section>
 
       <section>
-        <h2>{language === 'de' ? 'Häufig gestellte Fragen' : 'Frequently Asked Questions'}</h2>
-        <dl>
-          <dt>{language === 'de' ? 'Wo befindet sich das Restaurant STORIA?' : 'Where is STORIA restaurant located?'}</dt>
-          <dd>{language === 'de' 
-            ? 'STORIA befindet sich in der Karlstraße 47a in München Maxvorstadt, nur wenige Gehminuten vom Königsplatz und dem Hauptbahnhof entfernt.'
-            : 'STORIA is located at Karlstraße 47a in Munich Maxvorstadt, just a few minutes walk from Königsplatz and the main train station.'
-          }</dd>
-          
-          <dt>{language === 'de' ? 'Kann ich einen Tisch reservieren?' : 'Can I book a table?'}</dt>
-          <dd>{language === 'de'
-            ? 'Ja, Reservierungen sind online über unsere Website oder telefonisch unter +49 89 515196 möglich.'
-            : 'Yes, reservations can be made online through our website or by phone at +49 89 515196.'
-          }</dd>
-          
-          <dt>{language === 'de' ? 'Bietet STORIA Catering an?' : 'Does STORIA offer catering?'}</dt>
-          <dd>{language === 'de'
-            ? 'Ja, wir bieten professionelles Catering für Firmenevents, Hochzeiten und private Feiern. Besuchen Sie events-storia.de für mehr Informationen.'
-            : 'Yes, we offer professional catering for corporate events, weddings, and private celebrations. Visit events-storia.de for more information.'
-          }</dd>
-          
-          <dt>{language === 'de' ? 'Welche Küche bietet STORIA?' : 'What cuisine does STORIA offer?'}</dt>
-          <dd>{language === 'de'
-            ? 'STORIA serviert authentische italienische Küche mit Fokus auf neapolitanische Pizza aus dem Holzofen, hausgemachte Pasta und klassische italienische Gerichte.'
-            : 'STORIA serves authentic Italian cuisine with a focus on Neapolitan wood-fired pizza, homemade pasta, and classic Italian dishes.'
-          }</dd>
-        </dl>
+        <h2>{language === 'de' ? 'Wichtige Informationen' : 'Key Information'}</h2>
+        <ul>
+          <li>
+            <strong>{language === 'de' ? 'Standort:' : 'Location:'}</strong>{' '}
+            {language === 'de' 
+              ? 'Karlstraße 47a, München Maxvorstadt – wenige Gehminuten vom Königsplatz und Hauptbahnhof.'
+              : 'Karlstraße 47a, Munich Maxvorstadt – a few minutes walk from Königsplatz and the main train station.'
+            }
+          </li>
+          <li>
+            <strong>{language === 'de' ? 'Reservierung:' : 'Reservations:'}</strong>{' '}
+            {language === 'de'
+              ? 'Online über unsere Website oder telefonisch unter +49 89 515196.'
+              : 'Online through our website or by phone at +49 89 515196.'
+            }
+          </li>
+          <li>
+            <strong>{language === 'de' ? 'Catering:' : 'Catering:'}</strong>{' '}
+            {language === 'de'
+              ? 'Professionelles Catering für Firmenevents, Hochzeiten und private Feiern unter events-storia.de.'
+              : 'Professional catering for corporate events, weddings, and private celebrations at events-storia.de.'
+            }
+          </li>
+          <li>
+            <strong>{language === 'de' ? 'Küche:' : 'Cuisine:'}</strong>{' '}
+            {language === 'de'
+              ? 'Authentische italienische Küche – neapolitanische Pizza aus dem Holzofen, hausgemachte Pasta, klassische italienische Gerichte.'
+              : 'Authentic Italian cuisine – Neapolitan wood-fired pizza, homemade pasta, classic Italian dishes.'
+            }
+          </li>
+        </ul>
       </section>
 
       <section itemProp="servesCuisine" content="Italian">
