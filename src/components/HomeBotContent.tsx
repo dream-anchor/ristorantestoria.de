@@ -2,16 +2,17 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 /**
  * HomeBotContent renders essential restaurant information for search engine crawlers.
- * Content is static but includes all SEO-relevant information.
+ * Content is semantic HTML only - NO schema.org microdata attributes to avoid
+ * duplicate structured data with the JSON-LD in StructuredData.tsx.
  */
 const HomeBotContent = () => {
   const { language } = useLanguage();
 
   const content = (
-    <article itemScope itemType="https://schema.org/Restaurant">
-      <h1 itemProp="name">STORIA – Ristorante • Pizzeria • Bar</h1>
+    <article>
+      <h1>STORIA – Ristorante • Pizzeria • Bar</h1>
       
-      <p itemProp="description">
+      <p>
         {language === 'de' 
           ? 'Authentisches italienisches Restaurant in München Maxvorstadt. Genießen Sie neapolitanische Pizza, hausgemachte Pasta und klassische italienische Gerichte in eleganter Atmosphäre nahe Königsplatz und Hauptbahnhof.'
           : 'Authentic Italian restaurant in Munich Maxvorstadt. Enjoy Neapolitan pizza, homemade pasta and classic Italian dishes in an elegant atmosphere near Königsplatz and Hauptbahnhof.'
@@ -20,26 +21,19 @@ const HomeBotContent = () => {
 
       <section>
         <h2>{language === 'de' ? 'Kontakt' : 'Contact'}</h2>
-        <address itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-          <span itemProp="streetAddress">Karlstraße 47a</span>,{' '}
-          <span itemProp="postalCode">80333</span>{' '}
-          <span itemProp="addressLocality">München</span>,{' '}
-          <span itemProp="addressCountry">Deutschland</span>
+        <address>
+          Karlstraße 47a, 80333 München, Deutschland
         </address>
-        <p>
-          <span itemProp="telephone">+49 89 515196</span>
-        </p>
-        <p>
-          <span itemProp="email">info@ristorantestoria.de</span>
-        </p>
+        <p>+49 89 51519696</p>
+        <p>info@ristorantestoria.de</p>
       </section>
 
       <section>
         <h2>{language === 'de' ? 'Öffnungszeiten' : 'Opening Hours'}</h2>
-        <p itemProp="openingHours" content="Mo-Fr 09:00-01:00">
+        <p>
           {language === 'de' ? 'Montag - Freitag: 09:00 - 01:00 Uhr' : 'Monday - Friday: 9:00 AM - 1:00 AM'}
         </p>
-        <p itemProp="openingHours" content="Sa-Su 12:00-01:00">
+        <p>
           {language === 'de' ? 'Samstag - Sonntag: 12:00 - 01:00 Uhr' : 'Saturday - Sunday: 12:00 PM - 1:00 AM'}
         </p>
       </section>
@@ -69,8 +63,8 @@ const HomeBotContent = () => {
           <li>
             <strong>{language === 'de' ? 'Reservierung:' : 'Reservations:'}</strong>{' '}
             {language === 'de'
-              ? 'Online über unsere Website oder telefonisch unter +49 89 515196.'
-              : 'Online through our website or by phone at +49 89 515196.'
+              ? 'Online über unsere Website oder telefonisch unter +49 89 51519696.'
+              : 'Online through our website or by phone at +49 89 51519696.'
             }
           </li>
           <li>
@@ -90,7 +84,7 @@ const HomeBotContent = () => {
         </ul>
       </section>
 
-      <section itemProp="servesCuisine" content="Italian">
+      <section>
         <h2>{language === 'de' ? 'Unsere Spezialitäten' : 'Our Specialties'}</h2>
         <ul>
           <li>{language === 'de' ? 'Neapolitanische Pizza aus dem Holzofen' : 'Neapolitan wood-fired pizza'}</li>
