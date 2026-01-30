@@ -61,45 +61,17 @@ jobs:
 
       # --- DEPLOY ZU IONOS ---
       - name: Deploy via SFTP to IONOS
-        timeout-minutes: 15
-        run: |
-          sudo apt-get update && sudo apt-get install -y lftp
-          
-          TARGET_DIR="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
-          
-          # Sicherheits-Check
-          if [[ "$TARGET_DIR" != *"ristorantestoria-de"* ]]; then
-            echo "Security Stop: Target Directory looks wrong!"
-            exit 1
-          fi
-
-          # Erstelle lftp script file (robuster als heredoc)
-          cat > /tmp/lftp_commands.txt << 'SCRIPT'
-          set sftp:auto-confirm yes
-          set sftp:connect-program "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-          set net:timeout 30
-          set net:max-retries 2
-          set net:reconnect-interval-base 3
-          set cmd:fail-exit no
-          set xfer:clobber on
-          set ftp:list-options -a
-          SCRIPT
-          
-          # Füge dynamische Befehle hinzu
-          echo "cd \"$TARGET_DIR\"" >> /tmp/lftp_commands.txt
-          echo "lcd ./dist" >> /tmp/lftp_commands.txt
-          echo "mirror -R --verbose --only-newer --no-perms --no-symlinks --exclude-glob .git* --exclude-glob *.map" >> /tmp/lftp_commands.txt
-          echo "bye" >> /tmp/lftp_commands.txt
-          
-          echo "=== LFTP Commands ==="
-          cat /tmp/lftp_commands.txt
-          
-          echo "=== Starting SFTP Upload ==="
-          lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" -f /tmp/lftp_commands.txt
-          
-          echo "=== Upload Complete ==="
-        env:
-          SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
-          SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
-          SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          IONOS_SFTP_TARGET_DIR: ${{ secrets.IONOS_SFTP_TARGET_DIR }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.IONOS_SFTP_HOST }}
+          username: ${{ secrets.IONOS_SFTP_USER }}
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          protocol: sftp
+          local-dir: ./dist/
+          server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/*.map
+          log-level: verbose
+          timeout: 60000
