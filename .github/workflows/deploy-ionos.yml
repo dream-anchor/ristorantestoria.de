@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120 # Wir gehen auf das Maximum
     concurrency:
       group: deploy-ionos
       cancel-in-progress: true
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2 # Wichtig für den Vergleich der letzten Änderungen
+          fetch-depth: 2 # Optimiert den Vergleich auf die letzten Änderungen
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -45,6 +45,7 @@ jobs:
           protocol: sftp
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
-          state-name: .deployment-state.json # Erstellt den Fingerabdruck auf dem Server
+          state-name: .deployment-state.json
+          # Verhindert den zeitfressenden Komplett-Scan des Servers:
           dangerous-clean-slate: false
           log-level: verbose
