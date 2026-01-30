@@ -61,6 +61,7 @@ jobs:
 
       # --- DEPLOY ZU IONOS ---
       - name: Deploy via SFTP to IONOS
+        timeout-minutes: 15
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
           
@@ -72,25 +73,31 @@ jobs:
             exit 1
           fi
 
-          # Optimierte SFTP-Konfiguration für IONOS
-          lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" <<EOF
+          # Erstelle lftp script file (robuster als heredoc)
+          cat > /tmp/lftp_commands.txt << 'SCRIPT'
           set sftp:auto-confirm yes
-          set net:timeout 120
-          set net:max-retries 3
-          set net:reconnect-interval-base 5
-          set net:reconnect-interval-multiplier 1
-          set cmd:fail-exit yes
+          set sftp:connect-program "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          set net:timeout 30
+          set net:max-retries 2
+          set net:reconnect-interval-base 3
+          set cmd:fail-exit no
           set xfer:clobber on
-          set mirror:parallel-transfer-count 2
+          set ftp:list-options -a
+          SCRIPT
           
-          echo "=== Changing to target directory: $TARGET_DIR ==="
-          cd "$TARGET_DIR"
+          # Füge dynamische Befehle hinzu
+          echo "cd \"$TARGET_DIR\"" >> /tmp/lftp_commands.txt
+          echo "lcd ./dist" >> /tmp/lftp_commands.txt
+          echo "mirror -R --verbose --only-newer --no-perms --no-symlinks --exclude-glob .git* --exclude-glob *.map" >> /tmp/lftp_commands.txt
+          echo "bye" >> /tmp/lftp_commands.txt
           
-          echo "=== Starting upload (no delete, overwrite only) ==="
-          mirror -R --verbose --parallel=2 --no-perms --continue --overwrite ./dist .
+          echo "=== LFTP Commands ==="
+          cat /tmp/lftp_commands.txt
           
-          bye
-          EOF
+          echo "=== Starting SFTP Upload ==="
+          lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" -f /tmp/lftp_commands.txt
+          
+          echo "=== Upload Complete ==="
         env:
           SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
           SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
