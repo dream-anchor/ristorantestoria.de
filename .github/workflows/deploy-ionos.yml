@@ -8,8 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Wir setzen ein höheres Timeout nur für den EINEN Synchronisations-Lauf
-    timeout-minutes: 30
+    # Da das Repo nun public ist, kosten uns auch 60 Min nichts
+    timeout-minutes: 60 
     concurrency:
       group: deploy-ionos
       cancel-in-progress: true
@@ -35,7 +35,7 @@ jobs:
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
 
-      - name: Deploy via SFTP (Inkrementell)
+      - name: Deploy via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.IONOS_SFTP_HOST }}
@@ -44,9 +44,7 @@ jobs:
           protocol: sftp
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
-          # WICHTIG: Erstellt eine Datei auf dem Server, um sich den Status zu merken
+          # Diese Datei ist der Schlüssel für inkrementelles (schnelles) Update:
           state-name: .deployment-state.json
-          # Verhindert das Löschen deiner manuellen Dateien
           dangerous-clean-slate: false
-          # Nur hochladen, was wirklich neu ist
-          dry-run: false
+          log-level: verbose
