@@ -39,7 +39,7 @@ jobs:
       - name: Verify Build Output
         run: |
           echo "=== Build Verification ==="
-          ls -R dist/
+          ls -la dist/
           
           check_page() {
             if [ -f "dist/$1.html" ] || [ -f "dist/$1/index.html" ]; then
@@ -60,7 +60,38 @@ jobs:
           echo "Build: $(date -u +%Y-%m-%dT%H:%M:%SZ)" > dist/__build_info.txt
           echo "Commit: ${{ github.sha }}" >> dist/__build_info.txt
 
-      # --- DEPLOY ZU IONOS ---
+      # --- DOWNLOAD EXISTING STATE FROM SERVER ---
+      # This enables true incremental sync by knowing what's already deployed
+      - name: Download deployment state from server
+        continue-on-error: true
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          
+          echo "Attempting to download existing deployment state..."
+          
+          lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" <<EOF
+          set sftp:auto-confirm yes
+          set sftp:connect-program "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          set net:timeout 30
+          set cmd:fail-exit no
+          cd "$TARGET_DIR"
+          get .ftp-deploy-sync-state.json -o .ftp-deploy-sync-state.json
+          bye
+          EOF
+          
+          if [ -f ".ftp-deploy-sync-state.json" ]; then
+            echo "✓ Found existing deployment state - incremental sync enabled"
+            cat .ftp-deploy-sync-state.json | head -20
+          else
+            echo "⚠ No deployment state found - will do full sync (first run or state was cleared)"
+          fi
+        env:
+          SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
+          SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
+          SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          TARGET_DIR: ${{ secrets.IONOS_SFTP_TARGET_DIR }}
+
+      # --- DEPLOY TO IONOS ---
       - name: Deploy via SFTP to IONOS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -71,9 +102,8 @@ jobs:
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
           dangerous-clean-slate: false
-          state-name: .deployment-state.json
           log-level: verbose
+          timeout: 120000
           exclude: |
             **/.git*
             **/*.map
-            .deployment-state.json
