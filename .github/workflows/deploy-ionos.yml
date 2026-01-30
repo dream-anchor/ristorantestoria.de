@@ -72,20 +72,22 @@ jobs:
             exit 1
           fi
 
-          # Wir nutzen '<<EOF', das ist robuster gegen Syntax-Fehler
+          # Optimierte SFTP-Konfiguration für IONOS
           lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" <<EOF
           set sftp:auto-confirm yes
-          set net:timeout 60
-          set net:max-retries 5
+          set net:timeout 120
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          set net:reconnect-interval-multiplier 1
           set cmd:fail-exit yes
+          set xfer:clobber on
+          set mirror:parallel-transfer-count 2
           
           echo "=== Changing to target directory: $TARGET_DIR ==="
-          # WICHTIG: Wir haben 'mkdir' entfernt, da der Server es blockiert (Permission Denied).
-          # Der Ordner MUSS manuell existieren. Wir wechseln nur hinein.
           cd "$TARGET_DIR"
           
-          echo "=== Starting upload ==="
-          mirror -R --verbose --parallel=4 --delete ./dist .
+          echo "=== Starting upload (no delete, overwrite only) ==="
+          mirror -R --verbose --parallel=2 --no-perms --continue --overwrite ./dist .
           
           bye
           EOF
