@@ -1,75 +1,110 @@
 
-# Plan: Italienische Übersetzung korrigieren ("al STORIA" → "in STORIA")
+# Plan: GitHub Actions SFTP Deployment Fix
 
-## Übersicht
+## Problem-Analyse
 
-In der italienischen Übersetzungsdatei muss die Präposition "al" vor "STORIA" durch "in" ersetzt werden. Dies ist eine rein sprachliche Korrektur, die **nur** die italienische Datei betrifft – die anderen Sprachen (DE, EN, FR) bleiben unverändert.
+Der SFTP-Upload zu IONOS hängt sich auf, obwohl der Build erfolgreich durchläuft. Die Hauptursachen:
 
----
-
-## Betroffene Datei
-
-`src/translations/it.ts`
+1. **Heredoc-Einrückung**: Die YAML-Einrückung wird ins lftp-Script geschrieben, was zu ungültigen Befehlen führt
+2. **IONOS Connection Limits**: Shared Hosting hat strikte Verbindungslimits
+3. **Keine robuste Fehlerbehandlung**: Der Workflow erkennt nicht, wenn lftp hängt
 
 ---
 
-## Zu ersetzende Muster
+## Lösung: Wechsel zu dediziertem SFTP-Action
 
-| Suchen | Ersetzen |
-|--------|----------|
-| `al STORIA` | `in STORIA` |
-| `Al STORIA` | `In STORIA` |
-| `al ristorante STORIA` | `nel ristorante STORIA` |
+Anstatt `lftp` manuell zu konfigurieren, verwenden wir eine bewährte GitHub Action, die speziell für SFTP-Deployments entwickelt wurde.
 
----
+### Änderungen an `.github/workflows/deploy-ionos.yml`
 
-## Betroffene Stellen (ca. 50+ Instanzen)
+```yaml
+# Ersetze den gesamten "Deploy via SFTP to IONOS" Step mit:
 
-Die Korrekturen betreffen folgende Bereiche der Datei:
-
-- **imageGrid** (Zeilen 15-17): Bild-Alt-Texte
-- **seo.firmenfeier** (Zeilen 370-484): Firmenfeier-Landingpage
-- **seo.aperitivo** (Zeilen 581-711): Aperitivo-Landingpage
-- **seo.romanticDinner** (Zeilen 738-885): Romantisches Dinner
-- **seo.eventlocation** (Zeilen 1075-1110): Eventlocation
-- **seo.birthday** (Zeilen 1151-1183): Geburtstagsfeiern
-- **seo.neapolitanPizza** (Zeilen 1211-1329): Pizza-Landingpage
-- **seo.wild** (Zeilen 1386-1464): Wild-essen-Landingpage
-
----
-
-## Beispiele
-
-**Vorher:**
-```
-altWine: "Servizio vini al ristorante STORIA",
-altPasta: "Pasta fatta in casa al STORIA Monaco",
-faq3Question: "Quali eventi posso festeggiare al STORIA?",
-ctaTitle: "Pianificate Ora il Vostro Evento al STORIA",
+- name: Deploy via SFTP to IONOS
+  uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+  with:
+    server: ${{ secrets.IONOS_SFTP_HOST }}
+    username: ${{ secrets.IONOS_SFTP_USER }}
+    password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+    protocol: sftp
+    local-dir: ./dist/
+    server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
+    dangerous-clean-slate: false
+    exclude: |
+      **/.git*
+      **/*.map
+    log-level: verbose
+    timeout: 60000
 ```
 
-**Nachher:**
-```
-altWine: "Servizio vini nel ristorante STORIA",
-altPasta: "Pasta fatta in casa in STORIA Monaco",
-faq3Question: "Quali eventi posso festeggiare in STORIA?",
-ctaTitle: "Pianificate Ora il Vostro Evento in STORIA",
-```
+### Vorteile dieser Lösung
+
+| Aspekt | Vorher (lftp) | Nachher (FTP-Deploy-Action) |
+|--------|---------------|----------------------------|
+| Konfiguration | Komplexes Shell-Script | Einfache YAML-Parameter |
+| Fehlerbehandlung | Manuell, unzuverlässig | Eingebaut, robust |
+| Verbindung | Kann hängen bleiben | Automatische Timeouts |
+| Debugging | Schwer nachvollziehbar | Verbose Logging |
+| Maintenance | Eigener Code | Community-maintained |
 
 ---
 
-## Technischer Ablauf
+## Alternative: lftp-Fix (falls Action nicht gewünscht)
 
-1. Öffne `src/translations/it.ts`
-2. Führe globale Suche & Ersetzung durch:
-   - `al STORIA` → `in STORIA`
-   - `Al STORIA` → `In STORIA`
-   - `al ristorante STORIA` → `nel ristorante STORIA`
-   - `Al ristorante STORIA` → `Nel ristorante STORIA`
-3. Keine Änderungen an `de.ts`, `en.ts` oder `fr.ts`
+Falls du bei `lftp` bleiben möchtest, hier die korrigierte Version:
+
+```yaml
+- name: Deploy via SFTP to IONOS
+  timeout-minutes: 15
+  run: |
+    sudo apt-get update && sudo apt-get install -y lftp
+    
+    TARGET_DIR="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
+    
+    # Sicherheits-Check
+    if [[ "$TARGET_DIR" != *"ristorantestoria-de"* ]]; then
+      echo "Security Stop: Target Directory looks wrong!"
+      exit 1
+    fi
+
+    # Script OHNE führende Leerzeichen erstellen
+    cat > /tmp/lftp_commands.txt <<'EOF'
+set sftp:auto-confirm yes
+set sftp:connect-program "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+set net:timeout 60
+set net:max-retries 3
+set net:reconnect-interval-base 5
+set cmd:fail-exit yes
+set xfer:clobber on
+EOF
+    
+    # Dynamische Befehle anhängen
+    echo "cd \"$TARGET_DIR\"" >> /tmp/lftp_commands.txt
+    echo "lcd ./dist" >> /tmp/lftp_commands.txt
+    echo "mirror -R --verbose --only-newer --no-perms --no-symlinks --exclude-glob .git* --exclude-glob *.map" >> /tmp/lftp_commands.txt
+    echo "bye" >> /tmp/lftp_commands.txt
+    
+    echo "=== LFTP Script ==="
+    cat /tmp/lftp_commands.txt
+    
+    echo "=== Starting Upload ==="
+    lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" -f /tmp/lftp_commands.txt
+    
+    echo "=== Upload Complete ==="
+  env:
+    SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
+    SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
+    SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
+```
+
+**Wichtigste Änderung**: Das Heredoc beginnt direkt am Zeilenanfang (`<<'EOF'` ohne Einrückung), sodass keine führenden Leerzeichen in die Befehle geschrieben werden.
 
 ---
 
-## Erwartetes Ergebnis
+## Empfehlung
 
-Alle italienischen Texte verwenden die grammatikalisch korrekte Präposition "in" (bzw. "nel" vor "ristorante") vor dem Restaurantnamen STORIA.
+Ich empfehle **Option 1 (FTP-Deploy-Action)**, da:
+- Weniger fehleranfällig
+- Bessere Timeouts und Retry-Logik
+- Aktiv maintained von der Community
+- Einfacher zu debuggen
