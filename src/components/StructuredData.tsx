@@ -79,7 +79,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.5',
-      reviewCount: '250',
+      reviewCount: '879',
       bestRating: '5',
       worstRating: '1',
     },
@@ -155,31 +155,8 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     })),
   } : null;
 
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': 'https://ristorantestoria.de/#localbusiness',
-    name: 'STORIA - Ristorante • Pizzeria • Bar',
-    image: 'https://iieethejhwfsyzhbweps.supabase.co/storage/v1/object/public/menu-pdfs/og-image.jpg',
-    telephone: '+49 89 51519696',
-    email: 'info@ristorantestoria.de',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Karlstraße 47a',
-      addressLocality: 'München',
-      postalCode: '80333',
-      addressRegion: 'Bayern',
-      addressCountry: 'DE',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 48.1456,
-      longitude: 11.5656,
-    },
-    url: 'https://ristorantestoria.de',
-    openingHoursSpecification: restaurantSchema.openingHoursSpecification,
-    priceRange: '€€',
-  };
+  // LocalBusiness schema removed - Restaurant is already a subtype of LocalBusiness
+  // Having both causes duplicate entity warnings in Google Search Console
 
   const eventSchema = eventData ? {
     '@context': 'https://schema.org',
@@ -217,9 +194,6 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
         <>
           <script type="application/ld+json">
             {JSON.stringify(restaurantSchema)}
-          </script>
-          <script type="application/ld+json">
-            {JSON.stringify(localBusinessSchema)}
           </script>
           <script type="application/ld+json">
             {JSON.stringify(websiteSchema)}
