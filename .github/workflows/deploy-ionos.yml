@@ -11,6 +11,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: deploy-ionos
+      cancel-in-progress: true
 
     steps:
       - name: Checkout repository
@@ -70,8 +74,11 @@ jobs:
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
           dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/*.map
-          log-level: verbose
-          timeout: 60000
+      dangerous-clean-slate: false
+      state-name: .deployment-state.json
+      exclude: |
+        **/.git*
+        **/*.map
+        .deployment-state.json
+      log-level: verbose
+      timeout: 120000
