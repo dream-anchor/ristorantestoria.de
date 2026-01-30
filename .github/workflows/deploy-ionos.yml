@@ -4,14 +4,12 @@ on:
   push:
     branches:
       - main
-  repository_dispatch:
-    types:
-      - menu_updated
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # Wir setzen ein höheres Timeout nur für den EINEN Synchronisations-Lauf
+    timeout-minutes: 30
     concurrency:
       group: deploy-ionos
       cancel-in-progress: true
@@ -28,71 +26,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # --- BUILD PROZESS (SSG) ---
       - name: Build Project (SSG)
         run: npm run build
         env: 
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      # --- BUILD VERIFICATION ---
-      - name: Verify Build Output
-        run: |
-          echo "=== Build Verification ==="
-          ls -la dist/
-          
-          check_page() {
-            if [ -f "dist/$1.html" ] || [ -f "dist/$1/index.html" ]; then
-              echo "✓ $1 exists"
-            else
-              echo "✗ $1 MISSING"
-              exit 1
-            fi
-          }
-          
-          check_page "index"
-
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
 
-      - name: Create Deploy Marker
-        run: |
-          echo "Build: $(date -u +%Y-%m-%dT%H:%M:%SZ)" > dist/__build_info.txt
-          echo "Commit: ${{ github.sha }}" >> dist/__build_info.txt
-
-      # --- DOWNLOAD EXISTING STATE FROM SERVER ---
-      # This enables true incremental sync by knowing what's already deployed
-      - name: Download deployment state from server
-        continue-on-error: true
-        run: |
-          sudo apt-get update && sudo apt-get install -y lftp
-          
-          echo "Attempting to download existing deployment state..."
-          
-          lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" <<EOF
-          set sftp:auto-confirm yes
-          set sftp:connect-program "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-          set net:timeout 30
-          set cmd:fail-exit no
-          cd "$TARGET_DIR"
-          get .ftp-deploy-sync-state.json -o .ftp-deploy-sync-state.json
-          bye
-          EOF
-          
-          if [ -f ".ftp-deploy-sync-state.json" ]; then
-            echo "✓ Found existing deployment state - incremental sync enabled"
-            cat .ftp-deploy-sync-state.json | head -20
-          else
-            echo "⚠ No deployment state found - will do full sync (first run or state was cleared)"
-          fi
-        env:
-          SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
-          SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
-          SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          TARGET_DIR: ${{ secrets.IONOS_SFTP_TARGET_DIR }}
-
-      # --- DEPLOY TO IONOS ---
-      - name: Deploy via SFTP to IONOS
+      - name: Deploy via SFTP (Inkrementell)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.IONOS_SFTP_HOST }}
@@ -101,9 +44,9 @@ jobs:
           protocol: sftp
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
+          # WICHTIG: Erstellt eine Datei auf dem Server, um sich den Status zu merken
+          state-name: .deployment-state.json
+          # Verhindert das Löschen deiner manuellen Dateien
           dangerous-clean-slate: false
-          log-level: verbose
-          timeout: 120000
-          exclude: |
-            **/.git*
-            **/*.map
+          # Nur hochladen, was wirklich neu ist
+          dry-run: false
