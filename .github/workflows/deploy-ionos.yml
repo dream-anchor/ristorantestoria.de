@@ -8,8 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Da das Repo nun public ist, kosten uns auch 60 Min nichts
-    timeout-minutes: 60 
+    timeout-minutes: 60
     concurrency:
       group: deploy-ionos
       cancel-in-progress: true
@@ -17,6 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Wichtig für den Vergleich der letzten Änderungen
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -44,7 +45,6 @@ jobs:
           protocol: sftp
           local-dir: ./dist/
           server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
-          # WICHTIG: Erstellt die Datei, damit GitHub weiß, was schon da ist
-          state-name: .deployment-state.json
+          state-name: .deployment-state.json # Erstellt den Fingerabdruck auf dem Server
           dangerous-clean-slate: false
           log-level: verbose
