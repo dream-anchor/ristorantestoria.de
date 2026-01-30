@@ -1,25 +1,30 @@
 
-# Plan: GitHub Actions SFTP Deployment Fix
+# Plan: GitHub Actions Deployment-Fix (Concurrency + SFTP-Optimierung)
 
 ## Problem-Analyse
 
-Der SFTP-Upload zu IONOS hängt sich auf, obwohl der Build erfolgreich durchläuft. Die Hauptursachen:
+Im Screenshot sind **6 Workflows gleichzeitig aktiv**. Das verursacht:
+- IONOS SFTP-Server blockiert parallele Verbindungen
+- Workflows warten aufeinander und erreichen nie den Server
+- Keine automatische Abbruch-Logik für veraltete Deployments
 
-1. **Heredoc-Einrückung**: Die YAML-Einrückung wird ins lftp-Script geschrieben, was zu ungültigen Befehlen führt
-2. **IONOS Connection Limits**: Shared Hosting hat strikte Verbindungslimits
-3. **Keine robuste Fehlerbehandlung**: Der Workflow erkennt nicht, wenn lftp hängt
+## Lösung
 
----
-
-## Lösung: Wechsel zu dediziertem SFTP-Action
-
-Anstatt `lftp` manuell zu konfigurieren, verwenden wir eine bewährte GitHub Action, die speziell für SFTP-Deployments entwickelt wurde.
-
-### Änderungen an `.github/workflows/deploy-ionos.yml`
+### 1. Concurrency-Block hinzufügen
+Verhindert parallele Deployments - neue Builds brechen alte ab:
 
 ```yaml
-# Ersetze den gesamten "Deploy via SFTP to IONOS" Step mit:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-ionos
+      cancel-in-progress: true
+```
 
+### 2. SFTP-Action Konfiguration optimieren
+
+```yaml
 - name: Deploy via SFTP to IONOS
   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
   with:
@@ -30,81 +35,60 @@ Anstatt `lftp` manuell zu konfigurieren, verwenden wir eine bewährte GitHub Act
     local-dir: ./dist/
     server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
     dangerous-clean-slate: false
+    state-name: .deployment-state.json
     exclude: |
       **/.git*
       **/*.map
+      .deployment-state.json
     log-level: verbose
-    timeout: 60000
+    timeout: 120000
 ```
 
-### Vorteile dieser Lösung
+Änderungen:
+- **`state-name`**: Expliziter Name für die Sync-State-Datei
+- **`timeout: 120000`**: Erhöht auf 2 Minuten (IONOS kann langsam sein)
+- **Exclude erweitert**: State-Datei wird nicht hochgeladen
 
-| Aspekt | Vorher (lftp) | Nachher (FTP-Deploy-Action) |
-|--------|---------------|----------------------------|
-| Konfiguration | Komplexes Shell-Script | Einfache YAML-Parameter |
-| Fehlerbehandlung | Manuell, unzuverlässig | Eingebaut, robust |
-| Verbindung | Kann hängen bleiben | Automatische Timeouts |
-| Debugging | Schwer nachvollziehbar | Verbose Logging |
-| Maintenance | Eigener Code | Community-maintained |
+### 3. Sofortmaßnahme: Laufende Workflows abbrechen
 
----
+Du musst manuell alle "In progress" Workflows in GitHub abbrechen:
+1. Gehe zu jedem gelben Workflow
+2. Klicke oben rechts "Cancel workflow"
+3. Warte bis alle gestoppt sind
+4. Dann wird der nächste Push sauber durchlaufen
 
-## Alternative: lftp-Fix (falls Action nicht gewünscht)
+## Technische Details
 
-Falls du bei `lftp` bleiben möchtest, hier die korrigierte Version:
+### Vollständige Änderungen an `.github/workflows/deploy-ionos.yml`
 
-```yaml
-- name: Deploy via SFTP to IONOS
-  timeout-minutes: 15
-  run: |
-    sudo apt-get update && sudo apt-get install -y lftp
-    
-    TARGET_DIR="${{ secrets.IONOS_SFTP_TARGET_DIR }}"
-    
-    # Sicherheits-Check
-    if [[ "$TARGET_DIR" != *"ristorantestoria-de"* ]]; then
-      echo "Security Stop: Target Directory looks wrong!"
-      exit 1
-    fi
-
-    # Script OHNE führende Leerzeichen erstellen
-    cat > /tmp/lftp_commands.txt <<'EOF'
-set sftp:auto-confirm yes
-set sftp:connect-program "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-set net:timeout 60
-set net:max-retries 3
-set net:reconnect-interval-base 5
-set cmd:fail-exit yes
-set xfer:clobber on
-EOF
-    
-    # Dynamische Befehle anhängen
-    echo "cd \"$TARGET_DIR\"" >> /tmp/lftp_commands.txt
-    echo "lcd ./dist" >> /tmp/lftp_commands.txt
-    echo "mirror -R --verbose --only-newer --no-perms --no-symlinks --exclude-glob .git* --exclude-glob *.map" >> /tmp/lftp_commands.txt
-    echo "bye" >> /tmp/lftp_commands.txt
-    
-    echo "=== LFTP Script ==="
-    cat /tmp/lftp_commands.txt
-    
-    echo "=== Starting Upload ==="
-    lftp -u "$SFTP_USER,$SFTP_PASS" "sftp://$SFTP_HOST" -f /tmp/lftp_commands.txt
-    
-    echo "=== Upload Complete ==="
-  env:
-    SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
-    SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
-    SFTP_PASS: ${{ secrets.IONOS_SFTP_PASSWORD }}
+```text
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
++   concurrency:
++     group: deploy-ionos
++     cancel-in-progress: true
 ```
 
-**Wichtigste Änderung**: Das Heredoc beginnt direkt am Zeilenanfang (`<<'EOF'` ohne Einrückung), sodass keine führenden Leerzeichen in die Befehle geschrieben werden.
+Und im Deploy-Step:
+```text
+        timeout: 60000
++       state-name: .deployment-state.json
++   timeout-minutes: 10
+```
 
----
+### Warum das hilft
 
-## Empfehlung
+| Problem | Lösung |
+|---------|--------|
+| 6 parallele Workflows | `concurrency` bricht alte ab |
+| SFTP-Verbindung blockiert | Nur 1 aktive Verbindung |
+| Timeout zu kurz | 120s statt 60s |
+| Kein Job-Timeout | `timeout-minutes: 10` als Fallback |
 
-Ich empfehle **Option 1 (FTP-Deploy-Action)**, da:
-- Weniger fehleranfällig
-- Bessere Timeouts und Retry-Logik
-- Aktiv maintained von der Community
-- Einfacher zu debuggen
+## Empfohlene Reihenfolge
+
+1. Alle laufenden Workflows manuell abbrechen
+2. Änderungen implementieren
+3. Push auslösen
+4. Nur ein Workflow läuft - sollte durchgehen
