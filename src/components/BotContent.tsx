@@ -43,29 +43,26 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
   };
 
   const content = (
-    <article itemScope itemType="https://schema.org/Menu">
-      <h1 itemProp="name">{getLocalizedText(menu.title, menu.title_en)}</h1>
-      {menu.subtitle && <p itemProp="description">{getLocalizedText(menu.subtitle, menu.subtitle_en)}</p>}
+    <article>
+      <h1>{getLocalizedText(menu.title, menu.title_en)}</h1>
+      {menu.subtitle && <p>{getLocalizedText(menu.subtitle, menu.subtitle_en)}</p>}
       
       {menu.categories.map((category) => (
-        <section key={category.id} itemScope itemType="https://schema.org/MenuSection">
-          <h2 itemProp="name">{getLocalizedText(category.name, category.name_en)}</h2>
+        <section key={category.id}>
+          <h2>{getLocalizedText(category.name, category.name_en)}</h2>
           {category.description && (
-            <p itemProp="description">{getLocalizedText(category.description, category.description_en)}</p>
+            <p>{getLocalizedText(category.description, category.description_en)}</p>
           )}
           
           <ul>
             {category.items.map((item) => (
-              <li key={item.id} itemScope itemType="https://schema.org/MenuItem">
-                <span itemProp="name">{getLocalizedText(item.name, item.name_en)}</span>
+              <li key={item.id}>
+                <strong>{getLocalizedText(item.name, item.name_en)}</strong>
                 {item.description && (
-                  <span itemProp="description"> – {getLocalizedText(item.description, item.description_en)}</span>
+                  <span> – {getLocalizedText(item.description, item.description_en)}</span>
                 )}
                 {(item.price || item.price_display) && (
-                  <span itemProp="offers" itemScope itemType="https://schema.org/Offer">
-                    <span itemProp="price"> – {formatPrice(item.price, item.price_display)}</span>
-                    <meta itemProp="priceCurrency" content="EUR" />
-                  </span>
+                  <span> – {formatPrice(item.price, item.price_display)}</span>
                 )}
               </li>
             ))}
@@ -76,7 +73,7 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
       <footer>
         <p>STORIA – Ristorante • Pizzeria • Bar</p>
         <p>Karlstraße 47a, 80333 München</p>
-        <p>Tel: +49 89 515196</p>
+        <p>Tel: +49 89 51519696</p>
       </footer>
     </article>
   );
