@@ -76,13 +76,8 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
         name: 'Nicola Speranza',
       },
     ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.5',
-      reviewCount: '879',
-      bestRating: '5',
-      worstRating: '1',
-    },
+    // aggregateRating entfernt - Google erlaubt dies nur wenn Reviews auf der Seite sichtbar sind
+    // (nicht hinter Consent-Banner). Kann wieder aktiviert werden wenn Reviews ohne Consent angezeigt werden.
   };
 
   const websiteSchema = {
