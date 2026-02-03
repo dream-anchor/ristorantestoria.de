@@ -5,9 +5,16 @@ import { HelmetProvider } from 'react-helmet-async'
 import { QueryClient, QueryClientProvider, dehydrate } from '@tanstack/react-query'
 import App from './App'
 
+interface SpecialMenuData {
+  basicMenu: any;
+  fullMenu: any;
+  slug: string;
+}
+
 interface RenderContext {
   menuData?: any;
   menuType?: string;
+  specialMenuData?: SpecialMenuData;
 }
 
 export function render(url: string, context: RenderContext = {}) {
@@ -23,9 +30,18 @@ export function render(url: string, context: RenderContext = {}) {
     },
   })
 
-  // Pre-populate cache with server-fetched menu data
+  // Pre-populate cache with server-fetched menu data (for standard menus)
   if (context.menuData && context.menuType) {
     queryClient.setQueryData(['menu', context.menuType], context.menuData)
+  }
+
+  // Pre-populate cache with special menu data (for special occasion pages)
+  if (context.specialMenuData) {
+    const { basicMenu, fullMenu, slug } = context.specialMenuData
+    // For useSpecialMenuBySlug hook
+    queryClient.setQueryData(['special-menu', slug], basicMenu)
+    // For useMenuById hook (used by MenuDisplay)
+    queryClient.setQueryData(['menu-by-id', basicMenu.id], fullMenu)
   }
 
   const html = ReactDOMServer.renderToString(

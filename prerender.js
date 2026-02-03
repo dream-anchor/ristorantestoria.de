@@ -90,6 +90,118 @@ function getMenuTypeForRoute(url) {
 }
 
 /**
+ * Extract special menu slug from URL
+ * Returns the slug if this is a special occasion page, null otherwise
+ */
+function getSpecialMenuSlugFromRoute(url) {
+  const specialParentPatterns = [
+    "/besondere-anlaesse/",
+    "/special-occasions/",
+    "/occasioni-speciali/",
+    "/occasions-speciales/"
+  ];
+
+  for (const pattern of specialParentPatterns) {
+    if (url.includes(pattern)) {
+      const parts = url.split(pattern);
+      if (parts[1]) {
+        // Remove trailing slash and any further path segments
+        return parts[1].split("/")[0].replace(/\/$/, "");
+      }
+    }
+  }
+  return null;
+}
+
+/**
+ * Fetch special menu data by slug (with full content for SSR)
+ */
+async function fetchSpecialMenuBySlug(slug) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !slug) return null;
+
+  try {
+    // 1. Fetch menu by slug
+    const menuRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/menus?slug=eq.${slug}&is_published=eq.true&select=*`,
+      { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
+    );
+    const menus = await menuRes.json();
+    const menu = menus[0];
+    if (!menu) return null;
+
+    // 2. Fetch categories
+    const catRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/menu_categories?menu_id=eq.${menu.id}&order=sort_order&select=*`,
+      { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
+    );
+    const categories = await catRes.json();
+
+    // 3. Fetch items for all categories
+    let items = [];
+    if (categories.length > 0) {
+      const categoryIds = categories.map((c) => c.id).join(",");
+      const itemsRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/menu_items?category_id=in.(${categoryIds})&order=sort_order&select=*`,
+        { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
+      );
+      items = await itemsRes.json();
+    }
+
+    // Return both the basic menu data and the full menu with categories/items
+    // Basic menu: for useSpecialMenuBySlug query
+    const basicMenu = { ...menu };
+
+    // Full menu: for useMenuById query (MenuDisplay component)
+    const fullMenu = {
+      id: menu.id,
+      menu_type: menu.menu_type,
+      title: menu.title,
+      title_en: menu.title_en,
+      title_it: menu.title_it,
+      title_fr: menu.title_fr,
+      subtitle: menu.subtitle,
+      subtitle_en: menu.subtitle_en,
+      subtitle_it: menu.subtitle_it,
+      subtitle_fr: menu.subtitle_fr,
+      is_published: menu.is_published,
+      categories: categories.map((cat) => ({
+        id: cat.id,
+        name: cat.name,
+        name_en: cat.name_en,
+        name_it: cat.name_it,
+        name_fr: cat.name_fr,
+        description: cat.description,
+        description_en: cat.description_en,
+        description_it: cat.description_it,
+        description_fr: cat.description_fr,
+        sort_order: cat.sort_order || 0,
+        items: items
+          .filter((item) => item.category_id === cat.id)
+          .map((item) => ({
+            id: item.id,
+            name: item.name,
+            name_en: item.name_en,
+            name_it: item.name_it,
+            name_fr: item.name_fr,
+            description: item.description,
+            description_en: item.description_en,
+            description_it: item.description_it,
+            description_fr: item.description_fr,
+            price: item.price ? parseFloat(item.price.toString()) : null,
+            price_display: item.price_display,
+            sort_order: item.sort_order || 0,
+          })),
+      })),
+    };
+
+    return { basicMenu, fullMenu, slug };
+  } catch (error) {
+    console.error(`❌ Error fetching special menu for slug ${slug}:`, error.message);
+    return null;
+  }
+}
+
+/**
  * Fetch dynamic slugs from Supabase
  * UPDATE: Fetches ALL published menus to ensure special events like Valentine's are found
  */
@@ -221,6 +333,7 @@ async function generateRoutesToPrerender() {
 
   // Cache for menu data to avoid re-fetching
   const menuDataCache = {};
+  const specialMenuCache = {};
 
   for (const url of routesToPrerender) {
     try {
@@ -235,8 +348,19 @@ async function generateRoutesToPrerender() {
         menuData = menuDataCache[menuType];
       }
 
-      // 2. Render App & get Helmet data (with menu data context)
-      const { html, helmet, dehydratedState } = render(url, { menuData, menuType });
+      // 2. Fetch special menu data if this is a special occasion page
+      const specialMenuSlug = getSpecialMenuSlugFromRoute(url);
+      let specialMenuData = null;
+      if (specialMenuSlug) {
+        if (!specialMenuCache[specialMenuSlug]) {
+          console.log(`📥 Fetching special menu "${specialMenuSlug}" for SSR...`);
+          specialMenuCache[specialMenuSlug] = await fetchSpecialMenuBySlug(specialMenuSlug);
+        }
+        specialMenuData = specialMenuCache[specialMenuSlug];
+      }
+
+      // 3. Render App & get Helmet data (with menu data context)
+      const { html, helmet, dehydratedState } = render(url, { menuData, menuType, specialMenuData });
 
       // 3. Inject HTML into Template
       // Match <div id="root"> with optional <!--app-html--> marker or whitespace, then closing </div>
