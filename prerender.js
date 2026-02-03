@@ -169,8 +169,9 @@ async function generateRoutesToPrerender() {
       const { html, helmet } = render(url, {});
 
       // 2. Inject HTML into Template
+      // Match <div id="root"> with optional <!--app-html--> marker or whitespace, then closing </div>
       let finalHtml = template.replace(
-        /|<div id="root"><\/div>|<div id="root">\s*<\/div>/,
+        /<div id="root">(?:<!--app-html-->|\s)*<\/div>/,
         `<div id="root">${html}</div>`
       );
 
