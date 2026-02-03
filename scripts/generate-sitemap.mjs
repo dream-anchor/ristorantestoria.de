@@ -63,6 +63,10 @@ async function fetchDynamicRoutes() {
   }
 
   try {
+    // Timeout nach 10 Sekunden
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
     const response = await fetch(
       `${SUPABASE_URL}/rest/v1/menus?menu_type=eq.special&is_published=eq.true&select=slug`,
       {
@@ -70,8 +74,11 @@ async function fetchDynamicRoutes() {
           apikey: SUPABASE_ANON_KEY,
           "Content-Type": "application/json",
         },
+        signal: controller.signal,
       }
     );
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       console.warn(`⚠️  Failed to fetch dynamic routes: ${response.status}`);
@@ -95,7 +102,11 @@ async function fetchDynamicRoutes() {
       changefreq: "weekly",
     }));
   } catch (error) {
-    console.error("❌ Error fetching dynamic routes:", error.message);
+    if (error.name === 'AbortError') {
+      console.warn("⚠️  Supabase request timed out after 10s. Skipping dynamic routes.");
+    } else {
+      console.error("❌ Error fetching dynamic routes:", error.message);
+    }
     return [];
   }
 }
