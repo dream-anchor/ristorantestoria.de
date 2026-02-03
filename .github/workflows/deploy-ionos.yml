@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 120 # Wir gehen auf das Maximum
+    timeout-minutes: 30
     concurrency:
       group: deploy-ionos
       cancel-in-progress: true
@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2 # Optimiert den Vergleich auf die letzten Änderungen
+          fetch-depth: 2
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -30,23 +30,24 @@ jobs:
 
       - name: Build Project (SSG)
         run: npm run build
-        env: 
+        env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
 
-      - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.IONOS_SFTP_HOST }}
-          username: ${{ secrets.IONOS_SFTP_USER }}
-          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          protocol: sftp
-          local-dir: ./dist/
-          server-dir: ${{ secrets.IONOS_SFTP_TARGET_DIR }}/
-          state-name: .deployment-state.json
-          # Verhindert den zeitfressenden Komplett-Scan des Servers:
-          dangerous-clean-slate: false
-          log-level: verbose
+      - name: Deploy via LFTP (parallel uploads)
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:timeout 30;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 5;
+            set mirror:parallel-transfer-count 10;
+            set mirror:parallel-directories yes;
+            open -u ${{ secrets.IONOS_SFTP_USER }},${{ secrets.IONOS_SFTP_PASSWORD }} sftp://${{ secrets.IONOS_SFTP_HOST }};
+            mirror --reverse --delete --verbose --parallel=10 ./dist/ ${{ secrets.IONOS_SFTP_TARGET_DIR }}/;
+            quit;
+          "
