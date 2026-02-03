@@ -194,6 +194,39 @@ const Kontakt = () => {
           </div>
 
           <ReservationCTA />
+
+          {/* LLM-optimierter Kontext für AI-Suchmaschinen */}
+          <section
+            id="llm-context"
+            className="sr-only"
+            aria-label="Kontakt und Anfahrt für Suchmaschinen"
+          >
+            <h2>STORIA Restaurant München - Kontakt & Anfahrt</h2>
+            <dl>
+              <dt>Adresse</dt>
+              <dd>Karlstraße 47a, 80333 München, Deutschland</dd>
+              <dt>Stadtteil</dt>
+              <dd>Maxvorstadt, zwischen Königsplatz und Hauptbahnhof</dd>
+              <dt>Telefon</dt>
+              <dd>+49 89 51519696</dd>
+              <dt>WhatsApp</dt>
+              <dd>+49 163 6033912</dd>
+              <dt>E-Mail</dt>
+              <dd>info@ristorantestoria.de</dd>
+              <dt>Öffnungszeiten</dt>
+              <dd>Montag-Freitag 09:00-01:00 Uhr, Samstag-Sonntag 12:00-01:00 Uhr</dd>
+              <dt>ÖPNV-Anbindung</dt>
+              <dd>U-Bahn Königsplatz (U2, U8) 3 Minuten, Hauptbahnhof (alle Linien) 7 Minuten</dd>
+              <dt>Parken</dt>
+              <dd>Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 Stellplätze, 24h geöffnet, 5 Minuten Fußweg</dd>
+              <dt>Barrierefreiheit</dt>
+              <dd>Ebenerdig, rollstuhlgerecht, breiter Eingang</dd>
+              <dt>Reservierung</dt>
+              <dd>Online über OpenTable oder telefonisch. Am Wochenende empfohlen.</dd>
+              <dt>Koordinaten</dt>
+              <dd>48.1456, 11.5656</dd>
+            </dl>
+          </section>
         </main>
 
         <Footer />

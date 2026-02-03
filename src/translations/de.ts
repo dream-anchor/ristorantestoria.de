@@ -1840,6 +1840,38 @@ export const de = {
       question: 'Ist das STORIA barrierefrei zugänglich?',
       answer: 'Das Restaurant ist ebenerdig und somit für Rollstuhlfahrer und Personen mit eingeschränkter Mobilität zugänglich. Die Eingangstür ist breit genug für Rollstühle. Bei Fragen zur Barrierefreiheit kontaktieren Sie uns gerne vorab.',
     },
+    {
+      question: 'Welche Pizza-Sorten bietet das STORIA an?',
+      answer: 'Wir bieten über 20 Pizza-Sorten: Klassiker wie Margherita (€12,50) und Diavola (€15,90), Premium-Pizzen wie Tartufo mit schwarzem Trüffel (€24,90), und saisonale Spezialitäten. Alle Pizzen werden im Steinofen bei 400°C nach neapolitanischer Tradition gebacken.',
+    },
+    {
+      question: 'Gibt es im STORIA glutenfreie Pizza?',
+      answer: 'Ja, wir bieten glutenfreien Pizzateig als Option an. Bitte informieren Sie uns bei der Bestellung über Ihre Glutenunverträglichkeit, damit wir entsprechende Vorkehrungen treffen können. Auch andere Allergene berücksichtigen wir gerne.',
+    },
+    {
+      question: 'Was ist die Spezialität des Hauses im STORIA?',
+      answer: 'Unsere Spezialitäten sind die neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta nach Familienrezepten der Familie Speranza, und saisonale Gerichte wie Wild (September-Februar) und frische Meeresfrüchte. Besonders beliebt: Pizza Bufalina mit Büffelmozzarella.',
+    },
+    {
+      question: 'Bietet das STORIA Lieferservice oder Abholung an?',
+      answer: 'Ja, alle unsere Pizzen und viele Pasta-Gerichte gibt es zum Mitnehmen. Rufen Sie uns an unter 089 51519696 für Bestellungen. Ein externer Lieferservice ist über Lieferando verfügbar.',
+    },
+    {
+      question: 'Gibt es Kinderportionen oder ein Kindermenü im STORIA?',
+      answer: 'Ja, wir bieten kleinere Portionen für Kinder an. Beliebte Optionen sind Kinderpasta mit Tomatensauce, kleine Pizza Margherita und Chicken Nuggets. Kinderstühle sind vorhanden, und Familien sind bei uns herzlich willkommen.',
+    },
+    {
+      question: 'Welche Weine empfiehlt das STORIA?',
+      answer: 'Unsere Sommelier-Empfehlungen umfassen italienische Weine aus allen Regionen: Primitivo und Negroamaro aus Apulien, Chianti aus der Toskana, Barolo aus dem Piemont. Wir bieten auch offene Weine ab €6,50 pro Glas und eine umfangreiche Flaschenwein-Auswahl.',
+    },
+    {
+      question: 'Wie ist die Atmosphäre im STORIA Restaurant?',
+      answer: 'Das STORIA verbindet italienische Eleganz mit gemütlicher Wärme: Holztische, warmes Licht, mediterrane Dekoration und italienische Musik im Hintergrund. Im Sommer lädt unsere versteckte Innenhof-Terrasse zum Verweilen ein – ein echter Geheimtipp in der Maxvorstadt.',
+    },
+    {
+      question: 'Kann man im STORIA auch nur Getränke bestellen?',
+      answer: 'Ja, Sie sind herzlich willkommen, nur auf einen Aperitivo oder Kaffee vorbeizukommen. Unsere Bar bietet Aperol Spritz (€9,90), Hugo, Negroni (€14,90) und weitere italienische Cocktails. Montag bis Freitag ab 9 Uhr, Samstag und Sonntag ab 12 Uhr geöffnet.',
+    },
   ],
   faqPage: {
     seo: {

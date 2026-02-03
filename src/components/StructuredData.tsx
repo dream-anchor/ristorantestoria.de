@@ -77,6 +77,49 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
         name: 'Nicola Speranza',
       },
     ],
+    // Ausstattung & Features für Rich Snippets
+    amenityFeature: [
+      { '@type': 'LocationFeatureSpecification', name: 'Terrasse', value: true },
+      { '@type': 'LocationFeatureSpecification', name: 'Barrierefrei', value: true },
+      { '@type': 'LocationFeatureSpecification', name: 'WLAN', value: true },
+      { '@type': 'LocationFeatureSpecification', name: 'Klimaanlage', value: true },
+      { '@type': 'LocationFeatureSpecification', name: 'Privaträume für Events', value: true },
+    ],
+    // Zahlungsmethoden
+    paymentAccepted: 'Cash, Credit Card, EC Card, Visa, Mastercard, American Express',
+    currenciesAccepted: 'EUR',
+    // Service-Gebiet für Local SEO
+    areaServed: [
+      { '@type': 'City', name: 'München' },
+      { '@type': 'AdministrativeArea', name: 'Maxvorstadt' },
+      { '@type': 'AdministrativeArea', name: 'Schwabing' },
+    ],
+    // Aktionen für Google Rich Results
+    potentialAction: [
+      {
+        '@type': 'ReserveAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: 'https://ristorantestoria.de/reservierung',
+          actionPlatform: [
+            'http://schema.org/DesktopWebPlatform',
+            'http://schema.org/MobileWebPlatform',
+          ],
+        },
+        result: {
+          '@type': 'Reservation',
+          name: 'Tischreservierung',
+        },
+      },
+      {
+        '@type': 'OrderAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: 'tel:+498951519696',
+          actionPlatform: 'http://schema.org/MobileWebPlatform',
+        },
+      },
+    ],
     // aggregateRating entfernt - Google erlaubt dies nur wenn Reviews auf der Seite sichtbar sind
     // (nicht hinter Consent-Banner). Kann wieder aktiviert werden wenn Reviews ohne Consent angezeigt werden.
   };

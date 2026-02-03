@@ -86,6 +86,33 @@ const Menu = () => {
             </div>
           </div>
         </div>
+
+        {/* LLM-optimierter Kontext für AI-Suchmaschinen */}
+        <section
+          id="llm-context"
+          className="sr-only"
+          aria-label="Speisekarte-Informationen für Suchmaschinen"
+        >
+          <h2>STORIA Speisekarte - Übersicht</h2>
+          <dl>
+            <dt>Pizza-Preise</dt>
+            <dd>€9,90 (Marinara) bis €24,90 (Tartufo mit schwarzem Trüffel). Margherita €12,50, Bufalina €16,50, Diavola €15,90.</dd>
+            <dt>Pasta-Preise</dt>
+            <dd>€14,50 bis €24,50. Hausgemachte Pasta nach Familienrezepten der Familie Speranza.</dd>
+            <dt>Hauptgerichte</dt>
+            <dd>Fisch und Fleisch €22 bis €38. Saisonale Wildgerichte (September-Februar).</dd>
+            <dt>Antipasti</dt>
+            <dd>Vorspeisen ab €8,50. Bruschetta, Carpaccio, Burrata, Meeresfrüchte-Variationen.</dd>
+            <dt>Desserts</dt>
+            <dd>Hausgemachtes Tiramisu, Panna Cotta, italienische Klassiker ab €7,50.</dd>
+            <dt>Menü-Optionen</dt>
+            <dd>3-Gänge-Menü ca. €35-50. 4-Gänge Degustationsmenü ab €55 (Vegetale), €89 mit Weinbegleitung.</dd>
+            <dt>Besonderheiten</dt>
+            <dd>Glutenfreie Pizza verfügbar, vegetarische Optionen, Kinderportionen, Allergene auf Anfrage.</dd>
+            <dt>Mittagsmenü</dt>
+            <dd>Montag bis Freitag 11:30-14:30 Uhr, wechselndes Tagesmenü zu günstigen Preisen.</dd>
+          </dl>
+        </section>
       </main>
 
       <Footer />

@@ -1825,6 +1825,38 @@ export const en = {
       question: 'Is STORIA wheelchair accessible?',
       answer: 'The restaurant is at street level and accessible for wheelchair users and people with limited mobility. The entrance door is wide enough for wheelchairs. For accessibility questions, please contact us in advance.',
     },
+    {
+      question: 'What pizza varieties does STORIA offer?',
+      answer: 'We offer over 20 pizza varieties: classics like Margherita (€12.50) and Diavola (€15.90), premium pizzas like Tartufo with black truffle (€24.90), and seasonal specialties. All pizzas are baked in a stone oven at 400°C following Neapolitan tradition.',
+    },
+    {
+      question: 'Does STORIA offer gluten-free pizza?',
+      answer: 'Yes, we offer gluten-free pizza dough as an option. Please inform us about your gluten intolerance when ordering so we can take appropriate precautions. We also accommodate other food allergies.',
+    },
+    {
+      question: 'What is the house specialty at STORIA?',
+      answer: 'Our specialties are Neapolitan stone-oven pizza, homemade pasta from the Speranza family recipes, and seasonal dishes like game (September-February) and fresh seafood. Especially popular: Pizza Bufalina with buffalo mozzarella.',
+    },
+    {
+      question: 'Does STORIA offer delivery or takeaway?',
+      answer: 'Yes, all our pizzas and many pasta dishes are available for takeaway. Call us at 089 51519696 for orders. External delivery service is available through Lieferando.',
+    },
+    {
+      question: 'Are there kids portions or a kids menu at STORIA?',
+      answer: 'Yes, we offer smaller portions for children. Popular options include kids pasta with tomato sauce, small Pizza Margherita, and chicken nuggets. High chairs are available, and families are warmly welcome.',
+    },
+    {
+      question: 'What wines does STORIA recommend?',
+      answer: 'Our sommelier recommendations include Italian wines from all regions: Primitivo and Negroamaro from Puglia, Chianti from Tuscany, Barolo from Piedmont. We also offer wines by the glass from €6.50 and an extensive bottle wine selection.',
+    },
+    {
+      question: 'What is the atmosphere like at STORIA restaurant?',
+      answer: 'STORIA combines Italian elegance with cozy warmth: wooden tables, warm lighting, Mediterranean decor, and Italian music in the background. In summer, our hidden courtyard terrace invites you to linger – a true hidden gem in Maxvorstadt.',
+    },
+    {
+      question: 'Can I just order drinks at STORIA?',
+      answer: 'Yes, you are welcome to stop by just for an aperitivo or coffee. Our bar offers Aperol Spritz (€9.90), Hugo, Negroni (€14.90), and other Italian cocktails. Open Monday to Friday from 9 AM, Saturday and Sunday from 12 PM.',
+    },
   ],
   faqPage: {
     seo: {

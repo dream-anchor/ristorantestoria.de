@@ -1625,6 +1625,38 @@ export const fr = {
       question: 'Le STORIA est-il accessible aux personnes à mobilité réduite?',
       answer: 'Le restaurant est de plain-pied et accessible aux utilisateurs de fauteuils roulants et aux personnes à mobilité réduite. La porte d\'entrée est assez large pour les fauteuils roulants. Pour les questions d\'accessibilité, veuillez nous contacter à l\'avance.',
     },
+    {
+      question: 'Quelles variétés de pizza propose le STORIA?',
+      answer: 'Nous proposons plus de 20 variétés de pizza: des classiques comme Margherita (12,50€) et Diavola (15,90€), des pizzas premium comme Tartufo à la truffe noire (24,90€), et des spécialités saisonnières. Toutes les pizzas sont cuites au four à pierre à 400°C selon la tradition napolitaine.',
+    },
+    {
+      question: 'Le STORIA propose-t-il des pizzas sans gluten?',
+      answer: 'Oui, nous proposons une pâte à pizza sans gluten en option. Veuillez nous informer de votre intolérance au gluten lors de la commande afin que nous puissions prendre les précautions appropriées. Nous prenons également en compte les autres allergies alimentaires.',
+    },
+    {
+      question: 'Quelle est la spécialité de la maison au STORIA?',
+      answer: 'Nos spécialités sont la pizza napolitaine du four à pierre, les pâtes maison selon les recettes de la famille Speranza, et les plats saisonniers comme le gibier (septembre-février) et les fruits de mer frais. Particulièrement populaire: la Pizza Bufalina à la mozzarella de bufflonne.',
+    },
+    {
+      question: 'Le STORIA propose-t-il la livraison ou les plats à emporter?',
+      answer: 'Oui, toutes nos pizzas et de nombreux plats de pâtes sont disponibles à emporter. Appelez-nous au 089 51519696 pour les commandes. Un service de livraison externe est disponible via Lieferando.',
+    },
+    {
+      question: 'Y a-t-il des portions enfants ou un menu enfant au STORIA?',
+      answer: 'Oui, nous proposons des portions plus petites pour les enfants. Les options populaires incluent les pâtes enfants à la sauce tomate, la petite Pizza Margherita et les nuggets de poulet. Des chaises hautes sont disponibles et les familles sont les bienvenues.',
+    },
+    {
+      question: 'Quels vins le STORIA recommande-t-il?',
+      answer: 'Nos recommandations de sommelier comprennent des vins italiens de toutes les régions: Primitivo et Negroamaro des Pouilles, Chianti de Toscane, Barolo du Piémont. Nous proposons également des vins au verre à partir de 6,50€ et une vaste sélection de bouteilles.',
+    },
+    {
+      question: 'Comment est l\'ambiance au restaurant STORIA?',
+      answer: 'Le STORIA allie élégance italienne et chaleur conviviale: tables en bois, éclairage chaleureux, décoration méditerranéenne et musique italienne en fond sonore. En été, notre terrasse cachée dans la cour intérieure vous invite à vous attarder – un véritable joyau caché à Maxvorstadt.',
+    },
+    {
+      question: 'Peut-on commander uniquement des boissons au STORIA?',
+      answer: 'Oui, vous êtes les bienvenus pour passer juste pour un aperitivo ou un café. Notre bar propose Aperol Spritz (9,90€), Hugo, Negroni (14,90€) et d\'autres cocktails italiens. Ouvert du lundi au vendredi à partir de 9h, samedi et dimanche à partir de 12h.',
+    },
   ],
   faqPage: {
     seo: {

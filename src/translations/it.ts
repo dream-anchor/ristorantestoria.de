@@ -1572,6 +1572,38 @@ const itBase = {
       question: 'STORIA è accessibile ai disabili?',
       answer: 'Il ristorante è a livello stradale e accessibile per utenti in sedia a rotelle e persone con mobilità ridotta. La porta d\'ingresso è abbastanza larga per le sedie a rotelle. Per domande sull\'accessibilità, contattateci in anticipo.',
     },
+    {
+      question: 'Quali varietà di pizza offre STORIA?',
+      answer: 'Offriamo oltre 20 varietà di pizza: classici come Margherita (€12,50) e Diavola (€15,90), pizze premium come Tartufo al tartufo nero (€24,90), e specialità stagionali. Tutte le pizze sono cotte nel forno a pietra a 400°C secondo la tradizione napoletana.',
+    },
+    {
+      question: 'STORIA offre pizza senza glutine?',
+      answer: 'Sì, offriamo impasto per pizza senza glutine come opzione. Vi preghiamo di informarci della vostra intolleranza al glutine al momento dell\'ordine in modo da poter prendere le precauzioni appropriate. Teniamo conto anche di altre allergie alimentari.',
+    },
+    {
+      question: 'Qual è la specialità della casa da STORIA?',
+      answer: 'Le nostre specialità sono la pizza napoletana dal forno a pietra, la pasta fatta in casa secondo le ricette della famiglia Speranza, e i piatti stagionali come la selvaggina (settembre-febbraio) e i frutti di mare freschi. Particolarmente popolare: la Pizza Bufalina con mozzarella di bufala.',
+    },
+    {
+      question: 'STORIA offre consegna o asporto?',
+      answer: 'Sì, tutte le nostre pizze e molti piatti di pasta sono disponibili per l\'asporto. Chiamateci al 089 51519696 per gli ordini. Un servizio di consegna esterno è disponibile tramite Lieferando.',
+    },
+    {
+      question: 'Ci sono porzioni per bambini o un menu per bambini da STORIA?',
+      answer: 'Sì, offriamo porzioni più piccole per i bambini. Le opzioni popolari includono pasta per bambini con salsa di pomodoro, piccola Pizza Margherita e nuggets di pollo. Sono disponibili seggioloni e le famiglie sono le benvenute.',
+    },
+    {
+      question: 'Quali vini consiglia STORIA?',
+      answer: 'Le nostre raccomandazioni del sommelier includono vini italiani da tutte le regioni: Primitivo e Negroamaro dalla Puglia, Chianti dalla Toscana, Barolo dal Piemonte. Offriamo anche vini al bicchiere a partire da €6,50 e un\'ampia selezione di bottiglie.',
+    },
+    {
+      question: 'Com\'è l\'atmosfera al ristorante STORIA?',
+      answer: 'STORIA combina eleganza italiana con calore accogliente: tavoli in legno, illuminazione calda, decorazioni mediterranee e musica italiana in sottofondo. In estate, la nostra terrazza nascosta nel cortile interno vi invita a soffermarvi – un vero gioiello nascosto a Maxvorstadt.',
+    },
+    {
+      question: 'Si possono ordinare solo bevande da STORIA?',
+      answer: 'Sì, siete i benvenuti a passare solo per un aperitivo o un caffè. Il nostro bar offre Aperol Spritz (€9,90), Hugo, Negroni (€14,90) e altri cocktail italiani. Aperto dal lunedì al venerdì dalle 9, sabato e domenica dalle 12.',
+    },
   ],
   faqPage: {
     seo: {
