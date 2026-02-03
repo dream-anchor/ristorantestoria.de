@@ -1834,7 +1834,7 @@ export const de = {
     },
     {
       question: 'Gibt es Parkmöglichkeiten beim STORIA?',
-      answer: 'In unmittelbarer Nähe befinden sich mehrere Parkmöglichkeiten: Das Parkhaus am Stachus (5 Minuten Fußweg), Parkhaus Elisenhof und Straßenparkplätze in der Umgebung. Die U-Bahn-Haltestelle Königsplatz ist nur 3 Minuten entfernt.',
+      answer: 'In unmittelbarer Nähe befinden sich mehrere Parkmöglichkeiten: Das Parkhaus Marsstraße (P22) in der Hirtenstraße 14 (5 Minuten Fußweg) sowie Straßenparkplätze in der Umgebung. Die U-Bahn-Haltestelle Königsplatz ist nur 3 Minuten entfernt.',
     },
     {
       question: 'Ist das STORIA barrierefrei zugänglich?',
@@ -2021,7 +2021,7 @@ export const de = {
           },
           {
             question: "Gibt es Parkmöglichkeiten in der Nähe des STORIA?",
-            answer: "In unmittelbarer Nähe befinden sich mehrere Parkmöglichkeiten: Das Parkhaus am Stachus (5 Minuten Fußweg), Parkhaus Elisenhof und Straßenparkplätze in der Umgebung. Die U-Bahn-Haltestelle Königsplatz ist nur 3 Minuten entfernt – ideal für eine entspannte Anreise.",
+            answer: "In unmittelbarer Nähe befinden sich mehrere Parkmöglichkeiten: Das Parkhaus Marsstraße (P22) in der Hirtenstraße 14 (5 Minuten Fußweg) sowie Straßenparkplätze in der Umgebung. Die U-Bahn-Haltestelle Königsplatz ist nur 3 Minuten entfernt – ideal für eine entspannte Anreise.",
             link: "kontakt",
             linkText: "Zur Anfahrt",
           },

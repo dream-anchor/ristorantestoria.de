@@ -1819,7 +1819,7 @@ export const en = {
     },
     {
       question: 'Is there parking near STORIA?',
-      answer: 'Several parking options are available nearby: The Stachus parking garage (5-minute walk), Elisenhof parking garage and street parking in the area. The Königsplatz U-Bahn station is just 3 minutes away.',
+      answer: 'Several parking options are available nearby: The Marsstraße parking garage (P22) at Hirtenstraße 14 (5-minute walk) and street parking in the area. The Königsplatz U-Bahn station is just 3 minutes away.',
     },
     {
       question: 'Is STORIA wheelchair accessible?',
@@ -2006,7 +2006,7 @@ export const en = {
           },
           {
             question: "Is there parking near STORIA?",
-            answer: "Several parking options are available nearby: The Stachus parking garage (5-minute walk), Elisenhof parking garage and street parking in the area. The Königsplatz U-Bahn station is just 3 minutes away – ideal for a relaxed arrival.",
+            answer: "Several parking options are available nearby: The Marsstraße parking garage (P22) at Hirtenstraße 14 (5-minute walk) and street parking in the area. The Königsplatz U-Bahn station is just 3 minutes away – ideal for a relaxed arrival.",
             link: "kontakt",
             linkText: "Get directions",
           },

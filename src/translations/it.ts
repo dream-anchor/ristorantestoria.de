@@ -1566,7 +1566,7 @@ const itBase = {
     },
     {
       question: 'Ci sono parcheggi vicino a STORIA?',
-      answer: 'Diverse opzioni di parcheggio sono disponibili nelle vicinanze: Il parcheggio Stachus (5 minuti a piedi), parcheggio Elisenhof e parcheggio in strada nella zona. La stazione della metropolitana Königsplatz è a soli 3 minuti.',
+      answer: 'Diverse opzioni di parcheggio sono disponibili nelle vicinanze: Il parcheggio Marsstraße (P22) in Hirtenstraße 14 (5 minuti a piedi) e parcheggio in strada nella zona. La stazione della metropolitana Königsplatz è a soli 3 minuti.',
     },
     {
       question: 'STORIA è accessibile ai disabili?',
@@ -1753,7 +1753,7 @@ const itBase = {
           },
           {
             question: "Ci sono parcheggi vicino a STORIA?",
-            answer: "Diverse opzioni di parcheggio sono disponibili nelle vicinanze: Il parcheggio Stachus (5 minuti a piedi), parcheggio Elisenhof e parcheggio in strada nella zona. La stazione della metropolitana Königsplatz è a soli 3 minuti – ideale per un arrivo rilassato.",
+            answer: "Diverse opzioni di parcheggio sono disponibili nelle vicinanze: Il parcheggio Marsstraße (P22) in Hirtenstraße 14 (5 minuti a piedi) e parcheggio in strada nella zona. La stazione della metropolitana Königsplatz è a soli 3 minuti – ideale per un arrivo rilassato.",
             link: "kontakt",
             linkText: "Come arrivare",
           },
