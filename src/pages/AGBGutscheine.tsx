@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Link } from "react-router-dom";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
@@ -8,16 +9,37 @@ const AGBGutscheine = () => {
   usePrerenderReady(true);
   return (
     <>
-      <SEO 
-        title="AGB Gutscheine" 
+      <SEO
+        title="AGB Gutscheine"
         description="Allgemeine Geschäftsbedingungen für Gutscheine bei STORIA Restaurant München. Informationen zu Kauf, Einlösung und Gültigkeit von STORIA-Gutscheinen."
         canonical="/agb-gutscheine"
       />
+      <StructuredData type="restaurant" />
+      <StructuredData
+        type="breadcrumb"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'AGB Gutscheine', url: '/agb-gutscheine' }
+        ]}
+      />
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-32 pb-20 px-4">
         <div className="max-w-3xl mx-auto">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+            <ol className="flex items-center gap-2">
+              <li>
+                <Link to="/" className="hover:text-foreground transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">AGB Gutscheine</li>
+            </ol>
+          </nav>
+
           <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-12 text-center">
             AGB für Gutscheine
           </h1>

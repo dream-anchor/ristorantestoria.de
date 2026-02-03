@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
+import LocalizedLink from "@/components/LocalizedLink";
 import ReservationCTA from "@/components/ReservationCTA";
 import StaticBotContent from "@/components/StaticBotContent";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -32,11 +34,32 @@ const UeberUns = () => {
         description={t.pages.ueberUns.description}
         canonical="/ueber-uns"
       />
+      <StructuredData type="restaurant" />
+      <StructuredData
+        type="breadcrumb"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: t.about.title, url: '/ueber-uns' }
+        ]}
+      />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <Navigation />
         <main className="flex-1 py-16 md:py-24">
           <div className="container mx-auto px-6 md:px-8 max-w-4xl">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+              <ol className="flex items-center gap-2">
+                <li>
+                  <LocalizedLink to="home" className="hover:text-foreground transition-colors">
+                    Home
+                  </LocalizedLink>
+                </li>
+                <li>/</li>
+                <li className="text-foreground font-medium">{t.about.title}</li>
+              </ol>
+            </nav>
+
             <h1 className="font-serif text-3xl md:text-4xl font-semibold text-foreground text-center mb-10 md:mb-14">
               {t.about.title}
             </h1>

@@ -1,23 +1,46 @@
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
 const Impressum = () => {
   usePrerenderReady(true);
   return (
     <>
-      <SEO 
+      <SEO
         title="Impressum"
         description="Impressum der Speranza GmbH - Ristorante STORIA München. Rechtliche Angaben, Kontaktdaten und Firmendaten."
         canonical="/impressum"
         noIndex={false}
       />
+      <StructuredData type="restaurant" />
+      <StructuredData
+        type="breadcrumb"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Impressum', url: '/impressum' }
+        ]}
+      />
       <div className="min-h-screen bg-background">
         <Header />
-      
+
       <main className="pt-32 pb-20 px-4">
         <div className="max-w-3xl mx-auto">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+            <ol className="flex items-center gap-2">
+              <li>
+                <Link to="/" className="hover:text-foreground transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">Impressum</li>
+            </ol>
+          </nav>
+
           <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-12 text-center">
             Impressum
           </h1>

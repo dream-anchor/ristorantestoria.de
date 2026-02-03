@@ -2,15 +2,25 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
+import LocalizedLink from "@/components/LocalizedLink";
 import storiaLogo from "@/assets/storia-logo.webp";
 
 const Menu = () => {
   return (
     <>
-      <SEO 
-        title="Menükarte – Alle Speisen" 
+      <SEO
+        title="Menükarte – Alle Speisen"
         description="Das Menü von STORIA Restaurant München: Antipasti, Pizza, Pasta und Dolci – authentische italienische Küche in der Maxvorstadt."
         canonical="/menu"
+      />
+      <StructuredData type="restaurant" />
+      <StructuredData
+        type="breadcrumb"
+        breadcrumbs={[
+          { name: 'Home', url: '/' },
+          { name: 'Menü', url: '/menu' }
+        ]}
       />
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
@@ -25,6 +35,19 @@ const Menu = () => {
       <Navigation />
       
       <main className="container mx-auto px-4 py-12 flex-grow">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+          <ol className="flex items-center gap-2">
+            <li>
+              <LocalizedLink to="home" className="hover:text-foreground transition-colors">
+                Home
+              </LocalizedLink>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Menü</li>
+          </ol>
+        </nav>
+
         <h1 className="text-4xl font-bold mb-8">Menü</h1>
         
         <div className="max-w-4xl mx-auto">
