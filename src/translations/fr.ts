@@ -1605,6 +1605,26 @@ export const fr = {
       question: 'Le Ristorante Pizzeria STORIA propose-t-il des menus déjeuner?',
       answer: 'Oui, nous proposons un menu déjeuner variable en semaine à des prix attractifs – idéal pour votre pause déjeuner à Maxvorstadt. Consultez notre page menu déjeuner pour les offres actuelles.',
     },
+    {
+      question: 'Combien coûte un dîner au STORIA?',
+      answer: 'Un plat principal au STORIA coûte entre 15€ et 35€. Les pizzas vont de 9,90€ (Marinara) à 24,90€ (Tartufo). Les plats de pâtes coûtent 14,50€ à 24,50€, les plats de poisson et viande 22€ à 38€. Un menu 3 plats est d\'environ 35-50€ par personne sans boissons.',
+    },
+    {
+      question: 'Le STORIA propose-t-il des options végétariennes et véganes?',
+      answer: 'Oui, nous proposons une large sélection de plats végétariens: Pizza Margherita, Pizza Vegetariana, divers plats de pâtes aux légumes, antipasti et salades. Des options véganes sont disponibles sur demande – n\'hésitez pas à nous demander. Notre menu 4 plats «Vegetale» est entièrement végétarien.',
+    },
+    {
+      question: 'Peut-on réserver des événements d\'entreprise et fêtes privées au STORIA?',
+      answer: 'Oui, le STORIA est un lieu événementiel populaire pour les événements d\'entreprise, fêtes de Noël, anniversaires et célébrations privées. Nous accueillons 10 à 80 convives avec des forfaits menu personnalisés. Toutes les informations événementielles sur events-storia.de.',
+    },
+    {
+      question: 'Y a-t-il des possibilités de stationnement près du STORIA?',
+      answer: 'Plusieurs options de stationnement sont disponibles à proximité: Le parking Stachus (5 minutes à pied), parking Elisenhof et stationnement dans les rues environnantes. La station de métro Königsplatz est à seulement 3 minutes.',
+    },
+    {
+      question: 'Le STORIA est-il accessible aux personnes à mobilité réduite?',
+      answer: 'Le restaurant est de plain-pied et accessible aux utilisateurs de fauteuils roulants et aux personnes à mobilité réduite. La porte d\'entrée est assez large pour les fauteuils roulants. Pour les questions d\'accessibilité, veuillez nous contacter à l\'avance.',
+    },
   ],
   faqPage: {
     seo: {
@@ -1783,6 +1803,56 @@ export const fr = {
           {
             question: "STORIA a-t-il une terrasse?",
             answer: "Oui, le restaurant dispose d'une terrasse, idéale pour les chaudes journées d'été à Munich. Profitez de l'ambiance italienne en plein air à Maxvorstadt.",
+          },
+          {
+            question: "Y a-t-il un parking près du STORIA?",
+            answer: "Plusieurs options de stationnement sont disponibles à proximité: Le parking Stachus (5 minutes à pied), parking Elisenhof et stationnement dans les rues environnantes. La station de métro Königsplatz est à seulement 3 minutes – idéal pour une arrivée détendue.",
+            link: "kontakt",
+            linkText: "Plan d'accès",
+          },
+          {
+            question: "Le STORIA est-il accessible en fauteuil roulant?",
+            answer: "Le restaurant est de plain-pied et accessible aux utilisateurs de fauteuils roulants et aux personnes à mobilité réduite. La porte d'entrée est assez large pour les fauteuils roulants. Pour les questions d'accessibilité, veuillez nous contacter à l'avance au +49 89 51519696.",
+            link: "kontakt",
+            linkText: "Nous contacter",
+          },
+        ],
+      },
+      {
+        id: "prix-paiement",
+        title: "Prix & Paiement",
+        items: [
+          {
+            question: "Combien coûte un repas au STORIA?",
+            answer: "Les pizzas coûtent de 9,90€ à 24,90€, les plats de pâtes de 14,50€ à 24,50€, poisson et viande de 22€ à 38€. Un menu 3 plats est d'environ 35-50€ par personne sans boissons. Notre menu déjeuner offre des prix plus avantageux pour votre pause.",
+            link: "speisekarte",
+            linkText: "Voir la carte",
+          },
+          {
+            question: "Quels modes de paiement accepte le STORIA?",
+            answer: "Nous acceptons les espèces, carte EC et toutes les principales cartes de crédit (Visa, Mastercard, American Express). Le paiement sans contact est également disponible.",
+          },
+        ],
+      },
+      {
+        id: "alimentation-allergies",
+        title: "Régimes Alimentaires & Allergies",
+        items: [
+          {
+            question: "Y a-t-il des plats végétariens au STORIA?",
+            answer: "Oui, nous proposons une large sélection de plats végétariens: Pizza Margherita, Pizza Vegetariana, divers plats de pâtes aux légumes, antipasti, salades et notre menu complet 4 plats «Vegetale».",
+            link: "speisekarte",
+            linkText: "Voir la carte",
+          },
+          {
+            question: "Le STORIA propose-t-il des options véganes?",
+            answer: "Des options véganes sont disponibles sur demande. Informez-nous lors de votre réservation ou sur place – notre cuisine se fait un plaisir de préparer des versions véganes de nos plats.",
+            link: "reservierung",
+            linkText: "Réserver",
+          },
+          {
+            question: "Le STORIA peut-il s'adapter aux allergies et intolérances?",
+            answer: "Oui, nous prenons les allergies et intolérances très au sérieux. Veuillez nous informer lors de votre réservation ou sur place de vos besoins. Nous proposons des pizzas sans gluten et pouvons adapter de nombreux plats.",
           },
         ],
       },

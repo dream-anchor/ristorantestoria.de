@@ -1820,6 +1820,26 @@ export const de = {
       question: 'Bietet das Ristorante Pizzeria STORIA Mittagsmenüs an?',
       answer: 'Ja, wir bieten wochentags ein wechselndes Mittagsmenü zu attraktiven Preisen an – ideal für Ihre Mittagspause in der Maxvorstadt. Schauen Sie auf unserer Mittagsmenü-Seite für die aktuellen Angebote.',
     },
+    {
+      question: 'Was kostet ein Abendessen im STORIA?',
+      answer: 'Ein Hauptgericht im STORIA kostet zwischen €15 und €35. Pizzen beginnen bei €9,90 (Marinara) bis €24,90 (Tartufo). Pasta-Gerichte kosten €14,50 bis €24,50, Fisch- und Fleischgerichte €22 bis €38. Ein 3-Gänge-Menü liegt bei ca. €35-50 pro Person ohne Getränke.',
+    },
+    {
+      question: 'Hat das STORIA vegetarische und vegane Optionen?',
+      answer: 'Ja, wir bieten eine große Auswahl an vegetarischen Gerichten: Pizza Margherita, Pizza Vegetariana, diverse Pasta-Gerichte mit Gemüse, Antipasti und Salate. Vegane Optionen sind auf Anfrage verfügbar – sprechen Sie uns gerne an. Unser 4-Gänge-Menü «Vegetale» ist komplett vegetarisch.',
+    },
+    {
+      question: 'Kann man im STORIA Firmenfeiern und private Events buchen?',
+      answer: 'Ja, das STORIA ist eine beliebte Eventlocation für Firmenfeiern, Weihnachtsfeiern, Geburtstage und private Feiern. Wir bieten Platz für 10-80 Gäste mit individuellen Menü-Paketen. Alle Event-Informationen finden Sie auf events-storia.de.',
+    },
+    {
+      question: 'Gibt es Parkmöglichkeiten beim STORIA?',
+      answer: 'In unmittelbarer Nähe befinden sich mehrere Parkmöglichkeiten: Das Parkhaus am Stachus (5 Minuten Fußweg), Parkhaus Elisenhof und Straßenparkplätze in der Umgebung. Die U-Bahn-Haltestelle Königsplatz ist nur 3 Minuten entfernt.',
+    },
+    {
+      question: 'Ist das STORIA barrierefrei zugänglich?',
+      answer: 'Das Restaurant ist ebenerdig und somit für Rollstuhlfahrer und Personen mit eingeschränkter Mobilität zugänglich. Die Eingangstür ist breit genug für Rollstühle. Bei Fragen zur Barrierefreiheit kontaktieren Sie uns gerne vorab.',
+    },
   ],
   faqPage: {
     seo: {
@@ -1998,6 +2018,56 @@ export const de = {
           {
             question: "Gibt es im STORIA eine Terrasse?",
             answer: "Ja, das Restaurant verfügt über eine Terrasse, ideal für warme Sommertage in München. Genießen Sie italienisches Flair unter freiem Himmel in der Maxvorstadt.",
+          },
+          {
+            question: "Gibt es Parkmöglichkeiten in der Nähe des STORIA?",
+            answer: "In unmittelbarer Nähe befinden sich mehrere Parkmöglichkeiten: Das Parkhaus am Stachus (5 Minuten Fußweg), Parkhaus Elisenhof und Straßenparkplätze in der Umgebung. Die U-Bahn-Haltestelle Königsplatz ist nur 3 Minuten entfernt – ideal für eine entspannte Anreise.",
+            link: "kontakt",
+            linkText: "Zur Anfahrt",
+          },
+          {
+            question: "Ist das STORIA barrierefrei zugänglich?",
+            answer: "Das Restaurant ist ebenerdig und somit für Rollstuhlfahrer und Personen mit eingeschränkter Mobilität zugänglich. Die Eingangstür ist breit genug für Rollstühle. Bei Fragen zur Barrierefreiheit kontaktieren Sie uns gerne vorab unter +49 89 51519696.",
+            link: "kontakt",
+            linkText: "Kontakt aufnehmen",
+          },
+        ],
+      },
+      {
+        id: "preise-bezahlung",
+        title: "Preise & Bezahlung",
+        items: [
+          {
+            question: "Was kostet ein Essen im STORIA?",
+            answer: "Pizzen kosten €9,90 bis €24,90, Pasta-Gerichte €14,50 bis €24,50, Fisch und Fleisch €22 bis €38. Ein 3-Gänge-Menü liegt bei ca. €35-50 pro Person ohne Getränke. Unser Mittagsmenü bietet günstigere Preise für die Mittagspause.",
+            link: "speisekarte",
+            linkText: "Zur Speisekarte",
+          },
+          {
+            question: "Welche Zahlungsmethoden akzeptiert das STORIA?",
+            answer: "Wir akzeptieren Barzahlung, EC-Karte und alle gängigen Kreditkarten (Visa, Mastercard, American Express). Kontaktloses Bezahlen ist ebenfalls möglich.",
+          },
+        ],
+      },
+      {
+        id: "ernaehrung-allergien",
+        title: "Ernährung & Allergien",
+        items: [
+          {
+            question: "Gibt es vegetarische Gerichte im STORIA?",
+            answer: "Ja, wir bieten eine große Auswahl an vegetarischen Gerichten: Pizza Margherita, Pizza Vegetariana, diverse Pasta-Gerichte mit Gemüse, Antipasti, Salate und unser komplettes 4-Gänge-Menü «Vegetale».",
+            link: "speisekarte",
+            linkText: "Zur Speisekarte",
+          },
+          {
+            question: "Hat das STORIA vegane Optionen?",
+            answer: "Vegane Optionen sind auf Anfrage verfügbar. Sprechen Sie uns bei der Reservierung oder vor Ort an – unsere Küche bereitet gerne vegane Varianten unserer Gerichte zu.",
+            link: "reservierung",
+            linkText: "Zur Reservierung",
+          },
+          {
+            question: "Kann das STORIA auf Allergien und Unverträglichkeiten eingehen?",
+            answer: "Ja, wir nehmen Allergien und Unverträglichkeiten sehr ernst. Bitte informieren Sie uns bei der Reservierung oder vor Ort über Ihre Bedürfnisse. Wir können glutenfreie Pizza anbieten und viele Gerichte anpassen.",
           },
         ],
       },

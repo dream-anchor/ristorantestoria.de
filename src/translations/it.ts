@@ -1552,6 +1552,26 @@ const itBase = {
       question: 'Il Ristorante Pizzeria STORIA offre menu pranzo?',
       answer: 'Sì, offriamo un menu pranzo variabile nei giorni feriali a prezzi convenienti – ideale per la vostra pausa pranzo a Maxvorstadt. Consultate la nostra pagina menu pranzo per le offerte attuali.',
     },
+    {
+      question: 'Quanto costa una cena da STORIA?',
+      answer: 'Un piatto principale da STORIA costa tra 15€ e 35€. Le pizze vanno da 9,90€ (Marinara) a 24,90€ (Tartufo). I piatti di pasta costano 14,50€-24,50€, pesce e carne 22€-38€. Un menu di 3 portate è circa 35-50€ a persona senza bevande.',
+    },
+    {
+      question: 'STORIA ha opzioni vegetariane e vegane?',
+      answer: 'Sì, offriamo un\'ampia selezione di piatti vegetariani: Pizza Margherita, Pizza Vegetariana, vari piatti di pasta con verdure, antipasti e insalate. Opzioni vegane sono disponibili su richiesta – chiedete pure. Il nostro menu 4 portate «Vegetale» è completamente vegetariano.',
+    },
+    {
+      question: 'Si possono prenotare eventi aziendali e feste private da STORIA?',
+      answer: 'Sì, STORIA è una location popolare per eventi aziendali, feste di Natale, compleanni e celebrazioni private. Ospitiamo 10-80 ospiti con pacchetti menu personalizzati. Tutte le informazioni eventi su events-storia.de.',
+    },
+    {
+      question: 'Ci sono parcheggi vicino a STORIA?',
+      answer: 'Diverse opzioni di parcheggio sono disponibili nelle vicinanze: Il parcheggio Stachus (5 minuti a piedi), parcheggio Elisenhof e parcheggio in strada nella zona. La stazione della metropolitana Königsplatz è a soli 3 minuti.',
+    },
+    {
+      question: 'STORIA è accessibile ai disabili?',
+      answer: 'Il ristorante è a livello stradale e accessibile per utenti in sedia a rotelle e persone con mobilità ridotta. La porta d\'ingresso è abbastanza larga per le sedie a rotelle. Per domande sull\'accessibilità, contattateci in anticipo.',
+    },
   ],
   faqPage: {
     seo: {
@@ -1730,6 +1750,56 @@ const itBase = {
           {
             question: "STORIA ha una terrazza?",
             answer: "Sì, il ristorante dispone di una terrazza, ideale per le calde giornate estive a Monaco. Godetevi l'atmosfera italiana all'aperto a Maxvorstadt.",
+          },
+          {
+            question: "Ci sono parcheggi vicino a STORIA?",
+            answer: "Diverse opzioni di parcheggio sono disponibili nelle vicinanze: Il parcheggio Stachus (5 minuti a piedi), parcheggio Elisenhof e parcheggio in strada nella zona. La stazione della metropolitana Königsplatz è a soli 3 minuti – ideale per un arrivo rilassato.",
+            link: "kontakt",
+            linkText: "Come arrivare",
+          },
+          {
+            question: "STORIA è accessibile alle sedie a rotelle?",
+            answer: "Il ristorante è a livello stradale e accessibile per utenti in sedia a rotelle e persone con mobilità ridotta. La porta d'ingresso è abbastanza larga per le sedie a rotelle. Per domande sull'accessibilità, contattateci in anticipo al +49 89 51519696.",
+            link: "kontakt",
+            linkText: "Contattaci",
+          },
+        ],
+      },
+      {
+        id: "prezzi-pagamento",
+        title: "Prezzi & Pagamento",
+        items: [
+          {
+            question: "Quanto costa un pasto da STORIA?",
+            answer: "Le pizze costano da 9,90€ a 24,90€, i piatti di pasta da 14,50€ a 24,50€, pesce e carne da 22€ a 38€. Un menu di 3 portate è circa 35-50€ a persona senza bevande. Il nostro menu pranzo offre prezzi più convenienti per la vostra pausa.",
+            link: "speisekarte",
+            linkText: "Vedi menu",
+          },
+          {
+            question: "Quali metodi di pagamento accetta STORIA?",
+            answer: "Accettiamo contanti, carta EC e tutte le principali carte di credito (Visa, Mastercard, American Express). È disponibile anche il pagamento contactless.",
+          },
+        ],
+      },
+      {
+        id: "dieta-allergie",
+        title: "Esigenze Alimentari & Allergie",
+        items: [
+          {
+            question: "Ci sono piatti vegetariani da STORIA?",
+            answer: "Sì, offriamo un'ampia selezione di piatti vegetariani: Pizza Margherita, Pizza Vegetariana, vari piatti di pasta con verdure, antipasti, insalate e il nostro menu completo 4 portate «Vegetale».",
+            link: "speisekarte",
+            linkText: "Vedi menu",
+          },
+          {
+            question: "STORIA ha opzioni vegane?",
+            answer: "Opzioni vegane sono disponibili su richiesta. Informateci al momento della prenotazione o sul posto – la nostra cucina è lieta di preparare versioni vegane dei nostri piatti.",
+            link: "reservierung",
+            linkText: "Prenota",
+          },
+          {
+            question: "STORIA può adattarsi ad allergie e intolleranze?",
+            answer: "Sì, prendiamo molto seriamente allergie e intolleranze. Vi preghiamo di informarci al momento della prenotazione o sul posto delle vostre esigenze. Offriamo pizza senza glutine e possiamo adattare molti piatti.",
           },
         ],
       },

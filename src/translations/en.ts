@@ -1805,6 +1805,26 @@ export const en = {
       question: 'Does Ristorante Pizzeria STORIA offer lunch menus?',
       answer: 'Yes, we offer a changing lunch menu on weekdays at attractive prices – ideal for your lunch break in Maxvorstadt. Check our lunch menu page for current offerings.',
     },
+    {
+      question: 'How much does dinner at STORIA cost?',
+      answer: 'A main course at STORIA costs between €15 and €35. Pizzas range from €9.90 (Marinara) to €24.90 (Tartufo). Pasta dishes cost €14.50 to €24.50, fish and meat dishes €22 to €38. A 3-course menu is approximately €35-50 per person without drinks.',
+    },
+    {
+      question: 'Does STORIA have vegetarian and vegan options?',
+      answer: 'Yes, we offer a wide selection of vegetarian dishes: Pizza Margherita, Pizza Vegetariana, various pasta dishes with vegetables, antipasti and salads. Vegan options are available upon request – just ask us. Our 4-course menu «Vegetale» is completely vegetarian.',
+    },
+    {
+      question: 'Can I book corporate events and private parties at STORIA?',
+      answer: 'Yes, STORIA is a popular event location for corporate events, Christmas parties, birthdays and private celebrations. We accommodate 10-80 guests with customized menu packages. All event information is available at events-storia.de.',
+    },
+    {
+      question: 'Is there parking near STORIA?',
+      answer: 'Several parking options are available nearby: The Stachus parking garage (5-minute walk), Elisenhof parking garage and street parking in the area. The Königsplatz U-Bahn station is just 3 minutes away.',
+    },
+    {
+      question: 'Is STORIA wheelchair accessible?',
+      answer: 'The restaurant is at street level and accessible for wheelchair users and people with limited mobility. The entrance door is wide enough for wheelchairs. For accessibility questions, please contact us in advance.',
+    },
   ],
   faqPage: {
     seo: {
@@ -1983,6 +2003,56 @@ export const en = {
           {
             question: "Does STORIA have a terrace?",
             answer: "Yes, the restaurant has a terrace, ideal for warm summer days in Munich. Enjoy Italian flair outdoors in Maxvorstadt.",
+          },
+          {
+            question: "Is there parking near STORIA?",
+            answer: "Several parking options are available nearby: The Stachus parking garage (5-minute walk), Elisenhof parking garage and street parking in the area. The Königsplatz U-Bahn station is just 3 minutes away – ideal for a relaxed arrival.",
+            link: "kontakt",
+            linkText: "Get directions",
+          },
+          {
+            question: "Is STORIA wheelchair accessible?",
+            answer: "The restaurant is at street level and accessible for wheelchair users and people with limited mobility. The entrance door is wide enough for wheelchairs. For accessibility questions, please contact us in advance at +49 89 51519696.",
+            link: "kontakt",
+            linkText: "Contact us",
+          },
+        ],
+      },
+      {
+        id: "prices-payment",
+        title: "Prices & Payment",
+        items: [
+          {
+            question: "How much does a meal at STORIA cost?",
+            answer: "Pizzas cost €9.90 to €24.90, pasta dishes €14.50 to €24.50, fish and meat €22 to €38. A 3-course menu is approximately €35-50 per person without drinks. Our lunch menu offers lower prices for your lunch break.",
+            link: "speisekarte",
+            linkText: "View menu",
+          },
+          {
+            question: "What payment methods does STORIA accept?",
+            answer: "We accept cash, EC card and all major credit cards (Visa, Mastercard, American Express). Contactless payment is also available.",
+          },
+        ],
+      },
+      {
+        id: "dietary-allergies",
+        title: "Dietary Requirements & Allergies",
+        items: [
+          {
+            question: "Are there vegetarian dishes at STORIA?",
+            answer: "Yes, we offer a wide selection of vegetarian dishes: Pizza Margherita, Pizza Vegetariana, various pasta dishes with vegetables, antipasti, salads and our complete 4-course menu «Vegetale».",
+            link: "speisekarte",
+            linkText: "View menu",
+          },
+          {
+            question: "Does STORIA have vegan options?",
+            answer: "Vegan options are available upon request. Just let us know when making your reservation or on site – our kitchen is happy to prepare vegan versions of our dishes.",
+            link: "reservierung",
+            linkText: "Make a reservation",
+          },
+          {
+            question: "Can STORIA accommodate allergies and intolerances?",
+            answer: "Yes, we take allergies and intolerances very seriously. Please inform us when making your reservation or on site about your needs. We can offer gluten-free pizza and adapt many dishes.",
           },
         ],
       },
