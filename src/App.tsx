@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, HydrationBoundary } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
@@ -47,7 +48,13 @@ import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
 import FAQ from "./pages/FAQ";
 
-const queryClient = new QueryClient();
+// Get dehydrated state from SSR (only on client)
+const getDehydratedState = () => {
+  if (typeof window !== "undefined" && (window as any).__REACT_QUERY_STATE__) {
+    return (window as any).__REACT_QUERY_STATE__;
+  }
+  return undefined;
+};
 
 // Route configuration with components
 const routeComponents: Record<string, React.ComponentType> = {
@@ -163,24 +170,31 @@ const AppRoutes = () => {
 };
 
 // App component with all providers and contexts
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <LanguageProvider>
-        <CookieConsentProvider>
-          <Toaster />
-          <Sonner />
-          <GoogleAnalytics />
-          <ScrollToTop />
-          <NormalizePath />
-          <FloatingActions />
-          <CookieBanner />
-          <CookieSettingsButton />
-          <AppRoutes />
-        </CookieConsentProvider>
-      </LanguageProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [queryClient] = useState(() => new QueryClient());
+  const dehydratedState = getDehydratedState();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <HydrationBoundary state={dehydratedState}>
+        <TooltipProvider>
+          <LanguageProvider>
+            <CookieConsentProvider>
+              <Toaster />
+              <Sonner />
+              <GoogleAnalytics />
+              <ScrollToTop />
+              <NormalizePath />
+              <FloatingActions />
+              <CookieBanner />
+              <CookieSettingsButton />
+              <AppRoutes />
+            </CookieConsentProvider>
+          </LanguageProvider>
+        </TooltipProvider>
+      </HydrationBoundary>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

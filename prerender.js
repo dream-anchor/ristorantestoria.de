@@ -34,6 +34,62 @@ const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 /**
+ * Fetch complete menu data (menu + categories + items) for SSR
+ */
+async function fetchCompleteMenuData(menuType) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+
+  try {
+    // 1. Fetch menu by type
+    const menuRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/menus?menu_type=eq.${menuType}&is_published=eq.true&select=*`,
+      { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
+    );
+    const menus = await menuRes.json();
+    const menu = menus[0];
+    if (!menu) return null;
+
+    // 2. Fetch categories
+    const catRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/menu_categories?menu_id=eq.${menu.id}&order=sort_order&select=*`,
+      { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
+    );
+    const categories = await catRes.json();
+    if (!categories.length) return { ...menu, categories: [] };
+
+    // 3. Fetch items for all categories
+    const categoryIds = categories.map((c) => c.id).join(",");
+    const itemsRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/menu_items?category_id=in.(${categoryIds})&order=sort_order&select=*`,
+      { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
+    );
+    const items = await itemsRes.json();
+
+    // Return in useMenu-compatible format
+    return {
+      ...menu,
+      categories: categories.map((cat) => ({
+        ...cat,
+        items: items.filter((item) => item.category_id === cat.id),
+      })),
+    };
+  } catch (error) {
+    console.error(`❌ Error fetching menu data for ${menuType}:`, error.message);
+    return null;
+  }
+}
+
+/**
+ * Determine menu type from URL
+ */
+function getMenuTypeForRoute(url) {
+  if (url.includes("speisekarte") || url.includes("food-menu") || url.includes("menu-cibo") || url.includes("/carte")) return "food";
+  if (url.includes("mittags") || url.includes("lunch") || url.includes("pranzo") || url.includes("dejeuner")) return "lunch";
+  if (url.includes("getraenke") || url.includes("drinks") || url.includes("bevande") || url.includes("boissons")) return "drinks";
+  return null;
+}
+
+/**
  * Fetch dynamic slugs from Supabase
  * UPDATE: Fetches ALL published menus to ensure special events like Valentine's are found
  */
@@ -163,19 +219,39 @@ async function generateRoutesToPrerender() {
   let successCount = 0;
   let errorCount = 0;
 
+  // Cache for menu data to avoid re-fetching
+  const menuDataCache = {};
+
   for (const url of routesToPrerender) {
     try {
-      // 1. Render App & get Helmet data
-      const { html, helmet } = render(url, {});
+      // 1. Fetch menu data if this is a menu page
+      const menuType = getMenuTypeForRoute(url);
+      let menuData = null;
+      if (menuType) {
+        if (!menuDataCache[menuType]) {
+          console.log(`📥 Fetching ${menuType} menu data for SSR...`);
+          menuDataCache[menuType] = await fetchCompleteMenuData(menuType);
+        }
+        menuData = menuDataCache[menuType];
+      }
 
-      // 2. Inject HTML into Template
+      // 2. Render App & get Helmet data (with menu data context)
+      const { html, helmet, dehydratedState } = render(url, { menuData, menuType });
+
+      // 3. Inject HTML into Template
       // Match <div id="root"> with optional <!--app-html--> marker or whitespace, then closing </div>
       let finalHtml = template.replace(
         /<div id="root">(?:<!--app-html-->|\s)*<\/div>/,
         `<div id="root">${html}</div>`
       );
 
-      // 3. Inject SEO Tags (Helmet)
+      // 4. Inject dehydrated React Query state for hydration
+      if (dehydratedState && dehydratedState.queries?.length > 0) {
+        const stateScript = `<script>window.__REACT_QUERY_STATE__=${JSON.stringify(dehydratedState)}</script>`;
+        finalHtml = finalHtml.replace("</head>", `${stateScript}</head>`);
+      }
+
+      // 5. Inject SEO Tags (Helmet)
       if (helmet) {
         const helmetHtml = `
           ${helmet.title ? helmet.title.toString() : ""}
