@@ -64,6 +64,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     sameAs: [
       'https://www.instagram.com/ristorante_storia/',
       'https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen',
+      'https://maps.google.com/?cid=3761590175870856939',
     ],
     founder: [
       {
@@ -108,6 +109,7 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     sameAs: [
       'https://www.instagram.com/ristorante_storia/',
       'https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen',
+      'https://maps.google.com/?cid=3761590175870856939',
     ],
     foundingDate: '1995-01-01',
     contactPoint: {
