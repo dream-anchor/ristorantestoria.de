@@ -216,4 +216,7 @@ async function generateRoutesToPrerender() {
   console.log(`\n✅ Prerendering complete!`);
   console.log(`   - Success: ${successCount}`);
   console.log(`   - Errors: ${errorCount}`);
+
+  // Force exit to prevent hanging on open handles (fetch connections)
+  process.exit(errorCount > 0 ? 1 : 0);
 })();
