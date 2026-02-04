@@ -5,6 +5,87 @@
 
 type Language = 'de' | 'en' | 'it' | 'fr';
 
+/**
+ * RECURRING MENU SLUGS (SEO-permanent)
+ * These slugs are reused every year for the same theme.
+ * IMPORTANT: Never change these slugs - they have SEO authority!
+ */
+export const RECURRING_MENU_SLUGS: Record<string, Record<Language, string>> = {
+  // Valentinstag - reused every February
+  valentinstag: {
+    de: 'valentinstag-menue',
+    en: 'valentines-menu',
+    it: 'san-valentino-menu',
+    fr: 'saint-valentin-menu',
+  },
+  // Weihnachten - reused every December
+  weihnachten: {
+    de: 'weihnachtsmenues',
+    en: 'christmas-menus',
+    it: 'natale-menu',
+    fr: 'noel-menus',
+  },
+  // Silvester - reused every December/January
+  silvester: {
+    de: 'silvesterparty',
+    en: 'new-years-party',
+    it: 'capodanno-party',
+    fr: 'nouvel-an-party',
+  },
+  // Ostern - reused every spring
+  ostern: {
+    de: 'ostern-menue',
+    en: 'easter-menu',
+    it: 'pasqua-menu',
+    fr: 'paques-menu',
+  },
+  // Muttertag - reused every May
+  muttertag: {
+    de: 'muttertag-menue',
+    en: 'mothers-day-menu',
+    it: 'festa-mamma-menu',
+    fr: 'fete-meres-menu',
+  },
+};
+
+/**
+ * Detects if a menu title matches a recurring theme
+ * @param title - The menu title (e.g., "Valentinstag-Menü 2026")
+ * @returns The theme key if matched, or null
+ */
+export function detectRecurringTheme(title: string): string | null {
+  const lowerTitle = title.toLowerCase();
+
+  // Check each recurring theme
+  for (const theme of Object.keys(RECURRING_MENU_SLUGS)) {
+    if (lowerTitle.includes(theme)) {
+      return theme;
+    }
+  }
+
+  // Also check for common variations
+  if (lowerTitle.includes('weihnacht')) return 'weihnachten';
+  if (lowerTitle.includes('sylvester') || lowerTitle.includes('neujahr')) return 'silvester';
+  if (lowerTitle.includes('valentine')) return 'valentinstag';
+  if (lowerTitle.includes('easter') || lowerTitle.includes('pasqua')) return 'ostern';
+  if (lowerTitle.includes('mother') || lowerTitle.includes('mutter')) return 'muttertag';
+
+  return null;
+}
+
+/**
+ * Gets predefined slugs for a recurring menu theme
+ * @param title - The menu title
+ * @returns Predefined slugs if recurring theme, or null
+ */
+export function getRecurringMenuSlugs(title: string): Record<Language, string> | null {
+  const theme = detectRecurringTheme(title);
+  if (theme && RECURRING_MENU_SLUGS[theme]) {
+    return RECURRING_MENU_SLUGS[theme];
+  }
+  return null;
+}
+
 // Common German → Other language translations for menu slugs
 const SLUG_TRANSLATIONS: Record<string, Record<Language, string>> = {
   // Seasonal menus

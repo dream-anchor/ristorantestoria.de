@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { slugify, generateUniqueSlug } from "@/lib/slugify";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
-import { generateAllSlugVariants } from "@/lib/slugTranslations";
+import { generateAllSlugVariants, getRecurringMenuSlugs } from "@/lib/slugTranslations";
 
 export interface ParsedMenuItem {
   name: string;
@@ -329,20 +329,31 @@ export const useSaveMenuContent = () => {
 
   return useMutation({
     mutationFn: async ({ menuId, data }: { menuId: string; data: ParsedMenu }) => {
-      // Generate new slug from title
-      const baseSlug = slugify(data.title);
-      const uniqueSlug = await generateUniqueSlug(baseSlug, async (slug) => {
-        const { data: existing } = await supabase
-          .from('menus')
-          .select('id')
-          .eq('slug', slug)
-          .neq('id', menuId)
-          .maybeSingle();
-        return !!existing;
-      });
+      // Check if this is a recurring menu theme (Valentinstag, Weihnachten, etc.)
+      // If so, use predefined SEO-permanent slugs
+      const recurringMenuSlugs = getRecurringMenuSlugs(data.title);
 
-      // Generate translated slugs for all languages
-      const slugVariants = generateAllSlugVariants(uniqueSlug);
+      let slugVariants: { de: string; en: string; it: string; fr: string };
+
+      if (recurringMenuSlugs) {
+        // Use predefined slugs for recurring themes (SEO-important!)
+        slugVariants = recurringMenuSlugs;
+      } else {
+        // Generate new slug from title for non-recurring menus
+        const baseSlug = slugify(data.title);
+        const uniqueSlug = await generateUniqueSlug(baseSlug, async (slug) => {
+          const { data: existing } = await supabase
+            .from('menus')
+            .select('id')
+            .eq('slug', slug)
+            .neq('id', menuId)
+            .maybeSingle();
+          return !!existing;
+        });
+
+        // Generate translated slugs for all languages
+        slugVariants = generateAllSlugVariants(uniqueSlug);
+      }
 
       // Update menu title/subtitle/slug (including translated slugs)
       const { error: menuError } = await supabase
@@ -356,7 +367,7 @@ export const useSaveMenuContent = () => {
           subtitle_en: data.subtitle_en,
           subtitle_it: data.subtitle_it,
           subtitle_fr: data.subtitle_fr,
-          slug: uniqueSlug,
+          slug: slugVariants.de,
           slug_en: slugVariants.en,
           slug_it: slugVariants.it,
           slug_fr: slugVariants.fr,

@@ -36,6 +36,31 @@ RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
 RewriteRule ^(.*)$ /$1/ [R=301,L]
 
 # ============================================
+# 1d. Multi-Language Slug Redirects (SEO - Translated URLs)
+# ============================================
+# Redirect German slugs on foreign language paths to localized slugs
+
+# --- Valentinstag ---
+RewriteRule ^en/special-occasions/valentinstag-menue/?$ /en/special-occasions/valentines-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/valentinstag-menue/?$ /it/occasioni-speciali/san-valentino-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/valentinstag-menue/?$ /fr/occasions-speciales/saint-valentin-menu/ [R=301,L]
+
+# --- Weihnachten ---
+RewriteRule ^en/special-occasions/weihnachtsmenues/?$ /en/special-occasions/christmas-menus/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/weihnachtsmenues/?$ /it/occasioni-speciali/natale-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/weihnachtsmenues/?$ /fr/occasions-speciales/noel-menus/ [R=301,L]
+
+# --- Silvester ---
+RewriteRule ^en/special-occasions/silvesterparty/?$ /en/special-occasions/new-years-party/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/silvesterparty/?$ /it/occasioni-speciali/capodanno-party/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/silvesterparty/?$ /fr/occasions-speciales/nouvel-an-party/ [R=301,L]
+
+# --- Ostern ---
+RewriteRule ^en/special-occasions/ostern-menue/?$ /en/special-occasions/easter-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/ostern-menue/?$ /it/occasioni-speciali/pasqua-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/ostern-menue/?$ /fr/occasions-speciales/paques-menu/ [R=301,L]
+
+# ============================================
 # 2. Error Documents (Fallback auf SPA)
 # ============================================
 ErrorDocument 404 /index.html
