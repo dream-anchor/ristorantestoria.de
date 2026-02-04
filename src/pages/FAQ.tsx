@@ -34,6 +34,8 @@ const FAQ = () => {
 
   // Flatten all FAQs for Schema.org
   const allFaqs = faqCategories.flatMap((cat: { items: Array<{ question: string; answer: string }> }) => cat.items);
+  // Limit to first 10 items for schema (Google recommends 8-12 max for rich results)
+  const schemaFaqs = allFaqs.slice(0, 10);
 
   return (
     <>
@@ -50,10 +52,10 @@ const FAQ = () => {
           { name: 'FAQ', url: '/faq' }
         ]} 
       />
-      {/* Custom FAQ Schema */}
+      {/* Custom FAQ Schema - Limited to 10 items for rich results eligibility */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateFaqSchema(allFaqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateFaqSchema(schemaFaqs)) }}
       />
 
       <div className="min-h-screen bg-background flex flex-col">
@@ -126,7 +128,7 @@ const FAQ = () => {
                       <AccordionTrigger className="text-left text-base md:text-lg font-medium hover:no-underline py-5">
                         {item.question}
                       </AccordionTrigger>
-                      <AccordionContent className="text-base text-muted-foreground pb-5 leading-relaxed">
+                      <AccordionContent forceMount className="text-base text-muted-foreground pb-5 leading-relaxed data-[state=closed]:hidden">
                         <p className="mb-2">{item.answer}</p>
                         {item.link && (
                           <LocalizedLink 
