@@ -149,7 +149,7 @@ const NeapolitanischePizza = () => {
                   {t.seo.neapolitanPizza.heroReserveBtn}
                 </LocalizedLink>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
                 <LocalizedLink to="speisekarte">
                   {t.seo.neapolitanPizza.heroMenuBtn}
                   <ArrowRight className="w-4 h-4 ml-2" />
