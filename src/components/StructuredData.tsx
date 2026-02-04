@@ -88,12 +88,23 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
     // Zahlungsmethoden
     paymentAccepted: 'Cash, Credit Card, EC Card, Visa, Mastercard, American Express',
     currenciesAccepted: 'EUR',
-    // Service-Gebiet für Local SEO
+    // Service-Gebiet für Local SEO (erweitert für bessere lokale Abdeckung)
     areaServed: [
       { '@type': 'City', name: 'München' },
       { '@type': 'AdministrativeArea', name: 'Maxvorstadt' },
       { '@type': 'AdministrativeArea', name: 'Schwabing' },
+      { '@type': 'AdministrativeArea', name: 'Schwabing-West' },
+      { '@type': 'AdministrativeArea', name: 'Neuhausen' },
+      { '@type': 'AdministrativeArea', name: 'Nymphenburg' },
+      { '@type': 'AdministrativeArea', name: 'Altstadt-Lehel' },
+      { '@type': 'AdministrativeArea', name: 'Ludwigsvorstadt-Isarvorstadt' },
+      { '@type': 'AdministrativeArea', name: 'Schwanthalerhöhe' },
+      { '@type': 'AdministrativeArea', name: 'Sendling' },
+      { '@type': 'AdministrativeArea', name: 'Au-Haidhausen' },
     ],
+    // Öffentlich zugänglich & Raucher-Policy
+    publicAccess: true,
+    smokingAllowed: false,
     // Aktionen für Google Rich Results
     potentialAction: [
       {
