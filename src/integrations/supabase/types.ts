@@ -219,9 +219,6 @@ export type Database = {
           pdf_url: string | null
           published_at: string | null
           slug: string | null
-          slug_en: string | null
-          slug_it: string | null
-          slug_fr: string | null
           sort_order: number | null
           subtitle: string | null
           subtitle_en: string | null
@@ -241,9 +238,6 @@ export type Database = {
           pdf_url?: string | null
           published_at?: string | null
           slug?: string | null
-          slug_en?: string | null
-          slug_it?: string | null
-          slug_fr?: string | null
           sort_order?: number | null
           subtitle?: string | null
           subtitle_en?: string | null
@@ -263,9 +257,6 @@ export type Database = {
           pdf_url?: string | null
           published_at?: string | null
           slug?: string | null
-          slug_en?: string | null
-          slug_it?: string | null
-          slug_fr?: string | null
           sort_order?: number | null
           subtitle?: string | null
           subtitle_en?: string | null
