@@ -14,6 +14,7 @@
 - **/scripts/** - Automation and utility scripts.
 - **/.claude/agents/** - Specialized Sub-Agent definitions.
 - **/.planning/** - Project-specific GSD artifacts (PROJECT.md, ROADMAP.md).
+- **/docs/** - SEO strategy, keyword mapping, and documentation.
 
 ---
 
@@ -102,3 +103,83 @@ No code without a spec. For non-trivial tasks:
 > When a user request involves cross-module changes or deep codebase analysis, explicitly state: *"I will delegate the [Research/Review] to a sub-agent to preserve context."*
 
 > Always prioritize the integrity of the existing architecture.
+
+---
+
+## SEO Ground Rules (Binding)
+
+### URL Architecture
+- **Canonical Domain:** `https://www.ristorantestoria.de` (mit www)
+- **Trailing Slash:** IMMER mit `/` am Ende (außer Dateien)
+- **Slugs:** Definiert in `src/config/slugs.json` (4 Sprachen)
+- **Parent Slugs:** Landing Pages unter `/besondere-anlaesse/[slug]/`
+
+### Meta & Structured Data
+- **Title Management:** NUR via React Helmet (kein statischer Title in index.html)
+- **Canonical URLs:** Immer absolute URLs mit `https://www.ristorantestoria.de`
+- **hreflang:** Alle 4 Sprachen (de, en, it, fr) + x-default → de
+- **JSON-LD:** Restaurant, FAQPage (max 10), Menu, BreadcrumbList
+
+### Content Rendering für SEO
+- **Accordion/Collapse:** IMMER `forceMount` + `data-[state=closed]:hidden`
+- **Dynamic Content:** SSG-prerendered, nicht client-only
+- **Video:** `preload="none"` für Lazy Loading
+
+---
+
+## Content Architecture (Pillar & Cluster Model)
+
+### Pillar Pages (Hauptseiten)
+| Pillar | URL | Cluster Topics |
+|--------|-----|----------------|
+| Besondere Anlässe | `/besondere-anlaesse/` | 6 Landing Pages |
+| Speisekarte | `/speisekarte/` | Menu-Kategorien |
+| Über Uns | `/ueber-uns/` | Geschichte, Team |
+
+### Landing Page Cluster (unter /besondere-anlaesse/)
+- `lunch-muenchen-maxvorstadt/` - Business Lunch
+- `aperitivo-muenchen/` - After-Work
+- `romantisches-dinner-muenchen/` - Date Night
+- `eventlocation-muenchen-maxvorstadt/` - Firmenfeiern
+- `firmenfeier-muenchen/` - Corporate Events
+- `geburtstagsfeier-muenchen/` - Private Feiern
+- `neapolitanische-pizza-muenchen/` - Pizza-Spezialisierung
+- `wild-essen-muenchen/` - Saisonale Spezialitäten
+
+---
+
+## Keyword Mapping Reference
+
+Vollständige Keyword-Strategie siehe: **`docs/seo-strategy.md`**
+
+### Primary Keywords (Fokus)
+- "italienisches restaurant münchen" (Hauptkeyword)
+- "pizza münchen maxvorstadt"
+- "restaurant maxvorstadt"
+- "neapolitanische pizza münchen"
+
+### Local Modifiers
+- München, Maxvorstadt, Schwabing, Uni-Viertel
+- "in der Nähe", "nahe Königsplatz"
+
+---
+
+## Local SEO Focus
+
+### Google Business Profile
+- Kategorie: Italian Restaurant (Primary)
+- Sekundär: Pizza Restaurant, Wine Bar
+- Fotos: Minimum 10 pro Kategorie
+
+### NAP Konsistenz (Name, Address, Phone)
+```
+Ristorante STORIA
+Theresienstraße 56
+80333 München
++49 89 28806855
+```
+
+### Review Strategy
+- Google Reviews priorisieren
+- Antworten innerhalb 24h
+- AggregateRating Schema erst nach Cookie-Consent-Lösung
