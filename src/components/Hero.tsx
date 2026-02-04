@@ -20,7 +20,7 @@ const Hero = () => {
             className="h-32 md:h-48 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer"
           />
         </Link>
-        <p className="text-lg md:text-xl text-muted-foreground mb-8 tracking-widest uppercase">
+        <p className="text-lg md:text-xl text-muted-foreground mb-8 tracking-widest uppercase font-display">
           {t.hero.subtitle}
         </p>
         <h1 id="hero-heading" className="text-2xl md:text-3xl font-medium mb-10">

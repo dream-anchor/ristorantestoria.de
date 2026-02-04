@@ -13,7 +13,7 @@ const Header = () => {
           <LocalizedLink to="home" className="font-serif text-2xl md:text-3xl font-bold hover:opacity-80 transition-opacity">
             STORIA
           </LocalizedLink>
-          <div className="flex items-center gap-4 md:gap-6 text-base text-foreground/80 font-medium">
+          <div className="flex items-center gap-4 md:gap-6 text-base text-foreground/80 font-display font-medium">
             <a href="tel:+498951519696" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">+49 89 51519696</span>

@@ -33,6 +33,39 @@
   src: url('/fonts/PlayfairDisplay-Bold.woff2') format('woff2');
 }
 
+/* Cormorant Garamond - Elegant Serif für Header/Subtitle */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/CormorantGaramond-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/CormorantGaramond-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/CormorantGaramond-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/CormorantGaramond-Bold.woff2') format('woff2');
+}
+
 /* Inter */
 @font-face {
   font-family: 'Inter';

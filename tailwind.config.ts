@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         'serif': ['Playfair Display', 'serif'],
         'sans': ['Inter', 'sans-serif'],
+        'display': ['Cormorant Garamond', 'serif'],
         'signature': ['Great Vibes', 'cursive'],
       },
       colors: {
