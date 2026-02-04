@@ -125,7 +125,7 @@ const NeapolitanischePizza = () => {
           <div className="relative z-10 container mx-auto px-4 text-center">
             <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12 max-w-4xl mx-auto text-white">
             <Link to="/">
-              <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer" />
+              <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer brightness-0 invert" />
             </Link>
             
             <div className="flex flex-wrap justify-center gap-3 mb-6">
