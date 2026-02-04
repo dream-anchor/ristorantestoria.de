@@ -345,6 +345,18 @@ export const en = {
       ctaDesc: "Reserve your table now and enjoy Italian cuisine at the highest level.",
       ctaReserve: "Reserve table",
       ctaWhatsapp: "WhatsApp",
+      // FAQ Section
+      faqTitle: "Frequently Asked Questions about Business Lunch",
+      faq1Question: "How much does a business lunch at STORIA Munich cost?",
+      faq1Answer: "Our 3-course lunch menu starts from €14.90 and includes starter, main course and dessert. Individual pasta dishes start at €14.50, pizzas from €12.50 and fresh salads from €11.50. All prices include VAT.",
+      faq2Question: "Can I reserve a table for a business meeting?",
+      faq2Answer: "Yes, reservations for business lunches are available by phone at 089 51519696, via WhatsApp or online. For groups of 6 or more, we recommend booking at least 1-2 days in advance. We can also arrange separate areas for important business meetings.",
+      faq3Question: "How long does a typical lunch at STORIA take?",
+      faq3Answer: "A business lunch typically takes 45-60 minutes. Our service is tailored to professionals' needs – quick but relaxed. If you're in a hurry, let us know when ordering and we'll make sure you're back at the office on time.",
+      faq4Question: "Are there vegetarian options on the lunch menu?",
+      faq4Answer: "Yes, we offer daily vegetarian options: homemade pasta with vegetarian sauces, Pizza Margherita and various variations, as well as fresh salads with Mediterranean ingredients. Vegan options are also available upon request.",
+      faq5Question: "Is the lunch menu available for takeaway?",
+      faq5Answer: "Yes, all our lunch dishes are available as takeaway. Order by phone and pick up your meal ready-packed – ideal for a quick lunch break at the office or on the go.",
     },
     firmenfeier: {
       // SEO

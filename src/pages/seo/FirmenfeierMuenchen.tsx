@@ -82,7 +82,17 @@ const FirmenfeierMuenchen = () => {
       <SEO title={t.seo.firmenfeier.seoTitle} description={t.seo.firmenfeier.seoDescription} canonical="/firmenfeier-muenchen" />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[{ name: 'Home', url: '/' }, { name: t.internalLinks.corporateEvent, url: '/firmenfeier-muenchen' }]} />
-      
+      {/* FAQ Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(item => ({
+          "@type": "Question",
+          "name": item.q,
+          "acceptedAnswer": { "@type": "Answer", "text": item.a }
+        }))
+      })}} />
+
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         

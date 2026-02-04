@@ -112,12 +112,22 @@ const RomantischesDinner = () => {
       />
       <StructuredData type="restaurant" />
       <StructuredData 
-        type="breadcrumb" 
+        type="breadcrumb"
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: t.internalLinks.romanticDinner, url: '/romantisches-dinner-muenchen' }
-        ]} 
+        ]}
       />
+      {/* FAQ Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(item => ({
+          "@type": "Question",
+          "name": item.q,
+          "acceptedAnswer": { "@type": "Answer", "text": item.a }
+        }))
+      })}} />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         

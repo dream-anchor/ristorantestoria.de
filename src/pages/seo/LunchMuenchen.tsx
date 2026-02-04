@@ -10,6 +10,12 @@ import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
 import StaticBotContent from "@/components/StaticBotContent";
 import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { MapPin, Clock, Utensils, ChefHat, Euro, ArrowRight, Salad, Pizza, Users, Receipt, Building, CalendarClock, BadgeCheck, MessageCircle } from "lucide-react";
@@ -58,6 +64,14 @@ const LunchMuenchen = () => {
     { title: t.seo.lunch.saladTitle, description: t.seo.lunch.saladDesc, icon: Salad, badge: null },
   ];
 
+  const faqItems = [
+    { q: t.seo.lunch.faq1Question, a: t.seo.lunch.faq1Answer },
+    { q: t.seo.lunch.faq2Question, a: t.seo.lunch.faq2Answer },
+    { q: t.seo.lunch.faq3Question, a: t.seo.lunch.faq3Answer },
+    { q: t.seo.lunch.faq4Question, a: t.seo.lunch.faq4Answer },
+    { q: t.seo.lunch.faq5Question, a: t.seo.lunch.faq5Answer },
+  ];
+
   return (
     <>
       <StaticBotContent
@@ -75,14 +89,24 @@ const LunchMuenchen = () => {
         canonical="/lunch-muenchen-maxvorstadt"
       />
       <StructuredData type="restaurant" />
-      <StructuredData 
-        type="breadcrumb" 
+      <StructuredData
+        type="breadcrumb"
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: t.internalLinks.lunchMunich, url: '/lunch-muenchen-maxvorstadt' }
-        ]} 
+        ]}
       />
-      
+      {/* FAQ Schema */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqItems.map(item => ({
+          "@type": "Question",
+          "name": item.q,
+          "acceptedAnswer": { "@type": "Answer", "text": item.a }
+        }))
+      })}} />
+
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         
@@ -322,6 +346,23 @@ const LunchMuenchen = () => {
                 "{t.seo.lunch.testimonialQuote}"
               </blockquote>
               <p className="text-muted-foreground">– {t.seo.lunch.testimonialAuthor}</p>
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section className="py-16 md:py-20">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
+                {t.seo.lunch.faqTitle}
+              </h2>
+              <Accordion type="single" collapsible className="space-y-4">
+                {faqItems.map((item, idx) => (
+                  <AccordionItem key={idx} value={`faq-${idx}`} className="bg-card border border-border rounded-lg px-4">
+                    <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
           </section>
 

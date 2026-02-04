@@ -375,6 +375,18 @@ const itBase = {
       ctaDesc: "Prenotate ora il vostro tavolo e gustate la cucina italiana al massimo livello.",
       ctaReserve: "Prenota tavolo",
       ctaWhatsapp: "WhatsApp",
+      // FAQ Section
+      faqTitle: "Domande frequenti sul Business Lunch",
+      faq1Question: "Quanto costa un business lunch al STORIA Monaco?",
+      faq1Answer: "Il nostro menu pranzo a 3 portate parte da €14,90 e include antipasto, primo e dessert. I singoli piatti di pasta partono da €14,50, le pizze da €12,50 e le insalate fresche da €11,50. Tutti i prezzi sono IVA inclusa.",
+      faq2Question: "Posso prenotare un tavolo per un pranzo di lavoro?",
+      faq2Answer: "Sì, le prenotazioni per pranzi di lavoro sono disponibili telefonicamente al 089 51519696, via WhatsApp o online. Per gruppi di 6 o più persone, consigliamo di prenotare con almeno 1-2 giorni di anticipo. Possiamo anche organizzare aree separate per riunioni di lavoro importanti.",
+      faq3Question: "Quanto dura un pranzo tipico al STORIA?",
+      faq3Answer: "Un business lunch dura in genere 45-60 minuti. Il nostro servizio è pensato per le esigenze dei professionisti – veloce ma senza fretta. Se avete poco tempo, comunicatecelo al momento dell'ordine e vi faremo tornare in ufficio puntuali.",
+      faq4Question: "Ci sono opzioni vegetariane nel menu pranzo?",
+      faq4Answer: "Sì, offriamo quotidianamente opzioni vegetariane: pasta fatta in casa con sughi vegetariani, Pizza Margherita e varie varianti, oltre a insalate fresche con ingredienti mediterranei. Opzioni vegane sono disponibili su richiesta.",
+      faq5Question: "Il menu pranzo è disponibile da asporto?",
+      faq5Answer: "Sì, tutti i nostri piatti del pranzo sono disponibili come take-away. Ordinate per telefono e ritirate il vostro pasto già confezionato – ideale per una pausa pranzo veloce in ufficio o in viaggio.",
     },
     firmenfeier: {
       // SEO

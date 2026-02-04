@@ -345,6 +345,18 @@ export const fr = {
       ctaDesc: "Réservez votre table maintenant et savourez la cuisine italienne au plus haut niveau.",
       ctaReserve: "Réserver une table",
       ctaWhatsapp: "WhatsApp",
+      // FAQ Section
+      faqTitle: "Questions fréquentes sur le Business Lunch",
+      faq1Question: "Combien coûte un business lunch au STORIA Munich ?",
+      faq1Answer: "Notre menu déjeuner 3 plats commence à partir de 14,90 € et comprend entrée, plat principal et dessert. Les plats de pâtes individuels commencent à 14,50 €, les pizzas à 12,50 € et les salades fraîches à 11,50 €. Tous les prix sont TTC.",
+      faq2Question: "Puis-je réserver une table pour un déjeuner d'affaires ?",
+      faq2Answer: "Oui, les réservations pour les déjeuners d'affaires sont disponibles par téléphone au 089 51519696, via WhatsApp ou en ligne. Pour les groupes de 6 personnes ou plus, nous recommandons de réserver au moins 1-2 jours à l'avance. Nous pouvons également aménager des espaces séparés pour les réunions d'affaires importantes.",
+      faq3Question: "Combien de temps dure un déjeuner typique au STORIA ?",
+      faq3Answer: "Un business lunch dure généralement 45-60 minutes. Notre service est adapté aux besoins des professionnels – rapide mais détendu. Si vous êtes pressé, faites-le nous savoir lors de la commande et nous vous assurerons d'être de retour au bureau à l'heure.",
+      faq4Question: "Y a-t-il des options végétariennes au menu déjeuner ?",
+      faq4Answer: "Oui, nous proposons quotidiennement des options végétariennes : pâtes maison avec sauces végétariennes, Pizza Margherita et diverses variantes, ainsi que des salades fraîches aux ingrédients méditerranéens. Des options véganes sont également disponibles sur demande.",
+      faq5Question: "Le menu déjeuner est-il disponible à emporter ?",
+      faq5Answer: "Oui, tous nos plats du déjeuner sont disponibles en take-away. Commandez par téléphone et récupérez votre repas prêt à emporter – idéal pour une pause déjeuner rapide au bureau ou en déplacement.",
     },
     firmenfeier: {
       // SEO

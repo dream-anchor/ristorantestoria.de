@@ -345,6 +345,18 @@ export const de = {
       ctaDesc: "Reservieren Sie jetzt Ihren Tisch und genießen Sie italienische Küche auf höchstem Niveau.",
       ctaReserve: "Tisch reservieren",
       ctaWhatsapp: "WhatsApp",
+      // FAQ Section
+      faqTitle: "Häufige Fragen zum Business Lunch",
+      faq1Question: "Was kostet ein Business Lunch im STORIA München?",
+      faq1Answer: "Unser 3-Gänge Mittagsmenü beginnt ab €14,90 und beinhaltet Vorspeise, Hauptgang und Dessert. Einzelne Pasta-Gerichte sind ab €14,50, Pizzen ab €12,50 und frische Salate ab €11,50 erhältlich. Alle Preise verstehen sich inkl. MwSt.",
+      faq2Question: "Kann ich einen Tisch für ein Geschäftsessen reservieren?",
+      faq2Answer: "Ja, Reservierungen für Geschäftsessen sind telefonisch unter 089 51519696, per WhatsApp oder online möglich. Für Gruppen ab 6 Personen empfehlen wir eine Reservierung mindestens 1-2 Tage im Voraus. Wir können auch separate Bereiche für wichtige Business-Meetings arrangieren.",
+      faq3Question: "Wie lange dauert ein typisches Mittagessen im STORIA?",
+      faq3Answer: "Ein Business Lunch dauert in der Regel 45-60 Minuten. Unser Service ist auf die Bedürfnisse von Berufstätigen eingestellt – schnell, aber ohne Hektik. Wenn Sie es eilig haben, teilen Sie dies bei der Bestellung mit, und wir sorgen dafür, dass Sie pünktlich zurück im Büro sind.",
+      faq4Question: "Gibt es vegetarische Optionen beim Mittagsmenü?",
+      faq4Answer: "Ja, wir bieten täglich vegetarische Optionen an: hausgemachte Pasta mit vegetarischen Saucen, Pizza Margherita und verschiedene Varianten, sowie frische Salate mit mediterranen Zutaten. Vegane Optionen sind auf Anfrage ebenfalls möglich.",
+      faq5Question: "Ist das Mittagsmenü auch zum Mitnehmen verfügbar?",
+      faq5Answer: "Ja, alle unsere Lunch-Gerichte sind auch als Take-away erhältlich. Bestellen Sie telefonisch vor und holen Sie Ihr Essen fertig verpackt ab – ideal für eine schnelle Mittagspause im Büro oder unterwegs.",
     },
     firmenfeier: {
       // SEO
