@@ -21,10 +21,10 @@ const LanguageSwitcher = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-        <Globe className="h-4 w-4 text-foreground/70" />
+      <DropdownMenuTrigger className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full bg-white/10 hover:bg-white/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <Globe className="h-4 w-4 opacity-70" />
         <span className="uppercase">{language}</span>
-        <ChevronDown className="h-3 w-3 text-foreground/50" />
+        <ChevronDown className="h-3 w-3 opacity-50" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[140px]">
         {languages.map((lang) => (
