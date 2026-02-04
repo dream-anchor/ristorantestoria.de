@@ -157,7 +157,7 @@ const Navigation = () => {
                       onOpenChange={() => toggleMobileMenu(item.label)}
                     >
                       <CollapsibleTrigger
-                        className={`flex items-center justify-between w-full px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors ${
+                        className={`flex items-center justify-between w-full px-4 py-3 text-sm font-medium tracking-wide rounded-md transition-colors ${
                           isActive(item)
                             ? "bg-accent text-accent-foreground"
                             : "hover:bg-accent/50 hover:text-accent-foreground"
@@ -176,7 +176,7 @@ const Navigation = () => {
                             key={child.baseSlug}
                             to={child.baseSlug}
                             onClick={() => setIsOpen(false)}
-                            className={`block px-4 py-2 text-sm tracking-wider rounded-md transition-colors ${
+                            className={`block px-4 py-2 text-sm tracking-wide rounded-md transition-colors ${
                               isChildActive(child.baseSlug)
                                 ? "bg-accent text-accent-foreground"
                                 : "hover:bg-accent/50 hover:text-accent-foreground"
@@ -198,7 +198,7 @@ const Navigation = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-center justify-between px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors ${
+                        className={`flex items-center justify-between px-4 py-3 text-sm font-medium tracking-wide rounded-md transition-colors ${
                           item.external 
                             ? "text-primary-foreground/70 hover:text-primary-foreground hover:bg-accent/50" 
                             : "hover:bg-accent/50 hover:text-accent-foreground"
@@ -213,7 +213,7 @@ const Navigation = () => {
                       key={item.baseSlug}
                       to={item.baseSlug!}
                       onClick={() => setIsOpen(false)}
-                      className={`px-4 py-3 text-sm font-medium tracking-wider rounded-md transition-colors ${
+                      className={`px-4 py-3 text-sm font-medium tracking-wide rounded-md transition-colors ${
                         isActive(item)
                           ? "bg-accent text-accent-foreground"
                           : "hover:bg-accent/50 hover:text-accent-foreground"
@@ -249,7 +249,7 @@ const Navigation = () => {
                 onMouseLeave={() => setHoveredMenu(null)}
               >
                 <button
-                  className={`group flex items-center gap-1 whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative ${
+                  className={`group flex items-center gap-1 whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wide transition-colors relative ${
                     isActive(item) ? "text-accent-foreground" : ""
                   }`}
                 >
@@ -268,7 +268,7 @@ const Navigation = () => {
                       <LocalizedLink
                         key={child.baseSlug}
                         to={child.baseSlug}
-                        className={`block px-5 py-3 text-sm tracking-wider hover:bg-primary-foreground/10 transition-colors first:rounded-t-sm last:rounded-b-sm ${
+                        className={`block px-5 py-3 text-sm tracking-wide hover:bg-primary-foreground/10 transition-colors first:rounded-t-sm last:rounded-b-sm ${
                           isChildActive(child.baseSlug)
                             ? "bg-primary-foreground/10"
                             : ""
@@ -290,7 +290,7 @@ const Navigation = () => {
                   href={item.externalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group flex items-center gap-1.5 whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative ${
+                  className={`group flex items-center gap-1.5 whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wide transition-colors relative ${
                     item.external ? "text-primary-foreground/70 hover:text-primary-foreground" : ""
                   }`}
                 >
@@ -305,7 +305,7 @@ const Navigation = () => {
               <LocalizedLink
                 key={item.baseSlug}
                 to={item.baseSlug!}
-                className={`group whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wider transition-colors relative`}
+                className={`group whitespace-nowrap px-5 py-4 text-sm font-medium tracking-wide transition-colors relative`}
               >
                 <span className="relative">
                   {item.label}

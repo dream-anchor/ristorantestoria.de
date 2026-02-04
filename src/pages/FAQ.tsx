@@ -80,7 +80,7 @@ const FAQ = () => {
         <main className="container mx-auto px-4 py-16 md:py-20 flex-grow">
           <article className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+            <nav aria-label="Breadcrumb" className="mb-8 text-base text-muted-foreground">
               <ol className="flex items-center gap-2">
                 <li>
                   <LocalizedLink to="home" className="hover:text-foreground transition-colors">

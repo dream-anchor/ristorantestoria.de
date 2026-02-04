@@ -115,7 +115,7 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
                   return (
                     <div key={item.id} className="group">
                       <div className="flex justify-between items-baseline gap-4">
-                        <span className="font-serif font-medium text-lg text-foreground">
+                        <span className="font-serif font-medium text-lg text-foreground leading-snug">
                           {itemName}
                         </span>
                         <span className="flex-shrink-0 border-b border-dotted border-border flex-grow mx-2" />

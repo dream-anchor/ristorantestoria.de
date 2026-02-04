@@ -80,13 +80,13 @@ const Footer = () => {
             {/* Kontakt */}
             <div className="space-y-4 text-center md:text-left">
               <h3 className="font-serif font-medium text-base tracking-[0.2em] uppercase mb-6 text-primary-foreground/90">{t.footer.contact}</h3>
-              <div className="space-y-2.5 text-sm font-sans text-primary-foreground/60">
+              <div className="space-y-3 text-base font-sans text-primary-foreground/70">
               <a href="tel:+498951519696" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
-                  <Phone className="h-3.5 w-3.5" />
+                  <Phone className="h-4 w-4" />
                   +49 89 51519696
                 </a>
                 <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
-                  <Mail className="h-3.5 w-3.5" />
+                  <Mail className="h-4 w-4" />
                   info@ristorantestoria.de
                 </a>
                 <a 
@@ -95,14 +95,14 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-[#25D366] transition-colors"
                 >
-                  <MessageCircle className="h-3.5 w-3.5" />
+                  <MessageCircle className="h-4 w-4" />
                   WhatsApp
                 </a>
               <LocalizedLink 
                   to="kontakt#map" 
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"
                 >
-                  <MapPin className="h-3.5 w-3.5" />
+                  <MapPin className="h-4 w-4" />
                   <span>Karlstr. 47a, 80333 München<br /><span className="text-xs opacity-70">Nähe Königsplatz & Hauptbahnhof</span></span>
                 </LocalizedLink>
               </div>
@@ -123,9 +123,9 @@ const Footer = () => {
             {/* Öffnungszeiten */}
             <div className="space-y-4 text-center md:text-right">
               <h3 className="font-serif font-medium text-base tracking-[0.2em] uppercase mb-6 text-primary-foreground/90">{t.footer.openingHours}</h3>
-              <div className="space-y-1.5 text-sm font-sans text-primary-foreground/60">
+              <div className="space-y-2 text-base font-sans text-primary-foreground/70">
                 <div className="flex items-center justify-center md:justify-end gap-2.5">
-                  <Clock className="h-3.5 w-3.5" />
+                  <Clock className="h-4 w-4" />
                   <span>{t.footer.monFri}: 09:00 – 01:00</span>
                 </div>
                 <p>{t.footer.satSun}: 12:00 – 01:00</p>
@@ -140,7 +140,7 @@ const Footer = () => {
           <p className="text-sm font-sans text-primary-foreground/40">
             © {new Date().getFullYear()} {t.footer.copyright}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-xs font-sans text-primary-foreground/30">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-sm font-sans text-primary-foreground/40">
             <LocalizedLink to="impressum" className="hover:text-primary-foreground/60 transition-colors">{t.footer.imprint}</LocalizedLink>
             <span className="opacity-50">·</span>
             <LocalizedLink to="datenschutz" className="hover:text-primary-foreground/60 transition-colors">{t.footer.privacy}</LocalizedLink>
