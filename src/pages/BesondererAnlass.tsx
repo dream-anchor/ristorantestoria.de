@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -15,6 +15,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
 import MenuDisplay from "@/components/MenuDisplay";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+
+// Parent slug mapping for each language
+const PARENT_SLUGS = {
+  de: 'besondere-anlaesse',
+  en: 'special-occasions',
+  it: 'occasioni-speciali',
+  fr: 'occasions-speciales',
+} as const;
 
 const BesondererAnlass = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -63,6 +71,31 @@ const BesondererAnlass = () => {
   const menuTitle = getLocalizedText(menu.title, menu.title_en, menu.title_it, menu.title_fr);
   const menuSubtitle = getLocalizedText(menu.subtitle, menu.subtitle_en, menu.subtitle_it, menu.subtitle_fr);
 
+  // Get localized slugs from menu data (fallback to German slug if not set)
+  const getLocalizedSlug = (lang: 'de' | 'en' | 'it' | 'fr') => {
+    if (lang === 'de') return menu.slug;
+    const langSlug = (menu as any)[`slug_${lang}`];
+    return langSlug || menu.slug; // Fallback to German slug
+  };
+
+  // Generate hreflang alternates for all languages
+  const alternates = useMemo(() => {
+    const baseUrl = 'https://www.ristorantestoria.de';
+    return [
+      { lang: 'de', url: `${baseUrl}/${PARENT_SLUGS.de}/${getLocalizedSlug('de')}/` },
+      { lang: 'en', url: `${baseUrl}/en/${PARENT_SLUGS.en}/${getLocalizedSlug('en')}/` },
+      { lang: 'it', url: `${baseUrl}/it/${PARENT_SLUGS.it}/${getLocalizedSlug('it')}/` },
+      { lang: 'fr', url: `${baseUrl}/fr/${PARENT_SLUGS.fr}/${getLocalizedSlug('fr')}/` },
+    ];
+  }, [menu.slug, (menu as any).slug_en, (menu as any).slug_it, (menu as any).slug_fr]);
+
+  // Get canonical URL for current language
+  const currentSlug = getLocalizedSlug(language as 'de' | 'en' | 'it' | 'fr');
+  const parentSlug = PARENT_SLUGS[language as keyof typeof PARENT_SLUGS];
+  const canonicalPath = language === 'de'
+    ? `/${parentSlug}/${currentSlug}/`
+    : `/${language}/${parentSlug}/${currentSlug}/`;
+
   // SEO-optimized description based on slug
   const getSeoDescription = () => {
     if (slug?.includes('weihnacht')) {
@@ -80,20 +113,29 @@ const BesondererAnlass = () => {
       : `${menuTitle} at STORIA Munich Maxvorstadt. Celebrate special occasions with authentic Italian cuisine. Book now!`;
   };
 
+  // Breadcrumb labels per language
+  const breadcrumbParentLabels = {
+    de: 'Besondere Anlässe',
+    en: 'Special Occasions',
+    it: 'Occasioni Speciali',
+    fr: 'Occasions Spéciales',
+  };
+
   return (
     <>
-      <SEO 
+      <SEO
         title={menuTitle}
         description={getSeoDescription()}
-        canonical={`/besondere-anlaesse/${slug}`}
+        canonical={canonicalPath}
+        alternates={alternates}
       />
       <StructuredData type="restaurant" />
-      <StructuredData 
-        type="breadcrumb" 
+      <StructuredData
+        type="breadcrumb"
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: language === 'de' ? 'Besondere Anlässe' : 'Special Occasions', url: '/besondere-anlaesse' },
-          { name: menuTitle, url: `/besondere-anlaesse/${slug}` }
+          { name: breadcrumbParentLabels[language as keyof typeof breadcrumbParentLabels], url: `/${parentSlug}` },
+          { name: menuTitle, url: canonicalPath }
         ]}
       />
       <MenuStructuredData menuId={menu.id} />

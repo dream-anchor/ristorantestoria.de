@@ -3,6 +3,11 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { getLocalizedPath, parseLocalizedPath, SUPPORTED_LANGUAGES } from '@/config/routes';
 import { useLocation } from 'react-router-dom';
 
+interface AlternateUrl {
+  lang: string;
+  url: string;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -10,6 +15,8 @@ interface SEOProps {
   type?: 'website' | 'article' | 'restaurant';
   image?: string;
   noIndex?: boolean;
+  /** Custom hreflang alternates for dynamic pages (e.g., special menus with translated slugs) */
+  alternates?: AlternateUrl[];
 }
 
 const SEO = ({
@@ -19,31 +26,35 @@ const SEO = ({
   type = 'website',
   image = 'https://ristorantestoria.de/og-image.jpg',
   noIndex = false,
+  alternates,
 }: SEOProps) => {
   const { language, t } = useLanguage();
   const location = useLocation();
   const baseUrl = 'https://www.ristorantestoria.de';
-  
+
   const siteTitle = 'STORIA – Italienisches Restaurant München Maxvorstadt';
   const fullTitle = title ? `${title} | STORIA München` : siteTitle;
-  
+
   const metaDescription = description || t.pages.index.description;
-  
+
   // Get the base slug for hreflang generation
   const { baseSlug } = parseLocalizedPath(location.pathname);
-  
+
   // Build canonical URL for current language
   const currentPath = canonical || getLocalizedPath(baseSlug, language);
   const canonicalUrl = `${baseUrl}${currentPath}`;
-  
+
   // Generate hreflang URLs for all languages
-  const hreflangUrls = SUPPORTED_LANGUAGES.map(lang => ({
+  // Use custom alternates if provided (for dynamic pages with translated slugs)
+  const hreflangUrls = alternates || SUPPORTED_LANGUAGES.map(lang => ({
     lang,
     url: `${baseUrl}${getLocalizedPath(baseSlug, lang)}`
   }));
-  
+
   // x-default points to German version
-  const xDefaultUrl = `${baseUrl}${getLocalizedPath(baseSlug, 'de')}`;
+  const xDefaultUrl = alternates
+    ? alternates.find(a => a.lang === 'de')?.url || `${baseUrl}/`
+    : `${baseUrl}${getLocalizedPath(baseSlug, 'de')}`;
   
   // Locale mapping for Open Graph
   const ogLocaleMap: Record<string, string> = {

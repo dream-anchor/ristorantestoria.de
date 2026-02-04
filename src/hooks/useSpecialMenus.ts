@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { slugify, generateUniqueSlug } from "@/lib/slugify";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
+import { generateAllSlugVariants } from "@/lib/slugTranslations";
 
 export interface ParsedMenuItem {
   name: string;
@@ -53,6 +54,9 @@ export interface SpecialMenu {
   subtitle_it: string | null;
   subtitle_fr: string | null;
   slug: string | null;
+  slug_en: string | null;
+  slug_it: string | null;
+  slug_fr: string | null;
   is_published: boolean;
   published_at: string | null;
   created_at: string | null;
@@ -106,6 +110,9 @@ export const useSpecialMenus = () => {
           subtitle_it: menu.subtitle_it,
           subtitle_fr: menu.subtitle_fr,
           slug: (menu as any).slug || null,
+          slug_en: (menu as any).slug_en || null,
+          slug_it: (menu as any).slug_it || null,
+          slug_fr: (menu as any).slug_fr || null,
           is_published: menu.is_published || false,
           published_at: menu.published_at,
           created_at: menu.created_at,
@@ -166,12 +173,18 @@ export const useCreateSpecialMenu = () => {
         return !!data;
       });
 
+      // Generate translated slugs for all languages
+      const slugVariants = generateAllSlugVariants(uniqueSlug);
+
       const { data, error } = await supabase
         .from('menus')
         .insert({
           menu_type: 'special',
           title: 'Neuer Anlass',
           slug: uniqueSlug,
+          slug_en: slugVariants.en,
+          slug_it: slugVariants.it,
+          slug_fr: slugVariants.fr,
           is_published: false,
           sort_order: nextSortOrder,
         } as any)
@@ -328,7 +341,10 @@ export const useSaveMenuContent = () => {
         return !!existing;
       });
 
-      // Update menu title/subtitle/slug
+      // Generate translated slugs for all languages
+      const slugVariants = generateAllSlugVariants(uniqueSlug);
+
+      // Update menu title/subtitle/slug (including translated slugs)
       const { error: menuError } = await supabase
         .from('menus')
         .update({
@@ -341,6 +357,9 @@ export const useSaveMenuContent = () => {
           subtitle_it: data.subtitle_it,
           subtitle_fr: data.subtitle_fr,
           slug: uniqueSlug,
+          slug_en: slugVariants.en,
+          slug_it: slugVariants.it,
+          slug_fr: slugVariants.fr,
           updated_at: new Date().toISOString(),
         } as any)
         .eq('id', menuId);
@@ -432,15 +451,17 @@ export const useSaveMenuContent = () => {
   });
 };
 
-export const useSpecialMenuBySlug = (slug: string) => {
+export const useSpecialMenuBySlug = (slug: string, language?: string) => {
   return useQuery({
-    queryKey: ['special-menu', slug],
+    queryKey: ['special-menu', slug, language],
     queryFn: async () => {
+      // Search across all slug columns (de, en, it, fr)
+      // This enables URLs like /en/special-occasions/valentines-menu to work
       const { data, error } = await supabase
         .from('menus')
         .select('*')
-        .eq('slug', slug)
         .eq('is_published', true)
+        .or(`slug.eq.${slug},slug_en.eq.${slug},slug_it.eq.${slug},slug_fr.eq.${slug}`)
         .maybeSingle();
 
       if (error) throw error;
