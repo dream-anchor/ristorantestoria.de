@@ -46,29 +46,55 @@ export const RECURRING_MENU_SLUGS: Record<string, Record<Language, string>> = {
     it: 'festa-mamma-menu',
     fr: 'fete-meres-menu',
   },
+  // Vatertag - reused every year
+  vatertag: {
+    de: 'vatertag-menue',
+    en: 'fathers-day-menu',
+    it: 'festa-papa-menu',
+    fr: 'fete-peres-menu',
+  },
+};
+
+/**
+ * Pattern matching for recurring menu themes
+ * Each theme has multiple variations (typos, abbreviations, translations)
+ */
+const THEME_PATTERNS: Record<string, RegExp> = {
+  // Valentinstag: Valentins-, Valentine-, Valentin-, San Valentino, Saint-Valentin
+  valentinstag: /valentin|valentine|san.?valentino|saint.?valentin/i,
+
+  // Weihnachten: Weihnachts-, Christmas, Natale, Noël
+  weihnachten: /weihnacht|christmas|x-?mas|natale|no[eë]l/i,
+
+  // Silvester: Silvester, Sylvester, New Year, Neujahr, Capodanno, Nouvel An
+  silvester: /silvester|sylvester|new.?year|neujahr|capodanno|nouvel.?an|jahreswechsel/i,
+
+  // Ostern: Ostern, Easter, Pasqua, Pâques
+  ostern: /ostern|easter|pasqua|p[aâ]ques/i,
+
+  // Muttertag: Muttertag, Mother's Day, Festa della Mamma, Fête des Mères
+  muttertag: /mutter|mother|mamma|m[eè]re/i,
+
+  // Vatertag: Vatertag, Father's Day, Festa del Papà, Fête des Pères
+  vatertag: /vater|father|pap[aà]|p[eè]re/i,
 };
 
 /**
  * Detects if a menu title matches a recurring theme
+ * Uses fuzzy matching to handle variations like:
+ * - "Valentins-Menü", "Valentinstags-Menü", "Valentine's Menu"
+ * - "Weihnachtsmenü", "Christmas Menu", "X-Mas Special"
+ *
  * @param title - The menu title (e.g., "Valentinstag-Menü 2026")
  * @returns The theme key if matched, or null
  */
 export function detectRecurringTheme(title: string): string | null {
-  const lowerTitle = title.toLowerCase();
-
-  // Check each recurring theme
-  for (const theme of Object.keys(RECURRING_MENU_SLUGS)) {
-    if (lowerTitle.includes(theme)) {
+  // Check against all theme patterns
+  for (const [theme, pattern] of Object.entries(THEME_PATTERNS)) {
+    if (pattern.test(title)) {
       return theme;
     }
   }
-
-  // Also check for common variations
-  if (lowerTitle.includes('weihnacht')) return 'weihnachten';
-  if (lowerTitle.includes('sylvester') || lowerTitle.includes('neujahr')) return 'silvester';
-  if (lowerTitle.includes('valentine')) return 'valentinstag';
-  if (lowerTitle.includes('easter') || lowerTitle.includes('pasqua')) return 'ostern';
-  if (lowerTitle.includes('mother') || lowerTitle.includes('mutter')) return 'muttertag';
 
   return null;
 }
