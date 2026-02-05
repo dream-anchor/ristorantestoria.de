@@ -383,7 +383,7 @@ const LunchMuenchen = () => {
                     {t.seo.lunch.ctaReserve}
                   </LocalizedLink>
                 </Button>
-                <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
+                <Button size="lg" variant="outlineWhite" asChild>
                   <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="w-5 h-5 mr-2" />
                     {t.seo.lunch.ctaWhatsapp}

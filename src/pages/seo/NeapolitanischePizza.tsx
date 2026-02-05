@@ -149,7 +149,7 @@ const NeapolitanischePizza = () => {
                   {t.seo.neapolitanPizza.heroReserveBtn}
                 </LocalizedLink>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
+              <Button size="lg" variant="outlineWhite" asChild>
                 <LocalizedLink to="speisekarte">
                   {t.seo.neapolitanPizza.heroMenuBtn}
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -375,7 +375,7 @@ const NeapolitanischePizza = () => {
                     {t.seo.neapolitanPizza.ctaReserve}
                   </LocalizedLink>
                 </Button>
-                <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
+                <Button size="lg" variant="outlineWhite" asChild>
                   <a href="tel:+498951519696">
                     <Phone className="w-5 h-5 mr-2" />
                     {t.seo.neapolitanPizza.ctaCall}

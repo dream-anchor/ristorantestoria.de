@@ -415,7 +415,7 @@ const EventlocationMuenchen = () => {
                 <Button size="lg" variant="secondary" asChild>
                   <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" asChild>
+                <Button size="lg" variant="outlineWhite" asChild>
                   <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" />E-Mail senden</a>
                 </Button>
               </div>
