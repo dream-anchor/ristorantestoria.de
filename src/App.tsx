@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider, HydrationBoundary } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { AlternateLinksProvider } from "@/contexts/AlternateLinksContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import Index from "./pages/Index";
 import Reservierung from "./pages/Reservierung";
@@ -179,6 +180,7 @@ const App = () => {
       <HydrationBoundary state={dehydratedState}>
         <TooltipProvider>
           <LanguageProvider>
+            <AlternateLinksProvider>
             <CookieConsentProvider>
               <Toaster />
               <Sonner />
@@ -190,6 +192,7 @@ const App = () => {
               <CookieSettingsButton />
               <AppRoutes />
             </CookieConsentProvider>
+            </AlternateLinksProvider>
           </LanguageProvider>
         </TooltipProvider>
       </HydrationBoundary>

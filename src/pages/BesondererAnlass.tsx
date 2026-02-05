@@ -12,6 +12,7 @@ import ReservationCTA from "@/components/ReservationCTA";
 import BotContent from "@/components/BotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
 import MenuDisplay from "@/components/MenuDisplay";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -27,6 +28,7 @@ const PARENT_SLUGS = {
 const BesondererAnlass = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t, language } = useLanguage();
+  const { setAlternates, clearAlternates } = useAlternateLinks();
   const { data: menu, isLoading, error } = useSpecialMenuBySlug(slug || '');
   usePrerenderReady(!isLoading && !!menu);
 
@@ -34,6 +36,28 @@ const BesondererAnlass = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  // Set alternate links for language switcher when menu data is loaded
+  useEffect(() => {
+    if (menu) {
+      const getLocalizedSlugForAlternates = (lang: 'de' | 'en' | 'it' | 'fr') => {
+        if (lang === 'de') return menu.slug;
+        const langSlug = (menu as any)[`slug_${lang}`];
+        return langSlug || menu.slug;
+      };
+
+      const baseUrl = 'https://www.ristorantestoria.de';
+      setAlternates([
+        { lang: 'de', url: `${baseUrl}/${PARENT_SLUGS.de}/${getLocalizedSlugForAlternates('de')}/` },
+        { lang: 'en', url: `${baseUrl}/en/${PARENT_SLUGS.en}/${getLocalizedSlugForAlternates('en')}/` },
+        { lang: 'it', url: `${baseUrl}/it/${PARENT_SLUGS.it}/${getLocalizedSlugForAlternates('it')}/` },
+        { lang: 'fr', url: `${baseUrl}/fr/${PARENT_SLUGS.fr}/${getLocalizedSlugForAlternates('fr')}/` },
+      ]);
+    }
+
+    // Clear alternates when leaving the page
+    return () => clearAlternates();
+  }, [menu, setAlternates, clearAlternates]);
 
   if (isLoading) {
     return (

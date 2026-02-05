@@ -1,4 +1,7 @@
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
+import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { ChevronDown, Globe } from "lucide-react";
 import {
   DropdownMenu,
@@ -15,9 +18,25 @@ const languages: { code: Language; label: string; flag: string }[] = [
 ];
 
 const LanguageSwitcher = () => {
-  const { language, switchLanguage } = useLanguage();
-  
+  const navigate = useNavigate();
+  const { language, setLanguage, switchLanguage } = useLanguage();
+  const { getAlternateUrl } = useAlternateLinks();
+
   const currentLang = languages.find(l => l.code === language) || languages[0];
+
+  // Handle language switch - use alternate URL if available (for dynamic pages)
+  const handleLanguageSwitch = useCallback((targetLang: Language) => {
+    const alternateUrl = getAlternateUrl(targetLang);
+
+    if (alternateUrl) {
+      // Use alternate URL for pages with dynamic slugs (e.g., special occasions)
+      setLanguage(targetLang);
+      navigate(alternateUrl);
+    } else {
+      // Fall back to standard slug-based switching for static pages
+      switchLanguage(targetLang);
+    }
+  }, [getAlternateUrl, setLanguage, navigate, switchLanguage]);
 
   return (
     <DropdownMenu>
@@ -30,7 +49,7 @@ const LanguageSwitcher = () => {
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => switchLanguage(lang.code)}
+            onClick={() => handleLanguageSwitch(lang.code)}
             className={`flex items-center gap-2 cursor-pointer ${
               language === lang.code ? "bg-primary/10 text-primary font-medium" : ""
             }`}
