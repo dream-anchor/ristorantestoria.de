@@ -38,8 +38,9 @@ export function render(url: string, context: RenderContext = {}) {
   // Pre-populate cache with special menu data (for special occasion pages)
   if (context.specialMenuData) {
     const { basicMenu, fullMenu, slug } = context.specialMenuData
-    // For useSpecialMenuBySlug hook
-    queryClient.setQueryData(['special-menu', slug], basicMenu)
+    // For useSpecialMenuBySlug hook - must match query key exactly: ['special-menu', slug, language]
+    // The hook is called without language param, so it's undefined
+    queryClient.setQueryData(['special-menu', slug, undefined], basicMenu)
     // For useMenuById hook (used by MenuDisplay)
     queryClient.setQueryData(['menu-by-id', basicMenu.id], fullMenu)
   }
