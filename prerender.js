@@ -115,14 +115,16 @@ function getSpecialMenuSlugFromRoute(url) {
 
 /**
  * Fetch special menu data by slug (with full content for SSR)
+ * Searches across all slug columns (de, en, it, fr) to find the menu
  */
 async function fetchSpecialMenuBySlug(slug) {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !slug) return null;
 
   try {
-    // 1. Fetch menu by slug
+    // 1. Fetch menu by any slug variant (supports all languages)
+    // Uses OR filter to search: slug, slug_en, slug_it, slug_fr
     const menuRes = await fetch(
-      `${SUPABASE_URL}/rest/v1/menus?slug=eq.${slug}&is_published=eq.true&select=*`,
+      `${SUPABASE_URL}/rest/v1/menus?is_published=eq.true&or=(slug.eq.${slug},slug_en.eq.${slug},slug_it.eq.${slug},slug_fr.eq.${slug})&select=*`,
       { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
     );
     const menus = await menuRes.json();
@@ -203,7 +205,7 @@ async function fetchSpecialMenuBySlug(slug) {
 
 /**
  * Fetch dynamic slugs from Supabase
- * UPDATE: Fetches ALL published menus to ensure special events like Valentine's are found
+ * UPDATE: Fetches ALL published menus with localized slugs for all languages
  */
 async function fetchDynamicSlugs() {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
@@ -212,9 +214,9 @@ async function fetchDynamicSlugs() {
   }
 
   try {
-    // UPDATE: Removed "menu_type=eq.special" filter. We fetch all published menus.
+    // Fetch all slug variants for proper i18n routing
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/menus?is_published=eq.true&select=slug,menu_type`,
+      `${SUPABASE_URL}/rest/v1/menus?is_published=eq.true&select=slug,slug_en,slug_it,slug_fr,menu_type`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -230,8 +232,14 @@ async function fetchDynamicSlugs() {
 
     const menus = await response.json();
     console.log(`📦 Found ${menus.length} published menus from DB`);
-    // Return objects with slug AND type
-    return menus.map((m) => ({ slug: m.slug, type: m.menu_type }));
+    // Return objects with all slug variants and type
+    return menus.map((m) => ({
+      slug: m.slug,
+      slug_en: m.slug_en || m.slug,
+      slug_it: m.slug_it || m.slug,
+      slug_fr: m.slug_fr || m.slug,
+      type: m.menu_type,
+    }));
   } catch (error) {
     console.error("❌ Error fetching dynamic slugs:", error.message);
     return [];
@@ -290,23 +298,32 @@ async function generateRoutesToPrerender() {
 
   // 3. Dynamic Routes from Supabase
   const dynamicMenus = await fetchDynamicSlugs();
-  const parentSlugs = slugMaps.parentSlugs || {};
+
+  // Parent slugs for special occasions per language
+  const SPECIAL_PARENT_SLUGS = {
+    de: 'besondere-anlaesse',
+    en: 'special-occasions',
+    it: 'occasioni-speciali',
+    fr: 'occasions-speciales',
+  };
 
   for (const menu of dynamicMenus) {
-    for (const lang of LANGUAGES) {
-      // Determine parent folder based on menu type
-      // Standard fallback is 'menu'
-      let parentSlug = parentSlugs[lang] || 'menu';
-      
-      // If it's a special event (like Valentine's), try to use special-events folder
-      if (menu.type === 'special') {
-         parentSlug = slugMaps[lang]?.['special-events'] || parentSlug; 
-      }
+    // Only generate routes for special menus (food, drinks, lunch are static)
+    if (menu.type !== 'special') continue;
 
-      const routePath = lang === "de" 
-        ? `/${parentSlug}/${menu.slug}`
-        : `/${lang}/${parentSlug}/${menu.slug}`;
-      
+    for (const lang of LANGUAGES) {
+      // Get the localized menu slug for this language
+      const menuSlug = lang === 'de' ? menu.slug
+        : lang === 'en' ? menu.slug_en
+        : lang === 'it' ? menu.slug_it
+        : menu.slug_fr;
+
+      const parentSlug = SPECIAL_PARENT_SLUGS[lang];
+
+      const routePath = lang === "de"
+        ? `/${parentSlug}/${menuSlug}`
+        : `/${lang}/${parentSlug}/${menuSlug}`;
+
       if (!routes.includes(routePath)) {
         routes.push(routePath);
       }
