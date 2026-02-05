@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -29,6 +30,7 @@ const BesondererAnlass = () => {
   const { slug } = useParams<{ slug: string }>();
   const { t, language } = useLanguage();
   const { setAlternates, clearAlternates } = useAlternateLinks();
+  const queryClient = useQueryClient();
   const { data: menu, isLoading, error } = useSpecialMenuBySlug(slug || '');
   usePrerenderReady(!isLoading && !!menu);
 
@@ -36,6 +38,26 @@ const BesondererAnlass = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  // Pre-populate cache for all slug variants to enable instant language switching
+  useEffect(() => {
+    if (menu) {
+      const slugVariants = [
+        menu.slug,
+        (menu as any).slug_en,
+        (menu as any).slug_it,
+        (menu as any).slug_fr,
+      ].filter(Boolean); // Remove null/undefined
+
+      // Set cache for all slug variants so language switching is instant
+      slugVariants.forEach((slugVariant) => {
+        if (slugVariant && slugVariant !== slug) {
+          // Query key must match useSpecialMenuBySlug: ['special-menu', slug, language]
+          queryClient.setQueryData(['special-menu', slugVariant, undefined], menu);
+        }
+      });
+    }
+  }, [menu, slug, queryClient]);
 
   // Set alternate links for language switcher when menu data is loaded
   useEffect(() => {

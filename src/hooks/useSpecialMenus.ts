@@ -15,6 +15,9 @@ export interface ParsedMenuItem {
   description_fr: string;
   price: number | null;
   price_display: string;
+  price_display_en: string;
+  price_display_it: string;
+  price_display_fr: string;
   sort_order: number;
 }
 
@@ -314,6 +317,9 @@ export const useMenuContent = (menuId: string | undefined) => {
               description_fr: item.description_fr || '',
               price: item.price,
               price_display: item.price_display || '',
+              price_display_en: (item as any).price_display_en || '',
+              price_display_it: (item as any).price_display_it || '',
+              price_display_fr: (item as any).price_display_fr || '',
               sort_order: item.sort_order || 0,
             })),
         })) || [],
@@ -462,6 +468,9 @@ export const useSaveMenuContent = () => {
             description_fr: item.description_fr || null,
             price: item.price,
             price_display: item.price_display || null,
+            price_display_en: item.price_display_en || null,
+            price_display_it: item.price_display_it || null,
+            price_display_fr: item.price_display_fr || null,
             sort_order: itemIndex,
           }));
 

@@ -15,6 +15,9 @@ export interface MenuItem {
   description_fr: string | null;
   price: number | null;
   price_display: string | null;
+  price_display_en: string | null;
+  price_display_it: string | null;
+  price_display_fr: string | null;
   sort_order: number;
 }
 
@@ -116,6 +119,9 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
         description_fr: (item as any).description_fr || null,
         price: item.price ? parseFloat(item.price.toString()) : null,
         price_display: item.price_display,
+        price_display_en: (item as any).price_display_en || null,
+        price_display_it: (item as any).price_display_it || null,
+        price_display_fr: (item as any).price_display_fr || null,
         sort_order: item.sort_order || 0,
       }))
   }));

@@ -110,7 +110,14 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
               {category.items.map((item) => {
                   const itemName = getLocalizedText(item.name, item.name_en, item.name_it, item.name_fr);
                   const itemDescription = getLocalizedText(item.description, item.description_en, item.description_it, item.description_fr);
-                  const priceDisplay = item.price_display || (item.price ? `€${item.price.toFixed(2).replace('.', ',')}` : null);
+                  // Use localized price_display with fallback to German
+                  const localizedPriceDisplay = getLocalizedText(
+                    item.price_display,
+                    (item as any).price_display_en,
+                    (item as any).price_display_it,
+                    (item as any).price_display_fr
+                  );
+                  const priceDisplay = localizedPriceDisplay || (item.price ? `€${item.price.toFixed(2).replace('.', ',')}` : null);
 
                   return (
                     <div key={item.id} className="group">
