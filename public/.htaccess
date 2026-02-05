@@ -60,6 +60,16 @@ RewriteRule ^en/special-occasions/ostern-menue/?$ /en/special-occasions/easter-m
 RewriteRule ^it/occasioni-speciali/ostern-menue/?$ /it/occasioni-speciali/pasqua-menu/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/ostern-menue/?$ /fr/occasions-speciales/paques-menu/ [R=301,L]
 
+# --- Muttertag ---
+RewriteRule ^en/special-occasions/muttertag-menue/?$ /en/special-occasions/mothers-day-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/muttertag-menue/?$ /it/occasioni-speciali/festa-mamma-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/muttertag-menue/?$ /fr/occasions-speciales/fete-meres-menu/ [R=301,L]
+
+# --- Vatertag ---
+RewriteRule ^en/special-occasions/vatertag-menue/?$ /en/special-occasions/fathers-day-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/vatertag-menue/?$ /it/occasioni-speciali/festa-papa-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/vatertag-menue/?$ /fr/occasions-speciales/fete-peres-menu/ [R=301,L]
+
 # ============================================
 # 2. Error Documents (Fallback auf SPA)
 # ============================================

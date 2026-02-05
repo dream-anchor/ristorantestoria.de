@@ -125,16 +125,13 @@ const EventlocationMuenchen = () => {
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{t.seo.eventlocation.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="w-5 h-5 mr-2" />
-                    {t.seo.eventlocation.heroCta}
-                  </a>
+                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />Jetzt anrufen</a>
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" />Anfrage senden</a>
                 </Button>
               </div>
-              <p className="text-white/60 text-sm mt-4">{t.seo.eventlocation.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">events-storia.de</a></p>
+              <p className="text-white/60 text-sm mt-4">Oder besuchen Sie unser Event-Portal: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white hover:underline">events-storia.de</a></p>
             </div>
           </div>
         </section>
@@ -148,21 +145,23 @@ const EventlocationMuenchen = () => {
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{t.seo.eventlocation.introTitle}</h2>
               <p className="text-lg text-muted-foreground mb-4">{t.seo.eventlocation.introP1}</p>
-              <p className="text-muted-foreground">{t.seo.eventlocation.introP2} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">events-storia.de</a></p>
+              <p className="text-muted-foreground">{t.seo.eventlocation.introP2}</p>
             </section>
 
-            {/* Events CTA Box */}
+            {/* Contact CTA Box */}
             <section className="bg-primary/10 border border-primary/30 rounded-xl p-8 mb-16 text-center">
-              <h2 className="text-2xl font-serif font-bold mb-4">{t.seo.eventlocation.eventsCta}</h2>
-              <p className="text-muted-foreground mb-6">{t.seo.eventlocation.eventsCtaDesc}</p>
-              <Button size="lg" asChild>
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-5 h-5 mr-2" />
-                  {t.seo.eventlocation.eventsCtaButton}
-                </a>
-              </Button>
-              <p className="text-sm text-muted-foreground mt-6">{t.seo.eventlocation.eventsContactNote}<br />
-                <a href="tel:+498951519696" className="text-foreground hover:text-primary">089 51519696</a> · <a href="mailto:info@ristorantestoria.de" className="text-foreground hover:text-primary">info@ristorantestoria.de</a>
+              <h2 className="text-2xl font-serif font-bold mb-4">Planen Sie Ihr Event mit uns</h2>
+              <p className="text-muted-foreground mb-6">Kontaktieren Sie uns direkt für eine persönliche Beratung zu Ihrem Event</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" />E-Mail senden</a>
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground mt-6">
+                Für Online-Anfragen: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">events-storia.de</a>
               </p>
             </section>
 
@@ -188,9 +187,9 @@ const EventlocationMuenchen = () => {
                 ))}
               </div>
               <div className="text-center mt-8">
-                <p className="text-muted-foreground mb-4">{t.seo.eventlocation.eventTypesCtaNote}</p>
+                <p className="text-muted-foreground mb-4">Haben Sie Fragen zu Ihrem Event? Rufen Sie uns an!</p>
                 <Button variant="outline" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{t.seo.eventlocation.eventTypesCtaButton}</a>
+                  <a href="tel:+498951519696"><Phone className="w-4 h-4 mr-2" />089 51519696</a>
                 </Button>
               </div>
             </section>
@@ -233,7 +232,7 @@ const EventlocationMuenchen = () => {
                   </CardContent>
                 </Card>
               </div>
-              <p className="text-center text-muted-foreground mt-6">{t.seo.eventlocation.roomsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">events-storia.de</a></p>
+              <p className="text-center text-muted-foreground mt-6">Gerne zeigen wir Ihnen unsere Räume bei einem persönlichen Besuch. <a href="tel:+498951519696" className="text-primary hover:underline">Rufen Sie uns an</a></p>
             </section>
 
             {/* Dynamic Packages from Events Project */}
@@ -277,7 +276,7 @@ const EventlocationMuenchen = () => {
               </div>
               <div className="text-center mt-8">
                 <Button size="lg" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{t.seo.eventlocation.processCtaButton}</a>
+                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />Jetzt Beratungstermin vereinbaren</a>
                 </Button>
               </div>
             </section>
@@ -351,27 +350,58 @@ const EventlocationMuenchen = () => {
               </Accordion>
             </section>
 
+            {/* Internal Event Pages - Pillar Links */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Feiern Sie Ihren Anlass bei uns</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
+                Entdecken Sie unsere spezialisierten Event-Seiten für Ihre perfekte Feier im STORIA München
+              </p>
+              <div className="grid md:grid-cols-3 gap-6">
+                <LocalizedLink to="/firmenfeier-muenchen" className="group bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/30 rounded-xl p-8 hover:border-primary hover:shadow-lg transition-all">
+                  <div className="text-4xl mb-4">🏢</div>
+                  <h3 className="text-xl font-serif font-bold mb-2 group-hover:text-primary transition-colors">Firmenfeier München</h3>
+                  <p className="text-muted-foreground text-sm mb-4">Teamevents, Firmenjubiläen, Weihnachtsfeiern & Business-Dinner im stilvollen Ambiente</p>
+                  <span className="text-primary font-medium text-sm">Mehr erfahren →</span>
+                </LocalizedLink>
+                <LocalizedLink to="/geburtstagsfeier-muenchen" className="group bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/30 rounded-xl p-8 hover:border-primary hover:shadow-lg transition-all">
+                  <div className="text-4xl mb-4">🎂</div>
+                  <h3 className="text-xl font-serif font-bold mb-2 group-hover:text-primary transition-colors">Geburtstagsfeier München</h3>
+                  <p className="text-muted-foreground text-sm mb-4">Feiern Sie Ihren Geburtstag mit Familie & Freunden bei authentischer italienischer Küche</p>
+                  <span className="text-primary font-medium text-sm">Mehr erfahren →</span>
+                </LocalizedLink>
+                <LocalizedLink to="/romantisches-dinner-muenchen" className="group bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/30 rounded-xl p-8 hover:border-primary hover:shadow-lg transition-all">
+                  <div className="text-4xl mb-4">💕</div>
+                  <h3 className="text-xl font-serif font-bold mb-2 group-hover:text-primary transition-colors">Romantisches Dinner</h3>
+                  <p className="text-muted-foreground text-sm mb-4">Jahrestage, Verlobungen & besondere Abende zu zweit in romantischer Atmosphäre</p>
+                  <span className="text-primary font-medium text-sm">Mehr erfahren →</span>
+                </LocalizedLink>
+              </div>
+            </section>
+
             {/* Related Content */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.eventlocation.relatedTitle}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="bg-primary/10 border border-primary/30 rounded-lg p-6 hover:bg-primary/20 transition-colors">
-                  <h3 className="font-semibold mb-2">{t.seo.eventlocation.relatedEventsTitle}</h3>
-                  <p className="text-muted-foreground text-sm mb-2">{t.seo.eventlocation.relatedEventsDesc}</p>
-                  <span className="text-primary text-sm">{t.seo.eventlocation.relatedEventsButton} →</span>
-                </a>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <LocalizedLink to="/speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.seo.eventlocation.relatedMenuTitle}</h3>
                   <p className="text-muted-foreground text-sm">{t.seo.eventlocation.relatedMenuDesc}</p>
                 </LocalizedLink>
-                <LocalizedLink to="/romantisches-dinner-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
-                  <h3 className="font-semibold mb-2">{t.seo.eventlocation.relatedRomanticTitle}</h3>
-                  <p className="text-muted-foreground text-sm">{t.seo.eventlocation.relatedRomanticDesc}</p>
+                <LocalizedLink to="/besondere-anlaesse" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">Besondere Anlässe</h3>
+                  <p className="text-muted-foreground text-sm">Saisonale Menüs für Valentinstag, Ostern, Weihnachten & mehr</p>
                 </LocalizedLink>
                 <LocalizedLink to="/ueber-uns" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.seo.eventlocation.relatedAboutTitle}</h3>
                   <p className="text-muted-foreground text-sm">{t.seo.eventlocation.relatedAboutDesc}</p>
                 </LocalizedLink>
+              </div>
+              {/* Secondary: External events portal */}
+              <div className="mt-8 text-center">
+                <p className="text-muted-foreground text-sm mb-3">Für große Events & Catering-Anfragen:</p>
+                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary hover:underline text-sm">
+                  <ExternalLink className="w-4 h-4" />
+                  events-storia.de besuchen
+                </a>
               </div>
             </section>
 
@@ -381,17 +411,17 @@ const EventlocationMuenchen = () => {
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{t.seo.eventlocation.ctaTitle}</h2>
               <p className="mb-8 opacity-90">{t.seo.eventlocation.ctaDesc}</p>
-              <Button size="lg" variant="secondary" asChild>
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-5 h-5 mr-2" />
-                  {t.seo.eventlocation.ctaButton}
-                </a>
-              </Button>
-              <p className="mt-6 opacity-80 text-sm">{t.seo.eventlocation.ctaAlternative}</p>
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
-                <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
-                <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> info@ristorantestoria.de</a>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                <Button size="lg" variant="secondary" asChild>
+                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                </Button>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" asChild>
+                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" />E-Mail senden</a>
+                </Button>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4 mt-4 opacity-90">
                 <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
+                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><ExternalLink className="w-4 h-4" /> Online-Anfrage</a>
               </div>
               <p className="mt-6 text-sm opacity-70">{t.seo.eventlocation.ctaHoursTitle} {t.seo.eventlocation.ctaHoursValue}<br />{t.seo.eventlocation.ctaOpeningTitle} {t.seo.eventlocation.ctaOpeningValue}</p>
             </section>

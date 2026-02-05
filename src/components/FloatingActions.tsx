@@ -14,22 +14,26 @@ import { Button } from "@/components/ui/button";
 const FloatingActions = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
   const isMobile = useIsMobile();
   const { t } = useLanguage();
   const location = useLocation();
 
   useEffect(() => {
+    // Mark as hydrated to enable scroll detection
+    setIsHydrated(true);
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      
+
       // Sichtbar wenn gescrollt > 100px
       const hasScrolled = scrollY > 100;
-      
+
       // Am Footer wenn ganz unten (50px Puffer)
       const nearBottom = scrollY + windowHeight >= documentHeight - 50;
-      
+
       setIsVisible(hasScrolled && !nearBottom);
     };
 
@@ -46,7 +50,8 @@ const FloatingActions = () => {
   // Nicht auf Admin-Seiten anzeigen
   if (location.pathname.startsWith('/admin')) return null;
 
-  if (!isVisible) return null;
+  // Don't render until hydrated and visible (prevents hydration mismatch)
+  if (!isHydrated || !isVisible) return null;
 
   const buttonClasses = "bg-white hover:bg-gray-50 text-primary border-2 border-primary/20 rounded-2xl px-5 py-3 shadow-xl transition-all hover:scale-105 flex flex-col items-center gap-1";
   const whatsappButtonClasses = "bg-[#25D366] hover:bg-[#20BD5A] text-white border-2 border-[#25D366]/20 rounded-2xl px-5 py-3 shadow-xl transition-all hover:scale-105 flex flex-col items-center gap-1";

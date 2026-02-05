@@ -329,9 +329,13 @@ export const useSaveMenuContent = () => {
 
   return useMutation({
     mutationFn: async ({ menuId, data }: { menuId: string; data: ParsedMenu }) => {
-      // Check if this is a recurring menu theme (Valentinstag, Weihnachten, etc.)
-      // If so, use predefined SEO-permanent slugs
-      const recurringMenuSlugs = getRecurringMenuSlugs(data.title);
+      try {
+        console.log('[SaveMenuContent] Starting save for menu:', menuId, 'title:', data.title);
+
+        // Check if this is a recurring menu theme (Valentinstag, Weihnachten, etc.)
+        // If so, use predefined SEO-permanent slugs
+        const recurringMenuSlugs = getRecurringMenuSlugs(data.title);
+        console.log('[SaveMenuContent] Recurring slugs:', recurringMenuSlugs);
 
       let slugVariants: { de: string; en: string; it: string; fr: string };
 
@@ -375,7 +379,11 @@ export const useSaveMenuContent = () => {
         } as any)
         .eq('id', menuId);
 
-      if (menuError) throw menuError;
+      if (menuError) {
+        console.error('[SaveMenuContent] Error updating menu:', menuError);
+        throw new Error(`Fehler beim Aktualisieren des Menüs: ${menuError.message}`);
+      }
+      console.log('[SaveMenuContent] Menu updated successfully');
 
       // Get existing categories to delete them
       const { data: existingCategories } = await supabase
@@ -383,22 +391,37 @@ export const useSaveMenuContent = () => {
         .select('id')
         .eq('menu_id', menuId);
 
+      console.log('[SaveMenuContent] Existing categories:', existingCategories?.length || 0);
+
       if (existingCategories && existingCategories.length > 0) {
         const categoryIds = existingCategories.map(c => c.id);
-        
-        // Delete existing items
-        await supabase
+        console.log('[SaveMenuContent] Deleting items from categories:', categoryIds);
+
+        // Delete existing items first (due to foreign key constraint)
+        const { error: itemsDeleteError } = await supabase
           .from('menu_items')
           .delete()
           .in('category_id', categoryIds);
 
+        if (itemsDeleteError) {
+          console.error('Error deleting menu items:', itemsDeleteError);
+          throw new Error(`Fehler beim Löschen der Gerichte: ${itemsDeleteError.message}`);
+        }
+
         // Delete existing categories
-        await supabase
+        const { error: categoriesDeleteError } = await supabase
           .from('menu_categories')
           .delete()
           .eq('menu_id', menuId);
+
+        if (categoriesDeleteError) {
+          console.error('[SaveMenuContent] Error deleting menu categories:', categoriesDeleteError);
+          throw new Error(`Fehler beim Löschen der Kategorien: ${categoriesDeleteError.message}`);
+        }
+        console.log('[SaveMenuContent] Old categories deleted successfully');
       }
 
+      console.log('[SaveMenuContent] Inserting', data.categories.length, 'new categories');
       // Insert new categories and items
       for (let catIndex = 0; catIndex < data.categories.length; catIndex++) {
         const category = data.categories[catIndex];
@@ -420,7 +443,10 @@ export const useSaveMenuContent = () => {
           .select()
           .single();
 
-        if (catError) throw catError;
+        if (catError) {
+          console.error('Error inserting category:', catError);
+          throw new Error(`Fehler beim Erstellen der Kategorie "${category.name}": ${catError.message}`);
+        }
 
         // Insert items for this category
         if (category.items.length > 0) {
@@ -443,11 +469,23 @@ export const useSaveMenuContent = () => {
             .from('menu_items')
             .insert(itemsToInsert);
 
-          if (itemsError) throw itemsError;
+          if (itemsError) {
+            console.error('Error inserting items:', itemsError);
+            throw new Error(`Fehler beim Erstellen der Gerichte in "${category.name}": ${itemsError.message}`);
+          }
         }
       }
 
-      return { success: true };
+        console.log('[SaveMenuContent] Save completed successfully');
+        return { success: true };
+      } catch (error) {
+        console.error('[SaveMenuContent] Unexpected error:', error);
+        // Re-throw with proper Error object
+        if (error instanceof Error) {
+          throw error;
+        }
+        throw new Error(`Unerwarteter Fehler: ${JSON.stringify(error)}`);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['special-menus'] });
