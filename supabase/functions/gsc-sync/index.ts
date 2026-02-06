@@ -760,7 +760,7 @@ serve(async (req) => {
   // CORS headers
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-cron-secret',
   };
 
   if (req.method === 'OPTIONS') {
@@ -768,6 +768,21 @@ serve(async (req) => {
   }
 
   try {
+    // Check for cron secret (for scheduled jobs)
+    const cronSecret = req.headers.get('x-cron-secret');
+    const expectedCronSecret = Deno.env.get('CRON_SECRET');
+    
+    if (cronSecret) {
+      if (cronSecret !== expectedCronSecret) {
+        return new Response(JSON.stringify({ error: 'Invalid cron secret' }), {
+          status: 401,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      console.log('Authenticated via cron secret');
+    }
+    // Note: For non-cron requests, Supabase JWT verification handles auth
+
     // Validate environment
     if (!GSC_CLIENT_EMAIL || !GSC_PRIVATE_KEY) {
       throw new Error('GSC credentials not configured. Set GSC_CLIENT_EMAIL and GSC_PRIVATE_KEY.');
