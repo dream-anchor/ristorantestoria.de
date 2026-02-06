@@ -2,15 +2,60 @@
  * Admin SEO Operations Page
  * SEO monitoring and management dashboard for administrators
  */
-import { useEffect } from "react";
+import { useEffect, Component, type ReactNode } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, LogOut, BarChart3 } from "lucide-react";
+import { ArrowLeft, ExternalLink, LogOut, BarChart3, AlertTriangle } from "lucide-react";
 import { SEODashboard } from "@/components/admin/seo-ops";
 import SEO from "@/components/SEO";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { toast } from "sonner";
+
+// Error Boundary for catching render errors
+class SEOErrorBoundary extends Component<
+  { children: ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("SEO Dashboard Error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-background flex items-center justify-center p-4">
+          <div className="max-w-md text-center">
+            <div className="rounded-full bg-red-100 dark:bg-red-900/50 p-4 mx-auto w-fit mb-4">
+              <AlertTriangle className="h-8 w-8 text-red-600 dark:text-red-400" />
+            </div>
+            <h2 className="text-xl font-semibold mb-2">Dashboard-Fehler</h2>
+            <p className="text-muted-foreground mb-4">
+              Ein Fehler ist aufgetreten beim Laden des SEO Dashboards.
+            </p>
+            <pre className="text-xs text-left bg-muted p-3 rounded-lg overflow-auto max-h-40 mb-4">
+              {this.state.error?.message || "Unbekannter Fehler"}
+            </pre>
+            <Button onClick={() => window.location.reload()}>
+              Seite neu laden
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 export default function AdminSEO() {
   const navigate = useNavigate();
@@ -100,7 +145,9 @@ export default function AdminSEO() {
 
       {/* Main Content */}
       <main className="pt-12">
-        <SEODashboard />
+        <SEOErrorBoundary>
+          <SEODashboard />
+        </SEOErrorBoundary>
       </main>
     </>
   );
