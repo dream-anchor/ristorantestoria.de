@@ -101,7 +101,7 @@ export default function SEODashboard() {
 
   const handleRunPipeline = async () => {
     try {
-      await triggerPipeline.mutateAsync();
+      await triggerPipeline.mutateAsync(undefined);
       toast.success("SEO Pipeline erfolgreich ausgeführt");
       refetchStats();
     } catch (error) {
