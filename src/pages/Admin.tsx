@@ -10,7 +10,7 @@ import MenuUploader from "@/components/admin/MenuUploader";
 import MenuStatusCard from "@/components/admin/MenuStatusCard";
 import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
 import SortableMenuCard from "@/components/admin/SortableMenuCard";
-import { LogOut, ExternalLink, Rocket, Loader2 } from "lucide-react";
+import { LogOut, ExternalLink, Rocket, Loader2, BarChart3 } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
 import SEO from "@/components/SEO";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
@@ -172,6 +172,12 @@ const Admin = () => {
             </Link>
             <div className="flex items-center gap-2">
               {/* Desktop: Full buttons */}
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
+                <Link to="/admin/gsc">
+                  <BarChart3 className="h-4 w-4 mr-2" />
+                  Search Console
+                </Link>
+              </Button>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant="default" size="sm" disabled={isDeploying} className="hidden sm:flex">
@@ -207,6 +213,11 @@ const Admin = () => {
                 Abmelden
               </Button>
               {/* Mobile: Icon-only buttons */}
+              <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
+                <Link to="/admin/gsc">
+                  <BarChart3 className="h-4 w-4" />
+                </Link>
+              </Button>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant="default" size="icon" disabled={isDeploying} className="sm:hidden h-10 w-10">

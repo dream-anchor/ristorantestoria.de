@@ -244,9 +244,10 @@ const FirmenfeierMuenchen = () => {
             {/* Related */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.firmenfeier.relatedTitle}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="bg-primary/10 border border-primary/30 rounded-lg p-6 hover:bg-primary/20 transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventsTitle}</h3><p className="text-muted-foreground text-sm mb-2">{t.seo.firmenfeier.relatedEventsDesc}</p><span className="text-primary text-sm">{t.seo.firmenfeier.relatedEventsButton} →</span></a>
                 <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventlocationTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedEventlocationDesc}</p></LocalizedLink>
+                <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedCateringTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedCateringDesc}</p></LocalizedLink>
                 <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedMenuTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedMenuDesc}</p></LocalizedLink>
                 <LocalizedLink to="lunch-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedLunchTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedLunchDesc}</p></LocalizedLink>
               </div>

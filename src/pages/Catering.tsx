@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
+import LocalizedLink from "@/components/LocalizedLink";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -98,6 +99,21 @@ const Catering = () => {
                 <Button size="lg" variant="outline" asChild>
                   <a href="mailto:info@ristorantestoria.de">{t.catering.sendEmail}</a>
                 </Button>
+              </div>
+            </div>
+
+            {/* Related Links */}
+            <div className="mt-12">
+              <h2 className="text-2xl font-serif font-bold mb-6 text-center">{t.catering.relatedTitle}</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <LocalizedLink to="firmenfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.catering.relatedFirmenfeierTitle}</h3>
+                  <p className="text-muted-foreground text-sm">{t.catering.relatedFirmenfeierDesc}</p>
+                </LocalizedLink>
+                <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.catering.relatedEventlocationTitle}</h3>
+                  <p className="text-muted-foreground text-sm">{t.catering.relatedEventlocationDesc}</p>
+                </LocalizedLink>
               </div>
             </div>
 

@@ -9,6 +9,7 @@ import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BotContent from "@/components/BotContent";
 import BackToLandingPage from "@/components/BackToLandingPage";
+import LocalizedLink from "@/components/LocalizedLink";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMenu } from "@/hooks/useMenu";
@@ -63,7 +64,18 @@ const Mittagsmenu = () => {
           </div>
 
           <MenuDisplay menuType="lunch" />
-          
+
+          {/* SEO Internal Link to Lunch Landing Page */}
+          <div className="mt-12 max-w-xl mx-auto">
+            <LocalizedLink
+              to="lunch-muenchen-maxvorstadt"
+              className="block bg-card border rounded-lg p-6 hover:border-primary transition-colors text-center"
+            >
+              <h3 className="font-semibold mb-2">{t.pages.mittagsmenu.seoLinkTitle}</h3>
+              <p className="text-muted-foreground text-sm">{t.pages.mittagsmenu.seoLinkDesc}</p>
+            </LocalizedLink>
+          </div>
+
           <ReservationCTA />
         </main>
 

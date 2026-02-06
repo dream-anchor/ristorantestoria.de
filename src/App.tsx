@@ -20,6 +20,7 @@ import Catering from "./pages/Catering";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+import AdminGSC from "./pages/AdminGSC";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import CookieRichtlinie from "./pages/CookieRichtlinie";
@@ -47,6 +48,7 @@ import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
 import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
 import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
+import ItalienerKoenigsplatz from "./pages/seo/ItalienerKoenigsplatz";
 import FAQ from "./pages/FAQ";
 
 // Get dehydrated state from SSR (only on client)
@@ -86,6 +88,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
   "wild-essen-muenchen": WildEssenMuenchen,
+  "italiener-koenigsplatz": ItalienerKoenigsplatz,
   "faq": FAQ,
 };
 
@@ -152,6 +155,7 @@ const AppRoutes = () => {
       {/* Admin routes (no i18n) */}
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/gsc" element={<AdminGSC />} />
       
       {/* Legacy URL redirects (previously in .htaccess) */}
       <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu" replace />} />
