@@ -42,6 +42,9 @@ interface ParsedItem {
   description_fr: string;
   price: number | null;
   price_display: string;
+  price_display_en: string;
+  price_display_it: string;
+  price_display_fr: string;
   sort_order: number;
 }
 

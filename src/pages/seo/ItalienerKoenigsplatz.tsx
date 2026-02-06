@@ -291,7 +291,7 @@ const ItalienerKoenigsplatz = () => {
               </h2>
               <Accordion type="single" collapsible className="space-y-4">
                 {faqItems.map((item, idx) => (
-                  <AccordionItem key={idx} value={`faq-${idx}`} className="bg-card border border-border rounded-lg px-4" forceMount>
+                  <AccordionItem key={idx} value={`faq-${idx}`} className="bg-card border border-border rounded-lg px-4">
                     <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>
                     <AccordionContent className="text-muted-foreground data-[state=closed]:hidden">{item.a}</AccordionContent>
                   </AccordionItem>
