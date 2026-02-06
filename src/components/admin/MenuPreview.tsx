@@ -70,6 +70,9 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
       description_fr: '',
       price: 0,
       price_display: '€0,00',
+      price_display_en: '',
+      price_display_it: '',
+      price_display_fr: '',
       sort_order: newCategories[catIndex].items.length,
     };
     newCategories[catIndex] = {

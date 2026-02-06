@@ -124,22 +124,22 @@ export default function GSCTopQueriesTable({
                   </div>
                 </TableCell>
                 <TableCell className="text-right font-medium">
-                  {item.clicks.toLocaleString('de-DE')}
+                  {item.total_clicks.toLocaleString('de-DE')}
                 </TableCell>
                 {showTrends && (
                   <TableCell className="text-right">
-                    <TrendCell change={item.clicks_pct_change} />
+                    <TrendCell change={item.delta_clicks_wow} />
                   </TableCell>
                 )}
                 <TableCell className="text-right text-muted-foreground">
-                  {item.impressions.toLocaleString('de-DE')}
+                  {item.total_impressions.toLocaleString('de-DE')}
                 </TableCell>
                 <TableCell className="text-right text-muted-foreground">
-                  {(item.ctr * 100).toFixed(1)}%
+                  {(item.avg_ctr * 100).toFixed(1)}%
                 </TableCell>
                 <TableCell className="text-right">
                   <Badge variant="outline" className="font-mono">
-                    {item.position.toFixed(1)}
+                    {item.avg_position.toFixed(1)}
                   </Badge>
                 </TableCell>
               </TableRow>

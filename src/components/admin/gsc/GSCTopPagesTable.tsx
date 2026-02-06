@@ -88,8 +88,8 @@ export default function GSCTopPagesTable({
         </TableHeader>
         <TableBody>
           {displayedPages.map((page, index) => {
-            const path = extractPath(page.page_url);
-            const displayPath = formatUrlForDisplay(page.page_url, 40);
+            const path = extractPath(page.normalized_url);
+            const displayPath = formatUrlForDisplay(page.normalized_url, 40);
 
             return (
               <TableRow
@@ -98,7 +98,7 @@ export default function GSCTopPagesTable({
                   "group cursor-pointer transition-colors",
                   onPageClick && "hover:bg-accent/50"
                 )}
-                onClick={() => onPageClick?.(page.page_url)}
+                onClick={() => onPageClick?.(page.normalized_url)}
               >
                 <TableCell>
                   <div className="flex items-center gap-2">
@@ -109,7 +109,7 @@ export default function GSCTopPagesTable({
                       {displayPath}
                     </span>
                     <a
-                      href={page.page_url}
+                      href={`https://${page.normalized_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
@@ -120,22 +120,22 @@ export default function GSCTopPagesTable({
                   </div>
                 </TableCell>
                 <TableCell className="text-right font-medium">
-                  {page.clicks.toLocaleString('de-DE')}
+                  {page.total_clicks.toLocaleString('de-DE')}
                 </TableCell>
                 {showTrends && (
                   <TableCell className="text-right">
-                    <TrendCell change={page.clicks_pct_change} />
+                    <TrendCell change={page.pct_change_clicks_wow} />
                   </TableCell>
                 )}
                 <TableCell className="text-right text-muted-foreground">
-                  {page.impressions.toLocaleString('de-DE')}
+                  {page.total_impressions.toLocaleString('de-DE')}
                 </TableCell>
                 <TableCell className="text-right text-muted-foreground">
-                  {(page.ctr * 100).toFixed(1)}%
+                  {(page.avg_ctr * 100).toFixed(1)}%
                 </TableCell>
                 <TableCell className="text-right">
                   <Badge variant="outline" className="font-mono">
-                    {page.position.toFixed(1)}
+                    {page.avg_position.toFixed(1)}
                   </Badge>
                 </TableCell>
               </TableRow>

@@ -34,7 +34,7 @@ import {
   useGSCTopPages,
   useGSCTopQueries,
   useGSCAlerts,
-  useAcknowledgeAlert,
+  useUpdateAlertStatus,
   useTriggerGSCSync,
   useTriggerGSCAggregate,
 } from "@/hooks/useGSCMetrics";
@@ -51,13 +51,13 @@ export default function GSCDashboard() {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   // Data hooks
-  const { data: dashboard, isLoading: dashboardLoading, refetch } = useGSCDashboard();
-  const { data: topPages, isLoading: pagesLoading } = useGSCTopPages(windowType, 'clicks', 20);
-  const { data: topQueries, isLoading: queriesLoading } = useGSCTopQueries(windowType, 'clicks', 50);
+  const { data: dashboard, isLoading: dashboardLoading, refetch } = useGSCDashboard(windowType);
+  const { data: topPages, isLoading: pagesLoading } = useGSCTopPages(windowType, 'total_clicks', 20);
+  const { data: topQueries, isLoading: queriesLoading } = useGSCTopQueries(windowType, 'total_clicks', 50);
   const { data: alerts, isLoading: alertsLoading } = useGSCAlerts(false);
 
   // Mutation hooks
-  const acknowledgeMutation = useAcknowledgeAlert();
+  const updateAlertMutation = useUpdateAlertStatus();
   const syncMutation = useTriggerGSCSync();
   const aggregateMutation = useTriggerGSCAggregate();
 
@@ -65,7 +65,7 @@ export default function GSCDashboard() {
 
   const handleRefresh = async () => {
     try {
-      await syncMutation.mutateAsync({ action: 'daily_sync' });
+      await syncMutation.mutateAsync('daily_sync');
       await aggregateMutation.mutateAsync();
       toast.success('Daten aktualisiert');
       refetch();
@@ -76,7 +76,7 @@ export default function GSCDashboard() {
 
   const handleAcknowledge = async (alertId: string) => {
     try {
-      await acknowledgeMutation.mutateAsync(alertId);
+      await updateAlertMutation.mutateAsync({ alertId, status: 'acknowledged' });
       toast.success('Alert bestätigt');
     } catch (error) {
       toast.error('Fehler beim Bestätigen');
@@ -85,16 +85,16 @@ export default function GSCDashboard() {
 
   const handleBackfill = async () => {
     try {
-      await syncMutation.mutateAsync({ action: 'backfill', days: 90 });
+      await syncMutation.mutateAsync('backfill');
       toast.success('Backfill gestartet');
     } catch (error) {
       toast.error('Fehler beim Backfill');
     }
   };
 
-  const site28d = dashboard?.site28d;
-  const site7d = dashboard?.site7d;
-  const lastSync = dashboard?.lastSync;
+  // Get first site aggregate for the selected window
+  const siteAggregate = dashboard?.siteAggregates?.[0];
+  const lastSync = dashboard?.recentSync;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900">
@@ -163,26 +163,26 @@ export default function GSCDashboard() {
                 <>
                   <GSCMetricCard
                     title="Klicks"
-                    value={site28d?.clicks || 0}
-                    percentChange={site28d?.clicks_pct_change}
+                    value={siteAggregate?.total_clicks || 0}
+                    percentChange={siteAggregate?.pct_change_clicks_wow}
                     format="number"
                   />
                   <GSCMetricCard
                     title="Impressionen"
-                    value={site28d?.impressions || 0}
-                    percentChange={site28d?.impressions_pct_change}
+                    value={siteAggregate?.total_impressions || 0}
+                    percentChange={siteAggregate?.pct_change_impressions_wow}
                     format="number"
                   />
                   <GSCMetricCard
                     title="CTR"
-                    value={site28d?.ctr || 0}
-                    percentChange={site28d?.ctr_pct_change}
+                    value={siteAggregate?.avg_ctr || 0}
+                    percentChange={null}
                     format="percent"
                   />
                   <GSCMetricCard
                     title="Position"
-                    value={site28d?.position || 0}
-                    percentChange={site28d?.position_pct_change}
+                    value={siteAggregate?.avg_position || 0}
+                    percentChange={null}
                     format="position"
                   />
                 </>
@@ -334,7 +334,7 @@ export default function GSCDashboard() {
               </div>
             </div>
 
-            {/* 7-Day vs 28-Day Comparison */}
+            {/* Trend Summary */}
             <div className={cn(
               "rounded-2xl p-4",
               "bg-white/60 dark:bg-gray-900/60",
@@ -344,28 +344,28 @@ export default function GSCDashboard() {
             )}>
               <h3 className="font-medium mb-3 flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
-                Kurzzeit-Trend (7d)
+                WoW Änderungen
               </h3>
-              {site7d ? (
+              {siteAggregate ? (
                 <div className="grid grid-cols-2 gap-3">
                   <GSCMetricCard
                     title="Klicks"
-                    value={site7d.clicks}
-                    percentChange={site7d.clicks_pct_change}
+                    value={siteAggregate.delta_clicks_wow || 0}
+                    percentChange={siteAggregate.pct_change_clicks_wow}
                     format="number"
                     size="sm"
                   />
                   <GSCMetricCard
                     title="Impressionen"
-                    value={site7d.impressions}
-                    percentChange={site7d.impressions_pct_change}
+                    value={siteAggregate.delta_impressions_wow || 0}
+                    percentChange={siteAggregate.pct_change_impressions_wow}
                     format="number"
                     size="sm"
                   />
                 </div>
               ) : (
                 <div className="text-sm text-muted-foreground text-center py-4">
-                  Keine 7-Tage Daten verfügbar
+                  Keine Vergleichsdaten verfügbar
                 </div>
               )}
             </div>

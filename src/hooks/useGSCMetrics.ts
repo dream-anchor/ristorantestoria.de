@@ -1,11 +1,12 @@
 /**
  * React Query hooks for Google Search Console metrics
+ * Types aligned with database schema from gsc_monitoring migration
  */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 // ============================================
-// Types
+// Types - aligned with database schema
 // ============================================
 
 export interface DateRange {
@@ -15,90 +16,134 @@ export interface DateRange {
 
 export interface GSCSiteMetrics {
   id: string;
+  site_property: string;
   date: string;
+  search_type: string;
   clicks: number;
   impressions: number;
   ctr: number;
   position: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface GSCPageMetrics {
   id: string;
+  site_property: string;
   date: string;
-  page_url: string;
+  search_type: string;
+  raw_url: string;
+  normalized_url: string;
   clicks: number;
   impressions: number;
   ctr: number;
   position: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface GSCQueryMetrics {
   id: string;
+  site_property: string;
   date: string;
+  search_type: string;
   query: string;
   clicks: number;
   impressions: number;
   ctr: number;
   position: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface GSCPageQueryMetrics {
   id: string;
+  site_property: string;
   date: string;
-  page_url: string;
+  search_type: string;
+  raw_url: string;
+  normalized_url: string;
   query: string;
   clicks: number;
   impressions: number;
   ctr: number;
   position: number;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface GSCSiteAggregate {
   id: string;
-  window_type: '7d' | '28d' | '90d';
-  period_end: string;
-  clicks: number;
-  impressions: number;
-  ctr: number;
-  position: number;
-  clicks_prev: number;
-  impressions_prev: number;
-  ctr_prev: number;
-  position_prev: number;
-  clicks_pct_change: number | null;
-  impressions_pct_change: number | null;
-  ctr_pct_change: number | null;
-  position_pct_change: number | null;
+  site_property: string;
+  computed_date: string;
+  window_type: string;
+  search_type: string;
+  total_clicks: number;
+  total_impressions: number;
+  avg_ctr: number;
+  avg_position: number;
+  delta_clicks_wow: number | null;
+  delta_impressions_wow: number | null;
+  delta_ctr_wow: number | null;
+  delta_position_wow: number | null;
+  delta_clicks_mom: number | null;
+  delta_impressions_mom: number | null;
+  delta_ctr_mom: number | null;
+  delta_position_mom: number | null;
+  pct_change_clicks_wow: number | null;
+  pct_change_impressions_wow: number | null;
+  pct_change_clicks_mom: number | null;
+  pct_change_impressions_mom: number | null;
+  created_at: string;
 }
 
 export interface GSCPageAggregate {
   id: string;
-  page_url: string;
-  window_type: '7d' | '28d' | '90d';
-  period_end: string;
-  clicks: number;
-  impressions: number;
-  ctr: number;
-  position: number;
-  clicks_prev: number;
-  impressions_prev: number;
-  clicks_pct_change: number | null;
-  impressions_pct_change: number | null;
+  site_property: string;
+  computed_date: string;
+  window_type: string;
+  normalized_url: string;
+  search_type: string;
+  total_clicks: number;
+  total_impressions: number;
+  avg_ctr: number;
+  avg_position: number;
+  delta_clicks_wow: number | null;
+  delta_impressions_wow: number | null;
+  delta_position_wow: number | null;
+  delta_clicks_mom: number | null;
+  delta_impressions_mom: number | null;
+  delta_position_mom: number | null;
+  pct_change_clicks_wow: number | null;
+  pct_change_impressions_wow: number | null;
+  pct_change_clicks_mom: number | null;
+  pct_change_impressions_mom: number | null;
+  is_winner: boolean;
+  is_loser: boolean;
+  created_at: string;
 }
 
 export interface GSCQueryAggregate {
   id: string;
+  site_property: string;
+  computed_date: string;
+  window_type: string;
   query: string;
-  window_type: '7d' | '28d' | '90d';
-  period_end: string;
-  clicks: number;
-  impressions: number;
-  ctr: number;
-  position: number;
-  clicks_prev: number;
-  impressions_prev: number;
-  clicks_pct_change: number | null;
-  impressions_pct_change: number | null;
+  search_type: string;
+  total_clicks: number;
+  total_impressions: number;
+  avg_ctr: number;
+  avg_position: number;
+  ranking_page_count: number;
+  top_page_url: string | null;
+  is_cannibalized: boolean;
+  delta_clicks_wow: number | null;
+  delta_impressions_wow: number | null;
+  delta_position_wow: number | null;
+  delta_clicks_mom: number | null;
+  delta_impressions_mom: number | null;
+  delta_position_mom: number | null;
+  created_at: string;
 }
 
 export interface GSCAlert {
@@ -106,41 +151,63 @@ export interface GSCAlert {
   rule_id: string;
   alert_type: string;
   severity: 'info' | 'warning' | 'critical';
+  status: string;
   title: string;
-  description: string;
+  description: string | null;
   affected_url: string | null;
   affected_query: string | null;
+  affected_date: string | null;
   metric_value: number | null;
   threshold_value: number | null;
-  is_acknowledged: boolean;
-  acknowledged_at: string | null;
-  acknowledged_by: string | null;
+  comparison_period: string | null;
+  details: Record<string, unknown>;
+  resolved_at: string | null;
+  resolved_by: string | null;
+  resolution_notes: string | null;
   created_at: string;
+  updated_at: string;
   rule_name?: string;
 }
 
 export interface GSCSyncJob {
   id: string;
-  job_type: 'backfill' | 'daily_sync' | 'manual_sync';
-  status: 'pending' | 'running' | 'completed' | 'failed';
+  job_type: string;
+  status: string;
   started_at: string | null;
   completed_at: string | null;
-  date_from: string | null;
-  date_to: string | null;
-  rows_processed: number;
-  error_message: string | null;
+  date_from: string;
+  date_to: string;
+  rows_fetched: number;
+  rows_inserted: number;
+  rows_updated: number;
+  errors_count: number;
+  error_details: unknown[];
+  progress_percent: number;
+  current_dimension: string | null;
   created_at: string;
+  updated_at: string;
 }
 
-export interface GSCUrlVariant {
+export interface GSCUrlRegistry {
   id: string;
+  raw_url: string;
   normalized_url: string;
-  variant_url: string;
-  variant_type: string;
+  canonical_group_id: string | null;
+  host_variant: string | null;
+  protocol_variant: string | null;
+  trailing_slash_variant: boolean;
+  is_legacy_cms: boolean;
+  is_pdf: boolean;
+  is_image: boolean;
+  language: string | null;
+  route_key: string | null;
   first_seen: string;
   last_seen: string;
   total_clicks: number;
   total_impressions: number;
+  avg_position: number | null;
+  created_at: string;
+  updated_at: string;
 }
 
 // ============================================
@@ -162,7 +229,7 @@ export const useGSCSiteMetrics = (dateRange: DateRange) => {
         .order('date', { ascending: true });
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCSiteMetrics[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -178,11 +245,11 @@ export const useGSCSiteAggregates = () => {
       const { data, error } = await supabase
         .from('gsc_site_aggregates')
         .select('*')
-        .order('period_end', { ascending: false })
+        .order('computed_date', { ascending: false })
         .limit(10);
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCSiteAggregate[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -199,12 +266,12 @@ export const useLatestSiteAggregate = (windowType: '7d' | '28d' | '90d') => {
         .from('gsc_site_aggregates')
         .select('*')
         .eq('window_type', windowType)
-        .order('period_end', { ascending: false })
+        .order('computed_date', { ascending: false })
         .limit(1)
         .maybeSingle();
 
       if (error) throw error;
-      return data;
+      return data as unknown as GSCSiteAggregate | null;
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -228,13 +295,13 @@ export const useGSCPageMetrics = (dateRange: DateRange, pageUrl?: string) => {
         .lte('date', dateRange.endDate);
 
       if (pageUrl) {
-        query = query.eq('page_url', pageUrl);
+        query = query.eq('normalized_url', pageUrl);
       }
 
       const { data, error } = await query.order('date', { ascending: true });
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCPageMetrics[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -245,7 +312,7 @@ export const useGSCPageMetrics = (dateRange: DateRange, pageUrl?: string) => {
  */
 export const useGSCTopPages = (
   windowType: '7d' | '28d' | '90d' = '28d',
-  sortBy: 'clicks' | 'impressions' = 'clicks',
+  sortBy: 'total_clicks' | 'total_impressions' = 'total_clicks',
   limit: number = 20
 ) => {
   return useQuery({
@@ -259,7 +326,7 @@ export const useGSCTopPages = (
         .limit(limit);
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCPageAggregate[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -276,14 +343,12 @@ export const useGSCDecliningPages = (windowType: '7d' | '28d' = '7d', limit: num
         .from('gsc_page_aggregates')
         .select('*')
         .eq('window_type', windowType)
-        .not('clicks_pct_change', 'is', null)
-        .lt('clicks_pct_change', -10)
-        .gt('clicks_prev', 5) // Only pages that had significant traffic
-        .order('clicks_pct_change', { ascending: true })
+        .eq('is_loser', true)
+        .order('pct_change_clicks_wow', { ascending: true })
         .limit(limit);
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCPageAggregate[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -313,7 +378,7 @@ export const useGSCQueryMetrics = (dateRange: DateRange, queryFilter?: string) =
       const { data, error } = await query.order('clicks', { ascending: false }).limit(1000);
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCQueryMetrics[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -324,7 +389,7 @@ export const useGSCQueryMetrics = (dateRange: DateRange, queryFilter?: string) =
  */
 export const useGSCTopQueries = (
   windowType: '7d' | '28d' | '90d' = '28d',
-  sortBy: 'clicks' | 'impressions' = 'clicks',
+  sortBy: 'total_clicks' | 'total_impressions' = 'total_clicks',
   limit: number = 50
 ) => {
   return useQuery({
@@ -338,7 +403,7 @@ export const useGSCTopQueries = (
         .limit(limit);
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCQueryAggregate[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -364,37 +429,37 @@ export const useGSCPageQueryMetrics = (dateRange: DateRange, queryFilter?: strin
       const { data, error } = await query.order('impressions', { ascending: false }).limit(1000);
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCPageQueryMetrics[];
     },
     staleTime: 5 * 60 * 1000,
   });
 };
 
 // ============================================
-// URL Variants & Duplicates Hooks
+// URL Registry Hooks
 // ============================================
 
 /**
- * Fetch URL variants (potential duplicates)
+ * Fetch URL registry entries (for duplicate/variant detection)
  */
-export const useGSCUrlVariants = () => {
+export const useGSCUrlRegistry = () => {
   return useQuery({
-    queryKey: ['gsc-url-variants'],
-    queryFn: async (): Promise<GSCUrlVariant[]> => {
+    queryKey: ['gsc-url-registry'],
+    queryFn: async (): Promise<GSCUrlRegistry[]> => {
       const { data, error } = await supabase
-        .from('gsc_url_variants')
+        .from('gsc_url_registry')
         .select('*')
         .order('total_impressions', { ascending: false });
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCUrlRegistry[];
     },
     staleTime: 5 * 60 * 1000,
   });
 };
 
 /**
- * Fetch URLs with duplicates (normalized URLs that have variants)
+ * Fetch URLs with duplicates (grouped by canonical)
  */
 export const useGSCDuplicateUrls = () => {
   return useQuery({
@@ -402,30 +467,34 @@ export const useGSCDuplicateUrls = () => {
     queryFn: async () => {
       // Get URLs that have variants
       const { data, error } = await supabase
-        .from('gsc_url_variants')
-        .select('normalized_url, variant_url, variant_type, total_clicks, total_impressions')
+        .from('gsc_url_registry')
+        .select('*')
+        .not('canonical_group_id', 'is', null)
         .order('total_impressions', { ascending: false });
 
       if (error) throw error;
 
-      // Group by normalized URL
-      const grouped = (data || []).reduce((acc, item) => {
-        if (!acc[item.normalized_url]) {
-          acc[item.normalized_url] = {
+      // Group by canonical_group_id
+      const grouped = (data || []).reduce((acc, item: any) => {
+        const groupId = item.canonical_group_id;
+        if (!groupId) return acc;
+        
+        if (!acc[groupId]) {
+          acc[groupId] = {
             canonicalUrl: item.normalized_url,
             variants: [],
             totalClicks: 0,
             totalImpressions: 0,
           };
         }
-        acc[item.normalized_url].variants.push({
-          url: item.variant_url,
-          type: item.variant_type,
-          clicks: item.total_clicks,
-          impressions: item.total_impressions,
+        acc[groupId].variants.push({
+          url: item.raw_url,
+          type: item.host_variant || 'unknown',
+          clicks: item.total_clicks || 0,
+          impressions: item.total_impressions || 0,
         });
-        acc[item.normalized_url].totalClicks += item.total_clicks;
-        acc[item.normalized_url].totalImpressions += item.total_impressions;
+        acc[groupId].totalClicks += item.total_clicks || 0;
+        acc[groupId].totalImpressions += item.total_impressions || 0;
         return acc;
       }, {} as Record<string, any>);
 
@@ -442,9 +511,9 @@ export const useGSCDuplicateUrls = () => {
 /**
  * Fetch active alerts
  */
-export const useGSCAlerts = (includeAcknowledged: boolean = false) => {
+export const useGSCAlerts = (includeResolved: boolean = false) => {
   return useQuery({
-    queryKey: ['gsc-alerts', includeAcknowledged],
+    queryKey: ['gsc-alerts', includeResolved],
     queryFn: async (): Promise<GSCAlert[]> => {
       let query = supabase
         .from('gsc_alerts')
@@ -454,8 +523,8 @@ export const useGSCAlerts = (includeAcknowledged: boolean = false) => {
         `)
         .order('created_at', { ascending: false });
 
-      if (!includeAcknowledged) {
-        query = query.eq('is_acknowledged', false);
+      if (!includeResolved) {
+        query = query.eq('status', 'open');
       }
 
       const { data, error } = await query.limit(100);
@@ -463,29 +532,38 @@ export const useGSCAlerts = (includeAcknowledged: boolean = false) => {
       if (error) throw error;
 
       // Map rule name to alert
-      return (data || []).map(alert => ({
+      return ((data || []) as any[]).map(alert => ({
         ...alert,
-        rule_name: (alert as any).gsc_alert_rules?.name,
-      }));
+        rule_name: alert.gsc_alert_rules?.name,
+      })) as GSCAlert[];
     },
     staleTime: 2 * 60 * 1000, // 2 minutes for alerts
   });
 };
 
 /**
- * Acknowledge an alert
+ * Acknowledge/update an alert status
  */
-export const useAcknowledgeAlert = () => {
+export const useUpdateAlertStatus = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (alertId: string) => {
+    mutationFn: async ({ alertId, status, notes }: { alertId: string; status: string; notes?: string }) => {
+      const updateData: Record<string, unknown> = {
+        status,
+        updated_at: new Date().toISOString(),
+      };
+
+      if (status === 'resolved') {
+        updateData.resolved_at = new Date().toISOString();
+      }
+      if (notes) {
+        updateData.resolution_notes = notes;
+      }
+
       const { error } = await supabase
         .from('gsc_alerts')
-        .update({
-          is_acknowledged: true,
-          acknowledged_at: new Date().toISOString(),
-        })
+        .update(updateData)
         .eq('id', alertId);
 
       if (error) throw error;
@@ -501,7 +579,7 @@ export const useAcknowledgeAlert = () => {
 // ============================================
 
 /**
- * Fetch sync jobs
+ * Fetch recent sync jobs
  */
 export const useGSCSyncJobs = (limit: number = 10) => {
   return useQuery({
@@ -514,22 +592,22 @@ export const useGSCSyncJobs = (limit: number = 10) => {
         .limit(limit);
 
       if (error) throw error;
-      return data || [];
+      return (data || []) as unknown as GSCSyncJob[];
     },
     staleTime: 30 * 1000, // 30 seconds
   });
 };
 
 /**
- * Trigger a manual sync job
+ * Trigger a GSC sync (via edge function)
  */
 export const useTriggerGSCSync = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (params: { action: 'backfill' | 'daily_sync' | 'manual_sync'; days?: number }) => {
+    mutationFn: async (action: 'backfill' | 'daily_sync' | 'manual_sync') => {
       const { data, error } = await supabase.functions.invoke('gsc-sync', {
-        body: params,
+        body: { action },
       });
 
       if (error) throw error;
@@ -537,12 +615,15 @@ export const useTriggerGSCSync = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['gsc-sync-jobs'] });
+      queryClient.invalidateQueries({ queryKey: ['gsc-site-metrics'] });
+      queryClient.invalidateQueries({ queryKey: ['gsc-page-metrics'] });
+      queryClient.invalidateQueries({ queryKey: ['gsc-query-metrics'] });
     },
   });
 };
 
 /**
- * Trigger aggregation job
+ * Trigger GSC aggregation (via edge function)
  */
 export const useTriggerGSCAggregate = () => {
   const queryClient = useQueryClient();
@@ -550,7 +631,7 @@ export const useTriggerGSCAggregate = () => {
   return useMutation({
     mutationFn: async () => {
       const { data, error } = await supabase.functions.invoke('gsc-aggregate', {
-        body: { action: 'aggregate' },
+        body: { action: 'compute_all' },
       });
 
       if (error) throw error;
@@ -558,82 +639,82 @@ export const useTriggerGSCAggregate = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['gsc-site-aggregates'] });
-      queryClient.invalidateQueries({ queryKey: ['gsc-top-pages'] });
-      queryClient.invalidateQueries({ queryKey: ['gsc-top-queries'] });
+      queryClient.invalidateQueries({ queryKey: ['gsc-page-aggregates'] });
+      queryClient.invalidateQueries({ queryKey: ['gsc-query-aggregates'] });
       queryClient.invalidateQueries({ queryKey: ['gsc-alerts'] });
     },
   });
 };
 
 // ============================================
-// Dashboard Summary Hook
+// Dashboard Combined Hook
 // ============================================
 
-export interface GSCDashboardSummary {
-  site28d: GSCSiteAggregate | null;
-  site7d: GSCSiteAggregate | null;
-  alertCount: number;
+export interface GSCDashboardData {
+  siteAggregates: GSCSiteAggregate[];
   topPages: GSCPageAggregate[];
   topQueries: GSCQueryAggregate[];
-  lastSync: GSCSyncJob | null;
+  alerts: GSCAlert[];
+  recentSync: GSCSyncJob | null;
 }
 
 /**
- * Fetch all data needed for dashboard overview
+ * Combined hook for dashboard - fetches all data needed for the overview
  */
-export const useGSCDashboard = () => {
+export const useGSCDashboard = (windowType: '7d' | '28d' | '90d' = '28d') => {
   return useQuery({
-    queryKey: ['gsc-dashboard'],
-    queryFn: async (): Promise<GSCDashboardSummary> => {
-      // Fetch all in parallel
-      const [site28dRes, site7dRes, alertsRes, topPagesRes, topQueriesRes, syncRes] = await Promise.all([
+    queryKey: ['gsc-dashboard', windowType],
+    queryFn: async (): Promise<GSCDashboardData> => {
+      // Fetch all data in parallel
+      const [
+        siteAggResult,
+        topPagesResult,
+        topQueriesResult,
+        alertsResult,
+        syncJobsResult,
+      ] = await Promise.all([
         supabase
           .from('gsc_site_aggregates')
           .select('*')
-          .eq('window_type', '28d')
-          .order('period_end', { ascending: false })
-          .limit(1)
-          .maybeSingle(),
-        supabase
-          .from('gsc_site_aggregates')
-          .select('*')
-          .eq('window_type', '7d')
-          .order('period_end', { ascending: false })
-          .limit(1)
-          .maybeSingle(),
-        supabase
-          .from('gsc_alerts')
-          .select('id', { count: 'exact' })
-          .eq('is_acknowledged', false),
+          .eq('window_type', windowType)
+          .order('computed_date', { ascending: false })
+          .limit(3),
         supabase
           .from('gsc_page_aggregates')
           .select('*')
-          .eq('window_type', '28d')
-          .order('clicks', { ascending: false })
-          .limit(5),
+          .eq('window_type', windowType)
+          .order('total_clicks', { ascending: false })
+          .limit(10),
         supabase
           .from('gsc_query_aggregates')
           .select('*')
-          .eq('window_type', '28d')
-          .order('clicks', { ascending: false })
-          .limit(5),
+          .eq('window_type', windowType)
+          .order('total_clicks', { ascending: false })
+          .limit(10),
+        supabase
+          .from('gsc_alerts')
+          .select('*, gsc_alert_rules!inner(name)')
+          .eq('status', 'open')
+          .order('created_at', { ascending: false })
+          .limit(10),
         supabase
           .from('gsc_sync_jobs')
           .select('*')
           .order('created_at', { ascending: false })
-          .limit(1)
-          .maybeSingle(),
+          .limit(1),
       ]);
 
       return {
-        site28d: site28dRes.data,
-        site7d: site7dRes.data,
-        alertCount: alertsRes.count || 0,
-        topPages: topPagesRes.data || [],
-        topQueries: topQueriesRes.data || [],
-        lastSync: syncRes.data,
+        siteAggregates: (siteAggResult.data || []) as unknown as GSCSiteAggregate[],
+        topPages: (topPagesResult.data || []) as unknown as GSCPageAggregate[],
+        topQueries: (topQueriesResult.data || []) as unknown as GSCQueryAggregate[],
+        alerts: ((alertsResult.data || []) as any[]).map(a => ({
+          ...a,
+          rule_name: a.gsc_alert_rules?.name,
+        })) as GSCAlert[],
+        recentSync: (syncJobsResult.data?.[0] as unknown as GSCSyncJob) || null,
       };
     },
-    staleTime: 5 * 60 * 1000,
+    staleTime: 2 * 60 * 1000,
   });
 };

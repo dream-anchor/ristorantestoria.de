@@ -14,6 +14,844 @@ export type Database = {
   }
   public: {
     Tables: {
+      gsc_alert_rules: {
+        Row: {
+          alert_type: string
+          created_at: string
+          description: string | null
+          id: string
+          is_enabled: boolean | null
+          name: string
+          notify_email: boolean | null
+          notify_slack: boolean | null
+          severity: string
+          thresholds: Json
+          updated_at: string
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          name: string
+          notify_email?: boolean | null
+          notify_slack?: boolean | null
+          severity?: string
+          thresholds?: Json
+          updated_at?: string
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          name?: string
+          notify_email?: boolean | null
+          notify_slack?: boolean | null
+          severity?: string
+          thresholds?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_alerts: {
+        Row: {
+          affected_date: string | null
+          affected_query: string | null
+          affected_url: string | null
+          alert_type: string
+          comparison_period: string | null
+          created_at: string
+          description: string | null
+          details: Json | null
+          id: string
+          metric_value: number | null
+          resolution_notes: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          rule_id: string
+          severity: string
+          status: string
+          threshold_value: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          affected_date?: string | null
+          affected_query?: string | null
+          affected_url?: string | null
+          alert_type: string
+          comparison_period?: string | null
+          created_at?: string
+          description?: string | null
+          details?: Json | null
+          id?: string
+          metric_value?: number | null
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          rule_id: string
+          severity?: string
+          status?: string
+          threshold_value?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          affected_date?: string | null
+          affected_query?: string | null
+          affected_url?: string | null
+          alert_type?: string
+          comparison_period?: string | null
+          created_at?: string
+          description?: string | null
+          details?: Json | null
+          id?: string
+          metric_value?: number | null
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          rule_id?: string
+          severity?: string
+          status?: string
+          threshold_value?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gsc_alerts_rule_id_fkey"
+            columns: ["rule_id"]
+            isOneToOne: false
+            referencedRelation: "gsc_alert_rules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gsc_canonical_groups: {
+        Row: {
+          canonical_url: string
+          created_at: string
+          id: string
+          is_duplicate_issue: boolean | null
+          primary_variant: string | null
+          total_clicks: number | null
+          total_impressions: number | null
+          updated_at: string
+          variant_count: number | null
+        }
+        Insert: {
+          canonical_url: string
+          created_at?: string
+          id?: string
+          is_duplicate_issue?: boolean | null
+          primary_variant?: string | null
+          total_clicks?: number | null
+          total_impressions?: number | null
+          updated_at?: string
+          variant_count?: number | null
+        }
+        Update: {
+          canonical_url?: string
+          created_at?: string
+          id?: string
+          is_duplicate_issue?: boolean | null
+          primary_variant?: string | null
+          total_clicks?: number | null
+          total_impressions?: number | null
+          updated_at?: string
+          variant_count?: number | null
+        }
+        Relationships: []
+      }
+      gsc_country_metrics: {
+        Row: {
+          clicks: number
+          country: string
+          created_at: string
+          ctr: number
+          date: string
+          id: string
+          impressions: number
+          position: number
+          search_type: string
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          country: string
+          created_at?: string
+          ctr?: number
+          date: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          country?: string
+          created_at?: string
+          ctr?: number
+          date?: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_device_metrics: {
+        Row: {
+          clicks: number
+          created_at: string
+          ctr: number
+          date: string
+          device: string
+          id: string
+          impressions: number
+          position: number
+          search_type: string
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date: string
+          device: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date?: string
+          device?: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_page_aggregates: {
+        Row: {
+          avg_ctr: number
+          avg_position: number
+          computed_date: string
+          created_at: string
+          delta_clicks_mom: number | null
+          delta_clicks_wow: number | null
+          delta_impressions_mom: number | null
+          delta_impressions_wow: number | null
+          delta_position_mom: number | null
+          delta_position_wow: number | null
+          id: string
+          is_loser: boolean | null
+          is_winner: boolean | null
+          normalized_url: string
+          pct_change_clicks_mom: number | null
+          pct_change_clicks_wow: number | null
+          pct_change_impressions_mom: number | null
+          pct_change_impressions_wow: number | null
+          search_type: string
+          site_property: string
+          total_clicks: number
+          total_impressions: number
+          window_type: string
+        }
+        Insert: {
+          avg_ctr?: number
+          avg_position?: number
+          computed_date: string
+          created_at?: string
+          delta_clicks_mom?: number | null
+          delta_clicks_wow?: number | null
+          delta_impressions_mom?: number | null
+          delta_impressions_wow?: number | null
+          delta_position_mom?: number | null
+          delta_position_wow?: number | null
+          id?: string
+          is_loser?: boolean | null
+          is_winner?: boolean | null
+          normalized_url: string
+          pct_change_clicks_mom?: number | null
+          pct_change_clicks_wow?: number | null
+          pct_change_impressions_mom?: number | null
+          pct_change_impressions_wow?: number | null
+          search_type?: string
+          site_property?: string
+          total_clicks?: number
+          total_impressions?: number
+          window_type: string
+        }
+        Update: {
+          avg_ctr?: number
+          avg_position?: number
+          computed_date?: string
+          created_at?: string
+          delta_clicks_mom?: number | null
+          delta_clicks_wow?: number | null
+          delta_impressions_mom?: number | null
+          delta_impressions_wow?: number | null
+          delta_position_mom?: number | null
+          delta_position_wow?: number | null
+          id?: string
+          is_loser?: boolean | null
+          is_winner?: boolean | null
+          normalized_url?: string
+          pct_change_clicks_mom?: number | null
+          pct_change_clicks_wow?: number | null
+          pct_change_impressions_mom?: number | null
+          pct_change_impressions_wow?: number | null
+          search_type?: string
+          site_property?: string
+          total_clicks?: number
+          total_impressions?: number
+          window_type?: string
+        }
+        Relationships: []
+      }
+      gsc_page_metrics: {
+        Row: {
+          clicks: number
+          created_at: string
+          ctr: number
+          date: string
+          id: string
+          impressions: number
+          normalized_url: string
+          position: number
+          raw_url: string
+          search_type: string
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date: string
+          id?: string
+          impressions?: number
+          normalized_url: string
+          position?: number
+          raw_url: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date?: string
+          id?: string
+          impressions?: number
+          normalized_url?: string
+          position?: number
+          raw_url?: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_page_query_metrics: {
+        Row: {
+          clicks: number
+          created_at: string
+          ctr: number
+          date: string
+          id: string
+          impressions: number
+          normalized_url: string
+          position: number
+          query: string
+          raw_url: string
+          search_type: string
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date: string
+          id?: string
+          impressions?: number
+          normalized_url: string
+          position?: number
+          query: string
+          raw_url: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date?: string
+          id?: string
+          impressions?: number
+          normalized_url?: string
+          position?: number
+          query?: string
+          raw_url?: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_query_aggregates: {
+        Row: {
+          avg_ctr: number
+          avg_position: number
+          computed_date: string
+          created_at: string
+          delta_clicks_mom: number | null
+          delta_clicks_wow: number | null
+          delta_impressions_mom: number | null
+          delta_impressions_wow: number | null
+          delta_position_mom: number | null
+          delta_position_wow: number | null
+          id: string
+          is_cannibalized: boolean | null
+          query: string
+          ranking_page_count: number | null
+          search_type: string
+          site_property: string
+          top_page_url: string | null
+          total_clicks: number
+          total_impressions: number
+          window_type: string
+        }
+        Insert: {
+          avg_ctr?: number
+          avg_position?: number
+          computed_date: string
+          created_at?: string
+          delta_clicks_mom?: number | null
+          delta_clicks_wow?: number | null
+          delta_impressions_mom?: number | null
+          delta_impressions_wow?: number | null
+          delta_position_mom?: number | null
+          delta_position_wow?: number | null
+          id?: string
+          is_cannibalized?: boolean | null
+          query: string
+          ranking_page_count?: number | null
+          search_type?: string
+          site_property?: string
+          top_page_url?: string | null
+          total_clicks?: number
+          total_impressions?: number
+          window_type: string
+        }
+        Update: {
+          avg_ctr?: number
+          avg_position?: number
+          computed_date?: string
+          created_at?: string
+          delta_clicks_mom?: number | null
+          delta_clicks_wow?: number | null
+          delta_impressions_mom?: number | null
+          delta_impressions_wow?: number | null
+          delta_position_mom?: number | null
+          delta_position_wow?: number | null
+          id?: string
+          is_cannibalized?: boolean | null
+          query?: string
+          ranking_page_count?: number | null
+          search_type?: string
+          site_property?: string
+          top_page_url?: string | null
+          total_clicks?: number
+          total_impressions?: number
+          window_type?: string
+        }
+        Relationships: []
+      }
+      gsc_query_metrics: {
+        Row: {
+          clicks: number
+          created_at: string
+          ctr: number
+          date: string
+          id: string
+          impressions: number
+          position: number
+          query: string
+          search_type: string
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date: string
+          id?: string
+          impressions?: number
+          position?: number
+          query: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date?: string
+          id?: string
+          impressions?: number
+          position?: number
+          query?: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_search_appearance_metrics: {
+        Row: {
+          clicks: number
+          created_at: string
+          ctr: number
+          date: string
+          id: string
+          impressions: number
+          position: number
+          search_appearance: string
+          search_type: string
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_appearance: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date?: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_appearance?: string
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_site_aggregates: {
+        Row: {
+          avg_ctr: number
+          avg_position: number
+          computed_date: string
+          created_at: string
+          delta_clicks_mom: number | null
+          delta_clicks_wow: number | null
+          delta_ctr_mom: number | null
+          delta_ctr_wow: number | null
+          delta_impressions_mom: number | null
+          delta_impressions_wow: number | null
+          delta_position_mom: number | null
+          delta_position_wow: number | null
+          id: string
+          pct_change_clicks_mom: number | null
+          pct_change_clicks_wow: number | null
+          pct_change_impressions_mom: number | null
+          pct_change_impressions_wow: number | null
+          search_type: string
+          site_property: string
+          total_clicks: number
+          total_impressions: number
+          window_type: string
+        }
+        Insert: {
+          avg_ctr?: number
+          avg_position?: number
+          computed_date: string
+          created_at?: string
+          delta_clicks_mom?: number | null
+          delta_clicks_wow?: number | null
+          delta_ctr_mom?: number | null
+          delta_ctr_wow?: number | null
+          delta_impressions_mom?: number | null
+          delta_impressions_wow?: number | null
+          delta_position_mom?: number | null
+          delta_position_wow?: number | null
+          id?: string
+          pct_change_clicks_mom?: number | null
+          pct_change_clicks_wow?: number | null
+          pct_change_impressions_mom?: number | null
+          pct_change_impressions_wow?: number | null
+          search_type?: string
+          site_property?: string
+          total_clicks?: number
+          total_impressions?: number
+          window_type: string
+        }
+        Update: {
+          avg_ctr?: number
+          avg_position?: number
+          computed_date?: string
+          created_at?: string
+          delta_clicks_mom?: number | null
+          delta_clicks_wow?: number | null
+          delta_ctr_mom?: number | null
+          delta_ctr_wow?: number | null
+          delta_impressions_mom?: number | null
+          delta_impressions_wow?: number | null
+          delta_position_mom?: number | null
+          delta_position_wow?: number | null
+          id?: string
+          pct_change_clicks_mom?: number | null
+          pct_change_clicks_wow?: number | null
+          pct_change_impressions_mom?: number | null
+          pct_change_impressions_wow?: number | null
+          search_type?: string
+          site_property?: string
+          total_clicks?: number
+          total_impressions?: number
+          window_type?: string
+        }
+        Relationships: []
+      }
+      gsc_site_metrics: {
+        Row: {
+          clicks: number
+          created_at: string
+          ctr: number
+          date: string
+          id: string
+          impressions: number
+          position: number
+          search_type: string
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          clicks?: number
+          created_at?: string
+          ctr?: number
+          date?: string
+          id?: string
+          impressions?: number
+          position?: number
+          search_type?: string
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_sync_jobs: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          current_dimension: string | null
+          date_from: string
+          date_to: string
+          error_details: Json | null
+          errors_count: number | null
+          id: string
+          job_type: string
+          progress_percent: number | null
+          rows_fetched: number | null
+          rows_inserted: number | null
+          rows_updated: number | null
+          started_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          current_dimension?: string | null
+          date_from: string
+          date_to: string
+          error_details?: Json | null
+          errors_count?: number | null
+          id?: string
+          job_type: string
+          progress_percent?: number | null
+          rows_fetched?: number | null
+          rows_inserted?: number | null
+          rows_updated?: number | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          current_dimension?: string | null
+          date_from?: string
+          date_to?: string
+          error_details?: Json | null
+          errors_count?: number | null
+          id?: string
+          job_type?: string
+          progress_percent?: number | null
+          rows_fetched?: number | null
+          rows_inserted?: number | null
+          rows_updated?: number | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_sync_state: {
+        Row: {
+          created_at: string
+          dimension: string
+          id: string
+          last_sync_at: string | null
+          last_synced_date: string | null
+          next_sync_at: string | null
+          site_property: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dimension: string
+          id?: string
+          last_sync_at?: string | null
+          last_synced_date?: string | null
+          next_sync_at?: string | null
+          site_property?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dimension?: string
+          id?: string
+          last_sync_at?: string | null
+          last_synced_date?: string | null
+          next_sync_at?: string | null
+          site_property?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gsc_url_registry: {
+        Row: {
+          avg_position: number | null
+          canonical_group_id: string | null
+          created_at: string
+          first_seen: string
+          host_variant: string | null
+          id: string
+          is_image: boolean | null
+          is_legacy_cms: boolean | null
+          is_pdf: boolean | null
+          language: string | null
+          last_seen: string
+          normalized_url: string
+          protocol_variant: string | null
+          raw_url: string
+          route_key: string | null
+          total_clicks: number | null
+          total_impressions: number | null
+          trailing_slash_variant: boolean | null
+          updated_at: string
+        }
+        Insert: {
+          avg_position?: number | null
+          canonical_group_id?: string | null
+          created_at?: string
+          first_seen?: string
+          host_variant?: string | null
+          id?: string
+          is_image?: boolean | null
+          is_legacy_cms?: boolean | null
+          is_pdf?: boolean | null
+          language?: string | null
+          last_seen?: string
+          normalized_url: string
+          protocol_variant?: string | null
+          raw_url: string
+          route_key?: string | null
+          total_clicks?: number | null
+          total_impressions?: number | null
+          trailing_slash_variant?: boolean | null
+          updated_at?: string
+        }
+        Update: {
+          avg_position?: number | null
+          canonical_group_id?: string | null
+          created_at?: string
+          first_seen?: string
+          host_variant?: string | null
+          id?: string
+          is_image?: boolean | null
+          is_legacy_cms?: boolean | null
+          is_pdf?: boolean | null
+          language?: string | null
+          last_seen?: string
+          normalized_url?: string
+          protocol_variant?: string | null
+          raw_url?: string
+          route_key?: string | null
+          total_clicks?: number | null
+          total_impressions?: number | null
+          trailing_slash_variant?: boolean | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gsc_url_registry_canonical_group_id_fkey"
+            columns: ["canonical_group_id"]
+            isOneToOne: false
+            referencedRelation: "gsc_canonical_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       landingpage_content: {
         Row: {
           created_at: string | null
@@ -312,6 +1150,8 @@ export type Database = {
         }
         Returns: boolean
       }
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
     }
     Enums: {
       app_role: "admin" | "staff"
