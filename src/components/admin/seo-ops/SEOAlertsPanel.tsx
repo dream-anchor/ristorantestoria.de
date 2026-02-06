@@ -135,10 +135,16 @@ function AlertCard({
   const statusConfig = getStatusConfig(alert.status);
   const Icon = config.icon;
 
-  const timeAgo = formatDistanceToNow(new Date(alert.date_detected), {
-    addSuffix: true,
-    locale: de,
-  });
+  const timeAgo = (() => {
+    try {
+      if (!alert.date_detected) return "-";
+      const date = new Date(alert.date_detected);
+      if (isNaN(date.getTime())) return "-";
+      return formatDistanceToNow(date, { addSuffix: true, locale: de });
+    } catch {
+      return "-";
+    }
+  })();
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);

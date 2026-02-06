@@ -135,8 +135,21 @@ function TaskCard({
   const StatusIcon = statusConfig.icon;
 
   const isDone = task.status === "done" || task.status === "wont_fix";
-  const isOverdue = task.due_date && isPast(new Date(task.due_date)) && !isDone;
-  const isDueToday = task.due_date && isToday(new Date(task.due_date));
+
+  // Safely parse due date
+  const dueDate = (() => {
+    try {
+      if (!task.due_date) return null;
+      const date = new Date(task.due_date);
+      if (isNaN(date.getTime())) return null;
+      return date;
+    } catch {
+      return null;
+    }
+  })();
+
+  const isOverdue = dueDate && isPast(dueDate) && !isDone;
+  const isDueToday = dueDate && isToday(dueDate);
 
   const handleStatusUpdate = async (newStatus: SEOTask["status"]) => {
     if (!onUpdateStatus) return;
@@ -205,7 +218,7 @@ function TaskCard({
           <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{task.description}</p>
         </div>
         <div className="flex flex-col items-end gap-1">
-          {task.due_date && (
+          {dueDate && (
             <div
               className={cn(
                 "flex items-center gap-1 text-xs",
@@ -215,7 +228,7 @@ function TaskCard({
               )}
             >
               <Calendar className="h-3 w-3" />
-              {format(new Date(task.due_date), "d. MMM", { locale: de })}
+              {format(dueDate, "d. MMM", { locale: de })}
             </div>
           )}
           <ChevronDown
@@ -249,12 +262,12 @@ function TaskCard({
               </div>
             )}
 
-            {task.due_date && (
+            {dueDate && (
               <div className="flex items-center gap-2 text-sm">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span className="text-muted-foreground">Fällig:</span>
                 <span className={isOverdue ? "text-red-600" : ""}>
-                  {format(new Date(task.due_date), "d. MMMM yyyy", { locale: de })}
+                  {format(dueDate, "d. MMMM yyyy", { locale: de })}
                   {isOverdue && " (überfällig)"}
                 </span>
               </div>
@@ -272,7 +285,15 @@ function TaskCard({
               <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
                 <CheckCircle2 className="h-4 w-4" />
                 <span>
-                  Erledigt am {format(new Date(task.completed_at), "d. MMMM yyyy", { locale: de })}
+                  Erledigt am {(() => {
+                    try {
+                      const date = new Date(task.completed_at);
+                      if (isNaN(date.getTime())) return "-";
+                      return format(date, "d. MMMM yyyy", { locale: de });
+                    } catch {
+                      return "-";
+                    }
+                  })()}
                 </span>
               </div>
             )}
@@ -380,7 +401,15 @@ export default function SEOTasksPanel({
     if (priorityDiff !== 0) return priorityDiff;
 
     if (a.due_date && b.due_date) {
-      return new Date(a.due_date).getTime() - new Date(b.due_date).getTime();
+      try {
+        const dateA = new Date(a.due_date);
+        const dateB = new Date(b.due_date);
+        if (!isNaN(dateA.getTime()) && !isNaN(dateB.getTime())) {
+          return dateA.getTime() - dateB.getTime();
+        }
+      } catch {
+        // Ignore date parsing errors in sort
+      }
     }
     if (a.due_date) return -1;
     if (b.due_date) return 1;

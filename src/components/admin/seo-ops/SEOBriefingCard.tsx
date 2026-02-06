@@ -127,7 +127,21 @@ export default function SEOBriefingCard({
     );
   }
 
-  const briefingDate = new Date(briefing.date);
+  // Safely parse the briefing date
+  const briefingDate = (() => {
+    try {
+      if (!briefing.date) return null;
+      const date = new Date(briefing.date);
+      if (isNaN(date.getTime())) return null;
+      return date;
+    } catch {
+      return null;
+    }
+  })();
+
+  const formattedDate = briefingDate
+    ? format(briefingDate, "EEEE, d. MMMM yyyy", { locale: de })
+    : "-";
 
   return (
     <div
@@ -151,7 +165,7 @@ export default function SEOBriefingCard({
               <h3 className="font-semibold">SEO Briefing</h3>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Calendar className="h-3 w-3" />
-                {format(briefingDate, "EEEE, d. MMMM yyyy", { locale: de })}
+                {formattedDate}
               </div>
             </div>
           </div>

@@ -249,18 +249,29 @@ function PromptCard({
           <div className="px-4 py-3 bg-muted/30 border-t flex items-center justify-between">
             <div className="text-xs text-muted-foreground">
               Erstellt{" "}
-              {formatDistanceToNow(new Date(prompt.created_at), {
-                addSuffix: true,
-                locale: de,
-              })}
+              {(() => {
+                try {
+                  if (!prompt.created_at) return "-";
+                  const date = new Date(prompt.created_at);
+                  if (isNaN(date.getTime())) return "-";
+                  return formatDistanceToNow(date, { addSuffix: true, locale: de });
+                } catch {
+                  return "-";
+                }
+              })()}
               {prompt.used_at && (
                 <>
                   {" "}
                   • Verwendet{" "}
-                  {formatDistanceToNow(new Date(prompt.used_at), {
-                    addSuffix: true,
-                    locale: de,
-                  })}
+                  {(() => {
+                    try {
+                      const date = new Date(prompt.used_at);
+                      if (isNaN(date.getTime())) return "-";
+                      return formatDistanceToNow(date, { addSuffix: true, locale: de });
+                    } catch {
+                      return "-";
+                    }
+                  })()}
                 </>
               )}
             </div>
@@ -304,7 +315,16 @@ export default function SEOPromptsPanel({
   // Sort: unused first, then by creation date
   const sortedPrompts = [...filteredPrompts].sort((a, b) => {
     if (a.is_used !== b.is_used) return a.is_used ? 1 : -1;
-    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    try {
+      const dateA = new Date(a.created_at);
+      const dateB = new Date(b.created_at);
+      if (!isNaN(dateA.getTime()) && !isNaN(dateB.getTime())) {
+        return dateB.getTime() - dateA.getTime();
+      }
+    } catch {
+      // Ignore date parsing errors in sort
+    }
+    return 0;
   });
 
   if (isLoading) {

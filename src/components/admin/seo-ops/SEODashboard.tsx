@@ -177,15 +177,21 @@ export default function SEODashboard() {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              {stats?.last_pipeline_run && (
+              {stats?.last_pipeline_run && (stats.last_pipeline_run.completed_at || stats.last_pipeline_run.started_at) && (
                 <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground">
                   <Clock className="h-3 w-3" />
                   <span>
                     Letzte Analyse:{" "}
-                    {formatDistanceToNow(new Date(stats.last_pipeline_run.completed_at || stats.last_pipeline_run.started_at), {
-                      addSuffix: true,
-                      locale: de,
-                    })}
+                    {(() => {
+                      try {
+                        const dateStr = stats.last_pipeline_run.completed_at || stats.last_pipeline_run.started_at;
+                        const date = new Date(dateStr!);
+                        if (isNaN(date.getTime())) return "-";
+                        return formatDistanceToNow(date, { addSuffix: true, locale: de });
+                      } catch {
+                        return "-";
+                      }
+                    })()}
                   </span>
                 </div>
               )}
@@ -244,11 +250,16 @@ export default function SEODashboard() {
                   />
                   <StatCard
                     title="Letztes Briefing"
-                    value={
-                      stats?.latest_briefing_date
-                        ? format(new Date(stats.latest_briefing_date), "d. MMM", { locale: de })
-                        : "-"
-                    }
+                    value={(() => {
+                      try {
+                        if (!stats?.latest_briefing_date) return "-";
+                        const date = new Date(stats.latest_briefing_date);
+                        if (isNaN(date.getTime())) return "-";
+                        return format(date, "d. MMM", { locale: de });
+                      } catch {
+                        return "-";
+                      }
+                    })()}
                     icon={FileText}
                     color="bg-indigo-500"
                     onClick={() => setDetailView("briefing")}
@@ -388,7 +399,18 @@ export default function SEODashboard() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Datum:</span>
-                    <span>{format(new Date(stats.last_pipeline_run.date), "d. MMMM yyyy", { locale: de })}</span>
+                    <span>
+                      {(() => {
+                        try {
+                          if (!stats.last_pipeline_run.date) return "-";
+                          const date = new Date(stats.last_pipeline_run.date);
+                          if (isNaN(date.getTime())) return "-";
+                          return format(date, "d. MMMM yyyy", { locale: de });
+                        } catch {
+                          return "-";
+                        }
+                      })()}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Status:</span>
@@ -519,7 +541,16 @@ export default function SEODashboard() {
               {detailView === "briefing" && briefing && (
                 <div className="prose prose-sm dark:prose-invert max-w-none">
                   <h1 className="text-xl font-semibold mb-4">
-                    SEO Briefing - {format(new Date(briefing.date), "d. MMMM yyyy", { locale: de })}
+                    SEO Briefing - {(() => {
+                      try {
+                        if (!briefing.date) return "-";
+                        const date = new Date(briefing.date);
+                        if (isNaN(date.getTime())) return "-";
+                        return format(date, "d. MMMM yyyy", { locale: de });
+                      } catch {
+                        return "-";
+                      }
+                    })()}
                   </h1>
                   <div className="whitespace-pre-wrap font-mono text-sm bg-muted/50 rounded-xl p-6">
                     {briefing.briefing_md}
