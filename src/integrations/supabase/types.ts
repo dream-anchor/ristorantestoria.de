@@ -1117,6 +1117,416 @@ export type Database = {
         }
         Relationships: []
       }
+      seo_alert_event: {
+        Row: {
+          affected_path: string | null
+          affected_query: string | null
+          baseline_value: number | null
+          created_at: string
+          description: string | null
+          details: Json | null
+          detected_date: string
+          id: string
+          metric_name: string | null
+          metric_value: number | null
+          pct_change: number | null
+          resolved_at: string | null
+          resolved_by: string | null
+          rule_id: string
+          severity: Database["public"]["Enums"]["seo_severity"]
+          status: Database["public"]["Enums"]["seo_alert_status"]
+          title: string
+          updated_at: string
+          window: Database["public"]["Enums"]["seo_window"] | null
+        }
+        Insert: {
+          affected_path?: string | null
+          affected_query?: string | null
+          baseline_value?: number | null
+          created_at?: string
+          description?: string | null
+          details?: Json | null
+          detected_date?: string
+          id?: string
+          metric_name?: string | null
+          metric_value?: number | null
+          pct_change?: number | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          rule_id: string
+          severity?: Database["public"]["Enums"]["seo_severity"]
+          status?: Database["public"]["Enums"]["seo_alert_status"]
+          title: string
+          updated_at?: string
+          window?: Database["public"]["Enums"]["seo_window"] | null
+        }
+        Update: {
+          affected_path?: string | null
+          affected_query?: string | null
+          baseline_value?: number | null
+          created_at?: string
+          description?: string | null
+          details?: Json | null
+          detected_date?: string
+          id?: string
+          metric_name?: string | null
+          metric_value?: number | null
+          pct_change?: number | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          rule_id?: string
+          severity?: Database["public"]["Enums"]["seo_severity"]
+          status?: Database["public"]["Enums"]["seo_alert_status"]
+          title?: string
+          updated_at?: string
+          window?: Database["public"]["Enums"]["seo_window"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seo_alert_event_rule_id_fkey"
+            columns: ["rule_id"]
+            isOneToOne: false
+            referencedRelation: "seo_alert_rule"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      seo_alert_rule: {
+        Row: {
+          base_severity: Database["public"]["Enums"]["seo_severity"]
+          boost_money: boolean
+          cooldown_hours: number
+          created_at: string
+          description: string | null
+          id: string
+          is_enabled: boolean
+          metric: string
+          name: string
+          operator: string
+          scope: Database["public"]["Enums"]["seo_scope"]
+          slug: string
+          threshold: number
+          updated_at: string
+          window: Database["public"]["Enums"]["seo_window"]
+        }
+        Insert: {
+          base_severity?: Database["public"]["Enums"]["seo_severity"]
+          boost_money?: boolean
+          cooldown_hours?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_enabled?: boolean
+          metric: string
+          name: string
+          operator?: string
+          scope?: Database["public"]["Enums"]["seo_scope"]
+          slug: string
+          threshold: number
+          updated_at?: string
+          window?: Database["public"]["Enums"]["seo_window"]
+        }
+        Update: {
+          base_severity?: Database["public"]["Enums"]["seo_severity"]
+          boost_money?: boolean
+          cooldown_hours?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_enabled?: boolean
+          metric?: string
+          name?: string
+          operator?: string
+          scope?: Database["public"]["Enums"]["seo_scope"]
+          slug?: string
+          threshold?: number
+          updated_at?: string
+          window?: Database["public"]["Enums"]["seo_window"]
+        }
+        Relationships: []
+      }
+      seo_baseline_cache: {
+        Row: {
+          baseline_value: number
+          computed_date: string
+          created_at: string
+          id: string
+          metric: string
+          sample_count: number | null
+          scope: Database["public"]["Enums"]["seo_scope"]
+          scope_key: string
+          window: Database["public"]["Enums"]["seo_window"]
+        }
+        Insert: {
+          baseline_value: number
+          computed_date?: string
+          created_at?: string
+          id?: string
+          metric: string
+          sample_count?: number | null
+          scope: Database["public"]["Enums"]["seo_scope"]
+          scope_key: string
+          window: Database["public"]["Enums"]["seo_window"]
+        }
+        Update: {
+          baseline_value?: number
+          computed_date?: string
+          created_at?: string
+          id?: string
+          metric?: string
+          sample_count?: number | null
+          scope?: Database["public"]["Enums"]["seo_scope"]
+          scope_key?: string
+          window?: Database["public"]["Enums"]["seo_window"]
+        }
+        Relationships: []
+      }
+      seo_daily_briefing: {
+        Row: {
+          alerts_count: number | null
+          briefing_date: string
+          created_at: string
+          id: string
+          metrics_snapshot: Json | null
+          pipeline_run_id: string | null
+          prompts_generated: number | null
+          summary_de: string | null
+          summary_en: string | null
+          tasks_created: number | null
+        }
+        Insert: {
+          alerts_count?: number | null
+          briefing_date: string
+          created_at?: string
+          id?: string
+          metrics_snapshot?: Json | null
+          pipeline_run_id?: string | null
+          prompts_generated?: number | null
+          summary_de?: string | null
+          summary_en?: string | null
+          tasks_created?: number | null
+        }
+        Update: {
+          alerts_count?: number | null
+          briefing_date?: string
+          created_at?: string
+          id?: string
+          metrics_snapshot?: Json | null
+          pipeline_run_id?: string | null
+          prompts_generated?: number | null
+          summary_de?: string | null
+          summary_en?: string | null
+          tasks_created?: number | null
+        }
+        Relationships: []
+      }
+      seo_page_catalog: {
+        Row: {
+          canonical_url: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          notes: string | null
+          page_type: Database["public"]["Enums"]["seo_page_type"]
+          path: string
+          target_keywords: string[] | null
+          title_de: string | null
+          title_en: string | null
+          updated_at: string
+        }
+        Insert: {
+          canonical_url?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          notes?: string | null
+          page_type?: Database["public"]["Enums"]["seo_page_type"]
+          path: string
+          target_keywords?: string[] | null
+          title_de?: string | null
+          title_en?: string | null
+          updated_at?: string
+        }
+        Update: {
+          canonical_url?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          notes?: string | null
+          page_type?: Database["public"]["Enums"]["seo_page_type"]
+          path?: string
+          target_keywords?: string[] | null
+          title_de?: string | null
+          title_en?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      seo_pipeline_run: {
+        Row: {
+          alerts_detected: number | null
+          completed_at: string | null
+          created_at: string
+          duration_ms: number | null
+          error_message: string | null
+          id: string
+          prompts_generated: number | null
+          started_at: string
+          status: string
+          steps_completed: string[] | null
+          tasks_created: number | null
+        }
+        Insert: {
+          alerts_detected?: number | null
+          completed_at?: string | null
+          created_at?: string
+          duration_ms?: number | null
+          error_message?: string | null
+          id?: string
+          prompts_generated?: number | null
+          started_at?: string
+          status?: string
+          steps_completed?: string[] | null
+          tasks_created?: number | null
+        }
+        Update: {
+          alerts_detected?: number | null
+          completed_at?: string | null
+          created_at?: string
+          duration_ms?: number | null
+          error_message?: string | null
+          id?: string
+          prompts_generated?: number | null
+          started_at?: string
+          status?: string
+          steps_completed?: string[] | null
+          tasks_created?: number | null
+        }
+        Relationships: []
+      }
+      seo_prompt_pack: {
+        Row: {
+          alert_event_id: string | null
+          area: Database["public"]["Enums"]["seo_prompt_area"]
+          context_data: Json | null
+          created_at: string
+          executed_at: string | null
+          id: string
+          is_executed: boolean
+          prompt_text: string
+          result_summary: string | null
+          task_id: string | null
+          title: string
+        }
+        Insert: {
+          alert_event_id?: string | null
+          area: Database["public"]["Enums"]["seo_prompt_area"]
+          context_data?: Json | null
+          created_at?: string
+          executed_at?: string | null
+          id?: string
+          is_executed?: boolean
+          prompt_text: string
+          result_summary?: string | null
+          task_id?: string | null
+          title: string
+        }
+        Update: {
+          alert_event_id?: string | null
+          area?: Database["public"]["Enums"]["seo_prompt_area"]
+          context_data?: Json | null
+          created_at?: string
+          executed_at?: string | null
+          id?: string
+          is_executed?: boolean
+          prompt_text?: string
+          result_summary?: string | null
+          task_id?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seo_prompt_pack_alert_event_id_fkey"
+            columns: ["alert_event_id"]
+            isOneToOne: false
+            referencedRelation: "seo_alert_event"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "seo_prompt_pack_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "seo_task"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      seo_task: {
+        Row: {
+          affected_path: string | null
+          alert_event_id: string | null
+          assigned_to: string | null
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          notes: string | null
+          priority: Database["public"]["Enums"]["seo_severity"]
+          prompt_pack_id: string | null
+          status: Database["public"]["Enums"]["seo_task_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          affected_path?: string | null
+          alert_event_id?: string | null
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          priority?: Database["public"]["Enums"]["seo_severity"]
+          prompt_pack_id?: string | null
+          status?: Database["public"]["Enums"]["seo_task_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          affected_path?: string | null
+          alert_event_id?: string | null
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          priority?: Database["public"]["Enums"]["seo_severity"]
+          prompt_pack_id?: string | null
+          status?: Database["public"]["Enums"]["seo_task_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seo_task_alert_event_id_fkey"
+            columns: ["alert_event_id"]
+            isOneToOne: false
+            referencedRelation: "seo_alert_event"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "seo_task_prompt_pack_id_fkey"
+            columns: ["prompt_pack_id"]
+            isOneToOne: false
+            referencedRelation: "seo_prompt_pack"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -1143,6 +1553,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      boost_severity: {
+        Args: {
+          p_base: Database["public"]["Enums"]["seo_severity"]
+          p_page_type: Database["public"]["Enums"]["seo_page_type"]
+        }
+        Returns: Database["public"]["Enums"]["seo_severity"]
+      }
+      get_page_type: {
+        Args: { p_path: string }
+        Returns: Database["public"]["Enums"]["seo_page_type"]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1150,6 +1571,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      normalize_seo_path: { Args: { p_url: string }; Returns: string }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
     }
@@ -1162,6 +1584,34 @@ export type Database = {
         | "christmas"
         | "valentines"
         | "special"
+      seo_alert_status: "open" | "acknowledged" | "resolved" | "false_positive"
+      seo_page_type:
+        | "money"
+        | "pillar"
+        | "cluster"
+        | "trust"
+        | "legal"
+        | "legacy"
+      seo_prompt_area:
+        | "redirects"
+        | "titles"
+        | "content"
+        | "schema"
+        | "internal_linking"
+        | "new_page"
+        | "canonicalization"
+        | "technical"
+      seo_scope:
+        | "site"
+        | "page"
+        | "query"
+        | "canonical_group"
+        | "device"
+        | "country"
+        | "appearance"
+      seo_severity: "low" | "medium" | "high" | "critical"
+      seo_task_status: "open" | "in_progress" | "done" | "wont_fix"
+      seo_window: "daily" | "wow" | "mom"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1298,6 +1748,30 @@ export const Constants = {
         "valentines",
         "special",
       ],
+      seo_alert_status: ["open", "acknowledged", "resolved", "false_positive"],
+      seo_page_type: ["money", "pillar", "cluster", "trust", "legal", "legacy"],
+      seo_prompt_area: [
+        "redirects",
+        "titles",
+        "content",
+        "schema",
+        "internal_linking",
+        "new_page",
+        "canonicalization",
+        "technical",
+      ],
+      seo_scope: [
+        "site",
+        "page",
+        "query",
+        "canonical_group",
+        "device",
+        "country",
+        "appearance",
+      ],
+      seo_severity: ["low", "medium", "high", "critical"],
+      seo_task_status: ["open", "in_progress", "done", "wont_fix"],
+      seo_window: ["daily", "wow", "mom"],
     },
   },
 } as const

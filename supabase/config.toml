@@ -20,3 +20,9 @@ verify_jwt = false
 
 [functions.gsc-aggregate]
 verify_jwt = false
+
+[functions.seo-pipeline]
+verify_jwt = false
+
+[functions.seo-api]
+verify_jwt = false
