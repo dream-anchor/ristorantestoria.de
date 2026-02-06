@@ -1,0 +1,197 @@
+{
+  "rules": [
+    {
+      "key": "drop_clicks_site",
+      "name": "Site Clicks Drop",
+      "description": "Gesamte Klicks der Website sind deutlich gesunken",
+      "category": "performance",
+      "config": {
+        "threshold_pct": -15,
+        "min_absolute_drop": 50
+      },
+      "default_severity": "high",
+      "scope": "site",
+      "windows": ["daily", "wow", "mom"],
+      "min_impressions": 100,
+      "enabled": true
+    },
+    {
+      "key": "drop_clicks_page",
+      "name": "Page Clicks Drop",
+      "description": "Klicks einer Seite sind deutlich gesunken",
+      "category": "performance",
+      "config": {
+        "threshold_pct": -25,
+        "min_absolute_drop": 10
+      },
+      "default_severity": "medium",
+      "scope": "page",
+      "windows": ["wow", "mom"],
+      "min_impressions": 30,
+      "enabled": true
+    },
+    {
+      "key": "drop_impressions_page",
+      "name": "Page Impressions Drop",
+      "description": "Impressionen einer Seite sind deutlich gesunken (Sichtbarkeitsverlust)",
+      "category": "performance",
+      "config": {
+        "threshold_pct": -30,
+        "min_absolute_drop": 100
+      },
+      "default_severity": "medium",
+      "scope": "page",
+      "windows": ["wow", "mom"],
+      "min_impressions": 100,
+      "enabled": true
+    },
+    {
+      "key": "position_drop",
+      "name": "Ranking Drop",
+      "description": "Durchschnittliche Position einer Seite ist gesunken",
+      "category": "ranking",
+      "config": {
+        "threshold_positions": 3,
+        "max_baseline_position": 20
+      },
+      "default_severity": "high",
+      "scope": "page",
+      "windows": ["wow", "mom"],
+      "min_impressions": 50,
+      "enabled": true
+    },
+    {
+      "key": "ctr_drop_stable_position",
+      "name": "CTR Drop (Stable Position)",
+      "description": "CTR gesunken obwohl Position stabil - Title/Description Problem",
+      "category": "content",
+      "config": {
+        "ctr_threshold_pct": -20,
+        "position_tolerance": 2
+      },
+      "default_severity": "medium",
+      "scope": "page",
+      "windows": ["wow", "mom"],
+      "min_impressions": 100,
+      "enabled": true
+    },
+    {
+      "key": "duplicate_variants",
+      "name": "Duplicate URL Variants",
+      "description": "Mehrere URL-Varianten ranken (http/https, www/non-www, trailing slash)",
+      "category": "technical",
+      "config": {
+        "min_variant_impressions": 10
+      },
+      "default_severity": "high",
+      "scope": "canonical_group",
+      "windows": ["daily"],
+      "min_impressions": 0,
+      "enabled": true
+    },
+    {
+      "key": "legacy_cms_traffic",
+      "name": "Legacy CMS Traffic",
+      "description": "Alte /cms/ URLs haben noch Traffic",
+      "category": "technical",
+      "config": {
+        "patterns": ["/cms/", "?page_id=", "/wp-content/"]
+      },
+      "default_severity": "critical",
+      "scope": "page",
+      "windows": ["daily"],
+      "min_impressions": 1,
+      "enabled": true
+    },
+    {
+      "key": "cannibalization",
+      "name": "Keyword Cannibalization",
+      "description": "Mehrere Seiten ranken für dasselbe Keyword",
+      "category": "content",
+      "config": {
+        "min_pages": 2,
+        "max_position_spread": 10,
+        "min_query_impressions": 50
+      },
+      "default_severity": "high",
+      "scope": "query",
+      "windows": ["wow"],
+      "min_impressions": 50,
+      "enabled": true
+    },
+    {
+      "key": "appearance_loss",
+      "name": "Rich Result Loss",
+      "description": "Rich Snippet (FAQ, Review) verloren",
+      "category": "content",
+      "config": {
+        "appearance_types": ["FAQ rich result", "Review snippet", "Event"]
+      },
+      "default_severity": "medium",
+      "scope": "appearance",
+      "windows": ["wow"],
+      "min_impressions": 20,
+      "enabled": true
+    },
+    {
+      "key": "mobile_gap",
+      "name": "Mobile Performance Gap",
+      "description": "Mobile Position deutlich schlechter als Desktop",
+      "category": "technical",
+      "config": {
+        "position_gap": 5,
+        "min_mobile_impressions": 100
+      },
+      "default_severity": "medium",
+      "scope": "device",
+      "windows": ["wow"],
+      "min_impressions": 100,
+      "enabled": true
+    },
+    {
+      "key": "rising_query",
+      "name": "Rising Query",
+      "description": "Query mit starkem Impressionswachstum - Optimierungspotential",
+      "category": "opportunity",
+      "config": {
+        "threshold_pct": 50,
+        "min_impressions": 100,
+        "max_position": 15
+      },
+      "default_severity": "low",
+      "scope": "query",
+      "windows": ["wow"],
+      "min_impressions": 100,
+      "enabled": true
+    },
+    {
+      "key": "striking_distance",
+      "name": "Striking Distance",
+      "description": "Seite auf Position 4-10 - mit Optimierung auf Seite 1 möglich",
+      "category": "opportunity",
+      "config": {
+        "min_position": 4,
+        "max_position": 10,
+        "min_impressions": 200
+      },
+      "default_severity": "low",
+      "scope": "page",
+      "windows": ["wow"],
+      "min_impressions": 200,
+      "enabled": true
+    }
+  ],
+  "severity_boost": {
+    "money": 2,
+    "pillar": 1,
+    "cluster": 0,
+    "trust": 0,
+    "legal": -1,
+    "legacy": "force_critical"
+  },
+  "thresholds": {
+    "site_min_impressions": 100,
+    "page_min_impressions": 30,
+    "query_min_impressions": 20
+  }
+}

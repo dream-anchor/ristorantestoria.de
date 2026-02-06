@@ -21,6 +21,7 @@ import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
 import AdminGSC from "./pages/AdminGSC";
+import AdminSEO from "./pages/AdminSEO";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import CookieRichtlinie from "./pages/CookieRichtlinie";
@@ -156,6 +157,7 @@ const AppRoutes = () => {
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/gsc" element={<AdminGSC />} />
+      <Route path="/admin/seo" element={<AdminSEO />} />
       
       {/* Legacy URL redirects (previously in .htaccess) */}
       <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu" replace />} />
