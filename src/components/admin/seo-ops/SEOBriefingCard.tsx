@@ -184,59 +184,61 @@ export default function SEOBriefingCard({
       </div>
 
       {/* Metrics Highlights */}
-      <div className="px-6 py-4 border-t border-white/10 dark:border-gray-700/30">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <MetricHighlight
-            label="Klicks"
-            value={briefing.highlights.total_clicks}
-            change={briefing.highlights.clicks_change}
-          />
-          <MetricHighlight
-            label="Impressionen"
-            value={briefing.highlights.total_impressions}
-            change={briefing.highlights.impressions_change}
-          />
-          <MetricHighlight
-            label="Ø Position"
-            value={briefing.highlights.avg_position}
-            format="position"
-          />
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2">
-              {briefing.new_alerts_count > 0 ? (
-                <Badge variant="destructive" className="text-lg px-3 py-1">
-                  {briefing.new_alerts_count}
-                </Badge>
-              ) : (
-                <Badge variant="secondary" className="text-lg px-3 py-1">
-                  0
-                </Badge>
-              )}
+      {briefing.highlights && (
+        <div className="px-6 py-4 border-t border-white/10 dark:border-gray-700/30">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <MetricHighlight
+              label="Klicks"
+              value={briefing.highlights.total_clicks ?? 0}
+              change={briefing.highlights.clicks_change}
+            />
+            <MetricHighlight
+              label="Impressionen"
+              value={briefing.highlights.total_impressions ?? 0}
+              change={briefing.highlights.impressions_change}
+            />
+            <MetricHighlight
+              label="Ø Position"
+              value={briefing.highlights.avg_position ?? 0}
+              format="position"
+            />
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-2">
+                {(briefing.new_alerts_count ?? 0) > 0 ? (
+                  <Badge variant="destructive" className="text-lg px-3 py-1">
+                    {briefing.new_alerts_count}
+                  </Badge>
+                ) : (
+                  <Badge variant="secondary" className="text-lg px-3 py-1">
+                    0
+                  </Badge>
+                )}
+              </div>
+              <div className="text-xs text-muted-foreground mt-1.5">Neue Alerts</div>
             </div>
-            <div className="text-xs text-muted-foreground mt-1.5">Neue Alerts</div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Winners & Losers */}
-      {(briefing.top_winners.length > 0 || briefing.top_losers.length > 0) && (
+      {((briefing.top_winners?.length ?? 0) > 0 || (briefing.top_losers?.length ?? 0) > 0) && (
         <div className="px-6 py-4 border-t border-white/10 dark:border-gray-700/30 grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Winners */}
-          {briefing.top_winners.length > 0 && (
+          {(briefing.top_winners?.length ?? 0) > 0 && (
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
                 <span className="text-sm font-medium">Top Gewinner</span>
               </div>
               <div className="space-y-1.5">
-                {briefing.top_winners.slice(0, 3).map((page, i) => (
+                {briefing.top_winners?.slice(0, 3).map((page, i) => (
                   <div
                     key={i}
                     className="flex items-center justify-between text-xs bg-white/50 dark:bg-gray-800/50 rounded-lg px-2 py-1.5"
                   >
                     <span className="truncate max-w-[180px] font-mono">{page.path}</span>
                     <span className="text-green-600 dark:text-green-400 font-medium">
-                      +{page.change_pct.toFixed(0)}%
+                      +{(page.change_pct ?? 0).toFixed(0)}%
                     </span>
                   </div>
                 ))}
@@ -245,21 +247,21 @@ export default function SEOBriefingCard({
           )}
 
           {/* Losers */}
-          {briefing.top_losers.length > 0 && (
+          {(briefing.top_losers?.length ?? 0) > 0 && (
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <TrendingDown className="h-4 w-4 text-red-600 dark:text-red-400" />
                 <span className="text-sm font-medium">Top Verlierer</span>
               </div>
               <div className="space-y-1.5">
-                {briefing.top_losers.slice(0, 3).map((page, i) => (
+                {briefing.top_losers?.slice(0, 3).map((page, i) => (
                   <div
                     key={i}
                     className="flex items-center justify-between text-xs bg-white/50 dark:bg-gray-800/50 rounded-lg px-2 py-1.5"
                   >
                     <span className="truncate max-w-[180px] font-mono">{page.path}</span>
                     <span className="text-red-600 dark:text-red-400 font-medium">
-                      {page.change_pct.toFixed(0)}%
+                      {(page.change_pct ?? 0).toFixed(0)}%
                     </span>
                   </div>
                 ))}
@@ -270,9 +272,9 @@ export default function SEOBriefingCard({
       )}
 
       {/* Critical Issues & Recommendations */}
-      {(briefing.critical_issues.length > 0 || briefing.recommendations.length > 0) && (
+      {((briefing.critical_issues?.length ?? 0) > 0 || (briefing.recommendations?.length ?? 0) > 0) && (
         <div className="px-6 py-4 border-t border-white/10 dark:border-gray-700/30">
-          {briefing.critical_issues.length > 0 && (
+          {(briefing.critical_issues?.length ?? 0) > 0 && (
             <div className="mb-3">
               <div className="flex items-center gap-2 mb-2">
                 <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
@@ -281,7 +283,7 @@ export default function SEOBriefingCard({
                 </span>
               </div>
               <ul className="space-y-1">
-                {briefing.critical_issues.map((issue, i) => (
+                {briefing.critical_issues?.map((issue, i) => (
                   <li key={i} className="text-xs text-red-600/80 dark:text-red-400/80 flex items-start gap-2">
                     <span className="mt-1">•</span>
                     <span>{issue.title}</span>
@@ -291,14 +293,14 @@ export default function SEOBriefingCard({
             </div>
           )}
 
-          {briefing.recommendations.length > 0 && (
+          {(briefing.recommendations?.length ?? 0) > 0 && (
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <CheckCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 <span className="text-sm font-medium">Empfehlungen</span>
               </div>
               <ul className="space-y-1">
-                {briefing.recommendations.slice(0, 3).map((rec, i) => (
+                {briefing.recommendations?.slice(0, 3).map((rec, i) => (
                   <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
                     <span className="mt-1">•</span>
                     <span>{rec}</span>
