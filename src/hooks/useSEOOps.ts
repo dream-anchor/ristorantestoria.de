@@ -226,7 +226,35 @@ export function useSEOBriefing(date?: string) {
     queryFn: async (): Promise<SEOBriefing | null> => {
       const params = date ? `?date=${date}` : '';
       try {
-        return await fetchSeoApi<SEOBriefing>(`/briefing${params}`);
+        // API returns array, take first element
+        const result = await fetchSeoApi<SEOBriefing[] | SEOBriefing>(`/briefing${params}`);
+        if (Array.isArray(result)) {
+          if (result.length === 0) return null;
+          // Map API field names to expected format
+          const briefing = result[0] as Record<string, unknown>;
+          return {
+            id: briefing.id as string,
+            date: (briefing.briefing_date || briefing.date) as string,
+            briefing_md: (briefing.summary_de || briefing.briefing_md || '') as string,
+            executive_summary: (briefing.summary_de || briefing.executive_summary || '') as string,
+            highlights: briefing.metrics_snapshot ? {
+              total_clicks: (briefing.metrics_snapshot as Record<string, unknown>).total_clicks as number || 0,
+              clicks_change: (briefing.metrics_snapshot as Record<string, unknown>).pct_change_clicks_wow as number || 0,
+              total_impressions: (briefing.metrics_snapshot as Record<string, unknown>).total_impressions as number || 0,
+              impressions_change: (briefing.metrics_snapshot as Record<string, unknown>).pct_change_impressions_wow as number || 0,
+              avg_position: (briefing.metrics_snapshot as Record<string, unknown>).avg_position as number || 0,
+            } : undefined,
+            metrics_snapshot: briefing.metrics_snapshot as Record<string, unknown> || {},
+            top_winners: [],
+            top_losers: [],
+            new_alerts_count: (briefing.alerts_count || 0) as number,
+            open_tasks_count: (briefing.tasks_created || 0) as number,
+            critical_issues: [],
+            recommendations: [],
+            created_at: briefing.created_at as string || '',
+          } as SEOBriefing;
+        }
+        return result;
       } catch {
         return null;
       }
@@ -473,7 +501,28 @@ export function useSEOStats() {
     queryKey: ['seo-stats'],
     queryFn: async (): Promise<SEOStats> => {
       try {
-        return await fetchSeoApi('/stats');
+        const apiResponse = await fetchSeoApi<Record<string, unknown>>('/stats');
+        // Map API field names to expected format
+        const latestBriefing = apiResponse.latest_briefing as Record<string, unknown> | null;
+        const latestRun = apiResponse.latest_pipeline_run as Record<string, unknown> | null;
+
+        return {
+          open_alerts: (apiResponse.alerts_open || apiResponse.open_alerts || 0) as number,
+          open_tasks: (apiResponse.tasks_open || apiResponse.open_tasks || 0) as number,
+          unused_prompts: (apiResponse.prompts_pending || apiResponse.unused_prompts || 0) as number,
+          latest_briefing_date: latestBriefing?.briefing_date as string || null,
+          last_pipeline_run: latestRun ? {
+            id: latestRun.id as string,
+            date: (latestRun.created_at as string)?.split('T')[0] || '',
+            status: latestRun.status as string || 'unknown',
+            started_at: latestRun.created_at as string || '',
+            completed_at: latestRun.completed_at as string | null,
+            baselines_computed: 0,
+            alerts_created: (latestRun.alerts_detected || 0) as number,
+            tasks_created: (latestRun.tasks_created || 0) as number,
+            prompts_generated: (latestRun.prompts_generated || 0) as number,
+          } : null,
+        };
       } catch {
         return {
           open_alerts: 0,
