@@ -262,7 +262,11 @@ export function useSEOAlerts(options?: {
   return useQuery({
     queryKey: ['seo-alerts', queryString],
     queryFn: async (): Promise<{ alerts: SEOAlertEvent[]; total: number }> => {
-      return fetchSeoApi(`/alerts${queryString ? `?${queryString}` : ''}`);
+      try {
+        return await fetchSeoApi(`/alerts${queryString ? `?${queryString}` : ''}`);
+      } catch {
+        return { alerts: [], total: 0 };
+      }
     },
     staleTime: 2 * 60 * 1000,
   });
@@ -314,7 +318,11 @@ export function useSEOTasks(options?: {
   return useQuery({
     queryKey: ['seo-tasks', queryString],
     queryFn: async (): Promise<{ tasks: SEOTask[] }> => {
-      return fetchSeoApi(`/tasks${queryString ? `?${queryString}` : ''}`);
+      try {
+        return await fetchSeoApi(`/tasks${queryString ? `?${queryString}` : ''}`);
+      } catch {
+        return { tasks: [] };
+      }
     },
     staleTime: 2 * 60 * 1000,
   });
@@ -355,7 +363,11 @@ export function useSEOPrompts(options?: {
   return useQuery({
     queryKey: ['seo-prompts', queryString],
     queryFn: async (): Promise<{ prompts: SEOPromptPack[] }> => {
-      return fetchSeoApi(`/prompts${queryString ? `?${queryString}` : ''}`);
+      try {
+        return await fetchSeoApi(`/prompts${queryString ? `?${queryString}` : ''}`);
+      } catch {
+        return { prompts: [] };
+      }
     },
     staleTime: 2 * 60 * 1000,
   });
@@ -460,7 +472,17 @@ export function useSEOStats() {
   return useQuery({
     queryKey: ['seo-stats'],
     queryFn: async (): Promise<SEOStats> => {
-      return fetchSeoApi('/stats');
+      try {
+        return await fetchSeoApi('/stats');
+      } catch {
+        return {
+          open_alerts: 0,
+          open_tasks: 0,
+          unused_prompts: 0,
+          latest_briefing_date: null,
+          last_pipeline_run: null,
+        };
+      }
     },
     staleTime: 60 * 1000, // 1 minute
   });
