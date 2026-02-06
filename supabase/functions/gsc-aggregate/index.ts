@@ -45,6 +45,9 @@ const GSC_SITE_URL = Deno.env.get('GSC_SITE_URL') || 'sc-domain:ristorantestoria
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
 
+// deno-lint-ignore no-explicit-any
+type SupabaseClient = any;
+
 // Window configurations
 const WINDOWS = {
   '7d': 7,
