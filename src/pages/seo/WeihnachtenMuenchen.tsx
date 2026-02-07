@@ -98,7 +98,7 @@ const WeihnachtenMuenchen = ({ menu, archivedMenu, seasonalConfig }: Weihnachten
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[
         { name: 'Home', url: '/' },
-        { name: t.nav.besondereAnlaesse, url: `/${PARENT_SLUGS[language] || PARENT_SLUGS.de}` },
+        { name: t.nav.specialOccasions, url: `/${PARENT_SLUGS[language] || PARENT_SLUGS.de}` },
         { name: seasonalConfig.titles[language] || seasonalConfig.titles.de, url: canonicalPath }
       ]} />
 
