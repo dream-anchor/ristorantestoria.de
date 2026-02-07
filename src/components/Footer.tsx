@@ -99,13 +99,15 @@ const Footer = () => {
                   <MessageCircle className="h-4 w-4" />
                   WhatsApp
                 </a>
-              <LocalizedLink 
-                  to="kontakt#map" 
+              <a
+                  href="https://maps.google.com/maps?cid=3762699313835683563"
+                  target="_blank"
+                  rel="noopener"
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"
                 >
                   <MapPin className="h-4 w-4" />
-                  <span>Karlstr. 47a, 80333 München<br /><span className="text-xs opacity-70">Nähe Königsplatz & Hauptbahnhof</span></span>
-                </LocalizedLink>
+                  <span>STORIA ristorante pizzeria bar<br />Karlstraße 47A, 80333 München</span>
+                </a>
               </div>
             </div>
 
