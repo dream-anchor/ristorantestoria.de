@@ -22,7 +22,7 @@ import { MapPin, Clock, Footprints, Building2, Landmark, UtensilsCrossed, ArrowR
 
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
-import aussenHero from "@/assets/aussen.webp";
+import aussenHero from "@/assets/Terrasse-Restaurant-Storia-Maxvorstadt-Muenchen.webp";
 
 const ItalienerKoenigsplatz = () => {
   const { t } = useLanguage();

@@ -19,7 +19,7 @@ import MenuDisplay from "@/components/MenuDisplay";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierImage from "@/assets/weihnachtsfeier-event.webp";
 import romantischesDinnerImage from "@/assets/romantisches-dinner-hero.webp";
-import sommerfestImage from "@/assets/sommerfest-event.webp";
+import silvesterHeroImage from "@/assets/Silvester-Restaurant-Storia-Maxvorstadt-Muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
@@ -36,7 +36,7 @@ import ValentinstagMuenchen from "@/pages/seo/ValentinstagMuenchen";
 const SEASONAL_HERO_IMAGES: Record<string, string> = {
   valentinstag: romantischesDinnerImage,
   weihnachten: weihnachtsfeierImage,
-  silvester: sommerfestImage,
+  silvester: silvesterHeroImage,
 };
 
 const BesondererAnlass = () => {

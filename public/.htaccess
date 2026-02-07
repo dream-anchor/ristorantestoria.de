@@ -114,6 +114,10 @@ RewriteRule ^cms/our-team/?$ /ueber-uns/ [R=301,L]
 RewriteRule ^cms/reservations/?$ /reservierung/ [R=301,L]
 RewriteRule ^cms/events(-2)?/?$ /besondere-anlaesse/ [R=301,L]
 RewriteRule ^cms/catering/?$ /catering/ [R=301,L]
+# Soft 404 Fixes
+Redirect 301 /ristorantestoria-de/ https://www.ristorantestoria.de/
+RedirectMatch 301 ^/cms/wp-content/uploads/.* https://www.ristorantestoria.de/mittags-menu/
+
 # CMS Catch-All: Alle verbleibenden /cms/* Pfade → Startseite
 RewriteRule ^cms/?$ / [R=301,L]
 RewriteRule ^cms/(.+)$ / [R=301,L]
