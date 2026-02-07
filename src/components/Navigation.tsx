@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import LocalizedLink from "@/components/LocalizedLink";
 import { Menu, ChevronDown, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -36,6 +36,14 @@ const menuTypeConfig: Record<string, { baseSlug: string }> = {
   drinks: { baseSlug: 'getraenke' },
 };
 
+// Localized parent slugs for special occasions (same as BesondereAnlaesse.tsx)
+const PARENT_SLUGS: Record<string, string> = {
+  de: 'besondere-anlaesse',
+  en: 'special-occasions',
+  it: 'occasioni-speciali',
+  fr: 'occasions-speciales',
+};
+
 const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
@@ -53,19 +61,34 @@ const Navigation = () => {
 
   // Helper für lokalisierte Menü-Titel
   const getLocalizedMenuTitle = (menu: any) => {
+    if (language === 'en' && menu.title_en) return menu.title_en;
     if (language === 'it' && menu.title_it) return menu.title_it;
     if (language === 'fr' && menu.title_fr) return menu.title_fr;
-    if (language === 'en' && menu.title_en) return menu.title_en;
     return menu.title || '';
   };
 
+  // Helper für lokalisierte Menü-Slugs
+  const getLocalizedMenuSlug = (menu: any) => {
+    if (language === 'en' && menu.slug_en) return menu.slug_en;
+    if (language === 'it' && menu.slug_it) return menu.slug_it;
+    if (language === 'fr' && menu.slug_fr) return menu.slug_fr;
+    return menu.slug || menu.id;
+  };
+
   // Dynamische Kinder für "Besondere Anlässe" basierend auf veröffentlichten Menüs
-  // Note: Dynamic slugs like "/besondere-anlaesse/weihnachtsmenues" need special handling
+  // Uses localized parent slugs + localized menu slugs for correct i18n URLs
+  const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
   const specialOccasionsChildren: NavChild[] = specialMenus && specialMenus.length > 0
-    ? specialMenus.map(menu => ({
-        label: getLocalizedMenuTitle(menu).toUpperCase() || 'MENÜ',
-        baseSlug: `besondere-anlaesse/${(menu as any).slug || menu.id}`
-      }))
+    ? specialMenus.map(menu => {
+        const menuSlug = getLocalizedMenuSlug(menu);
+        const fullPath = language === 'de'
+          ? `/${parentSlug}/${menuSlug}/`
+          : `/${language}/${parentSlug}/${menuSlug}/`;
+        return {
+          label: getLocalizedMenuTitle(menu).toUpperCase() || 'MENÜ',
+          baseSlug: fullPath,
+        };
+      })
     : [{ label: t.nav.specialOccasions, baseSlug: "besondere-anlaesse" }];
 
   // Mapping von menu_type zu Label (Translation-basiert)
@@ -110,23 +133,26 @@ const Navigation = () => {
   };
 
   // Check if current path matches this nav item
+  // Handles both baseSlug (for LocalizedLink) and full paths (starting with /)
+  const resolvePath = (slug: string) =>
+    slug.startsWith('/') ? slug : getLocalizedPath(slug, language);
+
   const isActive = (item: NavItem) => {
     if (item.baseSlug) {
-      const localizedPath = getLocalizedPath(item.baseSlug, language);
-      return location.pathname === localizedPath;
+      return location.pathname === resolvePath(item.baseSlug);
     }
     if (item.children) {
       return item.children.some((child) => {
-        const localizedPath = getLocalizedPath(child.baseSlug, language);
-        return location.pathname === localizedPath || location.pathname.startsWith(localizedPath + "/");
+        const p = resolvePath(child.baseSlug);
+        return location.pathname === p || location.pathname.startsWith(p);
       });
     }
     return false;
   };
 
-  const isChildActive = (baseSlug: string) => {
-    const localizedPath = getLocalizedPath(baseSlug, language);
-    return location.pathname === localizedPath || location.pathname.startsWith(localizedPath + "/");
+  const isChildActive = (slug: string) => {
+    const p = resolvePath(slug);
+    return location.pathname === p || location.pathname.startsWith(p);
   };
 
   return (
@@ -171,20 +197,35 @@ const Navigation = () => {
                         />
                       </CollapsibleTrigger>
                       <CollapsibleContent className="pl-4">
-                        {item.children.map((child) => (
-                          <LocalizedLink
-                            key={child.baseSlug}
-                            to={child.baseSlug}
-                            onClick={() => setIsOpen(false)}
-                            className={`block px-4 py-2 text-sm tracking-wide rounded-md transition-colors ${
-                              isChildActive(child.baseSlug)
-                                ? "bg-accent text-accent-foreground"
-                                : "hover:bg-accent/50 hover:text-accent-foreground"
-                            }`}
-                          >
-                            {child.label}
-                          </LocalizedLink>
-                        ))}
+                        {item.children.map((child) =>
+                          child.baseSlug.startsWith('/') ? (
+                            <Link
+                              key={child.baseSlug}
+                              to={child.baseSlug}
+                              onClick={() => setIsOpen(false)}
+                              className={`block px-4 py-2 text-sm tracking-wide rounded-md transition-colors ${
+                                isChildActive(child.baseSlug)
+                                  ? "bg-accent text-accent-foreground"
+                                  : "hover:bg-accent/50 hover:text-accent-foreground"
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          ) : (
+                            <LocalizedLink
+                              key={child.baseSlug}
+                              to={child.baseSlug}
+                              onClick={() => setIsOpen(false)}
+                              className={`block px-4 py-2 text-sm tracking-wide rounded-md transition-colors ${
+                                isChildActive(child.baseSlug)
+                                  ? "bg-accent text-accent-foreground"
+                                  : "hover:bg-accent/50 hover:text-accent-foreground"
+                              }`}
+                            >
+                              {child.label}
+                            </LocalizedLink>
+                          )
+                        )}
                       </CollapsibleContent>
                     </Collapsible>
                   ) : item.externalUrl ? (
@@ -264,19 +305,33 @@ const Navigation = () => {
                 
                 {hoveredMenu === item.label && (
                   <div className="absolute top-full left-0 bg-primary text-primary-foreground border border-primary-foreground/20 rounded-sm shadow-lg min-w-[200px] z-50 animate-fade-in">
-                    {item.children.map((child) => (
-                      <LocalizedLink
-                        key={child.baseSlug}
-                        to={child.baseSlug}
-                        className={`block px-5 py-3 text-sm tracking-wide hover:bg-primary-foreground/10 transition-colors first:rounded-t-sm last:rounded-b-sm ${
-                          isChildActive(child.baseSlug)
-                            ? "bg-primary-foreground/10"
-                            : ""
-                        }`}
-                      >
-                        {child.label}
-                      </LocalizedLink>
-                    ))}
+                    {item.children.map((child) =>
+                      child.baseSlug.startsWith('/') ? (
+                        <Link
+                          key={child.baseSlug}
+                          to={child.baseSlug}
+                          className={`block px-5 py-3 text-sm tracking-wide hover:bg-primary-foreground/10 transition-colors first:rounded-t-sm last:rounded-b-sm ${
+                            isChildActive(child.baseSlug)
+                              ? "bg-primary-foreground/10"
+                              : ""
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      ) : (
+                        <LocalizedLink
+                          key={child.baseSlug}
+                          to={child.baseSlug}
+                          className={`block px-5 py-3 text-sm tracking-wide hover:bg-primary-foreground/10 transition-colors first:rounded-t-sm last:rounded-b-sm ${
+                            isChildActive(child.baseSlug)
+                              ? "bg-primary-foreground/10"
+                              : ""
+                          }`}
+                        >
+                          {child.label}
+                        </LocalizedLink>
+                      )
+                    )}
                   </div>
                 )}
               </div>
