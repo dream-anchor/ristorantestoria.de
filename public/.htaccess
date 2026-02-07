@@ -12,25 +12,20 @@ RewriteEngine On
 RewriteBase /
 
 # ============================================
-# 1. HTTPS Erzwingen (Sicherheit & SEO)
+# 1a. Subdomain Redirects (vor HTTPS/WWW, damit Pfad → Root)
 # ============================================
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# ============================================
-# 1a2. Subdomain Redirects (301)
-# ============================================
-# newsletter.ristorantestoria.de → www.ristorantestoria.de
+# newsletter.ristorantestoria.de → www.ristorantestoria.de (immer Root)
 RewriteCond %{HTTP_HOST} ^newsletter\.ristorantestoria\.de$ [NC]
 RewriteRule ^ https://www.ristorantestoria.de/ [R=301,L]
 
 # ============================================
-# 1b. WWW Normalisierung (SEO - Domain Authority)
+# 1b. HTTPS + WWW Normalisierung (ein Hop statt zwei)
 # ============================================
-# Redirect non-www zu www (kanonische Domain)
+# Alle Varianten in einem 301-Hop auf https://www. normalisieren
+# (http://ristorantestoria.de, https://ristorantestoria.de, http://www.ristorantestoria.de)
+RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteCond %{HTTP_HOST} !^localhost [NC]
-RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
 
 # ============================================
 # 1c. Trailing Slash erzwingen (SEO - URL Konsistenz)
