@@ -17,6 +17,8 @@ interface SEOProps {
   noIndex?: boolean;
   /** Custom hreflang alternates for dynamic pages (e.g., special menus with translated slugs) */
   alternates?: AlternateUrl[];
+  /** Skip hreflang tags entirely (for legal pages that only exist in DE) */
+  noHreflang?: boolean;
 }
 
 const SEO = ({
@@ -27,6 +29,7 @@ const SEO = ({
   image = 'https://ristorantestoria.de/og-image.jpg',
   noIndex = false,
   alternates,
+  noHreflang = false,
 }: SEOProps) => {
   const { language, t } = useLanguage();
   const location = useLocation();
@@ -44,23 +47,29 @@ const SEO = ({
   // Get the base slug for hreflang generation
   const { baseSlug } = parseLocalizedPath(location.pathname);
 
-  // Build canonical URL for current language
-  const currentPath = ensureTrailingSlash(canonical || getLocalizedPath(baseSlug, language));
+  // Build canonical URL — legal pages always point to DE version
+  const currentPath = noHreflang
+    ? ensureTrailingSlash(canonical || getLocalizedPath(baseSlug, 'de'))
+    : ensureTrailingSlash(canonical || getLocalizedPath(baseSlug, language));
   const canonicalUrl = `${baseUrl}${currentPath}`;
 
-  // Generate hreflang URLs for all languages
+  // Generate hreflang URLs for all languages (skip for legal pages)
   // Use custom alternates if provided (for dynamic pages with translated slugs)
-  const hreflangUrls = alternates
-    ? alternates.map(a => ({ ...a, url: a.url.endsWith('/') ? a.url : `${a.url}/` }))
-    : SUPPORTED_LANGUAGES.map(lang => ({
-      lang,
-      url: `${baseUrl}${getLocalizedPath(baseSlug, lang)}`
-    }));
+  const hreflangUrls = noHreflang
+    ? []
+    : alternates
+      ? alternates.map(a => ({ ...a, url: a.url.endsWith('/') ? a.url : `${a.url}/` }))
+      : SUPPORTED_LANGUAGES.map(lang => ({
+        lang,
+        url: `${baseUrl}${getLocalizedPath(baseSlug, lang)}`
+      }));
 
   // x-default points to German version
-  const xDefaultUrl = alternates
-    ? alternates.find(a => a.lang === 'de')?.url || `${baseUrl}/`
-    : `${baseUrl}${getLocalizedPath(baseSlug, 'de')}`;
+  const xDefaultUrl = noHreflang
+    ? ''
+    : alternates
+      ? alternates.find(a => a.lang === 'de')?.url || `${baseUrl}/`
+      : `${baseUrl}${getLocalizedPath(baseSlug, 'de')}`;
   
   // Locale mapping for Open Graph
   const ogLocaleMap: Record<string, string> = {
@@ -88,11 +97,11 @@ const SEO = ({
       {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />
       
-      {/* Hreflang Tags for all languages */}
-      {hreflangUrls.map(({ lang, url }) => (
+      {/* Hreflang Tags for all languages (skip for legal-only-DE pages) */}
+      {!noHreflang && hreflangUrls.map(({ lang, url }) => (
         <link key={lang} rel="alternate" hrefLang={lang} href={url} />
       ))}
-      <link rel="alternate" hrefLang="x-default" href={xDefaultUrl} />
+      {!noHreflang && <link rel="alternate" hrefLang="x-default" href={xDefaultUrl} />}
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />

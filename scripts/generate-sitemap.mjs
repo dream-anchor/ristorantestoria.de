@@ -34,6 +34,13 @@ const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 // Routes to exclude from sitemap (admin, internal)
 const EXCLUDED_ROUTES = ["admin", "admin/login"];
 
+// Legal pages — only generate German URLs (no foreign language versions)
+const LEGAL_ONLY_DE = [
+  "impressum", "datenschutz", "cookie-richtlinie",
+  "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
+  "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+];
+
 // Priority configuration based on route type
 const getPriority = (baseSlug) => {
   if (baseSlug === "home") return "1.0";
@@ -172,6 +179,7 @@ async function generateSitemap() {
 
   // Process static routes
   for (const baseSlug of staticBaseSlugs) {
+    const isLegalPage = LEGAL_ONLY_DE.includes(baseSlug);
     const slugs = {
       de: slugMaps.de[baseSlug],
       en: slugMaps.en[baseSlug],
@@ -181,12 +189,18 @@ async function generateSitemap() {
 
     const priority = getPriority(baseSlug);
     const changefreq = getChangeFreq(baseSlug);
-    const hreflangLinks = generateHreflangLinks(slugs);
 
-    // Generate URL entry for each language
-    for (const lang of LANGUAGES) {
-      const url = buildUrl(slugs[lang], lang);
-      urlEntries.push(generateUrlEntry(url, TODAY, changefreq, priority, hreflangLinks));
+    if (isLegalPage) {
+      // Legal pages: only German URL, no hreflang
+      const url = buildUrl(slugs.de, "de");
+      urlEntries.push(generateUrlEntry(url, TODAY, changefreq, priority, ""));
+    } else {
+      // Normal pages: all languages with hreflang
+      const hreflangLinks = generateHreflangLinks(slugs);
+      for (const lang of LANGUAGES) {
+        const url = buildUrl(slugs[lang], lang);
+        urlEntries.push(generateUrlEntry(url, TODAY, changefreq, priority, hreflangLinks));
+      }
     }
   }
 

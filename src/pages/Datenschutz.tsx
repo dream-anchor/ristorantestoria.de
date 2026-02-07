@@ -13,6 +13,7 @@ const Datenschutz = () => {
         title="Datenschutzerklärung"
         description="Datenschutzerklärung der Speranza GmbH (STORIA Restaurant München). Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO."
         canonical="/datenschutz"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData

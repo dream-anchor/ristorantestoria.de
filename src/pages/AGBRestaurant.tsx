@@ -13,6 +13,7 @@ const AGBRestaurant = () => {
         title="AGB Restaurant"
         description="Allgemeine Geschäftsbedingungen für Restaurant und Reservierungen bei STORIA München. Informationen zu Stornierung, No-Show und Gruppenreservierungen."
         canonical="/agb-restaurant"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData

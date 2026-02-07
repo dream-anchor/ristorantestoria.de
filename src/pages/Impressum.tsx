@@ -13,6 +13,7 @@ const Impressum = () => {
         title="Impressum"
         description="Impressum der Speranza GmbH - Ristorante STORIA München. Rechtliche Angaben, Kontaktdaten und Firmendaten."
         canonical="/impressum"
+        noHreflang
         noIndex={false}
       />
       <StructuredData type="restaurant" />

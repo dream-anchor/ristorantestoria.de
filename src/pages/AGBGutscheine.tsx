@@ -13,6 +13,7 @@ const AGBGutscheine = () => {
         title="AGB Gutscheine"
         description="Allgemeine Geschäftsbedingungen für Gutscheine bei STORIA Restaurant München. Informationen zu Kauf, Einlösung und Gültigkeit von STORIA-Gutscheinen."
         canonical="/agb-gutscheine"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData

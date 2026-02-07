@@ -13,6 +13,7 @@ const Lebensmittelhinweise = () => {
         title="Lebensmittelinformationen"
         description="Allergen- und Zusatzstoffkennzeichnung gemäß EU-LMIV bei STORIA Restaurant München. Alle 14 Hauptallergene und Zusatzstoffe transparent erklärt."
         canonical="/lebensmittelhinweise"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData

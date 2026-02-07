@@ -13,6 +13,7 @@ const Widerrufsbelehrung = () => {
         title="Widerrufsbelehrung"
         description="Widerrufsbelehrung der Speranza GmbH (STORIA Restaurant München). Informationen zum Widerrufsrecht bei Online-Bestellungen und Gutscheinkäufen."
         canonical="/widerrufsbelehrung"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData

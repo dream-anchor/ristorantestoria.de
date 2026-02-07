@@ -102,6 +102,13 @@ import { fr } from "@/translations/fr";
 const slugMaps = { de: de.slugs, en: en.slugs, it: italian.slugs, fr: fr.slugs };
 type Language = "de" | "en" | "it" | "fr";
 
+// Legal pages — only exist in German, foreign language routes redirect to DE
+const LEGAL_ONLY_DE = new Set([
+  "impressum", "datenschutz", "cookie-richtlinie",
+  "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
+  "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+]);
+
 // Generate all routes for all languages
 const generateRoutes = () => {
   const routes: Array<{ path: string; element: React.ReactNode }> = [];
@@ -128,7 +135,13 @@ const generateRoutes = () => {
       if (baseSlug === "home") continue; // Already handled above
       const localizedSlug = slugMap[baseSlug as keyof typeof slugMap];
       if (localizedSlug) {
-        routes.push({ path: `/${lang}/${localizedSlug}`, element: <Component /> });
+        if (LEGAL_ONLY_DE.has(baseSlug)) {
+          // Legal pages: redirect foreign language URLs to German version
+          const germanSlug = slugMaps.de[baseSlug as keyof typeof slugMaps.de];
+          routes.push({ path: `/${lang}/${localizedSlug}`, element: <Navigate to={`/${germanSlug}/`} replace /> });
+        } else {
+          routes.push({ path: `/${lang}/${localizedSlug}`, element: <Component /> });
+        }
       }
     }
   }

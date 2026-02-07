@@ -13,6 +13,7 @@ const CookieRichtlinie = () => {
         title="Cookie-Richtlinie"
         description="Cookie-Richtlinie von STORIA Restaurant München. Informationen zu Cookies, Consent-System und Ihren Wahlmöglichkeiten gemäß DSGVO und TTDSG."
         canonical="/cookie-richtlinie"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData

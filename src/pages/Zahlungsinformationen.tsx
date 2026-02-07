@@ -14,6 +14,7 @@ const Zahlungsinformationen = () => {
         title="Zahlungsinformationen"
         description="Zahlungsmöglichkeiten bei STORIA Restaurant München. Akzeptierte Zahlungsmittel: Bar, EC, Kreditkarte, Apple Pay, Google Pay und Gutscheine."
         canonical="/zahlungsinformationen"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData

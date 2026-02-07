@@ -101,6 +101,57 @@ RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L]
 RewriteRule ^ristorantestoria-de/?$ / [R=301,L]
 
 # ============================================
+# 1h. Legal Pages — Nur DE (Fremdsprachen → 301 auf DE)
+# ============================================
+# Rechtliche Seiten existieren nur auf Deutsch.
+# Alle fremdsprachigen URLs leiten auf die deutsche Version weiter.
+
+# --- Impressum ---
+RewriteRule ^en/imprint/?$ /impressum/ [R=301,L]
+RewriteRule ^it/note-legali/?$ /impressum/ [R=301,L]
+RewriteRule ^fr/mentions-legales/?$ /impressum/ [R=301,L]
+
+# --- Datenschutz ---
+RewriteRule ^en/privacy-policy/?$ /datenschutz/ [R=301,L]
+RewriteRule ^it/privacy/?$ /datenschutz/ [R=301,L]
+RewriteRule ^fr/confidentialite/?$ /datenschutz/ [R=301,L]
+
+# --- Cookie-Richtlinie ---
+RewriteRule ^en/cookie-policy/?$ /cookie-richtlinie/ [R=301,L]
+RewriteRule ^it/cookie-policy/?$ /cookie-richtlinie/ [R=301,L]
+RewriteRule ^fr/politique-cookies/?$ /cookie-richtlinie/ [R=301,L]
+
+# --- AGB Restaurant ---
+RewriteRule ^en/terms-restaurant/?$ /agb-restaurant/ [R=301,L]
+RewriteRule ^it/termini-ristorante/?$ /agb-restaurant/ [R=301,L]
+RewriteRule ^fr/cgv-restaurant/?$ /agb-restaurant/ [R=301,L]
+
+# --- AGB Gutscheine ---
+RewriteRule ^en/terms-vouchers/?$ /agb-gutscheine/ [R=301,L]
+RewriteRule ^it/termini-buoni/?$ /agb-gutscheine/ [R=301,L]
+RewriteRule ^fr/cgv-bons/?$ /agb-gutscheine/ [R=301,L]
+
+# --- Widerrufsbelehrung ---
+RewriteRule ^en/cancellation-policy/?$ /widerrufsbelehrung/ [R=301,L]
+RewriteRule ^it/diritto-recesso/?$ /widerrufsbelehrung/ [R=301,L]
+RewriteRule ^fr/droit-retractation/?$ /widerrufsbelehrung/ [R=301,L]
+
+# --- Zahlungsinformationen ---
+RewriteRule ^en/payment-info/?$ /zahlungsinformationen/ [R=301,L]
+RewriteRule ^it/info-pagamento/?$ /zahlungsinformationen/ [R=301,L]
+RewriteRule ^fr/infos-paiement/?$ /zahlungsinformationen/ [R=301,L]
+
+# --- Lebensmittelhinweise ---
+RewriteRule ^en/food-info/?$ /lebensmittelhinweise/ [R=301,L]
+RewriteRule ^it/info-alimenti/?$ /lebensmittelhinweise/ [R=301,L]
+RewriteRule ^fr/infos-alimentaires/?$ /lebensmittelhinweise/ [R=301,L]
+
+# --- Haftungsausschluss ---
+RewriteRule ^en/disclaimer/?$ /haftungsausschluss/ [R=301,L]
+RewriteRule ^it/disclaimer/?$ /haftungsausschluss/ [R=301,L]
+RewriteRule ^fr/avertissement/?$ /haftungsausschluss/ [R=301,L]
+
+# ============================================
 # 1g. WordPress Query-String Redirect
 # ============================================
 RewriteCond %{QUERY_STRING} ^page_id=2881$

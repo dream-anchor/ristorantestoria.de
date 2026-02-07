@@ -13,6 +13,7 @@ const Haftungsausschluss = () => {
         title="Haftungsausschluss"
         description="Haftungsausschluss (Disclaimer) der Speranza GmbH (STORIA Restaurant München). Informationen zu Haftung, Urheberrecht und externen Links."
         canonical="/haftungsausschluss"
+        noHreflang
       />
       <StructuredData type="restaurant" />
       <StructuredData
