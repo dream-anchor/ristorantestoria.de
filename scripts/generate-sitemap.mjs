@@ -220,12 +220,24 @@ async function generateSitemap() {
   }
 
   // Process dynamic routes (special menus from database)
-  for (const route of dynamicRoutes) {
-    const hreflangLinks = generateHreflangLinks(route.slugs);
+  // Deduplicate: skip any Supabase menu whose DE slug is already in SEASONAL_MENUS
+  const seasonalDeSlugs = new Set(SEASONAL_MENUS.map(s => s.de.split('/').pop()));
+  const seenUrls = new Set(urlEntries.map(e => e.match(/<loc>([^<]+)<\/loc>/)?.[1]).filter(Boolean));
 
+  for (const route of dynamicRoutes) {
+    const menuSlug = route.slugs.de.split('/').pop();
+    if (seasonalDeSlugs.has(menuSlug)) {
+      console.log(`   ⏭️  Skipping "${menuSlug}" (already in seasonal routes)`);
+      continue;
+    }
+
+    const hreflangLinks = generateHreflangLinks(route.slugs);
     for (const lang of LANGUAGES) {
       const url = buildUrl(route.slugs[lang], lang);
-      urlEntries.push(generateUrlEntry(url, TODAY, route.changefreq, route.priority, hreflangLinks));
+      if (!seenUrls.has(url)) {
+        urlEntries.push(generateUrlEntry(url, TODAY, route.changefreq, route.priority, hreflangLinks));
+        seenUrls.add(url);
+      }
     }
   }
 
