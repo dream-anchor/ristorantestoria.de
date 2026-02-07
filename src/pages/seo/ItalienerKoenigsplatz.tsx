@@ -326,6 +326,45 @@ const ItalienerKoenigsplatz = () => {
             </div>
           </section>
 
+          {/* Related Pages */}
+          <section className="py-12 bg-secondary/30">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-serif font-semibold text-center mb-8">
+                {t.internalLinks.title}
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <LocalizedLink
+                  to="neapolitanische-pizza-muenchen"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">🍕</span>
+                  <span className="font-medium">{t.internalLinks.neapolitanPizza}</span>
+                </LocalizedLink>
+                <LocalizedLink
+                  to="wild-essen-muenchen"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">🦌</span>
+                  <span className="font-medium">{t.internalLinks.gameDishesMunich}</span>
+                </LocalizedLink>
+                <LocalizedLink
+                  to="aperitivo-muenchen"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">🥂</span>
+                  <span className="font-medium">{t.internalLinks.aperitivoMunich}</span>
+                </LocalizedLink>
+                <LocalizedLink
+                  to="romantisches-dinner-muenchen"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">❤️</span>
+                  <span className="font-medium">{t.internalLinks.romanticDinner}</span>
+                </LocalizedLink>
+              </div>
+            </div>
+          </section>
+
           <ReservationCTA />
         </main>
 

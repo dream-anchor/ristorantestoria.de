@@ -13,6 +13,7 @@ const InternalLinks = () => {
     { baseSlug: "firmenfeier-muenchen", label: t.internalLinks.corporateEvent },
     { baseSlug: "geburtstagsfeier-muenchen", label: t.internalLinks.birthdayParty },
     { baseSlug: "wild-essen-muenchen", label: t.internalLinks.gameDishesMunich },
+    { baseSlug: "italiener-koenigsplatz", label: t.internalLinks.italienerKoenigsplatz },
   ];
 
   return (

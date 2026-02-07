@@ -39,10 +39,10 @@ export const getLocalizedPath = (baseSlug: string, language: Language): string =
  * @returns Object with language and base slug
  */
 export const parseLocalizedPath = (path: string): { language: Language; baseSlug: string } => {
-  // Remove leading slash
-  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
-  const segments = cleanPath.split("/");
-  
+  // Remove leading slash and trailing slash (consistent with slug values which have no slashes)
+  const cleanPath = path.replace(/^\/|\/$/g, "");
+  const segments = cleanPath.split("/").filter(Boolean);
+
   // Check if first segment is a language code
   const firstSegment = segments[0];
   if (SUPPORTED_LANGUAGES.includes(firstSegment as Language) && firstSegment !== "de") {
@@ -51,7 +51,7 @@ export const parseLocalizedPath = (path: string): { language: Language; baseSlug
     const baseSlug = getBaseSlugFromLocalized(localizedSlug, language);
     return { language, baseSlug };
   }
-  
+
   // Default: German
   const localizedSlug = cleanPath || "home";
   const baseSlug = getBaseSlugFromLocalized(localizedSlug, "de");
