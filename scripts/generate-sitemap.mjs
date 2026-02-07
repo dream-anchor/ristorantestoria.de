@@ -117,9 +117,9 @@ async function fetchDynamicRoutes() {
 function buildUrl(slug, lang) {
   if (!slug) {
     // Home page
-    return lang === "de" ? BASE_URL : `${BASE_URL}/${lang}`;
+    return lang === "de" ? `${BASE_URL}/` : `${BASE_URL}/${lang}/`;
   }
-  return lang === "de" ? `${BASE_URL}/${slug}` : `${BASE_URL}/${lang}/${slug}`;
+  return lang === "de" ? `${BASE_URL}/${slug}/` : `${BASE_URL}/${lang}/${slug}/`;
 }
 
 /**

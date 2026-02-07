@@ -26,11 +26,11 @@ export const getLocalizedPath = (baseSlug: string, language: Language): string =
   
   // German has no prefix
   if (language === "de") {
-    return localizedSlug ? `/${localizedSlug}` : "/";
+    return localizedSlug ? `/${localizedSlug}/` : "/";
   }
-  
+
   // Other languages get a prefix
-  return localizedSlug ? `/${language}/${localizedSlug}` : `/${language}`;
+  return localizedSlug ? `/${language}/${localizedSlug}/` : `/${language}/`;
 };
 
 /**

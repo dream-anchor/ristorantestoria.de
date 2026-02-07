@@ -21,12 +21,8 @@ export const NormalizePath = () => {
       return;
     }
 
-    // Remove trailing slash (except for root "/")
-    if (pathname.length > 1 && pathname.endsWith('/')) {
-      const normalizedPath = pathname.slice(0, -1);
-      navigate(normalizedPath + search + hash, { replace: true });
-      return;
-    }
+    // Trailing slashes are enforced server-side by .htaccess (1c).
+    // Do NOT remove them here — that would cause a redirect loop.
   }, [location, navigate, searchParams]);
 
   return null;

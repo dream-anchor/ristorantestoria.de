@@ -37,19 +37,25 @@ const SEO = ({
 
   const metaDescription = description || t.pages.index.description;
 
+  // Ensure trailing slash on all paths (consistent with .htaccess rule 1c)
+  const ensureTrailingSlash = (p: string) =>
+    p === '/' || p.endsWith('/') ? p : `${p}/`;
+
   // Get the base slug for hreflang generation
   const { baseSlug } = parseLocalizedPath(location.pathname);
 
   // Build canonical URL for current language
-  const currentPath = canonical || getLocalizedPath(baseSlug, language);
+  const currentPath = ensureTrailingSlash(canonical || getLocalizedPath(baseSlug, language));
   const canonicalUrl = `${baseUrl}${currentPath}`;
 
   // Generate hreflang URLs for all languages
   // Use custom alternates if provided (for dynamic pages with translated slugs)
-  const hreflangUrls = alternates || SUPPORTED_LANGUAGES.map(lang => ({
-    lang,
-    url: `${baseUrl}${getLocalizedPath(baseSlug, lang)}`
-  }));
+  const hreflangUrls = alternates
+    ? alternates.map(a => ({ ...a, url: a.url.endsWith('/') ? a.url : `${a.url}/` }))
+    : SUPPORTED_LANGUAGES.map(lang => ({
+      lang,
+      url: `${baseUrl}${getLocalizedPath(baseSlug, lang)}`
+    }));
 
   // x-default points to German version
   const xDefaultUrl = alternates
