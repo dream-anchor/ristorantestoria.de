@@ -26,3 +26,6 @@ verify_jwt = false
 
 [functions.seo-api]
 verify_jwt = false
+
+[functions.classify-seasonal-menu]
+verify_jwt = false
