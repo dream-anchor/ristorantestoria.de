@@ -19,34 +19,16 @@ const RECURRING_MENU_SLUGS: Record<string, Record<string, string>> = {
     fr: "saint-valentin-menu",
   },
   weihnachten: {
-    de: "weihnachtsmenues",
-    en: "christmas-menus",
-    it: "natale-menu",
-    fr: "noel-menus",
+    de: "weihnachtsmenue",
+    en: "christmas-menu",
+    it: "menu-natale",
+    fr: "menu-noel",
   },
   silvester: {
-    de: "silvesterparty",
-    en: "new-years-party",
-    it: "capodanno-party",
-    fr: "nouvel-an-party",
-  },
-  ostern: {
-    de: "ostern-menue",
-    en: "easter-menu",
-    it: "pasqua-menu",
-    fr: "paques-menu",
-  },
-  muttertag: {
-    de: "muttertag-menue",
-    en: "mothers-day-menu",
-    it: "festa-mamma-menu",
-    fr: "fete-meres-menu",
-  },
-  vatertag: {
-    de: "vatertag-menue",
-    en: "fathers-day-menu",
-    it: "festa-papa-menu",
-    fr: "fete-peres-menu",
+    de: "silvester",
+    en: "new-years-eve",
+    it: "capodanno",
+    fr: "nouvel-an",
   },
 };
 
@@ -55,9 +37,6 @@ const THEME_PATTERNS: Record<string, RegExp> = {
   valentinstag: /valentin|valentine|san.?valentino|saint.?valentin/i,
   weihnachten: /weihnacht|christmas|x-?mas|natale|no[eë]l/i,
   silvester: /silvester|sylvester|new.?year|neujahr|capodanno|nouvel.?an|jahreswechsel/i,
-  ostern: /ostern|easter|pasqua|p[aâ]ques/i,
-  muttertag: /mutter|mother|mamma|m[eè]re/i,
-  vatertag: /vater|father|pap[aà]|p[eè]re/i,
 };
 
 function detectThemeLocally(title: string): string | null {
@@ -68,46 +47,42 @@ function detectThemeLocally(title: string): string | null {
 }
 
 /**
- * Fallback: Use Lovable AI to classify an ambiguous title.
+ * Fallback: Use Anthropic Claude to classify an ambiguous title.
  */
 async function classifyWithAI(title: string): Promise<string | null> {
-  const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-  if (!LOVABLE_API_KEY) {
-    console.warn("[classify] LOVABLE_API_KEY not set, skipping AI classification");
+  const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
+  if (!apiKey) {
+    console.warn("[classify] ANTHROPIC_API_KEY not set, skipping AI classification");
     return null;
   }
 
   const themes = Object.keys(RECURRING_MENU_SLUGS);
-  const systemPrompt = `You classify restaurant menu titles into seasonal event categories.
-Given a menu title, respond with EXACTLY one of these category keys: ${themes.join(", ")}
-If the title does not match any seasonal event, respond with: none
-Respond with only the category key, nothing else.`;
 
   try {
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 10,
+        system: `Du bist ein Klassifikator für Restaurant-Menü-Titel. Ordne den Titel einem saisonalen Event zu. Antworte NUR mit dem Event-Key oder 'none'. Nichts anderes. Events: ${themes.join(", ")}. Der Titel kann in jeder Sprache sein (DE/EN/IT/FR), auch kreativ geschrieben (X-mas, NYE, etc.). Im Zweifel 'none'.`,
         messages: [
-          { role: "system", content: systemPrompt },
           { role: "user", content: title },
         ],
-        temperature: 0,
-        max_tokens: 20,
       }),
     });
 
     if (!response.ok) {
-      console.error("[classify] AI gateway error:", response.status, await response.text());
+      console.error("[classify] Anthropic API error:", response.status, await response.text());
       return null;
     }
 
     const data = await response.json();
-    const answer = (data.choices?.[0]?.message?.content ?? "").trim().toLowerCase();
+    const answer = (data.content?.[0]?.text ?? "").trim().toLowerCase();
     console.log("[classify] AI response:", answer);
 
     if (themes.includes(answer)) return answer;
