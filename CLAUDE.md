@@ -104,6 +104,9 @@ No code without a spec. For non-trivial tasks:
 
 > Always prioritize the integrity of the existing architecture.
 
+### Supabase / Lovable.dev Workflow (MANDATORY)
+> Wenn eine Änderung Supabase-Daten betrifft (Titel, Slugs, Felder, Schema, RLS-Policies etc.) und Claude keinen direkten Schreibzugriff hat (RLS blockiert Anon-Key), **IMMER** einen fertigen Lovable.dev-Prompt ausgeben, den der User direkt kopieren und einfügen kann. Format: klar, präzise, mit Tabellen-/Feldnamen und exakten Werten.
+
 ---
 
 ## SEO Ground Rules (Binding)
