@@ -101,7 +101,15 @@ RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L]
 RewriteRule ^ristorantestoria-de/?$ / [R=301,L]
 
 # ============================================
-# 1h. Legal Pages — Nur DE (Fremdsprachen → 301 auf DE)
+# 1h. /menu → /speisekarte (Thin Content entfernt)
+# ============================================
+RewriteRule ^menu/?$ /speisekarte/ [R=301,L]
+RewriteRule ^en/menu/?$ /speisekarte/ [R=301,L]
+RewriteRule ^it/menu/?$ /speisekarte/ [R=301,L]
+RewriteRule ^fr/menu/?$ /speisekarte/ [R=301,L]
+
+# ============================================
+# 1i. Legal Pages — Nur DE (Fremdsprachen → 301 auf DE)
 # ============================================
 # Rechtliche Seiten existieren nur auf Deutsch.
 # Alle fremdsprachigen URLs leiten auf die deutsche Version weiter.

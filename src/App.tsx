@@ -9,7 +9,6 @@ import { AlternateLinksProvider } from "@/contexts/AlternateLinksContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import Index from "./pages/Index";
 import Reservierung from "./pages/Reservierung";
-import Menu from "./pages/Menu";
 import Mittagsmenu from "./pages/Mittagsmenu";
 import Speisekarte from "./pages/Speisekarte";
 import Getraenke from "./pages/Getraenke";
@@ -64,7 +63,6 @@ const getDehydratedState = () => {
 const routeComponents: Record<string, React.ComponentType> = {
   home: Index,
   reservierung: Reservierung,
-  menu: Menu,
   "mittags-menu": Mittagsmenu,
   speisekarte: Speisekarte,
   getraenke: Getraenke,
@@ -172,6 +170,12 @@ const AppRoutes = () => {
       <Route path="/admin/gsc" element={<AdminGSC />} />
       <Route path="/admin/seo" element={<AdminSEO />} />
       
+      {/* /menu → /speisekarte (thin content page removed) */}
+      <Route path="/menu" element={<Navigate to="/speisekarte/" replace />} />
+      <Route path="/en/menu" element={<Navigate to="/speisekarte/" replace />} />
+      <Route path="/it/menu" element={<Navigate to="/speisekarte/" replace />} />
+      <Route path="/fr/menu" element={<Navigate to="/speisekarte/" replace />} />
+
       {/* Legacy URL redirects (previously in .htaccess) */}
       <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu" replace />} />
       <Route path="/weihnachtsmenues" element={<Navigate to="/besondere-anlaesse/weihnachtsmenues" replace />} />
