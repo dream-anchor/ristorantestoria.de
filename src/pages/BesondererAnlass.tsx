@@ -17,14 +17,7 @@ import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
 import MenuDisplay from "@/components/MenuDisplay";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-
-// Parent slug mapping for each language
-const PARENT_SLUGS = {
-  de: 'besondere-anlaesse',
-  en: 'special-occasions',
-  it: 'occasioni-speciali',
-  fr: 'occasions-speciales',
-} as const;
+import { findSeasonalMenuBySlug, PARENT_SLUGS } from "@/config/seasonalMenus";
 
 const BesondererAnlass = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -32,7 +25,8 @@ const BesondererAnlass = () => {
   const { setAlternates, clearAlternates } = useAlternateLinks();
   const queryClient = useQueryClient();
   const { data: menu, isLoading, error } = useSpecialMenuBySlug(slug || '');
-  usePrerenderReady(!isLoading && !!menu);
+  const seasonalConfig = findSeasonalMenuBySlug(slug || '');
+  usePrerenderReady(!isLoading && (!!menu || !!seasonalConfig));
 
   // Scroll to top on mount
   useEffect(() => {
@@ -81,6 +75,92 @@ const BesondererAnlass = () => {
     return () => clearAlternates();
   }, [menu, setAlternates, clearAlternates]);
 
+  // Seasonal placeholder: known seasonal slug but no Supabase data yet
+  // Must be checked BEFORE isLoading to ensure SSR renders placeholder (not skeleton)
+  if (!menu && seasonalConfig) {
+    const seasonalTitle = seasonalConfig.titles[language] || seasonalConfig.titles.de;
+    const seasonalPlaceholder = seasonalConfig.placeholder[language] || seasonalConfig.placeholder.de;
+    const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
+    const seasonalSlug = seasonalConfig.slugs[language] || seasonalConfig.slugs.de;
+    const canonicalPath = language === 'de'
+      ? `/${parentSlug}/${seasonalSlug}/`
+      : `/${language}/${parentSlug}/${seasonalSlug}/`;
+
+    const alternates = (['de', 'en', 'it', 'fr'] as const).map((lang) => ({
+      lang,
+      url: lang === 'de'
+        ? `https://www.ristorantestoria.de/${PARENT_SLUGS[lang]}/${seasonalConfig.slugs[lang]}/`
+        : `https://www.ristorantestoria.de/${lang}/${PARENT_SLUGS[lang]}/${seasonalConfig.slugs[lang]}/`,
+    }));
+
+    const breadcrumbParentLabels: Record<string, string> = {
+      de: 'Besondere Anlässe',
+      en: 'Special Occasions',
+      it: 'Occasioni Speciali',
+      fr: 'Occasions Spéciales',
+    };
+
+    return (
+      <>
+        <SEO
+          title={seasonalTitle}
+          description={seasonalPlaceholder}
+          canonical={canonicalPath}
+          alternates={alternates}
+        />
+        <StructuredData type="restaurant" />
+        <StructuredData
+          type="breadcrumb"
+          breadcrumbs={[
+            { name: 'Home', url: '/' },
+            { name: breadcrumbParentLabels[language] || breadcrumbParentLabels.de, url: `/${parentSlug}` },
+            { name: seasonalTitle, url: canonicalPath }
+          ]}
+        />
+        <div className="min-h-screen bg-background flex flex-col">
+          <Header />
+          <div className="bg-background border-b border-border">
+            <div className="container mx-auto px-4 py-8 text-center">
+              <Link to="/">
+                <img src={storiaLogo} alt="STORIA – Italienisches Restaurant München Logo" width={128} height={128} loading="eager" className="h-24 md:h-32 w-auto mx-auto mb-4 hover:opacity-80 transition-opacity cursor-pointer" />
+              </Link>
+              <p className="text-lg text-muted-foreground tracking-wide">
+                {t.hero.subtitle}
+              </p>
+            </div>
+          </div>
+          <Navigation />
+
+          <main className="container mx-auto px-4 py-12 flex-grow">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-card p-8 md:p-12 rounded-lg border border-border mb-8 text-center">
+                <h1 className="text-3xl md:text-4xl font-serif font-semibold tracking-wide mb-6">
+                  {seasonalTitle}
+                </h1>
+                <div className="w-24 h-px bg-primary/30 mx-auto mb-8" />
+                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                  {seasonalPlaceholder}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button size="lg" asChild>
+                    <a href="tel:+498951519696">+49 89 51519696</a>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <a href="mailto:info@ristorantestoria.de">{t.specialOccasions.sendEmail}</a>
+                  </Button>
+                </div>
+              </div>
+              <ReservationCTA />
+            </div>
+          </main>
+
+          <Footer />
+        </div>
+      </>
+    );
+  }
+
+  // Loading state (only for non-seasonal pages that might still be fetching)
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
@@ -101,7 +181,7 @@ const BesondererAnlass = () => {
     );
   }
 
-  // Redirect to overview if menu not found
+  // Redirect to overview if menu not found and not a known seasonal page
   if (error || !menu) {
     return <Navigate to="/besondere-anlaesse" replace />;
   }

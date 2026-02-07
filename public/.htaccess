@@ -45,15 +45,15 @@ RewriteRule ^en/special-occasions/valentinstag-menue/?$ /en/special-occasions/va
 RewriteRule ^it/occasioni-speciali/valentinstag-menue/?$ /it/occasioni-speciali/san-valentino-menu/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/valentinstag-menue/?$ /fr/occasions-speciales/saint-valentin-menu/ [R=301,L]
 
-# --- Weihnachten ---
-RewriteRule ^en/special-occasions/weihnachtsmenues/?$ /en/special-occasions/christmas-menus/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/weihnachtsmenues/?$ /it/occasioni-speciali/natale-menu/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/weihnachtsmenues/?$ /fr/occasions-speciales/noel-menus/ [R=301,L]
+# --- Weihnachten (neue permanente Slugs) ---
+RewriteRule ^en/special-occasions/weihnachtsmenue/?$ /en/special-occasions/christmas-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/weihnachtsmenue/?$ /it/occasioni-speciali/natale-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/weihnachtsmenue/?$ /fr/occasions-speciales/noel-menu/ [R=301,L]
 
-# --- Silvester ---
-RewriteRule ^en/special-occasions/silvesterparty/?$ /en/special-occasions/new-years-party/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/silvesterparty/?$ /it/occasioni-speciali/capodanno-party/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/silvesterparty/?$ /fr/occasions-speciales/nouvel-an-party/ [R=301,L]
+# --- Silvester (neue permanente Slugs) ---
+RewriteRule ^en/special-occasions/silvester/?$ /en/special-occasions/new-years-eve/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/silvester/?$ /it/occasioni-speciali/capodanno/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/silvester/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
 
 # --- Ostern ---
 RewriteRule ^en/special-occasions/ostern-menue/?$ /en/special-occasions/easter-menu/ [R=301,L]
@@ -70,6 +70,34 @@ RewriteRule ^en/special-occasions/vatertag-menue/?$ /en/special-occasions/father
 RewriteRule ^it/occasioni-speciali/vatertag-menue/?$ /it/occasioni-speciali/festa-papa-menu/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/vatertag-menue/?$ /fr/occasions-speciales/fete-peres-menu/ [R=301,L]
 
+# --- Reservierung: DE Slug auf fremdsprachigen Pfaden → korrekte Übersetzung ---
+RewriteRule ^en/reservierung/?$ /en/reservation/ [R=301,L]
+RewriteRule ^it/reservierung/?$ /it/prenotazione/ [R=301,L]
+RewriteRule ^fr/reservierung/?$ /fr/reservation/ [R=301,L]
+
+# --- Abgelaufene/alte Seiten ---
+RewriteRule ^en/besondere-anlaesse/winter-dinner-experience/?$ /en/special-occasions/ [R=301,L]
+
+# ============================================
+# 1d2. Alte Seasonal Slugs → Neue permanente Slugs (301)
+# ============================================
+# Weihnachten: Plural → Singular
+RewriteRule ^besondere-anlaesse/weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
+RewriteRule ^en/special-occasions/christmas-menus/?$ /en/special-occasions/christmas-menu/ [R=301,L]
+RewriteRule ^en/special-occasions/weihnachtsmenues/?$ /en/special-occasions/christmas-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/weihnachtsmenues/?$ /it/occasioni-speciali/natale-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/noel-menus/?$ /fr/occasions-speciales/noel-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/weihnachtsmenues/?$ /fr/occasions-speciales/noel-menu/ [R=301,L]
+
+# Silvester: -party → ohne
+RewriteRule ^besondere-anlaesse/silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
+RewriteRule ^en/special-occasions/silvesterparty/?$ /en/special-occasions/new-years-eve/ [R=301,L]
+RewriteRule ^en/special-occasions/new-years-party/?$ /en/special-occasions/new-years-eve/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/silvesterparty/?$ /it/occasioni-speciali/capodanno/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/capodanno-party/?$ /it/occasioni-speciali/capodanno/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/silvesterparty/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/nouvel-an-party/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
+
 # ============================================
 # 1e. Legacy CMS Redirects (WordPress → Neue Seiten)
 # ============================================
@@ -79,10 +107,12 @@ RewriteRule ^cms/speisekarte/?$ /speisekarte/ [R=301,L]
 RewriteRule ^cms/1753-2/?$ /kontakt/ [R=301,L]
 RewriteRule ^cms/wp-content/uploads/2025/12/Mittagskarte-01\.12\.2025\.pdf$ /mittags-menu/ [R=301,L]
 RewriteRule ^cms/getraenke/?$ /getraenke/ [R=301,L]
-RewriteRule ^cms/weihnachtsmenues-2/?$ /besondere-anlaesse/weihnachtsmenues/ [R=301,L]
+RewriteRule ^cms/weihnachtsmenues-2/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
 RewriteRule ^cms/impressum/?$ /impressum/ [R=301,L]
 RewriteRule ^cms/our-team/?$ /ueber-uns/ [R=301,L]
 RewriteRule ^cms/reservations/?$ /reservierung/ [R=301,L]
+RewriteRule ^cms/events(-2)?/?$ /besondere-anlaesse/ [R=301,L]
+RewriteRule ^cms/catering/?$ /catering/ [R=301,L]
 # CMS Catch-All: Alle verbleibenden /cms/* Pfade → Startseite
 RewriteRule ^cms/?$ / [R=301,L]
 RewriteRule ^cms/(.+)$ / [R=301,L]
@@ -92,8 +122,8 @@ RewriteRule ^cms/(.+)$ / [R=301,L]
 # ============================================
 # Alte Top-Level-URLs die zur neuen URL-Architektur weiterleiten
 RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
-RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenues/ [R=301,L]
-RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvesterparty/ [R=301,L]
+RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
+RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
 # Alte Subdomain-URL Struktur (ristorantestoria-de/...)

@@ -299,16 +299,35 @@ async function generateRoutesToPrerender() {
     if (!routes.includes('/')) routes.push("/");
   }
 
-  // 3. Dynamic Routes from Supabase
-  const dynamicMenus = await fetchDynamicSlugs();
-
-  // Parent slugs for special occasions per language
+  // 3. Seasonal Routes (permanent URLs — always prerendered, even when inactive)
   const SPECIAL_PARENT_SLUGS = {
     de: 'besondere-anlaesse',
     en: 'special-occasions',
     it: 'occasioni-speciali',
     fr: 'occasions-speciales',
   };
+
+  const SEASONAL_MENUS = [
+    { de: 'valentinstag-menue', en: 'valentines-menu', it: 'san-valentino-menu', fr: 'saint-valentin-menu' },
+    { de: 'weihnachtsmenue', en: 'christmas-menu', it: 'natale-menu', fr: 'noel-menu' },
+    { de: 'silvester', en: 'new-years-eve', it: 'capodanno', fr: 'nouvel-an' },
+  ];
+
+  for (const seasonal of SEASONAL_MENUS) {
+    for (const lang of LANGUAGES) {
+      const parentSlug = SPECIAL_PARENT_SLUGS[lang];
+      const menuSlug = seasonal[lang];
+      const routePath = lang === "de"
+        ? `/${parentSlug}/${menuSlug}`
+        : `/${lang}/${parentSlug}/${menuSlug}`;
+      if (!routes.includes(routePath)) {
+        routes.push(routePath);
+      }
+    }
+  }
+
+  // 4. Dynamic Routes from Supabase (non-seasonal special menus)
+  const dynamicMenus = await fetchDynamicSlugs();
 
   for (const menu of dynamicMenus) {
     // Only generate routes for special menus (food, drinks, lunch are static)
