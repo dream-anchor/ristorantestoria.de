@@ -70,8 +70,41 @@ RewriteRule ^en/special-occasions/vatertag-menue/?$ /en/special-occasions/father
 RewriteRule ^it/occasioni-speciali/vatertag-menue/?$ /it/occasioni-speciali/festa-papa-menu/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/vatertag-menue/?$ /fr/occasions-speciales/fete-peres-menu/ [R=301,L]
 
-# --- Legacy CMS Redirects ---
+# ============================================
+# 1e. Legacy CMS Redirects (WordPress → Neue Seiten)
+# ============================================
+# Diese URLs existierten unter dem alten WordPress CMS (ristorantestoria.de/cms/...)
+# 301-Redirects bewahren Link-Juice und verhindern 404s
 RewriteRule ^cms/speisekarte/?$ /speisekarte/ [R=301,L]
+RewriteRule ^cms/1753-2/?$ /kontakt/ [R=301,L]
+RewriteRule ^cms/wp-content/uploads/2025/12/Mittagskarte-01\.12\.2025\.pdf$ /mittags-menu/ [R=301,L]
+RewriteRule ^cms/getraenke/?$ /getraenke/ [R=301,L]
+RewriteRule ^cms/weihnachtsmenues-2/?$ /besondere-anlaesse/weihnachtsmenues/ [R=301,L]
+RewriteRule ^cms/impressum/?$ /impressum/ [R=301,L]
+RewriteRule ^cms/our-team/?$ /ueber-uns/ [R=301,L]
+RewriteRule ^cms/reservations/?$ /reservierung/ [R=301,L]
+# CMS Catch-All: Alle verbleibenden /cms/* Pfade → Startseite
+RewriteRule ^cms/?$ / [R=301,L]
+RewriteRule ^cms/(.+)$ / [R=301,L]
+
+# ============================================
+# 1f. Legacy URL Redirects (Alte Pfade → Aktuelle Struktur)
+# ============================================
+# Alte Top-Level-URLs die zur neuen URL-Architektur weiterleiten
+RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
+RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenues/ [R=301,L]
+RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvesterparty/ [R=301,L]
+RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
+RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
+# Alte Subdomain-URL Struktur (ristorantestoria-de/...)
+RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L]
+RewriteRule ^ristorantestoria-de/?$ / [R=301,L]
+
+# ============================================
+# 1g. WordPress Query-String Redirect
+# ============================================
+RewriteCond %{QUERY_STRING} ^page_id=2881$
+RewriteRule ^$ /impressum/? [R=301,L]
 
 # ============================================
 # 2. Error Documents (Fallback auf SPA)
