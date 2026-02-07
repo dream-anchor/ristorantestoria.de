@@ -16,7 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import cocktailsImage from "@/assets/cocktails.webp";
+import cocktailsImage from "@/assets/Aperitivo-Restaurant-Storia-Maxvorstadt-Muenchen.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, MessageCircle, Calendar, MapPin, Clock, Wine, Utensils, ArrowRight } from "lucide-react";
