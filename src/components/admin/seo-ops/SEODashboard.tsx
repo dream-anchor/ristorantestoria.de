@@ -21,11 +21,13 @@ import {
   Activity,
   TrendingUp,
   FileText,
+  Globe,
 } from "lucide-react";
 import SEOBriefingCard from "./SEOBriefingCard";
 import SEOAlertsPanel from "./SEOAlertsPanel";
 import SEOTasksPanel from "./SEOTasksPanel";
 import SEOPromptsPanel from "./SEOPromptsPanel";
+import SEOCrawlerPanel from "./SEOCrawlerPanel";
 import {
   useSEOBriefing,
   useSEOAlerts,
@@ -41,7 +43,7 @@ import { toast } from "sonner";
 import { format, formatDistanceToNow } from "date-fns";
 import { de } from "date-fns/locale";
 
-type DetailView = "alerts" | "tasks" | "prompts" | "briefing" | null;
+type DetailView = "alerts" | "tasks" | "prompts" | "briefing" | "crawler" | null;
 
 function StatCard({
   title,
@@ -477,6 +479,14 @@ export default function SEODashboard() {
                   <Sparkles className="h-4 w-4 mr-2" />
                   Prompts durchgehen
                 </Button>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  onClick={() => setDetailView("crawler")}
+                >
+                  <Globe className="h-4 w-4 mr-2" />
+                  Site Crawler
+                </Button>
               </div>
             </div>
           </div>
@@ -487,7 +497,10 @@ export default function SEODashboard() {
       {detailView && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
           <div
-            className="absolute inset-y-0 right-0 w-full max-w-3xl bg-background shadow-2xl overflow-y-auto"
+            className={cn(
+              "absolute inset-y-0 right-0 w-full bg-background shadow-2xl overflow-y-auto",
+              detailView === "crawler" ? "max-w-5xl" : "max-w-3xl"
+            )}
             style={{ animation: "slideIn 0.2s ease-out" }}
           >
             <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b px-6 py-4 flex items-center justify-between">
@@ -495,6 +508,7 @@ export default function SEODashboard() {
                 {detailView === "alerts" && "Alle SEO Alerts"}
                 {detailView === "tasks" && "Alle SEO Tasks"}
                 {detailView === "prompts" && "Alle Claude Code Prompts"}
+                {detailView === "crawler" && "Site Crawler"}
                 {detailView === "briefing" && "Vollständiges Briefing"}
               </h2>
               <Button
@@ -537,6 +551,9 @@ export default function SEODashboard() {
                   onMarkUsed={handleMarkPromptUsed}
                   showFilters
                 />
+              )}
+              {detailView === "crawler" && (
+                <SEOCrawlerPanel />
               )}
               {detailView === "briefing" && briefing && (
                 <div className="prose prose-sm dark:prose-invert max-w-none">

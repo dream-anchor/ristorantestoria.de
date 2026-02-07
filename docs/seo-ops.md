@@ -377,6 +377,78 @@ bei stabiler Position. Der aktuelle Title ist zu lang und wird abgeschnitten.
 2. Severity-Boost in `boost_severity()` anpassen
 3. Page-Catalog aktualisieren
 
+## Site Crawler
+
+### Übersicht
+Der SEO Crawler prüft alle URLs aus der Sitemap auf technische SEO-Probleme.
+
+### Checks
+| Check | Beschreibung | Alert bei |
+|-------|--------------|-----------|
+| HTTP Status | Status Code prüfen | 4xx/5xx |
+| Redirect Chain | Anzahl Redirects | ≥2 Hops |
+| Response Time | Antwortzeit | >2000ms |
+| Canonical | Canonical ↔ Sitemap Match | Mismatch |
+| Title | Title-Tag vorhanden | Fehlend |
+| Meta Description | Meta-Description vorhanden | Fehlend |
+| H1 | H1-Tag vorhanden | Fehlend/Mehrfach |
+| hreflang | hreflang-Tags vorhanden | Fehlend |
+| Noindex | robots noindex | Unerwartet |
+| Mixed Content | HTTP-Ressourcen auf HTTPS-Seite | Vorhanden |
+
+### Datenbank-Tabellen
+
+| Tabelle | Beschreibung |
+|---------|--------------|
+| `seo_crawl_run` | Protokoll jedes Crawl-Durchlaufs (Status, Dauer, URLs, Issues) |
+| `seo_crawl_result` | Einzelergebnis pro URL mit allen Check-Daten und Issues |
+
+### Edge Function
+`supabase/functions/seo-crawler/index.ts`
+
+**Actions:**
+- `full_crawl` — Alle URLs aus der Sitemap crawlen
+- `quick_check` — Nur Money/Pillar Pages prüfen
+- `single_url` — Eine einzelne URL testen
+
+### API Endpoints
+| Methode | Pfad | Beschreibung |
+|---------|------|--------------|
+| GET | `/crawl-runs` | Letzte Crawl-Runs |
+| GET | `/crawl-results` | Ergebnisse mit Filtern (run_id, has_issues) |
+| GET | `/stats` | Erweitert mit last_crawl_run, crawl_issues_count |
+
+### Cron
+Täglich 06:30 UTC (nach Pipeline um 06:15)
+
+### Admin UI
+Admin → SEO → Schnellaktionen → Site Crawler
+
+**Komponenten:**
+- `SEOCrawlerPanel.tsx` — Hauptkomponente mit Header, Summary Cards, Ergebnis-Tabelle, Run-Historie
+- `useSEOCrawler.ts` — React Query Hooks (useCrawlRuns, useCrawlResults, useCrawlerStats, useTriggerCrawl)
+
+### Hooks
+
+```typescript
+// Crawl-Runs laden
+const { data: runs } = useCrawlRuns(10);
+
+// Ergebnisse laden (mit Filter)
+const { data: results } = useCrawlResults({
+  runId: '...',
+  hasIssues: true,
+  limit: 100,
+});
+
+// Crawler-Stats
+const { data: stats } = useCrawlerStats();
+
+// Crawl auslösen
+const triggerCrawl = useTriggerCrawl();
+await triggerCrawl.mutateAsync({ action: 'full_crawl' });
+```
+
 ---
 
-**Letzte Aktualisierung:** 2026-02-06
+**Letzte Aktualisierung:** 2026-02-08

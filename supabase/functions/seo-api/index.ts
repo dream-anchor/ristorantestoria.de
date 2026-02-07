@@ -2,7 +2,7 @@
  * SEO API Edge Function
  * 
  * REST API for all SEO operations data.
- * Endpoints: /briefing, /alerts, /tasks, /prompts, /duplicates, /cannibalization, /catalog, /stats
+ * Endpoints: /briefing, /alerts, /tasks, /prompts, /duplicates, /cannibalization, /catalog, /crawl-runs, /crawl-results, /stats
  */
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
@@ -164,6 +164,33 @@ serve(async (req) => {
         break;
       }
 
+      case 'crawl-runs': {
+        const limit = parseInt(url.searchParams.get('limit') || '10');
+        const { data } = await supabase
+          .from('seo_crawl_run')
+          .select('*')
+          .order('started_at', { ascending: false })
+          .limit(limit);
+        responseData = data || [];
+        break;
+      }
+
+      case 'crawl-results': {
+        const runId = url.searchParams.get('run_id');
+        const hasIssues = url.searchParams.get('has_issues');
+        const limit = parseInt(url.searchParams.get('limit') || '100');
+        let query = supabase
+          .from('seo_crawl_result')
+          .select('*')
+          .order('crawled_at', { ascending: false })
+          .limit(limit);
+        if (runId) query = query.eq('crawl_run_id', runId);
+        if (hasIssues === 'true') query = query.not('issues', 'eq', '[]');
+        const { data } = await query;
+        responseData = data || [];
+        break;
+      }
+
       case 'stats':
       case 'seo-api': {
         // Overview stats
@@ -174,6 +201,8 @@ serve(async (req) => {
           { count: promptsPending },
           { data: latestBriefing },
           { data: latestRun },
+          { data: lastCrawlRun },
+          { count: crawlIssuesCount },
         ] = await Promise.all([
           supabase.from('seo_alert_event').select('*', { count: 'exact', head: true }).eq('status', 'open'),
           supabase.from('seo_alert_event').select('*', { count: 'exact', head: true }).eq('status', 'open').eq('severity', 'critical'),
@@ -181,6 +210,8 @@ serve(async (req) => {
           supabase.from('seo_prompt_pack').select('*', { count: 'exact', head: true }).eq('is_executed', false),
           supabase.from('seo_daily_briefing').select('*').order('briefing_date', { ascending: false }).limit(1),
           supabase.from('seo_pipeline_run').select('*').order('created_at', { ascending: false }).limit(1),
+          supabase.from('seo_crawl_run').select('*').order('started_at', { ascending: false }).limit(1),
+          supabase.from('seo_crawl_result').select('*', { count: 'exact', head: true }).not('issues', 'eq', '[]'),
         ]);
 
         responseData = {
@@ -190,6 +221,8 @@ serve(async (req) => {
           prompts_pending: promptsPending || 0,
           latest_briefing: latestBriefing?.[0] || null,
           latest_pipeline_run: latestRun?.[0] || null,
+          last_crawl_run: lastCrawlRun?.[0] || null,
+          crawl_issues_count: crawlIssuesCount || 0,
         };
         break;
       }
