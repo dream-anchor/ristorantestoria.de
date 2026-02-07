@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          menu_id: string | null
+          message: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          menu_id?: string | null
+          message: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          menu_id?: string | null
+          message?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_notifications_menu_id_fkey"
+            columns: ["menu_id"]
+            isOneToOne: false
+            referencedRelation: "menus"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       gsc_alert_rules: {
         Row: {
           alert_type: string
@@ -1050,6 +1085,7 @@ export type Database = {
       }
       menus: {
         Row: {
+          archive_year: number | null
           created_at: string | null
           id: string
           is_published: boolean | null
@@ -1072,6 +1108,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          archive_year?: number | null
           created_at?: string | null
           id?: string
           is_published?: boolean | null
@@ -1094,6 +1131,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          archive_year?: number | null
           created_at?: string | null
           id?: string
           is_published?: boolean | null
@@ -1114,6 +1152,33 @@ export type Database = {
           title_fr?: string | null
           title_it?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      seasonal_signups: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          language: string
+          notified_at: string | null
+          seasonal_event: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          language?: string
+          notified_at?: string | null
+          seasonal_event: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          language?: string
+          notified_at?: string | null
+          seasonal_event?: string
         }
         Relationships: []
       }
@@ -1523,6 +1588,44 @@ export type Database = {
             columns: ["prompt_pack_id"]
             isOneToOne: false
             referencedRelation: "seo_prompt_pack"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      slug_classifications: {
+        Row: {
+          classified_as: string | null
+          conflict: boolean
+          created_at: string
+          id: string
+          menu_id: string
+          original_title: string
+          slugs_updated: boolean
+        }
+        Insert: {
+          classified_as?: string | null
+          conflict?: boolean
+          created_at?: string
+          id?: string
+          menu_id: string
+          original_title: string
+          slugs_updated?: boolean
+        }
+        Update: {
+          classified_as?: string | null
+          conflict?: boolean
+          created_at?: string
+          id?: string
+          menu_id?: string
+          original_title?: string
+          slugs_updated?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "slug_classifications_menu_id_fkey"
+            columns: ["menu_id"]
+            isOneToOne: false
+            referencedRelation: "menus"
             referencedColumns: ["id"]
           },
         ]
