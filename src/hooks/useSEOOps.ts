@@ -231,7 +231,7 @@ export function useSEOBriefing(date?: string) {
         if (Array.isArray(result)) {
           if (result.length === 0) return null;
           // Map API field names to expected format
-          const briefing = result[0] as Record<string, unknown>;
+          const briefing = result[0] as unknown as Record<string, unknown>;
           return {
             id: briefing.id as string,
             date: (briefing.briefing_date || briefing.date) as string,
