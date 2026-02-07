@@ -12,6 +12,9 @@ import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
 import SortableMenuCard from "@/components/admin/SortableMenuCard";
 import { LogOut, ExternalLink, Rocket, Loader2, BarChart3, Sparkles } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
+import SeasonalSignupsManager from "@/components/admin/SeasonalSignupsManager";
+import AdminNotificationsBanner from "@/components/admin/AdminNotificationsBanner";
+import ClassificationLog from "@/components/admin/ClassificationLog";
 import SEO from "@/components/SEO";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 import {
@@ -272,6 +275,7 @@ const Admin = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 md:py-8">
+        <AdminNotificationsBanner />
         <div className="mb-6 md:mb-8">
           <h2 className="text-xl md:text-2xl font-serif font-semibold mb-2">Menü-Verwaltung</h2>
           <p className="text-sm md:text-base text-muted-foreground">
@@ -315,6 +319,12 @@ const Admin = () => {
 
         {/* Besondere Anlässe Section */}
         <SpecialOccasionsManager />
+
+        {/* Saisonale Vormerkungen */}
+        <SeasonalSignupsManager />
+
+        {/* Slug-Klassifikationen */}
+        <ClassificationLog />
       </main>
     </div>
     </>

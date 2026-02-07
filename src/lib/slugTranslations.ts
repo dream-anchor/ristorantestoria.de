@@ -20,17 +20,17 @@ export const RECURRING_MENU_SLUGS: Record<string, Record<Language, string>> = {
   },
   // Weihnachten - reused every December
   weihnachten: {
-    de: 'weihnachtsmenues',
-    en: 'christmas-menus',
+    de: 'weihnachtsmenue',
+    en: 'christmas-menu',
     it: 'natale-menu',
-    fr: 'noel-menus',
+    fr: 'noel-menu',
   },
   // Silvester - reused every December/January
   silvester: {
-    de: 'silvesterparty',
-    en: 'new-years-party',
-    it: 'capodanno-party',
-    fr: 'nouvel-an-party',
+    de: 'silvester',
+    en: 'new-years-eve',
+    it: 'capodanno',
+    fr: 'nouvel-an',
   },
   // Ostern - reused every spring
   ostern: {
