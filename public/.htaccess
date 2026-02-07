@@ -70,6 +70,9 @@ RewriteRule ^en/special-occasions/vatertag-menue/?$ /en/special-occasions/father
 RewriteRule ^it/occasioni-speciali/vatertag-menue/?$ /it/occasioni-speciali/festa-papa-menu/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/vatertag-menue/?$ /fr/occasions-speciales/fete-peres-menu/ [R=301,L]
 
+# --- Legacy CMS Redirects ---
+RewriteRule ^cms/speisekarte/?$ /speisekarte/ [R=301,L]
+
 # ============================================
 # 2. Error Documents (Fallback auf SPA)
 # ============================================
