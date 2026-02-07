@@ -21,8 +21,8 @@ const RECURRING_MENU_SLUGS: Record<string, Record<string, string>> = {
   weihnachten: {
     de: "weihnachtsmenue",
     en: "christmas-menu",
-    it: "menu-natale",
-    fr: "menu-noel",
+    it: "natale-menu",
+    fr: "noel-menu",
   },
   silvester: {
     de: "silvester",
