@@ -204,6 +204,21 @@ async function generateSitemap() {
     }
   }
 
+  // Process seasonal routes (permanent URLs — always in sitemap, even when inactive)
+  const SEASONAL_MENUS = [
+    { de: 'besondere-anlaesse/valentinstag-menue', en: 'special-occasions/valentines-menu', it: 'occasioni-speciali/san-valentino-menu', fr: 'occasions-speciales/saint-valentin-menu' },
+    { de: 'besondere-anlaesse/weihnachtsmenue', en: 'special-occasions/christmas-menu', it: 'occasioni-speciali/natale-menu', fr: 'occasions-speciales/noel-menu' },
+    { de: 'besondere-anlaesse/silvester', en: 'special-occasions/new-years-eve', it: 'occasioni-speciali/capodanno', fr: 'occasions-speciales/nouvel-an' },
+  ];
+
+  for (const seasonal of SEASONAL_MENUS) {
+    const hreflangLinks = generateHreflangLinks(seasonal);
+    for (const lang of LANGUAGES) {
+      const url = buildUrl(seasonal[lang], lang);
+      urlEntries.push(generateUrlEntry(url, TODAY, "weekly", "0.7", hreflangLinks));
+    }
+  }
+
   // Process dynamic routes (special menus from database)
   for (const route of dynamicRoutes) {
     const hreflangLinks = generateHreflangLinks(route.slugs);

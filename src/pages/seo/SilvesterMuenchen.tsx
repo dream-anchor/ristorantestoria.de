@@ -39,6 +39,13 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
     ? `/${parentSlug}/${seasonalSlug}`
     : `/${language}/${parentSlug}/${seasonalSlug}`;
 
+  const alternates = (['de', 'en', 'it', 'fr'] as const).map(lang => ({
+    lang,
+    url: lang === 'de'
+      ? `https://www.ristorantestoria.de/${PARENT_SLUGS.de}/${seasonalConfig.slugs.de}/`
+      : `https://www.ristorantestoria.de/${lang}/${PARENT_SLUGS[lang]}/${seasonalConfig.slugs[lang]}/`,
+  }));
+
   const packages = [
     { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4, s.package1Item5], ideal: s.package1Ideal, price: s.package1Price },
     { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5, s.package2Item6, s.package2Item7], ideal: s.package2Ideal, price: s.package2Price, badge: s.package2Badge },
@@ -88,7 +95,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
   return (
     <>
       <StaticBotContent title={s.heroTitle} description={s.heroDescription} sections={[]} />
-      <SEO title={s.seoTitle} description={s.seoDescription} canonical={canonicalPath} />
+      <SEO title={s.seoTitle} description={s.seoDescription} canonical={canonicalPath} alternates={alternates} />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[
         { name: 'Home', url: '/' },

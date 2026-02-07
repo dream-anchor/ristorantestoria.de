@@ -18,6 +18,13 @@ RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # ============================================
+# 1a2. Subdomain Redirects (301)
+# ============================================
+# newsletter.ristorantestoria.de → www.ristorantestoria.de
+RewriteCond %{HTTP_HOST} ^newsletter\.ristorantestoria\.de$ [NC]
+RewriteRule ^ https://www.ristorantestoria.de/ [R=301,L]
+
+# ============================================
 # 1b. WWW Normalisierung (SEO - Domain Authority)
 # ============================================
 # Redirect non-www zu www (kanonische Domain)

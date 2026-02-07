@@ -220,50 +220,12 @@ const RomantischesDinner = () => {
               <p className="text-center text-muted-foreground text-sm mt-6">{t.seo.romanticDinner.menuNote}</p>
             </section>
 
-            {/* Valentinstag Special */}
-            <section className="mb-16 bg-primary/10 border border-primary/30 rounded-xl p-8">
+            {/* Valentinstag Teaser */}
+            <section className="mb-16 bg-primary/10 border border-primary/30 rounded-xl p-8 text-center">
               <span className="inline-block bg-primary text-primary-foreground text-xs px-3 py-1 rounded mb-4">{t.seo.romanticDinner.valentineBadge}</span>
               <h2 className="text-2xl font-serif font-bold mb-4">{t.seo.romanticDinner.valentineTitle}</h2>
-              <p className="text-muted-foreground mb-4">{t.seo.romanticDinner.valentineIntro}</p>
-              <p className="text-sm text-primary mb-6">{t.seo.romanticDinner.valentineDates}</p>
-              
-              <h3 className="text-xl font-semibold mb-4">{t.seo.romanticDinner.valentineMenuTitle}</h3>
-              <div className="grid md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-background rounded-lg p-4">
-                  <p className="font-medium">{t.seo.romanticDinner.valentineCourse1Title}</p>
-                  <p className="text-muted-foreground text-sm">{t.seo.romanticDinner.valentineCourse1Desc}</p>
-                </div>
-                <div className="bg-background rounded-lg p-4">
-                  <p className="font-medium">{t.seo.romanticDinner.valentineCourse2Title}</p>
-                  <p className="text-muted-foreground text-sm">{t.seo.romanticDinner.valentineCourse2Desc}</p>
-                </div>
-                <div className="bg-background rounded-lg p-4">
-                  <p className="font-medium">{t.seo.romanticDinner.valentineCourse3Title}</p>
-                  <p className="text-muted-foreground text-sm">{t.seo.romanticDinner.valentineCourse3Desc}</p>
-                </div>
-                <div className="bg-background rounded-lg p-4">
-                  <p className="font-medium">{t.seo.romanticDinner.valentineCourse4Title}</p>
-                  <p className="text-muted-foreground text-sm">{t.seo.romanticDinner.valentineCourse4Desc}</p>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-4 items-center mb-6">
-                <span className="text-xl font-bold">{t.seo.romanticDinner.valentinePrice}</span>
-                <span className="text-muted-foreground text-sm">{t.seo.romanticDinner.valentinePriceNote}</span>
-              </div>
-              <div className="mb-6">
-                <p className="font-medium mb-2">{t.seo.romanticDinner.valentineExtrasTitle}</p>
-                <ul className="text-muted-foreground text-sm space-y-1">
-                  <li>{t.seo.romanticDinner.valentineExtra1}</li>
-                  <li>{t.seo.romanticDinner.valentineExtra2}</li>
-                  <li>{t.seo.romanticDinner.valentineExtra3}</li>
-                </ul>
-              </div>
-              <div className="bg-background rounded-lg p-4">
-                <h4 className="font-semibold mb-2">{t.seo.romanticDinner.valentineReserveTitle}</h4>
-                <p className="text-muted-foreground text-sm mb-4">{t.seo.romanticDinner.valentineReserveNote}</p>
-                <Button asChild><LocalizedLink to="reservierung">{t.seo.romanticDinner.heroCta}</LocalizedLink></Button>
-              </div>
-              <p className="text-muted-foreground text-xs mt-4 italic">{t.seo.romanticDinner.valentineFuture}</p>
+              <p className="text-muted-foreground mb-6">{t.seo.romanticDinner.valentineTeaser}</p>
+              <Button asChild><LocalizedLink to="besondere-anlaesse/valentinstag-menue">{t.seo.romanticDinner.valentineLinkText}</LocalizedLink></Button>
             </section>
 
             {/* Occasions */}
