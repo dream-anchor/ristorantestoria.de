@@ -19,18 +19,26 @@ RewriteCond %{HTTP_HOST} ^newsletter\.ristorantestoria\.de$ [NC]
 RewriteRule ^ https://www.ristorantestoria.de/ [R=301,L]
 
 # ============================================
-# 1b. HTTPS + WWW Normalisierung (ein Hop statt zwei)
+# 1b. HTTPS + WWW + Trailing Slash — alles in einem Hop
 # ============================================
-# Alle Varianten in einem 301-Hop auf https://www. normalisieren
-# (http://ristorantestoria.de, https://ristorantestoria.de, http://www.ristorantestoria.de)
+# Regel 1: Nicht-kanonischer Host/Protokoll UND kein Trailing Slash
+#          → https://www. MIT Slash in einem einzigen 301
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1/ [R=301,L]
 
-# ============================================
-# 1c. Trailing Slash erzwingen (SEO - URL Konsistenz)
-# ============================================
-# Fügt / am Ende hinzu (außer bei Dateien und Root)
+# Regel 2: Nicht-kanonischer Host/Protokoll MIT Trailing Slash (oder Root/Datei)
+#          → https://www. (Pfad bleibt wie er ist)
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.ristorantestoria.de%{REQUEST_URI} [R=301,L]
+
+# Regel 3: Bereits auf https://www. aber ohne Trailing Slash
+#          → Slash hinzufügen (einziger verbleibender Fall)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !^/$
 RewriteCond %{REQUEST_URI} !/$
