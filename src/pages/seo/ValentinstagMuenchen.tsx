@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
-import romantischesDinnerImage from "@/assets/romantisches-dinner-hero.webp";
+import romantischesDinnerImage from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";

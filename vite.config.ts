@@ -25,6 +25,16 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
       { find: /^@\//, replacement: path.resolve(__dirname, "./src") + "/" },
     ],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: isSsrBuild ? undefined : {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'recharts': ['recharts'],
+        },
+      },
+    },
+  },
   ssr: {
     // Bundle react-helmet-async to avoid CJS/ESM interop issues
     noExternal: ["react-helmet-async"],

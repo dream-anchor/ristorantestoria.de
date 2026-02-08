@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Heart, Clock } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
-import romanticDinnerHero from "@/assets/romantisches-dinner-hero.webp";
+import romanticDinnerHero from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";

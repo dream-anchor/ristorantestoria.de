@@ -10,7 +10,7 @@ const HomeBotContent = () => {
 
   const content = (
     <article>
-      <h1>STORIA – Ristorante • Pizzeria • Bar</h1>
+      <h2>STORIA – Ristorante • Pizzeria • Bar</h2>
       
       <p>
         {language === 'de' 

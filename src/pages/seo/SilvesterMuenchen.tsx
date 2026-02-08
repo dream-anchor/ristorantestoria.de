@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
-import silvesterHeroImage from "@/assets/Silvester-Restaurant-Storia-Maxvorstadt-Muenchen.webp";
+import silvesterHeroImage from "@/assets/silvester-dinner-gala-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";

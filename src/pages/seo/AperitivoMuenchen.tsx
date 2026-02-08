@@ -16,7 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import cocktailsImage from "@/assets/Aperitivo-Restaurant-Storia-Maxvorstadt-Muenchen.png";
+import cocktailsImage from "@/assets/aperitivo-muenchen-italienische-bar-storia.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, MessageCircle, Calendar, MapPin, Clock, Wine, Utensils, ArrowRight } from "lucide-react";
@@ -118,7 +118,7 @@ const AperitivoMuenchen = () => {
         "@context": "https://schema.org",
         "@type": "BarOrPub",
         "name": "STORIA Aperitivo Bar München",
-        "image": "https://www.ristorantestoria.de/assets/cocktails.webp",
+        "image": "https://www.ristorantestoria.de/assets/aperitivo-cocktails-bar-storia-muenchen.webp",
         "description": t.seo.aperitivo.seoDescription,
         "address": {
           "@type": "PostalAddress",

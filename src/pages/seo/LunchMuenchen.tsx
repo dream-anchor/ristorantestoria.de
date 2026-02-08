@@ -21,8 +21,8 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { MapPin, Clock, Utensils, ChefHat, Euro, ArrowRight, Salad, Pizza, Users, Receipt, Building, CalendarClock, BadgeCheck, MessageCircle } from "lucide-react";
 
 // Images
-import businessLunchAtmosphere from "@/assets/business-lunch-atmosphere.webp";
-import businessLunchFood from "@/assets/business-lunch-food.webp";
+import businessLunchAtmosphere from "@/assets/business-lunch-mittagessen-maxvorstadt-muenchen.webp";
+import businessLunchFood from "@/assets/mittagsmenue-pasta-lunch-storia-muenchen.webp";
 
 const LunchMuenchen = () => {
   const { t } = useLanguage();

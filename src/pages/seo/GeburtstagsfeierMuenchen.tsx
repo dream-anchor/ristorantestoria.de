@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Mail, ExternalLink } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
-import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-event.webp";
+import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-restaurant-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";

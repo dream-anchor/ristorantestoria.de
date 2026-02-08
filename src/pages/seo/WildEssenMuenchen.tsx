@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 
 // Wild game hero image
-import wildVenisonHero from "@/assets/wild-venison-hero.webp";
+import wildVenisonHero from "@/assets/wild-essen-wildsaison-storia-muenchen.webp";
 
 const WildEssenMuenchen = () => {
   const { t } = useLanguage();

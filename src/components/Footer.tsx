@@ -1,9 +1,8 @@
 import LocalizedLink from "@/components/LocalizedLink";
 import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
-import domenicoImage from "@/assets/domenico-speranza.webp";
+import domenicoImage from "@/assets/domenico-speranza-gruender-storia-muenchen.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
-import nicolaImage from "@/assets/nicola-speranza.webp";
-import mammaVideo from "@/assets/lamamma.mp4";
+import nicolaImage from "@/assets/nicola-speranza-famiglia-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
@@ -36,7 +35,7 @@ const Footer = () => {
             <div className="text-center group">
               <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-5 rounded-full overflow-hidden ring-1 ring-primary-foreground/20 shadow-xl transition-transform duration-300 group-hover:scale-105">
                 <video
-                  src={mammaVideo}
+                  src="/mamma-speranza-kueche-storia-muenchen.mp4"
                   autoPlay
                   muted
                   loop
