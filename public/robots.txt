@@ -10,14 +10,6 @@
 # ─────────────────────────────────────────────────────────────────────
 Sitemap: https://www.ristorantestoria.de/sitemap.xml
 
-# ─────────────────────────────────────────────────────────────────────
-# LLM-OPTIMIERTE SEITEN FÜR AI-ASSISTENTEN
-# Vollständige Restaurant-Informationen für ChatGPT, Claude, Perplexity
-# ─────────────────────────────────────────────────────────────────────
-LLMs-Txt: https://www.ristorantestoria.de/llms.txt
-# Strukturierte HTML-Seiten für AI-Crawling:
-# German: https://www.ristorantestoria.de/llm-de.html
-# English: https://www.ristorantestoria.de/llm-en.html
 
 # ═══════════════════════════════════════════════════════════════════
 # ERLAUBTE CRAWLER - Sichtbarkeit, Traffic & Empfehlungen
