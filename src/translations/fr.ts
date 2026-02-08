@@ -92,11 +92,19 @@ export const fr = {
     claim: "~ Au cœur de Munich ~",
     reserveButton: "RÉSERVER MAINTENANT",
   },
-  welcome: {
+  homeIntro: {
     title: "Bienvenue au STORIA",
-    p1: "Le Ristorante STORIA, situé Karlstraße 47a, est depuis 1995 un coin d'Italie du Sud au cœur du quartier Maxvorstadt de Munich. Domenico Speranza et sa famille servent une pizza napolitaine cuite au four à pierre à 400\u00a0°C, des pâtes maison et des fruits de mer frais – accompagnés d'une carte de vins italiens soigneusement sélectionnés. À quelques minutes à pied de Königsplatz, le STORIA allie cuisine italienne authentique et chaleur d'une entreprise familiale.",
-    p2: "Qu'il s'agisse d'un déjeuner d'affaires en semaine, d'un aperitivo en terrasse le soir ou d'un dîner romantique à deux – chaque visite se veut comme une soirée entre amis en Italie. Pour les événements d'entreprise, anniversaires et fêtes privées, nous proposons des places pour un maximum de 80 convives.",
-    linkText: "En savoir plus sur nous",
+    p1pre: "Depuis 1995, le Ristorante STORIA au Karlstraße 47a incarne un morceau du Sud de l'Italie au cœur du quartier Maxvorstadt de Munich. Domenico Speranza et sa famille servent une ",
+    link1: "pizza napolitaine au four à pierre",
+    p1mid: " à 400\u00a0°C, des pâtes maison et des fruits de mer frais – accompagnés d'une ",
+    link2: "carte des vins italiens",
+    p1post: " soigneusement sélectionnée. À quelques minutes à pied du Königsplatz, le STORIA allie cuisine italienne authentique et chaleur d'une entreprise familiale.",
+    p2pre: "Qu'il s'agisse d'un ",
+    link3: "déjeuner d'affaires",
+    p2mid: " décontracté en semaine, d'un ",
+    link4: "aperitivo sur la terrasse",
+    p2post: " le soir ou d'un dîner romantique à deux – chaque visite doit donner l'impression d'une soirée entre amis en Italie. Pour événements d'entreprise, anniversaires et fêtes privées, nous offrons de l'espace pour 80 convives.",
+    cta: "En savoir plus sur nous",
   },
   footer: {
     theFamily: "La Famiglia Speranza",

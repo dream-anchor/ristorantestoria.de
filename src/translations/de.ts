@@ -92,11 +92,19 @@ export const de = {
     claim: "~ Im Herzen von München ~",
     reserveButton: "HIER RESERVIEREN",
   },
-  welcome: {
+  homeIntro: {
     title: "Willkommen im STORIA",
-    p1: "Das Ristorante STORIA in der Karlstraße 47a ist seit 1995 ein Stück Süditalien mitten in Münchens Maxvorstadt. Domenico Speranza und seine Familie servieren neapolitanische Pizza aus dem Steinofen bei 400\u00a0°C, hausgemachte Pasta und frische Meeresfrüchte – begleitet von einer ausgewählten italienischen Weinkarte. Nur wenige Gehminuten vom Königsplatz entfernt verbindet das STORIA authentische italienische Küche mit der Herzlichkeit eines Familienbetriebs.",
-    p2: "Ob entspannter Business Lunch unter der Woche, Aperitivo auf der Terrasse am Abend oder ein romantisches Dinner zu zweit – jeder Besuch soll sich anfühlen wie ein Abend bei Freunden in Italien. Für Firmenfeiern, Geburtstage und private Feste bieten wir Platz für bis zu 80 Gäste.",
-    linkText: "Mehr über uns erfahren",
+    p1pre: "Das Ristorante STORIA in der Karlstraße 47a ist seit 1995 ein Stück Süditalien mitten in Münchens Maxvorstadt. Domenico Speranza und seine Familie servieren ",
+    link1: "neapolitanische Pizza aus dem Steinofen",
+    p1mid: " bei 400\u00a0°C, hausgemachte Pasta und frische Meeresfrüchte – begleitet von einer ausgewählten ",
+    link2: "italienischen Weinkarte",
+    p1post: ". Nur wenige Gehminuten vom Königsplatz entfernt verbindet das STORIA authentische italienische Küche mit der Herzlichkeit eines Familienbetriebs.",
+    p2pre: "Ob entspannter ",
+    link3: "Business Lunch",
+    p2mid: " unter der Woche, ",
+    link4: "Aperitivo auf der Terrasse",
+    p2post: " am Abend oder ein romantisches Dinner zu zweit – jeder Besuch soll sich anfühlen wie ein Abend bei Freunden in Italien. Für Firmenfeiern, Geburtstage und private Feste bieten wir Platz für bis zu 80 Gäste.",
+    cta: "Mehr über uns erfahren",
   },
   footer: {
     theFamily: "La Famiglia Speranza",

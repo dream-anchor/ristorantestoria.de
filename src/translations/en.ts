@@ -92,11 +92,19 @@ export const en = {
     claim: "~ In the Heart of Munich ~",
     reserveButton: "RESERVE NOW",
   },
-  welcome: {
+  homeIntro: {
     title: "Welcome to STORIA",
-    p1: "Ristorante STORIA at Karlstraße 47a has been a piece of Southern Italy in the heart of Munich's Maxvorstadt since 1995. Domenico Speranza and his family serve Neapolitan pizza from the stone oven at 400\u00a0°C, homemade pasta and fresh seafood – accompanied by a curated Italian wine list. Just a few minutes' walk from Königsplatz, STORIA combines authentic Italian cuisine with the warmth of a family-run restaurant.",
-    p2: "Whether a relaxed business lunch during the week, aperitivo on the terrace in the evening or a romantic dinner for two – every visit should feel like an evening with friends in Italy. For corporate events, birthdays and private celebrations we offer seating for up to 80 guests.",
-    linkText: "Learn more about us",
+    p1pre: "Since 1995, Ristorante STORIA on Karlstraße 47a has been a piece of Southern Italy in the heart of Munich's Maxvorstadt. Domenico Speranza and his family serve ",
+    link1: "Neapolitan stone-oven pizza",
+    p1mid: " at 400\u00a0°C, homemade pasta, and fresh seafood – accompanied by a curated ",
+    link2: "Italian wine list",
+    p1post: ". Just a few minutes' walk from Königsplatz, STORIA combines authentic Italian cuisine with the warmth of a family-run restaurant.",
+    p2pre: "Whether it's a relaxed ",
+    link3: "business lunch",
+    p2mid: " during the week, ",
+    link4: "aperitivo on the terrace",
+    p2post: " in the evening, or a romantic dinner for two – every visit should feel like an evening with friends in Italy. For corporate events, birthdays, and private celebrations, we offer space for up to 80 guests.",
+    cta: "Learn more about us",
   },
   footer: {
     theFamily: "La Famiglia Speranza",
