@@ -344,7 +344,7 @@ const EventlocationMuenchen = () => {
                 {faqs.map((faq, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">{faq.a}</AccordionContent>
+                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{faq.a}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>

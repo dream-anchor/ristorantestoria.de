@@ -304,7 +304,7 @@ const NeapolitanischePizza = () => {
                 {faqItems.map((faq, index) => (
                   <AccordionItem key={index} value={`faq-${index}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
+                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">
                       {faq.a}
                     </AccordionContent>
                   </AccordionItem>

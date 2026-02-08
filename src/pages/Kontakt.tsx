@@ -287,7 +287,7 @@ const Kontakt = () => {
                     {content.parking}
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-8 pb-6 text-muted-foreground">
+                <AccordionContent forceMount className="px-8 pb-6 text-muted-foreground data-[state=closed]:hidden">
                   <div className="space-y-4 pt-2">
                     <div className="flex items-start gap-4">
                       <ParkingSquare className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
@@ -317,7 +317,7 @@ const Kontakt = () => {
                     {content.publicTransport}
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-8 pb-6 text-muted-foreground">
+                <AccordionContent forceMount className="px-8 pb-6 text-muted-foreground data-[state=closed]:hidden">
                   <div className="space-y-4 pt-2">
                     <div className="flex items-start gap-4">
                       <div className="bg-[#0065ae] text-white text-xs font-bold px-2.5 py-1.5 rounded flex-shrink-0">U</div>

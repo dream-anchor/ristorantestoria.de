@@ -238,7 +238,7 @@ const FirmenfeierMuenchen = () => {
             {/* FAQ */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.firmenfeier.faqTitle}</h2>
-              <Accordion type="single" collapsible className="max-w-3xl mx-auto">{faqs.map((faq, i) => (<AccordionItem key={i} value={`faq-${i}`}><AccordionTrigger className="text-left">{faq.q}</AccordionTrigger><AccordionContent className="text-muted-foreground">{faq.a}</AccordionContent></AccordionItem>))}</Accordion>
+              <Accordion type="single" collapsible className="max-w-3xl mx-auto">{faqs.map((faq, i) => (<AccordionItem key={i} value={`faq-${i}`}><AccordionTrigger className="text-left">{faq.q}</AccordionTrigger><AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{faq.a}</AccordionContent></AccordionItem>))}</Accordion>
             </section>
 
             {/* Related */}
