@@ -14,14 +14,14 @@ const HomeIntro = () => {
           {t.homeIntro.p1pre}
           <LocalizedLink
             to="neapolitanische-pizza-muenchen"
-            className="font-semibold text-foreground hover:text-primary transition-colors"
+            className="font-semibold italic text-foreground hover:text-primary transition-colors"
           >
             {t.homeIntro.link1}
           </LocalizedLink>
           {t.homeIntro.p1mid}
           <LocalizedLink
             to="getraenke"
-            className="font-semibold text-foreground hover:text-primary transition-colors"
+            className="font-semibold italic text-foreground hover:text-primary transition-colors"
           >
             {t.homeIntro.link2}
           </LocalizedLink>
@@ -31,14 +31,14 @@ const HomeIntro = () => {
           {t.homeIntro.p2pre}
           <LocalizedLink
             to="lunch-muenchen-maxvorstadt"
-            className="font-semibold text-foreground hover:text-primary transition-colors"
+            className="font-semibold italic text-foreground hover:text-primary transition-colors"
           >
             {t.homeIntro.link3}
           </LocalizedLink>
           {t.homeIntro.p2mid}
           <LocalizedLink
             to="aperitivo-muenchen"
-            className="font-semibold text-foreground hover:text-primary transition-colors"
+            className="font-semibold italic text-foreground hover:text-primary transition-colors"
           >
             {t.homeIntro.link4}
           </LocalizedLink>
@@ -46,9 +46,9 @@ const HomeIntro = () => {
         </p>
         <LocalizedLink
           to="ueber-uns"
-          className="text-sm font-medium text-primary hover:underline transition-colors"
+          className="text-sm font-medium text-foreground underline decoration-primary/40 underline-offset-4 hover:decoration-primary transition-colors"
         >
-          {t.homeIntro.cta} →
+          {t.homeIntro.cta}
         </LocalizedLink>
       </div>
     </section>
