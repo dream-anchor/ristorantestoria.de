@@ -117,9 +117,16 @@ const itBase = {
   },
   hero: {
     subtitle: "RISTORANTE · PIZZERIA · BAR",
-    heading: "Ristorante Italiano a Monaco di Baviera",
+    headingLine1: "Ristorante Italiano a",
+    headingLine2: "Monaco di Baviera",
     claim: "~ Nel cuore di Monaco ~",
     reserveButton: "PRENOTA ORA",
+  },
+  welcome: {
+    title: "Benvenuti in STORIA",
+    p1: "Il Ristorante STORIA in Karlstraße 47a è dal 1995 un angolo di Sud Italia nel cuore della Maxvorstadt di Monaco. Domenico Speranza e la sua famiglia servono pizza napoletana dal forno a legna a 400\u00a0°C, pasta fatta in casa e frutti di mare freschi – accompagnati da una selezionata carta dei vini italiani. A pochi passi da Königsplatz, lo STORIA unisce l'autentica cucina italiana al calore di un'impresa familiare.",
+    p2: "Che si tratti di un pranzo di lavoro durante la settimana, un aperitivo in terrazza la sera o una cena romantica a due – ogni visita vuole essere come una serata tra amici in Italia. Per eventi aziendali, compleanni e feste private offriamo posti per un massimo di 80 ospiti.",
+    linkText: "Scopri di più su di noi",
   },
   footer: {
     theFamily: "La Famiglia Speranza",

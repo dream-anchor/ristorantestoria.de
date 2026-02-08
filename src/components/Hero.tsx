@@ -24,7 +24,7 @@ const Hero = () => {
           {t.hero.subtitle}
         </p>
         <h1 id="hero-heading" className="text-2xl md:text-3xl font-medium mb-3">
-          {t.hero.heading}
+          {t.hero.headingLine1}<br />{t.hero.headingLine2}
         </h1>
         <p className="text-base md:text-lg text-muted-foreground/80 italic font-serif mb-10">
           {t.hero.claim}

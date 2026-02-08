@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import HomeBotContent from "@/components/HomeBotContent";
+import LocalizedLink from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
@@ -29,6 +30,28 @@ const Index = () => {
         <Navigation />
         <main>
           <ImageGrid />
+
+          {/* Willkommen-Sektion */}
+          <section className="bg-background py-16 md:py-20">
+            <div className="container mx-auto px-4 max-w-3xl text-center">
+              <h2 className="text-2xl md:text-3xl font-serif font-medium mb-6 tracking-wide">
+                {t.welcome.title}
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                {t.welcome.p1}
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                {t.welcome.p2}
+              </p>
+              <LocalizedLink
+                to="ueber-uns"
+                className="inline-flex items-center gap-2 text-base font-serif italic text-primary/80 hover:text-primary transition-colors"
+              >
+                {t.welcome.linkText} →
+              </LocalizedLink>
+            </div>
+          </section>
+
           <ConsentElfsightReviews />
           <InternalLinks />
 

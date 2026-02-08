@@ -87,9 +87,16 @@ export const de = {
   },
   hero: {
     subtitle: "RISTORANTE · PIZZERIA · BAR",
-    heading: "Italienisches Restaurant in München Maxvorstadt",
+    headingLine1: "Italienisches Restaurant in",
+    headingLine2: "München Maxvorstadt",
     claim: "~ Im Herzen von München ~",
     reserveButton: "HIER RESERVIEREN",
+  },
+  welcome: {
+    title: "Willkommen im STORIA",
+    p1: "Das Ristorante STORIA in der Karlstraße 47a ist seit 1995 ein Stück Süditalien mitten in Münchens Maxvorstadt. Domenico Speranza und seine Familie servieren neapolitanische Pizza aus dem Steinofen bei 400\u00a0°C, hausgemachte Pasta und frische Meeresfrüchte – begleitet von einer ausgewählten italienischen Weinkarte. Nur wenige Gehminuten vom Königsplatz entfernt verbindet das STORIA authentische italienische Küche mit der Herzlichkeit eines Familienbetriebs.",
+    p2: "Ob entspannter Business Lunch unter der Woche, Aperitivo auf der Terrasse am Abend oder ein romantisches Dinner zu zweit – jeder Besuch soll sich anfühlen wie ein Abend bei Freunden in Italien. Für Firmenfeiern, Geburtstage und private Feste bieten wir Platz für bis zu 80 Gäste.",
+    linkText: "Mehr über uns erfahren",
   },
   footer: {
     theFamily: "La Famiglia Speranza",

@@ -63,13 +63,6 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Discover Restaurant Link */}
-          <LocalizedLink 
-            to="ueber-uns"
-            className="mt-10 inline-flex items-center gap-2 text-base font-serif italic text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors"
-          >
-            ~ {t.footer.discoverRestaurant} ~
-          </LocalizedLink>
         </div>
       </div>
 

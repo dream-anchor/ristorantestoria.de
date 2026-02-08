@@ -87,9 +87,16 @@ export const fr = {
   },
   hero: {
     subtitle: "RISTORANTE · PIZZERIA · BAR",
-    heading: "Restaurant Italien à Munich Maxvorstadt",
+    headingLine1: "Restaurant Italien à",
+    headingLine2: "Munich Maxvorstadt",
     claim: "~ Au cœur de Munich ~",
     reserveButton: "RÉSERVER MAINTENANT",
+  },
+  welcome: {
+    title: "Bienvenue au STORIA",
+    p1: "Le Ristorante STORIA, situé Karlstraße 47a, est depuis 1995 un coin d'Italie du Sud au cœur du quartier Maxvorstadt de Munich. Domenico Speranza et sa famille servent une pizza napolitaine cuite au four à pierre à 400\u00a0°C, des pâtes maison et des fruits de mer frais – accompagnés d'une carte de vins italiens soigneusement sélectionnés. À quelques minutes à pied de Königsplatz, le STORIA allie cuisine italienne authentique et chaleur d'une entreprise familiale.",
+    p2: "Qu'il s'agisse d'un déjeuner d'affaires en semaine, d'un aperitivo en terrasse le soir ou d'un dîner romantique à deux – chaque visite se veut comme une soirée entre amis en Italie. Pour les événements d'entreprise, anniversaires et fêtes privées, nous proposons des places pour un maximum de 80 convives.",
+    linkText: "En savoir plus sur nous",
   },
   footer: {
     theFamily: "La Famiglia Speranza",
