@@ -5,12 +5,12 @@ const HomeIntro = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-16 md:py-20 bg-background">
-      <div className="container mx-auto px-4 max-w-3xl text-center">
-        <h2 className="text-2xl md:text-3xl font-serif font-medium mb-6 tracking-wide">
+    <section className="py-10 md:py-14 bg-secondary/30">
+      <div className="container mx-auto px-4 max-w-2xl text-center">
+        <h2 className="text-xl md:text-2xl font-serif font-semibold mb-4">
           {t.homeIntro.title}
         </h2>
-        <p className="text-muted-foreground leading-relaxed mb-4">
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">
           {t.homeIntro.p1pre}
           <LocalizedLink
             to="neapolitanische-pizza-muenchen"
@@ -27,7 +27,7 @@ const HomeIntro = () => {
           </LocalizedLink>
           {t.homeIntro.p1post}
         </p>
-        <p className="text-muted-foreground leading-relaxed mb-8">
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
           {t.homeIntro.p2pre}
           <LocalizedLink
             to="lunch-muenchen-maxvorstadt"
@@ -46,7 +46,7 @@ const HomeIntro = () => {
         </p>
         <LocalizedLink
           to="ueber-uns"
-          className="inline-flex items-center gap-2 text-base font-serif italic text-primary/80 hover:text-primary transition-colors"
+          className="text-sm font-medium text-primary hover:underline transition-colors"
         >
           {t.homeIntro.cta} →
         </LocalizedLink>
