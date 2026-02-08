@@ -87,12 +87,15 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
 
       {/* Categories */}
       <div className="space-y-12">
-        {menu.categories.map((category) => {
+        {(() => { let pizzaAnchorPlaced = false; return menu.categories.map((category) => {
           const categoryName = getLocalizedText(category.name, category.name_en, category.name_it, category.name_fr);
           const categoryDescription = getLocalizedText(category.description, category.description_en, category.description_it, category.description_fr);
+          const isPizza = (category.name || '').toLowerCase().includes('pizz');
+          const needsPizzaAnchor = isPizza && !pizzaAnchorPlaced;
+          if (needsPizzaAnchor) pizzaAnchorPlaced = true;
 
           return (
-            <div key={category.id} className="space-y-6">
+            <div key={category.id} id={needsPizzaAnchor ? 'pizza' : undefined} className="space-y-6">
               {/* Category Header */}
               <div className="text-center">
                 <h3 className="text-2xl font-serif font-medium tracking-[0.15em] uppercase text-primary">
@@ -143,7 +146,7 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
               </div>
             </div>
           );
-        })}
+        }); })()}
       </div>
 
       {/* Footer note */}
