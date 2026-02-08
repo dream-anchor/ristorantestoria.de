@@ -52,7 +52,7 @@ const Footer = () => {
               <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-5 rounded-full overflow-hidden ring-1 ring-primary-foreground/20 shadow-xl transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src={nicolaImage} 
-                  alt="Nicola Speranza – Ristorante STORIA München"
+                  alt="Nicola Speranza – Familie STORIA München Maxvorstadt"
                   width={176}
                   height={176}
                   loading="lazy"

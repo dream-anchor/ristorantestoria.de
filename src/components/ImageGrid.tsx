@@ -92,14 +92,14 @@ const ImageGrid = () => {
             className="aspect-square"
             imageClassName="object-bottom"
           />
-          <ImageCard 
-            image={drinksImage} 
-            alt={t.imageGrid.altWine}
+          <ImageCard
+            image={drinksImage}
+            alt={t.imageGrid.altCocktails}
             className="aspect-square"
           />
-          <ImageCard 
-            image={aperitivoImage} 
-            alt={t.imageGrid.altDessert}
+          <ImageCard
+            image={aperitivoImage}
+            alt={t.imageGrid.altSeafood}
             title={t.imageGrid.cateringTitle}
             subtitle={t.imageGrid.cateringText}
             externalLink="https://www.events-storia.de"
@@ -107,27 +107,27 @@ const ImageGrid = () => {
           />
 
           {/* Row 2 */}
-          <ImageCard 
-            image={breakfastImage} 
+          <ImageCard
+            image={breakfastImage}
             alt={t.imageGrid.altTerrasse}
             title={t.imageGrid.breakfastTitle}
             subtitle={t.imageGrid.breakfastText}
             className="aspect-square"
           />
-          <ImageCard 
-            image={restaurantImage} 
-            alt={t.imageGrid.altTerrasse}
+          <ImageCard
+            image={restaurantImage}
+            alt={t.imageGrid.altFassade}
             className="aspect-square"
             imageClassName="object-bottom"
           />
-          <ImageCard 
-            image={dessertImage} 
+          <ImageCard
+            image={dessertImage}
             alt={t.imageGrid.altDessert}
             className="aspect-square"
           />
-          <ImageCard 
-            image={terrasseImage} 
-            alt={t.imageGrid.altTerrasse}
+          <ImageCard
+            image={terrasseImage}
+            alt={t.imageGrid.altGaeste}
             className="aspect-square"
           />
         </div>
