@@ -83,7 +83,8 @@ export const fr = {
   },
   hero: {
     subtitle: "RISTORANTE · PIZZERIA · BAR",
-    location: "Au cœur de Munich",
+    heading: "Restaurant Italien à Munich Maxvorstadt",
+    claim: "~ Au cœur de Munich ~",
     reserveButton: "RÉSERVER MAINTENANT",
   },
   footer: {

@@ -20,12 +20,15 @@ const Hero = () => {
             className="h-32 md:h-48 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer"
           />
         </Link>
-        <p className="text-lg md:text-xl text-muted-foreground mb-8 tracking-widest uppercase font-display">
+        <p className="text-lg md:text-xl text-muted-foreground mb-4 tracking-widest uppercase font-display">
           {t.hero.subtitle}
         </p>
-        <h1 id="hero-heading" className="text-2xl md:text-3xl font-medium mb-10">
-          {t.hero.location}
+        <h1 id="hero-heading" className="text-2xl md:text-3xl font-medium mb-3">
+          {t.hero.heading}
         </h1>
+        <p className="text-base md:text-lg text-muted-foreground/80 italic font-serif mb-10">
+          {t.hero.claim}
+        </p>
         <p className="sr-only">
           {t.common.seoDescription}
         </p>

@@ -113,7 +113,8 @@ const itBase = {
   },
   hero: {
     subtitle: "RISTORANTE · PIZZERIA · BAR",
-    location: "Nel cuore di Monaco",
+    heading: "Ristorante Italiano a Monaco di Baviera",
+    claim: "~ Nel cuore di Monaco ~",
     reserveButton: "PRENOTA ORA",
   },
   footer: {

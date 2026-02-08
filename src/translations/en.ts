@@ -83,7 +83,8 @@ export const en = {
   },
   hero: {
     subtitle: "RISTORANTE · PIZZERIA · BAR",
-    location: "In the Heart of Munich",
+    heading: "Italian Restaurant in Munich Maxvorstadt",
+    claim: "~ In the Heart of Munich ~",
     reserveButton: "RESERVE NOW",
   },
   footer: {
