@@ -153,6 +153,21 @@ find dist -name "index.html" -exec grep -l "Laden\.\.\." {} \;
 # Ergebnis muss leer sein!
 ```
 
+### Rechtliche Seiten — Nur Deutsch (MANDATORY)
+
+Rechtliche Seiten werden **NICHT übersetzt** und existieren nur unter der deutschen URL:
+- `impressum`, `datenschutz`, `cookie-richtlinie`
+- `agb-restaurant`, `agb-gutscheine`, `widerrufsbelehrung`
+- `zahlungsinformationen`, `lebensmittelhinweise`, `haftungsausschluss`
+
+**Regeln:**
+- **Keine übersetzten Slugs** in `slugs.json` für EN/IT/FR
+- **`noHreflang`** auf jeder Legal-Seite im `<SEO>`-Tag
+- **`LEGAL_ONLY_DE`** in `routes.ts`, `App.tsx`, `generate-sitemap.mjs` — alle konsistent halten
+- **`.htaccess`** Section 1i: 301-Redirects von alten übersetzten URLs auf DE-Version
+- `LocalizedLink to="impressum"` zeigt immer `/impressum/` — egal welche Sprache aktiv ist
+- In der Sitemap nur deutsche URLs, keine hreflang-Tags für Legal-Seiten
+
 ---
 
 ## Content Architecture (Pillar & Cluster Model)

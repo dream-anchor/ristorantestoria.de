@@ -11,6 +11,13 @@ const translations = { de, en, it: italian, fr };
 export const SUPPORTED_LANGUAGES: Language[] = ["de", "en", "it", "fr"];
 export const DEFAULT_LANGUAGE: Language = "de";
 
+// Legal pages — German only, no translated URLs
+const LEGAL_ONLY_DE = new Set([
+  "impressum", "datenschutz", "cookie-richtlinie",
+  "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
+  "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+]);
+
 // Get slugs for a specific language
 export const getSlugs = (language: Language) => translations[language].slugs;
 
@@ -21,9 +28,15 @@ export const getSlugs = (language: Language) => translations[language].slugs;
  * @returns Full path with language prefix (e.g., "/en/reservation")
  */
 export const getLocalizedPath = (baseSlug: string, language: Language): string => {
+  // Legal pages always use German URL (no translations, no language prefix)
+  if (LEGAL_ONLY_DE.has(baseSlug)) {
+    const deSlug = translations.de.slugs[baseSlug as keyof typeof translations.de.slugs];
+    return deSlug ? `/${deSlug}/` : "/";
+  }
+
   const slugs = getSlugs(language);
   const localizedSlug = slugs[baseSlug as keyof typeof slugs] ?? baseSlug;
-  
+
   // German has no prefix
   if (language === "de") {
     return localizedSlug ? `/${localizedSlug}/` : "/";
