@@ -41,6 +41,7 @@ const Footer = () => {
                   loop
                   playsInline
                   preload="none"
+                  data-nosnippet=""
                   className="w-full h-full object-cover"
                 />
               </div>
