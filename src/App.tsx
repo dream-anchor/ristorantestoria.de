@@ -29,34 +29,34 @@ import GoogleAnalytics from "./components/GoogleAnalytics";
 import NormalizePath from "./components/NormalizePath";
 import { RedirectFromLegacyPrefix } from "./components/LegacyRedirects";
 
-// Lazy: Admin (enthält Recharts, schwere Hooks — nie von normalen Besuchern geladen)
+// Eager: SEO-Landingpages (müssen pre-rendered werden — lazy() bricht renderToString)
+import LunchMuenchen from "./pages/seo/LunchMuenchen";
+import AperitivoMuenchen from "./pages/seo/AperitivoMuenchen";
+import RomantischesDinner from "./pages/seo/RomantischesDinner";
+import EventlocationMuenchen from "./pages/seo/EventlocationMuenchen";
+import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
+import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
+import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
+import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
+import ItalienerKoenigsplatz from "./pages/seo/ItalienerKoenigsplatz";
+import FAQ from "./pages/FAQ";
+
+// Eager: Legal-Seiten (müssen pre-rendered werden)
+import Impressum from "./pages/Impressum";
+import Datenschutz from "./pages/Datenschutz";
+import CookieRichtlinie from "./pages/CookieRichtlinie";
+import AGBRestaurant from "./pages/AGBRestaurant";
+import AGBGutscheine from "./pages/AGBGutscheine";
+import Widerrufsbelehrung from "./pages/Widerrufsbelehrung";
+import Zahlungsinformationen from "./pages/Zahlungsinformationen";
+import Lebensmittelhinweise from "./pages/Lebensmittelhinweise";
+import Haftungsausschluss from "./pages/Haftungsausschluss";
+
+// Lazy: Admin (enthält Recharts, schwere Hooks — nie pre-rendered, nie von Besuchern geladen)
 const Admin = lazy(() => import("./pages/Admin"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminGSC = lazy(() => import("./pages/AdminGSC"));
 const AdminSEO = lazy(() => import("./pages/AdminSEO"));
-
-// Lazy: SEO-Landingpages (nur über Suchmaschinen oder interne Links erreicht)
-const LunchMuenchen = lazy(() => import("./pages/seo/LunchMuenchen"));
-const AperitivoMuenchen = lazy(() => import("./pages/seo/AperitivoMuenchen"));
-const RomantischesDinner = lazy(() => import("./pages/seo/RomantischesDinner"));
-const EventlocationMuenchen = lazy(() => import("./pages/seo/EventlocationMuenchen"));
-const FirmenfeierMuenchen = lazy(() => import("./pages/seo/FirmenfeierMuenchen"));
-const GeburtstagsfeierMuenchen = lazy(() => import("./pages/seo/GeburtstagsfeierMuenchen"));
-const NeapolitanischePizza = lazy(() => import("./pages/seo/NeapolitanischePizza"));
-const WildEssenMuenchen = lazy(() => import("./pages/seo/WildEssenMuenchen"));
-const ItalienerKoenigsplatz = lazy(() => import("./pages/seo/ItalienerKoenigsplatz"));
-const FAQ = lazy(() => import("./pages/FAQ"));
-
-// Lazy: Legal-Seiten (selten besucht)
-const Impressum = lazy(() => import("./pages/Impressum"));
-const Datenschutz = lazy(() => import("./pages/Datenschutz"));
-const CookieRichtlinie = lazy(() => import("./pages/CookieRichtlinie"));
-const AGBRestaurant = lazy(() => import("./pages/AGBRestaurant"));
-const AGBGutscheine = lazy(() => import("./pages/AGBGutscheine"));
-const Widerrufsbelehrung = lazy(() => import("./pages/Widerrufsbelehrung"));
-const Zahlungsinformationen = lazy(() => import("./pages/Zahlungsinformationen"));
-const Lebensmittelhinweise = lazy(() => import("./pages/Lebensmittelhinweise"));
-const Haftungsausschluss = lazy(() => import("./pages/Haftungsausschluss"));
 
 // Get dehydrated state from SSR (only on client)
 const getDehydratedState = () => {

@@ -128,6 +128,31 @@ No code without a spec. For non-trivial tasks:
 - **Dynamic Content:** SSG-prerendered, nicht client-only
 - **Video:** `preload="none"` für Lazy Loading
 
+### Pre-Render-Pflicht (MANDATORY)
+
+**Hintergrund:** `ReactDOMServer.renderToString()` ist synchron und kann `React.lazy()` nicht auflösen. Lazy-Komponenten rendern nur den Suspense-Fallback ("Laden...") statt echtem Content. Google sieht dann keinen Inhalt.
+
+**Regeln:**
+- **KEIN `React.lazy()`** für Seiten die pre-rendered werden (alle außer Admin)
+- Nur Admin-Seiten (mit schwerem Recharts) dürfen `lazy()` verwenden (werden nie pre-rendered)
+- Alle anderen Seiten-Imports in `App.tsx` MÜSSEN eager imports sein (`import X from "..."`)
+
+**Checkliste für jede neue/geänderte Seite:**
+1. Route in `App.tsx` angelegt (alle 4 Sprachen über `routeComponents` + `slugs.json`)
+2. Slug in `src/config/slugs.json` eingetragen (de, en, it, fr)
+3. Import in `App.tsx` ist ein **eager import** (kein `lazy()`)
+4. `npm run build` erfolgreich (128+ Routen, 0 Errors)
+5. HTML in `dist/` enthält echten Content (kein "Laden...")
+6. `<title>`, `<meta description>`, hreflang und JSON-LD vorhanden
+7. Translations in allen 4 Sprachen vorhanden (de.ts, en.ts, it.ts, fr.ts)
+
+**Verifikation nach Build:**
+```bash
+# Prüfe ob echte Inhalte vorhanden sind (kein "Laden...")
+find dist -name "index.html" -exec grep -l "Laden\.\.\." {} \;
+# Ergebnis muss leer sein!
+```
+
 ---
 
 ## Content Architecture (Pillar & Cluster Model)
