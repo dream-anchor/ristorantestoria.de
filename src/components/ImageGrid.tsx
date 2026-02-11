@@ -1,10 +1,10 @@
-import weinserviceImage from "@/assets/weinservice-italienische-weine-storia-muenchen.webp";
-import ravioliImage from "@/assets/hausgemachte-ravioli-pasta-storia-muenchen.webp";
-import drinksImage from "@/assets/aperitivo-cocktails-bar-storia-muenchen.webp";
-import breakfastImage from "@/assets/restaurant-terrasse-maxvorstadt-muenchen.webp";
-import restaurantImage from "@/assets/ristorante-storia-fassade-karlstrasse-muenchen.webp";
-import aperitivoImage from "@/assets/meeresfruechte-antipasti-storia-muenchen.webp";
-import dessertImage from "@/assets/tiramisu-dessert-italienisch-storia-muenchen.webp";
+import weinserviceImage from "@/assets/weinservice.webp";
+import ravioliImage from "@/assets/ravioli.webp";
+import drinksImage from "@/assets/cocktails.webp";
+import breakfastImage from "@/assets/aussen.webp";
+import restaurantImage from "@/assets/haus-aussen-2.webp";
+import aperitivoImage from "@/assets/meeresfruchte.webp";
+import dessertImage from "@/assets/tiramisu.webp";
 import terrasseImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 

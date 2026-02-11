@@ -12,7 +12,7 @@ import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import storiaLogo from "@/assets/storia-logo.webp";
-import neapolitanPizzaHero from "@/assets/neapolitanische-pizza-steinofen-storia-muenchen.webp";
+import neapolitanPizzaHero from "@/assets/neapolitan-pizza-hero.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, MessageCircle, MapPin, Clock, Star, Utensils, ArrowRight } from "lucide-react";

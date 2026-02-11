@@ -3,7 +3,7 @@ import { Phone, UtensilsCrossed, Copy, Check } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
-import LocalizedLink from "@/components/LocalizedLink";
+import { getLocalizedPath } from "@/config/routes";
 import {
   Popover,
   PopoverContent,
@@ -16,11 +16,10 @@ const FloatingActions = () => {
   const [copied, setCopied] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
   const isMobile = useIsMobile();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const location = useLocation();
 
   useEffect(() => {
-    // Mark as hydrated to enable scroll detection
     setIsHydrated(true);
 
     const handleScroll = () => {
@@ -28,16 +27,13 @@ const FloatingActions = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
 
-      // Sichtbar wenn gescrollt > 100px
       const hasScrolled = scrollY > 100;
-
-      // Am Footer wenn ganz unten (50px Puffer)
       const nearBottom = scrollY + windowHeight >= documentHeight - 50;
 
       setIsVisible(hasScrolled && !nearBottom);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -50,14 +46,19 @@ const FloatingActions = () => {
   // Nicht auf Admin-Seiten anzeigen
   if (location.pathname.startsWith('/admin')) return null;
 
-  // Don't render until hydrated and visible (prevents hydration mismatch)
-  if (!isHydrated || !isVisible) return null;
+  // Don't render until hydrated (prevents hydration mismatch)
+  if (!isHydrated) return null;
 
-  const buttonClasses = "bg-white hover:bg-gray-50 text-primary border-2 border-primary/20 rounded-2xl px-5 py-3 shadow-xl transition-all hover:scale-105 flex flex-col items-center gap-1";
-  const whatsappButtonClasses = "bg-[#25D366] hover:bg-[#20BD5A] text-white border-2 border-[#25D366]/20 rounded-2xl px-5 py-3 shadow-xl transition-all hover:scale-105 flex flex-col items-center gap-1";
+  const buttonClasses = "bg-white hover:bg-gray-50 text-primary border-2 border-primary/20 rounded-2xl px-5 py-3 shadow-xl transition-shadow flex flex-col items-center gap-1";
+  const whatsappButtonClasses = "bg-[#25D366] hover:bg-[#20BD5A] text-white border-2 border-[#25D366]/20 rounded-2xl px-5 py-3 shadow-xl transition-shadow flex flex-col items-center gap-1";
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 animate-fade-in">
+    <div
+      className={`fixed bottom-6 right-6 z-50 flex flex-col gap-3 transition-opacity duration-300 ${
+        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`}
+      style={{ touchAction: "manipulation" }}
+    >
       {/* Telefon Button */}
       {isMobile ? (
         <a
@@ -107,15 +108,15 @@ const FloatingActions = () => {
         </svg>
         <span className="text-sm font-semibold">{t.floatingActions.whatsapp}</span>
       </a>
-      
-      {/* Reservierung Button */}
-      <LocalizedLink
-        to="reservierung"
+
+      {/* Reservierung Button — native <a> für zuverlässige Mobile-Taps */}
+      <a
+        href={getLocalizedPath("reservierung", language)}
         className={buttonClasses}
       >
         <UtensilsCrossed className="h-5 w-5" />
         <span className="text-sm font-semibold">{t.floatingActions.reserve}</span>
-      </LocalizedLink>
+      </a>
     </div>
   );
 };

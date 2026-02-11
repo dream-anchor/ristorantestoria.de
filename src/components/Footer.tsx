@@ -1,8 +1,8 @@
 import LocalizedLink from "@/components/LocalizedLink";
 import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
-import domenicoImage from "@/assets/domenico-speranza-gruender-storia-muenchen.webp";
+import domenicoImage from "@/assets/domenico-speranza.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
-import nicolaImage from "@/assets/nicola-speranza-famiglia-storia-muenchen.webp";
+import nicolaImage from "@/assets/nicola-speranza.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
