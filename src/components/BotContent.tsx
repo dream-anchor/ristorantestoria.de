@@ -44,7 +44,7 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
 
   const content = (
     <article>
-      <h1>{getLocalizedText(menu.title, menu.title_en)}</h1>
+      <h2>{getLocalizedText(menu.title, menu.title_en)}</h2>
       {menu.subtitle && <p>{getLocalizedText(menu.subtitle, menu.subtitle_en)}</p>}
       
       {menu.categories.map((category) => (

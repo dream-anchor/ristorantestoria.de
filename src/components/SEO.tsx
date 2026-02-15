@@ -35,7 +35,7 @@ const SEO = ({
   const location = useLocation();
   const baseUrl = 'https://www.ristorantestoria.de';
 
-  const siteTitle = 'STORIA – Ihr Italiener in München | Ristorante & Pizzeria';
+  const siteTitle = 'STORIA \u2013 Ihr Italiener in M\u00fcnchen Maxvorstadt';
   const fullTitle = title ? `${title} | STORIA München` : siteTitle;
 
   const metaDescription = description || t.pages.index.description;

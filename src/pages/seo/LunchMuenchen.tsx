@@ -84,7 +84,7 @@ const LunchMuenchen = () => {
         ]}
       />
       <SEO
-        title={t.seo.lunch.heroTitle}
+        title={t.seo.lunch.seoTitle}
         description={t.seo.lunch.heroDescription}
         canonical="/lunch-muenchen-maxvorstadt"
       />

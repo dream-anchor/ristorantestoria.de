@@ -20,7 +20,7 @@ const StaticBotContent = ({ title, description, sections = [], includeContact = 
 
   const content = (
     <article>
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <p>{description}</p>
       
       {sections.map((section, index) => (

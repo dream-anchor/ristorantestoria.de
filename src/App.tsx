@@ -38,8 +38,11 @@ import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
 import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
 import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
+import PizzaMuenchen from "./pages/seo/PizzaMuenchen";
 import ItalienerMuenchen from "./pages/seo/ItalienerMuenchen";
 import ItalienerKoenigsplatz from "./pages/seo/ItalienerKoenigsplatz";
+import WeihnachtsfeierMuenchen from "./pages/seo/WeihnachtsfeierMuenchen";
+import TerrasseMuenchen from "./pages/seo/TerrasseMuenchen";
 import FAQ from "./pages/FAQ";
 
 // Eager: Legal-Seiten (müssen pre-rendered werden)
@@ -95,8 +98,11 @@ const routeComponents: Record<string, React.ComponentType> = {
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
   "wild-essen-muenchen": WildEssenMuenchen,
+  "pizza-muenchen": PizzaMuenchen,
   "italiener-muenchen": ItalienerMuenchen,
   "italiener-koenigsplatz": ItalienerKoenigsplatz,
+  "weihnachtsfeier-muenchen": WeihnachtsfeierMuenchen,
+  "terrasse-muenchen": TerrasseMuenchen,
   "faq": FAQ,
 };
 
