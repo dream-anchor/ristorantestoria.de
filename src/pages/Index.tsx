@@ -8,6 +8,7 @@ import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import HomeAbout from "@/components/HomeAbout";
 import HomeBotContent from "@/components/HomeBotContent";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -32,6 +33,7 @@ const Index = () => {
           <ImageGrid />
 
           <HomeIntro />
+          <HomeAbout />
 
           <ConsentElfsightReviews />
           <InternalLinks />
