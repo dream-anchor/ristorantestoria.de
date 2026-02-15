@@ -1,7 +1,13 @@
-# ristorantestoria.de
+# Ristorante Storia - Kontext
 
 ## Stack
-Vite + React + TypeScript + Tailwind CSS + shadcn-ui + Supabase
+- React + TS + Vite + Tailwind + shadcn/ui
+- Supabase (Postgres, Auth, Edge Functions, Storage)
+
+## Deployment
+- Code → commit + push → Lovable auto-deploy
+- Supabase (SQL, Edge Functions, Secrets) → Lovable-Prompt an User
+- Kein CLI-Zugang zu Supabase
 
 ## Sub-Agents
 | Agent | Model | Zweck |
@@ -12,61 +18,61 @@ Vite + React + TypeScript + Tailwind CSS + shadcn-ui + Supabase
 
 Für High-Volume-Output oder Deep Analysis immer Sub-Agent nutzen. `/plan` vor komplexen Features.
 
-## Workflow
-1. Nicht-triviale Tasks: researcher → .planning/PROJECT.md → /plan → Approval → Code
-2. PascalCase Komponenten, camelCase Funktionen, strict TS (kein `any`)
-3. Tailwind + shadcn exklusiv
-4. Keine unused Imports, keine console.logs
+## Konventionen
+- PascalCase: Components | camelCase: functions/vars
+- Strict TS, kein `any`
+- Tailwind + shadcn bevorzugt
+- Komplette Dateien, keine Snippets
 
 ## Supabase-Regel
 Wenn Claude keinen Schreibzugriff hat (RLS blockiert): fertigen Lovable.dev-Prompt ausgeben mit Tabellen-/Feldnamen und exakten Werten.
 
----
+## Commands
+```bash
+npm run dev | build | lint
+npm run prerender    # SSG für SEO
+```
 
-## SEO-Regeln (verbindlich)
-
-### URLs
-- Canonical: `https://www.ristorantestoria.de` (mit www, trailing slash)
+## SEO URL-Architektur
+- Canonical: `https://www.ristorantestoria.de` (mit www)
+- Trailing Slash: IMMER (außer Dateien)
 - Slugs: `src/config/slugs.json` (4 Sprachen: de, en, it, fr)
 - Landing Pages: `/besondere-anlaesse/[slug]/`
 
-### Meta & Structured Data
-- Title NUR via React Helmet (nicht in index.html)
-- Canonical immer absolut mit `https://www.ristorantestoria.de`
-- hreflang: de, en, it, fr + x-default → de
+## SEO Meta & Structured Data
+- Title: NUR via React Helmet (kein statischer Title in index.html)
+- Canonical: Immer absolute URLs mit `https://www.ristorantestoria.de`
+- hreflang: Alle 4 Sprachen + x-default → de
 - JSON-LD: Restaurant, FAQPage (max 10), Menu, BreadcrumbList
 
-### Content Rendering
+## SEO Content Rendering (KRITISCH)
 - Accordion: IMMER `forceMount` + `data-[state=closed]:hidden`
-- SSG-prerendered, nicht client-only
+- Dynamic Content: SSG-prerendered, nicht client-only
 - Video: `preload="none"`
 
-### Pre-Render-Pflicht
+## Pre-Render-Regeln (MANDATORY)
 - **KEIN `React.lazy()`** für pre-rendered Seiten (nur Admin darf lazy)
-- Alle Seiten-Imports in `App.tsx` als eager imports
-- `ReactDOMServer.renderToString()` ist synchron — lazy ergibt nur "Laden..."
+- Alle Seiten-Imports in `App.tsx`: eager imports
+- Checkliste neue Seite:
+  1. Route in `App.tsx` (alle 4 Sprachen via `routeComponents` + `slugs.json`)
+  2. Slug in `src/config/slugs.json` (de, en, it, fr)
+  3. Slug in Translation-Dateien (`de.ts`, `en.ts`, `it.ts`, `fr.ts` → `slugs`-Objekt)
+  4. Eager import (kein `lazy()`)
+  5. `npm run build` ok (105+ Routen, 0 Errors)
+  6. HTML in `dist/` hat echten Content (kein "Laden...")
+  7. `<title>`, `<meta description>`, hreflang, JSON-LD vorhanden
+  8. Translations in allen 4 Sprachen
+- Verify: `find dist -name "index.html" -exec grep -l "Laden\.\.\." {} \;` → muss leer sein
 
-**Checkliste neue Seite:**
-1. Route in `App.tsx` (alle 4 Sprachen via `routeComponents` + `slugs.json`)
-2. Slug in `slugs.json` (de, en, it, fr)
-3. Eager import in `App.tsx`
-4. `npm run build` — 0 Errors, HTML in `dist/` mit echtem Content
-5. `<title>`, `<meta description>`, hreflang, JSON-LD vorhanden
-6. Translations in de.ts, en.ts, it.ts, fr.ts
-
-### Rechtliche Seiten — Nur Deutsch
-`impressum`, `datenschutz`, `cookie-richtlinie`, `agb-restaurant`, `agb-gutscheine`, `widerrufsbelehrung`, `zahlungsinformationen`, `lebensmittelhinweise`, `haftungsausschluss`
-
-- Keine übersetzten Slugs in slugs.json
+## Rechtliche Seiten (NUR Deutsch)
+- Pages: impressum, datenschutz, cookie-richtlinie, agb-restaurant, agb-gutscheine, widerrufsbelehrung, zahlungsinformationen, lebensmittelhinweise, haftungsausschluss
+- Keine übersetzten Slugs in EN/IT/FR
 - `noHreflang` im `<SEO>`-Tag
-- `LEGAL_ONLY_DE` in routes.ts, App.tsx, generate-sitemap.mjs konsistent
-- .htaccess Section 1i: 301-Redirects von alten übersetzten URLs → DE
-- Sitemap: nur DE-URLs, keine hreflang-Tags
-
----
+- `LEGAL_ONLY_DE` konsistent in: `routes.ts`, `App.tsx`, `generate-sitemap.mjs`
+- `.htaccess` 1i: 301-Redirects alter übersetzer URLs → DE
+- Sitemap: nur deutsche URLs, keine hreflang-Tags
 
 ## Content-Architektur
-
 ### Pillar Pages
 | Pillar | URL |
 |--------|-----|
@@ -74,15 +80,18 @@ Wenn Claude keinen Schreibzugriff hat (RLS blockiert): fertigen Lovable.dev-Prom
 | Speisekarte | `/speisekarte/` |
 | Über Uns | `/ueber-uns/` |
 
-### Landing Pages (unter /besondere-anlaesse/)
-`lunch-muenchen-maxvorstadt`, `aperitivo-muenchen`, `romantisches-dinner-muenchen`, `eventlocation-muenchen-maxvorstadt`, `firmenfeier-muenchen`, `geburtstagsfeier-muenchen`, `neapolitanische-pizza-muenchen`, `wild-essen-muenchen`
+### Landing Pages (/besondere-anlaesse/)
+lunch-muenchen-maxvorstadt, aperitivo-muenchen, romantisches-dinner-muenchen, eventlocation-muenchen-maxvorstadt, firmenfeier-muenchen, geburtstagsfeier-muenchen, neapolitanische-pizza-muenchen, wild-essen-muenchen
 
-### NAP (für Structured Data)
-```
-Ristorante STORIA
-Theresienstraße 56, 80333 München
-+49 89 28806855
-```
+## Keywords
+- Primary: "italienisches restaurant münchen", "pizza münchen maxvorstadt", "restaurant maxvorstadt", "neapolitanische pizza münchen"
+- Modifiers: München, Maxvorstadt, Schwabing, Uni-Viertel, "nahe Königsplatz"
+- Vollständig: `docs/seo-strategy.md` (VOR Seitenänderung prüfen!)
 
-### SEO-Strategie
-Vollständig in `docs/seo-strategy.md`
+## Local SEO
+- NAP: Ristorante STORIA, Theresienstraße 56, 80333 München, +49 89 28806855
+- GMB: Italian Restaurant (Primary), Pizza Restaurant, Wine Bar
+- AggregateRating Schema: erst nach Cookie-Consent-Lösung
+
+## Sprache
+- UI: Deutsch | Code: Englisch
