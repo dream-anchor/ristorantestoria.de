@@ -59,7 +59,6 @@ const fetchMenuById = async (menuId: string): Promise<Menu | null> => {
     .single();
 
   if (menuError || !menu) {
-    console.log(`No menu found for id: ${menuId}`);
     return null;
   }
 
@@ -76,7 +75,6 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
     .order('sort_order');
 
   if (catError) {
-    console.error('Error fetching categories:', catError);
     return null;
   }
 
@@ -89,7 +87,6 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
     .order('sort_order');
 
   if (itemsError) {
-    console.error('Error fetching items:', itemsError);
     return null;
   }
 
@@ -155,7 +152,6 @@ export const useMenu = (menuType: MenuType) => {
         .maybeSingle();
 
       if (menuError || !menu) {
-        console.log(`No published menu found for type: ${menuType}`);
         return null;
       }
 

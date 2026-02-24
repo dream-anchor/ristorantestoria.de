@@ -81,7 +81,6 @@ export function useLandingpageContent(pageSlug: string) {
         .maybeSingle();
 
       if (error) {
-        console.error('Error fetching landingpage content:', error);
         return null;
       }
 

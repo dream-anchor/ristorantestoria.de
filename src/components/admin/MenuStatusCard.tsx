@@ -93,7 +93,7 @@ const MenuStatusCard = ({ menuType, menuLabel, viewPath }: MenuStatusCardProps) 
             variant="ghost"
             size="sm"
             className="h-7 px-2"
-            onClick={() => window.open(viewPath, '_blank')}
+            onClick={() => window.open(viewPath, '_blank', 'noopener,noreferrer')}
           >
             <ExternalLink className="h-3.5 w-3.5" />
           </Button>

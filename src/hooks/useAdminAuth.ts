@@ -52,13 +52,11 @@ export const useAdminAuth = () => {
         .single();
 
       if (error) {
-        console.log('User is not admin:', error.message);
         setIsAdmin(false);
       } else {
         setIsAdmin(!!data);
       }
-    } catch (err) {
-      console.error('Error checking admin role:', err);
+    } catch {
       setIsAdmin(false);
     } finally {
       setLoading(false);

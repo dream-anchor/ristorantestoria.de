@@ -410,7 +410,8 @@ async function generateRoutesToPrerender() {
 
       // 4. Inject dehydrated React Query state for hydration
       if (dehydratedState && dehydratedState.queries?.length > 0) {
-        const stateScript = `<script>window.__REACT_QUERY_STATE__=${JSON.stringify(dehydratedState)}</script>`;
+        const safeState = JSON.stringify(dehydratedState).replace(/<\/script>/gi, '<\\/script>');
+        const stateScript = `<script>window.__REACT_QUERY_STATE__=${safeState}</script>`;
         finalHtml = finalHtml.replace("</head>", `${stateScript}</head>`);
       }
 

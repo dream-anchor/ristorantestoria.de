@@ -284,8 +284,40 @@ serve(async (req) => {
       throw new Error("GITHUB_PAT Secret nicht konfiguriert");
     }
 
+    // Auth: JWT + Admin-Role prüfen
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response(JSON.stringify({ error: "Missing authorization" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const supabaseAuth = createClient(supabaseUrl, serviceRoleKey);
+    const token = authHeader.replace("Bearer ", "");
+    const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
+
+    if (authError || !user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { data: roleData } = await supabaseAuth.from("user_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .eq("role", "admin")
+      .single();
+
+    if (!roleData) {
+      return new Response(JSON.stringify({ error: "Forbidden: admin role required" }), {
+        status: 403,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // SEO-HTML generieren (Menüs + statische Seiten)
-    console.log("Generiere SEO-HTML aus Menüdaten und statischen Seiten...");
     const seoHtml = await generateSeoHtml(supabaseUrl, serviceRoleKey);
     console.log(`SEO-HTML generiert: ${seoHtml.length} Zeichen`);
 
