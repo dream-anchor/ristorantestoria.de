@@ -1,13 +1,4 @@
-# Ristorante Storia - Kontext
-
-## Stack
-- React + TS + Vite + Tailwind + shadcn/ui
-- Supabase (Postgres, Auth, Edge Functions, Storage)
-
-## Deployment
-- Code → commit + push → Lovable auto-deploy
-- Supabase (SQL, Edge Functions, Secrets) → Lovable-Prompt an User
-- Kein CLI-Zugang zu Supabase
+# ristorantestoria.de
 
 ## Sub-Agents
 | Agent | Model | Zweck |
@@ -18,37 +9,20 @@
 
 Für High-Volume-Output oder Deep Analysis immer Sub-Agent nutzen. `/plan` vor komplexen Features.
 
-## Konventionen
-- PascalCase: Components | camelCase: functions/vars
-- Strict TS, kein `any`
-- Tailwind + shadcn bevorzugt
-- Komplette Dateien, keine Snippets
-
-## Supabase-Regel
-Wenn Claude keinen Schreibzugriff hat (RLS blockiert): fertigen Lovable.dev-Prompt ausgeben mit Tabellen-/Feldnamen und exakten Werten.
-
-## Commands
+## Commands (zusätzlich)
 ```bash
-npm run dev | build | lint
-npm run prerender    # SSG für SEO
+npm run prerender    # SSG für SEO — KRITISCH
 ```
 
-## SEO URL-Architektur
-- Canonical: `https://www.ristorantestoria.de` (mit www)
-- Trailing Slash: IMMER (außer Dateien)
-- Slugs: `src/config/slugs.json` (4 Sprachen: de, en, it, fr)
-- Landing Pages: `/besondere-anlaesse/[slug]/`
-
-## SEO Meta & Structured Data
-- Title: NUR via React Helmet (kein statischer Title in index.html)
-- Canonical: Immer absolute URLs mit `https://www.ristorantestoria.de`
+## Mehrsprachigkeit (4 Sprachen)
+- DE, EN, IT, FR via `src/config/slugs.json` + Translation-Dateien
 - hreflang: Alle 4 Sprachen + x-default → de
-- JSON-LD: Restaurant, FAQPage (max 10), Menu, BreadcrumbList
 
-## SEO Content Rendering (KRITISCH)
-- Accordion: IMMER `forceMount` + `data-[state=closed]:hidden`
-- Dynamic Content: SSG-prerendered, nicht client-only
-- Video: `preload="none"`
+## SEO URL-Architektur
+- Canonical: `https://www.ristorantestoria.de` (mit www, trailing slash IMMER)
+- Slugs: `src/config/slugs.json`
+- Landing Pages: `/besondere-anlaesse/[slug]/`
+- Keyword-Mapping: `docs/seo-strategy.md` (VOR Seitenänderung prüfen!)
 
 ## Pre-Render-Regeln (MANDATORY)
 - **KEIN `React.lazy()`** für pre-rendered Seiten (nur Admin darf lazy)
@@ -64,13 +38,22 @@ npm run prerender    # SSG für SEO
   8. Translations in allen 4 Sprachen
 - Verify: `find dist -name "index.html" -exec grep -l "Laden\.\.\." {} \;` → muss leer sein
 
+## SEO Content Rendering
+- Accordion: IMMER `forceMount` + `data-[state=closed]:hidden`
+- Dynamic Content: SSG-prerendered, nicht client-only
+- Video: `preload="none"`
+
 ## Rechtliche Seiten (NUR Deutsch)
-- Pages: impressum, datenschutz, cookie-richtlinie, agb-restaurant, agb-gutscheine, widerrufsbelehrung, zahlungsinformationen, lebensmittelhinweise, haftungsausschluss
-- Keine übersetzten Slugs in EN/IT/FR
+- impressum, datenschutz, cookie-richtlinie, agb-restaurant, agb-gutscheine, widerrufsbelehrung, zahlungsinformationen, lebensmittelhinweise, haftungsausschluss
 - `noHreflang` im `<SEO>`-Tag
 - `LEGAL_ONLY_DE` konsistent in: `routes.ts`, `App.tsx`, `generate-sitemap.mjs`
-- `.htaccess` 1i: 301-Redirects alter übersetzer URLs → DE
-- Sitemap: nur deutsche URLs, keine hreflang-Tags
+- `.htaccess`: 301-Redirects alter übersetzter URLs → DE
+
+## Local SEO
+- NAP: Ristorante STORIA, Theresienstraße 56, 80333 München
+- Tel: +49 89 28806855
+- GMB: Italian Restaurant (Primary), Pizza Restaurant, Wine Bar
+- Keywords: "italienisches restaurant münchen", "pizza münchen maxvorstadt", "neapolitanische pizza münchen"
 
 ## Content-Architektur
 ### Pillar Pages
@@ -80,18 +63,5 @@ npm run prerender    # SSG für SEO
 | Speisekarte | `/speisekarte/` |
 | Über Uns | `/ueber-uns/` |
 
-### Landing Pages (/besondere-anlaesse/)
+### Landing Pages
 lunch-muenchen-maxvorstadt, aperitivo-muenchen, romantisches-dinner-muenchen, eventlocation-muenchen-maxvorstadt, firmenfeier-muenchen, geburtstagsfeier-muenchen, neapolitanische-pizza-muenchen, wild-essen-muenchen
-
-## Keywords
-- Primary: "italienisches restaurant münchen", "pizza münchen maxvorstadt", "restaurant maxvorstadt", "neapolitanische pizza münchen"
-- Modifiers: München, Maxvorstadt, Schwabing, Uni-Viertel, "nahe Königsplatz"
-- Vollständig: `docs/seo-strategy.md` (VOR Seitenänderung prüfen!)
-
-## Local SEO
-- NAP: Ristorante STORIA, Theresienstraße 56, 80333 München, +49 89 28806855
-- GMB: Italian Restaurant (Primary), Pizza Restaurant, Wine Bar
-- AggregateRating Schema: erst nach Cookie-Consent-Lösung
-
-## Sprache
-- UI: Deutsch | Code: Englisch

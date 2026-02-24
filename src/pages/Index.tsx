@@ -65,7 +65,7 @@ const Index = () => {
               <dt>Öffnungszeiten</dt>
               <dd>Montag-Freitag 09:00-01:00 Uhr, Samstag-Sonntag 12:00-01:00 Uhr</dd>
               <dt>Besonderheiten</dt>
-              <dd>Terrasse im Innenhof, barrierefrei, Aperitivo-Bar, Events bis 80 Personen, Firmenfeiern, Geburtstage</dd>
+              <dd>Terrasse im Innenhof, barrierefrei, Aperitivo-Bar, Events bis 100 Sitzplätze / 180 Stehempfang, Firmenfeiern, Geburtstage</dd>
               <dt>Reservierung</dt>
               <dd>Online über OpenTable oder telefonisch empfohlen, besonders am Wochenende</dd>
               <dt>Zahlungsmethoden</dt>
