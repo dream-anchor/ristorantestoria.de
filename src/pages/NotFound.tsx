@@ -24,9 +24,11 @@ const NotFound = () => {
       />
       <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
         <Link to="/">
-          <img 
-            src={storiaLogo} 
-            alt="STORIA Logo" 
+          <img
+            src={storiaLogo}
+            alt="STORIA Logo"
+            loading="lazy"
+            decoding="async"
             className="h-24 md:h-32 mb-8 hover:opacity-80 transition-opacity"
           />
         </Link>

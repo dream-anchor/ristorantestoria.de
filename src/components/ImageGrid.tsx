@@ -28,6 +28,7 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
         height={400}
         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageClassName}`}
         loading="lazy"
+        decoding="async"
       />
       {(title || subtitle) && (
         <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 pointer-events-none">

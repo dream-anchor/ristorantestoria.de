@@ -26,6 +26,7 @@ import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
 import ScrollToTop from "./components/ScrollToTop";
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import ClarityTracking from "./components/ClarityTracking";
 import NormalizePath from "./components/NormalizePath";
 import { RedirectFromLegacyPrefix } from "./components/LegacyRedirects";
 
@@ -232,6 +233,7 @@ const App = () => {
               <Toaster />
               <Sonner />
               <GoogleAnalytics />
+              <ClarityTracking />
               <ScrollToTop />
               <NormalizePath />
               <FloatingActions />

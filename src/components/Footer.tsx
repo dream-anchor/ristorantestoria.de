@@ -19,12 +19,13 @@ const Footer = () => {
             {/* Domenico */}
             <div className="text-center group">
               <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-5 rounded-full overflow-hidden ring-1 ring-primary-foreground/20 shadow-xl transition-transform duration-300 group-hover:scale-105">
-                <img 
-                  src={domenicoImage} 
-                  alt="Domenico Speranza – Gründer Ristorante STORIA München" 
+                <img
+                  src={domenicoImage}
+                  alt="Domenico Speranza – Gründer Ristorante STORIA München"
                   width={176}
                   height={176}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -57,6 +58,7 @@ const Footer = () => {
                   width={176}
                   height={176}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -112,6 +114,7 @@ const Footer = () => {
                 width={80}
                 height={80}
                 loading="lazy"
+                decoding="async"
                 className="h-16 md:h-20 w-auto brightness-0 invert opacity-20"
               />
             </div>

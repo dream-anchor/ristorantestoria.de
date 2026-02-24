@@ -93,7 +93,7 @@ const ItalienerMuenchen = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <Link to="/">
-              <img src={storiaLogo} alt="STORIA Logo" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert hover:opacity-80 transition-opacity" />
+              <img src={storiaLogo} alt="STORIA Logo" loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert hover:opacity-80 transition-opacity" />
             </Link>
             <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12">
               <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase">
