@@ -2,7 +2,20 @@ import { useEffect } from "react";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLocation } from "react-router-dom";
 
-const GA_MEASUREMENT_ID = "G-G44C983YRJ";
+/**
+ * Google Analytics 4 — Consent-gated Script Loading
+ *
+ * Architektur (3 Schichten):
+ * 1. index.html:          gtag('consent', 'default', {denied})  — sync, vor allem anderen
+ * 2. CookieConsentContext: gtag('consent', 'update', {granted})  — nach User-Interaktion
+ * 3. Diese Komponente:    gtag.js Library laden + config/pageview — erst nach Consent
+ *
+ * WICHTIG: Consent-Defaults MÜSSEN in index.html bleiben (Google-Vorgabe: "as early as possible").
+ * window.gtag + window.dataLayer existieren bereits aus index.html — hier NICHT erneut deklarieren.
+ */
+
+const GA_MEASUREMENT_ID =
+  import.meta.env.VITE_GA_MEASUREMENT_ID || "G-G44C983YRJ";
 
 declare global {
   interface Window {
@@ -11,39 +24,38 @@ declare global {
   }
 }
 
+const GTAG_SCRIPT_SELECTOR = 'script[src*="googletagmanager.com/gtag/js"]';
+
 const GoogleAnalytics = () => {
   const { hasConsent } = useCookieConsent();
   const location = useLocation();
   const hasStatisticsConsent = hasConsent("statistics");
 
   useEffect(() => {
-    // Nur laden wenn Benutzer Statistik-Cookies akzeptiert hat
     if (!hasStatisticsConsent) return;
 
-    // Prüfe ob gtag.js Library bereits im DOM geladen ist
-    // (NICHT window.gtag prüfen — das existiert bereits durch Consent-Defaults in index.html)
-    const gtagScriptLoaded = document.querySelector(
-      'script[src*="googletagmanager.com/gtag/js"]'
-    );
+    // Prüfe ob gtag.js Library-Script bereits im DOM existiert
+    // (window.gtag existiert IMMER durch Consent-Defaults in index.html — kein geeigneter Check)
+    const scriptExists = document.querySelector(GTAG_SCRIPT_SELECTOR);
 
-    if (gtagScriptLoaded) {
-      // Library bereits geladen, nur Pageview tracken
+    if (!scriptExists) {
+      // Erstmaliges Laden: Script einfügen + via dataLayer-Queue initialisieren
+      const script = document.createElement("script");
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+      script.async = true;
+      document.head.appendChild(script);
+
+      // Queue: gtag.js verarbeitet diese Einträge nach dem Laden
+      window.gtag("js", new Date());
       window.gtag("config", GA_MEASUREMENT_ID, {
-        page_path: location.pathname,
+        page_location: window.location.href,
       });
       return;
     }
 
-    // gtag.js Script dynamisch laden
-    const script = document.createElement("script");
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    // gtag initialisieren (dataLayer + gtag existieren bereits aus index.html Consent-Defaults)
-    window.gtag("js", new Date());
+    // Script existiert bereits: SPA-Navigation Pageview senden
     window.gtag("config", GA_MEASUREMENT_ID, {
-      page_path: location.pathname,
+      page_location: window.location.href,
     });
   }, [hasStatisticsConsent, location.pathname]);
 
