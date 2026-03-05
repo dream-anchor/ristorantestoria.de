@@ -20,8 +20,14 @@ const GoogleAnalytics = () => {
     // Nur laden wenn Benutzer Statistik-Cookies akzeptiert hat
     if (!hasStatisticsConsent) return;
 
-    // Script bereits geladen? Dann nur Pageview tracken
-    if (window.gtag) {
+    // Prüfe ob gtag.js Library bereits im DOM geladen ist
+    // (NICHT window.gtag prüfen — das existiert bereits durch Consent-Defaults in index.html)
+    const gtagScriptLoaded = document.querySelector(
+      'script[src*="googletagmanager.com/gtag/js"]'
+    );
+
+    if (gtagScriptLoaded) {
+      // Library bereits geladen, nur Pageview tracken
       window.gtag("config", GA_MEASUREMENT_ID, {
         page_path: location.pathname,
       });
@@ -34,13 +40,11 @@ const GoogleAnalytics = () => {
     script.async = true;
     document.head.appendChild(script);
 
-    // gtag initialisieren
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function (...args) {
-      window.dataLayer.push(args);
-    };
+    // gtag initialisieren (dataLayer + gtag existieren bereits aus index.html Consent-Defaults)
     window.gtag("js", new Date());
-    window.gtag("config", GA_MEASUREMENT_ID);
+    window.gtag("config", GA_MEASUREMENT_ID, {
+      page_path: location.pathname,
+    });
   }, [hasStatisticsConsent, location.pathname]);
 
   return null;
