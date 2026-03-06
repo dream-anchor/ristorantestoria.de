@@ -405,7 +405,7 @@ async function generateRoutesToPrerender() {
       // Match <div id="root"> with optional <!--app-html--> marker or whitespace, then closing </div>
       let finalHtml = template.replace(
         /<div id="root">(?:<!--app-html-->|\s)*<\/div>/,
-        `<div id="root">${html}</div>`
+        `<div id="root" data-prerendered-path="${url}">${html}</div>`
       );
 
       // 4. Inject dehydrated React Query state for hydration

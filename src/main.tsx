@@ -13,9 +13,27 @@ const app = (
   </HelmetProvider>
 );
 
-// Use hydration for SSR in production
+/**
+ * Hydration-Strategie:
+ * - Pre-renderte Seiten haben data-prerendered-path auf #root
+ * - Nur hydratieren wenn der aktuelle Pfad zum Pre-Render passt
+ * - Sonst: createRoot (verhindert weiße Seite bei dynamischen Routen)
+ */
+const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
+
 if (import.meta.env.PROD) {
-  hydrateRoot(root, app);
+  const prerenderedPath = root.dataset.prerenderedPath;
+  const currentPath = normalizePath(window.location.pathname);
+  const isMatch = prerenderedPath && normalizePath(prerenderedPath) === currentPath;
+
+  if (isMatch) {
+    hydrateRoot(root, app);
+  } else {
+    // Kein Pre-Render für diese Route: DOM + State aufräumen, fresh rendern
+    root.innerHTML = '';
+    delete (window as any).__REACT_QUERY_STATE__;
+    createRoot(root).render(app);
+  }
 } else {
   createRoot(root).render(app);
 }
