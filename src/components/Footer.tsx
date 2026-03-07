@@ -153,16 +153,16 @@ const Footer = () => {
             <LocalizedLink to="faq" className="hover:text-primary-foreground/60 transition-colors font-medium">FAQ</LocalizedLink>
           </div>
           <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
-            <a 
-              href="https://www.instagram.com/ristorante_storia/" 
-              target="_blank" 
+            <a
+              href="https://www.instagram.com/ristorante_storia/"
+              target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary-foreground/40 transition-colors"
+              className="flex items-center justify-center min-h-[48px] min-w-[48px] p-2 hover:text-primary-foreground/40 transition-colors"
               aria-label="Instagram"
             >
               <Instagram className="h-3.5 w-3.5" />
             </a>
-            <LocalizedLink to="admin" className="hover:text-primary-foreground/40 transition-colors">Admin</LocalizedLink>
+            <LocalizedLink to="admin" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors">Admin</LocalizedLink>
           </div>
         </div>
       </div>

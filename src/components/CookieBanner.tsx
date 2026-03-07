@@ -62,7 +62,7 @@ const CookieBanner = () => {
         <div className="bg-card border border-border rounded-lg shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
           <div className="flex items-center justify-between p-4 border-b border-border">
             <h2 className="text-lg font-semibold">{t.cookies.settingsTitle}</h2>
-            <button onClick={closeSettings} className="text-muted-foreground hover:text-foreground">
+            <button onClick={closeSettings} className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2 text-muted-foreground hover:text-foreground">
               <X className="h-5 w-5" />
             </button>
           </div>
