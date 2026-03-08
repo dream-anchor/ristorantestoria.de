@@ -19,9 +19,10 @@ const Index = () => {
 
   return (
     <>
-      <SEO 
-        canonical="/" 
-        description={t.pages.index.description}
+      <SEO
+        title="Italiener München Maxvorstadt – STORIA seit 1995"
+        canonical="/"
+        description="Familienbetrieb seit 1995 am Königsplatz: Neapolitanische Pizza (400°C Steinofen), hausgemachte Pasta & Aperitivo. Mo–Fr ab 09 Uhr. Jetzt reservieren!"
       />
       <StructuredData type="restaurant" />
       <div className="min-h-screen bg-background flex flex-col">
