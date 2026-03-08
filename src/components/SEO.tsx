@@ -1,134 +1,160 @@
-import { Helmet } from '@/lib/helmetAsync';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { getLocalizedPath, parseLocalizedPath, SUPPORTED_LANGUAGES } from '@/config/routes';
-import { useLocation } from 'react-router-dom';
+import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-interface AlternateUrl {
-  lang: string;
-  url: string;
+const BASE_URL = "https://www.ristorantestoria.de";
+
+/**
+ * Normalisiert einen canonical-Pfad zur vollständigen kanonischen URL.
+ * Regeln:
+ * - Immer https://www.ristorantestoria.de als Basis
+ * - Immer trailing Slash (außer bei Dateipfaden mit Extension)
+ * - Keine Query-Parameter
+ * - Keine Hash-Fragmente
+ */
+function buildCanonicalUrl(canonical: string): string {
+  // Absolute URL bereits übergeben → nur Base-URL sicherstellen
+  if (canonical.startsWith("http")) {
+    try {
+      const url = new URL(canonical);
+      // Erzwinge www-Version
+      const path = url.pathname;
+      return BASE_URL + normalizeTrailingSlash(path);
+    } catch {
+      return BASE_URL + "/";
+    }
+  }
+
+  // Relativer Pfad: Query-Parameter und Hash entfernen
+  let path = canonical;
+  const hashIndex = path.indexOf("#");
+  if (hashIndex !== -1) path = path.slice(0, hashIndex);
+  const queryIndex = path.indexOf("?");
+  if (queryIndex !== -1) path = path.slice(0, queryIndex);
+
+  // Leading Slash sicherstellen
+  if (!path.startsWith("/")) path = "/" + path;
+
+  return BASE_URL + normalizeTrailingSlash(path);
+}
+
+/**
+ * Stellt sicher, dass der Pfad mit einem trailing Slash endet,
+ * außer bei Pfaden die wie Dateien aussehen (z.B. /sitemap.xml).
+ */
+function normalizeTrailingSlash(path: string): string {
+  // Root bleibt /
+  if (path === "/") return "/";
+  // Pfade mit Datei-Extension (z.B. .xml, .html, .pdf) unverändert lassen
+  const lastSegment = path.split("/").pop() || "";
+  if (lastSegment.includes(".")) return path;
+  // Trailing Slash hinzufügen falls nicht vorhanden
+  return path.endsWith("/") ? path : path + "/";
 }
 
 interface SEOProps {
   title?: string;
   description?: string;
   canonical?: string;
-  type?: 'website' | 'article' | 'restaurant';
-  image?: string;
   noIndex?: boolean;
-  /** Custom hreflang alternates for dynamic pages (e.g., special menus with translated slugs) */
-  alternates?: AlternateUrl[];
-  /** Skip hreflang tags entirely (for legal pages that only exist in DE) */
   noHreflang?: boolean;
+  ogImage?: string;
+  ogType?: string;
+  /** Optionale hreflang-Overrides für Seiten mit dynamischen Slugs */
+  hreflangUrls?: {
+    de?: string;
+    en?: string;
+    it?: string;
+    fr?: string;
+  };
 }
 
 const SEO = ({
   title,
   description,
   canonical,
-  type = 'website',
-  image = 'https://ristorantestoria.de/og-image.jpg',
   noIndex = false,
-  alternates,
   noHreflang = false,
+  ogImage,
+  ogType = "website",
+  hreflangUrls,
 }: SEOProps) => {
-  const { language, t } = useLanguage();
-  const location = useLocation();
-  const baseUrl = 'https://www.ristorantestoria.de';
+  const { language } = useLanguage();
 
-  const siteTitle = 'STORIA \u2013 Ihr Italiener in M\u00fcnchen Maxvorstadt';
-  const fullTitle = title ? `${title} | STORIA München` : siteTitle;
+  // Vollständiger Seiten-Title
+  const fullTitle = title ? `${title} – STORIA München` : "STORIA – Ristorante Pizzeria Bar München";
 
-  const metaDescription = description || t.pages.index.description;
+  // Kanonische URL normalisiert
+  const canonicalUrl = canonical
+    ? buildCanonicalUrl(canonical)
+    : `${BASE_URL}/`;
 
-  // Ensure trailing slash on all paths (consistent with .htaccess rule 1c)
-  const ensureTrailingSlash = (p: string) =>
-    p === '/' || p.endsWith('/') ? p : `${p}/`;
-
-  // Get the base slug for hreflang generation
-  const { baseSlug } = parseLocalizedPath(location.pathname);
-
-  // Build canonical URL — legal pages always point to DE version
-  const currentPath = noHreflang
-    ? ensureTrailingSlash(canonical || getLocalizedPath(baseSlug, 'de'))
-    : ensureTrailingSlash(canonical || getLocalizedPath(baseSlug, language));
-  const canonicalUrl = `${baseUrl}${currentPath}`;
-
-  // Generate hreflang URLs for all languages (skip for legal pages)
-  // Use custom alternates if provided (for dynamic pages with translated slugs)
-  const hreflangUrls = noHreflang
-    ? []
-    : alternates
-      ? alternates.map(a => ({ ...a, url: a.url.endsWith('/') ? a.url : `${a.url}/` }))
-      : SUPPORTED_LANGUAGES.map(lang => ({
-        lang,
-        url: `${baseUrl}${getLocalizedPath(baseSlug, lang)}`
-      }));
-
-  // x-default points to German version
-  const xDefaultUrl = noHreflang
-    ? ''
-    : alternates
-      ? alternates.find(a => a.lang === 'de')?.url || `${baseUrl}/`
-      : `${baseUrl}${getLocalizedPath(baseSlug, 'de')}`;
-  
-  // Locale mapping for Open Graph
-  const ogLocaleMap: Record<string, string> = {
-    de: 'de_DE',
-    en: 'en_US',
-    it: 'it_IT',
-    fr: 'fr_FR',
-  };
+  // OG-Image Fallback
+  const ogImageUrl = ogImage || `${BASE_URL}/og-image.jpg`;
 
   return (
     <Helmet>
-      {/* Favicon - explizit setzen für alle Seiten mit Cache-Busting */}
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=2" />
-      <link rel="shortcut icon" href="/favicon.png?v=2" type="image/png" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
-      
-      {/* Primary Meta Tags */}
-      <html lang={language} />
+      {/* Basis */}
+      <html lang={language === "de" ? "de" : language} />
       <title>{fullTitle}</title>
-      <meta name="description" content={metaDescription} />
-      <meta name="author" content="Ristorante STORIA" />
+      {description && <meta name="description" content={description} />}
+
+      {/* Indexierung */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
-      
-      {/* Canonical */}
+
+      {/* Canonical — self-referencing, immer www + trailing slash */}
       <link rel="canonical" href={canonicalUrl} />
-      
-      {/* Hreflang Tags for all languages (skip for legal-only-DE pages) */}
-      {!noHreflang && hreflangUrls.map(({ lang, url }) => (
-        <link key={lang} rel="alternate" hrefLang={lang} href={url} />
-      ))}
-      {!noHreflang && <link rel="alternate" hrefLang="x-default" href={xDefaultUrl} />}
-      
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={canonicalUrl} />
+
+      {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={metaDescription} />
-      <meta property="og:image" content={image} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:locale" content={ogLocaleMap[language]} />
-      {SUPPORTED_LANGUAGES.filter(l => l !== language).map(lang => (
-        <meta key={lang} property="og:locale:alternate" content={ogLocaleMap[lang]} />
-      ))}
-      <meta property="og:site_name" content="STORIA Ristorante" />
-      
-      {/* Twitter */}
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={canonicalUrl} />
+      {description && <meta property="og:description" content={description} />}
+      <meta property="og:image" content={ogImageUrl} />
+      <meta property="og:site_name" content="STORIA München" />
+      <meta property="og:locale" content={language === "de" ? "de_DE" : language === "en" ? "en_GB" : language === "it" ? "it_IT" : "fr_FR"} />
+
+      {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={canonicalUrl} />
       <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={metaDescription} />
-      <meta name="twitter:image" content={image} />
-      
-      {/* Geo Tags */}
+      {description && <meta name="twitter:description" content={description} />}
+      <meta name="twitter:image" content={ogImageUrl} />
+
+      {/* Geo-Tags für lokales SEO */}
       <meta name="geo.region" content="DE-BY" />
       <meta name="geo.placename" content="München" />
-      <meta name="geo.position" content="48.1456;11.5656" />
-      <meta name="ICBM" content="48.1456, 11.5656" />
+      <meta name="geo.position" content="48.1467;11.5641" />
+      <meta name="ICBM" content="48.1467, 11.5641" />
+
+      {/* hreflang — nur für mehrsprachige Seiten */}
+      {!noHreflang && !noIndex && (
+        <>
+          <link
+            rel="alternate"
+            hrefLang="de"
+            href={hreflangUrls?.de || `${BASE_URL}${canonical ? normalizeTrailingSlash(canonical.startsWith("/") ? canonical.split("?")[0].split("#")[0] : "/" + canonical.split("?")[0].split("#")[0]) : "/"}`}
+          />
+          <link
+            rel="alternate"
+            hrefLang="en"
+            href={hreflangUrls?.en || `${BASE_URL}/en/`}
+          />
+          <link
+            rel="alternate"
+            hrefLang="it"
+            href={hreflangUrls?.it || `${BASE_URL}/it/`}
+          />
+          <link
+            rel="alternate"
+            hrefLang="fr"
+            href={hreflangUrls?.fr || `${BASE_URL}/fr/`}
+          />
+          <link
+            rel="alternate"
+            hrefLang="x-default"
+            href={hreflangUrls?.de || `${BASE_URL}${canonical ? normalizeTrailingSlash(canonical.startsWith("/") ? canonical.split("?")[0].split("#")[0] : "/" + canonical.split("?")[0].split("#")[0]) : "/"}`}
+          />
+        </>
+      )}
     </Helmet>
   );
 };
