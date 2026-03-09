@@ -359,7 +359,7 @@ async function main() {
     return;
   }
 
-  // Google Auth — OAuth Tokens aus gbp-auth-test wiederverwenden
+  // Google Auth — Tokens aus Supabase DB laden
   console.log("\n🔑 Authentifiziere bei Google...");
   const accessToken = await getAccessToken(supabase);
 
