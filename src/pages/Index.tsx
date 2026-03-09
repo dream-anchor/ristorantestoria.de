@@ -4,7 +4,7 @@ import Hero from "@/components/Hero";
 import ImageGrid from "@/components/ImageGrid";
 import HomeIntro from "@/components/HomeIntro";
 import InternalLinks from "@/components/InternalLinks";
-import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
+import GoogleReviews from "@/components/GoogleReviews";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
@@ -36,7 +36,7 @@ const Index = () => {
           <HomeIntro />
           <HomeAbout />
 
-          <ConsentElfsightReviews />
+          <GoogleReviews />
           <InternalLinks />
 
         </main>

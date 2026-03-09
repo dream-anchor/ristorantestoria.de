@@ -12,7 +12,8 @@
     "build:prerender": "node prerender.js",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fetch-reviews": "node scripts/fetch-google-reviews.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

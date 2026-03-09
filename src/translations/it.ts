@@ -356,7 +356,7 @@ const itBase = {
     enableOpenTable: "Attiva OpenTable",
     alternativeBooking: "In alternativa, potete prenotare telefonicamente:",
     reviewsBlocked: "Recensioni clienti",
-    reviewsBlockedDesc: "Per visualizzare le recensioni esterne da es. Google e TheFork, abbiamo bisogno del vostro consenso.",
+    reviewsBlockedDesc: "Per visualizzare le recensioni Google, abbiamo bisogno del vostro consenso.",
     enableReviews: "Attiva recensioni",
   },
   legal: {
@@ -370,7 +370,12 @@ const itBase = {
   },
   reviews: {
     title: "Cosa Dicono i Nostri Ospiti",
-    subtitle: "Recensioni degli ospiti da Google & TheFork",
+    subtitle: "Recensioni degli ospiti su Google",
+    outOf5: "su 5",
+    reviewCount: "recensioni",
+    writeReview: "Valutaci su Google",
+    readMore: "leggi di pi\u00f9",
+    readLess: "meno",
   },
   about: {
     title: 'La Famiglia Speranza – STORIA nel Cuore di Monaco',

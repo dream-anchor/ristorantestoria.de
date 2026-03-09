@@ -1,0 +1,8 @@
+{
+  "placeId": "",
+  "rating": 0,
+  "totalReviews": 0,
+  "lastFetched": "",
+  "reviews": [],
+  "_note": "Run 'npm run fetch-reviews' to populate. Requires GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID in .env"
+}

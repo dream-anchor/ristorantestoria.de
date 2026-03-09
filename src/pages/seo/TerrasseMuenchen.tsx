@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
+import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
@@ -310,7 +310,7 @@ const TerrasseMuenchen = () => {
               </div>
             </section>
 
-            <ConsentElfsightReviews />
+            <GoogleReviews />
 
             {/* Final CTA */}
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">

@@ -330,7 +330,7 @@ export const de = {
     enableOpenTable: "OpenTable aktivieren",
     alternativeBooking: "Alternativ können Sie telefonisch reservieren:",
     reviewsBlocked: "Kundenbewertungen anzeigen",
-    reviewsBlockedDesc: "Zur Anzeige externer Bewertungen von z.B. Google und TheFork benötigen wir Ihre Zustimmung.",
+    reviewsBlockedDesc: "Zur Anzeige der Google-Bewertungen ben\u00f6tigen wir Ihre Zustimmung.",
     enableReviews: "Bewertungen aktivieren",
   },
   legal: {
@@ -343,8 +343,13 @@ export const de = {
     disclaimer: "Disclaimer",
   },
   reviews: {
-    title: "Das sagen unsere Gäste",
-    subtitle: "Gäste-Bewertungen von Google & TheFork",
+    title: "Das sagen unsere G\u00e4ste",
+    subtitle: "G\u00e4ste-Bewertungen von Google",
+    outOf5: "von 5",
+    reviewCount: "Bewertungen",
+    writeReview: "Auf Google bewerten",
+    readMore: "mehr lesen",
+    readLess: "weniger",
   },
   about: {
     title: 'La Famiglia Speranza – STORIA im Herzen von München',

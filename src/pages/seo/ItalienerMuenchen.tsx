@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
+import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import StaticBotContent from "@/components/StaticBotContent";
 import ReservationCTA from "@/components/ReservationCTA";
@@ -268,7 +268,7 @@ const ItalienerMuenchen = () => {
             </div>
           </section>
 
-          <ConsentElfsightReviews />
+          <GoogleReviews />
 
           {/* Final CTA */}
           <section className="py-16 md:py-20 bg-primary text-primary-foreground">

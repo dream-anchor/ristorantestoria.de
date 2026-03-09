@@ -1,5 +1,6 @@
 import { Helmet } from '@/lib/helmetAsync';
 import { useLanguage } from '@/contexts/LanguageContext';
+import reviewsData from '@/data/google-reviews.json';
 
 interface StructuredDataProps {
   type?: 'restaurant' | 'menu' | 'faq' | 'breadcrumb' | 'event';
@@ -139,8 +140,30 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
         },
       },
     ],
-    // aggregateRating entfernt - Google erlaubt dies nur wenn Reviews auf der Seite sichtbar sind
-    // (nicht hinter Consent-Banner). Kann wieder aktiviert werden wenn Reviews ohne Consent angezeigt werden.
+    // AggregateRating — nur wenn echte Reviews geladen sind
+    ...(reviewsData.rating > 0 && reviewsData.totalReviews > 0 ? {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: reviewsData.rating,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: reviewsData.totalReviews,
+      },
+    } : {}),
+    // Einzelne Reviews als review-Array
+    ...(reviewsData.reviews?.length > 0 ? {
+      review: reviewsData.reviews.slice(0, 5).map((r: { authorName: string; rating: number; text: string }) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.authorName },
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: r.rating,
+          bestRating: 5,
+          worstRating: 1,
+        },
+        reviewBody: r.text,
+      })),
+    } : {}),
   };
 
   const websiteSchema = {

@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ReservationBooking from "@/components/ReservationBooking";
-import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
+import GoogleReviews from "@/components/GoogleReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import BackToLandingPage from "@/components/BackToLandingPage";
@@ -70,7 +70,7 @@ const Reservierung = () => {
 
           <ReservationBooking />
 
-          <ConsentElfsightReviews />
+          <GoogleReviews />
         </main>
 
         <Footer />

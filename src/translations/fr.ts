@@ -326,7 +326,7 @@ export const fr = {
     enableOpenTable: "Activer OpenTable",
     alternativeBooking: "Alternativement, vous pouvez réserver par téléphone:",
     reviewsBlocked: "Avis clients",
-    reviewsBlockedDesc: "Pour afficher les avis externes de par ex. Google et TheFork, nous avons besoin de votre consentement.",
+    reviewsBlockedDesc: "Pour afficher les avis Google, nous avons besoin de votre consentement.",
     enableReviews: "Activer les avis",
   },
   legal: {
@@ -340,7 +340,12 @@ export const fr = {
   },
   reviews: {
     title: "Ce Que Disent Nos Clients",
-    subtitle: "Avis des clients de Google & TheFork",
+    subtitle: "Avis des clients sur Google",
+    outOf5: "sur 5",
+    reviewCount: "avis",
+    writeReview: "\u00c9valuez-nous sur Google",
+    readMore: "lire la suite",
+    readLess: "moins",
   },
   about: {
     title: 'La Famiglia Speranza – STORIA au Cœur de Munich',

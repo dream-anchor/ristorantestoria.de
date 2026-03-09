@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
-import ConsentElfsightReviews from "@/components/ConsentElfsightReviews";
+import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
@@ -555,7 +555,7 @@ const AperitivoMuenchen = () => {
             </div>
           </section>
 
-          <ConsentElfsightReviews />
+          <GoogleReviews />
         </main>
 
         <Footer />
