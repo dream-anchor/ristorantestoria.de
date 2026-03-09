@@ -47,6 +47,8 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '
 
 // deno-lint-ignore no-explicit-any
 type SupabaseClient = any;
+// deno-lint-ignore no-explicit-any
+type AnyRow = any;
 
 // Window configurations
 const WINDOWS = {
