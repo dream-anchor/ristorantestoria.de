@@ -865,7 +865,7 @@ async function updateUrlRegistryTotals(
 // ============================================================================
 
 async function updateCanonicalGroups(
-  supabase: ReturnType<typeof createClient>
+  supabase: SupabaseClient
 ): Promise<number> {
   // Get all URLs grouped by normalized_url
   const { data: urls } = await supabase

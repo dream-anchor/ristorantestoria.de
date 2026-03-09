@@ -32,3 +32,6 @@ verify_jwt = false
 
 [functions.classify-seasonal-menu]
 verify_jwt = false
+
+[functions.cleanup-menu-data]
+verify_jwt = true
