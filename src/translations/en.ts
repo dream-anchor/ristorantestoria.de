@@ -2564,6 +2564,7 @@ export const en = {
       h1: 'Menu – Italian Restaurant Munich Maxvorstadt',
       description: 'STORIA menu: Neapolitan stone-oven pizza, fresh pasta & antipasti. Italian restaurant Maxvorstadt near Königsplatz. Book now!',
       intro: 'Authentic Italian cuisine – Neapolitan stone-oven pizza, homemade pasta and fresh antipasti. Enjoy our fine Italian wines with your meal. On weekdays, we recommend our affordable lunch menu.',
+      introP2: 'Beyond pizza, our menu features homemade pasta in numerous variations – from classic spaghetti carbonara to seasonal creations with fresh truffle or seafood. Our antipasti are prepared fresh daily and are perfect for sharing. We recommend pairing your meal with a wine from our carefully curated selection of Italian vintners. All ingredients are sourced directly from Italy whenever possible to offer you an authentic taste experience. During the week, be sure to check out our rotating lunch menu with attractive prices – a true piece of Italy just steps from Königsplatz.',
       breadcrumb: 'Menu',
     },
     getraenke: {
