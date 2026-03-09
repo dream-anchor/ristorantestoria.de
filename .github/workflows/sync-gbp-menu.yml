@@ -1,0 +1,40 @@
+name: Sync GBP Menu (Weekly)
+
+on:
+  schedule:
+    # Jeden Montag um 09:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  sync-menu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync GBP Menu
+        run: npx ts-node scripts/sync-gbp-menu.ts
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "::error::❌ GBP Menu Sync fehlgeschlagen! Prüfe die Logs oben für Details."
+          echo "Mögliche Ursachen:"
+          echo "  - Supabase-Verbindung fehlgeschlagen"
+          echo "  - Google OAuth Token abgelaufen (gbp-auth-test.ts erneut ausführen)"
+          echo "  - API-Limit erreicht"
