@@ -16,6 +16,9 @@ interface MenuItem {
   description_fr: string;
   price: number | null;
   price_display: string;
+  allergens: string;
+  is_vegetarian: boolean;
+  is_vegan: boolean;
   sort_order: number;
 }
 
