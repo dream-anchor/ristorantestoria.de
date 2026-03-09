@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
-import { Star, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Sparkles, ExternalLink, PenLine } from "lucide-react";
 
 import reviewsDe from "@/data/google-reviews-de.json";
 import reviewsEn from "@/data/google-reviews-en.json";
@@ -97,8 +97,11 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
   const { rating, totalReviews, reviews, placeId, summary, summaryLabel } = data;
   const hasReviews = reviews.length > 0 && rating > 0;
 
-  const reviewUrl = placeId
+  const writeReviewUrl = placeId
     ? `https://search.google.com/local/writereview?placeid=${placeId}`
+    : "https://maps.google.com/?cid=3761590175870856939";
+  const allReviewsUrl = placeId
+    ? `https://search.google.com/local/reviews?placeid=${placeId}`
     : "https://maps.google.com/?cid=3761590175870856939";
 
   const handleEnableExternal = () => {
@@ -147,15 +150,25 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
       {hasConsent("external") ? (
         <>
           <ReviewCarousel reviews={displayReviews} />
-          <div className="text-center mt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
             <a
-              href={reviewUrl}
+              href={allReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-accent transition-colors text-sm font-medium"
             >
               <GoogleIcon />
-              {compact ? t.reviews.viewAll : t.reviews.writeReview}
+              <span>{t.reviews.viewAll}</span>
+              <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+            </a>
+            <a
+              href={writeReviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors text-sm font-medium"
+            >
+              <PenLine className="h-4 w-4" />
+              <span>{t.reviews.writeReview}</span>
             </a>
           </div>
         </>
