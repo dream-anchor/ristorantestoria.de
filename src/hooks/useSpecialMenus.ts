@@ -466,11 +466,11 @@ export const useSaveMenuContent = () => {
             description_en: item.description_en || null,
             description_it: item.description_it || null,
             description_fr: item.description_fr || null,
-            price: item.price,
+            price: item.price ?? null,
             price_display: item.price_display || null,
-            price_display_en: item.price_display_en || null,
-            price_display_it: item.price_display_it || null,
-            price_display_fr: item.price_display_fr || null,
+            allergens: (item as any).allergens || null,
+            is_vegetarian: (item as any).is_vegetarian ?? false,
+            is_vegan: (item as any).is_vegan ?? false,
             sort_order: itemIndex,
           }));
 
