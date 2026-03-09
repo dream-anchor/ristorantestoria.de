@@ -2,7 +2,7 @@ name: Sync GBP Menu (Daily)
 
 on:
   schedule:
-    # Täglich um 09:00 UTC
+    # Täglich um 09:00 UTC (10:00 Uhr MEZ / 11:00 Uhr MESZ)
     - cron: '0 9 * * *'
   workflow_dispatch:
 
@@ -26,8 +26,7 @@ jobs:
       - name: Sync GBP Menu
         run: npx tsx scripts/sync-gbp-menu.ts
         env:
-          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
 
       - name: Report failure
@@ -35,6 +34,6 @@ jobs:
         run: |
           echo "::error::❌ GBP Menu Sync fehlgeschlagen! Prüfe die Logs oben für Details."
           echo "Mögliche Ursachen:"
-          echo "  - Supabase-Verbindung fehlgeschlagen"
+          echo "  - Neon-Datenbank-Verbindung fehlgeschlagen"
           echo "  - Google OAuth Token abgelaufen (gbp-auth-test.ts erneut ausführen)"
           echo "  - API-Limit erreicht"
