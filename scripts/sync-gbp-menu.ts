@@ -11,14 +11,15 @@
  */
 
 import dotenv from "dotenv";
-import { fileURLToPath as urlToPath } from "url";
+import { fileURLToPath, fileURLToPath as urlToPath } from "url";
 import { dirname, resolve } from "path";
 dotenv.config({ path: resolve(dirname(urlToPath(import.meta.url)), "..", ".env") });
 
 import { createClient } from "@supabase/supabase-js";
-import { GoogleAuth } from "google-auth-library";
 import * as fs from "fs";
 import * as path from "path";
+import * as https from "https";
+import * as crypto from "crypto";
 
 // --- Config ---
 
@@ -80,7 +81,7 @@ interface DbMenu {
   menu_type: string;
   title: string;
   title_it: string | null;
-  published: boolean;
+  is_published: boolean;
 }
 
 interface DbCategory {
@@ -91,7 +92,6 @@ interface DbCategory {
   description: string | null;
   description_it: string | null;
   sort_order: number;
-  published: boolean;
 }
 
 interface DbItem {
@@ -106,7 +106,6 @@ interface DbItem {
   is_vegetarian: boolean;
   is_vegan: boolean;
   sort_order: number;
-  published: boolean;
 }
 
 interface MoneyProto {
@@ -159,32 +158,38 @@ function buildDietaryRestrictions(item: DbItem): string[] {
 
 // --- Google Food Menu Builder ---
 
+const MAX_DISPLAY_NAME = 140;
+
+function splitNameDescription(name: string, description: string | null): { displayName: string; description?: string } {
+  if (name.length <= MAX_DISPLAY_NAME) {
+    return { displayName: name, ...(description ? { description } : {}) };
+  }
+  // Name zu lang — kürze und verschiebe Rest in description
+  const truncated = name.slice(0, MAX_DISPLAY_NAME).replace(/\s+\S*$/, "");
+  const overflow = name.slice(truncated.length).trim();
+  const fullDesc = [overflow, description].filter(Boolean).join(" ");
+  return { displayName: truncated, ...(fullDesc ? { description: fullDesc } : {}) };
+}
+
 function buildFoodMenuItem(item: DbItem) {
+  const de = splitNameDescription(item.name, item.description);
+  const it = splitNameDescription(item.name_it || item.name, item.description_it || item.description);
+
   const labels = [
-    {
-      displayName: item.name,
-      ...(item.description ? { description: item.description } : {}),
-      languageCode: "de",
-    },
-    {
-      displayName: item.name_it || item.name,
-      ...(item.description_it || item.description
-        ? { description: item.description_it || item.description }
-        : {}),
-      languageCode: "it",
-    },
+    { ...de, languageCode: "de" },
+    { ...it, languageCode: "it" },
   ];
 
+  // Google Food Menu API akzeptiert nur: HALAL, KOSHER, ORGANIC, VEGAN, VEGETARIAN, GLUTEN_FREE
+  // Individuelle Allergene (DAIRY, EGG etc.) werden NICHT unterstützt
   const dietaryRestriction = buildDietaryRestrictions(item);
-  const allergens = parseAllergens(item.allergens);
-  const allRestrictions = [...new Set([...dietaryRestriction, ...allergens])];
 
   const attributes: Record<string, unknown> = {};
   if (item.price != null) {
     attributes.price = priceToMoney(item.price);
   }
-  if (allRestrictions.length > 0) {
-    attributes.dietaryRestriction = allRestrictions;
+  if (dietaryRestriction.length > 0) {
+    attributes.dietaryRestriction = dietaryRestriction;
   }
 
   return {
@@ -197,28 +202,19 @@ function buildFoodMenuSection(
   category: DbCategory,
   items: DbItem[]
 ) {
-  const publishedItems = items
-    .filter((i) => i.published)
+  const sortedItems = items
     .sort((a, b) => a.sort_order - b.sort_order);
 
+  const de = splitNameDescription(category.name, category.description);
+  const it = splitNameDescription(category.name_it || category.name, category.description_it || category.description);
   const labels = [
-    {
-      displayName: category.name,
-      ...(category.description ? { description: category.description } : {}),
-      languageCode: "de",
-    },
-    {
-      displayName: category.name_it || category.name,
-      ...(category.description_it || category.description
-        ? { description: category.description_it || category.description }
-        : {}),
-      languageCode: "it",
-    },
+    { ...de, languageCode: "de" },
+    { ...it, languageCode: "it" },
   ];
 
   return {
     labels,
-    items: publishedItems.map(buildFoodMenuItem),
+    items: sortedItems.map(buildFoodMenuItem),
   };
 }
 
@@ -227,19 +223,23 @@ function buildFoodMenu(
   categories: DbCategory[],
   itemsByCategory: Map<string, DbItem[]>
 ) {
-  const publishedCategories = categories
-    .filter((c) => c.published)
+  const sortedCategories = categories
     .sort((a, b) => a.sort_order - b.sort_order);
 
-  const sections = publishedCategories
+  const sections = sortedCategories
     .map((cat) => buildFoodMenuSection(cat, itemsByCategory.get(cat.id) || []))
     .filter((s) => s.items.length > 0);
 
+  // Google verlangt unique displayNames pro Sprache — nur IT-Label wenn unterschiedlich
+  const labels: Array<{ displayName: string; languageCode: string }> = [
+    { displayName: menu.title, languageCode: "de" },
+  ];
+  if (menu.title_it && menu.title_it !== menu.title) {
+    labels.push({ displayName: menu.title_it, languageCode: "it" });
+  }
+
   return {
-    labels: [
-      { displayName: menu.title, languageCode: "de" },
-      { displayName: menu.title_it || menu.title, languageCode: "it" },
-    ],
+    labels,
     sourceUrl: SOURCE_URL,
     cuisines: CUISINES,
     sections,
@@ -251,12 +251,15 @@ function buildFoodMenu(
 async function main() {
   const dryRun = process.argv.includes("--dry-run");
 
-  // Env-Vars prüfen
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Env-Vars prüfen (Fallback auf VITE_-Varianten)
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
   if (!supabaseUrl || !supabaseKey) {
-    console.error("❌ SUPABASE_URL und SUPABASE_SERVICE_ROLE_KEY müssen gesetzt sein.");
+    console.error("❌ SUPABASE_URL (oder VITE_SUPABASE_URL) und SUPABASE_SERVICE_ROLE_KEY (oder VITE_SUPABASE_PUBLISHABLE_KEY) müssen gesetzt sein.");
     process.exit(1);
+  }
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY && dryRun) {
+    console.warn("⚠ Kein Service Role Key — verwende Anon Key (Dry-Run). RLS muss SELECT erlauben.");
   }
 
   const supabase = createClient(supabaseUrl, supabaseKey);
@@ -266,9 +269,9 @@ async function main() {
 
   const { data: menus, error: menusErr } = await supabase
     .from("menus")
-    .select("id, menu_type, title, title_it, published")
+    .select("id, menu_type, title, title_it, is_published")
     .in("menu_type", [...MENU_TYPES_TO_SYNC])
-    .eq("published", true);
+    .eq("is_published", true);
 
   if (menusErr) {
     console.error("❌ Fehler beim Laden der Menüs:", menusErr.message);
@@ -285,9 +288,8 @@ async function main() {
   const menuIds = menus.map((m) => m.id);
   const { data: categories, error: catErr } = await supabase
     .from("menu_categories")
-    .select("id, menu_id, name, name_it, description, description_it, sort_order, published")
+    .select("id, menu_id, name, name_it, description, description_it, sort_order")
     .in("menu_id", menuIds)
-    .eq("published", true)
     .order("sort_order");
 
   if (catErr) {
@@ -302,10 +304,9 @@ async function main() {
   const { data: items, error: itemsErr } = await supabase
     .from("menu_items")
     .select(
-      "id, category_id, name, name_it, description, description_it, price, allergens, is_vegetarian, is_vegan, sort_order, published"
+      "id, category_id, name, name_it, description, description_it, price, allergens, is_vegetarian, is_vegan, sort_order"
     )
     .in("category_id", categoryIds)
-    .eq("published", true)
     .order("sort_order");
 
   if (itemsErr) {
@@ -358,38 +359,130 @@ async function main() {
     return;
   }
 
-  // Google Auth
+  // Google Auth — OAuth Tokens aus gbp-auth-test wiederverwenden
   console.log("\n🔑 Authentifiziere bei Google...");
-  const auth = new GoogleAuth({
-    scopes: [GBP_SCOPE],
-  });
-  const client = await auth.getClient();
+  const accessToken = await getAccessToken();
 
   const url = `${GBP_API_BASE}/accounts/${GBP_ACCOUNT_ID}/locations/${GBP_LOCATION_ID}/foodMenus`;
-
   console.log(`📤 Sende PATCH an ${url}...`);
 
-  try {
-    const response = await client.request({
-      url,
-      method: "PATCH",
-      data: payload,
-      headers: { "Content-Type": "application/json" },
-    });
+  const result = await httpsPatch(url, accessToken, payload);
 
-    console.log(`✅ Sync erfolgreich! Status: ${response.status}`);
-  } catch (err: unknown) {
-    if (err && typeof err === "object" && "response" in err) {
-      const apiErr = err as { response: { status: number; data: unknown } };
-      console.error(`❌ Google API Fehler (${apiErr.response.status}):`);
-      console.error(JSON.stringify(apiErr.response.data, null, 2));
-    } else if (err instanceof Error) {
-      console.error("❌ Fehler:", err.message);
-    } else {
-      console.error("❌ Unbekannter Fehler:", err);
-    }
+  if (result.status >= 200 && result.status < 300) {
+    console.log(`\n✅ Sync erfolgreich! Status: ${result.status}`);
+    console.log(JSON.stringify(result.data, null, 2));
+  } else {
+    console.error(`\n❌ Google API Fehler (${result.status}):`);
+    console.error(JSON.stringify(result.data, null, 2));
     process.exit(1);
   }
+}
+
+// --- OAuth Token Management (shared with gbp-auth-test.ts) ---
+
+const TOKENS_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".gbp-tokens.json");
+const CREDENTIALS_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "client_secret.json");
+const ALGORITHM = "aes-256-gcm";
+
+function getEncryptionKey(): Buffer {
+  const keyHex = process.env.GBP_TOKEN_ENCRYPTION_KEY;
+  if (!keyHex) {
+    console.error("❌ GBP_TOKEN_ENCRYPTION_KEY nicht gesetzt.");
+    process.exit(1);
+  }
+  return Buffer.from(keyHex, "hex");
+}
+
+function decrypt(encoded: string): string {
+  const key = getEncryptionKey();
+  const [ivB64, tagB64, dataB64] = encoded.split(":");
+  const decipher = crypto.createDecipheriv(ALGORITHM, key, Buffer.from(ivB64, "base64"));
+  decipher.setAuthTag(Buffer.from(tagB64, "base64"));
+  return Buffer.concat([decipher.update(Buffer.from(dataB64, "base64")), decipher.final()]).toString("utf-8");
+}
+
+function encrypt(plaintext: string): string {
+  const key = getEncryptionKey();
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
+  const encrypted = Buffer.concat([cipher.update(plaintext, "utf-8"), cipher.final()]);
+  return [iv.toString("base64"), cipher.getAuthTag().toString("base64"), encrypted.toString("base64")].join(":");
+}
+
+function loadCredentials(): { client_id: string; client_secret: string } {
+  const raw = JSON.parse(fs.readFileSync(CREDENTIALS_PATH, "utf-8"));
+  const creds = raw.installed || raw.web;
+  return { client_id: creds.client_id, client_secret: creds.client_secret };
+}
+
+async function getAccessToken(): Promise<string> {
+  if (!fs.existsSync(TOKENS_PATH)) {
+    console.error("❌ Keine gespeicherten Tokens. Erst 'npx ts-node scripts/gbp-auth-test.ts' ausführen.");
+    process.exit(1);
+  }
+
+  const tokens = JSON.parse(decrypt(fs.readFileSync(TOKENS_PATH, "utf-8").trim()));
+  const isExpired = !tokens.expiry_date || Date.now() > tokens.expiry_date - 5 * 60 * 1000;
+
+  if (!isExpired) {
+    console.log("✅ Gespeicherter Access Token noch gültig");
+    return tokens.access_token;
+  }
+
+  console.log("🔄 Access Token abgelaufen, refreshe...");
+  const creds = loadCredentials();
+  const refreshed = await refreshToken(creds.client_id, creds.client_secret, tokens.refresh_token);
+  const updated = {
+    access_token: refreshed.access_token,
+    refresh_token: tokens.refresh_token,
+    expiry_date: Date.now() + refreshed.expires_in * 1000,
+  };
+  fs.writeFileSync(TOKENS_PATH, encrypt(JSON.stringify(updated)), "utf-8");
+  console.log("✅ Access Token erneuert");
+  return refreshed.access_token;
+}
+
+function refreshToken(clientId: string, clientSecret: string, refToken: string): Promise<{ access_token: string; expires_in: number }> {
+  return new Promise((resolve, reject) => {
+    const postData = new URLSearchParams({
+      client_id: clientId, client_secret: clientSecret,
+      refresh_token: refToken, grant_type: "refresh_token",
+    }).toString();
+    const req = https.request("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded", "Content-Length": String(Buffer.byteLength(postData)) },
+    }, (res) => {
+      let body = "";
+      res.on("data", (c) => (body += c));
+      res.on("end", () => res.statusCode === 200 ? resolve(JSON.parse(body)) : reject(new Error(`Refresh failed (${res.statusCode}): ${body}`)));
+    });
+    req.on("error", reject);
+    req.write(postData);
+    req.end();
+  });
+}
+
+function httpsPatch(url: string, accessToken: string, data: unknown): Promise<{ status: number; data: unknown }> {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify(data);
+    const parsed = new URL(url);
+    const req = https.request({
+      hostname: parsed.hostname, path: parsed.pathname + parsed.search,
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json", "Content-Length": String(Buffer.byteLength(body)) },
+    }, (res) => {
+      let resBody = "";
+      res.on("data", (c) => (resBody += c));
+      res.on("end", () => {
+        let parsed: unknown;
+        try { parsed = JSON.parse(resBody); } catch { parsed = resBody; }
+        resolve({ status: res.statusCode || 0, data: parsed });
+      });
+    });
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
 }
 
 main();
