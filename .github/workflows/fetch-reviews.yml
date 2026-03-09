@@ -2,7 +2,7 @@ name: Fetch Google Reviews (Daily)
 
 on:
   schedule:
-    # 06:00 UTC = 08:00 München (MEZ) / 07:00 (MESZ)
+    # 06:00 UTC = 07:00 München (MEZ) / 08:00 (MESZ)
     - cron: '0 6 * * *'
   workflow_dispatch:
 
@@ -26,8 +26,10 @@ jobs:
       - name: Fetch Google Reviews
         run: npm run fetch-reviews -- --force
         env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
           GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+          GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
 
       - name: Check for changes
         id: changes
