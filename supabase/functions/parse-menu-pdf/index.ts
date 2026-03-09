@@ -180,17 +180,20 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
                             properties: {
                               name: { type: 'string' },
                               name_en: { type: 'string', description: 'PFLICHT - Englische Übersetzung' },
-                              name_it: { type: 'string', description: 'PFLICHT - Italienische Übersetzung' },
+                              name_it: { type: 'string', description: 'PFLICHT - Muss IMMER befüllt sein, auch wenn identisch zum Deutschen! Google braucht dies für die IT-Karte.' },
                               name_fr: { type: 'string', description: 'PFLICHT - Französische Übersetzung' },
-                              description: { type: 'string' },
+                              description: { type: 'string', description: 'Beschreibung OHNE Allergene und Preis' },
                               description_en: { type: 'string', description: 'PFLICHT - Englische Übersetzung' },
                               description_it: { type: 'string', description: 'PFLICHT - Italienische Übersetzung' },
                               description_fr: { type: 'string', description: 'PFLICHT - Französische Übersetzung' },
-                              price: { type: 'number' },
-                              price_display: { type: 'string' },
+                              price: { type: 'number', description: 'PFLICHT - Numerischer Preis (z.B. 15.90). NIEMALS null wenn Preis im PDF steht!' },
+                              price_display: { type: 'string', description: 'Formatierter Preis (z.B. "15,90 €")' },
+                              allergens: { type: 'string', description: 'Kommagetrennte Allergen-Kürzel (z.B. "a,c,g"). Leerer String wenn keine.' },
+                              is_vegetarian: { type: 'boolean', description: 'Ob das Gericht vegetarisch ist' },
+                              is_vegan: { type: 'boolean', description: 'Ob das Gericht vegan ist' },
                               sort_order: { type: 'number' }
                             },
-                            required: ['name', 'name_en', 'name_it', 'name_fr', 'price_display', 'sort_order']
+                            required: ['name', 'name_en', 'name_it', 'name_fr', 'price', 'price_display', 'allergens', 'sort_order']
                           }
                         }
                       },
