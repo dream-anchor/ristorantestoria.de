@@ -249,28 +249,45 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
 
     const rawMenu: ParsedMenu = JSON.parse(toolCall.function.arguments);
     
-    // Log missing translations for debugging
-    const checkMissingTranslations = (menu: ParsedMenu) => {
-      let missingCount = 0;
-      if (!menu.title_it || menu.title_it === menu.title) missingCount++;
-      if (!menu.title_fr || menu.title_fr === menu.title) missingCount++;
+    // Validate Italian translations are not just copies of German text
+    const validateTranslations = (menu: ParsedMenu) => {
+      let copiedCount = 0;
+      const isLikelyGerman = (de: string, it: string) => {
+        if (!de || !it) return false;
+        // If IT is identical to DE and contains typical German characters/words, it's likely a copy
+        return it === de && /[äöüßÄÖÜ]|und |mit |aus |für |der |die |das /i.test(de);
+      };
+
       menu.categories.forEach(cat => {
-        if (!cat.name_it || cat.name_it === cat.name) missingCount++;
-        if (!cat.name_fr || cat.name_fr === cat.name) missingCount++;
+        if (isLikelyGerman(cat.name, cat.name_it)) {
+          console.warn(`⚠ Category name_it is German copy: "${cat.name_it}"`);
+          copiedCount++;
+        }
         cat.items.forEach(item => {
-          if (!item.name_it || item.name_it === item.name) missingCount++;
-          if (!item.name_fr || item.name_fr === item.name) missingCount++;
+          if (isLikelyGerman(item.name, item.name_it)) {
+            console.warn(`⚠ Item name_it is German copy: "${item.name_it}"`);
+            copiedCount++;
+          }
+          if (isLikelyGerman(item.description || '', item.description_it || '')) {
+            console.warn(`⚠ Item description_it is German copy: "${item.description_it}"`);
+            copiedCount++;
+          }
         });
       });
-      if (missingCount > 0) {
-        console.log(`Warning: ${missingCount} IT/FR translations may be missing or identical to DE`);
+
+      if (copiedCount > 0) {
+        console.error(`❌ ${copiedCount} Italian field(s) appear to be copies of German text instead of translations!`);
+      } else {
+        console.log('✅ Italian translations appear to be genuine translations');
       }
+      return copiedCount;
     };
     
-    checkMissingTranslations(rawMenu);
+    const copiedFields = validateTranslations(rawMenu);
+    if (copiedFields > 0) {
+      console.log(`Warning: ${copiedFields} IT translations are likely German copies - DB trigger will fallback to DE for empty fields`);
+    }
     
-    // Do NOT apply fallback - let the spell checker detect missing translations
-    // This way the admin sees which translations are actually missing
     console.log(`Parsed ${rawMenu.categories.length} categories`);
 
     return new Response(JSON.stringify({ 
