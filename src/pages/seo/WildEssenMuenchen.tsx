@@ -242,7 +242,7 @@ const WildEssenMuenchen = () => {
                 </Button>
                 <Button 
                   size="lg" 
-                  className="bg-white text-primary hover:bg-white/90 border-2 border-white text-base md:text-lg px-8 py-6"
+                  className="bg-white text-primary hover:bg-white/90 text-base md:text-lg px-8 py-6"
                   asChild
                 >
                   <a href="tel:+498951519696">
@@ -586,7 +586,7 @@ const WildEssenMuenchen = () => {
                 </Button>
                 <Button 
                   size="lg" 
-                  className="bg-white text-primary hover:bg-white/90 border-2 border-white"
+                  className="bg-white text-primary hover:bg-white/90"
                   asChild
                 >
                   <a href="tel:+498951519696">
