@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Sync GBP Menu
-        run: npx ts-node scripts/sync-gbp-menu.ts
+        run: npx ts-node --esm scripts/sync-gbp-menu.ts
         env:
           SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
