@@ -211,7 +211,6 @@ const BesondererAnlass = () => {
         title={menuTitle}
         description={getSeoDescription()}
         canonical={canonicalPath}
-        alternates={alternates}
       />
       <StructuredData type="restaurant" />
       <StructuredData
