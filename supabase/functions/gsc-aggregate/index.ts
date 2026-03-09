@@ -810,7 +810,7 @@ async function saveAlerts(
 // ============================================================================
 
 async function updateUrlRegistryTotals(
-  supabase: ReturnType<typeof createClient>
+  supabase: SupabaseClient
 ): Promise<void> {
   // Update total clicks/impressions from page metrics
   await supabase.rpc('update_url_registry_totals');
