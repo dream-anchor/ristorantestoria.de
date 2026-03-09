@@ -693,9 +693,9 @@ export const en = {
       contactWhatsapp: "Contact us via",
     },
     aperitivo: {
-      seoTitle: "Aperitivo Munich | STORIA Italian Bar",
-      seoDescription: "Aperitivo Munich: Aperol Spritz, Negroni & Italian wines. Daily from 5 PM in Maxvorstadt near Königsplatz.",
-      title: "Aperitivo Munich – La Dolce Vita in Maxvorstadt",
+      seoTitle: "Aperitivo Munich | Aperol Spritz & Negroni from 5 PM – STORIA",
+      seoDescription: "Aperitivo Munich: Aperol Spritz, Negroni & over 50 Italian wines. Daily from 5 PM with terrace in Maxvorstadt near Königsplatz.",
+      title: "Aperitivo Munich – Aperol Spritz & Negroni at STORIA",
       heroSubtitle: "Italian Bar Culture at STORIA Maxvorstadt",
       heroTime: "🍸 Daily 5:00 PM – 10:30 PM",
       heroDescription: "Enjoy authentic Italian aperitivo in Munich: Aperol Spritz, Negroni, Hugo and fine Italian wines – just 5 minutes walk from Königsplatz.",
@@ -1232,10 +1232,10 @@ export const en = {
     },
     birthday: {
       // SEO
-      seoTitle: "Birthday Party Munich | Restaurant STORIA",
-      seoDescription: "Birthday party Munich at STORIA: Italian menu, birthday cake & space for up to 100 guests. Milestone birthdays, surprise parties & more. Inquire now!",
+      seoTitle: "Birthday Party Munich | Up to 100 Guests from €35 – STORIA",
+      seoDescription: "Birthday party Munich at STORIA: Italian menu, birthday cake & space for up to 100 guests. 30th, 40th, 50th birthday – central at Königsplatz. Inquire now!",
       // Hero
-      heroTitle: "Birthday Party Munich – Celebrate at STORIA Maxvorstadt",
+      heroTitle: "Birthday Party Munich – Celebrate Italian Style at STORIA",
       heroSubtitle: "Milestone Birthdays, Surprise Parties & Family Celebrations | STORIA at Königsplatz",
       heroBadge1: "🎂 up to 100 Guests",
       heroBadge2: "🍕 Italian Cuisine",

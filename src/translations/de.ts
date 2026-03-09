@@ -693,9 +693,9 @@ export const de = {
       contactWhatsapp: "Schreiben Sie uns per",
     },
     aperitivo: {
-      seoTitle: "Aperitivo M\u00fcnchen | STORIA Italienische Bar",
-      seoDescription: "Aperitivo M\u00fcnchen: Aperol Spritz, Negroni & italienische Weine. T\u00e4glich ab 17 Uhr in der Maxvorstadt nahe K\u00f6nigsplatz.",
-      title: "Aperitivo M\u00fcnchen \u2013 La Dolce Vita in der Maxvorstadt",
+      seoTitle: "Aperitivo München | Aperol Spritz & Negroni ab 17 Uhr – STORIA",
+      seoDescription: "Aperitivo München: Aperol Spritz, Negroni & über 50 italienische Weine. Täglich ab 17 Uhr mit Terrasse in der Maxvorstadt nahe Königsplatz.",
+      title: "Aperitivo München – Aperol Spritz & Negroni im STORIA",
       heroSubtitle: "Italienische Bar-Kultur im STORIA Maxvorstadt",
       heroTime: "🍸 Täglich 17:00 – 22:30 Uhr",
       heroDescription: "Genießen Sie authentischen italienischen Aperitivo in München: Aperol Spritz, Negroni, Hugo und erlesene italienische Weine – nur 5 Gehminuten vom Königsplatz.",
@@ -1247,10 +1247,10 @@ export const de = {
     },
     birthday: {
       // SEO
-      seoTitle: "Geburtstagsfeier M\u00fcnchen | Restaurant STORIA",
-      seoDescription: "Geburtstagsfeier München im STORIA: Italienisches Menü, Geburtstagstorte & Platz für bis zu 100 Gäste. Runder Geburtstag, Überraschungsparty & mehr. Jetzt anfragen!",
+      seoTitle: "Geburtstagsfeier München | Bis 100 Gäste ab 35 € – STORIA",
+      seoDescription: "Geburtstagsfeier München im STORIA: Italienisches Menü, Geburtstagstorte & Platz für bis zu 100 Gäste. 30., 40., 50. Geburtstag – zentral am Königsplatz. Jetzt anfragen!",
       // Hero
-      heroTitle: "Geburtstagsfeier M\u00fcnchen \u2013 Feiern im STORIA Maxvorstadt",
+      heroTitle: "Geburtstagsfeier München – Italienisch feiern im STORIA",
       heroSubtitle: "Runder Geburtstag, \u00dcberraschungsparty & Familienfeiern | STORIA am K\u00f6nigsplatz",
       heroBadge1: "🎂 bis 100 Gäste",
       heroBadge2: "\ud83c\udf55 Italienische K\u00fcche",
