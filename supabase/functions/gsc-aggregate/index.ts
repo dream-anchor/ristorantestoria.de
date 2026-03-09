@@ -47,6 +47,8 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '
 
 // deno-lint-ignore no-explicit-any
 type SupabaseClient = any;
+// deno-lint-ignore no-explicit-any
+type AnyRow = any;
 
 // Window configurations
 const WINDOWS = {
@@ -60,7 +62,7 @@ const WINDOWS = {
 // ============================================================================
 
 async function computeSiteAggregates(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<number> {
   let insertCount = 0;
@@ -165,7 +167,7 @@ async function computeSiteAggregates(
 }
 
 async function computePageAggregates(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<number> {
   let insertCount = 0;
@@ -317,7 +319,7 @@ async function computePageAggregates(
 }
 
 async function computeQueryAggregates(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<number> {
   let insertCount = 0;
@@ -483,7 +485,7 @@ async function computeQueryAggregates(
 // ============================================================================
 
 async function detectDuplicateUrls(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<AlertData[]> {
   const alerts: AlertData[] = [];
@@ -549,7 +551,7 @@ async function detectDuplicateUrls(
 }
 
 async function detectLegacyCmsUrls(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<AlertData[]> {
   const alerts: AlertData[] = [];
@@ -592,7 +594,7 @@ async function detectLegacyCmsUrls(
 }
 
 async function detectCannibalization(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<AlertData[]> {
   const alerts: AlertData[] = [];
@@ -641,7 +643,7 @@ async function detectCannibalization(
 }
 
 async function detectPerformanceDrops(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<AlertData[]> {
   const alerts: AlertData[] = [];
@@ -771,7 +773,7 @@ async function detectPerformanceDrops(
 }
 
 async function saveAlerts(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   alerts: AlertData[]
 ): Promise<number> {
   if (alerts.length === 0) return 0;
@@ -808,7 +810,7 @@ async function saveAlerts(
 // ============================================================================
 
 async function updateUrlRegistryTotals(
-  supabase: ReturnType<typeof createClient>
+  supabase: SupabaseClient
 ): Promise<void> {
   // Update total clicks/impressions from page metrics
   await supabase.rpc('update_url_registry_totals');
@@ -863,7 +865,7 @@ async function updateUrlRegistryTotals(
 // ============================================================================
 
 async function updateCanonicalGroups(
-  supabase: ReturnType<typeof createClient>
+  supabase: SupabaseClient
 ): Promise<number> {
   // Get all URLs grouped by normalized_url
   const { data: urls } = await supabase
