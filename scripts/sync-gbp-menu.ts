@@ -361,7 +361,7 @@ async function main() {
 
   // Google Auth — OAuth Tokens aus gbp-auth-test wiederverwenden
   console.log("\n🔑 Authentifiziere bei Google...");
-  const accessToken = await getAccessToken();
+  const accessToken = await getAccessToken(supabase);
 
   const url = `${GBP_API_BASE}/accounts/${GBP_ACCOUNT_ID}/locations/${GBP_LOCATION_ID}/foodMenus`;
   console.log(`📤 Sende PATCH an ${url}...`);
