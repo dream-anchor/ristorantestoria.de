@@ -75,27 +75,44 @@ WICHTIGE REGELN FÜR EXTRAKTION:
 4. Bei Unklarheiten: lieber original übernehmen als interpretieren
 5. Erkenne Preise auch wenn sie in verschiedenen Formaten angegeben sind (€, EUR, ohne Währung)
 
+PREIS-EXTRAKTION (PFLICHT für Google Business Profile Sync):
+6. Jedes Gericht MUSS zwei Preis-Felder haben:
+   - price: Numerischer Wert als Zahl (z.B. 15.90, 8.80, 22.50) - NIEMALS null lassen wenn ein Preis im PDF steht!
+   - price_display: Formatierter Preis für die Anzeige (z.B. "15,90 €")
+   Beispiel: PDF zeigt "15,90" → price: 15.90, price_display: "15,90 €"
+   Beispiel: PDF zeigt "8,8" → price: 8.80, price_display: "8,80 €"
+
+ALLERGEN-EXTRAKTION (PFLICHT):
+7. Identifiziere Allergen-Kürzel im PDF (oft am Ende der Beschreibung oder in Klammern).
+   Gängige Kürzel: a (Gluten), b (Krebstiere), c (Eier), d (Fisch), e (Erdnüsse), f (Soja), g (Milch), h (Schalenfrüchte), 1-14 (Zusatzstoffe).
+   - Speichere sie kommagetrennt in allergens (z.B. "a,c,g")
+   - Entferne die Allergen-Kürzel aus der description, damit diese sauber bleibt
+   - Wenn keine Allergene erkennbar: leeren String "" zurückgeben
+
+VEGETARISCH/VEGAN-ERKENNUNG:
+8. Erkenne vegetarische (is_vegetarian) und vegane (is_vegan) Gerichte anhand von Symbolen oder Beschreibungen im PDF.
+
 PFLICHT: ÜBERSETZUNG IN ALLE 4 SPRACHEN (DE, EN, IT, FR):
-6. Du MUSST alle Felder in ALLEN 4 SPRACHEN ausfüllen - KEINE leeren Felder erlaubt!
+9. Du MUSST alle Felder in ALLEN 4 SPRACHEN ausfüllen - KEINE leeren Felder erlaubt!
    - Deutsche Felder (name, description, title, subtitle) - Original aus PDF
    - Englische Felder (_en) - Übersetzung ins Englische
    - Italienische Felder (_it) - Übersetzung ins Italienische  
    - Französische Felder (_fr) - Übersetzung ins Französische
-7. WICHTIG: Lasse KEINE Übersetzungsfelder leer! Alle _en, _it, _fr Felder MÜSSEN ausgefüllt sein!
-8. Der Restaurantname "STORIA" darf NIEMALS übersetzt werden - er bleibt immer "STORIA"!
+10. WICHTIG: Lasse KEINE Übersetzungsfelder leer! Alle _en, _it, _fr Felder MÜSSEN ausgefüllt sein!
+11. Der Restaurantname "STORIA" darf NIEMALS übersetzt werden - er bleibt immer "STORIA"!
 
-REGELN FÜR ITALIENISCHE BEGRIFFE:
-9. Bei italienischen Kategorie-Namen wie "Antipasti", "Primi Piatti", "Dolci":
-   - name: Original beibehalten
-   - name_en: Englische Erklärung hinzufügen (z.B. "Antipasti - Starters")
-   - name_it: Italienischen Namen beibehalten
-   - name_fr: Französische Erklärung hinzufügen (z.B. "Antipasti - Entrées")
-10. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
-   - name, name_en, name_it, name_fr: Original beibehalten (italienische Gerichtnamen sind international)
-   - description: Deutsche Beschreibung übernehmen
-   - description_en: Deutsche Beschreibung ins Englische übersetzen
-   - description_it: Deutsche Beschreibung ins Italienische übersetzen
-   - description_fr: Deutsche Beschreibung ins Französische übersetzen
+REGELN FÜR ITALIENISCHE NAMEN (KRITISCH für Google Business Profile):
+12. name_it MUSS IMMER befüllt werden - auch wenn der Name identisch zum Deutschen ist!
+    Google verwendet name_it für die italienische Speisekarte. Ein leeres name_it bedeutet fehlendes Gericht.
+    Beispiel: "Spaghetti alla Carbonara" → name_it: "Spaghetti alla Carbonara" (identisch, aber MUSS gesetzt sein)
+    Beispiel: "Kürbiscremesuppe" → name_it: "Crema di zucca" (Übersetzung)
+13. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
+    - name, name_en, name_it, name_fr: Original beibehalten (italienische Gerichtnamen sind international)
+    - description: Deutsche Beschreibung übernehmen (OHNE Allergene und Preis)
+    - description_en: Ins Englische übersetzen
+    - description_it: Ins Italienische übersetzen
+    - description_fr: Ins Französische übersetzen
+14. Bei deutschen Gerichten: Alle Namensfelder korrekt übersetzen.
 
 Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.`;
 
