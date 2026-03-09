@@ -57,19 +57,13 @@ if [[ "$CURRENT_BRANCH" != "main" ]]; then
   echo -e "${YELLOW}▸ Merge $CURRENT_BRANCH → main...${NC}"
 
   # Worktree-Check: main ist evtl. schon im Haupt-Repo ausgecheckt
-  GIT_DIR_PATH=$(git rev-parse --git-dir)
-  IS_WORKTREE=false
-  if [[ -f "$GIT_DIR_PATH" ]]; then
-    IS_WORKTREE=true
-    # Haupt-Repo-Pfad aus git worktree list ermitteln
-    MAIN_REPO=$(git worktree list | head -1 | awk '{print $1}')
-  fi
+  MAIN_REPO=$(git worktree list | head -1 | awk '{print $1}')
+  CURRENT_WORKTREE=$(git rev-parse --show-toplevel)
 
-  if [[ "$IS_WORKTREE" == "true" ]]; then
-    # Im Haupt-Repo mergen
+  if [[ "$CURRENT_WORKTREE" != "$MAIN_REPO" ]]; then
+    # Wir sind in einem Worktree — Merge im Haupt-Repo
     git -C "$MAIN_REPO" merge "$CURRENT_BRANCH" --no-edit
-    echo -e "${GREEN}✓ Merge im Haupt-Repo ($MAIN_REPO) erfolgreich${NC}"
-    cd "$MAIN_REPO"
+    echo -e "${GREEN}✓ Merge im Haupt-Repo erfolgreich${NC}"
   else
     git checkout main
     git merge "$CURRENT_BRANCH" --no-edit
