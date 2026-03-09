@@ -124,6 +124,9 @@ RewriteRule ^cms/our-team/?$ /ueber-uns/ [R=301,L]
 RewriteRule ^cms/reservations/?$ /reservierung/ [R=301,L]
 RewriteRule ^cms/events(-2)?/?$ /besondere-anlaesse/ [R=301,L]
 RewriteRule ^cms/catering/?$ /catering/ [R=301,L]
+RewriteRule ^cms/menue/?$ /mittags-menu/ [R=301,L]
+RewriteRule ^cms/speisekarte-2/?$ /speisekarte/ [R=301,L]
+RewriteRule ^cms/front-page-2/?$ /? [R=301,L]
 # Soft 404 Fix
 Redirect 301 /ristorantestoria-de/ https://www.ristorantestoria.de/
 # Alle wp-content/uploads → /mittags-menu/ (als RewriteRule, damit es VOR Catch-All greift)
@@ -142,6 +145,11 @@ RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
 RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
+# Phantom-URL aus GSC (kein Content, kein H1) → Pillar Page
+RewriteRule ^besondere-anlaesse/neuer-anlass/?$ /besondere-anlaesse/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/neuer-anlass/?$ /it/occasioni-speciali/ [R=301,L]
+RewriteRule ^en/special-occasions/neuer-anlass/?$ /en/special-occasions/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/neuer-anlass/?$ /fr/occasions-speciales/ [R=301,L]
 # Alte Subdomain-URL Struktur (ristorantestoria-de/...)
 RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L]
 RewriteRule ^ristorantestoria-de/?$ / [R=301,L]
@@ -210,6 +218,12 @@ RewriteRule ^fr/avertissement/?$ /haftungsausschluss/ [R=301,L]
 # ============================================
 RewriteCond %{QUERY_STRING} ^page_id=2881$
 RewriteRule ^$ /impressum/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^page_id=3539$
+RewriteRule ^(.*)$ /? [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^page_id=2505$
+RewriteRule ^(.*)$ /? [R=301,L]
 
 # ============================================
 # 2. Error Documents (Fallback auf SPA)

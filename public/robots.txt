@@ -232,6 +232,10 @@ Allow: /
 Disallow: /admin
 Disallow: /admin-login
 
+# ─── ALTE CMS-PFADE (WordPress) ───
+# 301-Redirects bereits in .htaccess — Crawler sollen diese URLs nicht neu indexieren
+Disallow: /cms/
+
 # ─── BUILD-ARTEFAKTE ───
 Disallow: /assets/*.js$
 Disallow: /assets/*.css$
