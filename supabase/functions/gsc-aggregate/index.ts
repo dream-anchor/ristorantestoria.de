@@ -594,7 +594,7 @@ async function detectLegacyCmsUrls(
 }
 
 async function detectCannibalization(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<AlertData[]> {
   const alerts: AlertData[] = [];
