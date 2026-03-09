@@ -11,7 +11,7 @@ const ClarityTracking = () => {
     if (!hasExternalConsent) return;
 
     // Bereits geladen? Nicht nochmal laden
-    if (typeof window !== "undefined" && (window as Record<string, unknown>).clarity) return;
+    if (typeof window !== "undefined" && (window as unknown as Record<string, unknown>).clarity) return;
 
     // Clarity Script dynamisch laden (nur nach Consent)
     const w = window as Record<string, unknown>;
