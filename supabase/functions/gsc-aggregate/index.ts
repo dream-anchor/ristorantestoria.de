@@ -773,7 +773,7 @@ async function detectPerformanceDrops(
 }
 
 async function saveAlerts(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   alerts: AlertData[]
 ): Promise<number> {
   if (alerts.length === 0) return 0;
