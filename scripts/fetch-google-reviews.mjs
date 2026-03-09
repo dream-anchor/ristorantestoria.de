@@ -76,41 +76,39 @@ if (!FORCE && existsSync(OUTPUT_PATH)) {
 console.log('🔄 Fetching Google Reviews...');
 console.log(`   Place ID: ${PLACE_ID}`);
 
-// Google Places API (legacy) — reviews field
-const url = new URL('https://maps.googleapis.com/maps/api/place/details/json');
-url.searchParams.set('place_id', PLACE_ID);
-url.searchParams.set('fields', 'rating,user_ratings_total,reviews');
-url.searchParams.set('key', API_KEY);
-url.searchParams.set('language', 'de'); // German reviews preferred
-url.searchParams.set('reviews_sort', 'newest');
+// Google Places API (New) — reviews field
+const apiUrl = `https://places.googleapis.com/v1/places/${PLACE_ID}`;
 
 try {
-  const res = await fetch(url.toString());
+  const res = await fetch(apiUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Goog-Api-Key': API_KEY,
+      'X-Goog-FieldMask': 'rating,userRatingCount,reviews',
+    },
+  });
+
   if (!res.ok) {
-    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    const errBody = await res.text();
+    throw new Error(`HTTP ${res.status}: ${errBody}`);
   }
 
-  const data = await res.json();
-
-  if (data.status !== 'OK') {
-    throw new Error(`Places API error: ${data.status} — ${data.error_message || 'Unknown error'}`);
-  }
-
-  const result = data.result;
+  const result = await res.json();
 
   const output = {
     placeId: PLACE_ID,
     rating: result.rating || 0,
-    totalReviews: result.user_ratings_total || 0,
+    totalReviews: result.userRatingCount || 0,
     lastFetched: new Date().toISOString(),
     reviews: (result.reviews || []).map(r => ({
-      authorName: r.author_name || 'Anonym',
+      authorName: r.authorAttribution?.displayName || 'Anonym',
       rating: r.rating,
-      text: r.text || '',
-      relativeTimeDescription: r.relative_time_description || '',
-      time: r.time,
-      profilePhotoUrl: r.profile_photo_url || '',
-      language: r.language || 'de',
+      text: r.text?.text || r.originalText?.text || '',
+      relativeTimeDescription: r.relativePublishTimeDescription || '',
+      time: r.publishTime ? Math.floor(new Date(r.publishTime).getTime() / 1000) : 0,
+      profilePhotoUrl: r.authorAttribution?.photoUri || '',
+      language: r.text?.languageCode || r.originalText?.languageCode || 'de',
     })),
   };
 

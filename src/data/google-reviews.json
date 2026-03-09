@@ -1,8 +1,53 @@
 {
-  "placeId": "",
-  "rating": 0,
-  "totalReviews": 0,
-  "lastFetched": "",
-  "reviews": [],
-  "_note": "Run 'npm run fetch-reviews' to populate. Requires GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID in .env"
+  "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
+  "rating": 4.5,
+  "totalReviews": 787,
+  "lastFetched": "2026-03-09T00:50:21.193Z",
+  "reviews": [
+    {
+      "authorName": "Steven Digges",
+      "rating": 5,
+      "text": "The Pizza and salad was amazing. They split is so we could share. Amazing place for an afternoon lunch.",
+      "relativeTimeDescription": "3 months ago",
+      "time": 1764243543,
+      "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjU89U7dXvhkgKTFfC5g4etWH0TJkHNwoX6JpdN4vGMEeSD6oeCt=s128-c0x00000000-cc-rp-mo-ba2",
+      "language": "en"
+    },
+    {
+      "authorName": "Chris Chapman",
+      "rating": 4,
+      "text": "This was a very intimate setting. The restaurant delivers an upperclass vibe with the design, staff uniforms and tunes. We ordered the parmigiana, a pizza and a couple of drinks with the total around $65 aud. The food was very tasty and the staff were very welcoming. I would recommend to someone in Munich looking for an Italian dish with family or on a date.",
+      "relativeTimeDescription": "2 months ago",
+      "time": 1766815959,
+      "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjVJfk_SEWSErMLc9tD52-uhoCmYGM-qrsTcPE6lcd2gMaUYPYT9=s128-c0x00000000-cc-rp-mo-ba6",
+      "language": "en"
+    },
+    {
+      "authorName": "Star C",
+      "rating": 5,
+      "text": "I love this place, come here often. They are very laid back, so if you want something and need to be out of there in under two hours, you need to get their attention. If you are not in a time crunch, slow service is perfect if you like who you went there with! The food is always amazing, the cocktails are always on point and refreshing and excellent selection of wine.",
+      "relativeTimeDescription": "a year ago",
+      "time": 1710356028,
+      "profilePhotoUrl": "https://lh3.googleusercontent.com/a/ACg8ocIl1_Wy86gN2IYSVruHUVo0skNWKFtrK7u1QmzaWRYVcSFEuw=s128-c0x00000000-cc-rp-mo-ba5",
+      "language": "en"
+    },
+    {
+      "authorName": "UK Photo Journey",
+      "rating": 5,
+      "text": "Choose this place for dinner because very near to our hotel but they didn’t disappoint us. Staff was very welcoming and restaurant is stylish. Attentive water and the service is great. Indoor and outdoor seating. Very beautiful & romantic atmosphere on top of that it was sunset time.\n\nPrices are little up on the higher side but considering the quality of the food, justified. The authentic Italian food freshly cooked and it’s delicious.\nIf you are in the area and not worried about prices then I recommend give this restaurant a try.",
+      "relativeTimeDescription": "2 years ago",
+      "time": 1692287234,
+      "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjWzWOWwolE6DjxFf-pN_q8cMTMs4F7WwqJy7765IliDZJxAmyQZ=s128-c0x00000000-cc-rp-mo-ba8",
+      "language": "en"
+    },
+    {
+      "authorName": "kate mccutchin",
+      "rating": 5,
+      "text": "We had a beautiful dinner. Francesco was wonderful and the service was amazing. Excellent food!",
+      "relativeTimeDescription": "5 months ago",
+      "time": 1758929813,
+      "profilePhotoUrl": "https://lh3.googleusercontent.com/a-/ALV-UjX7n4wbUEsnU6RJQCLZNocWOJH6qR7lTATnAP_j5Ii-qtZfOATHoQ=s128-c0x00000000-cc-rp-mo",
+      "language": "en"
+    }
+  ]
 }
