@@ -11,10 +11,12 @@ const ClarityTracking = () => {
     if (!hasExternalConsent) return;
 
     // Bereits geladen? Nicht nochmal laden
-    if (typeof window !== "undefined" && (window as unknown as unknown as Record<string, unknown>).clarity) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (typeof window !== "undefined" && (window as any).clarity) return;
 
     // Clarity Script dynamisch laden (nur nach Consent)
-    const w =unknown as  window as Record<string, unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any;
     w.clarity = w.clarity || function (...args: unknown[]) {
       ((w.clarity as Record<string, unknown[]>).q = (w.clarity as Record<string, unknown[]>).q || []).push(args);
     };

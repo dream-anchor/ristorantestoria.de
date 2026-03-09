@@ -94,7 +94,7 @@ const WeihnachtenMuenchen = ({ menu, archivedMenu, seasonalConfig }: Weihnachten
   return (
     <>
       <StaticBotContent title={s.heroTitle} description={s.heroDescription} sections={[]} />
-      <SEO title={s.seoTitle} description={s.seoDescription} canonical={canonicalPath} alternates={alternates} />
+      <SEO title={s.seoTitle} description={s.seoDescription} canonical={canonicalPath} />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[
         { name: 'Home', url: '/' },

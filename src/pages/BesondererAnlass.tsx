@@ -346,7 +346,6 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
         title={seasonalTitle}
         description={seoDescription}
         canonical={canonicalPath}
-        alternates={alternates}
       />
       <StructuredData type="restaurant" />
       <StructuredData
