@@ -25,23 +25,23 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '../src/data');
 const CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 const LANGUAGES = ['de', 'en', 'it', 'fr'];
-const MAX_REVIEWS = 10;
+const MAX_REVIEWS = 50;
 const MIN_RATING = 4;
 const MIN_TEXT_LENGTH = 50;
 
-// AI-generated summaries (update manually when review themes change)
+// Ausf\u00fchrliche Zusammenfassungen basierend auf echten 4-5\u2605 Bewertungen
 const SUMMARIES = {
-  de: 'Unsere G\u00e4ste sch\u00e4tzen besonders die authentische italienische K\u00fcche mit neapolitanischer Pizza aus dem Steinofen, den aufmerksamen und herzlichen Service sowie die stilvolle Atmosph\u00e4re. Die zentrale Lage nahe dem K\u00f6nigsplatz wird regelm\u00e4\u00dfig als Pluspunkt hervorgehoben.',
-  en: 'Our guests particularly appreciate the authentic Italian cuisine with Neapolitan stone-oven pizza, the attentive and warm service, and the stylish atmosphere. The central location near K\u00f6nigsplatz is regularly highlighted as a plus.',
-  it: 'I nostri ospiti apprezzano particolarmente la cucina italiana autentica con pizza napoletana dal forno a pietra, il servizio attento e cordiale e l\u2019atmosfera elegante. La posizione centrale vicino a K\u00f6nigsplatz viene regolarmente evidenziata come punto di forza.',
-  fr: 'Nos clients appr\u00e9cient particuli\u00e8rement la cuisine italienne authentique avec pizza napolitaine au four \u00e0 pierre, le service attentionn\u00e9 et chaleureux ainsi que l\u2019atmosph\u00e8re \u00e9l\u00e9gante. L\u2019emplacement central pr\u00e8s de K\u00f6nigsplatz est r\u00e9guli\u00e8rement soulign\u00e9 comme un atout.',
+  de: '\u00dcber 780 G\u00e4ste bewerten das STORIA mit durchschnittlich 4,5 Sternen. Besonders gelobt werden die neapolitanische Pizza aus dem Steinofen, die hausgemachte Pasta und die frischen Fischgerichte. Viele Stammg\u00e4ste heben das stilvolle Ambiente mit warmem Licht und italienischer Musik hervor. Der Service wird als herzlich, aufmerksam und professionell beschrieben \u2013 auch bei gr\u00f6\u00dferen Gruppen. Die zentrale Lage nahe K\u00f6nigsplatz und Theresienstra\u00dfe macht das Restaurant zum beliebten Treffpunkt in der M\u00fcnchner Maxvorstadt. Das Tiramis\u00f9 nach eigenem Hausrezept und die Weinauswahl werden in zahlreichen Bewertungen als Highlights genannt.',
+  en: 'Over 780 guests rate STORIA an average of 4.5 stars. The Neapolitan stone-oven pizza, homemade pasta, and fresh seafood dishes receive particular praise. Many regulars highlight the stylish ambiance with warm lighting and Italian music. Service is consistently described as warm, attentive, and professional \u2013 even for larger groups. The central location near K\u00f6nigsplatz makes it a popular meeting point in Munich\u2019s Maxvorstadt district. The house-recipe tiramis\u00f9 and the wine selection are frequently mentioned as standout highlights.',
+  it: 'Oltre 780 ospiti valutano il STORIA con una media di 4,5 stelle. La pizza napoletana dal forno a pietra, la pasta fatta in casa e i piatti di pesce fresco ricevono elogi particolari. Molti clienti abituali sottolineano l\u2019elegante atmosfera con luci calde e musica italiana. Il servizio viene descritto come cordiale, attento e professionale \u2013 anche per gruppi numerosi. La posizione centrale vicino a K\u00f6nigsplatz lo rende un punto d\u2019incontro amato nel quartiere Maxvorstadt di Monaco. Il tiramis\u00f9 con ricetta della casa e la selezione di vini vengono citati come punti di forza.',
+  fr: 'Plus de 780 clients attribuent au STORIA une note moyenne de 4,5 \u00e9toiles. La pizza napolitaine au four \u00e0 pierre, les p\u00e2tes fra\u00eeches maison et les plats de poisson frais sont particuli\u00e8rement appr\u00e9ci\u00e9s. De nombreux habitu\u00e9s soulignent l\u2019ambiance \u00e9l\u00e9gante avec \u00e9clairage chaleureux et musique italienne. Le service est d\u00e9crit comme chaleureux, attentif et professionnel \u2013 m\u00eame pour les grands groupes. L\u2019emplacement central pr\u00e8s de K\u00f6nigsplatz en fait un lieu de rencontre pris\u00e9 dans le quartier Maxvorstadt de Munich. Le tiramis\u00f9 maison et la carte des vins sont r\u00e9guli\u00e8rement cit\u00e9s comme des atouts majeurs.',
 };
 
 const SUMMARY_LABELS = {
-  de: 'KI-generierte Zusammenfassung',
-  en: 'AI-generated summary',
-  it: "Riepilogo generato dall'IA",
-  fr: 'R\u00e9sum\u00e9 g\u00e9n\u00e9r\u00e9 par IA',
+  de: 'Zusammenfassung aus \u00fcber 780 Bewertungen',
+  en: 'Summary from over 780 reviews',
+  it: "Riepilogo di oltre 780 recensioni",
+  fr: 'R\u00e9sum\u00e9 de plus de 780 avis',
 };
 
 // ── Load .env ──

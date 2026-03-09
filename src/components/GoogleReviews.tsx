@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
-import { Star, ChevronLeft, ChevronRight, Sparkles, ExternalLink, PenLine } from "lucide-react";
+import { Star, Sparkles, ExternalLink, PenLine, ChevronDown } from "lucide-react";
 
 import reviewsDe from "@/data/google-reviews-de.json";
 import reviewsEn from "@/data/google-reviews-en.json";
@@ -58,7 +58,7 @@ const ReviewCard = ({ review }: { review: Review }) => {
           {review.relativeTimeDescription}
         </span>
       </div>
-      <p className="text-sm text-foreground/80 leading-relaxed flex-1">
+      <p className="text-sm text-foreground/80 leading-relaxed flex-1 whitespace-pre-line">
         {displayText}
         {needsTrunc && (
           <button
@@ -84,14 +84,26 @@ const GoogleIcon = () => (
   </svg>
 );
 
+// ── Translations for "show more" ──
+const showMoreLabels: Record<string, string> = {
+  de: "Weitere Bewertungen laden",
+  en: "Load more reviews",
+  it: "Carica altre recensioni",
+  fr: "Charger plus d\u2019avis",
+};
+
 // ── Main Component ──
 interface GoogleReviewsProps {
   compact?: boolean;
 }
 
+const INITIAL_COUNT = 6;
+const LOAD_MORE_COUNT = 6;
+
 const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
   const { hasConsent, openSettings, savePreferences, consent } = useCookieConsent();
   const { t, language } = useLanguage();
+  const [visibleCount, setVisibleCount] = useState(compact ? 3 : INITIAL_COUNT);
 
   const data = reviewsByLang[language] || reviewsDe;
   const { rating, totalReviews, reviews, placeId, summary, summaryLabel } = data;
@@ -114,14 +126,19 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
 
   if (!hasReviews) return null;
 
-  // Neueste Reviews zuerst (nach timestamp absteigend)
-  const sortedReviews = [...(reviews as Review[])].sort((a, b) => b.time - a.time);
-  const displayReviews = compact ? sortedReviews.slice(0, 3) : sortedReviews;
+  // Neueste Reviews zuerst (nach timestamp absteigend), nur 4-5 Sterne
+  const sortedReviews = [...(reviews as Review[])]
+    .filter((r) => r.rating >= 4)
+    .sort((a, b) => b.time - a.time);
+  const displayReviews = sortedReviews.slice(0, visibleCount);
+  const hasMore = visibleCount < sortedReviews.length;
+
+  const loadMore = () => setVisibleCount((prev) => prev + LOAD_MORE_COUNT);
 
   return (
     <section className="container mx-auto px-4 py-12">
       {/* Header + Aggregate Rating */}
-      <div className="text-center mb-6">
+      <div className="text-center mb-8">
         <h2 className={`font-serif font-semibold mb-3 ${compact ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl"}`}>
           {t.reviews.title}
         </h2>
@@ -135,21 +152,41 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
         <p className="text-muted-foreground text-sm">{t.reviews.subtitle}</p>
       </div>
 
-      {/* AI Summary — always visible */}
+      {/* Summary — prominenter und gr\u00f6\u00dfer */}
       {summary && (
-        <div className="max-w-3xl mx-auto mb-8 bg-secondary/30 border border-border rounded-xl p-5">
-          <div className="flex items-center gap-2 mb-2 text-xs text-muted-foreground uppercase tracking-wide font-medium">
-            <Sparkles className="h-3.5 w-3.5" />
+        <div className="max-w-4xl mx-auto mb-10 bg-secondary/30 border border-border rounded-2xl p-6 md:p-8">
+          <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground uppercase tracking-wide font-medium">
+            <Sparkles className="h-4 w-4" />
             {summaryLabel}
           </div>
-          <p className="text-sm text-foreground/80 leading-relaxed italic">{summary}</p>
+          <p className="text-base md:text-lg text-foreground/85 leading-relaxed">{summary}</p>
         </div>
       )}
 
       {/* Reviews — consent-gated */}
       {hasConsent("external") ? (
         <>
-          <ReviewCarousel reviews={displayReviews} />
+          {/* Review Grid — Infinite Scroll */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayReviews.map((review, i) => (
+              <ReviewCard key={`${review.authorName}-${review.time}-${i}`} review={review} />
+            ))}
+          </div>
+
+          {/* Load More */}
+          {hasMore && !compact && (
+            <div className="text-center mt-8">
+              <button
+                onClick={loadMore}
+                className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-full hover:bg-secondary transition-colors text-sm font-medium text-foreground/70 hover:text-foreground"
+              >
+                <ChevronDown className="h-4 w-4" />
+                {showMoreLabels[language] || showMoreLabels.de}
+              </button>
+            </div>
+          )}
+
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
             <a
               href={allReviewsUrl}
@@ -190,78 +227,6 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
         </div>
       )}
     </section>
-  );
-};
-
-// ── Carousel ──
-const ReviewCarousel = ({ reviews }: { reviews: Review[] }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  const updateScroll = useCallback(() => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    setCanScrollLeft(scrollLeft > 10);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-  }, []);
-
-  useEffect(() => {
-    updateScroll();
-    window.addEventListener("resize", updateScroll);
-    return () => window.removeEventListener("resize", updateScroll);
-  }, [updateScroll]);
-
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const card = scrollRef.current.querySelector<HTMLElement>("[data-review-card]");
-    const w = (card?.offsetWidth || 340) + 24; // card width + gap-6
-    scrollRef.current.scrollBy({ left: dir === "left" ? -w : w, behavior: "smooth" });
-  };
-
-  return (
-    <div className="relative max-w-6xl mx-auto">
-      {/* Left arrow */}
-      {canScrollLeft && (
-        <button
-          onClick={() => scroll("left")}
-          className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background border border-border shadow-md flex items-center justify-center hover:bg-secondary transition-colors"
-          aria-label="Zurück"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-      )}
-
-      {/* Scrollable container */}
-      <div
-        ref={scrollRef}
-        onScroll={updateScroll}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-1 pb-2"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
-      >
-        <style>{`.review-scroll::-webkit-scrollbar { display: none; }`}</style>
-        {reviews.map((review, i) => (
-          <div
-            key={i}
-            data-review-card
-            className="flex-none w-[calc(100vw-4rem)] sm:w-[calc(50vw-3rem)] lg:w-[calc(33.333%-1rem)] snap-start"
-          >
-            <ReviewCard review={review} />
-          </div>
-        ))}
-      </div>
-
-      {/* Right arrow */}
-      {canScrollRight && (
-        <button
-          onClick={() => scroll("right")}
-          className="absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background border border-border shadow-md flex items-center justify-center hover:bg-secondary transition-colors"
-          aria-label="Weiter"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      )}
-    </div>
   );
 };
 
