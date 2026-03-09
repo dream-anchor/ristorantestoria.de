@@ -1,0 +1,52 @@
+name: Uptime Monitor (All Sites)
+
+on:
+  schedule:
+    # Alle 15 Minuten prüfen
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-sites:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check all sites
+        id: check
+        run: |
+          FAILED=""
+          SITES=(
+            "https://www.ristorantestoria.de/"
+            "https://events-storia.de/"
+            "https://www.paterbrown.com/"
+            "https://www.franzmeiller.com/"
+            "https://www.stefaniesick.com/"
+            "https://www.trauworte.com/"
+            "https://www.schrittmacher.ai/"
+          )
+
+          for site in "${SITES[@]}"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$site" || echo "000")
+            if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+              echo "✅ $site — HTTP $STATUS"
+            else
+              echo "❌ $site — HTTP $STATUS"
+              FAILED="${FAILED}❌ ${site} — HTTP ${STATUS}%0A"
+            fi
+          done
+
+          if [ -n "$FAILED" ]; then
+            echo "failed=true" >> $GITHUB_OUTPUT
+            echo "details=$FAILED" >> $GITHUB_OUTPUT
+          else
+            echo "failed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Telegram Alert on Downtime
+        if: steps.check.outputs.failed == 'true'
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d parse_mode="HTML" \
+            -d text="🔴 <b>Site(s) nicht erreichbar!</b>%0A%0A${{ steps.check.outputs.details }}%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Details</a>"
