@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Fetches Google Reviews via Places API and saves to src/data/google-reviews.json.
+ * Fetches Google Reviews via Places API (New) in 4 languages.
+ * Saves to src/data/google-reviews-{de,en,it,fr}.json.
  *
  * Required env vars:
  *   GOOGLE_PLACES_API_KEY — Google Cloud API key with Places API enabled
@@ -8,38 +9,50 @@
  *
  * Usage:
  *   npm run fetch-reviews
- *   GOOGLE_PLACES_API_KEY=xxx GOOGLE_PLACE_ID=yyy node scripts/fetch-google-reviews.mjs
- *
- * The script skips fetching if the cached file is less than 24h old (use --force to override).
+ *   npm run fetch-reviews -- --force
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUTPUT_PATH = resolve(__dirname, '../src/data/google-reviews.json');
-const CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours
+const DATA_DIR = resolve(__dirname, '../src/data');
+const CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+const LANGUAGES = ['de', 'en', 'it', 'fr'];
+const MAX_REVIEWS = 10;
+const MIN_RATING = 4;
 
-// Load .env manually (no dependency needed)
+// AI-generated summaries (update manually when review themes change)
+const SUMMARIES = {
+  de: 'Unsere G\u00e4ste sch\u00e4tzen besonders die authentische italienische K\u00fcche mit neapolitanischer Pizza aus dem Steinofen, den aufmerksamen und herzlichen Service sowie die stilvolle Atmosph\u00e4re. Die zentrale Lage nahe dem K\u00f6nigsplatz wird regelm\u00e4\u00dfig als Pluspunkt hervorgehoben.',
+  en: 'Our guests particularly appreciate the authentic Italian cuisine with Neapolitan stone-oven pizza, the attentive and warm service, and the stylish atmosphere. The central location near K\u00f6nigsplatz is regularly highlighted as a plus.',
+  it: 'I nostri ospiti apprezzano particolarmente la cucina italiana autentica con pizza napoletana dal forno a pietra, il servizio attento e cordiale e l\u2019atmosfera elegante. La posizione centrale vicino a K\u00f6nigsplatz viene regolarmente evidenziata come punto di forza.',
+  fr: 'Nos clients appr\u00e9cient particuli\u00e8rement la cuisine italienne authentique avec pizza napolitaine au four \u00e0 pierre, le service attentionn\u00e9 et chaleureux ainsi que l\u2019atmosph\u00e8re \u00e9l\u00e9gante. L\u2019emplacement central pr\u00e8s de K\u00f6nigsplatz est r\u00e9guli\u00e8rement soulign\u00e9 comme un atout.',
+};
+
+const SUMMARY_LABELS = {
+  de: 'KI-generierte Zusammenfassung',
+  en: 'AI-generated summary',
+  it: "Riepilogo generato dall'IA",
+  fr: 'R\u00e9sum\u00e9 g\u00e9n\u00e9r\u00e9 par IA',
+};
+
+// ── Load .env ──
 function loadEnv() {
   const envPath = resolve(__dirname, '../.env');
   if (!existsSync(envPath)) return;
-  const content = readFileSync(envPath, 'utf-8');
-  for (const line of content.split('\n')) {
+  for (const line of readFileSync(envPath, 'utf-8').split('\n')) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith('#')) continue;
-    const eqIndex = trimmed.indexOf('=');
-    if (eqIndex === -1) continue;
-    const key = trimmed.slice(0, eqIndex).trim();
-    let value = trimmed.slice(eqIndex + 1).trim();
-    // Remove surrounding quotes
-    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-      value = value.slice(1, -1);
+    const eq = trimmed.indexOf('=');
+    if (eq === -1) continue;
+    const key = trimmed.slice(0, eq).trim();
+    let val = trimmed.slice(eq + 1).trim();
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1);
     }
-    if (!process.env[key]) {
-      process.env[key] = value;
-    }
+    if (!process.env[key]) process.env[key] = val;
   }
 }
 
@@ -51,88 +64,128 @@ const FORCE = process.argv.includes('--force');
 
 if (!API_KEY || !PLACE_ID) {
   console.error('❌ Missing env vars. Set GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID in .env');
-  console.error('   GOOGLE_PLACES_API_KEY:', API_KEY ? '✓ set' : '✗ missing');
-  console.error('   GOOGLE_PLACE_ID:', PLACE_ID ? '✓ set' : '✗ missing');
   process.exit(1);
 }
 
-// Check cache age
-if (!FORCE && existsSync(OUTPUT_PATH)) {
+// ── Cache check ──
+const cacheFile = resolve(DATA_DIR, 'google-reviews-de.json');
+if (!FORCE && existsSync(cacheFile)) {
   try {
-    const cached = JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8'));
+    const cached = JSON.parse(readFileSync(cacheFile, 'utf-8'));
     if (cached.lastFetched) {
       const age = Date.now() - new Date(cached.lastFetched).getTime();
       if (age < CACHE_MAX_AGE_MS && cached.reviews?.length > 0) {
-        const hoursAgo = Math.round(age / (60 * 60 * 1000));
-        console.log(`⏭️  Cache is ${hoursAgo}h old (< 24h). Skipping. Use --force to override.`);
+        console.log(`⏭️  Cache is ${Math.round(age / 3600000)}h old (< 24h). Use --force to override.`);
         process.exit(0);
       }
     }
-  } catch {
-    // Cache corrupt, proceed with fetch
-  }
+  } catch { /* proceed */ }
 }
 
-console.log('🔄 Fetching Google Reviews...');
-console.log(`   Place ID: ${PLACE_ID}`);
-
-// Google Places API (New) — reviews field
-const apiUrl = `https://places.googleapis.com/v1/places/${PLACE_ID}`;
-
-try {
-  const res = await fetch(apiUrl, {
-    method: 'GET',
+// ── Fetch from Google Places API (New) ──
+async function fetchReviews(lang) {
+  const res = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
     headers: {
       'Content-Type': 'application/json',
       'X-Goog-Api-Key': API_KEY,
       'X-Goog-FieldMask': 'rating,userRatingCount,reviews',
+      'X-Goog-Api-Language-Code': lang,
     },
   });
+  if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+  return res.json();
+}
 
-  if (!res.ok) {
-    const errBody = await res.text();
-    throw new Error(`HTTP ${res.status}: ${errBody}`);
+function mapReview(r) {
+  return {
+    authorName: r.authorAttribution?.displayName || 'Anonym',
+    rating: r.rating,
+    text: r.text?.text || r.originalText?.text || '',
+    relativeTimeDescription: r.relativePublishTimeDescription || '',
+    time: r.publishTime ? Math.floor(new Date(r.publishTime).getTime() / 1000) : 0,
+    language: r.originalText?.languageCode || r.text?.languageCode || 'de',
+  };
+}
+
+console.log('🔄 Fetching Google Reviews in 4 languages...');
+console.log(`   Place ID: ${PLACE_ID}`);
+
+try {
+  // Fetch all 4 languages (localized relativeTimeDescription)
+  const allByLang = {};
+  let globalRating = 0;
+  let globalTotal = 0;
+
+  for (const lang of LANGUAGES) {
+    const data = await fetchReviews(lang);
+    globalRating = data.rating || globalRating;
+    globalTotal = data.userRatingCount || globalTotal;
+
+    allByLang[lang] = (data.reviews || [])
+      .map(mapReview)
+      .filter(r => r.rating >= MIN_RATING);
+
+    console.log(`   ${lang.toUpperCase()}: ${allByLang[lang].length} reviews (${MIN_RATING}+ stars)`);
   }
 
-  const result = await res.json();
+  // Apply fallback: fill each language to MAX_REVIEWS from DE, then EN
+  const now = new Date().toISOString();
 
-  const output = {
-    placeId: PLACE_ID,
-    rating: result.rating || 0,
-    totalReviews: result.userRatingCount || 0,
-    lastFetched: new Date().toISOString(),
-    reviews: (result.reviews || []).map(r => ({
-      authorName: r.authorAttribution?.displayName || 'Anonym',
-      rating: r.rating,
-      text: r.text?.text || r.originalText?.text || '',
-      relativeTimeDescription: r.relativePublishTimeDescription || '',
-      time: r.publishTime ? Math.floor(new Date(r.publishTime).getTime() / 1000) : 0,
-      profilePhotoUrl: r.authorAttribution?.photoUri || '',
-      language: r.text?.languageCode || r.originalText?.languageCode || 'de',
-    })),
-  };
+  for (const lang of LANGUAGES) {
+    let reviews = [...allByLang[lang]];
 
-  writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n', 'utf-8');
+    // Fill from DE
+    if (reviews.length < MAX_REVIEWS && lang !== 'de') {
+      for (const r of (allByLang['de'] || [])) {
+        if (reviews.length >= MAX_REVIEWS) break;
+        if (!reviews.some(existing => existing.authorName === r.authorName)) {
+          reviews.push(r);
+        }
+      }
+    }
 
-  console.log(`✅ Saved ${output.reviews.length} reviews to src/data/google-reviews.json`);
-  console.log(`   Rating: ${output.rating} / 5 (${output.totalReviews} total)`);
-  console.log(`   Fetched: ${output.lastFetched}`);
+    // Fill from EN
+    if (reviews.length < MAX_REVIEWS && lang !== 'en') {
+      for (const r of (allByLang['en'] || [])) {
+        if (reviews.length >= MAX_REVIEWS) break;
+        if (!reviews.some(existing => existing.authorName === r.authorName)) {
+          reviews.push(r);
+        }
+      }
+    }
+
+    const output = {
+      placeId: PLACE_ID,
+      rating: globalRating,
+      totalReviews: globalTotal,
+      lastFetched: now,
+      summary: SUMMARIES[lang],
+      summaryLabel: SUMMARY_LABELS[lang],
+      reviews: reviews.slice(0, MAX_REVIEWS),
+    };
+
+    const outPath = resolve(DATA_DIR, `google-reviews-${lang}.json`);
+    writeFileSync(outPath, JSON.stringify(output, null, 2) + '\n', 'utf-8');
+  }
+
+  // Remove old single-file format if present
+  const oldFile = resolve(DATA_DIR, 'google-reviews.json');
+  if (existsSync(oldFile)) unlinkSync(oldFile);
+
+  console.log(`\n✅ Saved reviews for ${LANGUAGES.length} languages`);
+  console.log(`   Rating: ${globalRating} / 5 (${globalTotal} total)`);
+  console.log(`   Fetched: ${now}`);
 
 } catch (err) {
   console.error('❌ Fetch failed:', err.message);
 
-  // Fallback: keep existing cache if available
-  if (existsSync(OUTPUT_PATH)) {
-    try {
-      const cached = JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8'));
-      if (cached.reviews?.length > 0) {
-        console.log('📦 Keeping existing cached reviews as fallback.');
-        process.exit(0);
-      }
-    } catch {
-      // ignore
-    }
+  // Keep existing caches as fallback
+  const hasCache = LANGUAGES.some(l =>
+    existsSync(resolve(DATA_DIR, `google-reviews-${l}.json`))
+  );
+  if (hasCache) {
+    console.log('📦 Keeping existing cached reviews as fallback.');
+    process.exit(0);
   }
-
   process.exit(1);
 }

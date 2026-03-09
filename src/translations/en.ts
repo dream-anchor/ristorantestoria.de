@@ -346,6 +346,7 @@ export const en = {
     writeReview: "Rate us on Google",
     readMore: "read more",
     readLess: "less",
+    viewAll: "View all reviews on Google",
   },
   about: {
     title: 'La Famiglia Speranza – STORIA in the Heart of Munich',
@@ -360,6 +361,16 @@ export const en = {
     p8: 'Ristorante STORIA is a permanent part of the city and invites you to experience Italian enjoyment in the heart of Munich. With a menu that includes antipasti, pizza, pasta, fish, and drinks, we offer a variety that guests appreciate time and again. Come by, let yourself be pampered by our kitchen, and enjoy the taste of Italy – right here in Maxvorstadt. On our website, you will find all the important information for a visit with us!',
   },
   seo: {
+    besondereAnlaesse: {
+      seoTitle: "Special Occasions at STORIA Munich",
+      seoDescription: "Celebrate special occasions at STORIA Munich: Valentine\u2019s Day, Christmas dinner, New Year\u2019s Eve & more. Italian menus in Maxvorstadt.",
+      h1: "Special Occasions at Ristorante STORIA",
+      intro: "Ristorante STORIA in Munich\u2019s Maxvorstadt is the perfect place to celebrate special occasions in a stylish setting. Whether a romantic Valentine\u2019s dinner by candlelight, a festive Christmas celebration with colleagues and family, or an unforgettable New Year\u2019s Eve gala dinner with music and champagne \u2013 our seasonal menus are prepared with passion and fresh ingredients from Italy. Each event menu tells its own culinary story, blending Italian tradition with the festivity of the occasion. We offer multi-course menus with expertly paired wines, individually tailored to your celebration.",
+      introP2: "As an event venue in Maxvorstadt, we accommodate celebrations from intimate gatherings to 180 guests \u2013 whether in our cosy restaurant, in a private area, or on our terrace in fine weather. Our experienced team takes care of every detail: from bespoke menu design and wine selection to atmospheric decoration. STORIA is centrally located near K\u00f6nigsplatz and just a few minutes\u2019 walk from Munich\u2019s main station. Discover our current seasonal offerings and let us create an evening that you and your guests will fondly remember. Contact us for a personal consultation \u2013 we look forward to hearing from you.",
+      valentinstag: "Valentine\u2019s Day Menu",
+      weihnachten: "Christmas Menu",
+      silvester: "New Year\u2019s Eve Gala Dinner",
+    },
     lunch: {
       seoTitle: "Lunch Munich | STORIA Maxvorstadt",
       heroTitle: "Lunch Munich – Italian Lunch in Maxvorstadt",
@@ -2557,16 +2568,19 @@ export const en = {
     mittagsmenu: {
       title: 'Lunch Menu – Italian Lunch Munich',
       h1: 'Lunch Menu – Italian Lunch Munich Maxvorstadt',
-      description: 'Lunch menu at STORIA Munich Maxvorstadt: Fresh Italian cuisine Mon-Fri at great prices. Lunch near main station & Königsplatz. Enjoy your lunch break!',
+      description: 'Lunch menu at STORIA Munich Maxvorstadt: Fresh Italian cuisine Mon-Fri at great prices. Lunch near main station & K\u00f6nigsplatz. Enjoy your lunch break!',
+      introSeo: 'Our lunch menu in Maxvorstadt offers fresh Italian cuisine at fair prices Monday to Friday \u2013 ideal for a business lunch in Munich. From 11:30 AM we serve a weekly changing lunch menu with starter, main course and dessert, prepared from seasonal ingredients directly from Italy. Whether crispy stone-oven pizza, homemade pasta, a light salad or a warming risotto \u2013 you\u2019ll find the perfect lunch for a relaxing break from the office. We also offer daily soups and fresh fish dishes as alternatives.',
+      introSeoP2: 'STORIA is just a five-minute walk from K\u00f6nigsplatz and only minutes from Munich\u2019s main station \u2013 ideally accessible for anyone working in Maxvorstadt, the city centre or near TU Munich. You can reach us conveniently via the K\u00f6nigsplatz U-Bahn station. Our lunch menu is popular with regulars because we insist on fast, attentive service without compromising on quality. Reservations for lunch are recommended, especially on sunny days when the terrace is open. Come by and see for yourself \u2013 a taste of Italy in your lunch break.',
       breadcrumb: 'Lunch Menu',
-      seoLinkTitle: '📍 Lunch in Maxvorstadt',
-      seoLinkDesc: 'More about our business lunch – Location, ambience & directions',
+      seoLinkTitle: '\uD83D\uDCCD Lunch in Maxvorstadt',
+      seoLinkDesc: 'More about our business lunch \u2013 Location, ambience & directions',
     },
     catering: {
       title: 'Catering & Events – Event Location Munich',
       h1: 'Catering & Events – Event Location Munich Maxvorstadt',
-      description: 'Italian catering Munich & event location Maxvorstadt: Corporate parties, weddings & birthdays. STORIA – your partner for events!',
-      intro: 'Italian catering and stylish event location in Maxvorstadt – perfect for corporate events, weddings and private occasions.',
+      description: 'Italian catering Munich & event location Maxvorstadt: Corporate parties, weddings & birthdays. STORIA \u2013 your partner for events!',
+      intro: 'Italian catering in Munich \u2013 the STORIA team brings the taste of Italy to your event. Whether corporate celebration, wedding, birthday or summer party: we pamper your guests with freshly prepared antipasti platters, crispy stone-oven pizza, homemade pasta and sweet dolci. Our event catering in Munich is flexible and adapts to your wishes \u2013 from an intimate gathering for 20 to a large corporate event for 180 guests. We place special emphasis on fresh ingredients, authentic recipes and a presentation that will delight your guests.',
+      introP2: 'As an event location in Maxvorstadt, STORIA offers a stylish setting for any occasion. Our restaurant is centrally located near K\u00f6nigsplatz and easily accessible by public transport \u2013 both for Munich-based companies and for out-of-town guests. For larger celebrations, we are happy to reserve individual areas or the entire restaurant exclusively. From company parties and anniversaries to weddings in Italian ambience \u2013 our experienced team supports you from planning through to execution. We create individual menu suggestions, arrange the perfect wine pairing and provide a service that leaves nothing to be desired. Get in touch and let us make your event something truly special.',
       breadcrumb: 'Catering & Events',
     },
     ueberUns: {
@@ -2575,9 +2589,11 @@ export const en = {
       breadcrumb: 'About Us',
     },
     reservierung: {
-      title: 'Reserve a Table – Restaurant Munich',
+      title: 'Reserve a Table \u2013 Restaurant Munich',
       h1: 'Reserve a Table',
-      description: 'Reserve a table at STORIA Munich Maxvorstadt: Book online or call us. Your Italian restaurant near Königsplatz & main station. Secure your spot!',
+      description: 'Reserve a table at STORIA Munich Maxvorstadt: Book online or call us. Your Italian restaurant near K\u00f6nigsplatz & main station. Secure your spot!',
+      introSeo: 'Reserve your table at Ristorante STORIA \u2013 your Italian restaurant in Munich\u2019s Maxvorstadt, right by K\u00f6nigsplatz. Whether a romantic dinner for two, a convivial evening with friends, or a larger celebration with family or colleagues: with a reservation you secure your place at one of Munich\u2019s most popular Italian restaurants. Book conveniently online through our reservation system or call us directly on +49 89 28806855 \u2013 we\u2019re happy to advise you personally on table options and special requests.',
+      introSeoP2: 'STORIA is centrally located in Maxvorstadt, just five minutes\u2019 walk from K\u00f6nigsplatz and a few minutes from Munich\u2019s main station. You can reach us easily by U-Bahn (K\u00f6nigsplatz stop) or on foot from the Pinakothek museums. We especially recommend booking ahead for weekends and public holidays, as our tables fill up quickly. In summer, our covered terrace is a particularly popular spot. For groups of 10 or more, we\u2019re happy to create a bespoke menu \u2013 simply mention it when booking. Our team looks forward to welcoming you with authentic Italian hospitality and creating an unforgettable evening.',
       breadcrumb: 'Reservation',
     },
     besondereAnlaesse: {

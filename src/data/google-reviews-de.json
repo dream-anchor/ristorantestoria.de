@@ -1,0 +1,50 @@
+{
+  "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
+  "rating": 4.5,
+  "totalReviews": 787,
+  "lastFetched": "2026-03-09T01:06:16.922Z",
+  "summary": "Unsere Gäste schätzen besonders die authentische italienische Küche mit neapolitanischer Pizza aus dem Steinofen, den aufmerksamen und herzlichen Service sowie die stilvolle Atmosphäre. Die zentrale Lage nahe dem Königsplatz wird regelmäßig als Pluspunkt hervorgehoben.",
+  "summaryLabel": "KI-generierte Zusammenfassung",
+  "reviews": [
+    {
+      "authorName": "Steven Digges",
+      "rating": 5,
+      "text": "The Pizza and salad was amazing. They split is so we could share. Amazing place for an afternoon lunch.",
+      "relativeTimeDescription": "3 months ago",
+      "time": 1764243543,
+      "language": "en"
+    },
+    {
+      "authorName": "Chris Chapman",
+      "rating": 4,
+      "text": "This was a very intimate setting. The restaurant delivers an upperclass vibe with the design, staff uniforms and tunes. We ordered the parmigiana, a pizza and a couple of drinks with the total around $65 aud. The food was very tasty and the staff were very welcoming. I would recommend to someone in Munich looking for an Italian dish with family or on a date.",
+      "relativeTimeDescription": "2 months ago",
+      "time": 1766815959,
+      "language": "en"
+    },
+    {
+      "authorName": "Star C",
+      "rating": 5,
+      "text": "I love this place, come here often. They are very laid back, so if you want something and need to be out of there in under two hours, you need to get their attention. If you are not in a time crunch, slow service is perfect if you like who you went there with! The food is always amazing, the cocktails are always on point and refreshing and excellent selection of wine.",
+      "relativeTimeDescription": "a year ago",
+      "time": 1710356028,
+      "language": "en"
+    },
+    {
+      "authorName": "UK Photo Journey",
+      "rating": 5,
+      "text": "Choose this place for dinner because very near to our hotel but they didn’t disappoint us. Staff was very welcoming and restaurant is stylish. Attentive water and the service is great. Indoor and outdoor seating. Very beautiful & romantic atmosphere on top of that it was sunset time.\n\nPrices are little up on the higher side but considering the quality of the food, justified. The authentic Italian food freshly cooked and it’s delicious.\nIf you are in the area and not worried about prices then I recommend give this restaurant a try.",
+      "relativeTimeDescription": "2 years ago",
+      "time": 1692287234,
+      "language": "en"
+    },
+    {
+      "authorName": "kate mccutchin",
+      "rating": 5,
+      "text": "We had a beautiful dinner. Francesco was wonderful and the service was amazing. Excellent food!",
+      "relativeTimeDescription": "5 months ago",
+      "time": 1758929813,
+      "language": "en"
+    }
+  ]
+}

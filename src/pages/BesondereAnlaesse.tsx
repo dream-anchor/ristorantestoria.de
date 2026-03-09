@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import GoogleReviews from "@/components/GoogleReviews";
 import LocalizedLink from "@/components/LocalizedLink";
 
 // Parent slug mapping for each language (same as BesondererAnlass.tsx)
@@ -109,6 +110,8 @@ const BesondereAnlaesse = () => {
             </div>
           </div>
         </section>
+
+        <GoogleReviews compact />
       </div>
     </>
   );

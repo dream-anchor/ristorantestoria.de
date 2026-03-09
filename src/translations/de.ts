@@ -350,6 +350,7 @@ export const de = {
     writeReview: "Auf Google bewerten",
     readMore: "mehr lesen",
     readLess: "weniger",
+    viewAll: "Alle Bewertungen auf Google ansehen",
   },
   about: {
     title: 'La Famiglia Speranza – STORIA im Herzen von München',

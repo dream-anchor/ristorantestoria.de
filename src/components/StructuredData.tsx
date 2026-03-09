@@ -1,9 +1,10 @@
 import { Helmet } from '@/lib/helmetAsync';
 import { useLanguage } from '@/contexts/LanguageContext';
-import reviewsData from '@/data/google-reviews.json';
+import reviewsData from '@/data/google-reviews-de.json';
 
 interface StructuredDataProps {
   type?: 'restaurant' | 'menu' | 'faq' | 'breadcrumb' | 'event';
+  includeReviews?: boolean;
   breadcrumbs?: Array<{ name: string; url: string }>;
   faqItems?: Array<{ question: string; answer: string }>;
   eventData?: {
@@ -14,7 +15,7 @@ interface StructuredDataProps {
   };
 }
 
-const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData }: StructuredDataProps) => {
+const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumbs, faqItems, eventData }: StructuredDataProps) => {
   const { t } = useLanguage();
 
   const restaurantSchema = {
@@ -150,8 +151,8 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
         ratingCount: reviewsData.totalReviews,
       },
     } : {}),
-    // Einzelne Reviews als review-Array
-    ...(reviewsData.reviews?.length > 0 ? {
+    // Einzelne Reviews als review-Array (nur auf Hauptseiten)
+    ...(includeReviews && reviewsData.reviews?.length > 0 ? {
       review: reviewsData.reviews.slice(0, 5).map((r: { authorName: string; rating: number; text: string }) => ({
         '@type': 'Review',
         author: { '@type': 'Person', name: r.authorName },

@@ -255,7 +255,7 @@ const FirmenfeierMuenchen = () => {
               </div>
             </section>
 
-            <GoogleReviews />
+            <GoogleReviews compact />
 
             {/* Final CTA */}
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">

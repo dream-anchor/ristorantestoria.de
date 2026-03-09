@@ -70,7 +70,7 @@ const Reservierung = () => {
 
           <ReservationBooking />
 
-          <GoogleReviews />
+          <GoogleReviews compact />
         </main>
 
         <Footer />
