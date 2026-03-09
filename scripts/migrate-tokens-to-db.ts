@@ -1,38 +1,33 @@
 /**
- * Einmal-Script: Lokale GBP-Tokens und Client-Credentials in die Supabase-DB migrieren.
+ * Migriert .gbp-tokens.json und client_secret.json in die Neon-Tabelle
+ * google_business_settings (verschlüsselt mit GBP_TOKEN_ENCRYPTION_KEY).
  *
  * Usage:
- *   npx tsx scripts/migrate-tokens-to-db.ts
+ *   npx ts-node --esm scripts/migrate-tokens-to-db.ts
  *
- * Voraussetzungen:
- *   - scripts/.gbp-tokens.json (verschlüsselte Tokens, erstellt von gbp-auth-test.ts)
- *   - scripts/client_secret.json (Google OAuth Client-Credentials)
- *   - GBP_TOKEN_ENCRYPTION_KEY in .env oder Umgebungsvariable
- *   - SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (oder VITE_-Varianten in .env)
+ * Env-Vars:
+ *   DATABASE_URL              — Neon Connection String
+ *   GBP_TOKEN_ENCRYPTION_KEY  — 32-Byte Hex-Key für AES-256-GCM
  */
 
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
+dotenv.config({ path: resolve(dirname(fileURLToPath(import.meta.url)), "..", ".env") });
+
+import postgres from "postgres";
 import * as fs from "fs";
+import * as path from "path";
 import * as crypto from "crypto";
-import { createClient } from "@supabase/supabase-js";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: resolve(__dirname, "..", ".env") });
-
-// --- Config ---
-const TOKENS_PATH = resolve(__dirname, ".gbp-tokens.json");
-const CREDENTIALS_PATH = resolve(__dirname, "client_secret.json");
+const __dirname_esm = path.dirname(fileURLToPath(import.meta.url));
+const TOKENS_PATH = path.resolve(__dirname_esm, ".gbp-tokens.json");
+const CLIENT_SECRET_PATH = path.resolve(__dirname_esm, "client_secret.json");
 const ALGORITHM = "aes-256-gcm";
 
-// --- Encryption helpers ---
 function getEncryptionKey(): Buffer {
   const keyHex = process.env.GBP_TOKEN_ENCRYPTION_KEY;
-  if (!keyHex) {
-    console.error("❌ GBP_TOKEN_ENCRYPTION_KEY nicht gesetzt.");
-    process.exit(1);
-  }
+  if (!keyHex) { console.error("❌ GBP_TOKEN_ENCRYPTION_KEY nicht gesetzt."); process.exit(1); }
   return Buffer.from(keyHex, "hex");
 }
 
@@ -44,70 +39,57 @@ function encrypt(plaintext: string): string {
   return [iv.toString("base64"), cipher.getAuthTag().toString("base64"), encrypted.toString("base64")].join(":");
 }
 
-// --- Main ---
+function decrypt(encoded: string): string {
+  const key = getEncryptionKey();
+  const [ivB64, tagB64, dataB64] = encoded.split(":");
+  const decipher = crypto.createDecipheriv(ALGORITHM, key, Buffer.from(ivB64, "base64"));
+  decipher.setAuthTag(Buffer.from(tagB64, "base64"));
+  return Buffer.concat([decipher.update(Buffer.from(dataB64, "base64")), decipher.final()]).toString("utf-8");
+}
+
 async function main() {
-  // 1. Supabase-Client erstellen
-  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!supabaseUrl || !supabaseKey) {
-    console.error("❌ SUPABASE_URL und SUPABASE_SERVICE_ROLE_KEY müssen gesetzt sein.");
-    console.error("   Tipp: SUPABASE_SERVICE_ROLE_KEY findest du über die temp-show-key Edge Function.");
-    process.exit(1);
-  }
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl) { console.error("❌ DATABASE_URL nicht gesetzt."); process.exit(1); }
+  const sql = postgres(dbUrl, { ssl: "require" });
 
-  // 2. Tokens-Datei lesen
-  if (!fs.existsSync(TOKENS_PATH)) {
-    console.error(`❌ ${TOKENS_PATH} nicht gefunden.`);
-    console.error("   Erst 'npx tsx scripts/gbp-auth-test.ts' ausführen, um Tokens zu erstellen.");
-    process.exit(1);
-  }
-  const encryptedTokens = fs.readFileSync(TOKENS_PATH, "utf-8").trim();
-  console.log(`✅ Verschlüsselte Tokens gelesen (${encryptedTokens.length} Zeichen)`);
+  console.log("🔄 Migriere GBP-Tokens und Client-Secret nach Neon...\n");
 
-  // 3. Client-Credentials lesen und verschlüsseln
-  if (!fs.existsSync(CREDENTIALS_PATH)) {
-    console.error(`❌ ${CREDENTIALS_PATH} nicht gefunden.`);
-    process.exit(1);
-  }
-  const rawCreds = JSON.parse(fs.readFileSync(CREDENTIALS_PATH, "utf-8"));
-  const creds = rawCreds.installed || rawCreds.web;
-  const credsPayload = JSON.stringify({
-    client_id: creds.client_id,
-    client_secret: creds.client_secret,
-  });
-  const encryptedCreds = encrypt(credsPayload);
-  console.log(`✅ Client-Credentials verschlüsselt (${encryptedCreds.length} Zeichen)`);
+  // 1. Tokens
+  if (!fs.existsSync(TOKENS_PATH)) { console.error(`❌ ${TOKENS_PATH} nicht gefunden.`); process.exit(1); }
+  const tokensRaw = fs.readFileSync(TOKENS_PATH, "utf-8").trim();
+  let tokensPlain: string;
+  try {
+    tokensPlain = decrypt(tokensRaw);
+    const parsed = JSON.parse(tokensPlain);
+    console.log(`✅ Tokens entschlüsselt (access_token: ${(parsed.access_token as string).substring(0, 20)}...)`);
+  } catch (err) { console.error("❌ Entschlüsselung fehlgeschlagen:", err); process.exit(1); }
 
-  // 4. In DB speichern (upsert)
-  const now = new Date().toISOString();
+  const encTokens = encrypt(tokensPlain);
+  await sql`
+    INSERT INTO google_business_settings (setting_key, setting_value)
+    VALUES ('gbp_oauth_tokens', ${encTokens})
+    ON CONFLICT (setting_key) DO UPDATE SET setting_value = ${encTokens}, updated_at = now()
+  `;
+  console.log("   ✅ gbp_oauth_tokens hochgeladen\n");
 
-  const { error: err1 } = await supabase
-    .from("google_business_settings")
-    .upsert(
-      { setting_key: "gbp_tokens", setting_value: encryptedTokens, updated_at: now },
-      { onConflict: "setting_key" }
-    );
-  if (err1) {
-    console.error("❌ Fehler beim Speichern von gbp_tokens:", err1.message);
-    process.exit(1);
-  }
-  console.log("✅ gbp_tokens in DB gespeichert");
+  // 2. Client Secret
+  if (!fs.existsSync(CLIENT_SECRET_PATH)) { console.error(`❌ ${CLIENT_SECRET_PATH} nicht gefunden.`); process.exit(1); }
+  const secretRaw = fs.readFileSync(CLIENT_SECRET_PATH, "utf-8").trim();
+  JSON.parse(secretRaw); // Validieren
+  const encSecret = encrypt(secretRaw);
+  await sql`
+    INSERT INTO google_business_settings (setting_key, setting_value)
+    VALUES ('gbp_client_secret', ${encSecret})
+    ON CONFLICT (setting_key) DO UPDATE SET setting_value = ${encSecret}, updated_at = now()
+  `;
+  console.log("   ✅ gbp_client_secret hochgeladen\n");
 
-  const { error: err2 } = await supabase
-    .from("google_business_settings")
-    .upsert(
-      { setting_key: "gbp_client_credentials", setting_value: encryptedCreds, updated_at: now },
-      { onConflict: "setting_key" }
-    );
-  if (err2) {
-    console.error("❌ Fehler beim Speichern von gbp_client_credentials:", err2.message);
-    process.exit(1);
-  }
-  console.log("✅ gbp_client_credentials in DB gespeichert");
+  // Verify
+  const rows = await sql`SELECT setting_key, updated_at FROM google_business_settings`;
+  for (const r of rows) console.log(`   ✅ ${r.setting_key} — ${r.updated_at}`);
 
-  console.log("\n🎉 Migration abgeschlossen! Die GitHub Action kann jetzt Tokens aus der DB lesen.");
-  console.log("   Du kannst die lokalen Dateien (.gbp-tokens.json, client_secret.json) jetzt sicher löschen.");
+  await sql.end();
+  console.log("\n✅ Migration abgeschlossen!");
 }
 
 main();
