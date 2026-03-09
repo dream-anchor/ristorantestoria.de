@@ -96,23 +96,32 @@ PFLICHT: ÜBERSETZUNG IN ALLE 4 SPRACHEN (DE, EN, IT, FR):
 9. Du MUSST alle Felder in ALLEN 4 SPRACHEN ausfüllen - KEINE leeren Felder erlaubt!
    - Deutsche Felder (name, description, title, subtitle) - Original aus PDF
    - Englische Felder (_en) - Übersetzung ins Englische
-   - Italienische Felder (_it) - Übersetzung ins Italienische  
-   - Französische Felder (_fr) - Übersetzung ins Französische
+   - Italienische Felder (_it) - ECHTE Übersetzung ins Italienische (NIEMALS deutsche Texte kopieren!)
+   - Französische Felder (_fr) - ECHTE Übersetzung ins Französische (NIEMALS deutsche Texte kopieren!)
 10. WICHTIG: Lasse KEINE Übersetzungsfelder leer! Alle _en, _it, _fr Felder MÜSSEN ausgefüllt sein!
 11. Der Restaurantname "STORIA" darf NIEMALS übersetzt werden - er bleibt immer "STORIA"!
 
-REGELN FÜR ITALIENISCHE NAMEN (KRITISCH für Google Business Profile):
-12. name_it MUSS IMMER befüllt werden - auch wenn der Name identisch zum Deutschen ist!
-    Google verwendet name_it für die italienische Speisekarte. Ein leeres name_it bedeutet fehlendes Gericht.
-    Beispiel: "Spaghetti alla Carbonara" → name_it: "Spaghetti alla Carbonara" (identisch, aber MUSS gesetzt sein)
-    Beispiel: "Kürbiscremesuppe" → name_it: "Crema di zucca" (Übersetzung)
-13. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
+REGELN FÜR ITALIENISCHE ÜBERSETZUNGEN (KRITISCH):
+12. ALLE deutschen Texte MÜSSEN korrekt ins Italienische übersetzt werden:
+    - "Vorspeisen" → "Antipasti" (NICHT "Vorspeisen" kopieren!)
+    - "Kürbiscremesuppe" → "Crema di zucca" (NICHT den deutschen Namen kopieren!)
+    - "Hausgemachte Pasta" → "Pasta fatta in casa"
+    - "Gegrilltes Gemüse" → "Verdure grigliate"
+    - "mit Trüffel und Parmesan" → "con tartufo e parmigiano"
+13. name_it MUSS IMMER eine ECHTE italienische Übersetzung sein:
+    - Bei bereits italienischen Gerichtnamen: Original beibehalten (z.B. "Spaghetti alla Carbonara" bleibt gleich)
+    - Bei deutschen Namen: INS ITALIENISCHE ÜBERSETZEN (z.B. "Rinderfilet" → "Filetto di manzo")
+    - NIEMALS den deutschen Text einfach nach name_it kopieren!
+14. description_it MUSS eine ECHTE italienische Übersetzung der deutschen Beschreibung sein:
+    - "mit hausgemachter Tomatensauce" → "con salsa di pomodoro fatta in casa"
+    - NIEMALS die deutsche Beschreibung nach description_it kopieren!
+15. Bei Gerichten mit italienischen Namen (z.B. "Spaghetti Carbonara"):
     - name, name_en, name_it, name_fr: Original beibehalten (italienische Gerichtnamen sind international)
     - description: Deutsche Beschreibung übernehmen (OHNE Allergene und Preis)
     - description_en: Ins Englische übersetzen
-    - description_it: Ins Italienische übersetzen
+    - description_it: Ins Italienische übersetzen (ECHTE Übersetzung, nicht kopieren!)
     - description_fr: Ins Französische übersetzen
-14. Bei deutschen Gerichten: Alle Namensfelder korrekt übersetzen.
+16. Bei deutschen Gerichten: Alle Namensfelder korrekt übersetzen.
 
 Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.`;
 
@@ -240,28 +249,45 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
 
     const rawMenu: ParsedMenu = JSON.parse(toolCall.function.arguments);
     
-    // Log missing translations for debugging
-    const checkMissingTranslations = (menu: ParsedMenu) => {
-      let missingCount = 0;
-      if (!menu.title_it || menu.title_it === menu.title) missingCount++;
-      if (!menu.title_fr || menu.title_fr === menu.title) missingCount++;
+    // Validate Italian translations are not just copies of German text
+    const validateTranslations = (menu: ParsedMenu) => {
+      let copiedCount = 0;
+      const isLikelyGerman = (de: string, it: string) => {
+        if (!de || !it) return false;
+        // If IT is identical to DE and contains typical German characters/words, it's likely a copy
+        return it === de && /[äöüßÄÖÜ]|und |mit |aus |für |der |die |das /i.test(de);
+      };
+
       menu.categories.forEach(cat => {
-        if (!cat.name_it || cat.name_it === cat.name) missingCount++;
-        if (!cat.name_fr || cat.name_fr === cat.name) missingCount++;
+        if (isLikelyGerman(cat.name, cat.name_it)) {
+          console.warn(`⚠ Category name_it is German copy: "${cat.name_it}"`);
+          copiedCount++;
+        }
         cat.items.forEach(item => {
-          if (!item.name_it || item.name_it === item.name) missingCount++;
-          if (!item.name_fr || item.name_fr === item.name) missingCount++;
+          if (isLikelyGerman(item.name, item.name_it)) {
+            console.warn(`⚠ Item name_it is German copy: "${item.name_it}"`);
+            copiedCount++;
+          }
+          if (isLikelyGerman(item.description || '', item.description_it || '')) {
+            console.warn(`⚠ Item description_it is German copy: "${item.description_it}"`);
+            copiedCount++;
+          }
         });
       });
-      if (missingCount > 0) {
-        console.log(`Warning: ${missingCount} IT/FR translations may be missing or identical to DE`);
+
+      if (copiedCount > 0) {
+        console.error(`❌ ${copiedCount} Italian field(s) appear to be copies of German text instead of translations!`);
+      } else {
+        console.log('✅ Italian translations appear to be genuine translations');
       }
+      return copiedCount;
     };
     
-    checkMissingTranslations(rawMenu);
+    const copiedFields = validateTranslations(rawMenu);
+    if (copiedFields > 0) {
+      console.log(`Warning: ${copiedFields} IT translations are likely German copies - DB trigger will fallback to DE for empty fields`);
+    }
     
-    // Do NOT apply fallback - let the spell checker detect missing translations
-    // This way the admin sees which translations are actually missing
     console.log(`Parsed ${rawMenu.categories.length} categories`);
 
     return new Response(JSON.stringify({ 
