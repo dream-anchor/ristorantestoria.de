@@ -2159,6 +2159,7 @@ export const en = {
       introTitle: "Italian Cuisine in the Heart of the Art District",
       introP1: "Ristorante STORIA is ideally located for exploring Munich's art district. Just a few minutes' walk from Königsplatz, we offer authentic Italian cuisine in a relaxed atmosphere – perfect for a break between museums or a delightful evening after your cultural experience.",
       introP2: "Since 1995, we have been delighting our guests with homemade pasta, crispy stone-oven pizza, and selected Italian wines. Maxvorstadt is our home – and you are warmly welcome.",
+      introP3: "Book your table by phone or online – especially on weekends and during special events, we recommend making a reservation in advance.",
       pillarLink: "→ Learn more about STORIA",
       nearbyTitle: "Nearby Attractions",
       nearbySubtitle: "STORIA is centrally located in Munich's art district – ideal for culture and food lovers",
