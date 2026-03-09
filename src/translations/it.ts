@@ -391,6 +391,16 @@ const itBase = {
     p8: 'Il Ristorante STORIA è parte integrante della città e vi invita a vivere il piacere italiano nel cuore di Monaco. Con un menu che include antipasti, pizza, pasta, pesce e bevande, offriamo una varietà che gli ospiti apprezzano sempre. Venite a trovarci, lasciatevi coccolare dalla nostra cucina e gustate il sapore dell\'Italia – proprio qui nella Maxvorstadt. Sul nostro sito web troverete tutte le informazioni importanti per una visita da noi!',
   },
   seo: {
+    besondereAnlaesse: {
+      seoTitle: "Occasioni Speciali al STORIA Monaco",
+      seoDescription: "Festeggiate occasioni speciali al STORIA Monaco: San Valentino, cena di Natale, Capodanno e altro. Menu italiani nella Maxvorstadt.",
+      h1: "Occasioni Speciali al Ristorante STORIA",
+      intro: "Il Ristorante STORIA nella Maxvorstadt di Monaco \u00e8 il luogo perfetto per festeggiare occasioni speciali in un\u2019atmosfera elegante. Che si tratti di una cena romantica di San Valentino a lume di candela, di una festa di Natale con colleghi e famiglia o di un indimenticabile gala di Capodanno con musica e champagne \u2013 i nostri menu stagionali vengono preparati con passione e ingredienti freschi dall\u2019Italia. Ogni menu evento racconta la propria storia culinaria, fondendo tradizione italiana con la festivit\u00e0 dell\u2019occasione. Vi offriamo menu di pi\u00f9 portate con abbinamento vini, personalizzabili per la vostra festa.",
+      introP2: "Come location eventi nella Maxvorstadt, offriamo spazio per feste dall\u2019intima riunione fino a 180 ospiti \u2013 nel nostro accogliente ristorante, in un\u2019area riservata o con il bel tempo sulla nostra terrazza. Il nostro team esperto si occupa di ogni dettaglio: dalla composizione personalizzata del menu alla selezione dei vini fino alla decorazione d\u2019atmosfera. Lo STORIA si trova in posizione centrale vicino a K\u00f6nigsplatz ed \u00e8 raggiungibile in pochi minuti a piedi dalla stazione centrale di Monaco. Scoprite le nostre offerte stagionali e lasciateci creare una serata che voi e i vostri ospiti ricorderete con piacere. Contattateci per una consulenza personalizzata.",
+      valentinstag: "Menu di San Valentino",
+      weihnachten: "Menu di Natale",
+      silvester: "Gala di Capodanno",
+    },
     lunch: {
       seoTitle: "Pranzo Monaco | STORIA Maxvorstadt",
       heroTitle: "Pranzo Monaco – Lunch italiano nella Maxvorstadt",
@@ -2716,6 +2726,7 @@ export const it = deepMapStrings({
   seo: {
     ...de.seo,
     ...itBase.seo,
+    besondereAnlaesse: { ...de.seo.besondereAnlaesse, ...itBase.seo.besondereAnlaesse },
     lunch: { ...de.seo.lunch, ...itBase.seo.lunch },
     firmenfeier: { ...de.seo.firmenfeier, ...itBase.seo.firmenfeier },
     aperitivo: { ...de.seo.aperitivo, ...itBase.seo.aperitivo },

@@ -2515,7 +2515,7 @@ export const de = {
       faq5Question: "Kann man auf der Terrasse auch nur Getränke bestellen?",
       faq5Answer: "Ja, Sie können die Terrasse auch für einen Aperitivo, Digestif oder Espresso nutzen. Eine Bestellung aus der Speisekarte ist nicht zwingend erforderlich.",
       faq6Question: "Wie viele Plätze hat die Terrasse?",
-      faq6Answer: "Unsere Innenhof-Terrasse bietet Platz für bis zu 40 Gäste. An warmen Sommerabenden empfehlen wir eine Reservierung mit dem Hinweis 'Terrasse'.",
+      faq6Answer: "Unsere Innenhof-Terrasse bietet Platz f\u00fcr bis zu 100 G\u00e4ste. An warmen Sommerabenden empfehlen wir eine Reservierung mit dem Hinweis \u2018Terrasse\u2019.",
       faq7Question: "Kann ich die Terrasse für eine private Feier buchen?",
       faq7Answer: "Ja, ab ca. 20 Personen ist die exklusive Terrassennutzung möglich. Kontaktieren Sie uns über events-storia.de oder telefonisch.",
       faq8Question: "Verkauft das STORIA Zigarren?",

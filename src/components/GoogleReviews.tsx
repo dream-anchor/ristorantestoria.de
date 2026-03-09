@@ -111,7 +111,9 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
 
   if (!hasReviews) return null;
 
-  const displayReviews = compact ? (reviews as Review[]).slice(0, 3) : (reviews as Review[]);
+  // Neueste Reviews zuerst (nach timestamp absteigend)
+  const sortedReviews = [...(reviews as Review[])].sort((a, b) => b.time - a.time);
+  const displayReviews = compact ? sortedReviews.slice(0, 3) : sortedReviews;
 
   return (
     <section className="container mx-auto px-4 py-12">

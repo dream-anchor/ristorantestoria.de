@@ -361,8 +361,18 @@ export const fr = {
     p8: 'Le Ristorante STORIA fait partie intégrante de la ville et vous invite à vivre le plaisir italien au cœur de Munich. Avec un menu qui comprend antipasti, pizza, pâtes, poisson et boissons, nous offrons une variété que les clients apprécient encore et encore. Venez nous voir, laissez-vous choyer par notre cuisine et savourez le goût de l\'Italie – juste ici dans la Maxvorstadt. Sur notre site web, vous trouverez toutes les informations importantes pour une visite chez nous!',
   },
   seo: {
+    besondereAnlaesse: {
+      seoTitle: "Occasions Sp\u00e9ciales au STORIA Munich",
+      seoDescription: "C\u00e9l\u00e9brez des occasions sp\u00e9ciales au STORIA Munich : Saint-Valentin, d\u00eener de No\u00ebl, R\u00e9veillon & plus. Menus italiens \u00e0 Maxvorstadt.",
+      h1: "Occasions Sp\u00e9ciales au Ristorante STORIA",
+      intro: "Le Ristorante STORIA dans la Maxvorstadt de Munich est le lieu id\u00e9al pour c\u00e9l\u00e9brer des occasions sp\u00e9ciales dans un cadre \u00e9l\u00e9gant. Qu\u2019il s\u2019agisse d\u2019un d\u00eener romantique de Saint-Valentin aux chandelles, d\u2019un repas de No\u00ebl festif avec coll\u00e8gues et famille ou d\u2019un inoubliable gala du Nouvel An avec musique et champagne \u2013 nos menus saisonniers sont pr\u00e9par\u00e9s avec passion et des ingr\u00e9dients frais d\u2019Italie. Chaque menu \u00e9v\u00e9nementiel raconte sa propre histoire culinaire, m\u00ealant tradition italienne et festivit\u00e9 de l\u2019occasion. Nous vous proposons des menus de plusieurs services avec accord mets-vins, personnalisables selon votre c\u00e9l\u00e9bration.",
+      introP2: "Comme lieu d\u2019\u00e9v\u00e9nement \u00e0 Maxvorstadt, nous accueillons des f\u00eates de la r\u00e9union intime jusqu\u2019\u00e0 180 convives \u2013 dans notre restaurant chaleureux, dans un espace priv\u00e9 ou par beau temps sur notre terrasse. Notre \u00e9quipe exp\u00e9riment\u00e9e s\u2019occupe de chaque d\u00e9tail : de la conception du menu personnalis\u00e9 \u00e0 la s\u00e9lection des vins en passant par la d\u00e9coration d\u2019ambiance. Le STORIA est situ\u00e9 au centre pr\u00e8s de K\u00f6nigsplatz et \u00e0 quelques minutes \u00e0 pied de la gare centrale de Munich. D\u00e9couvrez nos offres saisonni\u00e8res actuelles et laissez-nous cr\u00e9er une soir\u00e9e dont vous et vos invit\u00e9s garderez un souvenir pr\u00e9cieux. Contactez-nous pour un conseil personnalis\u00e9.",
+      valentinstag: "Menu de la Saint-Valentin",
+      weihnachten: "Menu de No\u00ebl",
+      silvester: "Gala du Nouvel An",
+    },
     lunch: {
-      seoTitle: "Déjeuner Munich | STORIA Maxvorstadt",
+      seoTitle: "D\u00e9jeuner Munich | STORIA Maxvorstadt",
       heroTitle: "Déjeuner Munich – Lunch italien dans la Maxvorstadt",
       heroSubtitle: "Business Lunch à Maxvorstadt",
       heroDescription: "Déjeuner italien à Munich : business lunch, pâtes fraîches & pizza dès 11h30. 5 min de Königsplatz. Menu déjeuner lun-ven !",
