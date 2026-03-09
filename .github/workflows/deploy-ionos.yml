@@ -50,3 +50,11 @@ jobs:
             mirror --reverse --delete --verbose --parallel=10 ./dist/ ${{ secrets.IONOS_SFTP_TARGET_DIR }}/;
             quit;
           "
+
+      - name: Telegram Alert on Failure
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d parse_mode="HTML" \
+            -d text="🔴 <b>Deploy fehlgeschlagen</b>%0A%0ARepo: ristorantestoria.de%0ABranch: ${{ github.ref_name }}%0ACommit: <code>${{ github.sha }}</code>%0A%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Logs ansehen</a>"

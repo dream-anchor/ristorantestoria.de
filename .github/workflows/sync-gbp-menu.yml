@@ -29,11 +29,10 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
 
-      - name: Report failure
+      - name: Telegram Alert on Failure
         if: failure()
         run: |
-          echo "::error::❌ GBP Menu Sync fehlgeschlagen! Prüfe die Logs oben für Details."
-          echo "Mögliche Ursachen:"
-          echo "  - Neon-Datenbank-Verbindung fehlgeschlagen"
-          echo "  - Google OAuth Token abgelaufen (gbp-auth-test.ts erneut ausführen)"
-          echo "  - API-Limit erreicht"
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d parse_mode="HTML" \
+            -d text="🔴 <b>GBP Menu Sync fehlgeschlagen</b>%0A%0ARepo: ristorantestoria.de%0ATrigger: ${{ github.event_name }}%0A%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Logs ansehen</a>"
