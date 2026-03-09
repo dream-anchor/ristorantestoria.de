@@ -359,9 +359,9 @@ async function main() {
     return;
   }
 
-  // Google Auth — OAuth Tokens aus gbp-auth-test wiederverwenden
+  // Google Auth — Tokens aus Supabase DB laden
   console.log("\n🔑 Authentifiziere bei Google...");
-  const accessToken = await getAccessToken();
+  const accessToken = await getAccessToken(supabase);
 
   const url = `${GBP_API_BASE}/accounts/${GBP_ACCOUNT_ID}/locations/${GBP_LOCATION_ID}/foodMenus`;
   console.log(`📤 Sende PATCH an ${url}...`);
@@ -378,10 +378,8 @@ async function main() {
   }
 }
 
-// --- OAuth Token Management (shared with gbp-auth-test.ts) ---
+// --- OAuth Token Management (from Supabase DB) ---
 
-const TOKENS_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".gbp-tokens.json");
-const CREDENTIALS_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "client_secret.json");
 const ALGORITHM = "aes-256-gcm";
 
 function getEncryptionKey(): Buffer {
@@ -409,19 +407,36 @@ function encrypt(plaintext: string): string {
   return [iv.toString("base64"), cipher.getAuthTag().toString("base64"), encrypted.toString("base64")].join(":");
 }
 
-function loadCredentials(): { client_id: string; client_secret: string } {
-  const raw = JSON.parse(fs.readFileSync(CREDENTIALS_PATH, "utf-8"));
-  const creds = raw.installed || raw.web;
-  return { client_id: creds.client_id, client_secret: creds.client_secret };
+async function loadSettingFromDB(supabase: ReturnType<typeof createClient>, key: string): Promise<string | null> {
+  const { data, error } = await supabase
+    .from("google_business_settings")
+    .select("setting_value")
+    .eq("setting_key", key)
+    .maybeSingle();
+  if (error) {
+    console.error(`❌ Fehler beim Laden von '${key}':`, error.message);
+    return null;
+  }
+  return data?.setting_value ?? null;
 }
 
-async function getAccessToken(): Promise<string> {
-  if (!fs.existsSync(TOKENS_PATH)) {
-    console.error("❌ Keine gespeicherten Tokens. Erst 'npx ts-node scripts/gbp-auth-test.ts' ausführen.");
+async function saveSettingToDB(supabase: ReturnType<typeof createClient>, key: string, value: string): Promise<void> {
+  const { error } = await supabase
+    .from("google_business_settings")
+    .upsert({ setting_key: key, setting_value: value, updated_at: new Date().toISOString() }, { onConflict: "setting_key" });
+  if (error) {
+    console.error(`❌ Fehler beim Speichern von '${key}':`, error.message);
+  }
+}
+
+async function getAccessToken(supabase: ReturnType<typeof createClient>): Promise<string> {
+  const encryptedTokens = await loadSettingFromDB(supabase, "gbp_tokens");
+  if (!encryptedTokens) {
+    console.error("❌ Keine GBP-Tokens in der Datenbank. Bitte zuerst lokal mit 'npx tsx scripts/gbp-auth-test.ts' authentifizieren und Tokens in die DB übertragen.");
     process.exit(1);
   }
 
-  const tokens = JSON.parse(decrypt(fs.readFileSync(TOKENS_PATH, "utf-8").trim()));
+  const tokens = JSON.parse(decrypt(encryptedTokens));
   const isExpired = !tokens.expiry_date || Date.now() > tokens.expiry_date - 5 * 60 * 1000;
 
   if (!isExpired) {
@@ -430,15 +445,23 @@ async function getAccessToken(): Promise<string> {
   }
 
   console.log("🔄 Access Token abgelaufen, refreshe...");
-  const creds = loadCredentials();
+
+  const encryptedCreds = await loadSettingFromDB(supabase, "gbp_client_credentials");
+  if (!encryptedCreds) {
+    console.error("❌ Keine Client-Credentials in der Datenbank. Bitte 'gbp_client_credentials' in google_business_settings speichern.");
+    process.exit(1);
+  }
+  const creds = JSON.parse(decrypt(encryptedCreds));
+
   const refreshed = await refreshToken(creds.client_id, creds.client_secret, tokens.refresh_token);
   const updated = {
     access_token: refreshed.access_token,
     refresh_token: tokens.refresh_token,
     expiry_date: Date.now() + refreshed.expires_in * 1000,
   };
-  fs.writeFileSync(TOKENS_PATH, encrypt(JSON.stringify(updated)), "utf-8");
-  console.log("✅ Access Token erneuert");
+
+  await saveSettingToDB(supabase, "gbp_tokens", encrypt(JSON.stringify(updated)));
+  console.log("✅ Access Token erneuert und in DB gespeichert");
   return refreshed.access_token;
 }
 
