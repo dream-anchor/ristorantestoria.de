@@ -57,7 +57,7 @@ if [[ "$CURRENT_BRANCH" != "main" ]]; then
   echo -e "${YELLOW}▸ Merge $CURRENT_BRANCH → main...${NC}"
 
   # Worktree-Check: main ist evtl. schon im Haupt-Repo ausgecheckt
-  MAIN_REPO=$(git worktree list | head -1 | awk '{print $1}')
+  MAIN_REPO=$(git worktree list --porcelain | head -1 | sed 's/^worktree //')
   CURRENT_WORKTREE=$(git rev-parse --show-toplevel)
 
   if [[ "$CURRENT_WORKTREE" != "$MAIN_REPO" ]]; then
