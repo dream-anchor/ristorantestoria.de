@@ -53,12 +53,14 @@ const Speisekarte = () => {
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
-          <h1 className="text-4xl font-serif font-bold mb-4 text-center">
+          <h1 className="text-4xl font-serif font-bold mb-8 text-center">
             {t.pages.speisekarte.h1}
           </h1>
-          <div className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto space-y-4">
-            <p>{t.pages.speisekarte.intro}</p>
-            {t.pages.speisekarte.introP2 && <p>{t.pages.speisekarte.introP2}</p>}
+          <div className="max-w-2xl mx-auto mb-12">
+            <div className="bg-card border border-border rounded-2xl px-8 py-7 shadow-sm text-center space-y-4 text-muted-foreground">
+              <p>{t.pages.speisekarte.intro}</p>
+              {t.pages.speisekarte.introP2 && <p>{t.pages.speisekarte.introP2}</p>}
+            </div>
           </div>
 
           <MenuDisplay menuType="food" />
