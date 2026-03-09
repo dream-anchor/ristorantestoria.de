@@ -832,10 +832,10 @@ export const fr = {
     },
     romanticDinner: {
       // SEO
-      seoTitle: "Dîner Romantique Munich | Restaurant STORIA",
-      seoDescription: "Dîner romantique Munich au STORIA : lumière tamisée, cuisine italienne & vins raffinés. Parfait pour rendez-vous, anniversaire & Saint-Valentin.",
+      seoTitle: "Dîner Romantique Munich | Dîner aux Chandelles – STORIA",
+      seoDescription: "Dîner romantique à Munich aux chandelles, cuisine italienne et accord mets-vins. Idéal pour rendez-vous & anniversaire. STORIA Maxvorstadt.",
       // Hero
-      heroTitle: "Dîner Romantique Munich",
+      heroTitle: "Dîner Romantique Munich – Aux Chandelles chez STORIA",
       heroSubtitle: "Cuisine italienne pour moments spéciaux à deux | STORIA Maxvorstadt",
       heroBadge1: "🕯️ Atmosphère aux Chandelles",
       heroBadge2: "🍷 Vins Fins",
@@ -1013,10 +1013,10 @@ export const fr = {
     },
     eventlocation: {
       // SEO
-      seoTitle: "Lieu d'Événement Munich | STORIA Maxvorstadt",
-      seoDescription: "Lieu d'événement Munich Maxvorstadt : fêtes d'entreprise, mariages & anniversaires jusqu'à 180 invités. Cuisine italienne, central à Königsplatz. Demandez maintenant !",
+      seoTitle: "Lieu d'Événement Munich Maxvorstadt | 20–180 Invités – STORIA",
+      seoDescription: "Lieu d'événement Munich Maxvorstadt pour 20–180 invités. Fêtes d'entreprise, mariages, anniversaires – cuisine italienne. STORIA près de Königsplatz. Demandez maintenant !",
       // Hero
-      heroTitle: "Lieu d'Événement Munich – Célébrations dans la Maxvorstadt",
+      heroTitle: "Lieu d'Événement Munich Maxvorstadt – Célébrer chez STORIA",
       heroSubtitle: "Restaurant Italien pour Événements Inoubliables | STORIA à Königsplatz",
       heroBadge1: "🎉 jusqu'à 180 Invités",
       heroBadge2: "🍝 Cuisine Italienne",
@@ -1859,10 +1859,10 @@ export const fr = {
     },
     neapolitanPizza: {
       // SEO
-      seoTitle: "Pizza Napolitaine Munich | Pizzeria STORIA",
-      seoDescription: "Pizza napolitaine Munich : cuite au four à pierre à 400°C. San Marzano, mozzarella di bufala, pâte 48h. STORIA Maxvorstadt.",
+      seoTitle: "Pizza Napolitaine Munich | Four à Pierre 400°C – STORIA",
+      seoDescription: "Authentique pizza napolitaine à Munich – cuite au four à pierre à 400°C. San Marzano DOP, mozzarella di bufala, pâte 48h. Ristorante STORIA Maxvorstadt.",
       // Hero
-      heroTitle: "Pizza Napolitaine à Munich",
+      heroTitle: "Pizza Napolitaine Munich – Four à Pierre 400°C chez STORIA",
       heroSubtitle: "Authentique au Four à Pierre | STORIA Maxvorstadt",
       heroDescription: "Vivez la vraie Pizza napoletana à Munich: Cuite dans le style traditionnel napolitain au four à pierre à 400°C. Avec tomates San Marzano DOP, mozzarella de bufflonne de Campanie et 48 heures de fermentation – à seulement 5 minutes à pied de Königsplatz.",
       heroBadge1: "🔥 Four à Pierre 400°C",
@@ -2470,7 +2470,7 @@ export const fr = {
       breadcrumb: 'Occasions Spéciales',
     },
     kontakt: {
-      title: 'Contact – Restaurant Munich Maxvorstadt',
+      title: 'Contact & Itinéraire – STORIA Ristorante Munich Maxvorstadt',
       description: 'Contactez STORIA Munich: Téléphone, email, WhatsApp. Votre restaurant italien à Maxvorstadt – Karlstraße 47a. Réservez maintenant!',
       breadcrumb: 'Contact',
     },

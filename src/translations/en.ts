@@ -842,10 +842,10 @@ export const en = {
     },
     romanticDinner: {
       // SEO
-      seoTitle: "Romantic Dinner Munich | Restaurant STORIA",
-      seoDescription: "Romantic dining Munich at STORIA: candlelight, Italian cuisine & fine wines. Perfect for date night, anniversary & Valentine's Day.",
+      seoTitle: "Romantic Dinner Munich | Candlelight Dinner – STORIA",
+      seoDescription: "Romantic dinner in Munich with candlelight, Italian cuisine and wine pairing. Perfect for date night & anniversary. STORIA Maxvorstadt.",
       // Hero
-      heroTitle: "Romantic Dinner Munich",
+      heroTitle: "Romantic Dinner Munich – Candlelight at STORIA",
       heroSubtitle: "Italian cuisine for special moments together | STORIA Maxvorstadt",
       heroBadge1: "🕯️ Candlelight Atmosphere",
       heroBadge2: "🍷 Fine Wines",
@@ -1023,10 +1023,10 @@ export const en = {
     },
     eventlocation: {
       // SEO
-      seoTitle: "Event Venue Munich | STORIA Maxvorstadt",
-      seoDescription: "Event venue Munich Maxvorstadt: corporate events, weddings & birthdays for up to 180 guests. Italian cuisine, central at Königsplatz. Inquire now!",
+      seoTitle: "Event Venue Munich Maxvorstadt | 20–180 Guests – STORIA",
+      seoDescription: "Event venue Munich Maxvorstadt for 20–180 guests. Corporate events, weddings, birthdays – Italian cuisine. STORIA near Königsplatz. Inquire now!",
       // Hero
-      heroTitle: "Event Venue Munich – Celebrations in Maxvorstadt",
+      heroTitle: "Event Venue Munich Maxvorstadt – Celebrate at STORIA",
       heroSubtitle: "Italian Restaurant for Unforgettable Events | STORIA at Königsplatz",
       heroBadge1: "🎉 up to 180 Guests",
       heroBadge2: "🍝 Italian Cuisine",
@@ -1713,10 +1713,10 @@ export const en = {
     },
     neapolitanPizza: {
       // SEO
-      seoTitle: "Neapolitan Pizza Munich | Pizzeria STORIA",
-      seoDescription: "Neapolitan pizza Munich: Stone oven baked at 400°C. San Marzano tomatoes, buffalo mozzarella, 48h dough. STORIA Maxvorstadt.",
+      seoTitle: "Neapolitan Pizza Munich | Stone Oven at 400°C – STORIA",
+      seoDescription: "Authentic Pizza napoletana in Munich – stone oven baked at 400°C. San Marzano DOP, buffalo mozzarella, 48h dough fermentation. Ristorante STORIA Maxvorstadt.",
       // Hero
-      heroTitle: "Neapolitan Pizza Munich",
+      heroTitle: "Neapolitan Pizza Munich – Stone Oven 400°C at STORIA",
       heroSubtitle: "Authentic Stone Oven | STORIA Maxvorstadt",
       heroDescription: "Experience real Pizza napoletana in Munich: Baked in traditional Neapolitan style in a stone oven at 400°C. With San Marzano tomatoes DOP, buffalo mozzarella from Campania and 48-hour dough fermentation – just 5 minutes walk from Königsplatz.",
       heroBadge1: "🔥 400°C Stone Oven",
@@ -2609,7 +2609,7 @@ export const en = {
       breadcrumb: 'Special Occasions',
     },
     kontakt: {
-      title: 'Contact – Restaurant Munich Maxvorstadt',
+      title: 'Contact & Directions – STORIA Ristorante Munich Maxvorstadt',
       description: 'Contact STORIA Munich: Phone, email, WhatsApp. Your Italian restaurant in Maxvorstadt – Karlstraße 47a. Reserve your table now!',
       breadcrumb: 'Contact',
     },

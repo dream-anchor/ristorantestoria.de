@@ -885,9 +885,9 @@ const itBase = {
       menuLink: "Vedi la Carta Bevande completa",
     },
     romanticDinner: {
-      seoTitle: "Cena Romantica Monaco | Ristorante STORIA",
-      seoDescription: "Cena romantica Monaco allo STORIA: luce di candele, cucina italiana & vini pregiati. Perfetto per appuntamento, anniversario & San Valentino.",
-      heroTitle: "Cena Romantica a Monaco Maxvorstadt",
+      seoTitle: "Cena Romantica Monaco | Cena a Lume di Candela – STORIA",
+      seoDescription: "Cena romantica a Monaco con luce di candele, cucina italiana e abbinamento vini. Ideale per appuntamento & anniversario. STORIA Maxvorstadt.",
+      heroTitle: "Cena Romantica Monaco – Lume di Candela da STORIA",
       heroSubtitle: "Ristorante Italiano per Momenti Indimenticabili a Due | STORIA a Königsplatz",
       heroBadge1: "❤️ Atmosfera a Lume di Candela",
       heroBadge2: "🍷 Menu 4 Portate",
@@ -1064,10 +1064,10 @@ const itBase = {
     },
     eventlocation: {
       // SEO
-      seoTitle: "Location Eventi Monaco | STORIA Maxvorstadt",
-      seoDescription: "Location eventi Monaco Maxvorstadt: feste aziendali, matrimoni & compleanni fino a 180 ospiti. Cucina italiana, centrale a Königsplatz. Richiedi ora!",
+      seoTitle: "Location Eventi Monaco Maxvorstadt | 20–180 Ospiti – STORIA",
+      seoDescription: "Location eventi Monaco Maxvorstadt per 20–180 ospiti. Feste aziendali, matrimoni, compleanni – cucina italiana. STORIA vicino a Königsplatz. Richiedi ora!",
       // Hero
-      heroTitle: "Location Eventi Monaco – Festeggiare nella Maxvorstadt",
+      heroTitle: "Location Eventi Monaco Maxvorstadt – Festeggiare da STORIA",
       heroSubtitle: "Ristorante Italiano per Eventi Indimenticabili | STORIA a Königsplatz",
       heroBadge1: "🎉 fino a 180 Ospiti",
       heroBadge2: "🍝 Cucina Italiana",
@@ -1846,9 +1846,9 @@ const itBase = {
       related4Desc: "Terrazza per feste private",
     },
     neapolitanPizza: {
-      seoTitle: "Pizza Napoletana Monaco | Pizzeria STORIA",
-      seoDescription: "Pizza napoletana Monaco: cotta nel forno a pietra a 400°C. San Marzano, mozzarella di bufala, lievitazione 48h. STORIA Maxvorstadt.",
-      heroTitle: "Pizza Napoletana a Monaco Maxvorstadt",
+      seoTitle: "Pizza Napoletana Monaco | Forno a Pietra 400°C – STORIA",
+      seoDescription: "Autentica pizza napoletana a Monaco – cotta nel forno a pietra a 400°C. San Marzano DOP, mozzarella di bufala, lievitazione 48h. Ristorante STORIA Maxvorstadt.",
+      heroTitle: "Pizza Napoletana Monaco – Forno a Pietra 400°C da STORIA",
       heroSubtitle: "Autentica Pizza dal Forno a Pietra | STORIA Pizzeria a Königsplatz",
       heroBadge1: "🍕 Forno a Pietra 400°C",
       heroBadge2: "⏰ 48h Lievitazione",
@@ -2389,7 +2389,7 @@ const itBase = {
       breadcrumb: 'Occasioni Speciali',
     },
     kontakt: {
-      title: 'Contatto – Ristorante Monaco Maxvorstadt',
+      title: 'Contatto & Indicazioni – STORIA Ristorante Monaco Maxvorstadt',
       description: 'Contattate STORIA Monaco: Telefono, email, WhatsApp. Il vostro ristorante italiano a Maxvorstadt – Karlstraße 47a. Prenotate ora!',
       breadcrumb: 'Contatto',
     },

@@ -857,10 +857,10 @@ export const de = {
     },
     romanticDinner: {
       // SEO
-      seoTitle: "Romantisches Dinner M\u00fcnchen | Restaurant STORIA",
-      seoDescription: "Romantisch essen M\u00fcnchen im STORIA: Kerzenlicht, italienische K\u00fcche & erlesene Weine. Perfekt f\u00fcr Date Night, Jahrestag & Valentinstag.",
+      seoTitle: "Romantisches Dinner München | Candle-Light-Dinner – STORIA",
+      seoDescription: "Romantisches Abendessen in München mit Kerzenlicht, italienischer Küche und Weinbegleitung. Ideal für Date Night & Jahrestag. STORIA Maxvorstadt.",
       // Hero
-      heroTitle: "Romantisches Dinner München",
+      heroTitle: "Romantisches Dinner München – Candle Light im STORIA",
       heroSubtitle: "Italienische Küche für besondere Momente zu zweit | STORIA Maxvorstadt",
       heroBadge1: "🕯️ Kerzenlicht-Atmosphäre",
       heroBadge2: "🍷 Erlesene Weine",
@@ -1038,10 +1038,10 @@ export const de = {
     },
     eventlocation: {
       // SEO
-      seoTitle: "Eventlocation M\u00fcnchen | STORIA Maxvorstadt",
-      seoDescription: "Eventlocation München Maxvorstadt: Firmenfeier, Hochzeit & Geburtstag für bis zu 180 Gäste. Italienische Küche, zentral am Königsplatz. Jetzt anfragen!",
+      seoTitle: "Eventlocation München Maxvorstadt | 20–180 Gäste – STORIA",
+      seoDescription: "Eventlocation München Maxvorstadt für 20–180 Gäste. Firmenfeier, Hochzeit, Geburtstag – italienische Küche. STORIA nahe Königsplatz. Jetzt anfragen!",
       // Hero
-      heroTitle: "Eventlocation M\u00fcnchen \u2013 Feiern in der Maxvorstadt",
+      heroTitle: "Eventlocation München Maxvorstadt – Feiern im STORIA",
       heroSubtitle: "Italienisches Restaurant für unvergessliche Events | STORIA am Königsplatz",
       heroBadge1: "🎉 bis 180 Gäste",
       heroBadge2: "🍝 Italienische Küche",
@@ -1740,10 +1740,10 @@ export const de = {
     },
     neapolitanPizza: {
       // SEO
-      seoTitle: "Neapolitanische Pizza M\u00fcnchen | Pizzeria STORIA",
-      seoDescription: "Napoli Pizza M\u00fcnchen: Im Steinofen bei 400\u00b0C gebacken. San Marzano, B\u00fcffelmozzarella, 48h Teigf\u00fchrung. STORIA Maxvorstadt.",
+      seoTitle: "Neapolitanische Pizza München | Steinofen bei 400°C – STORIA",
+      seoDescription: "Echte Pizza napoletana in München – im Steinofen bei 400°C. San Marzano DOP, Büffelmozzarella, 48h Teigführung. Ristorante STORIA Maxvorstadt.",
       // Hero
-      heroTitle: "Neapolitanische Pizza München",
+      heroTitle: "Neapolitanische Pizza München – Steinofen 400°C im STORIA",
       heroSubtitle: "Authentisch im Steinofen | STORIA Maxvorstadt",
       heroDescription: "Erleben Sie echte Pizza napoletana in München: Nach traditioneller neapolitanischer Art im Steinofen bei 400°C gebacken. Mit San Marzano Tomaten DOP, Büffelmozzarella aus Kampanien und 48-Stunden Teigführung – nur 5 Gehminuten vom Königsplatz.",
       heroBadge1: "🔥 400°C Steinofen",
@@ -2648,7 +2648,7 @@ export const de = {
       breadcrumb: 'Besondere Anlässe',
     },
     kontakt: {
-      title: 'Kontakt – Restaurant München Maxvorstadt',
+      title: 'Kontakt & Anfahrt – STORIA Ristorante München Maxvorstadt',
       description: 'Kontaktieren Sie das STORIA München: Telefon, E-Mail, WhatsApp. Ihr Italiener in der Maxvorstadt – Karlstraße 47a. Jetzt Tisch reservieren!',
       breadcrumb: 'Kontakt',
     },

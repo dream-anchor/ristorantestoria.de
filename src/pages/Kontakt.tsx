@@ -27,7 +27,7 @@ const Kontakt = () => {
   // SEO titles and descriptions per language
   const seoContent = {
     de: {
-      title: 'Kontakt & Anfahrt – Pizza Maxvorstadt',
+      title: 'Kontakt & Anfahrt – STORIA Ristorante München Maxvorstadt',
       description: 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr 9-1 Uhr. Jetzt anrufen: +49 89 51519696!',
       h1: 'Kontakt & Anfahrt – Italiener nahe Königsplatz München',
       intro: 'Besuchen Sie uns in der Karlstraße 47a – zentral in der Maxvorstadt, nur wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.',
@@ -40,7 +40,7 @@ const Kontakt = () => {
       nearby: 'In der Nähe',
     },
     en: {
-      title: 'Contact & Directions – Italian Restaurant Munich',
+      title: 'Contact & Directions – STORIA Ristorante Munich Maxvorstadt',
       description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Near main station, Königsplatz & TU Munich. Open Mon-Fri 9am-1am. Call now: +49 89 51519696!',
       h1: 'Contact & Directions – Italian Restaurant near Königsplatz Munich',
       intro: 'Visit us at Karlstraße 47a – centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.',
@@ -53,7 +53,7 @@ const Kontakt = () => {
       nearby: 'Nearby',
     },
     it: {
-      title: 'Contatto & Come Raggiungerci – Ristorante Italiano Monaco',
+      title: 'Contatto & Indicazioni – STORIA Ristorante Monaco Maxvorstadt',
       description: 'STORIA Monaco contatto: Karlstraße 47a, Maxvorstadt. Vicino alla stazione centrale, Königsplatz & TU Monaco. Aperto Lun-Ven 9-1. Chiamaci: +49 89 51519696!',
       h1: 'Contatto & Come Raggiungerci – Ristorante Italiano vicino Königsplatz Monaco',
       intro: 'Visitateci in Karlstraße 47a – posizione centrale a Maxvorstadt, a pochi minuti a piedi dalla stazione centrale, Königsplatz e TU Monaco.',
@@ -66,7 +66,7 @@ const Kontakt = () => {
       nearby: 'Nelle vicinanze',
     },
     fr: {
-      title: 'Contact & Itinéraire – Restaurant Italien Munich',
+      title: 'Contact & Itinéraire – STORIA Ristorante Munich Maxvorstadt',
       description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Près de la gare centrale, Königsplatz & TU Munich. Ouvert Lun-Ven 9h-1h. Appelez: +49 89 51519696!',
       h1: 'Contact & Itinéraire – Restaurant Italien près de Königsplatz Munich',
       intro: 'Rendez-nous visite au Karlstraße 47a – au centre de Maxvorstadt, à quelques minutes à pied de la gare centrale, Königsplatz et TU Munich.',
