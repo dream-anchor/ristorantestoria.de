@@ -551,7 +551,7 @@ async function detectDuplicateUrls(
 }
 
 async function detectLegacyCmsUrls(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<AlertData[]> {
   const alerts: AlertData[] = [];
