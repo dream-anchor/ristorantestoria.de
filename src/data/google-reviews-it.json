@@ -2,89 +2,73 @@
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
   "totalReviews": 786,
-  "lastFetched": "2026-03-09T09:26:14.911Z",
+  "lastFetched": "2026-03-09T09:44:17.777Z",
   "summary": "I nostri ospiti apprezzano particolarmente la cucina italiana autentica con pizza napoletana dal forno a pietra, il servizio attento e cordiale e l’atmosfera elegante. La posizione centrale vicino a Königsplatz viene regolarmente evidenziata come punto di forza.",
   "summaryLabel": "Riepilogo generato dall'IA",
   "reviews": [
     {
+      "authorName": "Stefano Di Pangrazio",
+      "rating": 5,
+      "text": "Abbiamo deciso di cenare qui per fare una pausa dalla cucina bavarese. Buona la pizza. Locale italiano che propone anche vari piatti di pesce ( che non abbiamo provato). Personale cordiale e disponibile.",
+      "relativeTimeDescription": "3 anni fa",
+      "time": 1661550565,
+      "language": "it"
+    },
+    {
+      "authorName": "Nazanin Gh",
+      "rating": 5,
+      "text": "Se vi interessa un'ottima pizza tradizionale Napoletana la potete trovare qui, ho ordinato una margherita  . era gustosa  esattamente come quella che mangio in Italia... Ci tornerò volentieri !!! :)",
+      "relativeTimeDescription": "5 anni fa",
+      "time": 1598515469,
+      "language": "it"
+    },
+    {
+      "authorName": "Lupo Marsicano",
+      "rating": 5,
+      "text": "Esperienza avuta notte di capodanno fantastica.\nFunzionale, accogliente ,curato nel dettaglio, cibo eccellente, servizio impeccabile il tutto al prezzo giusto.\nConsigliato alla grande!",
+      "relativeTimeDescription": "un anno fa",
+      "time": 1735731587,
+      "language": "it"
+    },
+    {
       "authorName": "Luigi Marangolo",
       "rating": 5,
       "text": "Posso dire in poche parole che è un posto oltre che meraviglioso, ma soprattutto anche un posto magico, come lo è anche la vita, poiché appunto nella vita non sai mai quand'è il tuo ultimo pasto, ovvero il tuo ultimo abbraccio, o anche il tuo ultimo bacio alla persona che ami. E per questo la vita è magica perché non sai se sono le ultime cose che fai oppure no. È la vita è bella proprio per questo motivo perché è magica, è per questo bisogna viverla come se fosse ogni giorno l'ultimo giorno, perché li fai appunto con tanta voglia di vivere. Perché se è veramente l'ultimo giorno che fa appunto queste cose mi fai con più amore. E per questo bisogna viverla ripeto come se fosse l'ultimo perché se non è veramente, l'ultimo giorno gay, ripeto fai queste cose allora, bisogna viverla appunto con molta felicità e soprattutto con molta dolcezza. Perché, se è vero che così ripeto per l'ultima volta la vita è: ( MAGICAMENTE ), \" BELLA \".",
-      "relativeTimeDescription": "a year ago",
-      "time": 1741512374,
-      "language": "it"
-    },
-    {
-      "authorName": "Joana Konica",
-      "rating": 5,
-      "text": "Io e i miei amici eravamo alla ricerca di un ristorante Italiano con del buon cibo e su internet abbiamo trovato per caso ristorante storie in centro vicino alla stazione centrale. Come prima volta siamo rimasti sorpresi per L atmosfera calorosa e per lo spirito italiano che ci ha sorpreso. Abbiamo mangiato del buon cibo e del buon vino accompagnato da una musica soft che rendeva L ambiente interessante. Il servizio è stato efficiente, abbastanza veloce e soprattutto molto gentile e ospitale. Sicuramente questa non sarà L ultima volta, per passare una serata serena con un servizio accogliente e mangiare del buon cibo italiano, il ristorante Storie è decisamente quello giusto.",
-      "relativeTimeDescription": "6 years ago",
-      "time": 1583832374,
-      "language": "it"
-    },
-    {
-      "authorName": "Alessia",
-      "rating": 5,
-      "text": "Degli amici mi hanno consigliato di venire in questo locale e devo dire che ha superato le mie aspettative. Personale disponibile e cibo ottimo. Il menù, per quello che ho visto, è ricco e vario, adatto alle esigenze di tutti. Consiglio di andare da Storia se si ha intenzione di passare una serata tranquilla senza alcuna preoccupazione. Tornerò sicuramente.",
-      "relativeTimeDescription": "4 years ago",
-      "time": 1646904374,
-      "language": "it"
-    },
-    {
-      "authorName": "Andrea .D'Imperio",
-      "rating": 5,
-      "text": "Con la mia compagna per il cenone di capodanno. Piacevolmente sorpresi dall'eleganza del luogo, e dal menù ricercato e molto gustoso. Consiglio vivamente a tutti di mangiare in questo ristorante che permette di vivere una esperienza di alta cucina, ma con porzioni giuste, e prezzi nella media di Monaco.",
-      "relativeTimeDescription": "7 years ago",
-      "time": 1552296374,
+      "relativeTimeDescription": "un anno fa",
+      "time": 1732370143,
       "language": "it"
     },
     {
       "authorName": "Motta collection",
       "rating": 5,
       "text": "ambiente curato, moderno, servizio attento e cordiale da parte di tutto lo staff. Il menù italiano di qualità, proposte di carne e di pesce. Tutto molto buono. Buona anche la carta dei vini. Niente da eccepire. Ho trovato assolutamente corretto anche il conto.",
-      "relativeTimeDescription": "3 years ago",
-      "time": 1678440374,
+      "relativeTimeDescription": "3 anni fa",
+      "time": 1669850662,
       "language": "it"
     },
     {
-      "authorName": "Mister Mr Gusto",
-      "rating": 5,
-      "text": "Location: centrale nel quartiere Max Vorstadt Cucina: ottima, sia i piatti di terra che quelli di mare, ovviamente non vi aspettate il pesce fresco di giornata Servizio: impeccabile, personale sempre a disposizione per qualsiasi richiesta",
-      "relativeTimeDescription": "6 years ago",
-      "time": 1583832374,
-      "language": "it"
-    },
-    {
-      "authorName": "Stefano Di Pangrazio",
-      "rating": 5,
-      "text": "Abbiamo deciso di cenare qui per fare una pausa dalla cucina bavarese. Buona la pizza. Locale italiano che propone anche vari piatti di pesce ( che non abbiamo provato). Personale cordiale e disponibile.",
-      "relativeTimeDescription": "3 years ago",
-      "time": 1678440374,
-      "language": "it"
-    },
-    {
-      "authorName": "Nazanin Gh",
-      "rating": 5,
-      "text": "Se vi interessa un'ottima pizza tradizionale Napoletana la potete trovare qui, ho ordinato una margherita . era gustosa esattamente come quella che mangio in Italia... Ci tornerò volentieri !!! :)",
-      "relativeTimeDescription": "5 years ago",
-      "time": 1615368374,
-      "language": "it"
-    },
-    {
-      "authorName": "Lupo Marsicano",
-      "rating": 5,
-      "text": "Esperienza avuta notte di capodanno fantastica. Funzionale, accogliente ,curato nel dettaglio, cibo eccellente, servizio impeccabile il tutto al prezzo giusto. Consigliato alla grande!",
-      "relativeTimeDescription": "a year ago",
-      "time": 1741512374,
-      "language": "it"
-    },
-    {
-      "authorName": "Albert Gatius i Sieso",
+      "authorName": "Maik Ramftel",
       "rating": 4,
-      "text": "Probablement la millor pizza que mai he menjat fora d’Itàlia. Servei amable tot i que una mica despistat, t’ho has de prendre en calma però val molt la pena. Repetiria segur.",
-      "relativeTimeDescription": "3 years ago",
-      "time": 1678440374,
-      "language": "it"
+      "text": "Das Storia präsentiert sich mit einem modernen Ambiente. Der Empfang ist freundlich, wir bekamen auch ohne Reservierung einen schönen Tisch zugewiesen.\n\nDie Speisekarte zeigt alle italienischen Klassiker und eine schöne, aber nicht günstige Auswahl an Weinen.\n\nMeine Spagetti Carbonara waren genau so wie sie sein müssen. Guancale, Ei und Peccorino und basta, einfach und gut. Auch die Nudeln mit Meeresfrüchten meiner Frau waren gut. Der Sauvignon Blanc glänzte mit der erwarten Noten von Stachelbeere und Zitrus und einer lebendigen Säure.\n\nDer Pistazien Kuchen meiner Frau war bezaubernd und auch mein Nachtisch, ein Schoko Sufflet mit Krokant Eis war lecker, nur das ein Schokokuchen, ein Lava Cake ist. Ein Sufflet geht beim Backen auf, es suffliert, das ist hier nicht der Fall. Eine Ungenauigkeit in der Beschreibung, der häufig vorkommt.\n\nIch darf mir erlauben einige Hinweise zum Service zu geben, die die vollen Punktzahl verhinderte. Auf dem Tisch liegen Teller, Öl und Salz für das bekannte Brot als Starter bereit. Leider blieb das Brot nur ein Versprechen, kein Einzelfall wie wir beobachten konnten. Bei der Carbonara hätte ich mir frischen Pfeffer gewünscht, ich bin mir sicher, auf Nachfrage hätte ich welchen bekommen, die Kunst des Service ist es aber, das der Kunde nicht fragen muss. Die Kerze wurde nicht angezündet, der Deckel vom Wasser wurde mitgenomen, der Service lief an leeren Gläsern vorbei ohne nachzuschenken und es wurde nicht nachgefragt, ob es Dessert oder Kaffee gewünscht wird. Bei ganzen Gambas wprde ich ein Reinigungstuch anbieten.\n\nAlles Kleinigkeiten, aber die machen den Unterschied aus. Gäste erinnern sich oft eher an der Service als an das Essen. Nicht das ein falscher Eindruck entsteht, der Service war nett und souverän, aber es ginge noch besser.",
+      "relativeTimeDescription": "vor 9 Monaten",
+      "time": 1747978642,
+      "language": "de"
+    },
+    {
+      "authorName": "Christin Maurer",
+      "rating": 5,
+      "text": "What a great evening!\nEs war von A-Z ein gelungener Abend.\nDas Essen war sehr gut, besonders hervorheben möchte ich das Tiramisu, das war das beste was ich bisher gegessen habe.\nService war auch absolut topp. Das Lokal war voll dennoch behielten sie den Überblick und waren sehr zuvorkommend und haben Späßchen gemacht.\nPreis Leistung ist hier absolut gegeben.",
+      "relativeTimeDescription": "vor 2 Monaten",
+      "time": 1765619443,
+      "language": "de"
+    },
+    {
+      "authorName": "Attila Borody",
+      "rating": 5,
+      "text": "Die Tagliata vom Thunfisch mit Kartoffeln war richtig köstlich – perfekt zubereitet. Natürlich gab es viel mehr Kartoffeln dazu, als es auf dem Bild zu sehen ist.",
+      "relativeTimeDescription": "vor einem Monat",
+      "time": 1769378844,
+      "language": "de"
     }
   ]
 }
