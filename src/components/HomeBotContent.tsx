@@ -98,15 +98,7 @@ const HomeBotContent = () => {
   );
 
   return (
-    <>
-      {/* For bots without JavaScript execution */}
-      <noscript>{content}</noscript>
-      
-      {/* For JS-enabled crawlers like Googlebot - hidden from users */}
-      <div className="sr-only" aria-hidden="true">
-        {content}
-      </div>
-    </>
+    <noscript>{content}</noscript>
   );
 };
 

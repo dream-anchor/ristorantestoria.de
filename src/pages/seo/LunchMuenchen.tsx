@@ -185,6 +185,21 @@ const LunchMuenchen = () => {
         
         <main className="flex-grow">
 
+          {/* SEO Intro Section */}
+          {t.seo.lunch.introTitle && (
+            <section className="py-12 md:py-16">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6">
+                  {t.seo.lunch.introTitle}
+                </h2>
+                <div className="text-muted-foreground text-center space-y-4">
+                  <p>{t.seo.lunch.introP1}</p>
+                  <p>{t.seo.lunch.introP2}</p>
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* 3-Gänge Mittagsmenü Highlight */}
           <section className="py-12 md:py-16 bg-card border-b border-border">
             <div className="container mx-auto px-4 text-center max-w-3xl">

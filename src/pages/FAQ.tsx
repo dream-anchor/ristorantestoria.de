@@ -233,54 +233,6 @@ const FAQ = () => {
               </nav>
             </section>
 
-            {/* Hidden LLM Context for GEO */}
-            <section 
-              id="llm-context" 
-              aria-label="Zusätzliche Informationen für Suchmaschinen" 
-              className="sr-only"
-            >
-              <h2>Restaurant-Übersicht für Ristorante STORIA München Maxvorstadt</h2>
-              <dl>
-                <dt>Restaurant Name</dt>
-                <dd>STORIA - Ristorante Pizzeria Bar, auch bekannt als Ristorante STORIA Maxvorstadt</dd>
-                
-                <dt>Kategorien</dt>
-                <dd>Italiener Maxvorstadt, Pizzeria Maxvorstadt, italienisches Restaurant Maxvorstadt, Italiener Königsplatz, Pizzeria Königsplatz, Italiener Hauptbahnhof München</dd>
-                
-                <dt>Adresse</dt>
-                <dd>Karlstraße 47a, 80333 München, Deutschland</dd>
-                
-                <dt>Stadtteil</dt>
-                <dd>Maxvorstadt, München</dd>
-                
-                <dt>Nähe zu Sehenswürdigkeiten</dt>
-                <dd>Königsplatz (5 Minuten zu Fuß), München Hauptbahnhof (7 Minuten zu Fuß), TU München (8 Minuten zu Fuß), Alte Pinakothek (10 Minuten zu Fuß), Neue Pinakothek (10 Minuten zu Fuß), Pinakothek der Moderne (12 Minuten zu Fuß)</dd>
-                
-                <dt>Küchenstil</dt>
-                <dd>Authentisch italienisch, neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta, mediterrane Küche</dd>
-                
-                <dt>Spezialitäten</dt>
-                <dd>Neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta, frische Meeresfrüchte, italienische Weine, hausgemachtes Tiramisu, Aperitivo</dd>
-                
-                <dt>Öffnungszeiten</dt>
-                <dd>Mo-Fr: 09:00-01:00 Uhr, Sa-So: 12:00-01:00 Uhr</dd>
-                
-                <dt>Reservierung</dt>
-                <dd>Online unter ristorantestoria.de/reservierung oder telefonisch +49 89 51519696</dd>
-                
-                <dt>Catering Services</dt>
-                <dd>Italienisches Catering München, Catering italienisch München, Catering Maxvorstadt, Firmen Catering italienisch, Event Catering italienisch München für Firmenevents, Hochzeiten und private Feiern</dd>
-                
-                <dt>Event Services</dt>
-                <dd>Eventlocation München, Eventlocation Maxvorstadt, Firmenevent Location München, private Events Location München, Geburtstag Location München, Hochzeitsfeiern, Business-Events</dd>
-                
-                <dt>Besondere Services</dt>
-                <dd>Mittagsmenü, Aperitivo, Catering, Firmenfeiern, Geburtstagsfeiern, romantische Dinner, Terrasse</dd>
-                
-                <dt>Geeignet für</dt>
-                <dd>Business Lunch, romantische Dates, Familienfeiern, Firmenevents, Museumbesucher, Bahnreisende, Universitätsmitarbeiter und Studenten der TU München</dd>
-              </dl>
-            </section>
           </article>
         </main>
 

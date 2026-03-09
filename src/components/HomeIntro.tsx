@@ -51,6 +51,18 @@ const HomeIntro = () => {
           >
             {t.homeIntro.cta}
           </LocalizedLink>
+          {t.homeIntro.seasonalNote && (
+            <p className="mt-6 text-sm text-[#666]">
+              {t.homeIntro.seasonalPre}
+              <LocalizedLink
+                to="besondere-anlaesse"
+                className="font-semibold text-foreground hover:text-[#8b0000] transition-colors"
+              >
+                {t.homeIntro.seasonalLink}
+              </LocalizedLink>
+              {t.homeIntro.seasonalPost}
+            </p>
+          )}
         </div>
       </div>
     </section>

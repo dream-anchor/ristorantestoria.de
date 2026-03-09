@@ -394,6 +394,18 @@ const EventlocationMuenchen = () => {
                   <h3 className="font-semibold mb-2">{t.seo.eventlocation.relatedAboutTitle}</h3>
                   <p className="text-muted-foreground text-sm">{t.seo.eventlocation.relatedAboutDesc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="weihnachtsfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">Weihnachtsfeier München</h3>
+                  <p className="text-muted-foreground text-sm">Ihre italienische Weihnachtsfeier in der Maxvorstadt – festliche Menüs für Teams und Gruppen.</p>
+                </LocalizedLink>
+                <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">Catering & Event-Küche</h3>
+                  <p className="text-muted-foreground text-sm">Italienisches Catering für Ihre Veranstaltung – im Haus oder extern.</p>
+                </LocalizedLink>
+                <Link to="/besondere-anlaesse/silvester" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3>
+                  <p className="text-muted-foreground text-sm">Feiern Sie den Jahreswechsel mit einem italienischen 5-Gänge-Menü im STORIA.</p>
+                </Link>
               </div>
               {/* Secondary: External events portal */}
               <div className="mt-8 text-center">

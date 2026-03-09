@@ -102,6 +102,14 @@ const StructuredData = ({ type = 'restaurant', breadcrumbs, faqItems, eventData 
       { '@type': 'AdministrativeArea', name: 'Sendling' },
       { '@type': 'AdministrativeArea', name: 'Au-Haidhausen' },
     ],
+    // ÖPNV-Anbindung
+    publicTransportNearby: 'U-Bahn Königsplatz (U2, U8) 3 Min., Hauptbahnhof 7 Min., Tram 27/28 Karolinenplatz 4 Min.',
+    // Parkmöglichkeiten
+    parking: {
+      '@type': 'ParkingFacility',
+      name: 'Parkhaus Marsstraße (P22)',
+      address: 'Hirtenstraße 14, 80335 München',
+    },
     // Öffentlich zugänglich & Raucher-Policy
     publicAccess: true,
     smokingAllowed: false,

@@ -29,10 +29,7 @@ const Hero = () => {
         <p className="text-base md:text-lg text-muted-foreground/80 italic font-serif mb-10">
           {t.hero.claim}
         </p>
-        <p className="sr-only">
-          {t.common.seoDescription}
-        </p>
-        <Button 
+        <Button
           size="lg" 
           className="bg-primary text-primary-foreground hover:bg-accent transition-colors px-10 py-6 text-base tracking-widest uppercase"
           asChild

@@ -196,6 +196,20 @@ const NeapolitanischePizza = () => {
             </div>
           </section>
 
+          {/* Napoli Pizza München */}
+          {t.seo.neapolitanPizza.napoliTitle && (
+            <section className="py-12 md:py-16">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6">
+                  {t.seo.neapolitanPizza.napoliTitle}
+                </h2>
+                <p className="text-muted-foreground text-center text-lg leading-relaxed">
+                  {t.seo.neapolitanPizza.napoliP1}
+                </p>
+              </div>
+            </section>
+          )}
+
           {/* Explained Section */}
           <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container mx-auto px-4">

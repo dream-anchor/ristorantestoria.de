@@ -352,6 +352,10 @@ const RomantischesDinner = () => {
                   <h3 className="font-semibold mb-2">{t.seo.romanticDinner.relatedPizzaTitle}</h3>
                   <p className="text-muted-foreground text-sm">{t.seo.romanticDinner.relatedPizzaDesc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="terrasse-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">Romantischer Abend auf der Terrasse</h3>
+                  <p className="text-muted-foreground text-sm">Bei schönem Wetter genießen Sie Ihr Dinner auf unserer geschützten Terrasse.</p>
+                </LocalizedLink>
               </div>
             </section>
 

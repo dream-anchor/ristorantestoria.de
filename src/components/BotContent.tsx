@@ -7,9 +7,7 @@ interface BotContentProps {
 }
 
 /**
- * BotContent renders full menu content for search engine crawlers.
- * - <noscript> block for bots that don't execute JavaScript
- * - sr-only div for JS-enabled crawlers like Googlebot
+ * BotContent renders full menu content as noscript fallback for crawlers without JS.
  * Content is dynamically fetched from database - no manual updates needed.
  */
 const BotContent = ({ menuType, menuId }: BotContentProps) => {
@@ -20,15 +18,8 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
   const menu = menuId ? menuById : menuByType;
   const isLoading = menuId ? loadingById : loadingByType;
 
-  // Static fallback for react-snap prerendering - ensures SEO content even during loading
   if (isLoading || !menu) {
-    return (
-      <div className="sr-only" aria-hidden="true">
-        <p>Menü wird geladen... Besuchen Sie uns im Restaurant für die aktuelle Speisekarte.</p>
-        <p>STORIA – Ristorante • Pizzeria • Bar, Karlstraße 47a, 80333 München</p>
-        <p>Tel: +49 89 515196</p>
-      </div>
-    );
+    return null;
   }
 
   const getLocalizedText = (de: string | null | undefined, en: string | null | undefined) => {
@@ -79,15 +70,7 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
   );
 
   return (
-    <>
-      {/* For bots without JavaScript execution */}
-      <noscript>{content}</noscript>
-      
-      {/* For JS-enabled crawlers like Googlebot - hidden from users */}
-      <div className="sr-only" aria-hidden="true">
-        {content}
-      </div>
-    </>
+    <noscript>{content}</noscript>
   );
 };
 

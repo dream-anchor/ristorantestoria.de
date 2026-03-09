@@ -11,9 +11,7 @@ interface StaticBotContentProps {
 }
 
 /**
- * StaticBotContent renders static page content for search engine crawlers.
- * - <noscript> block for bots that don't execute JavaScript
- * - sr-only div for JS-enabled crawlers like Googlebot
+ * StaticBotContent renders static page content as noscript fallback for crawlers without JS.
  */
 const StaticBotContent = ({ title, description, sections = [], includeContact = true }: StaticBotContentProps) => {
   const { t } = useLanguage();
@@ -55,12 +53,7 @@ const StaticBotContent = ({ title, description, sections = [], includeContact = 
   );
 
   return (
-    <>
-      <noscript>{content}</noscript>
-      <div className="sr-only" aria-hidden="true">
-        {content}
-      </div>
-    </>
+    <noscript>{content}</noscript>
   );
 };
 

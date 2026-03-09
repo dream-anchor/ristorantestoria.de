@@ -58,10 +58,16 @@ const Reservierung = () => {
           <h1 className="text-4xl font-bold mb-4 text-center">
             {t.pages.reservierung.h1}
           </h1>
-          <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
+          <p className="text-muted-foreground mb-4 text-center max-w-2xl mx-auto">
             {t.reservationBooking.subtitle}
           </p>
-          
+          {t.pages.reservierung.introSeo && (
+            <div className="text-muted-foreground text-center max-w-2xl mx-auto mb-8 space-y-4">
+              <p>{t.pages.reservierung.introSeo}</p>
+              {t.pages.reservierung.introSeoP2 && <p>{t.pages.reservierung.introSeoP2}</p>}
+            </div>
+          )}
+
           <ReservationBooking />
 
           <ConsentElfsightReviews />

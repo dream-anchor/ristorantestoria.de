@@ -31,6 +31,7 @@ const Kontakt = () => {
       description: 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr 9-1 Uhr. Jetzt anrufen: +49 89 51519696!',
       h1: 'Kontakt & Anfahrt – Italiener nahe Königsplatz München',
       intro: 'Besuchen Sie uns in der Karlstraße 47a – zentral in der Maxvorstadt, nur wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.',
+      introP2: 'Ob Geschäftsessen in der Mittagspause, romantisches Dinner am Abend oder Feierabend-Aperitivo mit Freunden: Das STORIA ist Ihr italienisches Restaurant in München mit persönlichem Service und authentischer Küche. Rufen Sie uns an, schreiben Sie per WhatsApp oder planen Sie Ihre Route – wir freuen uns auf Ihren Besuch in der Münchner Maxvorstadt.',
       nearLocation: 'Nähe Königsplatz & Hauptbahnhof',
       callNow: 'Jetzt anrufen',
       getDirections: 'Route planen',
@@ -43,6 +44,7 @@ const Kontakt = () => {
       description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Near main station, Königsplatz & TU Munich. Open Mon-Fri 9am-1am. Call now: +49 89 51519696!',
       h1: 'Contact & Directions – Italian Restaurant near Königsplatz Munich',
       intro: 'Visit us at Karlstraße 47a – centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.',
+      introP2: 'Whether you are looking for a business lunch, a romantic dinner or an after-work aperitivo with friends: STORIA is your Italian restaurant in Munich with personal service and authentic cuisine. Call us, write via WhatsApp or plan your route – we look forward to your visit.',
       nearLocation: 'Near Königsplatz & main station',
       callNow: 'Call now',
       getDirections: 'Get directions',
@@ -55,6 +57,7 @@ const Kontakt = () => {
       description: 'STORIA Monaco contatto: Karlstraße 47a, Maxvorstadt. Vicino alla stazione centrale, Königsplatz & TU Monaco. Aperto Lun-Ven 9-1. Chiamaci: +49 89 51519696!',
       h1: 'Contatto & Come Raggiungerci – Ristorante Italiano vicino Königsplatz Monaco',
       intro: 'Visitateci in Karlstraße 47a – posizione centrale a Maxvorstadt, a pochi minuti a piedi dalla stazione centrale, Königsplatz e TU Monaco.',
+      introP2: 'Che si tratti di un pranzo di lavoro, una cena romantica o un aperitivo con gli amici: lo STORIA è il vostro ristorante italiano a Monaco con servizio personale e cucina autentica. Chiamateci, scriveteci su WhatsApp o pianificate il vostro percorso.',
       nearLocation: 'Vicino Königsplatz & stazione centrale',
       callNow: 'Chiama ora',
       getDirections: 'Indicazioni stradali',
@@ -67,6 +70,7 @@ const Kontakt = () => {
       description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Près de la gare centrale, Königsplatz & TU Munich. Ouvert Lun-Ven 9h-1h. Appelez: +49 89 51519696!',
       h1: 'Contact & Itinéraire – Restaurant Italien près de Königsplatz Munich',
       intro: 'Rendez-nous visite au Karlstraße 47a – au centre de Maxvorstadt, à quelques minutes à pied de la gare centrale, Königsplatz et TU Munich.',
+      introP2: 'Que ce soit pour un déjeuner d\'affaires, un dîner romantique ou un apéritif entre amis : le STORIA est votre restaurant italien à Munich avec un service personnalisé et une cuisine authentique. Appelez-nous, écrivez-nous sur WhatsApp ou planifiez votre itinéraire.',
       nearLocation: 'Près de Königsplatz & gare centrale',
       callNow: 'Appelez maintenant',
       getDirections: 'Itinéraire',
@@ -120,9 +124,10 @@ const Kontakt = () => {
           <h1 className="text-4xl font-bold mb-4 text-center">
             {content.h1}
           </h1>
-          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {content.intro}
-          </p>
+          <div className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto space-y-4">
+            <p>{content.intro}</p>
+            {content.introP2 && <p>{content.introP2}</p>}
+          </div>
 
           {/* Prominente CTA Buttons mit Glow-Effekt */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -360,40 +365,6 @@ const Kontakt = () => {
 
           <ReservationCTA />
 
-          {/* LLM-optimierter Kontext für AI-Suchmaschinen */}
-          <section
-            id="llm-context"
-            className="sr-only"
-            aria-label="Kontakt und Anfahrt für Suchmaschinen"
-          >
-            <h2>STORIA Restaurant München - Kontakt & Anfahrt</h2>
-            <dl>
-              <dt>Adresse</dt>
-              <dd>Karlstraße 47a, 80333 München, Deutschland</dd>
-              <dt>Stadtteil</dt>
-              <dd>Maxvorstadt, zwischen Königsplatz und Hauptbahnhof</dd>
-              <dt>Telefon</dt>
-              <dd>+49 89 51519696</dd>
-              <dt>WhatsApp</dt>
-              <dd>+49 163 6033912</dd>
-              <dt>E-Mail</dt>
-              <dd>info@ristorantestoria.de</dd>
-              <dt>Öffnungszeiten</dt>
-              <dd>Montag-Freitag 09:00-01:00 Uhr, Samstag-Sonntag 12:00-01:00 Uhr</dd>
-              <dt>ÖPNV-Anbindung</dt>
-              <dd>U-Bahn Königsplatz (U2, U8) 3 Minuten, Hauptbahnhof (alle Linien) 7 Minuten, Tram 27/28 Karolinenplatz 4 Minuten</dd>
-              <dt>Parken</dt>
-              <dd>Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 Stellplätze, 24h geöffnet, 5 Minuten Fußweg, €4/Stunde max €40/Tag</dd>
-              <dt>Barrierefreiheit</dt>
-              <dd>Ebenerdig, rollstuhlgerecht, breiter Eingang</dd>
-              <dt>Reservierung</dt>
-              <dd>Online über OpenTable oder telefonisch. Am Wochenende empfohlen.</dd>
-              <dt>Koordinaten</dt>
-              <dd>48.1456, 11.5656</dd>
-              <dt>In der Nähe</dt>
-              <dd>Königsplatz 5 Min, Pinakotheken 8 Min, TU München 10 Min, Hauptbahnhof 7 Min</dd>
-            </dl>
-          </section>
         </main>
 
         <Footer />

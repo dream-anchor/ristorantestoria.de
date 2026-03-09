@@ -250,6 +250,8 @@ const FirmenfeierMuenchen = () => {
                 <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedCateringTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedCateringDesc}</p></LocalizedLink>
                 <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedMenuTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedMenuDesc}</p></LocalizedLink>
                 <LocalizedLink to="lunch-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedLunchTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedLunchDesc}</p></LocalizedLink>
+                <LocalizedLink to="weihnachtsfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Weihnachtsfeier München</h3><p className="text-muted-foreground text-sm">Italienische Weihnachtsfeier für Ihr Team mit festlichen Menüs ab 45 € pro Person.</p></LocalizedLink>
+                <Link to="/besondere-anlaesse/silvester" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3><p className="text-muted-foreground text-sm">Jahresabschluss-Dinner mit italienischem 5-Gänge-Menü ab 99 € pro Person.</p></Link>
               </div>
             </section>
 

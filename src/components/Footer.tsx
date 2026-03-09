@@ -157,12 +157,12 @@ const Footer = () => {
               href="https://www.instagram.com/ristorante_storia/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center min-h-[48px] min-w-[48px] p-2 hover:text-primary-foreground/40 transition-colors"
-              aria-label="Instagram"
+              className="flex items-center justify-center gap-1.5 min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors"
             >
               <Instagram className="h-3.5 w-3.5" />
+              <span>Instagram</span>
             </a>
-            <LocalizedLink to="admin" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors">Admin</LocalizedLink>
+            <a href="/admin" rel="nofollow" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors">Admin</a>
           </div>
         </div>
       </div>

@@ -15,6 +15,10 @@ dist-ssr
 .env.*
 !.env.example
 aufgaben.md
+service_account_key.json
+gbp-menu-payload.json
+.gbp-tokens.json
+client_secret*.json
 
 # Editor directories and files
 .vscode/*

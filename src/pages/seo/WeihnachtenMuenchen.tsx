@@ -102,6 +102,30 @@ const WeihnachtenMuenchen = ({ menu, archivedMenu, seasonalConfig }: Weihnachten
         { name: seasonalConfig.titles[language] || seasonalConfig.titles.de, url: canonicalPath }
       ]} />
 
+      {/* Event Schema – Weihnachtsmenü */}
+      {menu && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FoodEvent",
+          "name": "Weihnachtsmenü im Ristorante STORIA München",
+          "description": "Italienisches Weihnachtsmenü in der Münchner Maxvorstadt: Festliche Menüs für Firmenfeiern, Familien und Freunde.",
+          "startDate": "2026-12-01",
+          "endDate": "2026-12-23",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "location": {
+            "@type": "Restaurant",
+            "name": "STORIA - Ristorante • Pizzeria • Bar",
+            "address": { "@type": "PostalAddress", "streetAddress": "Karlstraße 47a", "addressLocality": "München", "postalCode": "80333", "addressCountry": "DE" }
+          },
+          "organizer": { "@type": "Organization", "name": "Speranza GmbH", "url": "https://ristorantestoria.de" },
+          "offers": [
+            { "@type": "Offer", "name": "Weihnachtsmenü", "price": "45", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
+            { "@type": "Offer", "name": "Premium Weihnachtsmenü", "price": "65", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+          ]
+        })}} />
+      )}
+
       {/* FAQ Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",

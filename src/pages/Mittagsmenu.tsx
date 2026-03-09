@@ -58,9 +58,15 @@ const Mittagsmenu = () => {
           </h1>
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <p className="text-xl font-serif italic text-primary mb-4">{t.lunchMenu.greeting}</p>
-            <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+            <p className="text-muted-foreground whitespace-pre-line leading-relaxed mb-4">
               {t.lunchMenu.description}
             </p>
+            {t.pages.mittagsmenu.introSeo && (
+              <div className="text-muted-foreground leading-relaxed space-y-4 mt-6">
+                <p>{t.pages.mittagsmenu.introSeo}</p>
+                {t.pages.mittagsmenu.introSeoP2 && <p>{t.pages.mittagsmenu.introSeoP2}</p>}
+              </div>
+            )}
           </div>
 
           <MenuDisplay menuType="lunch" />

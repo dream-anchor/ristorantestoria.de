@@ -612,28 +612,6 @@ const WildEssenMuenchen = () => {
             </div>
           </section>
 
-          {/* GEO Context for LLMs (Hidden) */}
-          <section id="geo-context" aria-label="Zusätzliche Informationen" className="sr-only">
-            <h2>Wild essen München – Ristorante STORIA Maxvorstadt</h2>
-            <dl>
-              <dt>Spezialität</dt>
-              <dd>Italienische Wildgerichte, saisonale Wildspezialitäten (September bis Februar)</dd>
-              <dt>Wildarten</dt>
-              <dd>Reh (Capriolo), Hirsch (Cervo), Ente (Anatra)</dd>
-              <dt>Gerichte</dt>
-              <dd>Rosa gebratener Rehrücken mit Wacholder und Rosmarin (€ 44,00), Geschmortes Hirschragout (€ 27,50), Pappardelle mit Hirschragout und Parmigiano (€ 22,50), Entenbrust Carpaccio mit Orangencreme und karamellisierten Maronen (€ 19,50), 4 Gänge Menü Terra mit Wildspezialitäten (€ 62,00)</dd>
-              <dt>Kochstil</dt>
-              <dd>Traditionell italienisch nach Rezepten aus der Region Cilento, Familie Speranza</dd>
-              <dt>Saison</dt>
-              <dd>September bis Februar (Herbst und Winter), Hauptsaison für Wild</dd>
-              <dt>Standort</dt>
-              <dd>München Maxvorstadt, Karlstraße 47a, 80333 München</dd>
-              <dt>Nähe</dt>
-              <dd>5 Min. Königsplatz, 7 Min. Hauptbahnhof München, 8 Min. TU München, 10 Min. Pinakotheken</dd>
-              <dt>Weinempfehlung</dt>
-              <dd>Barolo, Brunello di Montalcino, Amarone della Valpolicella, Primitivo di Manduria</dd>
-            </dl>
-          </section>
         </main>
 
         <Footer />

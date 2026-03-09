@@ -1,15 +1,14 @@
 # STORIA - Ristorante • Pizzeria • Bar
-# Italienisches Restaurant in München Maxvorstadt
 
 > STORIA ist ein authentisches italienisches Restaurant im Herzen von München, Maxvorstadt. Seit 1995 servieren wir neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta und frische Antipasti. Unser Restaurant befindet sich in der Karlstraße 47a, nur wenige Gehminuten vom Königsplatz, der TU München und den Pinakotheken entfernt.
 
 ## Kontakt & Reservierung
 
 - **Adresse**: Karlstraße 47a, 80333 München, Deutschland
-- **Telefon**: +49 89 515196
+- **Telefon**: +49 89 51519696
 - **E-Mail**: info@ristorantestoria.de
-- **Website**: https://ristorantestoria.de
-- **Reservierung**: https://ristorantestoria.de/reservierung
+- **Website**: [ristorantestoria.de](https://www.ristorantestoria.de/)
+- **Reservierung**: [Online reservieren](https://www.ristorantestoria.de/reservierung/)
 
 ## Öffnungszeiten
 
@@ -85,24 +84,32 @@ Umfangreiche Auswahl italienischer Weine aus allen Regionen:
 
 Werktags bieten wir ein wechselndes Mittagsmenü mit Vorspeise, Hauptgang und Getränk zu attraktiven Preisen.
 
+- [Aktuelle Mittagskarte](https://www.ristorantestoria.de/mittags-menu/)
+
 ## Besondere Anlässe & Events
 
-### Silvesterparty 2024/25
+### Silvester Gala-Dinner
 Feiern Sie Silvester bei STORIA mit:
-- Festlichem 5-Gänge-Menü
+- Festlichem 5-Gänge-Menü ab 99 €
 - Willkommensdrink auf der Terrasse
 - Live-Musik
 - Mitternachts-Countdown
+- [Silvester-Menü](https://www.ristorantestoria.de/besondere-anlaesse/silvester/)
 
 ### Weihnachtsmenüs
-Spezielle Weihnachtsmenüs für Firmen und Gruppen verfügbar.
+Spezielle Weihnachtsmenüs für Firmen und Gruppen ab 45 € pro Person.
+- [Weihnachtsmenü](https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/)
+
+### Valentinstag
+Romantisches Dinner zu zweit mit speziellem Valentinstag-Menü ab 55 €.
+- [Valentinstag-Menü](https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/)
 
 ### Firmenfeier & Events
 - Kapazität: 6-300 Personen
 - Überdachte Terrasse
 - Flexible Menügestaltung
 - Professionelles Event-Team
-- Anfragen: https://ristorantestoria.de/firmenfeier-muenchen
+- [Firmenfeier planen](https://www.ristorantestoria.de/firmenfeier-muenchen/)
 
 ## La Famiglia Speranza
 
@@ -114,10 +121,10 @@ STORIA wird von der Familie Speranza geführt:
 ## Lage & Anfahrt
 
 Das Restaurant liegt zentral in München Maxvorstadt:
-- 5 Minuten zu Fuß vom Königsplatz (U2)
+- 5 Minuten zu Fuß vom Königsplatz (U2, U8)
 - Nahe TU München und LMU
 - Zwischen den Pinakotheken
-- Parkplätze in der Umgebung verfügbar
+- Parkhaus Marsstraße (P22), 5 Minuten Fußweg
 
 ## Zahlungsmethoden
 
@@ -127,17 +134,19 @@ Das Restaurant liegt zentral in München Maxvorstadt:
 
 ## Links
 
-- Speisekarte: https://ristorantestoria.de/speisekarte
-- Mittagsmenü: https://ristorantestoria.de/mittagsmenu
-- Getränkekarte: https://ristorantestoria.de/getraenke
-- Reservierung: https://ristorantestoria.de/reservierung
-- Besondere Anlässe: https://ristorantestoria.de/besondere-anlaesse
-- Kontakt: https://ristorantestoria.de/kontakt
-- Über uns: https://ristorantestoria.de/ueber-uns
-- Instagram: https://www.instagram.com/ristorante_storia/
+- [Speisekarte](https://www.ristorantestoria.de/speisekarte/)
+- [Mittagsmenü](https://www.ristorantestoria.de/mittags-menu/)
+- [Getränkekarte](https://www.ristorantestoria.de/getraenke/)
+- [Reservierung](https://www.ristorantestoria.de/reservierung/)
+- [Besondere Anlässe](https://www.ristorantestoria.de/besondere-anlaesse/)
+- [Kontakt & Anfahrt](https://www.ristorantestoria.de/kontakt/)
+- [Über uns](https://www.ristorantestoria.de/ueber-uns/)
+- [Terrasse München](https://www.ristorantestoria.de/terrasse-muenchen/)
+- [Catering](https://www.ristorantestoria.de/catering/)
+- [Instagram](https://www.instagram.com/ristorante_storia/)
 
 ## Catering & externe Events
 
 Für Catering und externe Veranstaltungen:
-- Website: https://www.events-storia.de/
-- Kontakt: info@ristorantestoria.de
+- [events-storia.de](https://www.events-storia.de/)
+- E-Mail: info@ristorantestoria.de

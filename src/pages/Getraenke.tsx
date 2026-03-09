@@ -53,9 +53,10 @@ const Getraenke = () => {
           <h1 className="text-4xl font-serif font-bold mb-4 text-center">
             {t.pages.getraenke.h1}
           </h1>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            {t.pages.getraenke.intro}
-          </p>
+          <div className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto space-y-4">
+            <p>{t.pages.getraenke.intro}</p>
+            {t.pages.getraenke.introP2 && <p>{t.pages.getraenke.introP2}</p>}
+          </div>
 
           <MenuDisplay menuType="drinks" />
           

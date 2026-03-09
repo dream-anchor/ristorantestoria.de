@@ -174,6 +174,11 @@ const ItalienerKoenigsplatz = () => {
               <p className="text-muted-foreground text-center mb-8">
                 {t.seo.italienerKoenigsplatz.introP2}
               </p>
+              {t.seo.italienerKoenigsplatz.introP3 && (
+                <p className="text-muted-foreground text-center mb-8">
+                  {t.seo.italienerKoenigsplatz.introP3}
+                </p>
+              )}
               {/* Pillar Link back to Homepage */}
               <div className="text-center">
                 <LocalizedLink

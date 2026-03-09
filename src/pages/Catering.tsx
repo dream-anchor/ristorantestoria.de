@@ -22,12 +22,13 @@ const Catering = () => {
         description={t.pages.catering.description}
         canonical="/catering"
       />
-      <StructuredData 
-        type="breadcrumb" 
+      <StructuredData type="restaurant" />
+      <StructuredData
+        type="breadcrumb"
         breadcrumbs={[
           { name: 'Home', url: '/' },
           { name: t.pages.catering.breadcrumb, url: '/catering' }
-        ]} 
+        ]}
       />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
@@ -47,9 +48,10 @@ const Catering = () => {
           <h1 className="text-4xl font-bold mb-4 text-center">
             {t.pages.catering.h1}
           </h1>
-          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            {t.pages.catering.intro}
-          </p>
+          <div className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto space-y-4">
+            <p>{t.pages.catering.intro}</p>
+            {t.pages.catering.introP2 && <p>{t.pages.catering.introP2}</p>}
+          </div>
           
           <div className="max-w-4xl mx-auto">
             <div className="bg-card p-8 rounded-lg border border-border mb-8">

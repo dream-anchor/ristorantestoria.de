@@ -254,6 +254,10 @@ const GeburtstagsfeierMuenchen = () => {
                   <h3 className="font-semibold mb-2">{b.relatedAperitivoTitle}</h3>
                   <p className="text-muted-foreground text-sm">{b.relatedAperitivoDesc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">Catering für Ihre Feier</h3>
+                  <p className="text-muted-foreground text-sm">Italienisches Buffet oder Menü – auch für große Geburtstagsgesellschaften.</p>
+                </LocalizedLink>
               </div>
             </section>
 

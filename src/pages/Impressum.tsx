@@ -42,10 +42,14 @@ const Impressum = () => {
             </ol>
           </nav>
 
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-12 text-center">
+          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-6 text-center">
             Impressum
           </h1>
-          
+
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+            Nachfolgend finden Sie die gesetzlichen Pflichtangaben zur Anbieterkennzeichnung des Ristorante STORIA in München sowie weitere rechtliche Informationen gemäß § 5 DDG (Digitale-Dienste-Gesetz). Bei Fragen erreichen Sie uns telefonisch unter +49 89 51519696 oder per E-Mail.
+          </p>
+
           <div className="prose prose-lg max-w-none space-y-8 text-foreground/90">
             {/* Firmenadresse */}
             <section>
@@ -131,18 +135,20 @@ const Impressum = () => {
                 EU-Streitschlichtung
               </h2>
               <p>
-                Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{" "}
-                <a 
-                  href="https://ec.europa.eu/consumers/odr/" 
-                  target="_blank" 
+                Die Europäische Kommission hat die Plattform zur Online-Streitbeilegung (OS) zum
+                20. Juli 2025 eingestellt (Verordnung EU 2024/3228). Informationen zu
+                Streitbeilegungsstellen finden Sie unter:{" "}
+                <a
+                  href="https://consumer-redress.ec.europa.eu/dispute-resolution-bodies_de"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline break-all"
                 >
-                  https://ec.europa.eu/consumers/odr/
+                  EU-Streitbeilegungsstellen
                 </a>
               </p>
               <p className="mt-4">
-                Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren 
+                Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren
                 vor einer Verbraucherschlichtungsstelle teilzunehmen.
               </p>
             </section>
