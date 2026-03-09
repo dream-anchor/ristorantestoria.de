@@ -319,7 +319,7 @@ async function computePageAggregates(
 }
 
 async function computeQueryAggregates(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<number> {
   let insertCount = 0;
