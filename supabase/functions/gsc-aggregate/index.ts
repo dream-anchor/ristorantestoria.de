@@ -62,7 +62,7 @@ const WINDOWS = {
 // ============================================================================
 
 async function computeSiteAggregates(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   computeDate: string
 ): Promise<number> {
   let insertCount = 0;
