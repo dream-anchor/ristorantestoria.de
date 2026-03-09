@@ -451,10 +451,10 @@ export const en = {
     },
     firmenfeier: {
       // SEO
-      seoTitle: "Corporate Events Munich | Company Party at STORIA",
-      seoDescription: "Corporate events Munich at STORIA Maxvorstadt: Christmas party, team building & summer party for up to 180 guests. Italian cuisine, central at Königsplatz.",
+      seoTitle: "Company Party Munich from \u20ac39 | Up to 180 Guests \u2013 STORIA",
+      seoDescription: "Plan your company party in Munich: Italian restaurant with space for 20\u2013180 guests. Christmas party, team building & summer party from \u20ac39 p.p. \u2013 central at K\u00f6nigsplatz. Inquire now!",
       // Hero
-      heroTitle: "Corporate Events Munich – Company Party in Maxvorstadt",
+      heroTitle: "Company Party Munich \u2013 Celebrate at STORIA Maxvorstadt",
       heroSubtitle: "Company Parties, Christmas Celebrations & Team Events | STORIA at Königsplatz",
       heroBadge1: "💼 up to 180 Guests",
       heroBadge2: "🎄 Christmas Parties",

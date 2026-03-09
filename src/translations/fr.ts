@@ -451,10 +451,10 @@ export const fr = {
     },
     firmenfeier: {
       // SEO
-      seoTitle: "Événements d'Entreprise Munich | Fête d'entreprise au STORIA",
-      seoDescription: "Événements d'entreprise Munich au STORIA Maxvorstadt : fête de Noël, team building & fête d'été jusqu'à 180 invités. Cuisine italienne, central à Königsplatz.",
+      seoTitle: "F\u00eate d'entreprise Munich d\u00e8s 39 \u20ac | Jusqu'\u00e0 180 invit\u00e9s \u2013 STORIA",
+      seoDescription: "Organisez votre f\u00eate d'entreprise \u00e0 Munich : restaurant italien pour 20\u2013180 invit\u00e9s. No\u00ebl, team building & f\u00eate d'\u00e9t\u00e9 d\u00e8s 39 \u20ac p.p. \u2013 central K\u00f6nigsplatz. Renseignez-vous !",
       // Hero
-      heroTitle: "Événements d'Entreprise Munich – Fête d'entreprise dans la Maxvorstadt",
+      heroTitle: "F\u00eate d'entreprise Munich \u2013 C\u00e9l\u00e9brez au STORIA Maxvorstadt",
       heroSubtitle: "Fêtes d'Entreprise, Noël & Team Events | STORIA à Königsplatz",
       heroBadge1: "💼 jusqu'à 180 Invités",
       heroBadge2: "🎄 Fêtes de Noël",

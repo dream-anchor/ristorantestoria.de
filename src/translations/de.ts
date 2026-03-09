@@ -451,10 +451,10 @@ export const de = {
     },
     firmenfeier: {
       // SEO
-      seoTitle: "Firmenevents M\u00fcnchen | Firmenfeier im STORIA",
-      seoDescription: "Firmenevents München im STORIA Maxvorstadt: Weihnachtsfeier, Teambuilding & Sommerfest für bis zu 180 Gäste. Italienische Küche, zentral am Königsplatz.",
+      seoTitle: "Firmenfeier M\u00fcnchen ab 39 \u20ac | Bis 180 G\u00e4ste \u2013 STORIA",
+      seoDescription: "Firmenfeier in M\u00fcnchen planen: Italienisches Restaurant mit Platz f\u00fcr 20\u2013180 G\u00e4ste. Weihnachtsfeier, Teambuilding & Sommerfest ab 39 \u20ac p.P. \u2013 zentral am K\u00f6nigsplatz. Jetzt anfragen!",
       // Hero
-      heroTitle: "Firmenevents M\u00fcnchen \u2013 Firmenfeier in der Maxvorstadt",
+      heroTitle: "Firmenfeier M\u00fcnchen \u2013 Feiern im STORIA Maxvorstadt",
       heroSubtitle: "Betriebsfeier, Weihnachtsfeier & Teamevents | STORIA am Königsplatz",
       heroBadge1: "💼 bis 180 Gäste",
       heroBadge2: "🎄 Weihnachtsfeiern",
