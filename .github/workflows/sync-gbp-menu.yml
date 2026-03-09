@@ -3,7 +3,7 @@ name: Sync GBP Menu (Weekly)
 on:
   schedule:
     # Jeden Montag um 09:00 UTC
-    - cron: '0 9 * * 1'
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:
