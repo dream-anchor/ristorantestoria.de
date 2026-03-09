@@ -211,7 +211,6 @@ const BesondererAnlass = () => {
         title={menuTitle}
         description={getSeoDescription()}
         canonical={canonicalPath}
-        alternates={alternates}
       />
       <StructuredData type="restaurant" />
       <StructuredData
@@ -347,7 +346,6 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
         title={seasonalTitle}
         description={seoDescription}
         canonical={canonicalPath}
-        alternates={alternates}
       />
       <StructuredData type="restaurant" />
       <StructuredData

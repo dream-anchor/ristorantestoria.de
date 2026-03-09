@@ -138,6 +138,10 @@ const itBase = {
     link4: "aperitivo sulla terrazza",
     p2post: " la sera o di una cena romantica a due \u2013 ogni visita deve sembrare una serata tra amici in Italia. All\u2019interno e sulla terrazza offriamo ciascuno fino a 100 posti a sedere o 180 posti in piedi \u2013 ideali per eventi aziendali, compleanni e feste private.",
     cta: "Scopri di più su di noi",
+    seasonalNote: true,
+    seasonalPre: "Festeggiate ",
+    seasonalLink: "occasioni speciali",
+    seasonalPost: " da noi: cena di gala di Capodanno, menù di San Valentino e menù natalizi per gruppi.",
   },
   homeAbout: {
     title: "La Famiglia Monaco – Famiglia Speranza dal 1995",
@@ -2220,6 +2224,7 @@ const itBase = {
       introTitle: "Cucina Italiana nel Cuore del Quartiere dell'Arte",
       introP1: "Il Ristorante STORIA è posizionato idealmente per esplorare il quartiere dell'arte di Monaco. A pochi minuti a piedi da Königsplatz, offriamo autentica cucina italiana in un'atmosfera rilassata – perfetto per una pausa tra due musei o una serata di gusto dopo la cultura.",
       introP2: "Dal 1995 deliziamo i nostri ospiti con pasta fatta in casa, pizza croccante dal forno a pietra e vini italiani selezionati. La Maxvorstadt è la nostra casa – e voi siete i benvenuti.",
+      introP3: "Prenotate il vostro tavolo per telefono o online – soprattutto nei fine settimana e durante eventi speciali, vi consigliamo di prenotare in anticipo.",
       pillarLink: "→ Scopri di più su STORIA",
       nearbyTitle: "Attrazioni nelle Vicinanze",
       nearbySubtitle: "STORIA è situato al centro del quartiere dell'arte di Monaco – ideale per amanti di cultura e gastronomia",
