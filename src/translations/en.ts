@@ -108,6 +108,10 @@ export const en = {
     link4: "aperitivo on the terrace",
     p2post: " in the evening, or a romantic dinner for two \u2013 every visit should feel like an evening with friends in Italy. Inside and on the terrace, we each offer up to 100 seats or 180 standing \u2013 ideal for corporate events, birthdays and private celebrations.",
     cta: "Learn more about us",
+    seasonalNote: true,
+    seasonalPre: "Celebrate ",
+    seasonalLink: "special occasions",
+    seasonalPost: " with us: New Year's Eve gala dinner, Valentine's Day menu and Christmas menus for groups.",
   },
   homeAbout: {
     title: "La Famiglia Munich – Family Speranza since 1995",

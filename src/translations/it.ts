@@ -138,6 +138,10 @@ const itBase = {
     link4: "aperitivo sulla terrazza",
     p2post: " la sera o di una cena romantica a due \u2013 ogni visita deve sembrare una serata tra amici in Italia. All\u2019interno e sulla terrazza offriamo ciascuno fino a 100 posti a sedere o 180 posti in piedi \u2013 ideali per eventi aziendali, compleanni e feste private.",
     cta: "Scopri di più su di noi",
+    seasonalNote: true,
+    seasonalPre: "Festeggiate ",
+    seasonalLink: "occasioni speciali",
+    seasonalPost: " da noi: cena di gala di Capodanno, menù di San Valentino e menù natalizi per gruppi.",
   },
   homeAbout: {
     title: "La Famiglia Monaco – Famiglia Speranza dal 1995",

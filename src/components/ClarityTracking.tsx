@@ -11,10 +11,10 @@ const ClarityTracking = () => {
     if (!hasExternalConsent) return;
 
     // Bereits geladen? Nicht nochmal laden
-    if (typeof window !== "undefined" && (window as unknown as Record<string, unknown>).clarity) return;
+    if (typeof window !== "undefined" && (window as unknown as unknown as Record<string, unknown>).clarity) return;
 
     // Clarity Script dynamisch laden (nur nach Consent)
-    const w = window as Record<string, unknown>;
+    const w =unknown as  window as Record<string, unknown>;
     w.clarity = w.clarity || function (...args: unknown[]) {
       ((w.clarity as Record<string, unknown[]>).q = (w.clarity as Record<string, unknown[]>).q || []).push(args);
     };

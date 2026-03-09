@@ -108,6 +108,10 @@ export const fr = {
     link4: "aperitivo sur la terrasse",
     p2post: " le soir ou d\u2019un d\u00eener romantique \u00e0 deux \u2013 chaque visite doit donner l\u2019impression d\u2019une soir\u00e9e entre amis en Italie. \u00c0 l\u2019int\u00e9rieur et sur la terrasse, nous offrons chacun jusqu\u2019\u00e0 100 places assises ou 180 debout \u2013 id\u00e9al pour \u00e9v\u00e9nements d\u2019entreprise, anniversaires et f\u00eates priv\u00e9es.",
     cta: "En savoir plus sur nous",
+    seasonalNote: true,
+    seasonalPre: "Célébrez ",
+    seasonalLink: "occasions spéciales",
+    seasonalPost: " chez nous : dîner de gala du Nouvel An, menu de Saint-Valentin et menus de Noël pour groupes.",
   },
   homeAbout: {
     title: "La Famiglia Munich – Famille Speranza depuis 1995",
