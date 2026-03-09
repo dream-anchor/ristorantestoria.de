@@ -105,7 +105,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
       { '@type': 'AdministrativeArea', name: 'Au-Haidhausen' },
     ],
     // ÖPNV-Anbindung
-    publicTransportNearby: 'U-Bahn Königsplatz (U2, U8) 3 Min., Hauptbahnhof 7 Min., Tram 27/28 Karolinenplatz 4 Min.',
+    publicTransportNearby: 'U-Bahn Königsplatz (U2, U8) 3 Min., Hauptbahnhof 7 Min., Tram 20/21 Karlstraße 3 Min., Bus 68 Karlstraße',
     // Parkmöglichkeiten
     parking: {
       '@type': 'ParkingFacility',

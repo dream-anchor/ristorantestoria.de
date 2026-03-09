@@ -89,7 +89,7 @@ const UeberUns = () => {
             <div className="mt-12 grid md:grid-cols-2 gap-4">
               <LocalizedLink to="terrasse-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                 <h3 className="font-semibold mb-2 text-foreground">Unsere Terrasse</h3>
-                <p className="text-muted-foreground text-sm">Genießen Sie die Atmosphäre unseres geschützten Innenhofs in der Maxvorstadt.</p>
+                <p className="text-muted-foreground text-sm">Genießen Sie die Atmosphäre unserer geschützten Terrasse in der Maxvorstadt.</p>
               </LocalizedLink>
               <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                 <h3 className="font-semibold mb-2 text-foreground">Catering & Events</h3>
