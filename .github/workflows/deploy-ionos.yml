@@ -32,8 +32,8 @@ jobs:
         run: npm run build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          # VITE_* vars werden direkt aus der committeten .env gelesen.
+          # Leere Secrets würden die .env-Werte überschreiben → absichtlich entfernt.
 
       - name: Copy .htaccess to dist
         run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"

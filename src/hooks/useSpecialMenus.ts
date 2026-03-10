@@ -3,6 +3,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { slugify, generateUniqueSlug } from "@/lib/slugify";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 import { generateAllSlugVariants, getRecurringMenuSlugs } from "@/lib/slugTranslations";
+import specialMenusFallbackData from "@/data/special-menus-fallback.json";
+
+// Fallback: statisches JSON (via scripts/export-special-menus.sh befüllbar)
+const SPECIAL_MENUS_FALLBACK = specialMenusFallbackData as unknown as any[];
+
+function findInFallback(slug: string): any | null {
+  if (!SPECIAL_MENUS_FALLBACK.length) return null;
+  return SPECIAL_MENUS_FALLBACK.find((m: any) =>
+    m.slug === slug || m.slug_en === slug || m.slug_it === slug || m.slug_fr === slug
+  ) ?? null;
+}
 
 export interface ParsedMenuItem {
   name: string;
@@ -516,7 +527,7 @@ export const useSpecialMenuBySlug = (slug: string, language?: string) => {
   return useQuery({
     queryKey: ['special-menu', slug, language],
     queryFn: async () => {
-      if (!supabase) return null;
+      if (!supabase) return findInFallback(slug);
       // Search across all slug columns (de, en, it, fr)
       // This enables URLs like /en/special-occasions/valentines-menu to work
       const { data, error } = await supabase
@@ -526,8 +537,8 @@ export const useSpecialMenuBySlug = (slug: string, language?: string) => {
         .or(`slug.eq.${slug},slug_en.eq.${slug},slug_it.eq.${slug},slug_fr.eq.${slug}`)
         .maybeSingle();
 
-      if (error) throw error;
-      return data;
+      if (error) return findInFallback(slug);
+      return data ?? findInFallback(slug);
     },
     enabled: !!slug,
     staleTime: 5 * 60 * 1000,

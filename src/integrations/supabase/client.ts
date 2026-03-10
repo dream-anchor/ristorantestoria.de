@@ -5,8 +5,15 @@ import type { Database } from './types';
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+// Env-Var-Fallback: Wenn GitHub-Secrets nicht gesetzt sind, überschreibt Vite
+// die .env-Datei mit leeren Strings. Da URL und Anon-Key public/publishable
+// sind (bereits in .env im Repo), ist ein hardcoded Fallback sicher.
+const SUPABASE_URL =
+  (import.meta.env.VITE_SUPABASE_URL || '').trim() ||
+  'https://iieethejhwfsyzhbweps.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY =
+  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '').trim() ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZWV0aGVqaHdmc3l6aGJ3ZXBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2OTkyMTcsImV4cCI6MjA4MDI3NTIxN30.s6hsm234IxF3NbYc2oNCjWZ28huDNSt588WLDxlV1hM';
 
 // Guard: wenn Env-Vars nicht gesetzt (z.B. CI ohne Secrets), nicht crashen.
 // SSG-Seiten nutzen React-Query-Hydration und brauchen keinen Live-Client.
