@@ -2592,6 +2592,7 @@ export const de = {
     zahlungsinformationen: "zahlungsinformationen",
     lebensmittelhinweise: "lebensmittelhinweise",
     haftungsausschluss: "haftungsausschluss",
+    barrierefreiheit: "barrierefreiheit",
     "lunch-muenchen-maxvorstadt": "lunch-muenchen-maxvorstadt",
     "aperitivo-muenchen": "aperitivo-muenchen",
     "romantisches-dinner-muenchen": "romantisches-dinner-muenchen",

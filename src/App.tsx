@@ -56,6 +56,7 @@ import Widerrufsbelehrung from "./pages/Widerrufsbelehrung";
 import Zahlungsinformationen from "./pages/Zahlungsinformationen";
 import Lebensmittelhinweise from "./pages/Lebensmittelhinweise";
 import Haftungsausschluss from "./pages/Haftungsausschluss";
+import Barrierefreiheit from "./pages/Barrierefreiheit";
 
 // Lazy: Admin (enthält Recharts, schwere Hooks — nie pre-rendered, nie von Besuchern geladen)
 const Admin = lazy(() => import("./pages/Admin"));
@@ -91,6 +92,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   zahlungsinformationen: Zahlungsinformationen,
   lebensmittelhinweise: Lebensmittelhinweise,
   haftungsausschluss: Haftungsausschluss,
+  barrierefreiheit: Barrierefreiheit,
   "lunch-muenchen-maxvorstadt": LunchMuenchen,
   "aperitivo-muenchen": AperitivoMuenchen,
   "romantisches-dinner-muenchen": RomantischesDinner,
@@ -121,6 +123,7 @@ const LEGAL_ONLY_DE = new Set([
   "impressum", "datenschutz", "cookie-richtlinie",
   "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
   "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+  "barrierefreiheit",
 ]);
 
 // Generate all routes for all languages
