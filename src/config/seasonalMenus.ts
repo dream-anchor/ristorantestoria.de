@@ -40,6 +40,86 @@ export interface SeasonalMenuConfig {
 
 export const SEASONAL_MENUS: SeasonalMenuConfig[] = [
   {
+    key: 'osterbrunch',
+    isActive: true,
+    slugs: {
+      de: 'osterbrunch',
+      en: 'easter-brunch',
+      it: 'pranzo-di-pasqua',
+      fr: 'brunch-de-paques',
+    },
+    titles: {
+      de: 'Osterbrunch',
+      en: 'Easter Brunch',
+      it: 'Pranzo di Pasqua',
+      fr: 'Brunch de P\u00e2ques',
+    },
+    placeholder: {
+      de: 'Unser Osterbrunch wird bald ver\u00f6ffentlicht. Kontaktieren Sie uns f\u00fcr Reservierungen.',
+      en: 'Our Easter Brunch menu will be published soon. Contact us for reservations.',
+      it: 'Il nostro pranzo di Pasqua sar\u00e0 pubblicato a breve. Contattateci per prenotazioni.',
+      fr: 'Notre brunch de P\u00e2ques sera bient\u00f4t publi\u00e9. Contactez-nous pour r\u00e9server.',
+    },
+    expectedMonth: {
+      de: 'M\u00e4rz',
+      en: 'March',
+      it: 'marzo',
+      fr: 'mars',
+    },
+    descriptions: {
+      de: [
+        'Begr\u00fc\u00dfen Sie den Fr\u00fchling mit einem festlichen Osterbrunch im STORIA \u2013 Ihrem italienischen Restaurant in M\u00fcnchen Maxvorstadt. Genie\u00dfen Sie die sch\u00f6nste Zeit des Jahres in unserem geschm\u00e4ckvollem Ambiente mit einem reichhaltigen italienischen Brunch-Men\u00fc.',
+        'Unser Osterbrunch vereint die Lebensfreude der italienischen K\u00fcche mit saisonalen Fr\u00fchlingsaromen. Von hausgemachten Antipasti \u00fcber frische Pasta bis hin zu traditionellen Osterspezialit\u00e4ten \u2013 ein Genuss f\u00fcr die ganze Familie.',
+        'Reservieren Sie fr\u00fchzeitig, da die Pl\u00e4tze f\u00fcr den Osterbrunch begrenzt sind. Gerne k\u00f6nnen Sie auch f\u00fcr gr\u00f6\u00dfere Gruppen und Familienfeiern anfragen.',
+      ],
+      en: [
+        'Welcome spring with a festive Easter Brunch at STORIA \u2013 your Italian restaurant in Munich Maxvorstadt. Enjoy the most beautiful time of the year in our elegant setting with a lavish Italian brunch menu.',
+        'Our Easter Brunch combines the joy of Italian cuisine with seasonal spring flavors. From homemade antipasti to fresh pasta and traditional Easter specialties \u2013 a treat for the whole family.',
+        'Book early as seating for our Easter Brunch is limited. Larger groups and family celebrations are also welcome upon request.',
+      ],
+      it: [
+        'Accogliete la primavera con un festoso pranzo di Pasqua al STORIA \u2013 il vostro ristorante italiano a Monaco Maxvorstadt. Godetevi il periodo pi\u00f9 bello dell\u2019anno nel nostro elegante ambiente con un ricco men\u00f9 brunch italiano.',
+        'Il nostro pranzo di Pasqua unisce la gioia della cucina italiana con i sapori primaverili di stagione. Dagli antipasti fatti in casa alla pasta fresca e alle specialit\u00e0 pasquali tradizionali \u2013 un piacere per tutta la famiglia.',
+        'Prenotate in anticipo poich\u00e9 i posti per il nostro pranzo di Pasqua sono limitati. Siamo lieti di accogliere anche gruppi numerosi e celebrazioni in famiglia.',
+      ],
+      fr: [
+        'Accueillez le printemps avec un brunch de P\u00e2ques festif au STORIA \u2013 votre restaurant italien au c\u0153ur de Munich Maxvorstadt. Savourez la plus belle saison de l\u2019ann\u00e9e dans notre cadre \u00e9l\u00e9gant avec un riche menu brunch italien.',
+        'Notre brunch de P\u00e2ques allie la joie de la cuisine italienne aux saveurs printani\u00e8res de saison. Des antipasti maison aux p\u00e2tes fra\u00eeches et aux sp\u00e9cialit\u00e9s de P\u00e2ques traditionnelles \u2013 un r\u00e9gal pour toute la famille.',
+        'R\u00e9servez t\u00f4t car les places pour notre brunch de P\u00e2ques sont limit\u00e9es. Nous accueillons \u00e9galement les grands groupes et les c\u00e9l\u00e9brations en famille sur demande.',
+      ],
+    },
+    faq: {
+      de: [
+        { question: 'Wann findet der Osterbrunch statt?', answer: 'Unser Osterbrunch findet traditionell am Ostersonntag und Ostermontag statt. Die genauen Zeiten entnehmen Sie bitte der aktuellen Men\u00fcankk\u00fcndigung.' },
+        { question: 'Wie kann ich f\u00fcr den Osterbrunch reservieren?', answer: 'Sie k\u00f6nnen telefonisch unter +49 89 51519696 oder per E-Mail an info@ristorantestoria.de reservieren. Fr\u00fchzeitige Reservierung wird empfohlen.' },
+        { question: 'F\u00fcr wie viele Personen eignet sich der Osterbrunch?', answer: 'Der Osterbrunch eignet sich f\u00fcr Paare, Familien und kleine Gruppen. F\u00fcr gr\u00f6\u00dfere Gesellschaften erstellen wir gerne ein individuelles Angebot.' },
+        { question: 'Was kostet der Osterbrunch ungef\u00e4hr?', answer: 'Der Preis variiert je nach Men\u00fc. Orientieren Sie sich an der aktuellen Men\u00fcankk\u00fcndigung oder kontaktieren Sie uns direkt.' },
+        { question: 'Gibt es vegetarische Optionen beim Osterbrunch?', answer: 'Ja, wir bieten eine Auswahl an vegetarischen Speisen. Bitte informieren Sie uns bei der Reservierung \u00fcber spezielle Ern\u00e4hrungsw\u00fcnsche.' },
+      ],
+      en: [
+        { question: 'When does the Easter Brunch take place?', answer: 'Our Easter Brunch traditionally takes place on Easter Sunday and Easter Monday. Please check the current menu announcement for exact times.' },
+        { question: 'How can I reserve for the Easter Brunch?', answer: 'You can reserve by phone at +49 89 51519696 or by email at info@ristorantestoria.de. Early booking is recommended.' },
+        { question: 'How many people is the Easter Brunch suited for?', answer: 'The Easter Brunch is suitable for couples, families, and small groups. For larger parties, we are happy to create a custom offer.' },
+        { question: 'What does the Easter Brunch cost approximately?', answer: 'The price varies by menu. Please check the current menu announcement or contact us directly.' },
+        { question: 'Are there vegetarian options at the Easter Brunch?', answer: 'Yes, we offer a selection of vegetarian dishes. Please inform us of any dietary requirements when making your reservation.' },
+      ],
+      it: [
+        { question: 'Quando si svolge il pranzo di Pasqua?', answer: 'Il nostro pranzo di Pasqua si svolge tradizionalmente la domenica e il luned\u00ec di Pasqua. Consultate l\u2019annuncio del men\u00fc attuale per gli orari esatti.' },
+        { question: 'Come posso prenotare per il pranzo di Pasqua?', answer: 'Potete prenotare telefonicamente al +49 89 51519696 o via email a info@ristorantestoria.de. Si consiglia la prenotazione anticipata.' },
+        { question: 'Per quante persone \u00e8 adatto il pranzo di Pasqua?', answer: 'Il pranzo di Pasqua \u00e8 adatto a coppie, famiglie e piccoli gruppi. Per gruppi pi\u00f9 numerosi, siamo lieti di creare un\'offerta personalizzata.' },
+        { question: 'Quanto costa approssimativamente il pranzo di Pasqua?', answer: "Il prezzo varia in base al men\u00fc. Consultate l\u2019annuncio del men\u00fc attuale o contattateci direttamente." },
+        { question: 'Ci sono opzioni vegetariane al pranzo di Pasqua?', answer: 'S\u00ec, offriamo una selezione di piatti vegetariani. Informateci di eventuali esigenze alimentari al momento della prenotazione.' },
+      ],
+      fr: [
+        { question: 'Quand a lieu le brunch de P\u00e2ques ?', answer: 'Notre brunch de P\u00e2ques a traditionnellement lieu le dimanche et le lundi de P\u00e2ques. Consultez l\u2019annonce du menu actuel pour les horaires exacts.' },
+        { question: 'Comment puis-je r\u00e9server pour le brunch de P\u00e2ques ?', answer: 'Vous pouvez r\u00e9server par t\u00e9l\u00e9phone au +49 89 51519696 ou par e-mail \u00e0 info@ristorantestoria.de. Une r\u00e9servation anticip\u00e9e est recommand\u00e9e.' },
+        { question: 'Pour combien de personnes le brunch de P\u00e2ques est-il adapt\u00e9 ?', answer: 'Le brunch de P\u00e2ques convient aux couples, aux familles et aux petits groupes. Pour les grands groupes, nous cr\u00e9ons volontiers une offre personnalis\u00e9e.' },
+        { question: 'Quel est le prix approximatif du brunch de P\u00e2ques ?', answer: 'Le prix varie selon le menu. Consultez l\u2019annonce du menu actuel ou contactez-nous directement.' },
+        { question: 'Y a-t-il des options v\u00e9g\u00e9tariennes au brunch de P\u00e2ques ?', answer: 'Oui, nous proposons une s\u00e9lection de plats v\u00e9g\u00e9tariens. Veuillez nous informer de tout besoin alimentaire sp\u00e9cial lors de votre r\u00e9servation.' },
+      ],
+    },
+  },
+  {
     key: 'valentinstag',
     isActive: true,
     slugs: {

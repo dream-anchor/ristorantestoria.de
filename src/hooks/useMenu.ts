@@ -1,5 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import foodFallback from "@/data/menu-food-fallback.json";
+import drinksFallback from "@/data/menu-drinks-fallback.json";
+import lunchFallback from "@/data/menu-lunch-fallback.json";
+
+const MENU_FALLBACKS: Record<string, Menu> = {
+  food: foodFallback as unknown as Menu,
+  drinks: drinksFallback as unknown as Menu,
+  lunch: lunchFallback as unknown as Menu,
+};
 
 export type MenuType = 'lunch' | 'food' | 'drinks' | 'christmas' | 'valentines' | 'special';
 
@@ -143,7 +152,7 @@ export const useMenu = (menuType: MenuType) => {
   return useQuery({
     queryKey: ['menu', menuType],
     queryFn: async (): Promise<Menu | null> => {
-      if (!supabase) return null;
+      if (!supabase) return MENU_FALLBACKS[menuType] ?? null;
       // Fetch menu by type
       const { data: menu, error: menuError } = await supabase
         .from('menus')
@@ -152,11 +161,20 @@ export const useMenu = (menuType: MenuType) => {
         .eq('is_published', true)
         .maybeSingle();
 
-      if (menuError || !menu) {
-        return null;
+      if (menuError) {
+        return MENU_FALLBACKS[menuType] ?? null;
       }
 
-      return fetchMenuData(menu);
+      if (!menu) {
+        return MENU_FALLBACKS[menuType] ?? null;
+      }
+
+      try {
+        const result = await fetchMenuData(menu);
+        return result ?? MENU_FALLBACKS[menuType] ?? null;
+      } catch {
+        return MENU_FALLBACKS[menuType] ?? null;
+      }
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
