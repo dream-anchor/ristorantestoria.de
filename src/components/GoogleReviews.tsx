@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
 import { Star, Sparkles, ExternalLink, PenLine, ChevronDown } from "lucide-react";
 
 import reviewsDe from "@/data/google-reviews-de.json";
@@ -99,6 +101,7 @@ const INITIAL_COUNT = 6;
 const LOAD_MORE_COUNT = 6;
 
 const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
+  const { hasConsent, openSettings, savePreferences, consent } = useCookieConsent();
   const { t, language } = useLanguage();
   const [visibleCount, setVisibleCount] = useState(compact ? 3 : INITIAL_COUNT);
 
@@ -112,6 +115,14 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
   const allReviewsUrl = placeId
     ? `https://search.google.com/local/reviews?placeid=${placeId}`
     : "https://maps.google.com/?cid=3761590175870856939";
+
+  const handleEnableExternal = () => {
+    savePreferences({
+      statistics: consent?.statistics ?? false,
+      marketing: consent?.marketing ?? false,
+      external: true,
+    });
+  };
 
   if (!hasReviews) return null;
 
@@ -152,7 +163,7 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
         </div>
       )}
 
-      {/* Review Grid — Infinite Scroll (static local JSON, no external consent needed) */}
+      {/* Review Grid — local JSON data, no consent required */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayReviews.map((review, i) => (
           <ReviewCard key={`${review.authorName}-${review.time}-${i}`} review={review} />
@@ -172,28 +183,39 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
         </div>
       )}
 
-      {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
-        <a
-          href={allReviewsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-accent transition-colors text-sm font-medium"
-        >
-          <GoogleIcon />
-          <span>{t.reviews.viewAll}</span>
-          <ExternalLink className="h-3.5 w-3.5 opacity-70" />
-        </a>
-        <a
-          href={writeReviewUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors text-sm font-medium"
-        >
-          <PenLine className="h-4 w-4" />
-          <span>{t.reviews.writeReview}</span>
-        </a>
-      </div>
+      {/* CTA Buttons — consent required for external links */}
+      {hasConsent("external") ? (
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+          <a
+            href={allReviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-accent transition-colors text-sm font-medium"
+          >
+            <GoogleIcon />
+            <span>{t.reviews.viewAll}</span>
+            <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+          </a>
+          <a
+            href={writeReviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors text-sm font-medium"
+          >
+            <PenLine className="h-4 w-4" />
+            <span>{t.reviews.writeReview}</span>
+          </a>
+        </div>
+      ) : (
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+          <Button onClick={handleEnableExternal} variant="default">
+            {t.cookies.enableReviews}
+          </Button>
+          <Button onClick={openSettings} variant="outline">
+            {t.cookies.settings}
+          </Button>
+        </div>
+      )}
     </section>
   );
 };

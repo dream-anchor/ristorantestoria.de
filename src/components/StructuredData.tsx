@@ -86,7 +86,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
       { '@type': 'AdministrativeArea', name: 'Sendling' },
       { '@type': 'AdministrativeArea', name: 'Au-Haidhausen' },
     ],
-    publicTransportNearby: 'U-Bahn Königsplatz (U2, U8) 3 Min., Hauptbahnhof 7 Min., Tram 20/21 Karlstraße 3 Min., Bus 68 Karlstraße',
+    publicTransportNearby: 'U-Bahn Königsplatz (U2, U8) 3 Min., Hauptbahnhof 7 Min., Tram 20/21 + Bus 68 Haltestelle Karlstraße – direkt vor der Tür',
     parking: {
       '@type': 'ParkingFacility',
       name: STORIA.parking.name,

@@ -333,14 +333,14 @@ const Kontakt = () => {
                       <div className="bg-[#eb690b] text-white text-xs font-bold px-2.5 py-1.5 rounded flex-shrink-0">Tram</div>
                       <div>
                         <p className="font-medium text-foreground">Tram 20/21 Haltestelle Karlstraße</p>
-                        <p className="text-sm">3 Minuten Fußweg</p>
+                        <p className="text-sm">Direkt vor der Tür</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
                       <div className="bg-[#eb690b] text-white text-xs font-bold px-2.5 py-1.5 rounded flex-shrink-0">Bus</div>
                       <div>
                         <p className="font-medium text-foreground">Bus 68 Haltestelle Karlstraße</p>
-                        <p className="text-sm">3 Minuten Fußweg</p>
+                        <p className="text-sm">Direkt vor der Tür</p>
                       </div>
                     </div>
                   </div>

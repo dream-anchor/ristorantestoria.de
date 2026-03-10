@@ -1,9 +1,6 @@
-import { useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { usePublishedSpecialMenus } from "@/hooks/useSpecialMenus";
+import { Link } from "react-router-dom";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { getLocalizedPath } from "@/config/routes";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -12,7 +9,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-// Parent slug mapping for each language (same as BesondererAnlass.tsx)
+// Parent slug mapping for each language
 const PARENT_SLUGS = {
   de: 'besondere-anlaesse',
   en: 'special-occasions',
@@ -21,52 +18,48 @@ const PARENT_SLUGS = {
 } as const;
 
 const BesondereAnlaesse = () => {
-  const navigate = useNavigate();
-  const { data: specialMenus, isLoading } = usePublishedSpecialMenus();
   const { language, t } = useLanguage();
-  usePrerenderReady(!isLoading);
+  usePrerenderReady(true);
 
-  // Client-side redirect zum ersten Special-Menü (nur wenn Daten vorhanden)
-  useEffect(() => {
-    // Nur im Browser redirecten, nicht beim Pre-Rendering
-    if (typeof window === 'undefined') return;
-    if (isLoading) return;
-    // Kein Redirect wenn Pre-Renderer aktiv
-    if ((window as any).__PRERENDER_INJECTED) return;
-
-    if (specialMenus && specialMenus.length > 0) {
-      const firstMenu = specialMenus[0] as any;
-      const getLocalizedMenuSlug = () => {
-        if (language === 'en' && firstMenu.slug_en) return firstMenu.slug_en;
-        if (language === 'it' && firstMenu.slug_it) return firstMenu.slug_it;
-        if (language === 'fr' && firstMenu.slug_fr) return firstMenu.slug_fr;
-        return firstMenu.slug || firstMenu.id;
-      };
-
-      const menuSlug = getLocalizedMenuSlug();
-      const parentSlug = PARENT_SLUGS[language as keyof typeof PARENT_SLUGS];
-      const basePath = language === "de" ? "" : `/${language}`;
-      navigate(`${basePath}/${parentSlug}/${menuSlug}`, { replace: true });
-    }
-    // Wenn keine Special-Menus: Seite anzeigen (kein Redirect zu speisekarte)
-  }, [specialMenus, isLoading, navigate, language]);
-
-  // Statische Links für Pre-Rendering und SEO
   const eventLinks = [
-    { slug: "valentinstag-menue", label: t.seo?.besondereAnlaesse?.valentinstag || "Valentinstag-Menü" },
-    { slug: "weihnachtsmenue", label: t.seo?.besondereAnlaesse?.weihnachten || "Weihnachtsmenü" },
-    { slug: "silvester", label: t.seo?.besondereAnlaesse?.silvester || "Silvester Gala-Dinner" },
+    {
+      slug: "osterbrunch",
+      slug_en: "easter-brunch", slug_it: "pranzo-pasquale", slug_fr: "brunch-pascal",
+      label: t.seo?.besondereAnlaesse?.osterbrunch || "Osterbrunch",
+    },
+    {
+      slug: "valentinstag-menue",
+      slug_en: "valentines-day-menu", slug_it: "menu-san-valentino", slug_fr: "menu-saint-valentin",
+      label: t.seo?.besondereAnlaesse?.valentinstag || "Valentinstag-Men\u00fc",
+    },
+    {
+      slug: "weihnachtsmenue",
+      slug_en: "christmas-menu", slug_it: "menu-natalizio", slug_fr: "menu-noel",
+      label: t.seo?.besondereAnlaesse?.weihnachten || "Weihnachtsmenü",
+    },
+    {
+      slug: "silvester",
+      slug_en: "new-years-eve", slug_it: "capodanno", slug_fr: "reveillon",
+      label: t.seo?.besondereAnlaesse?.silvester || "Silvester Gala-Dinner",
+    },
   ];
 
   const parentSlug = PARENT_SLUGS[language as keyof typeof PARENT_SLUGS];
   const basePath = language === "de" ? "" : `/${language}`;
 
+  const getSlug = (event: typeof eventLinks[0]) => {
+    if (language === 'en' && event.slug_en) return event.slug_en;
+    if (language === 'it' && event.slug_it) return event.slug_it;
+    if (language === 'fr' && event.slug_fr) return event.slug_fr;
+    return event.slug;
+  };
+
   return (
     <>
       <SEO
         title={t.seo?.besondereAnlaesse?.seoTitle || "Besondere Anlässe im STORIA München"}
-        description={t.seo?.besondereAnlaesse?.seoDescription || "Feiern Sie besondere Anlässe im STORIA München: Valentinstag, Weihnachtsfeier, Silvester & mehr. Italienische Menüs für jeden Anlass in der Maxvorstadt."}
-        canonical="/besondere-anlaesse"
+        description={t.seo?.besondereAnlaesse?.seoDescription || "Feiern Sie besondere Anlässe im STORIA München: Osterbrunch, Valentinstag, Weihnachtsfeier, Silvester & mehr. Italienische Menüs für jeden Anlass in der Maxvorstadt."}
+        canonical="/besondere-anlaesse/"
       />
       <StructuredData type="restaurant" />
 
@@ -89,11 +82,11 @@ const BesondereAnlaesse = () => {
                 )}
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2">
                 {eventLinks.map((event) => (
                   <Link
                     key={event.slug}
-                    to={`${basePath}/${parentSlug}/${event.slug}/`}
+                    to={`${basePath}/${parentSlug}/${getSlug(event)}/`}
                     className="block p-6 rounded-2xl border bg-card hover:bg-accent transition-colors"
                   >
                     <h2 className="text-xl font-semibold">{event.label}</h2>
