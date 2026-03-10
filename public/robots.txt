@@ -18,6 +18,11 @@ Sitemap: https://www.ristorantestoria.de/sitemap.xml
 # ─── GOOGLE (Suche, Maps, Bilder, Local Pack) ───
 User-agent: Googlebot
 Allow: /
+# Crawl-Budget: Ressourcen ohne SEO-Relevanz blockieren
+Disallow: /assets/*.woff2$
+Disallow: /assets/*.woff$
+Disallow: /assets/*.js$
+Disallow: /assets/*.css$
 
 User-agent: Googlebot-Mobile
 Allow: /
@@ -240,6 +245,8 @@ Disallow: /cms/
 Disallow: /assets/*.js$
 Disallow: /assets/*.css$
 Disallow: /assets/*.map$
+Disallow: /assets/*.woff2$
+Disallow: /assets/*.woff$
 
 # ─── API-ENDPUNKTE ───
 Disallow: /functions/
