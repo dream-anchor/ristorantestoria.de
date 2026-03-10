@@ -99,6 +99,23 @@ const BesondererAnlass = () => {
     return () => clearAlternates();
   }, [menu, setAlternates, clearAlternates]);
 
+  // Generate hreflang alternates (must be before early returns — React Rules of Hooks)
+  const alternates = useMemo(() => {
+    if (!menu) return [];
+    const baseUrl = 'https://www.ristorantestoria.de';
+    const getSlug = (lang: 'de' | 'en' | 'it' | 'fr') => {
+      if (lang === 'de') return menu.slug;
+      const langSlug = (menu as any)[`slug_${lang}`];
+      return langSlug || menu.slug;
+    };
+    return [
+      { lang: 'de', url: `${baseUrl}/${PARENT_SLUGS.de}/${getSlug('de')}/` },
+      { lang: 'en', url: `${baseUrl}/en/${PARENT_SLUGS.en}/${getSlug('en')}/` },
+      { lang: 'it', url: `${baseUrl}/it/${PARENT_SLUGS.it}/${getSlug('it')}/` },
+      { lang: 'fr', url: `${baseUrl}/fr/${PARENT_SLUGS.fr}/${getSlug('fr')}/` },
+    ];
+  }, [menu]);
+
   // Silvester: dedicated rich landing page (both active and inactive states)
   if (seasonalConfig?.key === 'silvester') {
     return <SilvesterMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
@@ -163,17 +180,6 @@ const BesondererAnlass = () => {
     const langSlug = (menu as any)[`slug_${lang}`];
     return langSlug || menu.slug;
   };
-
-  // Generate hreflang alternates for all languages
-  const alternates = useMemo(() => {
-    const baseUrl = 'https://www.ristorantestoria.de';
-    return [
-      { lang: 'de', url: `${baseUrl}/${PARENT_SLUGS.de}/${getLocalizedSlug('de')}/` },
-      { lang: 'en', url: `${baseUrl}/en/${PARENT_SLUGS.en}/${getLocalizedSlug('en')}/` },
-      { lang: 'it', url: `${baseUrl}/it/${PARENT_SLUGS.it}/${getLocalizedSlug('it')}/` },
-      { lang: 'fr', url: `${baseUrl}/fr/${PARENT_SLUGS.fr}/${getLocalizedSlug('fr')}/` },
-    ];
-  }, [menu.slug, (menu as any).slug_en, (menu as any).slug_it, (menu as any).slug_fr]);
 
   // Get canonical URL for current language
   const currentSlug = getLocalizedSlug(language as 'de' | 'en' | 'it' | 'fr');
