@@ -43,8 +43,10 @@ const BesondererAnlass = () => {
   const { t, language } = useLanguage();
   const { setAlternates, clearAlternates } = useAlternateLinks();
   const queryClient = useQueryClient();
-  const { data: menu, isLoading, error } = useSpecialMenuBySlug(slug || '');
   const seasonalConfig = findSeasonalMenuBySlug(slug || '');
+  // Use supabaseSlug if set (admin may auto-generate a different slug than the SEO URL slug)
+  const lookupSlug = seasonalConfig?.supabaseSlug || slug || '';
+  const { data: menu, isLoading, error } = useSpecialMenuBySlug(lookupSlug);
 
   // Hook must be called unconditionally (React rules of hooks)
   const { data: archivedMenu } = useArchivedSeasonalMenu(

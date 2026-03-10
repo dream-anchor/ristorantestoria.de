@@ -36,12 +36,19 @@ export interface SeasonalMenuConfig {
   descriptions: Record<string, string[]>;
   /** FAQ entries per language (shown on placeholder page) */
   faq: Record<string, SeasonalFAQ[]>;
+  /**
+   * Actual slug stored in Supabase DB (may differ from SEO URL slug).
+   * When set, useSpecialMenuBySlug uses this for the DB query.
+   * Needed when admin creates a menu with an auto-generated slug.
+   */
+  supabaseSlug?: string;
 }
 
 export const SEASONAL_MENUS: SeasonalMenuConfig[] = [
   {
     key: 'osterbrunch',
     isActive: true,
+    supabaseSlug: 'neuer-anlass',
     slugs: {
       de: 'osterbrunch',
       en: 'easter-brunch',
