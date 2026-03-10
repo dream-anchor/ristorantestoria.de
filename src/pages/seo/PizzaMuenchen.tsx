@@ -8,7 +8,6 @@ import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -54,15 +53,6 @@ const PizzaMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.pizzaMuenchen.heroTitle}
-        description={t.seo.pizzaMuenchen.seoDescription}
-        sections={[
-          { heading: t.seo.pizzaMuenchen.introTitle, content: t.seo.pizzaMuenchen.introP1 },
-          { heading: t.seo.pizzaMuenchen.menuTitle, content: pizzaHighlights.map(p => `${p.name} \u2013 ${p.price}`) },
-          { heading: t.seo.pizzaMuenchen.whyTitle, content: whyFeatures.map(f => f.title) },
-        ]}
-      />
       <SEO
         title={t.seo.pizzaMuenchen.seoTitle}
         description={t.seo.pizzaMuenchen.seoDescription}

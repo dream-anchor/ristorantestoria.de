@@ -90,6 +90,7 @@ const Footer = () => {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-[#25D366] transition-colors"
+                  title="WhatsApp: +49 163 603 3912"
                 >
                   <MessageCircle className="h-4 w-4" />
                   WhatsApp
@@ -99,6 +100,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener"
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"
+                  title="STORIA auf Google Maps"
                 >
                   <MapPin className="h-4 w-4" />
                   <span>STORIA ristorante pizzeria bar<br />Karlstraße 47A, 80333 München</span>
@@ -158,6 +160,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors"
+              title="Instagram @ristorante_storia"
             >
               <Instagram className="h-3.5 w-3.5" />
               <span>Instagram</span>

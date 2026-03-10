@@ -7,7 +7,6 @@ import GoogleReviews from "@/components/GoogleReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import BackToLandingPage from "@/components/BackToLandingPage";
-import StaticBotContent from "@/components/StaticBotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -18,14 +17,6 @@ const Reservierung = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.pages.reservierung.h1}
-        description={t.pages.reservierung.description}
-        sections={[
-          { heading: t.reservationBooking.title, content: t.reservationBooking.openTableNote },
-          { heading: t.contact.phone, content: '+49 89 51519696' }
-        ]}
-      />
       <SEO
         title={t.pages.reservierung.title}
         description={t.pages.reservierung.description}

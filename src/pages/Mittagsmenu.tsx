@@ -7,7 +7,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
-import BotContent from "@/components/BotContent";
 import BackToLandingPage from "@/components/BackToLandingPage";
 import LocalizedLink from "@/components/LocalizedLink";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -36,7 +35,6 @@ const Mittagsmenu = () => {
         ]} 
       />
       <MenuStructuredData menuType="lunch" />
-      <BotContent menuType="lunch" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">
@@ -51,7 +49,7 @@ const Mittagsmenu = () => {
         </div>
         <Navigation />
 
-        <main className="container mx-auto px-4 py-12 flex-grow">
+        <main id="main-content" className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
           <h1 className="text-4xl font-serif font-bold mb-8 text-center">
             {t.pages.mittagsmenu.h1}

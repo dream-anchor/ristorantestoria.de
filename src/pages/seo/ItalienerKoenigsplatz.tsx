@@ -7,7 +7,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
 import {
@@ -54,14 +53,6 @@ const ItalienerKoenigsplatz = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.italienerKoenigsplatz.heroTitle}
-        description={t.seo.italienerKoenigsplatz.heroDescription}
-        sections={[
-          { heading: t.seo.italienerKoenigsplatz.nearbyTitle, content: nearbyAttractions.map(a => a.title) },
-          { heading: t.seo.italienerKoenigsplatz.highlightsTitle, content: highlights.map(h => h.title) },
-        ]}
-      />
       <SEO
         title={t.seo.italienerKoenigsplatz.seoTitle}
         description={t.seo.italienerKoenigsplatz.seoDescription}

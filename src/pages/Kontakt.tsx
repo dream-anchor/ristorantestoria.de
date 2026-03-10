@@ -110,7 +110,7 @@ const Kontakt = () => {
         </div>
         <Navigation />
 
-        <main className="container mx-auto px-4 py-12 flex-grow">
+        <main id="main-content" className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
           <h1 className="text-4xl font-bold mb-4 text-center">
             {content.h1}

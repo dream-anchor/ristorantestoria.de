@@ -6,7 +6,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -78,7 +77,6 @@ const FirmenfeierMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent title={t.seo.firmenfeier.heroTitle} description={t.seo.firmenfeier.heroDescription} sections={[]} />
       <SEO title={t.seo.firmenfeier.seoTitle} description={t.seo.firmenfeier.seoDescription} canonical="/firmenfeier-muenchen" />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[{ name: 'Home', url: '/' }, { name: t.internalLinks.corporateEvent, url: '/firmenfeier-muenchen' }]} />

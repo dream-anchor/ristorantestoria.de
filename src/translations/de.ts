@@ -2614,7 +2614,7 @@ export const de = {
       description: 'Italiener M\u00fcnchen Maxvorstadt: Neapolitanische Pizza, hausgemachte Pasta & Aperitivo seit 2015. Nahe K\u00f6nigsplatz. Jetzt reservieren!',
     },
     speisekarte: {
-      title: 'Speisekarte – Pizza & Pasta',
+      title: 'Speisekarte STORIA München | Italienische Küche',
       h1: 'Speisekarte – Ristorante München Maxvorstadt',
       description: 'STORIA Speisekarte: Neapolitanische Pizza, hausgemachte Pasta & Antipasti. Italiener in der Maxvorstadt nahe Königsplatz. Jetzt reservieren!',
       intro: 'Die Speisekarte des STORIA vereint das Beste der italienischen Küche auf einem Tisch in der Münchner Maxvorstadt. Im Mittelpunkt steht unsere neapolitanische Steinofen-Pizza: Der Teig ruht mindestens 48 Stunden und wird bei über 400 °C im Holzofen gebacken – für den unverwechselbaren Geschmack einer echten Pizza Napoletana mit San-Marzano-Tomaten und original italienischem Büffelmozzarella. Ergänzt wird die Karte durch frische Fischgerichte, saftige Fleischspezialitäten und vegetarische Optionen, die keine Wünsche offen lassen.',
@@ -2622,7 +2622,7 @@ export const de = {
       breadcrumb: 'Speisekarte',
     },
     getraenke: {
-      title: 'Getränkekarte – Aperitivo München',
+      title: 'Getränkekarte STORIA München | 60+ Weine & Cocktails',
       h1: 'Getränkekarte – Aperitivo & Weine in München',
       description: 'STORIA Getränkekarte: Aperitivo, italienische Weine & Cocktails in München. Late Night Bar 21-22:30 Uhr. Maxvorstadt. Jetzt reservieren!',
       intro: 'Unsere Getränkekarte ist eine Liebeserklärung an die italienische Trinkkultur. Ob Sie den Abend mit einem klassischen Aperitivo wie Aperol Spritz oder Negroni beginnen, einen erlesenen Wein zum Essen genießen oder den Abschluss mit einem Grappa oder Limoncello zelebrieren – im STORIA München finden Sie für jeden Moment das passende Getränk. Die Auswahl reicht von erfrischenden Prosecco-Variationen über handverlesene Digestifs bis zu alkoholfreien italienischen Limonaden und Kaffeespezialitäten.',
@@ -2630,9 +2630,9 @@ export const de = {
       breadcrumb: 'Getränke',
     },
     mittagsmenu: {
-      title: 'Mittagsmenü – Lunch München Maxvorstadt',
+      title: 'Mittagsmenü STORIA München | Frisch & Täglich Mo–Fr',
       h1: 'Mittagsmenü – Lunch München Maxvorstadt',
-      description: 'Mittagsmenü im STORIA München Maxvorstadt: Frische italienische Küche Mo-Fr zu attraktiven Preisen. Lunch nahe Hauptbahnhof & Königsplatz. Jetzt Mittagstisch genießen!',
+      description: 'Mittagsmenü im STORIA München Maxvorstadt: Frische italienische Küche Mo-Fr. Lunch nahe Hauptbahnhof & Königsplatz. Jetzt genießen!',
       introSeo: 'Unser Mittagstisch in der Maxvorstadt bietet Ihnen montags bis freitags frische italienische Küche zu fairen Preisen – ideal für den Business Lunch in München. Ab 11:30 Uhr servieren wir ein wöchentlich wechselndes Mittagsmenü mit Vorspeise, Hauptgang und Dessert, zubereitet aus saisonalen Zutaten direkt aus Italien. Ob knusprige Steinofen-Pizza, hausgemachte Pasta, ein leichter Salat oder ein wärmendes Risotto – bei uns finden Sie das perfekte Mittagessen für eine entspannte Pause vom Büroalltag. Dazu bieten wir Tagessuppen und frische Fischgerichte als Alternative.',
       introSeoP2: 'Das STORIA liegt nur fünf Gehminuten vom Königsplatz und wenige Minuten vom Hauptbahnhof München entfernt – ideal erreichbar für alle, die in der Maxvorstadt, der Innenstadt oder rund um die TU München arbeiten. Mit der U-Bahn erreichen Sie uns bequem über die Station Königsplatz. Unser Mittagstisch ist bei Stammgästen beliebt, weil wir Wert auf schnellen, aufmerksamen Service legen, ohne bei der Qualität Kompromisse zu machen. Reservierungen für den Lunch sind empfehlenswert, besonders an sonnigen Tagen mit geöffneter Terrasse. Kommen Sie vorbei und überzeugen Sie sich selbst – ein Stück Italien in Ihrer Mittagspause.',
       breadcrumb: 'Mittagsmenü',

@@ -156,7 +156,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="bg-primary text-primary-foreground sticky top-0 z-50">
+    <nav className="bg-primary text-primary-foreground sticky top-0 z-50" aria-label="Hauptnavigation">
       <div className="container mx-auto px-4">
         {/* Mobile Navigation */}
         <div className="flex lg:hidden items-center justify-between py-4">

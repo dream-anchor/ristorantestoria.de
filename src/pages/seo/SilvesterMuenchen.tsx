@@ -4,7 +4,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import StaticBotContent from "@/components/StaticBotContent";
 import MenuDisplay from "@/components/MenuDisplay";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -94,7 +93,6 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
 
   return (
     <>
-      <StaticBotContent title={s.heroTitle} description={s.heroDescription} sections={[]} />
       <SEO title={s.seoTitle} description={s.seoDescription} canonical={canonicalPath} />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[

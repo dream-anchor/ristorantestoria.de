@@ -9,7 +9,6 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import HomeAbout from "@/components/HomeAbout";
-import HomeBotContent from "@/components/HomeBotContent";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
@@ -27,7 +26,6 @@ const Index = () => {
       <StructuredData type="restaurant" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <HomeBotContent />
         <Hero />
         <Navigation />
         <main>

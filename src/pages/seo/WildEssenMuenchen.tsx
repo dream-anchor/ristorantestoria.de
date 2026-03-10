@@ -6,7 +6,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -119,14 +118,6 @@ const WildEssenMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.wild.heroTitle}
-        description={t.seo.wild.heroDescription}
-        sections={[
-          { heading: t.seo.wild.menuTitle, content: wildDishes.map(d => d.title) },
-          { heading: t.seo.wild.whyStoriaTitle, content: whyStoriaFeatures.map(f => f.title) },
-        ]}
-      />
       <SEO
         title={t.seo.wild.seoTitle}
         description={t.seo.wild.seoDescription}

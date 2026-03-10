@@ -12,7 +12,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
-import BotContent from "@/components/BotContent";
 import LocalizedLink from "@/components/LocalizedLink";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
 import MenuDisplay from "@/components/MenuDisplay";
@@ -222,7 +221,6 @@ const BesondererAnlass = () => {
         ]}
       />
       <MenuStructuredData menuId={menu.id} />
-      <BotContent menuId={menu.id} />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">

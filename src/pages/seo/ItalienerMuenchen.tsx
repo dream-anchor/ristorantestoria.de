@@ -7,7 +7,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,14 +45,6 @@ const ItalienerMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.italienerMuenchen.heroTitle}
-        description={t.seo.italienerMuenchen.heroDescription}
-        sections={[
-          { heading: t.seo.italienerMuenchen.kitchenTitle, content: [t.seo.italienerMuenchen.kitchenP1, t.seo.italienerMuenchen.kitchenP2] },
-          { heading: t.seo.italienerMuenchen.occasionTitle, content: occasions.map(o => o.title) },
-        ]}
-      />
       <SEO
         title={t.seo.italienerMuenchen.seoTitle}
         description={t.seo.italienerMuenchen.seoDescription}

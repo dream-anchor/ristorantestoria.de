@@ -7,7 +7,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
-import BotContent from "@/components/BotContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMenu } from "@/hooks/useMenu";
@@ -34,7 +33,6 @@ const Getraenke = () => {
         ]} 
       />
       <MenuStructuredData menuType="drinks" />
-      <BotContent menuType="drinks" />
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <div className="bg-background border-b border-border">
@@ -49,7 +47,7 @@ const Getraenke = () => {
         </div>
         <Navigation />
 
-        <main className="container mx-auto px-4 py-12 flex-grow">
+        <main id="main-content" className="container mx-auto px-4 py-12 flex-grow">
           <h1 className="text-4xl font-serif font-bold mb-8 text-center">
             {t.pages.getraenke.h1}
           </h1>

@@ -8,7 +8,6 @@ import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -58,15 +57,6 @@ const NeapolitanischePizza = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.neapolitanPizza.heroTitle}
-        description={t.seo.neapolitanPizza.seoDescription}
-        sections={[
-          { heading: t.seo.neapolitanPizza.introTitle, content: t.seo.neapolitanPizza.introP1 },
-          { heading: t.seo.neapolitanPizza.menuTitle, content: pizzaHighlights.map(p => `${p.name} – ${p.price}`) },
-          { heading: t.seo.neapolitanPizza.whyTitle, content: whyFeatures.map(f => f.title) },
-        ]}
-      />
       <SEO
         title={t.seo.neapolitanPizza.seoTitle}
         description={t.seo.neapolitanPizza.seoDescription}

@@ -216,6 +216,19 @@ const Datenschutz = () => {
                   https://policies.google.com/privacy
                 </a>
               </p>
+
+              <h3 className="text-lg font-semibold mt-4 mb-2">Supabase (Menüdaten)</h3>
+              <p>
+                Für die Bereitstellung von Menüdaten nutzen wir Supabase (Supabase Inc., San Francisco, USA). Die Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 lit. f DSGVO. Weitere Informationen:{" "}
+                <a
+                  href="https://supabase.com/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  supabase.com/privacy
+                </a>
+              </p>
             </section>
 
             {/* 8. Speicherdauer */}

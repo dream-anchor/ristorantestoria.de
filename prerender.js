@@ -38,7 +38,8 @@ const MENU_FALLBACKS = {};
 try {
   MENU_FALLBACKS.food = require("./src/data/menu-food-fallback.json");
   MENU_FALLBACKS.drinks = require("./src/data/menu-drinks-fallback.json");
-  console.log("📦 Loaded static menu fallbacks (food + drinks)");
+  MENU_FALLBACKS.lunch = require("./src/data/menu-lunch-fallback.json");
+  console.log("📦 Loaded static menu fallbacks (food + drinks + lunch)");
 } catch (e) {
   console.warn("⚠️ Could not load menu fallback files:", e.message);
 }

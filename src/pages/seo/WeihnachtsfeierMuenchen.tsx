@@ -6,7 +6,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -73,7 +72,6 @@ const WeihnachtsfeierMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent title={w.heroTitle} description={w.heroDescription} sections={[]} />
       <SEO title={w.seoTitle} description={w.seoDescription} canonical="/weihnachtsfeier-muenchen" />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[

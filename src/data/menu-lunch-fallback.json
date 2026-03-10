@@ -1,0 +1,14 @@
+{
+  "id": "lunch-fallback",
+  "menu_type": "lunch",
+  "title": "Mittagsmenü",
+  "title_en": "Lunch Menu",
+  "title_it": "Menu Pranzo",
+  "title_fr": "Menu Déjeuner",
+  "subtitle": null,
+  "subtitle_en": null,
+  "subtitle_it": null,
+  "subtitle_fr": null,
+  "is_published": true,
+  "categories": []
+}

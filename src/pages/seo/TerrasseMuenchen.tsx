@@ -6,7 +6,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -71,7 +70,6 @@ const TerrasseMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent title={tr.heroTitle} description={tr.seoDescription} sections={[]} />
       <SEO title={tr.seoTitle} description={tr.seoDescription} canonical="/terrasse-muenchen" />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[

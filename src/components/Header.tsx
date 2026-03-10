@@ -2,12 +2,15 @@ import { Phone, Mail, Instagram, MessageCircle } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useScrolled } from "@/hooks/useScrolled";
+import SkipLink from "@/components/SkipLink";
 
 const Header = () => {
   const isScrolled = useScrolled();
 
   return (
-    <header className="border-b border-border bg-background">
+    <>
+      <SkipLink />
+      <header className="border-b border-border bg-background">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <LocalizedLink to="home" className="font-serif text-2xl md:text-3xl font-bold hover:opacity-80 transition-opacity">
@@ -36,6 +39,7 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors"
+              title="Instagram @ristorante_storia"
             >
               <Instagram className="h-4 w-4" />
             </a>
@@ -46,6 +50,7 @@ const Header = () => {
         </div>
       </div>
     </header>
+    </>
   );
 };
 

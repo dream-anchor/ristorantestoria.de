@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
-import StaticBotContent from "@/components/StaticBotContent";
 import ReservationCTA from "@/components/ReservationCTA";
 import { Button } from "@/components/ui/button";
 import {
@@ -74,15 +73,6 @@ const LunchMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.lunch.heroTitle}
-        description={t.seo.lunch.heroDescription}
-        sections={[
-          { heading: t.seo.lunch.benefitsTitle, content: [t.seo.lunch.benefit1Title, t.seo.lunch.benefit2Title, t.seo.lunch.benefit3Title, t.seo.lunch.benefit4Title] },
-          { heading: t.seo.lunch.businessTitle, content: [t.seo.lunch.businessInvoice, t.seo.lunch.businessTeam, t.seo.lunch.businessService] },
-          { heading: t.seo.lunch.monFri, content: '11:30-14:30' }
-        ]}
-      />
       <SEO
         title={t.seo.lunch.seoTitle}
         description={t.seo.lunch.heroDescription}

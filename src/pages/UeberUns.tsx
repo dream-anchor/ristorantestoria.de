@@ -59,7 +59,7 @@ const UeberUns = () => {
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
         <Navigation />
-        <main className="flex-1 py-16 md:py-24">
+        <main id="main-content" className="flex-1 py-16 md:py-24">
           <div className="container mx-auto px-6 md:px-8 max-w-4xl">
             {/* Breadcrumb */}
             <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
