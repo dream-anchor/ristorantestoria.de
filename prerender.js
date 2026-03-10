@@ -33,11 +33,29 @@ const LANGUAGES = ["de", "en", "it", "fr"];
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
+// Static fallback menu data (used when Supabase is unavailable)
+const MENU_FALLBACKS = {};
+try {
+  MENU_FALLBACKS.food = require("./src/data/menu-food-fallback.json");
+  MENU_FALLBACKS.drinks = require("./src/data/menu-drinks-fallback.json");
+  console.log("📦 Loaded static menu fallbacks (food + drinks)");
+} catch (e) {
+  console.warn("⚠️ Could not load menu fallback files:", e.message);
+}
+
 /**
  * Fetch complete menu data (menu + categories + items) for SSR
+ * Falls back to static JSON if Supabase is unavailable
  */
 async function fetchCompleteMenuData(menuType) {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    const fallback = MENU_FALLBACKS[menuType];
+    if (fallback) {
+      console.log(`📦 Using static fallback for ${menuType} menu (no Supabase credentials)`);
+      return fallback;
+    }
+    return null;
+  }
 
   try {
     // 1. Fetch menu by type
@@ -75,6 +93,11 @@ async function fetchCompleteMenuData(menuType) {
     };
   } catch (error) {
     console.error(`❌ Error fetching menu data for ${menuType}:`, error.message);
+    const fallback = MENU_FALLBACKS[menuType];
+    if (fallback) {
+      console.log(`📦 Using static fallback for ${menuType} menu (fetch error)`);
+      return fallback;
+    }
     return null;
   }
 }
