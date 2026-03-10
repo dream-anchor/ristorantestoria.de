@@ -7,7 +7,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
-import StaticBotContent from "@/components/StaticBotContent";
 import OpenStatusBadge from "@/components/OpenStatusBadge";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Car, Train, Landmark, Building, GraduationCap, Navigation as NavigationIcon, ParkingSquare } from "lucide-react";
 import {
@@ -84,14 +83,6 @@ const Kontakt = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={content.title}
-        description={content.description}
-        sections={[
-          { heading: t.contact.openingHours, content: [`${t.contact.monFri}: 09:00 - 01:00`, `${t.contact.satSun}: 12:00 - 01:00`] },
-          { heading: t.contact.address, content: content.intro }
-        ]}
-      />
       <SEO
         title={content.title}
         description={content.description}

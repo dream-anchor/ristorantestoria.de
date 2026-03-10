@@ -8,7 +8,6 @@ import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -90,14 +89,6 @@ const AperitivoMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.aperitivo.title}
-        description={t.seo.aperitivo.seoDescription}
-        sections={[
-          { heading: t.seo.aperitivo.menuTitle, content: spritzDrinks.slice(0, 4).map(d => d.name) },
-          { heading: t.seo.aperitivo.whyTitle, content: whyFeatures.map(f => f.title) },
-        ]}
-      />
       <SEO
         title={t.seo.aperitivo.seoTitle}
         description={t.seo.aperitivo.seoDescription}

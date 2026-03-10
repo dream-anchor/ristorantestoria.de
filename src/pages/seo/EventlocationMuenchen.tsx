@@ -6,7 +6,6 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import StaticBotContent from "@/components/StaticBotContent";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -69,15 +68,6 @@ const EventlocationMuenchen = () => {
 
   return (
     <>
-      <StaticBotContent
-        title={t.seo.eventlocation.heroTitle}
-        description={t.seo.eventlocation.heroDescription}
-        sections={[
-          { heading: t.seo.eventlocation.eventTypesTitle, content: eventTypes.map(e => e.title) },
-          { heading: t.seo.eventlocation.roomsTitle, content: [t.seo.eventlocation.room1Title, t.seo.eventlocation.room2Title, t.seo.eventlocation.room3Title] },
-          { heading: t.seo.eventlocation.whyTitle, content: whyFeatures.map(f => f.title) },
-        ]}
-      />
       <SEO
         title={t.seo.eventlocation.seoTitle}
         description={t.seo.eventlocation.seoDescription}

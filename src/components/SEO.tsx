@@ -81,7 +81,9 @@ const SEO = ({
   const { language } = useLanguage();
 
   // Vollständiger Seiten-Title
-  const fullTitle = title ? `${title} – STORIA München` : "STORIA – Ristorante Pizzeria Bar München";
+  const fullTitle = title
+    ? (title.includes('STORIA') ? title : `${title} – STORIA München`)
+    : "STORIA – Ristorante Pizzeria Bar München";
 
   // Kanonische URL normalisiert
   const canonicalUrl = canonical
