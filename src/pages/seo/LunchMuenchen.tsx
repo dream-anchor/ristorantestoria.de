@@ -151,7 +151,7 @@ const LunchMuenchen = () => {
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 text-sm md:text-base">
               <div className="flex items-center gap-2">
                 <BadgeCheck className="w-5 h-5" />
-                <span>{t.seo.lunch.since1995}</span>
+                <span>{t.seo.lunch.since2015}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-5 h-5" />
