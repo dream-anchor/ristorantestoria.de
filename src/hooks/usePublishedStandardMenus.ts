@@ -13,6 +13,7 @@ export const usePublishedStandardMenus = () => {
   return useQuery({
     queryKey: ['published-standard-menus'],
     queryFn: async (): Promise<PublishedStandardMenu[]> => {
+      if (!supabase) return [];
       const { data, error } = await supabase
         .from('menus')
         .select('id, menu_type, title, title_en, sort_order')

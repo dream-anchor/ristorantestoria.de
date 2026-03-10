@@ -1,5 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import menuFoodFallback from "@/data/menu-food-fallback.json";
+import menuDrinksFallback from "@/data/menu-drinks-fallback.json";
+import menuLunchFallback from "@/data/menu-lunch-fallback.json";
+
+// Statische Fallback-Daten für CI-Builds ohne Supabase-Credentials
+const MENU_FALLBACKS: Partial<Record<string, unknown>> = {
+  food: menuFoodFallback,
+  drinks: menuDrinksFallback,
+  lunch: menuLunchFallback,
+};
 
 export type MenuType = 'lunch' | 'food' | 'drinks' | 'christmas' | 'valentines' | 'special';
 
@@ -50,23 +60,10 @@ export interface Menu {
   categories: MenuCategory[];
 }
 
-// Shared function to fetch menu data by ID
-const fetchMenuById = async (menuId: string): Promise<Menu | null> => {
-  const { data: menu, error: menuError } = await supabase
-    .from('menus')
-    .select('*')
-    .eq('id', menuId)
-    .single();
-
-  if (menuError || !menu) {
-    return null;
-  }
-
-  return fetchMenuData(menu);
-};
-
 // Shared function to process menu data
 const fetchMenuData = async (menu: any): Promise<Menu | null> => {
+  if (!supabase) return null;
+
   // Fetch categories
   const { data: categories, error: catError } = await supabase
     .from('menu_categories')
@@ -139,11 +136,33 @@ const fetchMenuData = async (menu: any): Promise<Menu | null> => {
   };
 };
 
+// Shared function to fetch menu data by ID
+const fetchMenuById = async (menuId: string): Promise<Menu | null> => {
+  if (!supabase) return null;
+
+  const { data: menu, error: menuError } = await supabase
+    .from('menus')
+    .select('*')
+    .eq('id', menuId)
+    .single();
+
+  if (menuError || !menu) {
+    return null;
+  }
+
+  return fetchMenuData(menu);
+};
+
 export const useMenu = (menuType: MenuType) => {
   return useQuery({
     queryKey: ['menu', menuType],
     queryFn: async (): Promise<Menu | null> => {
-      // Fetch menu by type
+      // Kein Supabase-Client → statische Fallback-Daten zurückgeben (kein Skeleton)
+      if (!supabase) {
+        return (MENU_FALLBACKS[menuType] as Menu) ?? null;
+      }
+
+      // Live-Daten aus Supabase
       const { data: menu, error: menuError } = await supabase
         .from('menus')
         .select('*')
@@ -152,12 +171,12 @@ export const useMenu = (menuType: MenuType) => {
         .maybeSingle();
 
       if (menuError || !menu) {
-        return null;
+        return (MENU_FALLBACKS[menuType] as Menu) ?? null;
       }
 
       return fetchMenuData(menu);
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 10 * 60 * 1000, // 10 Minuten – Hydration-Daten bleiben länger frisch
   });
 };
 
@@ -166,9 +185,10 @@ export const useMenuById = (menuId: string | undefined) => {
     queryKey: ['menu-by-id', menuId],
     queryFn: async (): Promise<Menu | null> => {
       if (!menuId) return null;
+      if (!supabase) return null;
       return fetchMenuById(menuId);
     },
-    enabled: !!menuId,
+    enabled: !!menuId && !!supabase,
     staleTime: 5 * 60 * 1000,
   });
 };

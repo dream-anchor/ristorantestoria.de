@@ -73,6 +73,7 @@ export const useSpecialMenus = () => {
   return useQuery({
     queryKey: ['special-menus'],
     queryFn: async (): Promise<SpecialMenu[]> => {
+      if (!supabase) return [];
       const { data: menus, error } = await supabase
         .from('menus')
         .select('*')
@@ -134,6 +135,7 @@ export const usePublishedSpecialMenus = () => {
   return useQuery({
     queryKey: ['published-special-menus'],
     queryFn: async () => {
+      if (!supabase) return [];
       const { data: menus, error } = await supabase
         .from('menus')
         .select('*')
@@ -249,7 +251,8 @@ export const useMenuContent = (menuId: string | undefined) => {
     queryKey: ['menu-content', menuId],
     queryFn: async (): Promise<ParsedMenu | null> => {
       if (!menuId) return null;
-      
+      if (!supabase) return null;
+
       // Load menu data
       const { data: menu, error: menuError } = await supabase
         .from('menus')
@@ -513,6 +516,7 @@ export const useSpecialMenuBySlug = (slug: string, language?: string) => {
   return useQuery({
     queryKey: ['special-menu', slug, language],
     queryFn: async () => {
+      if (!supabase) return null;
       // Search across all slug columns (de, en, it, fr)
       // This enables URLs like /en/special-occasions/valentines-menu to work
       const { data, error } = await supabase
