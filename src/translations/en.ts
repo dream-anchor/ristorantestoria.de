@@ -1,4 +1,36 @@
 export const en = {
+  breadcrumb: {
+    home: "Home",
+  },
+  seasonal: {
+    valentinstag: {
+      label: "Valentine's Menu",
+      cta1: "View Valentine's Menu",
+    },
+    osterbrunch: {
+      label: "Easter Brunch",
+      cta1: "Discover Easter Brunch",
+      cta2: "Terrace",
+    },
+    terrasse: {
+      label: "Terrace & Aperitivo",
+      cta1: "Terrace Munich",
+      cta2: "Aperitivo Munich",
+    },
+    wild: {
+      label: "Game Season",
+      cta1: "Game Dishes Munich",
+    },
+    weihnachtsfeier: {
+      label: "Plan Christmas Party",
+      cta1: "Christmas Party Munich",
+    },
+    silvester: {
+      label: "Christmas & New Year's",
+      cta1: "Christmas Party",
+      cta2: "New Year's Menu",
+    },
+  },
   floatingActions: {
     call: "Call",
     reserve: "Book now",
@@ -502,11 +534,22 @@ export const en = {
       faq4Answer: "Yes, we offer daily vegetarian options: homemade pasta with vegetarian sauces, Pizza Margherita and various variations, as well as fresh salads with Mediterranean ingredients. Vegan options are also available upon request.",
       faq5Question: "Is the lunch menu available for takeaway?",
       faq5Answer: "Yes, all our lunch dishes are available as takeaway. Order by phone and pick up your meal ready-packed – ideal for a quick lunch break at the office or on the go.",
+      // Related Pages
+      relatedTitle: "More at STORIA",
+      relatedMittags: "Lunch Menu",
+      relatedMittagsDesc: "All dishes and prices on our current lunch menu.",
+      relatedAperitivo: "Aperitivo Munich",
+      relatedAperitivoDesc: "After-work aperitivo daily from 5 PM.",
+      relatedPizza: "Pizza Munich",
+      relatedPizzaDesc: "Neapolitan stone-oven pizza in Maxvorstadt.",
+      relatedItalianRestaurant: "Italian Restaurant Munich",
+      relatedItalianRestaurantDesc: "Your Italian restaurant in Maxvorstadt since 2015.",
     },
     firmenfeier: {
       // SEO
       seoTitle: "Company Party Munich from \u20ac39 | Up to 180 Guests \u2013 STORIA",
       seoDescription: "Plan your company party in Munich: Italian restaurant with space for 20\u2013180 guests. Christmas party, team building & summer party from \u20ac39 p.p. \u2013 central at K\u00f6nigsplatz. Inquire now!",
+      breadcrumb: "Company Party Munich",
       // Hero
       heroTitle: "Company Party Munich \u2013 Celebrate at STORIA Maxvorstadt",
       heroSubtitle: "Company Parties, Christmas Celebrations & Team Events | STORIA at Königsplatz",
@@ -898,6 +941,7 @@ export const en = {
       // SEO
       seoTitle: "Romantic Dinner Munich | Candlelight Dinner – STORIA",
       seoDescription: "Romantic dinner in Munich with candlelight, Italian cuisine and wine pairing. Perfect for date night & anniversary. STORIA Maxvorstadt.",
+      breadcrumb: "Romantic Dinner Munich",
       // Hero
       heroTitle: "Romantic Dinner Munich – Candlelight at STORIA",
       heroSubtitle: "Italian cuisine for special moments together | STORIA Maxvorstadt",
@@ -1079,6 +1123,7 @@ export const en = {
       // SEO
       seoTitle: "Event Venue Munich Maxvorstadt | 20–180 Guests – STORIA",
       seoDescription: "Event venue Munich Maxvorstadt for 20–180 guests. Corporate events, weddings, birthdays – Italian cuisine. STORIA near Königsplatz. Inquire now!",
+      breadcrumb: "Event Venue Munich",
       // Hero
       heroTitle: "Event Venue Munich Maxvorstadt – Celebrate at STORIA",
       heroSubtitle: "Italian Restaurant for Unforgettable Events | STORIA at Königsplatz",
@@ -1288,6 +1333,7 @@ export const en = {
       // SEO
       seoTitle: "Birthday Party Munich | Up to 100 Guests from €35 – STORIA",
       seoDescription: "Birthday party Munich at STORIA: Italian menu, birthday cake & space for up to 100 guests. 30th, 40th, 50th birthday – central at Königsplatz. Inquire now!",
+      breadcrumb: "Birthday Party Munich",
       // Hero
       heroTitle: "Birthday Party Munich – Celebrate Italian Style at STORIA",
       heroSubtitle: "Milestone Birthdays, Surprise Parties & Family Celebrations | STORIA at Königsplatz",
@@ -1406,6 +1452,7 @@ export const en = {
     silvester: {
       seoTitle: "New Year's Eve at Restaurant STORIA Munich – Gala Dinner 2026",
       seoDescription: "Restaurant Munich New Year's Eve: Italian gala dinner at STORIA Maxvorstadt. From €99 p.p. with music, wine pairing & midnight champagne.",
+      breadcrumb: "New Year's Eve Munich",
       heroTitle: "New Year's Eve at Restaurant STORIA Munich – Gala Dinner 2026",
       heroSubtitle: "Festive NYE dinner with music, wine pairing and midnight countdown in Maxvorstadt",
       heroBadge1: "🥂 Gala Dinner",
@@ -1530,6 +1577,7 @@ export const en = {
     weihnachten: {
       seoTitle: "Christmas Party Munich 2026 – Italian Restaurant | STORIA",
       seoDescription: "Christmas party in Munich: Italian Christmas menus at STORIA Maxvorstadt. From €45 p.p. for 6-100 guests. Corporate events, family, Advent dinners. Near Königsplatz. Enquire now!",
+      breadcrumb: "Christmas Munich",
       heroTitle: "Christmas in Munich – Festive Menus at STORIA",
       heroSubtitle: "Christmas party, Advent dinner or Christmas Eve – authentically Italian in Maxvorstadt",
       heroBadge1: "🎄 Christmas Menus",
@@ -1649,6 +1697,7 @@ export const en = {
     valentinstag: {
       seoTitle: "Valentine's Day Munich 2026 – Romantic Dinner | STORIA",
       seoDescription: "Valentine's Day in Munich: Romantic candlelight dinner at STORIA Maxvorstadt. From €55 p.p. with aperitivo, menu & rose. Near Königsplatz. Reserve now!",
+      breadcrumb: "Valentine's Day Munich",
       heroTitle: "Valentine's Day in Munich – Romantic Dinner at STORIA",
       heroSubtitle: "Candlelight dinner with aperitivo, wine pairing and a rose at your table – in Maxvorstadt",
       heroBadge1: "❤️ Candlelight Dinner",
@@ -2270,6 +2319,7 @@ export const en = {
     weihnachtsfeier: {
       seoTitle: "Christmas Party Munich | Up to 180 Guests from €45 – STORIA",
       seoDescription: "Christmas party Munich at STORIA: Italian Christmas menu from €45 p.p., up to 180 guests. Corporate & family celebrations – central at Königsplatz. Inquire now!",
+      breadcrumb: "Christmas Party Munich",
       heroTitle: "Christmas Party Munich – Celebrate Italian Style at STORIA",
       heroSubtitle: "Corporate Christmas party, private celebration & Christmas dinner | STORIA at Königsplatz",
       heroBadge1: "🎄 up to 180 Guests",

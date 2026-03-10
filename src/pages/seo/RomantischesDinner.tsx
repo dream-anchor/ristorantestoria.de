@@ -15,6 +15,7 @@ import romanticDinnerHero from "@/assets/romantisches-dinner-kerzenlicht-storia-
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 
 const RomantischesDinner = () => {
   const { t } = useLanguage();
@@ -161,7 +162,8 @@ const RomantischesDinner = () => {
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
-            
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.seo.romanticDinner.breadcrumb }]} />
+
             {/* Intro Section */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{t.seo.romanticDinner.introTitle}</h2>

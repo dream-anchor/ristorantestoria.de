@@ -8,6 +8,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import LocalizedLink from "@/components/LocalizedLink";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -51,6 +52,7 @@ const Mittagsmenu = () => {
 
         <main id="main-content" className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
+          <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.pages.mittagsmenu.breadcrumb }]} />
           <h1 className="text-4xl font-serif font-bold mb-8 text-center">
             {t.pages.mittagsmenu.h1}
           </h1>

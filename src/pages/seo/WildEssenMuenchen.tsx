@@ -1,5 +1,6 @@
 import LocalizedLink from "@/components/LocalizedLink";
 import Header from "@/components/Header";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -279,6 +280,7 @@ const WildEssenMuenchen = () => {
           {/* Introduction */}
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4 max-w-4xl">
+              <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.seo.wild.breadcrumb }]} />
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6">
                 {t.seo.wild.introTitle}
               </h2>

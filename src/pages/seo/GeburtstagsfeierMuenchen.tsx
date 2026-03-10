@@ -15,6 +15,7 @@ import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-restaurant-storia-m
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 
 const GeburtstagsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -124,6 +125,7 @@ const GeburtstagsfeierMuenchen = () => {
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.internalLinks.eventLocation, href: '/eventlocation-muenchen-maxvorstadt' }, { label: b.breadcrumb }]} />
 
             {/* Intro */}
             <section className="mb-16">

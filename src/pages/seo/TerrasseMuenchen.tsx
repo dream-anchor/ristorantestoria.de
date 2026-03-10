@@ -16,6 +16,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import ReservationCTA from "@/components/ReservationCTA";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 
 const TerrasseMuenchen = () => {
   const { t } = useLanguage();
@@ -121,6 +122,7 @@ const TerrasseMuenchen = () => {
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: tr.breadcrumb }]} />
 
             {/* Intro */}
             <section className="mb-16">

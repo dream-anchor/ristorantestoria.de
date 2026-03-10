@@ -29,6 +29,38 @@ const deepMapStrings = (value: unknown): unknown => {
 };
 
 const itBase = {
+  breadcrumb: {
+    home: "Inizio",
+  },
+  seasonal: {
+    valentinstag: {
+      label: "Men\u00f9 di San Valentino",
+      cta1: "Vedi men\u00f9 San Valentino",
+    },
+    osterbrunch: {
+      label: "Brunch di Pasqua",
+      cta1: "Scopri il brunch di Pasqua",
+      cta2: "Terrazza",
+    },
+    terrasse: {
+      label: "Terrazza & Aperitivo",
+      cta1: "Terrazza Monaco",
+      cta2: "Aperitivo Monaco",
+    },
+    wild: {
+      label: "Stagione della caccia",
+      cta1: "Selvaggina Monaco",
+    },
+    weihnachtsfeier: {
+      label: "Festa di Natale",
+      cta1: "Festa di Natale Monaco",
+    },
+    silvester: {
+      label: "Natale & Capodanno",
+      cta1: "Festa di Natale",
+      cta2: "Men\u00f9 di Capodanno",
+    },
+  },
   floatingActions: {
     call: "Chiama",
     reserve: "Prenota",
@@ -530,6 +562,7 @@ const itBase = {
       // SEO
       seoTitle: "Eventi Aziendali Monaco | Festa aziendale allo STORIA",
       seoDescription: "Eventi aziendali Monaco allo STORIA Maxvorstadt: festa di Natale, team building & festa estiva fino a 180 ospiti. Cucina italiana, centrale a Königsplatz.",
+      breadcrumb: "Festa Aziendale Monaco",
       // Hero
       heroTitle: "Eventi Aziendali Monaco – Festa aziendale nella Maxvorstadt",
       heroSubtitle: "Feste Aziendali, Natale & Team Events | STORIA a Königsplatz",
@@ -937,6 +970,7 @@ const itBase = {
     romanticDinner: {
       seoTitle: "Cena Romantica Monaco | Cena a Lume di Candela – STORIA",
       seoDescription: "Cena romantica a Monaco con luce di candele, cucina italiana e abbinamento vini. Ideale per appuntamento & anniversario. STORIA Maxvorstadt.",
+      breadcrumb: "Cena Romantica Monaco",
       heroTitle: "Cena Romantica Monaco – Lume di Candela da STORIA",
       heroSubtitle: "Ristorante Italiano per Momenti Indimenticabili a Due | STORIA a Königsplatz",
       heroBadge1: "❤️ Atmosfera a Lume di Candela",
@@ -1116,6 +1150,7 @@ const itBase = {
       // SEO
       seoTitle: "Location Eventi Monaco Maxvorstadt | 20–180 Ospiti – STORIA",
       seoDescription: "Location eventi Monaco Maxvorstadt per 20–180 ospiti. Feste aziendali, matrimoni, compleanni – cucina italiana. STORIA vicino a Königsplatz. Richiedi ora!",
+      breadcrumb: "Location Eventi Monaco",
       // Hero
       heroTitle: "Location Eventi Monaco Maxvorstadt – Festeggiare da STORIA",
       heroSubtitle: "Ristorante Italiano per Eventi Indimenticabili | STORIA a Königsplatz",
@@ -1261,6 +1296,7 @@ const itBase = {
     birthday: {
       seoTitle: "Festa di Compleanno Monaco | Fino a 100 Ospiti da 35 € – STORIA",
       seoDescription: "Festa di compleanno Monaco allo STORIA: Menu italiano, torta & posto fino a 100 ospiti. 30°, 40°, 50° compleanno – centrale a Königsplatz. Richiedi ora!",
+      breadcrumb: "Festa di Compleanno Monaco",
       heroTitle: "Festa di Compleanno Monaco – Festeggiare all'Italiana da STORIA",
       heroSubtitle: "Compleanno importante, festa a sorpresa & feste in famiglia | STORIA a Königsplatz",
       heroBadge1: "🎂 fino a 180 Ospiti",
@@ -1369,6 +1405,7 @@ const itBase = {
     silvester: {
       seoTitle: "Capodanno al Ristorante STORIA Monaco – Cena di Gala 2026",
       seoDescription: "Ristorante Monaco Capodanno: Cena di gala italiana al STORIA Maxvorstadt. Da 99 € a persona con musica, abbinamento vini e brindisi di mezzanotte.",
+      breadcrumb: "Capodanno Monaco",
       heroTitle: "Capodanno al Ristorante STORIA Monaco – Cena di Gala 2026",
       heroSubtitle: "Cena festiva di Capodanno con musica, abbinamento vini e countdown di mezzanotte nella Maxvorstadt",
       heroBadge1: "🥂 Cena di Gala",
@@ -1493,6 +1530,7 @@ const itBase = {
     weihnachtsfeier: {
       seoTitle: "Festa di Natale Monaco | Fino a 180 Ospiti da 45 € – STORIA",
       seoDescription: "Festa di Natale Monaco allo STORIA: Menu natalizio italiano da 45 € p.p., fino a 180 ospiti. Feste aziendali & familiari – centrale a Königsplatz. Richiedi ora!",
+      breadcrumb: "Festa di Natale Monaco",
       heroTitle: "Festa di Natale Monaco – Festeggiare all'Italiana da STORIA",
       heroSubtitle: "Festa di Natale aziendale, festa privata e cena di Natale | STORIA a Königsplatz",
       heroBadge1: "🎄 fino a 180 Ospiti",
@@ -1627,6 +1665,7 @@ const itBase = {
     valentinstag: {
       seoTitle: "San Valentino Monaco 2026 – Cena Romantica | STORIA",
       seoDescription: "San Valentino a Monaco: Cena romantica a lume di candela allo STORIA Maxvorstadt. Da 55 € a persona con aperitivo, menù & rosa. Vicino a Königsplatz. Prenotate ora!",
+      breadcrumb: "San Valentino Monaco",
       heroTitle: "San Valentino a Monaco – Cena Romantica allo STORIA",
       heroSubtitle: "Cena a lume di candela con aperitivo, abbinamento vini e rosa al tavolo – nella Maxvorstadt",
       heroBadge1: "❤️ Cena a Lume di Candela",

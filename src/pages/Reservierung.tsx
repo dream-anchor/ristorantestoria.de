@@ -7,6 +7,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import BackToLandingPage from "@/components/BackToLandingPage";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
@@ -46,6 +47,7 @@ const Reservierung = () => {
         
         <main className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
+          <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.pages.reservierung.breadcrumb }]} />
           <h1 className="text-4xl font-bold mb-4 text-center">
             {t.pages.reservierung.h1}
           </h1>

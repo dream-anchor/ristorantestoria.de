@@ -7,6 +7,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import OpenStatusBadge from "@/components/OpenStatusBadge";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Car, Train, Landmark, Building, GraduationCap, Navigation as NavigationIcon, ParkingSquare } from "lucide-react";
 import {
@@ -112,6 +113,7 @@ const Kontakt = () => {
 
         <main id="main-content" className="container mx-auto px-4 py-12 flex-grow">
           <BackToLandingPage />
+          <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.pages.kontakt.breadcrumb }]} />
           <h1 className="text-4xl font-bold mb-4 text-center">
             {content.h1}
           </h1>

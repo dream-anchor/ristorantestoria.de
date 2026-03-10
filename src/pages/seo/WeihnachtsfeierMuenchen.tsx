@@ -15,6 +15,7 @@ import weihnachtsfeierEvent from "@/assets/weihnachtsfeier-event.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 
 const WeihnachtsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -125,6 +126,7 @@ const WeihnachtsfeierMuenchen = () => {
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.internalLinks.eventLocation, href: '/eventlocation-muenchen-maxvorstadt' }, { label: w.breadcrumb }]} />
 
             {/* Intro */}
             <section className="mb-16">

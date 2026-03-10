@@ -1,4 +1,36 @@
 export const fr = {
+  breadcrumb: {
+    home: "Accueil",
+  },
+  seasonal: {
+    valentinstag: {
+      label: "Menu Saint-Valentin",
+      cta1: "Voir le menu Saint-Valentin",
+    },
+    osterbrunch: {
+      label: "Brunch de P\u00e2ques",
+      cta1: "D\u00e9couvrir le brunch de P\u00e2ques",
+      cta2: "Terrasse",
+    },
+    terrasse: {
+      label: "Terrasse & Aperitivo",
+      cta1: "Terrasse Munich",
+      cta2: "Aperitivo Munich",
+    },
+    wild: {
+      label: "Saison du gibier",
+      cta1: "Gibier Munich",
+    },
+    weihnachtsfeier: {
+      label: "F\u00eate de No\u00ebl",
+      cta1: "F\u00eate de No\u00ebl Munich",
+    },
+    silvester: {
+      label: "No\u00ebl & Nouvel An",
+      cta1: "F\u00eate de No\u00ebl",
+      cta2: "Menu du Nouvel An",
+    },
+  },
   floatingActions: {
     call: "Appeler",
     reserve: "Réserver",
@@ -502,11 +534,22 @@ export const fr = {
       faq4Answer: "Oui, nous proposons quotidiennement des options végétariennes : pâtes maison avec sauces végétariennes, Pizza Margherita et diverses variantes, ainsi que des salades fraîches aux ingrédients méditerranéens. Des options véganes sont également disponibles sur demande.",
       faq5Question: "Le menu déjeuner est-il disponible à emporter ?",
       faq5Answer: "Oui, tous nos plats du déjeuner sont disponibles en take-away. Commandez par téléphone et récupérez votre repas prêt à emporter – idéal pour une pause déjeuner rapide au bureau ou en déplacement.",
+      // Related Pages
+      relatedTitle: "Plus chez STORIA",
+      relatedMittags: "Menu du midi",
+      relatedMittagsDesc: "Tous les plats et tarifs de notre carte du midi.",
+      relatedAperitivo: "Aperitivo Munich",
+      relatedAperitivoDesc: "Aperitivo after-work tous les jours d\u00e8s 17h.",
+      relatedPizza: "Pizza Munich",
+      relatedPizzaDesc: "Pizza napolitaine au four \u00e0 pierre \u00e0 Maxvorstadt.",
+      relatedItalianRestaurant: "Restaurant italien Munich",
+      relatedItalianRestaurantDesc: "Votre restaurant italien \u00e0 Maxvorstadt depuis 2015.",
     },
     firmenfeier: {
       // SEO
       seoTitle: "F\u00eate d'entreprise Munich d\u00e8s 39 \u20ac | Jusqu'\u00e0 180 invit\u00e9s \u2013 STORIA",
       seoDescription: "Organisez votre f\u00eate d'entreprise \u00e0 Munich : restaurant italien pour 20\u2013180 invit\u00e9s. No\u00ebl, team building & f\u00eate d'\u00e9t\u00e9 d\u00e8s 39 \u20ac p.p. \u2013 central K\u00f6nigsplatz. Renseignez-vous !",
+      breadcrumb: "F\u00eate d'Entreprise Munich",
       // Hero
       heroTitle: "F\u00eate d'entreprise Munich \u2013 C\u00e9l\u00e9brez au STORIA Maxvorstadt",
       heroSubtitle: "Fêtes d'Entreprise, Noël & Team Events | STORIA à Königsplatz",
@@ -888,6 +931,7 @@ export const fr = {
       // SEO
       seoTitle: "Dîner Romantique Munich | Dîner aux Chandelles – STORIA",
       seoDescription: "Dîner romantique à Munich aux chandelles, cuisine italienne et accord mets-vins. Idéal pour rendez-vous & anniversaire. STORIA Maxvorstadt.",
+      breadcrumb: "D\u00eener Romantique Munich",
       // Hero
       heroTitle: "Dîner Romantique Munich – Aux Chandelles chez STORIA",
       heroSubtitle: "Cuisine italienne pour moments spéciaux à deux | STORIA Maxvorstadt",
@@ -1069,6 +1113,7 @@ export const fr = {
       // SEO
       seoTitle: "Lieu d'Événement Munich Maxvorstadt | 20–180 Invités – STORIA",
       seoDescription: "Lieu d'événement Munich Maxvorstadt pour 20–180 invités. Fêtes d'entreprise, mariages, anniversaires – cuisine italienne. STORIA près de Königsplatz. Demandez maintenant !",
+      breadcrumb: "Lieu d'\u00c9v\u00e9nement Munich",
       // Hero
       heroTitle: "Lieu d'Événement Munich Maxvorstadt – Célébrer chez STORIA",
       heroSubtitle: "Restaurant Italien pour Événements Inoubliables | STORIA à Königsplatz",
@@ -1277,6 +1322,7 @@ export const fr = {
     birthday: {
       seoTitle: "Fête d'Anniversaire Munich | Jusqu'à 100 Invités dès 35 € – STORIA",
       seoDescription: "Fête d'anniversaire Munich au STORIA : Menu italien, gâteau & espace jusqu'à 100 invités. 30e, 40e, 50e anniversaire – central à Königsplatz. Demandez maintenant !",
+      breadcrumb: "F\u00eate d'Anniversaire Munich",
       heroTitle: "Fête d'Anniversaire Munich – Célébrer à l'Italienne chez STORIA",
       heroSubtitle: "Anniversaire rond, fête surprise & célébrations en famille | STORIA à Königsplatz",
       heroBadge1: "🎂 jusqu'à 180 Invités",
@@ -1385,6 +1431,7 @@ export const fr = {
     silvester: {
       seoTitle: "Réveillon au Restaurant STORIA Munich – Dîner de Gala 2026",
       seoDescription: "Restaurant Munich Réveillon : Dîner de gala italien au STORIA Maxvorstadt. À partir de 99 € p.p. avec musique, accord mets-vins & champagne de minuit.",
+      breadcrumb: "R\u00e9veillon Munich",
       heroTitle: "Réveillon au Restaurant STORIA Munich – Dîner de Gala 2026",
       heroSubtitle: "Dîner festif du Réveillon avec musique, accord mets-vins et countdown de minuit dans la Maxvorstadt",
       heroBadge1: "🥂 Dîner de Gala",
@@ -1509,6 +1556,7 @@ export const fr = {
     weihnachtsfeier: {
       seoTitle: "Fête de Noël Munich | Jusqu'à 180 Invités dès 45 € – STORIA",
       seoDescription: "Fête de Noël Munich au STORIA : Menu de Noël italien dès 45 € p.p., jusqu'à 180 invités. Fêtes d'entreprise & familiales – central à Königsplatz. Demandez maintenant !",
+      breadcrumb: "F\u00eate de No\u00ebl Munich",
       heroTitle: "Fête de Noël Munich – Célébrer à l'Italienne chez STORIA",
       heroSubtitle: "Fête de Noël d\u2019entreprise, fête privée et dîner de Noël | STORIA à Königsplatz",
       heroBadge1: "🎄 jusqu'à 180 Invités",
@@ -1795,6 +1843,7 @@ export const fr = {
     valentinstag: {
       seoTitle: "Saint-Valentin Munich 2026 – Dîner Romantique | STORIA",
       seoDescription: "Saint-Valentin à Munich : Dîner romantique aux chandelles au STORIA Maxvorstadt. À partir de 55 € p.p. avec apéritif, menu & rose. Près de Königsplatz. Réservez maintenant !",
+      breadcrumb: "Saint-Valentin Munich",
       heroTitle: "Saint-Valentin à Munich – Dîner Romantique au STORIA",
       heroSubtitle: "Dîner aux chandelles avec apéritif, accord vins et rose à votre table – dans la Maxvorstadt",
       heroBadge1: "❤️ Dîner aux Chandelles",

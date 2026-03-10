@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -81,18 +82,7 @@ const FAQ = () => {
 
         <main className="container mx-auto px-4 py-16 md:py-20 flex-grow">
           <article className="max-w-4xl mx-auto">
-            {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="mb-8 text-base text-muted-foreground">
-              <ol className="flex items-center gap-2">
-                <li>
-                  <LocalizedLink to="home" className="hover:text-foreground transition-colors">
-                    Home
-                  </LocalizedLink>
-                </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">FAQ</li>
-              </ol>
-            </nav>
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: 'FAQ' }]} />
 
             {/* Header */}
             <header className="text-center mb-12">

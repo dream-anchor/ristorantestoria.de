@@ -1,5 +1,6 @@
 import LocalizedLink from "@/components/LocalizedLink";
 import { Link } from "react-router-dom";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -135,6 +136,7 @@ const ItalienerMuenchen = () => {
           {/* Intro Section */}
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4 max-w-4xl">
+              <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.seo.italienerMuenchen.breadcrumb }]} />
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6">
                 {t.seo.italienerMuenchen.introTitle}
               </h2>

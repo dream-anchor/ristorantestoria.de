@@ -19,6 +19,7 @@ import cocktailsImage from "@/assets/aperitivo-muenchen-italienische-bar-storia.
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, MessageCircle, Calendar, MapPin, Clock, Wine, Utensils, ArrowRight } from "lucide-react";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 
 const AperitivoMuenchen = () => {
   const { t } = useLanguage();
@@ -244,10 +245,11 @@ const AperitivoMuenchen = () => {
         <Navigation />
         
         <main className="flex-grow">
-          
+
           {/* Introduction */}
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4 max-w-4xl">
+              <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.seo.aperitivo.breadcrumb }]} />
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6">
                 {t.seo.aperitivo.introTitle}
               </h2>

@@ -7,6 +7,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
 import LocalizedLink from "@/components/LocalizedLink";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -179,6 +180,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]} />
 
             {/* Intro */}
             <section className="mb-16">

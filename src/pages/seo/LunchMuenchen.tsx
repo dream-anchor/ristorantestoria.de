@@ -1,5 +1,6 @@
 import LocalizedLink from "@/components/LocalizedLink";
 import { Link, useLocation } from "react-router-dom";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -174,6 +175,8 @@ const LunchMuenchen = () => {
         <Navigation />
         
         <main className="flex-grow">
+
+          <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.internalLinks.lunchMunich }]} />
 
           {/* SEO Intro Section */}
           {t.seo.lunch.introTitle && (
@@ -384,6 +387,31 @@ const LunchMuenchen = () => {
                   </AccordionItem>
                 ))}
               </Accordion>
+            </div>
+          </section>
+
+          {/* Related Pages */}
+          <section className="py-12 bg-secondary/20">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <h2 className="text-2xl font-serif font-bold mb-6 text-center">{t.seo.lunch.relatedTitle}</h2>
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <LocalizedLink to="mittags-menu" className="bg-card border border-border rounded-xl p-5 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-1 text-sm">{t.seo.lunch.relatedMittags}</h3>
+                  <p className="text-muted-foreground text-xs">{t.seo.lunch.relatedMittagsDesc}</p>
+                </LocalizedLink>
+                <LocalizedLink to="aperitivo-muenchen" className="bg-card border border-border rounded-xl p-5 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-1 text-sm">{t.seo.lunch.relatedAperitivo}</h3>
+                  <p className="text-muted-foreground text-xs">{t.seo.lunch.relatedAperitivoDesc}</p>
+                </LocalizedLink>
+                <LocalizedLink to="pizza-muenchen" className="bg-card border border-border rounded-xl p-5 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-1 text-sm">{t.seo.lunch.relatedPizza}</h3>
+                  <p className="text-muted-foreground text-xs">{t.seo.lunch.relatedPizzaDesc}</p>
+                </LocalizedLink>
+                <LocalizedLink to="italienisches-restaurant-muenchen" className="bg-card border border-border rounded-xl p-5 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-1 text-sm">{t.seo.lunch.relatedItalianRestaurant}</h3>
+                  <p className="text-muted-foreground text-xs">{t.seo.lunch.relatedItalianRestaurantDesc}</p>
+                </LocalizedLink>
+              </div>
             </div>
           </section>
 

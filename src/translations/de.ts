@@ -1,4 +1,36 @@
 export const de = {
+  breadcrumb: {
+    home: "Startseite",
+  },
+  seasonal: {
+    valentinstag: {
+      label: "Valentinstag-Men\u00fc",
+      cta1: "Valentinstag-Men\u00fc ansehen",
+    },
+    osterbrunch: {
+      label: "Osterbrunch",
+      cta1: "Osterbrunch entdecken",
+      cta2: "Terrasse",
+    },
+    terrasse: {
+      label: "Terrasse & Aperitivo",
+      cta1: "Terrasse M\u00fcnchen",
+      cta2: "Aperitivo M\u00fcnchen",
+    },
+    wild: {
+      label: "Wild-Saison",
+      cta1: "Wild essen M\u00fcnchen",
+    },
+    weihnachtsfeier: {
+      label: "Weihnachtsfeier planen",
+      cta1: "Weihnachtsfeier M\u00fcnchen",
+    },
+    silvester: {
+      label: "Silvester & Weihnachten",
+      cta1: "Weihnachtsfeier",
+      cta2: "Silvester Men\u00fc",
+    },
+  },
   floatingActions: {
     call: "Anrufen",
     reserve: "Reservieren",
@@ -503,11 +535,22 @@ export const de = {
       faq4Answer: "Ja, wir bieten täglich vegetarische Optionen an: hausgemachte Pasta mit vegetarischen Saucen, Pizza Margherita und verschiedene Varianten, sowie frische Salate mit mediterranen Zutaten. Vegane Optionen sind auf Anfrage ebenfalls möglich.",
       faq5Question: "Ist das Mittagsmenü auch zum Mitnehmen verfügbar?",
       faq5Answer: "Ja, alle unsere Lunch-Gerichte sind auch als Take-away erhältlich. Bestellen Sie telefonisch vor und holen Sie Ihr Essen fertig verpackt ab – ideal für eine schnelle Mittagspause im Büro oder unterwegs.",
+      // Related Pages
+      relatedTitle: "Weitere Angebote im STORIA",
+      relatedMittags: "Mittagsmen\u00fc",
+      relatedMittagsDesc: "Alle Gerichte und Preise der aktuellen Mittagskarte.",
+      relatedAperitivo: "Aperitivo M\u00fcnchen",
+      relatedAperitivoDesc: "Feierabend-Aperitivo t\u00e4glich ab 17 Uhr.",
+      relatedPizza: "Pizza M\u00fcnchen",
+      relatedPizzaDesc: "Neapolitanische Steinofen-Pizza in der Maxvorstadt.",
+      relatedItalianRestaurant: "Italienisches Restaurant M\u00fcnchen",
+      relatedItalianRestaurantDesc: "Ihr Italiener in der Maxvorstadt seit 2015.",
     },
     firmenfeier: {
       // SEO
       seoTitle: "Firmenfeier M\u00fcnchen ab 39 \u20ac | Bis 180 G\u00e4ste \u2013 STORIA",
       seoDescription: "Firmenfeier in M\u00fcnchen planen: Italienisches Restaurant mit Platz f\u00fcr 20\u2013180 G\u00e4ste. Weihnachtsfeier, Teambuilding & Sommerfest ab 39 \u20ac p.P. \u2013 zentral am K\u00f6nigsplatz. Jetzt anfragen!",
+      breadcrumb: "Firmenfeier M\u00fcnchen",
       // Hero
       heroTitle: "Firmenfeier M\u00fcnchen \u2013 Feiern im STORIA Maxvorstadt",
       heroSubtitle: "Betriebsfeier, Weihnachtsfeier & Teamevents | STORIA am Königsplatz",
@@ -916,6 +959,7 @@ export const de = {
       // SEO
       seoTitle: "Romantisches Dinner München | Candle-Light-Dinner – STORIA",
       seoDescription: "Romantisches Abendessen in München mit Kerzenlicht, italienischer Küche und Weinbegleitung. Ideal für Date Night & Jahrestag. STORIA Maxvorstadt.",
+      breadcrumb: "Romantisches Dinner M\u00fcnchen",
       // Hero
       heroTitle: "Romantisches Dinner München – Candle Light im STORIA",
       heroSubtitle: "Italienische Küche für besondere Momente zu zweit | STORIA Maxvorstadt",
@@ -1098,6 +1142,7 @@ export const de = {
       // SEO
       seoTitle: "Eventlocation München Maxvorstadt | 20–180 Gäste – STORIA",
       seoDescription: "Eventlocation München Maxvorstadt für 20–180 Gäste. Firmenfeier, Hochzeit, Geburtstag – italienische Küche. STORIA nahe Königsplatz. Jetzt anfragen!",
+      breadcrumb: "Eventlocation M\u00fcnchen",
       // Hero
       heroTitle: "Eventlocation München Maxvorstadt – Feiern im STORIA",
       heroSubtitle: "Italienisches Restaurant für unvergessliche Events | STORIA am Königsplatz",
@@ -1308,6 +1353,7 @@ export const de = {
       // SEO
       seoTitle: "Geburtstagsfeier München | Bis 100 Gäste ab 35 € – STORIA",
       seoDescription: "Geburtstagsfeier München im STORIA: Italienisches Menü, Geburtstagstorte & Platz für bis zu 100 Gäste. 30., 40., 50. Geburtstag – zentral am Königsplatz. Jetzt anfragen!",
+      breadcrumb: "Geburtstagsfeier M\u00fcnchen",
       // Hero
       heroTitle: "Geburtstagsfeier München – Italienisch feiern im STORIA",
       heroSubtitle: "Runder Geburtstag, \u00dcberraschungsparty & Familienfeiern | STORIA am K\u00f6nigsplatz",
@@ -1428,6 +1474,7 @@ export const de = {
       // SEO
       seoTitle: "Silvester im Restaurant STORIA München – Gala-Dinner 2026",
       seoDescription: "Restaurant München Silvester: Italienisches Gala-Dinner im STORIA Maxvorstadt. Ab 99 € p.P. mit Musik, Weinbegleitung & Mitternachts-Champagner.",
+      breadcrumb: "Silvester M\u00fcnchen",
       // Hero
       heroTitle: "Silvester im Restaurant STORIA München – Gala-Dinner 2026",
       heroSubtitle: "Festliches Silvester-Dinner mit Musik, Weinbegleitung und Mitternachts-Countdown in der Maxvorstadt",
@@ -1564,6 +1611,7 @@ export const de = {
     weihnachten: {
       seoTitle: "Weihnachtsmenü München 2026 – Feiern im STORIA",
       seoDescription: "Weihnachtsfeier in München: Italienische Weihnachtsmenüs im STORIA Maxvorstadt. Ab 45 € p.P. für 6–100 Gäste. Firmenfeier, Familie & Adventsessen.",
+      breadcrumb: "Weihnachten M\u00fcnchen",
       heroTitle: "Weihnachten in München – Festliche Menüs im STORIA",
       heroSubtitle: "Weihnachtsfeier, Adventsessen oder Heiligabend-Dinner – authentisch italienisch in der Maxvorstadt",
       heroBadge1: "🎄 Weihnachtsmenüs",
@@ -1684,6 +1732,7 @@ export const de = {
     valentinstag: {
       seoTitle: "Valentinstag München 2026 – Romantisches Dinner | STORIA",
       seoDescription: "Valentinstag in München: Romantisches Candle-Light-Dinner im STORIA Maxvorstadt. Ab 55 € p.P. mit Aperitivo, Menü & Rose. Nähe Königsplatz. Jetzt reservieren!",
+      breadcrumb: "Valentinstag M\u00fcnchen",
       heroTitle: "Valentinstag in München – Romantisches Dinner im STORIA",
       heroSubtitle: "Candle-Light-Dinner mit Aperitivo, Menü-Begleitung und Rose am Tisch – in der Maxvorstadt",
       heroBadge1: "❤️ Candle-Light-Dinner",
@@ -2322,6 +2371,7 @@ export const de = {
     weihnachtsfeier: {
       seoTitle: "Weihnachtsfeier München | Bis 180 Gäste ab 45 € – STORIA",
       seoDescription: "Weihnachtsfeier München im STORIA: Italienisches Weihnachtsmenü ab 45 € p.P., bis 180 Gäste. Firmenweihnachtsfeier & Familienessen – zentral am Königsplatz. Jetzt anfragen!",
+      breadcrumb: "Weihnachtsfeier M\u00fcnchen",
       heroTitle: "Weihnachtsfeier München – Italienisch feiern im STORIA",
       heroSubtitle: "Firmenweihnachtsfeier, private Feier & Weihnachtsessen | STORIA am Königsplatz",
       heroBadge1: "🎄 bis 180 Gäste",

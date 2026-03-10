@@ -16,6 +16,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import { DynamicPackagesSection, DynamicCateringHighlights } from "@/components/DynamicPackagesSection";
+import BreadcrumbNav from "@/components/BreadcrumbNav";
 
 const EventlocationMuenchen = () => {
   const { t } = useLanguage();
@@ -130,7 +131,8 @@ const EventlocationMuenchen = () => {
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
-            
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.seo.eventlocation.breadcrumb }]} />
+
             {/* Intro Section */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{t.seo.eventlocation.introTitle}</h2>
