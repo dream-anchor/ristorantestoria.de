@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import HomeAbout from "@/components/HomeAbout";
+import SeasonalBanner from "@/components/SeasonalBanner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
@@ -32,6 +33,9 @@ const Index = () => {
           <ImageGrid />
 
           <HomeIntro />
+          <div className="container mx-auto px-4 max-w-4xl">
+            <SeasonalBanner />
+          </div>
           <HomeAbout />
 
           <GoogleReviews />

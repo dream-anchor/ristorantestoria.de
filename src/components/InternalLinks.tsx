@@ -18,6 +18,9 @@ const InternalLinks = () => {
     { baseSlug: "wild-essen-muenchen", label: t.internalLinks.gameDishesMunich },
     { baseSlug: "italiener-muenchen", label: t.internalLinks.italienerMuenchen },
     { baseSlug: "italiener-koenigsplatz", label: t.internalLinks.italienerKoenigsplatz },
+    { baseSlug: "italienisches-restaurant-muenchen", label: t.internalLinks.italianRestaurantMunich },
+    { baseSlug: "italiener-hauptbahnhof-muenchen", label: t.internalLinks.italianCentralStationMunich },
+    { baseSlug: "hochzeitsfeier-muenchen", label: t.internalLinks.weddingMunich },
   ];
 
   return (
