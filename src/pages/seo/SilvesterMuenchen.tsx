@@ -128,7 +128,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
           "location": {
             "@type": "Place",
             "name": "Ristorante STORIA",
-            "address": { "@type": "PostalAddress", "streetAddress": "Theresienstraße 56", "addressLocality": "München", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" }
+            "address": { "@type": "PostalAddress", "streetAddress": "Karlstraße 47a", "addressLocality": "München", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" }
           },
           "organizer": { "@type": "Restaurant", "name": "Ristorante STORIA", "url": "https://www.ristorantestoria.de" },
           "offers": [

@@ -1,6 +1,7 @@
 import { Helmet } from '@/lib/helmetAsync';
 import { useLanguage } from '@/contexts/LanguageContext';
 import reviewsData from '@/data/google-reviews-de.json';
+import { STORIA } from '@/config/storia-entity';
 
 interface StructuredDataProps {
   type?: 'restaurant' | 'menu' | 'faq' | 'breadcrumb' | 'event';
@@ -15,85 +16,66 @@ interface StructuredDataProps {
   };
 }
 
+const addressSchema = {
+  '@type': 'PostalAddress' as const,
+  streetAddress: STORIA.address.street,
+  addressLocality: STORIA.address.city,
+  postalCode: STORIA.address.zip,
+  addressRegion: STORIA.address.state,
+  addressCountry: STORIA.address.country,
+};
+
+const geoSchema = {
+  '@type': 'GeoCoordinates' as const,
+  latitude: STORIA.geo.lat,
+  longitude: STORIA.geo.lng,
+};
+
 const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumbs, faqItems, eventData }: StructuredDataProps) => {
   const { t } = useLanguage();
 
   const restaurantSchema = {
     '@context': 'https://schema.org',
     '@type': 'Restaurant',
-    '@id': 'https://ristorantestoria.de/#restaurant',
-    name: 'STORIA - Ristorante • Pizzeria • Bar',
-    alternateName: 'Ristorante STORIA',
+    '@id': `${STORIA.url}/#restaurant`,
+    name: STORIA.schemaName,
+    alternateName: STORIA.alternateName[0],
     description: t.pages.index.description,
-    url: 'https://ristorantestoria.de',
-    telephone: '+49 89 51519696',
-    email: 'info@ristorantestoria.de',
+    url: STORIA.url,
+    telephone: STORIA.phone,
+    email: STORIA.email,
     image: [
       'https://iieethejhwfsyzhbweps.supabase.co/storage/v1/object/public/menu-pdfs/og-image.jpg',
     ],
-    logo: 'https://ristorantestoria.de/storia-logo.webp',
-    priceRange: '€€',
-    servesCuisine: ['Italian', 'Pizza', 'Pasta', 'Mediterranean'],
+    logo: `${STORIA.url}/storia-logo.webp`,
+    priceRange: STORIA.priceRange,
+    servesCuisine: STORIA.cuisine,
     acceptsReservations: true,
-    hasMenu: 'https://ristorantestoria.de/speisekarte',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Karlstraße 47a',
-      addressLocality: 'München',
-      postalCode: '80333',
-      addressRegion: 'Bayern',
-      addressCountry: 'DE',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 48.1456,
-      longitude: 11.5656,
-    },
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
-        closes: '01:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Saturday', 'Sunday'],
-        opens: '12:00',
-        closes: '01:00',
-      },
-    ],
-    sameAs: [
-      'https://www.instagram.com/ristorante_storia/',
-      'https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen',
-      'https://maps.google.com/?cid=3761590175870856939',
-    ],
-    founder: [
-      {
-        '@type': 'Person',
-        name: 'Domenico Speranza',
-        alternateName: 'Mimmo',
-      },
-      {
-        '@type': 'Person',
-        name: 'Nicola Speranza',
-      },
-    ],
-    // Ausstattung & Features für Rich Snippets
-    amenityFeature: [
-      { '@type': 'LocationFeatureSpecification', name: 'Terrasse', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Barrierefrei', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'WLAN', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Klimaanlage', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Privaträume für Events', value: true },
-    ],
-    // Zahlungsmethoden
-    paymentAccepted: 'Cash, Credit Card, EC Card, Visa, Mastercard, American Express',
+    hasMenu: `${STORIA.url}/speisekarte`,
+    address: addressSchema,
+    geo: geoSchema,
+    foundingDate: STORIA.foundedISO,
+    openingHoursSpecification: STORIA.openingHoursSpec.map(spec => ({
+      '@type': 'OpeningHoursSpecification',
+      ...spec,
+    })),
+    sameAs: STORIA.sameAs,
+    founder: STORIA.founders.map(f => ({
+      '@type': 'Person',
+      name: f.name,
+      ...(f.alternateName ? { alternateName: f.alternateName } : {}),
+      jobTitle: f.role,
+    })),
+    amenityFeature: STORIA.amenities.map(a => ({
+      '@type': 'LocationFeatureSpecification',
+      name: a.name,
+      value: a.value,
+    })),
+    paymentAccepted: STORIA.paymentAccepted.join(', '),
     currenciesAccepted: 'EUR',
-    // Service-Gebiet für Local SEO (erweitert für bessere lokale Abdeckung)
     areaServed: [
       { '@type': 'City', name: 'München' },
-      { '@type': 'AdministrativeArea', name: 'Maxvorstadt' },
+      { '@type': 'AdministrativeArea', name: STORIA.address.neighborhood },
       { '@type': 'AdministrativeArea', name: 'Schwabing' },
       { '@type': 'AdministrativeArea', name: 'Schwabing-West' },
       { '@type': 'AdministrativeArea', name: 'Neuhausen' },
@@ -104,24 +86,20 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
       { '@type': 'AdministrativeArea', name: 'Sendling' },
       { '@type': 'AdministrativeArea', name: 'Au-Haidhausen' },
     ],
-    // ÖPNV-Anbindung
     publicTransportNearby: 'U-Bahn Königsplatz (U2, U8) 3 Min., Hauptbahnhof 7 Min., Tram 20/21 Karlstraße 3 Min., Bus 68 Karlstraße',
-    // Parkmöglichkeiten
     parking: {
       '@type': 'ParkingFacility',
-      name: 'Parkhaus Marsstraße (P22)',
-      address: 'Hirtenstraße 14, 80335 München',
+      name: STORIA.parking.name,
+      address: `${STORIA.parking.address}, 80335 München`,
     },
-    // Öffentlich zugänglich & Raucher-Policy
     publicAccess: true,
     smokingAllowed: false,
-    // Aktionen für Google Rich Results
     potentialAction: [
       {
         '@type': 'ReserveAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: 'https://ristorantestoria.de/reservierung',
+          urlTemplate: `${STORIA.url}/reservierung`,
           actionPlatform: [
             'http://schema.org/DesktopWebPlatform',
             'http://schema.org/MobileWebPlatform',
@@ -136,12 +114,11 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
         '@type': 'OrderAction',
         target: {
           '@type': 'EntryPoint',
-          urlTemplate: 'tel:+498951519696',
+          urlTemplate: `tel:${STORIA.phoneTel}`,
           actionPlatform: 'http://schema.org/MobileWebPlatform',
         },
       },
     ],
-    // AggregateRating — nur wenn echte Reviews geladen sind
     ...(reviewsData.rating > 0 && reviewsData.totalReviews > 0 ? {
       aggregateRating: {
         '@type': 'AggregateRating',
@@ -151,7 +128,6 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
         ratingCount: reviewsData.totalReviews,
       },
     } : {}),
-    // Einzelne Reviews als review-Array (nur auf Hauptseiten)
     ...(includeReviews && reviewsData.reviews?.length > 0 ? {
       review: reviewsData.reviews.slice(0, 5).map((r: { authorName: string; rating: number; text: string }) => ({
         '@type': 'Review',
@@ -170,11 +146,11 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': 'https://ristorantestoria.de/#website',
-    name: 'STORIA - Ristorante • Pizzeria • Bar',
-    url: 'https://ristorantestoria.de',
+    '@id': `${STORIA.url}/#website`,
+    name: STORIA.schemaName,
+    url: STORIA.url,
     publisher: {
-      '@id': 'https://ristorantestoria.de/#restaurant',
+      '@id': `${STORIA.url}/#restaurant`,
     },
     inLanguage: ['de-DE', 'en-US'],
   };
@@ -182,36 +158,25 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://ristorantestoria.de/#organization',
-    name: 'Speranza GmbH',
+    '@id': `${STORIA.url}/#organization`,
+    name: STORIA.companyName,
     description: t.pages.index.description,
-    url: 'https://ristorantestoria.de',
+    url: STORIA.url,
     logo: {
       '@type': 'ImageObject',
-      url: 'https://ristorantestoria.de/storia-logo.webp',
+      url: `${STORIA.url}/storia-logo.webp`,
       width: 512,
       height: 512,
     },
-    sameAs: [
-      'https://www.instagram.com/ristorante_storia/',
-      'https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen',
-      'https://maps.google.com/?cid=3761590175870856939',
-    ],
-    foundingDate: '1995-01-01',
+    sameAs: STORIA.sameAs,
+    foundingDate: STORIA.foundedISO,
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+49 89 51519696',
+      telephone: STORIA.phone,
       contactType: 'reservations',
       availableLanguage: ['German', 'English', 'Italian'],
     },
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Karlstraße 47a',
-      addressLocality: 'München',
-      postalCode: '80333',
-      addressRegion: 'Bayern',
-      addressCountry: 'DE',
-    },
+    address: addressSchema,
   };
 
   const breadcrumbSchema = breadcrumbs ? {
@@ -221,7 +186,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `https://ristorantestoria.de${item.url}`,
+      item: `${STORIA.url}${item.url}`,
     })),
   } : null;
 
@@ -238,9 +203,6 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
     })),
   } : null;
 
-  // LocalBusiness schema removed - Restaurant is already a subtype of LocalBusiness
-  // Having both causes duplicate entity warnings in Google Search Console
-
   const eventSchema = eventData ? {
     '@context': 'https://schema.org',
     '@type': 'FoodEvent',
@@ -250,23 +212,17 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
     endDate: eventData.endDate,
     location: {
       '@type': 'Restaurant',
-      name: 'STORIA - Ristorante • Pizzeria • Bar',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Karlstraße 47a',
-        addressLocality: 'München',
-        postalCode: '80333',
-        addressCountry: 'DE',
-      },
+      name: STORIA.schemaName,
+      address: addressSchema,
     },
     organizer: {
       '@type': 'Organization',
-      name: 'Speranza GmbH',
-      url: 'https://ristorantestoria.de',
+      name: STORIA.companyName,
+      url: STORIA.url,
     },
     offers: {
       '@type': 'Offer',
-      url: 'https://ristorantestoria.de/reservierung',
+      url: `${STORIA.url}/reservierung`,
       availability: 'https://schema.org/InStock',
     },
   } : null;
