@@ -34,8 +34,8 @@ const FAQ = () => {
 
   // Flatten all FAQs for Schema.org
   const allFaqs = faqCategories.flatMap((cat: { items: Array<{ question: string; answer: string }> }) => cat.items);
-  // Limit to first 10 items for schema (Google recommends 8-12 max for rich results)
-  const schemaFaqs = allFaqs.slice(0, 10);
+  // Limit to first 20 items for schema
+  const schemaFaqs = allFaqs.slice(0, 20);
 
   return (
     <>

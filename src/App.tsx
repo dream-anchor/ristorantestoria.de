@@ -44,6 +44,9 @@ import ItalienerMuenchen from "./pages/seo/ItalienerMuenchen";
 import ItalienerKoenigsplatz from "./pages/seo/ItalienerKoenigsplatz";
 import WeihnachtsfeierMuenchen from "./pages/seo/WeihnachtsfeierMuenchen";
 import TerrasseMuenchen from "./pages/seo/TerrasseMuenchen";
+import ItalienischesRestaurantMuenchen from "./pages/seo/ItalienischesRestaurantMuenchen";
+import ItalienerHauptbahnhofMuenchen from "./pages/seo/ItalienerHauptbahnhofMuenchen";
+import HochzeitsfeierMuenchen from "./pages/seo/HochzeitsfeierMuenchen";
 import FAQ from "./pages/FAQ";
 
 // Eager: Legal-Seiten (müssen pre-rendered werden)
@@ -106,6 +109,9 @@ const routeComponents: Record<string, React.ComponentType> = {
   "italiener-koenigsplatz": ItalienerKoenigsplatz,
   "weihnachtsfeier-muenchen": WeihnachtsfeierMuenchen,
   "terrasse-muenchen": TerrasseMuenchen,
+  "italienisches-restaurant-muenchen": ItalienischesRestaurantMuenchen,
+  "italiener-hauptbahnhof-muenchen": ItalienerHauptbahnhofMuenchen,
+  "hochzeitsfeier-muenchen": HochzeitsfeierMuenchen,
   "faq": FAQ,
 };
 

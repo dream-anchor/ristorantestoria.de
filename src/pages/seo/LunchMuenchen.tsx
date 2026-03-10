@@ -190,7 +190,22 @@ const LunchMuenchen = () => {
             </section>
           )}
 
-          {/* 3-Gänge Mittagsmenü Highlight */}
+          {/* Mittagessen Maxvorstadt */}
+          {t.seo.lunch.mittagsTitle && (
+            <section className="py-12 md:py-16 bg-secondary/30">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6">
+                  {t.seo.lunch.mittagsTitle}
+                </h2>
+                <div className="text-muted-foreground text-center space-y-4">
+                  <p>{t.seo.lunch.mittagsP1}</p>
+                  <p>{t.seo.lunch.mittagsP2}</p>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* 3-G\u00e4nge Mittagsmen\u00fc Highlight */}
           <section className="py-12 md:py-16 bg-card border-b border-border">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">

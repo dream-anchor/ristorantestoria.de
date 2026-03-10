@@ -250,8 +250,21 @@ const PizzaMuenchen = () => {
             </div>
           </section>
 
-          {/* Occasions */}
+          {/* Pizzeria Maxvorstadt */}
           <section className="py-16 md:py-20 bg-secondary/30">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
+                {t.seo.pizzaMuenchen.maxvorstadtTitle}
+              </h2>
+              <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
+                <p>{t.seo.pizzaMuenchen.maxvorstadtP1}</p>
+                <p>{t.seo.pizzaMuenchen.maxvorstadtP2}</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Occasions */}
+          <section className="py-16 md:py-20">
             <div className="container mx-auto px-4">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-12">
                 {t.seo.pizzaMuenchen.occasionsTitle}

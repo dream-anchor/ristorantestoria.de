@@ -33,6 +33,9 @@
     "italiener-koenigsplatz": "italiener-koenigsplatz",
     "weihnachtsfeier-muenchen": "weihnachtsfeier-muenchen",
     "terrasse-muenchen": "terrasse-muenchen",
+    "italienisches-restaurant-muenchen": "italienisches-restaurant-muenchen",
+    "italiener-hauptbahnhof-muenchen": "italiener-hauptbahnhof-muenchen",
+    "hochzeitsfeier-muenchen": "hochzeitsfeier-muenchen",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -61,6 +64,9 @@
     "italiener-koenigsplatz": "italian-koenigsplatz",
     "weihnachtsfeier-muenchen": "christmas-party-munich",
     "terrasse-muenchen": "terrace-munich",
+    "italienisches-restaurant-muenchen": "best-italian-restaurant-munich",
+    "italiener-hauptbahnhof-muenchen": "italian-central-station-munich",
+    "hochzeitsfeier-muenchen": "wedding-celebration-munich",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -89,6 +95,9 @@
     "italiener-koenigsplatz": "italiano-koenigsplatz",
     "weihnachtsfeier-muenchen": "festa-natale-monaco",
     "terrasse-muenchen": "terrazza-monaco",
+    "italienisches-restaurant-muenchen": "miglior-ristorante-italiano-monaco",
+    "italiener-hauptbahnhof-muenchen": "italiano-stazione-centrale-monaco",
+    "hochzeitsfeier-muenchen": "festa-matrimonio-monaco",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -117,6 +126,9 @@
     "italiener-koenigsplatz": "italien-koenigsplatz",
     "weihnachtsfeier-muenchen": "fete-noel-munich",
     "terrasse-muenchen": "terrasse-munich",
+    "italienisches-restaurant-muenchen": "meilleur-restaurant-italien-munich",
+    "italiener-hauptbahnhof-muenchen": "italien-gare-centrale-munich",
+    "hochzeitsfeier-muenchen": "fete-mariage-munich",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"

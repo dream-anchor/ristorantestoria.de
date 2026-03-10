@@ -110,7 +110,11 @@ export const STORIA = {
     { name: "Barrierefrei", value: true },
     { name: "WLAN", value: true },
     { name: "Klimaanlage", value: true },
-    { name: "Privaträume", value: true },
+    { name: "Privatr\u00e4ume", value: true },
+    { name: "Rollstuhlgerechte Toilette", value: true },
+    { name: "Kinderst\u00fchle", value: true },
+    { name: "Hundefreundlich", value: true },
+    { name: "Powerbank-Verleih", value: true },
   ],
 } as const;
 
