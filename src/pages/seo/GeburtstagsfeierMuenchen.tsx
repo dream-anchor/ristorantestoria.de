@@ -28,6 +28,7 @@ const GeburtstagsfeierMuenchen = () => {
     { icon: b.type3Icon, title: b.type3Title, desc: b.type3Desc, items: [b.type3Item1, b.type3Item2, b.type3Item3, b.type3Item4] },
     { icon: b.type4Icon, title: b.type4Title, desc: b.type4Desc, items: [b.type4Item1, b.type4Item2, b.type4Item3, b.type4Item4] },
     { icon: b.type5Icon, title: b.type5Title, desc: b.type5Desc, items: [b.type5Item1, b.type5Item2, b.type5Item3, b.type5Item4] },
+    { icon: b.type6Icon, title: b.type6Title, desc: b.type6Desc, items: [b.type6Item1, b.type6Item2, b.type6Item3, b.type6Item4] },
   ];
 
   const packages = [

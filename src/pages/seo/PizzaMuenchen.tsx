@@ -261,6 +261,7 @@ const PizzaMuenchen = () => {
               <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
                 <p>{t.seo.pizzaMuenchen.maxvorstadtP1}</p>
                 <p>{t.seo.pizzaMuenchen.maxvorstadtP2}</p>
+                <p>{t.seo.pizzaMuenchen.maxvorstadtP3}</p>
               </div>
             </div>
           </section>

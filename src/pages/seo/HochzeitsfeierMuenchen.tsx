@@ -44,6 +44,7 @@ const HochzeitsfeierMuenchen = () => {
     { q: s.faq5Question, a: s.faq5Answer },
     { q: s.faq6Question, a: s.faq6Answer },
     { q: s.faq7Question, a: s.faq7Answer },
+    { q: s.faq8Question, a: s.faq8Answer },
   ];
 
   return (

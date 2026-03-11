@@ -74,6 +74,7 @@ const FirmenfeierMuenchen = () => {
     { q: t.seo.firmenfeier.faq6Question, a: t.seo.firmenfeier.faq6Answer },
     { q: t.seo.firmenfeier.faq7Question, a: t.seo.firmenfeier.faq7Answer },
     { q: t.seo.firmenfeier.faq8Question, a: t.seo.firmenfeier.faq8Answer },
+    { q: t.seo.firmenfeier.faq9Question, a: t.seo.firmenfeier.faq9Answer },
   ];
 
   return (
