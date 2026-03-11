@@ -16,19 +16,24 @@ const corsHeaders = {
  *   trigger_type text NOT NULL DEFAULT 'manual'
  *   status text NOT NULL DEFAULT 'pending'
  *   total_recipients int NOT NULL DEFAULT 0
- *   sent_at timestamptz
- *   subjects jsonb   -- { de: "...", en: "...", it: "...", fr: "..." }
+ *   sent_count int DEFAULT 0
+ *   failed_count int DEFAULT 0
+ *   email_subject jsonb     -- { de: "...", en: "...", it: "...", fr: "..." }
+ *   email_body_html jsonb   -- { de: "<html>...", en: "...", ... }
  *   created_at timestamptz DEFAULT now()
+ *   completed_at timestamptz
+ *   created_by uuid REFERENCES auth.users(id)
  *
  * seasonal_notification_recipients:
  *   id uuid PK DEFAULT gen_random_uuid()
  *   notification_id uuid REFERENCES seasonal_notifications(id)
+ *   signup_id uuid REFERENCES seasonal_signups(id)
  *   email text NOT NULL
  *   language text NOT NULL DEFAULT 'de'
  *   status text NOT NULL DEFAULT 'pending'
+ *   resend_id text
+ *   error_message text
  *   sent_at timestamptz
- *   error text
- *   created_at timestamptz DEFAULT now()
  */
 
 const EVENT_LABELS: Record<string, Record<string, string>> = {
@@ -337,9 +342,13 @@ serve(async (req) => {
       }
     }
 
-    // Extract subjects for storage
-    const subjects: Record<string, string> = {};
-    for (const lang of languages) subjects[lang] = contentByLanguage[lang].subject;
+    // Extract email content for storage (jsonb per language)
+    const emailSubject: Record<string, string> = {};
+    const emailBodyHtml: Record<string, string> = {};
+    for (const lang of languages) {
+      emailSubject[lang] = contentByLanguage[lang].subject;
+      emailBodyHtml[lang] = contentByLanguage[lang].body_html;
+    }
 
     // Create notification record
     const { data: notification, error: notifError } = await supabase
@@ -350,7 +359,8 @@ serve(async (req) => {
         trigger_type,
         status: "sending",
         total_recipients: signups.length,
-        subjects,
+        email_subject: emailSubject,
+        email_body_html: emailBodyHtml,
       })
       .select()
       .single();
@@ -369,6 +379,7 @@ serve(async (req) => {
       for (const recipient of recipients) {
         let emailStatus = "sent";
         let emailError: string | null = null;
+        let resendId: string | null = null;
 
         if (resendApiKey) {
           try {
@@ -393,6 +404,8 @@ serve(async (req) => {
               emailError = errText.slice(0, 500);
               failedCount++;
             } else {
+              const resendData = await emailResponse.json();
+              resendId = resendData?.id ?? null;
               sentCount++;
             }
           } catch (err) {
@@ -408,11 +421,13 @@ serve(async (req) => {
 
         await supabase.from("seasonal_notification_recipients").insert({
           notification_id: notification.id,
+          signup_id: recipient.id,
           email: recipient.email,
           language: lang,
           status: emailStatus,
+          resend_id: resendId,
           sent_at: emailStatus === "sent" ? now : null,
-          error: emailError,
+          error_message: emailError,
         });
 
         if (emailStatus === "sent") {
@@ -429,7 +444,7 @@ serve(async (req) => {
 
     await supabase
       .from("seasonal_notifications")
-      .update({ status: finalStatus, sent_at: now })
+      .update({ status: finalStatus, sent_count: sentCount, failed_count: failedCount, completed_at: now })
       .eq("id", notification.id);
 
     console.log(`[notify] Done: sent=${sentCount}, failed=${failedCount}, status=${finalStatus}`);

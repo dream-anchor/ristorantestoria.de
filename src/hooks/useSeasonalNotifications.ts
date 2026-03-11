@@ -8,20 +8,25 @@ export interface SeasonalNotification {
   trigger_type: string;
   status: string;
   total_recipients: number;
-  sent_at: string | null;
-  subjects: Record<string, string> | null;
+  sent_count: number;
+  failed_count: number;
+  email_subject: Record<string, string> | null;
+  email_body_html: Record<string, string> | null;
   created_at: string;
+  completed_at: string | null;
+  created_by: string | null;
 }
 
 export interface SeasonalNotificationRecipient {
   id: string;
   notification_id: string;
+  signup_id: string | null;
   email: string;
   language: string;
   status: string;
+  resend_id: string | null;
+  error_message: string | null;
   sent_at: string | null;
-  error: string | null;
-  created_at: string;
 }
 
 export interface NotifyPreviewResult {

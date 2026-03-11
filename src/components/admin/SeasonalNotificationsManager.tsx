@@ -49,7 +49,7 @@ const NotificationDetail = ({
   onBack: () => void;
 }) => {
   const { data: recipients, isLoading } = useSeasonalNotificationRecipients(notification.id);
-  const subjects = notification.subjects ?? {};
+  const subjects = notification.email_subject ?? {};
   const langs = Object.keys(subjects).filter((l) => subjects[l]);
 
   const sentCount = recipients?.filter((r) => r.status === "sent").length ?? 0;
@@ -142,7 +142,7 @@ const NotificationDetail = ({
                         <span className="text-xs">Gesendet</span>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-1 text-red-700" title={r.error ?? ""}>
+                      <div className="flex items-center gap-1 text-red-700" title={r.error_message ?? ""}>
                         <XCircle className="h-3.5 w-3.5" />
                         <span className="text-xs">Fehler</span>
                       </div>
