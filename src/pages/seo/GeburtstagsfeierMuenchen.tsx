@@ -16,6 +16,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import { renderMarkdown } from "@/lib/renderMarkdown";
 
 const GeburtstagsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -171,7 +172,7 @@ const GeburtstagsfeierMuenchen = () => {
               <p className="text-center text-muted-foreground mt-6">{b.packagesNote}</p>
               <div className="text-center mt-4">
                 <Button variant="outline" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{b.packagesCtaButton}</a>
+                  <LocalizedLink to="reservierung">{b.packagesCtaButton}</LocalizedLink>
                 </Button>
               </div>
             </section>
@@ -197,7 +198,7 @@ const GeburtstagsfeierMuenchen = () => {
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{b.extrasTitle}</h2>
               <ul className="max-w-2xl mx-auto space-y-3">
                 {extras.map((extra, i) => (
-                  <li key={i} className="text-muted-foreground">{extra}</li>
+                  <li key={i} className="text-muted-foreground">{renderMarkdown(extra)}</li>
                 ))}
               </ul>
             </section>
@@ -277,9 +278,12 @@ const GeburtstagsfeierMuenchen = () => {
               <h2 className="text-3xl font-serif font-bold mb-4">{b.ctaTitle}</h2>
               <p className="mb-8 opacity-90">{b.ctaDesc}</p>
               <Button size="lg" variant="secondary" asChild>
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{b.ctaButton}</a>
+                <LocalizedLink to="reservierung">{b.ctaButton}</LocalizedLink>
               </Button>
-              <p className="mt-6 opacity-80 text-sm">{b.ctaAlternative}</p>
+              <p className="mt-4 opacity-70 text-sm">
+                F\u00fcr Rundum-Event-Planung: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a>
+              </p>
+              <p className="mt-2 opacity-80 text-sm">{b.ctaAlternative}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> info@ristorantestoria.de</a>

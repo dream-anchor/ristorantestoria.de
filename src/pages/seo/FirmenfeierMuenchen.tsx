@@ -9,7 +9,7 @@ import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, ExternalLink, Star } from "lucide-react";
+import { Phone, MessageCircle, Star } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import firmenfeierEvent from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -113,13 +113,13 @@ const FirmenfeierMuenchen = () => {
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{t.seo.firmenfeier.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{t.seo.firmenfeier.heroCta}</a>
-                </Button>
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
                   <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
+                  <LocalizedLink to="reservierung">{t.seo.firmenfeier.heroCta}</LocalizedLink>
+                </Button>
               </div>
-              <p className="text-white/60 text-sm mt-4">{t.seo.firmenfeier.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">events-storia.de</a></p>
+              <p className="text-white/60 text-sm mt-4">{t.seo.firmenfeier.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white hover:underline">events-storia.de</a></p>
             </div>
           </div>
         </section>
@@ -141,7 +141,7 @@ const FirmenfeierMuenchen = () => {
             <section className="bg-primary/10 border border-primary/30 rounded-xl p-8 mb-16 text-center">
               <h2 className="text-2xl font-serif font-bold mb-4">{t.seo.firmenfeier.eventsCta}</h2>
               <p className="text-muted-foreground mb-6">{t.seo.firmenfeier.eventsCtaDesc}</p>
-              <Button size="lg" asChild><a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{t.seo.firmenfeier.eventsCtaButton}</a></Button>
+              <Button size="lg" asChild><a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{t.seo.firmenfeier.eventsCtaButton}</a></Button>
               <p className="text-sm text-muted-foreground mt-6">{t.seo.firmenfeier.eventsContactNote}<br /><a href="tel:+498951519696" className="text-foreground hover:text-primary">089 51519696</a> · <a href="mailto:info@ristorantestoria.de" className="text-foreground hover:text-primary">info@ristorantestoria.de</a></p>
             </section>
 
@@ -211,7 +211,7 @@ const FirmenfeierMuenchen = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {processSteps.map((step, i) => (<div key={i} className="flex gap-4"><span className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">{i + 1}</span><div><h3 className="font-semibold mb-1">{step.title}</h3><p className="text-muted-foreground text-sm">{step.desc}</p></div></div>))}
               </div>
-              <div className="text-center mt-8"><Button size="lg" asChild><a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{t.seo.firmenfeier.processCtaButton}</a></Button></div>
+              <div className="text-center mt-8"><Button size="lg" asChild><a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{t.seo.firmenfeier.processCtaButton}</a></Button></div>
             </section>
 
             {/* Testimonials */}
@@ -263,7 +263,8 @@ const FirmenfeierMuenchen = () => {
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{t.seo.firmenfeier.ctaTitle}</h2>
               <p className="mb-8 opacity-90">{t.seo.firmenfeier.ctaDesc}</p>
-              <Button size="lg" variant="secondary" asChild><a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{t.seo.firmenfeier.ctaButton}</a></Button>
+              <Button size="lg" variant="secondary" asChild><LocalizedLink to="reservierung">{t.seo.firmenfeier.ctaButton}</LocalizedLink></Button>
+              <p className="mt-4 opacity-70 text-sm">F\u00fcr Rundum-Event-Planung: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a></p>
               <p className="mt-6 opacity-80 text-sm">{t.seo.firmenfeier.ctaAlternative}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>

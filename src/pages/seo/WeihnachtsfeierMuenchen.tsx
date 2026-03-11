@@ -9,7 +9,7 @@ import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, ExternalLink, Star } from "lucide-react";
+import { Phone, MessageCircle, Star } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierEvent from "@/assets/weihnachtsfeier-event.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -111,10 +111,10 @@ const WeihnachtsfeierMuenchen = () => {
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{w.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{w.heroCta}</a>
+                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                  <LocalizedLink to="reservierung">{w.heroCta}</LocalizedLink>
                 </Button>
               </div>
               <p className="text-white/60 text-sm mt-4">{w.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">events-storia.de</a></p>
@@ -308,8 +308,9 @@ const WeihnachtsfeierMuenchen = () => {
               <h2 className="text-3xl font-serif font-bold mb-4">{w.ctaTitle}</h2>
               <p className="mb-8 opacity-90">{w.ctaDesc}</p>
               <Button size="lg" variant="secondary" asChild>
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{w.ctaButton}</a>
+                <LocalizedLink to="reservierung">{w.ctaButton}</LocalizedLink>
               </Button>
+              <p className="mt-4 opacity-70 text-sm">F\u00fcr Rundum-Event-Planung: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a></p>
               <div className="flex flex-wrap justify-center gap-4 mt-6">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
