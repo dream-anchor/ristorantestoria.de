@@ -196,6 +196,31 @@ serve(async (req) => {
             message: `Menü "${record.title}" wurde automatisch als "${classifiedAs}" klassifiziert. SEO-Slugs wurden zugewiesen.`,
             menu_id: record.id,
           });
+
+          // Auto-trigger email notification if menu is already published
+          if (record.is_published === true) {
+            console.log(`[classify] Menu is published — triggering email notifications for "${classifiedAs}"`);
+            const notifyUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/notify-seasonal-signups`;
+            const notifyKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+            try {
+              const notifyResponse = await fetch(notifyUrl, {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${notifyKey}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  seasonal_event: classifiedAs,
+                  menu_id: record.id,
+                  trigger_type: "auto",
+                }),
+              });
+              const notifyResult = await notifyResponse.json();
+              console.log("[classify] Auto-notify result:", JSON.stringify(notifyResult));
+            } catch (notifyErr) {
+              console.error("[classify] Auto-notify failed:", notifyErr);
+            }
+          }
         }
       }
     } else {

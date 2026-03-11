@@ -13,6 +13,7 @@ import SortableMenuCard from "@/components/admin/SortableMenuCard";
 import { LogOut, ExternalLink, Rocket, Loader2, BarChart3, Sparkles } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
 import SeasonalSignupsManager from "@/components/admin/SeasonalSignupsManager";
+import SeasonalNotificationsManager from "@/components/admin/SeasonalNotificationsManager";
 import AdminNotificationsBanner from "@/components/admin/AdminNotificationsBanner";
 import ClassificationLog from "@/components/admin/ClassificationLog";
 import SEO from "@/components/SEO";
@@ -322,6 +323,9 @@ const Admin = () => {
 
         {/* Saisonale Vormerkungen */}
         <SeasonalSignupsManager />
+
+        {/* Saisonale Benachrichtigungen */}
+        <SeasonalNotificationsManager />
 
         {/* Slug-Klassifikationen */}
         <ClassificationLog />
