@@ -12,39 +12,58 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp } from "lucide-react";
+import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp, ArrowRight } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import silvesterHeroImage from "@/assets/silvester-dinner-gala-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
+import allSlugs from "@/config/slugs.json";
 
 interface SilvesterMuenchenProps {
-  menu: any | null;
-  archivedMenu: any | undefined;
-  seasonalConfig: SeasonalMenuConfig;
+  standalone?: boolean;
+  menu?: any | null;
+  archivedMenu?: any | undefined;
+  seasonalConfig?: SeasonalMenuConfig;
 }
 
-const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuenchenProps) => {
+const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: SilvesterMuenchenProps) => {
   const { t, language } = useLanguage();
   usePrerenderReady(true);
   const s = t.seo.silvester;
-  const isActive = !!menu;
+  const { isActive: configActive, config: hookConfig } = useSeasonalMenuActive('silvester');
+  const effectiveConfig = seasonalConfig || hookConfig!;
+  const isActive = standalone ? configActive : !!menu;
   const currentYear = new Date().getFullYear();
 
-  const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
-  const seasonalSlug = seasonalConfig.slugs[language] || seasonalConfig.slugs.de;
-  const canonicalPath = language === 'de'
-    ? `/${parentSlug}/${seasonalSlug}`
-    : `/${language}/${parentSlug}/${seasonalSlug}`;
+  // --- Canonical + Hreflang ---
+  const slugKey = 'silvester-muenchen' as const;
+  const langKey = language as 'de' | 'en' | 'it' | 'fr';
 
-  const alternates = (['de', 'en', 'it', 'fr'] as const).map(lang => ({
-    lang,
-    url: lang === 'de'
-      ? `https://www.ristorantestoria.de/${PARENT_SLUGS.de}/${seasonalConfig.slugs.de}/`
-      : `https://www.ristorantestoria.de/${lang}/${PARENT_SLUGS[lang]}/${seasonalConfig.slugs[lang]}/`,
-  }));
+  let canonicalPath: string;
+  let breadcrumbSchema: Array<{ name: string; url: string }>;
+
+  if (standalone) {
+    const flatSlug = (allSlugs as any)[langKey]?.[slugKey] || slugKey;
+    canonicalPath = language === 'de' ? `/${flatSlug}` : `/${language}/${flatSlug}`;
+    breadcrumbSchema = [
+      { name: 'Home', url: '/' },
+      { name: s.standaloneBreadcrumb || 'Silvester M\u00fcnchen', url: canonicalPath },
+    ];
+  } else {
+    const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
+    const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
+    canonicalPath = language === 'de'
+      ? `/${parentSlug}/${seasonalSlug}`
+      : `/${language}/${parentSlug}/${seasonalSlug}`;
+    breadcrumbSchema = [
+      { name: 'Home', url: '/' },
+      { name: t.nav.specialOccasions, url: `/${PARENT_SLUGS[language] || PARENT_SLUGS.de}` },
+      { name: effectiveConfig.titles[language] || effectiveConfig.titles.de, url: canonicalPath },
+    ];
+  }
 
   const packages = [
     { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4, s.package1Item5], ideal: s.package1Ideal, price: s.package1Price },
@@ -83,7 +102,14 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
     { q: s.faq8Question, a: s.faq8Answer },
   ];
 
-  const relatedLinks = [
+  const relatedLinks = standalone ? [
+    { title: s.standaloneRelated1Title, desc: s.standaloneRelated1Desc, to: "eventlocation-muenchen-maxvorstadt" },
+    { title: s.standaloneRelated2Title, desc: s.standaloneRelated2Desc, to: "aperitivo-muenchen" },
+    { title: s.standaloneRelated3Title, desc: s.standaloneRelated3Desc, to: "firmenfeier-muenchen" },
+    { title: s.standaloneRelated4Title, desc: s.standaloneRelated4Desc, to: "speisekarte" },
+    { title: s.standaloneRelated5Title, desc: s.standaloneRelated5Desc, to: "reservierung" },
+    { title: s.standaloneRelated6Title, desc: s.standaloneRelated6Desc, to: "terrasse-muenchen" },
+  ] : [
     { title: s.related1Title, desc: s.related1Desc, to: "speisekarte" },
     { title: s.related2Title, desc: s.related2Desc, to: "eventlocation-muenchen-maxvorstadt" },
     { title: s.related3Title, desc: s.related3Desc, to: "besondere-anlaesse/weihnachtsmenue" },
@@ -92,15 +118,23 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
     { title: s.related6Title, desc: s.related6Desc, to: "kontakt" },
   ];
 
+  // Standalone: link to the besondere-anlaesse page when menu is active
+  const menuPagePath = (() => {
+    if (!standalone) return '';
+    const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
+    const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
+    return language === 'de' ? `/${parentSlug}/${seasonalSlug}` : `/${language}/${parentSlug}/${seasonalSlug}`;
+  })();
+
   return (
     <>
-      <SEO title={s.seoTitle} description={s.seoDescription} canonical={canonicalPath} />
+      <SEO
+        title={standalone ? s.standaloneSeoTitle : s.seoTitle}
+        description={standalone ? s.standaloneSeoDescription : s.seoDescription}
+        canonical={canonicalPath}
+      />
       <StructuredData type="restaurant" />
-      <StructuredData type="breadcrumb" breadcrumbs={[
-        { name: 'Home', url: '/' },
-        { name: t.nav.specialOccasions, url: `/${PARENT_SLUGS[language] || PARENT_SLUGS.de}` },
-        { name: seasonalConfig.titles[language] || seasonalConfig.titles.de, url: canonicalPath }
-      ]} />
+      <StructuredData type="breadcrumb" breadcrumbs={breadcrumbSchema} />
 
       {/* FAQ Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -113,8 +147,8 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
         }))
       })}} />
 
-      {/* Event Schema (active only) */}
-      {isActive && (
+      {/* Event Schema (active + non-standalone only) */}
+      {isActive && !standalone && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Event",
@@ -127,7 +161,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
           "location": {
             "@type": "Place",
             "name": "Ristorante STORIA",
-            "address": { "@type": "PostalAddress", "streetAddress": "Karlstraße 47a", "addressLocality": "München", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" }
+            "address": { "@type": "PostalAddress", "streetAddress": "Karlstra\u00dfe 47a", "addressLocality": "M\u00fcnchen", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" }
           },
           "organizer": { "@type": "Restaurant", "name": "Ristorante STORIA", "url": "https://www.ristorantestoria.de" },
           "offers": [
@@ -147,7 +181,9 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/"><img src={storiaLogo} alt="STORIA Logo" loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert" /></Link>
             <div className="bg-black/50 backdrop-blur-sm rounded-2xl px-6 py-8 md:px-12 md:py-12 max-w-4xl mx-auto">
-              <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">{s.heroTitle}</h1>
+              <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">
+                {standalone ? s.standaloneHeroTitle || s.heroTitle : s.heroTitle}
+              </h1>
               <p className="text-lg md:text-xl text-white/90 mb-6">{s.heroSubtitle}</p>
               <div className="flex flex-wrap justify-center gap-3 mb-6">
                 <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{s.heroBadge1}</span>
@@ -156,7 +192,11 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </div>
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{s.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {isActive ? (
+                {standalone ? (
+                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
+                    <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.heroCtaPhone}</a>
+                  </Button>
+                ) : isActive ? (
                   <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                     <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{s.heroCta}</a>
                   </Button>
@@ -166,7 +206,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                   </Button>
                 )}
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.heroCtaPhone}</a>
+                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" /> info@ristorantestoria.de</a>
                 </Button>
               </div>
               <p className="mt-6 text-white/70 text-sm">
@@ -180,7 +220,10 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
-            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]} />
+            <BreadcrumbNav crumbs={standalone
+              ? [{ label: t.breadcrumb.home, href: '/' }, { label: s.standaloneBreadcrumb || s.breadcrumb }]
+              : [{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]
+            } />
 
             {/* Intro */}
             <section className="mb-16">
@@ -190,8 +233,34 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               <p className="text-muted-foreground">{s.introP3}</p>
             </section>
 
-            {/* Packages (inactive) OR Live Menu (active) */}
-            {!isActive ? (
+            {/* Standalone: Teaser or CTA — Non-standalone: Packages or Live Menu */}
+            {standalone ? (
+              isActive ? (
+                <section className="mb-16">
+                  <Card className="border-primary bg-primary/5">
+                    <CardContent className="p-8 text-center">
+                      <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneTeaserTitle}</h2>
+                      <p className="text-muted-foreground mb-6">{s.standaloneTeaserDesc}</p>
+                      <Button size="lg" asChild>
+                        <Link to={menuPagePath}><ArrowRight className="w-5 h-5 mr-2" />{s.standaloneTeaserButton}</Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </section>
+              ) : (
+                <section className="mb-16 bg-card rounded-lg border border-border p-8 md:p-12 text-center">
+                  <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneInactiveTitle}</h2>
+                  <p className="text-muted-foreground mb-6">{s.standaloneInactiveDesc}</p>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <Button asChild><a href="tel:+498951519696"><Phone className="w-4 h-4 mr-2" /> 089 51519696</a></Button>
+                    <Button variant="outline" asChild><a href="mailto:info@ristorantestoria.de"><Mail className="w-4 h-4 mr-2" /> E-Mail</a></Button>
+                    <Button variant="outline" asChild>
+                      <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer"><MessageCircle className="w-4 h-4 mr-2" /> WhatsApp</a>
+                    </Button>
+                  </div>
+                </section>
+              )
+            ) : !isActive ? (
               <section className="mb-16">
                 <h2 className="text-3xl font-serif font-bold mb-4 text-center">{s.packagesTitle}</h2>
                 <p className="text-muted-foreground text-center mb-8">{s.packagesIntro}</p>
@@ -204,7 +273,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                         <p className="text-muted-foreground text-sm">{pkg.subtitle}</p>
                       </CardHeader>
                       <CardContent>
-                        <ul className="text-sm space-y-1 mb-4">{pkg.items.map((item, j) => <li key={j} className="text-muted-foreground">• {item}</li>)}</ul>
+                        <ul className="text-sm space-y-1 mb-4">{pkg.items.map((item, j) => <li key={j} className="text-muted-foreground">{'\u2022'} {item}</li>)}</ul>
                         <p className="text-xs text-muted-foreground mb-2">{pkg.ideal}</p>
                         <p className="font-bold text-primary">{pkg.price}</p>
                       </CardContent>
@@ -214,7 +283,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </section>
             ) : (
               <section className="mb-16">
-                <MenuDisplay menuType="special" menuId={menu.id} showTitle={false} />
+                <MenuDisplay menuType="special" menuId={menu!.id} showTitle={false} />
               </section>
             )}
 
@@ -273,8 +342,8 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </Accordion>
             </section>
 
-            {/* Email Signup (inactive only) */}
-            {!isActive && (
+            {/* Email Signup (inactive + non-standalone only) */}
+            {!isActive && !standalone && (
               <section id="signup-form" className="mb-16 scroll-mt-24">
                 <div className="bg-card rounded-lg border border-border p-8 md:p-12 text-center">
                   <h2 className="text-2xl font-serif font-bold mb-3">{s.signupTitle}</h2>
@@ -286,8 +355,8 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </section>
             )}
 
-            {/* Archived Menu (inactive only, when exists) */}
-            {!isActive && archivedMenu && (
+            {/* Archived Menu (inactive + non-standalone only) */}
+            {!isActive && !standalone && archivedMenu && (
               <section className="mb-16">
                 <div className="border-2 border-dashed border-border rounded-lg p-6 md:p-8 opacity-90">
                   <div className="flex items-center justify-center gap-3 mb-4">
@@ -324,7 +393,11 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
-              {isActive ? (
+              {standalone ? (
+                <Button size="lg" variant="secondary" asChild>
+                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.finalCtaButton}</a>
+                </Button>
+              ) : isActive ? (
                 <Button size="lg" variant="secondary" asChild>
                   <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{s.finalCtaButton}</a>
                 </Button>

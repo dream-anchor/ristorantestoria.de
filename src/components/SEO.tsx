@@ -1,7 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "@/contexts/LanguageContext";
+import allSlugs from "@/config/slugs.json";
 
 const BASE_URL = "https://www.ristorantestoria.de";
+const LANGUAGES = ["de", "en", "it", "fr"] as const;
 
 /**
  * Normalisiert einen canonical-Pfad zur vollständigen kanonischen URL.
@@ -51,6 +53,63 @@ function normalizeTrailingSlash(path: string): string {
   return path.endsWith("/") ? path : path + "/";
 }
 
+/**
+ * Berechnet hreflang-URLs aus dem canonical-Pfad + slugs.json.
+ * Ermittelt den Base-Slug per Reverse-Lookup und baut alle 4 Sprach-URLs.
+ */
+function computeHreflangFromCanonical(canonical: string): Record<string, string> | null {
+  if (!canonical || canonical === "/") return null;
+
+  // Pfad normalisieren: leading slash, kein trailing slash
+  let path = canonical.startsWith("/") ? canonical : "/" + canonical;
+  path = path.replace(/\/$/, "");
+
+  // Sprach-Prefix und Slug extrahieren
+  let currentLang = "de";
+  let slug = path.slice(1); // ohne leading slash
+  for (const lang of ["en", "it", "fr"]) {
+    if (path.startsWith(`/${lang}/`)) {
+      currentLang = lang;
+      slug = path.slice(lang.length + 2); // "/{lang}/" entfernen
+      break;
+    }
+    if (path === `/${lang}`) {
+      // Root einer Sprache → Homepage
+      return null;
+    }
+  }
+
+  if (!slug) return null;
+
+  // Reverse-Lookup: localizedSlug → baseSlug
+  const langSlugs = (allSlugs as any)[currentLang] as Record<string, string> | undefined;
+  if (!langSlugs) return null;
+
+  let baseSlug: string | null = null;
+  for (const [base, localized] of Object.entries(langSlugs)) {
+    if (localized === slug) {
+      baseSlug = base;
+      break;
+    }
+  }
+
+  if (!baseSlug) return null;
+
+  // URLs für alle 4 Sprachen bauen
+  const urls: Record<string, string> = {};
+  for (const lang of LANGUAGES) {
+    const localizedSlug = (allSlugs as any)[lang]?.[baseSlug];
+    if (localizedSlug === undefined || localizedSlug === null) continue;
+    const langPath = lang === "de"
+      ? `/${localizedSlug}`
+      : `/${lang}/${localizedSlug}`;
+    urls[lang] = `${BASE_URL}${normalizeTrailingSlash(langPath)}`;
+  }
+
+  // Nur zurückgeben wenn mindestens DE vorhanden
+  return urls.de ? urls : null;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -93,6 +152,15 @@ const SEO = ({
   // OG-Image Fallback
   const ogImageUrl = ogImage || `${BASE_URL}/og-image.jpg`;
 
+  // hreflang-URLs: explizite Overrides > automatische Berechnung aus slugs.json > Fallback auf Homepage
+  const computedHreflang = !hreflangUrls && canonical ? computeHreflangFromCanonical(canonical) : null;
+  const effectiveHreflang = {
+    de: hreflangUrls?.de || computedHreflang?.de || `${BASE_URL}${canonical ? normalizeTrailingSlash(canonical.startsWith("/") ? canonical.split("?")[0].split("#")[0] : "/" + canonical.split("?")[0].split("#")[0]) : "/"}`,
+    en: hreflangUrls?.en || computedHreflang?.en || `${BASE_URL}/en/`,
+    it: hreflangUrls?.it || computedHreflang?.it || `${BASE_URL}/it/`,
+    fr: hreflangUrls?.fr || computedHreflang?.fr || `${BASE_URL}/fr/`,
+  };
+
   return (
     <Helmet>
       {/* Basis */}
@@ -127,36 +195,12 @@ const SEO = ({
       <meta name="geo.position" content="48.1467;11.5641" />
       <meta name="ICBM" content="48.1467, 11.5641" />
 
-      {/* hreflang — nur für mehrsprachige Seiten */}
-      {!noHreflang && !noIndex && (
-        <>
-          <link
-            rel="alternate"
-            hrefLang="de"
-            href={hreflangUrls?.de || `${BASE_URL}${canonical ? normalizeTrailingSlash(canonical.startsWith("/") ? canonical.split("?")[0].split("#")[0] : "/" + canonical.split("?")[0].split("#")[0]) : "/"}`}
-          />
-          <link
-            rel="alternate"
-            hrefLang="en"
-            href={hreflangUrls?.en || `${BASE_URL}/en/`}
-          />
-          <link
-            rel="alternate"
-            hrefLang="it"
-            href={hreflangUrls?.it || `${BASE_URL}/it/`}
-          />
-          <link
-            rel="alternate"
-            hrefLang="fr"
-            href={hreflangUrls?.fr || `${BASE_URL}/fr/`}
-          />
-          <link
-            rel="alternate"
-            hrefLang="x-default"
-            href={hreflangUrls?.de || `${BASE_URL}${canonical ? normalizeTrailingSlash(canonical.startsWith("/") ? canonical.split("?")[0].split("#")[0] : "/" + canonical.split("?")[0].split("#")[0]) : "/"}`}
-          />
-        </>
-      )}
+      {/* hreflang — kein Fragment (react-helmet-async SSR-Kompatibilität) */}
+      {!noHreflang && !noIndex && <link rel="alternate" hrefLang="de" href={effectiveHreflang.de} />}
+      {!noHreflang && !noIndex && <link rel="alternate" hrefLang="en" href={effectiveHreflang.en} />}
+      {!noHreflang && !noIndex && <link rel="alternate" hrefLang="it" href={effectiveHreflang.it} />}
+      {!noHreflang && !noIndex && <link rel="alternate" hrefLang="fr" href={effectiveHreflang.fr} />}
+      {!noHreflang && !noIndex && <link rel="alternate" hrefLang="x-default" href={effectiveHreflang.de} />}
     </Helmet>
   );
 };

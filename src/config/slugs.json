@@ -36,6 +36,9 @@
     "italienisches-restaurant-muenchen": "italienisches-restaurant-muenchen",
     "italiener-hauptbahnhof-muenchen": "italiener-hauptbahnhof-muenchen",
     "hochzeitsfeier-muenchen": "hochzeitsfeier-muenchen",
+    "valentinstag-muenchen": "valentinstag-muenchen",
+    "silvester-muenchen": "silvester-muenchen",
+    "weihnachten-muenchen": "weihnachten-muenchen",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -67,6 +70,9 @@
     "italienisches-restaurant-muenchen": "best-italian-restaurant-munich",
     "italiener-hauptbahnhof-muenchen": "italian-central-station-munich",
     "hochzeitsfeier-muenchen": "wedding-celebration-munich",
+    "valentinstag-muenchen": "valentines-day-munich",
+    "silvester-muenchen": "new-years-eve-munich",
+    "weihnachten-muenchen": "christmas-munich",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -98,6 +104,9 @@
     "italienisches-restaurant-muenchen": "miglior-ristorante-italiano-monaco",
     "italiener-hauptbahnhof-muenchen": "italiano-stazione-centrale-monaco",
     "hochzeitsfeier-muenchen": "festa-matrimonio-monaco",
+    "valentinstag-muenchen": "san-valentino-monaco",
+    "silvester-muenchen": "capodanno-monaco",
+    "weihnachten-muenchen": "natale-monaco",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -129,6 +138,9 @@
     "italienisches-restaurant-muenchen": "meilleur-restaurant-italien-munich",
     "italiener-hauptbahnhof-muenchen": "italien-gare-centrale-munich",
     "hochzeitsfeier-muenchen": "fete-mariage-munich",
+    "valentinstag-muenchen": "saint-valentin-munich",
+    "silvester-muenchen": "nouvel-an-munich",
+    "weihnachten-muenchen": "noel-munich",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"

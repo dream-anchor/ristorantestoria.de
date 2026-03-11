@@ -47,6 +47,9 @@ import TerrasseMuenchen from "./pages/seo/TerrasseMuenchen";
 import ItalienischesRestaurantMuenchen from "./pages/seo/ItalienischesRestaurantMuenchen";
 import ItalienerHauptbahnhofMuenchen from "./pages/seo/ItalienerHauptbahnhofMuenchen";
 import HochzeitsfeierMuenchen from "./pages/seo/HochzeitsfeierMuenchen";
+import ValentinstagMuenchen from "./pages/seo/ValentinstagMuenchen";
+import SilvesterMuenchen from "./pages/seo/SilvesterMuenchen";
+import WeihnachtenMuenchen from "./pages/seo/WeihnachtenMuenchen";
 import FAQ from "./pages/FAQ";
 
 // Eager: Legal-Seiten (müssen pre-rendered werden)
@@ -74,6 +77,11 @@ const getDehydratedState = () => {
   }
   return undefined;
 };
+
+// Standalone wrappers for seasonal SEO pages (flat URLs)
+const ValentinstagMuenchenStandalone = () => <ValentinstagMuenchen standalone />;
+const SilvesterMuenchenStandalone = () => <SilvesterMuenchen standalone />;
+const WeihnachtenMuenchenStandalone = () => <WeihnachtenMuenchen standalone />;
 
 // Route configuration with components
 const routeComponents: Record<string, React.ComponentType> = {
@@ -112,6 +120,9 @@ const routeComponents: Record<string, React.ComponentType> = {
   "italienisches-restaurant-muenchen": ItalienischesRestaurantMuenchen,
   "italiener-hauptbahnhof-muenchen": ItalienerHauptbahnhofMuenchen,
   "hochzeitsfeier-muenchen": HochzeitsfeierMuenchen,
+  "valentinstag-muenchen": ValentinstagMuenchenStandalone,
+  "silvester-muenchen": SilvesterMuenchenStandalone,
+  "weihnachten-muenchen": WeihnachtenMuenchenStandalone,
   "faq": FAQ,
 };
 
