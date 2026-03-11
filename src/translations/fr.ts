@@ -72,6 +72,9 @@ export const fr = {
     valentinstagMunich: "Saint-Valentin Munich",
     silvesterMunich: "R\u00e9veillon Munich",
     christmasMunich: "No\u00ebl Munich",
+    faqLink: "Questions fr\u00e9quentes",
+    faqLinkDesc: "R\u00e9ponses \u00e0 vos questions sur STORIA",
+    pizzaMunich: "Pizza Munich",
   },
   eventForm: {
     title: "Demande d'événement",

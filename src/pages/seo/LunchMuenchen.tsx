@@ -411,6 +411,10 @@ const LunchMuenchen = () => {
                   <h3 className="font-semibold mb-1 text-sm">{t.seo.lunch.relatedItalianRestaurant}</h3>
                   <p className="text-muted-foreground text-xs">{t.seo.lunch.relatedItalianRestaurantDesc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="faq" className="bg-card border border-border rounded-xl p-5 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-1 text-sm">{t.internalLinks.faqLink}</h3>
+                  <p className="text-muted-foreground text-xs">{t.internalLinks.faqLinkDesc}</p>
+                </LocalizedLink>
               </div>
             </div>
           </section>

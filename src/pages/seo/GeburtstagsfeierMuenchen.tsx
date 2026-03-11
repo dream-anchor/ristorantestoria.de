@@ -259,6 +259,14 @@ const GeburtstagsfeierMuenchen = () => {
                   <h3 className="font-semibold mb-2">Catering für Ihre Feier</h3>
                   <p className="text-muted-foreground text-sm">Italienisches Buffet oder Menü – auch für große Geburtstagsgesellschaften.</p>
                 </LocalizedLink>
+                <LocalizedLink to="hochzeitsfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.internalLinks.weddingMunich}</h3>
+                  <p className="text-muted-foreground text-sm">Auch Hochzeitsfeiern im STORIA – bis 300 Gäste, individuelles Menü.</p>
+                </LocalizedLink>
+                <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3>
+                  <p className="text-muted-foreground text-sm">{t.internalLinks.faqLinkDesc}</p>
+                </LocalizedLink>
               </div>
             </section>
 

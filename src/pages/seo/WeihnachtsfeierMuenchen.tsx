@@ -290,6 +290,14 @@ const WeihnachtsfeierMuenchen = () => {
                   <h3 className="font-semibold mb-2">{w.related4Title}</h3>
                   <p className="text-muted-foreground text-sm">{w.related4Desc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="lunch-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.internalLinks.lunchMunich}</h3>
+                  <p className="text-muted-foreground text-sm">Auch als Business-Lunch beliebt – täglich wechselndes Mittagsmenü.</p>
+                </LocalizedLink>
+                <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3>
+                  <p className="text-muted-foreground text-sm">{t.internalLinks.faqLinkDesc}</p>
+                </LocalizedLink>
               </div>
             </section>
 

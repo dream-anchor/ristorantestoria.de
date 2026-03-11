@@ -415,6 +415,20 @@ const PizzaMuenchen = () => {
                   <span className="text-2xl mb-2 block">{"\ud83c\udf78"}</span>
                   <span className="font-medium">{t.internalLinks.aperitivoMunich}</span>
                 </LocalizedLink>
+                <LocalizedLink
+                  to="terrasse-muenchen"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">{"🌿"}</span>
+                  <span className="font-medium">{t.internalLinks.terraceMunich}</span>
+                </LocalizedLink>
+                <LocalizedLink
+                  to="faq"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">{"❓"}</span>
+                  <span className="font-medium">{t.internalLinks.faqLink}</span>
+                </LocalizedLink>
               </div>
             </div>
           </section>

@@ -450,6 +450,20 @@ const NeapolitanischePizza = () => {
                   <span className="text-2xl mb-2 block">☀️</span>
                   <span className="font-medium">{t.internalLinks.lunchMunich}</span>
                 </LocalizedLink>
+                <LocalizedLink
+                  to="pizza-muenchen"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">🍕</span>
+                  <span className="font-medium">{t.internalLinks.pizzaMunich}</span>
+                </LocalizedLink>
+                <LocalizedLink
+                  to="faq"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">❓</span>
+                  <span className="font-medium">{t.internalLinks.faqLink}</span>
+                </LocalizedLink>
               </div>
             </div>
           </section>
