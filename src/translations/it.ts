@@ -584,7 +584,7 @@ const itBase = {
       introP2: "Posizione centrale business: Solo 5 minuti a piedi da Königsplatz, 7 minuti dalla Stazione Centrale – perfettamente raggiungibile per team da tutta la città. Servizio professionale eventi aziendali: La famiglia Speranza e il loro team garantiscono operazioni fluide.",
       eventsCta: "💼 Richiedi evento aziendale presso STORIA Events",
       eventsCtaDesc: "Tutte le informazioni sui nostri pacchetti eventi aziendali, menu business, concetti di sala e prezzi sul nostro sito eventi specializzato:",
-      eventsCtaButton: "→ Richiedi evento aziendale ora su events-storia.de",
+      eventsCtaButton: "→ Richiedi evento aziendale ora",
       eventsContactNote: "Oppure contattateci direttamente:",
       eventTypesTitle: "Quali eventi aziendali potete organizzare in STORIA?",
       eventTypeChristmas: "Festa di Natale Aziendale",
@@ -631,7 +631,7 @@ const itBase = {
       eventTypeEmployeeItem3: "Torta su richiesta",
       eventTypeEmployeeItem4: "Gruppi piccoli-medi",
       eventTypesCtaNote: "Informazioni dettagliate su tutti i tipi di eventi aziendali e pacchetti:",
-      eventTypesCtaButton: "events-storia.de – Vedi opzioni eventi aziendali",
+      eventTypesCtaButton: "→ Vedi opzioni eventi aziendali",
       whyTitle: "8 Motivi per cui gli Eventi Aziendali in STORIA Hanno Successo",
       whyLocationTitle: "📍 Posizione Business Centrale",
       whyLocationDesc: "5 minuti da Königsplatz, 7 minuti dalla Stazione Centrale Monaco – ottimamente raggiungibile per tutti i dipendenti. Nelle vicinanze: TU Monaco (8 min.), Pinakotheken (10 min.).",
@@ -699,7 +699,7 @@ const itBase = {
       processStep5Desc: "1-2 settimane prima: Incontro coordinamento finale. Discutiamo programma, disposizione posti, ultime richieste.",
       processStep6Title: "Il Vostro Evento – Ci Occupiamo di Tutto",
       processStep6Desc: "Il giorno dell'evento siamo completamente a disposizione. La famiglia Speranza coordina personalmente, il nostro team garantisce operazioni fluide.",
-      processCtaButton: "→ Inizia pianificazione evento aziendale su events-storia.de",
+      processCtaButton: "→ Inizia pianificazione evento aziendale",
       testimonialsTitle: "Cosa Dicono le Aziende degli Eventi Aziendali Monaco in STORIA",
       testimonial1Quote: "La nostra festa di Natale è stata un successo! La posizione centrale ha reso l'arrivo facile per tutti, il cibo eccellente e il servizio molto professionale.",
       testimonial1Author: "— Dipartimento Marketing, Tech Startup Monaco",
@@ -761,7 +761,7 @@ const itBase = {
       relatedCateringDesc: "Catering professionale per il vostro evento",
       ctaTitle: "Pianificate Ora il Vostro Evento Aziendale in STORIA",
       ctaDesc: "Pronti per un evento aziendale di successo nel vostro ristorante italiano a Monaco? Che siano eventi aziendali Monaco, festa di Natale Monaco, teambuilding Monaco o festa estiva – rendiamo il vostro evento indimenticabile.",
-      ctaButton: "→ Richiedi evento aziendale ora su events-storia.de",
+      ctaButton: "→ Prenota evento aziendale ora",
       ctaAlternative: "Oppure contattateci direttamente:",
       ctaHoursTitle: "Consulenza eventi aziendali:",
       ctaHoursValue: "Lun-Ven 10:00-18:00",
@@ -1173,7 +1173,7 @@ const itBase = {
       // Events CTA
       eventsCta: "🎉 Richiedi evento presso STORIA Events",
       eventsCtaDesc: "Tutte le informazioni sulle nostre offerte di location, concetti di sala, menu eventi e prezzi si trovano sul nostro sito eventi specializzato:",
-      eventsCtaButton: "→ Richiedi evento ora su events-storia.de",
+      eventsCtaButton: "→ Richiedi evento ora",
       eventsContactNote: "Oppure contattateci direttamente:",
       // Event Types
       eventTypesTitle: "Quali eventi potete festeggiare in STORIA?",
@@ -1220,7 +1220,7 @@ const itBase = {
       eventTypePrivateItem3: "Baby shower",
       eventTypePrivateItem4: "Riunioni di famiglia",
       eventTypesCtaNote: "Informazioni dettagliate su tutti i tipi di evento su:",
-      eventTypesCtaButton: "events-storia.de – Vedi tutte le opzioni evento",
+      eventTypesCtaButton: "→ Vedi tutte le opzioni evento",
       // Room Concepts
       roomsTitle: "Concetti di Sala Flessibili fino a 180 Ospiti",
       roomsIntro: "STORIA offre spazi flessibili per eventi di diverse dimensioni. Dalle celebrazioni intime ai grandi eventi – troviamo la soluzione giusta.",
@@ -1292,7 +1292,7 @@ const itBase = {
       // CTA
       ctaTitle: "Pianificate il Vostro Evento in STORIA",
       ctaDesc: "Che sia compleanno, matrimonio, evento aziendale o festa di Natale – rendiamo il vostro evento indimenticabile. Contattateci per un preventivo personalizzato.",
-      ctaButton: "→ Richiedi evento su events-storia.de",
+      ctaButton: "→ Richiedi evento ora",
       ctaAlternative: "Oppure contattateci direttamente:",
       // Legacy
       title: "Location Eventi Monaco",
@@ -1367,7 +1367,7 @@ const itBase = {
       package3Title: "🎂🎂🎂 Pacchetto Deluxe – L'Evento di Compleanno",
       package3Desc: "Menu gala 5 portate con abbinamento vini, accoglienza aperitivo, torta personalizzata e decorazione individuale. Inclusa area separata e assistenza personale dalla famiglia Speranza.",
       packagesNote: "Composizioni individuali sono sempre possibili.",
-      packagesCtaButton: "Prezzi attuali su events-storia.de",
+      packagesCtaButton: "Prezzi su richiesta \u2014 prenota ora",
       testimonialsTitle: "Cosa Dicono i Nostri Ospiti Compleanni",
       testimonial1Quote: "Il mio 50° compleanno allo STORIA è stato perfetto. Il team si è occupato di tutto – dalla decorazione alla torta a sorpresa. I miei ospiti parlano ancora del cibo settimane dopo.",
       testimonial1Author: "— Festa di compleanno, 30 persone",
@@ -1412,7 +1412,7 @@ const itBase = {
       relatedAperitivoDesc: "Accoglienza aperitivo per i vostri ospiti",
       ctaTitle: "Pianificate Ora la Vostra Festa di Compleanno allo STORIA",
       ctaDesc: "Trasformate il vostro compleanno in una festa italiana!",
-      ctaButton: "→ Richiedi festa di compleanno su events-storia.de",
+      ctaButton: "→ Prenota festa di compleanno ora",
       ctaAlternative: "Oppure contattateci direttamente:",
     },
     silvester: {
@@ -1664,7 +1664,7 @@ const itBase = {
       faq8Answer: "Sì, il nostro menu natalizio è disponibile anche per le coppie. Per una cena di Natale romantica Monaco, vi consigliamo di prenotare.",
       ctaTitle: "Pianificate Ora la Vostra Festa di Natale Monaco",
       ctaDesc: "Assicuratevi la data desiderata – i posti migliori si esauriscono rapidamente!",
-      ctaButton: "Richiedi festa di Natale su events-storia.de",
+      ctaButton: "\u2192 Prenota festa di Natale ora",
       relatedTitle: "Potrebbe Interessarvi Anche",
       related1Title: "💼 Eventi Aziendali Monaco",
       related1Desc: "Tutti i formati evento in sintesi",
@@ -2540,7 +2540,7 @@ const itBase = {
     },
     {
       question: 'Si possono prenotare eventi aziendali e feste private da STORIA?',
-      answer: 'Sì, STORIA è una location popolare per eventi aziendali, feste di Natale, compleanni e celebrazioni private. Ospitiamo fino a 100 posti a sedere, 180 posti in piedi e grande terrazza con pacchetti menu personalizzati. Tutte le informazioni eventi su events-storia.de.',
+      answer: 'S\u00ec, STORIA \u00e8 una location popolare per eventi aziendali, feste di Natale, compleanni e celebrazioni private. Ospitiamo fino a 100 posti a sedere, 180 posti in piedi e grande terrazza con pacchetti menu personalizzati. Contattateci: 089 51519696.',
     },
     {
       question: 'Ci sono parcheggi vicino a STORIA?',

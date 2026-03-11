@@ -574,7 +574,7 @@ export const de = {
       // Events CTA
       eventsCta: "💼 Firmenfeier anfragen bei STORIA Events",
       eventsCtaDesc: "Alle Informationen zu unseren Firmenfeier-Paketen, Business-Menüs, Raumkonzepten und Preisen finden Sie auf unserer spezialisierten Event-Website:",
-      eventsCtaButton: "→ Jetzt Firmenfeier anfragen auf events-storia.de",
+      eventsCtaButton: "→ Jetzt Firmenfeier anfragen",
       eventsContactNote: "Oder kontaktieren Sie uns direkt:",
       // Event Types
       eventTypesTitle: "Welche Firmenfeiern können Sie im STORIA ausrichten?",
@@ -622,7 +622,7 @@ export const de = {
       eventTypeEmployeeItem3: "Kuchen auf Anfrage",
       eventTypeEmployeeItem4: "Kleine bis mittelgroße Gruppen",
       eventTypesCtaNote: "Detaillierte Informationen zu allen Firmenfeier-Typen und Paketen:",
-      eventTypesCtaButton: "events-storia.de – Firmenfeier-Optionen ansehen",
+      eventTypesCtaButton: "→ Firmenfeier-Optionen anfragen",
       // Why STORIA
       whyTitle: "8 Gründe, warum Firmenfeiern im STORIA erfolgreich sind",
       whyLocationTitle: "📍 Zentrale Business-Lage",
@@ -693,7 +693,7 @@ export const de = {
       processStep5Desc: "1-2 Wochen vor dem Event: Finaler Abstimmungstermin. Wir besprechen Ablauf, Sitzordnung, letzte Wünsche. Ihr fester Ansprechpartner steht für Fragen zur Verfügung.",
       processStep6Title: "Ihre Firmenfeier – Wir kümmern uns um alles",
       processStep6Desc: "Am Event-Tag sind wir komplett für Sie da. Die Familie Speranza koordiniert persönlich, unser Service-Team sorgt für reibungslosen Ablauf.",
-      processCtaButton: "→ Firmenfeier-Planung starten auf events-storia.de",
+      processCtaButton: "→ Firmenfeier-Planung starten",
       // Testimonials
       testimonialsTitle: "Das sagen Unternehmen über Firmenevents München im STORIA",
       testimonial1Quote: "Unsere Weihnachtsfeier war ein voller Erfolg! Die zentrale Lage machte die Anreise für alle einfach, das Essen war hervorragend und der Service sehr professionell.",
@@ -729,7 +729,7 @@ export const de = {
       // FAQ
       faqTitle: "Häufige Fragen zu Firmenfeiern im STORIA",
       faq1Question: "Was kostet eine Firmenfeier im STORIA München?",
-      faq1Answer: "Unsere Firmenfeier-Pakete beginnen bei €35 p.P. (Pizza & Aperitivo) bis €85 p.P. (Premium Gala-Paket). Das beliebteste Business-Menü Paket (3 Gänge mit Getränken) kostet ab €55 p.P. Detaillierte Preise auf events-storia.de.",
+      faq1Answer: "Unsere Firmenfeier-Pakete beginnen bei \u20ac35 p.P. (Pizza & Aperitivo) bis \u20ac85 p.P. (Premium Gala-Paket). Das beliebteste Business-Men\u00fc Paket (3 G\u00e4nge mit Getr\u00e4nken) kostet ab \u20ac55 p.P. Preise auf Anfrage \u2014 rufen Sie uns an: 089 51519696.",
       faq2Question: "Wie viele Personen passen für eine Firmenfeier ins STORIA?",
       faq2Answer: "Das STORIA bietet flexible Kapazit\u00e4ten: 10\u201330 Personen im separaten Bereich, 30\u201360 Personen semi-privat, 60\u2013100 Sitzpl\u00e4tze bei exklusiver Raummiete. Dazu die Terrasse mit ebenfalls bis zu 100 Sitzpl\u00e4tzen. Stehempf\u00e4nge bis 180 G\u00e4ste pro Bereich.",
       faq3Question: "Wann sollte ich die Weihnachtsfeier buchen?",
@@ -739,9 +739,9 @@ export const de = {
       faq5Question: "Gibt es vegetarische/vegane Optionen für Firmenfeiern?",
       faq5Answer: "Ja, wir bieten vegetarische und vegane Menü-Optionen für Firmenfeiern an. Teilen Sie uns bei der Planung mit, wie viele Vegetarier/Veganer dabei sind.",
       faq6Question: "Kann ich die Location vorher besichtigen?",
-      faq6Answer: "Ja, sehr gerne! Wir empfehlen einen Besichtigungstermin vor der Buchung. Vereinbaren Sie einen Termin über events-storia.de oder telefonisch: 089 51519696.",
+      faq6Answer: "Ja, sehr gerne! Wir empfehlen einen Besichtigungstermin vor der Buchung. Vereinbaren Sie einen Termin telefonisch: 089 51519696.",
       faq7Question: "Bietet das STORIA auch Catering außer Haus an?",
-      faq7Answer: "Ja, wir bieten auch italienisches Firmen-Catering außer Haus an – für Messen, Konferenzen oder Events in Ihren Räumlichkeiten. Alle Catering-Optionen auf events-storia.de.",
+      faq7Answer: "Ja, wir bieten auch italienisches Firmen-Catering au\u00dfer Haus an \u2013 f\u00fcr Messen, Konferenzen oder Events in Ihren R\u00e4umlichkeiten. Fragen Sie uns direkt an: 089 51519696.",
       faq8Question: "Gibt es eine Mindestanzahl f\u00fcr Firmenfeiern?",
       faq8Answer: "F\u00fcr separate Bereiche empfehlen wir mindestens 10 Personen. F\u00fcr die exklusive Raummiete des gesamten Restaurants ist eine Mindestanzahl von 40 Personen erforderlich.",
       faq9Question: "Welche Unterhaltungsm\u00f6glichkeiten gibt es bei Firmenfeiern im STORIA?",
@@ -762,7 +762,7 @@ export const de = {
       // CTA
       ctaTitle: "Jetzt Ihre Firmenfeier im STORIA planen",
       ctaDesc: "Bereit für erfolgreiche Firmenevents in München? Ob Weihnachtsfeier München, Teambuilding München, Sommerfest oder Firmenjubiläum – als Ihr Italiener in München machen wir Ihr Event unvergesslich. Alle Pakete, Menüs und Preise finden Sie auf unserer Event-Website.",
-      ctaButton: "→ Jetzt Firmenfeier anfragen auf events-storia.de",
+      ctaButton: "→ Jetzt Firmenfeier reservieren",
       ctaAlternative: "Oder kontaktieren Sie uns direkt:",
       ctaHoursTitle: "Firmenfeier-Beratung:",
       ctaHoursValue: "Mo-Fr 10:00-18:00 Uhr",
@@ -1168,7 +1168,7 @@ export const de = {
       // Events CTA
       eventsCta: "🎉 Event anfragen bei STORIA Events",
       eventsCtaDesc: "Alle Informationen zu unseren Eventlocation-Angeboten, Raumkonzepten, Event-Menüs und Preisen finden Sie auf unserer spezialisierten Event-Website:",
-      eventsCtaButton: "→ Jetzt Event anfragen auf events-storia.de",
+      eventsCtaButton: "→ Jetzt Event anfragen",
       eventsContactNote: "Oder kontaktieren Sie uns direkt:",
       // Event Types
       eventTypesTitle: "Welche Events können Sie im STORIA feiern?",
@@ -1215,7 +1215,7 @@ export const de = {
       eventTypePrivateItem3: "Babyshower",
       eventTypePrivateItem4: "Familientreffen",
       eventTypesCtaNote: "Detaillierte Informationen zu allen Event-Typen finden Sie auf:",
-      eventTypesCtaButton: "events-storia.de – Alle Event-Optionen ansehen",
+      eventTypesCtaButton: "→ Alle Event-Optionen anfragen",
       // Room Concepts
       roomsTitle: "Flexible Raumkonzepte für bis zu 180 Gäste",
       roomsIntro: "Das STORIA bietet flexible Räumlichkeiten für Events unterschiedlicher Größe. Von intimen Feiern bis zur großen Veranstaltung – wir finden die passende Lösung.",
@@ -1273,7 +1273,7 @@ export const de = {
       processStep5Desc: "In den Wochen vor Ihrem Event bleiben wir in Kontakt. Wir koordinieren alle Details, organisieren auf Wunsch externe Dienstleister (DJ, Fotograf) und sorgen für einen reibungslosen Ablauf.",
       processStep6Title: "Ihr Event – Wir kümmern uns um alles",
       processStep6Desc: "Am Tag Ihres Events sind wir komplett für Sie da. Die Familie Speranza und unser Team sorgen dafür, dass alles perfekt läuft. Sie können entspannt feiern – wir kümmern uns um den Rest.",
-      processCtaButton: "→ Event-Anfrage auf events-storia.de starten",
+      processCtaButton: "→ Jetzt Event anfragen",
       // Location
       locationTitle: "Eventlocation München Maxvorstadt – Perfekt erreichbar",
       locationIntro: "Das Ristorante STORIA liegt zentral in der Maxvorstadt – ideal für Events mit Gästen aus der ganzen Stadt.",
@@ -1298,17 +1298,17 @@ export const de = {
       // FAQ
       faqTitle: "Häufige Fragen zur Eventlocation STORIA München",
       faq1Question: "Wie viele Gäste passen in die Eventlocation STORIA?",
-      faq1Answer: "Das STORIA M\u00fcnchen bietet flexible Kapazit\u00e4ten: 10\u201330 G\u00e4ste im separaten Bereich, 30\u201360 G\u00e4ste semi-privat, 60\u2013100 Sitzpl\u00e4tze bei exklusiver Raummiete. Dazu die Terrasse mit ebenfalls bis zu 100 Sitzpl\u00e4tzen. Stehempf\u00e4nge bis 180 G\u00e4ste pro Bereich. Details auf events-storia.de.",
+      faq1Answer: "Das STORIA M\u00fcnchen bietet flexible Kapazit\u00e4ten: 10\u201330 G\u00e4ste im separaten Bereich, 30\u201360 G\u00e4ste semi-privat, 60\u2013100 Sitzpl\u00e4tze bei exklusiver Raummiete. Dazu die Terrasse mit ebenfalls bis zu 100 Sitzpl\u00e4tzen. Stehempf\u00e4nge bis 180 G\u00e4ste pro Bereich.",
       faq2Question: "Wo finde ich Informationen zu Event-Preisen und Menüs?",
-      faq2Answer: "Alle Event-Menüs, Preise und Pakete finden Sie auf unserer spezialisierten Event-Website: events-storia.de. Dort können Sie auch direkt eine unverbindliche Anfrage für Ihr Event stellen.",
+      faq2Answer: "Preise und Men\u00fcs teilen wir Ihnen gerne direkt mit. Rufen Sie uns an: 089 51519696 oder schreiben Sie an info@ristorantestoria.de.",
       faq3Question: "Welche Events kann ich im STORIA feiern?",
       faq3Answer: "Das STORIA ist perfekt für: Geburtstagsfeiern, Hochzeitsfeiern, Firmenfeiern, Weihnachtsfeiern, Jubiläen, Team-Events, Taufe/Kommunion, Verlobungen und alle privaten oder geschäftlichen Anlässe. bis 180 Gäste möglich.",
       faq4Question: "Gibt es eine Mindestanzahl an Gästen?",
       faq4Answer: "Ja, für private Bereiche empfehlen wir mindestens 10 Gäste. Für die exklusive Raummiete des gesamten Restaurants gilt eine Mindestgästezahl von 40 Personen. Kontaktieren Sie uns für individuelle Lösungen.",
       faq5Question: "Kann ich die Location vorher besichtigen?",
-      faq5Answer: "Ja, sehr gerne! Wir vereinbaren einen Besichtigungstermin, bei dem Sie die Räumlichkeiten sehen und mit uns alle Details besprechen können. Kontaktieren Sie uns über events-storia.de oder unter 089 51519696.",
+      faq5Answer: "Ja, sehr gerne! Wir vereinbaren einen Besichtigungstermin, bei dem Sie die R\u00e4umlichkeiten sehen und mit uns alle Details besprechen k\u00f6nnen. Rufen Sie uns an unter 089 51519696.",
       faq6Question: "Bietet das STORIA auch Catering außer Haus an?",
-      faq6Answer: "Ja, wir bieten auch italienisches Catering außer Haus an – für Ihre Firmenevents, Messen oder private Feiern an Ihrer Location. Alle Catering-Optionen finden Sie auf events-storia.de.",
+      faq6Answer: "Ja, wir bieten auch italienisches Catering au\u00dfer Haus an \u2013 f\u00fcr Ihre Firmenevents, Messen oder private Feiern an Ihrer Location. Fragen Sie uns an: 089 51519696.",
       faq7Question: "Wie weit im Voraus muss ich mein Event buchen?",
       faq7Answer: "Wir empfehlen eine Vorlaufzeit von mindestens 4-6 Wochen für größere Events (40+ Gäste). Für kleinere Feiern (10-20 Gäste) sind auch kurzfristigere Buchungen möglich. Weihnachtsfeiern sollten Sie bereits im September/Oktober buchen – diese sind schnell ausgebucht.",
       // Testimonials
@@ -1333,7 +1333,7 @@ export const de = {
       // CTA
       ctaTitle: "Jetzt Ihr Event im STORIA planen",
       ctaDesc: "Bereit für ein unvergessliches Event im STORIA München Maxvorstadt? Alle Informationen zu Raumkonzepten, Event-Menüs, Preisen und Verfügbarkeiten finden Sie auf unserer Event-Website.",
-      ctaButton: "→ Jetzt auf events-storia.de anfragen",
+      ctaButton: "→ Jetzt anfragen",
       ctaAlternative: "Oder kontaktieren Sie uns direkt:",
       ctaHoursTitle: "Eventberatung:",
       ctaHoursValue: "Mo-Fr 10:00-18:00 Uhr",
@@ -1431,7 +1431,7 @@ export const de = {
       package3Title: "\ud83c\udf82\ud83c\udf82\ud83c\udf82 Paket Deluxe \u2013 Das Geburtstags-Event",
       package3Desc: "5-Gang-Gala-Men\u00fc mit Weinbegleitung, Aperitivo-Empfang, personalisierter Torte und individueller Dekoration. Inklusive separatem Bereich und pers\u00f6nlicher Betreuung durch Familie Speranza.",
       packagesNote: "Individuelle Zusammenstellungen sind jederzeit m\u00f6glich.",
-      packagesCtaButton: "Aktuelle Preise auf events-storia.de",
+      packagesCtaButton: "Preise auf Anfrage \u2014 jetzt reservieren",
       // Testimonials (3, no age badges)
       testimonialsTitle: "Das sagen unsere Geburtstagsg\u00e4ste",
       testimonial1Quote: "Mein 50. Geburtstag im STORIA war perfekt. Das Team hat sich um alles gek\u00fcmmert \u2013 von der Dekoration bis zur \u00dcberraschungstorte. Meine G\u00e4ste schw\u00e4rmen noch Wochen sp\u00e4ter vom Essen.",
@@ -1482,7 +1482,7 @@ export const de = {
       // Final CTA
       ctaTitle: "Jetzt Ihre Geburtstagsfeier im STORIA planen",
       ctaDesc: "Machen Sie Ihren Geburtstag zu einem italienischen Fest!",
-      ctaButton: "\u2192 Geburtstagsfeier anfragen auf events-storia.de",
+      ctaButton: "\u2192 Jetzt Geburtstagsfeier reservieren",
       ctaAlternative: "Oder kontaktieren Sie uns direkt:",
     },
     silvester: {
@@ -2575,7 +2575,7 @@ export const de = {
       faq8Answer: "Ja, unser Weihnachtsmenü ist auch für Paare verfügbar. Für ein romantisches Weihnachtsessen München empfehlen wir eine Reservierung.",
       ctaTitle: "Jetzt Ihre Weihnachtsfeier München planen",
       ctaDesc: "Sichern Sie sich Ihren Wunschtermin – die besten Termine sind schnell vergeben!",
-      ctaButton: "Weihnachtsfeier anfragen auf events-storia.de",
+      ctaButton: "\u2192 Jetzt Weihnachtsfeier reservieren",
       relatedTitle: "Das könnte Sie auch interessieren",
       related1Title: "💼 Firmenevents München",
       related1Desc: "Alle Event-Formate im Überblick",

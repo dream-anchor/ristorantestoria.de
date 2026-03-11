@@ -572,7 +572,7 @@ export const en = {
       // Events CTA
       eventsCta: "💼 Inquire about corporate event at STORIA Events",
       eventsCtaDesc: "All information about our corporate event packages, business menus, room concepts and prices can be found on our specialized event website:",
-      eventsCtaButton: "→ Inquire about corporate event now at events-storia.de",
+      eventsCtaButton: "→ Inquire about corporate event now",
       eventsContactNote: "Or contact us directly:",
       // Event Types
       eventTypesTitle: "What corporate events can you host at STORIA?",
@@ -620,7 +620,7 @@ export const en = {
       eventTypeEmployeeItem3: "Cake on request",
       eventTypeEmployeeItem4: "Small to medium-sized groups",
       eventTypesCtaNote: "Detailed information about all corporate event types and packages:",
-      eventTypesCtaButton: "events-storia.de – View corporate event options",
+      eventTypesCtaButton: "→ View corporate event options",
       // Why STORIA
       whyTitle: "8 Reasons Why Corporate Events at STORIA Are Successful",
       whyLocationTitle: "📍 Central Business Location",
@@ -691,7 +691,7 @@ export const en = {
       processStep5Desc: "1-2 weeks before the event: Final coordination meeting. We discuss schedule, seating, last wishes. Your dedicated contact person is available for questions.",
       processStep6Title: "Your Corporate Event – We Take Care of Everything",
       processStep6Desc: "On the event day we are completely there for you. The Speranza family coordinates personally, our service team ensures smooth operations.",
-      processCtaButton: "→ Start corporate event planning at events-storia.de",
+      processCtaButton: "→ Start corporate event planning",
       // Testimonials
       testimonialsTitle: "What Companies Say About Corporate Events Munich at STORIA",
       testimonial1Quote: "Our Christmas party was a complete success! The central location made arrival easy for everyone, the food was excellent and the service very professional.",
@@ -727,7 +727,7 @@ export const en = {
       // FAQ
       faqTitle: "Frequently Asked Questions About Corporate Events at STORIA",
       faq1Question: "What does a corporate event cost at STORIA Munich?",
-      faq1Answer: "Our corporate event packages start at €35 p.p. (Pizza & Aperitivo) up to €85 p.p. (Premium Gala Package). The most popular Business Menu Package (3 courses with drinks) costs from €55 p.p. Detailed prices at events-storia.de.",
+      faq1Answer: "Our corporate event packages start at \u20ac35 p.p. (Pizza & Aperitivo) up to \u20ac85 p.p. (Premium Gala Package). The most popular Business Menu Package (3 courses with drinks) costs from \u20ac55 p.p. Prices on request \u2014 call us: 089 51519696.",
       faq2Question: "How many people fit for a corporate event at STORIA?",
       faq2Answer: "10-30 guests in separate area, 30-60 semi-private, 60\u2013100 seats with exclusive venue rental. Plus the terrace with up to 100 additional seats. Standing receptions up to 180 guests per area.",
       faq3Question: "When should I book the Christmas party?",
@@ -737,9 +737,9 @@ export const en = {
       faq5Question: "Are there vegetarian/vegan options for corporate events?",
       faq5Answer: "Yes, we offer vegetarian and vegan menu options for corporate events. Let us know during planning how many vegetarians/vegans will attend.",
       faq6Question: "Can I visit the location beforehand?",
-      faq6Answer: "Yes, with pleasure! We recommend a viewing appointment before booking. Arrange an appointment via events-storia.de or by phone: 089 51519696.",
+      faq6Answer: "Yes, with pleasure! We recommend a viewing appointment before booking. Arrange an appointment by phone: 089 51519696.",
       faq7Question: "Does STORIA also offer external catering?",
-      faq7Answer: "Yes, we also offer Italian corporate catering off-site – for trade fairs, conferences or events at your premises. All catering options at events-storia.de.",
+      faq7Answer: "Yes, we also offer Italian corporate catering off-site \u2013 for trade fairs, conferences or events at your premises. Contact us directly: 089 51519696.",
       faq8Question: "Is there a minimum number for corporate events?",
       faq8Answer: "For separate areas we recommend at least 10 people. For exclusive rental of the entire restaurant, a minimum of 40 people is required.",
       faq9Question: "What entertainment options are available for corporate events at STORIA?",
@@ -760,7 +760,7 @@ export const en = {
       // CTA
       ctaTitle: "Plan Your Corporate Event at STORIA Now",
       ctaDesc: "Ready for successful corporate events in Munich at STORIA? Whether Christmas party Munich, team building Munich, summer festival or company anniversary – we make your event unforgettable at your Italian restaurant in Munich. All packages, menus and prices can be found on our event website.",
-      ctaButton: "→ Inquire about corporate event now at events-storia.de",
+      ctaButton: "→ Reserve corporate event now",
       ctaAlternative: "Or contact us directly:",
       ctaHoursTitle: "Corporate event consultation:",
       ctaHoursValue: "Mon-Fri 10:00 AM-6:00 PM",
@@ -1148,7 +1148,7 @@ export const en = {
       // Events CTA
       eventsCta: "🎉 Inquire about event at STORIA Events",
       eventsCtaDesc: "All information about our event location offerings, room concepts, event menus and prices can be found on our specialized event website:",
-      eventsCtaButton: "→ Inquire about event now at events-storia.de",
+      eventsCtaButton: "→ Inquire about event now",
       eventsContactNote: "Or contact us directly:",
       // Event Types
       eventTypesTitle: "What events can you celebrate at STORIA?",
@@ -1195,7 +1195,7 @@ export const en = {
       eventTypePrivateItem3: "Baby shower",
       eventTypePrivateItem4: "Family gatherings",
       eventTypesCtaNote: "Detailed information about all event types can be found at:",
-      eventTypesCtaButton: "events-storia.de – View all event options",
+      eventTypesCtaButton: "→ View all event options",
       // Room Concepts
       roomsTitle: "Flexible Room Concepts for up to 180 Guests",
       roomsIntro: "STORIA offers flexible spaces for events of different sizes. From intimate celebrations to large events – we find the right solution.",
@@ -1253,7 +1253,7 @@ export const en = {
       processStep5Desc: "In the weeks before your event we stay in touch. We coordinate all details, organize external service providers (DJ, photographer) on request and ensure smooth running.",
       processStep6Title: "Your event – We take care of everything",
       processStep6Desc: "On the day of your event we are completely there for you. The Speranza family and our team ensure everything runs perfectly. You can relax and celebrate – we take care of the rest.",
-      processCtaButton: "→ Start event inquiry at events-storia.de",
+      processCtaButton: "→ Start event inquiry",
       // Location
       locationTitle: "Event Location Munich Maxvorstadt – Perfectly Accessible",
       locationIntro: "Ristorante STORIA is centrally located in Maxvorstadt – ideal for events with guests from all over the city.",
@@ -1278,17 +1278,17 @@ export const en = {
       // FAQ
       faqTitle: "Frequently Asked Questions about STORIA Munich Event Location",
       faq1Question: "How many guests fit in the STORIA event location?",
-      faq1Answer: "10-30 guests in separate area, 30-60 semi-private, 60\u2013100 seats with exclusive venue rental. Plus the terrace with up to 100 additional seats. Standing receptions up to 180 guests per area. Details at events-storia.de.",
+      faq1Answer: "10-30 guests in separate area, 30-60 semi-private, 60\u2013100 seats with exclusive venue rental. Plus the terrace with up to 100 additional seats. Standing receptions up to 180 guests per area.",
       faq2Question: "Where can I find information about event prices and menus?",
-      faq2Answer: "All event menus, prices and packages can be found on our specialized event website: events-storia.de. You can also submit a non-binding inquiry for your event there.",
+      faq2Answer: "We will be happy to share event menus, prices and packages directly. Call us: 089 51519696 or email info@ristorantestoria.de.",
       faq3Question: "What events can I celebrate at STORIA?",
       faq3Answer: "STORIA is perfect for: birthday parties, wedding receptions, corporate events, Christmas parties, anniversaries, team events, baptisms/communions, engagements and all private or business occasions. up to 180 guests possible.",
       faq4Question: "Is there a minimum number of guests?",
       faq4Answer: "Yes, for private areas we recommend at least 10 guests. For exclusive rental of the entire restaurant, a minimum of 40 guests applies. Contact us for individual solutions.",
       faq5Question: "Can I view the location beforehand?",
-      faq5Answer: "Yes, of course! We arrange a viewing appointment where you can see the facilities and discuss all details with us. Contact us via events-storia.de or at 089 51519696.",
+      faq5Answer: "Yes, of course! We arrange a viewing appointment where you can see the facilities and discuss all details with us. Call us at 089 51519696.",
       faq6Question: "Does STORIA also offer external catering?",
-      faq6Answer: "Yes, we also offer Italian catering outside the venue – for your corporate events, trade fairs or private celebrations at your location. All catering options can be found at events-storia.de.",
+      faq6Answer: "Yes, we also offer Italian catering outside the venue \u2013 for your corporate events, trade fairs or private celebrations at your location. Contact us: 089 51519696.",
       faq7Question: "How far in advance should I book my event?",
       faq7Answer: "We recommend a lead time of at least 4-6 weeks for larger events (40+ guests). For smaller celebrations (10-20 guests) shorter-notice bookings are also possible. Christmas parties should be booked in September/October – these fill up quickly.",
       // Testimonials
@@ -1313,7 +1313,7 @@ export const en = {
       // CTA
       ctaTitle: "Plan Your Event at STORIA Now",
       ctaDesc: "Ready for an unforgettable event at STORIA Munich Maxvorstadt? All information about room concepts, event menus, prices and availability can be found on our event website.",
-      ctaButton: "→ Inquire now at events-storia.de",
+      ctaButton: "→ Inquire now",
       ctaAlternative: "Or contact us directly:",
       ctaHoursTitle: "Event consultation:",
       ctaHoursValue: "Mon-Fri 10:00 AM-6:00 PM",
@@ -1410,7 +1410,7 @@ export const en = {
       package3Title: "🎂🎂🎂 Deluxe Package – The Birthday Event",
       package3Desc: "5-course gala menu with wine pairing, aperitivo reception, personalized cake and individual decoration. Including separate area and personal service by the Speranza family.",
       packagesNote: "Individual arrangements are always possible.",
-      packagesCtaButton: "Current prices at events-storia.de",
+      packagesCtaButton: "Prices on request \u2014 reserve now",
       // Testimonials (3, no age badges)
       testimonialsTitle: "What Our Birthday Guests Say",
       testimonial1Quote: "My 50th birthday at STORIA was perfect. The team took care of everything – from decoration to the surprise cake. My guests are still raving about the food weeks later.",
@@ -1461,7 +1461,7 @@ export const en = {
       // Final CTA
       ctaTitle: "Plan Your Birthday Party at STORIA Now",
       ctaDesc: "Make your birthday an Italian celebration!",
-      ctaButton: "→ Inquire birthday party at events-storia.de",
+      ctaButton: "→ Reserve birthday party now",
       ctaAlternative: "Or contact us directly:",
     },
     silvester: {
@@ -2522,7 +2522,7 @@ export const en = {
       faq8Answer: "Yes, our Christmas menu is also available for couples. For a romantic Christmas dinner Munich, we recommend making a reservation.",
       ctaTitle: "Plan Your Christmas Party Munich Now",
       ctaDesc: "Secure your preferred date – the best dates fill up fast!",
-      ctaButton: "Inquire about Christmas party at events-storia.de",
+      ctaButton: "\u2192 Reserve Christmas party now",
       relatedTitle: "You Might Also Be Interested In",
       related1Title: "💼 Corporate Events Munich",
       related1Desc: "All event formats at a glance",
