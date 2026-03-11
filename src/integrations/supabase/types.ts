@@ -1179,6 +1179,113 @@ export type Database = {
         }
         Relationships: []
       }
+      seasonal_notification_recipients: {
+        Row: {
+          email: string
+          error_message: string | null
+          id: string
+          language: string
+          notification_id: string
+          resend_id: string | null
+          sent_at: string | null
+          signup_id: string | null
+          status: string
+        }
+        Insert: {
+          email: string
+          error_message?: string | null
+          id?: string
+          language: string
+          notification_id: string
+          resend_id?: string | null
+          sent_at?: string | null
+          signup_id?: string | null
+          status?: string
+        }
+        Update: {
+          email?: string
+          error_message?: string | null
+          id?: string
+          language?: string
+          notification_id?: string
+          resend_id?: string | null
+          sent_at?: string | null
+          signup_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seasonal_notification_recipients_notification_id_fkey"
+            columns: ["notification_id"]
+            isOneToOne: false
+            referencedRelation: "seasonal_notifications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "seasonal_notification_recipients_signup_id_fkey"
+            columns: ["signup_id"]
+            isOneToOne: false
+            referencedRelation: "seasonal_signups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      seasonal_notifications: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          created_by: string | null
+          email_body_html: Json | null
+          email_subject: Json | null
+          failed_count: number | null
+          id: string
+          menu_id: string | null
+          seasonal_event: string
+          sent_count: number | null
+          status: string
+          total_recipients: number | null
+          trigger_type: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          email_body_html?: Json | null
+          email_subject?: Json | null
+          failed_count?: number | null
+          id?: string
+          menu_id?: string | null
+          seasonal_event: string
+          sent_count?: number | null
+          status?: string
+          total_recipients?: number | null
+          trigger_type?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          email_body_html?: Json | null
+          email_subject?: Json | null
+          failed_count?: number | null
+          id?: string
+          menu_id?: string | null
+          seasonal_event?: string
+          sent_count?: number | null
+          status?: string
+          total_recipients?: number | null
+          trigger_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seasonal_notifications_menu_id_fkey"
+            columns: ["menu_id"]
+            isOneToOne: false
+            referencedRelation: "menus"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       seasonal_signups: {
         Row: {
           created_at: string
