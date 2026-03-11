@@ -307,6 +307,10 @@ const TerrasseMuenchen = () => {
                   <h3 className="font-semibold mb-2">{tr.related4Title}</h3>
                   <p className="text-muted-foreground text-sm">{tr.related4Desc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3>
+                  <p className="text-muted-foreground text-sm">{t.internalLinks.faqLinkDesc}</p>
+                </LocalizedLink>
               </div>
             </section>
 

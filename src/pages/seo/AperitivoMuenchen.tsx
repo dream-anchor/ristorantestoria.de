@@ -515,6 +515,10 @@ const AperitivoMuenchen = () => {
                   <h3 className="font-semibold mb-1">Terrasse München</h3>
                   <p className="text-muted-foreground">Aperitivo auf unserer Terrasse – der perfekte Ort für laue Sommerabende.</p>
                 </LocalizedLink>
+                <LocalizedLink to="faq" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-1">{t.internalLinks.faqLink}</h3>
+                  <p className="text-muted-foreground">{t.internalLinks.faqLinkDesc}</p>
+                </LocalizedLink>
               </div>
             </div>
           </section>

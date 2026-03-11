@@ -102,6 +102,9 @@ const itBase = {
     valentinstagMunich: "San Valentino Monaco",
     silvesterMunich: "Capodanno Monaco",
     christmasMunich: "Natale Monaco",
+    faqLink: "Domande frequenti",
+    faqLinkDesc: "Risposte alle domande frequenti su STORIA",
+    pizzaMunich: "Pizza Monaco",
   },
   eventForm: {
     title: "Richiesta Evento",

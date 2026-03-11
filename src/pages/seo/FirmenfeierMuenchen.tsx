@@ -253,6 +253,7 @@ const FirmenfeierMuenchen = () => {
                 <LocalizedLink to="lunch-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedLunchTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedLunchDesc}</p></LocalizedLink>
                 <LocalizedLink to="weihnachtsfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Weihnachtsfeier München</h3><p className="text-muted-foreground text-sm">Italienische Weihnachtsfeier für Ihr Team mit festlichen Menüs ab 45 € pro Person.</p></LocalizedLink>
                 <Link to="/besondere-anlaesse/silvester" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3><p className="text-muted-foreground text-sm">Jahresabschluss-Dinner mit italienischem 5-Gänge-Menü ab 99 € pro Person.</p></Link>
+                <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3><p className="text-muted-foreground text-sm">{t.internalLinks.faqLinkDesc}</p></LocalizedLink>
               </div>
             </section>
 
