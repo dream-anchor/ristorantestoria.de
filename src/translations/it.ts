@@ -37,9 +37,9 @@ const itBase = {
       label: "Men\u00f9 di San Valentino",
       cta1: "Vedi men\u00f9 San Valentino",
     },
-    osterbrunch: {
-      label: "Brunch di Pasqua",
-      cta1: "Scopri il brunch di Pasqua",
+    ostermontag: {
+      label: "Men\u00f9 di Pasqua",
+      cta1: "Scopri il men\u00f9 di Pasqua",
       cta2: "Terrazza",
     },
     terrasse: {

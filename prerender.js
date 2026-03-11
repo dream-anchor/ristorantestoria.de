@@ -332,7 +332,7 @@ async function generateRoutesToPrerender() {
   };
 
   const SEASONAL_MENUS = [
-    { de: 'osterbrunch', en: 'easter-brunch', it: 'pranzo-di-pasqua', fr: 'brunch-de-paques' },
+    { de: 'ostermontag-menue', en: 'easter-monday-menu', it: 'menu-di-pasqua', fr: 'menu-de-paques' },
     { de: 'valentinstag-menue', en: 'valentines-menu', it: 'san-valentino-menu', fr: 'saint-valentin-menu' },
     { de: 'weihnachtsmenue', en: 'christmas-menu', it: 'natale-menu', fr: 'noel-menu' },
     { de: 'silvester', en: 'new-years-eve', it: 'capodanno', fr: 'nouvel-an' },

@@ -146,11 +146,16 @@ RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
-# Phantom-URL aus GSC (kein Content, kein H1) → Pillar Page
-RewriteRule ^besondere-anlaesse/neuer-anlass/?$ /besondere-anlaesse/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/neuer-anlass/?$ /it/occasioni-speciali/ [R=301,L]
-RewriteRule ^en/special-occasions/neuer-anlass/?$ /en/special-occasions/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/neuer-anlass/?$ /fr/occasions-speciales/ [R=301,L]
+# Phantom-URL aus GSC (kein Content, kein H1) → Ostermontag-Menu
+RewriteRule ^besondere-anlaesse/neuer-anlass/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/neuer-anlass/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
+RewriteRule ^en/special-occasions/neuer-anlass/?$ /en/special-occasions/easter-monday-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/neuer-anlass/?$ /fr/occasions-speciales/menu-de-paques/ [R=301,L]
+# Osterbrunch → Ostermontag-Menu (URL-Umbenennung 2026)
+RewriteRule ^besondere-anlaesse/osterbrunch/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
+RewriteRule ^en/special-occasions/easter-brunch/?$ /en/special-occasions/easter-monday-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/pranzo-di-pasqua/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/brunch-de-paques/?$ /fr/occasions-speciales/menu-de-paques/ [R=301,L]
 # Alte Subdomain-URL Struktur (ristorantestoria-de/...)
 RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L]
 RewriteRule ^ristorantestoria-de/?$ / [R=301,L]

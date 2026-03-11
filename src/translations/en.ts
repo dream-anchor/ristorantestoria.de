@@ -7,9 +7,9 @@ export const en = {
       label: "Valentine's Menu",
       cta1: "View Valentine's Menu",
     },
-    osterbrunch: {
-      label: "Easter Brunch",
-      cta1: "Discover Easter Brunch",
+    ostermontag: {
+      label: "Easter Monday Menu",
+      cta1: "Discover Easter Menu",
       cta2: "Terrace",
     },
     terrasse: {

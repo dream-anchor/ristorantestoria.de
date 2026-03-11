@@ -3,13 +3,13 @@ import { ArrowRight } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-type Season = "valentinstag" | "osterbrunch" | "terrasse" | "wild" | "weihnachtsfeier" | "silvester";
+type Season = "valentinstag" | "ostermontag" | "terrasse" | "wild" | "weihnachtsfeier" | "silvester";
 
 const SEASON_BY_MONTH: (Season | null)[] = [
   "valentinstag",  // Jan
   "valentinstag",  // Feb
-  "osterbrunch",   // Mar
-  "osterbrunch",   // Apr
+  "ostermontag",   // Mar
+  "ostermontag",   // Apr
   "terrasse",      // May
   "terrasse",      // Jun
   "terrasse",      // Jul
@@ -22,7 +22,7 @@ const SEASON_BY_MONTH: (Season | null)[] = [
 
 const SEASON_LINKS: Record<Season, { cta1: string; cta2?: string }> = {
   valentinstag: { cta1: "besondere-anlaesse/valentinstag-menue" },
-  osterbrunch: { cta1: "besondere-anlaesse/osterbrunch", cta2: "terrasse-muenchen" },
+  ostermontag: { cta1: "besondere-anlaesse/ostermontag-menue", cta2: "terrasse-muenchen" },
   terrasse: { cta1: "terrasse-muenchen", cta2: "aperitivo-muenchen" },
   wild: { cta1: "wild-essen-muenchen" },
   weihnachtsfeier: { cta1: "weihnachtsfeier-muenchen" },
@@ -31,7 +31,7 @@ const SEASON_LINKS: Record<Season, { cta1: string; cta2?: string }> = {
 
 const SEASON_ICONS: Record<Season, string> = {
   valentinstag: "\u2764\ufe0f",
-  osterbrunch: "\ud83d\udc30",
+  ostermontag: "\ud83d\udc30",
   terrasse: "\u2600\ufe0f",
   wild: "\ud83e\udd8c",
   weihnachtsfeier: "\ud83c\udf84",

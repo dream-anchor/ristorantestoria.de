@@ -7,9 +7,9 @@ export const fr = {
       label: "Menu Saint-Valentin",
       cta1: "Voir le menu Saint-Valentin",
     },
-    osterbrunch: {
-      label: "Brunch de P\u00e2ques",
-      cta1: "D\u00e9couvrir le brunch de P\u00e2ques",
+    ostermontag: {
+      label: "Menu de P\u00e2ques",
+      cta1: "D\u00e9couvrir le menu de P\u00e2ques",
       cta2: "Terrasse",
     },
     terrasse: {
