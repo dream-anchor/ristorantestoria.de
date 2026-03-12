@@ -19,7 +19,19 @@ RewriteCond %{HTTP_HOST} ^newsletter\.ristorantestoria\.de$ [NC]
 RewriteRule ^ https://www.ristorantestoria.de/ [R=301,L]
 
 # ============================================
-# 1b. HTTPS + WWW + Trailing Slash — alles in einem Hop
+# 1b. HTTP → HTTPS (alle Varianten)
+# ============================================
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
+
+# ============================================
+# 1c. non-www → www (für HTTPS)
+# ============================================
+RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
+
+# ============================================
+# 1d. HTTPS + WWW + Trailing Slash — alles in einem Hop
 # ============================================
 # Regel 1: Nicht-kanonischer Host/Protokoll UND kein Trailing Slash
 #          → https://www. MIT Slash in einem einzigen 301
