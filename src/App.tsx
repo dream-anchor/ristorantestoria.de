@@ -113,7 +113,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
   "wild-essen-muenchen": WildEssenMuenchen,
   "pizza-muenchen": PizzaMuenchen,
-  "italiener-muenchen": ItalienerMuenchen,
+  // "italiener-muenchen" removed — 301 redirect to / (keyword cannibalization fix)
   "italiener-koenigsplatz": ItalienerKoenigsplatz,
   "weihnachtsfeier-muenchen": WeihnachtsfeierMuenchen,
   "terrasse-muenchen": TerrasseMuenchen,
@@ -213,6 +213,12 @@ const AppRoutes = () => {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/gsc" element={<AdminGSC />} />
         <Route path="/admin/seo" element={<AdminSEO />} />
+
+        {/* /italiener-muenchen → / (keyword cannibalization fix, all language versions) */}
+        <Route path="/italiener-muenchen" element={<Navigate to="/" replace />} />
+        <Route path="/en/italian-restaurant-munich" element={<Navigate to="/en/" replace />} />
+        <Route path="/it/ristorante-italiano-monaco" element={<Navigate to="/it/" replace />} />
+        <Route path="/fr/restaurant-italien-munich" element={<Navigate to="/fr/" replace />} />
 
         {/* /menu → /speisekarte (thin content page removed) */}
         <Route path="/menu" element={<Navigate to="/speisekarte/" replace />} />

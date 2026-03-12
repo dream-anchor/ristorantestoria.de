@@ -402,11 +402,11 @@ const PizzaMuenchen = () => {
                   <span className="font-medium">{t.internalLinks.lunchMunich}</span>
                 </LocalizedLink>
                 <LocalizedLink
-                  to="italiener-muenchen"
+                  to="italienisches-restaurant-muenchen"
                   className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
                 >
                   <span className="text-2xl mb-2 block">{"\ud83c\uddee\ud83c\uddf9"}</span>
-                  <span className="font-medium">{t.internalLinks.italienerMuenchen}</span>
+                  <span className="font-medium">{t.internalLinks.italianRestaurantMunich}</span>
                 </LocalizedLink>
                 <LocalizedLink
                   to="aperitivo-muenchen"

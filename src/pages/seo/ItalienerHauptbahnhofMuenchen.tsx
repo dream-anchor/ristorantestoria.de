@@ -301,7 +301,7 @@ const ItalienerHauptbahnhofMuenchen = () => {
                   <span className="font-medium">{s.related2Title}</span>
                   <p className="text-sm text-muted-foreground mt-1">{s.related2Desc}</p>
                 </LocalizedLink>
-                <LocalizedLink to="italiener-muenchen" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
+                <LocalizedLink to="italienisches-restaurant-muenchen" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
                   <span className="font-medium">{s.related3Title}</span>
                   <p className="text-sm text-muted-foreground mt-1">{s.related3Desc}</p>
                 </LocalizedLink>

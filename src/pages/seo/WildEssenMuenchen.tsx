@@ -557,11 +557,11 @@ const WildEssenMuenchen = () => {
                   <span className="font-medium">{t.internalLinks.romanticDinner}</span>
                 </LocalizedLink>
                 <LocalizedLink
-                  to="italiener-muenchen"
+                  to="italienisches-restaurant-muenchen"
                   className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
                 >
                   <span className="text-2xl mb-2 block">🇮🇹</span>
-                  <span className="font-medium">{t.internalLinks.italienerMuenchen}</span>
+                  <span className="font-medium">{t.internalLinks.italianRestaurantMunich}</span>
                 </LocalizedLink>
                 <LocalizedLink
                   to="terrasse-muenchen"

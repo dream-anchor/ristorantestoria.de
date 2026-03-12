@@ -160,6 +160,38 @@ const Catering = () => {
             </div>
           </section>
 
+          {/* Two-track: Im Restaurant vs. Außer Haus */}
+          <section className="pb-8">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6">
+                  <div className="text-2xl mb-3">🍽️</div>
+                  <h2 className="font-semibold text-base mb-2">Feiern im Restaurant</h2>
+                  <p className="text-sm text-muted-foreground mb-4">Reservieren Sie für 1 bis 180 Gäste direkt bei uns – Dinner, Geburtstag, Firmenfeier, Hochzeit.</p>
+                  <LocalizedLink
+                    to="besondere-anlaesse"
+                    className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                  >
+                    Besondere Anlässe &rarr;
+                  </LocalizedLink>
+                </div>
+                <div className="bg-secondary/40 border border-border rounded-2xl p-6">
+                  <div className="text-2xl mb-3">🚚</div>
+                  <h2 className="font-semibold text-base mb-2">Catering außer Haus</h2>
+                  <p className="text-sm text-muted-foreground mb-4">Wir liefern Pizza, Pasta & Antipasti zu Ihrem Event – flexibel, frisch, authentisch.</p>
+                  <a
+                    href="https://events-storia.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                  >
+                    events-storia.de &rarr;
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Packages */}
           <section className="py-12 bg-secondary/20">
             <div className="container mx-auto px-4 max-w-4xl">

@@ -32,7 +32,7 @@ const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 // Routes to exclude from sitemap (admin, internal)
-const EXCLUDED_ROUTES = ["admin", "admin/login", "menu"];
+const EXCLUDED_ROUTES = ["admin", "admin/login", "menu", "italiener-muenchen"];
 
 // Legal pages — only generate German URLs (no foreign language versions)
 const LEGAL_ONLY_DE = [
