@@ -158,6 +158,8 @@ RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
+# Keyword-Kannibalisierung: /italiener-muenchen/ → Homepage (alle Sprach-Slugs werden durch Client-seitige Redirects abgedeckt)
+RewriteRule ^italiener-muenchen/?$ / [R=301,L]
 # Phantom-URL aus GSC (kein Content, kein H1) → Ostermontag-Menu
 RewriteRule ^besondere-anlaesse/neuer-anlass/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
 RewriteRule ^it/occasioni-speciali/neuer-anlass/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
