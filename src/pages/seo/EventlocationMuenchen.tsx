@@ -394,7 +394,7 @@ const EventlocationMuenchen = () => {
                   <h3 className="font-semibold mb-2">Catering & Event-Küche</h3>
                   <p className="text-muted-foreground text-sm">Italienisches Catering für Ihre Veranstaltung – im Haus oder extern.</p>
                 </LocalizedLink>
-                <Link to="/besondere-anlaesse/silvester" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                <Link to="/besondere-anlaesse/silvester/" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3>
                   <p className="text-muted-foreground text-sm">Feiern Sie den Jahreswechsel mit einem italienischen 5-Gänge-Menü im STORIA.</p>
                 </Link>
