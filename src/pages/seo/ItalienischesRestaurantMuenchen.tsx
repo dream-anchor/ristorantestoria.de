@@ -252,7 +252,7 @@ const ItalienischesRestaurantMuenchen = () => {
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
                 {s.faqTitle}
               </h2>
-              <Accordion type="single" collapsible className="space-y-4">
+              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4","faq-5","faq-6","faq-7","faq-8","faq-9"]} className="space-y-4">
                 {faqItems.map((item, idx) => (
                   <AccordionItem key={idx} value={`faq-${idx}`} className="bg-card border border-border rounded-lg px-4">
                     <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>

@@ -108,7 +108,7 @@ const FAQ = () => {
                   {category.title}
                 </h2>
                 
-                <Accordion type="multiple" className="space-y-3">
+                <Accordion type="multiple" defaultValue={category.items.map((_, idx) => `${category.id}-${idx}`)} className="space-y-3">
                   {category.items.map((item, itemIndex) => (
                     <AccordionItem 
                       key={itemIndex} 

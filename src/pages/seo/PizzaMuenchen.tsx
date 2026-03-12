@@ -289,7 +289,7 @@ const PizzaMuenchen = () => {
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-12">
                 {t.seo.pizzaMuenchen.faqTitle}
               </h2>
-              <Accordion type="single" collapsible className="w-full">
+              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4","faq-5","faq-6","faq-7","faq-8","faq-9"]} className="w-full">
                 {faqItems.map((faq, index) => (
                   <AccordionItem key={index} value={`faq-${index}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>

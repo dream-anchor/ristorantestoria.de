@@ -275,7 +275,7 @@ const Kontakt = () => {
 
           {/* Progressive Disclosure: Parking & Transit Accordion */}
           <div className="max-w-4xl mx-auto mt-8">
-            <Accordion type="single" collapsible className="bg-gradient-to-br from-card/80 to-card backdrop-blur-sm rounded-2xl border border-border/50 shadow-xl overflow-hidden">
+            <Accordion type="multiple" defaultValue={["parking","transit"]} className="bg-gradient-to-br from-card/80 to-card backdrop-blur-sm rounded-2xl border border-border/50 shadow-xl overflow-hidden">
               <AccordionItem value="parking" className="border-b border-border/50">
                 <AccordionTrigger className="px-8 py-5 text-lg font-medium hover:no-underline hover:bg-secondary/30 transition-colors">
                   <div className="flex items-center gap-3">
