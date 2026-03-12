@@ -57,7 +57,7 @@ export default function AdminGSC() {
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/admin">
+              <Link to="/admin/">
                 <ArrowLeft className="h-4 w-4 mr-1" />
                 Admin
               </Link>
