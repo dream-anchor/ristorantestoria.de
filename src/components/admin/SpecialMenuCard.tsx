@@ -202,7 +202,7 @@ const SpecialMenuCard = ({ menu, onDelete, isDeleting }: SpecialMenuCardProps) =
           {!isEditing && menu.is_published && (
             <div className="flex gap-2 mb-4">
               <Button variant="outline" size="sm" asChild className="h-10 touch-manipulation">
-                <Link to="/besondere-anlaesse">
+                <Link to="/besondere-anlaesse/">
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Auf Website ansehen
                 </Link>

@@ -6,11 +6,11 @@ import { Navigate, useLocation } from 'react-router-dom';
  */
 
 // Simple redirect component for static paths
-export const RedirectToMittagsMenu = () => <Navigate to="/mittags-menu" replace />;
-export const RedirectToWeihnachtsmenues = () => <Navigate to="/besondere-anlaesse/weihnachtsmenues" replace />;
-export const RedirectToSilvesterparty = () => <Navigate to="/besondere-anlaesse/silvesterparty" replace />;
-export const RedirectToLunchMuenchen = () => <Navigate to="/lunch-muenchen-maxvorstadt" replace />;
-export const RedirectToEventlocationMuenchen = () => <Navigate to="/eventlocation-muenchen-maxvorstadt" replace />;
+export const RedirectToMittagsMenu = () => <Navigate to="/mittags-menu/" replace />;
+export const RedirectToWeihnachtsmenues = () => <Navigate to="/besondere-anlaesse/weihnachtsmenues/" replace />;
+export const RedirectToSilvesterparty = () => <Navigate to="/besondere-anlaesse/silvesterparty/" replace />;
+export const RedirectToLunchMuenchen = () => <Navigate to="/lunch-muenchen-maxvorstadt/" replace />;
+export const RedirectToEventlocationMuenchen = () => <Navigate to="/eventlocation-muenchen-maxvorstadt/" replace />;
 
 /**
  * Handles the /ristorantestoria-de/* prefix removal.

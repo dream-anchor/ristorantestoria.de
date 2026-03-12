@@ -160,7 +160,7 @@ const BesondererAnlass = () => {
 
   // Redirect to overview if menu not found and not a known seasonal page
   if (error || !menu) {
-    return <Navigate to="/besondere-anlaesse" replace />;
+    return <Navigate to="/besondere-anlaesse/" replace />;
   }
 
   // Helper für lokalisierte Texte

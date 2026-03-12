@@ -41,12 +41,12 @@ const HomeBotContent = () => {
       <section>
         <h2>{language === 'de' ? 'Unser Angebot' : 'Our Offerings'}</h2>
         <ul>
-          <li><a href="/speisekarte">{language === 'de' ? 'Speisekarte' : 'Menu'}</a></li>
-          <li><a href="/mittags-menu">{language === 'de' ? 'Mittagsmenü' : 'Lunch Menu'}</a></li>
-          <li><a href="/getraenke">{language === 'de' ? 'Getränkekarte' : 'Drinks Menu'}</a></li>
-          <li><a href="/besondere-anlaesse">{language === 'de' ? 'Besondere Anlässe' : 'Special Occasions'}</a></li>
-          <li><a href="/reservierung">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</a></li>
-          <li><a href="/kontakt">{language === 'de' ? 'Kontakt & Anfahrt' : 'Contact & Directions'}</a></li>
+          <li><a href="/speisekarte/">{language === 'de' ? 'Speisekarte' : 'Menu'}</a></li>
+          <li><a href="/mittags-menu/">{language === 'de' ? 'Mittagsmenü' : 'Lunch Menu'}</a></li>
+          <li><a href="/getraenke/">{language === 'de' ? 'Getränkekarte' : 'Drinks Menu'}</a></li>
+          <li><a href="/besondere-anlaesse/">{language === 'de' ? 'Besondere Anlässe' : 'Special Occasions'}</a></li>
+          <li><a href="/reservierung/">{language === 'de' ? 'Tisch reservieren' : 'Book a Table'}</a></li>
+          <li><a href="/kontakt/">{language === 'de' ? 'Kontakt & Anfahrt' : 'Contact & Directions'}</a></li>
         </ul>
       </section>
 

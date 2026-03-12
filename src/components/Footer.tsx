@@ -165,7 +165,7 @@ const Footer = () => {
               <Instagram className="h-3.5 w-3.5" />
               <span>Instagram</span>
             </a>
-            <a href="/admin" rel="nofollow" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors">Admin</a>
+            <a href="/admin/" rel="nofollow" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors">Admin</a>
           </div>
         </div>
       </div>
