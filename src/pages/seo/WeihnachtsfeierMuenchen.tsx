@@ -260,7 +260,7 @@ const WeihnachtsfeierMuenchen = () => {
             {/* FAQ */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{w.faqTitle}</h2>
-              <Accordion type="single" collapsible className="max-w-3xl mx-auto">
+              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4","faq-5","faq-6","faq-7","faq-8","faq-9"]} className="max-w-3xl mx-auto">
                 {faqs.map((faq, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>

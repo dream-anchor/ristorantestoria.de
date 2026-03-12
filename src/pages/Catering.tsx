@@ -239,7 +239,7 @@ const Catering = () => {
           <section className="py-12 bg-secondary/20">
             <div className="container mx-auto px-4 max-w-3xl">
               <h2 className="text-2xl font-serif font-bold mb-8 text-center">{t.catering.faqTitle}</h2>
-              <Accordion type="single" collapsible>
+              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4","faq-5","faq-6","faq-7","faq-8","faq-9"]}>
                 {[
                   { q: t.catering.faq1Q, a: t.catering.faq1A },
                   { q: t.catering.faq2Q, a: t.catering.faq2A },
