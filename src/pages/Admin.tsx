@@ -177,13 +177,13 @@ const Admin = () => {
             <div className="flex items-center gap-2">
               {/* Desktop: Full buttons */}
               <Button variant="outline" size="sm" asChild className="hidden sm:flex">
-                <Link to="/admin/gsc">
+                <Link to="/admin/gsc/">
                   <BarChart3 className="h-4 w-4 mr-2" />
                   Search Console
                 </Link>
               </Button>
               <Button variant="outline" size="sm" asChild className="hidden sm:flex">
-                <Link to="/admin/seo">
+                <Link to="/admin/seo/">
                   <Sparkles className="h-4 w-4 mr-2" />
                   SEO Ops
                 </Link>
@@ -224,12 +224,12 @@ const Admin = () => {
               </Button>
               {/* Mobile: Icon-only buttons */}
               <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
-                <Link to="/admin/gsc">
+                <Link to="/admin/gsc/">
                   <BarChart3 className="h-4 w-4" />
                 </Link>
               </Button>
               <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
-                <Link to="/admin/seo">
+                <Link to="/admin/seo/">
                   <Sparkles className="h-4 w-4" />
                 </Link>
               </Button>
