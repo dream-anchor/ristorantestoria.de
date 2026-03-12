@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Button } from "@/components/ui/button";
 import { Star, Sparkles, ExternalLink, PenLine, ChevronDown } from "lucide-react";
 
 import reviewsDe from "@/data/google-reviews-de.json";
@@ -97,11 +95,16 @@ interface GoogleReviewsProps {
   compact?: boolean;
 }
 
+// ⚠️ REVIEW DISPLAY RULES — DO NOT CHANGE:
+// - Initial: 6 reviews visible in grid (compact mode: 3, no Load More)
+// - "Load more" button adds 3 more each click
+// - NO consent gate, NO carousel, NO activation button
+// - Reviews come from local JSON files — no third-party widget, no consent required
+// - Grid: 1 col mobile, 2 col tablet, 3 col desktop
 const INITIAL_COUNT = 6;
-const LOAD_MORE_COUNT = 6;
+const LOAD_MORE_COUNT = 3;
 
 const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
-  const { hasConsent, openSettings, savePreferences, consent } = useCookieConsent();
   const { t, language } = useLanguage();
   const [visibleCount, setVisibleCount] = useState(compact ? 3 : INITIAL_COUNT);
 
@@ -115,14 +118,6 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
   const allReviewsUrl = placeId
     ? `https://search.google.com/local/reviews?placeid=${placeId}`
     : "https://maps.google.com/?cid=3761590175870856939";
-
-  const handleEnableExternal = () => {
-    savePreferences({
-      statistics: consent?.statistics ?? false,
-      marketing: consent?.marketing ?? false,
-      external: true,
-    });
-  };
 
   if (!hasReviews) return null;
 
@@ -152,7 +147,7 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
         <p className="text-muted-foreground text-sm">{t.reviews.subtitle}</p>
       </div>
 
-      {/* Summary — prominenter und gr\u00f6\u00dfer */}
+      {/* Summary */}
       {summary && (
         <div className="max-w-4xl mx-auto mb-10 bg-secondary/30 border border-border rounded-2xl p-6 md:p-8">
           <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground uppercase tracking-wide font-medium">
@@ -170,7 +165,7 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
         ))}
       </div>
 
-      {/* Load More */}
+      {/* Load More — only in non-compact mode, disappears when all loaded */}
       {hasMore && !compact && (
         <div className="text-center mt-8">
           <button
@@ -183,39 +178,28 @@ const GoogleReviews = ({ compact = false }: GoogleReviewsProps) => {
         </div>
       )}
 
-      {/* CTA Buttons — consent required for external links */}
-      {hasConsent("external") ? (
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
-          <a
-            href={allReviewsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-accent transition-colors text-sm font-medium"
-          >
-            <GoogleIcon />
-            <span>{t.reviews.viewAll}</span>
-            <ExternalLink className="h-3.5 w-3.5 opacity-70" />
-          </a>
-          <a
-            href={writeReviewUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors text-sm font-medium"
-          >
-            <PenLine className="h-4 w-4" />
-            <span>{t.reviews.writeReview}</span>
-          </a>
-        </div>
-      ) : (
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
-          <Button onClick={handleEnableExternal} variant="default">
-            {t.cookies.enableReviews}
-          </Button>
-          <Button onClick={openSettings} variant="outline">
-            {t.cookies.settings}
-          </Button>
-        </div>
-      )}
+      {/* CTA Buttons — external links to Google, always visible */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+        <a
+          href={allReviewsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-accent transition-colors text-sm font-medium"
+        >
+          <GoogleIcon />
+          <span>{t.reviews.viewAll}</span>
+          <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+        </a>
+        <a
+          href={writeReviewUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors text-sm font-medium"
+        >
+          <PenLine className="h-4 w-4" />
+          <span>{t.reviews.writeReview}</span>
+        </a>
+      </div>
     </section>
   );
 };
