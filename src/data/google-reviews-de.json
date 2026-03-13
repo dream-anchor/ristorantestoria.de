@@ -2,73 +2,409 @@
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
   "totalReviews": 786,
-  "lastFetched": "2026-03-11T06:56:51.173Z",
-  "summary": "\u00dcber 780 G\u00e4ste bewerten das STORIA mit durchschnittlich 4,5 Sternen. Besonders gelobt werden die neapolitanische Pizza aus dem Steinofen, die hausgemachte Pasta und die frischen Fischgerichte. Viele Stammg\u00e4ste heben das stilvolle Ambiente mit warmem Licht und italienischer Musik hervor. Der Service wird als herzlich, aufmerksam und professionell beschrieben \u2013 auch bei gr\u00f6\u00dferen Gruppen. Die zentrale Lage nahe K\u00f6nigsplatz und Theresienstra\u00dfe macht das Restaurant zum beliebten Treffpunkt in der M\u00fcnchner Maxvorstadt. Das Tiramisù nach eigenem Hausrezept und die Weinauswahl werden in zahlreichen Bewertungen als Highlights genannt.",
-  "summaryLabel": "Zusammenfassung aus \u00fcber 780 Bewertungen",
+  "lastFetched": "2026-03-13T13:16:25.468Z",
+  "summary": "Über 780 Gäste bewerten das STORIA mit durchschnittlich 4,5 Sternen. Besonders gelobt werden die neapolitanische Pizza aus dem Steinofen, die hausgemachte Pasta und die frischen Fischgerichte. Viele Stammgäste heben das stilvolle Ambiente mit warmem Licht und italienischer Musik hervor. Der Service wird als herzlich, aufmerksam und professionell beschrieben – auch bei größeren Gruppen. Die zentrale Lage nahe Königsplatz und Theresienstraße macht das Restaurant zum beliebten Treffpunkt in der Münchner Maxvorstadt. Das Tiramisù nach eigenem Hausrezept und die Weinauswahl werden in zahlreichen Bewertungen als Highlights genannt.",
+  "summaryLabel": "Zusammenfassung aus über 780 Bewertungen",
   "reviews": [
     {
-      "authorName": "Attila Borody",
+      "authorName": "Vivi W.",
       "rating": 5,
-      "text": "Die Tagliata vom Thunfisch mit Kartoffeln war richtig k\u00f6stlich \u2013 perfekt zubereitet. Nat\u00fcrlich gab es viel mehr Kartoffeln dazu, als es auf dem Bild zu sehen ist.",
-      "relativeTimeDescription": "vor einem Monat",
-      "time": 1769378844,
+      "text": "Wir waren heute im Storia und wurden herzlich und zuvorkommend von Davide bedient.\nDas Essen war sehr lecker und der Service erstklassig.\nVielen Dank für den schönen Abend!🤗✨\n\n(Translated by Google)\nWe were at Storia today and received a warm and attentive welcome from Davide.\n\nThe food was delicious and the service was first-class.\n\nThank you for a lovely evening! 🤗✨",
+      "relativeTimeDescription": "vor 1 Woche",
+      "time": 1772574420,
+      "language": "de"
+    },
+    {
+      "authorName": "Axel Lamers",
+      "rating": 4,
+      "text": "Leckeres Essen, nettes Ambiente. Service könnte besser sein. War aber bisher nur einmal da, muss es also nochmal ausprobieren.\n\n(Translated by Google)\nDelicious food, nice atmosphere. Service could be better. But I've only been there once so far, so I'll have to try it again.",
+      "relativeTimeDescription": "vor 1 Woche",
+      "time": 1772390316,
+      "language": "de"
+    },
+    {
+      "authorName": "Eugen Paul",
+      "rating": 5,
+      "text": "Mega Location! Sehr gutes Essen, schönes Ambiente, sehr freundliches hilfsbereites zuvorkommendes  Personal. Wir haben uns rundum wohl gefühlt und können das Lokal nur wärmstens weiterempfehlen\n\n(Translated by Google)\nFantastic location! Excellent food, lovely atmosphere, and very friendly, helpful, and attentive staff. We felt completely at ease and highly recommend this restaurant.",
+      "relativeTimeDescription": "vor 1 Monat",
+      "time": 1769795412,
       "language": "de"
     },
     {
       "authorName": "Christin Maurer",
       "rating": 5,
-      "text": "What a great evening!\nEs war von A-Z ein gelungener Abend.\nDas Essen war sehr gut, besonders hervorheben m\u00f6chte ich das Tiramisu, das war das beste was ich bisher gegessen habe.\nService war auch absolut topp. Das Lokal war voll dennoch behielten sie den \u00dcberblick und waren sehr zuvorkommend und haben Sp\u00e4\u00dfchen gemacht.\nPreis Leistung ist hier absolut gegeben.",
-      "relativeTimeDescription": "vor 2 Monaten",
+      "text": "What a great evening!\nEs war von A-Z ein gelungener Abend.\nDas Essen war sehr gut, besonders hervorheben möchte ich das Tiramisu, das war das beste was ich bisher gegessen habe.\nService war auch absolut topp. Das Lokal war voll dennoch behielten sie den Überblick und waren sehr zuvorkommend und haben Späßchen gemacht.\nPreis Leistung ist hier absolut gegeben.\n\n(Translated by Google)\nWhat a great evening!\n\nIt was a perfect evening from start to finish.\n\nThe food was excellent, especially the tiramisu, which was the best I've ever had.\n\nThe service was absolutely top-notch. The restaurant was packed, but they kept everything running smoothly, were very attentive, and even cracked a few jokes.\n\nThe price-performance ratio is excellent.",
+      "relativeTimeDescription": "vor 3 Monaten",
       "time": 1765619443,
+      "language": "de"
+    },
+    {
+      "authorName": "Nikolai Rau",
+      "rating": 5,
+      "text": "Einfach hervorragend. Verglichen mit anderen, sehr motiviert. Lecker und edel. Vielen Dank\n\n(Translated by Google)\nSimply outstanding. Compared to others, very motivated. Delicious and sophisticated. Thank you so much.",
+      "relativeTimeDescription": "vor 3 Monaten",
+      "time": 1763571434,
+      "language": "de"
+    },
+    {
+      "authorName": "Iris Dawid",
+      "rating": 5,
+      "text": "Ein 5-Sterne-Erlebnis für alle Sinne -Wenn Genuss zur Perfektion wird\n​Der Besuch im Storia Restaurant war nicht nur ein Abendessen, sondern eine wahre Offenbarung der Gastlichkeit. Selten trifft man auf ein Lokal, das in allen Disziplinen - von der Küche über den Service bis hin zum Ambiente- mit einer derartigen Souveränität die Höchstnote von 5 Sternen verdient.\n​🍽️ Kulinarik der Spitzenklasse\n​Das Essen war schlichtweg ausgezeichnet. Jedes Gericht zeugte von Frische, Qualität und einer liebevollen Zubereitung. Von der ersten bis zur letzten Gabel wurde klar: Hier arbeiten Profis mit Leidenschaft. Die Küche des Storia versteht es, klassische Aromen neu zu interpretieren, ohne dabei die Essenz des Geschmacks zu verlieren.\n​🧑‍🍳 Der Blick hinter die Kulissen: Faszination offene Kochstellen\n​Ein besonderes Highlight, das massgeblich zur Atmosphäre beiträgt, sind die offenen Kochstellen. Sie bieten einen faszinierenden Einblick in die Kunst des Kochens und zeugen von der Transparenz und dem Selbstbewusstsein der Küchencrew. Diese Dynamik belebt den Raum und macht das Warten auf die Speisen zu einem Teil des Erlebnisses.\n​🛎️ Service: Schnell, freundlich und aufmerksam\n​Ein herausragendes Restaurant definiert sich nicht nur über das Essen, sondern auch über den Service. Das Personal im Storia agierte schnell, effizient und dabei stets sehr freundlich. Man fühlte sich vom ersten Moment an willkommen und umsorgt. Diese Kombination aus Professionalität und Herzlichkeit ist der Schlüssel zu einem rundum gelungenen Abend.\n​✨ Ambiente zum Wohlfühlen\n​Die Atmosphäre im Restaurant ist äusserst angenehm. Die Einrichtung ist geschmackvoll und stilvoll, was dem gesamten Aufenthalt eine besondere Note verleiht. Das durchdachte Design schafft eine Umgebung, in der man entspannen und den Moment geniessen kann.\n​Fazit:\n​Das Storia Restaurant ist eine uneingeschränkte Empfehlung für alle, die Wert auf höchste Qualität bei Speisen, Service und Ambiente legen. Es beweist, dass Perfektion in der Gastronomie erreichbar ist. Ein Besuch im Storia ist ein Fest für die Sinne und jeden Stern wert.\n\n(Translated by Google)\nA 5-Star Experience for All the Senses - When Pleasure Reaches Perfection\n\nA visit to Storia Restaurant was not just dinner, but a true revelation of hospitality. It's rare to find a restaurant that so effortlessly excels in every aspect – from the cuisine and service to the ambiance – earning the highest rating of 5 stars.\n\n🍽️ Top-Class Culinary Delights\n\nThe food was simply outstanding. Every dish was a testament to freshness, quality, and meticulous preparation. From the first bite to the last, it was clear: these are passionate professionals at work. Storia's kitchen understands how to reinterpret classic flavors without losing the essence of taste.\n\n🧑‍🍳 A Look Behind the Scenes: The Fascination of Open Cooking Stations\n\nA particular highlight that significantly contributes to the atmosphere is the open cooking stations. They offer a fascinating glimpse into the art of cooking and demonstrate the transparency and confidence of the kitchen team. This dynamic atmosphere enlivens the space and makes waiting for your food part of the experience.\n\n🛎️ Service: Fast, friendly, and attentive\n\nAn outstanding restaurant is defined not only by its food but also by its service. The staff at Storia were quick, efficient, and always very friendly. From the very first moment, you felt welcome and cared for. This combination of professionalism and warmth is the key to a truly successful evening.\n\n✨ A welcoming ambiance\n\nThe atmosphere in the restaurant is extremely pleasant. The decor is tasteful and stylish, adding a special touch to the entire experience. The thoughtful design creates an environment where you can relax and savor the moment.\n\nConclusion:\n\nStoria Restaurant comes highly recommended for anyone who values ​​top-quality food, service, and ambiance. It proves that perfection in gastronomy is achievable. A visit to Storia is a feast for the senses and worth every star.",
+      "relativeTimeDescription": "vor 4 Monaten",
+      "time": 1762594405,
+      "language": "de"
+    },
+    {
+      "authorName": "Fardad Hannaneh",
+      "rating": 5,
+      "text": "Ich war am Wochenende wieder in München und in meinen Liebling Restaurant, sooooo gut schmeckt alles.\n\n(Translated by Google)\nI was in Munich again this weekend and went to my favorite restaurant; everything tastes sooooo good.",
+      "relativeTimeDescription": "vor 8 Monaten",
+      "time": 1751994394,
+      "language": "de"
+    },
+    {
+      "authorName": "Jannis P.",
+      "rating": 4,
+      "text": "Ich würde sagen solider Italiener mit Potenzial. Pizza war gut, ein bisl wenig Gorgonzola war drauf aber sonst lecker. Die Drinks größtenteils auch gut. Salat mit Austernpilzen - lecker - aber für die Menge zu teuer.\n\n(Translated by Google)\nI'd say it's a solid Italian restaurant with potential. The pizza was good, a bit too little Gorgonzola on it, but otherwise delicious. Most of the drinks were good too. The salad with oyster mushrooms was tasty, but too expensive for the amount.",
+      "relativeTimeDescription": "vor 8 Monaten",
+      "time": 1751866545,
+      "language": "de"
+    },
+    {
+      "authorName": "Stefanie",
+      "rating": 5,
+      "text": "Wir waren mit der Familie im Storia. Ein echter Italiener, ein Geheimtipp in der Maxvorstadt und nur ein paar Minuten vom Königsplatz und dem Museumsviertel entfernt. Wir haben hier richtig gut italienisch gegessen. Es war sehr lecker, die Atmosphäre ist super, es gibt eine große und richtig schöne Terrasse, alle sind kinderfreundlich und sogar sehr hundefreundlich. Die Pizza und Pasta ist unglaublich lecker. Ein perfekter Italiener für alle, die in München gut italienisch essen gehen wollen! Wir kommen sicher wieder und öfters!\n\n(Translated by Google)\nWe went to Storia with the family. It's a real Italian restaurant, a hidden gem in the Maxvorstadt district, just a few minutes from Königsplatz and the museum quarter. We had a fantastic Italian meal. The food was delicious, the atmosphere was great, there's a large and lovely terrace, everyone is child-friendly, and even very dog-friendly. The pizza and pasta are incredibly tasty. A perfect Italian restaurant for anyone looking for good Italian food in Munich! We'll definitely be back, and often!",
+      "relativeTimeDescription": "vor 8 Monaten",
+      "time": 1751744494,
+      "language": "de"
+    },
+    {
+      "authorName": "Marlen",
+      "rating": 5,
+      "text": "Wir waren gerade hier essen und waren mehr als begeistert! Sehr freundlicher Service & das Essen war sehr gut! Wir können es nur wärmstens Empfehlen❤️\n\n(Translated by Google)\nWe just ate here and were absolutely thrilled! The service was incredibly friendly and the food was delicious! We highly recommend it ❤️",
+      "relativeTimeDescription": "vor 8 Monaten",
+      "time": 1751112489,
+      "language": "de"
+    },
+    {
+      "authorName": "Jeremy",
+      "rating": 4,
+      "text": "Das STORIA Ristorante Pizzeria Bar ist für mich ein echter Geheimtipp! Die Atmosphäre ist warm und einladend – perfekt für einen entspannten Abend mit Freunden oder der Familie. Das Personal ist ausgesprochen freundlich, aufmerksam und sorgt dafür, dass man sich rundum wohlfühlt.\n\nDie Speisekarte bietet eine tolle Auswahl an klassischen italienischen Gerichten und natürlich hervorragenden Pizzen, die frisch und mit hochwertigen Zutaten zubereitet werden. Besonders empfehlenswert sind die hausgemachten Pastagerichte und die kreativen Pizzakreationen, die man so nicht überall findet.\n\nAuch die Bar im STORIA überzeugt mit einer guten Auswahl an Getränken und leckeren Cocktails – ideal, um den Abend entspannt ausklingen zu lassen.\n\nFazit: Wer authentische italienische Küche in gemütlichem Ambiente genießen möchte, ist im STORIA genau richtig. Geschmack, Service und Ambiente sind hier einfach top. Sehr empfehlenswert!\n\n(Translated by Google)\nSTORIA Ristorante Pizzeria Bar is a real hidden gem! The atmosphere is warm and inviting – perfect for a relaxed evening with friends or family. The staff is exceptionally friendly and attentive, ensuring you feel completely at ease.\n\nThe menu offers a great selection of classic Italian dishes and, of course, excellent pizzas, all freshly prepared with high-quality ingredients. The homemade pasta dishes and creative pizza creations, which you won't find just anywhere, are particularly recommended.\n\nThe bar at STORIA also impresses with a good selection of drinks and delicious cocktails – ideal for winding down the evening.\n\nIn short: If you want to enjoy authentic Italian cuisine in a cozy atmosphere, STORIA is the place to be. The taste, service, and ambiance are simply top-notch. Highly recommended!",
+      "relativeTimeDescription": "vor 9 Monaten",
+      "time": 1749020195,
       "language": "de"
     },
     {
       "authorName": "Maik Ramftel",
       "rating": 4,
-      "text": "Das Storia pr\u00e4sentiert sich mit einem modernen Ambiente. Der Empfang ist freundlich, wir bekamen auch ohne Reservierung einen sch\u00f6nen Tisch zugewiesen.\n\nDie Speisekarte zeigt alle italienischen Klassiker und eine sch\u00f6ne, aber nicht g\u00fcnstige Auswahl an Weinen.\n\nMeine Spagetti Carbonara waren genau so wie sie sein m\u00fcssen. Guancale, Ei und Peccorino und basta, einfach und gut. Auch die Nudeln mit Meeresfr\u00fcchten meiner Frau waren gut. Der Sauvignon Blanc gl\u00e4nzte mit der erwarten Noten von Stachelbeere und Zitrus und einer lebendigen S\u00e4ure.\n\nDer Pistazien Kuchen meiner Frau war bezaubernd und auch mein Nachtisch, ein Schoko Sufflet mit Krokant Eis war lecker, nur das ein Schokokuchen, ein Lava Cake ist. Ein Sufflet geht beim Backen auf, es suffliert, das ist hier nicht der Fall. Eine Ungenauigkeit in der Beschreibung, der h\u00e4ufig vorkommt.\n\nIch darf mir erlauben einige Hinweise zum Service zu geben, die die vollen Punktzahl verhinderte. Auf dem Tisch liegen Teller, \u00d6l und Salz f\u00fcr das bekannte Brot als Starter bereit. Leider blieb das Brot nur ein Versprechen, kein Einzelfall wie wir beobachten konnten. Bei der Carbonara h\u00e4tte ich mir frischen Pfeffer gew\u00fcnscht, ich bin mir sicher, auf Nachfrage h\u00e4tte ich welchen bekommen, die Kunst des Service ist es aber, das der Kunde nicht fragen muss. Die Kerze wurde nicht angez\u00fcndet, der Deckel vom Wasser wurde mitgenomen, der Service lief an leeren Gl\u00e4sern vorbei ohne nachzuschenken und es wurde nicht nachgefragt, ob es Dessert oder Kaffee gew\u00fcnscht wird. Bei ganzen Gambas wprde ich ein Reinigungstuch anbieten.\n\nAlles Kleinigkeiten, aber die machen den Unterschied aus. G\u00e4ste erinnern sich oft eher an der Service als an das Essen. Nicht das ein falscher Eindruck entsteht, der Service war nett und souver\u00e4n, aber es ginge noch besser.",
+      "text": "Das Storia präsentiert sich mit einem modernen Ambiente. Der Empfang ist freundlich, wir bekamen auch ohne Reservierung einen schönen Tisch zugewiesen.\n\nDie Speisekarte zeigt alle italienischen Klassiker und eine schöne, aber nicht günstige Auswahl an Weinen.\n\nMeine Spagetti Carbonara waren genau so wie sie sein müssen. Guancale, Ei und Peccorino und basta, einfach und gut. Auch die Nudeln mit Meeresfrüchten meiner Frau waren gut. Der Sauvignon Blanc glänzte mit der erwarten Noten von Stachelbeere und Zitrus und einer lebendigen Säure.\n\nDer Pistazien Kuchen meiner Frau war bezaubernd und auch mein Nachtisch, ein Schoko Sufflet mit Krokant Eis war lecker, nur das ein Schokokuchen, ein Lava Cake ist. Ein Sufflet geht beim Backen auf, es suffliert, das ist hier nicht der Fall. Eine Ungenauigkeit in der Beschreibung, der häufig vorkommt.\n\nIch darf mir erlauben einige Hinweise zum Service zu geben, die die vollen Punktzahl verhinderte. Auf dem Tisch liegen Teller, Öl und Salz für das bekannte Brot als Starter bereit. Leider blieb das Brot nur ein Versprechen, kein Einzelfall wie wir beobachten konnten. Bei der Carbonara hätte ich mir frischen Pfeffer gewünscht, ich bin mir sicher, auf Nachfrage hätte ich welchen bekommen, die Kunst des Service ist es aber, das der Kunde nicht fragen muss. Die Kerze wurde nicht angezündet, der Deckel vom Wasser wurde mitgenomen, der Service lief an leeren Gläsern vorbei ohne nachzuschenken und es wurde nicht nachgefragt, ob es Dessert oder Kaffee gewünscht wird. Bei ganzen Gambas wprde ich ein Reinigungstuch anbieten.\n\nAlles Kleinigkeiten, aber die machen den Unterschied aus. Gäste erinnern sich oft eher an der Service als an das Essen. Nicht das ein falscher Eindruck entsteht, der Service war nett und souverän, aber es ginge noch besser.\n\n(Translated by Google)\nStoria presents itself with a modern ambiance. The welcome is friendly, and we were shown to a lovely table even without a reservation.\n\nThe menu features all the Italian classics and a nice, though not inexpensive, selection of wines.\n\nMy spaghetti carbonara was exactly as it should be: guanciale, egg, and pecorino—that's it, simple and good. My wife's seafood pasta was also good. The Sauvignon Blanc shone with the expected notes of gooseberry and citrus and a lively acidity.\n\nMy wife's pistachio cake was delightful, and my dessert, a chocolate sufflet with praline ice cream, was also delicious, except that a chocolate cake is actually a lava cake. A sufflet rises during baking; it puffs up, which wasn't the case here. This is a common inaccuracy in the description.\n\nI would like to offer a few comments on the service, which prevented a perfect score. Plates, oil, and salt for the familiar bread are already laid out on the table as a starter. Unfortunately, the bread remained just a promise, and not an isolated incident, as we observed. I would have liked fresh pepper with the carbonara; I'm sure I could have asked for it, but the art of good service lies in not having to ask. The candle wasn't lit, the lid of the water bottle was taken away, the server walked past empty glasses without refilling them, and no one asked if I wanted dessert or coffee. I would have offered a cleaning cloth for whole prawns.\n\nAll minor details, but they make all the difference. Guests often remember the service more than the food. Not that there should be a misunderstanding, the service was friendly and efficient, but it could have been better.",
       "relativeTimeDescription": "vor 9 Monaten",
       "time": 1747978642,
       "language": "de"
     },
     {
-      "authorName": "Lupo Marsicano",
+      "authorName": "Ralf Schuster",
       "rating": 5,
-      "text": "Esperienza avuta notte di capodanno fantastica.\nFunzionale, accogliente ,curato nel dettaglio, cibo eccellente, servizio impeccabile il tutto al prezzo giusto.\nConsigliato alla grande!",
-      "relativeTimeDescription": "vor einem Jahr",
-      "time": 1735731587,
-      "language": "it"
+      "text": "Warum hat das nicht jeder? Powerbank zum Mitnehmen direkt vor Ort – mein Handy ist dankbar und ich auch. Richtig cooler Extra-Service!\n\n(Translated by Google)\nWhy doesn't everyone have one? A power bank to take with them – my phone is grateful, and so am I. A really cool extra service!",
+      "relativeTimeDescription": "vor 11 Monaten",
+      "time": 1742666468,
+      "language": "de"
     },
     {
-      "authorName": "Louis Le Paname",
+      "authorName": "Katja Graf",
       "rating": 5,
-      "text": "Vin bon et pas trop cher. Pizza g\u00e9n\u00e9reuse. Le restaurant est tr\u00e8s beau.",
-      "relativeTimeDescription": "vor einem Jahr",
-      "time": 1735421090,
-      "language": "fr"
+      "text": "Ein hervorragendes Restaurant!! - Durch Zufall habe ich es bei meinem München-Aufenthalt in der Karlstr. bzw. Dachauer Str. entdeckt und war begeistert! - Und zwar vom ultragemütlichen Ambiente bzw. Einrichtung drinnen (wunderschön und geschmackvoll gestaltet, bis in alle Details) über das ultraleckere und so schön angerichtete feine Essen (meins war definitiv ein Gedicht; ich habe noch nie in einem italienischen Restaurant so lecker gegessen wie hier! <3) bis hin zum einfach nur perfekten, netten und aufmerksamen Service, trotz vollbesetzten Restaurants (ich schätze, dieses hier ist ein Geheimtipp! <3 ) - alles in allem: besser geht's nicht! Der perfekte warmherzige Service, Gemütlichkeit (gute Musik hatten sie auch noch!) und das tolle Essen haben meinen Abend dort zu einem so schönen Erlebnis gemacht - wenn ich wieder mal in München bin, gehe ich nur noch dort italienisch essen  und kann es somit also ganz klar nur wärmstens weiter empfehlen! Wie gesagt: alles war so perfekt und der Service und das Essen so sympathisch und Klasse - besser geht's schlichtweg nicht!  - Danke! <3\n\n(Translated by Google)\nAn outstanding restaurant!! - I discovered it by chance during my stay in Munich on Karlstrasse/Dachauer Strasse and was thrilled! - From the ultra-cozy atmosphere and decor inside (beautifully and tastefully designed down to the last detail), to the incredibly delicious and beautifully presented food (mine was absolutely divine; I've never eaten so well in an Italian restaurant before! <3), to the simply perfect, friendly, and attentive service, despite the restaurant being packed (I think this one's a hidden gem! <3) - all in all: it couldn't be better! The perfect, warm service, the cozy atmosphere (they even had great music!), and the fantastic food made my evening there such a wonderful experience - if I'm ever in Munich again, I'll only eat Italian food there, so I can wholeheartedly recommend it! As I said: everything was so perfect, and the service and the food were so friendly and top-notch - it simply couldn't be better! - Thank you! <3",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1732537585,
+      "language": "de"
     },
     {
-      "authorName": "C-A. D.",
+      "authorName": "paula",
       "rating": 5,
-      "text": "Tr\u00e8s bon service (en italien \ud83d\ude09), rapide et efficace.\nLes plats sont r\u00e9ussis (calzone avec jambon et.... assez surprenant, du salami piqu\u00e9; p\u00e2tes aux artichauts et speck; spritz au melon vert).\nPrix raisonnables\nSalle agr\u00e9able",
+      "text": "wir haben zwei pizzen bestellt. die pizza parma rucola ist sehr zu empfehlen!! der rand war auf dauer jedoch etwas zu viel.\n\ndas restaurant ist sehr schön eingerichtet.\n\ndie bedienungen waren freundlich.\n\n(Translated by Google)\nWe ordered two pizzas. The Parma arugula pizza is highly recommended! However, the crust was a bit too much in the long run.\n\nThe restaurant is very nicely decorated.\n\nThe service was friendly.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1730643995,
+      "language": "de"
+    },
+    {
+      "authorName": "ho ko",
+      "rating": 5,
+      "text": "Wir waren Sonntagmittag dort, sehr wenig los.\nEin stylishes Ambiente und eine angenehme Hintergrundmusik.\nDa sehr aufmerksame Personal war freundlich und auf Zack.\nUnsere Speisen waren hervorragend, sowohl optisch als auch geschmacklich auf hohem Niveau.\nPreislich für München völlig im Rahmen.\nEndlich mal eine Pizza, bei der ich nicht nachwürzen musste.\n\nLediglich die Messer könnten ein wenig schärfer sein und die WCs sind ein bisschen wenige, wenn der Laden voll ist.\n\nWir kommen definitiv wieder.\n\n(Translated by Google)\nWe were there on a Sunday afternoon; it was very quiet.\nA stylish ambiance and pleasant background music.\nThe very attentive staff were friendly and on the ball.\nOur food was excellent, both visually and tastefully top-notch.\nThe price was completely reasonable for Munich.\nFinally, a pizza that I didn't need to add any more seasoning to.\n\nThe only thing is that the knives could be a bit sharper, and there are a few restrooms when the place is busy.\n\nWe'll definitely be back.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1730633277,
+      "language": "de"
+    },
+    {
+      "authorName": "Daniele Ebling",
+      "rating": 5,
+      "text": "Sehr zentral und dafür bietet der Restaurant eine elegantes Ambiente zum Abendessen. Hochwertige Gerichten und Ultra respektvoller Service. Nach dem Italienner sind wir zum Eisdiele um die Ecke gegangen, der beste Abend in München!\n\n(Translated by Google)\nVery centrally located, yet the restaurant offers an elegant ambiance for dinner. High-quality dishes and exceptionally respectful service. After the Italian restaurant, we went to the ice cream parlor around the corner – the best evening in Munich!",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1728728877,
+      "language": "de"
+    },
+    {
+      "authorName": "Marco P.",
+      "rating": 4,
+      "text": "Das Essen im STORIA ist wirklich hervorragend – sogar meine italienische Verwandtschaft geht hier gerne essen, was einiges heißt. Leider ist der Service nicht auf demselben Niveau. Bei meiner letzten Reservierung für 10 Personen über die Website wurde ich bei Ankunft gleich unfreundlich darauf hingewiesen, dass Online-Reservierungen sowieso \"nicht gut\" seien und ich besser hätte anrufen sollen. Dann wurden wir auf drei separate Tische aufgeteilt. Auf meine Bitte, die Tische zusammenzustellen, hieß es, dass das nur geht, wenn wir ein Drei-Gänge-Menü bestellen. Da wir nur Vorspeise und Hauptgang wollten, durften wir tatsächlich nicht zusammen sitzen und mussten in Gruppen mit jeweils 50 cm Abstand essen – für ein Geburtstagsessen wirklich enttäuschend.\n\nDas ist sehr schade, denn eigentlich wäre das STORIA ein tolles Restaurant, wenn die Service-Einstellung etwas kundenfreundlicher wäre. Solche Erlebnisse trüben leider die Freude an einem ansonsten großartigen Essen.\n\n(Translated by Google)\nThe food at STORIA is truly outstanding – even my Italian relatives enjoy eating here, which is saying a lot. Unfortunately, the service isn't up to the same standard. Upon my last reservation for 10 people via the website, I was rudely informed upon arrival that online reservations were \"not good\" anyway and that I should have called. We were then divided into three separate tables. When I asked to be seated together, I was told that this was only possible if we ordered a three-course meal. Since we only wanted an appetizer and main course, we weren't actually allowed to sit together and had to eat in groups 50 cm apart – truly disappointing for a birthday dinner.\n\nThat's a real shame, because STORIA would actually be a great restaurant if their service were a bit more customer-friendly. Experiences like this unfortunately dampen the enjoyment of an otherwise great meal.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1728457260,
+      "language": "de"
+    },
+    {
+      "authorName": "Stefanie Fuchs",
+      "rating": 5,
+      "text": "Wir waren heute im Storia essen . Ich war sehr begeistert von dem Essen . Die Bedienung war freundlich . Wir würden sofort wieder hier essen .\n\n(Translated by Google)\nWe ate at Storia today. I was very impressed with the food. The service was friendly. We would definitely eat here again.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1725049478,
+      "language": "de"
+    },
+    {
+      "authorName": "Renate Wallner",
+      "rating": 5,
+      "text": "Mega nette Lokalität, super gemütlich und vor allem super leckere italienische Küche.\nSehr empfehlenswert\n\n(Translated by Google)\nA really nice place, super cozy, and above all, incredibly delicious Italian food.\n\nHighly recommended.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1725049435,
+      "language": "de"
+    },
+    {
+      "authorName": "Lorenzo Rafael",
+      "rating": 5,
+      "text": "Super laden, Super Essen! Es war wirklich sehr köstlich, man hat sich auch sehr Wohlgefühlt dank der sehr netten und aufmerksamen Bedienung von Ilyas. Ich kann den Laden nur mit Herz weiterempfehlen.\nWerde definitiv öfters kommen.\n\n(Translated by Google)\nGreat place, great food! It was absolutely delicious, and I felt very comfortable thanks to Ilyas's very friendly and attentive service. I wholeheartedly recommend this place.\n\nI'll definitely be back.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1723577720,
+      "language": "de"
+    },
+    {
+      "authorName": "Frederic Bühner",
+      "rating": 5,
+      "text": "Wir waren am 22.06.24 mit Freunden dort und hatten einen Tisch um 21 Uhr reserviert. Das Restaurant sieht sowohl von Außen, als auch von Innen sehr Edel und Modern aus. Da wenig los war, wurden wir umgehend bedient und wir mussten nicht lange auf unser Essen warten. Die Karte bietet eine tolle Auswahl an Italienischen Klassikern, aber auch ein paar extravagante Gerichte.\nBeim Essen waren wir alle vom Anrichten bis zum Geschmack sehr begeistert!\nPreislich für München auch absolut in Ordnung.\nAuch der Service war in unserem Fall absolut klasse, sehr freundlich und aufgeschlossen.\nFür mich definitiv eine Empfehlung!\n\n(Translated by Google)\nWe were there with friends on June 22, 2024, and had reserved a table for 9 p.m. The restaurant looks very elegant and modern, both inside and out. Since it wasn't busy, we were served promptly and didn't have to wait long for our food. The menu offers a great selection of Italian classics, as well as a few more extravagant dishes.\nWe were all very impressed with the food, from the presentation to the taste!\nThe price was also absolutely reasonable for Munich.\nThe service in our case was also absolutely fantastic, very friendly and approachable.\nI definitely recommend it!",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1720002614,
+      "language": "de"
+    },
+    {
+      "authorName": "Matthias Billmann",
+      "rating": 5,
+      "text": "Wir sind an einem verregneten Samstag nach dem Theater für Kinder direkt ums Eck spontan zu Elft dort eingefallen und haben direkt einen tollen Tisch bekommen. Der Kellner war mega sympathisch und trotz der 5 Kinder unter uns nicht im Ansatz genervt.\nDas Essen war hervorragend, die Pizza schmeckt wie in Italien. Preis/Leistung absolut angemessen.\nDa kann man bedenkenlos hingehen!\n\n(Translated by Google)\nEleven of us spontaneously dropped in on a rainy Saturday after the children's theater just around the corner and immediately got a great table. The server was incredibly friendly and, despite having five children among us, wasn't even slightly annoyed.\nThe food was excellent; the pizza tasted like it did in Italy. Absolutely reasonable value for money.\nYou can go there without hesitation!",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1717256099,
+      "language": "de"
+    },
+    {
+      "authorName": "Paskal Lauricella",
+      "rating": 5,
+      "text": "Ich war am Samstag mit meinen freunden und war sehr überzeugt über das service, die Getränke und das Essen der Kellner war sehr aufmerksam\n\n(Translated by Google)\nI was there on Saturday with my friends and was very impressed with the service, the drinks and the food; the waiters were very attentive.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1716314496,
+      "language": "de"
+    },
+    {
+      "authorName": "Víctor Pantoja Figueroa",
+      "rating": 5,
+      "text": "Die beste Pizza in München.\n\n(Translated by Google)\nThe best pizza in Munich.",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1713211223,
+      "language": "de"
+    },
+    {
+      "authorName": "MIGUEL PAREDES GABALDON",
+      "rating": 5,
+      "text": "Sehr lecker und freundlich!!\n\n(Translated by Google)\nVery tasty and friendly!!",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1713211120,
+      "language": "de"
+    },
+    {
+      "authorName": "Omar Jellazi",
+      "rating": 5,
+      "text": "Wunderbare Bedienung und sehr leckeres Essen!\n\n(Translated by Google)\nWonderful service and very delicious food!",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1711316651,
+      "language": "de"
+    },
+    {
+      "authorName": "Fatma Jellazi",
+      "rating": 5,
+      "text": "Sehr schönes Ambiente mit super Essen und sehr freundlicher und guter Bedienung. Vor allem zu Sonntagspreisen sehr lohnenswert, ich komme gerne wieder! Für jedes Alter und jeden Geschmack was dabei :)\n\n(Translated by Google)\nA lovely atmosphere with excellent food and very friendly and efficient service. Especially worthwhile at Sunday prices; I'll definitely be back! Something for every age and taste :)",
+      "relativeTimeDescription": "vor 1 Jahr",
+      "time": 1711313678,
+      "language": "de"
+    },
+    {
+      "authorName": "Frank Rehbock",
+      "rating": 4,
+      "text": "Coole Location, offen gestaltet, dadurch hohe Geräuschkulisse, hell, grosse Fenster. Das Essen ist sehr ordentlich, die Bedienung ist freundlich mit Hang zur Komik, aber professionell. Es hat etwas gedauert bis das Essen kam, aber noch im Rahmen.\n\n(Translated by Google)\nCool location, open design, therefore quite noisy, bright, large windows. The food is very good, the service is friendly with a touch of humor, but professional. It took a while for the food to arrive, but still within reason.",
       "relativeTimeDescription": "vor 2 Jahren",
-      "time": 1683920179,
-      "language": "fr"
+      "time": 1709933927,
+      "language": "de"
     },
     {
-      "authorName": "Motta collection",
+      "authorName": "Dany DC",
       "rating": 5,
-      "text": "ambiente curato, moderno, servizio attento e cordiale da parte di tutto lo staff. Il men\u00f9 italiano di qualit\u00e0, proposte di carne e di pesce. Tutto molto buono. Buona anche la carta dei vini. Niente da eccepire. Ho trovato assolutamente corretto anche il conto.",
-      "relativeTimeDescription": "vor 3 Jahren",
-      "time": 1669850662,
-      "language": "it"
+      "text": "Das beste Restaurant in München. Ich als Italienerin kann bestätigen, dass es sich um authentische echte traditionelle italienische Küche handelt. Jedes Mal ein wahrer Genuss. Grazie Mimmo. Tvb\n\n(Translated by Google)\nThe best restaurant in Munich. As an Italian, I can confirm that this is authentic, genuine, traditional Italian cuisine. A true delight every time. Grazie Mimmo. Tvb",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1706998345,
+      "language": "de"
     },
     {
-      "authorName": "Stefano Di Pangrazio",
+      "authorName": "Theresa",
       "rating": 5,
-      "text": "Abbiamo deciso di cenare qui per fare una pausa dalla cucina bavarese. Buona la pizza. Locale italiano che propone anche vari piatti di pesce ( che non abbiamo provato). Personale cordiale e disponibile.",
-      "relativeTimeDescription": "vor 3 Jahren",
-      "time": 1661550565,
-      "language": "it"
+      "text": "War echt super lecker, etwas teurer als sonstige Restaurants, aber zurecht. Die Inneneinrichtung ist romantisch, ruhig und sehr elegant. Die Kellner waren sehr freundlich und zuvorkommend. Ein Kellner verrechnete mir nur einen Hugo( obwohl ich 2 Hugo trank) , weil ich alleine essen war. Einfach super.\n\n(Translated by Google)\nIt was truly delicious, a bit more expensive than other restaurants, but rightly so. The interior is romantic, tranquil, and very elegant. The waiters were very friendly and accommodating. One waiter only charged me for one Hugo (even though I drank two Hugos) because I was dining alone. Simply fantastic.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1706731628,
+      "language": "de"
+    },
+    {
+      "authorName": "Lucas Reiniger",
+      "rating": 5,
+      "text": "In diesem Restaurant finden Sie nicht nur eine köstliche Auswahl an traditionellen italienischen Speisen, sondern auch eine einladende Atmosphäre, die zum Verweilen einlädt.\n\n(Translated by Google)\nIn this restaurant you will not only find a delicious selection of traditional Italian dishes, but also a welcoming atmosphere that invites you to linger.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1706358282,
+      "language": "de"
+    },
+    {
+      "authorName": "Isa Younes",
+      "rating": 5,
+      "text": "Es war unglaublich gut, eine der besten Pizzen die wir je gegessen haben\n\n(Translated by Google)\nIt was incredibly good, one of the best pizzas we have ever eaten.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1706217427,
+      "language": "de"
+    },
+    {
+      "authorName": "Maximilian Feyrer",
+      "rating": 5,
+      "text": "Wunderschönes Ambiente musikalisch würde voerst auch Italienische Musik gespielt leider wurde nach ca. 1std auf mainstream Musik geswitcht. Steak+ extra Kartoffeln für ca 40Euro ist auch ok optional inklusive wäre eine Knoblauchbutter oder Rossmarinbutter Top und gröberes Salz. Meine Frau hatte Spagetti Carbonara diese schmeckten auch sehr gut da auf Originalität geachtet wird! Wir kommen aufjedenfall wieder.\n\n(Translated by Google)\nBeautiful ambiance; initially, Italian music was played, but unfortunately, after about an hour, they switched to mainstream music. Steak and extra potatoes for around €40 are also okay; optional garlic or rosemary butter would be great, as would coarser salt. My wife had spaghetti carbonara, which was also very tasty, as they pay attention to authenticity! We will definitely come back.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1705858450,
+      "language": "de"
+    },
+    {
+      "authorName": "Steffen Klug",
+      "rating": 5,
+      "text": "Ich das Restaurant für ein kleines Treffen mit Bekannten ausgewählt, und es war ein voller Erfolg. Das Essen hat alle Gäste begeistert. Der Service war super, und die Atmosphäre im Restaurant hat dazu beigetragen, dass wir einen tollen Abend hatten. Hier bestellen wir wieder\n\n(Translated by Google)\nI chose this restaurant for a small get-together with friends, and it was a complete success. Everyone loved the food. The service was excellent, and the atmosphere in the restaurant contributed to a wonderful evening. We'll be ordering here again.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1704988118,
+      "language": "de"
+    },
+    {
+      "authorName": "Stephan Fassbinder",
+      "rating": 5,
+      "text": "Für mich die erste Wahl, wenn es um italienisches essen geht. Die neapolitanische Pizza schmeckt lecker, und die traditionellen Spezialitäten sind ein kulinarischer Genuss. Der nette Service und die angenehme Atmosphäre machen jeden Besuch zu einem Highlight\n\n(Translated by Google)\nFor me, this is the first choice when it comes to Italian food. The Neapolitan pizza is delicious, and the traditional specialties are a culinary delight. The friendly service and pleasant atmosphere make every visit a highlight.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1704893407,
+      "language": "de"
+    },
+    {
+      "authorName": "Sandra Leppelmann",
+      "rating": 5,
+      "text": "Für mich die beste Pizzeria in der Stadt!\n\n(Translated by Google)\nFor me the best pizzeria in town!",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1704876803,
+      "language": "de"
+    },
+    {
+      "authorName": "Heidrun Eberlein",
+      "rating": 5,
+      "text": "Ich komme am Liebsten her um entspannt in dem großzügigen Außenbereich zu Essen. Geschmacklich kommt hier keiner ran und auch der Service ist nicht selbstverständlich\n\n(Translated by Google)\nI love coming here to enjoy a relaxed meal in the spacious outdoor area. The taste is second to none, and the service is also exceptional.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1704627573,
+      "language": "de"
+    },
+    {
+      "authorName": "Carola Prause",
+      "rating": 5,
+      "text": "Als Liebhaber italienischer Küche bin ich im Storia in Istanbul begeistert. Die neapolitanische Pizza ist ein absolutes Highlight, und die anderen italienischen Spezialitäten schmecken ebenfalls authentisch. Der Service ist freundlich und aufmerksam, und die angenehme Atmosphäre lädt zum Verweilen ein. Ich komme gerne wieder!\n\n(Translated by Google)\nAs a lover of Italian cuisine, I'm thrilled at Storia in Istanbul. The Neapolitan pizza is an absolute highlight, and the other Italian specialties also taste authentic. The service is friendly and attentive, and the pleasant atmosphere invites you to linger. I'd love to come back!",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1703971632,
+      "language": "de"
+    },
+    {
+      "authorName": "Steffi Pawlitschko",
+      "rating": 5,
+      "text": "Wir hatten zwar nur wenig bestellt bzw gegessen, aber dennoch wurden wir super zuvorkommend bedient! Die Gerichte (Rissotto, Pizza, Salat) wie auch der Wein (Sauvignon Blanc) waren hervorragend und das Preis-/Leistungsverhältnis war echt ok. Der Service war ausgezeichnet und sehr stilvoll! Das moderne Ambiente fanden wir auch super stylish und dennoch richtig gemütlich! Kurzum, wir werden wieder kommen. Grazie tanto - ci vediamo!\n\n(Translated by Google)\nWe only ordered a little, or ate a little, but we still received extremely courteous service! The dishes (rissotto, pizza, salad) and the wine (Sauvignon Blanc) were excellent, and the value for money was really good. The service was excellent and very stylish! We also found the modern ambiance super stylish yet really cozy! In short, we will be back. Thank you very much - we'll see you there!",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1703709939,
+      "language": "de"
+    },
+    {
+      "authorName": "Klaus Krumbacher",
+      "rating": 5,
+      "text": "Egal, ob vor Ort, als Abholung oder kontaktlose Lieferung – das Storia überzeugt in jeder Hinsicht. Die italienischen Spezialitäten sind die beste Auswahl. Der Service ist professionell und freundlich, eine positive Erfahrung, die Lust auf mehr macht\n\n(Translated by Google)\nWhether you dine in, pick up, or deliver without contact, Storia impresses in every way. The Italian specialties are the best selection. The service is professional and friendly, a positive experience that leaves you wanting more.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1703149248,
+      "language": "de"
+    },
+    {
+      "authorName": "Denise Schweickert",
+      "rating": 5,
+      "text": "Das Storia vereint auf gelungene Weise Moderne und Tradition. Die natürliche neapolitanische Pizza ist ein Highlight, und die traditionellen italienischen Spezialitäten überzeugen durch besten Geschmack. Die einfache Reservierung und der professionelle Service machen jeden Besuch zu einem rundum gelungenen Erlebnis.\n\n(Translated by Google)\nStoria successfully combines modernity with tradition. The natural Neapolitan pizza is a highlight, and the traditional Italian specialties impress with their exquisite taste. Easy reservations and professional service make every visit a thoroughly enjoyable experience.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1702902590,
+      "language": "de"
+    },
+    {
+      "authorName": "Jule Haan",
+      "rating": 5,
+      "text": "Egal, ob man vor Ort speist oder das Essen abholt – das Storia überzeugt in jeder Hinsicht. Die neapolitanische Pizza ist ein Gedicht, und die italienischen Spezialitäten schmecken authentisch. Der Service ist freundlich und zuvorkommend, eine positive Erfahrung, die Lust auf mehr macht.\n\n(Translated by Google)\nWhether you dine in or pick up your food, Storia impresses in every way. The Neapolitan pizza is divine, and the Italian specialties taste authentic. The service is friendly and courteous, a positive experience that leaves you wanting more.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1702650181,
+      "language": "de"
+    },
+    {
+      "authorName": "Elena Müller",
+      "rating": 4,
+      "text": "Schick und teuer\n\n(Translated by Google)\nStylish and expensive",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1700924529,
+      "language": "de"
+    },
+    {
+      "authorName": "Linda H.",
+      "rating": 5,
+      "text": "Wer richtig gute italienische Küche mag, ist hier genau richtig. Die neue Karte ist klasse. Alles war wie immer top und wir freuen uns aufs nächste mal! Sehr empfehlenswert\n\n(Translated by Google)\nIf you really like good Italian food, this is the place for you. The new menu is fantastic. Everything was top-notch as always, and we're already looking forward to our next visit! Highly recommended.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1698175955,
+      "language": "de"
+    },
+    {
+      "authorName": "emxhatesyou",
+      "rating": 5,
+      "text": "Äußerst freundlich und zuvorkommend, super lieber Kellner, werde auf jedenfall öfter kommen\n\n(Translated by Google)\nExtremely friendly and accommodating, super nice waiter, will definitely come more often.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1697288924,
+      "language": "de"
+    },
+    {
+      "authorName": "Asiya muhammad",
+      "rating": 5,
+      "text": "Die leckeren Speisen und der nette Service machen das Restaurant zu einem echten Juwel\n\n(Translated by Google)\nThe delicious food and friendly service make this restaurant a real gem.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1696530766,
+      "language": "de"
+    },
+    {
+      "authorName": "Nathalie Kunze",
+      "rating": 5,
+      "text": "Sitzen gerade in Storia und und mein Mann genießt noch seinen Espresso. Der Service war herausragend ein italienischer Kellner, der alten Schule, galant, charmant und schnell ein sehr schöner Abend mit gutem Essen.\n\n(Translated by Google)\nWe're currently sitting at Storia, and my husband is still enjoying his espresso. The service was outstanding. An old-school Italian waiter was gallant, charming, and quick. A very pleasant evening with good food.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1689878785,
+      "language": "de"
+    },
+    {
+      "authorName": "Clau Di",
+      "rating": 5,
+      "text": "Sehr gutes italienisches Essen, exzellenter Service. Cameriere ist sehr freundlich und aufmerksam. Schicke moderne Location mit sanfter italienischer Musik. sehr zu empfehlen.\n\n(Translated by Google)\nVery good Italian food, excellent service. The waitress is very friendly and attentive. A chic, modern location with gentle Italian music. Highly recommended.",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1688678352,
+      "language": "de"
+    },
+    {
+      "authorName": "Julian Hüttenberger",
+      "rating": 5,
+      "text": "Sehr netter Kellner, Essen sehr gut\n\n(Translated by Google)\nVery nice waiter, food very good",
+      "relativeTimeDescription": "vor 2 Jahren",
+      "time": 1688416959,
+      "language": "de"
     }
   ]
 }
