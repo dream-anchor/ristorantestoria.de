@@ -5,9 +5,16 @@ on:
     branches:
       - main
       - feature/static-site-upgrade
+  workflow_run:
+    workflows: ["Fetch Google Reviews (Daily)"]
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   deploy:
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
