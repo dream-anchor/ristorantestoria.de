@@ -11,10 +11,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { config as dotenvConfig } from "dotenv";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const toAbsolute = (p) => path.resolve(__dirname, p);
+
+// Load .env for Supabase credentials (needed for SSR data fetching)
+dotenvConfig({ path: path.resolve(__dirname, ".env") });
 
 // Create require to load JSON files in ESM
 const require = createRequire(import.meta.url);
@@ -42,6 +46,21 @@ try {
   console.log("📦 Loaded static menu fallbacks (food + drinks + lunch)");
 } catch (e) {
   console.warn("⚠️ Could not load menu fallback files:", e.message);
+}
+
+// Special menus fallback (used when Supabase is unavailable or menu not found)
+let SPECIAL_MENUS_FALLBACK = [];
+try {
+  SPECIAL_MENUS_FALLBACK = require("./src/data/special-menus-fallback.json");
+  console.log(`📦 Loaded special menus fallback (${SPECIAL_MENUS_FALLBACK.length} menus)`);
+} catch (e) {
+  console.warn("⚠️ Could not load special-menus-fallback.json:", e.message);
+}
+
+function findSpecialMenuInFallback(slug) {
+  return SPECIAL_MENUS_FALLBACK.find(
+    (m) => m.slug === slug || m.slug_en === slug || m.slug_it === slug || m.slug_fr === slug
+  ) || null;
 }
 
 /**
@@ -138,11 +157,93 @@ function getSpecialMenuSlugFromRoute(url) {
 }
 
 /**
- * Fetch special menu data by slug (with full content for SSR)
- * Searches across all slug columns (de, en, it, fr) to find the menu
+ * Mapping: SEO URL slugs → Supabase DB slugs
+ * Needed when admin creates a menu with an auto-generated slug (e.g. 'neuer-anlass')
+ * but the SEO URL uses the permanent slug (e.g. 'ostermontag-menue').
+ * Keep in sync with seasonalMenus.ts supabaseSlug fields.
  */
-async function fetchSpecialMenuBySlug(slug) {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !slug) return null;
+const SEO_TO_SUPABASE_SLUG_MAP = {
+  'ostermontag-menue': 'neuer-anlass',
+  'easter-monday-menu': 'neuer-anlass',
+  'menu-di-pasqua': 'neuer-anlass',
+  'menu-de-paques': 'neuer-anlass',
+};
+
+/**
+ * Fetch special menu data by slug (with full content for SSR)
+ * Searches across all slug columns (de, en, it, fr) to find the menu.
+ * Applies SEO_TO_SUPABASE_SLUG_MAP to handle cases where the Supabase slug
+ * differs from the permanent SEO URL slug.
+ */
+/**
+ * Build basicMenu + fullMenu from fallback JSON entry (which has embedded categories/items)
+ */
+function buildMenuDataFromFallback(fallbackMenu, slug) {
+  const { categories: rawCategories = [], ...menuFields } = fallbackMenu;
+  const basicMenu = { ...menuFields };
+  const fullMenu = {
+    id: fallbackMenu.id,
+    menu_type: fallbackMenu.menu_type,
+    title: fallbackMenu.title,
+    title_en: fallbackMenu.title_en,
+    title_it: fallbackMenu.title_it,
+    title_fr: fallbackMenu.title_fr,
+    subtitle: fallbackMenu.subtitle,
+    subtitle_en: fallbackMenu.subtitle_en,
+    subtitle_it: fallbackMenu.subtitle_it,
+    subtitle_fr: fallbackMenu.subtitle_fr,
+    is_published: fallbackMenu.is_published,
+    categories: rawCategories.map((cat) => ({
+      id: cat.id,
+      name: cat.name,
+      name_en: cat.name_en,
+      name_it: cat.name_it,
+      name_fr: cat.name_fr,
+      description: cat.description,
+      description_en: cat.description_en,
+      description_it: cat.description_it,
+      description_fr: cat.description_fr,
+      sort_order: cat.sort_order || 0,
+      items: (cat.items || []).map((item) => ({
+        id: item.id,
+        name: item.name,
+        name_en: item.name_en,
+        name_it: item.name_it,
+        name_fr: item.name_fr,
+        description: item.description,
+        description_en: item.description_en,
+        description_it: item.description_it,
+        description_fr: item.description_fr,
+        price: item.price ? parseFloat(item.price.toString()) : null,
+        price_display: item.price_display,
+        price_display_en: item.price_display_en,
+        price_display_it: item.price_display_it,
+        price_display_fr: item.price_display_fr,
+        sort_order: item.sort_order || 0,
+      })),
+    })),
+  };
+  return { basicMenu, fullMenu, slug };
+}
+
+async function fetchSpecialMenuBySlug(originalSlug) {
+  if (!originalSlug) return null;
+
+  // Apply supabaseSlug mapping: SEO slug → actual DB slug
+  const slug = SEO_TO_SUPABASE_SLUG_MAP[originalSlug] || originalSlug;
+  if (slug !== originalSlug) {
+    console.log(`  📎 Slug mapping: '${originalSlug}' → '${slug}' (supabaseSlug)`);
+  }
+
+  // If no Supabase credentials, use fallback JSON directly
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    const fallbackMenu = findSpecialMenuInFallback(slug);
+    if (fallbackMenu) {
+      console.log(`  📦 Using fallback JSON for special menu "${slug}" (no Supabase credentials)`);
+      return buildMenuDataFromFallback(fallbackMenu, slug);
+    }
+    return null;
+  }
 
   try {
     // 1. Fetch menu by any slug variant (supports all languages)
@@ -153,7 +254,15 @@ async function fetchSpecialMenuBySlug(slug) {
     );
     const menus = await menuRes.json();
     const menu = menus[0];
-    if (!menu) return null;
+    if (!menu) {
+      // Supabase has no record — fall back to local JSON
+      const fallbackMenu = findSpecialMenuInFallback(slug);
+      if (fallbackMenu) {
+        console.log(`  📦 Supabase returned no results for "${slug}" — using fallback JSON`);
+        return buildMenuDataFromFallback(fallbackMenu, slug);
+      }
+      return null;
+    }
 
     // 2. Fetch categories
     const catRes = await fetch(
@@ -223,9 +332,18 @@ async function fetchSpecialMenuBySlug(slug) {
       })),
     };
 
+    // Return the DB slug (not the SEO slug) as the cache key,
+    // so entry-server.tsx pre-populates the query cache under the key
+    // that BesondererAnlass.tsx actually uses (supabaseSlug / DB slug).
     return { basicMenu, fullMenu, slug };
   } catch (error) {
     console.error(`❌ Error fetching special menu for slug ${slug}:`, error.message);
+    // Fall back to local JSON on error
+    const fallbackMenu = findSpecialMenuInFallback(slug);
+    if (fallbackMenu) {
+      console.log(`  📦 Supabase error — using fallback JSON for "${slug}"`);
+      return buildMenuDataFromFallback(fallbackMenu, slug);
+    }
     return null;
   }
 }

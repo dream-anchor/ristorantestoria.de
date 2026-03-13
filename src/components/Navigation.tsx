@@ -15,6 +15,7 @@ import { usePublishedStandardMenus } from "@/hooks/usePublishedStandardMenus";
 import { useScrolled } from "@/hooks/useScrolled";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { getLocalizedPath } from "@/config/routes";
+import { SEASONAL_MENUS } from "@/config/seasonalMenus";
 
 interface NavChild {
   label: string;
@@ -68,7 +69,16 @@ const Navigation = () => {
   };
 
   // Helper für lokalisierte Menü-Slugs
+  // Prefers SEO-permanent slugs from seasonalMenus.ts over Supabase auto-generated slugs
   const getLocalizedMenuSlug = (menu: any) => {
+    // Check if this is a known seasonal menu (matched by supabaseSlug or any slug variant)
+    const seasonalConfig = SEASONAL_MENUS.find(sm =>
+      sm.supabaseSlug === menu.slug ||
+      Object.values(sm.slugs).includes(menu.slug)
+    );
+    if (seasonalConfig) {
+      return seasonalConfig.slugs[language as keyof typeof seasonalConfig.slugs] || seasonalConfig.slugs.de;
+    }
     if (language === 'en' && menu.slug_en) return menu.slug_en;
     if (language === 'it' && menu.slug_it) return menu.slug_it;
     if (language === 'fr' && menu.slug_fr) return menu.slug_fr;
