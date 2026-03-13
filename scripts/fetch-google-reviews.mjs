@@ -1,25 +1,25 @@
 #!/usr/bin/env node
 /**
- * Fetches Google Reviews via Places API (New) + parses local reviews.txt export.
+ * Fetches Google Reviews via GBP API v4 (mybusiness.googleapis.com).
+ * Uses OAuth tokens from Neon DB (same pattern as sync-gbp-menu.ts).
+ * Paginates through all reviews, filters 4-5 stars + >=50 chars, saves top 50.
  * Saves to src/data/google-reviews-{de,en,it,fr}.json.
  *
- * The API only returns 5 reviews per request. To supplement, place a
- * reviews.txt export (from Google Maps) in the project root or ~/Downloads.
- * The script parses it and extracts 4-5 star reviews with text > 50 chars.
- *
  * Required env vars:
- *   GOOGLE_PLACES_API_KEY — Google Cloud API key with Places API enabled
- *   GOOGLE_PLACE_ID      — Place ID (format: ChIJ...)
+ *   DATABASE_URL             — Neon Connection String
+ *   GBP_TOKEN_ENCRYPTION_KEY — AES-256-GCM key (hex) for OAuth token decryption
  *
  * Usage:
  *   npm run fetch-reviews
  *   npm run fetch-reviews -- --force
  */
 
-import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { homedir } from 'os';
+import { createDecipheriv, randomBytes, createCipheriv } from 'crypto';
+import * as https from 'https';
+import postgres from 'postgres';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '../src/data');
@@ -28,6 +28,14 @@ const LANGUAGES = ['de', 'en', 'it', 'fr'];
 const MAX_REVIEWS = 50;
 const MIN_RATING = 4;
 const MIN_TEXT_LENGTH = 50;
+const MAX_FETCH = 200; // max reviews to collect before filtering
+
+const GBP_ACCOUNT_ID = '114367954632843728381';
+const GBP_LOCATION_ID = '17586248070861131392';
+const GBP_API_BASE = 'https://mybusiness.googleapis.com/v4';
+
+const ALGORITHM = 'aes-256-gcm';
+const STAR_MAP = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 };
 
 // Ausf\u00fchrliche Zusammenfassungen basierend auf echten 4-5\u2605 Bewertungen
 const SUMMARIES = {
@@ -40,7 +48,7 @@ const SUMMARIES = {
 const SUMMARY_LABELS = {
   de: 'Zusammenfassung aus \u00fcber 780 Bewertungen',
   en: 'Summary from over 780 reviews',
-  it: "Riepilogo di oltre 780 recensioni",
+  it: 'Riepilogo di oltre 780 recensioni',
   fr: 'R\u00e9sum\u00e9 de plus de 780 avis',
 };
 
@@ -64,14 +72,7 @@ function loadEnv() {
 
 loadEnv();
 
-const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
-const PLACE_ID = process.env.GOOGLE_PLACE_ID;
 const FORCE = process.argv.includes('--force');
-
-if (!API_KEY || !PLACE_ID) {
-  console.error('\u274c Missing env vars. Set GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID in .env');
-  process.exit(1);
-}
 
 // ── Cache check ──
 const cacheFile = resolve(DATA_DIR, 'google-reviews-de.json');
@@ -88,285 +89,264 @@ if (!FORCE && existsSync(cacheFile)) {
   } catch { /* proceed */ }
 }
 
-// ── Fetch from Google Places API (New) ──
-async function fetchPlaceData(lang) {
-  const url = `https://places.googleapis.com/v1/places/${PLACE_ID}?languageCode=${lang}`;
-  const res = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Goog-Api-Key': API_KEY,
-      'X-Goog-FieldMask': 'rating,userRatingCount,reviews',
-    },
+// ── Encryption (AES-256-GCM) ──
+function getEncryptionKey() {
+  const keyHex = process.env.GBP_TOKEN_ENCRYPTION_KEY;
+  if (!keyHex) { console.error('\u274c GBP_TOKEN_ENCRYPTION_KEY nicht gesetzt.'); process.exit(1); }
+  return Buffer.from(keyHex, 'hex');
+}
+
+function decrypt(encoded) {
+  const key = getEncryptionKey();
+  const [ivB64, tagB64, dataB64] = encoded.split(':');
+  const decipher = createDecipheriv(ALGORITHM, key, Buffer.from(ivB64, 'base64'));
+  decipher.setAuthTag(Buffer.from(tagB64, 'base64'));
+  return Buffer.concat([decipher.update(Buffer.from(dataB64, 'base64')), decipher.final()]).toString('utf-8');
+}
+
+function encrypt(plaintext) {
+  const key = getEncryptionKey();
+  const iv = randomBytes(16);
+  const cipher = createCipheriv(ALGORITHM, key, iv);
+  const encrypted = Buffer.concat([cipher.update(plaintext, 'utf-8'), cipher.final()]);
+  return [iv.toString('base64'), cipher.getAuthTag().toString('base64'), encrypted.toString('base64')].join(':');
+}
+
+// ── OAuth Token Management ──
+function refreshTokenHttp(clientId, clientSecret, refToken) {
+  return new Promise((resolve, reject) => {
+    const postData = new URLSearchParams({
+      client_id: clientId, client_secret: clientSecret,
+      refresh_token: refToken, grant_type: 'refresh_token',
+    }).toString();
+    const req = https.request('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': String(Buffer.byteLength(postData)) },
+    }, (res) => {
+      let body = '';
+      res.on('data', (c) => (body += c));
+      res.on('end', () => res.statusCode === 200 ? resolve(JSON.parse(body)) : reject(new Error(`Refresh failed (${res.statusCode}): ${body}`)));
+    });
+    req.on('error', reject);
+    req.write(postData);
+    req.end();
   });
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+}
+
+async function loadCredentials(sql) {
+  const [row] = await sql`SELECT setting_value FROM google_business_settings WHERE setting_key = 'gbp_client_secret'`;
+  if (!row) { console.error('\u274c Kein Client Secret in DB gefunden.'); process.exit(1); }
+  const raw = JSON.parse(decrypt(row.setting_value));
+  const c = raw.installed || raw.web;
+  return { client_id: c.client_id, client_secret: c.client_secret };
+}
+
+async function maybeRefreshToken(sql, tokens) {
+  const isExpired = !tokens.expiry_date || Date.now() > tokens.expiry_date - 5 * 60 * 1000;
+  if (!isExpired) {
+    console.log('\u2705 Access Token noch g\u00fcltig');
+    return tokens.access_token;
+  }
+  console.log('\ud83d\udd04 Access Token abgelaufen, refreshe...');
+  const creds = await loadCredentials(sql);
+  const refreshed = await refreshTokenHttp(creds.client_id, creds.client_secret, tokens.refresh_token);
+  const updated = {
+    access_token: refreshed.access_token,
+    refresh_token: tokens.refresh_token,
+    expiry_date: Date.now() + refreshed.expires_in * 1000,
+  };
+  const encrypted = encrypt(JSON.stringify(updated));
+  await sql`UPDATE google_business_settings SET setting_value = ${encrypted}, updated_at = now() WHERE setting_key = 'gbp_oauth_tokens'`;
+  console.log('\u2705 Access Token erneuert + in DB gespeichert');
+  return refreshed.access_token;
+}
+
+async function getAccessToken(sql) {
+  const [tokensRow] = await sql`SELECT setting_value FROM google_business_settings WHERE setting_key = 'gbp_oauth_tokens'`;
+  if (!tokensRow) { console.error('\u274c Keine OAuth-Tokens in DB gefunden.'); process.exit(1); }
+  const tokens = JSON.parse(decrypt(tokensRow.setting_value));
+  return await maybeRefreshToken(sql, tokens);
+}
+
+// ── GBP Reviews API ──
+async function fetchReviewsPage(accessToken, pageToken) {
+  const params = new URLSearchParams({ pageSize: '50' });
+  if (pageToken) params.set('pageToken', pageToken);
+  const url = `${GBP_API_BASE}/accounts/${GBP_ACCOUNT_ID}/locations/${GBP_LOCATION_ID}/reviews?${params}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok) throw new Error(`GBP API HTTP ${res.status}: ${await res.text()}`);
   return res.json();
 }
 
-function mapApiReview(r) {
+async function fetchAllReviews(accessToken) {
+  const allReviews = [];
+  let pageToken = null;
+  let averageRating = 0;
+  let totalReviewCount = 0;
+
+  do {
+    const data = await fetchReviewsPage(accessToken, pageToken);
+    if (!averageRating) averageRating = data.averageRating || 0;
+    if (!totalReviewCount) totalReviewCount = data.totalReviewCount || 0;
+    const reviews = data.reviews || [];
+    allReviews.push(...reviews);
+    pageToken = data.nextPageToken || null;
+    console.log(`   Fetched page: ${reviews.length} reviews (total so far: ${allReviews.length})`);
+  } while (pageToken && allReviews.length < MAX_FETCH);
+
+  return { allReviews, averageRating, totalReviewCount };
+}
+
+// ── Language Detection ──
+const germanWords = ['und', 'der', 'die', 'das', 'ein', 'eine', 'ist', 'war', 'sehr', 'wir', 'ich', 'mit', 'auch', 'aber', 'hier', 'f\u00fcr', 'bei', 'zum', 'haben', 'nicht', 'kann', 'nur', 'alle'];
+const englishWords = ['the', 'and', 'was', 'were', 'have', 'had', 'with', 'for', 'this', 'that', 'very', 'great', 'amazing', 'beautiful', 'excellent', 'perfect', 'recommend', 'would', 'really'];
+const italianWords = ['che', 'del', 'una', 'sono', 'molto', 'anche', 'questo', 'questa', 'stato', 'ottimo', 'buono', 'bello', 'posto', 'cibo', 'servizio', 'consiglio', 'davvero', 'sempre', 'tutto', 'nella'];
+const frenchWords = ['les', 'des', 'une', 'est', 'nous', 'avec', 'pour', 'dans', 'tr\u00e8s', 'bien', 'bon', 'bonne', 'cette', 'sont', 'mais', 'aussi', 'tout', 'fait', 'comme', 'chez'];
+
+function detectLanguage(text) {
+  if (!text) return 'other';
+  const words = text.toLowerCase().split(/\s+/);
+  const deScore = words.filter(w => germanWords.includes(w)).length;
+  const enScore = words.filter(w => englishWords.includes(w)).length;
+  const itScore = words.filter(w => italianWords.includes(w)).length;
+  const frScore = words.filter(w => frenchWords.includes(w)).length;
+  const maxScore = Math.max(deScore, enScore, itScore, frScore);
+  if (maxScore === 0) return 'other';
+  if (deScore === maxScore) return 'de';
+  if (enScore === maxScore) return 'en';
+  if (itScore === maxScore) return 'it';
+  if (frScore === maxScore) return 'fr';
+  return 'other';
+}
+
+// ── Relative Time Formatting ──
+function formatRelativeTime(isoDate, lang) {
+  const diffMs = Date.now() - new Date(isoDate).getTime();
+  const diffDays = Math.floor(diffMs / 86400000);
+
+  if (diffDays < 7) {
+    if (diffDays <= 1) return { de: 'vor 1 Tag', en: '1 day ago', it: '1 giorno fa', fr: 'il y a 1 jour' }[lang] || '1 day ago';
+    return { de: `vor ${diffDays} Tagen`, en: `${diffDays} days ago`, it: `${diffDays} giorni fa`, fr: `il y a ${diffDays} jours` }[lang] || `${diffDays} days ago`;
+  }
+  if (diffDays < 30) {
+    const n = Math.floor(diffDays / 7);
+    if (n === 1) return { de: 'vor 1 Woche', en: '1 week ago', it: '1 settimana fa', fr: 'il y a 1 semaine' }[lang] || '1 week ago';
+    return { de: `vor ${n} Wochen`, en: `${n} weeks ago`, it: `${n} settimane fa`, fr: `il y a ${n} semaines` }[lang] || `${n} weeks ago`;
+  }
+  if (diffDays < 365) {
+    const n = Math.floor(diffDays / 30);
+    if (n === 1) return { de: 'vor 1 Monat', en: '1 month ago', it: '1 mese fa', fr: 'il y a 1 mois' }[lang] || '1 month ago';
+    return { de: `vor ${n} Monaten`, en: `${n} months ago`, it: `${n} mesi fa`, fr: `il y a ${n} mois` }[lang] || `${n} months ago`;
+  }
+  const n = Math.floor(diffDays / 365);
+  if (n === 1) return { de: 'vor 1 Jahr', en: '1 year ago', it: '1 anno fa', fr: 'il y a 1 an' }[lang] || '1 year ago';
+  return { de: `vor ${n} Jahren`, en: `${n} years ago`, it: `${n} anni fa`, fr: `il y a ${n} anni` }[lang] || `${n} years ago`;
+}
+
+// ── Map GBP review to internal format ──
+const negativePatterns = /anwalt|peinlich|entt\u00e4uschung|entt\u00e4uscht|f\u00e4lschen|aufpolieren|leider nicht|nie wieder|schlecht|katastroph/i;
+
+function mapGbpReview(r) {
+  const text = r.comment || '';
+  const rating = STAR_MAP[r.starRating] || 0;
+  const lang = detectLanguage(text);
+  const isNegative = negativePatterns.test(text);
   return {
-    authorName: r.authorAttribution?.displayName || 'Anonym',
-    rating: r.rating,
-    text: r.text?.text || r.originalText?.text || '',
-    relativeTimeDescription: r.relativePublishTimeDescription || '',
-    time: r.publishTime ? Math.floor(new Date(r.publishTime).getTime() / 1000) : 0,
-    language: r.originalText?.languageCode || r.text?.languageCode || 'de',
+    authorName: r.reviewer?.displayName || 'Anonym',
+    rating,
+    text,
+    updateTime: r.updateTime || r.createTime || '',
+    language: lang,
+    isNegative,
+    valid: rating >= MIN_RATING && text.length >= MIN_TEXT_LENGTH && lang !== 'other' && !isNegative,
   };
 }
 
-// ── Parse reviews.txt export ──
-function parseReviewsTxt() {
-  const searchPaths = [
-    resolve(__dirname, '../reviews.txt'),
-    resolve(homedir(), 'Downloads/reviews.txt'),
-  ];
-
-  const filePath = searchPaths.find(p => existsSync(p));
-  if (!filePath) return [];
-
-  console.log(`\ud83d\udcc4 Parsing reviews.txt: ${filePath}`);
-  const content = readFileSync(filePath, 'utf-8');
-  const lines = content.split('\n');
-
-  const reviews = [];
-  let i = 0;
-
-  while (i < lines.length) {
-    // Suche Rating-Zeile (eine Zahl 1-5 allein auf einer Zeile)
-    const ratingMatch = lines[i]?.trim().match(/^([1-5])$/);
-    if (!ratingMatch) { i++; continue; }
-
-    const rating = parseInt(ratingMatch[1]);
-    i++; // skip ⭐ line
-    if (lines[i]?.trim() === '\u2b50') i++;
-
-    // Author name
-    const authorName = lines[i]?.trim() || '';
-    i++;
-
-    // Skip "(Local Guide)" line if present
-    if (lines[i]?.trim().startsWith('(Local Guide)') || lines[i]?.trim().startsWith('(')) i++;
-
-    // Skip "X reviews • Y photos" line
-    if (lines[i]?.trim().match(/\d+ reviews?/)) i++;
-
-    // Review text: alles bis "No photos" / "📸" / "Show business response" / "View on Google"
-    let text = '';
-    while (i < lines.length) {
-      const line = lines[i]?.trim() || '';
-      if (
-        line === 'No photos' ||
-        line.startsWith('\ud83d\udcf8') ||
-        line === 'Show business response' ||
-        line === 'View on Google'
-      ) break;
-      if (text) text += ' ';
-      text += line;
-      i++;
-    }
-
-    // Bereinigung: Entferne "Food : X/5 | Service : X/5 ..." Suffix und strukturierte Metadaten
-    text = text
-      .replace(/\s*(Food|Service|Atmosphere|Reservation|Noise level|Group size|Wait time|Seating type|Recommendation|Vegetarian|Parking|Kid-friendliness|Wheelchair)\s*[:].*/s, '')
-      .trim();
-
-    // relativeTimeDescription finden (z.B. "a month ago", "3 months ago")
-    let relativeTime = '';
-    while (i < lines.length) {
-      const line = lines[i]?.trim() || '';
-      if (line.match(/\d+ months? ago|a month ago|a week ago|\d+ weeks? ago|a year ago|\d+ years? ago|Edited/)) {
-        relativeTime = line.replace('Edited ', '');
-        i++;
-        break;
-      }
-      i++;
-      // Sicherheitsabbruch: nächstes Rating gefunden
-      if (line.match(/^[1-5]$/) && lines[i + 1]?.trim() === '\u2b50') break;
-    }
-
-    // Sprache erkennen (einfache Heuristik)
-    const germanWords = ['und', 'der', 'die', 'das', 'ein', 'eine', 'ist', 'war', 'sehr', 'wir', 'ich', 'mit', 'auch', 'aber', 'hier', 'für', 'bei', 'zum', 'haben', 'nicht', 'kann', 'nur', 'alle'];
-    const englishWords = ['the', 'and', 'was', 'were', 'have', 'had', 'with', 'for', 'this', 'that', 'very', 'great', 'amazing', 'beautiful', 'excellent', 'perfect', 'recommend', 'would', 'really'];
-    const italianWords = ['che', 'del', 'una', 'sono', 'molto', 'anche', 'questo', 'questa', 'stato', 'ottimo', 'buono', 'bello', 'posto', 'cibo', 'servizio', 'consiglio', 'davvero', 'sempre', 'tutto', 'nella'];
-    const frenchWords = ['les', 'des', 'une', 'est', 'nous', 'avec', 'pour', 'dans', 'très', 'bien', 'bon', 'bonne', 'cette', 'sont', 'mais', 'aussi', 'tout', 'fait', 'comme', 'chez'];
-
-    const words = text.toLowerCase().split(/\s+/);
-    const deScore = words.filter(w => germanWords.some(gw => w === gw)).length;
-    const enScore = words.filter(w => englishWords.some(ew => w === ew)).length;
-    const itScore = words.filter(w => italianWords.some(iw => w === iw)).length;
-    const frScore = words.filter(w => frenchWords.some(fw => w === fw)).length;
-
-    const maxScore = Math.max(deScore, enScore, itScore, frScore);
-    let language = 'other';
-    if (maxScore === 0 && text.length > 20) language = 'other';
-    else if (deScore === maxScore) language = 'de';
-    else if (enScore === maxScore) language = 'en';
-    else if (itScore === maxScore) language = 'it';
-    else if (frScore === maxScore) language = 'fr';
-
-    // Negative/sarkastische Reviews trotz hoher Sterne filtern
-    const negativePatterns = /anwalt|peinlich|enttäuschung|enttäuscht|fälschen|aufpolieren|leider nicht|nie wieder|schlecht|katastroph/i;
-    const isNegative = negativePatterns.test(text);
-
-    if (rating >= MIN_RATING && text.length >= MIN_TEXT_LENGTH && authorName && language !== 'other' && !isNegative) {
-      // Timestamp schätzen aus relativeTimeDescription
-      const time = estimateTimestamp(relativeTime);
-
-      reviews.push({
-        authorName,
-        rating,
-        text,
-        relativeTimeDescription: relativeTime,
-        time,
-        language,
-      });
-    }
-  }
-
-  console.log(`   Parsed: ${reviews.length} reviews (${MIN_RATING}+ stars, ${MIN_TEXT_LENGTH}+ chars)`);
-  const deCnt = reviews.filter(r => r.language === 'de').length;
-  const enCnt = reviews.filter(r => r.language === 'en').length;
-  const itCnt = reviews.filter(r => r.language === 'it').length;
-  const frCnt = reviews.filter(r => r.language === 'fr').length;
-  const otherCnt = reviews.filter(r => r.language === 'other').length;
-  console.log(`   DE: ${deCnt}, EN: ${enCnt}, IT: ${itCnt}, FR: ${frCnt}, other: ${otherCnt}`);
-
-  return reviews;
-}
-
-function estimateTimestamp(relativeTime) {
-  const now = Date.now();
-  if (!relativeTime) return Math.floor(now / 1000);
-
-  const match = relativeTime.match(/(\d+)\s*(week|month|year)s?\s*ago/);
-  if (match) {
-    const n = parseInt(match[1]);
-    const unit = match[2];
-    const ms = unit === 'week' ? n * 7 * 86400000
-      : unit === 'month' ? n * 30 * 86400000
-      : n * 365 * 86400000;
-    return Math.floor((now - ms) / 1000);
-  }
-
-  if (relativeTime.includes('a week ago')) return Math.floor((now - 7 * 86400000) / 1000);
-  if (relativeTime.includes('a month ago')) return Math.floor((now - 30 * 86400000) / 1000);
-  if (relativeTime.includes('a year ago')) return Math.floor((now - 365 * 86400000) / 1000);
-
-  return Math.floor(now / 1000);
-}
-
 // ── Main ──
-console.log('\ud83d\udd04 Fetching Google Reviews...');
-console.log(`   Place ID: ${PLACE_ID}`);
+console.log('\ud83d\udd04 Fetching Google Reviews via GBP API...');
 
+const dbUrl = process.env.DATABASE_URL;
+if (!dbUrl) {
+  console.error('\u274c DATABASE_URL nicht gesetzt.');
+  process.exit(1);
+}
+
+let sql;
 try {
-  // 1. API: Rating + Gesamtzahl holen (DE reicht)
-  const apiData = await fetchPlaceData('de');
-  const globalRating = apiData.rating || 0;
-  const globalTotal = apiData.userRatingCount || 0;
+  sql = postgres(dbUrl, { ssl: 'require' });
 
-  const apiReviews = (apiData.reviews || [])
-    .map(mapApiReview)
-    .filter(r => r.rating >= MIN_RATING);
+  console.log('\ud83d\udd11 Authentifiziere bei Google...');
+  const accessToken = await getAccessToken(sql);
 
-  console.log(`\n\ud83c\udf10 API: ${globalRating}/5, ${globalTotal} total, ${apiReviews.length} reviews (${MIN_RATING}+ stars)`);
+  console.log('\ud83d\udce5 Lade Reviews von GBP API...');
+  const { allReviews, averageRating, totalReviewCount } = await fetchAllReviews(accessToken);
 
-  // 2. reviews.txt parsen (falls vorhanden)
-  const txtReviews = parseReviewsTxt();
+  console.log(`\n\ud83c\udf10 GBP: ${averageRating}/5, ${totalReviewCount} total, ${allReviews.length} fetched`);
 
-  // 3. Merge: reviews.txt hat Priorität (mehr Auswahl), API ergänzt
-  function mergeReviews(primary, secondary) {
-    const merged = [...primary];
-    for (const r of secondary) {
-      if (!merged.some(m => m.authorName === r.authorName)) {
-        merged.push(r);
-      }
-    }
-    return merged;
+  // Map + filter
+  const mapped = allReviews
+    .map(mapGbpReview)
+    .filter(r => r.valid);
+
+  const byLang = { de: [], en: [], it: [], fr: [] };
+  for (const r of mapped) {
+    if (byLang[r.language]) byLang[r.language].push(r);
   }
 
-  // Reviews nach Sprache gruppieren
-  const allDe = mergeReviews(
-    txtReviews.filter(r => r.language === 'de'),
-    apiReviews.filter(r => r.language === 'de'),
-  );
-  const allEn = mergeReviews(
-    txtReviews.filter(r => r.language === 'en'),
-    apiReviews.filter(r => r.language === 'en'),
-  );
-  const allIt = txtReviews.filter(r => r.language === 'it');
-  const allFr = txtReviews.filter(r => r.language === 'fr');
+  console.log(`\ud83d\udcca Valid: ${mapped.length} total — DE: ${byLang.de.length}, EN: ${byLang.en.length}, IT: ${byLang.it.length}, FR: ${byLang.fr.length}`);
 
-  console.log(`\n\ud83d\udcca Merged: ${allDe.length} DE, ${allEn.length} EN, ${allIt.length} IT, ${allFr.length} FR`);
-
-  // 4. Für EN/IT/FR auch API-Daten holen (für lokalisierte relativeTimeDescription)
-  const apiByLang = { de: apiReviews };
-  for (const lang of ['en', 'it', 'fr']) {
-    const data = await fetchPlaceData(lang);
-    apiByLang[lang] = (data.reviews || [])
-      .map(mapApiReview)
-      .filter(r => r.rating >= MIN_RATING);
-    console.log(`   ${lang.toUpperCase()} API: ${apiByLang[lang].length} reviews`);
-  }
-
-  // 5. Pro Sprache: Beste Reviews auswählen
   const now = new Date().toISOString();
 
   for (const lang of LANGUAGES) {
-    let reviews;
+    // Primary: reviews in target language (sorted newest first)
+    let reviews = [...byLang[lang]].sort((a, b) => new Date(b.updateTime) - new Date(a.updateTime));
 
-    if (lang === 'de') {
-      // DE: Nur deutsche Reviews, sortiert nach Länge (aussagekräftigste zuerst)
-      reviews = allDe
-        .sort((a, b) => b.text.length - a.text.length)
-        .slice(0, MAX_REVIEWS);
-    } else if (lang === 'en') {
-      // EN: Englische Reviews, dann auffüllen mit DE
-      reviews = [...allEn.sort((a, b) => b.text.length - a.text.length)];
-      // Auffüllen mit DE falls nötig
-      for (const r of allDe) {
+    // Fill with DE if needed
+    if (lang !== 'de') {
+      for (const r of byLang.de.sort((a, b) => new Date(b.updateTime) - new Date(a.updateTime))) {
         if (reviews.length >= MAX_REVIEWS) break;
         if (!reviews.some(m => m.authorName === r.authorName)) reviews.push(r);
       }
-      reviews = reviews.slice(0, MAX_REVIEWS);
-    } else {
-      // IT/FR: txt-Reviews der Sprache + API-Reviews + DE-Fallback + EN-Fallback
-      const langTxt = lang === 'it' ? allIt : allFr;
-      reviews = [...langTxt.sort((a, b) => b.text.length - a.text.length)];
-      for (const r of (apiByLang[lang] || [])) {
-        if (reviews.length >= MAX_REVIEWS) break;
-        if (!reviews.some(m => m.authorName === r.authorName)) reviews.push(r);
-      }
-      for (const r of allDe) {
-        if (reviews.length >= MAX_REVIEWS) break;
-        if (!reviews.some(m => m.authorName === r.authorName)) reviews.push(r);
-      }
-      for (const r of allEn) {
-        if (reviews.length >= MAX_REVIEWS) break;
-        if (!reviews.some(m => m.authorName === r.authorName)) reviews.push(r);
-      }
-      reviews = reviews.slice(0, MAX_REVIEWS);
     }
 
+    // Fill with EN if still needed (for IT/FR)
+    if (lang === 'it' || lang === 'fr') {
+      for (const r of byLang.en.sort((a, b) => new Date(b.updateTime) - new Date(a.updateTime))) {
+        if (reviews.length >= MAX_REVIEWS) break;
+        if (!reviews.some(m => m.authorName === r.authorName)) reviews.push(r);
+      }
+    }
+
+    reviews = reviews.slice(0, MAX_REVIEWS);
+
+    // Map to output format with localized relativeTimeDescription
+    const outputReviews = reviews.map(r => ({
+      authorName: r.authorName,
+      rating: r.rating,
+      text: r.text,
+      relativeTimeDescription: formatRelativeTime(r.updateTime, lang),
+      time: Math.floor(new Date(r.updateTime).getTime() / 1000),
+      language: r.language,
+    }));
+
     const output = {
-      placeId: PLACE_ID,
-      rating: globalRating,
-      totalReviews: globalTotal,
+      placeId: `accounts/${GBP_ACCOUNT_ID}/locations/${GBP_LOCATION_ID}`,
+      rating: averageRating,
+      totalReviews: totalReviewCount,
       lastFetched: now,
       summary: SUMMARIES[lang],
       summaryLabel: SUMMARY_LABELS[lang],
-      reviews,
+      reviews: outputReviews,
     };
 
     const outPath = resolve(DATA_DIR, `google-reviews-${lang}.json`);
     writeFileSync(outPath, JSON.stringify(output, null, 2) + '\n', 'utf-8');
-    console.log(`   \u2705 ${lang.toUpperCase()}: ${reviews.length} reviews saved`);
+    console.log(`   \u2705 ${lang.toUpperCase()}: ${outputReviews.length} reviews saved`);
   }
 
-  // Remove old single-file format if present
-  const oldFile = resolve(DATA_DIR, 'google-reviews.json');
-  if (existsSync(oldFile)) unlinkSync(oldFile);
-
-  console.log(`\n\u2705 Done! Rating: ${globalRating}/5 (${globalTotal} total)`);
+  console.log(`\n\u2705 Done! Rating: ${averageRating}/5 (${totalReviewCount} total)`);
 
 } catch (err) {
   console.error('\u274c Fetch failed:', err.message);
@@ -379,4 +359,6 @@ try {
     process.exit(0);
   }
   process.exit(1);
+} finally {
+  if (sql) await sql.end();
 }
