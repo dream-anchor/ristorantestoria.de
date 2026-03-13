@@ -33,6 +33,7 @@ const MAX_FETCH = 200; // max reviews to collect before filtering
 const GBP_ACCOUNT_ID = '114367954632843728381';
 const GBP_LOCATION_ID = '17586248070861131392';
 const GBP_API_BASE = 'https://mybusiness.googleapis.com/v4';
+const GOOGLE_PLACE_ID = 'ChIJo-_iavt1nkcR665hz1XaMzQ'; // for review URLs in component
 
 const ALGORITHM = 'aes-256-gcm';
 const STAR_MAP = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 };
@@ -332,7 +333,7 @@ try {
     }));
 
     const output = {
-      placeId: `accounts/${GBP_ACCOUNT_ID}/locations/${GBP_LOCATION_ID}`,
+      placeId: GOOGLE_PLACE_ID,
       rating: averageRating,
       totalReviews: totalReviewCount,
       lastFetched: now,
