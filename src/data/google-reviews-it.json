@@ -1,11 +1,19 @@
 {
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
-  "totalReviews": 786,
-  "lastFetched": "2026-03-14T06:51:19.472Z",
+  "totalReviews": 787,
+  "lastFetched": "2026-03-15T06:59:43.296Z",
   "summary": "Oltre 780 ospiti valutano il STORIA con una media di 4,5 stelle. La pizza napoletana dal forno a pietra, la pasta fatta in casa e i piatti di pesce fresco ricevono elogi particolari. Molti clienti abituali sottolineano l’elegante atmosfera con luci calde e musica italiana. Il servizio viene descritto come cordiale, attento e professionale – anche per gruppi numerosi. La posizione centrale vicino a Königsplatz lo rende un punto d’incontro amato nel quartiere Maxvorstadt di Monaco. Il tiramisù con ricetta della casa e la selezione di vini vengono citati come punti di forza.",
   "summaryLabel": "Riepilogo di oltre 780 recensioni",
   "reviews": [
+    {
+      "authorName": "Peter Füllgrabe",
+      "rating": 5,
+      "text": "Wir waren hier Pizza und Pasta essen. Meine Thunfischpizza war sehr lecker und die Weinauswahl ist gut. Mein persönlicher Favorit war der White Russian – perfekt zubereitet. Der Service war insgesamt in Ordnung und sehr freundlich\n\n(Translated by Google)\nWe ate pizza and pasta here. My tuna pizza was delicious and the wine selection was good. My personal favorite was the White Russian – perfectly prepared. The service was generally fine and very friendly.",
+      "relativeTimeDescription": "1 giorno fa",
+      "time": 1773483402,
+      "language": "de"
+    },
     {
       "authorName": "Vivi W.",
       "rating": 5,
@@ -159,6 +167,14 @@
       "language": "de"
     },
     {
+      "authorName": "Tobias Dick",
+      "rating": 5,
+      "text": "Schön, modern, entspannt, classy - das Essen ist ein Traum - ein traumhafter Italiener!\nDas Menü ist fantastisch!\n\n(Translated by Google)\nBeautiful, modern, relaxed, classy – the food is a dream – a dream Italian restaurant!\nThe menu is fantastic!",
+      "relativeTimeDescription": "1 anno fa",
+      "time": 1727893876,
+      "language": "de"
+    },
+    {
       "authorName": "Stefanie Fuchs",
       "rating": 5,
       "text": "Wir waren heute im Storia essen . Ich war sehr begeistert von dem Essen . Die Bedienung war freundlich . Wir würden sofort wieder hier essen .\n\n(Translated by Google)\nWe ate at Storia today. I was very impressed with the food. The service was friendly. We would definitely eat here again.",
@@ -236,6 +252,14 @@
       "text": "Sehr schönes Ambiente mit super Essen und sehr freundlicher und guter Bedienung. Vor allem zu Sonntagspreisen sehr lohnenswert, ich komme gerne wieder! Für jedes Alter und jeden Geschmack was dabei :)\n\n(Translated by Google)\nA lovely atmosphere with excellent food and very friendly and efficient service. Especially worthwhile at Sunday prices; I'll definitely be back! Something for every age and taste :)",
       "relativeTimeDescription": "1 anno fa",
       "time": 1711313678,
+      "language": "de"
+    },
+    {
+      "authorName": "malek makni",
+      "rating": 5,
+      "text": "Die leckersten Italienischen Gerichte in München und die Beste Neapolitaner Pizza in München , gern wieder .. kann sehr gut empfehlen\n\n(Translated by Google)\nThe most delicious Italian dishes in Munich and the best Neapolitan pizza in Munich, would gladly come again... highly recommended.",
+      "relativeTimeDescription": "1 anno fa",
+      "time": 1711289160,
       "language": "de"
     },
     {
@@ -380,30 +404,6 @@
       "text": "Äußerst freundlich und zuvorkommend, super lieber Kellner, werde auf jedenfall öfter kommen\n\n(Translated by Google)\nExtremely friendly and accommodating, super nice waiter, will definitely come more often.",
       "relativeTimeDescription": "2 anni fa",
       "time": 1697288924,
-      "language": "de"
-    },
-    {
-      "authorName": "Asiya muhammad",
-      "rating": 5,
-      "text": "Die leckeren Speisen und der nette Service machen das Restaurant zu einem echten Juwel\n\n(Translated by Google)\nThe delicious food and friendly service make this restaurant a real gem.",
-      "relativeTimeDescription": "2 anni fa",
-      "time": 1696530766,
-      "language": "de"
-    },
-    {
-      "authorName": "Nathalie Kunze",
-      "rating": 5,
-      "text": "Sitzen gerade in Storia und und mein Mann genießt noch seinen Espresso. Der Service war herausragend ein italienischer Kellner, der alten Schule, galant, charmant und schnell ein sehr schöner Abend mit gutem Essen.\n\n(Translated by Google)\nWe're currently sitting at Storia, and my husband is still enjoying his espresso. The service was outstanding. An old-school Italian waiter was gallant, charming, and quick. A very pleasant evening with good food.",
-      "relativeTimeDescription": "2 anni fa",
-      "time": 1689878785,
-      "language": "de"
-    },
-    {
-      "authorName": "Clau Di",
-      "rating": 5,
-      "text": "Sehr gutes italienisches Essen, exzellenter Service. Cameriere ist sehr freundlich und aufmerksam. Schicke moderne Location mit sanfter italienischer Musik. sehr zu empfehlen.\n\n(Translated by Google)\nVery good Italian food, excellent service. The waitress is very friendly and attentive. A chic, modern location with gentle Italian music. Highly recommended.",
-      "relativeTimeDescription": "2 anni fa",
-      "time": 1688678352,
       "language": "de"
     }
   ]

@@ -1,8 +1,8 @@
 {
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
-  "totalReviews": 786,
-  "lastFetched": "2026-03-14T06:51:19.472Z",
+  "totalReviews": 787,
+  "lastFetched": "2026-03-15T06:59:43.296Z",
   "summary": "Over 780 guests rate STORIA an average of 4.5 stars. The Neapolitan stone-oven pizza, homemade pasta, and fresh seafood dishes receive particular praise. Many regulars highlight the stylish ambiance with warm lighting and Italian music. Service is consistently described as warm, attentive, and professional – even for larger groups. The central location near Königsplatz makes it a popular meeting point in Munich’s Maxvorstadt district. The house-recipe tiramisù and the wine selection are frequently mentioned as standout highlights.",
   "summaryLabel": "Summary from over 780 reviews",
   "reviews": [
@@ -255,6 +255,14 @@
       "language": "en"
     },
     {
+      "authorName": "Ulrike Martin",
+      "rating": 4,
+      "text": "Essen und Serrvice, wunderbar, die Musik scheußlich und vor allen Dingen viel zu laut.\n\n(Translated by Google)\nFood and service were wonderful, but the music was awful and, above all, much too loud.",
+      "relativeTimeDescription": "1 year ago",
+      "time": 1723647017,
+      "language": "en"
+    },
+    {
       "authorName": "Юлия Спиридонова",
       "rating": 5,
       "text": "(Translated by Google) Great place for dinner!\nDelicious food and excellent service! Special thanks to Anastasia ♥️\n\n(Original)\nОтличное место для ужина!\nВкусная еда и отличное обслуживание! Отдельное спасибо Анастасии ♥️",
@@ -316,6 +324,14 @@
       "text": "I love this place, come here often. They are very laid back, so if you want something and need to be out of there in under two hours, you need to get their attention. If you are not in a time crunch, slow service is perfect if you like who you went there with! The food is always amazing, the cocktails are always on point and refreshing and excellent selection of wine.",
       "relativeTimeDescription": "2 years ago",
       "time": 1710356028,
+      "language": "en"
+    },
+    {
+      "authorName": "Karin Mocho",
+      "rating": 5,
+      "text": "Sehr nette, aufmerksame Kellner, leckeres Essen, schönes Ambiente. Die Musik im Hintergrund war unaufgeregt und sehr dezent.\n\n(Translated by Google)\nVery friendly and attentive waiters, delicious food, lovely atmosphere. The background music was unobtrusive and very discreet.",
+      "relativeTimeDescription": "2 years ago",
+      "time": 1707208112,
       "language": "en"
     },
     {
@@ -388,22 +404,6 @@
       "text": "Köstliches Essen, guter Service & nettes Ambiente. Preise angemessen, Portionen machen satt! Gerne wieder!\n\n(Translated by Google)\nDelicious food, good service & pleasant atmosphere. Prices are reasonable, and the portions are generous! I'd gladly come again!",
       "relativeTimeDescription": "2 years ago",
       "time": 1699050525,
-      "language": "en"
-    },
-    {
-      "authorName": "domenico speranza",
-      "rating": 5,
-      "text": "(Translated by Google) The pizza there was too good.\n\n(Original)\nLà pizza e stata troppo buona.",
-      "relativeTimeDescription": "2 years ago",
-      "time": 1698435064,
-      "language": "en"
-    },
-    {
-      "authorName": "Haus Momoa Sylt",
-      "rating": 5,
-      "text": "Wunderschöne Location und ein tolles entspanntes Ambiente. Das Essen ist von der Vorspeise bis zum Dessert einfach wirklich herausragend und von bester Qualität. Wir waren 12 Personen, jedes Gericht hat exzellent geschmeckt und war jeden Cent wert. Unser Kellner mit seinem italienischen Charm hat uns oft zum Lachen gebracht und einen tollen Job gemacht. Danke liebes Storia Team, wir sehen uns wieder!\n\n(Translated by Google)\nA beautiful location and a wonderfully relaxed atmosphere. The food, from the appetizer to the dessert, was simply outstanding and of the highest quality. There were 12 of us, and every dish tasted excellent and was worth every penny. Our waiter, with his charming Italian personality, often made us laugh and did a fantastic job. Thank you, dear Storia team, we'll be back!",
-      "relativeTimeDescription": "2 years ago",
-      "time": 1698175192,
       "language": "en"
     }
   ]
