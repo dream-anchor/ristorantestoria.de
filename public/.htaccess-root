@@ -1,4 +1,5 @@
 RewriteEngine On
+RewriteBase /
 
 # ============================================
 # 0. WWW Kanonisierung (SEO)
