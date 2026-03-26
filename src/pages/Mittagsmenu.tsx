@@ -27,7 +27,7 @@ const Mittagsmenu = () => {
         description={t.pages.mittagsmenu.description}
         canonical="/mittags-menu"
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

@@ -15,7 +15,7 @@ const Haftungsausschluss = () => {
         canonical="/haftungsausschluss"
         noHreflang
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[

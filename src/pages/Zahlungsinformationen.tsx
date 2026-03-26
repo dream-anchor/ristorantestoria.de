@@ -16,7 +16,7 @@ const Zahlungsinformationen = () => {
         canonical="/zahlungsinformationen"
         noHreflang
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[

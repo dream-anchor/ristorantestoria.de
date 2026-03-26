@@ -89,7 +89,7 @@ const Kontakt = () => {
         description={content.description}
         canonical="/kontakt"
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[

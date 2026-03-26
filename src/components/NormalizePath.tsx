@@ -21,7 +21,7 @@ export const NormalizePath = () => {
       return;
     }
 
-    // Trailing slashes are enforced server-side by .htaccess (1c).
+    // Trailing slashes are enforced server-side by .htaccess (Section 4).
     // Do NOT remove them here — that would cause a redirect loop.
   }, [location, navigate, searchParams]);
 

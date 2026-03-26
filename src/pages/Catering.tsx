@@ -94,7 +94,7 @@ const Catering = () => {
         description={t.pages.catering.description}
         canonical="/catering"
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[

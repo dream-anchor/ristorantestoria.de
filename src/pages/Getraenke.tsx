@@ -24,7 +24,7 @@ const Getraenke = () => {
         description={t.pages.getraenke.description}
         canonical="/getraenke"
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

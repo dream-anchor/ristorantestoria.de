@@ -27,7 +27,7 @@ const Speisekarte = () => {
         description={t.pages.speisekarte.description}
         canonical="/speisekarte"
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData 
         type="breadcrumb" 
         breadcrumbs={[

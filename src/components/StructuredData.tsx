@@ -119,7 +119,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
         },
       },
     ],
-    ...(reviewsData.rating > 0 && reviewsData.totalReviews > 0 ? {
+    ...(includeReviews && reviewsData.rating > 0 && reviewsData.totalReviews > 0 ? {
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: reviewsData.rating,

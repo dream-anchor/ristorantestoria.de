@@ -61,7 +61,7 @@ const BesondereAnlaesse = () => {
         description={t.seo?.besondereAnlaesse?.seoDescription || "Feiern Sie besondere Anlässe im STORIA München: Osterbrunch, Valentinstag, Weihnachtsfeier, Silvester & mehr. Italienische Menüs für jeden Anlass in der Maxvorstadt."}
         canonical="/besondere-anlaesse/"
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
 
       <div className="min-h-screen bg-background flex flex-col">
         <Header />

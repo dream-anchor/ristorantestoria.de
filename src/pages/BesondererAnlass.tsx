@@ -131,9 +131,10 @@ const BesondererAnlass = () => {
     return <ValentinstagMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
   }
 
-  // Seasonal placeholder: known seasonal slug but no Supabase data yet
+  // Seasonal placeholder: known seasonal slug but no menu items
+  // Renders rich placeholder with descriptions, FAQs, signup form
   // Must be checked BEFORE isLoading to ensure SSR renders placeholder (not skeleton)
-  if (!menu && seasonalConfig) {
+  if (seasonalConfig && (!menu || !menu.is_published)) {
     return <SeasonalPlaceholder config={seasonalConfig} archivedMenu={archivedMenu} />;
   }
 
@@ -219,7 +220,7 @@ const BesondererAnlass = () => {
         description={getSeoDescription()}
         canonical={canonicalPath}
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[
@@ -353,7 +354,7 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
         description={seoDescription}
         canonical={canonicalPath}
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[
