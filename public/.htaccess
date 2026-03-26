@@ -94,69 +94,7 @@ RewriteRule ^fr/occasions-speciales/silvesterparty/?$ /fr/occasions-speciales/no
 RewriteRule ^fr/occasions-speciales/nouvel-an-party/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
 
 # ============================================
-# 1e. Legacy CMS Redirects (WordPress → Neue Seiten)
-# ============================================
-# Diese URLs existierten unter dem alten WordPress CMS (ristorantestoria.de/cms/...)
-# 301-Redirects bewahren Link-Juice und verhindern 404s
-RewriteRule ^cms/speisekarte/?$ /speisekarte/ [R=301,L]
-RewriteRule ^cms/1753-2/?$ /kontakt/ [R=301,L]
-RewriteRule ^cms/wp-content/uploads/2025/12/Mittagskarte-01\.12\.2025\.pdf$ /mittags-menu/ [R=301,L]
-RewriteRule ^cms/wp-content/uploads/2025/03/Mittagskarte-Deutsch-25\.03\.2025-din\.pdf$ /mittags-menu/ [R=301,L]
-RewriteRule ^cms/getraenke/?$ /getraenke/ [R=301,L]
-RewriteRule ^cms/weihnachtsmenues-2/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
-RewriteRule ^cms/impressum/?$ /impressum/ [R=301,L]
-RewriteRule ^cms/our-team/?$ /ueber-uns/ [R=301,L]
-RewriteRule ^cms/reservations/?$ /reservierung/ [R=301,L]
-RewriteRule ^cms/events(-2)?/?$ /besondere-anlaesse/ [R=301,L]
-RewriteRule ^cms/catering/?$ /catering/ [R=301,L]
-RewriteRule ^cms/menue/?$ /mittags-menu/ [R=301,L]
-RewriteRule ^cms/speisekarte-2/?$ /speisekarte/ [R=301,L]
-RewriteRule ^cms/front-page-2/?$ /? [R=301,L]
-# Soft 404 Fix
-Redirect 301 /ristorantestoria-de/ https://www.ristorantestoria.de/
-# Alle wp-content/uploads → /mittags-menu/ (als RewriteRule, damit es VOR Catch-All greift)
-RewriteRule ^cms/wp-content/uploads/ /mittags-menu/ [R=301,L]
-
-# CMS Catch-All: Alle verbleibenden /cms/* Pfade → Startseite (QSD strippt Query-String)
-RewriteRule ^cms/?$ /? [R=301,L]
-RewriteRule ^cms/(.+)$ /? [R=301,L]
-
-# ============================================
-# 1f. Legacy URL Redirects (Alte Pfade → Aktuelle Struktur)
-# ============================================
-# Alte Top-Level-URLs die zur neuen URL-Architektur weiterleiten
-RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
-RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
-RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
-RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
-RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
-RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
-# Keyword-Kannibalisierung: /italiener-muenchen/ → Homepage (alle Sprach-Slugs werden durch Client-seitige Redirects abgedeckt)
-RewriteRule ^italiener-muenchen/?$ / [R=301,L]
-# Phantom-URL aus GSC (kein Content, kein H1) → Ostermontag-Menu
-RewriteRule ^besondere-anlaesse/neuer-anlass/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/neuer-anlass/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
-RewriteRule ^en/special-occasions/neuer-anlass/?$ /en/special-occasions/easter-monday-menu/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/neuer-anlass/?$ /fr/occasions-speciales/menu-de-paques/ [R=301,L]
-# Osterbrunch → Ostermontag-Menu (URL-Umbenennung 2026)
-RewriteRule ^besondere-anlaesse/osterbrunch/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
-RewriteRule ^en/special-occasions/easter-brunch/?$ /en/special-occasions/easter-monday-menu/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/pranzo-di-pasqua/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/brunch-de-paques/?$ /fr/occasions-speciales/menu-de-paques/ [R=301,L]
-# Alte Subdomain-URL Struktur (ristorantestoria-de/...)
-RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L]
-RewriteRule ^ristorantestoria-de/?$ / [R=301,L]
-
-# ============================================
-# 1h. /menu → /speisekarte (Thin Content entfernt)
-# ============================================
-RewriteRule ^menu/?$ /speisekarte/ [R=301,L]
-RewriteRule ^en/menu/?$ /speisekarte/ [R=301,L]
-RewriteRule ^it/menu/?$ /speisekarte/ [R=301,L]
-RewriteRule ^fr/menu/?$ /speisekarte/ [R=301,L]
-
-# ============================================
-# 1i. Legal Pages — Nur DE (Fremdsprachen → 301 auf DE)
+# 1e. Legal Pages — Nur DE (Fremdsprachen → 301 auf DE)
 # ============================================
 # Rechtliche Seiten existieren nur auf Deutsch.
 # Alle fremdsprachigen URLs leiten auf die deutsche Version weiter.
@@ -205,18 +143,6 @@ RewriteRule ^fr/infos-alimentaires/?$ /lebensmittelhinweise/ [R=301,L]
 RewriteRule ^en/disclaimer/?$ /haftungsausschluss/ [R=301,L]
 RewriteRule ^it/disclaimer/?$ /haftungsausschluss/ [R=301,L]
 RewriteRule ^fr/avertissement/?$ /haftungsausschluss/ [R=301,L]
-
-# ============================================
-# 1g. WordPress Query-String Redirect
-# ============================================
-RewriteCond %{QUERY_STRING} ^page_id=2881$
-RewriteRule ^$ /impressum/? [R=301,L]
-
-RewriteCond %{QUERY_STRING} ^page_id=3539$
-RewriteRule ^(.*)$ /? [R=301,L]
-
-RewriteCond %{QUERY_STRING} ^page_id=2505$
-RewriteRule ^(.*)$ /? [R=301,L]
 
 # ============================================
 # 2. Error Documents (Fallback auf SPA)

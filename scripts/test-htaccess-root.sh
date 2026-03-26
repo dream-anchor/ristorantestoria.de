@@ -66,4 +66,35 @@ else
 fi
 echo ""
 
+echo "=== Test 8: CMS-Redirects im Root ==="
+CMS_COUNT=$(grep -c '^RewriteRule.*cms/' "$HTACCESS_ROOT" || true)
+echo "CMS-Redirect-Regeln im Root: $CMS_COUNT"
+if [ "$CMS_COUNT" -ge 10 ]; then
+  echo "OK: CMS-Redirects im Root vorhanden"
+else
+  echo "FEHLER: Weniger als 10 CMS-Redirect-Regeln im Root"
+  exit 1
+fi
+echo ""
+
+echo "=== Test 9: CMS-Redirects NICHT mehr im Inner ==="
+INNER_CMS=$(grep -c '^RewriteRule.*cms/' "$HTACCESS_INNER" || true)
+if [ "$INNER_CMS" -eq 0 ]; then
+  echo "OK: Keine CMS-Redirects mehr im inneren .htaccess"
+else
+  echo "FEHLER: $INNER_CMS CMS-Redirect-Regeln noch im inneren .htaccess"
+  exit 1
+fi
+echo ""
+
+echo "=== Test 10: Query-String Redirects im Root ==="
+QS_COUNT=$(grep -c 'page_id=' "$HTACCESS_ROOT" || true)
+if [ "$QS_COUNT" -ge 3 ]; then
+  echo "OK: $QS_COUNT Query-String-Redirects im Root"
+else
+  echo "FEHLER: Nur $QS_COUNT Query-String-Redirects (erwartet >= 3)"
+  exit 1
+fi
+echo ""
+
 echo "✅ Alle Tests bestanden!"

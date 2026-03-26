@@ -24,12 +24,65 @@ RewriteRule ^ / [R=301,L]
 RewriteCond %{QUERY_STRING} ^page_id=2881$
 RewriteRule ^$ /impressum? [R=301,L]
 
+RewriteCond %{QUERY_STRING} ^page_id=3539$
+RewriteRule ^(.*)$ /? [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^page_id=2505$
+RewriteRule ^(.*)$ /? [R=301,L]
+
 # ============================================
 # 3. 301 Redirects für alte URLs
 # ============================================
 RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
 RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
 RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
+RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
+RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
+RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
+RewriteRule ^italiener-muenchen/?$ / [R=301,L]
+# Phantom-URL aus GSC → Ostermontag-Menu
+RewriteRule ^besondere-anlaesse/neuer-anlass/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/neuer-anlass/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
+RewriteRule ^en/special-occasions/neuer-anlass/?$ /en/special-occasions/easter-monday-menu/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/neuer-anlass/?$ /fr/occasions-speciales/menu-de-paques/ [R=301,L]
+# Osterbrunch → Ostermontag-Menu (URL-Umbenennung 2026)
+RewriteRule ^besondere-anlaesse/osterbrunch/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
+RewriteRule ^en/special-occasions/easter-brunch/?$ /en/special-occasions/easter-monday-menu/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/pranzo-di-pasqua/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/brunch-de-paques/?$ /fr/occasions-speciales/menu-de-paques/ [R=301,L]
+# /menu → /speisekarte (Thin Content entfernt)
+RewriteRule ^menu/?$ /speisekarte/ [R=301,L]
+RewriteRule ^en/menu/?$ /speisekarte/ [R=301,L]
+RewriteRule ^it/menu/?$ /speisekarte/ [R=301,L]
+RewriteRule ^fr/menu/?$ /speisekarte/ [R=301,L]
+
+# ============================================
+# 3a. Legacy CMS Redirects (WordPress → Neue Seiten)
+# ============================================
+# /cms/* URLs aus dem alten WordPress. Müssen im Root-htaccess stehen,
+# da das Subdirectory keinen /cms/ Ordner hat und der SPA-Fallback
+# die Regeln im inneren htaccess nie erreichen lässt.
+RewriteRule ^cms/speisekarte/?$ /speisekarte/ [R=301,L]
+RewriteRule ^cms/1753-2/?$ /kontakt/ [R=301,L]
+RewriteRule ^cms/wp-content/uploads/2025/12/Mittagskarte-01\.12\.2025\.pdf$ /mittags-menu/ [R=301,L]
+RewriteRule ^cms/wp-content/uploads/2025/03/Mittagskarte-Deutsch-25\.03\.2025-din\.pdf$ /mittags-menu/ [R=301,L]
+RewriteRule ^cms/getraenke/?$ /getraenke/ [R=301,L]
+RewriteRule ^cms/weihnachtsmenues-2/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
+RewriteRule ^cms/impressum/?$ /impressum/ [R=301,L]
+RewriteRule ^cms/our-team/?$ /ueber-uns/ [R=301,L]
+RewriteRule ^cms/reservations/?$ /reservierung/ [R=301,L]
+RewriteRule ^cms/events(-2)?/?$ /besondere-anlaesse/ [R=301,L]
+RewriteRule ^cms/catering/?$ /catering/ [R=301,L]
+RewriteRule ^cms/menue/?$ /mittags-menu/ [R=301,L]
+RewriteRule ^cms/speisekarte-2/?$ /speisekarte/ [R=301,L]
+RewriteRule ^cms/front-page-2/?$ /? [R=301,L]
+# Soft 404 Fix
+Redirect 301 /ristorantestoria-de/ https://www.ristorantestoria.de/
+# Alle wp-content/uploads → /mittags-menu/
+RewriteRule ^cms/wp-content/uploads/ /mittags-menu/ [R=301,L]
+# CMS Catch-All: Alle verbleibenden /cms/* → Startseite
+RewriteRule ^cms/?$ /? [R=301,L]
+RewriteRule ^cms/(.+)$ /? [R=301,L]
 
 # ============================================
 # 3b. Trailing Slash erzwingen (vor Subdirectory-Rewrite)
