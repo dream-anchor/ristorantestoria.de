@@ -27,9 +27,20 @@ RewriteRule ^$ /impressum? [R=301,L]
 # ============================================
 # 3. 301 Redirects für alte URLs
 # ============================================
-RewriteRule ^mittagsmenu$ /mittags-menu [R=301,L]
-RewriteRule ^weihnachtsmenues$ /besondere-anlaesse/weihnachtsmenues [R=301,L]
-RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
+RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
+RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
+RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
+
+# ============================================
+# 3b. Trailing Slash erzwingen (vor Subdirectory-Rewrite)
+# ============================================
+# Alle URLs ohne Trailing Slash → 301 → mit Trailing Slash
+# Ausnahmen: Root /, Dateien mit Extension, bereits interne Pfade
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
+RewriteCond %{REQUEST_URI} !^/ristorantestoria-de/
+RewriteRule ^(.*)$ /$1/ [R=301,L]
 
 # ============================================
 # 4. Interne Rewrites auf /ristorantestoria-de/
@@ -39,6 +50,11 @@ RewriteRule ^silvesterparty$ /besondere-anlaesse/silvesterparty [R=301,L]
 # Wenn die Datei im Unterordner existiert (Assets, etc.)
 RewriteCond %{REQUEST_URI} !^/ristorantestoria-de/
 RewriteCond %{DOCUMENT_ROOT}/ristorantestoria-de%{REQUEST_URI} -f
+RewriteRule ^(.*)$ /ristorantestoria-de/$1 [L]
+
+# Wenn VERZEICHNIS im Unterordner existiert (pre-gerenderte Seiten)
+RewriteCond %{REQUEST_URI} !^/ristorantestoria-de/
+RewriteCond %{DOCUMENT_ROOT}/ristorantestoria-de%{REQUEST_URI} -d
 RewriteRule ^(.*)$ /ristorantestoria-de/$1 [L]
 
 # SPA-Fallback: Alle anderen Routen → index.html im Unterordner

@@ -31,33 +31,6 @@ RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
 RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
 
 # ============================================
-# 1d. HTTPS + WWW + Trailing Slash — alles in einem Hop
-# ============================================
-# Regel 1: Nicht-kanonischer Host/Protokoll UND kein Trailing Slash
-#          → https://www. MIT Slash in einem einzigen 301
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !^/$
-RewriteCond %{REQUEST_URI} !/$
-RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
-RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1/ [R=301,L]
-
-# Regel 2: Nicht-kanonischer Host/Protokoll MIT Trailing Slash (oder Root/Datei)
-#          → https://www. (Pfad bleibt wie er ist)
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^ https://www.ristorantestoria.de%{REQUEST_URI} [R=301,L]
-
-# Regel 3: Bereits auf https://www. aber ohne Trailing Slash
-#          → Slash hinzufügen (einziger verbleibender Fall)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !^/$
-RewriteCond %{REQUEST_URI} !/$
-RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
-RewriteRule ^(.*)$ /$1/ [R=301,L]
-
-# ============================================
 # 1d. Multi-Language Slug Redirects (SEO - Translated URLs)
 # ============================================
 # Redirect German slugs on foreign language paths to localized slugs

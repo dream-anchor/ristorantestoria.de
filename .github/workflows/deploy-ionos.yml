@@ -42,8 +42,10 @@ jobs:
           # VITE_* vars werden direkt aus der committeten .env gelesen.
           # Leere Secrets würden die .env-Werte überschreiben → absichtlich entfernt.
 
-      - name: Copy .htaccess to dist
-        run: cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
+      - name: Copy .htaccess files to dist
+        run: |
+          cp public/.htaccess dist/.htaccess || echo "No .htaccess found"
+          cp public/.htaccess-root dist/.htaccess-root || echo "No .htaccess-root found"
 
       - name: Deploy via LFTP (parallel uploads)
         run: |
@@ -57,6 +59,7 @@ jobs:
             set mirror:parallel-directories yes;
             open -u ${{ secrets.IONOS_SFTP_USER }},${{ secrets.IONOS_SFTP_PASSWORD }} sftp://${{ secrets.IONOS_SFTP_HOST }};
             mirror --reverse --delete --verbose --parallel=10 ./dist/ ${{ secrets.IONOS_SFTP_TARGET_DIR }}/;
+            put ./dist/.htaccess-root -o .htaccess;
             quit;
           "
 
