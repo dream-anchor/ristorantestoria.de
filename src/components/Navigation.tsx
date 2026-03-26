@@ -88,18 +88,49 @@ const Navigation = () => {
   // Dynamische Kinder für "Besondere Anlässe" basierend auf veröffentlichten Menüs
   // Uses localized parent slugs + localized menu slugs for correct i18n URLs
   const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
-  const specialOccasionsChildren: NavChild[] = specialMenus && specialMenus.length > 0
-    ? specialMenus.map(menu => {
+  // Combine Supabase menus + seasonal menus (deduplicated)
+  const buildSpecialOccasionsChildren = (): NavChild[] => {
+    const children: NavChild[] = [];
+    const seenSlugs = new Set<string>();
+
+    // 1. Add Supabase-published menus
+    if (specialMenus && specialMenus.length > 0) {
+      for (const menu of specialMenus) {
         const menuSlug = getLocalizedMenuSlug(menu);
         const fullPath = language === 'de'
           ? `/${parentSlug}/${menuSlug}/`
           : `/${language}/${parentSlug}/${menuSlug}/`;
-        return {
+        children.push({
           label: getLocalizedMenuTitle(menu).toUpperCase() || 'MENÜ',
           baseSlug: fullPath,
-        };
-      })
-    : [{ label: t.nav.specialOccasions, baseSlug: "besondere-anlaesse" }];
+        });
+        seenSlugs.add(menuSlug);
+      }
+    }
+
+    // 2. Add seasonal menus from config (if not already from Supabase)
+    for (const seasonal of SEASONAL_MENUS) {
+      const seasonalSlug = seasonal.slugs[language as keyof typeof seasonal.slugs] || seasonal.slugs.de;
+      if (!seenSlugs.has(seasonalSlug)) {
+        const fullPath = language === 'de'
+          ? `/${parentSlug}/${seasonalSlug}/`
+          : `/${language}/${parentSlug}/${seasonalSlug}/`;
+        children.push({
+          label: (seasonal.titles[language as keyof typeof seasonal.titles] || seasonal.titles.de).toUpperCase(),
+          baseSlug: fullPath,
+        });
+      }
+    }
+
+    // 3. Fallback if nothing found
+    if (children.length === 0) {
+      children.push({ label: t.nav.specialOccasions, baseSlug: "besondere-anlaesse" });
+    }
+
+    return children;
+  };
+
+  const specialOccasionsChildren = buildSpecialOccasionsChildren();
 
   // Mapping von menu_type zu Label (Translation-basiert)
   const menuTypeLabels: Record<string, string> = {
