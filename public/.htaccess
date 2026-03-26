@@ -27,16 +27,7 @@ RewriteCond %{HTTP_HOST} ^ristorantestoria\.de$ [NC]
 RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
 
 # ============================================
-# 2. Trailing Slash erzwingen
-# ============================================
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_URI} !^/$
-RewriteCond %{REQUEST_URI} !/$
-RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
-RewriteRule ^(.*)$ /$1/ [R=301,L]
-
-# ============================================
-# 3. Legacy URL Redirects
+# 2. Legacy URL Redirects
 # ============================================
 RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
 RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
@@ -64,7 +55,7 @@ RewriteRule ^it/menu/?$ /speisekarte/ [R=301,L]
 RewriteRule ^fr/menu/?$ /speisekarte/ [R=301,L]
 
 # ============================================
-# 4. Legacy CMS Redirects (WordPress)
+# 3. Legacy CMS Redirects (WordPress)
 # ============================================
 RewriteRule ^cms/speisekarte/?$ /speisekarte/ [R=301,L]
 RewriteRule ^cms/1753-2/?$ /kontakt/ [R=301,L]
@@ -84,6 +75,15 @@ Redirect 301 /ristorantestoria-de/ https://www.ristorantestoria.de/
 RewriteRule ^cms/wp-content/uploads/ /mittags-menu/ [R=301,L]
 RewriteRule ^cms/?$ /? [R=301,L]
 RewriteRule ^cms/(.+)$ /? [R=301,L]
+
+# ============================================
+# 4. Trailing Slash erzwingen
+# ============================================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
+RewriteRule ^(.*)$ /$1/ [R=301,L]
 
 # ============================================
 # 5. Multi-Language Slug Redirects
