@@ -2740,10 +2740,10 @@ export const de = {
       related4Desc: "Terrasse f\u00fcr private Feiern",
     },
     italienischesRestaurant: {
-      seoTitle: "Italienisches Restaurant M\u00fcnchen Maxvorstadt | Authentisch seit 2015 \u2013 STORIA",
-      seoDescription: "Bestes italienisches Restaurant in M\u00fcnchen: Steinofen-Pizza, hausgemachte Pasta & \u00fcber 60 Weine. Familienbetrieb seit 2015. Terrasse mit 100 Pl\u00e4tzen. Jetzt reservieren!",
+      seoTitle: "Italienisches Restaurant M\u00fcnchen \u2013 Authentische K\u00fcche aus S\u00fcditalien | STORIA",
+      seoDescription: "Authentisch s\u00fcditalienisches Restaurant in M\u00fcnchen Maxvorstadt. K\u00fcche aus dem Cilento: Steinofen-Pizza, hausgemachte Pasta, frische Meeresfr\u00fcchte. Familienbetrieb seit 2015.",
       breadcrumb: "Italienisches Restaurant M\u00fcnchen",
-      heroTitle: "Italienisches Restaurant M\u00fcnchen \u2013 STORIA in der Maxvorstadt",
+      heroTitle: "Italienisches Restaurant M\u00fcnchen \u2013 Cucina del Cilento",
       heroSubtitle: "Authentisch italienisch seit 2015 \u2022 Familienbetrieb Speranza",
       heroDescription: "Willkommen im STORIA \u2013 Ihrem italienischen Restaurant in M\u00fcnchen Maxvorstadt. Steinofen-Pizza, hausgemachte Pasta und s\u00fcditalienische Gastfreundschaft seit 2015. Nur 5 Min. vom K\u00f6nigsplatz.",
       tldr: "Italienisches Restaurant M\u00fcnchen: Das STORIA in der Maxvorstadt (Karlstra\u00dfe 47a) ist ein seit 2015 von Familie Speranza gef\u00fchrtes authentisches italienisches Restaurant. Neapolitanische Steinofen-Pizza bei 400\u00b0C, hausgemachte Pasta, Meeresfr\u00fcchte und \u00fcber 60 italienische Weine. 100 Pl\u00e4tze innen + 100 auf der \u00fcberdachten Terrasse. Mo\u2013Fr 09:00\u201301:00, Sa\u2013So 12:00\u201301:00. Reservierung: +49 89 51519696.",

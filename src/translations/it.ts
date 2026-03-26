@@ -2252,10 +2252,10 @@ const itBase = {
       relatedTitle: "Potrebbe interessarti anche",
     },
     italienerMuenchen: {
-      seoTitle: "Ristorante Italiano Monaco – STORIA Ristorante & Pizzeria dal 2015",
-      seoDescription: "Cercate il miglior ristorante italiano a Monaco? STORIA: Pizza napoletana, pasta fatta in casa & aperitivo dal 2015. Terrazza, eventi fino a 180 ospiti. Prenotate ora!",
+      seoTitle: "Ristorante Italiano Monaco \u2013 Cucina autentica del Sud Italia | STORIA",
+      seoDescription: "Ristorante autentico del Sud Italia a Monaco Maxvorstadt. Cucina del Cilento: pizza dal forno a pietra, pasta fatta in casa, frutti di mare freschi. Gestione familiare dal 2015.",
       breadcrumb: "Ristorante Italiano Monaco",
-      heroTitle: "Ristorante Italiano Monaco – Ristorante STORIA",
+      heroTitle: "Ristorante Italiano Monaco \u2013 Cucina del Cilento",
       heroSubtitle: "Autenticamente italiano dal 2015",
       heroDescription: "Il vostro ristorante italiano a Monaco Maxvorstadt: Pizza napoletana dal forno a pietra, pasta fatta in casa e vini selezionati. La famiglia Speranza vi dà il benvenuto.",
       heroButton: "Prenota un tavolo",

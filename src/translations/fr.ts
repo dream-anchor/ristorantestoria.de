@@ -2666,10 +2666,10 @@ export const fr = {
       ctaButton: "R\u00e9server maintenant",
     },
     italienischesRestaurant: {
-      seoTitle: "Restaurant Italien Munich | STORIA Maxvorstadt depuis 2015",
-      seoDescription: "Meilleur restaurant italien \u00e0 Munich : pizza au four \u00e0 pierre, p\u00e2tes maison & plus de 60 vins. Entreprise familiale depuis 2015. Terrasse 100 places. R\u00e9servez !",
+      seoTitle: "Restaurant Italien Munich \u2013 Cuisine authentique du sud de l\u2019Italie | STORIA",
+      seoDescription: "Restaurant authentique du sud de l\u2019Italie \u00e0 Munich Maxvorstadt. Cuisine du Cilento : pizza au four \u00e0 pierre, p\u00e2tes maison, fruits de mer frais. Entreprise familiale depuis 2015.",
       breadcrumb: "Restaurant Italien Munich",
-      heroTitle: "Restaurant Italien Munich \u2013 STORIA dans la Maxvorstadt",
+      heroTitle: "Restaurant Italien Munich \u2013 Cucina del Cilento",
       heroSubtitle: "Authentiquement italien depuis 2015 \u2022 Famille Speranza",
       heroDescription: "Bienvenue au STORIA \u2013 votre restaurant italien \u00e0 Munich Maxvorstadt. Pizza au four \u00e0 pierre, p\u00e2tes maison et hospitalit\u00e9 du sud de l\u2019Italie depuis 2015. \u00c0 5 min de K\u00f6nigsplatz.",
       heroButton: "R\u00e9server une table",

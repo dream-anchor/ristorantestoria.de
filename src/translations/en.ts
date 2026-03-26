@@ -2686,10 +2686,10 @@ export const en = {
       related4Desc: "Terrace for private celebrations",
     },
     italienischesRestaurant: {
-      seoTitle: "Italian Restaurant Munich | STORIA Maxvorstadt since 2015",
-      seoDescription: "Best Italian restaurant in Munich: stone-oven pizza, homemade pasta & over 60 wines. Family-run since 2015. Terrace with 100 seats. Reserve now!",
+      seoTitle: "Italian Restaurant Munich \u2013 Authentic Southern Italian Cuisine | STORIA",
+      seoDescription: "Authentic Southern Italian restaurant in Munich Maxvorstadt. Cuisine from the Cilento: stone-oven pizza, homemade pasta, fresh seafood. Family-run since 2015.",
       breadcrumb: "Italian Restaurant Munich",
-      heroTitle: "Italian Restaurant Munich \u2013 STORIA in Maxvorstadt",
+      heroTitle: "Italian Restaurant Munich \u2013 Cucina del Cilento",
       heroSubtitle: "Authentically Italian since 2015 \u2022 Speranza Family",
       heroDescription: "Welcome to STORIA \u2013 your Italian restaurant in Munich Maxvorstadt. Stone-oven pizza, homemade pasta and Southern Italian hospitality since 2015. Just 5 min from K\u00f6nigsplatz.",
       heroButton: "Reserve a table",
