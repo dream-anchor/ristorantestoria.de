@@ -21,7 +21,7 @@ import romantischesDinnerImage from "@/assets/romantisches-dinner-kerzenlicht-st
 import silvesterHeroImage from "@/assets/silvester-dinner-gala-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
-import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
+import { useSpecialMenuBySlug, useMenuContent } from "@/hooks/useSpecialMenus";
 import { useArchivedSeasonalMenu } from "@/hooks/useArchivedSeasonalMenu";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { findSeasonalMenuBySlug, PARENT_SLUGS } from "@/config/seasonalMenus";
@@ -47,6 +47,7 @@ const BesondererAnlass = () => {
   // Use supabaseSlug if set (admin may auto-generate a different slug than the SEO URL slug)
   const lookupSlug = seasonalConfig?.supabaseSlug || slug || '';
   const { data: menu, isLoading, error } = useSpecialMenuBySlug(lookupSlug);
+  const { data: menuContent, isLoading: isContentLoading } = useMenuContent(menu?.id);
 
   // Hook must be called unconditionally (React rules of hooks)
   const { data: archivedMenu } = useArchivedSeasonalMenu(
@@ -131,10 +132,12 @@ const BesondererAnlass = () => {
     return <ValentinstagMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
   }
 
-  // Seasonal placeholder: known seasonal slug but no menu items
+  // Seasonal placeholder: known seasonal slug but no menu content
   // Renders rich placeholder with descriptions, FAQs, signup form
   // Must be checked BEFORE isLoading to ensure SSR renders placeholder (not skeleton)
-  if (seasonalConfig && (!menu || !menu.is_published)) {
+  // Check: menu missing, unpublished, OR published but has no categories/items
+  const menuHasContent = menuContent && menuContent.categories.some(c => c.items.length > 0);
+  if (seasonalConfig && (!menu || !menu.is_published || (!isContentLoading && !menuHasContent))) {
     return <SeasonalPlaceholder config={seasonalConfig} archivedMenu={archivedMenu} />;
   }
 
