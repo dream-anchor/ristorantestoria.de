@@ -65,3 +65,19 @@ npm run prerender    # SSG für SEO — KRITISCH
 
 ### Landing Pages
 lunch-muenchen-maxvorstadt, aperitivo-muenchen, romantisches-dinner-muenchen, eventlocation-muenchen-maxvorstadt, firmenfeier-muenchen, geburtstagsfeier-muenchen, neapolitanische-pizza-muenchen, wild-essen-muenchen
+
+## SEO Indexing Tool
+
+Google Indexing API Script zum Einreichen von URLs zur Indexierung (200/Tag kostenlos).
+Service Account JSON liegt in `scripts/service-account.json` im seo.schrittmacher.ai Repo.
+
+```bash
+# Optionen
+node scripts/request-indexing.mjs --de-only        # Nur DE-URLs aus Sitemap
+node scripts/request-indexing.mjs --priority        # Nicht-indexierte Priority-URLs
+node scripts/request-indexing.mjs --dry-run         # Preview ohne Submit
+node scripts/request-indexing.mjs --url https://www.ristorantestoria.de/page/  # Einzelne URL
+```
+
+**Service Account:** `gsc-auditor-storia@evocative-shore-486623-v4.iam.gserviceaccount.com`
+Muss in GSC als **Inhaber** für `www.ristorantestoria.de` eingetragen sein.
