@@ -19,7 +19,7 @@ const UeberUns = () => {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: founder.name,
-    ...(founder.alternateName ? { alternateName: founder.alternateName } : {}),
+    ...('alternateName' in founder ? { alternateName: founder.alternateName } : {}),
     jobTitle: founder.role,
     worksFor: { '@id': `${STORIA.url}/#restaurant` },
     ...(founder.origin ? { birthPlace: { '@type': 'Place', name: founder.origin } } : {}),
