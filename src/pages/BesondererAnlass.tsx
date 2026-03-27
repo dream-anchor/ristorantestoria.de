@@ -131,10 +131,10 @@ const BesondererAnlass = () => {
     return <ValentinstagMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
   }
 
-  // Seasonal placeholder: known seasonal slug but no menu items
-  // Renders rich placeholder with descriptions, FAQs, signup form
-  // Must be checked BEFORE isLoading to ensure SSR renders placeholder (not skeleton)
-  if (seasonalConfig && (!menu || !menu.is_published)) {
+  // Seasonal placeholder: known seasonal slug but no published menu in Supabase.
+  // Only show placeholder AFTER loading is complete — otherwise we'd flash the
+  // placeholder during hydration before the query returns the actual menu data.
+  if (seasonalConfig && !isLoading && (!menu || !menu.is_published)) {
     return <SeasonalPlaceholder config={seasonalConfig} archivedMenu={archivedMenu} />;
   }
 
