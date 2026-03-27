@@ -204,7 +204,7 @@ export const SEASONAL_MENUS: SeasonalMenuConfig[] = [
   },
   {
     key: 'weihnachten',
-    isActive: false,
+    isActive: true,
     slugs: {
       de: 'weihnachtsmenue',
       en: 'christmas-menu',
@@ -280,7 +280,7 @@ export const SEASONAL_MENUS: SeasonalMenuConfig[] = [
   },
   {
     key: 'silvester',
-    isActive: false,
+    isActive: true,
     slugs: {
       de: 'silvester',
       en: 'new-years-eve',

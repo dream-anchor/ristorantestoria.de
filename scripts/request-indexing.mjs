@@ -1,24 +1,20 @@
 #!/usr/bin/env node
 /**
- * Google Indexing API — URL Submission Script
+ * Google Indexing API — Bulk URL Submission
  *
- * Submits URLs to Google's Indexing API (indexing.googleapis.com/v3)
- * to request (re)crawling. Uses Service Account JWT authentication.
+ * Reicht URLs bei Google zur Indexierung ein (200/Tag kostenlos).
+ * Nutzt Service Account JWT Auth (scripts/service-account.json).
+ * Keine externen Dependencies — nur Node.js built-ins.
  *
- * NOTE: The Indexing API is officially for JobPosting/BroadcastEvent,
- * but Google processes notifications for all URL types. This is a
- * widely-used SEO technique to speed up crawling.
- *
- * Credentials (one of):
- *   a) GSC_CLIENT_EMAIL + GSC_PRIVATE_KEY in .env
- *   b) GOOGLE_SERVICE_ACCOUNT_JSON in .env (path to .json key file)
- *   c) scripts/service-account.json (auto-detected)
+ * NOTE: Die Indexing API ist offiziell für JobPosting/BroadcastEvent,
+ * aber Google verarbeitet Notifications für alle URL-Typen.
  *
  * Usage:
- *   node scripts/request-indexing.mjs                          # All DE URLs from sitemap
- *   node scripts/request-indexing.mjs --all                    # All URLs from sitemap
- *   node scripts/request-indexing.mjs /pizza-muenchen/ /silvester-muenchen/  # Specific paths
- *   node scripts/request-indexing.mjs --dry-run                # Preview without submitting
+ *   node scripts/request-indexing.mjs                                        # Alle DE-Sitemap-URLs
+ *   node scripts/request-indexing.mjs --all                                  # Alle Sitemap-URLs
+ *   node scripts/request-indexing.mjs --priority                             # Nur nicht-indexierte DE-URLs
+ *   node scripts/request-indexing.mjs /pizza-muenchen/ /silvester-muenchen/  # Pfade
+ *   node scripts/request-indexing.mjs --dry-run                              # Preview ohne Submit
  */
 
 import fs from "node:fs";
@@ -26,84 +22,67 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const HOST = "https://www.ristorantestoria.de";
+const SITE_URL = "https://www.ristorantestoria.de";
 const INDEXING_API = "https://indexing.googleapis.com/v3/urlNotifications:publish";
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const SCOPE = "https://www.googleapis.com/auth/indexing";
-const RATE_LIMIT_MS = 300; // 300ms between requests (safe for 200/day quota)
+const RATE_LIMIT_MS = 500;
 
-// ── Load .env ──
-function loadEnv() {
-  const envPath = path.resolve(__dirname, "../.env");
-  if (!fs.existsSync(envPath)) return;
-  for (const line of fs.readFileSync(envPath, "utf-8").split("\n")) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("#")) continue;
-    const eq = trimmed.indexOf("=");
-    if (eq === -1) continue;
-    const key = trimmed.slice(0, eq).trim();
-    let val = trimmed.slice(eq + 1).trim();
-    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-      val = val.slice(1, -1);
-    }
-    if (!process.env[key]) process.env[key] = val;
-  }
-}
+// Service Account Key: scripts/service-account.json or env override
+const SERVICE_ACCOUNT_PATH = process.env.GOOGLE_APPLICATION_CREDENTIALS
+  || path.resolve(__dirname, "service-account.json");
 
-loadEnv();
+// Priority URLs: Nicht-indexierte DE-Seiten (aus GSC Coverage Report)
+const PRIORITY_URLS = [
+  "/pizza-muenchen/",
+  "/italienisches-restaurant-muenchen/",
+  "/italiener-hauptbahnhof-muenchen/",
+  "/eventlocation-muenchen-maxvorstadt/",
+  "/valentinstag-muenchen/",
+  "/silvester-muenchen/",
+  "/weihnachten-muenchen/",
+  "/weihnachtsfeier-muenchen/",
+  "/romantisches-dinner-muenchen/",
+  "/wild-essen-muenchen/",
+  "/terrasse-muenchen/",
+  "/barrierefreiheit/",
+  "/besondere-anlaesse/",
+  "/besondere-anlaesse/valentinstag-menue/",
+  "/lebensmittelhinweise/",
+  "/widerrufsbelehrung/",
+].map(p => SITE_URL + p);
 
 // ── Service Account Credentials ──
 function loadCredentials() {
-  // Option a) Env vars (same as Supabase Edge Function gsc-sync)
-  if (process.env.GSC_CLIENT_EMAIL && process.env.GSC_PRIVATE_KEY) {
-    return {
-      client_email: process.env.GSC_CLIENT_EMAIL,
-      private_key: process.env.GSC_PRIVATE_KEY.replace(/\\n/g, "\n"),
-    };
+  if (!fs.existsSync(SERVICE_ACCOUNT_PATH)) {
+    console.error(`Service Account JSON nicht gefunden: ${SERVICE_ACCOUNT_PATH}`);
+    console.error("Lege scripts/service-account.json ab oder setze GOOGLE_APPLICATION_CREDENTIALS.");
+    process.exit(1);
   }
-
-  // Option b) Path to JSON key file via env
-  if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-    const keyFile = JSON.parse(fs.readFileSync(process.env.GOOGLE_SERVICE_ACCOUNT_JSON, "utf-8"));
-    return { client_email: keyFile.client_email, private_key: keyFile.private_key };
+  const keyFile = JSON.parse(fs.readFileSync(SERVICE_ACCOUNT_PATH, "utf-8"));
+  if (keyFile.type !== "service_account") {
+    console.error("JSON ist kein Service Account (type muss 'service_account' sein).");
+    process.exit(1);
   }
-
-  // Option c) Auto-detect in scripts/
-  const autoPath = path.resolve(__dirname, "service-account.json");
-  if (fs.existsSync(autoPath)) {
-    const keyFile = JSON.parse(fs.readFileSync(autoPath, "utf-8"));
-    return { client_email: keyFile.client_email, private_key: keyFile.private_key };
-  }
-
-  console.error("❌ Keine Service-Account-Credentials gefunden.");
-  console.error("   Setze GSC_CLIENT_EMAIL + GSC_PRIVATE_KEY in .env");
-  console.error("   oder lege scripts/service-account.json ab.");
-  process.exit(1);
+  return { client_email: keyFile.client_email, private_key: keyFile.private_key };
 }
 
-// ── JWT + Access Token ──
-function base64url(data) {
-  return Buffer.from(data).toString("base64url");
-}
-
+// ── JWT → Access Token (zero dependencies) ──
 async function getAccessToken(credentials) {
   const now = Math.floor(Date.now() / 1000);
-  const header = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
-  const payload = base64url(JSON.stringify({
+  const header = Buffer.from(JSON.stringify({ alg: "RS256", typ: "JWT" })).toString("base64url");
+  const payload = Buffer.from(JSON.stringify({
     iss: credentials.client_email,
     scope: SCOPE,
     aud: TOKEN_URL,
     iat: now,
     exp: now + 3600,
-  }));
+  })).toString("base64url");
 
   const signInput = `${header}.${payload}`;
-  const sign = crypto.createSign("RSA-SHA256");
-  sign.update(signInput);
-  const signature = sign.sign(credentials.private_key, "base64url");
+  const signature = crypto.createSign("RSA-SHA256").update(signInput).sign(credentials.private_key, "base64url");
   const jwt = `${signInput}.${signature}`;
 
   const res = await fetch(TOKEN_URL, {
@@ -119,16 +98,14 @@ async function getAccessToken(credentials) {
     const body = await res.text();
     throw new Error(`Token-Request fehlgeschlagen (${res.status}): ${body}`);
   }
-
-  const data = await res.json();
-  return data.access_token;
+  return (await res.json()).access_token;
 }
 
 // ── Sitemap Parser ──
 function getUrlsFromSitemap(allLanguages = false) {
   const sitemapPath = path.resolve(__dirname, "../dist/sitemap.xml");
   if (!fs.existsSync(sitemapPath)) {
-    console.error("❌ dist/sitemap.xml nicht gefunden. Zuerst `npm run build` ausführen.");
+    console.error("dist/sitemap.xml nicht gefunden. Zuerst `npm run build` ausführen.");
     process.exit(1);
   }
 
@@ -137,7 +114,6 @@ function getUrlsFromSitemap(allLanguages = false) {
 
   if (allLanguages) return allUrls;
 
-  // Default: only DE URLs (no /en/, /it/, /fr/ prefix)
   return allUrls.filter(url => {
     const pathname = new URL(url).pathname;
     return !pathname.startsWith("/en/") && !pathname.startsWith("/it/") && !pathname.startsWith("/fr/");
@@ -152,19 +128,14 @@ async function submitUrl(url, accessToken) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify({
-      url,
-      type: "URL_UPDATED",
-    }),
+    body: JSON.stringify({ url, type: "URL_UPDATED" }),
   });
 
   const body = await res.json().catch(() => ({}));
-
   if (res.ok) {
-    return { url, status: "ok", notifyTime: body.urlNotificationMetadata?.latestUpdate?.notifyTime };
-  } else {
-    return { url, status: "error", code: res.status, message: body.error?.message || res.statusText };
+    return { ok: true };
   }
+  return { ok: false, code: res.status, message: body.error?.message || res.statusText };
 }
 
 // ── Main ──
@@ -172,24 +143,28 @@ async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes("--dry-run");
   const allLangs = args.includes("--all");
+  const isPriority = args.includes("--priority");
   const paths = args.filter(a => !a.startsWith("--"));
 
   let urls;
 
-  if (paths.length > 0) {
+  if (isPriority) {
+    urls = PRIORITY_URLS;
+    console.log("Modus: Priority URLs (nicht-indexierte DE-Seiten)\n");
+  } else if (paths.length > 0) {
     urls = paths.map(p => {
       if (p.startsWith("https://")) return p;
       const cleanPath = p.startsWith("/") ? p : `/${p}`;
       const withTrailing = cleanPath.endsWith("/") ? cleanPath : `${cleanPath}/`;
-      return `${HOST}${withTrailing}`;
+      return `${SITE_URL}${withTrailing}`;
     });
-    console.log("🎯 Modus: Spezifische URLs\n");
+    console.log("Modus: Spezifische Pfade\n");
   } else {
     urls = getUrlsFromSitemap(allLangs);
-    console.log(`🗺️  Modus: ${allLangs ? "Alle" : "DE"} URLs aus Sitemap\n`);
+    console.log(`Modus: ${allLangs ? "Alle" : "DE"} URLs aus Sitemap\n`);
   }
 
-  console.log(`📊 ${urls.length} URLs`);
+  console.log(`${urls.length} URLs:`);
   if (urls.length <= 20) {
     urls.forEach(u => console.log(`   ${u}`));
   } else {
@@ -199,48 +174,51 @@ async function main() {
   console.log();
 
   if (urls.length > 200) {
-    console.warn(`⚠️  ${urls.length} URLs überschreiten das Tageslimit (200). Nur die ersten 200 werden gesendet.`);
+    console.warn(`${urls.length} URLs > Tageslimit (200). Nur die ersten 200.`);
     urls = urls.slice(0, 200);
   }
 
   if (dryRun) {
-    console.log("🏁 Dry-Run — keine URLs gesendet.");
+    console.log("Dry-Run — keine URLs gesendet.");
     return;
   }
 
-  // Authenticate
-  console.log("🔑 Authentifiziere Service Account...");
+  // Auth
+  console.log("Authentifiziere Service Account...");
   const credentials = loadCredentials();
-  console.log(`   Client: ${credentials.client_email}`);
+  console.log(`   ${credentials.client_email}`);
   const accessToken = await getAccessToken(credentials);
-  console.log("✅ Access Token erhalten\n");
+  console.log("Access Token erhalten\n");
 
-  // Submit URLs
-  console.log("📤 Sende URLs an Google Indexing API...\n");
-  let okCount = 0;
-  let errorCount = 0;
+  // Submit
+  let success = 0, failed = 0;
 
   for (let i = 0; i < urls.length; i++) {
-    const result = await submitUrl(urls[i], accessToken);
+    const url = urls[i];
+    const result = await submitUrl(url, accessToken);
 
-    if (result.status === "ok") {
-      okCount++;
-      console.log(`   ✅ ${i + 1}/${urls.length} ${result.url}`);
+    if (result.ok) {
+      success++;
+      console.log(`   [${i + 1}/${urls.length}] ${url}`);
     } else {
-      errorCount++;
-      console.log(`   ❌ ${i + 1}/${urls.length} ${result.url} — ${result.code}: ${result.message}`);
+      failed++;
+      console.error(`   [${i + 1}/${urls.length}] FEHLER ${url} — ${result.code}: ${result.message}`);
+
+      if (result.code === 429) {
+        console.log("\n   Rate limit erreicht. Morgen weitermachen.");
+        break;
+      }
     }
 
-    // Rate limiting
     if (i < urls.length - 1) {
       await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
     }
   }
 
-  console.log(`\n🏁 Fertig: ${okCount} OK, ${errorCount} Fehler (von ${urls.length} URLs)`);
+  console.log(`\nErgebnis: ${success} eingereicht, ${failed} fehlgeschlagen (von ${urls.length} URLs)`);
 }
 
 main().catch((error) => {
-  console.error("❌ Fehler:", error.message);
+  console.error("Fehler:", error.message);
   process.exit(1);
 });

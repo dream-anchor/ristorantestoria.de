@@ -131,13 +131,6 @@ const BesondererAnlass = () => {
     return <ValentinstagMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
   }
 
-  // Ostermontag: uses generic SeasonalPlaceholder (no dedicated component)
-  // Must be checked here because Supabase returns a published menu
-  // record (slug: neuer-anlass) with no actual content/items.
-  if (seasonalConfig?.key === 'ostermontag') {
-    return <SeasonalPlaceholder config={seasonalConfig} archivedMenu={archivedMenu} />;
-  }
-
   // Seasonal placeholder: known seasonal slug but no menu items
   // Renders rich placeholder with descriptions, FAQs, signup form
   // Must be checked BEFORE isLoading to ensure SSR renders placeholder (not skeleton)
