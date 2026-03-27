@@ -25,7 +25,7 @@ const BesondereAnlaesse = () => {
     {
       slug: "ostermontag-menue",
       slug_en: "easter-monday-menu", slug_it: "menu-di-pasqua", slug_fr: "menu-de-paques",
-      label: t.seo?.besondereAnlaesse?.ostermontag || "Ostermontag-Men\u00fc",
+      label: (t.seo?.besondereAnlaesse as any)?.ostermontag || "Ostermontag-Menü",
     },
     {
       slug: "valentinstag-menue",

@@ -191,7 +191,7 @@ const NeapolitanischePizza = () => {
           {/* Intro Section */}
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4 max-w-4xl">
-              <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.seo.neapolitanPizza.breadcrumb }]} />
+              <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: (t.seo.neapolitanPizza as any).breadcrumb || 'Neapolitanische Pizza' }]} />
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
                 {t.seo.neapolitanPizza.introTitle}
               </h2>

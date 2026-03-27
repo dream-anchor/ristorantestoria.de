@@ -59,7 +59,7 @@ const HochzeitsfeierMuenchen = () => {
         type="breadcrumb"
         breadcrumbs={[
           { name: 'Home', url: '/' },
-          { name: t.seo.besondereAnlaesse?.breadcrumb || 'Besondere Anl\u00e4sse', url: '/besondere-anlaesse' },
+          { name: (t.seo.besondereAnlaesse as any)?.breadcrumb || 'Besondere Anlässe', url: '/besondere-anlaesse' },
           { name: s.breadcrumb, url: '/hochzeitsfeier-muenchen' }
         ]}
       />

@@ -63,7 +63,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
     founder: STORIA.founders.map(f => ({
       '@type': 'Person',
       name: f.name,
-      ...(f.alternateName ? { alternateName: f.alternateName } : {}),
+      ...('alternateName' in f ? { alternateName: f.alternateName } : {}),
       jobTitle: f.role,
     })),
     amenityFeature: STORIA.amenities.map(a => ({
