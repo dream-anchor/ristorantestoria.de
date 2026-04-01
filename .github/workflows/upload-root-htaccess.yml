@@ -15,6 +15,8 @@ jobs:
           sudo apt-get install -y lftp
           lftp -c "
             set ssl:verify-certificate no;
+            set sftp:auto-confirm yes;
+            set net:max-retries 3;
             open -u ${{ secrets.IONOS_SFTP_USER }},${{ secrets.IONOS_SFTP_PASSWORD }} sftp://${{ secrets.IONOS_SFTP_HOST }};
             put -O / root-htaccess/.htaccess;
             bye;
