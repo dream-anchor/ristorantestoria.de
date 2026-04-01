@@ -1,0 +1,17 @@
+# Root-.htaccess (eine Ebene über public/)
+# Zweck: HTTP → HTTPS Redirect, da Port-80-Requests
+# die public/.htaccess nicht erreichen.
+
+RewriteEngine On
+
+# Variante 1: HTTPS off
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
+
+# Variante 2: Fallback über SERVER_PORT (falls IONOS %{HTTPS} nicht setzt)
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]
+
+# Variante 3: Fallback über ENV:HTTPS (alternative IONOS-Syntax)
+RewriteCond %{ENV:HTTPS} !on
+RewriteRule ^(.*)$ https://www.ristorantestoria.de/$1 [R=301,L]

@@ -1,0 +1,22 @@
+name: Upload Root .htaccess to IONOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload root .htaccess via lftp
+        run: |
+          sudo apt-get install -y lftp
+          lftp -c "
+            set ssl:verify-certificate no;
+            open -u ${{ secrets.IONOS_SFTP_USER }},${{ secrets.IONOS_SFTP_PASSWORD }} sftp://${{ secrets.IONOS_SFTP_HOST }};
+            put -O / root-htaccess/.htaccess;
+            bye;
+          "
+          echo "Root .htaccess uploaded successfully"
