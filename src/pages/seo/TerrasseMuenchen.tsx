@@ -67,6 +67,7 @@ const TerrasseMuenchen = () => {
     { q: tr.faq6Question, a: tr.faq6Answer },
     { q: tr.faq7Question, a: tr.faq7Answer },
     { q: tr.faq8Question, a: tr.faq8Answer },
+    { q: tr.faq9Question, a: tr.faq9Answer },
   ];
 
   return (
@@ -145,6 +146,38 @@ const TerrasseMuenchen = () => {
                     {f.note && <p className="text-xs text-primary mt-3">⚠️ {f.note}</p>}
                   </div>
                 ))}
+              </div>
+            </section>
+
+            {/* Schanigarten */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-6 text-center">{tr.schanigartenTitle}</h2>
+              <p className="text-muted-foreground mb-4">{tr.schanigartenP1}</p>
+              <p className="text-muted-foreground mb-8">{tr.schanigartenP2}</p>
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-card border rounded-lg p-6">
+                  <h3 className="font-serif font-semibold text-lg mb-3">{tr.schanigartenCompTitle1}</h3>
+                  <ul className="text-sm space-y-2 text-muted-foreground">
+                    <li>• {tr.schanigartenItem1}</li>
+                    <li>• {tr.schanigartenItem2}</li>
+                    <li>• {tr.schanigartenItem3}</li>
+                    <li>• {tr.schanigartenItem4}</li>
+                  </ul>
+                </div>
+                <div className="bg-primary/5 border border-primary/20 rounded-lg p-6">
+                  <h3 className="font-serif font-semibold text-lg mb-3">{tr.schanigartenCompTitle2}</h3>
+                  <ul className="text-sm space-y-2 text-muted-foreground">
+                    <li>✓ {tr.schanigartenStoria1}</li>
+                    <li>✓ {tr.schanigartenStoria2}</li>
+                    <li>✓ {tr.schanigartenStoria3}</li>
+                    <li>✓ {tr.schanigartenStoria4}</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="text-center">
+                <Button asChild>
+                  <LocalizedLink to="reservierung">{tr.schanigartenCta}</LocalizedLink>
+                </Button>
               </div>
             </section>
 
