@@ -82,10 +82,10 @@ async function computeSiteAggregates(
 
     if (!currentPeriod || currentPeriod.length === 0) continue;
 
-    const totalClicks = currentPeriod.reduce((sum, r) => sum + (r.clicks || 0), 0);
-    const totalImpressions = currentPeriod.reduce((sum, r) => sum + (r.impressions || 0), 0);
-    const avgCtr = currentPeriod.reduce((sum, r) => sum + (r.ctr || 0), 0) / currentPeriod.length;
-    const avgPosition = currentPeriod.reduce((sum, r) => sum + (r.position || 0), 0) / currentPeriod.length;
+    const totalClicks = currentPeriod.reduce((sum: number, r: any) => sum + (r.clicks || 0), 0);
+    const totalImpressions = currentPeriod.reduce((sum: number, r: any) => sum + (r.impressions || 0), 0);
+    const avgCtr = currentPeriod.reduce((sum: number, r: any) => sum + (r.ctr || 0), 0) / currentPeriod.length;
+    const avgPosition = currentPeriod.reduce((sum: number, r: any) => sum + (r.position || 0), 0) / currentPeriod.length;
 
     // Calculate previous week for WoW
     const prevWeekStart = new Date(startDateStr);
@@ -100,13 +100,13 @@ async function computeSiteAggregates(
       .gte('date', prevWeekStart.toISOString().split('T')[0])
       .lte('date', prevWeekEnd.toISOString().split('T')[0]);
 
-    const prevWeekClicks = prevWeek?.reduce((sum, r) => sum + (r.clicks || 0), 0) || 0;
-    const prevWeekImpressions = prevWeek?.reduce((sum, r) => sum + (r.impressions || 0), 0) || 0;
+    const prevWeekClicks = prevWeek?.reduce((sum: number, r: any) => sum + (r.clicks || 0), 0) || 0;
+    const prevWeekImpressions = prevWeek?.reduce((sum: number, r: any) => sum + (r.impressions || 0), 0) || 0;
     const prevWeekCtr = prevWeek && prevWeek.length > 0
-      ? prevWeek.reduce((sum, r) => sum + (r.ctr || 0), 0) / prevWeek.length
+      ? prevWeek.reduce((sum: number, r: any) => sum + (r.ctr || 0), 0) / prevWeek.length
       : 0;
     const prevWeekPosition = prevWeek && prevWeek.length > 0
-      ? prevWeek.reduce((sum, r) => sum + (r.position || 0), 0) / prevWeek.length
+      ? prevWeek.reduce((sum: number, r: any) => sum + (r.position || 0), 0) / prevWeek.length
       : 0;
 
     // Calculate previous month for MoM
@@ -122,13 +122,13 @@ async function computeSiteAggregates(
       .gte('date', prevMonthStart.toISOString().split('T')[0])
       .lte('date', prevMonthEnd.toISOString().split('T')[0]);
 
-    const prevMonthClicks = prevMonth?.reduce((sum, r) => sum + (r.clicks || 0), 0) || 0;
-    const prevMonthImpressions = prevMonth?.reduce((sum, r) => sum + (r.impressions || 0), 0) || 0;
+    const prevMonthClicks = prevMonth?.reduce((sum: number, r: any) => sum + (r.clicks || 0), 0) || 0;
+    const prevMonthImpressions = prevMonth?.reduce((sum: number, r: any) => sum + (r.impressions || 0), 0) || 0;
     const prevMonthCtr = prevMonth && prevMonth.length > 0
-      ? prevMonth.reduce((sum, r) => sum + (r.ctr || 0), 0) / prevMonth.length
+      ? prevMonth.reduce((sum: number, r: any) => sum + (r.ctr || 0), 0) / prevMonth.length
       : 0;
     const prevMonthPosition = prevMonth && prevMonth.length > 0
-      ? prevMonth.reduce((sum, r) => sum + (r.position || 0), 0) / prevMonth.length
+      ? prevMonth.reduce((sum: number, r: any) => sum + (r.position || 0), 0) / prevMonth.length
       : 0;
 
     // Calculate deltas and percentages
@@ -785,7 +785,7 @@ async function saveAlerts(
     .eq('status', 'open');
 
   const existingKeys = new Set(
-    (existingAlerts || []).map(a =>
+    (existingAlerts || []).map((a: any) =>
       `${a.alert_type}:${a.affected_url || ''}:${a.affected_query || ''}`
     )
   );
