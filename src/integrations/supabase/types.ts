@@ -73,6 +73,78 @@ export type Database = {
         }
         Relationships: []
       }
+      group_menu_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value: Json
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      group_menus: {
+        Row: {
+          badge: Json | null
+          created_at: string | null
+          duration: Json
+          id: string
+          is_active: boolean
+          items: Json
+          menu_key: string
+          price_amount: number | null
+          price_label: Json
+          price_note: Json | null
+          sort_order: number
+          subtitle: Json
+          title: Json
+          updated_at: string | null
+        }
+        Insert: {
+          badge?: Json | null
+          created_at?: string | null
+          duration: Json
+          id?: string
+          is_active?: boolean
+          items: Json
+          menu_key: string
+          price_amount?: number | null
+          price_label: Json
+          price_note?: Json | null
+          sort_order?: number
+          subtitle: Json
+          title: Json
+          updated_at?: string | null
+        }
+        Update: {
+          badge?: Json | null
+          created_at?: string | null
+          duration?: Json
+          id?: string
+          is_active?: boolean
+          items?: Json
+          menu_key?: string
+          price_amount?: number | null
+          price_label?: Json
+          price_note?: Json | null
+          sort_order?: number
+          subtitle?: Json
+          title?: Json
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       gsc_alert_rules: {
         Row: {
           alert_type: string
