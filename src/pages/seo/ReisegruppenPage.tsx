@@ -18,6 +18,7 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
+import GroupInquiryForm from "@/components/GroupInquiryForm";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
   MapPin,
@@ -623,6 +624,7 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
+              <GroupInquiryForm />
             </div>
           </section>
 
