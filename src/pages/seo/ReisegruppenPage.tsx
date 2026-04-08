@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
+import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
   MapPin,
   Clock,
@@ -35,10 +37,53 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import groupHero from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
 
 const ReisegruppenPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   usePrerenderReady(true);
 
   const rg = t.reisegruppen;
+  const { menus, settings } = useGroupMenus();
+
+  // SSG fallback: hardcoded translations used when Supabase data is unavailable
+  const fallbackMenus: GroupMenu[] = [
+    {
+      id: "fallback-A", menu_key: "A",
+      title: { de: rg.menuATitle, en: rg.menuATitle, it: rg.menuATitle, fr: rg.menuATitle },
+      subtitle: { de: rg.menuASubtitle, en: rg.menuASubtitle, it: rg.menuASubtitle, fr: rg.menuASubtitle },
+      badge: null,
+      items: { de: rg.menuAItems, en: rg.menuAItems, it: rg.menuAItems, fr: rg.menuAItems },
+      duration: { de: rg.menuADuration, en: rg.menuADuration, it: rg.menuADuration, fr: rg.menuADuration },
+      price_label: { de: rg.menuAPrice, en: rg.menuAPrice, it: rg.menuAPrice, fr: rg.menuAPrice },
+      price_note: { de: rg.menuAPriceNote, en: rg.menuAPriceNote, it: rg.menuAPriceNote, fr: rg.menuAPriceNote },
+      price_amount: 25, sort_order: 0, is_active: true, created_at: "", updated_at: "",
+    },
+    {
+      id: "fallback-B", menu_key: "B",
+      title: { de: rg.menuBTitle, en: rg.menuBTitle, it: rg.menuBTitle, fr: rg.menuBTitle },
+      subtitle: { de: rg.menuBSubtitle, en: rg.menuBSubtitle, it: rg.menuBSubtitle, fr: rg.menuBSubtitle },
+      badge: { de: rg.menuBBadge, en: rg.menuBBadge, it: rg.menuBBadge, fr: rg.menuBBadge },
+      items: { de: rg.menuBItems, en: rg.menuBItems, it: rg.menuBItems, fr: rg.menuBItems },
+      duration: { de: rg.menuBDuration, en: rg.menuBDuration, it: rg.menuBDuration, fr: rg.menuBDuration },
+      price_label: { de: rg.menuBPrice, en: rg.menuBPrice, it: rg.menuBPrice, fr: rg.menuBPrice },
+      price_note: { de: rg.menuBPriceNote, en: rg.menuBPriceNote, it: rg.menuBPriceNote, fr: rg.menuBPriceNote },
+      price_amount: 35, sort_order: 1, is_active: true, created_at: "", updated_at: "",
+    },
+    {
+      id: "fallback-C", menu_key: "C",
+      title: { de: rg.menuCTitle, en: rg.menuCTitle, it: rg.menuCTitle, fr: rg.menuCTitle },
+      subtitle: { de: rg.menuCSubtitle, en: rg.menuCSubtitle, it: rg.menuCSubtitle, fr: rg.menuCSubtitle },
+      badge: null,
+      items: { de: rg.menuCItems, en: rg.menuCItems, it: rg.menuCItems, fr: rg.menuCItems },
+      duration: { de: rg.menuCDuration, en: rg.menuCDuration, it: rg.menuCDuration, fr: rg.menuCDuration },
+      price_label: { de: rg.menuCPrice, en: rg.menuCPrice, it: rg.menuCPrice, fr: rg.menuCPrice },
+      price_note: { de: rg.menuCPriceNote, en: rg.menuCPriceNote, it: rg.menuCPriceNote, fr: rg.menuCPriceNote },
+      price_amount: 49, sort_order: 2, is_active: true, created_at: "", updated_at: "",
+    },
+  ];
+
+  const displayMenus = menus.length > 0 ? menus : fallbackMenus;
+  const menuNote = settings["general_note"]
+    ? getLocalizedText(settings["general_note"] as Record<string, string>, language)
+    : rg.menuNote;
 
   const advantages = [
     { icon: MapPin, title: rg.adv1Title, desc: rg.adv1Desc },
@@ -158,32 +203,16 @@ const ReisegruppenPage = () => {
         closes: "01:00",
       },
     ],
-    makesOffer: [
-      {
-        "@type": "Offer",
-        name: "Gruppenmenü Pizza e Pasta",
-        description:
-          "Pizza oder Pasta nach Wahl, Salat, Dessert, Getränke. Ab 20 Personen. Ca. 45-60 Min.",
-        price: "25",
-        priceCurrency: "EUR",
-      },
-      {
-        "@type": "Offer",
-        name: "Gruppenmenü Benvenuti",
-        description:
-          "Antipasto zum Teilen, Hauptgang nach Wahl, Dessert, Wein/Getränke. Ab 20 Personen. Ca. 75-90 Min.",
-        price: "35",
-        priceCurrency: "EUR",
-      },
-      {
-        "@type": "Offer",
-        name: "Gruppenmenü Tradizione",
-        description:
-          "Antipasti, Pasta-Gang, Hauptgang, Dessert, Wein. Ab 20 Personen. Ca. 90-120 Min.",
-        price: "49",
-        priceCurrency: "EUR",
-      },
-    ],
+    makesOffer: displayMenus.map((menu) => ({
+      "@type": "Offer",
+      name: getLocalizedText(menu.title, "de"),
+      description: [
+        ...getLocalizedArray(menu.items, "de"),
+        getLocalizedText(menu.duration, "de"),
+      ].filter(Boolean).join(". "),
+      price: String(menu.price_amount),
+      priceCurrency: "EUR",
+    })),
   };
 
   const faqSchema = {
@@ -385,91 +414,62 @@ const ReisegruppenPage = () => {
                 {rg.menuIntro}
               </p>
               <div className="grid md:grid-cols-3 gap-8">
-                {/* Menü A */}
-                <div className="bg-card border border-border rounded-2xl overflow-hidden flex flex-col">
-                  <div className="bg-primary/10 px-6 py-5 border-b border-border">
-                    <p className="text-xs uppercase tracking-widest text-primary font-medium mb-1">
-                      {rg.menuALabel}
-                    </p>
-                    <h3 className="text-xl font-serif font-bold">{rg.menuATitle}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{rg.menuASubtitle}</p>
-                  </div>
-                  <div className="px-6 py-5 flex-grow">
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      {rg.menuAItems.map((item: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="text-xs text-muted-foreground mt-4">{rg.menuADuration}</p>
-                  </div>
-                  <div className="px-6 py-4 border-t border-border bg-secondary/20">
-                    <p className="text-2xl font-bold text-primary">{rg.menuAPrice}</p>
-                    <p className="text-xs text-muted-foreground">{rg.menuAPriceNote}</p>
-                  </div>
-                </div>
-
-                {/* Menü B */}
-                <div className="bg-card border-2 border-primary rounded-2xl overflow-hidden flex flex-col relative">
-                  <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
-                    {rg.menuBBadge}
-                  </div>
-                  <div className="bg-primary/15 px-6 py-5 border-b border-primary/20">
-                    <p className="text-xs uppercase tracking-widest text-primary font-medium mb-1">
-                      {rg.menuBLabel}
-                    </p>
-                    <h3 className="text-xl font-serif font-bold">{rg.menuBTitle}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{rg.menuBSubtitle}</p>
-                  </div>
-                  <div className="px-6 py-5 flex-grow">
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      {rg.menuBItems.map((item: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="text-xs text-muted-foreground mt-4">{rg.menuBDuration}</p>
-                  </div>
-                  <div className="px-6 py-4 border-t border-primary/20 bg-primary/5">
-                    <p className="text-2xl font-bold text-primary">{rg.menuBPrice}</p>
-                    <p className="text-xs text-muted-foreground">{rg.menuBPriceNote}</p>
-                  </div>
-                </div>
-
-                {/* Menü C */}
-                <div className="bg-card border border-border rounded-2xl overflow-hidden flex flex-col">
-                  <div className="bg-primary/10 px-6 py-5 border-b border-border">
-                    <p className="text-xs uppercase tracking-widest text-primary font-medium mb-1">
-                      {rg.menuCLabel}
-                    </p>
-                    <h3 className="text-xl font-serif font-bold">{rg.menuCTitle}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{rg.menuCSubtitle}</p>
-                  </div>
-                  <div className="px-6 py-5 flex-grow">
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      {rg.menuCItems.map((item: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="text-xs text-muted-foreground mt-4">{rg.menuCDuration}</p>
-                  </div>
-                  <div className="px-6 py-4 border-t border-border bg-secondary/20">
-                    <p className="text-2xl font-bold text-primary">{rg.menuCPrice}</p>
-                    <p className="text-xs text-muted-foreground">{rg.menuCPriceNote}</p>
-                  </div>
-                </div>
+                {displayMenus.map((menu) => {
+                  const badgeText = menu.badge
+                    ? getLocalizedText(menu.badge, language)
+                    : null;
+                  const isFeatured = !!badgeText;
+                  const items = getLocalizedArray(menu.items, language);
+                  return (
+                    <div
+                      key={menu.id}
+                      className={`bg-card ${isFeatured ? "border-2 border-primary" : "border border-border"} rounded-2xl overflow-hidden flex flex-col relative`}
+                    >
+                      {isFeatured && (
+                        <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
+                          {badgeText}
+                        </div>
+                      )}
+                      <div className={`${isFeatured ? "bg-primary/15" : "bg-primary/10"} px-6 py-5 border-b ${isFeatured ? "border-primary/20" : "border-border"}`}>
+                        <p className="text-xs uppercase tracking-widest text-primary font-medium mb-1">
+                          {`Menü ${menu.menu_key}`}
+                        </p>
+                        <h3 className="text-xl font-serif font-bold">
+                          {getLocalizedText(menu.title, language)}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {getLocalizedText(menu.subtitle, language)}
+                        </p>
+                      </div>
+                      <div className="px-6 py-5 flex-grow">
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                          {items.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <p className="text-xs text-muted-foreground mt-4">
+                          {getLocalizedText(menu.duration, language)}
+                        </p>
+                      </div>
+                      <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
+                        <p className="text-2xl font-bold text-primary">
+                          {getLocalizedText(menu.price_label, language)}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {getLocalizedText(menu.price_note, language)}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Hinweisblock */}
               <div className="mt-10 bg-secondary/30 border border-border rounded-xl p-6 max-w-3xl mx-auto">
-                <p className="text-sm text-muted-foreground whitespace-pre-line">{rg.menuNote}</p>
+                <p className="text-sm text-muted-foreground whitespace-pre-line">{menuNote}</p>
               </div>
             </div>
           </section>

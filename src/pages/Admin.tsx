@@ -12,6 +12,8 @@ import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
 import SortableMenuCard from "@/components/admin/SortableMenuCard";
 import { LogOut, ExternalLink, Rocket, Loader2, BarChart3, Sparkles } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
+import GroupMenusManager from "@/components/admin/GroupMenusManager";
+import GroupMenuSettingsEditor from "@/components/admin/GroupMenuSettingsEditor";
 import SeasonalSignupsManager from "@/components/admin/SeasonalSignupsManager";
 import SeasonalNotificationsManager from "@/components/admin/SeasonalNotificationsManager";
 import AdminNotificationsBanner from "@/components/admin/AdminNotificationsBanner";
@@ -320,6 +322,10 @@ const Admin = () => {
 
         {/* Besondere Anlässe Section */}
         <SpecialOccasionsManager />
+
+        {/* Gruppenmenüs */}
+        <GroupMenusManager />
+        <GroupMenuSettingsEditor />
 
         {/* Saisonale Vormerkungen */}
         <SeasonalSignupsManager />

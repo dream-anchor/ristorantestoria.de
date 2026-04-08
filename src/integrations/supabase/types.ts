@@ -1854,6 +1854,79 @@ export type Database = {
         }
         Relationships: []
       }
+      // Manually added — not yet in auto-generated types
+      group_menus: {
+        Row: {
+          id: string
+          menu_key: string
+          title: Json
+          subtitle: Json
+          badge: Json | null
+          items: Json
+          duration: Json
+          price_label: Json
+          price_note: Json
+          price_amount: number
+          sort_order: number
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          menu_key: string
+          title: Json
+          subtitle: Json
+          badge?: Json | null
+          items: Json
+          duration: Json
+          price_label: Json
+          price_note: Json
+          price_amount: number
+          sort_order?: number
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          menu_key?: string
+          title?: Json
+          subtitle?: Json
+          badge?: Json | null
+          items?: Json
+          duration?: Json
+          price_label?: Json
+          price_note?: Json
+          price_amount?: number
+          sort_order?: number
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      group_menu_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value: Json
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
