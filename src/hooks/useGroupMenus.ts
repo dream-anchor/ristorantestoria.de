@@ -132,7 +132,7 @@ export const useUpsertGroupMenu = () => {
       } else {
         const { error } = await supabase
           .from("group_menus")
-          .insert(payload as unknown as Record<string, unknown>);
+          .insert(payload as any);
         if (error) throw error;
       }
     },
@@ -167,7 +167,7 @@ export const useUpsertGroupMenuSetting = () => {
       const { error } = await supabase
         .from("group_menu_settings")
         .upsert(
-          { setting_key: key, setting_value: value } as unknown as Record<string, unknown>,
+          { setting_key: key, setting_value: value } as any,
           { onConflict: "setting_key" }
         );
       if (error) throw error;
