@@ -288,7 +288,7 @@ async function storeSiteMetrics(
       ctr: row.ctr || 0,
       position: row.position || 0,
       updated_at: new Date().toISOString(),
-    }, { onConflict: 'site_property,date,search_type' });
+    } as any, { onConflict: 'site_property,date,search_type' });
 
   if (error) {
     stats.errors.push(`Site metrics error: ${error.message}`);
@@ -325,7 +325,7 @@ async function storePageMetrics(
 
     const { error } = await supabase
       .from('gsc_page_metrics')
-      .upsert(records, { onConflict: 'site_property,date,search_type,raw_url' });
+      .upsert(records as any, { onConflict: 'site_property,date,search_type,raw_url' });
 
     if (error) {
       stats.errors.push(`Page metrics batch ${i} error: ${error.message}`);
@@ -364,7 +364,7 @@ async function storeQueryMetrics(
 
     const { error } = await supabase
       .from('gsc_query_metrics')
-      .upsert(records, { onConflict: 'site_property,date,search_type,query' });
+      .upsert(records as any, { onConflict: 'site_property,date,search_type,query' });
 
     if (error) {
       stats.errors.push(`Query metrics batch ${i} error: ${error.message}`);
@@ -402,7 +402,7 @@ async function storePageQueryMetrics(
 
     const { error } = await supabase
       .from('gsc_page_query_metrics')
-      .upsert(records, { onConflict: 'site_property,date,search_type,raw_url,query' });
+      .upsert(records as any, { onConflict: 'site_property,date,search_type,raw_url,query' });
 
     if (error) {
       stats.errors.push(`Page-query metrics batch ${i} error: ${error.message}`);
@@ -435,7 +435,7 @@ async function storeDeviceMetrics(
 
   const { error } = await supabase
     .from('gsc_device_metrics')
-    .upsert(records, { onConflict: 'site_property,date,search_type,device' });
+    .upsert(records as any, { onConflict: 'site_property,date,search_type,device' });
 
   if (error) {
     stats.errors.push(`Device metrics error: ${error.message}`);
@@ -470,7 +470,7 @@ async function storeCountryMetrics(
 
     const { error } = await supabase
       .from('gsc_country_metrics')
-      .upsert(records, { onConflict: 'site_property,date,search_type,country' });
+      .upsert(records as any, { onConflict: 'site_property,date,search_type,country' });
 
     if (error) {
       stats.errors.push(`Country metrics batch ${i} error: ${error.message}`);
@@ -503,7 +503,7 @@ async function storeSearchAppearanceMetrics(
 
   const { error } = await supabase
     .from('gsc_search_appearance_metrics')
-    .upsert(records, { onConflict: 'site_property,date,search_type,search_appearance' });
+    .upsert(records as any, { onConflict: 'site_property,date,search_type,search_appearance' });
 
   if (error) {
     stats.errors.push(`Search appearance metrics error: ${error.message}`);
@@ -542,7 +542,7 @@ async function updateUrlRegistry(
     // Use upsert with conflict on raw_url
     await supabase
       .from('gsc_url_registry')
-      .upsert(records, {
+      .upsert(records as any, {
         onConflict: 'raw_url',
         ignoreDuplicates: false,
       });
