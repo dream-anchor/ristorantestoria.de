@@ -5,8 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings2, Loader2 } from "lucide-react";
+import { Settings2, Loader2, Languages } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { useAllGroupMenuSettings, useUpsertGroupMenuSetting } from "@/hooks/useGroupMenus";
 
 const LANGS = ["de", "en", "it", "fr"] as const;
@@ -34,6 +35,39 @@ const GroupMenuSettingsEditor = () => {
     advance_booking_days: 7,
   });
   const [isDirty, setIsDirty] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+
+  const handleAutoTranslateNote = async () => {
+    setIsTranslating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("translate-group-menu", {
+        body: { source_language: "de", fields: { general_note: noteText.de } },
+      });
+
+      if (error || data?.error) {
+        toast.error(`Übersetzung fehlgeschlagen: ${data?.error ?? error?.message}`);
+        return;
+      }
+
+      const { translations } = data as { translations: Record<string, Record<string, string>> };
+      const targetLangs: Lang[] = ["en", "it", "fr"];
+
+      for (const lang of targetLangs) {
+        const t = translations[lang];
+        if (t?.general_note) {
+          setNoteText((p) => ({ ...p, [lang]: t.general_note }));
+        }
+      }
+
+      setIsDirty(true);
+      toast.success("EN, IT, FR wurden aktualisiert");
+    } catch (err) {
+      toast.error("Übersetzung fehlgeschlagen");
+      console.error("[translate-note] error:", err);
+    } finally {
+      setIsTranslating(false);
+    }
+  };
 
   // Initialize form from loaded settings
   useEffect(() => {
@@ -115,7 +149,7 @@ const GroupMenuSettingsEditor = () => {
                 ))}
               </TabsList>
               {LANGS.map((lang) => (
-                <TabsContent key={lang} value={lang} className="mt-2">
+                <TabsContent key={lang} value={lang} className="mt-2 space-y-2">
                   <Textarea
                     rows={4}
                     value={noteText[lang]}
@@ -124,6 +158,21 @@ const GroupMenuSettingsEditor = () => {
                       setIsDirty(true);
                     }}
                   />
+                  {lang === "de" && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleAutoTranslateNote}
+                      disabled={isTranslating || !noteText.de.trim()}
+                    >
+                      {isTranslating ? (
+                        <><Loader2 className="h-3 w-3 mr-2 animate-spin" /> Übersetze in 3 Sprachen…</>
+                      ) : (
+                        <><Languages className="h-3 w-3 mr-2" /> Automatisch übersetzen</>
+                      )}
+                    </Button>
+                  )}
                 </TabsContent>
               ))}
             </Tabs>

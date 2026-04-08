@@ -26,8 +26,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { UtensilsCrossed, Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import { UtensilsCrossed, Plus, Pencil, Trash2, Loader2, Languages } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import {
   useAllGroupMenus,
   useUpsertGroupMenu,
@@ -88,8 +89,58 @@ const EditModal = ({ menu: initial, onClose }: EditModalProps) => {
     it: (initial.badge as Record<string, string>)?.it ?? "",
     fr: (initial.badge as Record<string, string>)?.fr ?? "",
   });
+  const [activeTab, setActiveTab] = useState<Lang>("de");
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const upsert = useUpsertGroupMenu();
+
+  const handleAutoTranslate = async () => {
+    setIsTranslating(true);
+    try {
+      const fields = {
+        title: (form.title as Record<string, string>)?.de ?? "",
+        subtitle: (form.subtitle as Record<string, string>)?.de ?? "",
+        badge: hasBadge ? (badgeText.de || null) : null,
+        items: textToItems(itemsText.de),
+        duration: (form.duration as Record<string, string>)?.de ?? "",
+        price_label: (form.price_label as Record<string, string>)?.de ?? "",
+        price_note: (form.price_note as Record<string, string>)?.de ?? "",
+      };
+
+      const { data, error } = await supabase.functions.invoke("translate-group-menu", {
+        body: { source_language: "de", fields },
+      });
+
+      if (error || data?.error) {
+        toast.error(`Übersetzung fehlgeschlagen: ${data?.error ?? error?.message}`);
+        return;
+      }
+
+      const { translations } = data as { translations: Record<string, Record<string, unknown>> };
+      const targetLangs: Lang[] = ["en", "it", "fr"];
+
+      for (const lang of targetLangs) {
+        const t = translations[lang];
+        if (!t) continue;
+        if (t.title) setLangField("title", lang, String(t.title));
+        if (t.subtitle) setLangField("subtitle", lang, String(t.subtitle));
+        if (t.duration) setLangField("duration", lang, String(t.duration));
+        if (t.price_label) setLangField("price_label", lang, String(t.price_label));
+        if (t.price_note) setLangField("price_note", lang, String(t.price_note));
+        if (t.badge) setBadgeText((p) => ({ ...p, [lang]: String(t.badge) }));
+        if (Array.isArray(t.items)) {
+          setItemsText((p) => ({ ...p, [lang]: (t.items as string[]).join("\n") }));
+        }
+      }
+
+      toast.success("EN, IT, FR wurden aktualisiert");
+    } catch (err) {
+      toast.error("Übersetzung fehlgeschlagen");
+      console.error("[translate] error:", err);
+    } finally {
+      setIsTranslating(false);
+    }
+  };
 
   const setLangField = (
     field: "title" | "subtitle" | "duration" | "price_label" | "price_note",
@@ -177,7 +228,7 @@ const EditModal = ({ menu: initial, onClose }: EditModalProps) => {
           </div>
 
           {/* Language tabs */}
-          <Tabs defaultValue="de">
+          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as Lang)}>
             <TabsList>
               {LANGS.map((lang) => (
                 <TabsTrigger key={lang} value={lang}>{lang.toUpperCase()}</TabsTrigger>
@@ -243,13 +294,30 @@ const EditModal = ({ menu: initial, onClose }: EditModalProps) => {
           </Tabs>
         </div>
 
-        <DialogFooter>
-          <Button variant="outline" onClick={onClose}>Abbrechen</Button>
-          <Button onClick={handleSave} disabled={upsert.isPending}>
-            {upsert.isPending ? (
-              <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Speichern…</>
-            ) : "Speichern"}
-          </Button>
+        <DialogFooter className="flex-col sm:flex-row gap-2 sm:justify-between">
+          <div>
+            {activeTab === "de" && (
+              <Button
+                variant="outline"
+                onClick={handleAutoTranslate}
+                disabled={isTranslating}
+              >
+                {isTranslating ? (
+                  <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Übersetze in 3 Sprachen…</>
+                ) : (
+                  <><Languages className="h-4 w-4 mr-2" /> Automatisch übersetzen</>
+                )}
+              </Button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={onClose}>Abbrechen</Button>
+            <Button onClick={handleSave} disabled={upsert.isPending}>
+              {upsert.isPending ? (
+                <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Speichern…</>
+              ) : "Speichern"}
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
