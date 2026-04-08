@@ -300,6 +300,18 @@ const ItalienerKoenigsplatz = () => {
 
           <GoogleReviews />
 
+          {/* Reisegruppen Crosslink */}
+          <section className="py-6 bg-card border-y border-border">
+            <div className="container mx-auto px-4 text-center max-w-3xl">
+              <p className="text-muted-foreground">
+                {t.seo.italienerKoenigsplatz.reisegruppenHint}{" "}
+                <LocalizedLink to="reisegruppen-muenchen" className="text-primary hover:underline font-medium">
+                  {t.seo.italienerKoenigsplatz.reisegruppenLink}
+                </LocalizedLink>
+              </p>
+            </div>
+          </section>
+
           {/* Final CTA */}
           <section className="py-16 md:py-20 bg-primary text-primary-foreground">
             <div className="container mx-auto px-4 text-center">

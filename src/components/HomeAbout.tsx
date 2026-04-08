@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import LocalizedLink from "@/components/LocalizedLink";
+import { ArrowRight } from "lucide-react";
 
 const HomeAbout = () => {
   const { t } = useLanguage();
@@ -31,6 +32,16 @@ const HomeAbout = () => {
           <p>{t.homeAbout.p6}</p>
           <p className="font-medium text-foreground">
             {t.homeAbout.p7}
+          </p>
+          <p className="text-sm text-muted-foreground border border-border rounded-lg px-4 py-3 bg-secondary/20">
+            {t.homeAbout.reisegruppenHint}{" "}
+            <LocalizedLink
+              to="reisegruppen-muenchen"
+              className="text-primary hover:underline font-medium inline-flex items-center gap-1"
+            >
+              {t.homeAbout.reisegruppenLink}
+              <ArrowRight className="w-3 h-3" />
+            </LocalizedLink>.
           </p>
         </div>
         <div className="text-center mt-8">

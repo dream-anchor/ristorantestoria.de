@@ -39,6 +39,7 @@
     "valentinstag-muenchen": "valentinstag-muenchen",
     "silvester-muenchen": "silvester-muenchen",
     "weihnachten-muenchen": "weihnachten-muenchen",
+    "reisegruppen-muenchen": "reisegruppen",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -73,6 +74,7 @@
     "valentinstag-muenchen": "valentines-day-munich",
     "silvester-muenchen": "new-years-eve-munich",
     "weihnachten-muenchen": "christmas-munich",
+    "reisegruppen-muenchen": "group-dining",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -107,6 +109,7 @@
     "valentinstag-muenchen": "san-valentino-monaco",
     "silvester-muenchen": "capodanno-monaco",
     "weihnachten-muenchen": "natale-monaco",
+    "reisegruppen-muenchen": "ristorazione-gruppi-monaco",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"
@@ -141,6 +144,7 @@
     "valentinstag-muenchen": "saint-valentin-munich",
     "silvester-muenchen": "nouvel-an-munich",
     "weihnachten-muenchen": "noel-munich",
+    "reisegruppen-muenchen": "restauration-groupes-munich",
     "faq": "faq",
     "admin": "admin",
     "admin/login": "admin/login"

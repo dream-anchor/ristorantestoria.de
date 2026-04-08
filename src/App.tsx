@@ -50,6 +50,7 @@ import HochzeitsfeierMuenchen from "./pages/seo/HochzeitsfeierMuenchen";
 import ValentinstagMuenchen from "./pages/seo/ValentinstagMuenchen";
 import SilvesterMuenchen from "./pages/seo/SilvesterMuenchen";
 import WeihnachtenMuenchen from "./pages/seo/WeihnachtenMuenchen";
+import ReisegruppenPage from "./pages/seo/ReisegruppenPage";
 import FAQ from "./pages/FAQ";
 
 // Eager: Legal-Seiten (müssen pre-rendered werden)
@@ -123,6 +124,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "valentinstag-muenchen": ValentinstagMuenchenStandalone,
   "silvester-muenchen": SilvesterMuenchenStandalone,
   "weihnachten-muenchen": WeihnachtenMuenchenStandalone,
+  "reisegruppen-muenchen": ReisegruppenPage,
   "faq": FAQ,
 };
 

@@ -125,6 +125,17 @@ const UeberUns = () => {
               </div>
             </div>
 
+            {/* Reisegruppen Crosslink */}
+            <p className="text-sm text-muted-foreground border border-border rounded-lg px-4 py-3 bg-secondary/20 mb-6">
+              {t.about.reisegruppenHint}{" "}
+              <LocalizedLink
+                to="reisegruppen-muenchen"
+                className="text-primary hover:underline font-medium"
+              >
+                {t.about.reisegruppenLink}
+              </LocalizedLink>.
+            </p>
+
             {/* Bestehender Content */}
             <div className="space-y-6 text-muted-foreground font-sans text-base leading-relaxed mb-12">
               <p>{t.about.p1}</p>
