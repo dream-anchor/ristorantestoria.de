@@ -32,7 +32,7 @@ import {
 
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
-import groupHero from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
+import groupHero from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
 
 const ReisegruppenPage = () => {
   const { t } = useLanguage();
