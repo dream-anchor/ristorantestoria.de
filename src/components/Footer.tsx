@@ -35,14 +35,13 @@ const Footer = () => {
             {/* Mamma */}
             <div className="text-center group">
               <div className="w-36 h-36 md:w-44 md:h-44 mx-auto mb-5 rounded-full overflow-hidden ring-1 ring-primary-foreground/20 shadow-xl transition-transform duration-300 group-hover:scale-105">
-                <video
-                  src="/mamma-speranza-kueche-storia-muenchen.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  data-nosnippet=""
+                <img
+                  src="/mamma-speranza-kueche-storia-muenchen.webp"
+                  alt="Mamma Speranza in der Küche im STORIA München"
+                  width="144"
+                  height="176"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>
