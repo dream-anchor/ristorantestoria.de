@@ -230,8 +230,8 @@ const AppRoutes = () => {
 
         {/* Legacy URL redirects (previously in .htaccess) */}
         <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu/" replace />} />
-        <Route path="/weihnachtsmenues" element={<Navigate to="/besondere-anlaesse/weihnachtsmenues/" replace />} />
-        <Route path="/silvesterparty" element={<Navigate to="/besondere-anlaesse/silvesterparty/" replace />} />
+        <Route path="/weihnachtsmenues" element={<Navigate to="/besondere-anlaesse/weihnachtsmenue/" replace />} />
+        <Route path="/silvesterparty" element={<Navigate to="/besondere-anlaesse/silvester/" replace />} />
         <Route path="/lunch-muenchen" element={<Navigate to="/lunch-muenchen-maxvorstadt/" replace />} />
         <Route path="/eventlocation-muenchen" element={<Navigate to="/eventlocation-muenchen-maxvorstadt/" replace />} />
 

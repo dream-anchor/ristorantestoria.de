@@ -71,7 +71,6 @@ RewriteRule ^cms/catering/?$ /catering/ [R=301,L]
 RewriteRule ^cms/menue/?$ /mittags-menu/ [R=301,L]
 RewriteRule ^cms/speisekarte-2/?$ /speisekarte/ [R=301,L]
 RewriteRule ^cms/front-page-2/?$ /? [R=301,L]
-Redirect 301 /ristorantestoria-de/ https://www.ristorantestoria.de/
 RewriteRule ^cms/wp-content/uploads/ /mittags-menu/ [R=301,L]
 RewriteRule ^cms/?$ /? [R=301,L]
 RewriteRule ^cms/(.+)$ /? [R=301,L]
