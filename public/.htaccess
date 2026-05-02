@@ -46,8 +46,8 @@ RewriteRule ^en/special-occasions/easter-brunch/?$ /en/special-occasions/easter-
 RewriteRule ^it/occasioni-speciali/pranzo-di-pasqua/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/brunch-de-paques/?$ /fr/occasions-speciales/menu-de-paques/ [R=301,L]
 # Alte Subdomain-URL Struktur
-RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L]
-RewriteRule ^ristorantestoria-de/?$ / [R=301,L]
+RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L,QSD]
+RewriteRule ^ristorantestoria-de/?$ / [R=301,L,QSD]
 # /menu → /speisekarte (Thin Content entfernt)
 RewriteRule ^menu/?$ /speisekarte/ [R=301,L]
 RewriteRule ^en/menu/?$ /speisekarte/ [R=301,L]
