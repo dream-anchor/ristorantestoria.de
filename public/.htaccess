@@ -188,14 +188,19 @@ RewriteRule ^fr/avertissement/?$ /haftungsausschluss/ [R=301,L]
 # ============================================
 # 8. WordPress Query-String Redirects
 # ============================================
-RewriteCond %{QUERY_STRING} ^page_id=2881$
-RewriteRule ^$ /impressum/? [R=301,L]
+# Greifen auf JEDEM Path (Root, /cms/, /ristorantestoria-de/)
+# QSD strippt Query-String, sodass Ziel-URL kein ?page_id-Tail bekommt
 
-RewriteCond %{QUERY_STRING} ^page_id=3539$
-RewriteRule ^(.*)$ /? [R=301,L]
+# Bekannte Mappings → semantische Ziel-URL
+RewriteCond %{QUERY_STRING} (^|&)page_id=2881(&|$)
+RewriteRule ^.*$ /impressum/? [R=301,L,QSD]
 
-RewriteCond %{QUERY_STRING} ^page_id=2505$
-RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)page_id=1753(&|$)
+RewriteRule ^.*$ /kontakt/? [R=301,L,QSD]
+
+# Catch-All: alle anderen page_ids → Homepage
+RewriteCond %{QUERY_STRING} (^|&)page_id=[0-9]+
+RewriteRule ^.*$ /? [R=301,L,QSD]
 
 # ============================================
 # 9. Error Documents
