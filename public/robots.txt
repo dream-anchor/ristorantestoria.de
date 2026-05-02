@@ -239,8 +239,8 @@ Disallow: /admin
 Disallow: /admin-login
 
 # ─── ALTE CMS-PFADE (WordPress) ───
-# 301-Redirects bereits in .htaccess — Crawler sollen diese URLs nicht neu indexieren
-Disallow: /cms/
+# /cms/ bewusst NICHT geblockt: Googlebot muss die 301-Redirects in .htaccess
+# sehen können um alte WordPress-URLs aus dem Index zu entfernen.
 
 # ─── BUILD-ARTEFAKTE ───
 Disallow: /assets/*.js$
