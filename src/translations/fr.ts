@@ -593,7 +593,7 @@ export const fr = {
     firmenfeier: {
       // SEO
       seoTitle: "F\u00eate d'entreprise Munich d\u00e8s 39 \u20ac | Jusqu'\u00e0 180 invit\u00e9s \u2013 STORIA",
-      seoDescription: "Organisez votre f\u00eate d'entreprise \u00e0 Munich : restaurant italien pour 20\u2013180 invit\u00e9s. No\u00ebl, team building & f\u00eate d'\u00e9t\u00e9 d\u00e8s 39 \u20ac p.p. \u2013 central K\u00f6nigsplatz. Renseignez-vous !",
+      seoDescription: "Fête d'entreprise Munich au STORIA : 20–180 invités, dès 39 € p.p. Noël, team building & fête d'été – central Königsplatz. Renseignez-vous !",
       breadcrumb: "F\u00eate d'Entreprise Munich",
       // Hero
       heroTitle: "F\u00eate d'entreprise Munich \u2013 C\u00e9l\u00e9brez au STORIA Maxvorstadt",
@@ -828,7 +828,7 @@ export const fr = {
     },
     aperitivo: {
       seoTitle: "Aperitivo Munich | Aperol Spritz & Negroni dès 17h – STORIA",
-      seoDescription: "Aperitivo Munich : Aperol Spritz, Negroni & plus de 50 vins italiens. Tous les jours dès 17h avec terrasse dans la Maxvorstadt près de Königsplatz.",
+      seoDescription: "Aperitivo Munich : Aperol Spritz, Negroni & Cicchetti – tous les jours dès 17h. Terrasse en Maxvorstadt, 5 min de la gare centrale. Réservez !",
       title: "Aperitivo Munich – Aperol Spritz & Negroni chez STORIA",
       heroSubtitle: "Culture du Bar Italien au STORIA Maxvorstadt",
       heroTime: "🍸 Tous les jours 17h00 – 22h30",
@@ -1368,7 +1368,7 @@ export const fr = {
     },
     birthday: {
       seoTitle: "Fête d'Anniversaire Munich | Jusqu'à 100 Invités dès 35 € – STORIA",
-      seoDescription: "Fête d'anniversaire Munich au STORIA : Menu italien, gâteau & espace jusqu'à 100 invités. 30e, 40e, 50e anniversaire – central à Königsplatz. Demandez maintenant !",
+      seoDescription: "Fête d'anniversaire Munich : menu, gâteau & 100 invités max. 30e, 40e, 50e anniversaire – dès 35 € p.p. au STORIA. Demandez maintenant !",
       breadcrumb: "F\u00eate d'Anniversaire Munich",
       heroTitle: "Fête d'Anniversaire Munich – Célébrer à l'Italienne chez STORIA",
       heroSubtitle: "Anniversaire rond, fête surprise & célébrations en famille | STORIA à Königsplatz",

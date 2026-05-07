@@ -594,7 +594,7 @@ export const de = {
     firmenfeier: {
       // SEO
       seoTitle: "Firmenfeier M\u00fcnchen ab 39 \u20ac | Bis 180 G\u00e4ste \u2013 STORIA",
-      seoDescription: "Firmenfeier in M\u00fcnchen planen: Italienisches Restaurant mit Platz f\u00fcr 20\u2013180 G\u00e4ste. Weihnachtsfeier, Teambuilding & Sommerfest ab 39 \u20ac p.P. \u2013 zentral am K\u00f6nigsplatz. Jetzt anfragen!",
+      seoDescription: "Firmenfeier München im STORIA: 20–180 Gäste, ab 39 € p.P. Weihnachtsfeier, Sommerfest & Teambuilding – zentral am Königsplatz. Jetzt anfragen!",
       breadcrumb: "Firmenfeier M\u00fcnchen",
       // Hero
       heroTitle: "Firmenfeier M\u00fcnchen \u2013 Feiern im STORIA Maxvorstadt",
@@ -840,7 +840,7 @@ export const de = {
     },
     aperitivo: {
       seoTitle: "Aperitivo München | Aperol Spritz & Negroni ab 17 Uhr – STORIA",
-      seoDescription: "Aperitivo München: Aperol Spritz, Negroni & über 50 italienische Weine. Täglich ab 17 Uhr mit Terrasse in der Maxvorstadt nahe Königsplatz.",
+      seoDescription: "Aperitivo München: Aperol Spritz, Negroni & Cicchetti – täglich ab 17 Uhr. Terrasse in der Maxvorstadt, 5 Min. vom Hbf. Jetzt reservieren!",
       title: "Aperitivo München – Aperol Spritz & Negroni im STORIA",
       heroSubtitle: "Italienische Bar-Kultur im STORIA Maxvorstadt",
       heroTime: "🍸 Täglich 17:00 – 22:30 Uhr",
@@ -1399,7 +1399,7 @@ export const de = {
     birthday: {
       // SEO
       seoTitle: "Geburtstagsfeier München | Bis 100 Gäste ab 35 € – STORIA",
-      seoDescription: "Geburtstagsfeier München im STORIA: Italienisches Menü, Geburtstagstorte & Platz für bis zu 100 Gäste. 30., 40., 50. Geburtstag – zentral am Königsplatz. Jetzt anfragen!",
+      seoDescription: "Geburtstagsfeier München im STORIA: Menü, Torte & Deko für bis zu 100 Gäste. 30., 40., 50. Geburtstag – ab 35 € p.P. Jetzt anfragen!",
       breadcrumb: "Geburtstagsfeier M\u00fcnchen",
       // Hero
       heroTitle: "Geburtstagsfeier München – Italienisch feiern im STORIA",

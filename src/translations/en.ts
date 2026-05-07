@@ -593,7 +593,7 @@ export const en = {
     firmenfeier: {
       // SEO
       seoTitle: "Company Party Munich from \u20ac39 | Up to 180 Guests \u2013 STORIA",
-      seoDescription: "Plan your company party in Munich: Italian restaurant with space for 20\u2013180 guests. Christmas party, team building & summer party from \u20ac39 p.p. \u2013 central at K\u00f6nigsplatz. Inquire now!",
+      seoDescription: "Corporate party Munich at STORIA: 20–180 guests from €39 p.p. Christmas party, team building & summer events – central at Königsplatz. Inquire now!",
       breadcrumb: "Company Party Munich",
       // Hero
       heroTitle: "Company Party Munich \u2013 Celebrate at STORIA Maxvorstadt",
@@ -838,7 +838,7 @@ export const en = {
     },
     aperitivo: {
       seoTitle: "Aperitivo Munich | Aperol Spritz & Negroni from 5 PM – STORIA",
-      seoDescription: "Aperitivo Munich: Aperol Spritz, Negroni & over 50 Italian wines. Daily from 5 PM with terrace in Maxvorstadt near Königsplatz.",
+      seoDescription: "Aperitivo Munich: Aperol Spritz, Negroni & Cicchetti – daily from 5 PM. Terrace in Maxvorstadt, 5 min from Central Station. Reserve now!",
       title: "Aperitivo Munich – Aperol Spritz & Negroni at STORIA",
       heroSubtitle: "Italian Bar Culture at STORIA Maxvorstadt",
       heroTime: "🍸 Daily 5:00 PM – 10:30 PM",
@@ -1379,7 +1379,7 @@ export const en = {
     birthday: {
       // SEO
       seoTitle: "Birthday Party Munich | Up to 100 Guests from €35 – STORIA",
-      seoDescription: "Birthday party Munich at STORIA: Italian menu, birthday cake & space for up to 100 guests. 30th, 40th, 50th birthday – central at Königsplatz. Inquire now!",
+      seoDescription: "Birthday party Munich at STORIA: menu, birthday cake & up to 100 guests. 30th, 40th, 50th birthday – from €35 p.p. Inquire now!",
       breadcrumb: "Birthday Party Munich",
       // Hero
       heroTitle: "Birthday Party Munich – Celebrate Italian Style at STORIA",

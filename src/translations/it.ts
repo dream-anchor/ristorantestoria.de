@@ -851,7 +851,7 @@ const itBase = {
     },
     aperitivo: {
       seoTitle: "Aperitivo Monaco | Aperol Spritz & Negroni dalle 17 – STORIA",
-      seoDescription: "Aperitivo Monaco: Aperol Spritz, Negroni & oltre 50 vini italiani. Ogni giorno dalle 17 con terrazza nella Maxvorstadt vicino a Königsplatz.",
+      seoDescription: "Aperitivo Monaco: Aperol Spritz, Negroni & Cicchetti – ogni giorno dalle 17. Terrazza nella Maxvorstadt, 5 min dalla Stazione Centrale. Prenota ora!",
       title: "Aperitivo Monaco – Aperol Spritz & Negroni da STORIA",
       heroSubtitle: "Cultura del Bar Italiano in STORIA Maxvorstadt",
       heroTime: "🍸 Ogni giorno 17:00 – 22:30",
