@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLocation } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Google Analytics 4 — Consent-gated Script Loading
@@ -26,10 +27,34 @@ declare global {
 
 const GTAG_SCRIPT_SELECTOR = 'script[src*="googletagmanager.com/gtag/js"]';
 
+// Reservation page slugs across all 4 languages
+const RESERVATION_SLUGS = ["reservierung", "reservation", "prenotazione"];
+
 const GoogleAnalytics = () => {
   const { hasConsent } = useCookieConsent();
   const location = useLocation();
   const hasStatisticsConsent = hasConsent("statistics");
+
+  // Global click delegation — catches all tel/WhatsApp/reservation links site-wide
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as Element).closest("a");
+      if (!anchor) return;
+      const href = anchor.getAttribute("href") || "";
+      const page = window.location.pathname;
+
+      if (href.startsWith("tel:")) {
+        trackEvent("phone_click", { source: "global", page });
+      } else if (href.includes("wa.me")) {
+        trackEvent("whatsapp_click", { source: "global", page });
+      } else if (RESERVATION_SLUGS.some((slug) => href.includes(`/${slug}`))) {
+        trackEvent("reservation_click", { source: "global", page });
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
 
   useEffect(() => {
     if (!hasStatisticsConsent) return;
