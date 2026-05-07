@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLocation } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /**
  * Google Analytics 4 — Consent-gated Script Loading
@@ -33,6 +34,7 @@ const RESERVATION_SLUGS = ["reservierung", "reservation", "prenotazione"];
 const GoogleAnalytics = () => {
   const { hasConsent } = useCookieConsent();
   const location = useLocation();
+  const { language } = useLanguage();
   const hasStatisticsConsent = hasConsent("statistics");
 
   // Global click delegation — catches all tel/WhatsApp/reservation links site-wide
@@ -74,6 +76,7 @@ const GoogleAnalytics = () => {
       window.gtag("js", new Date());
       window.gtag("config", GA_MEASUREMENT_ID, {
         page_location: window.location.href,
+        language,
       });
       return;
     }
@@ -81,8 +84,9 @@ const GoogleAnalytics = () => {
     // Script existiert bereits: SPA-Navigation Pageview senden
     window.gtag("config", GA_MEASUREMENT_ID, {
       page_location: window.location.href,
+      language,
     });
-  }, [hasStatisticsConsent, location.pathname]);
+  }, [hasStatisticsConsent, location.pathname, language]);
 
   return null;
 };
