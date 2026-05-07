@@ -42,6 +42,7 @@ import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
 import PizzaMuenchen from "./pages/seo/PizzaMuenchen";
 import ItalienerMuenchen from "./pages/seo/ItalienerMuenchen";
 import ItalienerKoenigsplatz from "./pages/seo/ItalienerKoenigsplatz";
+import PastaFrescaMuenchen from "./pages/seo/PastaFrescaMuenchen";
 import WeihnachtsfeierMuenchen from "./pages/seo/WeihnachtsfeierMuenchen";
 import TerrasseMuenchen from "./pages/seo/TerrasseMuenchen";
 import ItalienischesRestaurantMuenchen from "./pages/seo/ItalienischesRestaurantMuenchen";
@@ -116,6 +117,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "pizza-muenchen": PizzaMuenchen,
   // "italiener-muenchen" removed — 301 redirect to / (keyword cannibalization fix)
   "italiener-koenigsplatz": ItalienerKoenigsplatz,
+  "pasta-fresca-muenchen": PastaFrescaMuenchen,
   "weihnachtsfeier-muenchen": WeihnachtsfeierMuenchen,
   "terrasse-muenchen": TerrasseMuenchen,
   "italienisches-restaurant-muenchen": ItalienischesRestaurantMuenchen,
