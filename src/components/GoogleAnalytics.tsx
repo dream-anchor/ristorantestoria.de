@@ -37,8 +37,10 @@ const GoogleAnalytics = () => {
   const { language } = useLanguage();
   const hasStatisticsConsent = hasConsent("statistics");
 
-  // Global click delegation — catches all tel/WhatsApp/reservation links site-wide
+  // Global click delegation — nur mit Consent (DSGVO)
   useEffect(() => {
+    if (!hasStatisticsConsent) return;
+
     const handleClick = (e: MouseEvent) => {
       const anchor = (e.target as Element).closest("a");
       if (!anchor) return;
@@ -56,7 +58,7 @@ const GoogleAnalytics = () => {
 
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
-  }, []);
+  }, [hasStatisticsConsent]);
 
   useEffect(() => {
     if (!hasStatisticsConsent) return;
