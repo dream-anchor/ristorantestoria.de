@@ -31,3 +31,5 @@ client_secret*.json
 *.sln
 *.sw?
 service-account.json
+.claude/
+AGENTS*.md
