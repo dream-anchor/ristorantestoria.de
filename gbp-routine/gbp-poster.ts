@@ -407,14 +407,69 @@ async function postToGBP(body: string, ctaType: string, ctaUrl: string, imageUrl
 
 async function slackReport(message: string) {
   const webhook = process.env.SLACK_WEBHOOK_URL;
-  if (!webhook) {
-    console.log("[Slack]", message);
-    return;
-  }
+  if (!webhook) { console.log("[Slack]", message); return; }
   await fetch(webhook, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ text: message }),
+  });
+}
+
+async function slackPostPreview(opts: {
+  dryRun: boolean;
+  status: string;
+  weekday: string;
+  slotTime: string;
+  pool: string;
+  body: string;
+  ctaType: string;
+  ctaUrl: string;
+  imageUrl: string;
+  imageFilename: string;
+  gbpPostId?: string | null;
+  errorLog?: string | null;
+}) {
+  const webhook = process.env.SLACK_WEBHOOK_URL;
+  if (!webhook) { console.log("[Slack Preview]", opts.body); return; }
+
+  const emoji = opts.status === "gepostet" ? "✅" : opts.status === "dry_run" ? "🔲" : "❌";
+  const label = opts.dryRun ? " *[DRY RUN — kein echter Post]*" : "";
+  const ctaLabel: Record<string, string> = { reserve: "Reservieren", call: "Anrufen", learn_more: "Mehr erfahren", website: "Website" };
+  const weekdayLabel: Record<string, string> = { mon: "Montag", wed: "Mittwoch", fri: "Freitag" };
+
+  const blocks: unknown[] = [
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `${emoji} *STORIA GBP-Post*${label}\n${weekdayLabel[opts.weekday] || opts.weekday} ${opts.slotTime} · Pool ${opts.pool}`,
+      },
+    },
+    { type: "divider" },
+    {
+      type: "image",
+      image_url: opts.imageUrl,
+      alt_text: opts.imageFilename,
+      title: { type: "plain_text", text: opts.imageFilename },
+    },
+    {
+      type: "section",
+      text: { type: "mrkdwn", text: `*Post-Text:*\n${opts.body}` },
+    },
+    {
+      type: "context",
+      elements: [
+        { type: "mrkdwn", text: `*CTA:* ${ctaLabel[opts.ctaType] || opts.ctaType} → ${opts.ctaUrl}` },
+        ...(opts.gbpPostId ? [{ type: "mrkdwn" as const, text: `*GBP-Post-ID:* ${opts.gbpPostId}` }] : []),
+        ...(opts.errorLog ? [{ type: "mrkdwn" as const, text: `*Fehler:* ${opts.errorLog}` }] : []),
+      ],
+    },
+  ];
+
+  await fetch(webhook, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ blocks }),
   });
 }
 
@@ -538,13 +593,21 @@ async function main() {
       (${pool}, ${postId}, ${image.id}, ${clusterId}, ${postBody}, ${gbpPostId}, ${status}, ${errorLog})
   `;
 
-  // Slack-Report
-  const emoji = status === "gepostet" ? "✅" : status === "dry_run" ? "🔲" : "❌";
-  const slackMsg = status === "failed"
-    ? `${emoji} STORIA GBP FAILED: ${weekday} ${schedule.slot_time}\nFehler: ${errorLog}`
-    : `${emoji} STORIA GBP${dryRun ? " [DRY RUN]" : ""}: ${weekday} ${schedule.slot_time}, Pool ${pool}\n${postBody.substring(0, 80)}…\nBild: ${image.filename}`;
-
-  await slackReport(slackMsg);
+  // Slack-Report mit vollem Post-Preview
+  await slackPostPreview({
+    dryRun,
+    status,
+    weekday,
+    slotTime: schedule.slot_time,
+    pool,
+    body: postBody,
+    ctaType,
+    ctaUrl,
+    imageUrl: image.storage_url,
+    imageFilename: image.filename,
+    gbpPostId,
+    errorLog,
+  });
 
   await sql.end();
   console.log("\nDone.");

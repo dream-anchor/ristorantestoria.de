@@ -9,6 +9,13 @@ Tonfall: freundlich, ehrlich, unaufgeregt — kein Marketing-Sprech.
 2. Klingt das nach Imagebroschüre oder nach Mensch?
 3. Ist da Wärme drin oder nur Information?
 
+## SEO-Struktur (zwingend)
+
+- **Hook (erste 80 Zeichen):** Hauptkeyword + konkreter Nutzen — das ist was Google und Nutzer zuerst sehen
+- **Lokale Signale:** Mindestens eines von: Maxvorstadt, Karlstraße, Königsplatz, München — natürlich eingebaut
+- **Keine Telefonnummern im Fließtext** — Telefon gehört nur in den CTA-Button, nicht in den Body
+- Zielkeyword-Cluster: "Italiener München", "Steinofenpizza München", "Pasta Maxvorstadt", "Trüffelpasta München"
+
 ## Verboten
 
 - „wir empfangen unsere Gäste seit … wie Familie"
