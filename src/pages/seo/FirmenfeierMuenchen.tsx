@@ -12,6 +12,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Phone, MessageCircle, Star } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import firmenfeierEvent from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
+import firmenfeierEvent600 from "@/assets/firmenfeier-eventlocation-storia-muenchen-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -98,7 +99,7 @@ const FirmenfeierMuenchen = () => {
         
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <img src={firmenfeierEvent} alt={t.seo.firmenfeier.heroTitle} className="absolute inset-0 w-full h-full object-cover" loading="eager" />
+          <img src={firmenfeierEvent} srcSet={`${firmenfeierEvent600} 600w, ${firmenfeierEvent} 1200w`} sizes="100vw" alt={t.seo.firmenfeier.heroTitle} className="absolute inset-0 w-full h-full object-cover" loading="eager" fetchPriority="high" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/"><img src={storiaLogo} alt="STORIA Logo" loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert" /></Link>

@@ -83,6 +83,7 @@ const PastaFrescaMuenchen = () => {
             width={1920}
             height={1080}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />

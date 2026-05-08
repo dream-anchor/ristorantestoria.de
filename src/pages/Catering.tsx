@@ -12,6 +12,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import storiaLogo from "@/assets/storia-logo.webp";
 import sommerfestEvent from "@/assets/sommerfest-event.webp";
+import sommerfestEvent600 from "@/assets/sommerfest-event-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, Mail, ExternalLink, Star, CheckCircle } from "lucide-react";
@@ -354,9 +355,11 @@ const Catering = () => {
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
           <img
             src={sommerfestEvent}
+            srcSet={`${sommerfestEvent600} 600w, ${sommerfestEvent} 1200w`}
+            sizes="100vw"
             alt="STORIA Catering München – Italienisches Event-Catering"
             className="absolute inset-0 w-full h-full object-cover"
-            loading="eager"
+            loading="eager" fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">

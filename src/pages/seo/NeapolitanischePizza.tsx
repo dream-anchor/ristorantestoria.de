@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import storiaLogo from "@/assets/storia-logo.webp";
 import neapolitanPizzaHero from "@/assets/neapolitan-pizza-hero.webp";
+import neapolitanPizzaHero600 from "@/assets/neapolitan-pizza-hero-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, MessageCircle, MapPin, Clock, Star, Utensils, ArrowRight } from "lucide-react";
@@ -118,12 +119,15 @@ const NeapolitanischePizza = () => {
         
         {/* Hero Section */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-          <img 
-            src={neapolitanPizzaHero} 
+          <img
+            src={neapolitanPizzaHero}
+            srcSet={`${neapolitanPizzaHero600} 600w, ${neapolitanPizzaHero} 1200w`}
+            sizes="100vw"
             alt="Authentische neapolitanische Pizza Margherita aus dem Steinofen"
             width={1920}
             height={1080}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />

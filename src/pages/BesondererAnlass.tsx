@@ -379,6 +379,7 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
             alt={seasonalTitle}
             className="w-full h-full object-cover"
             loading="eager"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <div className="text-center px-4">

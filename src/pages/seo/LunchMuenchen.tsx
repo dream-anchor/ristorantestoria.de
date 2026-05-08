@@ -22,7 +22,9 @@ import { MapPin, Clock, Utensils, ChefHat, Euro, ArrowRight, Salad, Pizza, Users
 
 // Images
 import businessLunchAtmosphere from "@/assets/business-lunch-mittagessen-maxvorstadt-muenchen.webp";
+import businessLunchAtmosphere600 from "@/assets/business-lunch-mittagessen-maxvorstadt-muenchen-600w.webp";
 import businessLunchFood from "@/assets/mittagsmenue-pasta-lunch-storia-muenchen.webp";
+import businessLunchFood600 from "@/assets/mittagsmenue-pasta-lunch-storia-muenchen-600w.webp";
 
 const LunchMuenchen = () => {
   const { t } = useLanguage();
@@ -103,12 +105,15 @@ const LunchMuenchen = () => {
         
         {/* Hero Section with Full Image */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-          <img 
-            src={businessLunchAtmosphere} 
+          <img
+            src={businessLunchAtmosphere}
+            srcSet={`${businessLunchAtmosphere600} 600w, ${businessLunchAtmosphere} 1200w`}
+            sizes="100vw"
             alt={t.seo.lunch.heroTitle}
             width={1200}
             height={800}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />

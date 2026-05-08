@@ -22,6 +22,7 @@ import { MapPin, Clock, CalendarDays, UtensilsCrossed, Wine, GlassWater, ArrowRi
 
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
+import heroImage600 from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen-600w.webp";
 
 const HochzeitsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -80,10 +81,13 @@ const HochzeitsfeierMuenchen = () => {
         <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
           <img
             src={heroImage}
+            srcSet={`${heroImage600} 600w, ${heroImage} 1200w`}
+            sizes="100vw"
             alt={s.heroTitle}
             width={1200}
             height={800}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />

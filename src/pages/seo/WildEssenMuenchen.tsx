@@ -26,6 +26,7 @@ import {
 
 // Wild game hero image
 import wildVenisonHero from "@/assets/wild-venison-hero.webp";
+import wildVenisonHero600 from "@/assets/wild-venison-hero-600w.webp";
 
 const WildEssenMuenchen = () => {
   const { t } = useLanguage();
@@ -197,12 +198,15 @@ const WildEssenMuenchen = () => {
         
         {/* Hero Section */}
         <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-          <img 
-            src={wildVenisonHero} 
+          <img
+            src={wildVenisonHero}
+            srcSet={`${wildVenisonHero600} 600w, ${wildVenisonHero} 1200w`}
+            sizes="100vw"
             alt={t.seo.wild.heroImageAlt}
             width={1200}
             height={800}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />

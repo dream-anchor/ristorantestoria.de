@@ -16,6 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import cocktailsImage from "@/assets/aperitivo-muenchen-italienische-bar-storia.webp";
+import cocktailsImage600 from "@/assets/aperitivo-muenchen-italienische-bar-storia-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, MessageCircle, Calendar, MapPin, Clock, Wine, Utensils, ArrowRight } from "lucide-react";
@@ -173,12 +174,15 @@ const AperitivoMuenchen = () => {
         
         {/* Hero Section */}
         <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-          <img 
-            src={cocktailsImage} 
+          <img
+            src={cocktailsImage}
+            srcSet={`${cocktailsImage600} 600w, ${cocktailsImage} 1200w`}
+            sizes="100vw"
             alt="Aperitivo Cocktails STORIA München"
             width={1200}
             height={800}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />

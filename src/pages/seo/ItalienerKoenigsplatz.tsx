@@ -23,6 +23,7 @@ import { MapPin, Clock, Footprints, Building2, Landmark, UtensilsCrossed, ArrowR
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
 import aussenHero from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen.webp";
+import aussenHero600 from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen-600w.webp";
 
 const ItalienerKoenigsplatz = () => {
   const { t } = useLanguage();
@@ -85,10 +86,13 @@ const ItalienerKoenigsplatz = () => {
         <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
           <img
             src={aussenHero}
+            srcSet={`${aussenHero600} 600w, ${aussenHero} 1200w`}
+            sizes="100vw"
             alt={t.seo.italienerKoenigsplatz.heroTitle}
             width={1200}
             height={800}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />

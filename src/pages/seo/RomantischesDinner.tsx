@@ -12,6 +12,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Phone, MessageCircle, Heart, Clock } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import romanticDinnerHero from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
+import romanticDinnerHero600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -124,12 +125,15 @@ const RomantischesDinner = () => {
         
         {/* Hero Section */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <img 
-            src={romanticDinnerHero} 
+          <img
+            src={romanticDinnerHero}
+            srcSet={`${romanticDinnerHero600} 600w, ${romanticDinnerHero} 1200w`}
+            sizes="100vw"
             alt={t.seo.romanticDinner.heroTitle}
             width={1920}
             height={1080}
             loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />

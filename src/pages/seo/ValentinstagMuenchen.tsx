@@ -15,6 +15,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp, ArrowRight } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import romantischesDinnerImage from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
+import romantischesDinnerImage600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
@@ -175,7 +176,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
 
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <img src={romantischesDinnerImage} alt={s.heroTitle} className="absolute inset-0 w-full h-full object-cover" loading="eager" width={1200} height={800} />
+          <img src={romantischesDinnerImage} srcSet={`${romantischesDinnerImage600} 600w, ${romantischesDinnerImage} 1200w`} sizes="100vw" alt={s.heroTitle} className="absolute inset-0 w-full h-full object-cover" loading="eager" fetchPriority="high" width={1200} height={800} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/"><img src={storiaLogo} alt="STORIA Logo" loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert" /></Link>

@@ -1,5 +1,44 @@
 # ristorantestoria.de
 
+## Google Business Profile (GBP) API
+
+**Status:** Aktiv, OAuth eingerichtet (Mai 2026)
+
+**Zugriff via:** `scripts/fetch-google-reviews.mjs`, `scripts/gbp-auth-test.ts`, `scripts/sync-gbp-menu.ts`
+
+**Credentials:**
+- OAuth App: "STORIA GBP Sync" (Projekt `storia-gbp-sync`, Owner: sebgruber225@gmail.com)
+- Client Secret: `scripts/client_secret.json` (client_id: `62628781665-8kpesh6rpedibo2ipg7sihotkouo1vdv`)
+- Tokens: verschlüsselt in Neon DB (`google_business_settings` Tabelle)
+- Encryption Key: `GBP_TOKEN_ENCRYPTION_KEY` in `.env`
+- Autorisierter Nutzer: `antoine@monot.com` (als Testnutzer eingetragen)
+
+**GBP-IDs:**
+- Account ID: `114367954632843728381`
+- Location ID: `17586248070861131392`
+- Place ID: `ChIJo-_iavt1nkcR665hz1XaMzQ`
+
+**Token erneuern (wenn abgelaufen):**
+```bash
+npx tsx scripts/gbp-auth-test.ts   # Öffnet Browser auf Port 3000
+npx tsx scripts/migrate-tokens-to-db.ts  # Token → Neon DB
+```
+
+**Reviews abrufen:**
+```bash
+node scripts/fetch-google-reviews.mjs --force
+```
+
+**Wichtig:** App ist im Test-Modus. Nur `antoine@monot.com` (und sebgruber225@gmail.com) haben Zugriff.
+Falls Token abläuft: Re-Auth über `gbp-auth-test.ts` → `migrate-tokens-to-db.ts`.
+
+**Reviews posten/antworten:** Via GBP API v4 (`mybusiness.googleapis.com/v4/accounts/{ACCOUNT_ID}/locations/{LOCATION_ID}/reviews/{REVIEW_ID}/reply`)
+
+**BLOCKING RULE — Rezensionen:** Bei allen Aufgaben rund um Google-Rezensionen (Antworten schreiben, Ton prüfen, Strategie) IMMER zuerst lesen:
+`docs/gbp-review-responses.md` — Antwort-Framework, Psychologie, System-Prompt, Verbote
+
+---
+
 ## Sub-Agents
 | Agent | Model | Zweck |
 |-------|-------|-------|
