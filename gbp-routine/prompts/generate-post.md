@@ -25,6 +25,11 @@ Tonfall: freundlich, ehrlich, unaufgeregt — kein Marketing-Sprech.
 - Übertriebene Adjektive (traumhaft, köstlich, einmalig, unvergesslich)
 - Hashtags
 - Erfundene Gerichte oder Specials
+- Telefonnummern im Body-Text (nur CTA-Button)
+
+## Emojis
+
+Erlaubt: 1–2 Emojis pro Post, dezent als visueller Anker (z.B. 🍝 🍕 🥂 🌿). Nie mehrere hintereinander, nie am Satzanfang für jeden Satz.
 
 ## Natürliche Entsprechungen
 
