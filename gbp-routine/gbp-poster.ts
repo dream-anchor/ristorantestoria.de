@@ -372,6 +372,7 @@ async function postToGBP(body: string, ctaType: string, ctaUrl: string, imageUrl
     : `${ctaUrl}${ctaUrl.includes("?") ? "&" : "?"}utm_source=gbp&utm_medium=post&utm_campaign=${pool}_${yearWeek}`;
 
   const payload: Record<string, unknown> = {
+    topicType: "STANDARD",
     languageCode: "de",
     summary: body,
     callToAction: {
