@@ -55,6 +55,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
     address: addressSchema,
     geo: geoSchema,
     foundingDate: STORIA.foundedISO,
+    dateModified: new Date().toISOString().split('T')[0],
     openingHoursSpecification: STORIA.openingHoursSpec.map(spec => ({
       '@type': 'OpeningHoursSpecification',
       ...spec,
@@ -170,6 +171,18 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
     },
     sameAs: STORIA.sameAs,
     foundingDate: STORIA.foundedISO,
+    knowsAbout: [
+      'Neapolitanische Pizza',
+      'Cucina del Cilento',
+      'Hausgemachte Pasta',
+      'Süditalienische Küche',
+      'Steinofenpizza München',
+      '48-Stunden-Teigführung',
+      'Eventcatering München',
+      'Weinberatung – Italienische Weine',
+      'Aperitivo München',
+      'Familiengeführtes Restaurant',
+    ],
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: STORIA.phone,
