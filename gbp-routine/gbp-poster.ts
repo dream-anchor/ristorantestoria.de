@@ -11,8 +11,8 @@ import { createDecipheriv, createCipheriv, randomBytes } from "crypto";
 import postgres from "postgres";
 import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "fs";
-import { slackText, slackPostPreview } from "./slack.js";
-import { GEO_ANCHORS, USPS } from "./gbp-constants.js";
+import { slackText, slackPostPreview } from "./slack";
+import { GEO_ANCHORS, USPS } from "./gbp-constants";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: resolve(__dirname, "..", ".env") });
