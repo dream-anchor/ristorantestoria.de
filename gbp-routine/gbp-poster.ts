@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { createDecipheriv, createCipheriv, randomBytes } from "crypto";
-import postgres from "postgres";
+import { neon } from "@neondatabase/serverless";
 import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "fs";
 import { slackText, slackPostPreview } from "./slack";
@@ -21,7 +21,7 @@ const ACCOUNT_ID = "114367954632843728381";
 const LOCATION_ID = "17586248070861131392";
 const BASE_URL = "https://ristorantestoria.de";
 
-const sql = postgres(process.env.DATABASE_URL!, { ssl: "require" });
+const sql = neon(process.env.DATABASE_URL!);
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 // ── Crypto (identisch zu gbp-post-reply.mjs) ──────────────────────────────────
@@ -371,6 +371,8 @@ async function postToGBP(body: string, ctaType: string, ctaUrl: string, imageUrl
     ? ctaUrl
     : `${ctaUrl}${ctaUrl.includes("?") ? "&" : "?"}utm_source=gbp&utm_medium=post&utm_campaign=${pool}_${yearWeek}`;
 
+  // GBP v4 API akzeptiert nur JPEG/PNG, kein WebP
+  const isJpegOrPng = /\.(jpg|jpeg|png)$/i.test(imageUrl);
   const payload: Record<string, unknown> = {
     topicType: "STANDARD",
     languageCode: "de",
@@ -379,7 +381,7 @@ async function postToGBP(body: string, ctaType: string, ctaUrl: string, imageUrl
       actionType: ctaActionMap[ctaType] || "LEARN_MORE",
       url: utmUrl.startsWith("tel:") ? undefined : utmUrl,
     },
-    media: [{ mediaFormat: "PHOTO", sourceUrl: imageUrl }],
+    ...(isJpegOrPng ? { media: [{ mediaFormat: "PHOTO", sourceUrl: imageUrl }] } : {}),
   };
 
   // Telefon-CTA hat keine URL
@@ -425,7 +427,6 @@ async function main() {
   `;
   if (!schedule) {
     console.log(`Kein aktiver Schedule für ${weekday}, abgebrochen.`);
-    await sql.end();
     return;
   }
 
@@ -517,7 +518,6 @@ async function main() {
     const msg = String(err);
     console.error(`❌ Bild-Fehler: ${msg}`);
     await slackReport(`⚠️ STORIA GBP Skip (${weekday} ${schedule.slot_time}): ${msg}`);
-    await sql.end();
     return;
   }
   console.log(`Bild: ${image.filename}`);
@@ -572,7 +572,6 @@ async function main() {
     errorLog,
   });
 
-  await sql.end();
   console.log("\nDone.");
 }
 
