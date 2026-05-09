@@ -34,6 +34,8 @@ export const STORIA = {
   sameAs: [
     "https://www.instagram.com/ristorante_storia/",
     "https://www.facebook.com/ristorantestoria/",
+    "https://www.tripadvisor.de/Restaurant_Review-g187309-d7895351-Reviews-STORIA_Ristorante_Pizzeria_Bar-Munich_Upper_Bavaria_Bavaria.html",
+    "https://www.thefork.de/restaurant/storia-r748537",
     "https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen",
     "https://maps.google.com/?cid=3761590175870856939",
     "https://www.quandoo.de/place/storia-10239",
