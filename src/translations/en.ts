@@ -174,7 +174,7 @@ export const en = {
   },
   homeIntro: {
     title: "Welcome to STORIA",
-    p1pre: "Since 2015, Ristorante STORIA on Karlstraße 47a has been a piece of Southern Italy in the heart of Munich's Maxvorstadt. Domenico Speranza and his family serve ",
+    p1pre: "STORIA (Ristorante Pizzeria Bar) is an Italian family restaurant in Munich Maxvorstadt (Karlstraße 47a, 80333 Munich), run by the Speranza family since 2015. Head chef Domenico Speranza and his team serve ",
     link1: "Neapolitan stone-oven pizza",
     p1mid: " at 400\u00a0°C, homemade pasta, and fresh seafood – accompanied by a curated ",
     link2: "Italian wine list",
@@ -491,6 +491,13 @@ export const en = {
     p8: 'Ristorante STORIA is a permanent part of the city and invites you to experience Italian enjoyment in the heart of Munich. With a menu that includes antipasti, pizza, pasta, fish, and drinks, we offer a variety that guests appreciate time and again. Come by, let yourself be pampered by our kitchen, and enjoy the taste of Italy – right here in Maxvorstadt. On our website, you will find all the important information for a visit with us!',
     reisegruppenHint: "We are also well prepared for tour groups and coach groups –",
     reisegruppenLink: "with three group menus and special rates for tour leaders",
+    lastUpdated: "Last updated: May 2026",
+    qualityTitle: "Ingredients & Quality Standards",
+    qualityPre: "Our cuisine is rooted in the traditions of Southern Italian craftsmanship. Pizza is baked according to the rules of the",
+    qualityUnescoLink: "UNESCO-recognised art of Neapolitan pizzaiuolo",
+    qualityMid: ". For our sauces we use",
+    qualitySanMarzanoLink: "San Marzano DOP tomatoes",
+    qualityPost: "– a protected designation of origin (PDO) from the Naples region. Our dough matures for 48 hours at a controlled temperature for optimal digestibility.",
   },
   seo: {
     besondereAnlaesse: {
@@ -3683,5 +3690,9 @@ export const en = {
       contact: "Contact & directions",
       catering: "Catering & events",
     },
+    sourcesTitle: "Further Reading",
+    sourcesUnescoText: "UNESCO: Art of the Neapolitan Pizzaiuolo (Intangible Cultural Heritage)",
+    sourcesSanMarzanoText: "Consorzio San Marzano DOP – Protected Designation of Origin (PDO)",
+    sourcesBayernText: "Bavarian Restaurant Law – Information on opening hours & operations",
   },
 };

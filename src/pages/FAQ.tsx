@@ -95,11 +95,14 @@ const FAQ = () => {
             </header>
 
             {/* Intro Context for GEO */}
-            <div className="bg-secondary/50 p-6 md:p-8 rounded-lg mb-12">
+            <div className="bg-secondary/50 p-6 md:p-8 rounded-lg mb-4">
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {t.faqPage.introContext}
               </p>
             </div>
+            <p className="text-xs text-muted-foreground text-right mb-10">
+              <time dateTime="2026-05">{t.faqPage.lastUpdated}</time>
+            </p>
 
             {/* FAQ Categories */}
             {faqCategories.map((category: { title: string; id: string; items: Array<{ question: string; answer: string; link?: string; linkText?: string; externalLink?: string; externalLinkText?: string }> }, catIndex: number) => (
@@ -145,6 +148,46 @@ const FAQ = () => {
                 </Accordion>
               </section>
             ))}
+
+            {/* Sources / Weiterführende Quellen */}
+            <section className="mt-14 mb-8 border-t border-border pt-10">
+              <h2 className="text-lg font-semibold text-foreground mb-4">{t.faqPage.sourcesTitle}</h2>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <a
+                    href="https://ich.unesco.org/en/RL/art-of-neapolitan-pizzaiuolo-01207"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:text-foreground underline transition-colors"
+                  >
+                    {t.faqPage.sourcesUnescoText}
+                    <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.consorziosanmarzano.it/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:text-foreground underline transition-colors"
+                  >
+                    {t.faqPage.sourcesSanMarzanoText}
+                    <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.stmelf.bayern.de/mam/cms01/ernaehrung/dateien/gaststaettenrecht_merkblatt.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:text-foreground underline transition-colors"
+                  >
+                    {t.faqPage.sourcesBayernText}
+                    <ExternalLink className="h-3 w-3 flex-shrink-0" />
+                  </a>
+                </li>
+              </ul>
+            </section>
 
             {/* CTA Box */}
             <div className="bg-primary/5 border border-primary/20 rounded-lg p-8 md:p-10 text-center mt-16">

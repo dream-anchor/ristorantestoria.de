@@ -174,7 +174,7 @@ export const de = {
   },
   homeIntro: {
     title: "Willkommen im STORIA",
-    p1pre: "Das Ristorante STORIA in der Karlstraße 47a ist seit 2015 ein Stück Süditalien mitten in Münchens Maxvorstadt. Domenico Speranza und seine Familie servieren",
+    p1pre: "Das STORIA (Ristorante Pizzeria Bar) ist ein seit 2015 von der Familie Speranza geführtes italienisches Restaurant in München-Maxvorstadt (Karlstraße 47a, 80333 München). Küchenchef Domenico Speranza und sein Team servieren",
     link1: "neapolitanische Pizza aus dem Steinofen",
     p1mid: " bei 400\u00a0°C, hausgemachte Pasta und frische Meeresfrüchte – begleitet von einer ausgewählten ",
     link2: "italienischen Weinkarte",
@@ -491,6 +491,13 @@ export const de = {
     p8: 'Das Ristorante STORIA ist ein fester Teil der Stadt und lädt dazu ein, italienischen Genuss mitten in München zu erleben. Mit einem Menü, das Antipasti, Pizza, Pasta, Fisch und Drinks umfasst, bieten wir eine Vielfalt, die von Gästen immer wieder geschätzt wird. Kommen Sie vorbei, lassen Sie sich von unserer Küche verwöhnen und genießen Sie den Geschmack Italiens – direkt hier in der Maxvorstadt. Auf unserer Website finden Sie alle wichtigen Informationen für einen Besuch bei uns!',
     reisegruppenHint: "Auch für Reisegruppen und Busgruppen sind wir bestens vorbereitet –",
     reisegruppenLink: "mit drei Gruppenmenüs und Sonderkonditionen für Reiseleiter",
+    lastUpdated: "Zuletzt aktualisiert: Mai 2026",
+    qualityTitle: "Zutaten & Qualitätsstandards",
+    qualityPre: "Unsere Küche orientiert sich an den Ursprüngen süditalienischer Handwerkskunst. Die Pizza wird nach den Regeln der",
+    qualityUnescoLink: "UNESCO-anerkannten neapolitanischen Pizzaiuolo-Kunst",
+    qualityMid: "gebacken. Für unsere Saucen verwenden wir",
+    qualitySanMarzanoLink: "San Marzano DOP-Tomaten",
+    qualityPost: "– geschützte Ursprungsbezeichnung (g.U.) aus der Region Neapel. Unser Teig reift 48 Stunden lang bei kontrollierter Temperatur für optimale Bekömmlichkeit.",
   },
   seo: {
     besondereAnlaesse: {
@@ -3757,5 +3764,9 @@ export const de = {
       contact: "Kontakt & Anfahrt",
       catering: "Catering & Events",
     },
+    sourcesTitle: "Weiterführende Quellen",
+    sourcesUnescoText: "UNESCO: Kunst des neapolitanischen Pizzaiuolos (Immaterielles Kulturerbe)",
+    sourcesSanMarzanoText: "Consorzio San Marzano DOP – Geschützte Ursprungsbezeichnung (g.U.)",
+    sourcesBayernText: "Bayerisches Gaststättenrecht – Infos zu Öffnungszeiten & Betrieb",
   },
 };

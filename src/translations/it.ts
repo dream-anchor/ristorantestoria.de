@@ -204,7 +204,7 @@ const itBase = {
   },
   homeIntro: {
     title: "Benvenuti allo STORIA",
-    p1pre: "Dal 2015, il Ristorante STORIA in Karlstraße 47a è un angolo del Sud Italia nel cuore del quartiere Maxvorstadt di Monaco. Domenico Speranza e la sua famiglia servono ",
+    p1pre: "Lo STORIA (Ristorante Pizzeria Bar) è un ristorante italiano a conduzione familiare nel quartiere Maxvorstadt di Monaco (Karlstraße 47a, 80333 Monaco), gestito dalla famiglia Speranza dal 2015. Il cuoco Domenico Speranza e il suo team servono ",
     link1: "pizza napoletana dal forno a pietra",
     p1mid: " a 400\u00a0°C, pasta fatta in casa e frutti di mare freschi – accompagnati da una selezionata ",
     link2: "carta dei vini italiani",
@@ -521,6 +521,13 @@ const itBase = {
     p8: 'Il Ristorante STORIA è parte integrante della città e vi invita a vivere il piacere italiano nel cuore di Monaco. Con un menu che include antipasti, pizza, pasta, pesce e bevande, offriamo una varietà che gli ospiti apprezzano sempre. Venite a trovarci, lasciatevi coccolare dalla nostra cucina e gustate il sapore dell\'Italia – proprio qui nella Maxvorstadt. Sul nostro sito web troverete tutte le informazioni importanti per una visita da noi!',
     reisegruppenHint: "Siamo anche ottimamente preparati per gruppi turistici e gruppi in pullman –",
     reisegruppenLink: "con tre menu di gruppo e condizioni speciali per le guide turistiche",
+    lastUpdated: "Ultimo aggiornamento: maggio 2026",
+    qualityTitle: "Ingredienti & Standard di Qualità",
+    qualityPre: "La nostra cucina si ispira alle origini dell'artigianato del Sud Italia. La pizza viene cotta secondo le regole dell'",
+    qualityUnescoLink: "arte pizzaiuola napoletana riconosciuta dall'UNESCO",
+    qualityMid: ". Per le nostre salse utilizziamo",
+    qualitySanMarzanoLink: "Pomodori San Marzano DOP",
+    qualityPost: "– denominazione di origine protetta (DOP) dalla regione di Napoli. Il nostro impasto matura 48 ore a temperatura controllata per una digeribilità ottimale.",
   },
   seo: {
     besondereAnlaesse: {
@@ -3162,6 +3169,10 @@ const itBase = {
       contact: "Contatti & come arrivare",
       catering: "Catering & eventi",
     },
+    sourcesTitle: "Approfondimenti",
+    sourcesUnescoText: "UNESCO: Arte del Pizzaiuolo Napoletano (Patrimonio Culturale Immateriale)",
+    sourcesSanMarzanoText: "Consorzio San Marzano DOP – Denominazione di Origine Protetta (DOP)",
+    sourcesBayernText: "Diritto della ristorazione bavarese – Informazioni su orari e gestione",
   },
 };
 

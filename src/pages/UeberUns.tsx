@@ -23,6 +23,7 @@ const UeberUns = () => {
     jobTitle: founder.role,
     worksFor: { '@id': `${STORIA.url}/#restaurant` },
     ...(founder.origin ? { birthPlace: { '@type': 'Place', name: founder.origin } } : {}),
+    ...('sameAs' in founder ? { sameAs: founder.sameAs } : {}),
   }));
 
   const timeline = [
@@ -74,9 +75,12 @@ const UeberUns = () => {
               </ol>
             </nav>
 
-            <h1 className="font-serif text-3xl md:text-4xl font-semibold text-foreground text-center mb-10 md:mb-14">
+            <h1 className="font-serif text-3xl md:text-4xl font-semibold text-foreground text-center mb-3">
               {t.about.title}
             </h1>
+            <p className="text-xs text-muted-foreground text-center mb-10 md:mb-14">
+              <time dateTime="2026-05">{t.about.lastUpdated}</time>
+            </p>
 
             {/* TLDR — Citation-optimized intro */}
             <div className="bg-card border rounded-2xl p-6 md:p-8 mb-12">
@@ -84,8 +88,16 @@ const UeberUns = () => {
                 Das STORIA in der Münchner Maxvorstadt (Karlstraße 47a, 80333 München) ist ein seit 2015
                 von der Familie Speranza geführtes italienisches Restaurant. Gründer Domenico Speranza
                 bringt über 30 Jahre Gastronomie-Erfahrung mit – vom Restaurant Cinema in Rosenheim
-                über die Betriebsleitung im H'ugo's München bis zum eigenen Restaurant. Bekannt für
-                neapolitanische Steinofen-Pizza bei 400 °C, hausgemachte Pasta und über 60 italienische
+                über die Betriebsleitung im H'ugo's München bis zum eigenen Restaurant. Bekannt für{" "}
+                <a
+                  href="https://ich.unesco.org/en/RL/art-of-neapolitan-pizzaiuolo-01207"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground underline decoration-muted-foreground hover:decoration-foreground transition-colors"
+                >
+                  neapolitanische Steinofen-Pizza
+                </a>
+                {" "}bei 400 °C (UNESCO-anerkannte Tradition), hausgemachte Pasta und über 60 italienische
                 Weine. 4,5 Sterne bei über 780 Google-Bewertungen. Geöffnet Mo–Fr 09:00–01:00,
                 Sa–So 12:00–01:00. Reservierung: <a href={`tel:${STORIA.phoneTel}`} className="text-foreground hover:underline">{STORIA.phone}</a>.
               </p>
@@ -180,6 +192,34 @@ const UeberUns = () => {
                   </p>
                 </div>
               </div>
+            </section>
+
+            {/* Qualitätsstandards */}
+            <section className="mb-12">
+              <h2 className="font-serif text-2xl md:text-3xl font-semibold text-foreground mb-4">
+                {t.about.qualityTitle}
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {t.about.qualityPre}{" "}
+                <a
+                  href="https://ich.unesco.org/en/RL/art-of-neapolitan-pizzaiuolo-01207"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-foreground transition-colors"
+                >
+                  {t.about.qualityUnescoLink}
+                </a>
+                {" "}{t.about.qualityMid}{" "}
+                <a
+                  href="https://www.consorziosanmarzano.it/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-foreground transition-colors"
+                >
+                  {t.about.qualitySanMarzanoLink}
+                </a>
+                {" "}{t.about.qualityPost}
+              </p>
             </section>
 
             {/* Timeline */}

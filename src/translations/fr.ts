@@ -174,7 +174,7 @@ export const fr = {
   },
   homeIntro: {
     title: "Bienvenue au STORIA",
-    p1pre: "Depuis 2015, le Ristorante STORIA au Karlstraße 47a incarne un morceau du Sud de l'Italie au cœur du quartier Maxvorstadt de Munich. Domenico Speranza et sa famille servent une ",
+    p1pre: "Le STORIA (Ristorante Pizzeria Bar) est un restaurant italien familial dans le quartier Maxvorstadt de Munich (Karlstraße 47a, 80333 Munich), dirigé par la famille Speranza depuis 2015. Le chef Domenico Speranza et son équipe servent une ",
     link1: "pizza napolitaine au four à pierre",
     p1mid: " à 400\u00a0°C, des pâtes maison et des fruits de mer frais – accompagnés d'une ",
     link2: "carte des vins italiens",
@@ -491,6 +491,13 @@ export const fr = {
     p8: 'Le Ristorante STORIA fait partie intégrante de la ville et vous invite à vivre le plaisir italien au cœur de Munich. Avec un menu qui comprend antipasti, pizza, pâtes, poisson et boissons, nous offrons une variété que les clients apprécient encore et encore. Venez nous voir, laissez-vous choyer par notre cuisine et savourez le goût de l\'Italie – juste ici dans la Maxvorstadt. Sur notre site web, vous trouverez toutes les informations importantes pour une visite chez nous!',
     reisegruppenHint: "Nous sommes également bien préparés pour les groupes touristiques et les groupes en car –",
     reisegruppenLink: "avec trois menus de groupe et des conditions spéciales pour les guides",
+    lastUpdated: "Dernière mise à jour : mai 2026",
+    qualityTitle: "Ingrédients & Standards de Qualité",
+    qualityPre: "Notre cuisine s'inspire des origines de l'artisanat du sud de l'Italie. La pizza est cuite selon les règles de l'",
+    qualityUnescoLink: "art du pizzaiuolo napolitain reconnu par l'UNESCO",
+    qualityMid: ". Pour nos sauces, nous utilisons des",
+    qualitySanMarzanoLink: "tomates San Marzano DOP",
+    qualityPost: "– appellation d'origine protégée (AOP) de la région de Naples. Notre pâte mûrit pendant 48 heures à température contrôlée pour une digestibilité optimale.",
   },
   seo: {
     besondereAnlaesse: {
@@ -3658,5 +3665,9 @@ export const fr = {
       contact: "Contact & accès",
       catering: "Traiteur & événements",
     },
+    sourcesTitle: "Pour aller plus loin",
+    sourcesUnescoText: "UNESCO: Art du pizzaiuolo napolitain (Patrimoine culturel immatériel)",
+    sourcesSanMarzanoText: "Consorzio San Marzano DOP – Appellation d'Origine Protégée (AOP)",
+    sourcesBayernText: "Droit de la restauration bavaroise – Infos sur les horaires et l'exploitation",
   },
 };

@@ -33,6 +33,7 @@ export const STORIA = {
   url: "https://www.ristorantestoria.de",
   sameAs: [
     "https://www.instagram.com/ristorante_storia/",
+    "https://www.facebook.com/ristorantestoria/",
     "https://www.opentable.de/r/storia-ristorante-pizzeria-bar-munchen",
     "https://maps.google.com/?cid=3761590175870856939",
     "https://www.quandoo.de/place/storia-10239",
@@ -54,6 +55,10 @@ export const STORIA = {
       roleEN: "Founder & Head Chef",
       origin: "Rofrano, Provinz Salerno",
       background: "Seit 1995 in Deutschland. Restaurant Cinema in Rosenheim, 6 Jahre Betriebsleiter im H'ugo's München.",
+      sameAs: [
+        "https://www.linkedin.com/in/domenico-speranza-650b122a5/",
+        "https://www.instagram.com/domenico.speranza/",
+      ],
     },
     {
       name: "Nicola Speranza",
