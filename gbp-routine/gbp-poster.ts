@@ -371,6 +371,8 @@ async function postToGBP(body: string, ctaType: string, ctaUrl: string, imageUrl
     ? ctaUrl
     : `${ctaUrl}${ctaUrl.includes("?") ? "&" : "?"}utm_source=gbp&utm_medium=post&utm_campaign=${pool}_${yearWeek}`;
 
+  // GBP v4 API akzeptiert nur JPEG/PNG, kein WebP
+  const isJpegOrPng = /\.(jpg|jpeg|png)$/i.test(imageUrl);
   const payload: Record<string, unknown> = {
     topicType: "STANDARD",
     languageCode: "de",
@@ -379,12 +381,7 @@ async function postToGBP(body: string, ctaType: string, ctaUrl: string, imageUrl
       actionType: ctaActionMap[ctaType] || "LEARN_MORE",
       url: utmUrl.startsWith("tel:") ? undefined : utmUrl,
     },
-    media: [
-      {
-        mediaFormat: "PHOTO",
-        sourceUrl: imageUrl,
-      },
-    ],
+    ...(isJpegOrPng ? { media: [{ mediaFormat: "PHOTO", sourceUrl: imageUrl }] } : {}),
   };
 
   // Telefon-CTA hat keine URL
