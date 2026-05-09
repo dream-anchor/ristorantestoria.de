@@ -45,7 +45,7 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
-          npx tsx gbp-routine/gbp-poster.ts $ARGS
+          ./node_modules/.bin/tsx gbp-routine/gbp-poster.ts $ARGS
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
