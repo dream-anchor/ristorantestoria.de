@@ -11,6 +11,8 @@ import { createDecipheriv, createCipheriv, randomBytes } from "crypto";
 import postgres from "postgres";
 import Anthropic from "@anthropic-ai/sdk";
 import { readFileSync } from "fs";
+import { slackText, slackPostPreview } from "./slack.js";
+import { GEO_ANCHORS, USPS } from "./gbp-constants.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: resolve(__dirname, "..", ".env") });
@@ -145,27 +147,33 @@ async function getRecentClusters(): Promise<string[]> {
 
 // ── Pool A / B: Post aus DB wählen ────────────────────────────────────────────
 
-async function pickPostFromDB(pool: "A" | "B", season: string, recentIds: number[]) {
+async function pickPostFromDB(pool: "A" | "B", season: string, themeSlot: string | null, recentIds: number[]) {
+  // Pool A: theme_slot muss passen. Pool B: kein theme_slot-Filter.
+  const slotFilter = themeSlot
+    ? sql`AND theme_slot = ${themeSlot}`
+    : sql``;
+
   const rows = await sql`
     SELECT * FROM gbp_posts
     WHERE pool = ${pool}
       AND (season = 'allyear' OR season = ${season})
+      ${slotFilter}
       AND id != ALL(${recentIds.length > 0 ? recentIds : [-1]})
     ORDER BY COALESCE(last_used, '2000-01-01') ASC, use_count ASC
     LIMIT 1
   `;
-  // Falls alle kürzlich verwendet: Filter lockern
-  if (rows.length === 0) {
-    const [fallback] = await sql`
-      SELECT * FROM gbp_posts
-      WHERE pool = ${pool}
-        AND (season = 'allyear' OR season = ${season})
-      ORDER BY COALESCE(last_used, '2000-01-01') ASC
-      LIMIT 1
-    `;
-    return fallback || null;
-  }
-  return rows[0];
+  if (rows.length > 0) return rows[0];
+
+  // Fallback: Anti-Repetition lockern (alle Posts dieses Slots kürzlich verwendet)
+  const [fallback] = await sql`
+    SELECT * FROM gbp_posts
+    WHERE pool = ${pool}
+      AND (season = 'allyear' OR season = ${season})
+      ${slotFilter}
+    ORDER BY COALESCE(last_used, '2000-01-01') ASC
+    LIMIT 1
+  `;
+  return fallback || null;
 }
 
 // ── Echte Mittagsgerichte aus DB ──────────────────────────────────────────────
@@ -269,7 +277,7 @@ async function checkNewMenuAndPost(dryRun: boolean): Promise<boolean> {
 
 // ── Pool C: Claude generiert ───────────────────────────────────────────────────
 
-async function generatePoolCPost(weekday: string, season: string, recentClusters: string[]) {
+async function generatePoolCPost(weekday: string, season: string, themeSlot: string, recentClusters: string[]) {
   // Cluster wählen (zuletzt genutzten vermeiden)
   const [cluster] = await sql`
     SELECT * FROM gbp_theme_clusters
@@ -285,6 +293,7 @@ async function generatePoolCPost(weekday: string, season: string, recentClusters
   const input = {
     pool: "C",
     weekday,
+    theme_slot: themeSlot,
     season,
     last_4_weeks_topics: recentClusters,
     theme_cluster: {
@@ -313,36 +322,36 @@ async function generatePoolCPost(weekday: string, season: string, recentClusters
   return { generated, cluster: fallbackCluster };
 }
 
-// ── Bild auswählen ────────────────────────────────────────────────────────────
+// ── Bild auswählen (kein Random-Fallback) ─────────────────────────────────────
+// Wirft Fehler wenn kein passendes Bild gefunden oder alle zu kürzlich verwendet.
+// Kein Fallback auf "irgendein Bild" — Post wird dann übersprungen + Slack-Alert.
 
-async function pickImage(tags: string[], season: string, recentImageIds: number[]) {
-  // Versuche: Tag + Season + anti-repetition
-  const rows = await sql`
+async function pickImage(tags: string[], season: string, minRepetitionDays = 21) {
+  // Primär: Tag + Season + Repetition-Check
+  const [match] = await sql`
     SELECT * FROM gbp_images
     WHERE tags && ${tags}::text[]
       AND (season = 'allyear' OR season = ${season})
-      AND id != ALL(${recentImageIds.length > 0 ? recentImageIds : [-1]})
-    ORDER BY use_count ASC, COALESCE(last_used, '2000-01-01') ASC
+      AND is_active = TRUE
+      AND (last_used IS NULL OR last_used < NOW() - ${minRepetitionDays} * INTERVAL '1 day')
+    ORDER BY COALESCE(last_used, '2000-01-01') ASC
     LIMIT 1
   `;
-  if (rows.length > 0) return rows[0];
+  if (match) return match;
 
-  // Fallback: nur Tag-Match
-  const [tagFallback] = await sql`
-    SELECT * FROM gbp_images
+  // Prüfen: Gibt es überhaupt ein Tag-Match? (Repetition-Block vs. komplett fehlende Tags)
+  const [anyTagMatch] = await sql`
+    SELECT id FROM gbp_images
     WHERE tags && ${tags}::text[]
-    ORDER BY use_count ASC, COALESCE(last_used, '2000-01-01') ASC
+      AND (season = 'allyear' OR season = ${season})
+      AND is_active = TRUE
     LIMIT 1
   `;
-  if (tagFallback) return tagFallback;
 
-  // Letzter Fallback: irgendein Bild
-  const [anyImg] = await sql`
-    SELECT * FROM gbp_images
-    ORDER BY use_count ASC, COALESCE(last_used, '2000-01-01') ASC
-    LIMIT 1
-  `;
-  return anyImg || null;
+  if (!anyTagMatch) {
+    throw new Error(`NoMatchingImage: Kein Bild mit tags=[${tags.join(",")}] season=${season}`);
+  }
+  throw new Error(`ImageRepetitionBlock: Alle Bilder für tags=[${tags.join(",")}] innerhalb ${minRepetitionDays}d verwendet`);
 }
 
 // ── GBP API: Post erstellen ────────────────────────────────────────────────────
@@ -403,81 +412,15 @@ async function postToGBP(body: string, ctaType: string, ctaUrl: string, imageUrl
   return result.name;
 }
 
-// ── Slack Status-Report ────────────────────────────────────────────────────────
-
-async function slackReport(message: string) {
-  const webhook = process.env.SLACK_WEBHOOK_URL;
-  if (!webhook) { console.log("[Slack]", message); return; }
-  await fetch(webhook, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text: message }),
-  });
-}
-
-async function slackPostPreview(opts: {
-  dryRun: boolean;
-  status: string;
-  weekday: string;
-  slotTime: string;
-  pool: string;
-  body: string;
-  ctaType: string;
-  ctaUrl: string;
-  imageUrl: string;
-  imageFilename: string;
-  gbpPostId?: string | null;
-  errorLog?: string | null;
-}) {
-  const webhook = process.env.SLACK_WEBHOOK_URL;
-  if (!webhook) { console.log("[Slack Preview]", opts.body); return; }
-
-  const emoji = opts.status === "gepostet" ? "✅" : opts.status === "dry_run" ? "🔲" : "❌";
-  const label = opts.dryRun ? " *[DRY RUN — kein echter Post]*" : "";
-  const ctaLabel: Record<string, string> = { reserve: "Reservieren", call: "Anrufen", learn_more: "Mehr erfahren", website: "Website" };
-  const weekdayLabel: Record<string, string> = { mon: "Montag", wed: "Mittwoch", fri: "Freitag" };
-
-  const blocks: unknown[] = [
-    {
-      type: "section",
-      text: {
-        type: "mrkdwn",
-        text: `${emoji} *STORIA GBP-Post*${label}\n${weekdayLabel[opts.weekday] || opts.weekday} ${opts.slotTime} · Pool ${opts.pool}`,
-      },
-    },
-    { type: "divider" },
-    {
-      type: "image",
-      image_url: opts.imageUrl,
-      alt_text: opts.imageFilename,
-      title: { type: "plain_text", text: opts.imageFilename },
-    },
-    {
-      type: "section",
-      text: { type: "mrkdwn", text: `*Post-Text:*\n${opts.body}` },
-    },
-    {
-      type: "context",
-      elements: [
-        { type: "mrkdwn", text: `*CTA:* ${ctaLabel[opts.ctaType] || opts.ctaType} → ${opts.ctaUrl}` },
-        ...(opts.gbpPostId ? [{ type: "mrkdwn" as const, text: `*GBP-Post-ID:* ${opts.gbpPostId}` }] : []),
-        ...(opts.errorLog ? [{ type: "mrkdwn" as const, text: `*Fehler:* ${opts.errorLog}` }] : []),
-      ],
-    },
-  ];
-
-  await fetch(webhook, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ blocks }),
-  });
-}
+// Slack-Funktionen: slackText + slackPostPreview aus ./slack.ts importiert
+const slackReport = slackText;
 
 // ── Haupt-Workflow ─────────────────────────────────────────────────────────────
 
 async function main() {
   const isDryRun = process.argv.includes("--dry-run");
-  const weekday = getWeekday();
+  const weekdayArg = process.argv.find(a => a.startsWith("--weekday="))?.split("=")[1] as "mon" | "wed" | "fri" | undefined;
+  const weekday = weekdayArg ?? getWeekday();
   const season = getSeason();
 
   // Schedule prüfen
@@ -491,16 +434,16 @@ async function main() {
   }
 
   const dryRun = isDryRun || schedule.is_dry_run;
+  const themeSlot = (schedule.theme_slot || "lifestyle") as string;
 
-  console.log(`\n🚀 GBP-Poster — ${weekday} ${schedule.slot_time}, Season: ${season}${dryRun ? " [DRY RUN]" : ""}\n`);
+  console.log(`\n🚀 GBP-Poster — ${weekday} ${schedule.slot_time}, Season: ${season}, Slot: ${themeSlot}${dryRun ? " [DRY RUN]" : ""}\n`);
 
   // Pool wählen
-  const pool = selectPool(weekday);
+  let pool = selectPool(weekday);
   console.log(`Pool: ${pool}`);
 
   // Anti-Wiederholung
   const recentPostIds = await getRecentPostIds(pool);
-  const recentImageIds = await getRecentImageIds();
   const recentClusters = await getRecentClusters();
 
   let postBody: string;
@@ -510,53 +453,77 @@ async function main() {
   let imageSeason: string;
   let postId: number | null = null;
   let clusterId: string | null = null;
+  let minRepDays = 21;
 
   // Neue Karte prüfen (läuft immer, unabhängig vom regulären Pool)
   await checkNewMenuAndPost(dryRun);
 
   // Post-Inhalt bestimmen
-  if (pool === "C") {
-    const { generated, cluster } = await generatePoolCPost(weekday, season, recentClusters);
-    postBody = generated.body;
-    ctaType = generated.cta_type;
-    ctaUrl = generated.cta_url;
-    imageTags = generated.image_tags;
-    imageSeason = generated.image_season || season;
-    clusterId = cluster.cluster_id;
+  // Pool A/B: aus DB. Pool A ohne passenden theme_slot-Post → Fallback auf Pool C.
+  let usePoolC = pool === "C";
 
-    // Cluster last_used aktualisieren
-    await sql`UPDATE gbp_theme_clusters SET last_used = NOW() WHERE cluster_id = ${clusterId}`;
-    console.log(`Theme-Cluster: ${clusterId}`);
-  } else {
-    const post = await pickPostFromDB(pool, season, recentPostIds);
-    if (!post) throw new Error(`Kein Post in Pool ${pool} verfügbar`);
-
-    // Pool A Mittagsmenü-Post: echte Gerichte aus DB einsetzen
-    if (pool === "A" && post.title === "Mittagsmenü Wochenstart") {
-      const lunchItems = await getLunchMenuItems();
-      if (lunchItems) {
-        postBody = `Im Mittagsmenü: ${lunchItems}. Mo–Fr 11:30–14:30 in der Karlstraße. Tisch: +49 89 51519696.`;
-        if (postBody.length > 300) postBody = postBody.substring(0, 297) + "...";
+  if (!usePoolC) {
+    const post = await pickPostFromDB(pool, season, themeSlot, recentPostIds);
+    if (!post) {
+      if (pool === "A") {
+        console.log(`⚠️  Kein Pool-A-Post für theme_slot=${themeSlot} — Fallback auf Pool C`);
+        usePoolC = true;
+      } else {
+        throw new Error(`Kein Post in Pool ${pool} verfügbar`);
+      }
+    } else {
+      // Pool A Mittagsmenü-Post: echte Gerichte aus DB einsetzen
+      if (pool === "A" && post.title === "Mittagsmenü Wochenstart") {
+        const lunchItems = await getLunchMenuItems();
+        if (lunchItems) {
+          postBody = `Im Mittagsmenü: ${lunchItems}. Mo–Fr 11:30–14:30 in der Karlstraße. Tisch: +49 89 51519696.`;
+          if (postBody.length > 300) postBody = postBody.substring(0, 297) + "...";
+        } else {
+          postBody = post.body;
+        }
       } else {
         postBody = post.body;
       }
-    } else {
-      postBody = post.body;
-    }
-    ctaType = post.cta_type;
-    ctaUrl = post.cta_url;
-    imageTags = post.image_tags || [];
-    imageSeason = post.season || "allyear";
-    postId = post.id;
+      ctaType = post.cta_type;
+      ctaUrl = post.cta_url;
+      imageTags = post.image_tags || [];
+      imageSeason = post.season || "allyear";
+      postId = post.id;
 
-    // Post last_used aktualisieren
-    await sql`UPDATE gbp_posts SET last_used = NOW(), use_count = use_count + 1 WHERE id = ${postId}`;
-    console.log(`Post-ID: ${postId} — "${post.title || postBody.substring(0, 50)}..."`);
+      await sql`UPDATE gbp_posts SET last_used = NOW(), use_count = use_count + 1 WHERE id = ${postId}`;
+      console.log(`Post-ID: ${postId} — "${post.title || postBody!.substring(0, 50)}..."`);
+    }
   }
 
-  // Bild wählen
-  const image = await pickImage(imageTags, imageSeason, recentImageIds);
-  if (!image) throw new Error("Kein Bild verfügbar");
+  if (usePoolC) {
+    pool = "C";
+    const { generated, cluster } = await generatePoolCPost(weekday, season, themeSlot, recentClusters);
+    postBody = generated.body;
+    ctaType = generated.cta_type;
+    ctaUrl = generated.cta_url;
+    // required_tags des Clusters für Image-Matching verwenden (robuster als Claude-generierte Tags)
+    imageTags = (cluster.required_tags as string[])?.length
+      ? (cluster.required_tags as string[])
+      : (generated.image_tags || []);
+    imageSeason = generated.image_season || season;
+    clusterId = cluster.cluster_id;
+    minRepDays = (cluster.min_image_repetition_days as number) || 21;
+
+    await sql`UPDATE gbp_theme_clusters SET last_used = NOW() WHERE cluster_id = ${clusterId}`;
+    console.log(`Theme-Cluster: ${clusterId}`);
+  }
+
+  // Bild wählen — kein Random-Fallback. Fehler → Skip + Slack-Alert.
+  let image: Awaited<ReturnType<typeof pickImage>>;
+  try {
+    image = await pickImage(imageTags!, imageSeason!, minRepDays);
+  } catch (err) {
+    const msg = String(err);
+    console.error(`❌ Bild-Fehler: ${msg}`);
+    await slackReport(`⚠️ STORIA GBP Skip (${weekday} ${schedule.slot_time}): ${msg}`);
+    await sql.end();
+    return;
+  }
   console.log(`Bild: ${image.filename}`);
 
   // Image last_used aktualisieren

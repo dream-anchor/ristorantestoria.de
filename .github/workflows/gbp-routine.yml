@@ -1,0 +1,61 @@
+name: GBP Routine (Mo/Mi/Fr)
+
+on:
+  schedule:
+    # Mo 09:00 MESZ = 07:00 UTC
+    - cron: '0 7 * * 1'
+    # Mi 11:00 MESZ = 09:00 UTC
+    - cron: '0 9 * * 3'
+    # Fr 17:00 MESZ = 15:00 UTC
+    - cron: '0 15 * * 5'
+  workflow_dispatch:
+    inputs:
+      weekday:
+        description: 'Wochentag überschreiben (mon | wed | fri) — leer = automatisch'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry-Run (true/false)'
+        required: false
+        default: 'false'
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run GBP Poster
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.weekday }}" != "" ]; then
+            ARGS="--weekday=${{ github.event.inputs.weekday }}"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          npx tsx gbp-routine/gbp-poster.ts $ARGS
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Telegram Alert on Failure
+        if: failure()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d parse_mode="HTML" \
+            -d text="🔴 <b>GBP-Routine fehlgeschlagen</b>%0A%0ATrigger: ${{ github.event_name }}%0AWeekday: ${{ github.event.inputs.weekday || 'auto' }}%0A%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Logs ansehen</a>"
