@@ -126,6 +126,17 @@ export const GroupInquiryForm = () => {
       }
 
       setIsSubmitted(true);
+
+      // GA4 Conversion-Event: generate_lead
+      if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
+        (window as Window & { gtag: (...args: unknown[]) => void }).gtag("event", "generate_lead", {
+          form_name: "reisegruppen_anfrage",
+          page_path: window.location.pathname,
+          language,
+          value: 1500,
+          currency: "EUR",
+        });
+      }
     } catch {
       setSubmitError(f.errorMessage);
     } finally {

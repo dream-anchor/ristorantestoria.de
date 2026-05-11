@@ -608,12 +608,26 @@ const ReisegruppenPage = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <a href={`mailto:info@ristorantestoria.de?subject=${encodeURIComponent(rg.emailSubject)}`}>
+                  <a
+                    href={`mailto:info@ristorantestoria.de?subject=${encodeURIComponent(rg.emailSubject)}`}
+                    onClick={() => {
+                      if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
+                        (window as Window & { gtag: (...args: unknown[]) => void }).gtag("event", "email_click", { page_path: window.location.pathname, page_type: "reisegruppen" });
+                      }
+                    }}
+                  >
                     {rg.ctaEmail}
                   </a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
-                  <a href="tel:+498951519696">{rg.ctaPhone}</a>
+                  <a
+                    href="tel:+498951519696"
+                    onClick={() => {
+                      if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
+                        (window as Window & { gtag: (...args: unknown[]) => void }).gtag("event", "phone_click", { page_path: window.location.pathname, page_type: "reisegruppen" });
+                      }
+                    }}
+                  >{rg.ctaPhone}</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
                   <a
