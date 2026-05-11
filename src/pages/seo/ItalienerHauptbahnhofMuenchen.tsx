@@ -313,6 +313,10 @@ const ItalienerHauptbahnhofMuenchen = () => {
                   <span className="font-medium">{s.related4Title}</span>
                   <p className="text-sm text-muted-foreground mt-1">{s.related4Desc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="reisegruppen-muenchen" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
+                  <span className="font-medium">Für Reisegruppen aus dem Hauptbahnhof</span>
+                  <p className="text-sm text-muted-foreground mt-1">5 Gehminuten – Gruppenmenüs ab 25 €, Reiseleiter isst gratis.</p>
+                </LocalizedLink>
                 <LocalizedLink to="faq" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
                   <span className="font-medium">{t.internalLinks.faqLink}</span>
                   <p className="text-sm text-muted-foreground mt-1">{t.internalLinks.faqLinkDesc}</p>

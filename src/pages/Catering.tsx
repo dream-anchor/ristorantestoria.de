@@ -663,6 +663,10 @@ const Catering = () => {
                   <h3 className="font-semibold mb-1 text-sm">🍱 Business Lunch</h3>
                   <p className="text-muted-foreground text-xs">Regelmäßiges Firmen-Catering & Mittagslunch</p>
                 </LocalizedLink>
+                <LocalizedLink to="reisegruppen-muenchen" className="bg-card border border-border rounded-xl p-5 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-1 text-sm">🚌 Catering für Reisegruppen vor Ort</h3>
+                  <p className="text-muted-foreground text-xs">Gruppenmenüs ab 25 € für 20–100 Personen</p>
+                </LocalizedLink>
               </div>
             </div>
           </section>

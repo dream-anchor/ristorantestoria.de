@@ -229,6 +229,14 @@ export const en = {
     aboutUs: "About us",
     instagram: "Instagram",
     discoverRestaurant: "Discover our restaurant",
+    eventsGroupsTitle: "Events & Groups",
+    eventsGroupsLinks: [
+      { label: "Group Dining Munich", slug: "reisegruppen-muenchen" },
+      { label: "Corporate Events Munich", slug: "firmenfeier-muenchen" },
+      { label: "Birthday Party Munich", slug: "geburtstagsfeier-muenchen" },
+      { label: "Wedding Celebration Munich", slug: "hochzeitsfeier-muenchen" },
+      { label: "Christmas Party Munich", slug: "weihnachtsfeier-muenchen" },
+    ],
   },
   reservation: {
     title: 'Reserve a Table',

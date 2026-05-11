@@ -259,6 +259,14 @@ const itBase = {
     aboutUs: "Chi siamo",
     instagram: "Instagram",
     discoverRestaurant: "Scopri il nostro ristorante",
+    eventsGroupsTitle: "Occasioni & Gruppi",
+    eventsGroupsLinks: [
+      { label: "Gruppi Turistici Monaco", slug: "reisegruppen-muenchen" },
+      { label: "Feste Aziendali Monaco", slug: "firmenfeier-muenchen" },
+      { label: "Feste di Compleanno Monaco", slug: "geburtstagsfeier-muenchen" },
+      { label: "Ricevimento Matrimoniale Monaco", slug: "hochzeitsfeier-muenchen" },
+      { label: "Festa di Natale Monaco", slug: "weihnachtsfeier-muenchen" },
+    ],
   },
   reservation: {
     title: 'Prenota un tavolo',

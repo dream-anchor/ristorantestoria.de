@@ -265,6 +265,10 @@ const GeburtstagsfeierMuenchen = () => {
                   <h3 className="font-semibold mb-2">{t.internalLinks.weddingMunich}</h3>
                   <p className="text-muted-foreground text-sm">Auch Hochzeitsfeiern im STORIA – bis 300 Gäste, individuelles Menü.</p>
                 </LocalizedLink>
+                <LocalizedLink to="reisegruppen-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">Sie organisieren eine Reisegruppe?</h3>
+                  <p className="text-muted-foreground text-sm">Unser STORIA ist auch für Reisegruppen von 20–100 Personen gerüstet – mit speziellen Gruppenmenüs.</p>
+                </LocalizedLink>
                 <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3>
                   <p className="text-muted-foreground text-sm">{t.internalLinks.faqLinkDesc}</p>

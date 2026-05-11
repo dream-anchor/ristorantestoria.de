@@ -68,6 +68,26 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Anlässe & Gruppen Navigation */}
+      <div className="border-b border-primary-foreground/5">
+        <div className="container mx-auto px-4 py-10 max-w-5xl">
+          <p className="text-xs uppercase tracking-[0.2em] text-primary-foreground/40 mb-5 text-center font-serif">
+            {t.footer.eventsGroupsTitle}
+          </p>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
+            {t.footer.eventsGroupsLinks.map((link: { label: string; slug: string }) => (
+              <LocalizedLink
+                key={link.slug}
+                to={link.slug}
+                className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+              >
+                {link.label}
+              </LocalizedLink>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Kontakt & Öffnungszeiten */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto">
