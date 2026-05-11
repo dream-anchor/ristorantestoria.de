@@ -1,11 +1,19 @@
 {
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
-  "totalReviews": 809,
-  "lastFetched": "2026-05-10T07:01:05.464Z",
+  "totalReviews": 810,
+  "lastFetched": "2026-05-11T07:21:34.859Z",
   "summary": "Oltre 780 ospiti valutano il STORIA con una media di 4,5 stelle. La pizza napoletana dal forno a pietra, la pasta fatta in casa e i piatti di pesce fresco ricevono elogi particolari. Molti clienti abituali sottolineano l’elegante atmosfera con luci calde e musica italiana. Il servizio viene descritto come cordiale, attento e professionale – anche per gruppi numerosi. La posizione centrale vicino a Königsplatz lo rende un punto d’incontro amato nel quartiere Maxvorstadt di Monaco. Il tiramisù con ricetta della casa e la selezione di vini vengono citati come punti di forza.",
   "summaryLabel": "Riepilogo di oltre 780 recensioni",
   "reviews": [
+    {
+      "authorName": "John Tower",
+      "rating": 5,
+      "text": "Sehr schöne Location\nGutes Essen\nGroße Auswahl an Weinen\nAngenehmes Ambiente\nAlles 🔝\n\n(Translated by Google)\nBeautiful location\nGood food\nLarge selection of wines\nPleasant atmosphere\nEverything 🔝",
+      "relativeTimeDescription": "1 giorno fa",
+      "time": 1778404085,
+      "language": "de"
+    },
     {
       "authorName": "Persi",
       "rating": 5,
@@ -313,7 +321,7 @@
     {
       "authorName": "Theresa",
       "rating": 5,
-      "text": "War echt super lecker, etwas teurer als sonstige Restaurants, aber zurecht. Die Inneneinrichtung ist romantisch, ruhig und sehr elegant. Die Kellner waren sehr freundlich und zuvorkommend. Ein Kellner verrechnete mir nur einen Hugo( obwohl ich 2 Hugo trank) , weil ich alleine essen war. Einfach super.\n\n(Translated by Google)\nIt was truly delicious, a bit more expensive than other restaurants, but rightly so. The interior is romantic, tranquil, and very elegant. The waiters were very friendly and accommodating. One waiter only charged me for one Hugo (even though I drank two Hugos) because I was dining alone. Simply fantastic.",
+      "text": "War echt super lecker, etwas teurer als sonstige Restaurants, aber zurecht. Die Inneneinrichtung ist romantisch, ruhig und sehr elegant. Die Kellner waren sehr freundlich und zuvorkommend. Ein Kellner verrechnete mir nur einen Hugo( obwohl ich 2 Hugo trank) , weil ich alleine essen war. Einfach super.\n\n(Translated by Google)\nIt was absolutely delicious, a bit more expensive than other restaurants, but worth it. The interior is romantic, tranquil, and very elegant. The waiters were very friendly and attentive. One waiter only charged me for one Hugo (even though I had two) because I was dining alone. Simply fantastic.",
       "relativeTimeDescription": "2 anni fa",
       "time": 1706731628,
       "language": "de"
@@ -396,14 +404,6 @@
       "text": "Egal, ob vor Ort, als Abholung oder kontaktlose Lieferung – das Storia überzeugt in jeder Hinsicht. Die italienischen Spezialitäten sind die beste Auswahl. Der Service ist professionell und freundlich, eine positive Erfahrung, die Lust auf mehr macht\n\n(Translated by Google)\nWhether you dine in, pick up, or deliver without contact, Storia impresses in every way. The Italian specialties are the best selection. The service is professional and friendly, a positive experience that leaves you wanting more.",
       "relativeTimeDescription": "2 anni fa",
       "time": 1703149248,
-      "language": "de"
-    },
-    {
-      "authorName": "Denise Schweickert",
-      "rating": 5,
-      "text": "Das Storia vereint auf gelungene Weise Moderne und Tradition. Die natürliche neapolitanische Pizza ist ein Highlight, und die traditionellen italienischen Spezialitäten überzeugen durch besten Geschmack. Die einfache Reservierung und der professionelle Service machen jeden Besuch zu einem rundum gelungenen Erlebnis.\n\n(Translated by Google)\nStoria successfully combines modernity with tradition. The natural Neapolitan pizza is a highlight, and the traditional Italian specialties impress with their exquisite taste. Easy reservations and professional service make every visit a thoroughly enjoyable experience.",
-      "relativeTimeDescription": "2 anni fa",
-      "time": 1702902590,
       "language": "de"
     }
   ]

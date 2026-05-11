@@ -1,8 +1,8 @@
 {
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
-  "totalReviews": 809,
-  "lastFetched": "2026-05-10T07:01:05.464Z",
+  "totalReviews": 810,
+  "lastFetched": "2026-05-11T07:21:34.859Z",
   "summary": "Plus de 780 clients attribuent au STORIA une note moyenne de 4,5 étoiles. La pizza napolitaine au four à pierre, les pâtes fraîches maison et les plats de poisson frais sont particulièrement appréciés. De nombreux habitués soulignent l’ambiance élégante avec éclairage chaleureux et musique italienne. Le service est décrit comme chaleureux, attentif et professionnel – même pour les grands groupes. L’emplacement central près de Königsplatz en fait un lieu de rencontre prisé dans le quartier Maxvorstadt de Munich. Le tiramisù maison et la carte des vins sont régulièrement cités comme des atouts majeurs.",
   "summaryLabel": "Résumé de plus de 780 avis",
   "reviews": [
@@ -13,6 +13,14 @@
       "relativeTimeDescription": "il y a 1 an",
       "time": 1735421090,
       "language": "fr"
+    },
+    {
+      "authorName": "John Tower",
+      "rating": 5,
+      "text": "Sehr schöne Location\nGutes Essen\nGroße Auswahl an Weinen\nAngenehmes Ambiente\nAlles 🔝\n\n(Translated by Google)\nBeautiful location\nGood food\nLarge selection of wines\nPleasant atmosphere\nEverything 🔝",
+      "relativeTimeDescription": "il y a 1 jour",
+      "time": 1778404085,
+      "language": "de"
     },
     {
       "authorName": "Persi",
@@ -321,7 +329,7 @@
     {
       "authorName": "Theresa",
       "rating": 5,
-      "text": "War echt super lecker, etwas teurer als sonstige Restaurants, aber zurecht. Die Inneneinrichtung ist romantisch, ruhig und sehr elegant. Die Kellner waren sehr freundlich und zuvorkommend. Ein Kellner verrechnete mir nur einen Hugo( obwohl ich 2 Hugo trank) , weil ich alleine essen war. Einfach super.\n\n(Translated by Google)\nIt was truly delicious, a bit more expensive than other restaurants, but rightly so. The interior is romantic, tranquil, and very elegant. The waiters were very friendly and accommodating. One waiter only charged me for one Hugo (even though I drank two Hugos) because I was dining alone. Simply fantastic.",
+      "text": "War echt super lecker, etwas teurer als sonstige Restaurants, aber zurecht. Die Inneneinrichtung ist romantisch, ruhig und sehr elegant. Die Kellner waren sehr freundlich und zuvorkommend. Ein Kellner verrechnete mir nur einen Hugo( obwohl ich 2 Hugo trank) , weil ich alleine essen war. Einfach super.\n\n(Translated by Google)\nIt was absolutely delicious, a bit more expensive than other restaurants, but worth it. The interior is romantic, tranquil, and very elegant. The waiters were very friendly and attentive. One waiter only charged me for one Hugo (even though I had two) because I was dining alone. Simply fantastic.",
       "relativeTimeDescription": "il y a 2 anni",
       "time": 1706731628,
       "language": "de"
@@ -396,14 +404,6 @@
       "text": "Wir hatten zwar nur wenig bestellt bzw gegessen, aber dennoch wurden wir super zuvorkommend bedient! Die Gerichte (Rissotto, Pizza, Salat) wie auch der Wein (Sauvignon Blanc) waren hervorragend und das Preis-/Leistungsverhältnis war echt ok. Der Service war ausgezeichnet und sehr stilvoll! Das moderne Ambiente fanden wir auch super stylish und dennoch richtig gemütlich! Kurzum, wir werden wieder kommen. Grazie tanto - ci vediamo!\n\n(Translated by Google)\nWe only ordered and ate a small amount, but the service was incredibly attentive! The dishes (risotto, pizza, salad) and the wine (Sauvignon Blanc) were excellent, and the price-performance ratio was really good. The service was outstanding and very stylish! We also found the modern ambiance to be very stylish yet cozy! In short, we will be back. Thank you so much - see you soon!",
       "relativeTimeDescription": "il y a 2 anni",
       "time": 1703709939,
-      "language": "de"
-    },
-    {
-      "authorName": "Klaus Krumbacher",
-      "rating": 5,
-      "text": "Egal, ob vor Ort, als Abholung oder kontaktlose Lieferung – das Storia überzeugt in jeder Hinsicht. Die italienischen Spezialitäten sind die beste Auswahl. Der Service ist professionell und freundlich, eine positive Erfahrung, die Lust auf mehr macht\n\n(Translated by Google)\nWhether you dine in, pick up, or deliver without contact, Storia impresses in every way. The Italian specialties are the best selection. The service is professional and friendly, a positive experience that leaves you wanting more.",
-      "relativeTimeDescription": "il y a 2 anni",
-      "time": 1703149248,
       "language": "de"
     }
   ]
