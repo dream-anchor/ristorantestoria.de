@@ -127,13 +127,38 @@ const ReisegruppenPage = () => {
     { q: rg.faq10Question, a: rg.faq10Answer },
   ];
 
+  const schemaUrlMap: Record<string, string> = {
+    de: "https://www.ristorantestoria.de/reisegruppen/",
+    en: "https://www.ristorantestoria.de/en/group-dining/",
+    it: "https://www.ristorantestoria.de/it/ristorazione-gruppi-monaco/",
+    fr: "https://www.ristorantestoria.de/fr/restauration-groupes-munich/",
+  };
+  const schemaDescMap: Record<string, string> = {
+    de: "Italienisches Restaurant für Reisegruppen in München Maxvorstadt. Bis 100 Sitzplätze, Gruppenmenüs ab 25 € pro Person, 5 Minuten vom Hauptbahnhof.",
+    en: "Italian restaurant for tour groups in Munich Maxvorstadt. Up to 100 seats, group menus from €25, 5 min from Central Station. Free meal for tour leaders.",
+    it: "Ristorante italiano per gruppi a Monaco di Baviera. Fino a 100 posti, menu di gruppo da 25 €, 5 min dalla stazione centrale. Guida gratuita.",
+    fr: "Restaurant italien pour groupes à Munich. Jusqu'à 100 places, menus de groupe à partir de 25 €, 5 min de la gare centrale. Guide gratuit.",
+  };
+  const schemaHomeMap: Record<string, string> = {
+    de: "https://www.ristorantestoria.de/",
+    en: "https://www.ristorantestoria.de/en/",
+    it: "https://www.ristorantestoria.de/it/",
+    fr: "https://www.ristorantestoria.de/fr/",
+  };
+  const schemaBreadcrumbNameMap: Record<string, string> = {
+    de: "Reisegruppen München",
+    en: "Group Dining Munich",
+    it: "Gruppi Monaco",
+    fr: "Groupes Munich",
+  };
+
   const restaurantSchema = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
     name: "Ristorante STORIA",
-    url: "https://www.ristorantestoria.de/reisegruppen/",
-    description:
-      "Italienisches Restaurant für Reisegruppen in München Maxvorstadt. Bis 100 Sitzplätze, Gruppenmenüs ab 25 € pro Person, 5 Minuten vom Hauptbahnhof.",
+    url: schemaUrlMap[language] ?? schemaUrlMap.de,
+    inLanguage: language,
+    description: schemaDescMap[language] ?? schemaDescMap.de,
     address: {
       "@type": "PostalAddress",
       streetAddress: "Karlstraße 47a",
@@ -234,13 +259,13 @@ const ReisegruppenPage = () => {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.ristorantestoria.de/",
+        item: schemaHomeMap[language] ?? schemaHomeMap.de,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: rg.breadcrumb,
-        item: "https://www.ristorantestoria.de/reisegruppen/",
+        name: schemaBreadcrumbNameMap[language] ?? schemaBreadcrumbNameMap.de,
+        item: schemaUrlMap[language] ?? schemaUrlMap.de,
       },
     ],
   };
