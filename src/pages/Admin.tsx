@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useAdminMenus } from "@/hooks/useAdminMenus";
 import { useUpdateMenuOrder } from "@/hooks/useUpdateMenuOrder";
@@ -153,7 +153,7 @@ const Admin = () => {
   }
 
   if (!user || !isAdmin) {
-    return null;
+    return <Navigate to="/admin/login" replace />;
   }
 
   return (
