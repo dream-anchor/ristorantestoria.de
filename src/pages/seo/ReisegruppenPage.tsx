@@ -125,6 +125,7 @@ const ReisegruppenPage = () => {
     { q: rg.faq8Question, a: rg.faq8Answer },
     { q: rg.faq9Question, a: rg.faq9Answer },
     { q: rg.faq10Question, a: rg.faq10Answer },
+    { q: rg.faq11Question, a: rg.faq11Answer },
   ];
 
   const schemaUrlMap: Record<string, string> = {
@@ -431,6 +432,27 @@ const ReisegruppenPage = () => {
             </div>
           </section>
 
+          {/* SECTION 3b: Für wen wir kochen */}
+          <section className="py-16 md:py-20">
+            <div className="container mx-auto px-4 max-w-5xl">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">
+                {rg.forWhomTitle}
+              </h2>
+              <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+                {rg.forWhomIntro}
+              </p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {(rg.forWhomGroups as { emoji: string; title: string; desc: string }[]).map((group, index) => (
+                  <div key={index} className="bg-card p-6 rounded-lg border border-border">
+                    <div className="text-3xl mb-3">{group.emoji}</div>
+                    <h3 className="font-semibold mb-2">{group.title}</h3>
+                    <p className="text-sm text-muted-foreground">{group.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* SECTION 4: Gruppenmenüs */}
           <section id="gruppenmenus" className="py-16 md:py-20">
             <div className="container mx-auto px-4 max-w-5xl">
@@ -524,6 +546,41 @@ const ReisegruppenPage = () => {
                     </div>
                   );
                 })}
+              </div>
+
+              {/* 3 neue Sehenswürdigkeiten mit Beschreibung */}
+              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-8">
+                {[
+                  { title: rg.newAttr1Title, distance: rg.newAttr1Distance, desc: rg.newAttr1Desc },
+                  { title: rg.newAttr2Title, distance: rg.newAttr2Distance, desc: rg.newAttr2Desc },
+                  { title: rg.newAttr3Title, distance: rg.newAttr3Distance, desc: rg.newAttr3Desc },
+                ].map((attr, index) => (
+                  <div key={index} className="bg-card p-6 rounded-lg border border-border">
+                    <div className="flex items-start gap-2 mb-3">
+                      <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <h3 className="font-semibold">{attr.title}</h3>
+                        <p className="text-xs text-primary font-medium mt-0.5">{attr.distance}</p>
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{attr.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Routen-Empfehlungen */}
+              <div className="mt-12 max-w-4xl mx-auto bg-card border border-border rounded-xl p-8">
+                <h3 className="text-xl font-serif font-semibold mb-3">{rg.routesTitle}</h3>
+                <p className="text-muted-foreground mb-6">{rg.routesIntro}</p>
+                <ul className="space-y-4">
+                  {(rg.routes as string[]).map((route, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{index + 1}</span>
+                      <p className="text-sm text-muted-foreground">{route}</p>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-muted-foreground mt-6 italic">{rg.routesOutro}</p>
               </div>
             </div>
           </section>
