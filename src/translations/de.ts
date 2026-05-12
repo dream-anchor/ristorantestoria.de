@@ -140,6 +140,7 @@ export const de = {
     privacyText: "Ich habe die",
     privacyLink: "Datenschutzerklärung",
     privacyTextAfter: "gelesen und stimme der Verarbeitung meiner Daten zu.",
+    replyHint: "Wir antworten innerhalb von 24 Stunden.",
     submitButton: "Anfrage senden",
     submitting: "Wird gesendet...",
     successTitle: "Vielen Dank für Ihre Anfrage!",

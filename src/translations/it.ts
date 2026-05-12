@@ -170,6 +170,7 @@ const itBase = {
     privacyText: "Ho letto la",
     privacyLink: "Privacy Policy",
     privacyTextAfter: "e acconsento al trattamento dei miei dati.",
+    replyHint: "Rispondiamo entro 24 ore.",
     submitButton: "Invia richiesta",
     submitting: "Invio in corso...",
     successTitle: "Grazie per la tua richiesta!",

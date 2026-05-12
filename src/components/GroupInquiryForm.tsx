@@ -29,7 +29,7 @@ const schema = z.object({
   preferred_date: z.string().optional(),
   preferred_date_flexible: z.boolean().optional(),
   arrival_time: z.string().max(20).optional(),
-  preferred_menu: z.string().min(1),
+  preferred_menu: z.string().optional(),
   message: z.string().max(1500).optional(),
   privacy: z.literal(true, { errorMap: () => ({ message: "Bitte Datenschutzerklärung akzeptieren" }) }),
 });
@@ -256,7 +256,7 @@ export const GroupInquiryForm = () => {
               name="preferred_menu"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-primary-foreground/90">{f.menuLabel} *</FormLabel>
+                  <FormLabel className="text-primary-foreground/90">{f.menuLabel}</FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="bg-white/10 border-white/20 text-primary-foreground">
@@ -373,6 +373,10 @@ export const GroupInquiryForm = () => {
               {submitError}
             </p>
           )}
+
+          <p className="text-sm text-primary-foreground/70 text-center sm:text-left">
+            {f.replyHint}
+          </p>
 
           <Button
             type="submit"

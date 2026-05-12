@@ -230,6 +230,13 @@ const ReisegruppenPage = () => {
         closes: "01:00",
       },
     ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "807",
+      bestRating: 5,
+      worstRating: 1,
+    },
     makesOffer: displayMenus.map((menu) => ({
       "@type": "Offer",
       name: getLocalizedText(menu.title, "de"),

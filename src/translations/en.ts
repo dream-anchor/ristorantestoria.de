@@ -140,6 +140,7 @@ export const en = {
     privacyText: "I have read the",
     privacyLink: "Privacy Policy",
     privacyTextAfter: "and agree to the processing of my data.",
+    replyHint: "We reply within 24 hours.",
     submitButton: "Send Enquiry",
     submitting: "Sending...",
     successTitle: "Thank you for your enquiry!",

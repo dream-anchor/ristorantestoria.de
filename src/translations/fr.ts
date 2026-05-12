@@ -140,6 +140,7 @@ export const fr = {
     privacyText: "J'ai lu la",
     privacyLink: "politique de confidentialité",
     privacyTextAfter: "et j'accepte le traitement de mes données.",
+    replyHint: "Nous répondons dans les 24 heures.",
     submitButton: "Envoyer la demande",
     submitting: "Envoi en cours...",
     successTitle: "Merci pour votre demande !",
