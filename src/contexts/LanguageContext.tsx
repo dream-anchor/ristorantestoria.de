@@ -1,14 +1,13 @@
 // LanguageContext - provides i18n support for DE/EN/IT/FR
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { useState, useCallback, useEffect, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { de } from "@/translations/de";
 import { en } from "@/translations/en";
 import { it as italian } from "@/translations/it";
 import { fr } from "@/translations/fr";
 import { parseLocalizedPath, getLocalizedPath, SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from "@/config/routes";
-
-export type Language = "de" | "en" | "it" | "fr";
-type Translations = typeof de;
+import { LanguageContext, type Language } from "./language-context";
+export { useLanguage, type Language } from "./language-context";
 
 const STORAGE_KEY = "storia-language";
 
@@ -44,18 +43,6 @@ const detectBrowserLanguage = (): Language => {
   // Fallback to default
   return DEFAULT_LANGUAGE;
 };
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  t: Translations;
-  /** Navigate to the same page in another language */
-  switchLanguage: (lang: Language) => void;
-  /** Get localized path for a base slug */
-  getPath: (baseSlug: string) => string;
-}
-
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
@@ -114,19 +101,11 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     fr,
   };
 
-  const t = translations[language] as Translations;
+  const t = translations[language] as typeof de;
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t, switchLanguage, getPath }}>
       {children}
     </LanguageContext.Provider>
   );
-};
-
-export const useLanguage = (): LanguageContextType => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage must be used within a LanguageProvider");
-  }
-  return context;
 };
