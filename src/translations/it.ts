@@ -2893,6 +2893,7 @@ const itBase = {
     subtitle: "Tutto quello che c'è da sapere sul Ristorante STORIA a Monaco di Baviera",
     introContext: "Il Ristorante STORIA è un ristorante italiano a gestione familiare in Karlstraße 47a a Monaco Maxvorstadt – dal 2015 gestito dalla famiglia Speranza di Rofrano in provincia di Salerno. Qui trovate risposta alle domande più frequenti sulla nostra pizza napoletana, sulla pasta fatta in casa, sulle prenotazioni, sui prezzi e sul galateo a tavola.",
     learnMore: "Scopri di più",
+    lastUpdated: "Ultimo aggiornamento: maggio 2026",
     categories: [
       {
         id: "su-storia",
