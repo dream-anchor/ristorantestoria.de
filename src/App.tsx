@@ -52,6 +52,7 @@ import ValentinstagMuenchen from "./pages/seo/ValentinstagMuenchen";
 import SilvesterMuenchen from "./pages/seo/SilvesterMuenchen";
 import WeihnachtenMuenchen from "./pages/seo/WeihnachtenMuenchen";
 import ReisegruppenPage from "./pages/seo/ReisegruppenPage";
+import ReisegruppenDankePage from "./pages/seo/ReisegruppenDankePage";
 import FAQ from "./pages/FAQ";
 
 // Eager: Legal-Seiten (müssen pre-rendered werden)
@@ -223,6 +224,10 @@ const AppRoutes = () => {
         <Route path="/en/italian-restaurant-munich" element={<Navigate to="/en/" replace />} />
         <Route path="/it/ristorante-italiano-monaco" element={<Navigate to="/it/" replace />} />
         <Route path="/fr/restaurant-italien-munich" element={<Navigate to="/fr/" replace />} />
+
+        {/* Thank-you page after group inquiry form submit */}
+        <Route path="/reisegruppen/danke" element={<ReisegruppenDankePage />} />
+        <Route path="/reisegruppen/danke/" element={<ReisegruppenDankePage />} />
 
         {/* /menu → /speisekarte (thin content page removed) */}
         <Route path="/menu" element={<Navigate to="/speisekarte/" replace />} />

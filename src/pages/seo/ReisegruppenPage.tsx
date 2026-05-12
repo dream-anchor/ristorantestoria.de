@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import LocalizedLink from "@/components/LocalizedLink";
 import { Link } from "react-router-dom";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
@@ -18,6 +19,8 @@ import {
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
+import { useUtmParams } from "@/hooks/useUtmParams";
+import { trackEvent } from "@/lib/analytics";
 import GroupInquiryForm from "@/components/GroupInquiryForm";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
@@ -43,6 +46,28 @@ const ReisegruppenPage = () => {
 
   const rg = t.reisegruppen;
   const { menus, settings } = useGroupMenus();
+  const utmParams = useUtmParams();
+
+  // Scroll-depth tracking: fires at 25 / 50 / 75 / 100 %
+  useEffect(() => {
+    const thresholds = [25, 50, 75, 100];
+    const fired = new Set<number>();
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = document.documentElement.scrollHeight;
+      const pct = Math.round((scrolled / total) * 100);
+      for (const t of thresholds) {
+        if (pct >= t && !fired.has(t)) {
+          fired.add(t);
+          trackEvent("scroll_depth", { depth: t, page_type: "reisegruppen" });
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // SSG fallback: hardcoded translations used when Supabase data is unavailable
   const fallbackMenus: GroupMenu[] = [
@@ -232,10 +257,10 @@ const ReisegruppenPage = () => {
     ],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "807",
-      bestRating: 5,
-      worstRating: 1,
+      ratingValue: "4.5",
+      reviewCount: "810",
+      bestRating: "5",
+      worstRating: "1",
     },
     makesOffer: displayMenus.map((menu) => ({
       "@type": "Offer",
@@ -335,9 +360,26 @@ const ReisegruppenPage = () => {
               <h1 className="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
                 {rg.heroTitle}
               </h1>
-              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl mb-5 max-w-2xl mx-auto">
                 {rg.heroSubline}
               </p>
+
+              {/* Trust-Bar — Werte müssen exakt zum aggregateRating-Schema passen */}
+              <div
+                className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 mb-7 text-sm"
+                role="region"
+                aria-label="Bewertungen"
+              >
+                <span className="flex items-center gap-1.5">
+                  <span className="text-yellow-400 tracking-tight leading-none" aria-hidden="true">★★★★½</span>
+                  <span className="font-semibold">4,5 / 5</span>
+                  <span className="text-white/70 hidden sm:inline">· 810 Google-Bewertungen seit 2015</span>
+                  <span className="text-white/70 sm:hidden">· 810 Google-Bewertungen</span>
+                </span>
+                <span className="text-white/40 hidden sm:inline" aria-hidden="true">·</span>
+                <span className="text-white/80">TheFork 9,2 / 10</span>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
@@ -371,6 +413,10 @@ const ReisegruppenPage = () => {
               <div className="flex items-center gap-2">
                 <Award className="w-5 h-5" />
                 <span>{rg.badge3}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5" />
+                <span>{rg.badge4}</span>
               </div>
             </div>
           </div>
@@ -700,9 +746,7 @@ const ReisegruppenPage = () => {
                   <a
                     href={`mailto:info@ristorantestoria.de?subject=${encodeURIComponent(rg.emailSubject)}`}
                     onClick={() => {
-                      if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
-                        (window as Window & { gtag: (...args: unknown[]) => void }).gtag("event", "email_click", { page_path: window.location.pathname, page_type: "reisegruppen" });
-                      }
+                      trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
                     }}
                   >
                     {rg.ctaEmail}
@@ -712,17 +756,16 @@ const ReisegruppenPage = () => {
                   <a
                     href="tel:+498951519696"
                     onClick={() => {
-                      if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
-                        (window as Window & { gtag: (...args: unknown[]) => void }).gtag("event", "phone_click", { page_path: window.location.pathname, page_type: "reisegruppen" });
-                      }
+                      trackEvent("phone_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
                     }}
                   >{rg.ctaPhone}</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
                   <a
-                    href="https://wa.me/491636033912"
+                    href="https://wa.me/491636033912?text=Hallo%2C%20wir%20planen%20eine%20Reisegruppe%20bei%20Ihnen."
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackEvent("phone_click", { method: "whatsapp", page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams })}
                   >
                     {rg.ctaWhatsapp}
                   </a>

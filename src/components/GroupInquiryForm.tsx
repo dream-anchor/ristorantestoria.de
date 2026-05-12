@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUtmParams } from "@/hooks/useUtmParams";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { CheckCircle, Loader2, Send } from "lucide-react";
+import { Loader2, Send } from "lucide-react";
 import { useGroupMenus, getLocalizedText } from "@/hooks/useGroupMenus";
 import LocalizedLink from "@/components/LocalizedLink";
 
@@ -42,10 +44,13 @@ export const GroupInquiryForm = () => {
   const { t, language } = useLanguage();
   const f = t.groupInquiryForm;
   const { menus } = useGroupMenus();
+  const utmParams = useUtmParams();
+  const navigate = useNavigate();
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [travelPlanFile, setTravelPlanFile] = useState<File | null>(null);
+  const [travelPlanError, setTravelPlanError] = useState<string | null>(null);
 
   // Timestamp spam check: form must be open ≥ 3 seconds before submit
   const openedAt = useRef<number>(Date.now());
@@ -74,9 +79,11 @@ export const GroupInquiryForm = () => {
   }, []);
 
   // Menu options: dynamic from Supabase if available, else fallback
+  const adviceOption = { value: "advice", label: f.menuAdvice };
   const menuOptions =
     menus.length > 0
       ? [
+          adviceOption,
           ...menus.map((m) => ({
             value: m.menu_key,
             label: getLocalizedText(m.title, language),
@@ -84,11 +91,21 @@ export const GroupInquiryForm = () => {
           { value: "custom", label: f.menuCustom },
         ]
       : [
+          adviceOption,
           { value: "A", label: f.menuA },
           { value: "B", label: f.menuB },
           { value: "C", label: f.menuC },
           { value: "custom", label: f.menuCustom },
         ];
+
+  // Convert File to base64 string
+  const fileToBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve((reader.result as string).split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
 
   const onSubmit = async (data: FormData) => {
     // Honeypot check
@@ -101,6 +118,14 @@ export const GroupInquiryForm = () => {
     setSubmitError(null);
 
     try {
+      let travelPlanBase64: string | null = null;
+      let travelPlanFilename: string | null = null;
+
+      if (travelPlanFile) {
+        travelPlanBase64 = await fileToBase64(travelPlanFile);
+        travelPlanFilename = travelPlanFile.name;
+      }
+
       const response = await fetch(EVENTS_FUNCTION_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -115,8 +140,11 @@ export const GroupInquiryForm = () => {
           arrivalTime: data.arrival_time?.trim() || null,
           preferredMenu: data.preferred_menu,
           message: data.message?.trim() || null,
+          travelPlanBase64,
+          travelPlanFilename,
           language,
           source: "ristorantestoria-reisegruppen",
+          ...utmParams,
         }),
       });
 
@@ -124,8 +152,6 @@ export const GroupInquiryForm = () => {
         const err = await response.json().catch(() => ({}));
         throw new Error((err as Record<string, string>).error ?? "Submit failed");
       }
-
-      setIsSubmitted(true);
 
       // GA4 Conversion-Event: generate_lead
       if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
@@ -135,26 +161,18 @@ export const GroupInquiryForm = () => {
           language,
           value: 1500,
           currency: "EUR",
+          ...utmParams,
         });
       }
+
+      // Redirect to thank-you page
+      navigate("/reisegruppen/danke/");
     } catch {
       setSubmitError(f.errorMessage);
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  if (isSubmitted) {
-    return (
-      <div className="text-center py-10">
-        <CheckCircle className="w-14 h-14 text-green-400 mx-auto mb-4" />
-        <h3 className="text-xl font-serif font-semibold text-primary-foreground mb-2">
-          {f.successTitle}
-        </h3>
-        <p className="text-primary-foreground/80">{f.successMessage}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="mt-10 pt-8 border-t border-primary-foreground/20">
@@ -342,6 +360,40 @@ export const GroupInquiryForm = () => {
             )}
           />
 
+          {/* PDF Upload — optional travel plan */}
+          <div className="space-y-1">
+            <label className="block text-sm text-primary-foreground/90 font-medium">
+              {f.travelPlanLabel}
+            </label>
+            <input
+              type="file"
+              accept="application/pdf"
+              className="block w-full text-sm text-primary-foreground/80 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-white/20 file:text-primary-foreground hover:file:bg-white/30 cursor-pointer"
+              onChange={(e) => {
+                const file = e.target.files?.[0] ?? null;
+                setTravelPlanError(null);
+                if (!file) { setTravelPlanFile(null); return; }
+                if (file.type !== "application/pdf") {
+                  setTravelPlanError(f.travelPlanWrongType);
+                  setTravelPlanFile(null);
+                  e.target.value = "";
+                  return;
+                }
+                if (file.size > 5 * 1024 * 1024) {
+                  setTravelPlanError(f.travelPlanTooBig);
+                  setTravelPlanFile(null);
+                  e.target.value = "";
+                  return;
+                }
+                setTravelPlanFile(file);
+              }}
+            />
+            {travelPlanError && (
+              <p className="text-sm text-red-300">{travelPlanError}</p>
+            )}
+            <p className="text-xs text-primary-foreground/60">{f.travelPlanHint}</p>
+          </div>
+
           <FormField
             control={form.control}
             name="privacy"
@@ -382,7 +434,7 @@ export const GroupInquiryForm = () => {
             type="submit"
             size="lg"
             variant="secondary"
-            disabled={isSubmitting}
+            disabled={!form.watch("privacy") || isSubmitting}
             className="w-full sm:w-auto"
           >
             {isSubmitting ? (
