@@ -3476,6 +3476,7 @@ export const de = {
     subtitle: "Alles Wissenswerte über das Ristorante STORIA in der Münchner Maxvorstadt",
     introContext: "Das Ristorante STORIA ist ein familiengeführtes italienisches Restaurant in der Karlstraße 47a in München Maxvorstadt – seit 2015 von der Familie Speranza aus Rofrano in der Provinz Salerno geführt. Hier finden Sie Antworten auf die häufigsten Fragen rund um neapolitanische Pizza, hausgemachte Pasta, Reservierung, Preise und Dining-Etikette.",
     learnMore: "Mehr erfahren",
+    lastUpdated: "Zuletzt aktualisiert: Mai 2026",
     categories: [
       {
         id: "ueber-storia",

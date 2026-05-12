@@ -3389,6 +3389,7 @@ export const fr = {
     subtitle: "Tout ce qu'il faut savoir sur le Ristorante STORIA dans le quartier Maxvorstadt de Munich",
     introContext: "Le Ristorante STORIA est un restaurant italien familial situé Karlstraße 47a à Munich Maxvorstadt – géré depuis 2015 par la famille Speranza, originaire de Rofrano dans la province de Salerne. Vous trouverez ici les réponses aux questions les plus fréquentes sur notre pizza napolitaine, nos pâtes maison, les réservations, les tarifs et l'étiquette à table.",
     learnMore: "En savoir plus",
+    lastUpdated: "Dernière mise à jour : mai 2026",
     categories: [
       {
         id: "a-propos-storia",
