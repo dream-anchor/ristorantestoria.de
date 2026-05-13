@@ -26,7 +26,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import { DynamicPackagesSection, DynamicCateringHighlights } from "@/components/DynamicPackagesSection";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
-import ImageLightbox from "@/components/ImageLightbox";
+import PhotoGallery from "@/components/PhotoGallery";
 
 const FirmenfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -187,12 +187,12 @@ const FirmenfeierMuenchen = () => {
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-4 text-center">Einblick in Ihr Firmenevent</h2>
               <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Von elegantem Stehempfang bis zum großen Dinner — das STORIA bietet den passenden Rahmen für jeden Business-Anlass.</p>
-              <div className="grid md:grid-cols-2 gap-4">
-                <ImageLightbox image={{ src: eventGaeste, srcSet: `${eventGaeste600} 600w, ${eventGaeste} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Firmenfeier im Ristorante STORIA München — Gäste genießen den Abend in lebendiger Restaurant-Atmosphäre", caption: "Business-Dinner · lebendige Atmosphäre · Gäste" }} />
-                <ImageLightbox image={{ src: locationDetails, srcSet: `${locationDetails600} 600w, ${locationDetails} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — Detailansichten: Dining Area, Bar, Show-Kitchen, Outdoor-Terrasse und Außenbereich", caption: "Dining Area · Bar · Show-Kitchen · Terrasse · Außenbereich" }} />
-                <ImageLightbox image={{ src: eventSetupSchwarz, srcSet: `${eventSetupSchwarz600} 600w, ${eventSetupSchwarz} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Abend-Stehempfang im STORIA München — elegantes Event-Setup mit schwarzen Stehtischen und Kerzenbeleuchtung auf der Loggia", caption: "Abend-Empfang · Loggia · schwarze Hussen" }} />
-                <ImageLightbox image={{ src: eventSetupWeiss, srcSet: `${eventSetupWeiss600} 600w, ${eventSetupWeiss} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Tages-Stehempfang im STORIA München — Loggia mit weißen Stehtischen, Blumendekoration und Heizstrahlern", caption: "Tages-Empfang · Loggia · weiße Hussen" }} />
-              </div>
+              <PhotoGallery images={[
+                { src: eventGaeste, srcSet: `${eventGaeste600} 600w, ${eventGaeste} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Firmenfeier im Ristorante STORIA München — Gäste genießen den Abend in lebendiger Restaurant-Atmosphäre", caption: "Business-Dinner · lebendige Atmosphäre · Gäste" },
+                { src: locationDetails, srcSet: `${locationDetails600} 600w, ${locationDetails} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — Detailansichten: Dining Area, Bar, Show-Kitchen, Outdoor-Terrasse und Außenbereich", caption: "Dining Area · Bar · Show-Kitchen · Terrasse · Außenbereich" },
+                { src: eventSetupSchwarz, srcSet: `${eventSetupSchwarz600} 600w, ${eventSetupSchwarz} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Abend-Stehempfang im STORIA München — elegantes Event-Setup mit schwarzen Stehtischen und Kerzenbeleuchtung auf der Loggia", caption: "Abend-Empfang · Loggia · schwarze Hussen" },
+                { src: eventSetupWeiss, srcSet: `${eventSetupWeiss600} 600w, ${eventSetupWeiss} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Tages-Stehempfang im STORIA München — Loggia mit weißen Stehtischen, Blumendekoration und Heizstrahlern", caption: "Tages-Empfang · Loggia · weiße Hussen" },
+              ]} />
             </section>
 
             {/* Dynamic Packages from Events Project */}

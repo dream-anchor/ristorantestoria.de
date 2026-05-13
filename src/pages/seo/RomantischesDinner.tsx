@@ -21,7 +21,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
-import ImageLightbox from "@/components/ImageLightbox";
+import PhotoGallery from "@/components/PhotoGallery";
 
 const RomantischesDinner = () => {
   const { t } = useLanguage();
@@ -197,10 +197,10 @@ const RomantischesDinner = () => {
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-4 text-center">Ihr romantischer Abend im STORIA</h2>
               <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Warmes Licht, edle Weinkarte, authentische italienische Küche — entdecken Sie das Ambiente, das Ihren besonderen Abend unvergesslich macht.</p>
-              <div className="grid md:grid-cols-2 gap-4">
-                <ImageLightbox image={{ src: locationDetails, srcSet: `${locationDetails600} 600w, ${locationDetails} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — Dining Area mit Kerzenlicht, Bar und romantische Terrasse", caption: "Dining Area · Bar · Kerzenlicht · Terrasse" }} />
-                <ImageLightbox image={{ src: restaurantUebersicht, srcSet: `${restaurantUebersicht600} 600w, ${restaurantUebersicht} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — stilvolles Ambiente für ein romantisches Dinner zu zweit", caption: "Edles Ambiente · Weinkeller · Innen & Außen" }} />
-              </div>
+              <PhotoGallery images={[
+                { src: locationDetails, srcSet: `${locationDetails600} 600w, ${locationDetails} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — Dining Area mit Kerzenlicht, Bar und romantische Terrasse", caption: "Dining Area · Bar · Kerzenlicht · Terrasse" },
+                { src: restaurantUebersicht, srcSet: `${restaurantUebersicht600} 600w, ${restaurantUebersicht} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — stilvolles Ambiente für ein romantisches Dinner zu zweit", caption: "Edles Ambiente · Weinkeller · Innen & Außen" },
+              ]} />
             </section>
 
             {/* Menus */}
