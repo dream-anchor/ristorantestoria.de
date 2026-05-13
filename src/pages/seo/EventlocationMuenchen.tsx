@@ -13,6 +13,12 @@ import { MessageCircle, Phone, Mail, ExternalLink, Star } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import firmenfeierEvent from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
 import firmenfeierEvent600 from "@/assets/firmenfeier-eventlocation-storia-muenchen-600w.webp";
+import locationDetails from "@/assets/ristorante-storia-uebersicht-details.webp";
+import locationDetails600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
+import eventSetupSchwarz from "@/assets/ristorante-storia-uebersicht-stehtische-schwarzen-hussen.webp";
+import eventSetupSchwarz600 from "@/assets/ristorante-storia-uebersicht-stehtische-schwarzen-hussen-600w.webp";
+import eventSetupWeiss from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen.webp";
+import eventSetupWeiss600 from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -228,8 +234,49 @@ const EventlocationMuenchen = () => {
               <p className="text-center text-muted-foreground mt-6">Gerne zeigen wir Ihnen unsere Räume bei einem persönlichen Besuch. <a href="tel:+498951519696" className="text-primary hover:underline">Rufen Sie uns an</a></p>
             </section>
 
+            {/* Photo Gallery — Location & Event Setups */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Unsere Location in Bildern</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Überzeugen Sie sich selbst — von der eleganten Bar über die Terrasse bis hin zum flexiblen Stehempfang auf unserer Loggia.</p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <figure className="overflow-hidden rounded-xl lg:col-span-2">
+                  <img
+                    src={locationDetails}
+                    srcSet={`${locationDetails600} 600w, ${locationDetails} 1400w`}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 66vw"
+                    alt="Ristorante STORIA München — Detailansichten: Dining Area, Bar, Show-Kitchen, Outdoor-Terrasse und Außenbereich"
+                    className="w-full h-72 object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <figcaption className="text-xs text-muted-foreground mt-2 text-center">Unsere Location — Dining Area · Bar · Show-Kitchen · Terrasse</figcaption>
+                </figure>
+                <figure className="overflow-hidden rounded-xl">
+                  <img
+                    src={eventSetupSchwarz}
+                    srcSet={`${eventSetupSchwarz600} 600w, ${eventSetupSchwarz} 1400w`}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    alt="Abend-Stehempfang auf der STORIA Loggia — schwarze Stehtische, Kerzen, Heizstrahler"
+                    className="w-full h-72 object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <figcaption className="text-xs text-muted-foreground mt-2 text-center">Abend-Empfang · Loggia · schwarze Hussen</figcaption>
+                </figure>
+                <figure className="overflow-hidden rounded-xl">
+                  <img
+                    src={eventSetupWeiss}
+                    srcSet={`${eventSetupWeiss600} 600w, ${eventSetupWeiss} 1400w`}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    alt="Tages-Stehempfang auf der STORIA Loggia — weiße Stehtische, Blumendekoration"
+                    className="w-full h-72 object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <figcaption className="text-xs text-muted-foreground mt-2 text-center">Tages-Empfang · Loggia · weiße Hussen</figcaption>
+                </figure>
+              </div>
+            </section>
+
             {/* Dynamic Packages from Events Project */}
-            <DynamicPackagesSection 
+            <DynamicPackagesSection
               pageSlug="eventlocation"
               title="Event-Pakete"
             />

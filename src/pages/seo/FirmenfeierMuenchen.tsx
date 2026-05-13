@@ -11,8 +11,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Star } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
-import firmenfeierEvent from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
-import firmenfeierEvent600 from "@/assets/firmenfeier-eventlocation-storia-muenchen-600w.webp";
+import firmenfeierEvent from "@/assets/ristorante-storia-uebersicht-stehtische-schwarzen-hussen.webp";
+import firmenfeierEvent600 from "@/assets/ristorante-storia-uebersicht-stehtische-schwarzen-hussen-600w.webp";
+import eventSetupWeiss from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen.webp";
+import eventSetupWeiss600 from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen-600w.webp";
+import eventGaeste from "@/assets/ristorante-storia-uebersicht-gaeste.webp";
+import eventGaeste600 from "@/assets/ristorante-storia-uebersicht-gaeste-600w.webp";
+import restaurantUebersicht from "@/assets/ristorante-storia-uebersicht.webp";
+import restaurantUebersicht600 from "@/assets/ristorante-storia-uebersicht-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -174,8 +180,64 @@ const FirmenfeierMuenchen = () => {
               </div>
             </section>
 
+            {/* Photo Gallery — Event Setups & Atmosphäre */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Einblick in Ihr Firmenevent</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Von elegantem Stehempfang bis zum großen Dinner — das STORIA bietet den passenden Rahmen für jeden Business-Anlass.</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <figure className="overflow-hidden rounded-xl">
+                    <img
+                      src={firmenfeierEvent}
+                      srcSet={`${firmenfeierEvent600} 600w, ${firmenfeierEvent} 1400w`}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      alt="Abend-Stehempfang im STORIA München — elegantes Event-Setup mit schwarzen Stehtischen und Kerzenbeleuchtung auf der Loggia"
+                      className="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <figcaption className="text-xs text-muted-foreground mt-2 text-center">Abend-Stehempfang · Loggia · schwarze Hussen</figcaption>
+                  </figure>
+                  <figure className="overflow-hidden rounded-xl">
+                    <img
+                      src={restaurantUebersicht}
+                      srcSet={`${restaurantUebersicht600} 600w, ${restaurantUebersicht} 1400w`}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      alt="Ristorante STORIA München — Gesamtüberblick: Dining Area, Bar, Terrasse und Außenbereich"
+                      className="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <figcaption className="text-xs text-muted-foreground mt-2 text-center">Location-Überblick · Dining Area · Bar · Terrasse</figcaption>
+                  </figure>
+                </div>
+                <div className="space-y-4">
+                  <figure className="overflow-hidden rounded-xl">
+                    <img
+                      src={eventSetupWeiss}
+                      srcSet={`${eventSetupWeiss600} 600w, ${eventSetupWeiss} 1400w`}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      alt="Stehempfang-Setup im STORIA München — Loggia mit weißen Stehtischen, Blumendekoration und Heizstrahlern"
+                      className="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <figcaption className="text-xs text-muted-foreground mt-2 text-center">Tages-Stehempfang · Loggia · weiße Hussen</figcaption>
+                  </figure>
+                  <figure className="overflow-hidden rounded-xl">
+                    <img
+                      src={eventGaeste}
+                      srcSet={`${eventGaeste600} 600w, ${eventGaeste} 1400w`}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      alt="Firmenfeier im Ristorante STORIA München — Gäste genießen den Abend in lebendiger Restaurant-Atmosphäre"
+                      className="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <figcaption className="text-xs text-muted-foreground mt-2 text-center">Business-Dinner · lebendige Atmosphäre · Gäste</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </section>
+
             {/* Dynamic Packages from Events Project */}
-            <DynamicPackagesSection 
+            <DynamicPackagesSection
               pageSlug="firmenfeier"
               title={t.seo.firmenfeier.packagesTitle}
               subtitle={t.seo.firmenfeier.packagesIntro}
