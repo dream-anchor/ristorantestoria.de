@@ -13,11 +13,16 @@ import { Phone, MessageCircle, Mail, ExternalLink } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import geburtstagsfeierEvent from "@/assets/geburtstagsfeier-restaurant-storia-muenchen.webp";
 import geburtstagsfeierEvent600 from "@/assets/geburtstagsfeier-restaurant-storia-muenchen-600w.webp";
+import eventGaeste from "@/assets/ristorante-storia-uebersicht-gaeste.webp";
+import eventGaeste600 from "@/assets/ristorante-storia-uebersicht-gaeste-600w.webp";
+import restaurantUebersicht from "@/assets/ristorante-storia-uebersicht.webp";
+import restaurantUebersicht600 from "@/assets/ristorante-storia-uebersicht-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { renderMarkdown } from "@/lib/renderMarkdown";
+import ImageLightbox from "@/components/ImageLightbox";
 
 const GeburtstagsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -152,6 +157,16 @@ const GeburtstagsfeierMuenchen = () => {
                     </CardContent>
                   </Card>
                 ))}
+              </div>
+            </section>
+
+            {/* Photo Gallery */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Feiern Sie bei uns</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Erleben Sie das STORIA — von der lebendigen Atmosphäre bis zum stilvollen Ambiente für Ihre Geburtstagsfeier.</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <ImageLightbox image={{ src: eventGaeste, srcSet: `${eventGaeste600} 600w, ${eventGaeste} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Gäste feiern im Ristorante STORIA München — lebendige Atmosphäre bei einer Geburtstagsfeier", caption: "Lebendige Feier-Atmosphäre im STORIA" }} />
+                <ImageLightbox image={{ src: restaurantUebersicht, srcSet: `${restaurantUebersicht600} 600w, ${restaurantUebersicht} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — Überblick über Dining Area, Bar, Terrasse und Außenbereich", caption: "Dining Area · Bar · Terrasse · Alle Bereiche" }} />
               </div>
             </section>
 

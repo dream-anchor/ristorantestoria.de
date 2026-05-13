@@ -21,8 +21,13 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { MapPin, Clock, CalendarDays, UtensilsCrossed, Wine, GlassWater, ArrowRight, Heart } from "lucide-react";
 
 import storiaLogo from "@/assets/storia-logo.webp";
+import ImageLightbox from "@/components/ImageLightbox";
 import heroImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
 import heroImage600 from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen-600w.webp";
+import eventSetupWeiss from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen.webp";
+import eventSetupWeiss600 from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen-600w.webp";
+import locationDetails from "@/assets/ristorante-storia-uebersicht-details.webp";
+import locationDetails600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
 
 const HochzeitsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -198,6 +203,18 @@ const HochzeitsfeierMuenchen = () => {
                     </LocalizedLink>
                   );
                 })}
+              </div>
+            </div>
+          </section>
+
+          {/* Photo Gallery */}
+          <section className="py-16 md:py-20">
+            <div className="container mx-auto px-4 max-w-5xl">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-4">Ihre Traumhochzeit im STORIA</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Von elegantem Stehempfang bis zum festlichen Dinner — das STORIA bietet den perfekten Rahmen für Ihren schönsten Tag.</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <ImageLightbox image={{ src: eventSetupWeiss, srcSet: `${eventSetupWeiss600} 600w, ${eventSetupWeiss} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Hochzeitsempfang im STORIA München — elegante Loggia mit weißen Stehtischen und Blumendekoration", caption: "Hochzeitsempfang · Loggia · weiße Dekoration" }} />
+                <ImageLightbox image={{ src: locationDetails, srcSet: `${locationDetails600} 600w, ${locationDetails} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — Innenräume, Bar, Show-Kitchen und romantische Terrasse", caption: "Innenräume · Bar · Terrasse · Location-Details" }} />
               </div>
             </div>
           </section>
