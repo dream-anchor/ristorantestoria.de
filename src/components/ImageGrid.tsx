@@ -7,6 +7,7 @@ import aperitivoImage from "@/assets/meeresfruchte.webp";
 import dessertImage from "@/assets/tiramisu.webp";
 import terrasseImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 interface ImageCardProps {
   image: string;
@@ -103,7 +104,7 @@ const ImageGrid = () => {
             alt={t.imageGrid.altSeafood}
             title={t.imageGrid.cateringTitle}
             subtitle={t.imageGrid.cateringText}
-            externalLink="https://www.events-storia.de"
+            externalLink={EVENTS_LINKS.homepageCrossSell}
             className="aspect-square"
           />
 
