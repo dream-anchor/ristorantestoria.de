@@ -386,7 +386,7 @@ const Catering = () => {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="https://events-storia.de" target="_blank" rel="noopener noreferrer">
+                  <a href={EVENTS_LINKS.catering} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-5 h-5 mr-2" />
                     Catering anfragen
                   </a>
@@ -497,7 +497,7 @@ const Catering = () => {
               </div>
               <div className="text-center mt-8">
                 <Button size="lg" asChild>
-                  <a href="https://events-storia.de" target="_blank" rel="noopener noreferrer">
+                  <a href={EVENTS_LINKS.catering} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-5 h-5 mr-2" />
                     Individuelles Angebot anfragen
                   </a>
@@ -549,7 +549,7 @@ const Catering = () => {
                 <h2 className="text-xl font-bold mb-3">{t.catering.eventsPortalTitle}</h2>
                 <p className="text-muted-foreground mb-5">{t.catering.eventsPortalDesc}</p>
                 <Button asChild>
-                  <a href="https://events-storia.de" target="_blank" rel="noopener noreferrer">
+                  <a href={EVENTS_LINKS.catering} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     {t.catering.eventsPortalCta}
                   </a>
@@ -609,7 +609,7 @@ const Catering = () => {
               <p className="opacity-90 mb-6">{t.catering.contactUs}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <a href="https://events-storia.de" target="_blank" rel="noopener noreferrer">
+                  <a href={EVENTS_LINKS.catering} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Catering anfragen
                   </a>
