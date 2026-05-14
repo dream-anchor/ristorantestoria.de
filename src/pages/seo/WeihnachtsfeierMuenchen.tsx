@@ -17,6 +17,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 const WeihnachtsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -118,7 +119,7 @@ const WeihnachtsfeierMuenchen = () => {
                   <LocalizedLink to="reservierung">{w.heroCta}</LocalizedLink>
                 </Button>
               </div>
-              <p className="text-white/60 text-sm mt-4">{w.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">events-storia.de</a></p>
+              <p className="text-white/60 text-sm mt-4">{w.heroEventsNote} <a href={EVENTS_LINKS.weihnachtsfeier} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">events-storia.de</a></p>
             </div>
           </div>
         </section>
@@ -311,7 +312,7 @@ const WeihnachtsfeierMuenchen = () => {
               <Button size="lg" variant="secondary" asChild>
                 <LocalizedLink to="reservierung">{w.ctaButton}</LocalizedLink>
               </Button>
-              <p className="mt-4 opacity-70 text-sm">F\u00fcr Rundum-Event-Planung: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a></p>
+              <p className="mt-4 opacity-70 text-sm">F\u00fcr Rundum-Event-Planung: <a href={EVENTS_LINKS.weihnachtsfeier} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a></p>
               <div className="flex flex-wrap justify-center gap-4 mt-6">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>

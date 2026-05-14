@@ -22,6 +22,7 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 interface SilvesterMuenchenProps {
   standalone?: boolean;
@@ -199,7 +200,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                   </Button>
                 ) : isActive ? (
                   <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{s.heroCta}</a>
+                    <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{s.heroCta}</a>
                   </Button>
                 ) : (
                   <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
@@ -211,7 +212,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                 </Button>
               </div>
               <p className="mt-6 text-white/70 text-sm">
-                {s.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-primary">{s.heroEventsLink}</a>
+                {s.heroEventsNote} <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-primary">{s.heroEventsLink}</a>
               </p>
             </div>
           </div>
@@ -293,7 +294,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               <h2 className="text-2xl font-serif font-bold mb-4">{s.ctaBoxTitle}</h2>
               <p className="mb-6 opacity-90">{s.ctaBoxDesc}</p>
               <Button size="lg" variant="secondary" asChild>
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{s.ctaBoxButton}</a>
+                <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer">{s.ctaBoxButton}</a>
               </Button>
               <p className="mt-6 opacity-80 text-sm">{s.ctaBoxNote}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
@@ -400,7 +401,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                 </Button>
               ) : isActive ? (
                 <Button size="lg" variant="secondary" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{s.finalCtaButton}</a>
+                  <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer">{s.finalCtaButton}</a>
                 </Button>
               ) : (
                 <Button size="lg" variant="secondary" asChild>

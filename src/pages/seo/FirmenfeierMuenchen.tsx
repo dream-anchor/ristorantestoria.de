@@ -27,6 +27,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import { DynamicPackagesSection, DynamicCateringHighlights } from "@/components/DynamicPackagesSection";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import PhotoGallery from "@/components/PhotoGallery";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 const FirmenfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -129,7 +130,7 @@ const FirmenfeierMuenchen = () => {
                   <LocalizedLink to="reservierung">{t.seo.firmenfeier.heroCta}</LocalizedLink>
                 </Button>
               </div>
-              <p className="text-white/60 text-sm mt-4">{t.seo.firmenfeier.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white hover:underline">events-storia.de</a></p>
+              <p className="text-white/60 text-sm mt-4">{t.seo.firmenfeier.heroEventsNote} <a href={EVENTS_LINKS.firmenfeier} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white hover:underline">events-storia.de</a></p>
             </div>
           </div>
         </section>
@@ -268,7 +269,7 @@ const FirmenfeierMuenchen = () => {
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.firmenfeier.relatedTitle}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="bg-primary/10 border border-primary/30 rounded-lg p-6 hover:bg-primary/20 transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventsTitle}</h3><p className="text-muted-foreground text-sm mb-2">{t.seo.firmenfeier.relatedEventsDesc}</p><span className="text-primary text-sm">{t.seo.firmenfeier.relatedEventsButton} →</span></a>
+                <a href={EVENTS_LINKS.firmenfeier} target="_blank" rel="noopener noreferrer" className="bg-primary/10 border border-primary/30 rounded-lg p-6 hover:bg-primary/20 transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventsTitle}</h3><p className="text-muted-foreground text-sm mb-2">{t.seo.firmenfeier.relatedEventsDesc}</p><span className="text-primary text-sm">{t.seo.firmenfeier.relatedEventsButton} →</span></a>
                 <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventlocationTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedEventlocationDesc}</p></LocalizedLink>
                 <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedCateringTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedCateringDesc}</p></LocalizedLink>
                 <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedMenuTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedMenuDesc}</p></LocalizedLink>
@@ -287,7 +288,7 @@ const FirmenfeierMuenchen = () => {
               <h2 className="text-3xl font-serif font-bold mb-4">{t.seo.firmenfeier.ctaTitle}</h2>
               <p className="mb-8 opacity-90">{t.seo.firmenfeier.ctaDesc}</p>
               <Button size="lg" variant="secondary" asChild><LocalizedLink to="reservierung">{t.seo.firmenfeier.ctaButton}</LocalizedLink></Button>
-              <p className="mt-4 opacity-70 text-sm">F\u00fcr Rundum-Event-Planung: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a></p>
+              <p className="mt-4 opacity-70 text-sm">F\u00fcr Rundum-Event-Planung: <a href={EVENTS_LINKS.firmenfeier} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a></p>
               <p className="mt-6 opacity-80 text-sm">{t.seo.firmenfeier.ctaAlternative}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>

@@ -23,6 +23,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { renderMarkdown } from "@/lib/renderMarkdown";
 import PhotoGallery from "@/components/PhotoGallery";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 const GeburtstagsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -119,7 +120,7 @@ const GeburtstagsfeierMuenchen = () => {
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{b.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{b.heroCta}</a>
+                  <a href={EVENTS_LINKS.geburtstag} target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{b.heroCta}</a>
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
                   <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{b.heroCtaSecondary}</a>
@@ -301,7 +302,7 @@ const GeburtstagsfeierMuenchen = () => {
                 <LocalizedLink to="reservierung">{b.ctaButton}</LocalizedLink>
               </Button>
               <p className="mt-4 opacity-70 text-sm">
-                F\u00fcr Rundum-Event-Planung: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a>
+                F\u00fcr Rundum-Event-Planung: <a href={EVENTS_LINKS.geburtstag} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">events-storia.de</a>
               </p>
               <p className="mt-2 opacity-80 text-sm">{b.ctaAlternative}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
