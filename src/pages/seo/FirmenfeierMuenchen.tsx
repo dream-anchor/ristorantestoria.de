@@ -27,6 +27,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import { DynamicPackagesSection, DynamicCateringHighlights } from "@/components/DynamicPackagesSection";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import PhotoGallery from "@/components/PhotoGallery";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 const FirmenfeierMuenchen = () => {
   const { t } = useLanguage();

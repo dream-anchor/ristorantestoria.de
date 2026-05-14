@@ -16,6 +16,7 @@ import sommerfestEvent600 from "@/assets/sommerfest-event-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, Mail, ExternalLink, Star, CheckCircle } from "lucide-react";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 const cateringServiceSchema = {
   "@context": "https://schema.org",

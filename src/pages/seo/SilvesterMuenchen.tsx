@@ -22,6 +22,7 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 interface SilvesterMuenchenProps {
   standalone?: boolean;

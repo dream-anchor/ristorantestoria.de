@@ -17,6 +17,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 const WeihnachtsfeierMuenchen = () => {
   const { t } = useLanguage();

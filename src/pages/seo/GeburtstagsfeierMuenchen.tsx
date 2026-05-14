@@ -23,6 +23,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { renderMarkdown } from "@/lib/renderMarkdown";
 import PhotoGallery from "@/components/PhotoGallery";
+import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
 const GeburtstagsfeierMuenchen = () => {
   const { t } = useLanguage();
