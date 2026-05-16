@@ -5,6 +5,31 @@ import App from "./App.tsx";
 import "./index.css";
 
 const root = document.getElementById("root")!;
+
+if (import.meta.env.PROD && typeof window !== "undefined") {
+  window.addEventListener("error", (e) => {
+    import("@/lib/reportError").then(({ reportError }) => {
+      reportError({
+        source: "frontend:window.error",
+        severity: "error",
+        message: `${e.message} (${e.filename}:${e.lineno}:${e.colno})`,
+        payload: { filename: e.filename, lineno: e.lineno, colno: e.colno },
+      });
+    });
+  });
+
+  window.addEventListener("unhandledrejection", (e) => {
+    import("@/lib/reportError").then(({ reportError }) => {
+      reportError({
+        source: "frontend:unhandledrejection",
+        severity: "error",
+        message: String(e.reason),
+        payload: { reason: String(e.reason) },
+      });
+    });
+  });
+}
+
 const app = (
   <HelmetProvider>
     <BrowserRouter>
