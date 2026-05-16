@@ -346,6 +346,24 @@ async function updateLandingpageContent(
   console.log(`Successfully updated landingpage_content for ${pageSlug}`);
 }
 
+
+async function reportEdgeError(source: string, message: string, payload?: unknown) {
+  try {
+    await fetch("https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/report-system-error", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        project: "ristorante_storia",
+        source,
+        severity: "error",
+        message,
+        payload: payload ?? null,
+        shared_secret: "a7f3d8e2c9b14056ef8a3d7c2b9e1f4d8a6c3b9e7f2d5a8c1b4e9f3d6a8c2b7e5f1d9a4c",
+      }),
+    });
+  } catch (_) { /* silent */ }
+}
+
 serve(async (req) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
@@ -515,6 +533,7 @@ serve(async (req) => {
     );
 
   } catch (error) {
+    await reportEdgeError("edge:update-landingpage-content", String(error));
     console.error('Fatal error:', error);
     return new Response(
       JSON.stringify({

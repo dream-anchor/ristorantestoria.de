@@ -248,6 +248,24 @@ function buildFallbackContent(
   return { subject, body_html };
 }
 
+
+async function reportEdgeError(source: string, message: string, payload?: unknown) {
+  try {
+    await fetch("https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/report-system-error", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        project: "ristorante_storia",
+        source,
+        severity: "critical",
+        message,
+        payload: payload ?? null,
+        shared_secret: "a7f3d8e2c9b14056ef8a3d7c2b9e1f4d8a6c3b9e7f2d5a8c1b4e9f3d6a8c2b7e5f1d9a4c",
+      }),
+    });
+  } catch (_) { /* silent */ }
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -454,6 +472,7 @@ serve(async (req) => {
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
+    await reportEdgeError("edge:notify-seasonal-signups", String(err));
     console.error("[notify] Unexpected error:", err);
     return new Response(
       JSON.stringify({ error: err instanceof Error ? err.message : "Unknown error" }),

@@ -265,6 +265,24 @@ async function generateSeoHtml(supabaseUrl: string, serviceRoleKey: string): Pro
   return html;
 }
 
+
+async function reportEdgeError(source: string, message: string, payload?: unknown) {
+  try {
+    await fetch("https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/report-system-error", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        project: "ristorante_storia",
+        source,
+        severity: "critical",
+        message,
+        payload: payload ?? null,
+        shared_secret: "a7f3d8e2c9b14056ef8a3d7c2b9e1f4d8a6c3b9e7f2d5a8c1b4e9f3d6a8c2b7e5f1d9a4c",
+      }),
+    });
+  } catch (_) { /* silent */ }
+}
+
 serve(async (req) => {
   // CORS preflight
   if (req.method === "OPTIONS") {
@@ -363,6 +381,7 @@ serve(async (req) => {
       }
     );
   } catch (error) {
+    await reportEdgeError("edge:trigger-github-deploy", String(error));
     const errorMessage = error instanceof Error ? error.message : "Unbekannter Fehler";
     console.error("Fehler in trigger-github-deploy:", errorMessage);
     return new Response(
