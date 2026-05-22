@@ -327,11 +327,12 @@ async function generatePoolCPost(weekday: string, season: string, themeSlot: str
 // Kein Fallback auf "irgendein Bild" — Post wird dann übersprungen + Slack-Alert.
 
 async function pickImage(tags: string[], season: string, minRepetitionDays = 21) {
-  // Primär: Tag + Season + Repetition-Check
+  // season='allyear' bedeutet: jede Bildseason akzeptabel (kein Season-Filter)
+  // season='spring' etc.: nur 'allyear'- und matching-season Bilder
   const [match] = await sql`
     SELECT * FROM gbp_images
     WHERE tags && ${tags}::text[]
-      AND (season = 'allyear' OR season = ${season})
+      AND (${season} = 'allyear' OR season = 'allyear' OR season = ${season})
       AND is_active = TRUE
       AND (last_used IS NULL OR last_used < NOW() - ${minRepetitionDays} * INTERVAL '1 day')
     ORDER BY COALESCE(last_used, '2000-01-01') ASC
@@ -343,7 +344,7 @@ async function pickImage(tags: string[], season: string, minRepetitionDays = 21)
   const [anyTagMatch] = await sql`
     SELECT id FROM gbp_images
     WHERE tags && ${tags}::text[]
-      AND (season = 'allyear' OR season = ${season})
+      AND (${season} = 'allyear' OR season = 'allyear' OR season = ${season})
       AND is_active = TRUE
     LIMIT 1
   `;
