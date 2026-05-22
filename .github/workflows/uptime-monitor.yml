@@ -2,8 +2,8 @@ name: Uptime Monitor (All Sites)
 
 on:
   schedule:
-    # Alle 15 Minuten prüfen
-    - cron: '*/15 * * * *'
+    # Alle 30 Minuten prüfen
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
