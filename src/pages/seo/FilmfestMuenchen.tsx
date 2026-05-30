@@ -4,6 +4,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import Footer from "@/components/Footer";
 import FilmfestInquiryForm from "@/components/FilmfestInquiryForm";
+import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
