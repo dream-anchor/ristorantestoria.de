@@ -4,6 +4,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import Footer from "@/components/Footer";
 import FilmfestInquiryForm from "@/components/FilmfestInquiryForm";
+import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
@@ -233,14 +234,12 @@ const FilmfestMuenchen = () => {
                 ))}
               </Reveal>
               <Reveal delay={0.1} className="ff-map-card">
-                <span className="ff-pin ff-pin-amh"><span className="dot" />Amerikahaus</span>
-                <span className="ff-map-line" />
-                <span className="ff-pin ff-pin-storia"><span className="dot" />STORIA</span>
-                <div className="ff-map-cap">
-                  <b>Karlstraße 47a · 80333 München</b>
-                  Fußläufig zu jedem relevanten Festivalort. Ihre Gäste laufen nach dem Screening
-                  herüber — kein Shuttle, kein Taxistau, kein Zeitverlust.
-                </div>
+                <ConsentGoogleMaps
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.0!2d11.5658!3d48.1465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKarlstra%C3%9Fe%2047a%2C%2080333%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1"
+                  title="STORIA · Karlstraße 47a, München"
+                  height={420}
+                  className="ff-map-iframe"
+                />
               </Reveal>
             </div>
           </div>
@@ -469,17 +468,8 @@ const ffStyles = `
 .ff-route .min small{font-size:.85rem;color:rgba(26,19,13,.55);font-weight:600;}
 .ff-route .place b{display:block;font-weight:700;font-size:1.08rem;}
 .ff-route .place span{font-size:.92rem;color:rgba(26,19,13,.6);}
-.ff-map-card{border-radius:20px;overflow:hidden;border:1px solid var(--line-dark);background:linear-gradient(135deg,#2b2018,#1a130d);min-height:420px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:30px;}
-.ff-map-card::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(244,236,224,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(244,236,224,.06) 1px,transparent 1px);background-size:42px 42px;opacity:.6;}
-.ff-pin{position:absolute;font-weight:700;font-size:12px;letter-spacing:.04em;z-index:2;}
-.ff-pin .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:middle;}
-.ff-pin-storia{top:58%;left:30%;color:var(--bone);}
-.ff-pin-storia .dot{background:var(--amber-bright);box-shadow:0 0 0 6px rgba(232,161,74,.22);}
-.ff-pin-amh{top:30%;left:62%;color:rgba(244,236,224,.85);}
-.ff-pin-amh .dot{background:#7fb0c4;}
-.ff-map-line{position:absolute;top:34%;left:33%;width:32%;height:25%;border-bottom:2px dashed rgba(232,161,74,.6);}
-.ff-map-cap{position:relative;z-index:2;color:rgba(244,236,224,.78);font-size:.9rem;}
-.ff-map-cap b{color:var(--amber-bright);font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.4rem;display:block;margin-bottom:4px;}
+.ff-map-card{border-radius:20px;overflow:hidden;border:1px solid var(--line-dark);min-height:420px;position:relative;}
+.ff-map-iframe{display:block;width:100%;border-radius:20px;}
 /* RÄUME */
 .ff-raeume{background:var(--ink);}
 .ff-room-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:46px;}
