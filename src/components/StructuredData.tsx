@@ -222,26 +222,30 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, includeRev
 
   const eventSchema = eventData ? {
     '@context': 'https://schema.org',
-    '@type': 'FoodEvent',
+    '@type': 'Service',
+    serviceType: 'Eventlocation & Catering',
     name: eventData.name,
     description: eventData.description,
-    startDate: eventData.startDate,
-    endDate: eventData.endDate,
-    location: {
-      '@type': 'Restaurant',
-      name: STORIA.schemaName,
-      address: addressSchema,
+    provider: {
+      '@id': `${STORIA.url}/#restaurant`,
     },
-    organizer: {
-      '@type': 'Organization',
-      name: STORIA.companyName,
-      url: STORIA.url,
+    areaServed: {
+      '@type': 'City',
+      name: 'München',
     },
-    offers: {
-      '@type': 'Offer',
-      url: `${STORIA.url}/reservierung`,
-      availability: 'https://schema.org/InStock',
-    },
+    ...(eventData.services?.length ? {
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Festivalformate',
+        itemListElement: eventData.services.map(s => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: s,
+          },
+        })),
+      },
+    } : {}),
   } : null;
 
   return (
