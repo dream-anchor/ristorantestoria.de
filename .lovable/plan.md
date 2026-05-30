@@ -1,48 +1,53 @@
 ## Ziel
 
-Den hochwertigen HTML-Entwurf „STORIA × Filmfest München 2026" in eine echte, gepflegte Seite der Website überführen — als **Hybrid**: der cineastische Look (warmes Tiefschwarz, Amber/Terrakotta) bleibt erhalten, aber die Seite wird sauber in die Site-Architektur eingebettet (globaler Footer, SEO-/Cookie-Komponenten, Pre-Render-Konformität). **Nur Deutsch.** Route: **`/filmfest-muenchen`**.
+Die Filmfest-München-Seite so umbauen, dass **alle Inhalte im Quelltext** stehen (statisches HTML) und die Seite nach **SEO- und GEO-Best-Practices** (laut `docs/geo-content-guidelines.md`) optimiert ist.
 
-### Warum `/filmfest-muenchen`?
-Konsistent mit der bestehenden SEO-Slug-Konvention (`firmenfeier-muenchen`, `aperitivo-muenchen` …), gut für lokale Suche. Zusätzlich richte ich `/filmfest` als 301-Weiterleitung dorthin ein, damit die kurze, merkbare URL ebenfalls funktioniert.
+## Kernbefund (Ursache)
 
-## Was ich aus dem Entwurf übernehme
-- **1:1 Inhalt & Sektionsstruktur**: Hero, Stat-Leiste, Formate (6 Karten), Lage (Wegezeiten + stilisierte Karte), Räume & Kapazitäten (+ Szenario-Tabelle), Catering, Ablauf (4 Schritte), Kontakt + Anfrageformular.
-- **Cineastisches Design**: dunkles Warmschwarz, Amber/Terrakotta-Akzente, Filmstreifen-Perforation, Grain-Overlay, Scroll-Reveal-Animationen (via framer-motion statt IntersectionObserver-Script).
-- **Texte**: alle deutschen Texte aus dem Entwurf.
+Die Seite rendert zur Laufzeit (Slug liegt in `src/translations/de.ts`), wird aber **nicht prerendert**. Grund: `prerender.js` und `scripts/generate-sitemap.mjs` lesen ihre Routen aus `src/config/slugs.json` — und dort fehlt `filmfest-muenchen` komplett. Dadurch existiert kein statisches `dist/filmfest-muenchen/index.html`; Crawler/KI-Bots ohne JS sehen keinen Inhalt. Das ist der eigentliche Hebel für die Anforderung „alles im Quelltext".
 
-## Anpassungen für den Hybrid-Ansatz
-1. **Fonts**: Statt extern geladenem Fraunces/Archivo (verstößt gegen die „keine externen Google-Fonts"-Regel) verwende ich die bereits self-hosteten Schriften der Site (Cormorant Garamond für Display, Inter für Body). Der Charakter bleibt elegant-editorial.
-2. **Styling**: Scoped auf die Seite (kein Eingriff in globale Design-Tokens), umgesetzt mit Tailwind + lokalem CSS-Block für die cineastischen Spezialeffekte. Globale Tokens bleiben unverändert.
-3. **Bilder**: Die Platzhalter-Slots fülle ich mit vorhandenen, authentischen STORIA-Fotos aus `src/assets` (Innenraum, Terrasse/Loggia, Event-Setups — wie auf der Firmenfeier-Seite) inkl. `srcSet`/`alt`/Lazy-Loading.
-4. **Footer**: globaler `<Footer />` der Site statt eigenem Mini-Footer (Hinweis „keine offizielle Verbindung zum Festival" bleibt als kleiner Disclaimer in der Seite).
-5. **SEO/Cookie/Analytics**: `<SEO>` (mit `noHreflang`, da DE-only), `<StructuredData type="restaurant" />` + Breadcrumb-Schema, automatische Einbindung in Cookie-Banner/Analytics über das App-Layout.
+Die Komponente selbst ist bereits SSR-sicher (`Reveal` hält Inhalte immer im DOM, kein `React.lazy`), es fehlt also nur die Registrierung im Prerender-/Sitemap-Pfad plus inhaltliche GEO/SEO-Tiefe.
 
-## Anfrageformular (echte Backend-Übermittlung)
-- Eigene Komponente **`FilmfestInquiryForm`** (react-hook-form + zod), Felder wie im Entwurf: Name/Firma, E-Mail, Telefon, Wunschtermin (eingeschränkt auf 26.06.–05.07.2026), Gästezahl, Format (Premierendinner, Verleiher-/Sales-Empfang, Cast & Crew, Presse-Lunch, Networking, Exklusiv-Anmietung), Anmerkungen.
-- **Versand** über die bereits etablierte Events-Anbindung (dieselbe externe Edge Function `receive-event-inquiry`, die das bestehende `EventInquiryForm` nutzt) mit `source: 'filmfest-landingpage'` und `event_type: 'filmfest'`. Das entspricht der Architektur-Vorgabe, dass Event-/Catering-Anfragen extern verarbeitet werden — kein mailto-Fallback, zuverlässige Übermittlung + Erfolg/Fehler-Toast.
-- Direktkontakte (Telefon, E-Mail, Maps, events-storia.de) bleiben als zusätzliche Kontaktwege erhalten.
+## Schritt 1 — Prerendering aktivieren (Quelltext-Inhalt)
 
-## Pre-Render-Konformität (MANDATORY)
-- **Eager Import** in `App.tsx` (kein `lazy()`), Seite registriert wie die anderen SEO-Pages.
-- Inhalt server-renderbar (statischer Content, keine client-only Daten).
-- `usePrerenderReady(true)`.
+1. **`src/config/slugs.json`**: Eintrag `"filmfest-muenchen": "filmfest-muenchen"` nur im `de`-Block ergänzen (Seite ist DE-only, daher kein en/it/fr-Eintrag → Prerender erzeugt nur die DE-Route).
+2. **`scripts/generate-sitemap.mjs`**: `"filmfest-muenchen"` zur `LEGAL_ONLY_DE`-Liste hinzufügen. So wird nur die deutsche URL ohne hreflang emittiert (verhindert kaputte URLs durch fehlende Übersetzungsslugs) — konsistent zur bereits vorhandenen `LEGAL_ONLY_DE`-Eintragung in `App.tsx`.
+3. Verifizieren: Build + Prerender laufen lassen und prüfen, dass `dist/filmfest-muenchen/index.html` echten Inhalt enthält (kein „Laden…"), inkl. `<title>`, Meta-Description, JSON-LD.
 
-## Technische Umsetzung (Dateien)
+## Schritt 2 — GEO-Optimierung (Inhalt im Quelltext, KI-Zitierbarkeit)
 
-```text
-src/pages/seo/FilmfestMuenchen.tsx     (neu) — die Landingpage
-src/components/FilmfestInquiryForm.tsx (neu) — Anfrageformular
-src/App.tsx                            — Route-Komponente + /filmfest Redirect
-src/translations/{de,en,it,fr}.ts      — Slug 'filmfest-muenchen' (DE-only-Verhalten)
-```
+Bearbeitung in `src/pages/seo/FilmfestMuenchen.tsx` — alle neuen Inhalte bleiben statisch im DOM (kein client-only Rendering):
 
-Schritte:
-1. `FilmfestMuenchen.tsx` bauen: alle Sektionen aus dem Entwurf als React/Tailwind, cineastisches Styling, framer-motion-Reveals, echte Fotos, globaler Footer, SEO mit `noHreflang`.
-2. `FilmfestInquiryForm.tsx` bauen und in die Kontaktsektion einsetzen.
-3. Slug `"filmfest-muenchen"` in den vier Translation-Slug-Objekten ergänzen und in die `LEGAL_ONLY_DE`-Logik (DE-only, Fremdsprachen → DE-Redirect) aufnehmen.
-4. In `App.tsx`: `routeComponents["filmfest-muenchen"] = FilmfestMuenchen` + eager import + DE-only-Set + `<Route path="/filmfest" element={<Navigate to="/filmfest-muenchen/" replace />} />`.
-5. Verifizieren: Build/Pre-Render ok, Seite zeigt echten Content (kein „Laden…"), Formular sendet erfolgreich (Test gegen Events-Endpoint), responsive & dunkles Design sauber.
+1. **Definition-Lead** (GEO Regel 1): Einen knappen, eigenständigen Einleitungs-Absatz direkt unter H1 bzw. als erste Section ergänzen nach Muster „Das Ristorante STORIA ist ein familiengeführtes italienisches Restaurant in der Karlstraße 47a, München Maxvorstadt, sechs Gehminuten vom Festivalzentrum Amerikahaus — Eventlocation für Premierendinner und Branchenempfänge während des Filmfest München 2026 (26. Juni – 5. Juli)."
+2. **FAQ-Sektion** (GEO Regel 5, Pflicht): Neue sichtbare Sektion mit 5–6 eigenständig lesbaren Q&As, z. B.:
+   - „Wo finde ich eine Eventlocation in der Nähe des Filmfest-Festivalzentrums?"
+   - „Welche Veranstaltungsformate richtet das STORIA während des Filmfest München aus?"
+   - „Für wie viele Gäste ist das STORIA geeignet?"
+   - „Bietet das STORIA Catering für Cast-&-Crew-Dinner an?"
+   - „Wie kurzfristig kann ich einen Termin im Festivalzeitraum anfragen?"
+   - „Wann findet das Filmfest München 2026 statt?"
+   Jede Antwort nennt die Entity explizit und enthält konkrete Zahlen.
+3. **FAQPage-Schema**: `<StructuredData faqItems={...} />` mit denselben Q&As (Komponente unterstützt das bereits).
+4. **FoodEvent-Schema**: `<StructuredData type="event" eventData={...} />` für „Filmfest München 2026" (startDate 2026-06-26, endDate 2026-07-05) — passt zum Schema-Typ „Event-Seiten" der GEO-Guidelines.
+5. **Externe autoritative Citation** (GEO Regel 3): mindestens einen Outbound-Link auf eine autoritative Quelle einbauen (offizielle Festivalseite `filmfest-muenchen.de`), mit `rel="noopener noreferrer"` — im Disclaimer/FAQ-Kontext, da bereits ein neutraler Hinweis zur fehlenden offiziellen Verbindung existiert.
+6. **Statistiken** sind bereits ausreichend vorhanden (6 Min., bis 180 Gäste, seit 2015, 4,5★/780+) — beibehalten und in FAQ-Antworten wiederverwenden.
 
-## Offene Annahmen
-- Kein Eintrag in Haupt-Navigation/Sitemap der regulären Landing Pages (Kampagnenseite, organisch/Direktlink) — sag Bescheid, falls sie verlinkt werden soll.
-- Telefonnummer auf der Seite: ich verwende die im Entwurf genannte **+49 89 51519696** (entspricht der STORIA-Entity-Konfiguration).
+## Schritt 3 — SEO-Feinschliff
+
+- `<title>` (~ aktuell knapp über 60 Zeichen) auf < 60 Zeichen straffen, Meta-Description < 160 Zeichen prüfen/kürzen.
+- Genau ein H1 (vorhanden), saubere H2/H3-Hierarchie (FAQ-Fragen als H3 unter einer FAQ-H2) — kein Heading-Skipping.
+- `dateModified` ist im Restaurant-Schema bereits dynamisch gesetzt — bleibt.
+- Canonical `/filmfest-muenchen` + `noHreflang` (DE-only) bleiben.
+
+## Schritt 4 — Verifikation
+
+- Production-Build + Prerender ausführen.
+- `dist/filmfest-muenchen/index.html` prüfen: enthält Hero-Text, Formate, Lage, Räume, Catering, **FAQ-Text** und JSON-LD (`FAQPage`, `FoodEvent`, `Restaurant`, `BreadcrumbList`) — alles ohne „Laden…".
+- Sitemap-Generierung prüfen: `/filmfest-muenchen/` ist als DE-only-Eintrag enthalten.
+
+## Technische Notizen
+
+- Zwei getrennte Slug-Quellen existieren: `translations/de.ts` (Laufzeit-Routing, hat den Slug) und `src/config/slugs.json` (Prerender + Sitemap + hreflang, fehlt der Slug). Diese Diskrepanz ist die Ursache und wird in Schritt 1 behoben.
+- `slugs.json` wird nicht automatisch generiert (kein Generator gefunden) → manuelle Ergänzung ist sicher.
+- Keine Übersetzungsdateien nötig (DE-only Seite, hartkodierter deutscher Text).
+- `StructuredData` rendert `faqItems`/`eventData` unabhängig vom `type`-Guard, daher genügen zusätzliche `<StructuredData>`-Instanzen.
