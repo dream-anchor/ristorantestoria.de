@@ -231,6 +231,23 @@ const FilmfestMuenchen = () => {
           </div>
         </section>
 
+        {/* DEFINITION-LEAD (GEO) */}
+        <section className="ff-sec ff-intro">
+          <div className="ff-wrap">
+            <Reveal as="p" className="ff-intro-lead">
+              Das Ristorante STORIA ist ein familiengeführtes italienisches Restaurant in der
+              Karlstraße 47a, München Maxvorstadt — sechs Gehminuten vom Festivalzentrum Amerikahaus
+              und damit eine Eventlocation für Premierendinner, Verleiher-Empfänge,
+              Cast-&-Crew-Dinner und Branchen-Networking während des{" "}
+              <a href="https://www.filmfest-muenchen.de/" target="_blank" rel="noopener noreferrer">
+                Filmfest München 2026
+              </a>{" "}
+              (26. Juni – 5. Juli 2026). Küche, Service und Eventplanung kommen aus einer Hand;
+              bis zu 200 Gäste sitzend und 180 beim Stehempfang finden hier Platz.
+            </Reveal>
+          </div>
+        </section>
+
         {/* FORMATE */}
         <section className="ff-sec ff-formate" id="formate">
           <div className="ff-wrap">
