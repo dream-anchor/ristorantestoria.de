@@ -532,7 +532,12 @@ const ffStyles = `
 .ff-nav-links a:hover{opacity:1;}
 .ff-nav-cta{background:var(--amber);color:var(--ink)!important;padding:10px 20px;border-radius:100px;font-weight:700;opacity:1!important;transition:transform .2s,background .2s;}
 .ff-nav-cta:hover{transform:translateY(-1px);background:var(--amber-bright);}
-@media(max-width:820px){.ff-nav-links a:not(.ff-nav-cta){display:none;}}
+.ff-nav-sep{width:1px;height:20px;background:var(--line);opacity:.6;}
+.ff-nav-icon{display:inline-flex;align-items:center;justify-content:center;color:var(--bone);opacity:.78;transition:opacity .2s,color .2s;}
+.ff-nav-icon:hover{opacity:1;}
+.ff-nav-icon-wa:hover{color:#25D366;}
+.ff-nav-lang{display:flex;align-items:center;margin-left:18px;}
+@media(max-width:820px){.ff-nav-links a:not(.ff-nav-cta),.ff-nav-sep,.ff-nav-icon{display:none;}.ff-nav-lang{margin-left:12px;}}
 /* HERO */
 .ff-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:120px 0 72px;overflow:hidden;background:var(--ink);}
 .ff-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;}
