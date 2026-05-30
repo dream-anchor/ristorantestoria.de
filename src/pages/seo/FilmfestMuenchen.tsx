@@ -146,7 +146,7 @@ const FilmfestMuenchen = () => {
   return (
     <>
       <SEO
-        title="STORIA × Filmfest München 2026 — Location für Premierendinner & Branchenempfänge"
+        title="Filmfest München 2026 — Eventlocation STORIA"
         description="Sechs Gehminuten vom Festivalzentrum Amerikahaus: Das STORIA in der Maxvorstadt ist Ihre Location für Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Networking während des Filmfest München 2026 (26. Juni – 5. Juli). Eigene Küche, Flying Buffets, bis 180 Gäste."
         canonical="/filmfest-muenchen"
         noHreflang
@@ -158,6 +158,17 @@ const FilmfestMuenchen = () => {
           { name: "Home", url: "/" },
           { name: "Filmfest München 2026", url: "/filmfest-muenchen" },
         ]}
+      />
+      <StructuredData type="faq" faqItems={faqItems} />
+      <StructuredData
+        type="event"
+        eventData={{
+          name: "Filmfest München 2026 — Eventabende im Ristorante STORIA",
+          description:
+            "Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking im Ristorante STORIA München, sechs Gehminuten vom Festivalzentrum Amerikahaus, während des Filmfest München 2026.",
+          startDate: "2026-06-26",
+          endDate: "2026-07-05",
+        }}
       />
 
       <style>{ffStyles}</style>
