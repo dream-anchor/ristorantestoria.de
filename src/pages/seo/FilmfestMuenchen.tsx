@@ -99,6 +99,39 @@ const steps = [
   { n: "4", title: "Ihr Abend", text: "Sie sind Gast auf der eigenen Veranstaltung. Wir kümmern uns um den Rest." },
 ];
 
+const faqItems = [
+  {
+    question: "Wo finde ich eine Eventlocation in der Nähe des Filmfest-Festivalzentrums?",
+    answer:
+      "Das Ristorante STORIA in der Karlstraße 47a, 80333 München, liegt nur sechs Gehminuten vom Festivalzentrum Amerikahaus (Karolinenplatz 3) entfernt — mitten im Kunstareal der Maxvorstadt. Königsplatz (U2) und Hauptbahnhof sind in drei bis fünf Minuten erreichbar, die Tram Karlstraße hält direkt vor dem Haus.",
+  },
+  {
+    question: "Welche Veranstaltungsformate richtet das STORIA während des Filmfest München aus?",
+    answer:
+      "Das STORIA richtet sechs Festivalformate aus: Premierendinner, Verleiher- und Sales-Empfänge, Cast-&-Crew-Dinner, Presse-Lunch und Junkets, Branchen-Networking sowie die Exklusiv-Anmietung des gesamten Hauses. Küche, Service und Eventplanung kommen aus einer Hand.",
+  },
+  {
+    question: "Für wie viele Gäste ist das STORIA geeignet?",
+    answer:
+      "Das STORIA bietet 100 Sitzplätze im Innenraum und 100 auf der überdachten Innenhof-Terrasse — insgesamt bis zu 200 sitzende Gäste. Beim Stehempfang mit Flying Buffet sind bis zu 180 Gäste möglich. Intime Cast-Dinner im Private Room funktionieren ab sechs Personen.",
+  },
+  {
+    question: "Bietet das STORIA Catering für Cast-&-Crew-Dinner an?",
+    answer:
+      "Ja. Küchenchef Domenico Speranza und sein Team kochen süditalienisch nach Familienrezepten aus dem Cilento — alles entsteht im Haus, ohne externe Catering-Logistik. Zur Wahl stehen Flying Buffets mit Stationen (inkl. neapolitanischer Steinofenpizza aus dem 400-°C-Ofen) oder mehrgängige 3- bis 5-Gang-Menüs mit italienischer Weinbegleitung. Vegane und glutenfreie Optionen sind möglich.",
+  },
+  {
+    question: "Wie kurzfristig kann ich im Festivalzeitraum einen Termin anfragen?",
+    answer:
+      "Im Festivalzeitraum vom 26. Juni bis 5. Juli 2026 reagiert das STORIA besonders schnell auf Anfragen. Geben Sie Datum, Format und Gästezahl über das Formular an oder rufen Sie direkt unter +49 89 51519696 an — der gewünschte Bereich wird kurzfristig freigehalten.",
+  },
+  {
+    question: "Wann findet das Filmfest München 2026 statt?",
+    answer:
+      "Das Filmfest München 2026 findet vom 26. Juni bis 5. Juli 2026 statt — zehn Festivaltage mit Premieren, Pressetagen und Branchenempfängen. Das STORIA ist als Eventlocation in Gehweite des Festivalzentrums die Bühne für den Abend danach.",
+  },
+];
+
 const FilmfestMuenchen = () => {
   usePrerenderReady(true);
   const [scrolled, setScrolled] = useState(false);
@@ -113,8 +146,8 @@ const FilmfestMuenchen = () => {
   return (
     <>
       <SEO
-        title="STORIA × Filmfest München 2026 — Location für Premierendinner & Branchenempfänge"
-        description="Sechs Gehminuten vom Festivalzentrum Amerikahaus: Das STORIA in der Maxvorstadt ist Ihre Location für Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Networking während des Filmfest München 2026 (26. Juni – 5. Juli). Eigene Küche, Flying Buffets, bis 180 Gäste."
+        title="Filmfest München 2026 — Eventlocation STORIA"
+        description="Eventlocation 6 Gehminuten vom Festivalzentrum: Premierendinner, Empfänge & Cast-Dinner im STORIA München beim Filmfest 2026 (26.6.–5.7.). Bis 180 Gäste."
         canonical="/filmfest-muenchen"
         noHreflang
       />
@@ -125,6 +158,17 @@ const FilmfestMuenchen = () => {
           { name: "Home", url: "/" },
           { name: "Filmfest München 2026", url: "/filmfest-muenchen" },
         ]}
+      />
+      <StructuredData type="faq" faqItems={faqItems} />
+      <StructuredData
+        type="event"
+        eventData={{
+          name: "Filmfest München 2026 — Eventabende im Ristorante STORIA",
+          description:
+            "Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking im Ristorante STORIA München, sechs Gehminuten vom Festivalzentrum Amerikahaus, während des Filmfest München 2026.",
+          startDate: "2026-06-26",
+          endDate: "2026-07-05",
+        }}
       />
 
       <style>{ffStyles}</style>
@@ -184,6 +228,23 @@ const FilmfestMuenchen = () => {
             <Reveal delay={0.08} className="ff-stat"><div className="n">bis 180</div><div className="l">Gäste beim Empfang · 200 Sitzplätze gesamt</div></Reveal>
             <Reveal delay={0.16} className="ff-stat"><div className="n">aus 1er Hand</div><div className="l">Küche, Service & Eventplanung im Haus</div></Reveal>
             <Reveal delay={0.24} className="ff-stat"><div className="n">seit 2015</div><div className="l">Familie Speranza · 4,5★ aus 780+ Bewertungen</div></Reveal>
+          </div>
+        </section>
+
+        {/* DEFINITION-LEAD (GEO) */}
+        <section className="ff-sec ff-intro">
+          <div className="ff-wrap">
+            <Reveal as="p" className="ff-intro-lead">
+              Das Ristorante STORIA ist ein familiengeführtes italienisches Restaurant in der
+              Karlstraße 47a, München Maxvorstadt — sechs Gehminuten vom Festivalzentrum Amerikahaus
+              und damit eine Eventlocation für Premierendinner, Verleiher-Empfänge,
+              Cast-&-Crew-Dinner und Branchen-Networking während des{" "}
+              <a href="https://www.filmfest-muenchen.de/" target="_blank" rel="noopener noreferrer">
+                Filmfest München 2026
+              </a>{" "}
+              (26. Juni – 5. Juli 2026). Küche, Service und Eventplanung kommen aus einer Hand;
+              bis zu 200 Gäste sitzend und 180 beim Stehempfang finden hier Platz.
+            </Reveal>
           </div>
         </section>
 
@@ -374,11 +435,28 @@ const FilmfestMuenchen = () => {
               <FilmfestInquiryForm />
             </Reveal>
           </div>
+          <div className="ff-wrap ff-faq" id="faq">
+            <Reveal className="ff-sec-head">
+              <span className="ff-eyebrow ff-eyebrow-line">Häufige Fragen</span>
+              <h2 className="ff-h2">Filmfest München 2026 im STORIA — kurz erklärt.</h2>
+            </Reveal>
+            <div className="ff-faq-list">
+              {faqItems.map((item, i) => (
+                <Reveal key={item.question} delay={(i % 3) * 0.06} className="ff-faq-item">
+                  <h3>{item.question}</h3>
+                  <p>{item.answer}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
           <div className="ff-wrap">
             <p className="ff-disclaimer">
               Eine Sonderseite zum Filmfest München (26. Juni – 5. Juli 2026). Filmfest München ist
               eine Veranstaltung der Internationale Münchner Filmwochen GmbH; diese Seite steht in
-              keiner offiziellen Verbindung zum Festival.
+              keiner offiziellen Verbindung zum Festival. Offizielle Festivalinformationen unter{" "}
+              <a href="https://www.filmfest-muenchen.de/" target="_blank" rel="noopener noreferrer">
+                filmfest-muenchen.de
+              </a>.
             </p>
             <img src={storiaLogo} alt="STORIA Logo" className="ff-foot-logo" loading="lazy" />
           </div>
@@ -543,6 +621,18 @@ const ffStyles = `
 .ff-submit{background:var(--amber)!important;color:var(--ink)!important;border:none!important;border-radius:100px!important;font-weight:700!important;height:auto!important;padding:16px 30px!important;font-size:15px!important;}
 .ff-submit:hover{background:var(--amber-bright)!important;}
 .ff-disclaimer{margin-top:54px;padding-top:28px;border-top:1px solid var(--line);font-size:.82rem;color:rgba(244,236,224,.45);max-width:80ch;}
+.ff-disclaimer a{color:rgba(244,236,224,.7);text-decoration:underline;}
+/* INTRO / DEFINITION-LEAD */
+.ff-intro{background:var(--ink);padding-top:clamp(48px,6vw,80px);padding-bottom:clamp(48px,6vw,80px);}
+.ff-intro-lead{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.55;color:rgba(244,236,224,.86);max-width:70ch;font-family:'Cormorant Garamond',Georgia,serif;}
+.ff-intro-lead a{color:var(--amber-bright);text-decoration:underline;text-underline-offset:3px;}
+/* FAQ */
+.ff-faq{margin-top:clamp(56px,7vw,96px);}
+.ff-faq-list{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px;}
+@media(max-width:780px){.ff-faq-list{grid-template-columns:1fr;}}
+.ff-faq-item{border:1px solid var(--line);border-radius:18px;padding:28px 26px;background:rgba(244,236,224,.03);}
+.ff-faq-item h3{font-size:1.2rem;color:var(--bone);margin-bottom:10px;}
+.ff-faq-item p{font-size:.96rem;color:rgba(244,236,224,.76);line-height:1.6;}
 .ff-foot-logo{height:54px;width:auto;margin-top:24px;opacity:.85;filter:brightness(0) invert(1);}
 /* REVEAL */
 .ff-reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}

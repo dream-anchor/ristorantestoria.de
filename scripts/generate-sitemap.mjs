@@ -39,6 +39,7 @@ const LEGAL_ONLY_DE = [
   "impressum", "datenschutz", "cookie-richtlinie",
   "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
   "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+  "barrierefreiheit", "filmfest-muenchen",
 ];
 
 // Priority configuration based on route type
