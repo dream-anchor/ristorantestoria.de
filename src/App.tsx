@@ -36,6 +36,7 @@ import AperitivoMuenchen from "./pages/seo/AperitivoMuenchen";
 import RomantischesDinner from "./pages/seo/RomantischesDinner";
 import EventlocationMuenchen from "./pages/seo/EventlocationMuenchen";
 import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
+import FilmfestMuenchen from "./pages/seo/FilmfestMuenchen";
 import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
 import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
@@ -112,6 +113,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "romantisches-dinner-muenchen": RomantischesDinner,
   "eventlocation-muenchen-maxvorstadt": EventlocationMuenchen,
   "firmenfeier-muenchen": FirmenfeierMuenchen,
+  "filmfest-muenchen": FilmfestMuenchen,
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
   "wild-essen-muenchen": WildEssenMuenchen,
@@ -145,7 +147,7 @@ const LEGAL_ONLY_DE = new Set([
   "impressum", "datenschutz", "cookie-richtlinie",
   "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
   "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
-  "barrierefreiheit",
+  "barrierefreiheit", "filmfest-muenchen",
 ]);
 
 // Generate all routes for all languages
@@ -237,6 +239,8 @@ const AppRoutes = () => {
 
         {/* Legacy URL redirects (previously in .htaccess) */}
         <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu/" replace />} />
+        {/* Kurz-URL für Filmfest-Kampagnenseite */}
+        <Route path="/filmfest" element={<Navigate to="/filmfest-muenchen/" replace />} />
         <Route path="/weihnachtsmenues" element={<Navigate to="/besondere-anlaesse/weihnachtsmenue/" replace />} />
         <Route path="/silvesterparty" element={<Navigate to="/besondere-anlaesse/silvester/" replace />} />
         <Route path="/lunch-muenchen" element={<Navigate to="/lunch-muenchen-maxvorstadt/" replace />} />

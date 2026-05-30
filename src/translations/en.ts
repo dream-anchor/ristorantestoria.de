@@ -3239,6 +3239,7 @@ export const en = {
     "romantisches-dinner-muenchen": "romantic-dinner-munich",
     "eventlocation-muenchen-maxvorstadt": "event-venue-munich",
     "firmenfeier-muenchen": "corporate-event-munich",
+    "filmfest-muenchen": "filmfest-muenchen",
     "geburtstagsfeier-muenchen": "birthday-party-munich",
     "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
     "wild-essen-muenchen": "game-dishes-munich",
