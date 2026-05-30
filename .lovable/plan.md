@@ -1,53 +1,49 @@
-## Ziel
+## Problem
 
-Die Filmfest-München-Seite so umbauen, dass **alle Inhalte im Quelltext** stehen (statisches HTML) und die Seite nach **SEO- und GEO-Best-Practices** (laut `docs/geo-content-guidelines.md`) optimiert ist.
+Der E-Mail-/Anfragenversand schlägt fehl ("Etwas ist schiefgelaufen"). Ursache liegt **nicht** am E-Mail-Versand selbst, sondern am Anfrage-Endpoint, der die E-Mails auslöst.
 
-## Kernbefund (Ursache)
+Der Filmfest-Anfrage-Endpoint (`receive-event-inquiry`, läuft im separaten Projekt **events-storia.de**) erwartet die Felder in **camelCase** (`contactName`, `companyName`, `guestCount`, `eventType`, `preferredDate`). Unsere Formulare senden sie aber in **snake_case** (`contact_name`, `company_name`, …). Dadurch greift die Validierung `if (!data.contactName || !data.email)` und der Server antwortet mit HTTP 400 „Name und E-Mail sind erforderlich". Es wird keine E-Mail versendet.
 
-Die Seite rendert zur Laufzeit (Slug liegt in `src/translations/de.ts`), wird aber **nicht prerendert**. Grund: `prerender.js` und `scripts/generate-sitemap.mjs` lesen ihre Routen aus `src/config/slugs.json` — und dort fehlt `filmfest-muenchen` komplett. Dadurch existiert kein statisches `dist/filmfest-muenchen/index.html`; Crawler/KI-Bots ohne JS sehen keinen Inhalt. Das ist der eigentliche Hebel für die Anforderung „alles im Quelltext".
+Bestätigt per Direkttest:
+- snake_case Payload → `{"error":"Name und E-Mail sind erforderlich"}`
+- camelCase Payload → `{"success":true, ...}` (E-Mail wird versendet)
 
-Die Komponente selbst ist bereits SSR-sicher (`Reveal` hält Inhalte immer im DOM, kein `React.lazy`), es fehlt also nur die Registrierung im Prerender-/Sitemap-Pfad plus inhaltliche GEO/SEO-Tiefe.
+Betroffen sind **zwei** Formulare in diesem Projekt:
+- `src/components/FilmfestInquiryForm.tsx`
+- `src/components/EventInquiryForm.tsx`
 
-## Schritt 1 — Prerendering aktivieren (Quelltext-Inhalt)
+(`GroupInquiryForm.tsx` ist korrekt — sendet bereits camelCase an einen anderen Endpoint.)
 
-1. **`src/config/slugs.json`**: Eintrag `"filmfest-muenchen": "filmfest-muenchen"` nur im `de`-Block ergänzen (Seite ist DE-only, daher kein en/it/fr-Eintrag → Prerender erzeugt nur die DE-Route).
-2. **`scripts/generate-sitemap.mjs`**: `"filmfest-muenchen"` zur `LEGAL_ONLY_DE`-Liste hinzufügen. So wird nur die deutsche URL ohne hreflang emittiert (verhindert kaputte URLs durch fehlende Übersetzungsslugs) — konsistent zur bereits vorhandenen `LEGAL_ONLY_DE`-Eintragung in `App.tsx`.
-3. Verifizieren: Build + Prerender laufen lassen und prüfen, dass `dist/filmfest-muenchen/index.html` echten Inhalt enthält (kein „Laden…"), inkl. `<title>`, Meta-Description, JSON-LD.
+## Fix (in diesem Projekt)
 
-## Schritt 2 — GEO-Optimierung (Inhalt im Quelltext, KI-Zitierbarkeit)
+**1. `FilmfestInquiryForm.tsx`** — Payload im `fetch`-Body von snake_case auf camelCase umstellen:
+- `company_name` → `companyName`
+- `contact_name` → `contactName`
+- `phone` bleibt `phone`
+- `guest_count` → `guestCount`
+- `event_type` → `eventType`
+- `preferred_date` → `preferredDate`
+- `message`, `source` bleiben gleich
 
-Bearbeitung in `src/pages/seo/FilmfestMuenchen.tsx` — alle neuen Inhalte bleiben statisch im DOM (kein client-only Rendering):
+**2. `EventInquiryForm.tsx`** — gleiche Umstellung der Payload-Keys auf camelCase.
 
-1. **Definition-Lead** (GEO Regel 1): Einen knappen, eigenständigen Einleitungs-Absatz direkt unter H1 bzw. als erste Section ergänzen nach Muster „Das Ristorante STORIA ist ein familiengeführtes italienisches Restaurant in der Karlstraße 47a, München Maxvorstadt, sechs Gehminuten vom Festivalzentrum Amerikahaus — Eventlocation für Premierendinner und Branchenempfänge während des Filmfest München 2026 (26. Juni – 5. Juli)."
-2. **FAQ-Sektion** (GEO Regel 5, Pflicht): Neue sichtbare Sektion mit 5–6 eigenständig lesbaren Q&As, z. B.:
-   - „Wo finde ich eine Eventlocation in der Nähe des Filmfest-Festivalzentrums?"
-   - „Welche Veranstaltungsformate richtet das STORIA während des Filmfest München aus?"
-   - „Für wie viele Gäste ist das STORIA geeignet?"
-   - „Bietet das STORIA Catering für Cast-&-Crew-Dinner an?"
-   - „Wie kurzfristig kann ich einen Termin im Festivalzeitraum anfragen?"
-   - „Wann findet das Filmfest München 2026 statt?"
-   Jede Antwort nennt die Entity explizit und enthält konkrete Zahlen.
-3. **FAQPage-Schema**: `<StructuredData faqItems={...} />` mit denselben Q&As (Komponente unterstützt das bereits).
-4. **FoodEvent-Schema**: `<StructuredData type="event" eventData={...} />` für „Filmfest München 2026" (startDate 2026-06-26, endDate 2026-07-05) — passt zum Schema-Typ „Event-Seiten" der GEO-Guidelines.
-5. **Externe autoritative Citation** (GEO Regel 3): mindestens einen Outbound-Link auf eine autoritative Quelle einbauen (offizielle Festivalseite `filmfest-muenchen.de`), mit `rel="noopener noreferrer"` — im Disclaimer/FAQ-Kontext, da bereits ein neutraler Hinweis zur fehlenden offiziellen Verbindung existiert.
-6. **Statistiken** sind bereits ausreichend vorhanden (6 Min., bis 180 Gäste, seit 2015, 4,5★/780+) — beibehalten und in FAQ-Antworten wiederverwenden.
+Die Formularfelder/Zod-Schemata bleiben unverändert; nur das gesendete JSON-Objekt wird angepasst.
 
-## Schritt 3 — SEO-Feinschliff
+## Wichtiger Hinweis: CORS auf der Produktivdomain
 
-- `<title>` (~ aktuell knapp über 60 Zeichen) auf < 60 Zeichen straffen, Meta-Description < 160 Zeichen prüfen/kürzen.
-- Genau ein H1 (vorhanden), saubere H2/H3-Hierarchie (FAQ-Fragen als H3 unter einer FAQ-H2) — kein Heading-Skipping.
-- `dateModified` ist im Restaurant-Schema bereits dynamisch gesetzt — bleibt.
-- Canonical `/filmfest-muenchen` + `noHreflang` (DE-only) bleiben.
+Der Endpoint im Projekt events-storia.de erlaubt aktuell per CORS nur:
+`events-storia.de`, `localhost` und Lovable-Preview-Domains (`*.lovable.app`, `*.lovableproject.com`).
 
-## Schritt 4 — Verifikation
+`https://www.ristorantestoria.de` ist **nicht** in der Allowlist. Das bedeutet:
+- In der **Lovable-Vorschau** funktioniert das Formular nach dem Fix sofort.
+- Auf der **Live-Domain** `www.ristorantestoria.de` wird die Anfrage weiterhin vom Browser per CORS blockiert.
 
-- Production-Build + Prerender ausführen.
-- `dist/filmfest-muenchen/index.html` prüfen: enthält Hero-Text, Formate, Lage, Räume, Catering, **FAQ-Text** und JSON-LD (`FAQPage`, `FoodEvent`, `Restaurant`, `BreadcrumbList`) — alles ohne „Laden…".
-- Sitemap-Generierung prüfen: `/filmfest-muenchen/` ist als DE-only-Eintrag enthalten.
+Um den Live-Versand zu ermöglichen, muss im **separaten Projekt events-storia.de** in `supabase/functions/_shared/cors.ts` die Allowlist erweitert werden um:
+```
+/^https:\/\/(www\.)?ristorantestoria\.de$/,
+```
+Das kann ich von hier aus nicht ändern (anderes Projekt). Diese Anpassung muss im events-storia.de-Projekt vorgenommen und die Edge Function neu deployed werden.
 
-## Technische Notizen
-
-- Zwei getrennte Slug-Quellen existieren: `translations/de.ts` (Laufzeit-Routing, hat den Slug) und `src/config/slugs.json` (Prerender + Sitemap + hreflang, fehlt der Slug). Diese Diskrepanz ist die Ursache und wird in Schritt 1 behoben.
-- `slugs.json` wird nicht automatisch generiert (kein Generator gefunden) → manuelle Ergänzung ist sicher.
-- Keine Übersetzungsdateien nötig (DE-only Seite, hartkodierter deutscher Text).
-- `StructuredData` rendert `faqItems`/`eventData` unabhängig vom `type`-Guard, daher genügen zusätzliche `<StructuredData>`-Instanzen.
+## Verifikation
+- Nach dem Fix in der Vorschau eine Testanfrage absenden → Erfolgsmeldung statt Fehler.
+- Nach CORS-Anpassung im events-Projekt auf der Live-Domain testen.
