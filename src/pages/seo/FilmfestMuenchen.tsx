@@ -168,7 +168,7 @@ const FilmfestMuenchen = () => {
         canonical="/filmfest-muenchen"
         noHreflang
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviewList={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[
@@ -182,9 +182,15 @@ const FilmfestMuenchen = () => {
         eventData={{
           name: "Filmfest München 2026 — Eventabende im Ristorante STORIA",
           description:
-            "Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking im Ristorante STORIA München, sechs Gehminuten vom Festivalzentrum Amerikahaus, während des Filmfest München 2026.",
-          startDate: "2026-06-26",
-          endDate: "2026-07-05",
+            "Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking im Ristorante STORIA München, sechs Gehminuten vom Festivalzentrum Amerikahaus, während des Filmfest München 2026 (26. Juni bis 5. Juli 2026).",
+          services: [
+            "Premierendinner",
+            "Verleiher- & Sales-Empfang",
+            "Cast & Crew Dinner",
+            "Presse-Lunch & Junket",
+            "Branchen-Networking",
+            "Exklusiv-Anmietung",
+          ],
         }}
       />
 
@@ -284,7 +290,7 @@ const FilmfestMuenchen = () => {
             <Reveal className="ff-stat"><div className="n">6 Min.</div><div className="l">Fußweg zum Festivalzentrum Amerikahaus</div></Reveal>
             <Reveal delay={0.08} className="ff-stat"><div className="n">bis 180</div><div className="l">Gäste beim Empfang · 200 Sitzplätze gesamt</div></Reveal>
             <Reveal delay={0.16} className="ff-stat"><div className="n">aus 1er Hand</div><div className="l">Küche, Service & Eventplanung im Haus</div></Reveal>
-            <Reveal delay={0.24} className="ff-stat"><div className="n">seit 2015</div><div className="l">Familie Speranza · 4,5★ aus 780+ Bewertungen</div></Reveal>
+            <Reveal delay={0.24} className="ff-stat"><div className="n">seit 2015</div><div className="l">Familie Speranza · 4,5★ aus 810 Bewertungen</div></Reveal>
           </div>
         </section>
 
