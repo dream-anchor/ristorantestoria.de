@@ -139,6 +139,19 @@ const faqItems = [
 const FilmfestMuenchen = () => {
   usePrerenderReady(true);
   const [scrolled, setScrolled] = useState(false);
+  const { setAlternates, clearAlternates } = useAlternateLinks();
+
+  // German-only page: route EN/IT/FR language switches to the localized
+  // homepage so no dead Filmfest URL is produced; DE stays on this page.
+  useEffect(() => {
+    setAlternates([
+      { lang: "de", url: getLocalizedPath("filmfest-muenchen", "de") },
+      { lang: "en", url: getLocalizedPath("home", "en") },
+      { lang: "it", url: getLocalizedPath("home", "it") },
+      { lang: "fr", url: getLocalizedPath("home", "fr") },
+    ]);
+    return () => clearAlternates();
+  }, [setAlternates, clearAlternates]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
