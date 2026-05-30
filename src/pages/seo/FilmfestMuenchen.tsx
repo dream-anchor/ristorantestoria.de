@@ -435,11 +435,28 @@ const FilmfestMuenchen = () => {
               <FilmfestInquiryForm />
             </Reveal>
           </div>
+          <div className="ff-wrap ff-faq" id="faq">
+            <Reveal className="ff-sec-head">
+              <span className="ff-eyebrow ff-eyebrow-line">Häufige Fragen</span>
+              <h2 className="ff-h2">Filmfest München 2026 im STORIA — kurz erklärt.</h2>
+            </Reveal>
+            <div className="ff-faq-list">
+              {faqItems.map((item, i) => (
+                <Reveal key={item.question} delay={(i % 3) * 0.06} className="ff-faq-item">
+                  <h3>{item.question}</h3>
+                  <p>{item.answer}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
           <div className="ff-wrap">
             <p className="ff-disclaimer">
               Eine Sonderseite zum Filmfest München (26. Juni – 5. Juli 2026). Filmfest München ist
               eine Veranstaltung der Internationale Münchner Filmwochen GmbH; diese Seite steht in
-              keiner offiziellen Verbindung zum Festival.
+              keiner offiziellen Verbindung zum Festival. Offizielle Festivalinformationen unter{" "}
+              <a href="https://www.filmfest-muenchen.de/" target="_blank" rel="noopener noreferrer">
+                filmfest-muenchen.de
+              </a>.
             </p>
             <img src={storiaLogo} alt="STORIA Logo" className="ff-foot-logo" loading="lazy" />
           </div>
