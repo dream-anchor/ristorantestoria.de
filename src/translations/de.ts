@@ -3306,6 +3306,7 @@ export const de = {
     "romantisches-dinner-muenchen": "romantisches-dinner-muenchen",
     "eventlocation-muenchen-maxvorstadt": "eventlocation-muenchen-maxvorstadt",
     "firmenfeier-muenchen": "firmenfeier-muenchen",
+    "filmfest-muenchen": "filmfest-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
     "wild-essen-muenchen": "wild-essen-muenchen",
