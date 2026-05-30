@@ -6,13 +6,17 @@ import { STORIA } from '@/config/storia-entity';
 interface StructuredDataProps {
   type?: 'restaurant' | 'menu' | 'faq' | 'breadcrumb' | 'event';
   includeReviews?: boolean;
+  /** When false, omits the individual review[] array but keeps aggregateRating. */
+  includeReviewList?: boolean;
   breadcrumbs?: Array<{ name: string; url: string }>;
   faqItems?: Array<{ question: string; answer: string }>;
   eventData?: {
     name: string;
     description: string;
-    startDate: string;
-    endDate: string;
+    startDate?: string;
+    endDate?: string;
+    /** Service formats rendered as an OfferCatalog. */
+    services?: string[];
   };
 }
 
@@ -31,7 +35,7 @@ const geoSchema = {
   longitude: STORIA.geo.lng,
 };
 
-const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumbs, faqItems, eventData }: StructuredDataProps) => {
+const StructuredData = ({ type = 'restaurant', includeReviews = true, includeReviewList = true, breadcrumbs, faqItems, eventData }: StructuredDataProps) => {
   const { t } = useLanguage();
 
   const restaurantSchema = {
@@ -129,7 +133,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, breadcrumb
         ratingCount: reviewsData.totalReviews,
       },
     } : {}),
-    ...(includeReviews && reviewsData.reviews?.length > 0 ? {
+    ...(includeReviews && includeReviewList && reviewsData.reviews?.length > 0 ? {
       review: reviewsData.reviews.slice(0, 5).map((r: { authorName: string; rating: number; text: string }) => ({
         '@type': 'Review',
         author: { '@type': 'Person', name: r.authorName },
