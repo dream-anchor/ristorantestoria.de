@@ -178,15 +178,55 @@ const FilmfestMuenchen = () => {
       <div className="ff-page">
         {/* NAV */}
         <nav className={`ff-nav ${scrolled ? "scrolled" : ""}`}>
-          <a href="#top" className="ff-brand" aria-label="STORIA Startseite der Filmfest-Seite">
+          <LocalizedLink to="home" className="ff-brand" aria-label="STORIA – zur Startseite">
             STORIA<span>.</span>
-          </a>
+          </LocalizedLink>
           <div className="ff-nav-links">
             <a href="#formate">Formate</a>
             <a href="#lage">Lage</a>
             <a href="#raeume">Räume</a>
             <a href="#catering">Catering</a>
             <a href="#kontakt" className="ff-nav-cta">Termin anfragen</a>
+            <span className="ff-nav-sep" aria-hidden="true" />
+            <a
+              href="tel:+498951519696"
+              className="ff-nav-icon"
+              aria-label="Anrufen +49 89 51519696"
+              title="+49 89 51519696"
+            >
+              <Phone size={16} />
+            </a>
+            <a
+              href="mailto:info@ristorantestoria.de"
+              className="ff-nav-icon"
+              aria-label="E-Mail an info@ristorantestoria.de"
+              title="info@ristorantestoria.de"
+            >
+              <Mail size={16} />
+            </a>
+            <a
+              href="https://wa.me/491636033912"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ff-nav-icon ff-nav-icon-wa"
+              aria-label="WhatsApp"
+              title="WhatsApp"
+            >
+              <MessageCircle size={16} />
+            </a>
+            <a
+              href="https://www.instagram.com/ristorante_storia/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ff-nav-icon"
+              aria-label="Instagram @ristorante_storia"
+              title="Instagram @ristorante_storia"
+            >
+              <Instagram size={16} />
+            </a>
+          </div>
+          <div className="ff-nav-lang">
+            <LanguageSwitcher />
           </div>
         </nav>
 
