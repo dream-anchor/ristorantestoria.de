@@ -234,14 +234,12 @@ const FilmfestMuenchen = () => {
                 ))}
               </Reveal>
               <Reveal delay={0.1} className="ff-map-card">
-                <span className="ff-pin ff-pin-amh"><span className="dot" />Amerikahaus</span>
-                <span className="ff-map-line" />
-                <span className="ff-pin ff-pin-storia"><span className="dot" />STORIA</span>
-                <div className="ff-map-cap">
-                  <b>Karlstraße 47a · 80333 München</b>
-                  Fußläufig zu jedem relevanten Festivalort. Ihre Gäste laufen nach dem Screening
-                  herüber — kein Shuttle, kein Taxistau, kein Zeitverlust.
-                </div>
+                <ConsentGoogleMaps
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.0!2d11.5658!3d48.1465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKarlstra%C3%9Fe%2047a%2C%2080333%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1"
+                  title="STORIA · Karlstraße 47a, München"
+                  height={420}
+                  className="ff-map-iframe"
+                />
               </Reveal>
             </div>
           </div>
