@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowUpRight, Instagram, MessageCircle } from "lucide-react";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import Footer from "@/components/Footer";
 import FilmfestInquiryForm from "@/components/FilmfestInquiryForm";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
+import LocalizedLink from "@/components/LocalizedLink";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
+import { getLocalizedPath } from "@/config/routes";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
 import heroImg600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
@@ -135,6 +139,19 @@ const faqItems = [
 const FilmfestMuenchen = () => {
   usePrerenderReady(true);
   const [scrolled, setScrolled] = useState(false);
+  const { setAlternates, clearAlternates } = useAlternateLinks();
+
+  // German-only page: route EN/IT/FR language switches to the localized
+  // homepage so no dead Filmfest URL is produced; DE stays on this page.
+  useEffect(() => {
+    setAlternates([
+      { lang: "de", url: getLocalizedPath("filmfest-muenchen", "de") },
+      { lang: "en", url: getLocalizedPath("home", "en") },
+      { lang: "it", url: getLocalizedPath("home", "it") },
+      { lang: "fr", url: getLocalizedPath("home", "fr") },
+    ]);
+    return () => clearAlternates();
+  }, [setAlternates, clearAlternates]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -176,15 +193,55 @@ const FilmfestMuenchen = () => {
       <div className="ff-page">
         {/* NAV */}
         <nav className={`ff-nav ${scrolled ? "scrolled" : ""}`}>
-          <a href="#top" className="ff-brand" aria-label="STORIA Startseite der Filmfest-Seite">
+          <LocalizedLink to="home" className="ff-brand" aria-label="STORIA – zur Startseite">
             STORIA<span>.</span>
-          </a>
+          </LocalizedLink>
           <div className="ff-nav-links">
             <a href="#formate">Formate</a>
             <a href="#lage">Lage</a>
             <a href="#raeume">Räume</a>
             <a href="#catering">Catering</a>
             <a href="#kontakt" className="ff-nav-cta">Termin anfragen</a>
+            <span className="ff-nav-sep" aria-hidden="true" />
+            <a
+              href="tel:+498951519696"
+              className="ff-nav-icon"
+              aria-label="Anrufen +49 89 51519696"
+              title="+49 89 51519696"
+            >
+              <Phone size={16} />
+            </a>
+            <a
+              href="mailto:info@ristorantestoria.de"
+              className="ff-nav-icon"
+              aria-label="E-Mail an info@ristorantestoria.de"
+              title="info@ristorantestoria.de"
+            >
+              <Mail size={16} />
+            </a>
+            <a
+              href="https://wa.me/491636033912"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ff-nav-icon ff-nav-icon-wa"
+              aria-label="WhatsApp"
+              title="WhatsApp"
+            >
+              <MessageCircle size={16} />
+            </a>
+            <a
+              href="https://www.instagram.com/ristorante_storia/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ff-nav-icon"
+              aria-label="Instagram @ristorante_storia"
+              title="Instagram @ristorante_storia"
+            >
+              <Instagram size={16} />
+            </a>
+          </div>
+          <div className="ff-nav-lang">
+            <LanguageSwitcher />
           </div>
         </nav>
 
@@ -490,7 +547,12 @@ const ffStyles = `
 .ff-nav-links a:hover{opacity:1;}
 .ff-nav-cta{background:var(--amber);color:var(--ink)!important;padding:10px 20px;border-radius:100px;font-weight:700;opacity:1!important;transition:transform .2s,background .2s;}
 .ff-nav-cta:hover{transform:translateY(-1px);background:var(--amber-bright);}
-@media(max-width:820px){.ff-nav-links a:not(.ff-nav-cta){display:none;}}
+.ff-nav-sep{width:1px;height:20px;background:var(--line);opacity:.6;}
+.ff-nav-icon{display:inline-flex;align-items:center;justify-content:center;color:var(--bone);opacity:.78;transition:opacity .2s,color .2s;}
+.ff-nav-icon:hover{opacity:1;}
+.ff-nav-icon-wa:hover{color:#25D366;}
+.ff-nav-lang{display:flex;align-items:center;margin-left:18px;}
+@media(max-width:820px){.ff-nav-links a:not(.ff-nav-cta),.ff-nav-sep,.ff-nav-icon{display:none;}.ff-nav-lang{margin-left:12px;}}
 /* HERO */
 .ff-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:120px 0 72px;overflow:hidden;background:var(--ink);}
 .ff-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;}

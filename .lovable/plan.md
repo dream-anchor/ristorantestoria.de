@@ -1,49 +1,42 @@
-## Problem
+## Ziel
 
-Der E-Mail-/Anfragenversand schlägt fehl ("Etwas ist schiefgelaufen"). Ursache liegt **nicht** am E-Mail-Versand selbst, sondern am Anfrage-Endpoint, der die E-Mails auslöst.
+Den Header (`ff-nav`) der Filmfest-München-Seite an den Standard-Header der Originalseite angleichen: Das Logo soll zur Startseite führen (nicht zum Seitenanfang der Landingpage), und die aus dem Original fehlenden Header-Elemente — allen voran der Sprachwechsler — werden ergänzt.
 
-Der Filmfest-Anfrage-Endpoint (`receive-event-inquiry`, läuft im separaten Projekt **events-storia.de**) erwartet die Felder in **camelCase** (`contactName`, `companyName`, `guestCount`, `eventType`, `preferredDate`). Unsere Formulare senden sie aber in **snake_case** (`contact_name`, `company_name`, …). Dadurch greift die Validierung `if (!data.contactName || !data.email)` und der Server antwortet mit HTTP 400 „Name und E-Mail sind erforderlich". Es wird keine E-Mail versendet.
+## Was aktuell fehlt / falsch ist
 
-Bestätigt per Direkttest:
-- snake_case Payload → `{"error":"Name und E-Mail sind erforderlich"}`
-- camelCase Payload → `{"success":true, ...}` (E-Mail wird versendet)
+Vergleich `src/components/Header.tsx` (Original) ↔ `ff-nav` in `src/pages/seo/FilmfestMuenchen.tsx`:
 
-Betroffen sind **zwei** Formulare in diesem Projekt:
-- `src/components/FilmfestInquiryForm.tsx`
-- `src/components/EventInquiryForm.tsx`
+| Element | Original-Header | Filmfest-Nav aktuell |
+|---|---|---|
+| Logo-Link | → Startseite (`home`) | → `#top` (nur Seitenanfang) ❌ |
+| Sprachwechsler (DE/EN/IT/FR) | vorhanden | fehlt ❌ |
+| Telefon | vorhanden | fehlt |
+| E-Mail | vorhanden | fehlt |
+| WhatsApp | vorhanden | fehlt |
+| Instagram | vorhanden | fehlt |
 
-(`GroupInquiryForm.tsx` ist korrekt — sendet bereits camelCase an einen anderen Endpoint.)
+## Umsetzung (nur `src/pages/seo/FilmfestMuenchen.tsx`)
 
-## Fix (in diesem Projekt)
+1. **Logo führt zur Startseite**
+   - `ff-brand` von `<a href="#top">` auf einen echten Link zur Startseite umstellen (React-Router `Link`/`LocalizedLink` zu `home`), `aria-label` entsprechend „STORIA – zur Startseite".
 
-**1. `FilmfestInquiryForm.tsx`** — Payload im `fetch`-Body von snake_case auf camelCase umstellen:
-- `company_name` → `companyName`
-- `contact_name` → `contactName`
-- `phone` bleibt `phone`
-- `guest_count` → `guestCount`
-- `event_type` → `eventType`
-- `preferred_date` → `preferredDate`
-- `message`, `source` bleiben gleich
+2. **Sprachwechsler einbinden**
+   - Bestehende `LanguageSwitcher`-Komponente in `ff-nav` (rechts) einsetzen — kein neuer Switcher.
+   - Da die Filmfest-Seite nur auf Deutsch existiert: Verhalten so absichern, dass ein Sprachwechsel auf EN/IT/FR auf die lokalisierte Startseite führt (Fallback), damit kein toter Link entsteht.
 
-**2. `EventInquiryForm.tsx`** — gleiche Umstellung der Payload-Keys auf camelCase.
+3. **Fehlende Header-Elemente ergänzen**
+   - Kompakte Kontakt-Icons analog Original: Telefon (`+49 89 51519696`), E-Mail (`info@ristorantestoria.de`), WhatsApp (`wa.me/491636033912`), Instagram (`ristorante_storia`).
+   - Auf Mobile dezent zusammenfassen, damit die bestehende Sektions-Navigation (Formate/Lage/Räume/Catering) + CTA „Termin anfragen" erhalten bleibt.
 
-Die Formularfelder/Zod-Schemata bleiben unverändert; nur das gesendete JSON-Objekt wird angepasst.
+4. **Styling**
+   - Neue Elemente an das dunkle `ff-nav`-Design (Bone/Amber) anpassen; Sprachwechsler-Trigger farblich an den Nav-Kontext angleichen.
+   - Responsive: Bei `max-width:820px` Icons/Switcher sinnvoll reduzieren, ohne dass die Top-Bar überläuft.
 
-## Wichtiger Hinweis: CORS auf der Produktivdomain
+5. **SEO/Pre-Render beachten**
+   - Logo-Link und Header-Inhalte müssen im Quelltext (SSG) vorhanden sein — keine client-only Auslagerung.
 
-Der Endpoint im Projekt events-storia.de erlaubt aktuell per CORS nur:
-`events-storia.de`, `localhost` und Lovable-Preview-Domains (`*.lovable.app`, `*.lovableproject.com`).
+## Technische Details
 
-`https://www.ristorantestoria.de` ist **nicht** in der Allowlist. Das bedeutet:
-- In der **Lovable-Vorschau** funktioniert das Formular nach dem Fix sofort.
-- Auf der **Live-Domain** `www.ristorantestoria.de` wird die Anfrage weiterhin vom Browser per CORS blockiert.
-
-Um den Live-Versand zu ermöglichen, muss im **separaten Projekt events-storia.de** in `supabase/functions/_shared/cors.ts` die Allowlist erweitert werden um:
-```
-/^https:\/\/(www\.)?ristorantestoria\.de$/,
-```
-Das kann ich von hier aus nicht ändern (anderes Projekt). Diese Anpassung muss im events-storia.de-Projekt vorgenommen und die Edge Function neu deployed werden.
-
-## Verifikation
-- Nach dem Fix in der Vorschau eine Testanfrage absenden → Erfolgsmeldung statt Fehler.
-- Nach CORS-Anpassung im events-Projekt auf der Live-Domain testen.
+- `LanguageSwitcher` nutzt `useLanguage` + `useAlternateLinks`; für eine reine DE-Seite ohne Alternates greift der slug-basierte Fallback. Sicherstellen, dass dieser auf die DE-/Ziel-Startseite zeigt statt auf eine nicht existierende Filmfest-Übersetzung.
+- Logo-Link über `LocalizedLink to="home"` (konsistent mit `Header.tsx`), damit die korrekte sprachabhängige Startseiten-URL erzeugt wird.
+- Keine Änderungen an Business-Logik/Backend; rein Frontend/Presentation.
