@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowUpRight, Instagram, MessageCircle } from "lucide-react";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import Footer from "@/components/Footer";
 import FilmfestInquiryForm from "@/components/FilmfestInquiryForm";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
+import LocalizedLink from "@/components/LocalizedLink";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
