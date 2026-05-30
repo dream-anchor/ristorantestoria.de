@@ -60,13 +60,13 @@ const FilmfestInquiryForm = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          company_name: data.name.trim(),
-          contact_name: data.name.trim(),
+          companyName: data.name.trim(),
+          contactName: data.name.trim(),
           email: data.email.trim().toLowerCase(),
           phone: data.phone?.trim() || null,
-          guest_count: data.guest_count?.trim() || null,
-          event_type: "filmfest",
-          preferred_date: data.preferred_date || null,
+          guestCount: data.guest_count?.trim() || null,
+          eventType: "filmfest",
+          preferredDate: data.preferred_date || null,
           message:
             `Format: ${data.format}` +
             (data.message?.trim() ? `\n\n${data.message.trim()}` : ""),
