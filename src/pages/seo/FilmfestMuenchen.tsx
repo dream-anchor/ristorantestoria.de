@@ -288,9 +288,9 @@ const FilmfestMuenchen = () => {
         <section className="ff-stats">
           <div className="ff-stats-grid">
             <Reveal className="ff-stat"><div className="n">6 Min.</div><div className="l">Fußweg zum Festivalzentrum Amerikahaus</div></Reveal>
-            <Reveal delay={0.08} className="ff-stat"><div className="n">bis 180</div><div className="l">Gäste beim Empfang · 200 Sitzplätze gesamt</div></Reveal>
-            <Reveal delay={0.16} className="ff-stat"><div className="n">aus 1er Hand</div><div className="l">Küche, Service & Eventplanung im Haus</div></Reveal>
-            <Reveal delay={0.24} className="ff-stat"><div className="n">seit 2015</div><div className="l">Familie Speranza · 4,5★ aus 810 Bewertungen</div></Reveal>
+            <Reveal delay={0.08} className="ff-stat"><div className="n">bis 350</div><div className="l">Gäste beim Empfang · 200 Sitzplätze gesamt (Innen und außen)</div></Reveal>
+            <Reveal delay={0.16} className="ff-stat"><div className="n">aus einer Hand</div><div className="l">Küche, Service & Eventplanung im Haus</div></Reveal>
+            <Reveal delay={0.24} className="ff-stat"><div className="n">seit 2015</div><div className="l">Familie Speranza · 4,5★ aus 810 Google-Bewertungen</div></Reveal>
           </div>
         </section>
 
