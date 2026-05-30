@@ -72,13 +72,13 @@ export const EventInquiryForm = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          company_name: data.company_name.trim(),
-          contact_name: data.contact_name.trim(),
+          companyName: data.company_name.trim(),
+          contactName: data.contact_name.trim(),
           email: data.email.trim().toLowerCase(),
           phone: data.phone?.trim() || null,
-          guest_count: data.guest_count,
-          event_type: data.event_type,
-          preferred_date: data.preferred_date || null,
+          guestCount: data.guest_count,
+          eventType: data.event_type,
+          preferredDate: data.preferred_date || null,
           message: data.message?.trim() || null,
           source: 'ristorante-website', // Track where the inquiry came from
         }),
