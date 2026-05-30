@@ -99,6 +99,39 @@ const steps = [
   { n: "4", title: "Ihr Abend", text: "Sie sind Gast auf der eigenen Veranstaltung. Wir kümmern uns um den Rest." },
 ];
 
+const faqItems = [
+  {
+    question: "Wo finde ich eine Eventlocation in der Nähe des Filmfest-Festivalzentrums?",
+    answer:
+      "Das Ristorante STORIA in der Karlstraße 47a, 80333 München, liegt nur sechs Gehminuten vom Festivalzentrum Amerikahaus (Karolinenplatz 3) entfernt — mitten im Kunstareal der Maxvorstadt. Königsplatz (U2) und Hauptbahnhof sind in drei bis fünf Minuten erreichbar, die Tram Karlstraße hält direkt vor dem Haus.",
+  },
+  {
+    question: "Welche Veranstaltungsformate richtet das STORIA während des Filmfest München aus?",
+    answer:
+      "Das STORIA richtet sechs Festivalformate aus: Premierendinner, Verleiher- und Sales-Empfänge, Cast-&-Crew-Dinner, Presse-Lunch und Junkets, Branchen-Networking sowie die Exklusiv-Anmietung des gesamten Hauses. Küche, Service und Eventplanung kommen aus einer Hand.",
+  },
+  {
+    question: "Für wie viele Gäste ist das STORIA geeignet?",
+    answer:
+      "Das STORIA bietet 100 Sitzplätze im Innenraum und 100 auf der überdachten Innenhof-Terrasse — insgesamt bis zu 200 sitzende Gäste. Beim Stehempfang mit Flying Buffet sind bis zu 180 Gäste möglich. Intime Cast-Dinner im Private Room funktionieren ab sechs Personen.",
+  },
+  {
+    question: "Bietet das STORIA Catering für Cast-&-Crew-Dinner an?",
+    answer:
+      "Ja. Küchenchef Domenico Speranza und sein Team kochen süditalienisch nach Familienrezepten aus dem Cilento — alles entsteht im Haus, ohne externe Catering-Logistik. Zur Wahl stehen Flying Buffets mit Stationen (inkl. neapolitanischer Steinofenpizza aus dem 400-°C-Ofen) oder mehrgängige 3- bis 5-Gang-Menüs mit italienischer Weinbegleitung. Vegane und glutenfreie Optionen sind möglich.",
+  },
+  {
+    question: "Wie kurzfristig kann ich im Festivalzeitraum einen Termin anfragen?",
+    answer:
+      "Im Festivalzeitraum vom 26. Juni bis 5. Juli 2026 reagiert das STORIA besonders schnell auf Anfragen. Geben Sie Datum, Format und Gästezahl über das Formular an oder rufen Sie direkt unter +49 89 51519696 an — der gewünschte Bereich wird kurzfristig freigehalten.",
+  },
+  {
+    question: "Wann findet das Filmfest München 2026 statt?",
+    answer:
+      "Das Filmfest München 2026 findet vom 26. Juni bis 5. Juli 2026 statt — zehn Festivaltage mit Premieren, Pressetagen und Branchenempfängen. Das STORIA ist als Eventlocation in Gehweite des Festivalzentrums die Bühne für den Abend danach.",
+  },
+];
+
 const FilmfestMuenchen = () => {
   usePrerenderReady(true);
   const [scrolled, setScrolled] = useState(false);
