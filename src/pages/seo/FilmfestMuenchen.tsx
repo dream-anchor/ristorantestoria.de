@@ -147,7 +147,7 @@ const FilmfestMuenchen = () => {
     <>
       <SEO
         title="Filmfest München 2026 — Eventlocation STORIA"
-        description="Sechs Gehminuten vom Festivalzentrum Amerikahaus: Das STORIA in der Maxvorstadt ist Ihre Location für Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Networking während des Filmfest München 2026 (26. Juni – 5. Juli). Eigene Küche, Flying Buffets, bis 180 Gäste."
+        description="Eventlocation 6 Gehminuten vom Festivalzentrum: Premierendinner, Empfänge & Cast-Dinner im STORIA München beim Filmfest 2026 (26.6.–5.7.). Bis 180 Gäste."
         canonical="/filmfest-muenchen"
         noHreflang
       />
