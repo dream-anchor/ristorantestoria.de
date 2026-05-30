@@ -168,7 +168,7 @@ const FilmfestMuenchen = () => {
         canonical="/filmfest-muenchen"
         noHreflang
       />
-      <StructuredData type="restaurant" />
+      <StructuredData type="restaurant" includeReviewList={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[
@@ -182,9 +182,15 @@ const FilmfestMuenchen = () => {
         eventData={{
           name: "Filmfest München 2026 — Eventabende im Ristorante STORIA",
           description:
-            "Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking im Ristorante STORIA München, sechs Gehminuten vom Festivalzentrum Amerikahaus, während des Filmfest München 2026.",
-          startDate: "2026-06-26",
-          endDate: "2026-07-05",
+            "Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking im Ristorante STORIA München, sechs Gehminuten vom Festivalzentrum Amerikahaus, während des Filmfest München 2026 (26. Juni bis 5. Juli 2026).",
+          services: [
+            "Premierendinner",
+            "Verleiher- & Sales-Empfang",
+            "Cast & Crew Dinner",
+            "Presse-Lunch & Junket",
+            "Branchen-Networking",
+            "Exklusiv-Anmietung",
+          ],
         }}
       />
 
