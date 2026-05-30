@@ -8,6 +8,8 @@ import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
+import { getLocalizedPath } from "@/config/routes";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
 import heroImg600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
