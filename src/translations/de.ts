@@ -2981,7 +2981,7 @@ export const de = {
       locationBadge3: "Terrasse + Innenbereich",
       introTitle: "Warum Ihre Hochzeitsfeier im STORIA?",
       introP1: "Eine Hochzeitsfeier soll etwas Besonderes sein \u2013 und genau das bietet das STORIA in M\u00fcnchen. Statt anonymer Eventlocation erleben Sie und Ihre G\u00e4ste italienische Gastfreundschaft in einem echten Familienbetrieb. Domenico und Nicola Speranza k\u00fcmmern sich pers\u00f6nlich um jede Hochzeitsfeier.",
-      introP2: "Mit 100 Sitzpl\u00e4tzen im eleganten Innenbereich und 100 weiteren auf der \u00fcberdachten, beheizten Terrasse bieten wir Platz f\u00fcr Hochzeitsfeiern jeder Gr\u00f6\u00dfe. Stehemfp\u00e4nge sind f\u00fcr bis zu 300 G\u00e4ste m\u00f6glich \u2013 insgesamt bis zu 300 G\u00e4ste.",
+      introP2: "Mit 100 Sitzpl\u00e4tzen im eleganten Innenbereich und 100 weiteren auf der \u00fcberdachten, beheizten Terrasse bieten wir Platz f\u00fcr Hochzeitsfeiern jeder Gr\u00f6\u00dfe. Stehempf\u00e4nge sind f\u00fcr bis zu 300 G\u00e4ste m\u00f6glich.",
       introP3: "Ob intime Feier zu sechst oder gro\u00dfe Hochzeitsgesellschaft \u2013 wir gestalten Men\u00fc, Dekoration und Ablauf individuell nach Ihren W\u00fcnschen. Italienisches Essen, exzellenter Wein und eine Atmosph\u00e4re, an die sich Ihre G\u00e4ste noch lange erinnern werden.",
       pillarLink: "Mehr \u00fcber STORIA erfahren",
       kitchenTitle: "Ihr individuelles Hochzeitsmen\u00fc",

@@ -2895,7 +2895,7 @@ export const fr = {
       locationBadge3: "Terrasse + int\u00e9rieur",
       introTitle: "Pourquoi c\u00e9l\u00e9brer votre mariage au STORIA ?",
       introP1: "Un mariage doit \u00eatre exceptionnel \u2013 et c\u2019est exactement ce que propose le STORIA \u00e0 Munich. Au lieu d\u2019un lieu \u00e9v\u00e9nementiel anonyme, vous et vos invit\u00e9s vivez l\u2019hospitalit\u00e9 italienne dans un v\u00e9ritable restaurant familial. Domenico et Nicola Speranza s\u2019occupent personnellement de chaque mariage.",
-      introP2: "Avec 100 places dans l\u2019\u00e9l\u00e9gant espace int\u00e9rieur et 100 autres sur la terrasse couverte et chauff\u00e9e, nous offrons de la place pour des mariages de toutes tailles. Des cocktails debout pour 300 invit\u00e9s par espace sont possibles \u2013 jusqu\u2019\u00e0 300 invit\u00e9s au total.",
+      introP2: "Avec 100 places dans l\u2019\u00e9l\u00e9gant espace int\u00e9rieur et 100 autres sur la terrasse couverte et chauff\u00e9e, nous offrons de la place pour des mariages de toutes tailles. Des cocktails debout pour jusqu\u2019\u00e0 300 invit\u00e9s sont possibles.",
       introP3: "Que ce soit une c\u00e9l\u00e9bration intime \u00e0 six ou une grande f\u00eate de mariage \u2013 nous concevons le menu, la d\u00e9coration et le d\u00e9roulement selon vos souhaits. Cuisine italienne, vin excellent et une atmosph\u00e8re dont vos invit\u00e9s se souviendront longtemps.",
       pillarLink: "En savoir plus sur STORIA",
       kitchenTitle: "Votre menu de mariage personnalis\u00e9",
