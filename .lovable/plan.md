@@ -1,46 +1,43 @@
 ## Ziel
-Alle Steh-/Empfangskapazitäts-Angaben auf der gesamten Website und allen Landingpages auf **300 Plätze stehend** vereinheitlichen. Aktuell stehen dort uneinheitlich **180** (Steh-/Gästekapazität) und **350** (Filmfest-Stat).
+Jede **Festnetz-Telefonnummer** (089 51519696 / +49 89 51519696 / +498951519696 sowie die Barrierefreiheits-Nummer 089 28806855) wird auf der gesamten Website und allen Landingpages zu einem klickbaren `tel:`-Link — auch wenn sie mitten im Fließtext (FAQ-Antworten, Hinweis-/CTA-Texte, Beschreibungen) steht.
 
-Keine optischen/strukturellen Änderungen außer den genannten Zahlen/Formulierungen.
+Die **WhatsApp-Nummer** (0163 6033912 / +49 163 603 3912) bleibt unverändert (kein tel:-Link).
 
-## Änderungen
+CTA-Buttons, die die Nummer bereits in `<a href="tel:…">` rendern, bleiben wie sie sind.
 
-### 1. Zentrale Config
-`src/config/storia-entity.ts`
-- `capacity.indoor.standing: 180` → `300`
-- (`events.max: 300` bleibt unverändert — passt bereits)
+## Technischer Ansatz
 
-### 2. Übersetzungen (alle 4 Sprachen)
-`src/translations/de.ts`, `en.ts`, `it.ts`, `fr.ts`
-- Alle `180` (Steh-/Gästekapazität: „bis 180 Gäste", „180 standing", „180 posti in piedi", „180 invités" usw.) → `300`
-- Geprüft: In den Translation-Dateien sind **alle** „180" Kapazitätsangaben — keine Preise/Jahre/IDs betroffen.
+### 1. Neuer Helfer `src/lib/linkifyPhone.tsx`
+- Funktion `linkifyPhone(text: string): React.ReactNode` und Wrapper-Komponente `<PhoneText>{string}</PhoneText>`.
+- Erkennt per Regex die Festnetz-Formate:
+  - `+49 89 51519696`, `+498951519696`, `089 51519696`
+  - `+49 89 28806855`, `089 28806855` (Barrierefreiheit)
+- **Schließt die WhatsApp-Nummer explizit aus** (Präfixe `0163` / `+49 163` werden nicht gematcht).
+- Wandelt jeden Treffer in `<a href="tel:+49…">…</a>` um (Original-Anzeigeformat bleibt erhalten), restlicher Text unverändert.
+- Reine String-Verarbeitung → SSR-/Prerender-sicher (kein DOM-Walker, keine Hydration-Probleme).
 
-### 3. Saison-FAQ
-`src/config/seasonalMenus.ts`
-- `180` (Stehempfang-FAQ in DE/EN/IT/FR) → `300`
+### 2. Anwendung an den Render-Stellen mit Fließtext-Nummern
+`<PhoneText>` wird dort eingesetzt, wo Übersetzungs-/Textstrings ausgegeben werden, die eine Festnetznummer enthalten können:
 
-### 4. AI-Kontextdatei
-`public/llms-full.txt`
-- `180` (Stehempfang-Angaben) → `300`
+- **FAQ-Antworten** (deckt alle `faq*Answer`-Keys ab):
+  `src/pages/FAQ.tsx`, `src/pages/BesondererAnlass.tsx`, `src/pages/seo/FilmfestMuenchen.tsx`, `src/pages/seo/WildEssenMuenchen.tsx`
+- **Hinweis-/CTA-Texte & Beschreibungen** mit Nummer, u. a.:
+  `ctaBoxNote`, `menuPriceNote`, `processStep1Desc`, `tldr`, `callForMenu`, internationale Gruppen-Beschreibung, sowie weitere `*Note`/`*Desc`-Absätze, die die Nummer enthalten.
+- **Hardcodierter Fließtext** in TSX (z. B. Filmfest-FAQ-Text mit „…rufen Sie direkt unter +49 89 51519696 an") — über die FAQ-Funnel bereits abgedeckt.
 
-### 5. Filmfest-Seite (Landingpage)
-`src/pages/seo/FilmfestMuenchen.tsx`
-- Stat-Kachel: „bis 350" → „bis 300", Label angepasst auf „**Plätze stehend** · 200 Sitzplätze gesamt (Innen und außen)"
-- Tabelle: „bis 180 Gäste" → „bis 300 Gäste"; „bis 200 sitzend / 180+ stehend" → „bis 200 sitzend / 300 stehend"
-- Fließtext: „180 beim Stehempfang" → „300 beim Stehempfang"
-- FAQ-JSON-LD: „bis zu 180 Gäste möglich" → „300"
-- SEO-Description: „Bis 180 Gäste" → „Bis 300 Gäste"
+Vorgehen zur Vollständigkeit: alle Übersetzungs-Keys, deren Wert die Festnetznummer enthält, werden ermittelt; jede zugehörige Render-Stelle wird mit `<PhoneText>` umschlossen.
 
-### 6. „pro Bereich" / „per area" Formulierungen
-Wo „180 … pro Bereich / per area / par zone / per area" steht, wird die Zahl auf 300 gesetzt **und** „pro Bereich" entfernt, damit 300 als Gesamt-Stehkapazität gelesen wird (sonst würde „300 pro Bereich" = 600 implizieren).
+### 3. Styling
+Inline-Links erben die Textfarbe und bekommen `hover:underline` (dezent, kein auffälliger Button), damit das Layout optisch unverändert bleibt.
 
-## Nicht anfassen
-- `src/data/menu-drinks-fallback.json` — enthält eine UUID mit „4180", keine Kapazitätsangabe.
-- „200 Sitzplätze", „100 Sitzplätze innen/Terrasse" — bleiben.
+## Nicht angefasst
+- WhatsApp-Nummer / WhatsApp-Links (bleiben grüner Inline-Text wie gehabt).
+- Bereits bestehende `tel:`-CTA-Buttons.
+- Strukturierte Daten / JSON-LD (Telefonnummer bleibt dort als Klartext).
 
 ## Verifikation
-- `npm run build` fehlerfrei (105+ Routen)
-- Kein verbliebenes „180" als Kapazität: `rg "180" src/translations src/config public/llms-full.txt src/pages/seo/FilmfestMuenchen.tsx` (nur erlaubte Treffer)
-- JSON-LD valide, Filmfest-Seite visuell unverändert außer den Zahlen.</content>
-<summary>Alle Steh-Kapazitätsangaben (180) und die Filmfest-Stat (350) sitewide & auf allen Landingpages auf „300 Plätze stehend" vereinheitlichen.</summary>
+- `npm run build` fehlerfrei.
+- Grep: jede gerenderte Festnetznummer ist von `PhoneText`/`tel:` erfasst; WhatsApp-Nummer nirgends als tel:-Link.
+- Stichproben (Filmfest-FAQ, ctaBoxNote, FAQ-Seite) im Preview: Nummer klickbar, Layout unverändert.</content>
+<summary>Festnetznummern sitewide & auf allen Landingpages auch im Fließtext als klickbare tel:-Links (per linkifyPhone-Helfer); WhatsApp bleibt unverändert.</summary>
 </invoke>
