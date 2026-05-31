@@ -90,10 +90,10 @@ const rooms = [
 
 const scenario = [
   ["Gesetztes Premierendinner", "Tafel / Bankett", "20 – 120 Gäste"],
-  ["Stehempfang mit Flying Buffet", "Steh / Lounge", "bis 180 Gäste"],
+  ["Stehempfang mit Flying Buffet", "Steh / Lounge", "bis 300 Gäste"],
   ["Presse-Lunch / Junket", "separierter Bereich", "10 – 40 Gäste"],
   ["Intimes Cast-Dinner", "Private Room", "6 – 24 Gäste"],
-  ["Exklusiv-Anmietung (ganzes Haus)", "kombiniert", "bis 200 sitzend / 180+ stehend"],
+  ["Exklusiv-Anmietung (ganzes Haus)", "kombiniert", "bis 200 sitzend / 300 stehend"],
 ];
 
 const steps = [
@@ -117,7 +117,7 @@ const faqItems = [
   {
     question: "Für wie viele Gäste ist das STORIA geeignet?",
     answer:
-      "Das STORIA bietet 100 Sitzplätze im Innenraum und 100 auf der überdachten Innenhof-Terrasse — insgesamt bis zu 200 sitzende Gäste. Beim Stehempfang mit Flying Buffet sind bis zu 180 Gäste möglich. Intime Cast-Dinner im Private Room funktionieren ab sechs Personen.",
+      "Das STORIA bietet 100 Sitzplätze im Innenraum und 100 auf der überdachten Innenhof-Terrasse — insgesamt bis zu 200 sitzende Gäste. Beim Stehempfang mit Flying Buffet sind bis zu 300 Gäste möglich. Intime Cast-Dinner im Private Room funktionieren ab sechs Personen.",
   },
   {
     question: "Bietet das STORIA Catering für Cast-&-Crew-Dinner an?",
@@ -164,7 +164,7 @@ const FilmfestMuenchen = () => {
     <>
       <SEO
         title="Filmfest München 2026 — Eventlocation STORIA"
-        description="Eventlocation 6 Gehminuten vom Festivalzentrum: Premierendinner, Empfänge & Cast-Dinner im STORIA München beim Filmfest 2026 (26.6.–5.7.). Bis 180 Gäste."
+        description="Eventlocation 6 Gehminuten vom Festivalzentrum: Premierendinner, Empfänge & Cast-Dinner im STORIA München beim Filmfest 2026 (26.6.–5.7.). Bis 300 Gäste."
         canonical="/filmfest-muenchen"
         noHreflang
       />
@@ -288,7 +288,7 @@ const FilmfestMuenchen = () => {
         <section className="ff-stats">
           <div className="ff-stats-grid">
             <Reveal className="ff-stat"><div className="n">6 Min.</div><div className="l">Fußweg zum Festivalzentrum Amerikahaus</div></Reveal>
-            <Reveal delay={0.08} className="ff-stat"><div className="n">bis 350</div><div className="l">Gäste beim Empfang · 200 Sitzplätze gesamt (Innen und außen)</div></Reveal>
+            <Reveal delay={0.08} className="ff-stat"><div className="n">bis 300</div><div className="l">Plätze stehend · 200 Sitzplätze gesamt (Innen und außen)</div></Reveal>
             <Reveal delay={0.16} className="ff-stat"><div className="n">aus einer Hand</div><div className="l">Küche, Service & Eventplanung im Haus</div></Reveal>
             <Reveal delay={0.24} className="ff-stat"><div className="n">seit 2015</div><div className="l">Familie Speranza · 4,5★ aus 810 Google-Bewertungen</div></Reveal>
           </div>
@@ -306,7 +306,7 @@ const FilmfestMuenchen = () => {
                 Filmfest München 2026
               </a>{" "}
               (26. Juni – 5. Juli 2026). Küche, Service und Eventplanung kommen aus einer Hand;
-              bis zu 200 Gäste sitzend und 180 beim Stehempfang finden hier Platz.
+              bis zu 200 Gäste sitzend und 300 beim Stehempfang finden hier Platz.
             </Reveal>
           </div>
         </section>

@@ -83,7 +83,7 @@ export const STORIA = {
 
   // Kapazität
   capacity: {
-    indoor: { seats: 100, standing: 180 },
+    indoor: { seats: 100, standing: 300 },
     terrace: { seats: 100, note: "überdacht & beheizt" },
     events: { min: 6, max: 300 },
   },
