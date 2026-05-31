@@ -5,9 +5,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
-
-const EVENTS_PROJECT_URL =
-  "https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/receive-event-inquiry";
+import { supabase } from "@/integrations/supabase/client";
 
 const FORMAT_OPTIONS = [
   "Premierendinner",
@@ -56,27 +54,29 @@ const FilmfestInquiryForm = () => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(EVENTS_PROJECT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          companyName: data.name.trim(),
-          contactName: data.name.trim(),
-          email: data.email.trim().toLowerCase(),
-          phone: data.phone?.trim() || null,
-          guestCount: data.guest_count?.trim() || null,
-          eventType: "filmfest",
-          preferredDate: data.preferred_date || null,
-          message:
-            `Format: ${data.format}` +
-            (data.message?.trim() ? `\n\n${data.message.trim()}` : ""),
-          source: "filmfest-landingpage",
-        }),
-      });
+      const { data: result, error } = await supabase.functions.invoke(
+        "submit-event-inquiry",
+        {
+          body: {
+            companyName: data.name.trim(),
+            contactName: data.name.trim(),
+            email: data.email.trim().toLowerCase(),
+            phone: data.phone?.trim() || null,
+            guestCount: data.guest_count?.trim() || null,
+            eventType: "filmfest",
+            preferredDate: data.preferred_date || null,
+            message:
+              `Format: ${data.format}` +
+              (data.message?.trim() ? `\n\n${data.message.trim()}` : ""),
+            source: "filmfest-landingpage",
+          },
+        },
+      );
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || "Failed to submit inquiry");
+      if (error || (result && (result as { error?: string }).error)) {
+        throw new Error(
+          (result as { error?: string })?.error || error?.message || "Failed to submit inquiry",
+        );
       }
 
       setIsSubmitted(true);

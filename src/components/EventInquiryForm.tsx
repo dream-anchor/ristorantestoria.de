@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const formSchema = z.object({
   company_name: z.string().min(2, 'Bitte Firmennamen eingeben').max(100),
@@ -63,30 +64,28 @@ export const EventInquiryForm = () => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      // Send to Events & Catering project's edge function
-      const EVENTS_PROJECT_URL = 'https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/receive-event-inquiry';
-      
-      const response = await fetch(EVENTS_PROJECT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      // Forwarded server-to-server to the Events & Catering project via our proxy
+      const { data: result, error } = await supabase.functions.invoke(
+        'submit-event-inquiry',
+        {
+          body: {
+            companyName: data.company_name.trim(),
+            contactName: data.contact_name.trim(),
+            email: data.email.trim().toLowerCase(),
+            phone: data.phone?.trim() || null,
+            guestCount: data.guest_count,
+            eventType: data.event_type,
+            preferredDate: data.preferred_date || null,
+            message: data.message?.trim() || null,
+            source: 'ristorante-website', // Track where the inquiry came from
+          },
         },
-        body: JSON.stringify({
-          companyName: data.company_name.trim(),
-          contactName: data.contact_name.trim(),
-          email: data.email.trim().toLowerCase(),
-          phone: data.phone?.trim() || null,
-          guestCount: data.guest_count,
-          eventType: data.event_type,
-          preferredDate: data.preferred_date || null,
-          message: data.message?.trim() || null,
-          source: 'ristorante-website', // Track where the inquiry came from
-        }),
-      });
+      );
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Failed to submit inquiry');
+      if (error || (result && (result as { error?: string }).error)) {
+        throw new Error(
+          (result as { error?: string })?.error || error?.message || 'Failed to submit inquiry',
+        );
       }
 
       setIsSubmitted(true);
