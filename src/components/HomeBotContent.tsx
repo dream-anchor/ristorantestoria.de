@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PhoneText } from "@/lib/linkifyPhone";
 
 /**
  * HomeBotContent renders essential restaurant information for search engine crawlers.
@@ -24,7 +25,7 @@ const HomeBotContent = () => {
         <address>
           Karlstraße 47a, 80333 München, Deutschland
         </address>
-        <p>+49 89 51519696</p>
+        <p><PhoneText>+49 89 51519696</PhoneText></p>
         <p>info@ristorantestoria.de</p>
       </section>
 

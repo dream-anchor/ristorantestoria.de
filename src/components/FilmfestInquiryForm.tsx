@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PhoneText } from "@/lib/linkifyPhone";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -196,7 +197,7 @@ const FilmfestInquiryForm = () => {
         )}
       </Button>
       <p className="text-xs text-[hsl(36_18%_55%)] mt-3 text-center">
-        Alternativ erreichen Sie uns direkt unter +49 89 51519696.
+        Alternativ erreichen Sie uns direkt unter <PhoneText>+49 89 51519696</PhoneText>.
       </p>
     </form>
   );

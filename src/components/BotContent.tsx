@@ -1,4 +1,5 @@
 import { useMenu, useMenuById, MenuType } from '@/hooks/useMenu';
+import { PhoneText } from "@/lib/linkifyPhone";
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface BotContentProps {
@@ -64,7 +65,7 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
       <footer>
         <p>STORIA – Ristorante • Pizzeria • Bar</p>
         <p>Karlstraße 47a, 80333 München</p>
-        <p>Tel: +49 89 51519696</p>
+        <p>Tel: <PhoneText>+49 89 51519696</PhoneText></p>
       </footer>
     </article>
   );

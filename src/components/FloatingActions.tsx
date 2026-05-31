@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { PhoneText } from "@/lib/linkifyPhone";
 import { Phone, UtensilsCrossed, Copy, Check } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -82,7 +83,7 @@ const FloatingActions = () => {
           </PopoverTrigger>
           <PopoverContent side="left" className="w-auto p-3">
             <div className="flex items-center gap-3">
-              <span className="font-medium whitespace-nowrap">+49 89 51519696</span>
+              <span className="font-medium whitespace-nowrap"><PhoneText>+49 89 51519696</PhoneText></span>
               <Button
                 size="sm"
                 variant="outline"

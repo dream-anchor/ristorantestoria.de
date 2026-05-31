@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -64,7 +65,7 @@ const Mittagsmenu = () => {
               </p>
               {t.pages.mittagsmenu.introSeo && (
                 <div className="text-muted-foreground leading-relaxed space-y-4 mt-4 pt-4 border-t border-border">
-                  <p>{t.pages.mittagsmenu.introSeo}</p>
+                  <p><PhoneText>{t.pages.mittagsmenu.introSeo}</PhoneText></p>
                   {t.pages.mittagsmenu.introSeoP2 && <p>{t.pages.mittagsmenu.introSeoP2}</p>}
                 </div>
               )}

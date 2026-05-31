@@ -1,4 +1,5 @@
 import LocalizedLink from "@/components/LocalizedLink";
+import { PhoneText } from "@/lib/linkifyPhone";
 import { Link, useLocation } from "react-router-dom";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { useEffect } from "react";
@@ -388,7 +389,7 @@ const LunchMuenchen = () => {
                 {faqItems.map((item, idx) => (
                   <AccordionItem key={idx} value={`faq-${idx}`} className="bg-card border border-border rounded-lg px-4">
                     <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>
-                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{item.a}</AccordionContent>
+                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden"><PhoneText>{item.a}</PhoneText></AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>

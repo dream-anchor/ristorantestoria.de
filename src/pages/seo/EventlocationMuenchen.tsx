@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -280,7 +281,7 @@ const EventlocationMuenchen = () => {
                     <span className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">{i + 1}</span>
                     <div>
                       <h3 className="font-semibold mb-1">{step.title}</h3>
-                      <p className="text-muted-foreground text-sm">{step.desc}</p>
+                      <p className="text-muted-foreground text-sm"><PhoneText>{step.desc}</PhoneText></p>
                     </div>
                   </div>
                 ))}
@@ -355,7 +356,7 @@ const EventlocationMuenchen = () => {
                 {faqs.map((faq, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
-                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{faq.a}</AccordionContent>
+                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden"><PhoneText>{faq.a}</PhoneText></AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>

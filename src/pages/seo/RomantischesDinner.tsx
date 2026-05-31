@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -331,7 +332,7 @@ const RomantischesDinner = () => {
                 {faqs.map((faq, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
-                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{faq.a}</AccordionContent>
+                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden"><PhoneText>{faq.a}</PhoneText></AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>

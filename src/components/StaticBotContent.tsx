@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { PhoneText } from "@/lib/linkifyPhone";
 
 interface StaticBotContentProps {
   title: string;
@@ -42,7 +43,7 @@ const StaticBotContent = ({ title, description, sections = [], includeContact = 
           <address>
             Karlstraße 47a, 80333 München
           </address>
-          <p>+49 89 51519696</p>
+          <p><PhoneText>+49 89 51519696</PhoneText></p>
           <p>info@ristorantestoria.de</p>
           <p>
             {t.common.openingHoursLabel}: {t.common.openingHoursText}

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -296,7 +297,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               <Button size="lg" variant="secondary" asChild>
                 <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer">{s.ctaBoxButton}</a>
               </Button>
-              <p className="mt-6 opacity-80 text-sm">{s.ctaBoxNote}</p>
+              <p className="mt-6 opacity-80 text-sm"><PhoneText>{s.ctaBoxNote}</PhoneText></p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> info@ristorantestoria.de</a>
@@ -338,7 +339,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                 {faqs.map((faq, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
-                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{faq.a}</AccordionContent>
+                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden"><PhoneText>{faq.a}</PhoneText></AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>

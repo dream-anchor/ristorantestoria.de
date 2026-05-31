@@ -1,4 +1,5 @@
 import LocalizedLink from "@/components/LocalizedLink";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Navigation from "@/components/Navigation";
@@ -502,7 +503,7 @@ const WildEssenMuenchen = () => {
                 {faqItems.map((item, index) => (
                   <div key={index} className="bg-card p-6 rounded-lg border border-border">
                     <h3 className="font-semibold mb-2">{item.question}</h3>
-                    <p className="text-muted-foreground text-sm">{item.answer}</p>
+                    <p className="text-muted-foreground text-sm"><PhoneText>{item.answer}</PhoneText></p>
                   </div>
                 ))}
               </div>
