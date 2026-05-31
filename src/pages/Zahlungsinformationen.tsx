@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -141,7 +142,7 @@ const Zahlungsinformationen = () => {
               <p className="mt-2">
                 <strong>Telefon:</strong>{" "}
                 <a href="tel:+498951519696" className="text-primary hover:underline">
-                  +49 89 51519696
+                  <PhoneText>+49 89 51519696</PhoneText>
                 </a>
                 <br />
                 <strong>E-Mail:</strong>{" "}

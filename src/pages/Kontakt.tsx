@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -165,7 +166,7 @@ const Kontakt = () => {
                   <div>
                     <p className="font-medium">{t.contact.phone}</p>
                     <a href="tel:+498951519696" className="text-muted-foreground hover:text-primary transition-colors">
-                      +49 89 51519696
+                      <PhoneText>+49 89 51519696</PhoneText>
                     </a>
                   </div>
                 </div>

@@ -202,7 +202,7 @@ const FAQ = () => {
                 <Button asChild variant="outline">
                   <a href="tel:+498951519696" className="gap-2">
                     <Phone className="h-4 w-4" />
-                    +49 89 51519696
+                    <PhoneText>+49 89 51519696</PhoneText>
                   </a>
                 </Button>
                 <Button asChild variant="outline">

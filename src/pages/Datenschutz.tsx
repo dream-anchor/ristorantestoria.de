@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -58,7 +59,7 @@ const Datenschutz = () => {
                 80333 München<br />
               Telefon:{" "}
                 <a href="tel:+498951519696" className="text-primary hover:underline">
-                  +49 89 51519696
+                  <PhoneText>+49 89 51519696</PhoneText>
                 </a><br />
                 E-Mail:{" "}
                 <a href="mailto:info@ristorantestoria.de" className="text-primary hover:underline">

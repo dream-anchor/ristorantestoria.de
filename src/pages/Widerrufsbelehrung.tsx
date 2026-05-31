@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -63,7 +64,7 @@ const Widerrufsbelehrung = () => {
                 Speranza GmbH<br />
                 Karlstraße 47a<br />
                 80333 München<br />
-                Telefon: +49 89 51519696<br />
+                Telefon: <PhoneText>+49 89 51519696</PhoneText><br />
                 E-Mail: info@ristorantestoria.de
               </p>
               <p>
