@@ -83,7 +83,7 @@ const FilmfestInquiryForm = () => {
       setIsSubmitted(true);
       toast({
         title: "Anfrage gesendet",
-        description: "Vielen Dank! Wir melden uns im Festivalzeitraum kurzfristig zurück.",
+        description: "Vielen Dank! Wir melden uns innerhalb von 24 Stunden zurück.",
       });
     } catch (error) {
       console.error("Error submitting filmfest inquiry:", error);
@@ -106,7 +106,7 @@ const FilmfestInquiryForm = () => {
           Anfrage gesendet
         </h3>
         <p className="text-[hsl(36_25%_72%)]">
-          Vielen Dank! Wir melden uns im Festivalzeitraum besonders schnell zurück.
+          Vielen Dank! Wir melden uns innerhalb von 24 Stunden zurück.
         </p>
       </div>
     );
