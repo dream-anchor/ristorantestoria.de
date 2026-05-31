@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { PhoneText } from "@/lib/linkifyPhone";
 import LocalizedLink from "@/components/LocalizedLink";
 import { Link } from "react-router-dom";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
@@ -499,7 +500,7 @@ const ReisegruppenPage = () => {
                   <div key={index} className="bg-card p-6 rounded-lg border border-border">
                     <div className="text-3xl mb-3">{group.emoji}</div>
                     <h3 className="font-semibold mb-2">{group.title}</h3>
-                    <p className="text-sm text-muted-foreground">{group.desc}</p>
+                    <p className="text-sm text-muted-foreground"><PhoneText>{group.desc}</PhoneText></p>
                   </div>
                 ))}
               </div>
@@ -687,7 +688,7 @@ const ReisegruppenPage = () => {
                       <span className="text-primary-foreground font-bold text-lg">{step.num}</span>
                     </div>
                     <h3 className="font-semibold mb-2">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground">{step.desc}</p>
+                    <p className="text-sm text-muted-foreground"><PhoneText>{step.desc}</PhoneText></p>
                   </div>
                 ))}
               </div>
@@ -718,7 +719,7 @@ const ReisegruppenPage = () => {
                       forceMount
                       className="text-muted-foreground data-[state=closed]:hidden"
                     >
-                      {item.a}
+                      <PhoneText>{item.a}</PhoneText>
                     </AccordionContent>
                   </AccordionItem>
                 ))}

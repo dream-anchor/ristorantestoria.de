@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { PhoneText } from "@/lib/linkifyPhone";
 import { Phone, Mail, MapPin, ArrowUpRight, Instagram, MessageCircle } from "lucide-react";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
@@ -507,7 +508,7 @@ const FilmfestMuenchen = () => {
               {faqItems.map((item, i) => (
                 <Reveal key={item.question} delay={(i % 3) * 0.06} className="ff-faq-item">
                   <h3>{item.question}</h3>
-                  <p>{item.answer}</p>
+                  <p><PhoneText>{item.answer}</PhoneText></p>
                 </Reveal>
               ))}
             </div>

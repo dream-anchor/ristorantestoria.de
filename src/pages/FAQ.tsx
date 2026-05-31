@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -122,7 +123,7 @@ const FAQ = () => {
                         {item.question}
                       </AccordionTrigger>
                       <AccordionContent forceMount className="text-base text-muted-foreground pb-5 leading-relaxed data-[state=closed]:hidden">
-                        <p className="mb-2">{item.answer}</p>
+                        <p className="mb-2"><PhoneText>{item.answer}</PhoneText></p>
                         {item.link && (
                           <LocalizedLink 
                             to={item.link} 

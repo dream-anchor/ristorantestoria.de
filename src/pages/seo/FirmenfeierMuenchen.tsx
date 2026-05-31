@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -232,7 +233,7 @@ const FirmenfeierMuenchen = () => {
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.firmenfeier.processTitle}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {processSteps.map((step, i) => (<div key={i} className="flex gap-4"><span className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">{i + 1}</span><div><h3 className="font-semibold mb-1">{step.title}</h3><p className="text-muted-foreground text-sm">{step.desc}</p></div></div>))}
+                {processSteps.map((step, i) => (<div key={i} className="flex gap-4"><span className="flex-shrink-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">{i + 1}</span><div><h3 className="font-semibold mb-1">{step.title}</h3><p className="text-muted-foreground text-sm"><PhoneText>{step.desc}</PhoneText></p></div></div>))}
               </div>
               <div className="text-center mt-8"><Button size="lg" asChild><a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{t.seo.firmenfeier.processCtaButton}</a></Button></div>
             </section>
@@ -262,7 +263,7 @@ const FirmenfeierMuenchen = () => {
             {/* FAQ */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.firmenfeier.faqTitle}</h2>
-              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4","faq-5","faq-6","faq-7","faq-8","faq-9"]} className="max-w-3xl mx-auto">{faqs.map((faq, i) => (<AccordionItem key={i} value={`faq-${i}`}><AccordionTrigger className="text-left">{faq.q}</AccordionTrigger><AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{faq.a}</AccordionContent></AccordionItem>))}</Accordion>
+              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4","faq-5","faq-6","faq-7","faq-8","faq-9"]} className="max-w-3xl mx-auto">{faqs.map((faq, i) => (<AccordionItem key={i} value={`faq-${i}`}><AccordionTrigger className="text-left">{faq.q}</AccordionTrigger><AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden"><PhoneText>{faq.a}</PhoneText></AccordionContent></AccordionItem>))}</Accordion>
             </section>
 
             {/* Related */}

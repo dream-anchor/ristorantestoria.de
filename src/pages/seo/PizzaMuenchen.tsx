@@ -1,4 +1,5 @@
 import LocalizedLink from "@/components/LocalizedLink";
+import { PhoneText } from "@/lib/linkifyPhone";
 import { Link } from "react-router-dom";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Header from "@/components/Header";
@@ -298,7 +299,7 @@ const PizzaMuenchen = () => {
                   <AccordionItem key={index} value={`faq-${index}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
                     <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">
-                      {faq.a}
+                      <PhoneText>{faq.a}</PhoneText>
                     </AccordionContent>
                   </AccordionItem>
                 ))}

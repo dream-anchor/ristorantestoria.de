@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { PhoneText } from "@/lib/linkifyPhone";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import Header from "@/components/Header";
@@ -486,7 +487,7 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
                         {faq.question}
                       </AccordionTrigger>
                       <AccordionContent forceMount className="text-base text-muted-foreground pb-5 leading-relaxed data-[state=closed]:hidden">
-                        <p>{faq.answer}</p>
+                        <p><PhoneText>{faq.answer}</PhoneText></p>
                       </AccordionContent>
                     </AccordionItem>
                   ))}

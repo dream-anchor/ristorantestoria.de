@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -60,7 +61,7 @@ const Reservierung = () => {
           {t.pages.reservierung.introSeo && (
             <div className="max-w-2xl mx-auto mt-12 mb-8">
               <div className="bg-card border border-border rounded-2xl px-8 py-7 shadow-sm text-center space-y-4 text-muted-foreground">
-                <p>{t.pages.reservierung.introSeo}</p>
+                <p><PhoneText>{t.pages.reservierung.introSeo}</PhoneText></p>
                 {t.pages.reservierung.introSeoP2 && <p>{t.pages.reservierung.introSeoP2}</p>}
               </div>
             </div>
