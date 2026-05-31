@@ -2915,7 +2915,7 @@ export const en = {
       locationBadge3: "Terrace + indoor area",
       introTitle: "Why Celebrate Your Wedding at STORIA?",
       introP1: "A wedding celebration should be something special \u2013 and that\u2019s exactly what STORIA in Munich offers. Instead of an anonymous event venue, you and your guests experience Italian hospitality in a genuine family-run restaurant. Domenico and Nicola Speranza personally attend to every wedding.",
-      introP2: "With 100 seats in the elegant indoor area and 100 more on the covered, heated terrace, we offer space for weddings of all sizes. Standing receptions for up to 300 guests are possible \u2013 up to 300 guests in total.",
+      introP2: "With 100 seats in the elegant indoor area and 100 more on the covered, heated terrace, we offer space for weddings of all sizes. Standing receptions for up to 300 guests are possible.",
       introP3: "Whether an intimate celebration for six or a grand wedding party \u2013 we design the menu, decoration and schedule individually to your wishes. Italian food, excellent wine and an atmosphere your guests will remember for a long time.",
       pillarLink: "Learn more about STORIA",
       kitchenTitle: "Your Custom Wedding Menu",
