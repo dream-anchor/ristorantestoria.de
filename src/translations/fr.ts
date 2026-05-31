@@ -2924,7 +2924,7 @@ export const fr = {
       transitParking: "Parking Marsstra\u00dfe (P22) : 5 min",
       faqTitle: "FAQ \u2013 F\u00eate de mariage au STORIA",
       faq1Question: "Combien d\u2019invit\u00e9s le STORIA peut-il accueillir pour un mariage ?",
-      faq1Answer: "Nous offrons de la place pour des mariages de 6 \u00e0 300 invit\u00e9s : 100 places \u00e0 l\u2019int\u00e9rieur, 100 sur la terrasse couverte, cocktails debout jusqu\u2019\u00e0 300 par espace.",
+      faq1Answer: "Nous offrons de la place pour des mariages de 6 \u00e0 300 invit\u00e9s : 100 places \u00e0 l\u2019int\u00e9rieur, 100 sur la terrasse couverte, cocktails debout jusqu\u2019\u00e0 300.",
       faq2Question: "Puis-je composer le menu individuellement pour mon mariage ?",
       faq2Answer: "Oui, nous cr\u00e9ons un menu de mariage enti\u00e8rement personnalis\u00e9 selon vos souhaits. De l\u2019entr\u00e9e aux services de p\u00e2tes et au dessert \u2013 y compris options v\u00e9g\u00e9tariennes et v\u00e9ganes.",
       faq3Question: "Combien co\u00fbte une f\u00eate de mariage au STORIA ?",
@@ -3504,7 +3504,7 @@ export const fr = {
           },
           {
             question: "Puis-je réserver pour un grand groupe ?",
-            answer: "Absolument. Nous disposons de 100 places assises en intérieur et 100 supplémentaires sur la terrasse couverte, avec des cocktails debout pour jusqu'à 300 personnes par espace. Pour les groupes de 6 personnes et plus, nous demandons une réservation. Pour les anniversaires, dîners d'entreprise, mariages et anniversaires, nous élaborons également des menus personnalisés.",
+            answer: "Absolument. Nous disposons de 100 places assises en intérieur et 100 supplémentaires sur la terrasse couverte, avec des cocktails debout pour jusqu'à 300 personnes. Pour les groupes de 6 personnes et plus, nous demandons une réservation. Pour les anniversaires, dîners d'entreprise, mariages et anniversaires, nous élaborons également des menus personnalisés.",
             link: "reservierung",
             linkText: "Demande de réservation de groupe",
           },
@@ -3632,7 +3632,7 @@ export const fr = {
         items: [
           {
             question: "Le STORIA est-il une bonne salle de réception à Munich ?",
-            answer: "Oui, le STORIA est un lieu de réception très apprécié à Munich pour les dîners d'entreprise, les événements professionnels et les fêtes privées. Avec 100 places assises en intérieur et 100 en terrasse, plus des cocktails debout jusqu'à 300 personnes par espace, nous proposons des espaces élégants avec une cuisine italienne authentique.",
+            answer: "Oui, le STORIA est un lieu de réception très apprécié à Munich pour les dîners d'entreprise, les événements professionnels et les fêtes privées. Avec 100 places assises en intérieur et 100 en terrasse, plus des cocktails debout jusqu'à 300 personnes, nous proposons des espaces élégants avec une cuisine italienne authentique.",
             externalLink: "https://www.events-storia.de/",
             externalLinkText: "Events STORIA",
           },
