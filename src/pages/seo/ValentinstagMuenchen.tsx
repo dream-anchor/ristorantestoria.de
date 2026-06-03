@@ -575,8 +575,36 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               </div>
             </section>
 
+            {/* Romantic FAQ */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-8 text-center">{vx.romanticFaqTitle}</h2>
+              <Accordion type="single" collapsible defaultValue="rfaq-0" className="max-w-3xl mx-auto">
+                {vx.romanticFaqs.map((faq, i) => (
+                  <AccordionItem key={i} value={`rfaq-${i}`}>
+                    <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
+                    <AccordionContent forceMount className="text-muted-foreground data-[state=closed]:hidden">{faq.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </section>
+
+            {/* Guest quote */}
+            <section className="mb-12">
+              <figure className="max-w-2xl mx-auto text-center bg-secondary/40 rounded-2xl p-8">
+                <div className="flex items-center justify-center gap-1 mb-4 text-primary" aria-label={vx.quoteRating}>
+                  {[1,2,3,4].map((n) => <span key={n} className="text-xl">{'\u2605'}</span>)}
+                  <span className="text-xl">{'\u2BE8'}</span>
+                </div>
+                <blockquote className="font-serif text-xl md:text-2xl text-foreground/90 italic mb-4">{'\u201E'}{vx.quoteText}{'\u201C'}</blockquote>
+                <figcaption className="text-sm text-muted-foreground">
+                  {'\u2013 '}{vx.quoteAuthor}
+                  <span className="block mt-1">{vx.quoteRating}</span>
+                </figcaption>
+              </figure>
+            </section>
+
             {/* Final CTA */}
-            <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
+            <section id="final-cta" className="scroll-mt-24 bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
               {standalone ? (
@@ -593,6 +621,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
                 </Button>
               )}
               <p className="mt-6 opacity-80 text-sm">{s.finalCtaAlt}</p>
+              <p className="mt-4 opacity-90 text-sm font-medium">{vx.scarcity}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> info@ristorantestoria.de</a>
