@@ -137,26 +137,39 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={breadcrumbSchema} />
 
-      {/* Event Schema – Weihnachtsmenü (non-standalone only) */}
-      {menu && !standalone && (
+      {/* Event @graph – Weihnachtsmenü (non-standalone only) — references #restaurant / #organization by @id */}
+      {!standalone && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "FoodEvent",
-          "name": "Weihnachtsmen\u00fc im Ristorante STORIA M\u00fcnchen",
-          "description": "Italienisches Weihnachtsmen\u00fc in der M\u00fcnchner Maxvorstadt: Festliche Men\u00fcs f\u00fcr Firmenfeiern, Familien und Freunde.",
-          "startDate": "2026-12-01",
-          "endDate": "2026-12-23",
-          "eventStatus": "https://schema.org/EventScheduled",
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "location": {
-            "@type": "Restaurant",
-            "name": "STORIA - Ristorante \u2022 Pizzeria \u2022 Bar",
-            "address": { "@type": "PostalAddress", "streetAddress": "Karlstra\u00dfe 47a", "addressLocality": "M\u00fcnchen", "postalCode": "80333", "addressCountry": "DE" }
-          },
-          "organizer": { "@type": "Organization", "name": "Speranza GmbH", "url": "https://ristorantestoria.de" },
-          "offers": [
-            { "@type": "Offer", "name": "Weihnachtsmen\u00fc", "price": "45", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
-            { "@type": "Offer", "name": "Premium Weihnachtsmen\u00fc", "price": "65", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.ristorantestoria.de/" },
+                { "@type": "ListItem", "position": 2, "name": "Besondere Anlässe", "item": "https://www.ristorantestoria.de/besondere-anlaesse/" },
+                { "@type": "ListItem", "position": 3, "name": "Weihnachtsmenü", "item": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/" }
+              ]
+            },
+            {
+              "@type": "Event",
+              "@id": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/#event",
+              "name": "Weihnachtsmenü im STORIA München",
+              "description": "Festliches italienisches Weihnachtsmenü in der Adventszeit – ideal für Familien und Firmen-Weihnachtsfeiern in der Maxvorstadt. Gruppen-Menü ab 45 € pro Person.",
+              "startDate": "2026-11-25T17:00:00+01:00",
+              "endDate": "2026-12-23T23:30:00+01:00",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
+              "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
+              "image": ["https://www.ristorantestoria.de/weihnachtsmenue-storia-muenchen.jpg"],
+              "offers": {
+                "@type": "AggregateOffer",
+                "lowPrice": "45.00",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "url": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/"
+              }
+            }
           ]
         })}} />
       )}
