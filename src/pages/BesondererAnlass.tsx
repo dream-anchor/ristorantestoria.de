@@ -177,6 +177,11 @@ const BesondererAnlass = () => {
   const menuTitle = getLocalizedText(menu.title, menu.title_en, menu.title_it, menu.title_fr);
   const menuSubtitle = getLocalizedText(menu.subtitle, menu.subtitle_en, menu.subtitle_it, menu.subtitle_fr);
 
+  // Detect romantic / Valentine's-style menus to show the emotional sections
+  const isRomanticMenu = /valentin|candle|romant|amore|san[-\s]?valentino/i.test(
+    `${menu.slug || ''} ${(menu as any).slug_en || ''} ${(menu as any).slug_it || ''} ${(menu as any).slug_fr || ''} ${menu.title || ''} ${menu.title_en || ''} ${menu.title_it || ''} ${menu.title_fr || ''}`
+  );
+
   // Get localized slugs from menu data (fallback to German slug if not set)
   const getLocalizedSlug = (lang: 'de' | 'en' | 'it' | 'fr') => {
     if (lang === 'de') return menu.slug;
