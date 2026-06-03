@@ -593,7 +593,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               <figure className="max-w-2xl mx-auto text-center bg-secondary/40 rounded-2xl p-8">
                 <div className="flex items-center justify-center gap-1 mb-4 text-primary" aria-label={vx.quoteRating}>
                   {[1,2,3,4].map((n) => <span key={n} className="text-xl">{'\u2605'}</span>)}
-                  <span className="text-xl">{'\u2BE8'}</span>
+                  <span className="text-xl opacity-50">{'\u2605'}</span>
                 </div>
                 <blockquote className="font-serif text-xl md:text-2xl text-foreground/90 italic mb-4">{'\u201E'}{vx.quoteText}{'\u201C'}</blockquote>
                 <figcaption className="text-sm text-muted-foreground">
