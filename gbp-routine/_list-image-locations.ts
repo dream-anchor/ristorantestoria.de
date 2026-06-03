@@ -1,0 +1,11 @@
+import dotenv from "dotenv";
+import { resolve, dirname } from "path";
+import { fileURLToPath } from "url";
+import postgres from "postgres";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: resolve(__dirname, "..", ".env") });
+const sql = postgres(process.env.DATABASE_URL!, { ssl: "require" });
+const imgs = await sql`SELECT filename, storage_url FROM gbp_images WHERE is_active = TRUE ORDER BY filename`;
+for (const i of imgs) console.log(`${i.filename}\n  → ${i.storage_url}\n`);
+console.log(`Total: ${imgs.length}`);
+await sql.end();

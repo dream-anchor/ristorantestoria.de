@@ -46,6 +46,8 @@ export const fr = {
     altFassade: "Façade du Ristorante STORIA Karlstraße – restaurant italien Munich",
     altDessert: "Tiramisu – dessert fait maison au STORIA, restaurant italien Munich",
     altGaeste: "Clients devant le STORIA – restaurant italien populaire à Munich",
+    terraceTeaserTitle: "Terrasse couverte",
+    terraceTeaserText: "Aperitivo & Dîner",
   },
   internalLinks: {
     title: "Découvrez plus",
@@ -162,6 +164,7 @@ export const fr = {
     foodMenu: "CARTE",
     drinks: "BOISSONS",
     specialOccasions: "OCCASIONS SPÉCIALES",
+    terrasse: "TERRASSE",
     christmasMenus: "MENUS DE NOËL",
     catering: "TRAITEUR & ÉVÉNEMENTS",
     contact: "CONTACT",

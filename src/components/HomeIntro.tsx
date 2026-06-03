@@ -45,6 +45,18 @@ const HomeIntro = () => {
             </LocalizedLink>
             {t.homeIntro.p2post}
           </p>
+          {t.homeIntro.link5 && (
+            <p className="leading-[1.8] text-[#444] text-base md:text-lg mt-4">
+              {t.homeIntro.p3pre}
+              <LocalizedLink
+                to="italienisches-restaurant-muenchen"
+                className="font-semibold italic text-foreground hover:text-[#8b0000] transition-colors"
+              >
+                {t.homeIntro.link5}
+              </LocalizedLink>
+              {t.homeIntro.p3post}
+            </p>
+          )}
           <LocalizedLink
             to="ueber-uns"
             className="inline-block mt-8 px-8 py-3 bg-[#8b0000] text-white rounded-full shadow-[0_4px_15px_rgba(139,0,0,0.3)] hover:shadow-[0_8px_25px_rgba(139,0,0,0.4)] hover:-translate-y-0.5 transition-all text-sm font-medium"

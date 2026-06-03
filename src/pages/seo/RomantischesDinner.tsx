@@ -237,7 +237,12 @@ const RomantischesDinner = () => {
               <span className="inline-block bg-primary text-primary-foreground text-xs px-3 py-1 rounded mb-4">{t.seo.romanticDinner.valentineBadge}</span>
               <h2 className="text-2xl font-serif font-bold mb-4">{t.seo.romanticDinner.valentineTitle}</h2>
               <p className="text-muted-foreground mb-6">{t.seo.romanticDinner.valentineTeaser}</p>
-              <Button asChild><LocalizedLink to="besondere-anlaesse/valentinstag-menue">{t.seo.romanticDinner.valentineLinkText}</LocalizedLink></Button>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Button asChild><LocalizedLink to="besondere-anlaesse/valentinstag-menue">{t.seo.romanticDinner.valentineLinkText}</LocalizedLink></Button>
+                {t.seo.romanticDinner.candlelightLinkText && (
+                  <Button asChild variant="outline"><LocalizedLink to="besondere-anlaesse/candlelight-menue">{t.seo.romanticDinner.candlelightLinkText}</LocalizedLink></Button>
+                )}
+              </div>
             </section>
 
             {/* Occasions */}

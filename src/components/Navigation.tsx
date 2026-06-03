@@ -162,6 +162,7 @@ const Navigation = () => {
       label: t.nav.specialOccasions,
       children: specialOccasionsChildren,
     },
+    { label: t.nav.terrasse, baseSlug: "terrasse-muenchen" },
     { label: t.nav.contact, baseSlug: "kontakt" },
     // Externer Link am Ende mit visueller Unterscheidung
     { label: t.nav.catering, externalUrl: "https://www.events-storia.de/", external: true },

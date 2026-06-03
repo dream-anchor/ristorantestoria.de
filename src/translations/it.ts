@@ -76,6 +76,8 @@ const itBase = {
     altFassade: "Facciata del Ristorante STORIA Karlstraße – ristorante italiano Monaco",
     altDessert: "Tiramisù – dolce fatto in casa allo STORIA, ristorante italiano Monaco",
     altGaeste: "Ospiti davanti allo STORIA – amato ristorante italiano a Monaco",
+    terraceTeaserTitle: "Terrazza coperta",
+    terraceTeaserText: "Aperitivo & Cena",
   },
   internalLinks: {
     title: "Scopri di più",
@@ -192,6 +194,7 @@ const itBase = {
     foodMenu: "CARTA",
     drinks: "BEVANDE",
     specialOccasions: "OCCASIONI SPECIALI",
+    terrasse: "TERRAZZA",
     christmasMenus: "MENU DI NATALE",
     catering: "CATERING & EVENTI",
     contact: "CONTATTO",

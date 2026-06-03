@@ -261,6 +261,18 @@ const AperitivoMuenchen = () => {
               <div className="prose prose-lg max-w-none text-muted-foreground">
                 <p className="mb-4">{t.seo.aperitivo.introP1}</p>
                 <p>{t.seo.aperitivo.introP2}</p>
+                {t.seo.aperitivo.introLinkAnchor && (
+                  <p className="mt-4">
+                    {t.seo.aperitivo.introLinkPre}
+                    <LocalizedLink
+                      to="italienisches-restaurant-muenchen"
+                      className="text-primary underline hover:no-underline"
+                    >
+                      {t.seo.aperitivo.introLinkAnchor}
+                    </LocalizedLink>
+                    {t.seo.aperitivo.introLinkPost}
+                  </p>
+                )}
               </div>
             </div>
           </section>

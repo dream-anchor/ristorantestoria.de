@@ -14,9 +14,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { config as dotenvConfig } from "dotenv";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// .env laden (wie prerender.js), damit VITE_SUPABASE_* für die dynamischen
+// Menü-Routen verfügbar sind. .env liegt im Projekt-Root, also eine Ebene über scripts/.
+dotenvConfig({ path: path.resolve(__dirname, "..", ".env") });
 
 // Import slugs from Single Source of Truth
 const require = createRequire(import.meta.url);

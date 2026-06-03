@@ -8,6 +8,7 @@ import dessertImage from "@/assets/tiramisu.webp";
 import terrasseImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
+import LocalizedLink from "@/components/LocalizedLink";
 
 interface ImageCardProps {
   image: string;
@@ -17,9 +18,10 @@ interface ImageCardProps {
   className?: string;
   imageClassName?: string;
   externalLink?: string;
+  internalSlug?: string;
 }
 
-const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink }: ImageCardProps) => {
+const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug }: ImageCardProps) => {
   const content = (
     <div className={`relative overflow-hidden group ${className}`}>
       <img 
@@ -55,14 +57,22 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
 
   if (externalLink) {
     return (
-      <a 
-        href={externalLink} 
-        target="_blank" 
+      <a
+        href={externalLink}
+        target="_blank"
         rel="noopener noreferrer"
         className="block cursor-pointer"
       >
         {content}
       </a>
+    );
+  }
+
+  if (internalSlug) {
+    return (
+      <LocalizedLink to={internalSlug} className="block cursor-pointer">
+        {content}
+      </LocalizedLink>
     );
   }
 
@@ -130,6 +140,9 @@ const ImageGrid = () => {
           <ImageCard
             image={terrasseImage}
             alt={t.imageGrid.altGaeste}
+            title={t.imageGrid.terraceTeaserTitle}
+            subtitle={t.imageGrid.terraceTeaserText}
+            internalSlug="terrasse-muenchen"
             className="aspect-square"
           />
         </div>

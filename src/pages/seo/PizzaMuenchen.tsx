@@ -199,6 +199,18 @@ const PizzaMuenchen = () => {
               <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
                 <p>{t.seo.pizzaMuenchen.introP1}</p>
                 <p>{t.seo.pizzaMuenchen.introP2}</p>
+                {t.seo.pizzaMuenchen.introLinkAnchor && (
+                  <p>
+                    {t.seo.pizzaMuenchen.introLinkPre}
+                    <LocalizedLink
+                      to="italienisches-restaurant-muenchen"
+                      className="text-primary underline hover:no-underline"
+                    >
+                      {t.seo.pizzaMuenchen.introLinkAnchor}
+                    </LocalizedLink>
+                    {t.seo.pizzaMuenchen.introLinkPost}
+                  </p>
+                )}
               </div>
             </div>
           </section>

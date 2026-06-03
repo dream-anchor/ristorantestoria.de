@@ -61,6 +61,7 @@ const GeburtstagsfeierMuenchen = () => {
     { q: b.faq4Question, a: b.faq4Answer },
     { q: b.faq5Question, a: b.faq5Answer },
     { q: b.faq6Question, a: b.faq6Answer },
+    { q: b.faq7Question, a: b.faq7Answer },
   ];
 
   return (

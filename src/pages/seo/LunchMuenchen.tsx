@@ -79,7 +79,7 @@ const LunchMuenchen = () => {
     <>
       <SEO
         title={t.seo.lunch.seoTitle}
-        description={t.seo.lunch.heroDescription}
+        description={t.seo.lunch.seoDescription}
         canonical="/lunch-muenchen-maxvorstadt"
       />
       <StructuredData type="restaurant" />

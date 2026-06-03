@@ -56,6 +56,16 @@ const Speisekarte = () => {
           <h1 className="text-4xl font-serif font-bold mb-8 text-center">
             {t.pages.speisekarte.h1}
           </h1>
+          {t.pages.speisekarte.lunchHint && (
+            <div className="max-w-2xl mx-auto mb-6">
+              <LocalizedLink
+                to="mittags-menu"
+                className="flex items-center justify-center gap-2 bg-primary/10 border border-primary/30 rounded-2xl px-6 py-4 text-center text-primary font-medium hover:bg-primary/15 transition-colors"
+              >
+                {t.pages.speisekarte.lunchHint}
+              </LocalizedLink>
+            </div>
+          )}
           <div className="max-w-2xl mx-auto mb-12">
             <div className="bg-card border border-border rounded-2xl px-8 py-7 shadow-sm text-center space-y-4 text-muted-foreground">
               <p>{t.pages.speisekarte.intro}</p>
