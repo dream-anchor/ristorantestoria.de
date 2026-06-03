@@ -313,17 +313,6 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               </div>
             </section>
 
-            {/* Perfect moment highlight */}
-            <section className="mb-16">
-              <div className="border-l-4 border-primary bg-primary/5 rounded-r-2xl p-6 md:p-8">
-                <h2 className="text-2xl font-serif font-bold mb-3 text-primary">{vx.momentTitle}</h2>
-                <p className="text-muted-foreground leading-relaxed mb-5">{vx.momentText}</p>
-                <Button asChild className="bg-primary hover:bg-primary/90">
-                  <a href="#final-cta"><ArrowRight className="w-4 h-4 mr-2" />{vx.momentCta}</a>
-                </Button>
-              </div>
-            </section>
-
             {/* 8 Reasons */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{s.reasonsTitle}</h2>
