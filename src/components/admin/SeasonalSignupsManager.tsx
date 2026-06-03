@@ -21,7 +21,6 @@ const EVENT_LABELS: Record<string, string> = {
   valentinstag: "Valentinstag",
   weihnachten: "Weihnachten",
   silvester: "Silvester",
-  ostermontag: "Ostermontag",
 };
 
 const LANG_FLAGS: Record<string, string> = { de: "DE", en: "EN", it: "IT", fr: "FR" };
@@ -183,7 +182,7 @@ const SeasonalSignupsManager = () => {
   const { data: signups, isLoading } = useSeasonalSignups(selectedEvent);
   const { data: counts } = useSeasonalSignupCounts();
 
-  const eventKeys = ["valentinstag", "weihnachten", "silvester", "ostermontag"];
+  const eventKeys = ["valentinstag", "weihnachten", "silvester"];
 
   const exportCSV = (data: SeasonalSignup[], eventName: string) => {
     const headers = "Email,Event,Sprache,Anmeldedatum,Benachrichtigt\n";
