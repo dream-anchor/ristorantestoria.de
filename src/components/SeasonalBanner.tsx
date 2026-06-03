@@ -8,8 +8,8 @@ type Season = "valentinstag" | "terrasse" | "wild" | "weihnachtsfeier" | "silves
 const SEASON_BY_MONTH: (Season | null)[] = [
   "valentinstag",  // Jan
   "valentinstag",  // Feb
-  "valentinstag",  // Mar
-  "terrasse",      // Apr
+  null,            // Mar
+  null,            // Apr
   "terrasse",      // May
   "terrasse",      // Jun
   "terrasse",      // Jul
