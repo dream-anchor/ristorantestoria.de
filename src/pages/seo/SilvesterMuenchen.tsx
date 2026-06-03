@@ -150,26 +150,122 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
         }))
       })}} />
 
-      {/* Event Schema (active + non-standalone only) */}
-      {isActive && !standalone && (
+      {/* Event + Menu @graph (non-standalone only) — references #restaurant / #organization by @id */}
+      {!standalone && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Event",
-          "name": s.seoTitle,
-          "description": s.seoDescription,
-          "startDate": `${currentYear}-12-31T19:00:00+01:00`,
-          "endDate": `${currentYear + 1}-01-01T02:00:00+01:00`,
-          "eventStatus": "https://schema.org/EventScheduled",
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "location": {
-            "@type": "Place",
-            "name": "Ristorante STORIA",
-            "address": { "@type": "PostalAddress", "streetAddress": "Karlstra\u00dfe 47a", "addressLocality": "M\u00fcnchen", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" }
-          },
-          "organizer": { "@type": "Restaurant", "name": "Ristorante STORIA", "url": "https://www.ristorantestoria.de" },
-          "offers": [
-            { "@type": "Offer", "name": "Classic", "price": "99", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
-            { "@type": "Offer", "name": "Premium", "price": "150", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.ristorantestoria.de/" },
+                { "@type": "ListItem", "position": 2, "name": "Besondere Anlässe", "item": "https://www.ristorantestoria.de/besondere-anlaesse/" },
+                { "@type": "ListItem", "position": 3, "name": "Silvester Gala-Dinner", "item": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/" }
+              ]
+            },
+            {
+              "@type": "Event",
+              "@id": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/#event",
+              "name": "Silvester Gala-Dinner im STORIA München",
+              "description": "Italienisches Gala-Dinner zum Jahreswechsel in der Maxvorstadt: Champagner-Aperitif und 4-Gänge-Degustationsmenü zur Wahl (Vegetale, Mare oder Terra). 65,90 € pro Person, mit Weinbegleitung 99 €.",
+              "startDate": "2026-12-31T19:00:00+01:00",
+              "endDate": "2027-01-01T02:00:00+01:00",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
+              "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
+              "image": ["https://www.ristorantestoria.de/silvester-gala-storia-muenchen.jpg"],
+              "offers": [
+                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü", "price": "65.90", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
+                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
+              ]
+            },
+            {
+              "@type": "Menu",
+              "@id": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/#menu",
+              "name": "Degustationsmenüs",
+              "inLanguage": "de-DE",
+              "hasMenuSection": [
+                {
+                  "@type": "MenuSection",
+                  "name": "4 Gänge Menü «Vegetale»",
+                  "offers": [
+                    { "@type": "Offer", "price": "65.90", "priceCurrency": "EUR" },
+                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR" }
+                  ],
+                  "hasMenuItem": [
+                    { "@type": "MenuItem", "name": "Champagner-Kastaniencremesuppe mit getrüffelter Crème Fraîche" },
+                    { "@type": "MenuItem", "name": "Auberginenkaviar, Parmesanpraline und Avocadocreme, Basilikumessenz" },
+                    { "@type": "MenuItem", "name": "Gnocconi gefüllt mit Steinpilzen, gehobeltem Parmigiano und schwarzem Trüffel" },
+                    { "@type": "MenuItem", "name": "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis" }
+                  ]
+                },
+                {
+                  "@type": "MenuSection",
+                  "name": "4 Gänge Menü «Mare»",
+                  "offers": [
+                    { "@type": "Offer", "price": "65.90", "priceCurrency": "EUR" },
+                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR" }
+                  ],
+                  "hasMenuItem": [
+                    { "@type": "MenuItem", "name": "Carpaccio vom Octopus mit Jakobsmuscheln in feiner Kräuter-Zitrus-Marinade" },
+                    { "@type": "MenuItem", "name": "Tagliolini mit Scampi im Hummerfond" },
+                    { "@type": "MenuItem", "name": "Seeteufel auf einer sanften Gelbtomaten-Basilikum-Sauce, serviert mit cremigem Safranrisotto" },
+                    { "@type": "MenuItem", "name": "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis" }
+                  ]
+                },
+                {
+                  "@type": "MenuSection",
+                  "name": "4 Gänge Menü «Terra»",
+                  "offers": [
+                    { "@type": "Offer", "price": "65.90", "priceCurrency": "EUR" },
+                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR" }
+                  ],
+                  "hasMenuItem": [
+                    { "@type": "MenuItem", "name": "Vitello Tonnato, Auberginenkaviar und Parmesanpraline" },
+                    { "@type": "MenuItem", "name": "Gnocconi gefüllt mit Steinpilzen, gehobeltem Parmigiano und schwarzem Trüffel" },
+                    { "@type": "MenuItem", "name": "Brasato di manzo al Barolo „Rinderschmorbraten in Barolo“ mit getrüffelter Petersilienwurzelcreme" },
+                    { "@type": "MenuItem", "name": "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis" }
+                  ]
+                },
+                {
+                  "@type": "MenuSection",
+                  "name": "À la carte",
+                  "hasMenuSection": [
+                    {
+                      "@type": "MenuSection", "name": "Aperitif-Empfehlung",
+                      "hasMenuItem": [{ "@type": "MenuItem", "name": "Glas Champagner – Rossini mit frischen Erdbeeren 0,1 l", "offers": { "@type": "Offer", "price": "15.90", "priceCurrency": "EUR" } }]
+                    },
+                    {
+                      "@type": "MenuSection", "name": "Vorspeisen",
+                      "hasMenuItem": [
+                        { "@type": "MenuItem", "name": "Champagner-Kastaniencremesuppe mit getrüffelter Crème Fraîche", "offers": { "@type": "Offer", "price": "15.90", "priceCurrency": "EUR" } },
+                        { "@type": "MenuItem", "name": "Carpaccio vom Octopus mit Jakobsmuscheln in feiner Kräuter-Zitrus-Marinade", "offers": { "@type": "Offer", "price": "24.50", "priceCurrency": "EUR" } },
+                        { "@type": "MenuItem", "name": "Vitello Tonnato, Auberginenkaviar und Parmesanpraline", "offers": { "@type": "Offer", "price": "22.50", "priceCurrency": "EUR" } }
+                      ]
+                    },
+                    {
+                      "@type": "MenuSection", "name": "Pasta",
+                      "hasMenuItem": [
+                        { "@type": "MenuItem", "name": "Gnocconi gefüllt mit Steinpilzen, gehobeltem Parmigiano und schwarzem Trüffel", "offers": { "@type": "Offer", "price": "24.00", "priceCurrency": "EUR" } },
+                        { "@type": "MenuItem", "name": "Tagliolini mit Garnelen in feinem Hummerfond", "offers": { "@type": "Offer", "price": "24.00", "priceCurrency": "EUR" } }
+                      ]
+                    },
+                    {
+                      "@type": "MenuSection", "name": "Hauptgang",
+                      "hasMenuItem": [
+                        { "@type": "MenuItem", "name": "Seeteufel auf einer sanften Gelbtomaten-Basilikum-Sauce, serviert mit cremigem Safranrisotto", "offers": { "@type": "Offer", "price": "42.00", "priceCurrency": "EUR" } },
+                        { "@type": "MenuItem", "name": "Brasato di manzo al Barolo „Rinderschmorbraten in Barolo“ mit getrüffelter Petersilienwurzelcreme", "offers": { "@type": "Offer", "price": "42.00", "priceCurrency": "EUR" } }
+                      ]
+                    },
+                    {
+                      "@type": "MenuSection", "name": "Dessert",
+                      "hasMenuItem": [{ "@type": "MenuItem", "name": "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis", "offers": { "@type": "Offer", "price": "12.90", "priceCurrency": "EUR" } }]
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         })}} />
       )}
