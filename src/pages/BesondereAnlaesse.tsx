@@ -26,16 +26,19 @@ const BesondereAnlaesse = () => {
       slug: "valentinstag-menue",
       slug_en: "valentines-day-menu", slug_it: "menu-san-valentino", slug_fr: "menu-saint-valentin",
       label: t.seo?.besondereAnlaesse?.valentinstag || "Valentinstag-Men\u00fc",
+      teaser: "14. Februar – romantisches Dinner zu zweit, Pakete ab 55 € p. P.",
     },
     {
       slug: "weihnachtsmenue",
       slug_en: "christmas-menu", slug_it: "menu-natalizio", slug_fr: "menu-noel",
       label: t.seo?.besondereAnlaesse?.weihnachten || "Weihnachtsmenü",
+      teaser: "In der Adventszeit – festliches Menü für Familien und Firmenfeiern, Gruppen-Menü ab 45 € p. P.",
     },
     {
       slug: "silvester",
       slug_en: "new-years-eve", slug_it: "capodanno", slug_fr: "reveillon",
       label: t.seo?.besondereAnlaesse?.silvester || "Silvester Gala-Dinner",
+      teaser: "31. Dezember – Gala-Dinner mit 4-Gänge-Degustationsmenü ab 65,90 € p. P. (mit Weinbegleitung 99 €).",
     },
   ];
 
@@ -49,6 +52,37 @@ const BesondereAnlaesse = () => {
     return event.slug;
   };
 
+  const eventsJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.ristorantestoria.de/" },
+          { "@type": "ListItem", "position": 2, "name": "Besondere Anlässe", "item": "https://www.ristorantestoria.de/besondere-anlaesse/" }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "Besondere Anlässe im Ristorante STORIA München",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "name": "Valentinstag-Menü" },
+          { "@type": "ListItem", "position": 2, "url": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/", "name": "Weihnachtsmenü" },
+          { "@type": "ListItem", "position": 3, "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "name": "Silvester Gala-Dinner" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Für wie viele Gäste ist das STORIA als Eventlocation geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Wir bieten Platz von der intimen Runde bis zu 300 Gästen – im Restaurant, in einem separaten Bereich oder bei schönem Wetter auf der Terrasse." } },
+          { "@type": "Question", "name": "Gibt es vegetarische und vegane Menüvarianten?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Alle Event-Menüs lassen sich vegetarisch oder vegan gestalten – sagen Sie uns bei der Reservierung einfach Ihre Wünsche und Unverträglichkeiten." } },
+          { "@type": "Question", "name": "Wie weit im Voraus sollte ich reservieren?", "acceptedAnswer": { "@type": "Answer", "text": "Für Feiertage wie Silvester, Weihnachten und den Valentinstag empfehlen wir eine Reservierung mehrere Wochen im Voraus. Für kleinere Anlässe genügen oft wenige Tage." } },
+          { "@type": "Question", "name": "Kann ich einen separaten Bereich exklusiv buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, das STORIA verfügt über einen separaten Bereich, der für Firmenfeiern und private Anlässe exklusiv reserviert werden kann." } }
+        ]
+      }
+    ]
+  };
+
   return (
     <>
       <SEO
@@ -57,6 +91,10 @@ const BesondereAnlaesse = () => {
         canonical="/besondere-anlaesse/"
       />
       <StructuredData type="restaurant" includeReviews={false} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }}
+      />
 
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
@@ -85,8 +123,23 @@ const BesondereAnlaesse = () => {
                     className="block p-6 rounded-2xl border bg-card hover:bg-accent transition-colors"
                   >
                     <h2 className="text-xl font-semibold">{event.label}</h2>
+                    {event.teaser && (
+                      <p className="mt-2 text-sm text-muted-foreground">{event.teaser}</p>
+                    )}
                   </Link>
                 ))}
+              </div>
+
+              <div className="mt-8 p-6 rounded-2xl bg-card border">
+                <h2 className="text-lg font-semibold mb-3">Auf einen Blick</h2>
+                <ul className="grid gap-2 sm:grid-cols-2 text-sm text-muted-foreground">
+                  <li>Kapazität bis 300 Gäste</li>
+                  <li>Maxvorstadt / Königsplatz</li>
+                  <li>5 Min. vom Hauptbahnhof</li>
+                  <li>Sprachen DE/EN/IT</li>
+                  <li>Separater Bereich buchbar</li>
+                  <li>4,5 Sterne bei 810 Bewertungen</li>
+                </ul>
               </div>
 
               <div className="mt-8 p-6 rounded-2xl bg-secondary/50 border">
