@@ -244,45 +244,6 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               <p className="text-muted-foreground">{s.introP3}</p>
             </section>
 
-            {/* Family / senses block */}
-            <section className="mb-16">
-              <div className="grid md:grid-cols-[1fr_auto] gap-6 md:gap-8 items-center bg-secondary/40 rounded-2xl p-6 md:p-8">
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3 text-primary">{vx.familyTitle}</h2>
-                  <p className="text-muted-foreground leading-relaxed">{vx.familyText}</p>
-                </div>
-                <img
-                  src={MAMMA_IMG}
-                  alt="Mamma Speranza in der K\u00fcche des Ristorante STORIA M\u00fcnchen"
-                  loading="lazy"
-                  width={220}
-                  height={220}
-                  className="w-40 h-40 md:w-52 md:h-52 object-cover rounded-2xl mx-auto shadow-md"
-                />
-              </div>
-            </section>
-
-            {/* Example menu + plate photos */}
-            <section className="mb-16">
-              <h2 className="text-3xl font-serif font-bold mb-3 text-center">{vx.menuTitle}</h2>
-              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{vx.menuIntro}</p>
-              <div className="grid md:grid-cols-2 gap-8 items-start">
-                <ul className="space-y-5">
-                  {vx.courses.map((c, i) => (
-                    <li key={i} className="border-l-2 border-primary pl-4">
-                      <span className="block text-sm uppercase tracking-wide text-primary font-sans font-medium mb-1">{c.label}</span>
-                      <span className="block font-serif text-lg text-foreground/90">{c.text}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="grid grid-cols-2 gap-4">
-                  <img src={PLATE_IMG_1} alt="Appetitlich angerichteter Gang des Valentinsmen\u00fcs im Ristorante STORIA M\u00fcnchen" loading="lazy" width={400} height={500} className="w-full h-full object-cover rounded-2xl aspect-[4/5] shadow-sm" />
-                  <img src={PLATE_IMG_2} alt="Italienisches Dessert zum Valentinstag im Ristorante STORIA M\u00fcnchen" loading="lazy" width={400} height={500} className="w-full h-full object-cover rounded-2xl aspect-[4/5] shadow-sm mt-8" />
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground italic text-center mt-6">{vx.menuNote}</p>
-            </section>
-
             {/* Standalone: Teaser or CTA — Non-standalone: Packages or Live Menu */}
             {standalone ? (
               isActive ? (
