@@ -7,11 +7,6 @@ export const de = {
       label: "Valentinstag-Men\u00fc",
       cta1: "Valentinstag-Men\u00fc ansehen",
     },
-    ostermontag: {
-      label: "Ostermontag-Men\u00fc",
-      cta1: "Ostermen\u00fc entdecken",
-      cta2: "Terrasse",
-    },
     terrasse: {
       label: "Terrasse & Aperitivo",
       cta1: "Terrasse M\u00fcnchen",

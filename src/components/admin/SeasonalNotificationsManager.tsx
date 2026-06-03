@@ -26,7 +26,6 @@ const EVENT_LABELS: Record<string, string> = {
   valentinstag: "Valentinstag",
   weihnachten: "Weihnachten",
   silvester: "Silvester",
-  ostermontag: "Ostermontag",
 };
 
 const STATUS_BADGE: Record<string, { label: string; className: string }> = {

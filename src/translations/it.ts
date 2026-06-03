@@ -37,11 +37,6 @@ const itBase = {
       label: "Men\u00f9 di San Valentino",
       cta1: "Vedi men\u00f9 San Valentino",
     },
-    ostermontag: {
-      label: "Men\u00f9 di Pasqua",
-      cta1: "Scopri il men\u00f9 di Pasqua",
-      cta2: "Terrazza",
-    },
     terrasse: {
       label: "Terrazza & Aperitivo",
       cta1: "Terrazza Monaco",
