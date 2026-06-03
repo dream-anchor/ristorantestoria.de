@@ -266,7 +266,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": faqs.map(faq => ({
+        "mainEntity": [...faqs, ...vx.romanticFaqs.map(f => ({ q: f.q, a: f.a }))].map(faq => ({
           "@type": "Question",
           "name": faq.q,
           "acceptedAnswer": { "@type": "Answer", "text": faq.a }
