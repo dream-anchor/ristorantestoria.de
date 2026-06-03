@@ -23,11 +23,6 @@ const BesondereAnlaesse = () => {
 
   const eventLinks = [
     {
-      slug: "ostermontag-menue",
-      slug_en: "easter-monday-menu", slug_it: "menu-di-pasqua", slug_fr: "menu-de-paques",
-      label: (t.seo?.besondereAnlaesse as any)?.ostermontag || "Ostermontag-Menü",
-    },
-    {
       slug: "valentinstag-menue",
       slug_en: "valentines-day-menu", slug_it: "menu-san-valentino", slug_fr: "menu-saint-valentin",
       label: t.seo?.besondereAnlaesse?.valentinstag || "Valentinstag-Men\u00fc",
