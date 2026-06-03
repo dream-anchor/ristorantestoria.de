@@ -148,26 +148,36 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
         }))
       })}} />
 
-      {/* Event Schema (active + non-standalone only) */}
-      {isActive && !standalone && (
+      {/* Event @graph (non-standalone only) — references #restaurant / #organization by @id */}
+      {!standalone && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Event",
-          "name": s.seoTitle,
-          "description": s.seoDescription,
-          "startDate": `${currentYear}-02-14T18:00:00+01:00`,
-          "endDate": `${currentYear}-02-14T23:00:00+01:00`,
-          "eventStatus": "https://schema.org/EventScheduled",
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "location": {
-            "@type": "Place",
-            "name": "Ristorante STORIA",
-            "address": { "@type": "PostalAddress", "streetAddress": "Karlstra\u00dfe 47a", "addressLocality": "M\u00fcnchen", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" }
-          },
-          "organizer": { "@type": "Restaurant", "name": "Ristorante STORIA", "url": "https://www.ristorantestoria.de" },
-          "offers": [
-            { "@type": "Offer", "name": "Classic", "price": "55", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" },
-            { "@type": "Offer", "name": "Premium", "price": "85", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.ristorantestoria.de/" },
+                { "@type": "ListItem", "position": 2, "name": "Besondere Anlässe", "item": "https://www.ristorantestoria.de/besondere-anlaesse/" },
+                { "@type": "ListItem", "position": 3, "name": "Valentinstag-Menü", "item": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/" }
+              ]
+            },
+            {
+              "@type": "Event",
+              "@id": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/#event",
+              "name": "Valentinstag-Dinner im STORIA München",
+              "description": "Romantisches Valentinstag-Dinner zu zweit in der Maxvorstadt: Aperitivo, mehrgängiges italienisches Menü, Rose am Tisch und Kerzenlicht. Drei Pakete – Classic ab 55 €, Premium ab 85 €, Exclusive auf Anfrage.",
+              "startDate": "2027-02-14T18:00:00+01:00",
+              "endDate": "2027-02-14T23:30:00+01:00",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
+              "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
+              "image": ["https://www.ristorantestoria.de/valentinstag-menue-storia-muenchen.jpg"],
+              "offers": [
+                { "@type": "Offer", "name": "Valentinstag Classic – 3-Gang-Menü", "price": "55.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "validFrom": "2027-01-15" },
+                { "@type": "Offer", "name": "Valentinstag Premium – 4-Gang-Menü mit Weinbegleitung", "price": "85.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "validFrom": "2027-01-15" }
+              ]
+            }
           ]
         })}} />
       )}
