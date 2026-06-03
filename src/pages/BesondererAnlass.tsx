@@ -16,6 +16,7 @@ import ReservationCTA from "@/components/ReservationCTA";
 import LocalizedLink from "@/components/LocalizedLink";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
 import MenuDisplay from "@/components/MenuDisplay";
+import ValentineEmotionalSections from "@/components/ValentineEmotionalSections";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierImage from "@/assets/weihnachtsfeier-italiener-storia-muenchen.webp";
 import romantischesDinnerImage from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
