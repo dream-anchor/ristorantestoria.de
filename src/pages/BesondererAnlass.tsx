@@ -266,8 +266,11 @@ const BesondererAnlass = () => {
               <MenuDisplay menuType="special" menuId={menu.id} showTitle={false} />
             </div>
 
+            {/* Romantic / Valentine's emotional sections */}
+            {isRomanticMenu && <ValentineEmotionalSections ctaAnchor="#anlass-reservierung" />}
+
             {/* Contact CTA */}
-            <div className="bg-secondary p-8 rounded-lg text-center">
+            <div id="anlass-reservierung" className="bg-secondary p-8 rounded-lg text-center scroll-mt-24">
               <h2 className="text-xl font-bold mb-4">{t.specialOccasions.interested}</h2>
               <p className="text-muted-foreground mb-6">
                 {t.specialOccasions.contactUs}
