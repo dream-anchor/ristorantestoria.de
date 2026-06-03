@@ -16,6 +16,7 @@ import ReservationCTA from "@/components/ReservationCTA";
 import LocalizedLink from "@/components/LocalizedLink";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
 import MenuDisplay from "@/components/MenuDisplay";
+import ValentineEmotionalSections from "@/components/ValentineEmotionalSections";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierImage from "@/assets/weihnachtsfeier-italiener-storia-muenchen.webp";
 import romantischesDinnerImage from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
@@ -176,6 +177,11 @@ const BesondererAnlass = () => {
   const menuTitle = getLocalizedText(menu.title, menu.title_en, menu.title_it, menu.title_fr);
   const menuSubtitle = getLocalizedText(menu.subtitle, menu.subtitle_en, menu.subtitle_it, menu.subtitle_fr);
 
+  // Detect romantic / Valentine's-style menus to show the emotional sections
+  const isRomanticMenu = /valentin|candle|romant|amore|san[-\s]?valentino/i.test(
+    `${menu.slug || ''} ${(menu as any).slug_en || ''} ${(menu as any).slug_it || ''} ${(menu as any).slug_fr || ''} ${menu.title || ''} ${menu.title_en || ''} ${menu.title_it || ''} ${menu.title_fr || ''}`
+  );
+
   // Get localized slugs from menu data (fallback to German slug if not set)
   const getLocalizedSlug = (lang: 'de' | 'en' | 'it' | 'fr') => {
     if (lang === 'de') return menu.slug;
@@ -260,8 +266,11 @@ const BesondererAnlass = () => {
               <MenuDisplay menuType="special" menuId={menu.id} showTitle={false} />
             </div>
 
+            {/* Romantic / Valentine's emotional sections */}
+            {isRomanticMenu && <ValentineEmotionalSections ctaAnchor="#anlass-reservierung" />}
+
             {/* Contact CTA */}
-            <div className="bg-secondary p-8 rounded-lg text-center">
+            <div id="anlass-reservierung" className="bg-secondary p-8 rounded-lg text-center scroll-mt-24">
               <h2 className="text-xl font-bold mb-4">{t.specialOccasions.interested}</h2>
               <p className="text-muted-foreground mb-6">
                 {t.specialOccasions.contactUs}
