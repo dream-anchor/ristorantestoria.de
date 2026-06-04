@@ -258,8 +258,12 @@ const AppRoutes = () => {
 };
 
 // App component with all providers and contexts
-const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
+// On the server, entry-server.tsx pre-populates a QueryClient and passes it in,
+// so SSR reads the prefetched data (correct SEO title/H1). On the client no prop
+// is passed → a fresh client is created and hydrated from __REACT_QUERY_STATE__.
+const App = ({ queryClient: serverQueryClient }: { queryClient?: QueryClient } = {}) => {
+  const [clientQueryClient] = useState(() => new QueryClient());
+  const queryClient = serverQueryClient ?? clientQueryClient;
   const dehydratedState = getDehydratedState();
 
   return (

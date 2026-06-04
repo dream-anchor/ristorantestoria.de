@@ -50,7 +50,7 @@ export function render(url: string, context: RenderContext = {}) {
       <QueryClientProvider client={queryClient}>
         <HelmetProvider context={helmetContext}>
           <StaticRouter location={url}>
-            <App />
+            <App queryClient={queryClient} />
           </StaticRouter>
         </HelmetProvider>
       </QueryClientProvider>
