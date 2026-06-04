@@ -178,9 +178,11 @@ const BesondererAnlass = () => {
   const menuSubtitle = getLocalizedText(menu.subtitle, menu.subtitle_en, menu.subtitle_it, menu.subtitle_fr);
 
   // Detect romantic / Valentine's-style menus to show the emotional sections
-  const isRomanticMenu = /valentin|candle|romant|amore|san[-\s]?valentino/i.test(
-    `${menu.slug || ''} ${(menu as any).slug_en || ''} ${(menu as any).slug_it || ''} ${(menu as any).slug_fr || ''} ${menu.title || ''} ${menu.title_en || ''} ${menu.title_it || ''} ${menu.title_fr || ''}`
-  );
+  const menuMatchText = `${menu.slug || ''} ${(menu as any).slug_en || ''} ${(menu as any).slug_it || ''} ${(menu as any).slug_fr || ''} ${menu.title || ''} ${menu.title_en || ''} ${menu.title_it || ''} ${menu.title_fr || ''}`;
+  const isRomanticMenu = /valentin|candle|romant|amore|san[-\s]?valentino/i.test(menuMatchText);
+  // Only actual Valentine's menus get the Valentine-specific sections (menu preview, proposal, 14.2.).
+  // Generic romantic occasions (e.g. candlelight-menue) show only the family block + generic FAQ.
+  const isValentineMenu = /valentin|san[-\s]?valentino/i.test(menuMatchText);
 
   // Get localized slugs from menu data (fallback to German slug if not set)
   const getLocalizedSlug = (lang: 'de' | 'en' | 'it' | 'fr') => {
@@ -267,7 +269,12 @@ const BesondererAnlass = () => {
             </div>
 
             {/* Romantic / Valentine's emotional sections */}
-            {isRomanticMenu && <ValentineEmotionalSections ctaAnchor="#anlass-reservierung" />}
+            {isRomanticMenu && (
+              <ValentineEmotionalSections
+                ctaAnchor="#anlass-reservierung"
+                variant={isValentineMenu ? "valentine" : "generic"}
+              />
+            )}
 
             {/* Contact CTA */}
             <div id="anlass-reservierung" className="bg-secondary p-8 rounded-lg text-center scroll-mt-24">
