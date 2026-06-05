@@ -71,6 +71,7 @@ import Barrierefreiheit from "./pages/Barrierefreiheit";
 // Lazy: Admin (enthält Recharts, schwere Hooks — nie pre-rendered, nie von Besuchern geladen)
 const Admin = lazy(() => import("./pages/Admin"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminResetPassword = lazy(() => import("./pages/AdminResetPassword"));
 const AdminGSC = lazy(() => import("./pages/AdminGSC"));
 const AdminSEO = lazy(() => import("./pages/AdminSEO"));
 
@@ -218,6 +219,7 @@ const AppRoutes = () => {
         {/* Admin routes (no i18n) */}
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/reset-password" element={<AdminResetPassword />} />
         <Route path="/admin/gsc" element={<AdminGSC />} />
         <Route path="/admin/seo" element={<AdminSEO />} />
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,12 +15,15 @@ const loginSchema = z.object({
   password: z.string().min(6, "Passwort muss mindestens 6 Zeichen haben"),
 });
 
+const emailSchema = z.string().email("Ungültige E-Mail-Adresse");
+
 const AdminLogin = () => {
   const navigate = useNavigate();
   const { user, isAdmin, loading, signIn } = useAdminAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     if (!loading && user && isAdmin) {
@@ -54,6 +58,30 @@ const AdminLogin = () => {
       toast.error("Ein Fehler ist aufgetreten");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    const validation = emailSchema.safeParse(email);
+    if (!validation.success) {
+      toast.error("Bitte oben deine E-Mail-Adresse eingeben, dann erneut klicken.");
+      return;
+    }
+
+    setIsResetting(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/admin/reset-password`,
+      });
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success("E-Mail zum Zurücksetzen des Passworts wurde versendet. Bitte Posteingang prüfen.");
+      }
+    } catch {
+      toast.error("Ein Fehler ist aufgetreten");
+    } finally {
+      setIsResetting(false);
     }
   };
 
@@ -109,6 +137,15 @@ const AdminLogin = () => {
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Anmelden..." : "Anmelden"}
           </Button>
+
+          <button
+            type="button"
+            onClick={handleForgotPassword}
+            disabled={isResetting}
+            className="w-full text-center text-sm text-muted-foreground hover:text-foreground hover:underline disabled:opacity-50"
+          >
+            {isResetting ? "E-Mail wird gesendet..." : "Passwort vergessen?"}
+          </button>
         </form>
 
         <p className="text-center text-sm text-muted-foreground mt-6">
