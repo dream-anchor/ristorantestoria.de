@@ -2842,6 +2842,8 @@ export const de = {
       related3Desc: "Steinofen-Pizza auf der Terrasse",
       related4Title: "\ud83c\udf89 Eventlocation M\u00fcnchen",
       related4Desc: "Terrasse f\u00fcr private Feiern",
+      relatedCandlelightTitle: "\ud83d\udd6f\ufe0f Candle-Light-Dinner",
+      relatedCandlelightDesc: "Men\u00fc zu zweit bei Kerzenschein",
     },
     italienischesRestaurant: {
       seoTitle: "Italiener M\u00fcnchen \u2013 Italienisches Restaurant Maxvorstadt | STORIA",
@@ -3061,6 +3063,8 @@ export const de = {
       related3Desc: "Dinner zu zweit",
       related4Title: "\ud83c\udf78 Aperitivo M\u00fcnchen",
       related4Desc: "Italienischer Feierabend",
+      relatedCandlelightTitle: "\ud83d\udd6f\ufe0f Candle-Light-Dinner",
+      relatedCandlelightDesc: "Men\u00fc zu zweit bei Kerzenschein",
     },
     pastaFrescaMuenchen: {
       seoTitle: "Frische Pasta M\u00fcnchen \u2013 Hausgemacht im STORIA Maxvorstadt",
