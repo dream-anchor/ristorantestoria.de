@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import ImageGrid from "@/components/ImageGrid";
+import HomeVideo from "@/components/HomeVideo";
 import HomeIntro from "@/components/HomeIntro";
 import InternalLinks from "@/components/InternalLinks";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -31,6 +32,8 @@ const Index = () => {
         <Navigation />
         <main>
           <ImageGrid />
+
+          <HomeVideo />
 
           <HomeIntro />
           <div className="container mx-auto px-4 max-w-4xl">
