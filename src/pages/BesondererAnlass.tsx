@@ -26,7 +26,7 @@ import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
 import { useArchivedSeasonalMenu } from "@/hooks/useArchivedSeasonalMenu";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { findSeasonalMenuBySlug, PARENT_SLUGS } from "@/config/seasonalMenus";
+import { findSeasonalMenuBySlug, PARENT_SLUGS, SEO_TO_SUPABASE_SLUG_MAP } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import { ArrowUp, Utensils, Calendar, BookOpen } from "lucide-react";
 import SilvesterMuenchen from "@/pages/seo/SilvesterMuenchen";
@@ -46,8 +46,11 @@ const BesondererAnlass = () => {
   const { setAlternates, clearAlternates } = useAlternateLinks();
   const queryClient = useQueryClient();
   const seasonalConfig = findSeasonalMenuBySlug(slug || '');
-  // Use supabaseSlug if set (admin may auto-generate a different slug than the SEO URL slug)
-  const lookupSlug = seasonalConfig?.supabaseSlug || slug || '';
+  // Use supabaseSlug if set (admin may auto-generate a different slug than the SEO URL slug).
+  // Generische Anlässe ohne Seasonal-Config über die SEO→DB-Slug-Map auflösen, damit der
+  // Client-Query-Key denselben Cache-Eintrag trifft, den prerender.js/entry-server prefüllen.
+  const lookupSlug =
+    seasonalConfig?.supabaseSlug || SEO_TO_SUPABASE_SLUG_MAP[slug || ''] || slug || '';
   const { data: menu, isLoading, error } = useSpecialMenuBySlug(lookupSlug);
 
   // Hook must be called unconditionally (React rules of hooks)

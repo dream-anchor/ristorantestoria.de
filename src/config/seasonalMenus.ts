@@ -275,6 +275,24 @@ export const SEASONAL_MENUS: SeasonalMenuConfig[] = [
   },
 ];
 
+/**
+ * SEO-URL-Slug → tatsächlicher Supabase-DB-Slug für generische Anlass-Seiten,
+ * deren admin-generierter DB-Slug vom permanenten SEO-Slug abweicht.
+ *
+ * Hintergrund: prerender.js mappt den SEO-Slug für den DB-Fetch um und prefüllt
+ * den React-Query-Cache unter dem DB-Slug. Ohne dieselbe Map liest der Client
+ * mit dem SEO-Slug → Cache-Miss → leerer Title/H1 (gleiche Fehlerklasse wie der
+ * Candlelight-SSR-Bug, nur über die Slug-Indirection).
+ *
+ * MUSS mit prerender.js → SEO_TO_SUPABASE_SLUG_MAP synchron gehalten werden.
+ */
+export const SEO_TO_SUPABASE_SLUG_MAP: Record<string, string> = {
+  'ostermontag-menue': 'neuer-anlass',
+  'easter-monday-menu': 'neuer-anlass',
+  'menu-di-pasqua': 'neuer-anlass',
+  'menu-de-paques': 'neuer-anlass',
+};
+
 /** Parent slugs for special occasions per language */
 export const PARENT_SLUGS: Record<string, string> = {
   de: 'besondere-anlaesse',
