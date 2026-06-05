@@ -149,6 +149,9 @@ export const en = {
     successMessage: "We will get back to you within 24 hours with a binding offer.",
     errorTitle: "Submission Error",
     errorMessage: "Please try again or contact us directly by phone or email.",
+    moreDetailsToggle: "More details (optional)",
+    whatsappButton: "Via WhatsApp",
+    whatsappPrefill: "Hello, we are planning a group visit at STORIA.",
   },
   reservationCta: {
     title: "Reserve Your Table",

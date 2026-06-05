@@ -80,6 +80,16 @@ const FilmfestInquiryForm = () => {
         );
       }
 
+      // GA4 Conversion-Event: generate_lead (analog zum Reisegruppen-Formular)
+      if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
+        (window as Window & { gtag: (...args: unknown[]) => void }).gtag("event", "generate_lead", {
+          form_name: "filmfest_anfrage",
+          page_path: window.location.pathname,
+          value: 1500,
+          currency: "EUR",
+        });
+      }
+
       setIsSubmitted(true);
       toast({
         title: "Anfrage gesendet",

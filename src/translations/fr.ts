@@ -149,6 +149,9 @@ export const fr = {
     successMessage: "Nous vous répondrons dans les 24 heures avec une offre ferme.",
     errorTitle: "Erreur d'envoi",
     errorMessage: "Veuillez réessayer ou nous contacter directement par téléphone ou e-mail.",
+    moreDetailsToggle: "Plus de détails (optionnel)",
+    whatsappButton: "Via WhatsApp",
+    whatsappPrefill: "Bonjour, nous organisons une visite de groupe au STORIA.",
   },
   reservationCta: {
     title: "Réservez votre table",

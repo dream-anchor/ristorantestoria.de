@@ -179,6 +179,9 @@ const itBase = {
     successMessage: "Ti risponderemo entro 24 ore con un'offerta definitiva.",
     errorTitle: "Errore di invio",
     errorMessage: "Riprova o contattaci direttamente per telefono o email.",
+    moreDetailsToggle: "Altri dettagli (opzionale)",
+    whatsappButton: "Via WhatsApp",
+    whatsappPrefill: "Salve, stiamo organizzando una visita di gruppo da STORIA.",
   },
   reservationCta: {
     title: "Prenota il tuo tavolo",

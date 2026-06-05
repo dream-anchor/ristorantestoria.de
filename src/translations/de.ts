@@ -154,6 +154,9 @@ export const de = {
     successMessage: "Wir melden uns innerhalb von 24 Stunden mit einem verbindlichen Angebot.",
     errorTitle: "Fehler beim Senden",
     errorMessage: "Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per Telefon oder E-Mail.",
+    moreDetailsToggle: "Weitere Details (optional)",
+    whatsappButton: "Per WhatsApp",
+    whatsappPrefill: "Hallo, wir planen eine Reisegruppe im STORIA.",
   },
   reservationCta: {
     title: "Reservieren Sie Ihren Tisch",

@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Loader2, Send } from "lucide-react";
+import { Loader2, Send, ChevronDown, MessageCircle } from "lucide-react";
 import { useGroupMenus, getLocalizedText } from "@/hooks/useGroupMenus";
 import LocalizedLink from "@/components/LocalizedLink";
 
@@ -51,6 +51,8 @@ export const GroupInquiryForm = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [travelPlanFile, setTravelPlanFile] = useState<File | null>(null);
   const [travelPlanError, setTravelPlanError] = useState<string | null>(null);
+  // Toggle für sekundäre Felder (Conversion-Optimierung: nur 5 Pflichtfelder sichtbar)
+  const [showMore, setShowMore] = useState(false);
 
   // Timestamp spam check: form must be open ≥ 3 seconds before submit
   const openedAt = useRef<number>(Date.now());
@@ -174,6 +176,16 @@ export const GroupInquiryForm = () => {
     }
   };
 
+  // WhatsApp-Prefill aus aktuellen Formularwerten (Datum + Gruppengröße)
+  const waSize = form.watch("group_size");
+  const waDate = form.watch("preferred_date");
+  const waDetails = [
+    waSize ? `${f.groupSizeLabel}: ${waSize}` : "",
+    waDate ? `${f.dateLabel.replace(/\s*\([^)]*\)/, "")}: ${waDate}` : "",
+  ].filter(Boolean).join(", ");
+  const waText = waDetails ? `${f.whatsappPrefill} ${waDetails}.` : f.whatsappPrefill;
+  const waHref = `https://wa.me/491636033912?text=${encodeURIComponent(waText)}`;
+
   return (
     <div className="mt-10 pt-8 border-t border-primary-foreground/20">
       <h3 className="text-xl font-serif font-semibold text-primary-foreground mb-6">
@@ -191,19 +203,8 @@ export const GroupInquiryForm = () => {
             autoComplete="off"
           />
 
+          {/* ── Sichtbare Pflicht-/Kernfelder (max. 5) ─────────────────────── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="company_name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-primary-foreground/90">{f.companyLabel}</FormLabel>
-                  <FormControl>
-                    <Input placeholder={f.companyPlaceholder} {...field} className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="contact_name"
@@ -217,9 +218,6 @@ export const GroupInquiryForm = () => {
                 </FormItem>
               )}
             />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="email"
@@ -230,18 +228,6 @@ export const GroupInquiryForm = () => {
                     <Input type="email" placeholder={f.emailPlaceholder} {...field} className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50" />
                   </FormControl>
                   <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-primary-foreground/90">{f.phoneLabel}</FormLabel>
-                  <FormControl>
-                    <Input type="tel" placeholder={f.phonePlaceholder} {...field} className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50" />
-                  </FormControl>
                 </FormItem>
               )}
             />
@@ -271,71 +257,12 @@ export const GroupInquiryForm = () => {
             />
             <FormField
               control={form.control}
-              name="preferred_menu"
+              name="preferred_date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-primary-foreground/90">{f.menuLabel}</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger className="bg-white/10 border-white/20 text-primary-foreground">
-                        <SelectValue placeholder={f.menuPlaceholder} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {menuOptions.map((opt) => (
-                        <SelectItem key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <FormField
-                control={form.control}
-                name="preferred_date"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-primary-foreground/90">{f.dateLabel}</FormLabel>
-                    <FormControl>
-                      <Input type="date" {...field} className="bg-white/10 border-white/20 text-primary-foreground" />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="preferred_date_flexible"
-                render={({ field }) => (
-                  <FormItem className="flex items-center gap-2 mt-2">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                        className="border-white/40 data-[state=checked]:bg-white data-[state=checked]:text-primary"
-                      />
-                    </FormControl>
-                    <FormLabel className="text-primary-foreground/80 text-sm font-normal cursor-pointer">
-                      {f.dateFlexible}
-                    </FormLabel>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <FormField
-              control={form.control}
-              name="arrival_time"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-primary-foreground/90">{f.arrivalTimeLabel}</FormLabel>
+                  <FormLabel className="text-primary-foreground/90">{f.dateLabel}</FormLabel>
                   <FormControl>
-                    <Input placeholder={f.arrivalTimePlaceholder} {...field} className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+                    <Input type="date" {...field} className="bg-white/10 border-white/20 text-primary-foreground" />
                   </FormControl>
                 </FormItem>
               )}
@@ -360,38 +287,140 @@ export const GroupInquiryForm = () => {
             )}
           />
 
-          {/* PDF Upload — optional travel plan */}
-          <div className="space-y-1">
-            <label className="block text-sm text-primary-foreground/90 font-medium">
-              {f.travelPlanLabel}
-            </label>
-            <input
-              type="file"
-              accept="application/pdf"
-              className="block w-full text-sm text-primary-foreground/80 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-white/20 file:text-primary-foreground hover:file:bg-white/30 cursor-pointer"
-              onChange={(e) => {
-                const file = e.target.files?.[0] ?? null;
-                setTravelPlanError(null);
-                if (!file) { setTravelPlanFile(null); return; }
-                if (file.type !== "application/pdf") {
-                  setTravelPlanError(f.travelPlanWrongType);
-                  setTravelPlanFile(null);
-                  e.target.value = "";
-                  return;
-                }
-                if (file.size > 5 * 1024 * 1024) {
-                  setTravelPlanError(f.travelPlanTooBig);
-                  setTravelPlanFile(null);
-                  e.target.value = "";
-                  return;
-                }
-                setTravelPlanFile(file);
-              }}
-            />
-            {travelPlanError && (
-              <p className="text-sm text-red-300">{travelPlanError}</p>
+          {/* ── Aufklapper: sekundäre Felder (optional) ────────────────────── */}
+          <div>
+            <button
+              type="button"
+              onClick={() => setShowMore((v) => !v)}
+              aria-expanded={showMore}
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+            >
+              <ChevronDown className={`w-4 h-4 transition-transform ${showMore ? "rotate-180" : ""}`} />
+              {f.moreDetailsToggle}
+            </button>
+
+            {showMore && (
+              <div className="mt-4 space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="company_name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-primary-foreground/90">{f.companyLabel}</FormLabel>
+                        <FormControl>
+                          <Input placeholder={f.companyPlaceholder} {...field} className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-primary-foreground/90">{f.phoneLabel}</FormLabel>
+                        <FormControl>
+                          <Input type="tel" placeholder={f.phonePlaceholder} {...field} className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="preferred_menu"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-primary-foreground/90">{f.menuLabel}</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-white/10 border-white/20 text-primary-foreground">
+                              <SelectValue placeholder={f.menuPlaceholder} />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {menuOptions.map((opt) => (
+                              <SelectItem key={opt.value} value={opt.value}>
+                                {opt.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="arrival_time"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-primary-foreground/90">{f.arrivalTimeLabel}</FormLabel>
+                        <FormControl>
+                          <Input placeholder={f.arrivalTimePlaceholder} {...field} className="bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/50" />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="preferred_date_flexible"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center gap-2">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          className="border-white/40 data-[state=checked]:bg-white data-[state=checked]:text-primary"
+                        />
+                      </FormControl>
+                      <FormLabel className="text-primary-foreground/80 text-sm font-normal cursor-pointer">
+                        {f.dateFlexible}
+                      </FormLabel>
+                    </FormItem>
+                  )}
+                />
+
+                {/* PDF Upload — optional travel plan */}
+                <div className="space-y-1">
+                  <label className="block text-sm text-primary-foreground/90 font-medium">
+                    {f.travelPlanLabel}
+                  </label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    className="block w-full text-sm text-primary-foreground/80 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-white/20 file:text-primary-foreground hover:file:bg-white/30 cursor-pointer"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] ?? null;
+                      setTravelPlanError(null);
+                      if (!file) { setTravelPlanFile(null); return; }
+                      if (file.type !== "application/pdf") {
+                        setTravelPlanError(f.travelPlanWrongType);
+                        setTravelPlanFile(null);
+                        e.target.value = "";
+                        return;
+                      }
+                      if (file.size > 5 * 1024 * 1024) {
+                        setTravelPlanError(f.travelPlanTooBig);
+                        setTravelPlanFile(null);
+                        e.target.value = "";
+                        return;
+                      }
+                      setTravelPlanFile(file);
+                    }}
+                  />
+                  {travelPlanError && (
+                    <p className="text-sm text-red-300">{travelPlanError}</p>
+                  )}
+                  <p className="text-xs text-primary-foreground/60">{f.travelPlanHint}</p>
+                </div>
+              </div>
             )}
-            <p className="text-xs text-primary-foreground/60">{f.travelPlanHint}</p>
           </div>
 
           <FormField
@@ -430,19 +459,34 @@ export const GroupInquiryForm = () => {
             {f.replyHint}
           </p>
 
-          <Button
-            type="submit"
-            size="lg"
-            variant="secondary"
-            disabled={!form.watch("privacy") || isSubmitting}
-            className="w-full sm:w-auto"
-          >
-            {isSubmitting ? (
-              <><Loader2 className="w-5 h-5 mr-2 animate-spin" />{f.submitting}</>
-            ) : (
-              <><Send className="w-5 h-5 mr-2" />{f.submitButton}</>
-            )}
-          </Button>
+          {/* Absenden + WhatsApp gleichwertig (Gäste bevorzugen den direkten Draht) */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button
+              type="submit"
+              size="lg"
+              variant="secondary"
+              disabled={!form.watch("privacy") || isSubmitting}
+              className="w-full sm:w-auto"
+            >
+              {isSubmitting ? (
+                <><Loader2 className="w-5 h-5 mr-2 animate-spin" />{f.submitting}</>
+              ) : (
+                <><Send className="w-5 h-5 mr-2" />{f.submitButton}</>
+              )}
+            </Button>
+            <Button
+              type="button"
+              size="lg"
+              variant="outlineWhite"
+              asChild
+              className="w-full sm:w-auto"
+            >
+              <a href={waHref} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="w-5 h-5 mr-2" />
+                {f.whatsappButton}
+              </a>
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
