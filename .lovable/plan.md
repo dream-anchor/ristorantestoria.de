@@ -1,41 +1,31 @@
-## Ziel
+## Problem
 
-Das Video `pizza-burrata.mp4` auf der Startseite **direkt nach dem Bild-Grid** (vor dem "Willkommen im STORIA"-Block) einbinden — komprimiert und SEO-/performance-konform.
+Das Video erscheint als leere Box, weil `HomeVideo.tsx` die Datei über Lovable-CDN-Pfade einbindet (`/__l5e/assets-v1/...` aus den `.asset.json`-Pointern). Diese URLs existieren nur auf Lovable-Hosting. Die Live-Seite läuft auf IONOS (SFTP-Deploy von `dist/`), wo diese Pfade 404 liefern → kein Video, kein Poster.
 
-## Komprimierung
+Lösung: Video + Poster wie das bestehende `mamma-speranza-kueche-storia-muenchen.mp4` in `public/` legen (wird mit `dist/` deployed) und SEO/GEO-konform mit VideoObject-Schema einbetten.
 
-Das Original ist 1280×720, 10 s, 4,8 MB (3,85 Mbps). Das lässt sich deutlich verkleinern:
+## Schritte
 
-- Re-Encode mit ffmpeg: H.264, CRF ~26–28, `-preset slow`, Auflösung 1280×720 beibehalten.
-- Audio entfernen (`-an`) — das Video wird stumm als Loop abgespielt, spart zusätzlich.
-- Zusätzlich ein Poster-Standbild (JPG, 1. Frame) für `preload="none"`.
-- Erwartete Größe: ca. **0,8–1,2 MB** (statt 4,8 MB).
+1. **Video re-komprimieren & in `public/` ablegen**
+   - Quelle `pizza-burrata.mp4` (4,8 MB) mit ffmpeg auf ~1 MB komprimieren (`-an -vf scale=1080:-2 -c:v libx264 -preset slow -crf 30 -movflags +faststart`).
+   - Speichern unter SEO-konformem Dateinamen: `public/pizza-burrata-steinofen-storia-muenchen.mp4`.
+   - Poster-Frame als `public/pizza-burrata-steinofen-storia-muenchen.jpg`.
 
-Ablage über Lovable Assets (kein Binär-Blob im Repo): `src/assets/pizza-burrata.mp4.asset.json` + Poster-Asset.
+2. **`HomeVideo.tsx` umbauen**
+   - CDN-Asset-Imports entfernen, stattdessen absolute Public-Pfade (`/pizza-burrata-steinofen-storia-muenchen.mp4` + `.jpg`).
+   - IntersectionObserver-Autoplay (stumm, Loop, `playsInline`, `preload="metadata"`) beibehalten.
+   - SEO/GEO-Attribute: `<video>` mit `aria-label`, sichtbare `<figcaption>`/Heading mit lokalem Kontext (z.B. „Neapolitanische Pizza mit Burrata aus dem 400°C-Steinofen – STORIA München-Maxvorstadt"), `title`-Attribut.
 
-## Einbau
+3. **VideoObject-JSON-LD ergänzen (GEO/SEO)**
+   - In `HomeVideo.tsx` via `Helmet` ein `VideoObject`-Schema einbinden: `name`, `description` (mit Standort München/Maxvorstadt), `thumbnailUrl` (absolute URL), `contentUrl` (absolute URL), `uploadDate`, `inLanguage: de-DE`, Verknüpfung zum Restaurant-`@id`.
+   - Absolute URLs über `https://www.ristorantestoria.de` bauen (konsistent mit `SEO.tsx`).
 
-Neue Komponente `src/components/HomeVideo.tsx`:
-
-- `<section>` im gleichen Stil wie die anderen Home-Sektionen (`container mx-auto px-4`, abgerundete Ecken, dezenter Schatten passend zum warmen Design).
-- `<video>` mit `autoPlay muted loop playsInline`, `preload="none"`, `poster={…}`, abgerundet, max. Breite analog Grid.
-- Stummschaltung → Autoplay erlaubt; barrierearm, kein Ton-Überfall.
-
-In `src/pages/Index.tsx` zwischen `<ImageGrid />` und `<HomeIntro />` einsetzen:
-
-```text
-<ImageGrid />
-<HomeVideo />   ← neu
-<HomeIntro />
-```
+4. **Aufräumen**
+   - Alte Asset-Pointer löschen: `src/assets/pizza-burrata.mp4.asset.json`, `src/assets/pizza-burrata-poster.jpg.asset.json` (CDN-Assets via `delete_asset`).
 
 ## Technische Details
 
-- Pre-Render-Regel: KEIN `lazy()` — `HomeVideo` als eager import in `Index.tsx`.
-- `preload="none"` gemäß SEO-Content-Regeln, damit das Video die Ladezeit nicht belastet.
-- Video stumm + Loop, damit es ohne Ton automatisch startet (Browser-Autoplay-Policy).
-- Assets via `lovable-assets create` aus dem komprimierten File, Import der `.asset.json` und Nutzung von `.url`.
-
-## Offen
-
-Ich gehe von **Autoplay stumm im Loop** (wie ein lebendiger Hintergrund-Clip) aus. Falls du stattdessen ein klickbares Video mit Ton möchtest, sag kurz Bescheid — dann passe ich es an.
+- Pre-Render-Regel beachten: `HomeVideo` bleibt eager import in `Index.tsx`, kein `lazy()`.
+- `preload="metadata"` statt `none`, damit der Poster zuverlässig erscheint; Poster lädt sofort als sichtbares Standbild auch ohne Autoplay.
+- VideoObject-`description` mit Geo-Keywords (München, Maxvorstadt, Königsplatz, Steinofen) für GEO-Sichtbarkeit.
+- `.htaccess` braucht keine Anpassung (mp4 wird vom Server standardmäßig korrekt ausgeliefert, das bestehende Mamma-mp4 belegt das).
