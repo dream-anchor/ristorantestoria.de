@@ -114,7 +114,7 @@ const ImageGrid = () => {
             alt={t.imageGrid.altSeafood}
             title={t.imageGrid.cateringTitle}
             subtitle={t.imageGrid.cateringText}
-            externalLink={EVENTS_LINKS.homepageCrossSell}
+            externalLink="https://www.events-storia.de/?utm_source=ristorante&utm_campaign=homepage_cross_sell"
             className="aspect-square"
           />
 
