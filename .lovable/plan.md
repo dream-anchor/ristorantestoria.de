@@ -1,7 +1,14 @@
-Den Bestätigungstext des Filmfest-Anfrageformulars von „im Festivalzeitraum kurzfristig zurück" auf „innerhalb von 24 Stunden zurück" ändern.
+301-Redirect /busreisen → /reisegruppen/
 
-## Änderungen in `src/components/FilmfestInquiryForm.tsx`
-- Zeile 86 (Toast): „Vielen Dank! Wir melden uns im Festivalzeitraum kurzfristig zurück." → „Vielen Dank! Wir melden uns innerhalb von 24 Stunden zurück."
-- Zeile 109 (Erfolgs-Box im UI, siehe Screenshot): „Vielen Dank! Wir melden uns im Festivalzeitraum besonders schnell zurück." → „Vielen Dank! Wir melden uns innerhalb von 24 Stunden zurück."
+**Begründung:** /busreisen war zwar nie ein interner Slug der Website, aber der Nutzer möchte trotzdem eine Weiterleitung einrichten (z. B. für externe Altlinks).
 
-Zeile 121 („Unverbindlich — wir melden uns kurzfristig zurück.") bleibt unverändert, da kein „Festivalzeitraum"-Bezug.
+**Umsetzung:**
+In `public/.htaccess` im Block "3. Legacy URL Redirects" folgende Zeile einfügen:
+```
+RewriteRule ^busreisen/?$ /reisegruppen/ [R=301,L]
+```
+
+**Checkliste nach Build:**
+- [ ] `npm run build` erfolgreich
+- [ ] `.htaccess` im `dist/`-Ordner vorhanden
+- [ ] Keine weiteren Änderungen nötig

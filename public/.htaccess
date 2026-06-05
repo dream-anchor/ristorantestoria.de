@@ -55,6 +55,7 @@ RewriteRule ^.*$ /? [R=301,L,QSD]
 # 3. Legacy URL Redirects
 # ============================================
 RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
+RewriteRule ^busreisen/?$ /reisegruppen/ [R=301,L]
 RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
 RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
