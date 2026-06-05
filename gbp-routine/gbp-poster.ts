@@ -490,7 +490,6 @@ async function main() {
       imageSeason = post.season || "allyear";
       postId = post.id;
 
-      await sql`UPDATE gbp_posts SET last_used = NOW(), use_count = use_count + 1 WHERE id = ${postId}`;
       console.log(`Post-ID: ${postId} — "${post.title || postBody!.substring(0, 50)}..."`);
     }
   }
@@ -508,8 +507,6 @@ async function main() {
     imageSeason = generated.image_season || season;
     clusterId = cluster.cluster_id;
     minRepDays = (cluster.min_image_repetition_days as number) || 21;
-
-    await sql`UPDATE gbp_theme_clusters SET last_used = NOW() WHERE cluster_id = ${clusterId}`;
     console.log(`Theme-Cluster: ${clusterId}`);
   }
 
@@ -524,9 +521,6 @@ async function main() {
     return;
   }
   console.log(`Bild: ${image.filename}`);
-
-  // Image last_used aktualisieren
-  await sql`UPDATE gbp_images SET last_used = NOW(), use_count = use_count + 1 WHERE id = ${image.id}`;
 
   console.log(`\nPost-Text:\n${postBody}\n`);
   console.log(`CTA: ${ctaType} → ${ctaUrl}`);
@@ -549,6 +543,13 @@ async function main() {
     }
   } else {
     console.log("\n[DRY RUN] — kein GBP-API-Call");
+  }
+
+  // last_used nur bei Erfolg oder dry_run aktualisieren (nicht bei failed)
+  if (status === "gepostet" || status === "dry_run") {
+    if (postId) await sql`UPDATE gbp_posts SET last_used = NOW(), use_count = use_count + 1 WHERE id = ${postId}`;
+    if (clusterId) await sql`UPDATE gbp_theme_clusters SET last_used = NOW() WHERE cluster_id = ${clusterId}`;
+    await sql`UPDATE gbp_images SET last_used = NOW(), use_count = use_count + 1 WHERE id = ${image.id}`;
   }
 
   // Log eintragen
