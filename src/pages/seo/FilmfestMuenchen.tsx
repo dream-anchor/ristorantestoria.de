@@ -12,6 +12,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
+import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { filmfestContent } from "./filmfestContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
@@ -81,6 +82,8 @@ const FilmfestMuenchen = () => {
   const { setAlternates, clearAlternates } = useAlternateLinks();
   const { language } = useLanguage();
   const c = filmfestContent[language];
+  // WM-Cross-Link nur im Überschneidungszeitraum (26.6.–5.7.2026).
+  const showWmCrossLink = isWmFilmfestOverlap();
 
   // Mehrsprachige Seite: alle vier Sprachen verweisen auf ihre lokalisierte
   // Filmfest-URL (self-referencing hreflang-Alternates).
@@ -360,6 +363,23 @@ const FilmfestMuenchen = () => {
                 <span key={chip} className="ff-chip">{chip}</span>
               ))}
             </Reveal>
+            <Reveal as="p" delay={0.16} className="ff-outbound">
+              {c.outbound.menuPre}
+              <LocalizedLink to="speisekarte">{c.outbound.menuAnchor}</LocalizedLink>
+              {c.outbound.menuMid}
+              <LocalizedLink to="reservierung">{c.outbound.reservAnchor}</LocalizedLink>
+              {c.outbound.reservPost}
+              {showWmCrossLink && (
+                <>
+                  {" "}
+                  {c.outbound.crossWmPre}
+                  <LocalizedLink to="wm-2026-public-viewing-muenchen">
+                    {c.outbound.crossWmAnchor}
+                  </LocalizedLink>
+                  {c.outbound.crossWmPost}
+                </>
+              )}
+            </Reveal>
           </div>
         </section>
 
@@ -552,6 +572,9 @@ const ffStyles = `
 .ff-menu-card li::before{content:"—";color:var(--amber);font-weight:700;}
 .ff-chips{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
 .ff-chip{background:rgba(168,67,31,.08);border:1px solid rgba(168,67,31,.25);color:var(--rust);padding:8px 16px;border-radius:100px;font-size:13.5px;font-weight:600;}
+.ff-outbound{margin-top:32px;font-size:1.05rem;line-height:1.6;color:rgba(26,19,13,.78);max-width:64ch;}
+.ff-outbound a{color:var(--rust);text-decoration:underline;text-underline-offset:3px;font-weight:600;transition:color .2s;}
+.ff-outbound a:hover{color:var(--amber);}
 /* ABLAUF */
 .ff-ablauf{background:var(--ink-2);}
 .ff-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}

@@ -38,7 +38,11 @@ export interface WmContent {
     eyebrow: string;
     h2: string;
     items: string[];
+    /** Exakte Teilzeichenkette in items, die als Link auf die Speisekarte gerendert wird. */
+    menuPhrase: string;
   };
+  /** Temporärer Cross-Link zur Filmfest-Seite – nur im Überschneidungszeitraum sichtbar. */
+  crossFilmfest: { pre: string; anchor: string; post: string };
   spiele: {
     eyebrow: string;
     h2: string;
@@ -113,6 +117,12 @@ export const wmContent = {
         "Keine Sportkneipe: süditalienische Küche, eigene Weinkarte, Aperitivo zum Anstoß.",
         "Reservierung empfohlen, gerade an den Abenden mit deutscher Beteiligung.",
       ],
+      menuPhrase: "süditalienische Küche",
+    },
+    crossFilmfest: {
+      pre: "Mehr als Fußball – vom 26. Juni bis 5. Juli läuft bei uns das ",
+      anchor: "Filmfest München zeitgleich",
+      post: ". Premierendinner und Branchenabende im selben Haus.",
     },
     spiele: {
       eyebrow: "Gruppe E · Die deutschen Spiele",
@@ -227,6 +237,12 @@ export const wmContent = {
         "Not a sports bar: southern Italian cooking, our own wine list, an aperitivo at kick-off.",
         "Booking recommended, especially on the evenings Germany are playing.",
       ],
+      menuPhrase: "southern Italian cooking",
+    },
+    crossFilmfest: {
+      pre: "More than football – from 26 June to 5 July we also host ",
+      anchor: "Filmfest München at the same time",
+      post: ". Premiere dinners and industry evenings under one roof.",
     },
     spiele: {
       eyebrow: "Group E · Germany's matches",
@@ -341,6 +357,12 @@ export const wmContent = {
         "Non un pub sportivo: cucina del Sud Italia, carta dei vini nostra, aperitivo al fischio d'inizio.",
         "Prenotazione consigliata, soprattutto nelle serate in cui gioca la Germania.",
       ],
+      menuPhrase: "cucina del Sud Italia",
+    },
+    crossFilmfest: {
+      pre: "Più del calcio – dal 26 giugno al 5 luglio da noi c'è anche il ",
+      anchor: "Filmfest München in contemporanea",
+      post: ". Cene di premiere e serate di settore nella stessa casa.",
     },
     spiele: {
       eyebrow: "Girone E · Le partite della Germania",
@@ -455,6 +477,12 @@ export const wmContent = {
         "Pas un bar à sport : cuisine du sud de l'Italie, notre propre carte des vins, un apéritif au coup d'envoi.",
         "Réservation conseillée, surtout les soirs où joue l'Allemagne.",
       ],
+      menuPhrase: "cuisine du sud de l'Italie",
+    },
+    crossFilmfest: {
+      pre: "Plus que le football – du 26 juin au 5 juillet, c'est aussi le ",
+      anchor: "Filmfest München en parallèle",
+      post: ". Dîners de première et soirées de l'industrie sous le même toit.",
     },
     spiele: {
       eyebrow: "Groupe E · Les matchs de l'Allemagne",

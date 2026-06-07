@@ -268,6 +268,7 @@ const itBase = {
     discoverRestaurant: "Scopri il nostro ristorante",
     eventsGroupsTitle: "Occasioni & Gruppi",
     eventsGroupsLinks: [
+      { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Gruppi Turistici Monaco", slug: "reisegruppen-muenchen" },
       { label: "Feste Aziendali Monaco", slug: "firmenfeier-muenchen" },
       { label: "Feste di Compleanno Monaco", slug: "geburtstagsfeier-muenchen" },

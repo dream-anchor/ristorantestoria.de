@@ -4,9 +4,16 @@ import domenicoImage from "@/assets/domenico-speranza.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
 import nicolaImage from "@/assets/nicola-speranza.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
 
 const Footer = () => {
   const { t } = useLanguage();
+
+  // Saison-Link „WM 2026" nach dem Finale (19.7.2026) automatisch ausblenden –
+  // die Seite selbst bleibt online, nur der tote Footer-Link verschwindet.
+  const eventsGroupsLinks = t.footer.eventsGroupsLinks.filter(
+    (link: { label: string; slug: string }) => link.slug !== WM_SLUG || isWmActive()
+  );
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -75,7 +82,7 @@ const Footer = () => {
             {t.footer.eventsGroupsTitle}
           </p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
-            {t.footer.eventsGroupsLinks.map((link: { label: string; slug: string }) => (
+            {eventsGroupsLinks.map((link: { label: string; slug: string }) => (
               <LocalizedLink
                 key={link.slug}
                 to={link.slug}

@@ -94,6 +94,17 @@ export interface FilmfestContent {
   cateringSection: { eyebrow: string; h2: string; lead: string };
   menuCards: FilmfestMenuCard[];
   chips: string[];
+  /** Kontextuelle Ausgänge: Speisekarte + Reservierung (dauerhaft) sowie WM-Cross-Link (nur im Überschneidungszeitraum). */
+  outbound: {
+    menuPre: string;
+    menuAnchor: string;
+    menuMid: string;
+    reservAnchor: string;
+    reservPost: string;
+    crossWmPre: string;
+    crossWmAnchor: string;
+    crossWmPost: string;
+  };
 
   ablaufSection: { eyebrow: string; h2: string };
   steps: FilmfestStep[];
@@ -247,6 +258,16 @@ const de: FilmfestContent = {
     },
   ],
   chips: ["Vegan auf Wunsch", "Glutenfreie Optionen", "Mehrsprachiger Service", "Späte Küche", "Menüs auf Englisch"],
+  outbound: {
+    menuPre: "Lieber regulär bei uns essen? Werfen Sie einen Blick in unsere ",
+    menuAnchor: "italienische Speisekarte",
+    menuMid: " oder ",
+    reservAnchor: "reservieren Sie einen Tisch",
+    reservPost: " für einen Abend abseits des Festivaltrubels.",
+    crossWmPre: "Fußballfans aufgepasst: Wir zeigen die ",
+    crossWmAnchor: "WM-Spiele parallel zum Filmfest",
+    crossWmPost: " auf der überdachten Terrasse.",
+  },
 
   ablaufSection: {
     eyebrow: "So einfach wird es Ihrer",
@@ -443,6 +464,16 @@ const en: FilmfestContent = {
     },
   ],
   chips: ["Vegan on request", "Gluten-free options", "Multilingual service", "Late kitchen", "Menus in English"],
+  outbound: {
+    menuPre: "Prefer a regular meal with us? Take a look at our ",
+    menuAnchor: "Italian menu",
+    menuMid: " or ",
+    reservAnchor: "reserve a table",
+    reservPost: " for an evening away from the festival buzz.",
+    crossWmPre: "Football fans, note: we show the ",
+    crossWmAnchor: "World Cup matches alongside Filmfest",
+    crossWmPost: " on the covered terrace.",
+  },
 
   ablaufSection: {
     eyebrow: "This is how it becomes yours",
@@ -639,6 +670,16 @@ const it: FilmfestContent = {
     },
   ],
   chips: ["Vegano su richiesta", "Opzioni senza glutine", "Servizio multilingue", "Cucina fino a tardi", "Menu in inglese"],
+  outbound: {
+    menuPre: "Preferisci una cena normale da noi? Dai un'occhiata al nostro ",
+    menuAnchor: "menù italiano",
+    menuMid: " oppure ",
+    reservAnchor: "prenota un tavolo",
+    reservPost: " per una serata lontano dal trambusto del festival.",
+    crossWmPre: "Per gli appassionati di calcio: trasmettiamo le ",
+    crossWmAnchor: "partite dei Mondiali durante il Filmfest",
+    crossWmPost: " sulla terrazza coperta.",
+  },
 
   ablaufSection: {
     eyebrow: "Così diventa la vostra",
@@ -835,6 +876,16 @@ const fr: FilmfestContent = {
     },
   ],
   chips: ["Végan sur demande", "Options sans gluten", "Service multilingue", "Cuisine tardive", "Menus en anglais"],
+  outbound: {
+    menuPre: "Vous préférez un repas classique chez nous ? Jetez un œil à notre ",
+    menuAnchor: "carte italienne",
+    menuMid: " ou ",
+    reservAnchor: "réservez une table",
+    reservPost: " pour une soirée loin de l'effervescence du festival.",
+    crossWmPre: "Amateurs de football : nous diffusons les ",
+    crossWmAnchor: "matchs de la Coupe du monde pendant le Filmfest",
+    crossWmPost: " sur la terrasse couverte.",
+  },
 
   ablaufSection: {
     eyebrow: "Voilà comment elle devient la vôtre",

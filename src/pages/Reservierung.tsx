@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ReservationBooking from "@/components/ReservationBooking";
+import ReservationSeasonalHints from "@/components/ReservationSeasonalHints";
 import GoogleReviews from "@/components/GoogleReviews";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
@@ -55,6 +56,8 @@ const Reservierung = () => {
           <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
             {t.reservationBooking.subtitle}
           </p>
+
+          <ReservationSeasonalHints />
 
           <ReservationBooking />
 

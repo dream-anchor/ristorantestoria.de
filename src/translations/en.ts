@@ -238,6 +238,7 @@ export const en = {
     discoverRestaurant: "Discover our restaurant",
     eventsGroupsTitle: "Events & Groups",
     eventsGroupsLinks: [
+      { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Group Dining Munich", slug: "reisegruppen-muenchen" },
       { label: "Corporate Events Munich", slug: "firmenfeier-muenchen" },
       { label: "Birthday Party Munich", slug: "geburtstagsfeier-muenchen" },

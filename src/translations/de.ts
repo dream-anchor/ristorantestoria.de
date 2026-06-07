@@ -247,6 +247,7 @@ export const de = {
     eventsGroupsTitle: "Anlässe & Gruppen",
     eventsGroupsLinks: [
       { label: "WM 2026 Public Viewing", slug: "wm-2026-public-viewing-muenchen" },
+      { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Restaurant für Reisegruppen", slug: "reisegruppen-muenchen" },
       { label: "Firmenfeier München", slug: "firmenfeier-muenchen" },
       { label: "Geburtstagsfeier München", slug: "geburtstagsfeier-muenchen" },

@@ -12,6 +12,7 @@ import StructuredData from "@/components/StructuredData";
 import HomeAbout from "@/components/HomeAbout";
 import SeasonalBanner from "@/components/SeasonalBanner";
 import WmBanner from "@/components/WmBanner";
+import FilmfestBanner from "@/components/FilmfestBanner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
@@ -39,6 +40,7 @@ const Index = () => {
           <HomeIntro />
           <div className="container mx-auto px-4 max-w-4xl">
             <WmBanner />
+            <FilmfestBanner />
             <SeasonalBanner />
           </div>
           <HomeAbout />

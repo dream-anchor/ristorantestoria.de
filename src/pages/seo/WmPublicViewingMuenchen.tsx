@@ -13,6 +13,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
+import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { wmContent } from "./wmContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen.webp";
@@ -147,12 +148,23 @@ const spielMeta = [
   { heimFlag: "🇪🇨", gastFlag: "🇩🇪", anstoss: "22:00", ort: "New York / NJ", tv: "ARD" },
 ];
 
+/** Kompakter Reservierungs-CTA nach den einzelnen Inhaltsblöcken – springt zum Buchungsbereich. */
+const WmBlockCta = ({ label }: { label: string }) => (
+  <Reveal className="wm-blockcta">
+    <a href="#reservieren" className="wm-btn wm-btn-primary" onClick={() => fireLead("wm_reservierung")}>
+      {label}
+    </a>
+  </Reveal>
+);
+
 const WmPublicViewingMuenchen = () => {
   usePrerenderReady(true);
   const [scrolled, setScrolled] = useState(false);
   const { setAlternates, clearAlternates } = useAlternateLinks();
   const { language } = useLanguage();
   const c = wmContent[language];
+  // Cross-Link zur Filmfest-Seite nur im Überschneidungszeitraum (26.6.–5.7.2026).
+  const showFilmfestCrossLink = isWmFilmfestOverlap();
 
   // Mehrsprachige Seite: hreflang verweist für jede Sprache auf die lokalisierte WM-URL.
   useEffect(() => {
@@ -293,10 +305,29 @@ const WmPublicViewingMuenchen = () => {
               <span className="wm-eyebrow wm-eyebrow-line">{c.angebot.eyebrow}</span>
               <h2 className="wm-h2">{c.angebot.h2}</h2>
               <ul className="wm-list">
-                {c.angebot.items.map((a) => (
-                  <li key={a}>{a}</li>
-                ))}
+                {c.angebot.items.map((a) => {
+                  const idx = a.indexOf(c.angebot.menuPhrase);
+                  if (idx === -1) return <li key={a}>{a}</li>;
+                  return (
+                    <li key={a}>
+                      {a.slice(0, idx)}
+                      <LocalizedLink to="speisekarte" className="wm-inline-link">
+                        {c.angebot.menuPhrase}
+                      </LocalizedLink>
+                      {a.slice(idx + c.angebot.menuPhrase.length)}
+                    </li>
+                  );
+                })}
               </ul>
+              {showFilmfestCrossLink && (
+                <p className="wm-crosslink">
+                  {c.crossFilmfest.pre}
+                  <LocalizedLink to="filmfest-muenchen" className="wm-inline-link">
+                    {c.crossFilmfest.anchor}
+                  </LocalizedLink>
+                  {c.crossFilmfest.post}
+                </p>
+              )}
             </Reveal>
             <Reveal delay={0.1} className="wm-angebot-img">
               <img
@@ -307,6 +338,9 @@ const WmPublicViewingMuenchen = () => {
                 loading="lazy"
               />
             </Reveal>
+          </div>
+          <div className="wm-wrap">
+            <WmBlockCta label={c.reservieren.ctaReserve} />
           </div>
         </section>
 
@@ -348,6 +382,7 @@ const WmPublicViewingMuenchen = () => {
             <Reveal as="p" className="wm-note">
               {c.spiele.note}
             </Reveal>
+            <WmBlockCta label={c.reservieren.ctaReserve} />
           </div>
         </section>
 
@@ -370,6 +405,7 @@ const WmPublicViewingMuenchen = () => {
                 ))}
               </ol>
             </Reveal>
+            <WmBlockCta label={c.reservieren.ctaReserve} />
           </div>
         </section>
 
@@ -532,6 +568,10 @@ const wmStyles = `
 .wm-list li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--amber-bright),var(--rust));}
 .wm-angebot-img{border-radius:20px;overflow:hidden;border:1px solid var(--line);}
 .wm-angebot-img img{display:block;width:100%;height:100%;object-fit:cover;}
+.wm-inline-link{color:var(--amber-bright);text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
+.wm-inline-link:hover{color:var(--bone);}
+.wm-crosslink{margin-top:26px;font-size:1.02rem;color:rgba(244,236,224,.78);line-height:1.55;max-width:60ch;}
+.wm-blockcta{display:flex;justify-content:center;margin-top:clamp(40px,5vw,60px);}
 /* DEUTSCHE SPIELE */
 .wm-spiele{background:var(--ink-2);}
 .wm-match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
