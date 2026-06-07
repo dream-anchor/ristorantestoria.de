@@ -1,13 +1,5 @@
 import type { Language } from "@/contexts/LanguageContext";
 
-/** Spiel-Eintrag: nur tag/datum/heim/gast werden übersetzt, der Rest bleibt sprachneutral. */
-interface SpielText {
-  tag: string;
-  datum: string;
-  heim: string;
-  gast: string;
-}
-
 /** Turnierphase: phase + zeit (Monatsnamen) werden übersetzt. */
 interface TurnierText {
   phase: string;
@@ -43,13 +35,13 @@ export interface WmContent {
   };
   /** Temporärer Cross-Link zur Filmfest-Seite – nur im Überschneidungszeitraum sichtbar. */
   crossFilmfest: { pre: string; anchor: string; post: string };
+  /** Spiel-Daten (Teams, Termine, Orte) liegen in wmSpiele.ts – hier nur Rahmentexte. */
   spiele: {
     eyebrow: string;
     h2: string;
     vs: string;
     mesz: string;
     note: string;
-    items: SpielText[];
   };
   turnier: {
     eyebrow: string;
@@ -130,11 +122,6 @@ export const wmContent = {
       vs: "gegen",
       mesz: "MESZ",
       note: "Alle Zeiten in MESZ. Kommt Deutschland weiter, zeigen wir auch die K.-o.-Spiele.",
-      items: [
-        { tag: "Sonntag", datum: "14. Juni", heim: "Deutschland", gast: "Curaçao" },
-        { tag: "Samstag", datum: "20. Juni", heim: "Deutschland", gast: "Elfenbeinküste" },
-        { tag: "Donnerstag", datum: "25. Juni", heim: "Ecuador", gast: "Deutschland" },
-      ],
     },
     turnier: {
       eyebrow: "So läuft das Turnier",
@@ -250,11 +237,6 @@ export const wmContent = {
       vs: "vs",
       mesz: "CEST",
       note: "All times in CEST. If Germany go through, we'll show the knockout matches too.",
-      items: [
-        { tag: "Sunday", datum: "14 June", heim: "Germany", gast: "Curaçao" },
-        { tag: "Saturday", datum: "20 June", heim: "Germany", gast: "Ivory Coast" },
-        { tag: "Thursday", datum: "25 June", heim: "Ecuador", gast: "Germany" },
-      ],
     },
     turnier: {
       eyebrow: "How the tournament runs",
@@ -370,11 +352,6 @@ export const wmContent = {
       vs: "contro",
       mesz: "ora di Roma",
       note: "Tutti gli orari sono ora di Roma. Se la Germania passa il turno, mostriamo anche le partite a eliminazione diretta.",
-      items: [
-        { tag: "Domenica", datum: "14 giugno", heim: "Germania", gast: "Curaçao" },
-        { tag: "Sabato", datum: "20 giugno", heim: "Germania", gast: "Costa d'Avorio" },
-        { tag: "Giovedì", datum: "25 giugno", heim: "Ecuador", gast: "Germania" },
-      ],
     },
     turnier: {
       eyebrow: "Come si svolge il torneo",
@@ -490,11 +467,6 @@ export const wmContent = {
       vs: "contre",
       mesz: "heure de Paris",
       note: "Tous les horaires à l'heure de Paris. Si l'Allemagne passe, on diffuse aussi les matchs à élimination directe.",
-      items: [
-        { tag: "Dimanche", datum: "14 juin", heim: "Allemagne", gast: "Curaçao" },
-        { tag: "Samedi", datum: "20 juin", heim: "Allemagne", gast: "Côte d'Ivoire" },
-        { tag: "Jeudi", datum: "25 juin", heim: "Équateur", gast: "Allemagne" },
-      ],
     },
     turnier: {
       eyebrow: "Comment se déroule le tournoi",

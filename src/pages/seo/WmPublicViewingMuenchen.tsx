@@ -15,6 +15,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
 import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { wmContent } from "./wmContent";
+import { wmSpiele, wmSpieleSorted, wmWeekday, wmDateLabel, wmKickoff, buildWmEventSchema } from "./wmSpiele";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen.webp";
 import heroImg600 from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen-600w.webp";
@@ -25,61 +26,10 @@ const OG_IMAGE = "https://www.ristorantestoria.de/wm-2026-public-viewing-muenche
 const OG_IMAGE_ALT = "Public Viewing auf der überdachten Terrasse im STORIA München";
 
 /**
- * Genau drei Public-Viewing-Event-Knoten (DFB-Gruppenspiele), FIFA-neutral.
- * Inhalt bewusst deutsch für alle Sprachversionen – sprachneutrale Veranstaltungsdaten.
- * location als inline Restaurant-Place (die Seite rendert keinen Restaurant-@id-Knoten).
+ * Public-Viewing-Event-Knoten, abgeleitet aus der einzigen Datenquelle wmSpiele.ts.
+ * Damit sind Karten und Schema dauerhaft synchron. FIFA-neutral, Teamnamen deutsch.
  */
-const WM_EVENT_LOCATION = {
-  "@type": "Restaurant",
-  name: "STORIA",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Karlstraße 47A",
-    postalCode: "80333",
-    addressLocality: "München",
-    addressCountry: "DE",
-  },
-};
-
-const WM_EVENTS = [
-  {
-    name: "Public Viewing WM 2026: Deutschland – Curaçao",
-    startDate: "2026-06-14T19:00:00+02:00",
-    endDate: "2026-06-14T21:30:00+02:00",
-    description:
-      "Übertragung des WM-Gruppenspiels Deutschland – Curaçao auf der überdachten Terrasse im STORIA München. Reservierung empfohlen.",
-  },
-  {
-    name: "Public Viewing WM 2026: Deutschland – Elfenbeinküste",
-    startDate: "2026-06-20T22:00:00+02:00",
-    endDate: "2026-06-21T00:30:00+02:00",
-    description:
-      "Übertragung des WM-Gruppenspiels Deutschland – Elfenbeinküste auf der überdachten Terrasse im STORIA München. Reservierung empfohlen.",
-  },
-  {
-    name: "Public Viewing WM 2026: Ecuador – Deutschland",
-    startDate: "2026-06-25T22:00:00+02:00",
-    endDate: "2026-06-26T00:30:00+02:00",
-    description:
-      "Übertragung des WM-Gruppenspiels Ecuador – Deutschland auf der überdachten Terrasse im STORIA München. Reservierung empfohlen.",
-  },
-].map((e) => ({
-  "@context": "https://schema.org",
-  "@type": "Event",
-  name: e.name,
-  startDate: e.startDate,
-  endDate: e.endDate,
-  description: e.description,
-  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-  eventStatus: "https://schema.org/EventScheduled",
-  image: OG_IMAGE,
-  location: WM_EVENT_LOCATION,
-  organizer: {
-    "@type": "Restaurant",
-    name: "STORIA",
-    url: "https://www.ristorantestoria.de/",
-  },
-}));
+const WM_EVENTS = buildWmEventSchema(OG_IMAGE);
 
 /** GA4 Conversion-Event: generate_lead — gleiche Implementierung wie FilmfestInquiryForm. */
 const fireLead = (formName: string) => {
@@ -141,13 +91,6 @@ const Reveal = ({
   );
 };
 
-/** Sprachneutrale Spiel-Metadaten (Flaggen, Anstoß MESZ, Spielort, TV) – per Index zu c.spiele.items. */
-const spielMeta = [
-  { heimFlag: "🇩🇪", gastFlag: "🇨🇼", anstoss: "19:00", ort: "Houston", tv: "ARD" },
-  { heimFlag: "🇩🇪", gastFlag: "🇨🇮", anstoss: "22:00", ort: "Toronto", tv: "ZDF" },
-  { heimFlag: "🇪🇨", gastFlag: "🇩🇪", anstoss: "22:00", ort: "New York / NJ", tv: "ARD" },
-];
-
 /** Kompakter Reservierungs-CTA nach den einzelnen Inhaltsblöcken – springt zum Buchungsbereich. */
 const WmBlockCta = ({ label }: { label: string }) => (
   <Reveal className="wm-blockcta">
@@ -165,6 +108,28 @@ const WmPublicViewingMuenchen = () => {
   const c = wmContent[language];
   // Cross-Link zur Filmfest-Seite nur im Überschneidungszeitraum (26.6.–5.7.2026).
   const showFilmfestCrossLink = isWmFilmfestOverlap();
+
+  // Vergangene/nächstes Spiel werden erst clientseitig nach Mount ermittelt.
+  // Guard: SSR + erster Client-Render = null (keine Klassen), damit der prerenderte
+  // Inhalt nicht von leerem Client-State überschrieben wird (kein Hydration-Mismatch/Flicker).
+  const [matchClass, setMatchClass] = useState<{ past: Set<string>; nextId: string | null } | null>(null);
+  useEffect(() => {
+    const now = Date.now();
+    const past = new Set<string>();
+    let nextId: string | null = null;
+    let nextStart = Infinity;
+    for (const s of wmSpiele) {
+      const end = new Date(s.endISO).getTime();
+      const start = new Date(s.startISO).getTime();
+      if (now > end) {
+        past.add(s.id);
+      } else if (start < nextStart) {
+        nextStart = start;
+        nextId = s.id;
+      }
+    }
+    setMatchClass({ past, nextId });
+  }, []);
 
   // Mehrsprachige Seite: hreflang verweist für jede Sprache auf die lokalisierte WM-URL.
   useEffect(() => {
@@ -352,27 +317,29 @@ const WmPublicViewingMuenchen = () => {
               <h2 className="wm-h2">{c.spiele.h2}</h2>
             </Reveal>
             <div className="wm-match-grid">
-              {c.spiele.items.map((s, i) => {
-                const m = spielMeta[i];
+              {wmSpieleSorted.map((s, i) => {
+                const isPast = matchClass?.past.has(s.id) ?? false;
+                const isNext = matchClass?.nextId === s.id;
+                const cls = `wm-match${isPast ? " is-past" : ""}${isNext ? " is-next" : ""}`;
                 return (
-                  <Reveal key={s.datum} delay={i * 0.08} className="wm-match">
-                    <span className="wm-match-date">{s.tag} · {s.datum}</span>
+                  <Reveal key={s.id} delay={i * 0.08} className={cls}>
+                    <span className="wm-match-date">{wmWeekday(s.startISO, language)} · {wmDateLabel(s.startISO, language)}</span>
                     <div className="wm-match-teams">
                       <div className="wm-team">
-                        <span className="flag" aria-hidden="true">{m.heimFlag}</span>
-                        <span className="name">{s.heim}</span>
+                        <span className="flag" aria-hidden="true">{s.teamA.flag}</span>
+                        <span className="name">{s.teamA.name[language]}</span>
                       </div>
                       <span className="wm-vs">{c.spiele.vs}</span>
                       <div className="wm-team">
-                        <span className="flag" aria-hidden="true">{m.gastFlag}</span>
-                        <span className="name">{s.gast}</span>
+                        <span className="flag" aria-hidden="true">{s.teamB.flag}</span>
+                        <span className="name">{s.teamB.name[language]}</span>
                       </div>
                     </div>
                     <div className="wm-match-foot">
-                      <span className="wm-kick">{m.anstoss}<small>{c.spiele.mesz}</small></span>
+                      <span className="wm-kick">{wmKickoff(s.startISO)}<small>{c.spiele.mesz}</small></span>
                       <span className="wm-match-foot-r">
-                        <span className="wm-where">{m.ort}</span>
-                        <span className="wm-tv">{m.tv}</span>
+                        <span className="wm-where">{s.ort}</span>
+                        <span className="wm-tv">{s.tv}</span>
                       </span>
                     </div>
                   </Reveal>
@@ -592,6 +559,10 @@ const wmStyles = `
 .wm-where{font-family:var(--mono);font-size:.82rem;color:rgba(244,236,224,.6);}
 .wm-tv{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(244,236,224,.82);border:1px solid var(--line);border-radius:7px;padding:4px 10px;}
 .wm-note{margin-top:26px;font-family:var(--mono);font-size:.86rem;color:rgba(244,236,224,.5);}
+/* Datums-Zustände (clientseitig nach Mount): vergangen ausgegraut, nächstes hervorgehoben */
+.wm-match.is-past{opacity:.42;}
+.wm-match.is-past:hover{transform:none;border-color:var(--line);}
+.wm-match.is-next{border-color:rgba(63,185,80,.6);box-shadow:0 0 0 1px rgba(63,185,80,.35),0 18px 50px -22px rgba(63,185,80,.55);}
 /* TURNIER */
 .wm-turnier{background:var(--ink);}
 .wm-timeline{position:relative;margin-top:14px;overflow-x:auto;padding-bottom:6px;}
