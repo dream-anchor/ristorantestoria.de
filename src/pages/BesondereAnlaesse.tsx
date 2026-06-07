@@ -8,6 +8,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
 
 // Parent slug mapping for each language
 const PARENT_SLUGS = {
@@ -20,6 +21,9 @@ const PARENT_SLUGS = {
 const BesondereAnlaesse = () => {
   const { language, t } = useLanguage();
   usePrerenderReady(true);
+
+  // Saisonale WM-2026-Verlinkung – blendet sich nach dem Finale (19.7.2026) automatisch aus.
+  const wmActive = isWmActive();
 
   const eventLinks = [
     {
@@ -68,7 +72,8 @@ const BesondereAnlaesse = () => {
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "name": "Valentinstag-Menü" },
           { "@type": "ListItem", "position": 2, "url": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/", "name": "Weihnachtsmenü" },
-          { "@type": "ListItem", "position": 3, "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "name": "Silvester Gala-Dinner" }
+          { "@type": "ListItem", "position": 3, "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "name": "Silvester Gala-Dinner" },
+          ...(wmActive ? [{ "@type": "ListItem", "position": 4, "url": `https://www.ristorantestoria.de/${WM_SLUG}/`, "name": "WM 2026 Public Viewing" }] : [])
         ]
       },
       {
@@ -128,6 +133,20 @@ const BesondereAnlaesse = () => {
                     )}
                   </Link>
                 ))}
+
+                {wmActive && (
+                  <LocalizedLink
+                    to={WM_SLUG}
+                    className="block p-6 rounded-2xl border bg-card hover:bg-accent transition-colors"
+                  >
+                    <h2 className="text-xl font-semibold">
+                      {t.seo?.besondereAnlaesse?.wm || "WM 2026 Public Viewing"}
+                    </h2>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {t.seo?.besondereAnlaesse?.wmTeaser || "11. Juni – 19. Juli – alle Spiele live auf der überdachten Terrasse, dazu süditalienische Küche & Aperitivo."}
+                    </p>
+                  </LocalizedLink>
+                )}
               </div>
 
               <div className="mt-8 p-6 rounded-2xl bg-card border">

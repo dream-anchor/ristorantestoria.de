@@ -534,6 +534,8 @@ export const de = {
       valentinstag: "Valentinstag-Menü",
       weihnachten: "Weihnachtsmenü",
       silvester: "Silvester Gala-Dinner",
+      wm: "WM 2026 Public Viewing",
+      wmTeaser: "11. Juni – 19. Juli – alle Spiele live auf der überdachten Terrasse, dazu süditalienische Küche & Aperitivo.",
     },
     lunch: {
       seoTitle: "Business Lunch M\u00fcnchen \u2013 3 G\u00e4nge ab 14,90 \u20ac (Mo\u2013Fr) | STORIA",

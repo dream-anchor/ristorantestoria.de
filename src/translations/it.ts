@@ -555,6 +555,8 @@ const itBase = {
       valentinstag: "Menu di San Valentino",
       weihnachten: "Menu di Natale",
       silvester: "Gala di Capodanno",
+      wm: "Mondiali 2026 in diretta",
+      wmTeaser: "11 giugno – 19 luglio – tutte le partite in diretta sulla terrazza coperta, con cucina del Sud Italia e aperitivo.",
     },
     lunch: {
       seoTitle: "Business Lunch Monaco Maxvorstadt | Ristorante Italiano STORIA vicino K\u00f6nigsplatz",

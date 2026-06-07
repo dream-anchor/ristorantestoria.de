@@ -525,6 +525,8 @@ export const fr = {
       valentinstag: "Menu de la Saint-Valentin",
       weihnachten: "Menu de No\u00ebl",
       silvester: "Gala du Nouvel An",
+      wm: "Coupe du monde 2026 en direct",
+      wmTeaser: "11 juin \u2013 19 juillet \u2013 tous les matchs en direct sur la terrasse couverte, avec cuisine du Sud de l\u2019Italie & ap\u00e9ritif.",
     },
     lunch: {
       seoTitle: "Business Lunch Munich Maxvorstadt | Restaurant Italien STORIA pr\u00e8s du K\u00f6nigsplatz",

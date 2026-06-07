@@ -525,6 +525,8 @@ export const en = {
       valentinstag: "Valentine\u2019s Day Menu",
       weihnachten: "Christmas Menu",
       silvester: "New Year\u2019s Eve Gala Dinner",
+      wm: "2026 World Cup Public Viewing",
+      wmTeaser: "11 June \u2013 19 July \u2013 every match live on the covered terrace, with Southern Italian cuisine & aperitivo.",
     },
     lunch: {
       seoTitle: "Business Lunch Munich Maxvorstadt | Italian Restaurant STORIA near K\u00f6nigsplatz",
