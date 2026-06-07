@@ -3225,6 +3225,7 @@ export const fr = {
     "eventlocation-muenchen-maxvorstadt": "lieu-evenement-munich",
     "firmenfeier-muenchen": "evenement-entreprise-munich",
     "filmfest-muenchen": "filmfest-muenchen",
+    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
     "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
     "wild-essen-muenchen": "gibier-munich",

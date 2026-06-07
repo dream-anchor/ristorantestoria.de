@@ -246,6 +246,7 @@ export const de = {
     discoverRestaurant: "Unser Restaurant entdecken",
     eventsGroupsTitle: "Anlässe & Gruppen",
     eventsGroupsLinks: [
+      { label: "WM 2026 Public Viewing", slug: "wm-2026-public-viewing-muenchen" },
       { label: "Restaurant für Reisegruppen", slug: "reisegruppen-muenchen" },
       { label: "Firmenfeier München", slug: "firmenfeier-muenchen" },
       { label: "Geburtstagsfeier München", slug: "geburtstagsfeier-muenchen" },
@@ -3335,6 +3336,7 @@ export const de = {
     "romantisches-dinner-muenchen": "romantisches-dinner-muenchen",
     "eventlocation-muenchen-maxvorstadt": "eventlocation-muenchen-maxvorstadt",
     "firmenfeier-muenchen": "firmenfeier-muenchen",
+    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
     "wild-essen-muenchen": "wild-essen-muenchen",

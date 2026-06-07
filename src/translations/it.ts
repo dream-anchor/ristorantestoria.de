@@ -2795,6 +2795,7 @@ const itBase = {
     "eventlocation-muenchen-maxvorstadt": "location-eventi-monaco",
     "firmenfeier-muenchen": "evento-aziendale-monaco",
     "filmfest-muenchen": "filmfest-muenchen",
+    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
     "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
     "wild-essen-muenchen": "selvaggina-monaco",

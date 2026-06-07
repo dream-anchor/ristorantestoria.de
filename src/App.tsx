@@ -37,6 +37,7 @@ import RomantischesDinner from "./pages/seo/RomantischesDinner";
 import EventlocationMuenchen from "./pages/seo/EventlocationMuenchen";
 import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
 import FilmfestMuenchen from "./pages/seo/FilmfestMuenchen";
+import WmPublicViewingMuenchen from "./pages/seo/WmPublicViewingMuenchen";
 import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
 import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
 import WildEssenMuenchen from "./pages/seo/WildEssenMuenchen";
@@ -115,6 +116,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "eventlocation-muenchen-maxvorstadt": EventlocationMuenchen,
   "firmenfeier-muenchen": FirmenfeierMuenchen,
   "filmfest-muenchen": FilmfestMuenchen,
+  "wm-2026-public-viewing-muenchen": WmPublicViewingMuenchen,
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
   "wild-essen-muenchen": WildEssenMuenchen,
@@ -148,7 +150,7 @@ const LEGAL_ONLY_DE = new Set([
   "impressum", "datenschutz", "cookie-richtlinie",
   "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
   "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
-  "barrierefreiheit", "filmfest-muenchen",
+  "barrierefreiheit", "filmfest-muenchen", "wm-2026-public-viewing-muenchen",
 ]);
 
 // Generate all routes for all languages
