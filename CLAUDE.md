@@ -115,7 +115,8 @@ Service Account JSON liegt in `scripts/service-account.json` im seo.schrittmache
 node scripts/request-indexing.mjs --de-only        # Nur DE-URLs aus Sitemap
 node scripts/request-indexing.mjs --priority        # Nicht-indexierte Priority-URLs
 node scripts/request-indexing.mjs --dry-run         # Preview ohne Submit
-node scripts/request-indexing.mjs --url https://www.ristorantestoria.de/page/  # Einzelne URL
+node scripts/request-indexing.mjs --dry-run "https://www.ristorantestoria.de/<pfad>/"  # Einzelne URL (positional), Preview
+node scripts/request-indexing.mjs "https://www.ristorantestoria.de/<pfad>/"            # Einzelne URL (positional), Submit
 ```
 
 **Service Account:** `gsc-auditor-storia@evocative-shore-486623-v4.iam.gserviceaccount.com`
