@@ -48,13 +48,22 @@ const isClosedDay = (date: Date): boolean => {
   return closedDays.some(closedDay => isSameDay(date, closedDay));
 };
 
-const ReservationBooking = () => {
+interface ReservationBookingProps {
+  /** Überschrift-Ebene des Widgets. Default h2; auf Seiten mit eigenem
+   *  Section-h2 (z. B. WM-Landingpage) auf h3 setzen, um doppelte h2 zu vermeiden. */
+  headingLevel?: "h2" | "h3";
+  /** Wird beim Klick auf „Jetzt buchen" (OpenTable) aufgerufen — z. B. für generate_lead. */
+  onBook?: () => void;
+}
+
+const ReservationBooking = ({ headingLevel = "h2", onBook }: ReservationBookingProps = {}) => {
   const { t, language } = useLanguage();
   const isMobile = useIsMobile();
   const [date, setDate] = useState<Date | undefined>(new Date()); // Default to today
   const [time, setTime] = useState("19:00");
   const [guests, setGuests] = useState("2");
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const HeadingTag = headingLevel;
 
   const getLocale = () => {
     switch (language) {
@@ -135,6 +144,7 @@ const ReservationBooking = () => {
   };
 
   const handleBookClick = () => {
+    onBook?.();
     window.open(buildOpenTableUrl(), "_blank", "noopener,noreferrer");
   };
 
@@ -144,9 +154,9 @@ const ReservationBooking = () => {
         <div className="bg-card rounded-2xl border border-border shadow-lg overflow-hidden">
           {/* Header */}
           <div className="bg-primary/5 px-6 py-5 border-b border-border">
-            <h2 className="text-xl font-semibold text-foreground text-center">
+            <HeadingTag className="text-xl font-semibold text-foreground text-center">
               {t.reservationBooking.title}
-            </h2>
+            </HeadingTag>
             <p className="text-sm text-muted-foreground text-center mt-1">
               {t.reservationBooking.subtitle}
             </p>

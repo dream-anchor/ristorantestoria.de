@@ -352,7 +352,7 @@ const WmPublicViewingMuenchen = () => {
               </p>
             </Reveal>
             <Reveal delay={0.1} className="wm-booking">
-              <ReservationBooking />
+              <ReservationBooking headingLevel="h3" onBook={() => fireLead("wm_reservierung")} />
             </Reveal>
             <Reveal delay={0.16} className="wm-hero-actions wm-actions-center">
               <LocalizedLink

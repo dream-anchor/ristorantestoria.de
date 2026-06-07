@@ -1,39 +1,46 @@
-import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Zeitlich begrenzter Kampagnen-Banner zur Fußball-WM 2026.
-// Sichtbar bis einschließlich Finaltag (19. Juli 2026), nur auf der
-// deutschsprachigen Startseite. Danach rendert die Komponente nichts mehr.
+/**
+ * Zeitlich begrenzter Saison-Banner zur Fußball-WM 2026 (Startseite, nur DE).
+ *
+ * ▸ NACH DEM TURNIER ENTFERNEN (Finale: 19. Juli 2026):
+ *   Der Banner blendet sich ab dem 20.07.2026 automatisch aus (WM_END).
+ *   Zum vollständigen Aufräumen: <WmBanner /> aus src/pages/Index.tsx
+ *   entfernen und diese Datei löschen.
+ *
+ * Wird serverseitig gerendert (kein useEffect-Gate), damit der interne Link
+ * bereits im prerenderten HTML steht und crawlbar ist.
+ */
 const WM_END = new Date("2026-07-20T00:00:00+02:00").getTime();
 
 const WmBanner = () => {
   const { language } = useLanguage();
-  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    setVisible(Date.now() < WM_END);
-  }, []);
-
-  if (!visible || language !== "de") return null;
+  if (language !== "de" || Date.now() >= WM_END) return null;
 
   return (
-    <div className="bg-primary/5 border border-primary/20 rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 my-6 mx-4 md:mx-0">
-      <span className="text-2xl shrink-0" aria-hidden="true">{"⚽"}</span>
+    <aside className="my-6 mx-4 md:mx-0 rounded-2xl border border-primary/20 bg-primary/5 px-6 py-6 flex flex-col sm:flex-row sm:items-center gap-4">
       <div className="flex-1 min-w-0">
-        <p className="font-semibold text-sm">WM 2026 – alle Spiele live auf der überdachten Terrasse</p>
-      </div>
-      <div className="flex flex-wrap gap-2 shrink-0">
-        <LocalizedLink
-          to="wm-2026-public-viewing-muenchen"
-          className="inline-flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+        <span
+          className="block text-xs font-semibold uppercase tracking-[0.22em] mb-2"
+          style={{ color: "#b07d29" }}
         >
-          Public Viewing im STORIA
-          <ArrowRight className="w-3.5 h-3.5" />
-        </LocalizedLink>
+          WM 2026
+        </span>
+        <p className="font-serif text-2xl md:text-3xl leading-tight text-primary">
+          Alle Spiele live auf der Terrasse
+        </p>
       </div>
-    </div>
+      <LocalizedLink
+        to="wm-2026-public-viewing-muenchen"
+        className="inline-flex items-center gap-1.5 shrink-0 text-base font-medium text-primary hover:underline underline-offset-4"
+      >
+        Zum Spielplan
+        <ArrowRight className="w-4 h-4" />
+      </LocalizedLink>
+    </aside>
   );
 };
 
