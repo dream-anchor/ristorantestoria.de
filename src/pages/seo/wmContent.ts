@@ -149,13 +149,13 @@ export const wmContent = {
     anfahrt: {
       eyebrow: "Anfahrt",
       h2: "Mitten in der Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 München. Telefon +49 89 51519696. Die Tram 20 und 21 hält an der Karlstraße direkt vor der Tür.",
+      lead: "STORIA, Karlstraße 47A, 80333 München. Telefon +49 89 51519696. Die Tram 20 und 21 hält an der Karlstraße direkt vor der Tür.",
       callLabel: "Direkt anrufen",
       callSub: "+49 89 51519696",
       whatsappLabel: "WhatsApp",
       whatsappSub: "Schnelle Reservierungsanfrage",
       directionsLabel: "Anfahrt",
-      directionsSub: "Karlstraße 47a · 80333 München",
+      directionsSub: "Karlstraße 47A · 80333 München",
       restaurantLabel: "Restaurant",
       restaurantSub: "ristorantestoria.de",
     },
@@ -188,7 +188,7 @@ export const wmContent = {
         {
           question: "Wo genau ist STORIA?",
           answer:
-            "In der Maxvorstadt, Karlstraße 47a, 80333 München. Tram 20 und 21, Haltestelle Karlstraße, direkt vor dem Restaurant.",
+            "In der Maxvorstadt, Karlstraße 47A, 80333 München. Tram 20 und 21, Haltestelle Karlstraße, direkt vor dem Restaurant.",
         },
       ],
       disclaimer:
@@ -263,13 +263,13 @@ export const wmContent = {
     anfahrt: {
       eyebrow: "Getting here",
       h2: "Right in the heart of Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 Munich. Phone +49 89 51519696. Trams 20 and 21 stop on Karlstraße right outside the door.",
+      lead: "STORIA, Karlstraße 47A, 80333 Munich. Phone +49 89 51519696. Trams 20 and 21 stop on Karlstraße right outside the door.",
       callLabel: "Call us directly",
       callSub: "+49 89 51519696",
       whatsappLabel: "WhatsApp",
       whatsappSub: "Quick booking enquiry",
       directionsLabel: "Directions",
-      directionsSub: "Karlstraße 47a · 80333 Munich",
+      directionsSub: "Karlstraße 47A · 80333 Munich",
       restaurantLabel: "Restaurant",
       restaurantSub: "ristorantestoria.de",
     },
@@ -302,7 +302,7 @@ export const wmContent = {
         {
           question: "Where exactly is STORIA?",
           answer:
-            "In Maxvorstadt, Karlstraße 47a, 80333 Munich. Trams 20 and 21, Karlstraße stop, right outside the restaurant.",
+            "In Maxvorstadt, Karlstraße 47A, 80333 Munich. Trams 20 and 21, Karlstraße stop, right outside the restaurant.",
         },
       ],
       disclaimer:
@@ -377,13 +377,13 @@ export const wmContent = {
     anfahrt: {
       eyebrow: "Come arrivare",
       h2: "Nel cuore di Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 Monaco di Baviera. Telefono +49 89 51519696. I tram 20 e 21 fermano in Karlstraße proprio davanti all'ingresso.",
+      lead: "STORIA, Karlstraße 47A, 80333 Monaco di Baviera. Telefono +49 89 51519696. I tram 20 e 21 fermano in Karlstraße proprio davanti all'ingresso.",
       callLabel: "Chiama subito",
       callSub: "+49 89 51519696",
       whatsappLabel: "WhatsApp",
       whatsappSub: "Richiesta rapida di prenotazione",
       directionsLabel: "Come arrivare",
-      directionsSub: "Karlstraße 47a · 80333 Monaco di Baviera",
+      directionsSub: "Karlstraße 47A · 80333 Monaco di Baviera",
       restaurantLabel: "Ristorante",
       restaurantSub: "ristorantestoria.de",
     },
@@ -416,7 +416,7 @@ export const wmContent = {
         {
           question: "Dove si trova esattamente lo STORIA?",
           answer:
-            "In Maxvorstadt, Karlstraße 47a, 80333 Monaco di Baviera. Tram 20 e 21, fermata Karlstraße, proprio davanti al ristorante.",
+            "In Maxvorstadt, Karlstraße 47A, 80333 Monaco di Baviera. Tram 20 e 21, fermata Karlstraße, proprio davanti al ristorante.",
         },
       ],
       disclaimer:
@@ -491,13 +491,13 @@ export const wmContent = {
     anfahrt: {
       eyebrow: "Accès",
       h2: "En plein cœur de Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 Munich. Téléphone +49 89 51519696. Les trams 20 et 21 s'arrêtent sur la Karlstraße, juste devant la porte.",
+      lead: "STORIA, Karlstraße 47A, 80333 Munich. Téléphone +49 89 51519696. Les trams 20 et 21 s'arrêtent sur la Karlstraße, juste devant la porte.",
       callLabel: "Appeler directement",
       callSub: "+49 89 51519696",
       whatsappLabel: "WhatsApp",
       whatsappSub: "Demande de réservation rapide",
       directionsLabel: "Accès",
-      directionsSub: "Karlstraße 47a · 80333 Munich",
+      directionsSub: "Karlstraße 47A · 80333 Munich",
       restaurantLabel: "Restaurant",
       restaurantSub: "ristorantestoria.de",
     },
@@ -530,7 +530,7 @@ export const wmContent = {
         {
           question: "Où se trouve exactement le STORIA ?",
           answer:
-            "À Maxvorstadt, Karlstraße 47a, 80333 Munich. Trams 20 et 21, arrêt Karlstraße, juste devant le restaurant.",
+            "À Maxvorstadt, Karlstraße 47A, 80333 Munich. Trams 20 et 21, arrêt Karlstraße, juste devant le restaurant.",
         },
       ],
       disclaimer:

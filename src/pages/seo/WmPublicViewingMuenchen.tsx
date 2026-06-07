@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { Phone, Mail, MapPin, ArrowUpRight, Instagram, MessageCircle } from "lucide-react";
+import { Helmet } from "@/lib/helmetAsync";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import Footer from "@/components/Footer";
@@ -20,6 +21,64 @@ import innenImg from "@/assets/wm-2026-fussball-uebertragung-innen-storia-muench
 import innenImg600 from "@/assets/wm-2026-fussball-uebertragung-innen-storia-muenchen-600w.webp";
 
 const OG_IMAGE = "https://www.ristorantestoria.de/wm-2026-public-viewing-muenchen-og.jpg";
+const OG_IMAGE_ALT = "Public Viewing auf der überdachten Terrasse im STORIA München";
+
+/**
+ * Genau drei Public-Viewing-Event-Knoten (DFB-Gruppenspiele), FIFA-neutral.
+ * Inhalt bewusst deutsch für alle Sprachversionen – sprachneutrale Veranstaltungsdaten.
+ * location als inline Restaurant-Place (die Seite rendert keinen Restaurant-@id-Knoten).
+ */
+const WM_EVENT_LOCATION = {
+  "@type": "Restaurant",
+  name: "STORIA",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Karlstraße 47A",
+    postalCode: "80333",
+    addressLocality: "München",
+    addressCountry: "DE",
+  },
+};
+
+const WM_EVENTS = [
+  {
+    name: "Public Viewing WM 2026: Deutschland – Curaçao",
+    startDate: "2026-06-14T19:00:00+02:00",
+    endDate: "2026-06-14T21:30:00+02:00",
+    description:
+      "Übertragung des WM-Gruppenspiels Deutschland – Curaçao auf der überdachten Terrasse im STORIA München. Reservierung empfohlen.",
+  },
+  {
+    name: "Public Viewing WM 2026: Deutschland – Elfenbeinküste",
+    startDate: "2026-06-20T22:00:00+02:00",
+    endDate: "2026-06-21T00:30:00+02:00",
+    description:
+      "Übertragung des WM-Gruppenspiels Deutschland – Elfenbeinküste auf der überdachten Terrasse im STORIA München. Reservierung empfohlen.",
+  },
+  {
+    name: "Public Viewing WM 2026: Ecuador – Deutschland",
+    startDate: "2026-06-25T22:00:00+02:00",
+    endDate: "2026-06-26T00:30:00+02:00",
+    description:
+      "Übertragung des WM-Gruppenspiels Ecuador – Deutschland auf der überdachten Terrasse im STORIA München. Reservierung empfohlen.",
+  },
+].map((e) => ({
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: e.name,
+  startDate: e.startDate,
+  endDate: e.endDate,
+  description: e.description,
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  image: OG_IMAGE,
+  location: WM_EVENT_LOCATION,
+  organizer: {
+    "@type": "Restaurant",
+    name: "STORIA",
+    url: "https://www.ristorantestoria.de/",
+  },
+}));
 
 /** GA4 Conversion-Event: generate_lead — gleiche Implementierung wie FilmfestInquiryForm. */
 const fireLead = (formName: string) => {
@@ -120,6 +179,24 @@ const WmPublicViewingMuenchen = () => {
         description={c.seo.description}
         canonical={getLocalizedPath("wm-2026-public-viewing-muenchen", language)}
         ogImage={OG_IMAGE}
+      />
+      <Helmet>
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+        <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+        {WM_EVENTS.map((ev) => (
+          <script type="application/ld+json" key={ev.name}>
+            {JSON.stringify(ev)}
+          </script>
+        ))}
+      </Helmet>
+      <StructuredData
+        type="breadcrumb"
+        breadcrumbs={[
+          { name: "Startseite", url: "https://www.ristorantestoria.de/" },
+          { name: "WM 2026 Public Viewing München", url: "https://www.ristorantestoria.de/wm-2026-public-viewing-muenchen/" },
+        ]}
       />
       <StructuredData type="faq" faqItems={c.faq.items} />
 
@@ -361,7 +438,7 @@ const WmPublicViewingMuenchen = () => {
             <Reveal delay={0.1} className="wm-map-card">
               <ConsentGoogleMaps
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.0!2d11.5658!3d48.1465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKarlstra%C3%9Fe%2047a%2C%2080333%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1"
-                title="STORIA · Karlstraße 47a, München"
+                title="STORIA · Karlstraße 47A, München"
                 height={420}
                 className="wm-map-iframe"
               />
