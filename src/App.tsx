@@ -150,7 +150,7 @@ const LEGAL_ONLY_DE = new Set([
   "impressum", "datenschutz", "cookie-richtlinie",
   "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
   "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
-  "barrierefreiheit", "filmfest-muenchen", "wm-2026-public-viewing-muenchen",
+  "barrierefreiheit",
 ]);
 
 // Generate all routes for all languages

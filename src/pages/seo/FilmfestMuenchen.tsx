@@ -10,7 +10,9 @@ import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
+import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
+import { filmfestContent } from "./filmfestContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
 import heroImg600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
@@ -66,91 +68,29 @@ const Reveal = ({
   );
 };
 
-const formate = [
-  { num: "01", title: "Premierendinner", text: "Das gesetzte Dinner direkt nach dem Screening. Mehrgängiges Menü, eigener Bereich, Service, der den Abend trägt — ohne dass jemand auf die Uhr schaut." },
-  { num: "02", title: "Verleiher- & Sales-Empfang", text: "Stehempfang mit Flying Buffet und Aperitivo-Bar. Raum für Gespräche, Deals und das Wiedersehen mit der halben Branche." },
-  { num: "03", title: "Cast & Crew Dinner", text: "Das Team feiert seinen Film. Lange Tafel, italienische Herzlichkeit, späte Küche und ein Abend, der nach Festival schmeckt." },
-  { num: "04", title: "Presse-Lunch & Junket", text: "Konzentriertes Mittagsformat zwischen zwei Terminen. Schnell, ruhig, mit separatem Bereich für Interviews und O-Töne." },
-  { num: "05", title: "Branchen-Networking", text: "Förderer, Redaktionen, Allianzen, Nachwuchs — ein Empfang, zu dem man gern kommt, weil er nicht im Konferenzsaal stattfindet." },
-  { num: "06", title: "Exklusiv-Anmietung", text: "Das ganze Haus für einen Abend. Innen, Terrasse, Bar — Ihr Logo, Ihr Ablauf, Ihre Gäste. Diskret und vollständig auf Sie zugeschnitten." },
-];
-
-const route = [
-  { min: "6", place: "Festivalzentrum Amerikahaus", sub: "Karolinenplatz 3 — Herz der FilmTalks & Festival-Lounge" },
-  { min: "3", place: "Königsplatz (U2)", sub: "Direktanbindung in die ganze Stadt" },
-  { min: "5", place: "Hauptbahnhof München", sub: "S-Bahn, Fernverkehr, Flughafen-Anbindung" },
-  { min: "0", place: "Tram Karlstraße (20/21/22/N20)", sub: "Hält direkt vor dem Haus — auch nachts" },
-  { min: "7", place: "Pinakotheken & Kunstareal", sub: "Das kulturelle Umfeld des Festivals" },
-];
-
-const rooms = [
-  { img: innenraumImg, img600: innenraumImg600, title: "Innenraum", cap: "bis 100 Sitzplätze", text: "Warmes Licht, italienisches Ambiente, ruhig genug fürs gesetzte Dinner. Ideal für Premieren- und Crew-Abende.", alt: "Innenraum des Ristorante STORIA München mit warmem Licht und italienischem Ambiente" },
-  { img: terrasseImg, img600: terrasseImg600, title: "Innenhof-Terrasse", cap: "bis 100 Sitzplätze · überdacht", text: "Der Sommerabend draußen — wettergeschützt. Perfekt für Aperitivo-Empfänge und entspanntes Networking.", alt: "Überdachte Innenhof-Terrasse des STORIA München mit Gästen" },
-  { img: barImg, img600: barImg600, title: "Bar & Private Room", cap: "separierbarer Bereich", text: "Eigene Bar für Aperitivo und Drinks, abtrennbarer Bereich für Interviews, Pitches oder die diskrete Runde.", alt: "Italienische Bar im STORIA München für Aperitivo und Drinks" },
-];
-
-const scenario = [
-  ["Gesetztes Premierendinner", "Tafel / Bankett", "20 – 120 Gäste"],
-  ["Stehempfang mit Flying Buffet", "Steh / Lounge", "bis 300 Gäste"],
-  ["Presse-Lunch / Junket", "separierter Bereich", "10 – 40 Gäste"],
-  ["Intimes Cast-Dinner", "Private Room", "6 – 24 Gäste"],
-  ["Exklusiv-Anmietung (ganzes Haus)", "kombiniert", "bis 200 sitzend / 300 stehend"],
-];
-
-const steps = [
-  { n: "1", title: "Anfrage", text: "Datum, Format, Gästezahl — kurz ins Formular oder direkt anrufen. Wir melden uns im Festivalzeitraum besonders schnell zurück." },
-  { n: "2", title: "Beratung", text: "Wir klären Bereich, Exklusivität und Ablauf und schlagen die passende Raumlösung vor." },
-  { n: "3", title: "Menü", text: "Gemeinsam stellen wir Buffet oder Menü zusammen — inklusive Wein, Diätwünschen und Timing." },
-  { n: "4", title: "Ihr Abend", text: "Sie sind Gast auf der eigenen Veranstaltung. Wir kümmern uns um den Rest." },
-];
-
-const faqItems = [
-  {
-    question: "Wo finde ich eine Eventlocation in der Nähe des Filmfest-Festivalzentrums?",
-    answer:
-      "Das Ristorante STORIA in der Karlstraße 47a, 80333 München, liegt nur sechs Gehminuten vom Festivalzentrum Amerikahaus (Karolinenplatz 3) entfernt — mitten im Kunstareal der Maxvorstadt. Königsplatz (U2) und Hauptbahnhof sind in drei bis fünf Minuten erreichbar, die Tram Karlstraße hält direkt vor dem Haus.",
-  },
-  {
-    question: "Welche Veranstaltungsformate richtet das STORIA während des Filmfest München aus?",
-    answer:
-      "Das STORIA richtet sechs Festivalformate aus: Premierendinner, Verleiher- und Sales-Empfänge, Cast-&-Crew-Dinner, Presse-Lunch und Junkets, Branchen-Networking sowie die Exklusiv-Anmietung des gesamten Hauses. Küche, Service und Eventplanung kommen aus einer Hand.",
-  },
-  {
-    question: "Für wie viele Gäste ist das STORIA geeignet?",
-    answer:
-      "Das STORIA bietet 100 Sitzplätze im Innenraum und 100 auf der überdachten Innenhof-Terrasse — insgesamt bis zu 200 sitzende Gäste. Beim Stehempfang mit Flying Buffet sind bis zu 300 Gäste möglich. Intime Cast-Dinner im Private Room funktionieren ab sechs Personen.",
-  },
-  {
-    question: "Bietet das STORIA Catering für Cast-&-Crew-Dinner an?",
-    answer:
-      "Ja. Küchenchef Domenico Speranza und sein Team kochen süditalienisch nach Familienrezepten aus dem Cilento — alles entsteht im Haus, ohne externe Catering-Logistik. Zur Wahl stehen Flying Buffets mit Stationen (inkl. neapolitanischer Steinofenpizza aus dem 400-°C-Ofen) oder mehrgängige 3- bis 5-Gang-Menüs mit italienischer Weinbegleitung. Vegane und glutenfreie Optionen sind möglich.",
-  },
-  {
-    question: "Wie kurzfristig kann ich im Festivalzeitraum einen Termin anfragen?",
-    answer:
-      "Im Festivalzeitraum vom 26. Juni bis 5. Juli 2026 reagiert das STORIA besonders schnell auf Anfragen. Geben Sie Datum, Format und Gästezahl über das Formular an oder rufen Sie direkt unter +49 89 51519696 an — der gewünschte Bereich wird kurzfristig freigehalten.",
-  },
-  {
-    question: "Wann findet das Filmfest München 2026 statt?",
-    answer:
-      "Das Filmfest München 2026 findet vom 26. Juni bis 5. Juli 2026 statt — zehn Festivaltage mit Premieren, Pressetagen und Branchenempfängen. Das STORIA ist als Eventlocation in Gehweite des Festivalzentrums die Bühne für den Abend danach.",
-  },
-];
+/** Mappt die Raum-Keys aus dem Content-Modul auf die Bild-Importe. */
+const roomImages = {
+  innenraum: { img: innenraumImg, img600: innenraumImg600 },
+  terrasse: { img: terrasseImg, img600: terrasseImg600 },
+  bar: { img: barImg, img600: barImg600 },
+} as const;
 
 const FilmfestMuenchen = () => {
   usePrerenderReady(true);
   const [scrolled, setScrolled] = useState(false);
   const { setAlternates, clearAlternates } = useAlternateLinks();
+  const { language } = useLanguage();
+  const c = filmfestContent[language];
 
-  // German-only page: route EN/IT/FR language switches to the localized
-  // homepage so no dead Filmfest URL is produced; DE stays on this page.
+  // Mehrsprachige Seite: alle vier Sprachen verweisen auf ihre lokalisierte
+  // Filmfest-URL (self-referencing hreflang-Alternates).
   useEffect(() => {
-    setAlternates([
-      { lang: "de", url: getLocalizedPath("filmfest-muenchen", "de") },
-      { lang: "en", url: getLocalizedPath("home", "en") },
-      { lang: "it", url: getLocalizedPath("home", "it") },
-      { lang: "fr", url: getLocalizedPath("home", "fr") },
-    ]);
+    setAlternates(
+      (["de", "en", "it", "fr"] as const).map((l: Language) => ({
+        lang: l,
+        url: getLocalizedPath("filmfest-muenchen", l),
+      }))
+    );
     return () => clearAlternates();
   }, [setAlternates, clearAlternates]);
 
@@ -164,34 +104,25 @@ const FilmfestMuenchen = () => {
   return (
     <>
       <SEO
-        title="Filmfest München 2026 — Eventlocation STORIA"
-        description="Eventlocation 6 Gehminuten vom Festivalzentrum: Premierendinner, Empfänge & Cast-Dinner im STORIA München beim Filmfest 2026 (26.6.–5.7.). Bis 300 Gäste."
-        canonical="/filmfest-muenchen"
-        noHreflang
+        title={c.seo.title}
+        description={c.seo.description}
+        canonical={getLocalizedPath("filmfest-muenchen", language)}
       />
       <StructuredData type="restaurant" includeReviewList={false} />
       <StructuredData
         type="breadcrumb"
         breadcrumbs={[
-          { name: "Home", url: "/" },
-          { name: "Filmfest München 2026", url: "/filmfest-muenchen" },
+          { name: "Home", url: getLocalizedPath("home", language) },
+          { name: c.breadcrumbLabel, url: getLocalizedPath("filmfest-muenchen", language) },
         ]}
       />
-      <StructuredData type="faq" faqItems={faqItems} />
+      <StructuredData type="faq" faqItems={c.faqItems} />
       <StructuredData
         type="event"
         eventData={{
-          name: "Filmfest München 2026 — Eventabende im Ristorante STORIA",
-          description:
-            "Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking im Ristorante STORIA München, sechs Gehminuten vom Festivalzentrum Amerikahaus, während des Filmfest München 2026 (26. Juni bis 5. Juli 2026).",
-          services: [
-            "Premierendinner",
-            "Verleiher- & Sales-Empfang",
-            "Cast & Crew Dinner",
-            "Presse-Lunch & Junket",
-            "Branchen-Networking",
-            "Exklusiv-Anmietung",
-          ],
+          name: c.structuredEvent.name,
+          description: c.structuredEvent.description,
+          services: c.structuredEvent.services,
         }}
       />
 
@@ -200,15 +131,15 @@ const FilmfestMuenchen = () => {
       <div className="ff-page">
         {/* NAV */}
         <nav className={`ff-nav ${scrolled ? "scrolled" : ""}`}>
-          <LocalizedLink to="home" className="ff-brand" aria-label="STORIA – zur Startseite">
+          <LocalizedLink to="home" className="ff-brand" aria-label={c.nav.brandAria}>
             STORIA<span>.</span>
           </LocalizedLink>
           <div className="ff-nav-links">
-            <a href="#formate">Formate</a>
-            <a href="#lage">Lage</a>
-            <a href="#raeume">Räume</a>
-            <a href="#catering">Catering</a>
-            <a href="#kontakt" className="ff-nav-cta">Termin anfragen</a>
+            <a href="#formate">{c.nav.formate}</a>
+            <a href="#lage">{c.nav.lage}</a>
+            <a href="#raeume">{c.nav.raeume}</a>
+            <a href="#catering">{c.nav.catering}</a>
+            <a href="#kontakt" className="ff-nav-cta">{c.nav.cta}</a>
             <span className="ff-nav-sep" aria-hidden="true" />
             <a
               href="tel:+498951519696"
@@ -258,7 +189,7 @@ const FilmfestMuenchen = () => {
             src={heroImg}
             srcSet={`${heroImg600} 600w, ${heroImg} 1400w`}
             sizes="100vw"
-            alt="Cineastischer Dinner-Abend bei Kerzenlicht im Ristorante STORIA München"
+            alt={c.hero.heroImgAlt}
             className="ff-hero-img"
             loading="eager"
             fetchPriority="high"
@@ -268,19 +199,17 @@ const FilmfestMuenchen = () => {
           <div className="ff-sprocket r" aria-hidden="true" />
           <div className="ff-wrap ff-hero-inner">
             <Reveal as="span" className="ff-eyebrow ff-eyebrow-line">
-              Filmfest München 2026 · 26. Juni – 5. Juli
+              {c.hero.eyebrow}
             </Reveal>
             <Reveal as="h1" delay={0.08} className="ff-h1">
-              Vom Roten Teppich zum Tisch in <em>sechs Minuten.</em>
+              {c.hero.h1Pre}<em>{c.hero.h1Em}</em>
             </Reveal>
             <Reveal as="p" delay={0.16} className="ff-hero-sub">
-              Während das Festivalzentrum um die Ecke pulsiert, ist das STORIA Ihre Bühne danach:
-              für Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Abende und Branchen-Networking.
-              Eigene Küche, überdachte Terrasse, alles aus einer Hand — mitten in der Maxvorstadt.
+              {c.hero.sub}
             </Reveal>
             <Reveal delay={0.24} className="ff-hero-actions">
-              <a href="#kontakt" className="ff-btn ff-btn-primary">Verfügbarkeit sichern →</a>
-              <a href="#formate" className="ff-btn ff-btn-ghost">Was wir ausrichten</a>
+              <a href="#kontakt" className="ff-btn ff-btn-primary">{c.hero.btnPrimary}</a>
+              <a href="#formate" className="ff-btn ff-btn-ghost">{c.hero.btnGhost}</a>
             </Reveal>
           </div>
         </header>
@@ -288,10 +217,12 @@ const FilmfestMuenchen = () => {
         {/* STATS */}
         <section className="ff-stats">
           <div className="ff-stats-grid">
-            <Reveal className="ff-stat"><div className="n">6 Min.</div><div className="l">Fußweg zum Festivalzentrum Amerikahaus</div></Reveal>
-            <Reveal delay={0.08} className="ff-stat"><div className="n">bis 300</div><div className="l">Plätze stehend · 200 Sitzplätze gesamt (Innen und außen)</div></Reveal>
-            <Reveal delay={0.16} className="ff-stat"><div className="n">aus einer Hand</div><div className="l">Küche, Service & Eventplanung im Haus</div></Reveal>
-            <Reveal delay={0.24} className="ff-stat"><div className="n">seit 2015</div><div className="l">Familie Speranza · 4,5★ aus 810 Google-Bewertungen</div></Reveal>
+            {c.stats.map((s, i) => (
+              <Reveal key={s.n + i} delay={i * 0.08} className="ff-stat">
+                <div className="n">{s.n}</div>
+                <div className="l">{s.l}</div>
+              </Reveal>
+            ))}
           </div>
         </section>
 
@@ -299,15 +230,11 @@ const FilmfestMuenchen = () => {
         <section className="ff-sec ff-intro">
           <div className="ff-wrap">
             <Reveal as="p" className="ff-intro-lead">
-              Das Ristorante STORIA ist ein familiengeführtes italienisches Restaurant in der
-              Karlstraße 47a, München Maxvorstadt — sechs Gehminuten vom Festivalzentrum Amerikahaus
-              und damit eine Eventlocation für Premierendinner, Verleiher-Empfänge,
-              Cast-&-Crew-Dinner und Branchen-Networking während des{" "}
+              {c.intro.pre}
               <a href="https://www.filmfest-muenchen.de/" target="_blank" rel="noopener noreferrer">
-                Filmfest München 2026
-              </a>{" "}
-              (26. Juni – 5. Juli 2026). Küche, Service und Eventplanung kommen aus einer Hand;
-              bis zu 200 Gäste sitzend und 300 beim Stehempfang finden hier Platz.
+                {c.intro.linkLabel}
+              </a>
+              {c.intro.post}
             </Reveal>
           </div>
         </section>
@@ -316,16 +243,12 @@ const FilmfestMuenchen = () => {
         <section className="ff-sec ff-formate" id="formate">
           <div className="ff-wrap">
             <Reveal className="ff-sec-head">
-              <span className="ff-eyebrow ff-eyebrow-line">Für die Branche gemacht</span>
-              <h2 className="ff-h2">Zehn Festivaltage, ein Ort, an dem man sich trifft.</h2>
-              <p className="ff-lead">
-                Premieren, Pitches, Pressetage, Empfänge — und der Hunger danach. Produktion,
-                Verleih, Sales, Casting, Förderer und Redaktionen finden im STORIA den diskreten,
-                repräsentativen Rahmen, der sich kurzfristig auf Ihre Festivalwoche abstimmen lässt.
-              </p>
+              <span className="ff-eyebrow ff-eyebrow-line">{c.formateSection.eyebrow}</span>
+              <h2 className="ff-h2">{c.formateSection.h2}</h2>
+              <p className="ff-lead">{c.formateSection.lead}</p>
             </Reveal>
             <div className="ff-cards">
-              {formate.map((f, i) => (
+              {c.formate.map((f, i) => (
                 <Reveal key={f.num} delay={(i % 3) * 0.08} className="ff-card">
                   <span className="ff-card-num">{f.num}</span>
                   <h3 className="ff-card-h">{f.title}</h3>
@@ -340,20 +263,15 @@ const FilmfestMuenchen = () => {
         <section className="ff-sec ff-lage" id="lage">
           <div className="ff-wrap">
             <Reveal className="ff-sec-head">
-              <span className="ff-eyebrow ff-eyebrow-line">Der eigentliche Hauptdarsteller</span>
-              <h2 className="ff-h2">Mitten im Geschehen — nicht am Rand davon.</h2>
-              <p className="ff-lead">
-                Das STORIA liegt in der Karlstraße 47a, im Kunstareal der Maxvorstadt. Vom
-                Festivalzentrum, von den Pinakotheken und vom Königsplatz sind Sie in Minuten da.
-                Internationale Gäste steigen am Hauptbahnhof aus und stehen fünf Minuten später bei
-                Ihnen am Tisch.
-              </p>
+              <span className="ff-eyebrow ff-eyebrow-line">{c.lageSection.eyebrow}</span>
+              <h2 className="ff-h2">{c.lageSection.h2}</h2>
+              <p className="ff-lead">{c.lageSection.lead}</p>
             </Reveal>
             <div className="ff-lage-grid">
               <Reveal as="ul" className="ff-route">
-                {route.map((r) => (
+                {c.route.map((r) => (
                   <li key={r.place}>
-                    <div className="min">{r.min}<small> Min.</small></div>
+                    <div className="min">{r.min}<small>{c.minLabel}</small></div>
                     <div className="place"><b>{r.place}</b><span>{r.sub}</span></div>
                   </li>
                 ))}
@@ -361,7 +279,7 @@ const FilmfestMuenchen = () => {
               <Reveal delay={0.1} className="ff-map-card">
                 <ConsentGoogleMaps
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.0!2d11.5658!3d48.1465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKarlstra%C3%9Fe%2047a%2C%2080333%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1"
-                  title="STORIA · Karlstraße 47a, München"
+                  title={c.mapTitle}
                   height={420}
                   className="ff-map-iframe"
                 />
@@ -374,41 +292,40 @@ const FilmfestMuenchen = () => {
         <section className="ff-sec ff-raeume" id="raeume">
           <div className="ff-wrap">
             <Reveal className="ff-sec-head">
-              <span className="ff-eyebrow ff-eyebrow-line">Räume & Kapazitäten</span>
-              <h2 className="ff-h2">Vom intimen Tisch bis zum großen Empfang.</h2>
-              <p className="ff-lead">
-                Drei Bereiche, frei kombinierbar — teilexklusiv im laufenden Betrieb oder das ganze
-                Haus für sich allein. Die überdachte Terrasse macht Sie unabhängig vom Münchner
-                Sommerwetter.
-              </p>
+              <span className="ff-eyebrow ff-eyebrow-line">{c.raeumeSection.eyebrow}</span>
+              <h2 className="ff-h2">{c.raeumeSection.h2}</h2>
+              <p className="ff-lead">{c.raeumeSection.lead}</p>
             </Reveal>
             <div className="ff-room-grid">
-              {rooms.map((room, i) => (
-                <Reveal key={room.title} delay={i * 0.08} className="ff-room">
-                  <div className="ff-room-img">
-                    <img
-                      src={room.img}
-                      srcSet={`${room.img600} 600w, ${room.img} 1400w`}
-                      sizes="(max-width: 900px) 100vw, 33vw"
-                      alt={room.alt}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="ff-room-body">
-                    <h3>{room.title}</h3>
-                    <div className="cap">{room.cap}</div>
-                    <p>{room.text}</p>
-                  </div>
-                </Reveal>
-              ))}
+              {c.rooms.map((room, i) => {
+                const imgs = roomImages[room.key];
+                return (
+                  <Reveal key={room.key} delay={i * 0.08} className="ff-room">
+                    <div className="ff-room-img">
+                      <img
+                        src={imgs.img}
+                        srcSet={`${imgs.img600} 600w, ${imgs.img} 1400w`}
+                        sizes="(max-width: 900px) 100vw, 33vw"
+                        alt={room.alt}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="ff-room-body">
+                      <h3>{room.title}</h3>
+                      <div className="cap">{room.cap}</div>
+                      <p>{room.text}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
             <Reveal className="ff-scenario">
               <table>
                 <thead>
-                  <tr><th>Format</th><th>Bestuhlung</th><th>Empfohlene Gästezahl</th></tr>
+                  <tr><th>{c.scenarioHead.format}</th><th>{c.scenarioHead.seating}</th><th>{c.scenarioHead.guests}</th></tr>
                 </thead>
                 <tbody>
-                  {scenario.map((row) => (
+                  {c.scenario.map((row) => (
                     <tr key={row[0]}><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>
                   ))}
                 </tbody>
@@ -421,39 +338,26 @@ const FilmfestMuenchen = () => {
         <section className="ff-sec ff-cater" id="catering">
           <div className="ff-wrap">
             <Reveal className="ff-sec-head">
-              <span className="ff-eyebrow ff-eyebrow-line">Catering & Küche</span>
-              <h2 className="ff-h2">Süditalien, das man im Raum riecht.</h2>
-              <p className="ff-lead">
-                Küchenchef Domenico Speranza und sein Team kochen nach Familienrezepten aus dem
-                Cilento. Keine Catering-Logistik von außen — alles entsteht im Haus und kommt frisch
-                an den Tisch. Zwei Wege, Ihren Abend zu erzählen:
-              </p>
+              <span className="ff-eyebrow ff-eyebrow-line">{c.cateringSection.eyebrow}</span>
+              <h2 className="ff-h2">{c.cateringSection.h2}</h2>
+              <p className="ff-lead">{c.cateringSection.lead}</p>
             </Reveal>
             <div className="ff-menu-grid">
-              <Reveal className="ff-menu-card">
-                <span className="tag">Für den Empfang</span>
-                <h3>Flying Buffet & Stationen</h3>
-                <ul>
-                  <li>Antipasti-Stationen mit Burrata, Vitello, mariniertem Gemüse</li>
-                  <li>Neapolitanische Steinofenpizza, live aus dem 400°-Ofen</li>
-                  <li>Flying Finger Food — Arancini, Crostini, Fritto Misto</li>
-                  <li>Aperitivo-Bar: Spritz, italienische Weine, alkoholfrei</li>
-                </ul>
-              </Reveal>
-              <Reveal delay={0.08} className="ff-menu-card">
-                <span className="tag">Für das Dinner</span>
-                <h3>Mehrgängiges Menü</h3>
-                <ul>
-                  <li>Individuell abgestimmte 3- bis 5-Gang-Menüs</li>
-                  <li>Hausgemachte Gragnano-Pasta, Mittelmeerfisch, regionales Fleisch</li>
-                  <li>Kuratierte italienische Weinbegleitung</li>
-                  <li>Service, der den Takt des Abends hält — bis spät</li>
-                </ul>
-              </Reveal>
+              {c.menuCards.map((card, i) => (
+                <Reveal key={card.title} delay={i * 0.08} className="ff-menu-card">
+                  <span className="tag">{card.tag}</span>
+                  <h3>{card.title}</h3>
+                  <ul>
+                    {card.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ))}
             </div>
             <Reveal delay={0.12} className="ff-chips">
-              {["Vegan auf Wunsch", "Glutenfreie Optionen", "Mehrsprachiger Service", "Späte Küche", "Menüs auf Englisch"].map((c) => (
-                <span key={c} className="ff-chip">{c}</span>
+              {c.chips.map((chip) => (
+                <span key={chip} className="ff-chip">{chip}</span>
               ))}
             </Reveal>
           </div>
@@ -463,11 +367,11 @@ const FilmfestMuenchen = () => {
         <section className="ff-sec ff-ablauf">
           <div className="ff-wrap">
             <Reveal className="ff-sec-head">
-              <span className="ff-eyebrow ff-eyebrow-line">So einfach wird es Ihrer</span>
-              <h2 className="ff-h2">Vier Schritte bis zu Ihrem Festivalabend.</h2>
+              <span className="ff-eyebrow ff-eyebrow-line">{c.ablaufSection.eyebrow}</span>
+              <h2 className="ff-h2">{c.ablaufSection.h2}</h2>
             </Reveal>
             <div className="ff-steps">
-              {steps.map((s, i) => (
+              {c.steps.map((s, i) => (
                 <Reveal key={s.n} delay={i * 0.08} className="ff-step">
                   <div className="n">{s.n}</div>
                   <h3>{s.title}</h3>
@@ -482,17 +386,14 @@ const FilmfestMuenchen = () => {
         <section className="ff-sec ff-kontakt" id="kontakt">
           <div className="ff-wrap ff-k-grid">
             <Reveal className="ff-k-left">
-              <span className="ff-urgency"><span className="pulse" />Festivalzeitraum 26.6.–5.7. — Termine sind begehrt</span>
-              <h2 className="ff-h2">Sichern Sie Ihren Abend, bevor es jemand anderes tut.</h2>
-              <p className="ff-lead">
-                Zehn Tage, in denen die ganze Branche in München ist und jeder gute Tisch zählt.
-                Sagen Sie uns Datum und Anlass — wir halten Ihnen den Bereich frei.
-              </p>
+              <span className="ff-urgency"><span className="pulse" />{c.kontakt.urgency}</span>
+              <h2 className="ff-h2">{c.kontakt.h2}</h2>
+              <p className="ff-lead">{c.kontakt.lead}</p>
               <div className="ff-direct">
-                <a href="tel:+498951519696"><span className="ic"><Phone size={18} /></span><span><b>Direkt anrufen</b>+49 89 51519696</span></a>
-                <a href="mailto:info@ristorantestoria.de?subject=Filmfest%20M%C3%BCnchen%202026%20%E2%80%93%20Eventanfrage"><span className="ic"><Mail size={18} /></span><span><b>E-Mail</b>info@ristorantestoria.de</span></a>
-                <a href="https://www.events-storia.de" target="_blank" rel="noopener noreferrer"><span className="ic"><ArrowUpRight size={18} /></span><span><b>Eventplattform</b>events-storia.de</span></a>
-                <a href="https://maps.google.com/?q=Ristorante+Storia+Karlstra%C3%9Fe+47a+M%C3%BCnchen" target="_blank" rel="noopener noreferrer"><span className="ic"><MapPin size={18} /></span><span><b>Anfahrt</b>Karlstraße 47a · 80333 München</span></a>
+                <a href="tel:+498951519696"><span className="ic"><Phone size={18} /></span><span><b>{c.kontakt.callLabel}</b>+49 89 51519696</span></a>
+                <a href={`mailto:info@ristorantestoria.de?subject=${c.kontakt.mailSubject}`}><span className="ic"><Mail size={18} /></span><span><b>{c.kontakt.mailLabel}</b>info@ristorantestoria.de</span></a>
+                <a href="https://www.events-storia.de" target="_blank" rel="noopener noreferrer"><span className="ic"><ArrowUpRight size={18} /></span><span><b>{c.kontakt.platformLabel}</b>events-storia.de</span></a>
+                <a href="https://maps.google.com/?q=Ristorante+Storia+Karlstra%C3%9Fe+47a+M%C3%BCnchen" target="_blank" rel="noopener noreferrer"><span className="ic"><MapPin size={18} /></span><span><b>{c.kontakt.directionsLabel}</b>{c.kontakt.directionsValue}</span></a>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
@@ -501,11 +402,11 @@ const FilmfestMuenchen = () => {
           </div>
           <div className="ff-wrap ff-faq" id="faq">
             <Reveal className="ff-sec-head">
-              <span className="ff-eyebrow ff-eyebrow-line">Häufige Fragen</span>
-              <h2 className="ff-h2">Filmfest München 2026 im STORIA — kurz erklärt.</h2>
+              <span className="ff-eyebrow ff-eyebrow-line">{c.faqSection.eyebrow}</span>
+              <h2 className="ff-h2">{c.faqSection.h2}</h2>
             </Reveal>
             <div className="ff-faq-list">
-              {faqItems.map((item, i) => (
+              {c.faqItems.map((item, i) => (
                 <Reveal key={item.question} delay={(i % 3) * 0.06} className="ff-faq-item">
                   <h3>{item.question}</h3>
                   <p><PhoneText>{item.answer}</PhoneText></p>
@@ -515,12 +416,11 @@ const FilmfestMuenchen = () => {
           </div>
           <div className="ff-wrap">
             <p className="ff-disclaimer">
-              Eine Sonderseite zum Filmfest München (26. Juni – 5. Juli 2026). Filmfest München ist
-              eine Veranstaltung der Internationale Münchner Filmwochen GmbH; diese Seite steht in
-              keiner offiziellen Verbindung zum Festival. Offizielle Festivalinformationen unter{" "}
+              {c.disclaimerPre}
               <a href="https://www.filmfest-muenchen.de/" target="_blank" rel="noopener noreferrer">
-                filmfest-muenchen.de
-              </a>.
+                {c.disclaimerLinkLabel}
+              </a>
+              {c.disclaimerPost}
             </p>
             <img src={storiaLogo} alt="STORIA Logo" className="ff-foot-logo" loading="lazy" />
           </div>

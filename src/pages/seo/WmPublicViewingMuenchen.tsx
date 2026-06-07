@@ -10,7 +10,9 @@ import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
+import { wmContent } from "./wmContent";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen.webp";
 import heroImg600 from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen-600w.webp";
@@ -79,73 +81,28 @@ const Reveal = ({
   );
 };
 
-const angebot = [
-  "Alle Spiele der WM 2026, von der Gruppenphase bis zum Finale.",
-  "Übertragung auf der überdachten Terrasse. Bei schlechtem Wetter zeigen wir drinnen weiter.",
-  "Keine Sportkneipe: süditalienische Küche, eigene Weinkarte, Aperitivo zum Anstoß.",
-  "Reservierung empfohlen, gerade an den Abenden mit deutscher Beteiligung.",
-];
-
-const deutscheSpiele = [
-  { tag: "Sonntag", datum: "14. Juni", heimFlag: "🇩🇪", heim: "Deutschland", gastFlag: "🇨🇼", gast: "Curaçao", anstoss: "19:00", ort: "Houston", tv: "ARD" },
-  { tag: "Samstag", datum: "20. Juni", heimFlag: "🇩🇪", heim: "Deutschland", gastFlag: "🇨🇮", gast: "Elfenbeinküste", anstoss: "22:00", ort: "Toronto", tv: "ZDF" },
-  { tag: "Donnerstag", datum: "25. Juni", heimFlag: "🇪🇨", heim: "Ecuador", gastFlag: "🇩🇪", gast: "Deutschland", anstoss: "22:00", ort: "New York / NJ", tv: "ARD" },
-];
-
-const turnier = [
-  { phase: "Eröffnung", zeit: "11. Juni · 21:00" },
-  { phase: "Gruppenphase", zeit: "11. – 27. Juni" },
-  { phase: "Sechzehntelfinale", zeit: "28.6. – 3.7." },
-  { phase: "Achtelfinale", zeit: "4. – 7. Juli" },
-  { phase: "Viertelfinale", zeit: "9. – 11. Juli" },
-  { phase: "Halbfinale", zeit: "14. / 15. Juli" },
-  { phase: "Finale", zeit: "19. Juli · 21:00" },
-];
-
-const faqItems = [
-  {
-    question: "Werden alle Spiele gezeigt?",
-    answer: "Ja. Wir übertragen alle Spiele der WM 2026, von der Gruppenphase bis zum Finale.",
-  },
-  {
-    question: "Muss ich reservieren?",
-    answer:
-      "Empfohlen, vor allem an Spieltagen und bei den deutschen Spielen. Reservieren geht über das Formular oder per WhatsApp.",
-  },
-  {
-    question: "Was passiert bei schlechtem Wetter?",
-    answer: "Die Terrasse ist überdacht. Wird es zu ungemütlich, zeigen wir die Spiele drinnen.",
-  },
-  {
-    question: "Zeigt ihr auch die Deutschland-Spiele?",
-    answer: "Ja, alle drei Gruppenspiele. Kommt Deutschland weiter, auch die K.-o.-Runde.",
-  },
-  {
-    question: "Kann ich auch nur etwas trinken kommen?",
-    answer:
-      "Ja. Aperitivo, Wein oder ein Bier zum Spiel sind kein Problem. Plätze sind an Spieltagen gefragt, darum besser kurz reservieren.",
-  },
-  {
-    question: "Wo genau ist STORIA?",
-    answer:
-      "In der Maxvorstadt, Karlstraße 47a, 80333 München. Tram 20 und 21, Haltestelle Karlstraße, direkt vor dem Restaurant.",
-  },
+/** Sprachneutrale Spiel-Metadaten (Flaggen, Anstoß MESZ, Spielort, TV) – per Index zu c.spiele.items. */
+const spielMeta = [
+  { heimFlag: "🇩🇪", gastFlag: "🇨🇼", anstoss: "19:00", ort: "Houston", tv: "ARD" },
+  { heimFlag: "🇩🇪", gastFlag: "🇨🇮", anstoss: "22:00", ort: "Toronto", tv: "ZDF" },
+  { heimFlag: "🇪🇨", gastFlag: "🇩🇪", anstoss: "22:00", ort: "New York / NJ", tv: "ARD" },
 ];
 
 const WmPublicViewingMuenchen = () => {
   usePrerenderReady(true);
   const [scrolled, setScrolled] = useState(false);
   const { setAlternates, clearAlternates } = useAlternateLinks();
+  const { language } = useLanguage();
+  const c = wmContent[language];
 
-  // Deutschsprachige Seite: EN/IT/FR-Sprachwechsel führen auf die lokalisierte
-  // Startseite, damit keine tote WM-URL entsteht; DE bleibt auf dieser Seite.
+  // Mehrsprachige Seite: hreflang verweist für jede Sprache auf die lokalisierte WM-URL.
   useEffect(() => {
-    setAlternates([
-      { lang: "de", url: getLocalizedPath("wm-2026-public-viewing-muenchen", "de") },
-      { lang: "en", url: getLocalizedPath("home", "en") },
-      { lang: "it", url: getLocalizedPath("home", "it") },
-      { lang: "fr", url: getLocalizedPath("home", "fr") },
-    ]);
+    setAlternates(
+      (["de", "en", "it", "fr"] as const).map((l) => ({
+        lang: l,
+        url: getLocalizedPath("wm-2026-public-viewing-muenchen", l),
+      }))
+    );
     return () => clearAlternates();
   }, [setAlternates, clearAlternates]);
 
@@ -159,27 +116,26 @@ const WmPublicViewingMuenchen = () => {
   return (
     <>
       <SEO
-        title="WM 2026 Public Viewing München – alle Spiele live | STORIA"
-        description="Alle Spiele der WM 2026 live auf der überdachten Terrasse in der Maxvorstadt. Süditalienische Küche, Aperitivo, bei schlechtem Wetter drinnen. Tisch reservieren."
-        canonical="/wm-2026-public-viewing-muenchen"
+        title={c.seo.title}
+        description={c.seo.description}
+        canonical={getLocalizedPath("wm-2026-public-viewing-muenchen", language)}
         ogImage={OG_IMAGE}
-        noHreflang
       />
-      <StructuredData type="faq" faqItems={faqItems} />
+      <StructuredData type="faq" faqItems={c.faq.items} />
 
       <style>{wmStyles}</style>
 
       <div className="wm-page">
         {/* NAV */}
         <nav className={`wm-nav ${scrolled ? "scrolled" : ""}`}>
-          <LocalizedLink to="home" className="wm-brand" aria-label="STORIA – zur Startseite">
+          <LocalizedLink to="home" className="wm-brand" aria-label="STORIA">
             STORIA<span>.</span>
           </LocalizedLink>
           <div className="wm-nav-links">
-            <a href="#angebot">Was läuft</a>
-            <a href="#spiele">Deutsche Spiele</a>
-            <a href="#turnier">Turnier</a>
-            <a href="#reservieren" className="wm-nav-cta">Tisch reservieren</a>
+            <a href="#angebot">{c.nav.angebot}</a>
+            <a href="#spiele">{c.nav.spiele}</a>
+            <a href="#turnier">{c.nav.turnier}</a>
+            <a href="#reservieren" className="wm-nav-cta">{c.nav.reservieren}</a>
             <span className="wm-nav-sep" aria-hidden="true" />
             <a href="tel:+498951519696" className="wm-nav-icon" aria-label="Anrufen +49 89 51519696" title="+49 89 51519696">
               <Phone size={16} />
@@ -228,20 +184,17 @@ const WmPublicViewingMuenchen = () => {
           <div className="wm-hero-overlay" />
           <div className="wm-wrap wm-hero-inner">
             <Reveal as="span" className="wm-eyebrow wm-eyebrow-line">
-              WM 2026 · 11. Juni – 19. Juli · Maxvorstadt
+              {c.hero.eyebrow}
             </Reveal>
             <Reveal as="h1" delay={0.08} className="wm-h1">
-              WM 2026 Public Viewing in der Maxvorstadt – alle Spiele im <em>STORIA</em>
+              {c.hero.h1.pre}<em>{c.hero.h1.em}</em>{c.hero.h1.post}
             </Reveal>
             <Reveal as="p" delay={0.16} className="wm-hero-sub">
-              Italien ist 2026 nicht dabei, zum dritten Mal in Folge. Bei uns läuft die WM trotzdem – von der
-              Eröffnung am 11. Juni bis zum Finale am 19. Juli. Alle Spiele, auf der überdachten Terrasse in der
-              Karlstraße. Dazu süditalienische Küche, ein Glas Wein, ein Aperitivo. An Spieltagen wird es voll,
-              reserviert also besser vorher.
+              {c.hero.sub}
             </Reveal>
             <Reveal delay={0.24} className="wm-hero-actions">
               <a href="#reservieren" className="wm-btn wm-btn-primary" onClick={() => fireLead("wm_reservierung")}>
-                Tisch reservieren →
+                {c.hero.ctaReserve}
               </a>
               <a
                 href="https://wa.me/491636033912"
@@ -250,7 +203,7 @@ const WmPublicViewingMuenchen = () => {
                 className="wm-btn wm-btn-ghost"
                 onClick={() => fireLead("wm_whatsapp")}
               >
-                <MessageCircle size={18} /> WhatsApp
+                <MessageCircle size={18} /> {c.hero.ctaWhatsapp}
               </a>
             </Reveal>
           </div>
@@ -260,10 +213,10 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-angebot" id="angebot">
           <div className="wm-wrap wm-angebot-grid">
             <Reveal className="wm-angebot-text">
-              <span className="wm-eyebrow wm-eyebrow-line">Was bei uns läuft</span>
-              <h2 className="wm-h2">Fußball schauen, italienisch genießen.</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">{c.angebot.eyebrow}</span>
+              <h2 className="wm-h2">{c.angebot.h2}</h2>
               <ul className="wm-list">
-                {angebot.map((a) => (
+                {c.angebot.items.map((a) => (
                   <li key={a}>{a}</li>
                 ))}
               </ul>
@@ -284,36 +237,39 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-spiele" id="spiele">
           <div className="wm-wrap">
             <Reveal className="wm-sec-head">
-              <span className="wm-eyebrow wm-eyebrow-line">Gruppe E · Die deutschen Spiele</span>
-              <h2 className="wm-h2">Wenn Deutschland spielt, ist hier was los.</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">{c.spiele.eyebrow}</span>
+              <h2 className="wm-h2">{c.spiele.h2}</h2>
             </Reveal>
             <div className="wm-match-grid">
-              {deutscheSpiele.map((s, i) => (
-                <Reveal key={s.datum} delay={i * 0.08} className="wm-match">
-                  <span className="wm-match-date">{s.tag} · {s.datum}</span>
-                  <div className="wm-match-teams">
-                    <div className="wm-team">
-                      <span className="flag" aria-hidden="true">{s.heimFlag}</span>
-                      <span className="name">{s.heim}</span>
+              {c.spiele.items.map((s, i) => {
+                const m = spielMeta[i];
+                return (
+                  <Reveal key={s.datum} delay={i * 0.08} className="wm-match">
+                    <span className="wm-match-date">{s.tag} · {s.datum}</span>
+                    <div className="wm-match-teams">
+                      <div className="wm-team">
+                        <span className="flag" aria-hidden="true">{m.heimFlag}</span>
+                        <span className="name">{s.heim}</span>
+                      </div>
+                      <span className="wm-vs">{c.spiele.vs}</span>
+                      <div className="wm-team">
+                        <span className="flag" aria-hidden="true">{m.gastFlag}</span>
+                        <span className="name">{s.gast}</span>
+                      </div>
                     </div>
-                    <span className="wm-vs">gegen</span>
-                    <div className="wm-team">
-                      <span className="flag" aria-hidden="true">{s.gastFlag}</span>
-                      <span className="name">{s.gast}</span>
+                    <div className="wm-match-foot">
+                      <span className="wm-kick">{m.anstoss}<small>{c.spiele.mesz}</small></span>
+                      <span className="wm-match-foot-r">
+                        <span className="wm-where">{m.ort}</span>
+                        <span className="wm-tv">{m.tv}</span>
+                      </span>
                     </div>
-                  </div>
-                  <div className="wm-match-foot">
-                    <span className="wm-kick">{s.anstoss}<small>MESZ</small></span>
-                    <span className="wm-match-foot-r">
-                      <span className="wm-where">{s.ort}</span>
-                      <span className="wm-tv">{s.tv}</span>
-                    </span>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                );
+              })}
             </div>
             <Reveal as="p" className="wm-note">
-              Alle Zeiten in MESZ. Kommt Deutschland weiter, zeigen wir auch die K.-o.-Spiele.
+              {c.spiele.note}
             </Reveal>
           </div>
         </section>
@@ -322,14 +278,14 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-turnier" id="turnier">
           <div className="wm-wrap">
             <Reveal className="wm-sec-head">
-              <span className="wm-eyebrow wm-eyebrow-line">So läuft das Turnier</span>
-              <h2 className="wm-h2">Von Mexiko-Stadt bis New Jersey.</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">{c.turnier.eyebrow}</span>
+              <h2 className="wm-h2">{c.turnier.h2}</h2>
             </Reveal>
             <Reveal className="wm-timeline">
               <div className="wm-timeline-track" aria-hidden="true" />
               <ol className="wm-timeline-list">
-                {turnier.map((t, i) => (
-                  <li key={t.phase} className={i === turnier.length - 1 ? "is-final" : ""}>
+                {c.turnier.items.map((t, i) => (
+                  <li key={t.phase} className={i === c.turnier.items.length - 1 ? "is-final" : ""}>
                     <span className="dot" aria-hidden="true" />
                     <span className="phase">{t.phase}</span>
                     <span className="zeit">{t.zeit}</span>
@@ -344,11 +300,10 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-reservieren" id="reservieren">
           <div className="wm-wrap">
             <Reveal className="wm-sec-head">
-              <span className="wm-eyebrow wm-eyebrow-line">Platz sichern</span>
-              <h2 className="wm-h2">Reservieren</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">{c.reservieren.eyebrow}</span>
+              <h2 className="wm-h2">{c.reservieren.h2}</h2>
               <p className="wm-lead">
-                An Spieltagen sind die Tische schnell vergeben, bei den deutschen Spielen besonders. Sichert euch
-                euren Platz auf der Terrasse oder drinnen – eine kurze Reservierung genügt.
+                {c.reservieren.lead}
               </p>
             </Reveal>
             <Reveal delay={0.1} className="wm-booking">
@@ -360,7 +315,7 @@ const WmPublicViewingMuenchen = () => {
                 className="wm-btn wm-btn-primary"
                 onClick={() => fireLead("wm_reservierung")}
               >
-                Tisch reservieren →
+                {c.reservieren.ctaReserve}
               </LocalizedLink>
               <a
                 href="https://wa.me/491636033912"
@@ -369,7 +324,7 @@ const WmPublicViewingMuenchen = () => {
                 className="wm-btn wm-btn-ghost"
                 onClick={() => fireLead("wm_whatsapp")}
               >
-                <MessageCircle size={18} /> WhatsApp
+                <MessageCircle size={18} /> {c.reservieren.ctaWhatsapp}
               </a>
             </Reveal>
           </div>
@@ -379,28 +334,27 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-anfahrt" id="anfahrt">
           <div className="wm-wrap wm-anfahrt-grid">
             <Reveal className="wm-anfahrt-text">
-              <span className="wm-eyebrow wm-eyebrow-line">Anfahrt</span>
-              <h2 className="wm-h2">Mitten in der Maxvorstadt.</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">{c.anfahrt.eyebrow}</span>
+              <h2 className="wm-h2">{c.anfahrt.h2}</h2>
               <p className="wm-lead">
-                STORIA, Karlstraße 47a, 80333 München. Telefon <PhoneText>+49 89 51519696</PhoneText>. Die Tram 20
-                und 21 hält an der Karlstraße direkt vor der Tür.
+                <PhoneText>{c.anfahrt.lead}</PhoneText>
               </p>
               <div className="wm-direct">
                 <a href="tel:+498951519696">
                   <span className="ic"><Phone size={18} /></span>
-                  <span><b>Direkt anrufen</b>+49 89 51519696</span>
+                  <span><b>{c.anfahrt.callLabel}</b>{c.anfahrt.callSub}</span>
                 </a>
                 <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" onClick={() => fireLead("wm_whatsapp")}>
                   <span className="ic"><MessageCircle size={18} /></span>
-                  <span><b>WhatsApp</b>Schnelle Reservierungsanfrage</span>
+                  <span><b>{c.anfahrt.whatsappLabel}</b>{c.anfahrt.whatsappSub}</span>
                 </a>
                 <a href="https://maps.google.com/?q=Ristorante+Storia+Karlstra%C3%9Fe+47a+M%C3%BCnchen" target="_blank" rel="noopener noreferrer">
                   <span className="ic"><MapPin size={18} /></span>
-                  <span><b>Anfahrt</b>Karlstraße 47a · 80333 München</span>
+                  <span><b>{c.anfahrt.directionsLabel}</b>{c.anfahrt.directionsSub}</span>
                 </a>
                 <a href="https://www.ristorantestoria.de" target="_blank" rel="noopener noreferrer">
                   <span className="ic"><ArrowUpRight size={18} /></span>
-                  <span><b>Restaurant</b>ristorantestoria.de</span>
+                  <span><b>{c.anfahrt.restaurantLabel}</b>{c.anfahrt.restaurantSub}</span>
                 </a>
               </div>
             </Reveal>
@@ -419,11 +373,11 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-faq-sec" id="faq">
           <div className="wm-wrap">
             <Reveal className="wm-sec-head">
-              <span className="wm-eyebrow wm-eyebrow-line">Häufige Fragen</span>
-              <h2 className="wm-h2">WM 2026 im STORIA – kurz erklärt.</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">{c.faq.eyebrow}</span>
+              <h2 className="wm-h2">{c.faq.h2}</h2>
             </Reveal>
             <div className="wm-faq-list">
-              {faqItems.map((item, i) => (
+              {c.faq.items.map((item, i) => (
                 <Reveal key={item.question} delay={(i % 3) * 0.06} className="wm-faq-item">
                   <h3>{item.question}</h3>
                   <p><PhoneText>{item.answer}</PhoneText></p>
@@ -431,8 +385,7 @@ const WmPublicViewingMuenchen = () => {
               ))}
             </div>
             <p className="wm-disclaimer">
-              Eine Sonderseite zur Fußball-Weltmeisterschaft 2026 (11. Juni – 19. Juli). Diese Seite steht in keiner
-              offiziellen Verbindung zur FIFA. Spielzeiten und Übertragungen ohne Gewähr.
+              {c.faq.disclaimer}
             </p>
             <img src={storiaLogo} alt="STORIA Logo" className="wm-foot-logo" loading="lazy" />
           </div>
