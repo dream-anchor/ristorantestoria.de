@@ -153,7 +153,7 @@ const HochzeitsfeierMuenchen = () => {
           {/* Intro Section */}
           <section className="py-16 md:py-20">
             <div className="container mx-auto px-4 max-w-4xl">
-              <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.internalLinks.eventLocation, href: '/eventlocation-muenchen-maxvorstadt' }, { label: s.breadcrumb }]} />
+              <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.internalLinks.eventLocation, href: '/eventlocation-muenchen-maxvorstadt/' }, { label: s.breadcrumb }]} />
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-6">
                 {s.introTitle}
               </h2>

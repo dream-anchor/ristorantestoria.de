@@ -2,6 +2,7 @@ import { Helmet } from '@/lib/helmetAsync';
 import { useLanguage } from '@/contexts/LanguageContext';
 import reviewsData from '@/data/google-reviews-de.json';
 import { STORIA } from '@/config/storia-entity';
+import { normalizeUrl } from '@/lib/urlNormalization';
 
 interface StructuredDataProps {
   type?: 'restaurant' | 'menu' | 'faq' | 'breadcrumb' | 'event';
@@ -203,7 +204,9 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, includeRev
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${STORIA.url}${item.url}`,
+      // item-URL immer kanonisch ausgeben (absolut, https + www, Trailing Slash) —
+      // unabhängig vom rohen href in den Props. Verhindert Crawl-Sprawl über das JSON-LD.
+      item: normalizeUrl(item.url),
     })),
   } : null;
 

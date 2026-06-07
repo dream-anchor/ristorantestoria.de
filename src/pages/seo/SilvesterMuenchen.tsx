@@ -126,7 +126,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
     if (!standalone) return '';
     const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
     const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
-    return language === 'de' ? `/${parentSlug}/${seasonalSlug}` : `/${language}/${parentSlug}/${seasonalSlug}`;
+    return language === 'de' ? `/${parentSlug}/${seasonalSlug}/` : `/${language}/${parentSlug}/${seasonalSlug}/`;
   })();
 
   return (

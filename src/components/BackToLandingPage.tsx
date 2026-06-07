@@ -16,7 +16,7 @@ const landingPageNames: Record<string, LandingPageInfo> = {
       it: 'Evento Aziendale Monaco',
       fr: 'Événement d\'entreprise Munich',
     },
-    path: '/firmenfeier-muenchen'
+    path: '/firmenfeier-muenchen/'
   },
   'geburtstagsfeier-muenchen': { 
     name: {
@@ -25,7 +25,7 @@ const landingPageNames: Record<string, LandingPageInfo> = {
       it: 'Festa di Compleanno Monaco',
       fr: 'Fête d\'anniversaire Munich',
     },
-    path: '/geburtstagsfeier-muenchen'
+    path: '/geburtstagsfeier-muenchen/'
   },
   'eventlocation-muenchen': { 
     name: {
@@ -34,7 +34,7 @@ const landingPageNames: Record<string, LandingPageInfo> = {
       it: 'Location Eventi Monaco',
       fr: 'Lieu d\'événement Munich',
     },
-    path: '/eventlocation-muenchen-maxvorstadt'
+    path: '/eventlocation-muenchen-maxvorstadt/'
   },
   'lunch-muenchen-maxvorstadt': { 
     name: {
@@ -43,7 +43,7 @@ const landingPageNames: Record<string, LandingPageInfo> = {
       it: 'Pranzo Monaco',
       fr: 'Déjeuner Munich',
     },
-    path: '/lunch-muenchen-maxvorstadt'
+    path: '/lunch-muenchen-maxvorstadt/'
   },
   'aperitivo-muenchen': { 
     name: {
@@ -52,7 +52,7 @@ const landingPageNames: Record<string, LandingPageInfo> = {
       it: 'Aperitivo Monaco',
       fr: 'Aperitivo Munich',
     },
-    path: '/aperitivo-muenchen'
+    path: '/aperitivo-muenchen/'
   },
   'romantisches-dinner': { 
     name: {
@@ -61,7 +61,7 @@ const landingPageNames: Record<string, LandingPageInfo> = {
       it: 'Cena Romantica',
       fr: 'Dîner Romantique',
     },
-    path: '/romantisches-dinner-muenchen'
+    path: '/romantisches-dinner-muenchen/'
   },
   'neapolitanische-pizza': { 
     name: {
@@ -70,7 +70,7 @@ const landingPageNames: Record<string, LandingPageInfo> = {
       it: 'Pizza Napoletana',
       fr: 'Pizza Napolitaine',
     },
-    path: '/neapolitanische-pizza-muenchen'
+    path: '/neapolitanische-pizza-muenchen/'
   }
 };
 
