@@ -87,19 +87,19 @@ const angebot = [
 ];
 
 const deutscheSpiele = [
-  { datum: "So, 14. Juni", anstoss: "19:00", spiel: "Deutschland – Curaçao", ort: "Houston", tv: "ARD" },
-  { datum: "Sa, 20. Juni", anstoss: "22:00", spiel: "Deutschland – Elfenbeinküste", ort: "Toronto", tv: "ZDF" },
-  { datum: "Do, 25. Juni", anstoss: "22:00", spiel: "Ecuador – Deutschland", ort: "New York/New Jersey", tv: "ARD" },
+  { tag: "Sonntag", datum: "14. Juni", heimFlag: "🇩🇪", heim: "Deutschland", gastFlag: "🇨🇼", gast: "Curaçao", anstoss: "19:00", ort: "Houston", tv: "ARD" },
+  { tag: "Samstag", datum: "20. Juni", heimFlag: "🇩🇪", heim: "Deutschland", gastFlag: "🇨🇮", gast: "Elfenbeinküste", anstoss: "22:00", ort: "Toronto", tv: "ZDF" },
+  { tag: "Donnerstag", datum: "25. Juni", heimFlag: "🇪🇨", heim: "Ecuador", gastFlag: "🇩🇪", gast: "Deutschland", anstoss: "22:00", ort: "New York / NJ", tv: "ARD" },
 ];
 
 const turnier = [
-  { phase: "Eröffnung", zeit: "11. Juni, 21:00" },
-  { phase: "Gruppenphase", zeit: "11. bis 27. Juni" },
-  { phase: "Sechzehntelfinale", zeit: "28. Juni bis 3. Juli" },
-  { phase: "Achtelfinale", zeit: "4. bis 7. Juli" },
-  { phase: "Viertelfinale", zeit: "9. bis 11. Juli" },
-  { phase: "Halbfinale", zeit: "14. und 15. Juli" },
-  { phase: "Finale", zeit: "19. Juli, 21:00" },
+  { phase: "Eröffnung", zeit: "11. Juni · 21:00" },
+  { phase: "Gruppenphase", zeit: "11. – 27. Juni" },
+  { phase: "Sechzehntelfinale", zeit: "28.6. – 3.7." },
+  { phase: "Achtelfinale", zeit: "4. – 7. Juli" },
+  { phase: "Viertelfinale", zeit: "9. – 11. Juli" },
+  { phase: "Halbfinale", zeit: "14. / 15. Juli" },
+  { phase: "Finale", zeit: "19. Juli · 21:00" },
 ];
 
 const faqItems = [
@@ -231,7 +231,7 @@ const WmPublicViewingMuenchen = () => {
               WM 2026 · 11. Juni – 19. Juli · Maxvorstadt
             </Reveal>
             <Reveal as="h1" delay={0.08} className="wm-h1">
-              WM 2026 Public Viewing in der Maxvorstadt – alle Spiele bei <em>STORIA</em>
+              WM 2026 Public Viewing in der Maxvorstadt – alle Spiele im <em>STORIA</em>
             </Reveal>
             <Reveal as="p" delay={0.16} className="wm-hero-sub">
               Italien ist 2026 nicht dabei, zum dritten Mal in Folge. Bei uns läuft die WM trotzdem – von der
@@ -284,33 +284,34 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-spiele" id="spiele">
           <div className="wm-wrap">
             <Reveal className="wm-sec-head">
-              <span className="wm-eyebrow wm-eyebrow-line">Rot-Weiß-Schwarz</span>
-              <h2 className="wm-h2">Die deutschen Spiele</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">Gruppe E · Die deutschen Spiele</span>
+              <h2 className="wm-h2">Wenn Deutschland spielt, ist hier was los.</h2>
             </Reveal>
-            <Reveal className="wm-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Datum</th>
-                    <th>Anstoß (MESZ)</th>
-                    <th>Begegnung</th>
-                    <th>Ort</th>
-                    <th>TV</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {deutscheSpiele.map((s) => (
-                    <tr key={s.datum}>
-                      <td>{s.datum}</td>
-                      <td>{s.anstoss}</td>
-                      <td>{s.spiel}</td>
-                      <td>{s.ort}</td>
-                      <td>{s.tv}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </Reveal>
+            <div className="wm-match-grid">
+              {deutscheSpiele.map((s, i) => (
+                <Reveal key={s.datum} delay={i * 0.08} className="wm-match">
+                  <span className="wm-match-date">{s.tag} · {s.datum}</span>
+                  <div className="wm-match-teams">
+                    <div className="wm-team">
+                      <span className="flag" aria-hidden="true">{s.heimFlag}</span>
+                      <span className="name">{s.heim}</span>
+                    </div>
+                    <span className="wm-vs">gegen</span>
+                    <div className="wm-team">
+                      <span className="flag" aria-hidden="true">{s.gastFlag}</span>
+                      <span className="name">{s.gast}</span>
+                    </div>
+                  </div>
+                  <div className="wm-match-foot">
+                    <span className="wm-kick">{s.anstoss}<small>MESZ</small></span>
+                    <span className="wm-match-foot-r">
+                      <span className="wm-where">{s.ort}</span>
+                      <span className="wm-tv">{s.tv}</span>
+                    </span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
             <Reveal as="p" className="wm-note">
               Alle Zeiten in MESZ. Kommt Deutschland weiter, zeigen wir auch die K.-o.-Spiele.
             </Reveal>
@@ -321,16 +322,20 @@ const WmPublicViewingMuenchen = () => {
         <section className="wm-sec wm-turnier" id="turnier">
           <div className="wm-wrap">
             <Reveal className="wm-sec-head">
-              <span className="wm-eyebrow wm-eyebrow-line">Der Fahrplan</span>
-              <h2 className="wm-h2">So läuft das Turnier</h2>
+              <span className="wm-eyebrow wm-eyebrow-line">So läuft das Turnier</span>
+              <h2 className="wm-h2">Von Mexiko-Stadt bis New Jersey.</h2>
             </Reveal>
-            <Reveal as="ul" className="wm-phases">
-              {turnier.map((t) => (
-                <li key={t.phase}>
-                  <span className="phase">{t.phase}</span>
-                  <span className="zeit">{t.zeit}</span>
-                </li>
-              ))}
+            <Reveal className="wm-timeline">
+              <div className="wm-timeline-track" aria-hidden="true" />
+              <ol className="wm-timeline-list">
+                {turnier.map((t, i) => (
+                  <li key={t.phase} className={i === turnier.length - 1 ? "is-final" : ""}>
+                    <span className="dot" aria-hidden="true" />
+                    <span className="phase">{t.phase}</span>
+                    <span className="zeit">{t.zeit}</span>
+                  </li>
+                ))}
+              </ol>
             </Reveal>
           </div>
         </section>
@@ -443,6 +448,7 @@ const wmStyles = `
 .wm-page{
   --ink:#1a130d;--ink-2:#241a12;--bone:hsl(36 38% 92%);--amber:#d6892f;--amber-bright:#e8a14a;
   --rust:#a8431f;--line:rgba(244,236,224,.16);--line-dark:rgba(26,19,13,.14);--maxw:1200px;
+  --green:#3fb950;--green-soft:#79d397;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
   background:var(--ink);color:var(--bone);overflow-x:hidden;
 }
 .wm-page ::selection{background:var(--amber);color:var(--ink);}
@@ -470,7 +476,7 @@ const wmStyles = `
 /* HERO */
 .wm-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:120px 0 72px;overflow:hidden;background:var(--ink);}
 .wm-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;}
-.wm-hero-overlay{position:absolute;inset:0;background:radial-gradient(120% 90% at 80% 0%,rgba(214,137,47,.22),transparent 55%),radial-gradient(90% 70% at 0% 100%,rgba(168,67,31,.34),transparent 60%),linear-gradient(180deg,rgba(18,12,8,.5),rgba(26,19,13,.78) 60%,rgba(22,15,10,.92));}
+.wm-hero-overlay{position:absolute;inset:0;background:radial-gradient(120% 90% at 80% 0%,rgba(214,137,47,.2),transparent 55%),radial-gradient(90% 70% at 0% 100%,rgba(168,67,31,.32),transparent 60%),linear-gradient(180deg,rgba(16,11,7,.58),rgba(20,14,9,.82) 52%,rgba(12,8,5,.97));}
 .wm-hero-inner{position:relative;z-index:3;width:100%;}
 .wm-h1{font-size:clamp(2.6rem,6.6vw,5.4rem);max-width:18ch;margin:26px 0;color:var(--bone);}
 .wm-h1 em{font-style:italic;color:var(--amber-bright);}
@@ -497,25 +503,36 @@ const wmStyles = `
 .wm-angebot-img{border-radius:20px;overflow:hidden;border:1px solid var(--line);}
 .wm-angebot-img img{display:block;width:100%;height:100%;object-fit:cover;}
 /* DEUTSCHE SPIELE */
-.wm-spiele{background:var(--bone);color:var(--ink);}
-.wm-spiele .wm-eyebrow{color:var(--rust);}
-.wm-spiele .wm-eyebrow-line::before{background:var(--rust);}
-.wm-spiele .wm-h2{color:var(--ink);}
-.wm-table{border:1px solid var(--line-dark);border-radius:18px;overflow:hidden;overflow-x:auto;background:#fff;}
-.wm-table table{width:100%;border-collapse:collapse;min-width:620px;}
-.wm-table th,.wm-table td{text-align:left;padding:18px 24px;border-bottom:1px solid var(--line-dark);font-size:1rem;}
-.wm-table th{font-weight:600;color:var(--rust);font-size:13px;letter-spacing:.04em;text-transform:uppercase;}
-.wm-table td:first-child,.wm-table td:nth-child(3){font-weight:600;color:var(--ink);}
-.wm-table td{color:rgba(26,19,13,.82);white-space:nowrap;}
-.wm-table tr:last-child td{border-bottom:none;}
-.wm-note{margin-top:20px;font-size:.95rem;color:rgba(26,19,13,.62);font-style:italic;}
+.wm-spiele{background:var(--ink-2);}
+.wm-match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:900px){.wm-match-grid{grid-template-columns:1fr;}}
+.wm-match{position:relative;border:1px solid var(--line);border-radius:18px;padding:30px 28px 26px;background:linear-gradient(180deg,rgba(244,236,224,.05),rgba(244,236,224,.02));overflow:hidden;transition:transform .3s,border-color .3s;}
+.wm-match::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--green));}
+.wm-match:hover{transform:translateY(-4px);border-color:rgba(63,185,80,.5);}
+.wm-match-date{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-bright);}
+.wm-match-teams{margin:22px 0 0;display:flex;flex-direction:column;gap:10px;}
+.wm-team{display:flex;align-items:center;gap:12px;}
+.wm-team .flag{font-size:1.7rem;line-height:1;}
+.wm-team .name{font-size:1.4rem;font-weight:700;color:var(--bone);font-family:'Cormorant Garamond',serif;}
+.wm-vs{font-size:.92rem;color:rgba(244,236,224,.45);padding-left:6px;}
+.wm-match-foot{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:flex-end;justify-content:space-between;gap:14px;}
+.wm-kick{font-family:var(--mono);font-size:1.9rem;font-weight:600;color:var(--green-soft);line-height:1;display:inline-flex;align-items:baseline;gap:7px;}
+.wm-kick small{font-size:.66rem;letter-spacing:.1em;color:rgba(244,236,224,.45);font-weight:500;}
+.wm-match-foot-r{display:flex;flex-direction:column;align-items:flex-end;gap:9px;}
+.wm-where{font-family:var(--mono);font-size:.82rem;color:rgba(244,236,224,.6);}
+.wm-tv{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(244,236,224,.82);border:1px solid var(--line);border-radius:7px;padding:4px 10px;}
+.wm-note{margin-top:26px;font-family:var(--mono);font-size:.86rem;color:rgba(244,236,224,.5);}
 /* TURNIER */
 .wm-turnier{background:var(--ink);}
-.wm-phases{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 56px;}
-@media(max-width:680px){.wm-phases{grid-template-columns:1fr;}}
-.wm-phases li{display:flex;align-items:baseline;justify-content:space-between;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);}
-.wm-phases .phase{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--bone);}
-.wm-phases .zeit{font-size:1rem;color:var(--amber-bright);font-weight:600;text-align:right;}
+.wm-timeline{position:relative;margin-top:14px;overflow-x:auto;padding-bottom:6px;}
+.wm-timeline-track{position:absolute;top:7px;left:0;right:0;height:1px;background:var(--line);min-width:760px;}
+.wm-timeline-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(118px,1fr));gap:0 18px;min-width:760px;}
+.wm-timeline-list li{position:relative;padding-top:32px;}
+.wm-timeline-list .dot{position:absolute;top:0;left:0;width:15px;height:15px;border-radius:50%;border:2px solid var(--rust);background:var(--ink);box-sizing:border-box;}
+.wm-timeline-list .phase{display:block;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--bone);line-height:1.1;}
+.wm-timeline-list .zeit{display:block;margin-top:7px;font-family:var(--mono);font-size:.82rem;color:rgba(244,236,224,.55);}
+.wm-timeline-list li.is-final .dot{border-color:var(--green);background:var(--green);box-shadow:0 0 14px 2px rgba(63,185,80,.7);}
+.wm-timeline-list li.is-final .phase,.wm-timeline-list li.is-final .zeit{color:var(--green-soft);}
 /* RESERVIEREN */
 .wm-reservieren{background:var(--bone);color:var(--ink);}
 .wm-reservieren .wm-eyebrow{color:var(--rust);}
