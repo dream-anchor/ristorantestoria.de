@@ -13,6 +13,7 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import { toast } from "sonner";
 import DemoModeToggle from "@/components/admin/DemoModeToggle";
 import DemoModeBanner from "@/components/admin/DemoModeBanner";
+import Redact from "@/components/admin/Redact";
 
 // Error Boundary for catching render errors
 class SEOErrorBoundary extends Component<
@@ -127,7 +128,7 @@ export default function AdminSEO() {
               </Link>
             </Button>
             <span className="text-xs text-muted-foreground hidden md:block">
-              {user.email}
+              <Redact>{user.email}</Redact>
             </span>
             <Button variant="ghost" size="icon" asChild className="h-8 w-8">
               <Link to="/" target="_blank">
