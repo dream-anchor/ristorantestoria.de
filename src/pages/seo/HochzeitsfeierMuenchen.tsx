@@ -90,7 +90,7 @@ const HochzeitsfeierMuenchen = () => {
         <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
           <img
             src={heroImage}
-            srcSet={`${heroImage600} 600w, ${heroImage} 1200w`}
+            srcSet={`${heroImage600} 600w, ${heroImage} 1400w`}
             sizes="100vw"
             alt="Hochzeitsfeier im Ristorante STORIA München Maxvorstadt – festlich eingedeckte Tische mit weißen Hussen und warmer Lichterdekoration"
             width={1400}
