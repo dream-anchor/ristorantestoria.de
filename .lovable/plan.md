@@ -1,26 +1,27 @@
-## Bessere Hero-Bilder für 4 SEO-Seiten
+## Ziel
+Das Hero-Bild auf `/terrasse-muenchen` (`src/assets/aussen.webp`) ist hinten rechts noch unscharf/pixelig. Komposition bleibt identisch, nur die Schärfe im Hintergrund wird verbessert.
 
-### Problem
-Das aktuelle Hero `gaeste-terrasse-italiener-maxvorstadt-muenchen.webp` ist nur **640×640 px** und wird als Vollbild-Hero auf 4 Seiten ausgespielt → verpixelt. Auf dem Homepage-Grid bleibt es (klein/quadratisch) korrekt.
+## Umsetzung
 
-### Umsetzung
+1. **KI-Edit (gezielt nachschärfen)**
+   - Basis: aktuelles `src/assets/aussen.webp` (896×1200).
+   - `imagegen--edit_image`, Aspect Ratio `3:4`.
+   - Prompt mit Fokus auf den hinteren rechten Bereich: schärfere Stühle, Tischkanten, Gläser, Sonnenschirme, Gebäudefassaden, Straße und Autos im Hintergrund — gleiche Komposition, gleiche Farben/Stimmung, keine neuen Objekte, fotorealistisch und tack-sharp.
+   - Ausgabe als temporäres `src/assets/aussen-sharp.png`.
 
-**1. Hochzeit (`/hochzeitsfeier-muenchen/`)**
-- Basis: echtes Foto `ristorante-storia-uebersicht-stehtische-weissen-hussen.webp` (1400×1050, weiße Hussen).
-- Per KI behutsam zu festlicher Hochzeitsstimmung veredelt (warmes Licht, dezente Blumendeko), Raum bleibt erkennbar real.
-- Neues `hochzeitsfeier-storia-muenchen.webp` + `-600w.webp` in `src/assets/`, eingebunden mit hochzeitsspezifischem Alt-Text + Geo-Keywords.
+2. **Qualität prüfen**
+   - Per `image_tools--zoom_image` in den hinteren rechten Bereich zoomen und Schärfe verifizieren.
+   - Bei Bedarf Edit ein- bis zweimal mit angepasstem Prompt wiederholen.
 
-**2. Italienisches Restaurant (`/italienisches-restaurant-muenchen`)**
-- Hero → `ristorante-storia-uebersicht.webp` (1400×934).
+3. **Einbinden**
+   - PNG → WebP konvertieren (~90 Qualität).
+   - `src/assets/aussen.webp` ersetzen (896×1200).
+   - `src/assets/aussen-600w.webp` neu erzeugen (auf 600px Breite skaliert).
+   - Temporäre Dateien (`aussen-sharp.png`) löschen.
 
-**3. Italiener München (`/italiener-muenchen`)**
-- Hero → `ristorante-storia-uebersicht-gaeste.webp` (1400×934).
+4. **Verifizieren**
+   - Preview auf `/terrasse-muenchen` öffnen, Hero-Screenshot, hinten rechts zoomen.
+   - `npm run build` läuft automatisch (0 Errors erwartet).
 
-**4. Italiener Hauptbahnhof (`/italiener-hauptbahnhof-muenchen`)**
-- Hero → `italiener-koenigsplatz-terrasse-storia-muenchen.webp` (1400×612).
-
-### Technisch
-- Pro Seite `heroImage` / `heroImage600` Imports umstellen; `srcSet`/`sizes`/Struktur bleiben, Alt-Texte seitenspezifisch.
-- Hochzeit: KI-veredeltes Bild erzeugen, als webp (Haupt + 600w) ablegen.
-- `FilmfestMuenchen` (nur Galerie-Kachel) und Homepage-Grid bleiben unverändert.
-- Verify: `npm run build` (0 Errors), Schärfe im Preview prüfen.
+## Hinweis
+Keine Code-Änderungen in `TerrasseMuenchen.tsx` nötig — nur die Bild-Assets werden ersetzt; Imports, `srcSet`, `sizes` und Alt-Text bleiben unverändert.
