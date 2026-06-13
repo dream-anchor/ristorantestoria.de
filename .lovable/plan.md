@@ -1,31 +1,26 @@
-## Problem
+## Bessere Hero-Bilder für 4 SEO-Seiten
 
-Das Video erscheint als leere Box, weil `HomeVideo.tsx` die Datei über Lovable-CDN-Pfade einbindet (`/__l5e/assets-v1/...` aus den `.asset.json`-Pointern). Diese URLs existieren nur auf Lovable-Hosting. Die Live-Seite läuft auf IONOS (SFTP-Deploy von `dist/`), wo diese Pfade 404 liefern → kein Video, kein Poster.
+### Problem
+Das aktuelle Hero `gaeste-terrasse-italiener-maxvorstadt-muenchen.webp` ist nur **640×640 px** und wird als Vollbild-Hero auf 4 Seiten ausgespielt → verpixelt. Auf dem Homepage-Grid bleibt es (klein/quadratisch) korrekt.
 
-Lösung: Video + Poster wie das bestehende `mamma-speranza-kueche-storia-muenchen.mp4` in `public/` legen (wird mit `dist/` deployed) und SEO/GEO-konform mit VideoObject-Schema einbetten.
+### Umsetzung
 
-## Schritte
+**1. Hochzeit (`/hochzeitsfeier-muenchen/`)**
+- Basis: echtes Foto `ristorante-storia-uebersicht-stehtische-weissen-hussen.webp` (1400×1050, weiße Hussen).
+- Per KI behutsam zu festlicher Hochzeitsstimmung veredelt (warmes Licht, dezente Blumendeko), Raum bleibt erkennbar real.
+- Neues `hochzeitsfeier-storia-muenchen.webp` + `-600w.webp` in `src/assets/`, eingebunden mit hochzeitsspezifischem Alt-Text + Geo-Keywords.
 
-1. **Video re-komprimieren & in `public/` ablegen**
-   - Quelle `pizza-burrata.mp4` (4,8 MB) mit ffmpeg auf ~1 MB komprimieren (`-an -vf scale=1080:-2 -c:v libx264 -preset slow -crf 30 -movflags +faststart`).
-   - Speichern unter SEO-konformem Dateinamen: `public/pizza-burrata-steinofen-storia-muenchen.mp4`.
-   - Poster-Frame als `public/pizza-burrata-steinofen-storia-muenchen.jpg`.
+**2. Italienisches Restaurant (`/italienisches-restaurant-muenchen`)**
+- Hero → `ristorante-storia-uebersicht.webp` (1400×934).
 
-2. **`HomeVideo.tsx` umbauen**
-   - CDN-Asset-Imports entfernen, stattdessen absolute Public-Pfade (`/pizza-burrata-steinofen-storia-muenchen.mp4` + `.jpg`).
-   - IntersectionObserver-Autoplay (stumm, Loop, `playsInline`, `preload="metadata"`) beibehalten.
-   - SEO/GEO-Attribute: `<video>` mit `aria-label`, sichtbare `<figcaption>`/Heading mit lokalem Kontext (z.B. „Neapolitanische Pizza mit Burrata aus dem 400°C-Steinofen – STORIA München-Maxvorstadt"), `title`-Attribut.
+**3. Italiener München (`/italiener-muenchen`)**
+- Hero → `ristorante-storia-uebersicht-gaeste.webp` (1400×934).
 
-3. **VideoObject-JSON-LD ergänzen (GEO/SEO)**
-   - In `HomeVideo.tsx` via `Helmet` ein `VideoObject`-Schema einbinden: `name`, `description` (mit Standort München/Maxvorstadt), `thumbnailUrl` (absolute URL), `contentUrl` (absolute URL), `uploadDate`, `inLanguage: de-DE`, Verknüpfung zum Restaurant-`@id`.
-   - Absolute URLs über `https://www.ristorantestoria.de` bauen (konsistent mit `SEO.tsx`).
+**4. Italiener Hauptbahnhof (`/italiener-hauptbahnhof-muenchen`)**
+- Hero → `italiener-koenigsplatz-terrasse-storia-muenchen.webp` (1400×612).
 
-4. **Aufräumen**
-   - Alte Asset-Pointer löschen: `src/assets/pizza-burrata.mp4.asset.json`, `src/assets/pizza-burrata-poster.jpg.asset.json` (CDN-Assets via `delete_asset`).
-
-## Technische Details
-
-- Pre-Render-Regel beachten: `HomeVideo` bleibt eager import in `Index.tsx`, kein `lazy()`.
-- `preload="metadata"` statt `none`, damit der Poster zuverlässig erscheint; Poster lädt sofort als sichtbares Standbild auch ohne Autoplay.
-- VideoObject-`description` mit Geo-Keywords (München, Maxvorstadt, Königsplatz, Steinofen) für GEO-Sichtbarkeit.
-- `.htaccess` braucht keine Anpassung (mp4 wird vom Server standardmäßig korrekt ausgeliefert, das bestehende Mamma-mp4 belegt das).
+### Technisch
+- Pro Seite `heroImage` / `heroImage600` Imports umstellen; `srcSet`/`sizes`/Struktur bleiben, Alt-Texte seitenspezifisch.
+- Hochzeit: KI-veredeltes Bild erzeugen, als webp (Haupt + 600w) ablegen.
+- `FilmfestMuenchen` (nur Galerie-Kachel) und Homepage-Grid bleiben unverändert.
+- Verify: `npm run build` (0 Errors), Schärfe im Preview prüfen.
