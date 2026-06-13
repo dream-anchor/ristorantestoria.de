@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AlternateLinksProvider } from "@/contexts/AlternateLinksContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
+import { DemoModeProvider } from "@/contexts/DemoModeContext";
 
 // Eager: Hauptseiten (Homepage, Reservierung, Menüs, Kontakt)
 import Index from "./pages/Index";
@@ -219,11 +220,11 @@ const AppRoutes = () => {
         <Route path="/fr/occasions-speciales/:slug" element={<BesondererAnlass />} />
 
         {/* Admin routes (no i18n) */}
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<DemoModeProvider><Admin /></DemoModeProvider>} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/reset-password" element={<AdminResetPassword />} />
-        <Route path="/admin/gsc" element={<AdminGSC />} />
-        <Route path="/admin/seo" element={<AdminSEO />} />
+        <Route path="/admin/gsc" element={<DemoModeProvider><AdminGSC /></DemoModeProvider>} />
+        <Route path="/admin/seo" element={<DemoModeProvider><AdminSEO /></DemoModeProvider>} />
 
         {/* /italiener-muenchen → / (keyword cannibalization fix, all language versions) */}
         <Route path="/italiener-muenchen" element={<Navigate to="/" replace />} />
