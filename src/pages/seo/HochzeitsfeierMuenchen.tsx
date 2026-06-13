@@ -24,8 +24,8 @@ import { MapPin, Clock, CalendarDays, UtensilsCrossed, Wine, GlassWater, ArrowRi
 
 import storiaLogo from "@/assets/storia-logo.webp";
 import PhotoGallery from "@/components/PhotoGallery";
-import heroImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
-import heroImage600 from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen-600w.webp";
+import heroImage from "@/assets/hochzeitsfeier-storia-muenchen.webp";
+import heroImage600 from "@/assets/hochzeitsfeier-storia-muenchen-600w.webp";
 import eventSetupWeiss from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen.webp";
 import eventSetupWeiss600 from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen-600w.webp";
 import locationDetails from "@/assets/ristorante-storia-uebersicht-details.webp";
@@ -92,9 +92,9 @@ const HochzeitsfeierMuenchen = () => {
             src={heroImage}
             srcSet={`${heroImage600} 600w, ${heroImage} 1200w`}
             sizes="100vw"
-            alt={s.heroTitle}
-            width={1200}
-            height={800}
+            alt="Hochzeitsfeier im Ristorante STORIA München Maxvorstadt – festlich eingedeckte Tische mit weißen Hussen und warmer Lichterdekoration"
+            width={1400}
+            height={933}
             loading="eager"
             fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
