@@ -115,7 +115,7 @@ const SendPreviewDialog = ({
           <>
             <div className="space-y-3">
               <p className="text-sm font-medium">
-                {previewData.total} Empfänger werden benachrichtigt:
+                <Redact>{previewData.total}</Redact> Empfänger werden benachrichtigt:
               </p>
               <div className="rounded-md border overflow-hidden">
                 <Table>
@@ -134,7 +134,7 @@ const SendPreviewDialog = ({
                         </TableCell>
                         <TableCell className="text-xs">{p.subject}</TableCell>
                         <TableCell className="text-right text-sm">
-                          {previewData.counts_by_lang[lang] ?? 0}
+                          <Redact>{previewData.counts_by_lang[lang] ?? 0}</Redact>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -260,7 +260,7 @@ const SeasonalSignupsManager = () => {
               onClick={() => setSendDialogEvent(selectedEvent)}
             >
               <Send className="h-4 w-4 mr-2" />
-              {unnotifiedCount} Benachrichtigen
+                <Redact>{unnotifiedCount}</Redact>&nbsp;Benachrichtigen
             </Button>
           )}
         </div>
