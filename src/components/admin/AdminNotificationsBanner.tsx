@@ -1,6 +1,7 @@
 import { AlertTriangle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUnreadNotifications, useMarkNotificationRead } from "@/hooks/useAdminNotifications";
+import Redact from "@/components/admin/Redact";
 
 const AdminNotificationsBanner = () => {
   const { data: notifications } = useUnreadNotifications();
@@ -29,7 +30,7 @@ const AdminNotificationsBanner = () => {
               {notification.type === 'slug_conflict' ? 'Slug-Konflikt' : 'Benachrichtigung'}
             </p>
             <p className="text-sm text-muted-foreground mt-1">
-              {notification.message}
+              <Redact block>{notification.message}</Redact>
             </p>
             <p className="text-xs text-muted-foreground mt-1">
               {new Date(notification.created_at).toLocaleString('de-DE')}
