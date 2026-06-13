@@ -277,10 +277,13 @@ const Admin = () => {
           {/* Row 2: Title and Email */}
           <div className="mt-2">
             <h1 className="font-serif font-semibold text-lg md:text-xl">Admin-Dashboard</h1>
-            <p className="text-xs md:text-sm text-muted-foreground truncate">{user.email}</p>
+            <p className="text-xs md:text-sm text-muted-foreground truncate">
+              <Redact>{user.email}</Redact>
+            </p>
           </div>
         </div>
       </header>
+      <DemoModeBanner />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 md:py-8">
