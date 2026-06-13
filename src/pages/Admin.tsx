@@ -19,6 +19,9 @@ import SeasonalNotificationsManager from "@/components/admin/SeasonalNotificatio
 import AdminNotificationsBanner from "@/components/admin/AdminNotificationsBanner";
 import ClassificationLog from "@/components/admin/ClassificationLog";
 import SEO from "@/components/SEO";
+import DemoModeToggle from "@/components/admin/DemoModeToggle";
+import DemoModeBanner from "@/components/admin/DemoModeBanner";
+import Redact from "@/components/admin/Redact";
 import { triggerGitHubDeploy } from "@/hooks/useTriggerDeploy";
 import {
   AlertDialog,
