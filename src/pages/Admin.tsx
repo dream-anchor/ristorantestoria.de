@@ -180,6 +180,8 @@ const Admin = () => {
               />
             </Link>
             <div className="flex items-center gap-2">
+              {/* Demo-Modus Toggle (Auge) */}
+              <DemoModeToggle variant="icon" className="hidden sm:flex" />
               {/* Desktop: Full buttons */}
               <Button variant="outline" size="sm" asChild className="hidden sm:flex">
                 <Link to="/admin/gsc/">
@@ -228,6 +230,7 @@ const Admin = () => {
                 Abmelden
               </Button>
               {/* Mobile: Icon-only buttons */}
+              <DemoModeToggle variant="icon" className="sm:hidden" />
               <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
                 <Link to="/admin/gsc/">
                   <BarChart3 className="h-4 w-4" />
