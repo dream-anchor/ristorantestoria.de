@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { GSCPageAggregate } from "@/hooks/useGSCMetrics";
+import Redact from "@/components/admin/Redact";
 
 interface GSCTopPagesTableProps {
   pages: GSCPageAggregate[];
@@ -120,7 +121,7 @@ export default function GSCTopPagesTable({
                   </div>
                 </TableCell>
                 <TableCell className="text-right font-medium">
-                  {page.total_clicks.toLocaleString('de-DE')}
+                  <Redact>{page.total_clicks.toLocaleString('de-DE')}</Redact>
                 </TableCell>
                 {showTrends && (
                   <TableCell className="text-right">
@@ -128,14 +129,14 @@ export default function GSCTopPagesTable({
                   </TableCell>
                 )}
                 <TableCell className="text-right text-muted-foreground">
-                  {page.total_impressions.toLocaleString('de-DE')}
+                  <Redact>{page.total_impressions.toLocaleString('de-DE')}</Redact>
                 </TableCell>
                 <TableCell className="text-right text-muted-foreground">
-                  {(page.avg_ctr * 100).toFixed(1)}%
+                  <Redact>{(page.avg_ctr * 100).toFixed(1)}%</Redact>
                 </TableCell>
                 <TableCell className="text-right">
                   <Badge variant="outline" className="font-mono">
-                    {page.avg_position.toFixed(1)}
+                    <Redact>{page.avg_position.toFixed(1)}</Redact>
                   </Badge>
                 </TableCell>
               </TableRow>
