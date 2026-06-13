@@ -22,8 +22,8 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { MapPin, Clock, CalendarDays, UtensilsCrossed, Wine, GlassWater, ArrowRight } from "lucide-react";
 
 import storiaLogo from "@/assets/storia-logo.webp";
-import heroImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
-import heroImage600 from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen-600w.webp";
+import heroImage from "@/assets/ristorante-storia-uebersicht-gaeste.webp";
+import heroImage600 from "@/assets/ristorante-storia-uebersicht-gaeste-600w.webp";
 
 const ItalienerMuenchen = () => {
   const { t } = useLanguage();
