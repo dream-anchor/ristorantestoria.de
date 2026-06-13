@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import Redact from "@/components/admin/Redact";
 import {
   TrendingUp,
   TrendingDown,
@@ -51,7 +52,7 @@ function MetricHighlight({
 
   return (
     <div className="text-center">
-      <div className="text-2xl font-semibold tracking-tight">{formattedValue}</div>
+      <div className="text-2xl font-semibold tracking-tight"><Redact>{formattedValue}</Redact></div>
       <div className="text-xs text-muted-foreground mt-0.5">{label}</div>
       {change !== undefined && change !== 0 && (
         <div

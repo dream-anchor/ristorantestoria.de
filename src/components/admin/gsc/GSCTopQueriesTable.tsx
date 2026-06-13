@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { GSCQueryAggregate } from "@/hooks/useGSCMetrics";
+import Redact from "@/components/admin/Redact";
 
 interface GSCTopQueriesTableProps {
   queries: GSCQueryAggregate[];
@@ -124,7 +125,7 @@ export default function GSCTopQueriesTable({
                   </div>
                 </TableCell>
                 <TableCell className="text-right font-medium">
-                  {item.total_clicks.toLocaleString('de-DE')}
+                  <Redact>{item.total_clicks.toLocaleString('de-DE')}</Redact>
                 </TableCell>
                 {showTrends && (
                   <TableCell className="text-right">
@@ -132,14 +133,14 @@ export default function GSCTopQueriesTable({
                   </TableCell>
                 )}
                 <TableCell className="text-right text-muted-foreground">
-                  {item.total_impressions.toLocaleString('de-DE')}
+                  <Redact>{item.total_impressions.toLocaleString('de-DE')}</Redact>
                 </TableCell>
                 <TableCell className="text-right text-muted-foreground">
-                  {(item.avg_ctr * 100).toFixed(1)}%
+                  <Redact>{(item.avg_ctr * 100).toFixed(1)}%</Redact>
                 </TableCell>
                 <TableCell className="text-right">
                   <Badge variant="outline" className="font-mono">
-                    {item.avg_position.toFixed(1)}
+                    <Redact>{item.avg_position.toFixed(1)}</Redact>
                   </Badge>
                 </TableCell>
               </TableRow>

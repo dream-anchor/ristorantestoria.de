@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { useSeasonalSignups, useSeasonalSignupCounts } from "@/hooks/useSeasonalSignups";
 import { useNotifySeasonalSignups, type NotifyPreviewResult } from "@/hooks/useSeasonalNotifications";
 import type { SeasonalSignup } from "@/hooks/useSeasonalSignups";
+import Redact from "@/components/admin/Redact";
 
 const EVENT_LABELS: Record<string, string> = {
   valentinstag: "Valentinstag",
@@ -114,7 +115,7 @@ const SendPreviewDialog = ({
           <>
             <div className="space-y-3">
               <p className="text-sm font-medium">
-                {previewData.total} Empfänger werden benachrichtigt:
+                <Redact>{previewData.total}</Redact> Empfänger werden benachrichtigt:
               </p>
               <div className="rounded-md border overflow-hidden">
                 <Table>
@@ -133,7 +134,7 @@ const SendPreviewDialog = ({
                         </TableCell>
                         <TableCell className="text-xs">{p.subject}</TableCell>
                         <TableCell className="text-right text-sm">
-                          {previewData.counts_by_lang[lang] ?? 0}
+                          <Redact>{previewData.counts_by_lang[lang] ?? 0}</Redact>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -214,7 +215,7 @@ const SeasonalSignupsManager = () => {
           <div className="flex items-center gap-3 mb-2">
             <Bell className="h-5 w-5 md:h-6 md:w-6 text-primary" />
             <h2 className="text-xl md:text-2xl font-serif font-semibold">Saisonale Vormerkungen</h2>
-            {totalCount > 0 && <Badge variant="secondary">{totalCount}</Badge>}
+            {totalCount > 0 && <Badge variant="secondary"><Redact>{totalCount}</Redact></Badge>}
           </div>
           <p className="text-sm text-muted-foreground">E-Mail-Vormerkungen für saisonale Events.</p>
         </div>
@@ -228,7 +229,7 @@ const SeasonalSignupsManager = () => {
           onClick={() => setSelectedEvent(undefined)}
         >
           Alle
-          {totalCount > 0 && <Badge variant="secondary" className="ml-2">{totalCount}</Badge>}
+          {totalCount > 0 && <Badge variant="secondary" className="ml-2"><Redact>{totalCount}</Redact></Badge>}
         </Button>
         {eventKeys.map((key) => (
           <Button
@@ -239,7 +240,7 @@ const SeasonalSignupsManager = () => {
           >
             {EVENT_LABELS[key]}
             {counts?.[key] && (
-              <Badge variant="secondary" className="ml-2">{counts[key].total}</Badge>
+              <Badge variant="secondary" className="ml-2"><Redact>{counts[key].total}</Redact></Badge>
             )}
           </Button>
         ))}
@@ -259,7 +260,7 @@ const SeasonalSignupsManager = () => {
               onClick={() => setSendDialogEvent(selectedEvent)}
             >
               <Send className="h-4 w-4 mr-2" />
-              {unnotifiedCount} Benachrichtigen
+                <Redact>{unnotifiedCount}</Redact>&nbsp;Benachrichtigen
             </Button>
           )}
         </div>
@@ -291,7 +292,7 @@ const SeasonalSignupsManager = () => {
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-2">
                       <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                      {signup.email}
+                      <Redact>{signup.email}</Redact>
                     </div>
                   </TableCell>
                   <TableCell>

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
+import Redact from "@/components/admin/Redact";
 import {
   RefreshCw,
   AlertCircle,
@@ -74,7 +75,7 @@ function StatCard({
           <Icon className="h-4 w-4 text-white" />
         </div>
         <div>
-          <div className="text-2xl font-semibold">{value}</div>
+          <div className="text-2xl font-semibold"><Redact>{value}</Redact></div>
           <div className="text-xs text-muted-foreground">{title}</div>
         </div>
       </div>

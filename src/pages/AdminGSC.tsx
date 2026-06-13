@@ -11,6 +11,9 @@ import { GSCDashboard } from "@/components/admin/gsc";
 import SEO from "@/components/SEO";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { toast } from "sonner";
+import DemoModeToggle from "@/components/admin/DemoModeToggle";
+import DemoModeBanner from "@/components/admin/DemoModeBanner";
+import Redact from "@/components/admin/Redact";
 
 export default function AdminGSC() {
   const navigate = useNavigate();
@@ -72,8 +75,9 @@ export default function AdminGSC() {
             </Link>
           </div>
           <div className="flex items-center gap-2">
+            <DemoModeToggle variant="icon" className="h-8 w-8" />
             <span className="text-xs text-muted-foreground hidden md:block">
-              {user.email}
+              <Redact>{user.email}</Redact>
             </span>
             <Button variant="ghost" size="icon" asChild className="h-8 w-8">
               <Link to="/" target="_blank">
@@ -94,6 +98,7 @@ export default function AdminGSC() {
 
       {/* Main Content */}
       <main className="pt-12">
+        <DemoModeBanner />
         <GSCDashboard />
       </main>
     </>
