@@ -51,7 +51,7 @@ function MetricHighlight({
 
   return (
     <div className="text-center">
-      <div className="text-2xl font-semibold tracking-tight">{formattedValue}</div>
+      <div className="text-2xl font-semibold tracking-tight"><Redact>{formattedValue}</Redact></div>
       <div className="text-xs text-muted-foreground mt-0.5">{label}</div>
       {change !== undefined && change !== 0 && (
         <div
