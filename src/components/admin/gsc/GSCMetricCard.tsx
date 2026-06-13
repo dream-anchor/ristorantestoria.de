@@ -5,6 +5,7 @@
 import { cn } from "@/lib/utils";
 import { formatPercentChange, getTrendIndicator } from "@/lib/urlNormalization";
 import { ArrowUp, ArrowDown, Minus } from "lucide-react";
+import Redact from "@/components/admin/Redact";
 
 interface GSCMetricCardProps {
   title: string;
@@ -86,20 +87,20 @@ export default function GSCMetricCard({
 
         <div className="flex items-end justify-between gap-2">
           <p className={cn("font-semibold tracking-tight", sizeClasses[size].value)}>
-            {formatValue(value, format)}
+            <Redact>{formatValue(value, format)}</Redact>
           </p>
 
           {percentChange !== undefined && percentChange !== null && (
             <div className={cn("flex items-center gap-0.5", trendColor, sizeClasses[size].trend)}>
               <TrendIcon className="h-3 w-3" />
-              <span>{formatPercentChange(percentChange)}</span>
+              <Redact>{formatPercentChange(percentChange)}</Redact>
             </div>
           )}
         </div>
 
         {previousValue !== undefined && (
           <p className="text-xs text-muted-foreground mt-1">
-            vs. {formatValue(previousValue, format)} vorher
+            vs. <Redact>{formatValue(previousValue, format)}</Redact> vorher
           </p>
         )}
       </div>
