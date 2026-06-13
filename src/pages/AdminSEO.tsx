@@ -11,6 +11,8 @@ import { SEODashboard } from "@/components/admin/seo-ops";
 import SEO from "@/components/SEO";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { toast } from "sonner";
+import DemoModeToggle from "@/components/admin/DemoModeToggle";
+import DemoModeBanner from "@/components/admin/DemoModeBanner";
 
 // Error Boundary for catching render errors
 class SEOErrorBoundary extends Component<
@@ -117,6 +119,7 @@ export default function AdminSEO() {
             </Link>
           </div>
           <div className="flex items-center gap-2">
+            <DemoModeToggle variant="icon" className="h-8 w-8" />
             <Button variant="ghost" size="sm" asChild className="hidden md:flex">
               <Link to="/admin/gsc/">
                 <BarChart3 className="h-4 w-4 mr-1" />
@@ -145,6 +148,7 @@ export default function AdminSEO() {
 
       {/* Main Content */}
       <main className="pt-12">
+        <DemoModeBanner />
         <SEOErrorBoundary>
           <SEODashboard />
         </SEOErrorBoundary>
