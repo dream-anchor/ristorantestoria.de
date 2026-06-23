@@ -165,6 +165,22 @@ const TerrasseMuenchen = () => {
               </div>
             </section>
 
+            {/* Der perfekte Abend (Aperitivo – Sommer-Schwerpunkt, nach vorne gezogen) */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-8 text-center">{tr.eveningTitle}</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {eveningSteps.map((step, i) => (
+                  <div key={i} className="text-center">
+                    <span className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mx-auto mb-3">{i + 1}</span>
+                    <div className="text-3xl mb-2">{step.icon}</div>
+                    <p className="text-sm text-primary font-medium mb-1">{step.time}</p>
+                    <h3 className="font-semibold mb-2">{step.title}</h3>
+                    <p className="text-muted-foreground text-sm">{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* Schanigarten */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{tr.schanigartenTitle}</h2>
@@ -194,57 +210,6 @@ const TerrasseMuenchen = () => {
                 <Button asChild>
                   <LocalizedLink to="reservierung" onClick={() => track("reservation_click")}>{tr.schanigartenCta}</LocalizedLink>
                 </Button>
-              </div>
-            </section>
-
-            {/* Zigarre vs Lounges Vergleich */}
-            <section className="mb-16">
-              <h2 className="text-3xl font-serif font-bold mb-6 text-center">{tr.comparisonTitle}</h2>
-              <p className="text-muted-foreground mb-8 text-center max-w-3xl mx-auto">{tr.comparisonIntro}</p>
-              <p className="text-muted-foreground mb-8">{tr.comparisonNote}</p>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-secondary/50">
-                      <th className="p-3 text-left font-semibold border border-border"></th>
-                      <th className="p-3 text-center font-semibold border border-border">{tr.compColLounge}</th>
-                      <th className="p-3 text-center font-semibold border border-border bg-primary/10">{tr.compColStoria}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      [tr.compRow1, tr.compRow1Lounge, tr.compRow1Storia],
-                      [tr.compRow2, tr.compRow2Lounge, tr.compRow2Storia],
-                      [tr.compRow3, tr.compRow3Lounge, tr.compRow3Storia],
-                      [tr.compRow4, tr.compRow4Lounge, tr.compRow4Storia],
-                      [tr.compRow5, tr.compRow5Lounge, tr.compRow5Storia],
-                      [tr.compRow6, tr.compRow6Lounge, tr.compRow6Storia],
-                      [tr.compRow7, tr.compRow7Lounge, tr.compRow7Storia],
-                    ].map((row, i) => (
-                      <tr key={i} className={i % 2 === 0 ? '' : 'bg-secondary/20'}>
-                        <td className="p-3 border border-border font-medium">{row[0]}</td>
-                        <td className="p-3 border border-border text-center text-muted-foreground">{row[1]}</td>
-                        <td className="p-3 border border-border text-center bg-primary/5 font-medium">{row[2]}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            {/* Der perfekte Abend */}
-            <section className="mb-16">
-              <h2 className="text-3xl font-serif font-bold mb-8 text-center">{tr.eveningTitle}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {eveningSteps.map((step, i) => (
-                  <div key={i} className="text-center">
-                    <span className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mx-auto mb-3">{i + 1}</span>
-                    <div className="text-3xl mb-2">{step.icon}</div>
-                    <p className="text-sm text-primary font-medium mb-1">{step.time}</p>
-                    <h3 className="font-semibold mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground text-sm">{step.desc}</p>
-                  </div>
-                ))}
               </div>
             </section>
 
@@ -321,7 +286,42 @@ const TerrasseMuenchen = () => {
               </Accordion>
             </section>
 
-            {/* Zigarrenhändler (sekundäres Thema – nach den verkaufsstarken Sommer-Abschnitten) */}
+            {/* Rauchen-Vergleich (sekundäres Thema – nach den verkaufsstarken Sommer-Abschnitten) */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-6 text-center">{tr.comparisonTitle}</h2>
+              <p className="text-muted-foreground mb-8 text-center max-w-3xl mx-auto">{tr.comparisonIntro}</p>
+              <p className="text-muted-foreground mb-8">{tr.comparisonNote}</p>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-secondary/50">
+                      <th className="p-3 text-left font-semibold border border-border"></th>
+                      <th className="p-3 text-center font-semibold border border-border">{tr.compColLounge}</th>
+                      <th className="p-3 text-center font-semibold border border-border bg-primary/10">{tr.compColStoria}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      [tr.compRow1, tr.compRow1Lounge, tr.compRow1Storia],
+                      [tr.compRow2, tr.compRow2Lounge, tr.compRow2Storia],
+                      [tr.compRow3, tr.compRow3Lounge, tr.compRow3Storia],
+                      [tr.compRow4, tr.compRow4Lounge, tr.compRow4Storia],
+                      [tr.compRow5, tr.compRow5Lounge, tr.compRow5Storia],
+                      [tr.compRow6, tr.compRow6Lounge, tr.compRow6Storia],
+                      [tr.compRow7, tr.compRow7Lounge, tr.compRow7Storia],
+                    ].map((row, i) => (
+                      <tr key={i} className={i % 2 === 0 ? '' : 'bg-secondary/20'}>
+                        <td className="p-3 border border-border font-medium">{row[0]}</td>
+                        <td className="p-3 border border-border text-center text-muted-foreground">{row[1]}</td>
+                        <td className="p-3 border border-border text-center bg-primary/5 font-medium">{row[2]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            {/* Zigarrenhändler (sekundäres Thema) */}
             <section className="mb-16 bg-secondary/50 rounded-xl p-8">
               <h2 className="text-2xl font-serif font-bold mb-6 text-center">{tr.cigarTitle}</h2>
               <p className="text-muted-foreground text-center mb-6">{tr.cigarIntro}</p>
