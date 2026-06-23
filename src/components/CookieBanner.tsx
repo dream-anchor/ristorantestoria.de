@@ -141,19 +141,29 @@ const CookieBanner = () => {
               <p className="text-sm text-muted-foreground">
                 {t.cookies.bannerText}
               </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                {t.cookies.benefitNote}
+              </p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2">
-            <Button onClick={rejectAll} variant="outline" className="flex-1">
+          {/* Ablehnen und Akzeptieren gleichwertig (gleiche Variante, Größe, Auffälligkeit) */}
+          <div className="grid grid-cols-2 gap-2">
+            <Button onClick={rejectAll} className="w-full">
               {t.cookies.rejectAll}
             </Button>
-            <Button onClick={openSettings} variant="outline" className="flex-1">
-              {t.cookies.settings}
-            </Button>
-            <Button onClick={acceptAll} className="flex-1">
+            <Button onClick={acceptAll} className="w-full">
               {t.cookies.acceptAll}
             </Button>
+          </div>
+          {/* "Einstellungen" als neutrale, sekundäre dritte Option */}
+          <div className="mt-2 text-center">
+            <button
+              onClick={openSettings}
+              className="text-sm text-muted-foreground hover:text-foreground underline underline-offset-2"
+            >
+              {t.cookies.settings}
+            </button>
           </div>
 
           <div className="mt-3 text-center">
