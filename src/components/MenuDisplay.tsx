@@ -1,14 +1,17 @@
 import { useMenu, useMenuById, MenuType } from "@/hooks/useMenu";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Fragment, ReactNode } from "react";
 
 interface MenuDisplayProps {
   menuType: MenuType;
   menuId?: string; // Optional: for fetching specific menu by ID (used for special occasions)
   showTitle?: boolean; // Optional: hide title when H1 is rendered externally (default: true)
+  interstitialCta?: ReactNode; // Optional: CTA rendered between categories
+  interstitialEvery?: number; // How many categories between each CTA (default 3)
 }
 
-const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) => {
+const MenuDisplay = ({ menuType, menuId, showTitle = true, interstitialCta, interstitialEvery = 3 }: MenuDisplayProps) => {
   // Use menuId if provided (for special menus), otherwise fetch by type
   const menuByType = useMenu(menuType);
   const menuById = useMenuById(menuId);
@@ -87,14 +90,17 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
 
       {/* Categories */}
       <div className="space-y-12">
-        {(() => { let pizzaAnchorPlaced = false; return menu.categories.map((category) => {
+        {(() => { let pizzaAnchorPlaced = false; const lastIndex = menu.categories.length - 1; return menu.categories.map((category, index) => {
           const categoryName = getLocalizedText(category.name, category.name_en, category.name_it, category.name_fr);
           const categoryDescription = getLocalizedText(category.description, category.description_en, category.description_it, category.description_fr);
           const isPizza = (category.name || '').toLowerCase().includes('pizz');
           const needsPizzaAnchor = isPizza && !pizzaAnchorPlaced;
           if (needsPizzaAnchor) pizzaAnchorPlaced = true;
 
+          const showCta = interstitialCta && index < lastIndex && (index + 1) % interstitialEvery === 0;
+
           return (
+            <Fragment key={category.id}>
             <div key={category.id} id={needsPizzaAnchor ? 'pizza' : undefined} className="space-y-6">
               {/* Category Header */}
               <div className="text-center">
@@ -145,6 +151,8 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true }: MenuDisplayProps) =
                 })}
               </div>
             </div>
+            {showCta && interstitialCta}
+            </Fragment>
           );
         }); })()}
       </div>
