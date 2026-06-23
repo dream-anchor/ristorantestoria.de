@@ -344,7 +344,7 @@ const ReisegruppenPage = () => {
             width={1200}
             height={800}
             loading="eager"
-            fetchpriority="high"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
