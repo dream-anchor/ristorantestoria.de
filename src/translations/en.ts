@@ -2610,6 +2610,7 @@ export const en = {
       heroBadge1: "☀️ Covered & weatherproof",
       heroBadge2: "🛋️ Cushions & blankets",
       heroBadge3: "\ud83d\udeac Smoking welcome",
+      heroWmNote: "⚽ World Cup 2026: summer evenings & aperitivo on the terrace – reserve your table now",
       heroDescription: "There are evenings that deserve more than just a good meal. Evenings where everything is right: the light, the air, a glass of wine, a perfect risotto – and then a cigarette or cigar in peace. On our covered restaurant terrace Munich at STORIA, that's exactly what's possible.",
       heroCta: "Reserve terrace seat",
       introTitle: "Restaurant with Terrace Munich – The STORIA Terrace",
