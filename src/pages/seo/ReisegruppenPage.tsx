@@ -40,6 +40,7 @@ import {
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
 import groupHero from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
+import groupHero600 from "@/assets/firmenfeier-eventlocation-storia-muenchen-600w.webp";
 
 const ReisegruppenPage = () => {
   const { t, language } = useLanguage();
@@ -334,9 +335,11 @@ const ReisegruppenPage = () => {
         <Header />
 
         {/* SECTION 1: Hero */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[70vh] min-h-[440px] flex items-center justify-center overflow-hidden">
           <img
             src={groupHero}
+            srcSet={`${groupHero600} 600w, ${groupHero} 1400w`}
+            sizes="100vw"
             alt="Gedeckter Tisch für Reisegruppe im Ristorante STORIA München"
             width={1200}
             height={800}
@@ -354,7 +357,7 @@ const ReisegruppenPage = () => {
                 className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert hover:opacity-80 transition-opacity"
               />
             </Link>
-            <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12">
+            <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-6 py-7 md:px-12 md:py-12">
               <p className="text-sm md:text-base mb-3 tracking-[0.3em] uppercase">
                 {rg.heroTagline}
               </p>
