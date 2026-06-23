@@ -108,7 +108,7 @@ const CookieBanner = () => {
           </div>
 
           <div className="p-4 border-t border-border flex flex-col sm:flex-row gap-2">
-            <Button onClick={rejectAll} variant="outline" className="flex-1">
+            <Button onClick={rejectAll} className="flex-1">
               {t.cookies.rejectAll}
             </Button>
             <Button onClick={handleSavePreferences} variant="outline" className="flex-1">
