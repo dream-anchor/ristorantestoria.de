@@ -117,6 +117,14 @@ const Datenschutz = () => {
                 Unsere Website verwendet technisch notwendige Cookies. Sofern Analyse- oder 
                 Marketing-Cookies eingesetzt werden, holen wir vorher eine Einwilligung (Consent Banner) ein.
               </p>
+              <p className="mt-2">
+                Für die Steuerung von Analyse- und Marketing-Diensten setzen wir den Google
+                Consent Mode v2 im Basic-Modus ein: Alle Einwilligungen sind standardmäßig auf
+                „denied" gesetzt. Entsprechende Dienste werden erst geladen und erheben erst
+                Daten, nachdem Sie über das Cookie-Banner aktiv eingewilligt haben. Ihre
+                Einwilligung können Sie jederzeit über das Cookie-Symbol unten links auf jeder
+                Seite („Cookie-Einstellungen") mit Wirkung für die Zukunft widerrufen.
+              </p>
             </section>
 
             {/* 5. Server-Logfiles */}
@@ -182,32 +190,51 @@ const Datenschutz = () => {
               </p>
 
               <h3 className="text-lg font-semibold mt-4 mb-2">Google Analytics</h3>
+              <h3 className="text-lg font-semibold mt-4 mb-2">Google Analytics 4 (GA4)</h3>
               <p>
-                Wir nutzen Google Analytics, einen Webanalysedienst der Google Ireland Limited 
-                ("Google"), Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics 
-                verwendet Cookies, die eine Analyse der Nutzung der Website ermöglichen.
+                Wir nutzen Google Analytics 4, einen Webanalysedienst der Google Ireland Limited,
+                Gordon House, Barrow Street, Dublin 4, Irland. Bei Übermittlung in Drittländer ist
+                Empfänger die Google LLC, USA.
               </p>
               <p className="mt-2">
-                Die durch Cookies erzeugten Informationen über Ihre Nutzung dieser Website 
-                werden in der Regel an einen Server von Google in den USA übertragen und dort 
-                gespeichert. Wir haben die IP-Anonymisierung aktiviert, sodass Ihre IP-Adresse 
-                von Google innerhalb der EU/EWR vor der Übertragung gekürzt wird.
+                <strong>Zweck:</strong> Analyse des Nutzungsverhaltens (aufgerufene Seiten,
+                Verweildauer, Herkunft der Zugriffe), um unser Angebot zu verbessern.
               </p>
               <p className="mt-2">
-                <strong>Zweck:</strong> Analyse des Nutzerverhaltens zur Verbesserung unseres Angebots.
+                <strong>Verarbeitete Daten:</strong> pseudonyme Kennung (Client-ID/Geräte-Kennung),
+                Geräte- und Browserinformationen, ungefährer Standort (Land/Region), Referrer sowie
+                Interaktions- und Event-Daten (z. B. Seitenaufrufe, Klicks, Scrolltiefe, Reservierungs-
+                und Kontakt-Klicks). Ihre IP-Adresse wird von Google nur vorübergehend zur Ableitung
+                des ungefähren Standorts verwendet und nicht dauerhaft gespeichert.
               </p>
               <p className="mt-2">
-                <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung über Cookie-Banner).
+                <strong>Rechtsgrundlage:</strong> Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO
+                sowie § 25 Abs. 1 TDDDG, erteilt über unser Cookie-Banner.
               </p>
               <p className="mt-2">
-                <strong>Speicherdauer:</strong> Die Daten werden nach 14 Monaten automatisch gelöscht.
+                <strong>Google Consent Mode v2 (Basic):</strong> Wir setzen den Google Consent Mode v2
+                im Basic-Modus ein. Alle Einwilligungen sind standardmäßig auf „denied" gesetzt. Google
+                Analytics wird erst geladen und erhebt erst Daten, nachdem Sie aktiv eingewilligt haben.
+                Ohne Einwilligung findet kein Tracking statt; es werden keine Daten an Google gesendet.
               </p>
               <p className="mt-2">
-                <strong>Widerruf:</strong> Sie können Ihre Einwilligung jederzeit über die Cookie-Einstellungen 
-                widerrufen. Bereits gesetzte Cookies können Sie in Ihren Browsereinstellungen löschen.
+                <strong>Drittlandübermittlung:</strong> Bei erteilter Einwilligung können Daten in die
+                USA übermittelt werden. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert.
+                {" "}{`{{Nur aufnehmen, wenn vertraglich tatsächlich vereinbart: ergänzend Standardvertragsklauseln gem. Art. 46 DSGVO.}}`}
               </p>
               <p className="mt-2">
-                Weitere Informationen finden Sie in der Datenschutzerklärung von Google:{" "}
+                <strong>Speicherdauer:</strong> Auf Nutzer- und Ereignisebene erhobene Daten werden nach
+                {" "}{`{{Aufbewahrungsdauer laut GA4 → Verwalten → Dateneinstellungen → Datenaufbewahrung: 2 oder 14 Monate}}`}
+                {" "}automatisch gelöscht.
+              </p>
+              <p className="mt-2">
+                <strong>Widerruf:</strong> Sie können Ihre Einwilligung jederzeit mit Wirkung für die
+                Zukunft über das Cookie-Symbol unten links auf jeder Seite („Cookie-Einstellungen")
+                widerrufen. Bereits gesetzte Cookies können Sie zusätzlich in Ihren Browsereinstellungen
+                löschen.
+              </p>
+              <p className="mt-2">
+                Weitere Informationen:{" "}
                 <a 
                   href="https://policies.google.com/privacy" 
                   target="_blank" 
