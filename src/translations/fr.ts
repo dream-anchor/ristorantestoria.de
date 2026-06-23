@@ -1943,6 +1943,7 @@ export const fr = {
       heroBadge1: "☀️ Couverte et protégée",
       heroBadge2: "🛋️ Coussins et couvertures",
       heroBadge3: "\ud83d\udeac Fumer bienvenu",
+      heroWmNote: "⚽ Coupe du monde 2026 : soirées d'été & apéritif en terrasse – réservez votre table",
       heroDescription: "Il y a des soir\u00e9es qui m\u00e9ritent plus qu\u2019un bon repas. Des soir\u00e9es o\u00f9 tout est parfait : la lumi\u00e8re, l\u2019air, un verre de vin, un risotto parfait \u2013 et ensuite une cigarette ou un cigare en toute tranquillit\u00e9. Sur notre terrasse couverte de restaurant Munich au STORIA, c\u2019est exactement ce qui est possible.",
       heroCta: "Réserver une place en terrasse",
       introTitle: "Restaurant avec Terrasse Munich – La Terrasse du STORIA",
