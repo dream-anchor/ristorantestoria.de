@@ -20,6 +20,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import ReservationCTA from "@/components/ReservationCTA";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import { trackEvent } from "@/lib/analytics";
 
 const TerrasseMuenchen = () => {
   const { t, language } = useLanguage();
@@ -27,6 +28,10 @@ const TerrasseMuenchen = () => {
   const candlelightTo = `${PARENT_SLUGS[language]}/${language === "de" ? "candlelight-menue" : "candlelight-menu"}`;
   usePrerenderReady(true);
   const tr = t.seo.terrasse;
+
+  // Einzige Quelle je Key-Event auf dieser Seite/Viewport — bestehender trackEvent-Mechanismus.
+  const track = (event: "reservation_click" | "phone_click" | "whatsapp_click") =>
+    trackEvent(event, { location: "terrasse" });
 
   const features = [
     { icon: "☀️", title: tr.feat1Title, desc: tr.feat1Desc, items: [tr.feat1Item1, tr.feat1Item2, tr.feat1Item3, tr.feat1Item4] },
