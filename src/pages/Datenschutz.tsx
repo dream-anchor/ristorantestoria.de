@@ -279,50 +279,6 @@ const Datenschutz = () => {
                 </a>
               </p>
 
-              <h3 className="text-lg font-semibold mt-4 mb-2">Microsoft Clarity (Sitzungsanalyse)</h3>
-              <p>
-                Wir nutzen Microsoft Clarity, ein Webanalyse-Tool zur Erstellung von
-                Sitzungsaufzeichnungen und Heatmaps. Vertragspartner für Nutzer in der EU ist die
-                Microsoft Ireland Operations Limited, One Microsoft Place, South County Business
-                Park, Leopardstown, Dublin 18, Irland.
-              </p>
-              <p className="mt-2">
-                <strong>Zweck:</strong> Auswertung des Nutzungsverhaltens (z. B. Maus- und
-                Scrollbewegungen, Klicks, aufgerufene Seiten, Geräte- und Browserinformationen,
-                ungefährer Standort), um die Benutzerfreundlichkeit unserer Website zu verbessern.
-                Eingaben in Formularfeldern werden durch Clarity automatisch maskiert.
-              </p>
-              <p className="mt-2">
-                <strong>Rechtsgrundlage:</strong> Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO,
-                § 25 Abs. 1 TDDDG). Clarity wird erst nach Ihrer Einwilligung geladen; ohne
-                Einwilligung findet keine Aufzeichnung statt.
-              </p>
-              <p className="mt-2">
-                <strong>Datenübermittlung:</strong> Soweit Daten zwischen der Microsoft Ireland
-                Operations Limited und der Microsoft Corporation (USA) übermittelt werden, erfolgt
-                dies auf Grundlage von Standardvertragsklauseln gemäß Art. 46 DSGVO.
-              </p>
-              <p className="mt-2">
-                <strong>Speicherdauer:</strong> Sitzungsaufzeichnungen werden nach 30 Tagen
-                gelöscht; Heatmaps sowie markierte oder favorisierte Aufzeichnungen werden bis zu
-                13 Monate gespeichert.
-              </p>
-              <p className="mt-2">
-                <strong>Widerruf:</strong> jederzeit über das Cookie-Symbol unten links auf jeder
-                Seite („Cookie-Einstellungen").
-              </p>
-              <p className="mt-2">
-                Weitere Informationen:{" "}
-                <a 
-                  href="https://privacy.microsoft.com/privacystatement" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  https://privacy.microsoft.com/privacystatement
-                </a>
-              </p>
-
               <h3 className="text-lg font-semibold mt-4 mb-2">Supabase (Menüdaten)</h3>
               <p>
                 Für die Bereitstellung von Menüdaten nutzen wir Supabase (Supabase Inc., San Francisco, USA). Die Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 lit. f DSGVO. Weitere Informationen:{" "}
