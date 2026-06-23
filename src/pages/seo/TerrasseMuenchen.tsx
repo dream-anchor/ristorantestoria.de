@@ -344,6 +344,10 @@ const TerrasseMuenchen = () => {
                   <h3 className="font-semibold mb-2">{tr.related1Title}</h3>
                   <p className="text-muted-foreground text-sm">{tr.related1Desc}</p>
                 </LocalizedLink>
+                <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.quickLinks.menu}</h3>
+                  <p className="text-muted-foreground text-sm">{tr.relatedMenuDesc}</p>
+                </LocalizedLink>
                 <LocalizedLink to="romantisches-dinner-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{tr.related2Title}</h3>
                   <p className="text-muted-foreground text-sm">{tr.related2Desc}</p>
