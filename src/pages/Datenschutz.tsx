@@ -67,7 +67,7 @@ const Datenschutz = () => {
                 </a>
               </p>
               <p className="mt-2">
-                <strong>Vertreten durch:</strong> Agnese Lettieri
+                <strong>Vertreten durch die Geschäftsführerin:</strong> Agnese Lettieri
               </p>
             </section>
 
@@ -105,6 +105,14 @@ const Datenschutz = () => {
               </p>
               <p className="mt-2">
                 <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO
+              </p>
+              <p className="mt-2">
+                <strong>Gruppen- und Veranstaltungsanfragen:</strong> Anfragen über unsere
+                Gruppen- bzw. Veranstaltungsformulare werden zur Bearbeitung an unseren
+                Veranstaltungs-Dienst (events-storia.de) übermittelt und dort verarbeitet. Die
+                Verarbeitung erfolgt ausschließlich zur Bearbeitung Ihrer Anfrage; die Daten
+                werden gelöscht, sobald die Anfrage abschließend bearbeitet ist. Rechtsgrundlage:
+                Art. 6 Abs. 1 lit. b und lit. f DSGVO.
               </p>
             </section>
 
@@ -159,12 +167,36 @@ const Datenschutz = () => {
               <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
                 7. Einsatz externer Dienste
               </h2>
-              
+
+              <h3 className="text-lg font-semibold mt-4 mb-2">Hosting (IONOS)</h3>
+              <p>
+                Unsere Website wird bei der IONOS SE, Elgendorfer Straße 57, 56410 Montabaur,
+                Deutschland, gehostet. Wenn Sie unsere Website aufrufen, verarbeitet IONOS in
+                unserem Auftrag die technisch anfallenden Zugriffsdaten – insbesondere
+                IP-Adresse, Datum und Uhrzeit des Zugriffs, die aufgerufenen Seiten, die
+                übertragene Datenmenge sowie Browser- und Betriebssysteminformationen.
+                Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren, stabilen
+                und effizienten Betrieb unserer Website (Art. 6 Abs. 1 lit. f DSGVO). Mit IONOS
+                besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO. Die Daten werden
+                ausschließlich auf Servern in Deutschland bzw. der Europäischen Union
+                verarbeitet; eine Übermittlung in ein Drittland findet nicht statt.
+              </p>
+
               <h3 className="text-lg font-semibold mt-4 mb-2">OpenTable (Reservierung)</h3>
               <p>
-                Für Online-Reservierungen nutzen wir den Dienst OpenTable. Bei einer Reservierung 
-                werden Ihre Daten an OpenTable übermittelt. Die Datenschutzerklärung von OpenTable 
-                finden Sie unter:{" "}
+                Für Online-Reservierungen nutzen wir den Dienst OpenTable. Bei einer Reservierung
+                werden die von Ihnen eingegebenen Daten (u. a. Name, Kontaktdaten,
+                Reservierungsdetails) an OpenTable übermittelt. OpenTable ist hinsichtlich dieser
+                Daten eigenständig Verantwortlicher.
+              </p>
+              <p className="mt-2">
+                <strong>Drittlandübermittlung:</strong> Soweit dabei Daten in die USA übermittelt
+                werden, ist OpenTable unter dem EU-US Data Privacy Framework zertifiziert; die
+                Übermittlung erfolgt auf Grundlage des Angemessenheitsbeschlusses der
+                EU-Kommission gemäß Art. 45 DSGVO.
+              </p>
+              <p className="mt-2">
+                Die Datenschutzerklärung von OpenTable finden Sie unter:{" "}
                 <a 
                   href="https://www.opentable.de/legal/privacy-policy" 
                   target="_blank" 
@@ -188,50 +220,52 @@ const Datenschutz = () => {
                   https://policies.google.com/privacy
                 </a>
               </p>
+              <p className="mt-2">
+                <strong>Rechtsgrundlage:</strong> Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO,
+                § 25 Abs. 1 TDDDG). Die Karte wird erst nach Ihrer Einwilligung über das
+                Cookie-Banner geladen.
+              </p>
 
-              <h3 className="text-lg font-semibold mt-4 mb-2">Google Analytics</h3>
               <h3 className="text-lg font-semibold mt-4 mb-2">Google Analytics 4 (GA4)</h3>
               <p>
-                Wir nutzen Google Analytics 4, einen Webanalysedienst der Google Ireland Limited,
-                Gordon House, Barrow Street, Dublin 4, Irland. Bei Übermittlung in Drittländer ist
-                Empfänger die Google LLC, USA.
+                Wir nutzen Google Analytics 4 der Google Ireland Limited, Gordon House, Barrow
+                Street, Dublin 4, Irland; Empfänger bei Drittlandtransfer: Google LLC, USA.
               </p>
               <p className="mt-2">
-                <strong>Zweck:</strong> Analyse des Nutzungsverhaltens (aufgerufene Seiten,
-                Verweildauer, Herkunft der Zugriffe), um unser Angebot zu verbessern.
+                <strong>Zweck:</strong> Analyse des Nutzungsverhaltens zur Verbesserung unseres
+                Angebots.
               </p>
               <p className="mt-2">
-                <strong>Verarbeitete Daten:</strong> pseudonyme Kennung (Client-ID/Geräte-Kennung),
-                Geräte- und Browserinformationen, ungefährer Standort (Land/Region), Referrer sowie
-                Interaktions- und Event-Daten (z. B. Seitenaufrufe, Klicks, Scrolltiefe, Reservierungs-
-                und Kontakt-Klicks). Ihre IP-Adresse wird von Google nur vorübergehend zur Ableitung
-                des ungefähren Standorts verwendet und nicht dauerhaft gespeichert.
+                <strong>Verarbeitete Daten:</strong> pseudonyme Kennung (Client-ID),
+                Geräte-/Browserinformationen, ungefährer Standort (Land/Region), Referrer,
+                Interaktions- und Event-Daten. Ihre IP-Adresse wird nur vorübergehend zur groben
+                Standortbestimmung verwendet und nicht dauerhaft gespeichert.
               </p>
               <p className="mt-2">
-                <strong>Rechtsgrundlage:</strong> Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO
-                sowie § 25 Abs. 1 TDDDG, erteilt über unser Cookie-Banner.
+                <strong>Keine Werbenutzung:</strong> Google-Signale sind deaktiviert, es besteht
+                keine Verknüpfung mit Google Ads, und es werden keine Daten zu Werbezwecken
+                verarbeitet.
               </p>
               <p className="mt-2">
-                <strong>Google Consent Mode v2 (Basic):</strong> Wir setzen den Google Consent Mode v2
-                im Basic-Modus ein. Alle Einwilligungen sind standardmäßig auf „denied" gesetzt. Google
-                Analytics wird erst geladen und erhebt erst Daten, nachdem Sie aktiv eingewilligt haben.
-                Ohne Einwilligung findet kein Tracking statt; es werden keine Daten an Google gesendet.
+                <strong>Rechtsgrundlage:</strong> Einwilligung (Art. 6 Abs. 1 lit. a DSGVO,
+                § 25 Abs. 1 TDDDG).
               </p>
               <p className="mt-2">
-                <strong>Drittlandübermittlung:</strong> Bei erteilter Einwilligung können Daten in die
-                USA übermittelt werden. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert.
-                {" "}{`{{Nur aufnehmen, wenn vertraglich tatsächlich vereinbart: ergänzend Standardvertragsklauseln gem. Art. 46 DSGVO.}}`}
+                <strong>Consent Mode v2 (Basic):</strong> Standard „denied"; GA4 lädt und misst
+                erst nach aktiver Einwilligung. Ohne Einwilligung kein Tracking, keine
+                Datenübertragung an Google.
               </p>
               <p className="mt-2">
-                <strong>Speicherdauer:</strong> Auf Nutzer- und Ereignisebene erhobene Daten werden nach
-                {" "}{`{{Aufbewahrungsdauer laut GA4 → Verwalten → Dateneinstellungen → Datenaufbewahrung: 2 oder 14 Monate}}`}
-                {" "}automatisch gelöscht.
+                <strong>Drittlandtransfer:</strong> Google LLC ist unter dem EU-US Data Privacy
+                Framework zertifiziert.
               </p>
               <p className="mt-2">
-                <strong>Widerruf:</strong> Sie können Ihre Einwilligung jederzeit mit Wirkung für die
-                Zukunft über das Cookie-Symbol unten links auf jeder Seite („Cookie-Einstellungen")
-                widerrufen. Bereits gesetzte Cookies können Sie zusätzlich in Ihren Browsereinstellungen
-                löschen.
+                <strong>Speicherdauer:</strong> Auf Ereignisebene erhobene Daten werden nach
+                2 Monaten automatisch gelöscht.
+              </p>
+              <p className="mt-2">
+                <strong>Widerruf:</strong> jederzeit über das Cookie-Symbol unten links
+                („Cookie-Einstellungen").
               </p>
               <p className="mt-2">
                 Weitere Informationen:{" "}
@@ -242,6 +276,50 @@ const Datenschutz = () => {
                   className="text-primary hover:underline"
                 >
                   https://policies.google.com/privacy
+                </a>
+              </p>
+
+              <h3 className="text-lg font-semibold mt-4 mb-2">Microsoft Clarity (Sitzungsanalyse)</h3>
+              <p>
+                Wir nutzen Microsoft Clarity, ein Webanalyse-Tool zur Erstellung von
+                Sitzungsaufzeichnungen und Heatmaps. Vertragspartner für Nutzer in der EU ist die
+                Microsoft Ireland Operations Limited, One Microsoft Place, South County Business
+                Park, Leopardstown, Dublin 18, Irland.
+              </p>
+              <p className="mt-2">
+                <strong>Zweck:</strong> Auswertung des Nutzungsverhaltens (z. B. Maus- und
+                Scrollbewegungen, Klicks, aufgerufene Seiten, Geräte- und Browserinformationen,
+                ungefährer Standort), um die Benutzerfreundlichkeit unserer Website zu verbessern.
+                Eingaben in Formularfeldern werden durch Clarity automatisch maskiert.
+              </p>
+              <p className="mt-2">
+                <strong>Rechtsgrundlage:</strong> Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO,
+                § 25 Abs. 1 TDDDG). Clarity wird erst nach Ihrer Einwilligung geladen; ohne
+                Einwilligung findet keine Aufzeichnung statt.
+              </p>
+              <p className="mt-2">
+                <strong>Datenübermittlung:</strong> Soweit Daten zwischen der Microsoft Ireland
+                Operations Limited und der Microsoft Corporation (USA) übermittelt werden, erfolgt
+                dies auf Grundlage von Standardvertragsklauseln gemäß Art. 46 DSGVO.
+              </p>
+              <p className="mt-2">
+                <strong>Speicherdauer:</strong> Sitzungsaufzeichnungen werden nach 30 Tagen
+                gelöscht; Heatmaps sowie markierte oder favorisierte Aufzeichnungen werden bis zu
+                13 Monate gespeichert.
+              </p>
+              <p className="mt-2">
+                <strong>Widerruf:</strong> jederzeit über das Cookie-Symbol unten links auf jeder
+                Seite („Cookie-Einstellungen").
+              </p>
+              <p className="mt-2">
+                Weitere Informationen:{" "}
+                <a 
+                  href="https://privacy.microsoft.com/privacystatement" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  https://privacy.microsoft.com/privacystatement
                 </a>
               </p>
 
