@@ -163,6 +163,7 @@ export const de = {
     description: "Erleben Sie authentische italienische Küche im Herzen von München. Ob romantisches Dinner, Familienfeier oder Geschäftsessen – wir freuen uns auf Sie.",
     descriptionWhatsapp: "oder schreiben Sie uns direkt per",
     reserveButton: "Jetzt reservieren",
+    inlineText: "Hunger bekommen? Sichern Sie sich Ihren Tisch.",
     callButton: "Anrufen",
   },
   nav: {

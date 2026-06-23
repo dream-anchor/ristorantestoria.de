@@ -7,6 +7,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
+import InlineReservationCTA from "@/components/InlineReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -73,7 +74,9 @@ const Speisekarte = () => {
             </div>
           </div>
 
-          <MenuDisplay menuType="food" />
+          <InlineReservationCTA />
+
+          <MenuDisplay menuType="food" interstitialCta={<InlineReservationCTA />} interstitialEvery={3} />
           
           <ReservationCTA />
         </main>

@@ -158,6 +158,7 @@ export const fr = {
     description: "Découvrez l'authentique cuisine italienne au cœur de Munich. Que ce soit un dîner romantique, une fête de famille ou un repas d'affaires – nous vous attendons.",
     descriptionWhatsapp: "ou contactez-nous directement via",
     reserveButton: "Réserver maintenant",
+    inlineText: "Une petite faim ? Réservez votre table.",
     callButton: "Appeler",
   },
   nav: {
