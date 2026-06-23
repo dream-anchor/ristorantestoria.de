@@ -1,60 +1,57 @@
-# Demo-Modus (Augen-Button) fürs Admin
+## Ausgangslage
 
-Ein global umschaltbarer "Demo-/Präsentationsmodus", der alle Zahlen und Kundendaten im gesamten Admin-Bereich unkenntlich macht (Blur), während alle Funktionen voll bedienbar bleiben. Zustand wird pro Gerät gemerkt.
+`events-storia.de` ist ein eigenständiges Projekt mit Warenkorb + Stripe-Checkout + Supabase-Katalog. Aus dieser Session habe ich dort **nur Lesezugriff** — ich kann die Gutschein-Seite/den Artikel nicht von hier aus anlegen. Deshalb teilt sich die Umsetzung in zwei Teile:
 
-## Konzept (CX-Sicht)
+- **Teil A** läuft im Projekt [events-storia.de](/projects/22114801-ce52-4c7e-be84-1945d60886fb) — dort gibst du den Build-Auftrag, ich setze ihn dort um.
+- **Teil B** läuft hier (ristorantestoria.de) — sobald `/gutschein` drüben live ist.
 
-- Ein **Augen-Icon-Button** oben rechts in jedem Admin-Header (Dashboard, GSC, SEO-Ops).
-- Aktiv = "verborgen": Auge durchgestrichen (`EyeOff`), sensible Werte sind weichgezeichnet und nicht markierbar/kopierbar.
-- Inaktiv = "sichtbar": normales Auge (`Eye`), alles normal.
-- Visuelles Feedback: dezenter Hinweis-Streifen "Demo-Modus aktiv – sensible Daten verborgen", damit man beim Vorführen nie versehentlich denkt, es sei aus.
-- Layout bleibt exakt gleich (kein Springen): nur `filter: blur()` + Platzhalter-Breite, keine Inhalte entfernt.
+---
 
-## Architektur
+## Teil A — Gutschein-Artikel auf events-storia.de
 
+Route, Aufbau und Datenmodell orientieren sich an den bestehenden Catering-Artikeln (`useCateringMenus` → Cart → `/checkout` → Stripe).
+
+**Route**
 ```text
-DemoModeProvider (localStorage: storia-demo-mode)
-        │  useDemoMode() -> { hidden, toggle }
-        ├── DemoModeToggle      (Augen-Button, in allen Admin-Headern)
-        ├── DemoModeBanner      (Hinweisstreifen wenn aktiv)
-        └── <Redact>            (Wrapper, blurrt Kinder wenn hidden)
+/gutschein            (DE)
+/en/voucher           (EN)
 ```
 
-1. **`src/contexts/DemoModeContext.tsx`** – Context + Provider. Initialwert aus `localStorage` (`storia-demo-mode` = "1"/"0"), `toggle()` schreibt zurück. Hook `useDemoMode()`.
+**Seitenaufbau** (analog `pages/catering/*`)
+- Hero: „STORIA Geschenkgutschein – Italienischer Genuss zum Verschenken"
+- Betrag wählbar: feste Stufen 25 / 50 / 75 / 100 € + optional Freibetrag
+- Versandoptionen: digital (PDF per Mail) / postalisch (2,50 €) — wie in `AGBGutscheine` beschrieben
+- „In den Warenkorb" → bestehender Cart → `/checkout` (Stripe ist schon eingebunden)
+- Verlinkung auf bestehende `/agb-gutscheine` und `/widerrufsbelehrung`
+- SEO-Tags + JSON-LD wie bei den anderen Seiten
 
-2. **Provider einhängen** – in `App.tsx` nur um die Admin-Routen (`/admin`, `/admin/gsc`, `/admin/seo`) legen, damit öffentliche Seiten unberührt und pre-rendering-sicher bleiben.
+**Artikel/Produkt-Anlage**
+- Gutschein als Katalog-Item mit `category: 'voucher'` (neue Kategorie in `CartItem`)
+- Cart-Logik: Gutschein wie normaler Artikel (kein Event-Paket, kein `min_order`)
+- Checkout/Stripe: Gutschein-Position als reguläre Line-Item; nach Zahlung PDF-Versand bzw. Versand-Handling
+- Footer/Navigation: Eintrag „Gutscheine" ergänzen
 
-3. **`src/components/admin/DemoModeToggle.tsx`** – Icon-Button (`Eye`/`EyeOff`), Tooltip "Sensible Daten verbergen/anzeigen". Wird in den Header-Button-Gruppen platziert:
-   - `Admin.tsx`: in beide Button-Reihen (Desktop + Mobile), als erster Eintrag der rechten Gruppe.
-   - `AdminSEO.tsx` und `AdminGSC.tsx`: in die rechte Header-Gruppe.
+**Verifizierung drüben:** Build grün, `/gutschein` rendert, In-den-Warenkorb → Checkout funktioniert, AGB verlinkt.
 
-4. **`src/components/admin/Redact.tsx`** – kleiner Wrapper:
-   ```tsx
-   const { hidden } = useDemoMode();
-   return <span className={hidden ? "blur-sm select-none pointer-events-none" : ""}>{children}</span>
-   ```
-   Variante `block` für Karten/Tabellenzeilen.
+---
 
-5. **`DemoModeBanner.tsx`** – schmaler Hinweis unter dem Header, nur sichtbar wenn aktiv.
+## Teil B — Verlinkung hier (ristorantestoria.de)
 
-## Wo `<Redact>` angewendet wird (komplettes Admin)
+Sobald `https://www.events-storia.de/gutschein` live ist:
 
-- **Saisonale Vormerkungen** (`SeasonalSignupsManager.tsx`): Name, E-Mail, Telefon, Personenzahl, Anzahl-Counter.
-- **Saisonale Benachrichtigungen / Empfänger** (`SeasonalNotificationsManager.tsx`, `seasonal_notification_recipients`): Empfänger-E-Mails, Zählerstände.
-- **GSC-Dashboard** (`src/components/admin/gsc/*`): alle Metrik-Zahlen (Klicks, Impressionen, CTR, Position), Such-Queries (können Personennamen/Marken enthalten → ebenfalls blurren).
-- **SEO-Ops-Dashboard** (`src/components/admin/seo-ops/*`): Kennzahlen, Traffic-/Score-Werte.
-- **Gruppenmenüs** (`GroupMenusManager.tsx`): falls Kundenangaben/Preise enthalten → blurren.
-- **Benachrichtigungs-Banner** (`AdminNotificationsBanner.tsx`): Nachrichtentext kann Kundendaten enthalten → blurren.
+1. **`src/lib/eventsLinks.ts`** — neuen Preset `gutschein` ergänzen, der auf `https://www.events-storia.de/gutschein` zeigt (mit `utm_source=ristorante&utm_campaign=gutschein`). Kein neuer Anfrage-Funnel, eigener fester Pfad.
+2. **Gutschein-CTA platzieren** — als Cross-Sell-Link (z. B. auf der Speisekarte / besondere-Anlässe), kein eigener neuer Seitenbaum nötig, sofern du keine eigene Gutschein-Landingpage hier willst.
+3. **Tracking** — Klick feuert `voucher_click` mit `location:'<seitenname>'`, genau einmal je CTA/Viewport. Keine Änderung an `analytics.ts`, GA4 oder Consent.
+4. **`target="_blank" rel="noopener"`** für den externen Shop-Link, keine mobilen Floating-Buttons.
 
-Speisekarten-/Menü-Verwaltung selbst bleibt sichtbar (keine personenbezogenen Daten), nur reine Preis-/Kundenzahlen werden umfasst.
+**Verifizierung hier:** `npm run build` grün, Playwright bestätigt `voucher_click` feuert genau einmal, Link öffnet `events-storia.de/gutschein`.
 
-## Technische Details
+---
 
-- Reines Frontend, keine DB-/Backend-Änderung. Daten werden weiterhin geladen (Funktionsprüfung möglich), nur visuell verdeckt.
-- `blur-sm`/`blur` über Tailwind; `select-none` + `pointer-events-none` verhindert Markieren/Kopieren der verborgenen Werte.
-- Persistenz via `localStorage` (pro Gerät). SSR-sicher: `typeof window` Guard im Provider, da Admin ohnehin nur clientseitig läuft.
-- Kein `React.lazy`-Konflikt: Provider liegt um bereits lazy geladene Admin-Seiten.
+## Nicht im Scope
+- Kein Stripe/Shop-Aufbau hier im Projekt (bleibt drüben).
+- Keine Änderung an bestehenden Anlass-/Saison-Seiten außer dem CTA-Einbau.
+- Brunch bleibt zurückgestellt.
 
-## Hinweis zur Sicherheit
-
-Der Blur ist eine **Präsentations-Maßnahme**, kein Zugriffsschutz – die Werte sind im DOM weiterhin vorhanden. Für reines "über die Schulter zeigen" ist das genau richtig; soll es echten Schutz vor technisch versierten Betrachtern bieten, müssten Daten serverseitig maskiert werden (größerer Umbau). Empfehlung: aktuelle Frontend-Lösung, da sie dem genannten Zweck ("System zeigen ohne Details") optimal entspricht.
+## Nächster Schritt
+Wechsle ins Projekt events-storia.de und gib dort frei „Gutschein-Artikel unter /gutschein bauen" — dann setze ich Teil A dort um. Danach erledige ich Teil B hier.
