@@ -448,6 +448,7 @@ export const fr = {
   cookies: {
     title: "Paramètres des Cookies",
     bannerText: "Nous utilisons des cookies pour faire fonctionner notre site web, permettre les réservations via OpenTable et afficher notre emplacement via Google Maps. Vous pouvez accepter tous les cookies, les refuser ou personnaliser vos paramètres.",
+    benefitNote: "Avec votre consentement aux cookies statistiques, nous pouvons comprendre quels contenus et offres sont demandés et améliorer notre site web.",
     acceptAll: "Accepter tout",
     rejectAll: "Refuser tout",
     settings: "Paramètres",

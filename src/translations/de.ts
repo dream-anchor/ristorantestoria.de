@@ -457,6 +457,7 @@ export const de = {
   cookies: {
     title: "Cookie-Einstellungen",
     bannerText: "Wir verwenden Cookies, um unsere Website zu betreiben, Reservierungen über OpenTable zu ermöglichen und unseren Standort über Google Maps korrekt anzuzeigen. Sie können alle Cookies akzeptieren, ablehnen oder individuelle Einstellungen vornehmen.",
+    benefitNote: "Mit Ihrer Zustimmung zu Statistik-Cookies können wir nachvollziehen, welche Inhalte und Angebote gefragt sind, und unsere Website verbessern.",
     acceptAll: "Alle akzeptieren",
     rejectAll: "Alle ablehnen",
     settings: "Einstellungen",

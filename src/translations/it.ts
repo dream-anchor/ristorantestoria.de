@@ -478,6 +478,7 @@ const itBase = {
   cookies: {
     title: "Impostazioni Cookie",
     bannerText: "Utilizziamo i cookie per gestire il nostro sito web, abilitare le prenotazioni tramite OpenTable e visualizzare la nostra posizione tramite Google Maps. Potete accettare tutti i cookie, rifiutarli o personalizzare le impostazioni.",
+    benefitNote: "Con il vostro consenso ai cookie statistici possiamo capire quali contenuti e offerte sono più richiesti e migliorare il nostro sito web.",
     acceptAll: "Accetta tutti",
     rejectAll: "Rifiuta tutti",
     settings: "Impostazioni",
