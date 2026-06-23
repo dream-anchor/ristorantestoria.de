@@ -108,8 +108,10 @@ const Datenschutz = () => {
               </p>
               <p className="mt-2">
                 <strong>Gruppen- und Veranstaltungsanfragen:</strong> Anfragen über unsere
-                Gruppen- bzw. Veranstaltungsformulare werden zur Bearbeitung an unseren
-                Veranstaltungs-Dienst (events-storia.de) übermittelt und dort verarbeitet. Die
+                Gruppen- bzw. Veranstaltungsformulare werden über unser Veranstaltungsangebot
+                (events-storia.de) bearbeitet. Dieses wird von derselben verantwortlichen Stelle
+                (Speranza GmbH) betrieben; es findet daher keine Übermittlung an einen Dritten
+                statt, sondern eine Verarbeitung innerhalb desselben Verantwortungsbereichs. Die
                 Verarbeitung erfolgt ausschließlich zur Bearbeitung Ihrer Anfrage; die Daten
                 werden gelöscht, sobald die Anfrage abschließend bearbeitet ist. Rechtsgrundlage:
                 Art. 6 Abs. 1 lit. b und lit. f DSGVO.
