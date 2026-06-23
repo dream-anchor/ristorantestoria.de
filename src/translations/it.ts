@@ -188,6 +188,7 @@ const itBase = {
     description: "Vivi l'autentica cucina italiana nel cuore di Monaco. Che sia una cena romantica, una festa in famiglia o un pranzo di lavoro – vi aspettiamo.",
     descriptionWhatsapp: "o scriveteci direttamente su",
     reserveButton: "Prenota ora",
+    inlineText: "Ti è venuta fame? Prenota il tuo tavolo.",
     callButton: "Chiama",
   },
   nav: {

@@ -158,6 +158,7 @@ export const en = {
     description: "Experience authentic Italian cuisine in the heart of Munich. Whether romantic dinner, family celebration or business meal – we look forward to welcoming you.",
     descriptionWhatsapp: "or contact us directly via",
     reserveButton: "Reserve now",
+    inlineText: "Getting hungry? Secure your table.",
     callButton: "Call",
   },
   nav: {
