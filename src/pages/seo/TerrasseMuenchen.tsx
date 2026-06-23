@@ -165,6 +165,22 @@ const TerrasseMuenchen = () => {
               </div>
             </section>
 
+            {/* Der perfekte Abend (Aperitivo – Sommer-Schwerpunkt, nach vorne gezogen) */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-8 text-center">{tr.eveningTitle}</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {eveningSteps.map((step, i) => (
+                  <div key={i} className="text-center">
+                    <span className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mx-auto mb-3">{i + 1}</span>
+                    <div className="text-3xl mb-2">{step.icon}</div>
+                    <p className="text-sm text-primary font-medium mb-1">{step.time}</p>
+                    <h3 className="font-semibold mb-2">{step.title}</h3>
+                    <p className="text-muted-foreground text-sm">{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* Schanigarten */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{tr.schanigartenTitle}</h2>
