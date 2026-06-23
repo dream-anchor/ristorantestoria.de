@@ -280,21 +280,6 @@ const TerrasseMuenchen = () => {
               </div>
             </section>
 
-            {/* Zigarrenhändler */}
-            <section className="mb-16 bg-secondary/50 rounded-xl p-8">
-              <h2 className="text-2xl font-serif font-bold mb-6 text-center">{tr.cigarTitle}</h2>
-              <p className="text-muted-foreground text-center mb-6">{tr.cigarIntro}</p>
-              <div className="grid md:grid-cols-3 gap-6">
-                {cigarShops.map((shop, i) => (
-                  <div key={i} className="bg-card rounded-lg p-4 border">
-                    <h3 className="font-semibold mb-1">{shop.name}</h3>
-                    <p className="text-muted-foreground text-sm mb-2">{shop.address}</p>
-                    <p className="text-muted-foreground text-xs">{shop.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
             {/* Location */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{tr.locationTitle}</h2>
@@ -334,6 +319,21 @@ const TerrasseMuenchen = () => {
                   </AccordionItem>
                 ))}
               </Accordion>
+            </section>
+
+            {/* Zigarrenhändler (sekundäres Thema – nach den verkaufsstarken Sommer-Abschnitten) */}
+            <section className="mb-16 bg-secondary/50 rounded-xl p-8">
+              <h2 className="text-2xl font-serif font-bold mb-6 text-center">{tr.cigarTitle}</h2>
+              <p className="text-muted-foreground text-center mb-6">{tr.cigarIntro}</p>
+              <div className="grid md:grid-cols-3 gap-6">
+                {cigarShops.map((shop, i) => (
+                  <div key={i} className="bg-card rounded-lg p-4 border">
+                    <h3 className="font-semibold mb-1">{shop.name}</h3>
+                    <p className="text-muted-foreground text-sm mb-2">{shop.address}</p>
+                    <p className="text-muted-foreground text-xs">{shop.desc}</p>
+                  </div>
+                ))}
+              </div>
             </section>
 
             {/* Related */}
