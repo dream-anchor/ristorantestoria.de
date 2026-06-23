@@ -1870,6 +1870,8 @@ const itBase = {
       heroBadge1: "☀️ Coperta e protetta",
       heroBadge2: "🛋️ Cuscini e coperte",
       heroBadge3: "\ud83d\udeac Fumare benvenuto",
+      heroWmNote: "⚽ Mondiali 2026: serate estive e aperitivo in terrazza – prenota subito il tuo tavolo",
+      relatedMenuDesc: "Pizza nel forno a legna, pasta fresca e cene a più portate – anche in terrazza.",
       heroDescription: "Ci sono serate che meritano pi\u00f9 di una buona cena. Serate in cui tutto \u00e8 perfetto: la luce, l\u2019aria, un bicchiere di vino, un risotto perfetto \u2013 e poi una sigaretta o un sigaro in tutta tranquillit\u00e0. Sulla nostra terrazza coperta al STORIA, tutto questo \u00e8 possibile.",
       heroCta: "Prenota posto in terrazza",
       introTitle: "Ristorante con Terrazza Monaco – La Terrazza del STORIA",

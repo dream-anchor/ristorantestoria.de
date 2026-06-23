@@ -20,6 +20,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import ReservationCTA from "@/components/ReservationCTA";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import { trackEvent } from "@/lib/analytics";
 
 const TerrasseMuenchen = () => {
   const { t, language } = useLanguage();
@@ -27,6 +28,10 @@ const TerrasseMuenchen = () => {
   const candlelightTo = `${PARENT_SLUGS[language]}/${language === "de" ? "candlelight-menue" : "candlelight-menu"}`;
   usePrerenderReady(true);
   const tr = t.seo.terrasse;
+
+  // Einzige Quelle je Key-Event auf dieser Seite/Viewport — bestehender trackEvent-Mechanismus.
+  const track = (event: "reservation_click" | "phone_click" | "whatsapp_click") =>
+    trackEvent(event, { location: "terrasse" });
 
   const features = [
     { icon: "☀️", title: tr.feat1Title, desc: tr.feat1Desc, items: [tr.feat1Item1, tr.feat1Item2, tr.feat1Item3, tr.feat1Item4] },
@@ -111,13 +116,19 @@ const TerrasseMuenchen = () => {
                 <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{tr.heroBadge2}</span>
                 <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{tr.heroBadge3}</span>
               </div>
+              {/* WM-2026-Hinweis: zeitlich begrenzt, über einen einzigen Translation-Key entfernbar. */}
+              {tr.heroWmNote && (
+                <p className="inline-block bg-primary/90 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium mb-6">
+                  {tr.heroWmNote}
+                </p>
+              )}
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{tr.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <LocalizedLink to="reservierung">{tr.heroCta}</LocalizedLink>
+                  <LocalizedLink to="reservierung" onClick={() => track("reservation_click")}>{tr.heroCta}</LocalizedLink>
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                  <a href="tel:+498951519696" onClick={() => track("phone_click")}><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
               </div>
             </div>
@@ -181,7 +192,7 @@ const TerrasseMuenchen = () => {
               </div>
               <div className="text-center">
                 <Button asChild>
-                  <LocalizedLink to="reservierung">{tr.schanigartenCta}</LocalizedLink>
+                  <LocalizedLink to="reservierung" onClick={() => track("reservation_click")}>{tr.schanigartenCta}</LocalizedLink>
                 </Button>
               </div>
             </section>
@@ -269,21 +280,6 @@ const TerrasseMuenchen = () => {
               </div>
             </section>
 
-            {/* Zigarrenhändler */}
-            <section className="mb-16 bg-secondary/50 rounded-xl p-8">
-              <h2 className="text-2xl font-serif font-bold mb-6 text-center">{tr.cigarTitle}</h2>
-              <p className="text-muted-foreground text-center mb-6">{tr.cigarIntro}</p>
-              <div className="grid md:grid-cols-3 gap-6">
-                {cigarShops.map((shop, i) => (
-                  <div key={i} className="bg-card rounded-lg p-4 border">
-                    <h3 className="font-semibold mb-1">{shop.name}</h3>
-                    <p className="text-muted-foreground text-sm mb-2">{shop.address}</p>
-                    <p className="text-muted-foreground text-xs">{shop.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
             {/* Location */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{tr.locationTitle}</h2>
@@ -325,6 +321,21 @@ const TerrasseMuenchen = () => {
               </Accordion>
             </section>
 
+            {/* Zigarrenhändler (sekundäres Thema – nach den verkaufsstarken Sommer-Abschnitten) */}
+            <section className="mb-16 bg-secondary/50 rounded-xl p-8">
+              <h2 className="text-2xl font-serif font-bold mb-6 text-center">{tr.cigarTitle}</h2>
+              <p className="text-muted-foreground text-center mb-6">{tr.cigarIntro}</p>
+              <div className="grid md:grid-cols-3 gap-6">
+                {cigarShops.map((shop, i) => (
+                  <div key={i} className="bg-card rounded-lg p-4 border">
+                    <h3 className="font-semibold mb-1">{shop.name}</h3>
+                    <p className="text-muted-foreground text-sm mb-2">{shop.address}</p>
+                    <p className="text-muted-foreground text-xs">{shop.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* Related */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{tr.relatedTitle}</h2>
@@ -332,6 +343,10 @@ const TerrasseMuenchen = () => {
                 <LocalizedLink to="aperitivo-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{tr.related1Title}</h3>
                   <p className="text-muted-foreground text-sm">{tr.related1Desc}</p>
+                </LocalizedLink>
+                <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.faqPage.quickLinks.menu}</h3>
+                  <p className="text-muted-foreground text-sm">{tr.relatedMenuDesc}</p>
                 </LocalizedLink>
                 <LocalizedLink to="romantisches-dinner-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{tr.related2Title}</h3>
@@ -364,13 +379,13 @@ const TerrasseMuenchen = () => {
               <p className="mb-8 opacity-90">{tr.ctaDesc}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <LocalizedLink to="reservierung">{tr.ctaReserve}</LocalizedLink>
+                  <LocalizedLink to="reservierung" onClick={() => track("reservation_click")}>{tr.ctaReserve}</LocalizedLink>
                 </Button>
                 <Button size="lg" className="bg-white/20 hover:bg-white/30 text-white" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                  <a href="tel:+498951519696" onClick={() => track("phone_click")}><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
                 <Button size="lg" className="bg-[#25D366] hover:bg-[#20BD5A] text-white" asChild>
-                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer"><MessageCircle className="w-5 h-5 mr-2" />WhatsApp</a>
+                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click")}><MessageCircle className="w-5 h-5 mr-2" />WhatsApp</a>
                 </Button>
               </div>
             </section>

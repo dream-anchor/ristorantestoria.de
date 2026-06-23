@@ -2688,6 +2688,8 @@ export const de = {
       heroBadge1: "☀️ Überdacht & wetterfest",
       heroBadge2: "🛋️ Kissen & Decken",
       heroBadge3: "\ud83d\udeac Rauchen willkommen",
+      heroWmNote: "⚽ WM 2026: Sommerabende & Aperitivo auf der Terrasse – jetzt Tisch sichern",
+      relatedMenuDesc: "Pizza aus dem Steinofen, frische Pasta & mehrgängige Dinner – auch auf der Terrasse.",
       heroDescription: "Es gibt Abende, die verdienen mehr als nur ein gutes Essen. Abende, an denen alles stimmt: das Licht, die Luft, ein Glas Wein, ein perfektes Risotto \u2013 und danach eine Zigarette oder Zigarre in aller Ruhe. Auf unserer \u00fcberdachten Restaurant Terrasse M\u00fcnchen am STORIA ist genau das m\u00f6glich.",
       tldr: "Restaurant-Terrasse München im STORIA Maxvorstadt (Karlstraße 47a): Überdachte Terrasse mit 100 Plätzen, Kissen und Decken – Rauchen willkommen. Italienisch essen und Aperitivo unter freiem Himmel, wetterfest bei jedem Wetter. 5 Min. vom Königsplatz. Seit 2015 Familienbetrieb von Familie Speranza. 4,5 Sterne bei über 780 Google-Bewertungen. Reservierung: +49 89 51519696.",
       heroCta: "Terrassenplatz reservieren",
