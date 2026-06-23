@@ -69,3 +69,10 @@ export const EVENTS_LINKS = {
     utm_campaign: "homepage_cross_sell",
   }),
 } as const;
+
+/**
+ * Gutschein-Shop auf events-storia.de.
+ * Eigener fester Pfad (kein /anfrage-Funnel). Klick-Tracking: voucher_click.
+ */
+export const VOUCHER_SHOP_URL =
+  "https://www.events-storia.de/gutschein?utm_source=ristorante&utm_campaign=gutschein";
