@@ -116,13 +116,19 @@ const TerrasseMuenchen = () => {
                 <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{tr.heroBadge2}</span>
                 <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{tr.heroBadge3}</span>
               </div>
+              {/* WM-2026-Hinweis: zeitlich begrenzt, über einen einzigen Translation-Key entfernbar. */}
+              {tr.heroWmNote && (
+                <p className="inline-block bg-primary/90 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium mb-6">
+                  {tr.heroWmNote}
+                </p>
+              )}
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{tr.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <LocalizedLink to="reservierung">{tr.heroCta}</LocalizedLink>
+                  <LocalizedLink to="reservierung" onClick={() => track("reservation_click")}>{tr.heroCta}</LocalizedLink>
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                  <a href="tel:+498951519696" onClick={() => track("phone_click")}><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
               </div>
             </div>
@@ -186,7 +192,7 @@ const TerrasseMuenchen = () => {
               </div>
               <div className="text-center">
                 <Button asChild>
-                  <LocalizedLink to="reservierung">{tr.schanigartenCta}</LocalizedLink>
+                  <LocalizedLink to="reservierung" onClick={() => track("reservation_click")}>{tr.schanigartenCta}</LocalizedLink>
                 </Button>
               </div>
             </section>
@@ -369,13 +375,13 @@ const TerrasseMuenchen = () => {
               <p className="mb-8 opacity-90">{tr.ctaDesc}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <LocalizedLink to="reservierung">{tr.ctaReserve}</LocalizedLink>
+                  <LocalizedLink to="reservierung" onClick={() => track("reservation_click")}>{tr.ctaReserve}</LocalizedLink>
                 </Button>
                 <Button size="lg" className="bg-white/20 hover:bg-white/30 text-white" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
+                  <a href="tel:+498951519696" onClick={() => track("phone_click")}><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
                 <Button size="lg" className="bg-[#25D366] hover:bg-[#20BD5A] text-white" asChild>
-                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer"><MessageCircle className="w-5 h-5 mr-2" />WhatsApp</a>
+                  <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click")}><MessageCircle className="w-5 h-5 mr-2" />WhatsApp</a>
                 </Button>
               </div>
             </section>
