@@ -161,6 +161,10 @@ export const en = {
     inlineText: "Getting hungry? Secure your table.",
     callButton: "Call",
   },
+  voucherCta: {
+    inlineText: "Give the gift of Italian indulgence – with a STORIA gift voucher.",
+    button: "Buy voucher",
+  },
   nav: {
     reservation: "RESERVATION",
     menu: "MENU",

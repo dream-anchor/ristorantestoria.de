@@ -161,6 +161,10 @@ export const fr = {
     inlineText: "Une petite faim ? Réservez votre table.",
     callButton: "Appeler",
   },
+  voucherCta: {
+    inlineText: "Offrez le plaisir italien – avec un bon cadeau STORIA.",
+    button: "Acheter un bon",
+  },
   nav: {
     reservation: "RÉSERVATION",
     menu: "MENU",
