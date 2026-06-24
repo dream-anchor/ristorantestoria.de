@@ -340,6 +340,8 @@ export const de = {
     submitting: "Wird gespeichert...",
     successTitle: "Erfolgreich vorgemerkt!",
     successMessage: "Vielen Dank! Wir melden uns bei Ihnen, sobald unser Menü verfügbar ist.",
+    doiTitle: "Fast geschafft – bitte E-Mail bestätigen",
+    doiMessage: "Wir haben Ihnen eine Bestätigungs-E-Mail geschickt. Bitte klicken Sie auf den Link darin, um Ihre Anmeldung abzuschließen.",
     duplicateMessage: "Diese E-Mail ist bereits vorgemerkt.",
     errorMessage: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
     archivedMenuTitle: "Rückblick: {event} {year}",

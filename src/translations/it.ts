@@ -361,6 +361,8 @@ const itBase = {
     submitting: "Salvataggio...",
     successTitle: "Registrazione riuscita!",
     successMessage: "Grazie! La avviseremo non appena il nostro menù sarà disponibile.",
+    doiTitle: "Ci siamo quasi – conferma la tua email",
+    doiMessage: "Ti abbiamo inviato un'email di conferma. Clicca sul link al suo interno per completare l'iscrizione.",
     duplicateMessage: "Questa email è già registrata.",
     errorMessage: "Si è verificato un errore. Riprova più tardi.",
     archivedMenuTitle: "Uno sguardo indietro: {event} {year}",

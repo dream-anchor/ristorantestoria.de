@@ -331,6 +331,8 @@ export const en = {
     submitting: "Saving...",
     successTitle: "Successfully registered!",
     successMessage: "Thank you! We'll notify you as soon as our menu is available.",
+    doiTitle: "Almost there – please confirm your email",
+    doiMessage: "We've sent you a confirmation email. Please click the link inside to complete your subscription.",
     duplicateMessage: "This email is already registered.",
     errorMessage: "An error occurred. Please try again later.",
     archivedMenuTitle: "A Look Back: {event} {year}",
