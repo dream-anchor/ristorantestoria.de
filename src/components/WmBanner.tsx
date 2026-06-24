@@ -24,7 +24,7 @@ const WmBanner = () => {
       <div className="flex-1 min-w-0">
         <span
           className="block text-xs font-semibold uppercase tracking-[0.22em] mb-2"
-          style={{ color: "#b07d29" }}
+          style={{ color: "#8a6220" }}
         >
           WM 2026
         </span>
