@@ -296,6 +296,22 @@ RewriteRule ^ index.html [L]
 </IfModule>
 
 # ============================================
+# 14c. Content-Security-Policy — REPORT-ONLY (Stufe 1, blockt NICHTS)
+# Bewusst Report-Only: meldet Verstöße, ohne die Seite zu brechen. Erlaubt:
+#   - Inline gtag-Consent-Script via sha256-Hash (kein 'unsafe-inline' für Scripts)
+#   - GA4, Microsoft Clarity, Elfsight (Reviews), OpenTable (Reservierung), Google Maps
+#   - Supabase (connect), lokale Fonts, https-Bilder (Map-Tiles/Avatare/Pixel)
+# ENFORCING BLOCKIERT (Voraussetzung vor Umstellung auf "Content-Security-Policy"):
+#   Der Prerender injiziert pro Menü-Seite ein Inline-<script>window.__REACT_QUERY_STATE__=…</script>.
+#   Ohne Hash/Nonce blockt strict script-src diese -> Hydration-Bruch. Vor dem Enforcen
+#   muss die Dehydration auf <script type="application/json"> umgestellt werden
+#   (prerender.js + entry-client). Bis dahin: Report-Only laufen lassen, Reports auswerten.
+# ============================================
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'sha256-yew/S/91uxxpETutMdUL9GsQZSCbR7Zf0cOCmdKFyWc=' https://www.googletagmanager.com https://www.clarity.ms https://static.elfsight.com https://www.opentable.de; style-src 'self' 'unsafe-inline' https://static.elfsight.com; img-src 'self' data: https:; font-src 'self' data:; media-src 'self'; connect-src 'self' https://iieethejhwfsyzhbweps.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://*.clarity.ms https://*.elfsight.com; frame-src https://www.google.com https://www.opentable.de https://*.opentable.com https://*.elfsight.com; form-action 'self' https://www.opentable.de"
+</IfModule>
+
+# ============================================
 # 15. Sitemap - Force XML Content-Type
 # ============================================
 <Files "sitemap.xml">
