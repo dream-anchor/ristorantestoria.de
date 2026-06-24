@@ -400,6 +400,13 @@ serve(async (req) => {
         let emailError: string | null = null;
         let resendId: string | null = null;
 
+        // Per-recipient unsubscribe link (token-based) + footer
+        const unsubUrl = `${supabaseUrl}/functions/v1/unsubscribe-seasonal?token=${recipient.confirm_token}`;
+        const unsubFooter = unsubscribeFooter(lang, unsubUrl);
+        const htmlWithUnsub = body_html.includes("</body>")
+          ? body_html.replace("</body>", `${unsubFooter}</body>`)
+          : body_html + unsubFooter;
+
         if (resendApiKey) {
           try {
             const emailResponse = await fetch("https://api.resend.com/emails", {
@@ -412,7 +419,11 @@ serve(async (req) => {
                 from: "Ristorante STORIA <info@ristorantestoria.de>",
                 to: [recipient.email],
                 subject,
-                html: body_html,
+                html: htmlWithUnsub,
+                headers: {
+                  "List-Unsubscribe": `<${unsubUrl}>`,
+                  "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+                },
               }),
             });
 
