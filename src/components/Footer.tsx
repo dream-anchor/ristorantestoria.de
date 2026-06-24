@@ -116,11 +116,11 @@ const Footer = () => {
               <h3 className="font-serif font-medium text-base tracking-[0.2em] uppercase mb-6 text-primary-foreground/90">{t.footer.contact}</h3>
               <div className="space-y-3 text-base font-sans text-primary-foreground/70">
               <a href="tel:+498951519696" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
-                  <Phone className="h-4 w-4" />
+                  <Phone className="h-4 w-4" aria-hidden="true" />
                   +49 89 51519696
                 </a>
                 <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
-                  <Mail className="h-4 w-4" />
+                  <Mail className="h-4 w-4" aria-hidden="true" />
                   info@ristorantestoria.de
                 </a>
                 <a 
@@ -130,7 +130,7 @@ const Footer = () => {
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-[#25D366] transition-colors"
                   title="WhatsApp: +49 163 603 3912"
                 >
-                  <MessageCircle className="h-4 w-4" />
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
                   WhatsApp
                 </a>
               <a
@@ -140,7 +140,7 @@ const Footer = () => {
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors"
                   title="STORIA auf Google Maps"
                 >
-                  <MapPin className="h-4 w-4" />
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
                   <span>STORIA ristorante pizzeria bar<br />Karlstraße 47A, 80333 München</span>
                 </a>
               </div>
@@ -164,7 +164,7 @@ const Footer = () => {
               <h3 className="font-serif font-medium text-base tracking-[0.2em] uppercase mb-6 text-primary-foreground/90">{t.footer.openingHours}</h3>
               <div className="space-y-2 text-base font-sans text-primary-foreground/70">
                 <div className="flex items-center justify-center md:justify-end gap-2.5">
-                  <Clock className="h-4 w-4" />
+                  <Clock className="h-4 w-4" aria-hidden="true" />
                   <span>{t.footer.monFri}: 09:00 – 01:00</span>
                 </div>
                 <p>{t.footer.satSun}: 12:00 – 01:00</p>

@@ -17,31 +17,33 @@ const Header = () => {
             STORIA
           </LocalizedLink>
           <div className="flex items-center gap-4 md:gap-6 text-base text-foreground/80 font-display font-medium">
-            <a href="tel:+498951519696" className="flex items-center justify-center gap-2 min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors">
-              <Phone className="h-4 w-4" />
+            <a href="tel:+498951519696" aria-label="STORIA anrufen: +49 89 51519696" className="flex items-center justify-center gap-2 min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors">
+              <Phone className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">+49 89 51519696</span>
             </a>
-            <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center gap-2 min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors">
-              <Mail className="h-4 w-4" />
+            <a href="mailto:info@ristorantestoria.de" aria-label="E-Mail an STORIA: info@ristorantestoria.de" className="flex items-center justify-center gap-2 min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors">
+              <Mail className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">info@ristorantestoria.de</span>
             </a>
             <a
               href="https://wa.me/491636033912"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="STORIA per WhatsApp kontaktieren"
               className="flex items-center justify-center min-h-[48px] min-w-[48px] p-2 hover:text-[#25D366] transition-colors"
               title="WhatsApp"
             >
-              <MessageCircle className="h-4 w-4" />
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
               href="https://www.instagram.com/ristorante_storia/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="STORIA auf Instagram: @ristorante_storia"
               className="flex items-center justify-center min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors"
               title="Instagram @ristorante_storia"
             >
-              <Instagram className="h-4 w-4" />
+              <Instagram className="h-4 w-4" aria-hidden="true" />
             </a>
             <div className={`transition-opacity duration-300 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
               <LanguageSwitcher />
