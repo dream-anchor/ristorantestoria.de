@@ -276,6 +276,23 @@ RewriteRule ^ index.html [L]
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+</IfModule>
+
+# ============================================
+# 14b. Cache-Control — gehashte Build-Assets + HTML-Freshness
+# Ergänzt das mod_expires-Caching (Abschnitt 13). Vite hasht JS/CSS/Fonts im
+# Dateinamen → dürfen 1 Jahr immutable gecacht werden. HTML (Prerender) darf NICHT
+# aggressiv gecacht werden, sonst sehen wiederkehrende Nutzer veraltete Stände.
+# Bilder/Videos behalten ihr mod_expires-Caching (bewusst nicht herabgesetzt).
+# ============================================
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
 # ============================================
