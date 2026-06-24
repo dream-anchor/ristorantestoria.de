@@ -194,6 +194,7 @@ const itBase = {
   voucherCta: {
     inlineText: "Regala il gusto italiano – con un buono regalo STORIA.",
     button: "Acquista buono",
+    footerLink: "Buono regalo",
   },
   nav: {
     reservation: "PRENOTAZIONE",
