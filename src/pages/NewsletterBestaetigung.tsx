@@ -108,7 +108,7 @@ const NewsletterBestaetigung = ({ lang = "de" }: Props) => {
 
   return (
     <>
-      <SEO title={c.metaTitle} description={c.confirmedMsg} canonical={CANONICAL[lang]} noHreflang noindex />
+      <SEO title={c.metaTitle} description={c.confirmedMsg} canonical={CANONICAL[lang]} noHreflang noIndex />
 
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
