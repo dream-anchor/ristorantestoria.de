@@ -1,57 +1,61 @@
-## Ausgangslage
-
-`events-storia.de` ist ein eigenständiges Projekt mit Warenkorb + Stripe-Checkout + Supabase-Katalog. Aus dieser Session habe ich dort **nur Lesezugriff** — ich kann die Gutschein-Seite/den Artikel nicht von hier aus anlegen. Deshalb teilt sich die Umsetzung in zwei Teile:
-
-- **Teil A** läuft im Projekt [events-storia.de](/projects/22114801-ce52-4c7e-be84-1945d60886fb) — dort gibst du den Build-Auftrag, ich setze ihn dort um.
-- **Teil B** läuft hier (ristorantestoria.de) — sobald `/gutschein` drüben live ist.
+## Merker (laufende Aufgabe, nicht vergessen)
+Gutschein-Shop wird gerade **drüben auf events-storia.de unter `/gutschein` gebaut**. Sobald live: hier Teil B = sichtbarer Gutschein-CTA + `voucher_click`-Tracking via bereits angelegtem `VOUCHER_SHOP_URL` (`src/lib/eventsLinks.ts`). Dieser Plan hier blockiert das nicht.
 
 ---
 
-## Teil A — Gutschein-Artikel auf events-storia.de
+## Schritt 1 — Bestandsaufnahme Anlass-/Saison-/Angebotsseiten
 
-Route, Aufbau und Datenmodell orientieren sich an den bestehenden Catering-Artikeln (`useCateringMenus` → Cart → `/checkout` → Stripe).
+| Route | Status | Nav | Footer „Anlässe & Gruppen" | Eigenes Hero/Formular |
+|---|---|---|---|---|
+| `/weihnachtsfeier-muenchen` | existiert | – | ✅ | ✅ Hero + Events-Anfrage |
+| `/terrasse-muenchen` | existiert (kürzlich überarbeitet) | ✅ | – | ✅ Hero + Reservieren-CTA |
+| `/firmenfeier-muenchen` | existiert | – | ✅ | ✅ Hero + Anfrage |
+| `/geburtstagsfeier-muenchen` | existiert | – | ✅ | ✅ Hero + Anfrage |
+| `/hochzeitsfeier-muenchen` | existiert | – | ✅ | ✅ Hero + Anfrage |
+| `/aperitivo-muenchen` | existiert | – | – | ✅ Hero + Reservieren |
+| `/romantisches-dinner-muenchen` | existiert | – | – | ✅ Hero + Reservieren |
+| `/reisegruppen` (slug `reisegruppen-muenchen`) | existiert | – | ✅ | ✅ Hero + Gruppen-Anfrage |
+| `/besondere-anlaesse/*` | existiert (Pillar + dynamische Saison-Menüs) | ✅ | – | dynamisch |
+| `/catering` | existiert | ✅ | – | ✅ verlinkt auf events-storia.de |
+| weitere im Set | `wm-2026-public-viewing`, `filmfest`, `silvester`, `valentinstag`, `weihnachten`, `wild-essen`, div. SEO-Seiten — alle vorhanden | | teilw. | ✅ |
 
-**Route**
-```text
-/gutschein            (DE)
-/en/voucher           (EN)
-```
+Footer „Anlässe & Gruppen" enthält aktuell: WM 2026, Filmfest, Reisegruppen, Firmenfeier, Geburtstagsfeier, Hochzeitsfeier, Weihnachtsfeier.
 
-**Seitenaufbau** (analog `pages/catering/*`)
-- Hero: „STORIA Geschenkgutschein – Italienischer Genuss zum Verschenken"
-- Betrag wählbar: feste Stufen 25 / 50 / 75 / 100 € + optional Freibetrag
-- Versandoptionen: digital (PDF per Mail) / postalisch (2,50 €) — wie in `AGBGutscheine` beschrieben
-- „In den Warenkorb" → bestehender Cart → `/checkout` (Stripe ist schon eingebunden)
-- Verlinkung auf bestehende `/agb-gutscheine` und `/widerrufsbelehrung`
-- SEO-Tags + JSON-LD wie bei den anderen Seiten
+## Schritt 2 — Echte Lücken
 
-**Artikel/Produkt-Anlage**
-- Gutschein als Katalog-Item mit `category: 'voucher'` (neue Kategorie in `CartItem`)
-- Cart-Logik: Gutschein wie normaler Artikel (kein Event-Paket, kein `min_order`)
-- Checkout/Stripe: Gutschein-Position als reguläre Line-Item; nach Zahlung PDF-Versand bzw. Versand-Handling
-- Footer/Navigation: Eintrag „Gutscheine" ergänzen
+**A) Geschenkgutschein** — Es gibt **keine** Gutschein-Verkaufsseite hier. Nur juristische Seite `/agb-gutscheine` (kein Kaufweg). Der Kaufweg entsteht gerade **drüben** unter `events-storia.de/gutschein`; `VOUCHER_SHOP_URL` ist hier schon hinterlegt. → **Lücke = nur noch der CTA-Einbau hier**, sobald der Shop live ist. Keine eigene neue Verkaufsseite hier nötig.
 
-**Verifizierung drüben:** Build grün, `/gutschein` rendert, In-den-Warenkorb → Checkout funktioniert, AGB verlinkt.
+**B) Brunch / Wochenend-Brunch** — Existiert **nirgends** (keine Route, kein Footer, keine Translation). Echte, vollständige Lücke. Auf deine frühere Ansage hin war Brunch **zurückgestellt** — bleibt zurückgestellt, bis du es explizit freigibst.
 
 ---
 
-## Teil B — Verlinkung hier (ristorantestoria.de)
+## Vorschlag Seitenaufbau (erst nach Einzel-Freigabe, eine Seite nach der anderen)
 
-Sobald `https://www.events-storia.de/gutschein` live ist:
+### A) Geschenkgutschein-CTA hier (kein neuer Seitenbaum)
+- Gutschein-Cross-Sell-Block auf `/speisekarte` und `/besondere-anlaesse` (Stil der bestehenden Inline-CTAs).
+- Externer Link → `VOUCHER_SHOP_URL`, `target="_blank" rel="noopener"`.
+- Tracking: `voucher_click` mit `location:'<seitenname>'`, genau einmal je CTA/Viewport.
+- Optional Footer-Eintrag „Geschenkgutschein" in „Anlässe & Gruppen".
+- Keine mobilen Floating-Buttons. Keine Änderung an `analytics.ts`/GA4/Consent.
 
-1. **`src/lib/eventsLinks.ts`** — neuen Preset `gutschein` ergänzen, der auf `https://www.events-storia.de/gutschein` zeigt (mit `utm_source=ristorante&utm_campaign=gutschein`). Kein neuer Anfrage-Funnel, eigener fester Pfad.
-2. **Gutschein-CTA platzieren** — als Cross-Sell-Link (z. B. auf der Speisekarte / besondere-Anlässe), kein eigener neuer Seitenbaum nötig, sofern du keine eigene Gutschein-Landingpage hier willst.
-3. **Tracking** — Klick feuert `voucher_click` mit `location:'<seitenname>'`, genau einmal je CTA/Viewport. Keine Änderung an `analytics.ts`, GA4 oder Consent.
-4. **`target="_blank" rel="noopener"`** für den externen Shop-Link, keine mobilen Floating-Buttons.
-
-**Verifizierung hier:** `npm run build` grün, Playwright bestätigt `voucher_click` feuert genau einmal, Link öffnet `events-storia.de/gutschein`.
+### B) Brunch-Seite `/brunch-muenchen` (nur falls freigegeben)
+Aufbau im Stil der bestehenden Anlass-Seiten:
+- **Hero + H1:** „Brunch in München – Italienischer Wochenend-Brunch im STORIA" + Sofort-CTA „Tisch reservieren" (`reservation_click`, `location:'brunch'`).
+- **Abschnitt 1 — Angebot:** TODO-Platzhalter (Wochentage/Uhrzeiten, Preis, à la carte vs. Buffet).
+- **Abschnitt 2 — Highlights:** Cornetti, Eier, Antipasti, Kaffee usw. (TODO konkrete Speisen).
+- **Abschnitt 3 — Ambiente/Lage:** Maxvorstadt, Terrasse-Verweis, interner Link `/terrasse-muenchen`.
+- **Abschnitt 4 — Praktisches/FAQ:** Reservierung empfohlen, Gruppen, TODO.
+- Interne Links zu `/speisekarte` und `/reservierung`. Abschluss-CTA „Brunch-Tisch sichern".
+- **Title:** „Brunch München – Italienischer Wochenend-Brunch | STORIA" · **Meta:** „Genießen Sie italienischen Brunch in München-Maxvorstadt im STORIA. Frische Cornetti, Antipasti & Kaffee. Jetzt Tisch reservieren." (TODO Fakten bestätigen)
+- Route + Slug in `slugs.json` (de/en/it/fr) + Translation-Dateien, eager import in `App.tsx`, hreflang, JSON-LD — wie bei den anderen Seiten.
+- Footer-Eintrag „Brunch München" in „Anlässe & Gruppen".
+- Pre-Render-Checkliste (kein `lazy()`, echter Content in `dist/`).
 
 ---
 
-## Nicht im Scope
-- Kein Stripe/Shop-Aufbau hier im Projekt (bleibt drüben).
-- Keine Änderung an bestehenden Anlass-/Saison-Seiten außer dem CTA-Einbau.
-- Brunch bleibt zurückgestellt.
+## Empfohlene Reihenfolge
+1. **Jetzt nichts Neues bauen** — Gutschein-Shop drüben abwarten, dann hier nur den CTA (Lücke A) einbauen.
+2. **Brunch** nur, wenn du es jetzt doch freigibst — dann als eigene Seite, einzeln.
 
-## Nächster Schritt
-Wechsle ins Projekt events-storia.de und gib dort frei „Gutschein-Artikel unter /gutschein bauen" — dann setze ich Teil A dort um. Danach erledige ich Teil B hier.
+## Nächster Schritt / offene Frage
+Soll Brunch jetzt aus der Zurückstellung geholt und als `/brunch-muenchen` gebaut werden, oder bleibt es zurückgestellt und wir beschränken uns auf den Gutschein-CTA (sobald der Shop live ist)?
