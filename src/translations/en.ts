@@ -164,6 +164,7 @@ export const en = {
   voucherCta: {
     inlineText: "Give the gift of Italian indulgence – with a STORIA gift voucher.",
     button: "Buy voucher",
+    footerLink: "Gift voucher",
   },
   nav: {
     reservation: "RESERVATION",
