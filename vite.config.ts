@@ -26,7 +26,9 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
     rollupOptions: {
       output: {
         manualChunks: isSsrBuild ? undefined : {
-          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          // Selten ändernde Vendor-Libs in eigene, langfristig cachebare Chunks
+          'react': ['react', 'react-dom', 'react-router-dom'],
+          'supabase': ['@supabase/supabase-js'],
           'recharts': ['recharts'],
         },
       },
