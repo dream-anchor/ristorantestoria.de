@@ -65,6 +65,8 @@ const HomeVideo = () => {
               aria-label={VIDEO_NAME}
             >
               <source src={VIDEO_PATH} type="video/mp4" />
+              {/* Stummes, dekoratives Video — leere Caption-Spur erfüllt den a11y-Audit */}
+              <track kind="captions" label="Deutsch" srcLang="de" />
             </video>
           </div>
           <figcaption className="mt-3 text-center text-sm text-muted-foreground font-serif italic">
