@@ -289,11 +289,12 @@ serve(async (req) => {
     const resendApiKey = Deno.env.get("RESEND_API_KEY_RISTORANTE");
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Fetch unnotified signups
+    // Fetch unnotified, CONFIRMED signups only (double-opt-in)
     const { data: signups, error: signupsError } = await supabase
       .from("seasonal_signups")
-      .select("id, email, language")
+      .select("id, email, language, confirm_token")
       .eq("seasonal_event", seasonal_event)
+      .eq("status", "confirmed")
       .is("notified_at", null);
 
     if (signupsError) throw new Error(`Failed to fetch signups: ${signupsError.message}`);
@@ -306,11 +307,11 @@ serve(async (req) => {
     }
 
     // Group by language
-    const byLanguage: Record<string, Array<{ id: string; email: string }>> = {};
+    const byLanguage: Record<string, Array<{ id: string; email: string; confirm_token: string }>> = {};
     for (const signup of signups) {
       const lang = signup.language || "de";
       if (!byLanguage[lang]) byLanguage[lang] = [];
-      byLanguage[lang].push({ id: signup.id, email: signup.email });
+      byLanguage[lang].push({ id: signup.id, email: signup.email, confirm_token: signup.confirm_token });
     }
 
     const languages = Object.keys(byLanguage);
