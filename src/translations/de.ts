@@ -169,6 +169,7 @@ export const de = {
   voucherCta: {
     inlineText: "Verschenken Sie italienischen Genuss – mit einem STORIA-Geschenkgutschein.",
     button: "Gutschein kaufen",
+    footerLink: "Geschenkgutschein",
   },
   nav: {
     reservation: "RESERVIERUNG",
