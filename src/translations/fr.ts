@@ -164,6 +164,7 @@ export const fr = {
   voucherCta: {
     inlineText: "Offrez le plaisir italien – avec un bon cadeau STORIA.",
     button: "Acheter un bon",
+    footerLink: "Bon cadeau",
   },
   nav: {
     reservation: "RÉSERVATION",
