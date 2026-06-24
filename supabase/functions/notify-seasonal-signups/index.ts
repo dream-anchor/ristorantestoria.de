@@ -70,6 +70,22 @@ const EVENT_URLS: Record<string, Record<string, string>> = {
   },
 };
 
+const UNSUB_LABELS: Record<string, string> = {
+  de: "Wenn Sie keine weiteren E-Mails erhalten möchten, können Sie sich hier abmelden",
+  en: "If you no longer wish to receive these emails, you can unsubscribe here",
+  it: "Se non desideri più ricevere queste email, puoi annullare l'iscrizione qui",
+  fr: "Si vous ne souhaitez plus recevoir ces e-mails, vous pouvez vous désinscrire ici",
+};
+
+function unsubscribeFooter(lang: string, unsubUrl: string): string {
+  const label = UNSUB_LABELS[lang] ?? UNSUB_LABELS.de;
+  return `<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5ede0;">
+    <tr><td align="center" style="padding:16px 24px;">
+      <p style="color:#a08060;font-size:11px;line-height:1.5;margin:0;text-align:center;font-family:Georgia,serif;">${label}: <a href="${unsubUrl}" style="color:#8B4513;">Abmelden / Unsubscribe</a></p>
+    </td></tr>
+  </table>`;
+}
+
 const LANG_NAMES: Record<string, string> = {
   de: "Deutsch",
   en: "Englisch",
@@ -289,11 +305,12 @@ serve(async (req) => {
     const resendApiKey = Deno.env.get("RESEND_API_KEY_RISTORANTE");
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Fetch unnotified signups
+    // Fetch unnotified, CONFIRMED signups only (double-opt-in)
     const { data: signups, error: signupsError } = await supabase
       .from("seasonal_signups")
-      .select("id, email, language")
+      .select("id, email, language, confirm_token")
       .eq("seasonal_event", seasonal_event)
+      .eq("status", "confirmed")
       .is("notified_at", null);
 
     if (signupsError) throw new Error(`Failed to fetch signups: ${signupsError.message}`);
@@ -306,11 +323,11 @@ serve(async (req) => {
     }
 
     // Group by language
-    const byLanguage: Record<string, Array<{ id: string; email: string }>> = {};
+    const byLanguage: Record<string, Array<{ id: string; email: string; confirm_token: string }>> = {};
     for (const signup of signups) {
       const lang = signup.language || "de";
       if (!byLanguage[lang]) byLanguage[lang] = [];
-      byLanguage[lang].push({ id: signup.id, email: signup.email });
+      byLanguage[lang].push({ id: signup.id, email: signup.email, confirm_token: signup.confirm_token });
     }
 
     const languages = Object.keys(byLanguage);
@@ -399,6 +416,13 @@ serve(async (req) => {
         let emailError: string | null = null;
         let resendId: string | null = null;
 
+        // Per-recipient unsubscribe link (token-based) + footer
+        const unsubUrl = `${supabaseUrl}/functions/v1/unsubscribe-seasonal?token=${recipient.confirm_token}`;
+        const unsubFooter = unsubscribeFooter(lang, unsubUrl);
+        const htmlWithUnsub = body_html.includes("</body>")
+          ? body_html.replace("</body>", `${unsubFooter}</body>`)
+          : body_html + unsubFooter;
+
         if (resendApiKey) {
           try {
             const emailResponse = await fetch("https://api.resend.com/emails", {
@@ -411,7 +435,11 @@ serve(async (req) => {
                 from: "Ristorante STORIA <info@ristorantestoria.de>",
                 to: [recipient.email],
                 subject,
-                html: body_html,
+                html: htmlWithUnsub,
+                headers: {
+                  "List-Unsubscribe": `<${unsubUrl}>`,
+                  "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+                },
               }),
             });
 

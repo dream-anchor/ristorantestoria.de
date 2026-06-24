@@ -1360,28 +1360,49 @@ export type Database = {
       }
       seasonal_signups: {
         Row: {
+          confirm_token: string
+          confirmed_at: string | null
+          consent_at: string | null
+          consent_ip: string | null
+          consent_text: string | null
+          consent_version: string | null
           created_at: string
           email: string
           id: string
           language: string
           notified_at: string | null
           seasonal_event: string
+          status: string
         }
         Insert: {
+          confirm_token?: string
+          confirmed_at?: string | null
+          consent_at?: string | null
+          consent_ip?: string | null
+          consent_text?: string | null
+          consent_version?: string | null
           created_at?: string
           email: string
           id?: string
           language?: string
           notified_at?: string | null
           seasonal_event: string
+          status?: string
         }
         Update: {
+          confirm_token?: string
+          confirmed_at?: string | null
+          consent_at?: string | null
+          consent_ip?: string | null
+          consent_text?: string | null
+          consent_version?: string | null
           created_at?: string
           email?: string
           id?: string
           language?: string
           notified_at?: string | null
           seasonal_event?: string
+          status?: string
         }
         Relationships: []
       }

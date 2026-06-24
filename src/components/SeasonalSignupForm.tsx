@@ -41,25 +41,33 @@ const SeasonalSignupForm = ({ seasonalEvent }: SeasonalSignupFormProps) => {
   const onSubmit = async (data: SignupFormData) => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase
-        .from('seasonal_signups')
-        .insert({
+      const consentText = t.seasonalSignup.privacyCheckbox.replace(
+        '{link}',
+        t.seasonalSignup.privacyLinkText,
+      );
+
+      const { data: result, error } = await supabase.functions.invoke('subscribe-seasonal', {
+        body: {
           email: data.email.trim().toLowerCase(),
           seasonal_event: seasonalEvent,
-          language: language,
-        });
+          language,
+          consent_text: consentText,
+        },
+      });
 
-      if (error) {
-        if (error.code === '23505') {
-          toast.info(t.seasonalSignup.duplicateMessage);
-        } else {
-          toast.error(t.seasonalSignup.errorMessage);
-          console.error('Signup error:', error);
-        }
+      if (error || !result?.ok) {
+        toast.error(t.seasonalSignup.errorMessage);
+        console.error('Signup error:', error || result);
         return;
       }
 
-      toast.success(t.seasonalSignup.successTitle);
+      if (result.status === 'already_confirmed') {
+        toast.info(t.seasonalSignup.duplicateMessage);
+        return;
+      }
+
+      // status === 'pending' → double-opt-in email sent
+      toast.success(t.seasonalSignup.doiTitle);
       setIsSubmitted(true);
     } catch (err) {
       toast.error(t.seasonalSignup.errorMessage);
@@ -74,10 +82,10 @@ const SeasonalSignupForm = ({ seasonalEvent }: SeasonalSignupFormProps) => {
       <div className="text-center py-8">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-xl font-serif font-semibold mb-2">
-          {t.seasonalSignup.successTitle}
+          {t.seasonalSignup.doiTitle}
         </h3>
         <p className="text-muted-foreground">
-          {t.seasonalSignup.successMessage}
+          {t.seasonalSignup.doiMessage}
         </p>
       </div>
     );

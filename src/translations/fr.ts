@@ -331,6 +331,8 @@ export const fr = {
     submitting: "Enregistrement...",
     successTitle: "Inscription réussie !",
     successMessage: "Merci ! Nous vous informerons dès que notre menu sera disponible.",
+    doiTitle: "Presque terminé – confirmez votre e-mail",
+    doiMessage: "Nous vous avons envoyé un e-mail de confirmation. Veuillez cliquer sur le lien qu'il contient pour finaliser votre inscription.",
     duplicateMessage: "Cet e-mail est déjà inscrit.",
     errorMessage: "Une erreur s'est produite. Veuillez réessayer plus tard.",
     archivedMenuTitle: "Rétrospective : {event} {year}",

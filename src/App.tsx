@@ -56,6 +56,7 @@ import WeihnachtenMuenchen from "./pages/seo/WeihnachtenMuenchen";
 import ReisegruppenPage from "./pages/seo/ReisegruppenPage";
 import ReisegruppenDankePage from "./pages/seo/ReisegruppenDankePage";
 import FAQ from "./pages/FAQ";
+import NewsletterBestaetigung from "./pages/NewsletterBestaetigung";
 
 // Eager: Legal-Seiten (müssen pre-rendered werden)
 import Impressum from "./pages/Impressum";
@@ -234,6 +235,16 @@ const AppRoutes = () => {
         {/* Thank-you page after group inquiry form submit */}
         <Route path="/reisegruppen/danke" element={<ReisegruppenDankePage />} />
         <Route path="/reisegruppen/danke/" element={<ReisegruppenDankePage />} />
+
+        {/* Newsletter double-opt-in confirmation (4 languages, noindex) */}
+        <Route path="/newsletter-bestaetigen" element={<NewsletterBestaetigung lang="de" />} />
+        <Route path="/newsletter-bestaetigen/" element={<NewsletterBestaetigung lang="de" />} />
+        <Route path="/en/confirm-newsletter" element={<NewsletterBestaetigung lang="en" />} />
+        <Route path="/en/confirm-newsletter/" element={<NewsletterBestaetigung lang="en" />} />
+        <Route path="/it/conferma-newsletter" element={<NewsletterBestaetigung lang="it" />} />
+        <Route path="/it/conferma-newsletter/" element={<NewsletterBestaetigung lang="it" />} />
+        <Route path="/fr/confirmation-newsletter" element={<NewsletterBestaetigung lang="fr" />} />
+        <Route path="/fr/confirmation-newsletter/" element={<NewsletterBestaetigung lang="fr" />} />
 
         {/* /menu → /speisekarte (thin content page removed) */}
         <Route path="/menu" element={<Navigate to="/speisekarte/" replace />} />

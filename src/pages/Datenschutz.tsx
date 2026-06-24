@@ -293,6 +293,45 @@ const Datenschutz = () => {
                   supabase.com/privacy
                 </a>
               </p>
+
+              <h3 className="text-lg font-semibold mt-4 mb-2">Resend (E-Mail-Versand)</h3>
+              <p>
+                Für den Versand von E-Mails (u. a. Newsletter-Bestätigungen und Menü-Benachrichtigungen)
+                nutzen wir Resend, Inc., USA, als Auftragsverarbeiter gemäß Art. 28 DSGVO. Resend ist unter
+                dem EU-US Data Privacy Framework zertifiziert; ergänzend bestehen Standardvertragsklauseln
+                gemäß Art. 46 DSGVO.
+              </p>
+
+              <h3 className="text-lg font-semibold mt-6 mb-2">Newsletter / Saisonale Menü-Vormerkung</h3>
+              <p>
+                Wenn Sie sich für unsere Benachrichtigung zu saisonalen Menüs anmelden, verarbeiten wir Ihre
+                E-Mail-Adresse, die gewählte Sprache sowie den jeweiligen Anlass.
+              </p>
+              <p className="mt-2">
+                <strong>Zweck:</strong> Information, sobald das jeweilige saisonale Menü bzw. Reservierungen
+                verfügbar sind.
+              </p>
+              <p className="mt-2">
+                <strong>Rechtsgrundlage:</strong> Ihre Einwilligung, Art. 6 Abs. 1 lit. a DSGVO.
+              </p>
+              <p className="mt-2">
+                <strong>Double-Opt-In:</strong> Nach der Anmeldung erhalten Sie eine Bestätigungs-E-Mail.
+                Erst nach Klick auf den Bestätigungslink nehmen wir Sie in den Verteiler auf. Zum Nachweis
+                speichern wir Anmelde- und Bestätigungszeitpunkt, die IP-Adresse sowie den Einwilligungstext.
+              </p>
+              <p className="mt-2">
+                <strong>Versanddienstleister:</strong> Der Versand erfolgt über Resend, Inc., USA, als
+                Auftragsverarbeiter (Art. 28 DSGVO). Resend ist unter dem EU-US Data Privacy Framework
+                zertifiziert; ergänzend bestehen Standardvertragsklauseln gemäß Art. 46 DSGVO.
+              </p>
+              <p className="mt-2">
+                <strong>Speicherdauer:</strong> bis zu Ihrer Abmeldung.
+              </p>
+              <p className="mt-2">
+                <strong>Widerruf:</strong> Sie können sich jederzeit über den Abmeldelink in jeder E-Mail oder
+                per Nachricht an uns abmelden. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung
+                bleibt unberührt.
+              </p>
             </section>
 
             {/* 8. Speicherdauer */}

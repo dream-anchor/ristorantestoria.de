@@ -1,17 +1,14 @@
-# Aufräumen: verwaister Clarity-Kommentar
+# Newsletter-Konformität (seasonal_signups) + Doku-Korrektur Menüdaten — UMGESETZT
 
-## Kontext
-Die Prüfung ist abgeschlossen. Alle bestätigten Punkte sind OK; einzige reale Abweichung gegenüber dem behaupteten Stand war der fehlende Microsoft-Clarity-Datenschutzabschnitt. Da Clarity **nirgends** im Code integriert ist (keine `ClarityTracking.tsx`, kein Lade-Code, kein Datenschutz-Abschnitt), ist datenschutzrechtlich nichts zu ergänzen oder funktional zu entfernen.
+## TEIL 1 — Newsletter Double-Opt-In (erledigt)
+- Migration: status/confirm_token/confirmed_at/consent_ip/consent_text/consent_at/consent_version; Status-Validierungstrigger; anon-INSERT entzogen (RLS-Policy entfernt).
+- Edge Function `subscribe-seasonal` (Service-Role): schreibt status='pending', speichert IP + Einwilligungstext/-version, sendet DOI-Mail (nur Bestätigung, keine Werbung).
+- `SeasonalSignupForm.tsx` ruft jetzt `subscribe-seasonal` statt Direct-Insert; zeigt DOI-Hinweis (doiTitle/doiMessage in 4 Sprachen).
+- `confirm-seasonal` + Seite `NewsletterBestaetigung.tsx` (Routen DE/EN/IT/FR, noindex).
+- `notify-seasonal-signups`: nur status='confirmed'; jede Mail mit Abmeldelink + List-Unsubscribe (one-click).
+- `unsubscribe-seasonal`: setzt status='unsubscribed' (GET=HTML-Seite, POST=one-click).
+- `Datenschutz.tsx`: Newsletter-Abschnitt + Resend als Auftragsverarbeiter (DPF + SCC).
+- KEIN Lösch-/Purge-Job — bestätigte Abonnenten bleiben.
 
-Übrig bleibt nur ein irreführender Kommentar.
-
-## Änderung
-- `index.html` (Z.41): Kommentar `<!-- Microsoft Clarity — consent-gated via ClarityTracking.tsx -->` entfernen, da er auf eine nicht existierende Komponente verweist.
-
-## Kein Handlungsbedarf
-- Punkt 1–3 & 5: bestätigt OK, keine Änderungen.
-- Punkt 4 (events-storia-DB): anon → 401 für alle 5 Tabellen bestätigt; keine Änderung in diesem Projekt.
-- Kein Datenschutz-Clarity-Abschnitt nötig (Clarity wird nicht eingesetzt).
-
-## Hinweis
-Falls du `security_invoker`/RPC-only für die events-DB-Views verbindlich verifizieren willst, brauche ich DB-Owner-Zugang zum events-Projekt (separat).
+## TEIL 2 — Menüdaten (bestätigt)
+- Keine 60-Tage-Purge-/Soft-Delete-Logik vorhanden. Klarstellung in Projekt-Memory aufgenommen.
