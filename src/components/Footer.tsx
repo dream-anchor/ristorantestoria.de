@@ -5,6 +5,8 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import nicolaImage from "@/assets/nicola-speranza.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
+import { trackEvent } from "@/lib/analytics";
+import { VOUCHER_SHOP_URL } from "@/lib/eventsLinks";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -91,6 +93,16 @@ const Footer = () => {
                 {link.label}
               </LocalizedLink>
             ))}
+            {/* Geschenkgutschein – externer Shop (events-storia.de) */}
+            <a
+              href={VOUCHER_SHOP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("voucher_click", { location: "footer" })}
+              className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors underline-offset-4 hover:underline"
+            >
+              {t.voucherCta.footerLink} ↗
+            </a>
           </div>
         </div>
       </div>
