@@ -8,6 +8,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import InlineVoucherCTA from "@/components/InlineVoucherCTA";
 import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
 
 // Parent slug mapping for each language
@@ -174,6 +175,8 @@ const BesondereAnlaesse = () => {
                   für externe Events.
                 </p>
               </div>
+
+              <InlineVoucherCTA location="besondere-anlaesse" />
             </div>
           </section>
 
