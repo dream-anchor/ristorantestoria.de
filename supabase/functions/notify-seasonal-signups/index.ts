@@ -70,6 +70,22 @@ const EVENT_URLS: Record<string, Record<string, string>> = {
   },
 };
 
+const UNSUB_LABELS: Record<string, string> = {
+  de: "Wenn Sie keine weiteren E-Mails erhalten möchten, können Sie sich hier abmelden",
+  en: "If you no longer wish to receive these emails, you can unsubscribe here",
+  it: "Se non desideri più ricevere queste email, puoi annullare l'iscrizione qui",
+  fr: "Si vous ne souhaitez plus recevoir ces e-mails, vous pouvez vous désinscrire ici",
+};
+
+function unsubscribeFooter(lang: string, unsubUrl: string): string {
+  const label = UNSUB_LABELS[lang] ?? UNSUB_LABELS.de;
+  return `<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5ede0;">
+    <tr><td align="center" style="padding:16px 24px;">
+      <p style="color:#a08060;font-size:11px;line-height:1.5;margin:0;text-align:center;font-family:Georgia,serif;">${label}: <a href="${unsubUrl}" style="color:#8B4513;">Abmelden / Unsubscribe</a></p>
+    </td></tr>
+  </table>`;
+}
+
 const LANG_NAMES: Record<string, string> = {
   de: "Deutsch",
   en: "Englisch",
