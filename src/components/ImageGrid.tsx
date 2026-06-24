@@ -19,18 +19,21 @@ interface ImageCardProps {
   imageClassName?: string;
   externalLink?: string;
   internalSlug?: string;
+  /** LCP-Bild above-the-fold: eager + hohe Priorität statt lazy. */
+  priority?: boolean;
 }
 
-const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug }: ImageCardProps) => {
+const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug, priority = false }: ImageCardProps) => {
   const content = (
     <div className={`relative overflow-hidden group ${className}`}>
-      <img 
-        src={image} 
+      <img
+        src={image}
         alt={alt}
         width={400}
         height={400}
         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageClassName}`}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : undefined}
         decoding="async"
       />
       {(title || subtitle) && (
@@ -90,11 +93,12 @@ const ImageGrid = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Row 1 */}
-          <ImageCard 
-            image={weinserviceImage} 
+          <ImageCard
+            image={weinserviceImage}
             alt={t.imageGrid.altWine}
             className="aspect-square"
             imageClassName="object-center"
+            priority
           />
           <ImageCard 
             image={ravioliImage} 
