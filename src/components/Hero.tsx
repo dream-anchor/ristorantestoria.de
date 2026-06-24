@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "@/lib/helmetAsync";
 import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -9,14 +10,20 @@ const Hero = () => {
 
   return (
     <section className="bg-background border-b border-border" aria-labelledby="hero-heading">
+      {/* LCP-Bild (STORIA-Logo, above-the-fold) priorisiert laden — gehashte Build-URL via Helmet */}
+      <Helmet>
+        <link rel="preload" as="image" href={storiaLogo} fetchpriority="high" />
+      </Helmet>
       <div className="container mx-auto px-4 py-16 md:py-24 text-center">
         <Link to="/" aria-label={t.common.goToHomepage}>
-          <img 
-            src={storiaLogo} 
+          <img
+            src={storiaLogo}
             alt="STORIA – Ristorante Pizzeria Bar München Logo"
             width={192}
             height={192}
             loading="eager"
+            fetchpriority="high"
+            decoding="async"
             className="h-32 md:h-48 w-auto mx-auto mb-6 hover:opacity-80 transition-opacity cursor-pointer"
           />
         </Link>
