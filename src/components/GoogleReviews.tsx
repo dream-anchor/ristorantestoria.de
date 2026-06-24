@@ -22,10 +22,11 @@ interface Review {
 
 // ── Stars ──
 const StarRating = ({ rating }: { rating: number }) => (
-  <div className="flex gap-0.5" aria-label={`${rating} von 5 Sternen`}>
+  <div className="flex gap-0.5" role="img" aria-label={`Bewertung: ${rating} von 5 Sternen`}>
     {[1, 2, 3, 4, 5].map((s) => (
       <Star
         key={s}
+        aria-hidden="true"
         className={`h-4 w-4 ${
           s <= rating
             ? "fill-amber-400 text-amber-400"
