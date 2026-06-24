@@ -80,7 +80,7 @@ const Footer = () => {
       {/* Anlässe & Gruppen Navigation */}
       <div className="border-b border-primary-foreground/5">
         <div className="container mx-auto px-4 py-10 max-w-5xl">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary-foreground/40 mb-5 text-center font-serif">
+          <p className="text-xs uppercase tracking-[0.2em] text-primary-foreground/80 mb-5 text-center font-serif">
             {t.footer.eventsGroupsTitle}
           </p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
@@ -88,7 +88,7 @@ const Footer = () => {
               <LocalizedLink
                 key={link.slug}
                 to={link.slug}
-                className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+                className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
               >
                 {link.label}
               </LocalizedLink>
@@ -176,34 +176,34 @@ const Footer = () => {
 
         {/* Copyright & Legal */}
         <div className="border-t border-primary-foreground/5 mt-14 pt-10 text-center">
-          <p className="text-sm font-sans text-primary-foreground/40">
+          <p className="text-sm font-sans text-primary-foreground/80">
             © {new Date().getFullYear()} {t.footer.copyright}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-sm font-sans text-primary-foreground/40">
-            <LocalizedLink to="impressum" className="hover:text-primary-foreground/60 transition-colors">{t.footer.imprint}</LocalizedLink>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-sm font-sans text-primary-foreground/80">
+            <LocalizedLink to="impressum" className="hover:text-primary-foreground transition-colors">{t.footer.imprint}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <LocalizedLink to="datenschutz" className="hover:text-primary-foreground/60 transition-colors">{t.footer.privacy}</LocalizedLink>
+            <LocalizedLink to="datenschutz" className="hover:text-primary-foreground transition-colors">{t.footer.privacy}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <LocalizedLink to="cookie-richtlinie" className="hover:text-primary-foreground/60 transition-colors">{t.legal.cookies}</LocalizedLink>
+            <LocalizedLink to="cookie-richtlinie" className="hover:text-primary-foreground transition-colors">{t.legal.cookies}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <LocalizedLink to="agb-restaurant" className="hover:text-primary-foreground/60 transition-colors">{t.legal.agb}</LocalizedLink>
+            <LocalizedLink to="agb-restaurant" className="hover:text-primary-foreground transition-colors">{t.legal.agb}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <LocalizedLink to="lebensmittelhinweise" className="hover:text-primary-foreground/60 transition-colors">{t.legal.foodInfo}</LocalizedLink>
+            <LocalizedLink to="lebensmittelhinweise" className="hover:text-primary-foreground transition-colors">{t.legal.foodInfo}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <LocalizedLink to="faq" className="hover:text-primary-foreground/60 transition-colors font-medium">FAQ</LocalizedLink>
+            <LocalizedLink to="faq" className="hover:text-primary-foreground transition-colors font-medium">FAQ</LocalizedLink>
           </div>
-          <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/20">
+          <div className="flex items-center justify-center gap-4 mt-3 text-xs font-sans text-primary-foreground/80">
             <a
               href="https://www.instagram.com/ristorante_storia/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors"
+              className="flex items-center justify-center gap-1.5 min-h-[48px] p-2 hover:text-primary-foreground transition-colors"
               title="Instagram @ristorante_storia"
             >
-              <Instagram className="h-3.5 w-3.5" />
+              <Instagram className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Instagram</span>
             </a>
-            <a href="/admin/" rel="nofollow" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground/40 transition-colors">Admin</a>
+            <a href="/admin/" rel="nofollow" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground transition-colors">Admin</a>
           </div>
         </div>
       </div>
