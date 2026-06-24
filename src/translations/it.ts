@@ -191,6 +191,10 @@ const itBase = {
     inlineText: "Ti è venuta fame? Prenota il tuo tavolo.",
     callButton: "Chiama",
   },
+  voucherCta: {
+    inlineText: "Regala il gusto italiano – con un buono regalo STORIA.",
+    button: "Acquista buono",
+  },
   nav: {
     reservation: "PRENOTAZIONE",
     menu: "MENU",

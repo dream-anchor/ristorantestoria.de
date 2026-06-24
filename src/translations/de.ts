@@ -166,6 +166,10 @@ export const de = {
     inlineText: "Hunger bekommen? Sichern Sie sich Ihren Tisch.",
     callButton: "Anrufen",
   },
+  voucherCta: {
+    inlineText: "Verschenken Sie italienischen Genuss – mit einem STORIA-Geschenkgutschein.",
+    button: "Gutschein kaufen",
+  },
   nav: {
     reservation: "RESERVIERUNG",
     menu: "MENÜ",
