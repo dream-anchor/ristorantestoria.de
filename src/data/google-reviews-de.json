@@ -2,10 +2,18 @@
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
   "totalReviews": 809,
-  "lastFetched": "2026-06-24T07:18:39.284Z",
+  "lastFetched": "2026-06-25T07:19:20.530Z",
   "summary": "Über 780 Gäste bewerten das STORIA mit durchschnittlich 4,5 Sternen. Besonders gelobt werden die neapolitanische Pizza aus dem Steinofen, die hausgemachte Pasta und die frischen Fischgerichte. Viele Stammgäste heben das stilvolle Ambiente mit warmem Licht und italienischer Musik hervor. Der Service wird als herzlich, aufmerksam und professionell beschrieben – auch bei größeren Gruppen. Die zentrale Lage nahe Königsplatz und Theresienstraße macht das Restaurant zum beliebten Treffpunkt in der Münchner Maxvorstadt. Das Tiramisù nach eigenem Hausrezept und die Weinauswahl werden in zahlreichen Bewertungen als Highlights genannt.",
   "summaryLabel": "Zusammenfassung aus über 780 Bewertungen",
   "reviews": [
+    {
+      "authorName": "David R",
+      "rating": 5,
+      "text": "Super Bedienung! Liebe es hier. Jedesmal ein genuss. Besonders Mauritzo ist der best!\n\n(Translated by Google)\nExcellent service! I love it here. It's always a pleasure. Mauritzo is especially the best!",
+      "relativeTimeDescription": "vor 1 Tag",
+      "time": 1782333391,
+      "language": "de"
+    },
     {
       "authorName": "Nachrichten München",
       "rating": 5,
@@ -396,14 +404,6 @@
       "text": "Als Liebhaber italienischer Küche bin ich im Storia in Istanbul begeistert. Die neapolitanische Pizza ist ein absolutes Highlight, und die anderen italienischen Spezialitäten schmecken ebenfalls authentisch. Der Service ist freundlich und aufmerksam, und die angenehme Atmosphäre lädt zum Verweilen ein. Ich komme gerne wieder!\n\n(Translated by Google)\nAs a lover of Italian cuisine, I was thrilled with Storia in Istanbul. The Neapolitan pizza is an absolute highlight, and the other Italian specialties taste just as authentic. The service is friendly and attentive, and the pleasant atmosphere invites you to linger. I'll definitely be back!",
       "relativeTimeDescription": "vor 2 Jahren",
       "time": 1703971632,
-      "language": "de"
-    },
-    {
-      "authorName": "Steffi Pawlitschko",
-      "rating": 5,
-      "text": "Wir hatten zwar nur wenig bestellt bzw gegessen, aber dennoch wurden wir super zuvorkommend bedient! Die Gerichte (Rissotto, Pizza, Salat) wie auch der Wein (Sauvignon Blanc) waren hervorragend und das Preis-/Leistungsverhältnis war echt ok. Der Service war ausgezeichnet und sehr stilvoll! Das moderne Ambiente fanden wir auch super stylish und dennoch richtig gemütlich! Kurzum, wir werden wieder kommen. Grazie tanto - ci vediamo!\n\n(Translated by Google)\nWe only ordered and ate a small amount, but the service was incredibly attentive! The dishes (risotto, pizza, salad) and the wine (Sauvignon Blanc) were excellent, and the price-performance ratio was really good. The service was outstanding and very stylish! We also found the modern ambiance to be very stylish yet cozy! In short, we will be back. Thank you so much - see you soon!",
-      "relativeTimeDescription": "vor 2 Jahren",
-      "time": 1703709939,
       "language": "de"
     }
   ]

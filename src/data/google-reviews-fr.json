@@ -2,7 +2,7 @@
   "placeId": "ChIJo-_iavt1nkcR665hz1XaMzQ",
   "rating": 4.5,
   "totalReviews": 809,
-  "lastFetched": "2026-06-24T07:18:39.284Z",
+  "lastFetched": "2026-06-25T07:19:20.530Z",
   "summary": "Plus de 780 clients attribuent au STORIA une note moyenne de 4,5 étoiles. La pizza napolitaine au four à pierre, les pâtes fraîches maison et les plats de poisson frais sont particulièrement appréciés. De nombreux habitués soulignent l’ambiance élégante avec éclairage chaleureux et musique italienne. Le service est décrit comme chaleureux, attentif et professionnel – même pour les grands groupes. L’emplacement central près de Königsplatz en fait un lieu de rencontre prisé dans le quartier Maxvorstadt de Munich. Le tiramisù maison et la carte des vins sont régulièrement cités comme des atouts majeurs.",
   "summaryLabel": "Résumé de plus de 780 avis",
   "reviews": [
@@ -13,6 +13,14 @@
       "relativeTimeDescription": "il y a 1 an",
       "time": 1735421090,
       "language": "fr"
+    },
+    {
+      "authorName": "David R",
+      "rating": 5,
+      "text": "Super Bedienung! Liebe es hier. Jedesmal ein genuss. Besonders Mauritzo ist der best!\n\n(Translated by Google)\nExcellent service! I love it here. It's always a pleasure. Mauritzo is especially the best!",
+      "relativeTimeDescription": "il y a 1 jour",
+      "time": 1782333391,
+      "language": "de"
     },
     {
       "authorName": "Nachrichten München",
@@ -396,14 +404,6 @@
       "text": "Ich komme am Liebsten her um entspannt in dem großzügigen Außenbereich zu Essen. Geschmacklich kommt hier keiner ran und auch der Service ist nicht selbstverständlich\n\n(Translated by Google)\nI love coming here to relax and eat in the spacious outdoor area. The food is second to none, and the service is exceptional.",
       "relativeTimeDescription": "il y a 2 anni",
       "time": 1704627573,
-      "language": "de"
-    },
-    {
-      "authorName": "Carola Prause",
-      "rating": 5,
-      "text": "Als Liebhaber italienischer Küche bin ich im Storia in Istanbul begeistert. Die neapolitanische Pizza ist ein absolutes Highlight, und die anderen italienischen Spezialitäten schmecken ebenfalls authentisch. Der Service ist freundlich und aufmerksam, und die angenehme Atmosphäre lädt zum Verweilen ein. Ich komme gerne wieder!\n\n(Translated by Google)\nAs a lover of Italian cuisine, I was thrilled with Storia in Istanbul. The Neapolitan pizza is an absolute highlight, and the other Italian specialties taste just as authentic. The service is friendly and attentive, and the pleasant atmosphere invites you to linger. I'll definitely be back!",
-      "relativeTimeDescription": "il y a 2 anni",
-      "time": 1703971632,
       "language": "de"
     }
   ]
