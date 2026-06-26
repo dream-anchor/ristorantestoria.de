@@ -25,11 +25,22 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: isSsrBuild ? undefined : {
-          // Selten ändernde Vendor-Libs in eigene, langfristig cachebare Chunks
-          'react': ['react', 'react-dom', 'react-router-dom'],
-          'supabase': ['@supabase/supabase-js'],
-          'recharts': ['recharts'],
+        // Schwere Shared-Vendors aus der Haupt-index.js ziehen → kleinerer
+        // Entry-Chunk, parallele Downloads, langfristig cachebar.
+        // Funktions-Form, damit @radix-ui/* (27 Pakete) gruppiert greifen.
+        manualChunks: isSsrBuild ? undefined : (id) => {
+          if (!id.includes('node_modules')) return undefined;
+          if (id.includes('node_modules/react-router')) return 'react';
+          if (id.includes('node_modules/react-dom/')) return 'react';
+          if (id.includes('node_modules/react/')) return 'react';
+          if (id.includes('node_modules/scheduler/')) return 'react';
+          if (id.includes('@supabase')) return 'supabase';
+          if (id.includes('recharts') || id.includes('node_modules/d3-') || id.includes('victory-vendor')) return 'recharts';
+          if (id.includes('@radix-ui')) return 'radix';
+          if (id.includes('@tanstack')) return 'query';
+          if (id.includes('lucide-react')) return 'icons';
+          if (id.includes('date-fns')) return 'date-fns';
+          return undefined; // Rest bleibt im Default-Chunk
         },
       },
     },
