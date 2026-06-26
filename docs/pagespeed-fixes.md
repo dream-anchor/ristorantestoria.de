@@ -44,5 +44,28 @@ Die Fixes lagen alle auf Branch `perf-a11y-fixes` (Abzweig 07.06.), die aber NIE
 - IONOS = Apache → Cache-/Security-Header in `.htaccess`.
 - Deploy = commit + push auf `perf-a11y-fixes` → GitHub Actions → SFTP/IONOS (~1–3 Min Verzug bis PSI es sieht).
 
+## Ergebnis 2026-06-26 (nach Deploy)
+| | Mobile vorher | Mobile nachher | Desktop |
+|---|---|---|---|
+| Performance | 60 | 56–88 (bistabil) | 92–100 |
+| Accessibility | 83 | **100** ✅ | **100** ✅ |
+| Best Practices | 100 | 100 | 100 |
+| SEO | 100 | 100 | 100 |
+
+**Mobile-Perf-Deckel = 2,6 MB Haupt-JS-Chunk** (`index-*.js`). Auf gedrosseltem 4G konkurriert
+das Bundle mit dem LCP-Bild → Lighthouse-„Netzwerk-Rennen" macht den Score bistabil (56↔88).
+NICHT durch meine Änderungen verursacht — Bundle war schon im Baseline-60-Zustand da.
+Zusammensetzung: 52 eager-Seiten + 4 Übersetzungssätze (14.717 Zeilen) + recharts/react-day-picker-Leak.
+
+### Offen für stabiles Mobile ≥ 90 (echtes Bundle-Projekt, Prerender-Restriktion beachten)
+- [ ] B1 rollup-plugin-visualizer einbauen → exakte Chunk-Zusammensetzung
+- [ ] B2 recharts (~400 KB) aus Haupt-Chunk lösen (nur ui/chart→Admin; Leak via manualChunks/Import-Pfad)
+- [ ] B3 react-day-picker/date-fns: nur in ReservationBooking → eigener Chunk
+- [ ] B4 Übersetzungen pro Sprache splitten (nur aktive Sprache laden) — größter, aber komplexester Win
+- [ ] P2 Render-blocking CSS (Critical-CSS-Inlining) — erst nach Bundle-Reduktion sinnvoll
+
 ## Log
-- 2026-06-26 — Baseline erfasst (Mobile 60/83, Desktop 92/92). PSI-Runner + Tracking angelegt.
+- 2026-06-26 — Baseline (Mobile 60/83, Desktop 92/92). PSI-Runner + Tracking angelegt.
+- 2026-06-26 — Kernproblem: 13 Fix-Commits lagen undeployed auf stale Branch `perf-a11y-fixes` (Abzweig 07.06.). Per Cherry-Pick auf aktuelles `main` aufgesetzt, deployed. A11y 83→100, Desktop→100, LCP-Bild eager.
+- 2026-06-26 — Kontrast (Footer-Gutschein /60→/80) → A11y 100. Media-Cache-TTL (.htaccess) → mp4/jpg gecacht.
+- 2026-06-26 — Diagnose Mobile-Deckel: 2,6 MB Haupt-Chunk. Bundle-Projekt (B1–B4) offen.
