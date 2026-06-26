@@ -99,7 +99,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackEvent("voucher_click", { location: "footer" })}
-              className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors underline-offset-4 hover:underline"
+              className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors underline-offset-4 hover:underline"
             >
               {t.voucherCta.footerLink} ↗
             </a>
