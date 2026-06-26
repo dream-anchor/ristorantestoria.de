@@ -1,0 +1,143 @@
+{
+  "strategy": "desktop",
+  "fetchTime": "2026-06-26T08:59:46.574Z",
+  "scores": {
+    "performance": 92,
+    "accessibility": 92,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "LCP": {
+      "value": "1.5 s",
+      "num": 1522,
+      "score": 0.8
+    },
+    "FCP": {
+      "value": "1.2 s",
+      "num": 1162,
+      "score": 0.77
+    },
+    "CLS": {
+      "value": "0.003",
+      "num": 0.00316,
+      "score": 1
+    },
+    "TBT": {
+      "value": "50 ms",
+      "num": 47.5,
+      "score": 1
+    },
+    "SI": {
+      "value": "1.2 s",
+      "num": 1162,
+      "score": 0.94
+    }
+  },
+  "failing": [
+    {
+      "id": "unused-javascript",
+      "title": "Reduce unused JavaScript",
+      "score": 0,
+      "value": "Est savings of 320 KiB",
+      "savingsMs": 280,
+      "savingsBytes": 327601
+    },
+    {
+      "id": "image-delivery-insight",
+      "title": "Improve image delivery",
+      "score": 0,
+      "value": "Est savings of 719 KiB",
+      "savingsMs": 200,
+      "savingsBytes": 0
+    },
+    {
+      "id": "cache-insight",
+      "title": "Use efficient cache lifetimes",
+      "score": 0,
+      "value": "Est savings of 1,138 KiB",
+      "savingsMs": 100,
+      "savingsBytes": 0
+    },
+    {
+      "id": "valid-source-maps",
+      "title": "Missing source maps for large first-party JavaScript",
+      "score": 0,
+      "value": "",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "aria-prohibited-attr",
+      "title": "Elements use prohibited ARIA attributes",
+      "score": 0,
+      "value": "",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "render-blocking-insight",
+      "title": "Render-blocking requests",
+      "score": 0,
+      "value": "Est savings of 170 ms",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "lcp-discovery-insight",
+      "title": "LCP request discovery",
+      "score": 0,
+      "value": "",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "color-contrast",
+      "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+      "score": 0,
+      "value": "",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "network-dependency-tree-insight",
+      "title": "Network dependency tree",
+      "score": 0,
+      "value": "",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "unused-css-rules",
+      "title": "Reduce unused CSS",
+      "score": 0.5,
+      "value": "Est savings of 18 KiB",
+      "savingsMs": 0,
+      "savingsBytes": 18807
+    },
+    {
+      "id": "total-byte-weight",
+      "title": "Avoid enormous network payloads",
+      "score": 0.5,
+      "value": "Total size was 4,102 KiB",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "first-contentful-paint",
+      "title": "First Contentful Paint",
+      "score": 0.77,
+      "value": "1.2 s",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    },
+    {
+      "id": "largest-contentful-paint",
+      "title": "Largest Contentful Paint",
+      "score": 0.8,
+      "value": "1.5 s",
+      "savingsMs": 0,
+      "savingsBytes": 0
+    }
+  ]
+}

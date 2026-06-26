@@ -16,7 +16,9 @@
     "fetch-reviews": "node scripts/fetch-google-reviews.mjs",
     "generate:llms-full": "npx tsx scripts/generate-llms-full.ts",
     "geo:monitor": "node scripts/geo-monitor.mjs",
-    "geo:report": "node scripts/geo-monitor.mjs --report"
+    "geo:report": "node scripts/geo-monitor.mjs --report",
+    "psi": "node scripts/psi.mjs",
+    "psi:both": "node scripts/psi.mjs --strategy=both --save"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.1",
