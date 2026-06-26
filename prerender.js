@@ -542,7 +542,7 @@ async function generateRoutesToPrerender() {
       }
 
       // 3. Render App & get Helmet data (with menu data context)
-      const { html, helmet, dehydratedState } = render(url, { menuData, menuType, specialMenuData });
+      const { html, helmet, dehydratedState } = await render(url, { menuData, menuType, specialMenuData });
 
       // 3. Inject HTML into Template
       // Match <div id="root"> with optional <!--app-html--> marker or whitespace, then closing </div>

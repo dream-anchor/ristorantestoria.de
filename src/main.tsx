@@ -2,6 +2,8 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from "@/lib/helmetAsync";
 import App from "./App.tsx";
+import { parseLocalizedPath } from "@/config/routes";
+import { loadTranslations } from "@/translations";
 import "./index.css";
 
 const root = document.getElementById("root")!;
@@ -46,19 +48,26 @@ const app = (
  */
 const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
 
-if (import.meta.env.PROD) {
-  const prerenderedPath = root.dataset.prerenderedPath;
-  const currentPath = normalizePath(window.location.pathname);
-  const isMatch = prerenderedPath && normalizePath(prerenderedPath) === currentPath;
+function mount() {
+  if (import.meta.env.PROD) {
+    const prerenderedPath = root.dataset.prerenderedPath;
+    const currentPath = normalizePath(window.location.pathname);
+    const isMatch = prerenderedPath && normalizePath(prerenderedPath) === currentPath;
 
-  if (isMatch) {
-    hydrateRoot(root, app);
+    if (isMatch) {
+      hydrateRoot(root, app);
+    } else {
+      // Kein Pre-Render für diese Route: DOM + State aufräumen, fresh rendern
+      root.innerHTML = '';
+      delete (window as any).__REACT_QUERY_STATE__;
+      createRoot(root).render(app);
+    }
   } else {
-    // Kein Pre-Render für diese Route: DOM + State aufräumen, fresh rendern
-    root.innerHTML = '';
-    delete (window as any).__REACT_QUERY_STATE__;
     createRoot(root).render(app);
   }
-} else {
-  createRoot(root).render(app);
 }
+
+// Übersetzungen der aktiven Sprache laden, BEVOR (hydratisiert) gerendert wird —
+// sonst hat der LanguageProvider beim ersten Render keinen Cache-Eintrag.
+const activeLanguage = parseLocalizedPath(window.location.pathname).language;
+loadTranslations(activeLanguage).then(mount);

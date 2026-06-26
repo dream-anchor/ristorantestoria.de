@@ -1,7 +1,7 @@
 // Pure context + hook module — separated from Provider component
 // so React Fast Refresh doesn't duplicate the context identity on HMR.
 import { createContext, useContext } from "react";
-import { de } from "@/translations/de";
+import type { de } from "@/translations/de";
 
 export type Language = "de" | "en" | "it" | "fr";
 type Translations = typeof de;

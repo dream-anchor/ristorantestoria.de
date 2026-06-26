@@ -137,13 +137,10 @@ const routeComponents: Record<string, React.ComponentType> = {
   "faq": FAQ,
 };
 
-// Import translations for slug mapping
-import { de } from "@/translations/de";
-import { en } from "@/translations/en";
-import { it as italian } from "@/translations/it";
-import { fr } from "@/translations/fr";
+// Slug-Maps fürs Routing — aus runtime-slugs.json (zieht NICHT die 300-KB-Volltexte ins Bundle)
+import rawSlugs from "@/config/runtime-slugs.json";
 
-const slugMaps = { de: de.slugs, en: en.slugs, it: italian.slugs, fr: fr.slugs };
+const slugMaps = rawSlugs as Record<"de" | "en" | "it" | "fr", Record<string, string>>;
 type Language = "de" | "en" | "it" | "fr";
 
 // Legal pages — only exist in German, foreign language routes redirect to DE

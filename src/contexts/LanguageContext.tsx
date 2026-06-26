@@ -1,10 +1,7 @@
 // LanguageContext - provides i18n support for DE/EN/IT/FR
 import { useState, useCallback, useEffect, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { de } from "@/translations/de";
-import { en } from "@/translations/en";
-import { it as italian } from "@/translations/it";
-import { fr } from "@/translations/fr";
+import { loadTranslations, getCachedTranslations, type Translations } from "@/translations";
 import { parseLocalizedPath, getLocalizedPath, SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from "@/config/routes";
 import { LanguageContext, type Language } from "./language-context";
 export { useLanguage, type Language } from "./language-context";
@@ -54,6 +51,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     return urlLanguage;
   });
 
+  // Übersetzungen der aktiven Sprache. Sind durch entry-server (SSR) bzw.
+  // main.tsx (Client-Bootstrap) VOR dem ersten Render geladen → Cache-Hit.
+  const [t, setT] = useState<Translations>(() => getCachedTranslations(language)!);
+
   // Sync language from URL changes
   useEffect(() => {
     const { language: urlLanguage } = parseLocalizedPath(location.pathname);
@@ -61,6 +62,22 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       setLanguageState(urlLanguage);
     }
   }, [location.pathname]);
+
+  // Übersetzungen nachladen, wenn die Sprache wechselt (z. B. SPA-Navigation).
+  useEffect(() => {
+    const cached = getCachedTranslations(language);
+    if (cached) {
+      setT(cached);
+      return;
+    }
+    let active = true;
+    loadTranslations(language).then((loaded) => {
+      if (active) setT(loaded);
+    });
+    return () => {
+      active = false;
+    };
+  }, [language]);
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
@@ -79,12 +96,15 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const switchLanguage = useCallback((targetLang: Language) => {
     const { baseSlug } = parseLocalizedPath(location.pathname);
     const newPath = getLocalizedPath(baseSlug, targetLang);
-    
+
     // Preserve hash if present
     const hash = location.hash || "";
-    
-    setLanguage(targetLang);
-    navigate(newPath + hash);
+
+    // Zielsprache vorab laden, damit beim Wechsel kein leerer Render entsteht.
+    void loadTranslations(targetLang).then(() => {
+      setLanguage(targetLang);
+      navigate(newPath + hash);
+    });
   }, [location.pathname, location.hash, setLanguage, navigate]);
 
   /**
@@ -93,15 +113,6 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const getPath = useCallback((baseSlug: string): string => {
     return getLocalizedPath(baseSlug, language);
   }, [language]);
-
-  const translations = {
-    de,
-    en,
-    it: italian,
-    fr,
-  };
-
-  const t = translations[language] as typeof de;
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t, switchLanguage, getPath }}>

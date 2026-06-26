@@ -4,6 +4,8 @@ import { StaticRouter } from 'react-router-dom/server'
 import { HelmetProvider } from 'react-helmet-async'
 import { QueryClient, QueryClientProvider, dehydrate } from '@tanstack/react-query'
 import App from './App'
+import { parseLocalizedPath } from './config/routes'
+import { loadTranslations } from './translations'
 
 interface SpecialMenuData {
   basicMenu: any;
@@ -17,8 +19,13 @@ interface RenderContext {
   specialMenuData?: SpecialMenuData;
 }
 
-export function render(url: string, context: RenderContext = {}) {
+export async function render(url: string, context: RenderContext = {}) {
   const helmetContext = {} as any
+
+  // Übersetzungen der Ziel-Sprache laden, BEVOR synchron gerendert wird
+  // (LanguageProvider liest sie dann aus dem Cache).
+  const { language } = parseLocalizedPath(url)
+  await loadTranslations(language)
 
   // Create QueryClient for SSR
   const queryClient = new QueryClient({

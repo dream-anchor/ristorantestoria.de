@@ -1,11 +1,11 @@
-import { de } from "@/translations/de";
-import { en } from "@/translations/en";
-import { it as italian } from "@/translations/it";
-import { fr } from "@/translations/fr";
+import rawSlugs from "@/config/runtime-slugs.json";
 import type { Language } from "@/contexts/LanguageContext";
 
-// All translation objects
-const translations = { de, en, it: italian, fr };
+// Slug-Maps pro Sprache — EXAKT aus den Übersetzungen extrahiert
+// (scripts: runtime-slugs.json), damit Routing nicht die 300-KB-Volltexte
+// ins Bundle zieht. Quelle der Wahrheit bleibt translations/*.ts → bei
+// Slug-Änderung runtime-slugs.json neu generieren.
+const slugMaps = rawSlugs as Record<Language, Record<string, string>>;
 
 // Supported languages
 export const SUPPORTED_LANGUAGES: Language[] = ["de", "en", "it", "fr"];
@@ -19,7 +19,7 @@ const LEGAL_ONLY_DE = new Set([
 ]);
 
 // Get slugs for a specific language
-export const getSlugs = (language: Language) => translations[language].slugs;
+export const getSlugs = (language: Language) => slugMaps[language];
 
 /**
  * Get the localized path for a given base slug
@@ -30,7 +30,7 @@ export const getSlugs = (language: Language) => translations[language].slugs;
 export const getLocalizedPath = (baseSlug: string, language: Language): string => {
   // Legal pages always use German URL (no translations, no language prefix)
   if (LEGAL_ONLY_DE.has(baseSlug)) {
-    const deSlug = translations.de.slugs[baseSlug as keyof typeof translations.de.slugs];
+    const deSlug = slugMaps.de[baseSlug];
     return deSlug ? `/${deSlug}/` : "/";
   }
 
@@ -93,7 +93,7 @@ const getBaseSlugFromLocalized = (localizedSlug: string, language: Language): st
  */
 export const getAllLocalizedRoutes = (): Array<{ path: string; language: Language; baseSlug: string }> => {
   const routes: Array<{ path: string; language: Language; baseSlug: string }> = [];
-  const baseSlugs = Object.keys(de.slugs);
+  const baseSlugs = Object.keys(slugMaps.de);
   
   for (const baseSlug of baseSlugs) {
     // Skip admin routes for prerendering (handled separately)
