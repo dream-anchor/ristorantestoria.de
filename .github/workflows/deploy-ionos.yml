@@ -39,8 +39,10 @@ jobs:
         run: npm run build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          # VITE_* vars werden direkt aus der committeten .env gelesen.
-          # Leere Secrets würden die .env-Werte überschreiben → absichtlich entfernt.
+          # VITE_* aus GH-Secrets (öffentliche Client-Vars, landen ohnehin im Bundle).
+          # .env ist nicht mehr committet → diese Vars MÜSSEN hier gesetzt sein.
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
 
       - name: Copy .htaccess files to dist
         run: |
