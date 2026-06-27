@@ -15,7 +15,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
 import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { wmContent } from "./wmContent";
-import { wmSpiele, wmSpieleSorted, wmWeekday, wmDateLabel, wmKickoff, buildWmEventSchema } from "./wmSpiele";
+import { wmSpiele, wmSpieleSorted, wmWeekday, wmDateLabel, wmKickoff, wmRundeLabel, buildWmEventSchema } from "./wmSpiele";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen.webp";
 import heroImg600 from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen-600w.webp";
@@ -326,7 +326,7 @@ const WmPublicViewingMuenchen = () => {
           </section>
         )}
 
-        {/* DEUTSCHE SPIELE */}
+        {/* DIE GRÖSSTEN SPIELE · K.-O.-SLOTS */}
         <section className="wm-sec wm-spiele" id="spiele">
           <div className="wm-wrap">
             <Reveal className="wm-sec-head">
@@ -341,22 +341,29 @@ const WmPublicViewingMuenchen = () => {
                 return (
                   <Reveal key={s.id} delay={i * 0.08} className={cls}>
                     <span className="wm-match-date">{wmWeekday(s.startISO, language)} · {wmDateLabel(s.startISO, language)}</span>
-                    <div className="wm-match-teams">
-                      <div className="wm-team">
-                        <span className="flag" aria-hidden="true">{s.teamA.flag}</span>
-                        <span className="name">{s.teamA.name[language]}</span>
+                    {s.teamA && s.teamB ? (
+                      <div className="wm-match-teams">
+                        <div className="wm-team">
+                          <span className="flag" aria-hidden="true">{s.teamA.flag}</span>
+                          <span className="name">{s.teamA.name[language]}</span>
+                        </div>
+                        <span className="wm-vs">{c.spiele.vs}</span>
+                        <div className="wm-team">
+                          <span className="flag" aria-hidden="true">{s.teamB.flag}</span>
+                          <span className="name">{s.teamB.name[language]}</span>
+                        </div>
                       </div>
-                      <span className="wm-vs">{c.spiele.vs}</span>
-                      <div className="wm-team">
-                        <span className="flag" aria-hidden="true">{s.teamB.flag}</span>
-                        <span className="name">{s.teamB.name[language]}</span>
+                    ) : (
+                      <div className="wm-match-teams wm-match-round">
+                        <span className="wm-round-label">{wmRundeLabel(s.runde, language)}</span>
+                        <span className="wm-round-open">{c.spiele.offen}</span>
                       </div>
-                    </div>
+                    )}
                     <div className="wm-match-foot">
                       <span className="wm-kick">{wmKickoff(s.startISO)}<small>{c.spiele.mesz}</small></span>
                       <span className="wm-match-foot-r">
                         <span className="wm-where">{s.ort}</span>
-                        <span className="wm-tv">{s.tv}</span>
+                        {s.tv ? <span className="wm-tv">{s.tv}</span> : null}
                       </span>
                     </div>
                   </Reveal>
@@ -574,6 +581,9 @@ const wmStyles = `
 .wm-team .flag{font-size:1.7rem;line-height:1;}
 .wm-team .name{font-size:1.4rem;font-weight:700;color:var(--bone);font-family:'Cormorant Garamond',serif;}
 .wm-vs{font-size:.92rem;color:rgba(244,236,224,.45);padding-left:6px;}
+.wm-match-round{gap:6px;}
+.wm-round-label{font-size:1.7rem;font-weight:700;color:var(--bone);font-family:'Cormorant Garamond',serif;line-height:1.05;}
+.wm-round-open{font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;color:rgba(244,236,224,.5);}
 .wm-match-foot{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:flex-end;justify-content:space-between;gap:14px;}
 .wm-kick{font-family:var(--mono);font-size:1.9rem;font-weight:600;color:var(--green-soft);line-height:1;display:inline-flex;align-items:baseline;gap:7px;}
 .wm-kick small{font-size:.66rem;letter-spacing:.1em;color:rgba(244,236,224,.45);font-weight:500;}
