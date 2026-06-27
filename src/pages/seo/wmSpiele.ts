@@ -6,12 +6,13 @@ import type { Language } from "@/contexts/LanguageContext";
  * So bleiben sichtbare Karten und Schema dauerhaft synchron.
  *
  * Begrenzung (manuell gepflegt, kein Filter gegen externe Daten):
- * Auf diese Seite gehören nur Deutschland-Spiele sowie Spiele ab Achtelfinale aufwärts.
- * Keine fremden Gruppenspiele eintragen.
+ * Auf diese Seite gehören nur Deutschland-Spiele (jede Runde, inkl. Sechzehntelfinale)
+ * sowie fremde Spiele erst ab Achtelfinale aufwärts.
+ * Keine fremden Gruppen- oder Sechzehntelfinalspiele eintragen.
  */
 
 /** Runde eines Spiels – dokumentiert, ob ein Eintrag für diese Seite vorgesehen ist. */
-export type WmRunde = "gruppe" | "achtelfinale" | "viertelfinale" | "halbfinale" | "finale";
+export type WmRunde = "gruppe" | "sechzehntelfinale" | "achtelfinale" | "viertelfinale" | "halbfinale" | "finale";
 
 interface WmTeam {
   /** Lokalisierter Mannschaftsname je Sprache. */
@@ -70,6 +71,20 @@ export const wmSpiele: WmSpiel[] = [
     ort: "New York / NJ",
     tv: "ARD",
     runde: "gruppe",
+  },
+
+  // ===== Sechzehntelfinale · Erstes K.-o.-Spiel (Gegner, Termin & Sender feststehend) =====
+  // Deutschland als Gruppensieger Gruppe E; Gegner = Paraguay (Dritter Gruppe D).
+  // Quelle u. a. ZDF/sportschau, Stand 27.06.2026. Free-TV: ZDF (ARD/ZDF teilen die K.-o.-Spiele).
+  {
+    id: "ger-par-2026-06-29",
+    startISO: "2026-06-29T22:30:00+02:00",
+    endISO: "2026-06-30T01:00:00+02:00",
+    teamA: { name: N("Deutschland", "Germany", "Germania", "Allemagne"), flag: "🇩🇪" },
+    teamB: { name: N("Paraguay", "Paraguay", "Paraguay", "Paraguay"), flag: "🇵🇾" },
+    ort: "Boston",
+    tv: "ZDF",
+    runde: "sechzehntelfinale",
   },
 
   // ===== K.-o.-Spiele hier nachtragen, sobald Gegner/Termin feststehen =====
