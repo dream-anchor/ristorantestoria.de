@@ -214,6 +214,7 @@ const itBase = {
     headingLine2: "Monaco di Baviera",
     claim: "~ Nel cuore di Monaco ~",
     reserveButton: "PRENOTA ORA",
+    wmBadge: "Mondiali 2026 in diretta in Maxvorstadt →",
   },
   homeIntro: {
     title: "Benvenuti allo STORIA",

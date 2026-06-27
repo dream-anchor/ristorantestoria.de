@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LocalizedLink from "@/components/LocalizedLink";
+import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
 
 const Hero = () => {
   const { t } = useLanguage();
+  // Saisonaler Cross-Link zur WM-2026-Seite – nur im Turnierzeitraum (bis 19.7.2026) sichtbar.
+  const showWmLink = isWmActive();
 
   return (
     <section className="bg-background border-b border-border" aria-labelledby="hero-heading">
@@ -36,6 +39,16 @@ const Hero = () => {
         <p className="text-base md:text-lg text-muted-foreground italic font-serif mb-10">
           {t.hero.claim}
         </p>
+        {showWmLink && (
+          <p className="mb-8">
+            <LocalizedLink
+              to={WM_SLUG}
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-5 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
+            >
+              {t.hero.wmBadge}
+            </LocalizedLink>
+          </p>
+        )}
         <Button
           size="lg" 
           className="bg-primary text-primary-foreground hover:bg-accent transition-colors px-10 py-6 text-base tracking-widest uppercase"

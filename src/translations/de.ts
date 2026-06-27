@@ -189,6 +189,7 @@ export const de = {
     headingLine2: "München Maxvorstadt",
     claim: "~ Im Herzen von München ~",
     reserveButton: "HIER RESERVIEREN",
+    wmBadge: "WM 2026 Public Viewing in der Maxvorstadt →",
   },
   homeIntro: {
     title: "Willkommen im STORIA",
@@ -2861,10 +2862,10 @@ export const de = {
       relatedCandlelightDesc: "Men\u00fc zu zweit bei Kerzenschein",
     },
     italienischesRestaurant: {
-      seoTitle: "S\u00fcditalienisches Restaurant M\u00fcnchen-Maxvorstadt | STORIA",
-      seoDescription: "Im STORIA kocht Familie Speranza die K\u00fcche des Cilento: hausgemachte Pasta, frischer Fisch, neapolitanische Pizza aus dem Steinofen \u2013 in M\u00fcnchens Maxvorstadt.",
-      breadcrumb: "S\u00fcditalienisches Restaurant M\u00fcnchen",
-      heroTitle: "Authentisch s\u00fcditalienisch \u2013 die K\u00fcche des Cilento in der Maxvorstadt",
+      seoTitle: "Italienisches Restaurant M\u00fcnchen \u2013 Maxvorstadt | STORIA",
+      seoDescription: "Italienisches Restaurant in M\u00fcnchen-Maxvorstadt: Familie Speranza kocht die K\u00fcche des Cilento \u2013 hausgemachte Pasta, frischer Fisch, neapolitanische Steinofen-Pizza. Jetzt reservieren.",
+      breadcrumb: "Italienisches Restaurant M\u00fcnchen",
+      heroTitle: "Italienisches Restaurant in M\u00fcnchen \u2013 die K\u00fcche des Cilento (Maxvorstadt)",
       heroSubtitle: "Authentisch s\u00fcditalienisch seit 2015 \u2022 Familienbetrieb Speranza",
       heroDescription: "Willkommen im STORIA \u2013 s\u00fcditalienische K\u00fcche aus dem Cilento in M\u00fcnchens Maxvorstadt. Steinofen-Pizza, hausgemachte Pasta und die herzliche Gastfreundschaft der Familie Speranza seit 2015. Nur 5 Min. vom K\u00f6nigsplatz.",
       tldr: "Italienisches Restaurant M\u00fcnchen: Das STORIA in der Maxvorstadt (Karlstra\u00dfe 47a) ist ein seit 2015 von Familie Speranza gef\u00fchrtes authentisches italienisches Restaurant. Neapolitanische Steinofen-Pizza bei 400\u00b0C, hausgemachte Pasta, Meeresfr\u00fcchte und \u00fcber 60 italienische Weine. 100 Pl\u00e4tze innen + 100 auf der \u00fcberdachten Terrasse. Mo\u2013Fr 09:00\u201301:00, Sa\u2013So 12:00\u201301:00. Reservierung: +49 89 51519696.",
