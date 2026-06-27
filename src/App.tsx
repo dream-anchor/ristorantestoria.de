@@ -223,11 +223,8 @@ const AppRoutes = () => {
         <Route path="/admin/gsc" element={<DemoModeProvider><AdminGSC /></DemoModeProvider>} />
         <Route path="/admin/seo" element={<DemoModeProvider><AdminSEO /></DemoModeProvider>} />
 
-        {/* /italiener-muenchen → / (keyword cannibalization fix, all language versions) */}
-        <Route path="/italiener-muenchen" element={<Navigate to="/" replace />} />
-        <Route path="/en/italian-restaurant-munich" element={<Navigate to="/en/" replace />} />
-        <Route path="/it/ristorante-italiano-monaco" element={<Navigate to="/it/" replace />} />
-        <Route path="/fr/restaurant-italien-munich" element={<Navigate to="/fr/" replace />} />
+        {/* /italiener-muenchen → / : echter 301 via public/.htaccess (Keyword-Konsolidierung,
+            alle Sprachversionen). Server-Redirect ist die einzige Quelle – keine SPA-Navigate-Route mehr. */}
 
         {/* Thank-you page after group inquiry form submit */}
         <Route path="/reisegruppen/danke" element={<ReisegruppenDankePage />} />

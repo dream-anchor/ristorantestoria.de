@@ -62,6 +62,8 @@ RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^italiener-muenchen/?$ / [R=301,L]
+# Keyword-Konsolidierung „italiener münchen" → Startseite (auch EN/IT/FR-Versionen)
+RewriteRule ^(en|it|fr)/(italian-restaurant-munich|ristorante-italiano-monaco|restaurant-italien-munich)/?$ /$1/ [R=301,L]
 # Phantom-URL + Osterbrunch → Ostermontag-Menu
 RewriteRule ^besondere-anlaesse/neuer-anlass/?$ /besondere-anlaesse/ostermontag-menue/ [R=301,L]
 RewriteRule ^it/occasioni-speciali/neuer-anlass/?$ /it/occasioni-speciali/menu-di-pasqua/ [R=301,L]
