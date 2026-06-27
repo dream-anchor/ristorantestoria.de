@@ -42,6 +42,8 @@ export interface WmContent {
     vs: string;
     mesz: string;
     note: string;
+    /** Label auf offenen K.-o.-Slot-Karten, wenn Gegner/Teams noch nicht feststehen. */
+    offen: string;
   };
   turnier: {
     eyebrow: string;
@@ -85,7 +87,7 @@ export const wmContent = {
     },
     nav: {
       angebot: "Was läuft",
-      spiele: "Deutsche Spiele",
+      spiele: "Die größten Spiele",
       turnier: "Turnier",
       reservieren: "Tisch reservieren",
     },
@@ -117,11 +119,12 @@ export const wmContent = {
       post: ". Premierendinner und Branchenabende im selben Haus.",
     },
     spiele: {
-      eyebrow: "Gruppe E · Die deutschen Spiele",
-      h2: "Wenn Deutschland spielt, ist hier was los.",
+      eyebrow: "Die größten Spiele · K.-o.-Phase",
+      h2: "Von Deutschland bis zum Finale – live bei uns.",
       vs: "gegen",
       mesz: "MESZ",
-      note: "Alle Zeiten in MESZ. Kommt Deutschland weiter, zeigen wir auch die K.-o.-Spiele.",
+      note: "Alle Zeiten in MESZ. Die Gegner der K.-o.-Spiele stehen erst nach den jeweiligen Runden fest – wir tragen sie laufend nach.",
+      offen: "Gegner stehen noch nicht fest",
     },
     turnier: {
       eyebrow: "So läuft das Turnier",
@@ -200,7 +203,7 @@ export const wmContent = {
     },
     nav: {
       angebot: "What's on",
-      spiele: "Germany's matches",
+      spiele: "The biggest matches",
       turnier: "Tournament",
       reservieren: "Book a table",
     },
@@ -232,11 +235,12 @@ export const wmContent = {
       post: ". Premiere dinners and industry evenings under one roof.",
     },
     spiele: {
-      eyebrow: "Group E · Germany's matches",
-      h2: "When Germany play, this place comes alive.",
+      eyebrow: "The biggest matches · Knockout stage",
+      h2: "From Germany to the final – live with us.",
       vs: "vs",
       mesz: "CEST",
-      note: "All times in CEST. If Germany go through, we'll show the knockout matches too.",
+      note: "All times in CEST. Opponents in the knockout matches are confirmed only after each round – we add them as we go.",
+      offen: "Opponents to be confirmed",
     },
     turnier: {
       eyebrow: "How the tournament runs",
@@ -315,7 +319,7 @@ export const wmContent = {
     },
     nav: {
       angebot: "Cosa c'è",
-      spiele: "Partite della Germania",
+      spiele: "Le partite più grandi",
       turnier: "Torneo",
       reservieren: "Prenota un tavolo",
     },
@@ -347,11 +351,12 @@ export const wmContent = {
       post: ". Cene di premiere e serate di settore nella stessa casa.",
     },
     spiele: {
-      eyebrow: "Girone E · Le partite della Germania",
-      h2: "Quando gioca la Germania, qui si scalda l'atmosfera.",
+      eyebrow: "Le partite più grandi · Fase a eliminazione",
+      h2: "Dalla Germania alla finale – in diretta da noi.",
       vs: "contro",
       mesz: "ora di Roma",
-      note: "Tutti gli orari sono ora di Roma. Se la Germania passa il turno, mostriamo anche le partite a eliminazione diretta.",
+      note: "Tutti gli orari sono ora di Roma. Gli avversari delle partite a eliminazione si conoscono solo dopo ogni turno – li aggiungiamo man mano.",
+      offen: "Avversari da definire",
     },
     turnier: {
       eyebrow: "Come si svolge il torneo",
@@ -430,7 +435,7 @@ export const wmContent = {
     },
     nav: {
       angebot: "Au programme",
-      spiele: "Matchs de l'Allemagne",
+      spiele: "Les plus grands matchs",
       turnier: "Tournoi",
       reservieren: "Réserver une table",
     },
@@ -462,11 +467,12 @@ export const wmContent = {
       post: ". Dîners de première et soirées de l'industrie sous le même toit.",
     },
     spiele: {
-      eyebrow: "Groupe E · Les matchs de l'Allemagne",
-      h2: "Quand l'Allemagne joue, ça vit ici.",
+      eyebrow: "Les plus grands matchs · Phase à élimination",
+      h2: "De l'Allemagne à la finale – en direct chez nous.",
       vs: "contre",
       mesz: "heure de Paris",
-      note: "Tous les horaires à l'heure de Paris. Si l'Allemagne passe, on diffuse aussi les matchs à élimination directe.",
+      note: "Tous les horaires à l'heure de Paris. Les adversaires des matchs à élimination ne sont connus qu'après chaque tour – nous les ajoutons au fur et à mesure.",
+      offen: "Adversaires à définir",
     },
     turnier: {
       eyebrow: "Comment se déroule le tournoi",
