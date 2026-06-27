@@ -309,6 +309,23 @@ const WmPublicViewingMuenchen = () => {
           </div>
         </section>
 
+        {/* LONG-TAIL PROSA (public viewing maxvorstadt + Spieltag-Intent) */}
+        {c.longtail && (
+          <section className="wm-sec wm-longtail" id="public-viewing">
+            <div className="wm-wrap">
+              <Reveal className="wm-sec-head">
+                <span className="wm-eyebrow wm-eyebrow-line">{c.longtail.eyebrow}</span>
+                <h2 className="wm-h2">{c.longtail.h2}</h2>
+              </Reveal>
+              {c.longtail.blocks.map((b) => (
+                <Reveal as="p" key={b.lead} className="wm-lead wm-longtail-p">
+                  <strong>{b.lead}</strong> {b.body}
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* DEUTSCHE SPIELE */}
         <section className="wm-sec wm-spiele" id="spiele">
           <div className="wm-wrap">
@@ -539,6 +556,11 @@ const wmStyles = `
 .wm-inline-link:hover{color:var(--bone);}
 .wm-crosslink{margin-top:26px;font-size:1.02rem;color:rgba(244,236,224,.78);line-height:1.55;max-width:60ch;}
 .wm-blockcta{display:flex;justify-content:center;margin-top:clamp(40px,5vw,60px);}
+/* LONG-TAIL PROSA */
+.wm-longtail{background:var(--ink);}
+.wm-longtail-p{margin-top:24px;}
+.wm-longtail-p:first-of-type{margin-top:8px;}
+.wm-longtail-p strong{color:var(--amber-bright);font-weight:600;}
 /* DEUTSCHE SPIELE */
 .wm-spiele{background:var(--ink-2);}
 .wm-match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}

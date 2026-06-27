@@ -184,6 +184,7 @@ export const en = {
     headingLine2: "Munich Maxvorstadt",
     claim: "~ In the Heart of Munich ~",
     reserveButton: "RESERVE NOW",
+    wmBadge: "World Cup 2026 public viewing in Maxvorstadt →",
   },
   homeIntro: {
     title: "Welcome to STORIA",

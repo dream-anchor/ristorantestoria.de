@@ -184,6 +184,7 @@ export const fr = {
     headingLine2: "Munich Maxvorstadt",
     claim: "~ Au cœur de Munich ~",
     reserveButton: "RÉSERVER MAINTENANT",
+    wmBadge: "Coupe du monde 2026 à Maxvorstadt →",
   },
   homeIntro: {
     title: "Bienvenue au STORIA",

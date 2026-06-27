@@ -35,6 +35,12 @@ export interface WmContent {
   };
   /** Temporärer Cross-Link zur Filmfest-Seite – nur im Überschneidungszeitraum sichtbar. */
   crossFilmfest: { pre: string; anchor: string; post: string };
+  /** Long-Tail-Prosa (public viewing maxvorstadt + Spieltag-Intent) – optional, derzeit nur DE. */
+  longtail?: {
+    eyebrow: string;
+    h2: string;
+    blocks: { lead: string; body: string }[];
+  };
   /** Spiel-Daten (Teams, Termine, Orte) liegen in wmSpiele.ts – hier nur Rahmentexte. */
   spiele: {
     eyebrow: string;
@@ -115,6 +121,20 @@ export const wmContent = {
       pre: "Mehr als Fußball – vom 26. Juni bis 5. Juli läuft bei uns das ",
       anchor: "Filmfest München zeitgleich",
       post: ". Premierendinner und Branchenabende im selben Haus.",
+    },
+    longtail: {
+      eyebrow: "Public Viewing · Maxvorstadt",
+      h2: "Mitten in der Stadt, mit Tisch statt Gedränge.",
+      blocks: [
+        {
+          lead: "Public Viewing in der Maxvorstadt.",
+          body: "Mitten zwischen Königsplatz und Hauptbahnhof zeigen wir alle Spiele der WM 2026 – auf der überdachten Terrasse und drinnen. Wenige Gehminuten von Stiglmaierplatz und Theresienwiese, mit Tisch statt Gedränge. Wer das Spiel mit echter italienischer Küche statt Stadionwurst sehen will, sitzt bei uns richtig.",
+        },
+        {
+          lead: "An den großen Spieltagen vorher reservieren.",
+          body: "Wenn Deutschland, Italien oder ein Achtel- bzw. Viertelfinale läuft, ist die Terrasse schnell voll. Sichern Sie sich Ihren Tisch vorab – dann bleibt vor dem Anpfiff noch Zeit für einen Aperitivo.",
+        },
+      ],
     },
     spiele: {
       eyebrow: "Gruppe E · Die deutschen Spiele",

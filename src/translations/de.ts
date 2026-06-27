@@ -189,6 +189,7 @@ export const de = {
     headingLine2: "München Maxvorstadt",
     claim: "~ Im Herzen von München ~",
     reserveButton: "HIER RESERVIEREN",
+    wmBadge: "WM 2026 Public Viewing in der Maxvorstadt →",
   },
   homeIntro: {
     title: "Willkommen im STORIA",
