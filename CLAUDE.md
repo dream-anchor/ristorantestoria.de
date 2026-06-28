@@ -89,8 +89,8 @@ npm run prerender    # SSG für SEO — KRITISCH
 - `.htaccess`: 301-Redirects alter übersetzter URLs → DE
 
 ## Local SEO
-- NAP: Ristorante STORIA, Theresienstraße 56, 80333 München
-- Tel: +49 89 28806855
+- NAP: Ristorante STORIA, Karlstraße 47a, 80333 München
+- Tel: +49 89 51519696
 - GMB: Italian Restaurant (Primary), Pizza Restaurant, Wine Bar
 - Keywords: "italienisches restaurant münchen", "pizza münchen maxvorstadt", "neapolitanische pizza münchen"
 
