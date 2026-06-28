@@ -1,0 +1,68 @@
+{
+  "_comment": "Basis-Spielplan der WM-2026-Public-Viewing-Seite (Termine, Orte, Runden). Aendert sich praktisch nie. Quelle: FIFA-Spielplan, Stand 27.06.2026. Die Team-Paarungen liegen getrennt in wmTeams.json und werden automatisch (GitHub Action 'Update WM Fixtures') oder manuell gepflegt. Redaktionsregel: nur Deutschland-Spiele (jede Runde) + fremde Spiele ab Achtelfinale.",
+  "slots": [
+    {
+      "id": "ger-par-2026-06-29",
+      "startISO": "2026-06-29T22:30:00+02:00",
+      "endISO": "2026-06-30T01:00:00+02:00",
+      "ort": "Boston",
+      "runde": "sechzehntelfinale"
+    },
+    {
+      "id": "af-2026-07-04",
+      "startISO": "2026-07-04T23:00:00+02:00",
+      "endISO": "2026-07-05T01:30:00+02:00",
+      "ort": "Philadelphia",
+      "runde": "achtelfinale"
+    },
+    {
+      "id": "af-2026-07-05",
+      "startISO": "2026-07-05T22:00:00+02:00",
+      "endISO": "2026-07-06T00:30:00+02:00",
+      "ort": "New York / NJ",
+      "runde": "achtelfinale"
+    },
+    {
+      "id": "vf-2026-07-09",
+      "startISO": "2026-07-09T22:00:00+02:00",
+      "endISO": "2026-07-10T00:30:00+02:00",
+      "ort": "Boston",
+      "runde": "viertelfinale"
+    },
+    {
+      "id": "vf-2026-07-11",
+      "startISO": "2026-07-11T23:00:00+02:00",
+      "endISO": "2026-07-12T01:30:00+02:00",
+      "ort": "Miami",
+      "runde": "viertelfinale"
+    },
+    {
+      "id": "hf-2026-07-14",
+      "startISO": "2026-07-14T21:00:00+02:00",
+      "endISO": "2026-07-14T23:30:00+02:00",
+      "ort": "Dallas",
+      "runde": "halbfinale"
+    },
+    {
+      "id": "hf-2026-07-15",
+      "startISO": "2026-07-15T21:00:00+02:00",
+      "endISO": "2026-07-15T23:30:00+02:00",
+      "ort": "Atlanta",
+      "runde": "halbfinale"
+    },
+    {
+      "id": "p3-2026-07-18",
+      "startISO": "2026-07-18T23:00:00+02:00",
+      "endISO": "2026-07-19T01:00:00+02:00",
+      "ort": "Miami",
+      "runde": "spiel-um-platz-3"
+    },
+    {
+      "id": "finale-2026-07-19",
+      "startISO": "2026-07-19T21:00:00+02:00",
+      "endISO": "2026-07-19T23:30:00+02:00",
+      "ort": "New York / NJ",
+      "runde": "finale"
+    }
+  ]
+}

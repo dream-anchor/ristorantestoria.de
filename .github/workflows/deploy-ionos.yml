@@ -6,7 +6,7 @@ on:
       - main
       - feature/static-site-upgrade
   workflow_run:
-    workflows: ["Fetch Google Reviews (Daily)"]
+    workflows: ["Fetch Google Reviews (Daily)", "Update WM Fixtures (Daily)"]
     types:
       - completed
     branches:

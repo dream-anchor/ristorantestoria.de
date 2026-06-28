@@ -1,18 +1,24 @@
 import type { Language } from "@/contexts/LanguageContext";
+import wmSlotsData from "./wmSlots.json";
+import wmTeamsData from "./wmTeams.json";
 
 /**
- * Alleinige Quelle der Wahrheit für die WM-2026-Spiele auf der Public-Viewing-Seite.
- * Aus diesem Array werden BEIDE gespeist: die wm-match-Karten UND das Event-JSON-LD.
- * So bleiben sichtbare Karten und Schema dauerhaft synchron.
+ * Quelle der Wahrheit für die WM-2026-Spiele auf der Public-Viewing-Seite.
+ * Der hier erzeugte `wmSpiele`-Array speist BEIDES: die wm-match-Karten UND das
+ * Event-JSON-LD. So bleiben sichtbare Karten und Schema dauerhaft synchron.
  *
- * Begrenzung (manuell gepflegt, kein Filter gegen externe Daten):
- * Auf diese Seite gehören nur Deutschland-Spiele (jede Runde, inkl. Sechzehntelfinale)
- * sowie fremde Spiele erst ab Achtelfinale aufwärts.
- * Keine fremden Gruppen- oder Sechzehntelfinalspiele eintragen.
+ * Aufbau (entkoppelt, damit die Automatik gefahrlos schreiben kann):
+ *  - `wmSlots.json`  → Basis-Spielplan (Termine/Orte/Runden). Ändert sich praktisch nie.
+ *  - `wmTeams.json`  → Team-Paarungen je Slot. Wird von der GitHub Action
+ *                      „Update WM Fixtures" automatisch gefüllt (football-data.org),
+ *                      sobald eine K.-o.-Paarung feststeht. TV-Sender bleibt manuell.
  *
- * Offene K.-o.-Slots: Solange der Gegner/die Teams nicht feststehen, wird `offen: true`
- * gesetzt und teamA/teamB weggelassen. Die Karte zeigt dann die Runde groß statt zwei
- * leerer Team-Zeilen. Sobald die Paarung feststeht: teamA/teamB ergänzen, `offen` entfernen.
+ * Begrenzung (über die Slot-Liste gepflegt): Auf diese Seite gehören nur
+ * Deutschland-Spiele (jede Runde) sowie fremde Spiele ab Achtelfinale aufwärts.
+ *
+ * Offene K.-o.-Slots: Solange für einen Slot keine beiden Teams in wmTeams.json
+ * stehen, ist `offen: true` und die Karte zeigt die Runde groß statt zwei leerer
+ * Team-Zeilen. Sobald beide Teams gesetzt sind, erscheint die Paarung automatisch.
  */
 
 /** Runde eines Spiels – dokumentiert, ob ein Eintrag für diese Seite vorgesehen ist. */
@@ -54,97 +60,34 @@ export interface WmSpiel {
 /** Kurzhelfer für die vier Sprachvarianten eines Namens. */
 const N = (de: string, en: string, it: string, fr: string): Record<Language, string> => ({ de, en, it, fr });
 
-export const wmSpiele: WmSpiel[] = [
-  // ===== Sechzehntelfinale · Erstes K.-o.-Spiel (Gegner, Termin & Sender feststehend) =====
-  // Deutschland als Gruppensieger Gruppe E; Gegner = Paraguay (Dritter Gruppe D).
-  // Quelle u. a. ZDF/sportschau, Stand 27.06.2026. Free-TV: ZDF.
-  {
-    id: "ger-par-2026-06-29",
-    startISO: "2026-06-29T22:30:00+02:00",
-    endISO: "2026-06-30T01:00:00+02:00",
-    teamA: { name: N("Deutschland", "Germany", "Germania", "Allemagne"), flag: "🇩🇪" },
-    teamB: { name: N("Paraguay", "Paraguay", "Paraguay", "Paraguay"), flag: "🇵🇾" },
-    ort: "Boston",
-    tv: "ZDF",
-    runde: "sechzehntelfinale",
-  },
+/** Basis-Spielplan (Termine/Orte/Runden) aus wmSlots.json. */
+type WmSlot = Pick<WmSpiel, "id" | "startISO" | "endISO" | "ort" | "runde">;
+const wmSlots = (wmSlotsData as { slots: WmSlot[] }).slots;
 
-  // ===== K.-o.-Slots ab Achtelfinale · Termine/Orte fix, Gegner offen =====
-  // Quelle Termine/Orte/Anstoßzeiten: FIFA-Spielplan (fifa.com), Stand 27.06.2026.
-  // Sobald Paarungen feststehen: teamA/teamB ergänzen, `offen` und ggf. tv setzen.
-  {
-    // Achtelfinale Deutschland-Pfad (Sieger Spiel 74 – Sieger Spiel 77), Spiel 89.
-    id: "af-2026-07-04",
-    startISO: "2026-07-04T23:00:00+02:00",
-    endISO: "2026-07-05T01:30:00+02:00",
-    offen: true,
-    ort: "Philadelphia",
-    runde: "achtelfinale",
-  },
-  {
-    // Achtelfinale, Spiel 91.
-    id: "af-2026-07-05",
-    startISO: "2026-07-05T22:00:00+02:00",
-    endISO: "2026-07-06T00:30:00+02:00",
-    offen: true,
-    ort: "New York / NJ",
-    runde: "achtelfinale",
-  },
-  {
-    // Viertelfinale Deutschland-Pfad (Boston).
-    id: "vf-2026-07-09",
-    startISO: "2026-07-09T22:00:00+02:00",
-    endISO: "2026-07-10T00:30:00+02:00",
-    offen: true,
-    ort: "Boston",
-    runde: "viertelfinale",
-  },
-  {
-    // Viertelfinale (Miami).
-    id: "vf-2026-07-11",
-    startISO: "2026-07-11T23:00:00+02:00",
-    endISO: "2026-07-12T01:30:00+02:00",
-    offen: true,
-    ort: "Miami",
-    runde: "viertelfinale",
-  },
-  {
-    // Halbfinale 1 (Dallas), Spiel 101.
-    id: "hf-2026-07-14",
-    startISO: "2026-07-14T21:00:00+02:00",
-    endISO: "2026-07-14T23:30:00+02:00",
-    offen: true,
-    ort: "Dallas",
-    runde: "halbfinale",
-  },
-  {
-    // Halbfinale 2 (Atlanta), Spiel 102.
-    id: "hf-2026-07-15",
-    startISO: "2026-07-15T21:00:00+02:00",
-    endISO: "2026-07-15T23:30:00+02:00",
-    offen: true,
-    ort: "Atlanta",
-    runde: "halbfinale",
-  },
-  {
-    // Spiel um Platz 3 (Miami), Spiel 103.
-    id: "p3-2026-07-18",
-    startISO: "2026-07-18T23:00:00+02:00",
-    endISO: "2026-07-19T01:00:00+02:00",
-    offen: true,
-    ort: "Miami",
-    runde: "spiel-um-platz-3",
-  },
-  {
-    // Finale (New York / New Jersey), Spiel 104.
-    id: "finale-2026-07-19",
-    startISO: "2026-07-19T21:00:00+02:00",
-    endISO: "2026-07-19T23:30:00+02:00",
-    offen: true,
-    ort: "New York / NJ",
-    runde: "finale",
-  },
-];
+/** Team-Zuordnung je Slot aus wmTeams.json (automatisch/manuell gepflegt). */
+interface WmTeamsEntry {
+  teamA?: WmTeam;
+  teamB?: WmTeam;
+  tv?: string;
+}
+const wmTeams = (wmTeamsData as { teams: Record<string, WmTeamsEntry> }).teams;
+
+/**
+ * Zusammengeführter Spielplan: Basis-Slot + (falls vorhanden) Team-Paarung.
+ * Stehen für einen Slot beide Teams in wmTeams.json, wird die Paarung gezeigt;
+ * sonst `offen: true` (Runden-Slot ohne Gegner).
+ */
+export const wmSpiele: WmSpiel[] = wmSlots.map((slot) => {
+  const t = wmTeams[slot.id];
+  const hasTeams = Boolean(t?.teamA && t?.teamB);
+  return {
+    ...slot,
+    teamA: t?.teamA,
+    teamB: t?.teamB,
+    tv: t?.tv,
+    offen: !hasTeams,
+  };
+});
 
 /** Spiele chronologisch (ISO mit gleichem Offset sortiert lexikografisch = zeitlich). */
 export const wmSpieleSorted: WmSpiel[] = [...wmSpiele].sort((a, b) => a.startISO.localeCompare(b.startISO));
