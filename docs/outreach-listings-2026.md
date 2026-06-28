@@ -10,20 +10,30 @@ Ristorante STORIA · Karlstraße 47a · 80333 München · Tel +49 89 51519696 ·
 
 ---
 
-## A) Kostenlose Verzeichnis-Einträge — SOFORT (höchster ROI, kein Pitch nötig)
+## A) Verzeichnisse — AUDIT-FIRST (Stand 2026-06-28, per Browser geprüft)
 
-| Ziel | URL | Topic | SERP-Pos. | Aktion |
-|------|-----|-------|-----------|--------|
-| muenchen.de Branchenbuch | https://www.muenchen.de/branchenbuch | WM + allg. | #8 (WM) | Eintrag „WM 2026 auf Großleinwand" anlegen |
-| Eventinc (Locations) | https://www.eventinc.de/location-vermieten | Firmenfeier | #5/#16 | Location kostenlos listen (20–300 Gäste, Private Room) |
-| Fiylo | https://www.fiylo.de/location-vermieten | Firmenfeier | #9 | Location bis 100 Pers. listen |
-| Munich-Eventlocations | https://www.munich-eventlocations.de | Firmenfeier | #2 | Location eintragen |
-| OpenTable | (Profil vorhanden? prüfen) | Pizza | #16 | Pizzeria-Kategorie + neapolitan. Pizza pflegen |
-| Tripadvisor | bestehendes Profil | Pizza | #8/Panel | „Neapolitanische Pizza" in Beschreibung/Tags |
+> ⚠️ WICHTIG: STORIA ist in den großen Verzeichnissen BEREITS gelistet. Blind „neu anlegen"
+> erzeugt NAP-Duplikate (schädlich fürs Local SEO). Daher gilt: erst prüfen, dann beanspruchen/ergänzen.
 
-**Checkliste je Eintrag:** NAP exakt (siehe oben), Kategorie „Italienisches Restaurant / Pizzeria",
-2–3 Fotos (Steinofen, Terrasse, Private Room), Öffnungszeiten, Link zur passenden Landing Page
-(WM → /wm-2026-public-viewing-muenchen/, Firmenfeier → /firmenfeier-muenchen/, Pizza → /neapolitanische-pizza-muenchen/).
+**Bereits gelistet (kein Neueintrag — ggf. beanspruchen/optimieren):**
+| Ziel | Status | Befund / Aktion |
+|------|--------|-----------------|
+| muenchen.de Branchenbuch | ✅ orte.muenchen.de/1247675.html | NAP ok. Website-Link nur als Premium → gratis nichts zu holen. Fertig. |
+| Tripadvisor | ✅ „STORIA Ristorante Pizzeria Bar", 289 Bew., 3,5★ | **FAKTEN-FEHLER:** Beschreibung „Seit 1995 ist das STORIA…" — falsch, STORIA seit 2015. Korrigieren (Owner-Login nötig). |
+| OpenTable | ✅ „Restaurant Storia – München" | Reservierungs-Profil aktiv. Beschreibung/Pizza-Kategorie pflegen (Owner-Login). |
+
+**Echte Lücken — aber Vendor-Account nötig (User muss registrieren, Claude bereitet Inhalte vor):**
+| Ziel | URL | Topic | SERP-Pos. |
+|------|-----|-------|-----------|
+| Eventinc | https://www.eventinc.de/location-vermieten | Firmenfeier | #5/#16 |
+| Fiylo | https://www.fiylo.de/location-vermieten | Firmenfeier | #9 |
+| Munich-Eventlocations | https://www.munich-eventlocations.de | Firmenfeier | #2 |
+
+**Listing-Content für die Event-Portale (vorbereitet):**
+- Name: Ristorante STORIA · Kategorie: Restaurant / Eventlocation
+- Kapazität: 100 Plätze innen + 100 überdachte Terrasse, Stehempfang bis 300 Gäste, Private Room
+- Menüs ab 45 €/Person · Lage: Maxvorstadt, 5 Min. vom Königsplatz
+- Fotos: Private Room, Terrasse, Steinofen · Link → /firmenfeier-muenchen/
 
 ---
 
