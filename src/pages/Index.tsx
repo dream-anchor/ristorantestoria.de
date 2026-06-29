@@ -23,9 +23,9 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="STORIA München – Italienisches Restaurant & Pizzeria Maxvorstadt"
+        title={t.seo.home.seoTitle}
         canonical="/"
-        description="Familienbetrieb seit 2015 am Königsplatz: Neapolitanische Pizza (400°C Steinofen), hausgemachte Pasta & Aperitivo. Mo–Fr ab 09 Uhr. Jetzt reservieren!"
+        description={t.seo.home.seoDescription}
       />
       <StructuredData type="restaurant" />
       <div className="min-h-screen bg-background flex flex-col">

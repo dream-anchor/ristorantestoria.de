@@ -526,6 +526,10 @@ export const en = {
     qualityPost: "– a protected designation of origin (PDO) from the Naples region. Our dough matures for 48 hours at a controlled temperature for optimal digestibility.",
   },
   seo: {
+    home: {
+      seoTitle: "STORIA Munich – Italian Restaurant & Pizzeria",
+      seoDescription: "Family-run since 2015 near Königsplatz: Neapolitan stone-oven pizza (400°C), homemade pasta & aperitivo. Open Mon–Fri from 9am. Book now!",
+    },
     besondereAnlaesse: {
       seoTitle: "Special Occasions at STORIA Munich",
       seoDescription: "Celebrate special occasions at STORIA Munich: Valentine\u2019s Day, Christmas dinner, New Year\u2019s Eve & more. Italian menus in Maxvorstadt.",

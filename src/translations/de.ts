@@ -535,6 +535,10 @@ export const de = {
     qualityPost: "– geschützte Ursprungsbezeichnung (g.U.) aus der Region Neapel. Unser Teig reift 48 Stunden lang bei kontrollierter Temperatur für optimale Bekömmlichkeit.",
   },
   seo: {
+    home: {
+      seoTitle: "STORIA München – Italienisches Restaurant & Pizzeria",
+      seoDescription: "Familienbetrieb seit 2015 am Königsplatz: neapolitanische Pizza (400°C Steinofen), hausgemachte Pasta & Aperitivo. Mo–Fr ab 09 Uhr. Jetzt reservieren!",
+    },
     besondereAnlaesse: {
       seoTitle: "Besondere Anlässe im STORIA München",
       seoDescription: "Feiern Sie besondere Anlässe im STORIA München: Valentinstag, Weihnachtsfeier, Silvester & mehr. Italienische Menüs in der Maxvorstadt.",

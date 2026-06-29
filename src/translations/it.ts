@@ -556,6 +556,10 @@ const itBase = {
     qualityPost: "– denominazione di origine protetta (DOP) dalla regione di Napoli. Il nostro impasto matura 48 ore a temperatura controllata per una digeribilità ottimale.",
   },
   seo: {
+    home: {
+      seoTitle: "STORIA Monaco – Ristorante Italiano & Pizzeria",
+      seoDescription: "A conduzione familiare dal 2015 vicino al Königsplatz: pizza napoletana nel forno a pietra (400°C), pasta fatta in casa & aperitivo. Prenota ora!",
+    },
     besondereAnlaesse: {
       seoTitle: "Occasioni Speciali al STORIA Monaco",
       seoDescription: "Festeggiate occasioni speciali al STORIA Monaco: San Valentino, cena di Natale, Capodanno e altro. Menu italiani nella Maxvorstadt.",

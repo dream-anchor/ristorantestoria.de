@@ -526,6 +526,10 @@ export const fr = {
     qualityPost: "– appellation d'origine protégée (AOP) de la région de Naples. Notre pâte mûrit pendant 48 heures à température contrôlée pour une digestibilité optimale.",
   },
   seo: {
+    home: {
+      seoTitle: "STORIA Munich – Restaurant Italien & Pizzeria",
+      seoDescription: "Établissement familial depuis 2015 près du Königsplatz : pizza napolitaine au four à pierre (400°C), pâtes maison & aperitivo. Réservez vite !",
+    },
     besondereAnlaesse: {
       seoTitle: "Occasions Sp\u00e9ciales au STORIA Munich",
       seoDescription: "C\u00e9l\u00e9brez des occasions sp\u00e9ciales au STORIA Munich : Saint-Valentin, d\u00eener de No\u00ebl, R\u00e9veillon & plus. Menus italiens \u00e0 Maxvorstadt.",
