@@ -640,7 +640,7 @@ export const de = {
     firmenfeier: {
       // SEO
       seoTitle: "Firmenfeier M\u00fcnchen \u2013 Location f\u00fcr 20\u2013300 G\u00e4ste | STORIA",
-      seoDescription: "Firmenfeier beim Italiener: Menüs ab 45 €/Person, 100 Plätze innen + 100 auf der überdachten Terrasse, bis 300 Gäste beim Stehempfang. Maxvorstadt, 5 Min. vom Königsplatz.",
+      seoDescription: "Firmenfeier beim Italiener: Menüs ab 45 €/Person, bis 300 Gäste, 200 Plätze + überdachte Terrasse. Maxvorstadt, 5 Min. vom Königsplatz. Jetzt anfragen!",
       breadcrumb: "Firmenfeier M\u00fcnchen",
       // Hero
       heroTitle: "Firmenfeier M\u00fcnchen \u2013 Feiern im STORIA Maxvorstadt",
@@ -892,7 +892,7 @@ export const de = {
     },
     aperitivo: {
       seoTitle: "Aperitivo München – Spritz ab 7,90 € auf der Terrasse | STORIA",
-      seoDescription: "Italienischer Aperitivo in München: 10 Spritz-Varianten ab 7,90 €, Negroni & alkoholfreie Aperitivi – täglich 17–22:30 Uhr auf der Terrasse. Jetzt reservieren!",
+      seoDescription: "Italienischer Aperitivo in München: 10 Spritz-Varianten ab 7,90 €, Negroni & mehr – täglich 17–22:30 Uhr auf der Terrasse. Jetzt reservieren!",
       title: "Aperitivo München – Aperol Spritz & Negroni im STORIA",
       heroSubtitle: "Italienische Bar-Kultur im STORIA Maxvorstadt",
       heroTime: "🍸 Täglich 17:00 – 22:30 Uhr",
@@ -1060,7 +1060,7 @@ export const de = {
     romanticDinner: {
       // SEO
       seoTitle: "Romantisches Dinner München | Candle-Light-Dinner – STORIA",
-      seoDescription: "Romantisches Dinner in München: Kerzenlicht, italienische Küche & Weinbegleitung im STORIA Maxvorstadt. Ideal für Date Night & Jahrestag. Jetzt Tisch reservieren!",
+      seoDescription: "Romantisches Dinner in München: Kerzenlicht, italienische Küche & Weinbegleitung im STORIA Maxvorstadt – ideal für Date Night. Jetzt reservieren!",
       breadcrumb: "Romantisches Dinner M\u00fcnchen",
       // Hero
       heroTitle: "Romantisches Dinner München – Candle Light im STORIA",
@@ -2863,7 +2863,7 @@ export const de = {
     },
     italienischesRestaurant: {
       seoTitle: "Bestes italienisches Restaurant Maxvorstadt M\u00fcnchen | STORIA",
-      seoDescription: "Bestes italienisches Restaurant in M\u00fcnchen-Maxvorstadt: Familie Speranza kocht die K\u00fcche des Cilento \u2013 hausgemachte Pasta, frischer Fisch, neapolitanische Steinofen-Pizza. Jetzt reservieren.",
+      seoDescription: "Bestes italienisches Restaurant in M\u00fcnchen-Maxvorstadt: Familie Speranza kocht die K\u00fcche des Cilento \u2013 Pasta, Fisch & Steinofen-Pizza. Jetzt reservieren!",
       breadcrumb: "Bestes italienisches Restaurant Maxvorstadt",
       heroTitle: "Bestes italienisches Restaurant in der Maxvorstadt \u2013 STORIA M\u00fcnchen",
       heroSubtitle: "Authentisch s\u00fcditalienisch seit 2015 \u2022 Familienbetrieb Speranza",
