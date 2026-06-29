@@ -644,7 +644,7 @@ export const de = {
       breadcrumb: "Firmenfeier M\u00fcnchen",
       // Hero
       heroTitle: "Firmenfeier M\u00fcnchen \u2013 Feiern im STORIA Maxvorstadt",
-      heroSubtitle: "Betriebsfeier, Weihnachtsfeier & Teamevents | STORIA am Königsplatz",
+      heroSubtitle: "Betriebsfeier, Business Dinner & Teamevents | STORIA am Königsplatz",
       heroBadge1: "💼 bis 180 Gäste",
       heroBadge2: "🎄 Weihnachtsfeiern",
       heroBadge3: "📍 Zentral Königsplatz",
@@ -892,7 +892,7 @@ export const de = {
     },
     aperitivo: {
       seoTitle: "Aperitivo München – Spritz ab 7,90 € auf der Terrasse | STORIA",
-      seoDescription: "Italienischer Aperitivo wie in Mailand: 10 Spritz-Varianten ab 7,90 €, Negroni, alkoholfreie Aperitivi – täglich 17–22:30 Uhr auf der überdachten Terrasse. 5 Min. vom Königsplatz.",
+      seoDescription: "Italienischer Aperitivo in München: 10 Spritz-Varianten ab 7,90 €, Negroni & alkoholfreie Aperitivi – täglich 17–22:30 Uhr auf der Terrasse. Jetzt reservieren!",
       title: "Aperitivo München – Aperol Spritz & Negroni im STORIA",
       heroSubtitle: "Italienische Bar-Kultur im STORIA Maxvorstadt",
       heroTime: "🍸 Täglich 17:00 – 22:30 Uhr",
@@ -1060,7 +1060,7 @@ export const de = {
     romanticDinner: {
       // SEO
       seoTitle: "Romantisches Dinner München | Candle-Light-Dinner – STORIA",
-      seoDescription: "Romantisches Abendessen in München mit Kerzenlicht, italienischer Küche und Weinbegleitung. Ideal für Date Night & Jahrestag. STORIA Maxvorstadt.",
+      seoDescription: "Romantisches Dinner in München: Kerzenlicht, italienische Küche & Weinbegleitung im STORIA Maxvorstadt. Ideal für Date Night & Jahrestag. Jetzt Tisch reservieren!",
       breadcrumb: "Romantisches Dinner M\u00fcnchen",
       // Hero
       heroTitle: "Romantisches Dinner München – Candle Light im STORIA",
