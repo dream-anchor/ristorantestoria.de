@@ -447,7 +447,7 @@ const en: FilmfestContent = {
       title: "Flying Buffet & Stations",
       items: [
         "Antipasti stations with burrata, vitello, marinated vegetables",
-        "Neapolitan wood-fired pizza, live from the 400° oven",
+        "Neapolitan stone-oven pizza, live from the 400° oven",
         "Flying finger food — arancini, crostini, fritto misto",
         "Aperitivo bar: spritz, Italian wines, alcohol-free options",
       ],
@@ -521,7 +521,7 @@ const en: FilmfestContent = {
     {
       question: "Does STORIA offer catering for cast & crew dinners?",
       answer:
-        "Yes. Head chef Domenico Speranza and his team cook southern Italian food to family recipes from the Cilento — everything is made in-house, without external catering logistics. The choice ranges from flying buffets with stations (including Neapolitan wood-fired pizza from the 400 °C oven) to multi-course 3- to 5-course menus with Italian wine pairing. Vegan and gluten-free options are available.",
+        "Yes. Head chef Domenico Speranza and his team cook southern Italian food to family recipes from the Cilento — everything is made in-house, without external catering logistics. The choice ranges from flying buffets with stations (including Neapolitan stone-oven pizza from the 400 °C oven) to multi-course 3- to 5-course menus with Italian wine pairing. Vegan and gluten-free options are available.",
     },
     {
       question: "How short-notice can I request a date during the festival period?",
@@ -653,7 +653,7 @@ const it: FilmfestContent = {
       title: "Flying buffet & postazioni",
       items: [
         "Postazioni di antipasti con burrata, vitello, verdure marinate",
-        "Pizza napoletana nel forno a legna, dal vivo dal forno a 400°",
+        "Pizza napoletana nel forno a pietra, dal vivo dal forno a 400°",
         "Flying finger food — arancini, crostini, fritto misto",
         "Bar aperitivo: spritz, vini italiani, analcolici",
       ],
@@ -727,7 +727,7 @@ const it: FilmfestContent = {
     {
       question: "Lo STORIA offre catering per cene cast & crew?",
       answer:
-        "Sì. Lo chef Domenico Speranza e il suo team cucinano piatti del Sud Italia secondo ricette di famiglia del Cilento — tutto nasce in casa, senza logistica di catering esterna. Si può scegliere tra flying buffet con postazioni (inclusa la pizza napoletana nel forno a legna a 400 °C) o menu a più portate da 3 a 5 portate con abbinamento di vini italiani. Sono disponibili opzioni vegane e senza glutine.",
+        "Sì. Lo chef Domenico Speranza e il suo team cucinano piatti del Sud Italia secondo ricette di famiglia del Cilento — tutto nasce in casa, senza logistica di catering esterna. Si può scegliere tra flying buffet con postazioni (inclusa la pizza napoletana nel forno a pietra a 400 °C) o menu a più portate da 3 a 5 portate con abbinamento di vini italiani. Sono disponibili opzioni vegane e senza glutine.",
     },
     {
       question: "Con quanto anticipo posso richiedere una data nel periodo del festival?",
@@ -859,7 +859,7 @@ const fr: FilmfestContent = {
       title: "Flying buffet & stations",
       items: [
         "Stations d'antipasti avec burrata, vitello, légumes marinés",
-        "Pizza napolitaine au four à bois, en direct du four à 400°",
+        "Pizza napolitaine au four Ã  pierre, en direct du four à 400°",
         "Flying finger food — arancini, crostini, fritto misto",
         "Bar à aperitivo : spritz, vins italiens, sans alcool",
       ],
@@ -933,7 +933,7 @@ const fr: FilmfestContent = {
     {
       question: "Le STORIA propose-t-il un traiteur pour les dîners cast & crew ?",
       answer:
-        "Oui. Le chef Domenico Speranza et son équipe cuisinent une cuisine du Sud de l'Italie selon des recettes de famille du Cilento — tout est préparé en interne, sans logistique traiteur externe. Au choix : des flying buffets avec stations (dont la pizza napolitaine au four à bois à 400 °C) ou des menus de 3 à 5 services avec accord de vins italiens. Des options véganes et sans gluten sont possibles.",
+        "Oui. Le chef Domenico Speranza et son équipe cuisinent une cuisine du Sud de l'Italie selon des recettes de famille du Cilento — tout est préparé en interne, sans logistique traiteur externe. Au choix : des flying buffets avec stations (dont la pizza napolitaine au four Ã  pierre à 400 °C) ou des menus de 3 à 5 services avec accord de vins italiens. Des options véganes et sans gluten sont possibles.",
     },
     {
       question: "Avec quel délai puis-je demander une date pendant la période du festival ?",

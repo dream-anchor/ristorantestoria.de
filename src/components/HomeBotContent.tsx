@@ -78,8 +78,8 @@ const HomeBotContent = () => {
           <li>
             <strong>{language === 'de' ? 'Küche:' : 'Cuisine:'}</strong>{' '}
             {language === 'de'
-              ? 'Authentische italienische Küche – neapolitanische Pizza aus dem Holzofen, hausgemachte Pasta, klassische italienische Gerichte.'
-              : 'Authentic Italian cuisine – Neapolitan wood-fired pizza, homemade pasta, classic Italian dishes.'
+              ? 'Authentische italienische Küche – neapolitanische Pizza aus dem Steinofen, hausgemachte Pasta, klassische italienische Gerichte.'
+              : 'Authentic Italian cuisine – Neapolitan stone-oven pizza, homemade pasta, classic Italian dishes.'
             }
           </li>
         </ul>
@@ -88,7 +88,7 @@ const HomeBotContent = () => {
       <section>
         <h2>{language === 'de' ? 'Unsere Spezialitäten' : 'Our Specialties'}</h2>
         <ul>
-          <li>{language === 'de' ? 'Neapolitanische Pizza aus dem Holzofen' : 'Neapolitan wood-fired pizza'}</li>
+          <li>{language === 'de' ? 'Neapolitanische Pizza aus dem Steinofen' : 'Neapolitan stone-oven pizza'}</li>
           <li>{language === 'de' ? 'Hausgemachte Pasta' : 'Homemade pasta'}</li>
           <li>{language === 'de' ? 'Frische Meeresfrüchte' : 'Fresh seafood'}</li>
           <li>{language === 'de' ? 'Italienische Weine' : 'Italian wines'}</li>

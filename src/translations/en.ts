@@ -290,7 +290,7 @@ export const en = {
     antipasti: "Antipasti",
     antipastiDesc: "Classic Italian starters – from bruschetta to carpaccio.",
     pizza: "Pizza",
-    pizzaDesc: "Traditionally baked in a wood-fired oven with fresh ingredients.",
+    pizzaDesc: "Traditionally baked in a stone oven with fresh ingredients.",
     pasta: "Pasta",
     pastaDesc: "Homemade pasta according to original Italian recipes.",
     dolci: "Dolci",
