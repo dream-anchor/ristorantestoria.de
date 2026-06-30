@@ -36,6 +36,7 @@ import AperitivoMuenchen from "./pages/seo/AperitivoMuenchen";
 import RomantischesDinner from "./pages/seo/RomantischesDinner";
 import EventlocationMuenchen from "./pages/seo/EventlocationMuenchen";
 import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
+import OktoberfestMuenchen from "./pages/seo/OktoberfestMuenchen";
 import FilmfestMuenchen from "./pages/seo/FilmfestMuenchen";
 import WmPublicViewingMuenchen from "./pages/seo/WmPublicViewingMuenchen";
 import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
@@ -116,6 +117,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "romantisches-dinner-muenchen": RomantischesDinner,
   "eventlocation-muenchen-maxvorstadt": EventlocationMuenchen,
   "firmenfeier-muenchen": FirmenfeierMuenchen,
+  "oktoberfest-muenchen": OktoberfestMuenchen,
   "filmfest-muenchen": FilmfestMuenchen,
   "wm-2026-public-viewing-muenchen": WmPublicViewingMuenchen,
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
