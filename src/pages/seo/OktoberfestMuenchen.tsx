@@ -132,10 +132,12 @@ const OktoberfestMuenchen = () => {
 
   return (
     <>
+      {/* TEMPORÄR: noIndex, solange die Preise Platzhalter sind. Vor Launch (echte Preise) entfernen, damit die Seite rechtzeitig zur Wiesn rankt. */}
       <SEO
         title={o.seoTitle}
         description={o.seoDescription}
         canonical="/oktoberfest-muenchen"
+        noIndex
       />
       <StructuredData type="restaurant" />
       <StructuredData
