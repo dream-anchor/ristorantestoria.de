@@ -1,14 +1,24 @@
-# Newsletter-Konformität (seasonal_signups) + Doku-Korrektur Menüdaten — UMGESETZT
+# Oktoberfest-Sondermenü in die Datenbank einspielen
 
-## TEIL 1 — Newsletter Double-Opt-In (erledigt)
-- Migration: status/confirm_token/confirmed_at/consent_ip/consent_text/consent_at/consent_version; Status-Validierungstrigger; anon-INSERT entzogen (RLS-Policy entfernt).
-- Edge Function `subscribe-seasonal` (Service-Role): schreibt status='pending', speichert IP + Einwilligungstext/-version, sendet DOI-Mail (nur Bestätigung, keine Werbung).
-- `SeasonalSignupForm.tsx` ruft jetzt `subscribe-seasonal` statt Direct-Insert; zeigt DOI-Hinweis (doiTitle/doiMessage in 4 Sprachen).
-- `confirm-seasonal` + Seite `NewsletterBestaetigung.tsx` (Routen DE/EN/IT/FR, noindex).
-- `notify-seasonal-signups`: nur status='confirmed'; jede Mail mit Abmeldelink + List-Unsubscribe (one-click).
-- `unsubscribe-seasonal`: setzt status='unsubscribed' (GET=HTML-Seite, POST=one-click).
-- `Datenschutz.tsx`: Newsletter-Abschnitt + Resend als Auftragsverarbeiter (DPF + SCC).
-- KEIN Lösch-/Purge-Job — bestätigte Abonnenten bleiben.
+## Ausgangslage
+- Datei `supabase/migrations/20260701120000_seed_oktoberfest_menu.sql` enthält einen idempotenten `DO $$`-Block.
+- DB-Check bestätigt: Slug `oktoberfest-menue` existiert **noch nicht** → der Insert läuft durch (keine Doppelanlage).
+- Es sind ausschließlich `INSERT`-Statements in die bestehenden Tabellen `menus`, `menu_categories`, `menu_items`. Keine Schemaänderung, keine neuen Tabellen, keine Änderung/Löschung bestehender Menüs.
 
-## TEIL 2 — Menüdaten (bestätigt)
-- Keine 60-Tage-Purge-/Soft-Delete-Logik vorhanden. Klarstellung in Projekt-Memory aufgenommen.
+## Umsetzung
+1. **SQL ausführen:** Den kompletten `DO $$ ... END $$;`-Block aus der Migrationsdatei über das Daten-Tool (`supabase--insert`) auf der verbundenen Datenbank ausführen. Der Block:
+   - legt 1 Menü an (`menu_type='special'`, `slug='oktoberfest-menue'`, `is_published=true`, Titel „Oktoberfest – Speisen & Getränke", 4-sprachig),
+   - 6 Kategorien (Wiesnbier vom Holzfass, Aperitivo-Brücke, Brotzeit & Brezn, Oktoberfest-Pizzen, Braten & Hauptgerichte, Gruppen-/Firmen-Pakete),
+   - 23 Positionen, jeweils de/en/it/fr mit Preis.
+
+2. **Verifikation nach dem Insert (read-only):**
+   - `SELECT id, slug, menu_type, is_published, title FROM public.menus WHERE slug='oktoberfest-menue';` → genau 1 Zeile.
+   - Anzahl Kategorien (= 6) und Items (= 23) über Joins gegenprüfen.
+
+## Erwartetes Ergebnis
+- Im Admin (`/admin`) → „Besondere Anlässe" erscheint „Oktoberfest – Speisen & Getränke", vollständig editierbar (Name/Beschreibung/Preis, 4-sprachig).
+- `/oktoberfest-muenchen/` zeigt danach die DB-Daten.
+- Anschließend kurze Bestätigung, dass die Migration lief und das Menü in `menus` (slug=`oktoberfest-menue`) vorhanden ist.
+
+## Nicht-Ziele
+- Keine Codeänderungen, keine Schemaänderungen, keine Anpassung anderer Menüs.
