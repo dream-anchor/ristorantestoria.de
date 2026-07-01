@@ -26,7 +26,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { UtensilsCrossed, Plus, Pencil, Trash2, Loader2, Languages } from "lucide-react";
+import { UtensilsCrossed, Plus, Pencil, Trash2, Loader2, Languages, GripVertical } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -35,6 +35,25 @@ import {
   useDeleteGroupMenu,
   type GroupMenu,
 } from "@/hooks/useGroupMenus";
+import { useUpdateGroupMenuOrder } from "@/hooks/useUpdateGroupMenuOrder";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  useSortable,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const LANGS = ["de", "en", "it", "fr"] as const;
 type Lang = typeof LANGS[number];
