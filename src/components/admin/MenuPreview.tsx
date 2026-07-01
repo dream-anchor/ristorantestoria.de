@@ -2,12 +2,20 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Trash2, Plus, GripVertical, SpellCheck, Loader2 } from "lucide-react";
+import { Trash2, Plus, GripVertical, SpellCheck, Loader2, Languages } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { ParsedMenu, ParsedMenuCategory, ParsedMenuItem } from "@/hooks/useSpecialMenus";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SpellCheckResults, { SpellingError } from "./SpellCheckResults";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { translateAllLanguages, type MenuLang } from "@/lib/specialMenuTranslation";
 
 interface MenuPreviewProps {
   data: ParsedMenu;
@@ -19,6 +27,24 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
   const [isSpellChecking, setIsSpellChecking] = useState(false);
   const [spellCheckErrors, setSpellCheckErrors] = useState<SpellingError[]>([]);
   const [showSpellCheck, setShowSpellCheck] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [sourceLang, setSourceLang] = useState<MenuLang>("de");
+
+  const handleTranslateAll = async () => {
+    setIsTranslating(true);
+    try {
+      const updated = await translateAllLanguages(data, sourceLang);
+      onUpdate(updated);
+      toast.success("Alle Sprachen wurden aktualisiert (EN, IT, FR)");
+    } catch (err) {
+      console.error("[translate-special-menu] error:", err);
+      toast.error(
+        err instanceof Error ? `Übersetzung fehlgeschlagen: ${err.message}` : "Übersetzung fehlgeschlagen"
+      );
+    } finally {
+      setIsTranslating(false);
+    }
+  };
 
   const updateTitle = (value: string) => {
     onUpdate({ ...data, title: value });
