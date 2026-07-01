@@ -7,6 +7,7 @@ import { useMenuContent, useSaveMenuContent, ParsedMenu } from "@/hooks/useSpeci
 import MenuPreview from "./MenuPreview";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { syncTranslations } from "@/lib/specialMenuTranslation";
 
 interface CollapsibleMenuCardProps {
   title: string;
@@ -46,7 +47,15 @@ const CollapsibleMenuCard = ({
     if (!editData || !menuId) return;
     
     try {
-      await saveMenuContent.mutateAsync({ menuId, data: editData });
+      let dataToSave = editData;
+      try {
+        dataToSave = await syncTranslations(editData, menuContent ?? null, "de");
+        if (dataToSave !== editData) setEditData(dataToSave);
+      } catch (err) {
+        console.error("[sync-translations] failed:", err);
+        toast.warning("Automatische Übersetzung übersprungen – Inhalt wird ohne Sync gespeichert");
+      }
+      await saveMenuContent.mutateAsync({ menuId, data: dataToSave });
       toast.success("Änderungen gespeichert");
       setIsEditing(false);
       setEditData(null);

@@ -2,12 +2,20 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Trash2, Plus, GripVertical, SpellCheck, Loader2 } from "lucide-react";
+import { Trash2, Plus, GripVertical, SpellCheck, Loader2, Languages } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { ParsedMenu, ParsedMenuCategory, ParsedMenuItem } from "@/hooks/useSpecialMenus";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SpellCheckResults, { SpellingError } from "./SpellCheckResults";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { translateAllLanguages, type MenuLang } from "@/lib/specialMenuTranslation";
 
 interface MenuPreviewProps {
   data: ParsedMenu;
@@ -19,6 +27,24 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
   const [isSpellChecking, setIsSpellChecking] = useState(false);
   const [spellCheckErrors, setSpellCheckErrors] = useState<SpellingError[]>([]);
   const [showSpellCheck, setShowSpellCheck] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [sourceLang, setSourceLang] = useState<MenuLang>("de");
+
+  const handleTranslateAll = async () => {
+    setIsTranslating(true);
+    try {
+      const updated = await translateAllLanguages(data, sourceLang);
+      onUpdate(updated);
+      toast.success("Alle Sprachen wurden aktualisiert (EN, IT, FR)");
+    } catch (err) {
+      console.error("[translate-special-menu] error:", err);
+      toast.error(
+        err instanceof Error ? `Übersetzung fehlgeschlagen: ${err.message}` : "Übersetzung fehlgeschlagen"
+      );
+    } finally {
+      setIsTranslating(false);
+    }
+  };
 
   const updateTitle = (value: string) => {
     onUpdate({ ...data, title: value });
@@ -215,24 +241,52 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
   return (
     <div className="border border-border rounded-lg p-4 md:p-6 space-y-6 bg-secondary/30">
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
             Vorschau & Bearbeitung
           </h4>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={runSpellCheck}
-            disabled={isSpellChecking}
-            className="gap-2"
-          >
-            {isSpellChecking ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <SpellCheck className="h-4 w-4" />
-            )}
-            {t.spellCheck?.runCheck || 'Rechtschreibprüfung'}
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-muted-foreground whitespace-nowrap">Quelle</span>
+              <Select value={sourceLang} onValueChange={(v) => setSourceLang(v as MenuLang)}>
+                <SelectTrigger className="h-9 w-[110px]" disabled={isTranslating}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleTranslateAll}
+              disabled={isTranslating || isSpellChecking}
+              className="gap-2"
+            >
+              {isTranslating ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Languages className="h-4 w-4" />
+              )}
+              {isTranslating ? "Übersetze…" : "Alle Sprachen übersetzen"}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={runSpellCheck}
+              disabled={isSpellChecking || isTranslating}
+              className="gap-2"
+            >
+              {isSpellChecking ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <SpellCheck className="h-4 w-4" />
+              )}
+              {t.spellCheck?.runCheck || 'Rechtschreibprüfung'}
+            </Button>
+          </div>
         </div>
 
         {/* Title & Subtitle - German */}
