@@ -1,4 +1,6 @@
-export const en = {
+import { de } from "./de";
+
+const enBase = {
   breadcrumb: {
     home: "Home",
   },
