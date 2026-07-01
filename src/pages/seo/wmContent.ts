@@ -84,7 +84,7 @@ export interface WmContent {
   };
 }
 
-export const wmContent = {
+export const wmContent: Record<Language, WmContent> = {
   de: {
     seo: {
       title: "WM 2026 Public Viewing München – alle Spiele live | STORIA",
@@ -563,4 +563,4 @@ export const wmContent = {
         "Une page spéciale consacrée à la Coupe du monde de football 2026 (11 juin – 19 juillet). Cette page n'a aucun lien officiel avec la FIFA. Horaires des matchs et diffusions sous réserve de modifications.",
     },
   },
-} satisfies Record<Language, WmContent>;
+};
