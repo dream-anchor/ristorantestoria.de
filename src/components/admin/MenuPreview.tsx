@@ -241,24 +241,52 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
   return (
     <div className="border border-border rounded-lg p-4 md:p-6 space-y-6 bg-secondary/30">
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <h4 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
             Vorschau & Bearbeitung
           </h4>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={runSpellCheck}
-            disabled={isSpellChecking}
-            className="gap-2"
-          >
-            {isSpellChecking ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <SpellCheck className="h-4 w-4" />
-            )}
-            {t.spellCheck?.runCheck || 'Rechtschreibprüfung'}
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-muted-foreground whitespace-nowrap">Quelle</span>
+              <Select value={sourceLang} onValueChange={(v) => setSourceLang(v as MenuLang)}>
+                <SelectTrigger className="h-9 w-[110px]" disabled={isTranslating}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleTranslateAll}
+              disabled={isTranslating || isSpellChecking}
+              className="gap-2"
+            >
+              {isTranslating ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Languages className="h-4 w-4" />
+              )}
+              {isTranslating ? "Übersetze…" : "Alle Sprachen übersetzen"}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={runSpellCheck}
+              disabled={isSpellChecking || isTranslating}
+              className="gap-2"
+            >
+              {isSpellChecking ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <SpellCheck className="h-4 w-4" />
+              )}
+              {t.spellCheck?.runCheck || 'Rechtschreibprüfung'}
+            </Button>
+          </div>
         </div>
 
         {/* Title & Subtitle - German */}
