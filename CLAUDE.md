@@ -1,5 +1,9 @@
 # ristorantestoria.de
 
+## Bildbearbeitung / Bildgenerierung (projektübergreifend)
+**IMMER über OpenRouter** (erreichbar via Composio). Nicht Pixelcut/Higsfield für Bild-Edits nutzen.
+Bild-zu-Bild-Editing (z. B. Fotos anpassen) läuft über OpenRouter-Bildmodelle (z. B. Gemini Flash Image / „nano-banana").
+
 ## Google Business Profile (GBP) API
 
 **Status:** Aktiv, OAuth eingerichtet (Mai 2026)
