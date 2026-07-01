@@ -518,84 +518,42 @@ const GroupMenusManager = () => {
         </div>
       ) : menus && menus.length > 0 ? (
         <div className="rounded-md border overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-16">Key</TableHead>
-                <TableHead>Titel (DE)</TableHead>
-                <TableHead className="w-24">Preis</TableHead>
-                <TableHead className="w-20">Sort</TableHead>
-                <TableHead className="w-20">Aktiv</TableHead>
-                <TableHead className="w-24">Badge</TableHead>
-                <TableHead className="w-24 text-right">Aktionen</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {menus.map((menu) => (
-                <TableRow
-                  key={menu.id}
-                  className="cursor-pointer hover:bg-muted/50"
-                  onClick={() => setEditMenu(menu)}
-                >
-                  <TableCell className="font-mono font-medium">{menu.menu_key}</TableCell>
-                  <TableCell>
-                    {(menu.title as Record<string, string>)?.de ?? "—"}
-                  </TableCell>
-                  <TableCell>{menu.price_amount} €</TableCell>
-                  <TableCell>{menu.sort_order}</TableCell>
-                  <TableCell>
-                    {menu.is_active ? (
-                      <Badge className="bg-green-100 text-green-800">Aktiv</Badge>
-                    ) : (
-                      <Badge variant="secondary">Inaktiv</Badge>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {menu.badge ? (
-                      <Badge variant="outline">
-                        {(menu.badge as Record<string, string>)?.de ?? "✓"}
-                      </Badge>
-                    ) : "—"}
-                  </TableCell>
-                  <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex items-center justify-end gap-1">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setEditMenu(menu)}
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <Trash2 className="h-4 w-4 text-destructive" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Menü löschen?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              Menü „{(menu.title as Record<string, string>)?.de}" wird unwiderruflich gelöscht.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-                            <AlertDialogAction
-                              onClick={() => handleDelete(menu.id)}
-                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                            >
-                              Löschen
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </div>
-                  </TableCell>
+          <p className="text-xs text-muted-foreground px-3 pt-3">Zeilen ziehen zum Sortieren.</p>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-10" />
+                  <TableHead className="w-16">Key</TableHead>
+                  <TableHead>Titel (DE)</TableHead>
+                  <TableHead className="w-24">Preis</TableHead>
+                  <TableHead className="w-20">Sort</TableHead>
+                  <TableHead className="w-20">Aktiv</TableHead>
+                  <TableHead className="w-24">Badge</TableHead>
+                  <TableHead className="w-24 text-right">Aktionen</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                <SortableContext
+                  items={menus.map((m) => m.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {menus.map((menu) => (
+                    <SortableGroupMenuRow
+                      key={menu.id}
+                      menu={menu}
+                      onEdit={setEditMenu}
+                      onDelete={handleDelete}
+                    />
+                  ))}
+                </SortableContext>
+              </TableBody>
+            </Table>
+          </DndContext>
         </div>
       ) : (
         <div className="bg-card rounded-lg border border-border p-6 text-center">
