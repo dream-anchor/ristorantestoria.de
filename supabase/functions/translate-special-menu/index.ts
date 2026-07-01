@@ -103,7 +103,7 @@ Antworte NUR mit JSON in dieser Form, wobei jeder Zielsprach-Schlüssel den gesa
       const errText = await response.text();
       console.error("[translate-special-menu] Anthropic error:", response.status, errText);
       return new Response(
-        JSON.stringify({ error: `Anthropic API error: ${response.status}` }),
+        JSON.stringify({ error: `Anthropic API error: ${response.status}`, detail: errText }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
