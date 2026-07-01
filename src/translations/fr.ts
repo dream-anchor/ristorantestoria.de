@@ -1,4 +1,6 @@
-export const fr = {
+import { de } from "./de";
+
+const frBase = {
   breadcrumb: {
     home: "Accueil",
   },
