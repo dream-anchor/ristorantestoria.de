@@ -10,6 +10,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
+import { useSpecialMenuBySlug, useMenuContent } from "@/hooks/useSpecialMenus";
 import heroImage from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen.webp";
 import heroImage600 from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen-600w.webp";
 
@@ -75,9 +76,14 @@ const Herz = ({ label }: { label: string }) => (
 );
 
 const OktoberfestMuenchen = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   usePrerenderReady(true);
   const o = t.seo.oktoberfest;
+  // Editierbarer Menü-Teil: DB-Sondermenü (Admin „Besondere Anlässe", Slug oktoberfest-menue)
+  const { data: liveMenu } = useSpecialMenuBySlug("oktoberfest-menue");
+  const { data: menuContent } = useMenuContent(liveMenu?.id);
+  const pickL = (obj: any, field: string) =>
+    obj ? ((language === "de" ? obj[field] : obj[`${field}_${language}`]) || obj[field] || "") : "";
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -143,6 +149,22 @@ const OktoberfestMuenchen = () => {
     { name: o.paketBavareseName, desc: o.paketBavareseDesc, price: o.paketBavarasePrice },
     { name: o.paketFirmaName, desc: o.paketFirmaDesc, price: o.paketFirmaPrice },
   ];
+
+  // Menü-Sektionen: aus DB-Sondermenü (im Admin editierbar) – sonst der aktuelle Inhalt als Fallback
+  const menuSections = (menuContent?.categories?.length)
+    ? menuContent.categories.map((c: any) => ({
+        title: pickL(c, "name"),
+        subtitle: pickL(c, "description"),
+        items: (c.items || []).map((it: any) => ({ name: pickL(it, "name"), desc: pickL(it, "description"), price: pickL(it, "price_display") })),
+      }))
+    : [
+        { title: o.categoryBeer, subtitle: o.beerSubtitle, items: biere.map((d) => ({ name: d.name, desc: d.desc, price: d.price })) },
+        { title: o.categoryAperitivo, subtitle: "", items: aperitivi.map((d) => ({ name: d.name, desc: d.desc, price: d.price })) },
+        { title: o.brotzeitTitle, subtitle: o.brotzeitSubtitle, items: brotzeit.map((d) => ({ name: d.name, desc: d.desc, price: d.price })) },
+        { title: o.pizzaTitle, subtitle: o.pizzaSubtitle, items: pizzen.map((d) => ({ name: d.name, desc: d.desc, price: d.price })) },
+        { title: o.bratenTitle, subtitle: o.bratenSubtitle, items: braten.map((d) => ({ name: d.name, desc: d.desc, price: d.price })) },
+        { title: o.paketeTitle, subtitle: o.paketeSubtitle, items: pakete.map((p) => ({ name: p.name, desc: p.desc, price: p.price })) },
+      ];
   const hotels = [
     { name: "ibis München City", time: o.hotelIbisTime, note: o.hotelIbisNote },
     { name: "Ruby Lilly Hotel", time: o.hotelLillyTime, note: o.hotelLillyNote },
@@ -307,48 +329,30 @@ const OktoberfestMuenchen = () => {
             </div>
           </section>
 
-          {/* BIER */}
-          <section className="okt-sec okt-sec-cream" id="bier">
-            <div className="okt-wrap">
-              <SecHead eyebrow="Aus dem Holzfass" title={o.beerTitle} lead={o.beerSubtitle} />
-              <Reveal className="okt-partner">
-                <span className="okt-partner-lbl">Ausschank-Partner</span>
-                <span className="okt-partner-name">PAULANER</span>
-                <span className="okt-partner-note">· Wiesnbier vom Holzfass</span>
-              </Reveal>
-              <Reveal as="h3" className="okt-subhead">{o.categoryBeer}</Reveal>
-              <div className="okt-cards okt-cards-3">{biere.map((d) => <Card key={d.name} {...d} />)}</div>
-              <Reveal as="h3" className="okt-subhead">{o.categoryAperitivo}</Reveal>
-              <div className="okt-cards okt-cards-3">{aperitivi.map((d) => <Card key={d.name} {...d} />)}</div>
-              <Reveal as="p" className="okt-note">{o.priceNote}</Reveal>
-              <CtaRow />
-            </div>
-          </section>
-
-          {/* BROTZEIT */}
-          <section className="okt-sec okt-sec-white" id="brotzeit">
-            <div className="okt-wrap">
-              <SecHead eyebrow="Zum Teilen" title={o.brotzeitTitle} lead={o.brotzeitSubtitle} />
-              <div className="okt-cards okt-cards-3">{brotzeit.map((d) => <Card key={d.name} {...d} />)}</div>
-            </div>
-          </section>
-
-          {/* PIZZEN */}
-          <section className="okt-sec okt-sec-cream" id="pizzen">
-            <div className="okt-wrap">
-              <SecHead eyebrow="Specials" title={o.pizzaTitle} lead={o.pizzaSubtitle} />
-              <div className="okt-cards okt-cards-2">{pizzen.map((d) => <Card key={d.name} {...d} />)}</div>
-              <Reveal as="p" className="okt-note">{o.pizzaNote}</Reveal>
-            </div>
-          </section>
-
-          {/* BRATEN */}
-          <section className="okt-sec okt-sec-white">
-            <div className="okt-wrap">
-              <SecHead eyebrow="Hauptgang" title={o.bratenTitle} lead={o.bratenSubtitle} />
-              <div className="okt-cards okt-cards-3">{braten.map((d) => <Card key={d.name} {...d} />)}</div>
-            </div>
-          </section>
+          {/* SPEISEN, GETRÄNKE & PAKETE — im Admin editierbar via „Besondere Anlässe" (Sondermenü oktoberfest-menue) */}
+          {menuSections.map((sec, i) => (
+            <section key={i} className={`okt-sec ${i % 2 === 0 ? "okt-sec-cream" : "okt-sec-white"}`} id={i === 0 ? "bier" : undefined}>
+              <div className="okt-wrap">
+                {i === 0 && (
+                  <Reveal className="okt-partner">
+                    <span className="okt-partner-lbl">Ausschank-Partner</span>
+                    <span className="okt-partner-name">PAULANER</span>
+                    <span className="okt-partner-note">· Wiesnbier vom Holzfass</span>
+                  </Reveal>
+                )}
+                <SecHead eyebrow="Bavarese" title={sec.title} lead={sec.subtitle} />
+                <div className="okt-cards okt-cards-3">
+                  {sec.items.map((it, j) => <Card key={j} name={it.name} desc={it.desc} price={it.price} />)}
+                </div>
+                {i === menuSections.length - 1 && (
+                  <>
+                    <Reveal as="p" className="okt-note okt-note-center">{o.priceNote}</Reveal>
+                    <CtaRow />
+                  </>
+                )}
+              </div>
+            </section>
+          ))}
 
           {/* ITAL. KARTE + KINDER */}
           <section className="okt-sec okt-sec-cream">
@@ -394,24 +398,6 @@ const OktoberfestMuenchen = () => {
                   </Reveal>
                 ))}
               </div>
-            </div>
-          </section>
-
-          {/* PAKETE */}
-          <section className="okt-sec okt-sec-white">
-            <div className="okt-wrap">
-              <SecHead eyebrow="Gruppen" title={o.paketeTitle} lead={o.paketeSubtitle} />
-              <div className="okt-cards okt-cards-3">
-                {pakete.map((p, i) => (
-                  <Reveal key={p.name} delay={i * 0.06} className="okt-paket">
-                    <h3>{p.name}</h3>
-                    <p>{p.desc}</p>
-                    <span className="okt-paket-price">{p.price}</span>
-                  </Reveal>
-                ))}
-              </div>
-              <Reveal as="p" className="okt-note">{o.paketeNote}</Reveal>
-              <CtaRow />
             </div>
           </section>
 
