@@ -343,12 +343,146 @@ const EditModal = ({ menu: initial, onClose }: EditModalProps) => {
   );
 };
 
+// ── Sortable Row ─────────────────────────────────────────────────────────────
+
+interface SortableGroupMenuRowProps {
+  menu: GroupMenu;
+  onEdit: (menu: GroupMenu) => void;
+  onDelete: (id: string) => void;
+}
+
+const SortableGroupMenuRow = ({ menu, onEdit, onDelete }: SortableGroupMenuRowProps) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: menu.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <TableRow
+      ref={setNodeRef}
+      style={style}
+      className="cursor-pointer hover:bg-muted/50"
+      onClick={() => onEdit(menu)}
+    >
+      <TableCell className="w-10" onClick={(e) => e.stopPropagation()}>
+        <button
+          {...attributes}
+          {...listeners}
+          className="cursor-grab active:cursor-grabbing touch-none text-muted-foreground hover:text-foreground"
+          aria-label="Ziehen zum Sortieren"
+          style={{ touchAction: "none" }}
+        >
+          <GripVertical className="h-4 w-4" />
+        </button>
+      </TableCell>
+      <TableCell className="font-mono font-medium">{menu.menu_key}</TableCell>
+      <TableCell>
+        {(menu.title as Record<string, string>)?.de ?? "—"}
+      </TableCell>
+      <TableCell>{menu.price_amount} €</TableCell>
+      <TableCell>{menu.sort_order}</TableCell>
+      <TableCell>
+        {menu.is_active ? (
+          <Badge className="bg-green-100 text-green-800">Aktiv</Badge>
+        ) : (
+          <Badge variant="secondary">Inaktiv</Badge>
+        )}
+      </TableCell>
+      <TableCell>
+        {menu.badge ? (
+          <Badge variant="outline">
+            {(menu.badge as Record<string, string>)?.de ?? "✓"}
+          </Badge>
+        ) : "—"}
+      </TableCell>
+      <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-end gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onEdit(menu)}
+          >
+            <Pencil className="h-4 w-4" />
+          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Trash2 className="h-4 w-4 text-destructive" />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Menü löschen?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Menü „{(menu.title as Record<string, string>)?.de}" wird unwiderruflich gelöscht.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={() => onDelete(menu.id)}
+                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                >
+                  Löschen
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+      </TableCell>
+    </TableRow>
+  );
+};
+
 // ── Main Component ───────────────────────────────────────────────────────────
 
 const GroupMenusManager = () => {
   const { data: menus, isLoading } = useAllGroupMenus();
   const deleteMenu = useDeleteGroupMenu();
+  const updateOrderMutation = useUpdateGroupMenuOrder();
   const [editMenu, setEditMenu] = useState<(Partial<GroupMenu> & { id?: string }) | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 8 },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 200, tolerance: 5 },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id && menus) {
+      const oldIndex = menus.findIndex((m) => m.id === active.id);
+      const newIndex = menus.findIndex((m) => m.id === over.id);
+      const reordered = arrayMove(menus, oldIndex, newIndex);
+      const updates = reordered.map((menu, index) => ({
+        id: menu.id,
+        sort_order: index + 1,
+      }));
+      try {
+        await updateOrderMutation.mutateAsync(updates);
+        toast.success("Reihenfolge gespeichert");
+      } catch (error) {
+        toast.error("Fehler beim Speichern der Reihenfolge");
+        console.error(error);
+      }
+    }
+  };
 
   const handleDelete = async (id: string) => {
     try {
