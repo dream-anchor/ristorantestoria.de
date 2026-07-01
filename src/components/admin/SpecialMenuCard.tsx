@@ -18,6 +18,7 @@ import { FileText, ExternalLink, Calendar, Trash2, Layers, UtensilsCrossed, Penc
 import { SpecialMenu, useMenuContent, useSaveMenuContent, ParsedMenu } from "@/hooks/useSpecialMenus";
 import MenuUploader from "./MenuUploader";
 import MenuPreview from "./MenuPreview";
+import { syncTranslations } from "@/lib/specialMenuTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -74,7 +75,18 @@ const SpecialMenuCard = ({ menu, onDelete, isDeleting }: SpecialMenuCardProps) =
     if (!editData) return;
 
     try {
-      await saveMenuContent.mutateAsync({ menuId: menu.id, data: editData });
+      let dataToSave = editData;
+      try {
+        dataToSave = await syncTranslations(editData, menuContent ?? null, "de");
+        if (dataToSave !== editData) setEditData(dataToSave);
+      } catch (err) {
+        console.error("[sync-translations] failed:", err);
+        toast({
+          title: "Automatische Übersetzung übersprungen",
+          description: "Der Inhalt wird ohne Sprach-Sync gespeichert.",
+        });
+      }
+      await saveMenuContent.mutateAsync({ menuId: menu.id, data: dataToSave });
       toast({
         title: "Gespeichert",
         description: "Änderungen wurden erfolgreich gespeichert.",
