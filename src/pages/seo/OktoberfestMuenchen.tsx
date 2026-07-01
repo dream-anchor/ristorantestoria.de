@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { PhoneText } from "@/lib/linkifyPhone";
-import { Phone, Mail, MapPin, MessageCircle, Instagram, Beer, Utensils, Music, Users, Star, ArrowUpRight } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Instagram, ArrowUpRight } from "lucide-react";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import Footer from "@/components/Footer";
@@ -10,9 +10,8 @@ import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import heroImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
-import heroImage600 from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen-600w.webp";
-import storiaLogo from "@/assets/storia-logo.webp";
+import heroImage from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen.webp";
+import heroImage600 from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen-600w.webp";
 
 /** GA4 Conversion-Event. */
 const fireLead = (formName: string) => {
@@ -33,13 +32,47 @@ const Reveal = ({ children, delay = 0, as: Tag = "div", className = "" }: {
     const el = ref.current; if (!el) return;
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e.isIntersecting) { setVisible(true); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
     io.observe(el);
     return () => io.disconnect();
   }, []);
   const Component = Tag as any;
   return <Component ref={ref as any} className={`okt-reveal ${visible ? "in" : ""} ${className}`} style={{ transitionDelay: `${delay}s` }}>{children}</Component>;
 };
+
+/** Blau-weiß-goldene Wimpelkette (SVG, deterministisch). */
+const Bunting = ({ h = 64 }: { h?: number }) => {
+  const W = 1440, N = 24, sp = W / N, topY = 6, sag = 26, pw = sp * 0.82, ph = 30;
+  const yAt = (x: number) => topY + sag * Math.sin(Math.PI * (x / W));
+  const cols = ["#1b6bb0", "#ffffff", "#dca62b", "#ffffff"];
+  const pts: string[] = [];
+  for (let x = 0; x <= W; x += 8) pts.push(`${x},${yAt(x).toFixed(1)}`);
+  const pennants = [];
+  for (let i = 0; i < N; i++) {
+    const x = i * sp + sp * 0.09;
+    const y = yAt(x + pw / 2);
+    const c = cols[i % cols.length];
+    const stroke = c === "#ffffff" ? "#ccd6e0" : "none";
+    pennants.push(<polygon key={i} points={`${x},${y} ${x + pw},${y} ${x + pw / 2},${y + ph}`} fill={c} stroke={stroke} strokeWidth="0.6" />);
+  }
+  return (
+    <svg className="okt-bunting-svg" width={W} height={h} viewBox={`0 0 ${W} 72`} preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d={`M ${pts.join(" L ")}`} fill="none" stroke="#3a2a18" strokeWidth="2" opacity="0.8" />
+      {pennants}
+    </svg>
+  );
+};
+
+/** Lebkuchenherz-Badge mit Zuckerschrift. */
+const Herz = ({ label }: { label: string }) => (
+  <div className="okt-herz">
+    <svg width="128" height="120" viewBox="0 0 128 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M64 112 C 20 78, 6 48, 22 28 C 34 12, 56 14, 64 32 C 72 14, 94 12, 106 28 C 122 48, 108 78, 64 112 Z" fill="#a8451f" />
+      <path d="M64 112 C 20 78, 6 48, 22 28 C 34 12, 56 14, 64 32 C 72 14, 94 12, 106 28 C 122 48, 108 78, 64 112 Z" fill="none" stroke="#fff" strokeWidth="3" strokeDasharray="2 6" strokeLinecap="round" transform="scale(0.9) translate(7,6)" />
+    </svg>
+    <span className="okt-herz-lbl">{label}</span>
+  </div>
+);
 
 const OktoberfestMuenchen = () => {
   const { t } = useLanguage();
@@ -60,18 +93,18 @@ const OktoberfestMuenchen = () => {
     { icon: "🤝", title: o.conceptBavareseTitle, desc: o.conceptBavareseDesc },
   ];
   const biere = [
-    { name: o.beerMassName, desc: o.beerMassDesc, price: "€ 12,90", badge: o.badgeFass },
+    { name: o.beerMassName, desc: o.beerMassDesc, price: "€ 12,90", badge: o.badgeFass, kind: "fass" },
     { name: o.beerRadlerName, desc: o.beerRadlerDesc, price: "€ 12,90" },
     { name: o.beerRussName, desc: o.beerRussDesc, price: "€ 12,90" },
     { name: o.beerAlkoholfreiName, desc: o.beerAlkoholfreiDesc, price: "€ 6,90" },
   ];
   const aperitivi = [
-    { name: o.spritzBavareseName, desc: o.spritzBavareseDesc, price: "€ 9,90", badge: o.badgeHaus },
+    { name: o.spritzBavareseName, desc: o.spritzBavareseDesc, price: "€ 9,90", badge: o.badgeHaus, kind: "ita" },
     { name: o.spritzAperolName, desc: o.spritzAperolDesc, price: "€ 9,90" },
     { name: o.spritzHugoName, desc: o.spritzHugoDesc, price: "€ 9,90" },
   ];
   const brotzeit = [
-    { name: o.brettBavareseName, desc: o.brettBavareseDesc, price: "ca. € 24,90", badge: o.badgeBestseller },
+    { name: o.brettBavareseName, desc: o.brettBavareseDesc, price: "ca. € 24,90", badge: o.badgeBestseller, kind: "bay" },
     { name: o.brettMuenchenName, desc: o.brettMuenchenDesc, price: "ca. € 19,90" },
     { name: o.brettItaliaName, desc: o.brettItaliaDesc, price: "ca. € 19,90" },
     { name: o.breznName, desc: o.breznDesc, price: "€ 4,50" },
@@ -79,10 +112,10 @@ const OktoberfestMuenchen = () => {
     { name: o.weisswurstName, desc: o.weisswurstDesc, price: "€ 8,90" },
   ];
   const pizzen = [
-    { kind: "bay", name: o.pizzaBratwurstName, desc: o.pizzaBratwurstDesc, price: "ca. € 15,90", badge: o.badgeBayerisch },
-    { kind: "bay", name: o.pizzaSpanferkelName, desc: o.pizzaSpanferkelDesc, price: "ca. € 16,90", badge: o.badgeBayerisch },
-    { kind: "ita", name: o.pizzaSalamiName, desc: o.pizzaSalamiDesc, price: "ca. € 14,90", badge: o.badgeItalienisch },
-    { kind: "ita", name: o.pizzaObatzdaName, desc: o.pizzaObatzdaDesc, price: "ca. € 14,90", badge: o.badgeItalienisch },
+    { name: o.pizzaBratwurstName, desc: o.pizzaBratwurstDesc, price: "ca. € 15,90", badge: o.badgeBayerisch, kind: "bay" },
+    { name: o.pizzaSpanferkelName, desc: o.pizzaSpanferkelDesc, price: "ca. € 16,90", badge: o.badgeBayerisch, kind: "bay" },
+    { name: o.pizzaSalamiName, desc: o.pizzaSalamiDesc, price: "ca. € 14,90", badge: o.badgeItalienisch, kind: "ita" },
+    { name: o.pizzaObatzdaName, desc: o.pizzaObatzdaDesc, price: "ca. € 14,90", badge: o.badgeItalienisch, kind: "ita" },
   ];
   const braten = [
     { name: o.schweinsbratenName, desc: o.schweinsbratenDesc, price: "ca. € 19,90" },
@@ -131,23 +164,32 @@ const OktoberfestMuenchen = () => {
     { q: o.faq7Question, a: o.faq7Answer }, { q: o.faq8Question, a: o.faq8Answer },
   ];
 
-  const MenuCard = ({ name, desc, price, badge, kind }: { name: string; desc: string; price: string; badge?: string; kind?: string }) => (
+  const Card = ({ name, desc, price, badge, kind }: { name: string; desc: string; price: string; badge?: string; kind?: string }) => (
     <div className="okt-card">
-      <div className="okt-card-head">
-        <h3>{name}</h3>
-        {badge && <span className={`okt-tag${kind ? ` okt-tag-${kind}` : ""}`}>{badge}</span>}
+      <div className="okt-gingham" />
+      <div className="okt-card-b">
+        <div className="okt-card-head">
+          <h3>{name}</h3>
+          {badge && <span className={`okt-tag${kind ? ` okt-tag-${kind}` : ""}`}>{badge}</span>}
+        </div>
+        <p>{desc}</p>
+        <span className="okt-price">{price}</span>
       </div>
-      <p>{desc}</p>
-      <span className="okt-price">{price}</span>
     </div>
   );
 
-  const CtaRow = ({ center = false }: { center?: boolean }) => (
-    <Reveal className={`okt-actions${center ? " okt-actions-center" : ""}`}>
-      <a href="#reservieren" className="okt-btn okt-btn-primary" onClick={() => fireLead("oktoberfest_reservierung")}>{o.reserveButton}</a>
-      <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="okt-btn okt-btn-ghost" onClick={() => fireLead("oktoberfest_whatsapp")}>
-        <MessageCircle size={18} /> WhatsApp
-      </a>
+  const CtaRow = () => (
+    <Reveal className="okt-actions okt-actions-center">
+      <a href="#reservieren" className="okt-btn okt-btn-p" onClick={() => fireLead("oktoberfest_reservierung")}>{o.reserveButton}</a>
+      <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="okt-btn okt-btn-g" onClick={() => fireLead("oktoberfest_whatsapp")}><MessageCircle size={18} /> WhatsApp</a>
+    </Reveal>
+  );
+
+  const SecHead = ({ eyebrow, title, lead }: { eyebrow: string; title: string; lead?: string }) => (
+    <Reveal className="okt-sec-head">
+      <span className="okt-eyebrow">{eyebrow}</span>
+      <h2 className="okt-h2">{title}</h2>
+      {lead && <p className="okt-lead">{lead}</p>}
     </Reveal>
   );
 
@@ -167,7 +209,7 @@ const OktoberfestMuenchen = () => {
         "startDate": "2026-09-19", "endDate": "2026-10-04",
         "eventStatus": "https://schema.org/EventScheduled",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "image": "https://www.ristorantestoria.de/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp",
+        "image": "https://www.ristorantestoria.de/assets/italiener-koenigsplatz-terrasse-storia-muenchen.webp",
         "description": o.seoDescription,
         "location": { "@type": "Place", "name": "Ristorante STORIA", "address": { "@type": "PostalAddress", "streetAddress": "Karlstraße 47a", "addressLocality": "München", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" } },
         "organizer": { "@type": "Organization", "name": "Ristorante STORIA", "url": "https://www.ristorantestoria.de/" },
@@ -197,47 +239,51 @@ const OktoberfestMuenchen = () => {
 
         {/* HERO */}
         <header className="okt-hero" id="top">
-          <img src={heroImage} srcSet={`${heroImage600} 600w, ${heroImage} 1200w`} sizes="100vw"
-            alt="Oktoberfest im Ristorante STORIA München – Terrasse in der Maxvorstadt"
+          <img src={heroImage} srcSet={`${heroImage600} 600w, ${heroImage} 1400w`} sizes="100vw"
+            alt="Oktoberfest im Ristorante STORIA München – festlich geschmückte Terrasse in der Maxvorstadt"
             className="okt-hero-img" loading="eager" fetchPriority="high" />
-          <div className="okt-hero-overlay" />
-          <div className="okt-wrap okt-hero-inner">
-            <Reveal as="span" className="okt-eyebrow okt-eyebrow-line">{o.heroTime}</Reveal>
-            <Reveal as="h1" delay={0.08} className="okt-h1">{o.title}</Reveal>
-            <Reveal as="p" delay={0.14} className="okt-hero-sub">{o.heroSubtitle}</Reveal>
-            <Reveal as="p" delay={0.2} className="okt-hero-lead">{o.heroDescription}</Reveal>
-            <Reveal delay={0.26} className="okt-actions">
-              <a href="#reservieren" className="okt-btn okt-btn-primary" onClick={() => fireLead("oktoberfest_reservierung")}>{o.reserveButton}</a>
-              <a href="tel:+498951519696" className="okt-btn okt-btn-ghost"><Phone size={18} /> 089 51519696</a>
+          <div className="okt-hero-scrim" />
+          <div className="okt-bunting"><Bunting /></div>
+          <Herz label="Bavarese" />
+          <div className="okt-hero-in">
+            <Reveal as="span" className="okt-hero-eyebrow">{o.heroTime}</Reveal>
+            <Reveal as="h1" delay={0.06} className="okt-h1">
+              <span className="okt-frak">Oktoberfest</span>
+              <span className="okt-h1-serif">{o.heroSubtitle}</span>
             </Reveal>
-            <Reveal delay={0.32} className="okt-trust"><Star size={15} className="okt-star" /><Star size={15} className="okt-star" /><Star size={15} className="okt-star" /><Star size={15} className="okt-star" /><Star size={15} className="okt-star" /><span>4,5 · 780+ Google</span></Reveal>
+            <Reveal as="p" delay={0.16} className="okt-hero-sub">{o.heroDescription}</Reveal>
+            <Reveal delay={0.26} className="okt-actions">
+              <a href="#reservieren" className="okt-btn okt-btn-p" onClick={() => fireLead("oktoberfest_reservierung")}>{o.reserveButton}</a>
+              <a href="tel:+498951519696" className="okt-btn okt-btn-g"><Phone size={18} /> 089 51519696</a>
+            </Reveal>
+            <Reveal delay={0.32} className="okt-trust"><span className="okt-stars">★★★★★</span> 4,5 · 780+ Google-Bewertungen</Reveal>
           </div>
-          <div className="okt-rauten" aria-hidden="true" />
         </header>
+        <div className="okt-raute" aria-hidden="true" />
 
         {/* SOCIAL PROOF STRIP */}
         <div className="okt-strip">
           <div className="okt-wrap okt-strip-inner">
-            <span><Beer size={17} /> {o.proofBeer}</span>
-            <span><Utensils size={17} /> {o.proofFood}</span>
-            <span><Music size={17} /> {o.proofPeriod}</span>
+            <span>🍺 {o.proofBeer}</span>
+            <span>🥨 {o.proofFood}</span>
+            <span>🕐 {o.proofPeriod}</span>
           </div>
         </div>
 
         <main>
-          {/* INTRO + BAVARESE-KONZEPT */}
-          <section className="okt-sec okt-intro">
+          {/* INTRO + KONZEPT */}
+          <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap">
               <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">Bavarese</span>
+                <span className="okt-eyebrow">Bavarese</span>
                 <h2 className="okt-h2">{o.introTitle}</h2>
                 <p className="okt-lead">{o.introP1}</p>
                 <p className="okt-lead">{o.introP2}</p>
-                <p className="okt-lead okt-crosslink">{o.introLinkPre}<LocalizedLink to="besondere-anlaesse" className="okt-inline-link">{o.introLinkAnchor}</LocalizedLink>{o.introLinkPost}</p>
+                <p className="okt-lead">{o.introLinkPre}<LocalizedLink to="besondere-anlaesse" className="okt-inline-link">{o.introLinkAnchor}</LocalizedLink>{o.introLinkPost}</p>
               </Reveal>
               <div className="okt-concept-grid">
                 {conceptCards.map((c, i) => (
-                  <Reveal key={c.title} delay={i * 0.07} className="okt-concept">
+                  <Reveal key={c.title} delay={i * 0.06} className="okt-concept">
                     <span className="okt-concept-ic">{c.icon}</span>
                     <h3>{c.title}</h3>
                     <p>{c.desc}</p>
@@ -248,9 +294,9 @@ const OktoberfestMuenchen = () => {
           </section>
 
           {/* ITALIENER-WOCHENENDE */}
-          <section className="okt-sec okt-iweekend">
+          <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <Reveal className="okt-iweekend-card">
+              <Reveal className="okt-iweekend">
                 <span className="okt-tricolore" aria-hidden="true" />
                 <span className="okt-iweekend-badge">{o.italienerWeekendBadge}</span>
                 <h2 className="okt-h2">{o.italienerWeekendTitle}</h2>
@@ -262,66 +308,55 @@ const OktoberfestMuenchen = () => {
           </section>
 
           {/* BIER */}
-          <section className="okt-sec okt-bier" id="bier">
+          <section className="okt-sec okt-sec-cream" id="bier">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">🍺 Holzfass</span>
-                <h2 className="okt-h2">{o.beerTitle}</h2>
-                <p className="okt-lead">{o.beerSubtitle}</p>
+              <SecHead eyebrow="Aus dem Holzfass" title={o.beerTitle} lead={o.beerSubtitle} />
+              <Reveal className="okt-partner">
+                <span className="okt-partner-lbl">Ausschank-Partner</span>
+                <span className="okt-partner-name">PAULANER</span>
+                <span className="okt-partner-note">· Wiesnbier vom Holzfass</span>
               </Reveal>
               <Reveal as="h3" className="okt-subhead">{o.categoryBeer}</Reveal>
-              <div className="okt-card-grid okt-card-grid-3">{biere.map((d) => <MenuCard key={d.name} {...d} />)}</div>
+              <div className="okt-cards okt-cards-3">{biere.map((d) => <Card key={d.name} {...d} />)}</div>
               <Reveal as="h3" className="okt-subhead">{o.categoryAperitivo}</Reveal>
-              <div className="okt-card-grid okt-card-grid-3">{aperitivi.map((d) => <MenuCard key={d.name} {...d} />)}</div>
+              <div className="okt-cards okt-cards-3">{aperitivi.map((d) => <Card key={d.name} {...d} />)}</div>
               <Reveal as="p" className="okt-note">{o.priceNote}</Reveal>
-              <CtaRow center />
+              <CtaRow />
             </div>
           </section>
 
           {/* BROTZEIT */}
-          <section className="okt-sec okt-brotzeit" id="brotzeit">
+          <section className="okt-sec okt-sec-white" id="brotzeit">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">🥨 Brotzeit</span>
-                <h2 className="okt-h2">{o.brotzeitTitle}</h2>
-                <p className="okt-lead">{o.brotzeitSubtitle}</p>
-              </Reveal>
-              <div className="okt-card-grid okt-card-grid-3">{brotzeit.map((d) => <MenuCard key={d.name} {...d} />)}</div>
+              <SecHead eyebrow="Zum Teilen" title={o.brotzeitTitle} lead={o.brotzeitSubtitle} />
+              <div className="okt-cards okt-cards-3">{brotzeit.map((d) => <Card key={d.name} {...d} />)}</div>
             </div>
           </section>
 
           {/* PIZZEN */}
-          <section className="okt-sec okt-pizzen" id="pizzen">
+          <section className="okt-sec okt-sec-cream" id="pizzen">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">🍕 Specials</span>
-                <h2 className="okt-h2">{o.pizzaTitle}</h2>
-                <p className="okt-lead">{o.pizzaSubtitle}</p>
-              </Reveal>
-              <div className="okt-card-grid okt-card-grid-2">{pizzen.map((d) => <MenuCard key={d.name} {...d} />)}</div>
+              <SecHead eyebrow="Specials" title={o.pizzaTitle} lead={o.pizzaSubtitle} />
+              <div className="okt-cards okt-cards-2">{pizzen.map((d) => <Card key={d.name} {...d} />)}</div>
               <Reveal as="p" className="okt-note">{o.pizzaNote}</Reveal>
             </div>
           </section>
 
           {/* BRATEN */}
-          <section className="okt-sec okt-braten">
+          <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">🍖 Hauptgang</span>
-                <h2 className="okt-h2">{o.bratenTitle}</h2>
-                <p className="okt-lead">{o.bratenSubtitle}</p>
-              </Reveal>
-              <div className="okt-card-grid okt-card-grid-3">{braten.map((d) => <MenuCard key={d.name} {...d} />)}</div>
+              <SecHead eyebrow="Hauptgang" title={o.bratenTitle} lead={o.bratenSubtitle} />
+              <div className="okt-cards okt-cards-3">{braten.map((d) => <Card key={d.name} {...d} />)}</div>
             </div>
           </section>
 
           {/* ITAL. KARTE + KINDER */}
-          <section className="okt-sec okt-italkarte">
+          <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap okt-twocol">
               <Reveal className="okt-panel">
                 <h2 className="okt-h3big">{o.italKarteTitle}</h2>
                 <p className="okt-lead">{o.italKarteDesc}</p>
-                <LocalizedLink to="speisekarte" className="okt-btn okt-btn-ghost okt-btn-sm">{o.italKarteLink} <ArrowUpRight size={16} /></LocalizedLink>
+                <LocalizedLink to="speisekarte" className="okt-btn okt-btn-g okt-btn-sm">{o.italKarteLink} <ArrowUpRight size={16} /></LocalizedLink>
               </Reveal>
               <Reveal delay={0.08} className="okt-panel">
                 <h2 className="okt-h3big">{o.kinderTitle}</h2>
@@ -331,17 +366,13 @@ const OktoberfestMuenchen = () => {
           </section>
 
           {/* ATMOSPHÄRE / WHY */}
-          <section className="okt-sec okt-why">
+          <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">🎶 Stimmung</span>
-                <h2 className="okt-h2">{o.whyTitle}</h2>
-                <p className="okt-lead">{o.whySubtitle}</p>
-              </Reveal>
-              <div className="okt-why-grid">
+              <SecHead eyebrow="Stimmung" title={o.whyTitle} lead={o.whySubtitle} />
+              <div className="okt-features">
                 {whyFeatures.map((f, i) => (
-                  <Reveal key={f.title} delay={(i % 3) * 0.06} className="okt-why-item">
-                    <span className="okt-why-ic">{f.icon}</span>
+                  <Reveal key={f.title} delay={(i % 3) * 0.06} className="okt-feature">
+                    <span className="okt-feature-ic">{f.icon}</span>
                     <h3>{f.title}</h3>
                     <p>{f.desc}</p>
                   </Reveal>
@@ -351,17 +382,13 @@ const OktoberfestMuenchen = () => {
           </section>
 
           {/* ZIELGRUPPEN */}
-          <section className="okt-sec okt-zielgruppen">
+          <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">👥 Für wen</span>
-                <h2 className="okt-h2">{o.occasionsTitle}</h2>
-                <p className="okt-lead">{o.occasionsSubtitle}</p>
-              </Reveal>
-              <div className="okt-why-grid">
+              <SecHead eyebrow="Für wen" title={o.occasionsTitle} lead={o.occasionsSubtitle} />
+              <div className="okt-features">
                 {occasions.map((c, i) => (
-                  <Reveal key={c.title} delay={(i % 3) * 0.06} className="okt-why-item">
-                    <span className="okt-why-ic">{c.icon}</span>
+                  <Reveal key={c.title} delay={(i % 3) * 0.06} className="okt-feature">
+                    <span className="okt-feature-ic">{c.icon}</span>
                     <h3>{c.title}</h3>
                     <p>{c.desc}</p>
                   </Reveal>
@@ -371,16 +398,12 @@ const OktoberfestMuenchen = () => {
           </section>
 
           {/* PAKETE */}
-          <section className="okt-sec okt-pakete">
+          <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line"><Users size={15} /> Gruppen</span>
-                <h2 className="okt-h2">{o.paketeTitle}</h2>
-                <p className="okt-lead">{o.paketeSubtitle}</p>
-              </Reveal>
-              <div className="okt-card-grid okt-card-grid-3">
+              <SecHead eyebrow="Gruppen" title={o.paketeTitle} lead={o.paketeSubtitle} />
+              <div className="okt-cards okt-cards-3">
                 {pakete.map((p, i) => (
-                  <Reveal key={p.name} delay={i * 0.07} className="okt-paket">
+                  <Reveal key={p.name} delay={i * 0.06} className="okt-paket">
                     <h3>{p.name}</h3>
                     <p>{p.desc}</p>
                     <span className="okt-paket-price">{p.price}</span>
@@ -388,18 +411,14 @@ const OktoberfestMuenchen = () => {
                 ))}
               </div>
               <Reveal as="p" className="okt-note">{o.paketeNote}</Reveal>
-              <CtaRow center />
+              <CtaRow />
             </div>
           </section>
 
           {/* RESERVIEREN */}
-          <section className="okt-sec okt-reservieren" id="reservieren">
+          <section className="okt-sec okt-sec-blue" id="reservieren">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">{o.reserveButton}</span>
-                <h2 className="okt-h2">{o.ctaTitle}</h2>
-                <p className="okt-lead">{o.ctaDesc}</p>
-              </Reveal>
+              <SecHead eyebrow={o.reserveButton} title={o.ctaTitle} lead={o.ctaDesc} />
               <Reveal delay={0.08} className="okt-booking">
                 <ReservationBooking headingLevel="h3" onBook={() => fireLead("oktoberfest_reservierung")} />
               </Reveal>
@@ -407,14 +426,10 @@ const OktoberfestMuenchen = () => {
           </section>
 
           {/* HOTELS */}
-          <section className="okt-sec okt-hotels">
+          <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">🏨 In der Nähe</span>
-                <h2 className="okt-h2">{o.hotelTitle}</h2>
-                <p className="okt-lead">{o.hotelSubtitle}</p>
-              </Reveal>
-              <div className="okt-card-grid okt-card-grid-3">
+              <SecHead eyebrow="In der Nähe" title={o.hotelTitle} lead={o.hotelSubtitle} />
+              <div className="okt-cards okt-cards-3">
                 {hotels.map((h, i) => (
                   <Reveal key={h.name} delay={(i % 3) * 0.06} className="okt-hotel">
                     <div className="okt-hotel-head"><h3>{h.name}</h3><span className="okt-hotel-time">{h.time}</span></div>
@@ -427,16 +442,12 @@ const OktoberfestMuenchen = () => {
           </section>
 
           {/* SCHNELL ZUR WIESN */}
-          <section className="okt-sec okt-route">
+          <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">🚶 Zur Wiesn</span>
-                <h2 className="okt-h2">{o.wiesnRouteTitle}</h2>
-                <p className="okt-lead">{o.wiesnRouteIntro}</p>
-              </Reveal>
-              <div className="okt-card-grid okt-card-grid-3">
+              <SecHead eyebrow="Zur Wiesn" title={o.wiesnRouteTitle} lead={o.wiesnRouteIntro} />
+              <div className="okt-cards okt-cards-3">
                 {wiesnRoute.map((r, i) => (
-                  <Reveal key={r.title} delay={i * 0.07} className="okt-route-card">
+                  <Reveal key={r.title} delay={i * 0.06} className="okt-route">
                     <span className="okt-route-ic">{r.icon}</span>
                     <h3>{r.title}</h3>
                     <p>{r.desc}</p>
@@ -447,11 +458,11 @@ const OktoberfestMuenchen = () => {
             </div>
           </section>
 
-          {/* ANFAHRT / LOCATION */}
-          <section className="okt-sec okt-anfahrt">
+          {/* ANFAHRT */}
+          <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap okt-anfahrt-grid">
               <Reveal className="okt-anfahrt-text">
-                <span className="okt-eyebrow okt-eyebrow-line">📍 Standort</span>
+                <span className="okt-eyebrow">Standort</span>
                 <h2 className="okt-h2">{o.locationTitle}</h2>
                 <p className="okt-lead">{o.locationIntro}</p>
                 <div className="okt-direct">
@@ -461,32 +472,29 @@ const OktoberfestMuenchen = () => {
                 </div>
               </Reveal>
               <Reveal delay={0.1} className="okt-map-card">
-                <ConsentGoogleMaps src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.0!2d11.5658!3d48.1465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKarlstra%C3%9Fe%2047a%2C%2080333%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1" title="STORIA · Karlstraße 47a, München" height={420} className="okt-map-iframe" />
+                <ConsentGoogleMaps src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.0!2d11.5658!3d48.1465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sKarlstra%C3%9Fe%2047a%2C%2080333%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1" title="STORIA · Karlstraße 47a, München" height={400} className="okt-map-iframe" />
               </Reveal>
             </div>
           </section>
 
           {/* FAQ */}
-          <section className="okt-sec okt-faq">
+          <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <Reveal className="okt-sec-head">
-                <span className="okt-eyebrow okt-eyebrow-line">FAQ</span>
-                <h2 className="okt-h2">{o.faqTitle}</h2>
-              </Reveal>
+              <SecHead eyebrow="FAQ" title={o.faqTitle} />
               <div className="okt-faq-list">
                 {faqItems.map((item, i) => (
-                  <Reveal key={item.q} delay={(i % 3) * 0.06} className="okt-faq-item">
+                  <Reveal key={item.q} delay={(i % 3) * 0.05} className="okt-faq-item">
                     <h3>{item.q}</h3>
                     <p><PhoneText>{item.a}</PhoneText></p>
                   </Reveal>
                 ))}
               </div>
-              <CtaRow center />
-              <img src={storiaLogo} alt="STORIA Logo" className="okt-foot-logo" loading="lazy" />
+              <CtaRow />
             </div>
           </section>
         </main>
 
+        <div className="okt-raute" aria-hidden="true" />
         <Footer />
       </div>
     </>
@@ -494,165 +502,175 @@ const OktoberfestMuenchen = () => {
 };
 
 const oktStyles = `
+@font-face{font-family:'WiesnFrak';src:url('/fonts/UnifrakturCook-Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
+@font-face{font-family:'HerzVibes';src:url('/fonts/GreatVibes-Regular-latin.woff2') format('woff2');font-display:swap;}
 .okt-page{
-  --ink:#16110a;--ink-2:#1f1810;--bone:hsl(40 42% 93%);
-  --amber:#cf8a36;--gold:#eab64e;--rust:#a8431f;
-  --bavaria:#1768b0;--green:#2f8f50;--red:#cf3a31;
-  --line:rgba(244,236,224,.14);--maxw:1180px;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
-  background:var(--ink);color:var(--bone);overflow-x:hidden;
+  --blau:#1b6bb0;--blaud:#134f86;--gold:#dca62b;--amber:#b9822a;
+  --creme:#f8f1e3;--creme2:#fdf9f0;--ink:#2c1e12;--muted:#6a5942;
+  --gruen:#2f8f50;--rot:#c0392b;--line:#ecdfca;--maxw:1180px;
+  --serif:'Cormorant Garamond',Georgia,serif;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  background:var(--creme2);color:var(--ink);overflow-x:hidden;font-family:'Inter',system-ui,sans-serif;
 }
-.okt-page ::selection{background:var(--gold);color:var(--ink);}
+.okt-page ::selection{background:var(--gold);color:#2a1c0d;}
 .okt-wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
-.okt-page h1,.okt-page h2,.okt-page h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.06;letter-spacing:-.01em;}
-.okt-eyebrow{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:8px;}
-.okt-eyebrow-line::before{content:"";width:30px;height:1px;background:var(--gold);}
+.okt-page h1,.okt-page h2,.okt-page h3{font-family:var(--serif);font-weight:700;line-height:1.05;}
+.okt-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--amber);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;}
+.okt-eyebrow::before{content:"";width:32px;height:2px;background:var(--amber);}
 /* NAV */
-.okt-nav{position:fixed;inset:0 0 auto 0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:18px 28px;transition:background .4s,padding .4s,border-color .4s;border-bottom:1px solid transparent;}
-.okt-nav.scrolled{background:rgba(20,15,9,.93);backdrop-filter:blur(10px);padding:11px 28px;border-bottom:1px solid var(--line);}
-.okt-brand{font-family:'Cormorant Garamond',serif;font-size:25px;letter-spacing:.04em;color:var(--bone);text-decoration:none;}
+.okt-nav{position:fixed;inset:0 0 auto 0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:16px 30px;transition:background .4s,padding .4s,box-shadow .4s;}
+.okt-nav.scrolled{background:rgba(253,249,240,.94);backdrop-filter:blur(10px);padding:10px 30px;box-shadow:0 1px 0 var(--line);}
+.okt-brand{font-family:var(--serif);font-weight:700;font-size:26px;letter-spacing:.03em;color:#fff;text-decoration:none;text-shadow:0 1px 8px rgba(0,0,0,.4);}
+.okt-nav.scrolled .okt-brand{color:var(--ink);text-shadow:none;}
 .okt-brand span{color:var(--gold);}
-.okt-nav-right{display:flex;align-items:center;gap:16px;}
-.okt-nav-icon{display:inline-flex;color:var(--bone);opacity:.78;transition:opacity .2s,color .2s;}
+.okt-nav-right{display:flex;align-items:center;gap:15px;}
+.okt-nav-icon{display:inline-flex;color:#fff;opacity:.9;transition:opacity .2s,color .2s;text-shadow:0 1px 6px rgba(0,0,0,.4);}
+.okt-nav.scrolled .okt-nav-icon{color:var(--ink);text-shadow:none;opacity:.75;}
 .okt-nav-icon:hover{opacity:1;}
 .okt-nav-wa:hover{color:#25D366;}
-.okt-nav-sep{width:1px;height:20px;background:var(--line);}
-.okt-nav-lang{display:flex;align-items:center;}
-.okt-nav-cta{background:var(--amber);color:var(--ink);padding:10px 20px;border-radius:100px;font-weight:700;font-size:14px;text-decoration:none;transition:transform .2s,background .2s;white-space:nowrap;}
-.okt-nav-cta:hover{transform:translateY(-1px);background:var(--gold);}
-@media(max-width:760px){.okt-nav-icon{display:none;}.okt-nav-sep{display:none;}}
+.okt-nav-sep{width:1px;height:20px;background:rgba(255,255,255,.4);}
+.okt-nav.scrolled .okt-nav-sep{background:var(--line);}
+.okt-nav-cta{background:var(--gold);color:#2a1c0d;padding:10px 20px;border-radius:100px;font-weight:600;font-size:14px;text-decoration:none;transition:transform .2s,background .2s;white-space:nowrap;}
+.okt-nav-cta:hover{transform:translateY(-1px);background:#e8b74a;}
+@media(max-width:760px){.okt-nav-icon,.okt-nav-sep{display:none;}}
 /* HERO */
-.okt-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:128px 0 64px;overflow:hidden;background:var(--ink);}
-.okt-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.52;}
-.okt-hero-overlay{position:absolute;inset:0;background:radial-gradient(120% 90% at 82% 0%,rgba(234,182,78,.22),transparent 55%),radial-gradient(90% 70% at 0% 100%,rgba(23,104,176,.28),transparent 60%),linear-gradient(180deg,rgba(16,11,7,.55),rgba(18,13,8,.82) 52%,rgba(12,8,5,.97));}
-.okt-hero-inner{position:relative;z-index:3;width:100%;}
-.okt-h1{font-size:clamp(2.7rem,7vw,5.6rem);max-width:16ch;margin:22px 0 18px;color:var(--bone);}
-.okt-hero-sub{font-size:clamp(1.15rem,2vw,1.5rem);color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic;margin-bottom:14px;}
-.okt-hero-lead{font-size:clamp(1.02rem,1.6vw,1.18rem);max-width:58ch;color:rgba(244,236,224,.84);margin-bottom:32px;line-height:1.55;}
-.okt-actions{display:flex;gap:14px;flex-wrap:wrap;}
-.okt-actions-center{justify-content:center;margin-top:34px;}
-.okt-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:15px;padding:15px 28px;border-radius:100px;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;cursor:pointer;}
-.okt-btn-primary{background:var(--amber);color:var(--ink);box-shadow:0 12px 40px -12px rgba(207,138,54,.7);}
-.okt-btn-primary:hover{transform:translateY(-2px);background:var(--gold);}
-.okt-btn-ghost{color:var(--bone);border:1px solid var(--line);background:rgba(244,236,224,.04);}
-.okt-btn-ghost:hover{border-color:var(--gold);transform:translateY(-2px);}
-.okt-btn-sm{padding:12px 22px;font-size:14px;margin-top:22px;}
-.okt-trust{display:flex;align-items:center;gap:5px;margin-top:26px;color:rgba(244,236,224,.7);font-size:.92rem;font-family:var(--mono);}
-.okt-trust .okt-star{color:var(--gold);fill:var(--gold);}
-.okt-trust span{margin-left:8px;}
-/* RAUTEN-Band (bayerisch Blau-Weiß) */
-.okt-rauten{position:absolute;left:0;right:0;bottom:0;height:16px;z-index:4;background-color:#fff;background-image:linear-gradient(135deg,var(--bavaria) 25%,transparent 25%),linear-gradient(225deg,var(--bavaria) 25%,transparent 25%),linear-gradient(315deg,var(--bavaria) 25%,transparent 25%),linear-gradient(45deg,var(--bavaria) 25%,transparent 25%);background-position:-14px 0,-14px 0,0 0,0 0;background-size:28px 28px;background-repeat:repeat;opacity:.92;}
+.okt-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:120px 0 68px;overflow:hidden;background:#1a120a;}
+.okt-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.okt-hero-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,15,8,.8),rgba(24,15,8,.32) 46%,rgba(24,15,8,.04) 72%),linear-gradient(0deg,rgba(20,12,6,.76),rgba(20,12,6,.1) 42%,rgba(20,12,6,.26));}
+.okt-bunting{position:absolute;top:0;left:0;right:0;z-index:5;line-height:0;filter:drop-shadow(0 3px 3px rgba(0,0,0,.28));}
+.okt-bunting-svg{display:block;width:100%;height:64px;}
+.okt-herz{position:absolute;right:56px;bottom:118px;z-index:6;width:128px;height:120px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.4));}
+.okt-herz-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'HerzVibes',cursive;color:#fff;font-size:30px;transform:translateY(-4px) rotate(-8deg);}
+@media(max-width:820px){.okt-herz{display:none;}}
+.okt-hero-in{position:relative;z-index:4;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 30px;}
+.okt-hero-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;}
+.okt-hero-eyebrow::before{content:"";width:34px;height:2px;background:var(--gold);}
+.okt-h1{line-height:.92;margin-bottom:18px;color:#fbf3e0;}
+.okt-frak{font-family:'WiesnFrak',var(--serif);font-weight:700;font-size:clamp(3.4rem,9vw,7.4rem);display:block;text-shadow:0 3px 24px rgba(0,0,0,.45);}
+.okt-h1-serif{font-family:var(--serif);font-weight:600;font-style:italic;font-size:clamp(1.7rem,3.4vw,3.1rem);color:#f0e7d6;display:block;margin-top:4px;}
+.okt-hero-sub{font-size:clamp(1rem,1.5vw,1.16rem);color:#e9dfce;max-width:54ch;line-height:1.55;margin-bottom:30px;}
+.okt-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.okt-actions-center{justify-content:center;margin-top:36px;}
+.okt-btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;font-size:15px;padding:15px 28px;border-radius:100px;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;cursor:pointer;}
+.okt-btn-p{background:var(--gold);color:#2a1c0d;box-shadow:0 14px 40px -16px rgba(220,166,43,.85);}
+.okt-btn-p:hover{transform:translateY(-2px);background:#e8b74a;}
+.okt-btn-g{color:#f4ece0;border:1.5px solid rgba(255,255,255,.42);}
+.okt-btn-g:hover{transform:translateY(-2px);border-color:var(--gold);}
+.okt-btn-sm{padding:12px 22px;font-size:14px;margin-top:20px;color:var(--blaud);border-color:rgba(27,107,176,.4);}
+.okt-btn-sm:hover{border-color:var(--blau);}
+.okt-trust{margin-top:22px;color:#e8dcc8;font-size:14px;}
+.okt-stars{color:var(--gold);letter-spacing:2px;}
+/* RAUTE band */
+.okt-raute{height:24px;background-color:#fff;background-image:linear-gradient(135deg,var(--blau) 25%,transparent 25%),linear-gradient(225deg,var(--blau) 25%,transparent 25%),linear-gradient(315deg,var(--blau) 25%,transparent 25%),linear-gradient(45deg,var(--blau) 25%,transparent 25%);background-position:-21px 0,-21px 0,0 0,0 0;background-size:42px 42px;background-repeat:repeat;}
 /* STRIP */
-.okt-strip{background:var(--ink-2);border-bottom:1px solid var(--line);}
-.okt-strip-inner{display:flex;flex-wrap:wrap;justify-content:center;gap:18px 40px;padding:18px 28px;}
-.okt-strip span{display:inline-flex;align-items:center;gap:9px;font-size:.94rem;color:rgba(244,236,224,.82);}
-.okt-strip svg{color:var(--gold);}
-/* SECTION */
-.okt-sec{padding:clamp(60px,7.5vw,108px) 0;}
-.okt-sec-head{max-width:64ch;margin-bottom:42px;}
-.okt-h2{font-size:clamp(2rem,4.6vw,3.3rem);margin:14px 0 0;}
-.okt-h3big{font-size:clamp(1.5rem,3vw,2.1rem);margin:0 0 14px;}
-.okt-lead{font-size:1.1rem;color:rgba(244,236,224,.8);max-width:62ch;margin-top:18px;line-height:1.6;}
-.okt-subhead{font-size:1.45rem;color:var(--bone);margin:40px 0 20px;}
-.okt-inline-link{color:var(--gold);text-decoration:underline;text-underline-offset:3px;}
-.okt-inline-link:hover{color:var(--bone);}
-.okt-crosslink{font-size:1rem;color:rgba(244,236,224,.72);}
-.okt-note{margin-top:26px;font-family:var(--mono);font-size:.84rem;color:rgba(244,236,224,.5);line-height:1.6;}
+.okt-strip{background:var(--blaud);color:#fff;}
+.okt-strip-inner{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;padding:16px 28px;}
+.okt-strip span{display:inline-flex;align-items:center;gap:9px;font-size:.95rem;font-weight:500;}
+/* SECTIONS */
+.okt-sec{padding:clamp(58px,7vw,100px) 0;}
+.okt-sec-cream{background:var(--creme2);}
+.okt-sec-white{background:#fff;}
+.okt-sec-head{max-width:64ch;margin-bottom:40px;}
+.okt-h2{font-size:clamp(2rem,4.4vw,3.2rem);color:var(--ink);margin-top:12px;}
+.okt-h3big{font-size:clamp(1.5rem,3vw,2.05rem);color:var(--ink);margin-bottom:12px;}
+.okt-lead{font-size:1.08rem;color:var(--muted);max-width:64ch;margin-top:16px;line-height:1.62;}
+.okt-subhead{font-family:var(--serif);font-size:1.5rem;color:var(--ink);margin:38px 0 20px;}
+.okt-inline-link{color:var(--blau);text-decoration:underline;text-underline-offset:3px;}
+.okt-inline-link:hover{color:var(--blaud);}
+.okt-note{margin-top:24px;font-size:.86rem;color:#8a795f;line-height:1.6;}
 .okt-note-center{text-align:center;max-width:66ch;margin-left:auto;margin-right:auto;}
-/* INTRO + KONZEPT */
-.okt-intro{background:var(--ink);}
+/* KONZEPT */
 .okt-concept-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:44px;}
 @media(max-width:760px){.okt-concept-grid{grid-template-columns:1fr;}}
-.okt-concept{border:1px solid var(--line);border-radius:18px;padding:28px 26px;background:linear-gradient(180deg,rgba(244,236,224,.05),rgba(244,236,224,.02));transition:transform .3s,border-color .3s;}
-.okt-concept:hover{transform:translateY(-4px);border-color:rgba(234,182,78,.5);}
+.okt-concept{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 26px;box-shadow:0 16px 36px -30px rgba(80,50,10,.4);transition:transform .3s,box-shadow .3s;}
+.okt-concept:hover{transform:translateY(-4px);box-shadow:0 22px 44px -26px rgba(80,50,10,.45);}
 .okt-concept-ic{font-size:1.9rem;}
-.okt-concept h3{font-size:1.45rem;margin:14px 0 8px;color:var(--bone);}
-.okt-concept p{color:rgba(244,236,224,.76);line-height:1.55;}
+.okt-concept h3{font-size:1.42rem;margin:12px 0 8px;color:var(--ink);}
+.okt-concept p{color:var(--muted);line-height:1.55;}
 /* ITALIENER-WOCHENENDE */
-.okt-iweekend{background:var(--ink-2);}
-.okt-iweekend-card{position:relative;border:1px solid var(--line);border-radius:22px;padding:44px 40px;background:radial-gradient(90% 120% at 100% 0%,rgba(47,143,80,.12),transparent 55%),radial-gradient(80% 120% at 0% 100%,rgba(207,58,49,.12),transparent 55%),rgba(244,236,224,.03);overflow:hidden;}
-.okt-tricolore{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--green) 0 33.3%,#f4ece0 33.3% 66.6%,var(--red) 66.6% 100%);}
-.okt-iweekend-badge{display:inline-block;background:var(--amber);color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:16px;}
-.okt-iweekend-date{color:var(--gold);font-weight:700;margin-top:10px;font-size:1.05rem;}
-/* CARD GRIDS */
-.okt-card-grid{display:grid;gap:16px;}
-.okt-card-grid-3{grid-template-columns:repeat(3,1fr);}
-.okt-card-grid-2{grid-template-columns:repeat(2,1fr);}
-@media(max-width:880px){.okt-card-grid-3{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:600px){.okt-card-grid-3,.okt-card-grid-2{grid-template-columns:1fr;}}
-.okt-card{position:relative;border:1px solid var(--line);border-radius:16px;padding:24px 22px;background:linear-gradient(180deg,rgba(244,236,224,.05),rgba(244,236,224,.02));overflow:hidden;transition:transform .3s,border-color .3s;display:flex;flex-direction:column;}
-.okt-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--gold));}
-.okt-card:hover{transform:translateY(-4px);border-color:rgba(234,182,78,.5);}
+.okt-iweekend{position:relative;border:1px solid var(--line);border-radius:22px;padding:46px 42px;background:radial-gradient(90% 130% at 100% 0%,rgba(47,143,80,.09),transparent 55%),radial-gradient(80% 130% at 0% 100%,rgba(192,57,43,.08),transparent 55%),#fff;overflow:hidden;box-shadow:0 20px 50px -34px rgba(80,50,10,.5);}
+.okt-tricolore{position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--gruen) 0 33.3%,#f6f0e6 33.3% 66.6%,var(--rot) 66.6% 100%);}
+.okt-iweekend-badge{display:inline-block;background:var(--gold);color:#2a1c0d;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:14px;}
+.okt-iweekend-date{color:var(--amber);font-weight:700;font-family:var(--serif);font-size:1.4rem;margin-top:8px;}
+/* CARDS */
+.okt-cards{display:grid;gap:20px;}
+.okt-cards-3{grid-template-columns:repeat(3,1fr);}
+.okt-cards-2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:880px){.okt-cards-3{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.okt-cards-3,.okt-cards-2{grid-template-columns:1fr;}}
+.okt-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 38px -30px rgba(80,50,10,.4);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;}
+.okt-card:hover{transform:translateY(-4px);box-shadow:0 24px 46px -26px rgba(80,50,10,.45);}
+.okt-gingham{height:12px;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(27,107,176,.5) 0 6px,transparent 6px 12px),repeating-linear-gradient(90deg,rgba(27,107,176,.5) 0 6px,transparent 6px 12px);}
+.okt-card-b{padding:22px 22px 24px;display:flex;flex-direction:column;flex-grow:1;}
 .okt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
-.okt-card-head h3{font-size:1.32rem;color:var(--bone);}
-.okt-card p{color:rgba(244,236,224,.74);line-height:1.5;margin:10px 0 16px;flex-grow:1;}
-.okt-price{font-family:var(--mono);font-size:1.05rem;font-weight:600;color:var(--gold);}
-.okt-tag{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:8px;white-space:nowrap;background:rgba(234,182,78,.16);color:var(--gold);border:1px solid rgba(234,182,78,.3);}
-.okt-tag-bay{background:rgba(23,104,176,.18);color:#7ab6ea;border-color:rgba(23,104,176,.4);}
-.okt-tag-ita{background:rgba(47,143,80,.16);color:#6fce92;border-color:rgba(47,143,80,.4);}
-.okt-bier{background:var(--ink-2);}
-.okt-pizzen{background:var(--ink-2);}
-/* PANELS (ital. karte + kinder) */
+.okt-card-head h3{font-size:1.3rem;color:var(--ink);}
+.okt-card p{color:var(--muted);line-height:1.5;margin:10px 0 16px;flex-grow:1;font-size:.98rem;}
+.okt-price{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:var(--amber);}
+.okt-tag{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:7px;white-space:nowrap;background:rgba(220,166,43,.16);color:var(--amber);}
+.okt-tag-fass{background:rgba(220,166,43,.18);color:var(--amber);}
+.okt-tag-bay{background:rgba(27,107,176,.14);color:var(--blaud);}
+.okt-tag-ita{background:rgba(47,143,80,.14);color:var(--gruen);}
+/* PARTNER */
+.okt-partner{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:100px;padding:9px 20px;margin-bottom:8px;box-shadow:0 12px 30px -24px rgba(80,50,10,.5);}
+.okt-partner-lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a795f;font-weight:600;}
+.okt-partner-name{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:var(--blaud);letter-spacing:.06em;}
+.okt-partner-note{color:var(--muted);font-size:.92rem;}
+/* PANELS */
 .okt-twocol{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 @media(max-width:820px){.okt-twocol{grid-template-columns:1fr;}}
-.okt-panel{border:1px solid var(--line);border-radius:20px;padding:34px 32px;background:rgba(244,236,224,.03);}
-/* WHY / ZIELGRUPPEN */
-.okt-why{background:var(--ink-2);}
-.okt-why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-@media(max-width:820px){.okt-why-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:560px){.okt-why-grid{grid-template-columns:1fr;}}
-.okt-why-item{border:1px solid var(--line);border-radius:16px;padding:26px 24px;background:rgba(244,236,224,.025);transition:transform .3s,border-color .3s;}
-.okt-why-item:hover{transform:translateY(-4px);border-color:rgba(234,182,78,.45);}
-.okt-why-ic{font-size:2rem;}
-.okt-why-item h3{font-size:1.32rem;margin:12px 0 8px;color:var(--bone);}
-.okt-why-item p{color:rgba(244,236,224,.74);line-height:1.55;}
+.okt-panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px 32px;box-shadow:0 16px 40px -32px rgba(80,50,10,.45);}
+/* FEATURES */
+.okt-features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:820px){.okt-features{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.okt-features{grid-template-columns:1fr;}}
+.okt-feature{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:0 14px 34px -30px rgba(80,50,10,.4);transition:transform .3s;}
+.okt-feature:hover{transform:translateY(-4px);}
+.okt-feature-ic{font-size:2rem;}
+.okt-feature h3{font-size:1.3rem;margin:12px 0 8px;color:var(--ink);}
+.okt-feature p{color:var(--muted);line-height:1.55;}
 /* PAKETE */
-.okt-paket{border:1px solid var(--line);border-radius:18px;padding:30px 28px;background:linear-gradient(180deg,rgba(234,182,78,.07),rgba(244,236,224,.02));display:flex;flex-direction:column;transition:transform .3s,border-color .3s;}
-.okt-paket:hover{transform:translateY(-4px);border-color:rgba(234,182,78,.55);}
-.okt-paket h3{font-size:1.5rem;color:var(--bone);margin-bottom:10px;}
-.okt-paket p{color:rgba(244,236,224,.76);line-height:1.55;flex-grow:1;margin-bottom:18px;}
-.okt-paket-price{font-family:var(--mono);font-size:1.2rem;font-weight:700;color:var(--gold);}
-/* RESERVIEREN */
-.okt-reservieren{background:var(--bone);color:var(--ink);}
-.okt-reservieren .okt-eyebrow{color:var(--rust);}
-.okt-reservieren .okt-eyebrow-line::before{background:var(--rust);}
-.okt-reservieren .okt-h2{color:var(--ink);}
-.okt-reservieren .okt-lead{color:rgba(22,17,10,.74);}
-.okt-booking{margin-top:8px;}
+.okt-paket{border:1px solid var(--line);border-radius:18px;padding:30px 28px;background:linear-gradient(180deg,rgba(220,166,43,.08),#fff);display:flex;flex-direction:column;box-shadow:0 16px 40px -30px rgba(80,50,10,.45);transition:transform .3s;}
+.okt-paket:hover{transform:translateY(-4px);}
+.okt-paket h3{font-size:1.5rem;color:var(--ink);margin-bottom:10px;}
+.okt-paket p{color:var(--muted);line-height:1.55;flex-grow:1;margin-bottom:16px;}
+.okt-paket-price{font-family:var(--serif);font-weight:700;font-size:1.3rem;color:var(--amber);}
+/* RESERVIEREN (blau) */
+.okt-sec-blue{background:linear-gradient(180deg,var(--blau),var(--blaud));color:#fff;}
+.okt-sec-blue .okt-eyebrow{color:#ffe6a8;}
+.okt-sec-blue .okt-eyebrow::before{background:#ffe6a8;}
+.okt-sec-blue .okt-h2{color:#fff;}
+.okt-sec-blue .okt-lead{color:rgba(255,255,255,.9);}
+.okt-booking{margin-top:8px;background:#fff;border-radius:20px;padding:8px;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);}
 /* HOTELS */
-.okt-hotels{background:var(--ink-2);}
-.okt-hotel{border:1px solid var(--line);border-radius:16px;padding:24px 22px;background:rgba(244,236,224,.025);transition:transform .3s,border-color .3s;}
-.okt-hotel:hover{transform:translateY(-3px);border-color:rgba(23,104,176,.5);}
+.okt-hotel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;box-shadow:0 14px 34px -30px rgba(80,50,10,.4);transition:transform .3s;}
+.okt-hotel:hover{transform:translateY(-3px);}
 .okt-hotel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px;}
-.okt-hotel-head h3{font-size:1.22rem;color:var(--bone);}
-.okt-hotel-time{font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--ink);background:var(--gold);padding:5px 9px;border-radius:7px;white-space:nowrap;}
-.okt-hotel p{color:rgba(244,236,224,.72);font-size:.95rem;line-height:1.5;}
+.okt-hotel-head h3{font-size:1.2rem;color:var(--ink);}
+.okt-hotel-time{font-family:var(--mono);font-size:.7rem;font-weight:600;color:#fff;background:var(--blau);padding:5px 9px;border-radius:7px;white-space:nowrap;}
+.okt-hotel p{color:var(--muted);font-size:.94rem;line-height:1.5;}
 /* ROUTE */
-.okt-route-card{border:1px solid var(--line);border-radius:16px;padding:30px 26px;background:rgba(244,236,224,.03);text-align:center;transition:transform .3s,border-color .3s;}
-.okt-route-card:hover{transform:translateY(-4px);border-color:rgba(234,182,78,.45);}
+.okt-route{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 26px;text-align:center;box-shadow:0 14px 34px -30px rgba(80,50,10,.4);transition:transform .3s;}
+.okt-route:hover{transform:translateY(-4px);}
 .okt-route-ic{font-size:2.3rem;}
-.okt-route-card h3{font-size:1.35rem;margin:12px 0 8px;color:var(--bone);}
-.okt-route-card p{color:rgba(244,236,224,.74);line-height:1.55;}
+.okt-route h3{font-size:1.32rem;margin:12px 0 8px;color:var(--ink);}
+.okt-route p{color:var(--muted);line-height:1.55;}
 /* ANFAHRT */
-.okt-anfahrt{background:radial-gradient(80% 120% at 100% 0%,rgba(234,182,78,.14),transparent 55%),linear-gradient(180deg,#160f0a,#1f160e);}
-.okt-anfahrt-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
-@media(max-width:880px){.okt-anfahrt-grid{grid-template-columns:1fr;gap:38px;}}
-.okt-direct{margin-top:28px;display:flex;flex-direction:column;gap:14px;}
-.okt-direct a{color:var(--bone);text-decoration:none;display:flex;align-items:center;gap:16px;font-size:1rem;line-height:1.4;}
-.okt-direct a:hover{color:var(--gold);}
-.okt-direct .ic{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;flex-shrink:0;}
-.okt-direct b{display:block;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:rgba(244,236,224,.5);font-weight:700;margin-bottom:2px;}
-.okt-map-card{border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:420px;}
+.okt-anfahrt-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+@media(max-width:880px){.okt-anfahrt-grid{grid-template-columns:1fr;gap:36px;}}
+.okt-direct{margin-top:26px;display:flex;flex-direction:column;gap:14px;}
+.okt-direct a{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:16px;font-size:1rem;line-height:1.4;}
+.okt-direct a:hover{color:var(--blau);}
+.okt-direct .ic{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;flex-shrink:0;color:var(--blau);}
+.okt-direct b{display:block;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8a795f;font-weight:700;margin-bottom:2px;}
+.okt-map-card{border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:400px;box-shadow:0 20px 46px -34px rgba(80,50,10,.5);}
 .okt-map-iframe{display:block;width:100%;border-radius:20px;}
 /* FAQ */
-.okt-faq{background:var(--ink);}
 .okt-faq-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 @media(max-width:780px){.okt-faq-list{grid-template-columns:1fr;}}
-.okt-faq-item{border:1px solid var(--line);border-radius:16px;padding:26px 24px;background:rgba(244,236,224,.03);}
-.okt-faq-item h3{font-size:1.18rem;color:var(--bone);margin-bottom:10px;}
-.okt-faq-item p{font-size:.96rem;color:rgba(244,236,224,.76);line-height:1.6;}
-.okt-foot-logo{display:block;height:52px;width:auto;margin:48px auto 0;opacity:.85;filter:brightness(0) invert(1);}
+.okt-faq-item{background:var(--creme2);border:1px solid var(--line);border-radius:16px;padding:26px 24px;}
+.okt-faq-item h3{font-size:1.16rem;color:var(--ink);margin-bottom:10px;}
+.okt-faq-item p{font-size:.96rem;color:var(--muted);line-height:1.6;}
 /* REVEAL */
-.okt-reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+.okt-reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
 .okt-reveal.in{opacity:1;transform:none;}
 @media(prefers-reduced-motion:reduce){.okt-reveal{opacity:1!important;transform:none!important;}}
 `;
