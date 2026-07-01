@@ -536,13 +536,14 @@ const oktStyles = `
 .okt-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:120px 0 68px;overflow:hidden;background:#1a120a;}
 .okt-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .okt-hero-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,15,8,.8),rgba(24,15,8,.32) 46%,rgba(24,15,8,.04) 72%),linear-gradient(0deg,rgba(20,12,6,.76),rgba(20,12,6,.1) 42%,rgba(20,12,6,.26));}
-.okt-bunting{position:absolute;top:0;left:0;right:0;z-index:5;line-height:0;filter:drop-shadow(0 3px 3px rgba(0,0,0,.28));}
+.okt-bunting{position:absolute;top:62px;left:0;right:0;z-index:5;line-height:0;filter:drop-shadow(0 3px 3px rgba(0,0,0,.28));pointer-events:none;}
+@media(max-width:760px){.okt-bunting{top:54px;}}
 .okt-bunting-svg{display:block;width:100%;height:64px;}
 .okt-herz{position:absolute;right:56px;bottom:118px;z-index:6;width:128px;height:120px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.4));}
 .okt-herz-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'HerzVibes',cursive;color:#fff;font-size:30px;transform:translateY(-4px) rotate(-8deg);}
 @media(max-width:820px){.okt-herz{display:none;}}
 .okt-hero-in{position:relative;z-index:4;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 30px;}
-.okt-hero-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;}
+.okt-hero-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-weight:600;font-size:13.5px;letter-spacing:.1em;margin-bottom:16px;}
 .okt-hero-eyebrow::before{content:"";width:34px;height:2px;background:var(--gold);}
 .okt-h1{line-height:.92;margin-bottom:18px;color:#fbf3e0;}
 .okt-frak{font-family:'WiesnFrak',var(--serif);font-weight:700;font-size:clamp(3.4rem,9vw,7.4rem);display:block;text-shadow:0 3px 24px rgba(0,0,0,.45);}
