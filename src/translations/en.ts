@@ -4032,3 +4032,115 @@ const enBase = {
     backLink: "Back to the tour groups page",
   },
 };
+
+// Deep-merge helper: fills any key missing from enBase with the German fallback,
+// then applies explicit English translations for newly added keys.
+function deepMerge<T>(base: T, over: unknown): T {
+  if (over === undefined || over === null) return base;
+  if (typeof base !== "object" || base === null || Array.isArray(base)) return over as T;
+  const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+  for (const k of Object.keys(over as Record<string, unknown>)) {
+    out[k] = deepMerge((base as Record<string, unknown>)[k], (over as Record<string, unknown>)[k]);
+  }
+  return out as T;
+}
+
+const enExtra = {
+  seo: {
+    lunch: {
+      seoDescription: "Lunch in Maxvorstadt: pasta from €14.50, pizza from €12.50, 3-course menu from €14.90. Mon–Fri 11:30–14:30, back at the office in 45 min. 5 min from Königsplatz.",
+      tldr: "STORIA in Munich's Maxvorstadt (Karlstraße 47a) serves Italian lunch Mon–Fri from 09:00. Changing lunch menu with fresh pasta, stone-oven pizza and salads. 5 min walk from Königsplatz, ideal for business lunch and students. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+    },
+    firmenfeier: {
+      tldr: "Corporate events at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for company parties, Christmas parties and team events with 20–180 guests. 100 seats inside + 100 on the covered terrace. Custom menus from €39 per person, professional event service. 5 min from Königsplatz, 7 min from the main station. Family-run since 2015. Inquiries: +49 89 51519696.",
+      faq10Question: "How much does a corporate event at STORIA Munich cost?",
+      faq10Answer: "Festive menus start at €45 per person (e.g. Christmas menus); individual buffets and drinks packages on request. For 50 people, a 3-course menu with a drinks package is typically €65–85 per person.",
+      faq11Question: "How many guests fit at STORIA?",
+      faq11Answer: "100 seats inside, 100 on the covered terrace, up to 300 guests for a standing reception. Exclusive booking of the restaurant or terrace is possible from around 20 people.",
+      faq12Question: "By when should we book our Christmas party?",
+      faq12Answer: "Popular December dates (Thursday/Friday) tend to be booked out from October – we recommend inquiring from July.",
+    },
+    aperitivo: {
+      tldr: "Aperitivo at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian bar culture with Aperol Spritz, Negroni, Hugo and over 60 Italian wines. Daily from 17:00 with stuzzichini and antipasti. Covered terrace, 5 min walk from Königsplatz. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      introLinkPre: "Read more about our ",
+      introLinkAnchor: "Italian restaurant in Munich",
+      introLinkPost: " and the Speranza family's cuisine on our restaurant page.",
+    },
+    romanticDinner: {
+      tldr: "Romantic dinner at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian candlelight dinner with tasting menus, wine pairings and an intimate atmosphere. Ideal for anniversaries, proposals and date nights. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      candlelightLinkText: "To the candlelight menu",
+    },
+    eventlocation: {
+      tldr: "Event location STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for corporate events, birthdays, weddings and Christmas parties with 20–180 guests. 100 seats inside + 100 on the covered terrace. Custom menus, professional event service. 5 min from Königsplatz. Family-run since 2015 by the Speranza family. Inquiries: +49 89 51519696.",
+    },
+    birthday: {
+      tldr: "Birthday party at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for birthday celebrations with 10–100 guests. Custom menus, birthday cake and personal service from the Speranza family. 5 min from Königsplatz. Family-run since 2015. 4.5 stars from over 780 Google reviews. Inquiries: +49 89 51519696.",
+      faq7Question: "How much does a birthday party for 30 people at the restaurant cost?",
+      faq7Answer: "At STORIA, expect around €40–70 per person including drinks, depending on the menu. There is no room hire – you only pay for food and drinks.",
+    },
+    silvester: {
+      tldr: "New Year's Eve at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian gala dinner with a multi-course festive menu, wine pairing, music and midnight champagne. From €99 per person. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Reservations: +49 89 51519696.",
+    },
+    weihnachten: {
+      tldr: "Christmas menu at STORIA Munich Maxvorstadt (Karlstraße 47a): Festive Italian Christmas menus from €45 per person for 6–100 guests. Homemade pasta, fine wines and traditional panettone. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Reservations: +49 89 51519696.",
+    },
+    valentinstag: {
+      tldr: "Valentine's Day at STORIA Munich Maxvorstadt (Karlstraße 47a): Romantic Italian Valentine's dinner with a multi-course candlelight menu, fine wines and a rose at the table. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+    },
+    neapolitanPizza: {
+      tldr: "Neapolitan pizza at STORIA Munich Maxvorstadt (Karlstraße 47a): Authentic pizza napoletana from the stone oven at over 400 °C. San Marzano DOP tomatoes, buffalo mozzarella from Campania, 48-hour dough proofing. Head chef Domenico Speranza from Campania, in German hospitality since 1995. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+    },
+    wild: {
+      tldr: "Game dining at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian game specialities from September to February. Venison saddle, deer ragout, wild boar ragù and duck breast – traditionally Italian, prepared by head chef Domenico Speranza. 5 min from Königsplatz. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+    },
+    pizzaMuenchen: {
+      tldr: "Pizza Munich at STORIA Maxvorstadt (Karlstraße 47a): Original Italian stone-oven pizza baked at over 400 °C. San Marzano tomatoes, buffalo mozzarella and 48-hour dough proofing. Family-run since 2015 by the Speranza family from Campania. 5 min walk from Königsplatz. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      introLinkPre: "Read more about our ",
+      introLinkAnchor: "Italian restaurant in Munich",
+      introLinkPost: " and the Speranza family behind it on our restaurant page.",
+    },
+    italienerMuenchen: {
+      tldr: "Italian in Munich: STORIA in Maxvorstadt (Karlstraße 47a) is an Italian restaurant run by the Speranza family since 2015. Neapolitan stone-oven pizza, homemade pasta, over 60 Italian wines and a covered terrace with 100 seats. Mon–Fri 09:00–01:00, Sat–Sun 12:00–01:00. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+    },
+    italienerKoenigsplatz: {
+      tldr: "Italian near Königsplatz Munich: STORIA (Karlstraße 47a) is just a 5-minute walk from Königsplatz, the Pinakotheken and TU Munich. Authentic Italian cuisine with stone-oven pizza, homemade pasta and over 60 Italian wines. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+    },
+    weihnachtsfeier: {
+      tldr: "Christmas party Munich at STORIA Maxvorstadt (Karlstraße 47a): Italian restaurant for corporate Christmas parties, private Christmas dinners and Advent celebrations with 6–180 guests. Festive menus from €45 per person, 100 seats inside + 100 on the terrace. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Inquiries: +49 89 51519696.",
+    },
+    terrasse: {
+      tldr: "Restaurant terrace Munich at STORIA Maxvorstadt (Karlstraße 47a): Covered terrace with 100 seats, cushions and blankets – smoking welcome. Italian dining and aperitivo in the open air, weatherproof in any weather. 5 min from Königsplatz. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+    },
+    italienischesRestaurant: {
+      tldr: "Italian restaurant Munich: STORIA in Maxvorstadt (Karlstraße 47a) is an authentic Italian restaurant run by the Speranza family since 2015. Neapolitan stone-oven pizza at 400 °C, homemade pasta, seafood and over 60 Italian wines. 100 seats inside + 100 on the covered terrace. Mon–Fri 09:00–01:00, Sat–Sun 12:00–01:00. Reservations: +49 89 51519696.",
+      heroBadge1: "🇮🇹 Authentically Italian",
+      heroBadge2: "👨‍👩‍👧 Family-run",
+      heroBadge3: "🎯 Since 2015",
+    },
+    italienerHauptbahnhof: {
+      tldr: "Italian near Munich main station: STORIA in Maxvorstadt (Karlstraße 47a) is just a 7-minute walk or 1 tram stop from Munich's main station. Neapolitan stone-oven pizza, homemade pasta, lunch menu Mon–Fri. Ideal before/after a train journey or for a business lunch. Mon–Fri 09:00–01:00, Sat–Sun 12:00–01:00. Reservations: +49 89 51519696.",
+      heroBadge1: "🚉 7 min from main station",
+      heroBadge2: "🚋 1 tram stop",
+      heroBadge3: "🎯 Since 2015",
+    },
+    hochzeitsfeier: {
+      tldr: "Wedding celebration at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for weddings with 6–300 guests. 100 seats inside + 100 on the covered terrace + standing reception up to 180 guests. Custom wedding menus, aperitivo reception, personal planning. 5 min from Königsplatz. Family-run since 2015. Inquiries: +49 89 51519696.",
+      heroBadge1: "💍 6–300 guests",
+      heroBadge2: "🍷 Custom menu",
+      heroBadge3: "☀️ Covered terrace",
+    },
+  },
+  slugs: {
+    barrierefreiheit: "accessibility",
+  },
+  pages: {
+    speisekarte: {
+      lunchHint: "🍝 Lunch menu Mon–Fri from €14.90 – view now",
+    },
+    getraenke: {
+      introP2: "The wine list features carefully selected bottles from every region of Italy: from fresh Pinot Grigio from the Veneto to robust Primitivos from Puglia and elegant Barolos from Piedmont. Our sommeliers are happy to advise you and recommend the perfect pairing for your dish. At the bar, alongside Italian classics we also serve craft cocktails and a selection of draught beers. Our late-night aperitivo is especially popular – the tradition of ending the day with a drink and small snacks. The perfect end to an evening in Maxvorstadt, just a few steps from Königsplatz.",
+    },
+  },
+};
+
+export const en = deepMerge(deepMerge(de, enBase), enExtra) as typeof de;
