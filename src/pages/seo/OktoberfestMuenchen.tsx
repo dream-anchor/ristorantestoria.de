@@ -14,6 +14,12 @@ import { useSpecialMenuBySlug, useMenuContent } from "@/hooks/useSpecialMenus";
 import heroImage from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen.webp";
 import heroImage600 from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen-600w.webp";
 
+/** Extrahiert den ersten €-Betrag als Zahl (z. B. "ca. € 24,90" → "24.90"), sonst null. */
+const parsePrice = (s: string): string | null => {
+  const m = (s || "").replace(/\./g, "").match(/(\d+(?:,\d{1,2})?)/);
+  return m ? m[1].replace(",", ".") : null;
+};
+
 /** GA4 Conversion-Event. */
 const fireLead = (formName: string) => {
   if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...a: unknown[]) => void }).gtag === "function") {
@@ -240,6 +246,24 @@ const OktoberfestMuenchen = () => {
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": faqItems.map((i) => ({ "@type": "Question", "name": i.q, "acceptedAnswer": { "@type": "Answer", "text": i.a } })),
       }) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@type": "Menu",
+        "name": language === "de" ? "Oktoberfest – Speisen & Getränke" : "Oktoberfest – Food & Drinks",
+        "inLanguage": language,
+        "provider": { "@type": "Restaurant", "name": "Ristorante STORIA", "url": "https://www.ristorantestoria.de/" },
+        "hasMenuSection": menuSections.map((sec) => ({
+          "@type": "MenuSection", "name": sec.title,
+          ...(sec.subtitle ? { "description": sec.subtitle } : {}),
+          "hasMenuItem": sec.items.map((it) => {
+            const num = parsePrice(it.price);
+            return {
+              "@type": "MenuItem", "name": it.name,
+              ...(it.desc ? { "description": it.desc } : {}),
+              ...(num != null ? { "offers": { "@type": "Offer", "price": num, "priceCurrency": "EUR" } } : {}),
+            };
+          }),
+        })),
+      }) }} />
 
       <style>{oktStyles}</style>
 
@@ -334,9 +358,9 @@ const OktoberfestMuenchen = () => {
               <div className="okt-wrap">
                 {i === 0 && (
                   <Reveal className="okt-partner">
-                    <span className="okt-partner-lbl">Ausschank-Partner</span>
+                    <span className="okt-partner-lbl">{o.partnerLabel}</span>
                     <span className="okt-partner-name">PAULANER</span>
-                    <span className="okt-partner-note">· Wiesnbier vom Holzfass</span>
+                    <span className="okt-partner-note">{o.partnerNote}</span>
                   </Reveal>
                 )}
                 <SecHead eyebrow="Bavarese" title={sec.title} lead={sec.subtitle} />
@@ -371,7 +395,7 @@ const OktoberfestMuenchen = () => {
           {/* ATMOSPHÄRE / WHY */}
           <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <SecHead eyebrow="Stimmung" title={o.whyTitle} lead={o.whySubtitle} />
+              <SecHead eyebrow={o.eyebrowStimmung} title={o.whyTitle} lead={o.whySubtitle} />
               <div className="okt-features">
                 {whyFeatures.map((f, i) => (
                   <Reveal key={f.title} delay={(i % 3) * 0.06} className="okt-feature">
@@ -387,7 +411,7 @@ const OktoberfestMuenchen = () => {
           {/* ZIELGRUPPEN */}
           <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap">
-              <SecHead eyebrow="Für wen" title={o.occasionsTitle} lead={o.occasionsSubtitle} />
+              <SecHead eyebrow={o.eyebrowFuerWen} title={o.occasionsTitle} lead={o.occasionsSubtitle} />
               <div className="okt-features">
                 {occasions.map((c, i) => (
                   <Reveal key={c.title} delay={(i % 3) * 0.06} className="okt-feature">
@@ -413,7 +437,7 @@ const OktoberfestMuenchen = () => {
           {/* HOTELS */}
           <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap">
-              <SecHead eyebrow="In der Nähe" title={o.hotelTitle} lead={o.hotelSubtitle} />
+              <SecHead eyebrow={o.eyebrowInDerNaehe} title={o.hotelTitle} lead={o.hotelSubtitle} />
               <div className="okt-cards okt-cards-3">
                 {hotels.map((h, i) => (
                   <Reveal key={h.name} delay={(i % 3) * 0.06} className="okt-hotel">
@@ -429,7 +453,7 @@ const OktoberfestMuenchen = () => {
           {/* SCHNELL ZUR WIESN */}
           <section className="okt-sec okt-sec-white">
             <div className="okt-wrap">
-              <SecHead eyebrow="Zur Wiesn" title={o.wiesnRouteTitle} lead={o.wiesnRouteIntro} />
+              <SecHead eyebrow={o.eyebrowZurWiesn} title={o.wiesnRouteTitle} lead={o.wiesnRouteIntro} />
               <div className="okt-cards okt-cards-3">
                 {wiesnRoute.map((r, i) => (
                   <Reveal key={r.title} delay={i * 0.06} className="okt-route">
@@ -447,7 +471,7 @@ const OktoberfestMuenchen = () => {
           <section className="okt-sec okt-sec-cream">
             <div className="okt-wrap okt-anfahrt-grid">
               <Reveal className="okt-anfahrt-text">
-                <span className="okt-eyebrow">Standort</span>
+                <span className="okt-eyebrow">{o.eyebrowStandort}</span>
                 <h2 className="okt-h2">{o.locationTitle}</h2>
                 <p className="okt-lead">{o.locationIntro}</p>
                 <div className="okt-direct">

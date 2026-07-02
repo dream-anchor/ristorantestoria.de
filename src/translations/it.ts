@@ -571,6 +571,8 @@ const itBase = {
       silvester: "Gala di Capodanno",
       wm: "Mondiali 2026 in diretta",
       wmTeaser: "11 giugno – 19 luglio – tutte le partite in diretta sulla terrazza coperta, con cucina del Sud Italia e aperitivo.",
+      oktoberfest: "Oktoberfest Monaco di Baviera",
+      oktoberfestTeaser: "19 set – 4 ott 2026 – amicizia bavarese-italiana dall'italiano: Wiesnbier alla spina (Maß), Brotzeit & specialità. Ideale per gruppi.",
     },
     lunch: {
       seoTitle: "Business Lunch Monaco Maxvorstadt | Ristorante Italiano STORIA vicino K\u00f6nigsplatz",
@@ -1055,7 +1057,7 @@ const itBase = {
     oktoberfest: {
       // SEO
       seoTitle: "Oktoberfest Monaco di Baviera – Ristorante italiano con Wiesnbier & Brotzeit | STORIA",
-      seoDescription: "Oktoberfest dall'italiano a Monaco di Baviera: Wiesnbier (birra dell'Oktoberfest) alla spina dalla botte di legno (Maß, boccale da 1 litro), Brotzeit, Brezn (bretzel) & specialità bavaresi-italiane allo STORIA Maxvorstadt – a pranzo & per il pre-Wiesn. Ideale per gruppi, aziende & gruppi turistici. Prenota ora!",
+      seoDescription: "Oktoberfest dall'italiano a Monaco: Wiesnbier alla spina (Maß), Brotzeit e specialità bavaresi-italiane allo STORIA. Ideale per gruppi. Prenota ora!",
       title: "Oktoberfest allo STORIA – il vostro italiano in Maxvorstadt",
       heroSubtitle: "Amicizia bavarese-italiana al tempo della Wiesn (Oktoberfest)",
       heroTime: "🍺 Wiesnbier (birra dell'Oktoberfest) alla spina dalla botte di legno (Maß) · 19 set – 4 ott 2026",
@@ -1064,6 +1066,14 @@ const itBase = {
       breadcrumb: "Oktoberfest Monaco di Baviera",
       breadcrumbParent: "Occasioni Speciali",
       reserveButton: "Prenota un tavolo",
+      // Section-Eyebrows
+      partnerLabel: "Partner della spina",
+      partnerNote: "· Wiesnbier dalla botte di legno",
+      eyebrowStimmung: "Atmosfera",
+      eyebrowFuerWen: "Per chi",
+      eyebrowInDerNaehe: "Nelle vicinanze",
+      eyebrowZurWiesn: "Verso la Wiesn",
+      eyebrowStandort: "Posizione",
       // Social Proof
       proofBeer: "Paulaner Wiesnbier (birra dell'Oktoberfest) alla spina dalla botte di legno (Maß)",
       proofFood: "Brotzeit, Brezn (bretzel) & specialità bavaresi-italiane",
