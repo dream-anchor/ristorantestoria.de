@@ -217,8 +217,7 @@ const OktoberfestMuenchen = () => {
 
   return (
     <>
-      {/* TEMPORÄR: noIndex, solange die Preise Platzhalter sind. Vor Launch (echte Preise) entfernen. */}
-      <SEO title={o.seoTitle} description={o.seoDescription} canonical="/oktoberfest-muenchen" noIndex />
+      <SEO title={o.seoTitle} description={o.seoDescription} canonical="/oktoberfest-muenchen" />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[
         { name: "Home", url: "/" },
