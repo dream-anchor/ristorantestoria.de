@@ -550,6 +550,8 @@ export const de = {
       silvester: "Silvester Gala-Dinner",
       wm: "WM 2026 Public Viewing",
       wmTeaser: "11. Juni – 19. Juli – alle Spiele live auf der überdachten Terrasse, dazu süditalienische Küche & Aperitivo.",
+      oktoberfest: "Oktoberfest München",
+      oktoberfestTeaser: "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier vom Holzfass (Maß), Brotzeit & Specials. Ideal für Gruppen.",
     },
     lunch: {
       seoTitle: "Business Lunch M\u00fcnchen \u2013 3 G\u00e4nge ab 14,90 \u20ac (Mo\u2013Fr) | STORIA",
@@ -1064,7 +1066,7 @@ export const de = {
     oktoberfest: {
       // SEO
       seoTitle: "Oktoberfest München – Italiener mit Wiesnbier & Brotzeit | STORIA",
-      seoDescription: "Oktoberfest beim Italiener in München: Wiesnbier vom Holzfass (Maß), Brotzeit, Brezn & bayerisch-italienische Specials im STORIA Maxvorstadt – mittags & zum Wiesn-Vorglühen. Ideal für Gruppen, Firmen & Reisegruppen. Jetzt reservieren!",
+      seoDescription: "Oktoberfest beim Italiener in München: Wiesnbier vom Holzfass (Maß), Brotzeit & bayerisch-italienische Specials im STORIA – ideal für Gruppen. Jetzt reservieren!",
       title: "Oktoberfest im STORIA – euer Italiener in der Maxvorstadt",
       heroSubtitle: "Bayerisch-italienische Freundschaft zur Wiesn-Zeit",
       heroTime: "🍺 Wiesnbier vom Holzfass (Maß) · 19. Sept – 4. Okt 2026",
@@ -1073,6 +1075,14 @@ export const de = {
       breadcrumb: "Oktoberfest München",
       breadcrumbParent: "Besondere Anlässe",
       reserveButton: "Tisch reservieren",
+      // Section-Eyebrows
+      partnerLabel: "Ausschank-Partner",
+      partnerNote: "· Wiesnbier vom Holzfass",
+      eyebrowStimmung: "Stimmung",
+      eyebrowFuerWen: "Für wen",
+      eyebrowInDerNaehe: "In der Nähe",
+      eyebrowZurWiesn: "Zur Wiesn",
+      eyebrowStandort: "Standort",
       // Social Proof
       proofBeer: "Paulaner Wiesnbier vom Holzfass (Maß)",
       proofFood: "Brotzeit, Brezn & bayerisch-italienische Specials",

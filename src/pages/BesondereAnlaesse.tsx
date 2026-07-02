@@ -9,7 +9,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import InlineVoucherCTA from "@/components/InlineVoucherCTA";
-import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
+import { isWmActive, WM_SLUG, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
 
 // Parent slug mapping for each language
 const PARENT_SLUGS = {
@@ -148,6 +148,18 @@ const BesondereAnlaesse = () => {
                     </p>
                   </LocalizedLink>
                 )}
+
+                <LocalizedLink
+                  to={OKTOBERFEST_SLUG}
+                  className="block p-6 rounded-2xl border bg-card hover:bg-accent transition-colors"
+                >
+                  <h2 className="text-xl font-semibold">
+                    {t.seo?.besondereAnlaesse?.oktoberfest || "Oktoberfest München"}
+                  </h2>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {t.seo?.besondereAnlaesse?.oktoberfestTeaser || "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier vom Holzfass (Maß), Brotzeit & Specials. Ideal für Gruppen."}
+                  </p>
+                </LocalizedLink>
               </div>
 
               <div className="mt-8 p-6 rounded-2xl bg-card border">

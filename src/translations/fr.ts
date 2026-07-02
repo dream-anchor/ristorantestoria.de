@@ -551,6 +551,8 @@ const frBase = {
       silvester: "Gala du Nouvel An",
       wm: "Coupe du monde 2026 en direct",
       wmTeaser: "11 juin \u2013 19 juillet \u2013 tous les matchs en direct sur la terrasse couverte, avec cuisine du Sud de l\u2019Italie & ap\u00e9ritif.",
+      oktoberfest: "Oktoberfest Munich",
+      oktoberfestTeaser: "19 sept \u2013 4 oct 2026 \u2013 amiti\u00e9 bavaroise-italienne chez l'Italien: bi\u00e8re de la Wiesn au f\u00fbt (Ma\u00df), Brotzeit & sp\u00e9cialit\u00e9s. Id\u00e9al pour groupes.",
     },
     lunch: {
       seoTitle: "Business Lunch Munich Maxvorstadt | Restaurant Italien STORIA pr\u00e8s du K\u00f6nigsplatz",
@@ -1027,7 +1029,7 @@ const frBase = {
     oktoberfest: {
       // SEO
       seoTitle: "Oktoberfest Munich – l'Italien avec bière de la Wiesn & Brotzeit | STORIA",
-      seoDescription: "Oktoberfest chez l'Italien à Munich: bière de la Wiesn au fût de bois (Maß), brotzeit, Brezn & spécialités bavaroises-italiennes au STORIA Maxvorstadt – le midi & pour se mettre en jambes avant la Wiesn. Idéal pour groupes, entreprises & groupes de voyage. Réservez dès maintenant!",
+      seoDescription: "Oktoberfest chez l'Italien à Munich: bière de la Wiesn au fût (Maß), Brotzeit & spécialités bavaroises-italiennes au STORIA. Idéal pour groupes. Réservez!",
       title: "Oktoberfest Munich au STORIA – votre Italien à Maxvorstadt",
       heroSubtitle: "L'amitié bavaroise-italienne au temps de la Wiesn",
       heroTime: "🍺 Bière de la Wiesn au fût de bois (Maß) · 19 sept – 4 oct 2026",
@@ -1036,6 +1038,14 @@ const frBase = {
       breadcrumb: "Oktoberfest Munich",
       breadcrumbParent: "Occasions Spéciales",
       reserveButton: "Réserver une table",
+      // Section-Eyebrows
+      partnerLabel: "Partenaire pression",
+      partnerNote: "· Bière de la Wiesn au fût de bois",
+      eyebrowStimmung: "Ambiance",
+      eyebrowFuerWen: "Pour qui",
+      eyebrowInDerNaehe: "À proximité",
+      eyebrowZurWiesn: "Vers la Wiesn",
+      eyebrowStandort: "Emplacement",
       // Social Proof
       proofBeer: "Bière de la Wiesn Paulaner au fût de bois (Maß)",
       proofFood: "Brotzeit, Brezn & spécialités bavaroises-italiennes",

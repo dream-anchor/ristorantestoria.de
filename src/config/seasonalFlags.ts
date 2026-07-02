@@ -25,6 +25,7 @@ export const FILMFEST_END = new Date("2026-07-06T00:00:00+02:00").getTime(); // 
 /** Interne Slugs der beiden Saison-Event-Seiten (für Footer-Filter etc.). */
 export const WM_SLUG = "wm-2026-public-viewing-muenchen";
 export const FILMFEST_SLUG = "filmfest-muenchen";
+export const OKTOBERFEST_SLUG = "oktoberfest-muenchen";
 
 /** WM-Saison aktiv (bis einschließlich 19.7.2026). */
 export const isWmActive = (now: number = Date.now()): boolean => now < WM_END;

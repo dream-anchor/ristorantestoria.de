@@ -551,6 +551,8 @@ const enBase = {
       silvester: "New Year\u2019s Eve Gala Dinner",
       wm: "2026 World Cup Public Viewing",
       wmTeaser: "11 June \u2013 19 July \u2013 every match live on the covered terrace, with Southern Italian cuisine & aperitivo.",
+      oktoberfest: "Oktoberfest Munich",
+      oktoberfestTeaser: "19 Sept \u2013 4 Oct 2026 \u2013 Bavarian-Italian friendship at an Italian restaurant: Wiesnbier from the cask (Ma\u00df), Brotzeit & specials. Ideal for groups.",
     },
     lunch: {
       seoTitle: "Business Lunch Munich Maxvorstadt | Italian Restaurant STORIA near K\u00f6nigsplatz",
@@ -1037,7 +1039,7 @@ const enBase = {
     oktoberfest: {
       // SEO
       seoTitle: "Oktoberfest Munich – Italian with Wiesnbier & Brotzeit | STORIA",
-      seoDescription: "Oktoberfest at an Italian restaurant in Munich: Wiesnbier (Oktoberfest beer) from the wooden cask (Maß), Brotzeit, Brezn (pretzels) & Bavarian-Italian specials at STORIA Maxvorstadt – at lunchtime & for the pre-Wiesn warm-up. Perfect for groups, companies & tour groups. Reserve now!",
+      seoDescription: "Oktoberfest at an Italian restaurant in Munich: Wiesnbier from the cask (Maß), Brotzeit & Bavarian-Italian specials at STORIA. Ideal for groups. Book now!",
       title: "Oktoberfest at STORIA – your Italian in Munich's Maxvorstadt",
       heroSubtitle: "Bavarian-Italian friendship for Oktoberfest Munich",
       heroTime: "🍺 Wiesnbier from the wooden cask (Maß) · 19 Sept – 4 Oct 2026",
@@ -1046,6 +1048,14 @@ const enBase = {
       breadcrumb: "Oktoberfest Munich",
       breadcrumbParent: "Special Occasions",
       reserveButton: "Book a table",
+      // Section-Eyebrows
+      partnerLabel: "Beer partner",
+      partnerNote: "· Wiesnbier from the wooden cask",
+      eyebrowStimmung: "Atmosphere",
+      eyebrowFuerWen: "Who it's for",
+      eyebrowInDerNaehe: "Nearby",
+      eyebrowZurWiesn: "To the Wiesn",
+      eyebrowStandort: "Location",
       // Social Proof
       proofBeer: "Paulaner Wiesnbier from the wooden cask (Maß)",
       proofFood: "Brotzeit, Brezn (pretzels) & Bavarian-Italian specials",
