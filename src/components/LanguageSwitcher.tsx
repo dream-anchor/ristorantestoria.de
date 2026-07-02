@@ -1,7 +1,8 @@
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
+import { parseLocalizedPath, getLocalizedPath } from "@/config/routes";
 import { ChevronDown, Globe } from "lucide-react";
 import {
   DropdownMenu,
@@ -19,10 +20,20 @@ const languages: { code: Language; label: string; flag: string }[] = [
 
 const LanguageSwitcher = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { language, setLanguage, switchLanguage } = useLanguage();
   const { getAlternateUrl } = useAlternateLinks();
 
-  const currentLang = languages.find(l => l.code === language) || languages[0];
+  // Ziel-URL je Sprache VOR dem Klick berechnen → wird als echtes <a href> gerendert.
+  // So funktioniert der Sprachwechsel auch, wenn der JS-Handler (z. B. nach einem
+  // Hydration-Hiccup auf Mobile) nicht greift: der Browser folgt dem Link auf die
+  // vorgerenderte, lokalisierte URL. Der onClick darüber macht daraus SPA-Navigation.
+  const targetHref = useCallback((targetLang: Language): string => {
+    const alternate = getAlternateUrl(targetLang);
+    if (alternate) return alternate;
+    const { baseSlug } = parseLocalizedPath(location.pathname);
+    return getLocalizedPath(baseSlug, targetLang) + (location.hash || "");
+  }, [getAlternateUrl, location.pathname, location.hash]);
 
   // Handle language switch - use alternate URL if available (for dynamic pages)
   const handleLanguageSwitch = useCallback((targetLang: Language) => {
@@ -49,13 +60,25 @@ const LanguageSwitcher = () => {
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => handleLanguageSwitch(lang.code)}
+            asChild
             className={`flex items-center gap-2 cursor-pointer ${
               language === lang.code ? "bg-primary/10 text-primary font-medium" : ""
             }`}
           >
-            <span>{lang.flag}</span>
-            <span>{lang.label}</span>
+            <a
+              href={targetHref(lang.code)}
+              hrefLang={lang.code}
+              onClick={(e) => {
+                // Plain left-click → SPA-Navigation (schnell, ohne Full-Reload).
+                // Modifier-/Mittelklick (neuer Tab) dem Browser überlassen.
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                e.preventDefault();
+                handleLanguageSwitch(lang.code);
+              }}
+            >
+              <span>{lang.flag}</span>
+              <span>{lang.label}</span>
+            </a>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
