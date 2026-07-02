@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -59,7 +59,12 @@ interface ReservationBookingProps {
 const ReservationBooking = ({ headingLevel = "h2", onBook }: ReservationBookingProps = {}) => {
   const { t, language } = useLanguage();
   const isMobile = useIsMobile();
-  const [date, setDate] = useState<Date | undefined>(new Date()); // Default to today
+  // Kein `new Date()` als Initial-State: SSR (Build-Zeitpunkt) und Client-Hydration
+  // (Laufzeit) würden sonst unterschiedliche Datums-Texte rendern → Hydration-Mismatch
+  // (#425/#422). Daher erst NACH dem Mount auf „heute" setzen – SSR & Erst-Render
+  // zeigen identisch den Platzhalter, danach wird heute vorbelegt.
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  useEffect(() => { setDate(new Date()); }, []);
   const [time, setTime] = useState("19:00");
   const [guests, setGuests] = useState("2");
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);

@@ -177,7 +177,9 @@ const WmPublicViewingMuenchen = () => {
       />
       <StructuredData type="faq" faqItems={c.faq.items} />
 
-      <style>{wmStyles}</style>
+      {/* dangerouslySetInnerHTML statt {children}: verhindert SSR-Quote-Escaping
+          im <style>-Rawtext → sonst Hydration-Mismatch (#425/#422). */}
+      <style dangerouslySetInnerHTML={{ __html: wmStyles }} />
 
       <div className="wm-page">
         {/* NAV */}
