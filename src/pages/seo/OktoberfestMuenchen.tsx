@@ -265,7 +265,10 @@ const OktoberfestMuenchen = () => {
         })),
       }) }} />
 
-      <style>{oktStyles}</style>
+      {/* dangerouslySetInnerHTML statt {children}: sonst escaped der SSR-Renderer
+          die Quotes im CSS (' → &#x27;), was im <style>-Rawtext einen
+          Hydration-Mismatch (#425/#422) auslöst. */}
+      <style dangerouslySetInnerHTML={{ __html: oktStyles }} />
 
       <div className="okt-page">
         {/* NAV */}

@@ -129,7 +129,9 @@ const FilmfestMuenchen = () => {
         }}
       />
 
-      <style>{ffStyles}</style>
+      {/* dangerouslySetInnerHTML statt {children}: verhindert SSR-Quote-Escaping
+          im <style>-Rawtext → sonst Hydration-Mismatch (#425/#422). */}
+      <style dangerouslySetInnerHTML={{ __html: ffStyles }} />
 
       <div className="ff-page">
         {/* NAV */}
