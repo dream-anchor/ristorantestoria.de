@@ -210,7 +210,7 @@ const ReservationBooking = ({ headingLevel = "h2", onBook }: ReservationBookingP
                 {t.reservationBooking.time}
               </label>
               <Select value={time} onValueChange={setTime}>
-                <SelectTrigger className="h-11">
+                <SelectTrigger className="h-11" aria-label={t.reservationBooking.time}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -230,7 +230,7 @@ const ReservationBooking = ({ headingLevel = "h2", onBook }: ReservationBookingP
                 {t.reservationBooking.guests}
               </label>
               <Select value={guests} onValueChange={setGuests}>
-                <SelectTrigger className="h-11">
+                <SelectTrigger className="h-11" aria-label={t.reservationBooking.guests}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
