@@ -13,6 +13,12 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSpecialMenuBySlug, useMenuContent } from "@/hooks/useSpecialMenus";
 import heroImage from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen.webp";
 import heroImage600 from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen-600w.webp";
+import heroImage900 from "@/assets/italiener-koenigsplatz-terrasse-storia-muenchen-900w.webp";
+import { Helmet } from "react-helmet-async";
+
+// Responsive Hero-Quellen: Mobil (DPR2 ≈ 780px) lädt die 900er (~56 KB) statt der
+// 1400er Vollversion (~121 KB) → kleineres LCP-Bild, schnelleres Laden.
+const heroSrcSet = `${heroImage600} 600w, ${heroImage900} 900w, ${heroImage} 1400w`;
 
 /** Extrahiert den ersten €-Betrag als Zahl (z. B. "ca. € 24,90" → "24.90"), sonst null. */
 const parsePrice = (s: string): string | null => {
@@ -224,6 +230,24 @@ const OktoberfestMuenchen = () => {
   return (
     <>
       <SEO title={o.seoTitle} description={o.seoDescription} canonical="/oktoberfest-muenchen" />
+      {/* Hero (LCP-Element) vorladen: startet den Download parallel zum CSS,
+          statt erst nach dessen Parsing → schnelleres LCP. Responsive über
+          imageSrcSet/imageSizes, damit derselbe Kandidat wie im <img> geladen wird. */}
+      <Helmet>
+        {/* Attribute bewusst klein geschrieben: Helmet reicht sie 1:1 durch, und
+            der Browser erkennt nur das HTML-Attribut `imagesrcset`/`imagesizes`
+            (camelCase würde ignoriert → responsive Preload liefe ins Leere). */}
+        <link
+          {...({
+            rel: "preload",
+            as: "image",
+            href: heroImage900,
+            imagesrcset: heroSrcSet,
+            imagesizes: "100vw",
+            fetchpriority: "high",
+          } as Record<string, string>)}
+        />
+      </Helmet>
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[
         { name: "Home", url: "/" },
@@ -287,7 +311,7 @@ const OktoberfestMuenchen = () => {
 
         {/* HERO */}
         <header className="okt-hero" id="top">
-          <img src={heroImage} srcSet={`${heroImage600} 600w, ${heroImage} 1400w`} sizes="100vw"
+          <img src={heroImage} srcSet={heroSrcSet} sizes="100vw"
             alt="Oktoberfest im Ristorante STORIA München – festlich geschmückte Terrasse in der Maxvorstadt"
             className="okt-hero-img" loading="eager" fetchPriority="high" />
           <div className="okt-hero-scrim" />
