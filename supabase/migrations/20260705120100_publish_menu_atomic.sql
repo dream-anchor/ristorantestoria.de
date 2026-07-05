@@ -45,7 +45,12 @@ BEGIN
     RETURN p_staging_menu_id;
   END IF;
 
-  IF NOT EXISTS (SELECT 1 FROM public.menus WHERE id = p_target_menu_id) THEN
+  -- Ziel-Menü-Zeile sperren, bevor destruktiv getauscht wird. Serialisiert
+  -- gleichzeitige Publish-Vorgänge auf dasselbe Ziel (z. B. zwei Admin-Tabs):
+  -- der zweite Aufruf wartet, bis der erste committet/rollt, und arbeitet dann
+  -- auf einem konsistenten Stand statt mit dem ersten zu interleaven.
+  PERFORM 1 FROM public.menus WHERE id = p_target_menu_id FOR UPDATE;
+  IF NOT FOUND THEN
     RAISE EXCEPTION 'Ziel-Menü % nicht gefunden', p_target_menu_id;
   END IF;
 
