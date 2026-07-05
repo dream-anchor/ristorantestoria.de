@@ -48,10 +48,10 @@ serve(async (req) => {
       );
     }
 
-    const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
+    const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) {
       return new Response(
-        JSON.stringify({ error: "ANTHROPIC_API_KEY not configured" }),
+        JSON.stringify({ error: "LOVABLE_API_KEY not configured" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -73,32 +73,42 @@ ${JSON.stringify(fields, null, 2)}
 
 Antworte NUR mit JSON: {"en": {gleiche Felder übersetzt}, "it": {gleiche Felder übersetzt}, "fr": {gleiche Felder übersetzt}}`;
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
+        "Lovable-API-Key": apiKey,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 2048,
-        system: systemPrompt,
-        messages: [{ role: "user", content: userPrompt }],
+        model: "google/gemini-3-flash-preview",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+        response_format: { type: "json_object" },
       }),
     });
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error("[translate-group-menu] Anthropic error:", response.status, errText);
+      console.error("[translate-group-menu] AI Gateway error:", response.status, errText);
+      const status = response.status === 429 || response.status === 402 ? response.status : 200;
       return new Response(
-        JSON.stringify({ error: `Anthropic API error: ${response.status}` }),
-        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        JSON.stringify({
+          error:
+            response.status === 429
+              ? "Zu viele Anfragen – bitte später erneut versuchen."
+              : response.status === 402
+              ? "KI-Guthaben aufgebraucht."
+              : `AI Gateway Fehler: ${response.status}`,
+          detail: errText,
+        }),
+        { status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
     const data = await response.json();
-    const rawText = (data.content?.[0]?.text ?? "").trim();
+    const rawText = (data.choices?.[0]?.message?.content ?? "").trim();
 
     // Extract JSON from response (handle potential markdown wrapping)
     const jsonMatch = rawText.match(/\{[\s\S]*\}/);
