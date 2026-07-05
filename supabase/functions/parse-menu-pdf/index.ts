@@ -47,6 +47,195 @@ interface ParsedMenu {
   categories: MenuCategory[];
 }
 
+// ---------------------------------------------------------------------------
+// Validierung & Nachübersetzung
+// Prüft nach der Extraktion für jede Zielsprache (EN/IT/FR), ob Übersetzungen
+// fehlen oder nur deutsche Kopien sind, und übersetzt Verdachtsfälle in einem
+// zweiten, sprachspezifischen KI-Call nach (max. 2 Runden). Was danach immer
+// noch eine deutsche Kopie ist, wird geleert – der Fallback auf Deutsch
+// passiert zur Render-Zeit im Frontend, nicht in den Daten.
+// ---------------------------------------------------------------------------
+
+type TargetLang = 'en' | 'it' | 'fr';
+
+const TARGET_LANGS: TargetLang[] = ['en', 'it', 'fr'];
+
+const LANG_NAMES: Record<TargetLang, string> = {
+  en: 'Englische',
+  it: 'Italienische',
+  fr: 'Französische',
+};
+
+const MAX_TRANSLATION_ROUNDS = 2;
+
+// Normalisierter Vergleich (Kleinschreibung, Whitespace zusammenfassen)
+const normalizeText = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ');
+
+// Heuristik: Sieht der deutsche Originaltext "deutsch" aus?
+// Eigennamen wie "Pizza Margherita" oder "Tiramisu" sind in allen Sprachen
+// legitim identisch und werden dadurch NICHT als Kopie gewertet.
+const looksGerman = (text: string) =>
+  /[äöüßÄÖÜ]|\b(und|mit|aus|für|der|die|das|vom|im|auf|dazu|hausgemacht\w*)\b/i.test(text);
+
+// Verdächtig = Übersetzung fehlt ODER ist (normalisiert) identisch mit dem
+// deutschen Original, obwohl dieses deutsch aussieht
+const isSuspectTranslation = (de: string | undefined | null, translated: string | undefined | null): boolean => {
+  const source = (de ?? '').trim();
+  if (!source) return false; // kein Original → nichts zu übersetzen
+  const target = (translated ?? '').trim();
+  if (!target) return true; // fehlende Übersetzung
+  return normalizeText(source) === normalizeText(target) && looksGerman(source);
+};
+
+interface SuspectField {
+  id: number;
+  text: string; // deutscher Originaltext
+  apply: (translated: string) => void;
+}
+
+// Sammelt alle verdächtigen Felder einer Zielsprache (Titel, Untertitel,
+// Kategorien- und Gericht-Namen/-Beschreibungen) samt Setter
+const collectSuspects = (menu: ParsedMenu, lang: TargetLang): SuspectField[] => {
+  const suspects: SuspectField[] = [];
+  let nextId = 0;
+
+  const check = (de: string | undefined | null, translated: string | undefined | null, apply: (t: string) => void) => {
+    if (isSuspectTranslation(de, translated)) {
+      suspects.push({ id: nextId++, text: (de ?? '').trim(), apply });
+    }
+  };
+
+  const m = menu as unknown as Record<string, string>;
+  check(menu.title, m[`title_${lang}`], (t) => { m[`title_${lang}`] = t; });
+  check(menu.subtitle, m[`subtitle_${lang}`], (t) => { m[`subtitle_${lang}`] = t; });
+
+  for (const cat of menu.categories) {
+    const c = cat as unknown as Record<string, string>;
+    check(cat.name, c[`name_${lang}`], (t) => { c[`name_${lang}`] = t; });
+    check(cat.description, c[`description_${lang}`], (t) => { c[`description_${lang}`] = t; });
+    for (const item of cat.items) {
+      const i = item as unknown as Record<string, string>;
+      check(item.name, i[`name_${lang}`], (t) => { i[`name_${lang}`] = t; });
+      check(item.description, i[`description_${lang}`], (t) => { i[`description_${lang}`] = t; });
+    }
+  }
+
+  return suspects;
+};
+
+// Übersetzt eine Liste deutscher Texte in EINEM sprachspezifischen KI-Call
+const translateBatch = async (
+  entries: SuspectField[],
+  lang: TargetLang,
+  apiKey: string,
+): Promise<Map<number, string>> => {
+  const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'google/gemini-2.5-flash',
+      messages: [
+        {
+          role: 'system',
+          content: `Du bist ein professioneller Gastronomie-Übersetzer für das italienische Restaurant "STORIA" in München. Übersetze deutsche Speisekarten-Texte ins ${LANG_NAMES[lang]}. REGELN: 1. Liefere ECHTE Übersetzungen, NIEMALS den deutschen Text kopieren. 2. Italienische Gerichtnamen (z.B. "Spaghetti alla Carbonara", "Tiramisu") bleiben unverändert. 3. Der Restaurantname "STORIA" wird niemals übersetzt. 4. Antworte NUR mit dem Tool-Call.`,
+        },
+        {
+          role: 'user',
+          content: JSON.stringify({ texts: entries.map((e) => ({ id: e.id, text: e.text })) }),
+        },
+      ],
+      tools: [
+        {
+          type: 'function',
+          function: {
+            name: 'submit_translations',
+            description: `Liefert die ${LANG_NAMES[lang]}n Übersetzungen der übergebenen deutschen Texte`,
+            parameters: {
+              type: 'object',
+              properties: {
+                translations: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'number', description: 'ID des Originaltexts' },
+                      translation: { type: 'string', description: 'Übersetzter Text' },
+                    },
+                    required: ['id', 'translation'],
+                  },
+                },
+              },
+              required: ['translations'],
+            },
+          },
+        },
+      ],
+      tool_choice: { type: 'function', function: { name: 'submit_translations' } },
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`AI gateway error (retranslate ${lang}): ${response.status}`);
+  }
+
+  const data = await response.json();
+  const toolCall = data.choices?.[0]?.message?.tool_calls?.[0];
+  if (!toolCall || toolCall.function.name !== 'submit_translations') {
+    throw new Error(`Invalid AI response format (retranslate ${lang})`);
+  }
+
+  const parsed = JSON.parse(toolCall.function.arguments) as {
+    translations?: Array<{ id: number; translation: string }>;
+  };
+
+  const result = new Map<number, string>();
+  for (const entry of parsed.translations ?? []) {
+    if (typeof entry.id === 'number' && typeof entry.translation === 'string') {
+      result.set(entry.id, entry.translation.trim());
+    }
+  }
+  return result;
+};
+
+// Validiert alle Zielsprachen und repariert Verdachtsfälle per Nachübersetzung
+const validateAndRepairTranslations = async (menu: ParsedMenu, apiKey: string): Promise<void> => {
+  for (const lang of TARGET_LANGS) {
+    for (let round = 1; round <= MAX_TRANSLATION_ROUNDS; round++) {
+      const suspects = collectSuspects(menu, lang);
+      if (suspects.length === 0) break;
+
+      console.log(`Nachübersetzung ${lang} (Runde ${round}/${MAX_TRANSLATION_ROUNDS}): ${suspects.length} verdächtige Felder`);
+      try {
+        const translations = await translateBatch(suspects, lang, apiKey);
+        for (const suspect of suspects) {
+          const translated = translations.get(suspect.id);
+          if (translated) {
+            suspect.apply(translated);
+          }
+        }
+      } catch (err) {
+        console.error(`Nachübersetzung ${lang} (Runde ${round}) fehlgeschlagen:`, err);
+        break; // weitere Runden für diese Sprache abbrechen
+      }
+    }
+
+    // Nach den Retry-Runden: verbliebene deutsche Kopien LEEREN statt
+    // deutschen Text als vermeintliche Übersetzung zu speichern
+    const remaining = collectSuspects(menu, lang);
+    for (const suspect of remaining) {
+      suspect.apply('');
+    }
+    if (remaining.length > 0) {
+      console.warn(`⚠ ${lang}: ${remaining.length} Feld(er) nach ${MAX_TRANSLATION_ROUNDS} Runden weiterhin unübersetzt – Felder geleert (Frontend-Fallback auf Deutsch)`);
+    } else {
+      console.log(`✅ ${lang}: alle Übersetzungen valide`);
+    }
+  }
+};
+
 
 async function reportEdgeError(source: string, message: string, payload?: unknown) {
   try {
@@ -266,46 +455,11 @@ Antworte NUR mit dem strukturierten Tool-Call, keine zusätzlichen Erklärungen.
     }
 
     const rawMenu: ParsedMenu = JSON.parse(toolCall.function.arguments);
-    
-    // Validate Italian translations are not just copies of German text
-    const validateTranslations = (menu: ParsedMenu) => {
-      let copiedCount = 0;
-      const isLikelyGerman = (de: string, it: string) => {
-        if (!de || !it) return false;
-        // If IT is identical to DE and contains typical German characters/words, it's likely a copy
-        return it === de && /[äöüßÄÖÜ]|und |mit |aus |für |der |die |das /i.test(de);
-      };
 
-      menu.categories.forEach(cat => {
-        if (isLikelyGerman(cat.name, cat.name_it)) {
-          console.warn(`⚠ Category name_it is German copy: "${cat.name_it}"`);
-          copiedCount++;
-        }
-        cat.items.forEach(item => {
-          if (isLikelyGerman(item.name, item.name_it)) {
-            console.warn(`⚠ Item name_it is German copy: "${item.name_it}"`);
-            copiedCount++;
-          }
-          if (isLikelyGerman(item.description || '', item.description_it || '')) {
-            console.warn(`⚠ Item description_it is German copy: "${item.description_it}"`);
-            copiedCount++;
-          }
-        });
-      });
+    // Validierungs- und Nachübersetzungs-Runde: fehlende Übersetzungen und
+    // deutsche Kopien in EN/IT/FR werden repariert statt nur geloggt
+    await validateAndRepairTranslations(rawMenu, LOVABLE_API_KEY);
 
-      if (copiedCount > 0) {
-        console.error(`❌ ${copiedCount} Italian field(s) appear to be copies of German text instead of translations!`);
-      } else {
-        console.log('✅ Italian translations appear to be genuine translations');
-      }
-      return copiedCount;
-    };
-    
-    const copiedFields = validateTranslations(rawMenu);
-    if (copiedFields > 0) {
-      console.log(`Warning: ${copiedFields} IT translations are likely German copies - DB trigger will fallback to DE for empty fields`);
-    }
-    
     console.log(`Parsed ${rawMenu.categories.length} categories`);
 
     return new Response(JSON.stringify({ 

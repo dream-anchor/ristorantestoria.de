@@ -45,6 +45,10 @@ interface ParsedItem {
   price_display_en: string;
   price_display_it: string;
   price_display_fr: string;
+  // LMIV-relevante Felder aus der PDF-Extraktion (parse-menu-pdf)
+  allergens?: string;
+  is_vegetarian?: boolean;
+  is_vegan?: boolean;
   sort_order: number;
 }
 
@@ -253,92 +257,52 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
     if (!parsedData) return;
 
     setIsSaving(true);
+    // ID des unveröffentlichten Staging-Menüs (für Aufräumen im Fehlerfall)
+    let stagingMenuId: string | null = null;
     try {
-      let menuId: string;
-
-      if (existingMenuId) {
-        const { error: updateError } = await supabase
-          .from('menus')
-          .update({
-            title: parsedData.title,
-            title_en: parsedData.title_en,
-            title_it: parsedData.title_it,
-            title_fr: parsedData.title_fr,
-            subtitle: parsedData.subtitle,
-            subtitle_en: parsedData.subtitle_en,
-            subtitle_it: parsedData.subtitle_it,
-            subtitle_fr: parsedData.subtitle_fr,
-            is_published: false,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', existingMenuId);
-
-        if (updateError) throw updateError;
-        menuId = existingMenuId;
-
-        await supabase
-          .from('menu_categories')
-          .delete()
-          .eq('menu_id', menuId);
-      } else {
+      // Ziel-Menü ermitteln – die bestehende Karte bleibt bis zum atomischen
+      // Tausch unverändert online (kein is_published=false mehr vorab!)
+      let targetMenuId: string | null = existingMenuId ?? null;
+      if (!targetMenuId) {
+        // Ältestes Menü dieses Typs = Live-Karte (robust gegen verwaiste Staging-Zeilen)
         const { data: existingMenu } = await supabase
           .from('menus')
           .select('id')
           .eq('menu_type', menuType)
+          .order('created_at', { ascending: true })
+          .limit(1)
           .maybeSingle();
-
-        if (existingMenu) {
-          const { error: updateError } = await supabase
-            .from('menus')
-            .update({
-              title: parsedData.title,
-              title_en: parsedData.title_en,
-              title_it: parsedData.title_it,
-              title_fr: parsedData.title_fr,
-              subtitle: parsedData.subtitle,
-              subtitle_en: parsedData.subtitle_en,
-              subtitle_it: parsedData.subtitle_it,
-              subtitle_fr: parsedData.subtitle_fr,
-              is_published: false,
-              updated_at: new Date().toISOString(),
-            })
-            .eq('id', existingMenu.id);
-
-          if (updateError) throw updateError;
-          menuId = existingMenu.id;
-
-          await supabase
-            .from('menu_categories')
-            .delete()
-            .eq('menu_id', menuId);
-        } else {
-          const { data: newMenu, error: insertError } = await supabase
-            .from('menus')
-            .insert({
-              menu_type: menuType,
-              title: parsedData.title,
-              title_en: parsedData.title_en,
-              title_it: parsedData.title_it,
-              title_fr: parsedData.title_fr,
-              subtitle: parsedData.subtitle,
-              subtitle_en: parsedData.subtitle_en,
-              subtitle_it: parsedData.subtitle_it,
-              subtitle_fr: parsedData.subtitle_fr,
-              is_published: false,
-            })
-            .select()
-            .single();
-
-          if (insertError) throw insertError;
-          menuId = newMenu.id;
-        }
+        targetMenuId = existingMenu?.id ?? null;
       }
 
+      // 1. Neues Menü zunächst UNVERÖFFENTLICHT als Staging anlegen
+      //    (für Besucher unsichtbar, RLS zeigt nur veröffentlichte Menüs)
+      const { data: stagingMenu, error: stagingError } = await supabase
+        .from('menus')
+        .insert({
+          menu_type: menuType,
+          title: parsedData.title,
+          title_en: parsedData.title_en,
+          title_it: parsedData.title_it,
+          title_fr: parsedData.title_fr,
+          subtitle: parsedData.subtitle,
+          subtitle_en: parsedData.subtitle_en,
+          subtitle_it: parsedData.subtitle_it,
+          subtitle_fr: parsedData.subtitle_fr,
+          is_published: false,
+        })
+        .select()
+        .single();
+
+      if (stagingError) throw stagingError;
+      stagingMenuId = stagingMenu.id;
+
+      // 2. Kategorien & Gerichte unter dem Staging-Menü anlegen
       for (const category of parsedData.categories) {
         const { data: newCat, error: catError } = await supabase
           .from('menu_categories')
           .insert({
-            menu_id: menuId,
+            menu_id: stagingMenu.id,
             name: category.name,
             name_en: category.name_en || null,
             name_it: category.name_it || null,
@@ -354,37 +318,45 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
 
         if (catError) throw catError;
 
-        for (const item of category.items) {
+        if (category.items.length > 0) {
+          const itemsToInsert = category.items.map(item => ({
+            category_id: newCat.id,
+            name: item.name,
+            name_en: item.name_en || null,
+            name_it: item.name_it || null,
+            name_fr: item.name_fr || null,
+            description: item.description || null,
+            description_en: item.description_en || null,
+            description_it: item.description_it || null,
+            description_fr: item.description_fr || null,
+            price: item.price,
+            price_display: item.price_display,
+            // LMIV: Allergene & Vegetarisch/Vegan-Flags aus der PDF-Extraktion speichern
+            allergens: item.allergens || null,
+            is_vegetarian: item.is_vegetarian ?? false,
+            is_vegan: item.is_vegan ?? false,
+            sort_order: Math.floor(item.sort_order),
+          }));
+
           const { error: itemError } = await supabase
             .from('menu_items')
-            .insert({
-              category_id: newCat.id,
-              name: item.name,
-              name_en: item.name_en || null,
-              name_it: item.name_it || null,
-              name_fr: item.name_fr || null,
-              description: item.description || null,
-              description_en: item.description_en || null,
-              description_it: item.description_it || null,
-              description_fr: item.description_fr || null,
-              price: item.price,
-              price_display: item.price_display,
-              sort_order: Math.floor(item.sort_order),
-            });
+            .insert(itemsToInsert);
 
           if (itemError) throw itemError;
         }
       }
 
-      const { error: publishError } = await supabase
-        .from('menus')
-        .update({
-          is_published: true,
-          published_at: new Date().toISOString(),
-        })
-        .eq('id', menuId);
+      // 3. Atomischer Tausch in EINER Transaktion: alte Kategorien raus,
+      //    neue rein, Staging-Menü aufgeräumt. Schlägt die RPC fehl,
+      //    bleibt die alte Karte vollständig unangetastet online.
+      const { error: publishError } = await supabase.rpc('publish_menu_atomic', {
+        p_staging_menu_id: stagingMenu.id,
+        p_target_menu_id: targetMenuId ?? undefined,
+      });
 
       if (publishError) throw publishError;
+      // Staging wurde von der RPC übernommen bzw. gelöscht
+      stagingMenuId = null;
 
       queryClient.invalidateQueries({ queryKey: ['special-menus'] });
       queryClient.invalidateQueries({ queryKey: ['published-special-menus'] });
@@ -401,10 +373,16 @@ const MenuUploader = ({ menuType, menuLabel, existingMenuId }: MenuUploaderProps
       setShowSpellCheck(false);
       setSpellCheckComplete(false);
       setSpellCheckErrors([]);
-      
+
+      // Deploy NUR nach erfolgreichem atomischem Publish auslösen
       triggerGitHubDeploy();
     } catch (err) {
       console.error('Save error:', err);
+      // Fehlerfall: Staging-Daten aufräumen (Kategorien/Items via CASCADE) –
+      // die alte Karte war zu keinem Zeitpunkt offline
+      if (stagingMenuId) {
+        await supabase.from('menus').delete().eq('id', stagingMenuId);
+      }
       toast.error('Fehler beim Speichern des Menüs');
     } finally {
       setIsSaving(false);
