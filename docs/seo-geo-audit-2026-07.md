@@ -1,9 +1,9 @@
 # Full SEO / GEO Audit — Juli 2026 (inkl. Google Business Profile)
 
 **Stand:** 2026-07-05 | **Ziel:** Mehr zahlende Gäste (Reservierungen, Anrufe, Laufkundschaft)
-**Methodik:** Live-Site-Checks (HTML, robots.txt, sitemap.xml, llms.txt), Codebase-Analyse, GSC-Baseline (`keyword-rank-baseline-2026-06-29.md`), PSI-Snapshots (26.06.), gecachte GBP-Reviews, Web-Recherche (Listicles, Verzeichnisse). Baut auf `geo-audit-2026-05.md`, `seo-strategy.md`, `seo-log.md`, `outreach-listings-2026.md` auf — dieses Audit berichtet **Deltas + neue Befunde**.
+**Methodik:** Live-Site-Checks (HTML, robots.txt, sitemap.xml, llms.txt), Codebase-Analyse, GSC-Baseline (`keyword-rank-baseline-2026-06-29.md`), PSI-Snapshots (26.06.), gecachte GBP-Reviews, Web-Recherche (Listicles, Verzeichnisse) sowie **DataForSEO via Composio** (Live-SERPs mobil/München, Google-Maps-Rankings, Google-Ads-Suchvolumina, Stand 05.07.). Baut auf `geo-audit-2026-05.md`, `seo-strategy.md`, `seo-log.md`, `outreach-listings-2026.md` auf — dieses Audit berichtet **Deltas + neue Befunde**.
 
-**Nicht prüfbar in dieser Session:** GBP-API live (kein `.env`/Token im Container), GSC live, Semrush (Plan ohne MCP-Zugang). Betroffene Punkte sind als „manuell prüfen" markiert.
+**Nicht prüfbar in dieser Session:** GBP-API live (kein `.env`/Token im Container), GSC live (Composio-Call erfordert Genehmigung), Semrush (Plan ohne MCP-Zugang). Betroffene Punkte sind als „manuell prüfen" markiert.
 
 ---
 
@@ -11,16 +11,16 @@
 
 | Bereich | Score | Kritischster Befund |
 |---------|-------|---------------------|
-| Technical SEO | 🔴 6/10 | **P0: Canonical-Bug — alle EN/IT/FR-Seiten zeigen per Canonical auf die DE-URL** |
+| Technical SEO | 🔴 6/10 | **P0: Canonical-Bug — alle EN/IT/FR-Seiten zeigen per Canonical auf die DE-URL** → ✅ **in diesem PR gefixt** |
 | On-Page / Content | 🟢 9/10 | Sehr stark (Titles, Descriptions, Schema, Landing-Page-Architektur) |
-| Performance | 🟡 7/10 | Mobile LCP 3,5 s; 1,4 MB Haupt-JS-Bundle; Cache-Header fehlen |
-| Local SEO / GBP | 🟡 7/10 | 4,5★/810 stark; TripAdvisor 3,5★ + Faktenfehler; GBP-Basics offen (Fotos/Posts/Q&A) |
+| Performance | 🟡 7/10 | Mobile LCP 3,5 s; 1,4 MB Haupt-JS-Bundle (Cache-Header sind live bereits korrekt) |
+| Local SEO / GBP | 🔴 5/10 | **STORIA ist in KEINEM Local Pack und nicht in den Maps-Top-30 vertreten** (DataForSEO 05.07.) |
 | GEO (AI-Sichtbarkeit) | 🟡 6/10 | On-Site top (llms.txt, robots, SSR) — aber **in keinem relevanten Listicle vertreten** |
 
 **Die 3 Hebel mit dem größten Effekt auf zahlende Gäste:**
-1. **Canonical-Bug fixen (P0, Code, ~1 h)** — 75 % aller 162 Sitemap-URLs (EN/IT/FR) signalisieren Google aktuell „indexiere mich nicht, nimm die DE-Seite". München-Touristen suchen englisch/italienisch/französisch — genau diese Gäste gehen verloren.
-2. **Listicle-Outreach JETZT versenden** (`outreach-listings-2026.md` liegt fertig vor) — ChatGPT, Perplexity und Google AI Overviews zitieren fast ausschließlich diese Listen. STORIA fehlt in **allen** (heute verifiziert). WM-Public-Viewing-Fenster schließt am **19.07.2026**.
-3. **GBP-Betrieb starten** (Fotos, wöchentliche Posts, Q&A, Review-QR) — die „in der Nähe"-Keywords haben laut GSC-Baseline null Impressionen; das ist fast reines GBP-/Local-Pack-Terrain.
+1. **GBP-Maps-Sichtbarkeit diagnostizieren (P0 Local)** — DataForSEO zeigt: STORIA erscheint weder im Local Pack der 5 Kern-Queries noch in den Top 30 der Maps-Ergebnisse für „italienisches restaurant" (München) — obwohl Wettbewerber mit nur 172 Bewertungen gelistet sind. Das Local Pack bedient die kaufbereiteste Nachfrage („in der Nähe": 0 Website-Impressionen laut GSC). Siehe §4.2a.
+2. **Listicle-Outreach JETZT versenden** (`outreach-listings-2026.md` liegt fertig vor) — ChatGPT, Perplexity und Google AI Overviews zitieren fast ausschließlich diese Listen; mitvergnuegen.com rankt organisch auf #1–3 bei ALLEN Restaurant-Queries. STORIA fehlt in **allen** Listen (verifiziert). WM-Public-Viewing-Fenster schließt am **19.07.2026**.
+3. ~~Canonical-Bug fixen~~ ✅ **in diesem PR umgesetzt** (`SEO.tsx` lokalisiert Canonicals jetzt pro Sprache; im Prerender-Build verifiziert) — nach Deploy: Sitemap neu einreichen + Priority-URLs via `request-indexing.mjs` pushen.
 
 ---
 
@@ -42,7 +42,7 @@ Auch `og:url` ist auf den EN/IT/FR-Seiten falsch (zeigt auf die DE-URL).
 
 **Impact:** Canonical und hreflang widersprechen sich. Google verlangt selbstreferenzierende Canonicals innerhalb eines hreflang-Clusters; bei Konflikt wird häufig die kanonisierte (DE-)Seite konsolidiert → EN/IT/FR-Seiten fallen aus dem Index oder ranken nie. Das betrifft ~120 von 162 Sitemap-URLs. Touristen-Suchen („italian restaurant munich", „pizzeria napoletana monaco di baviera") laufen ins Leere bzw. auf die DE-Seite.
 
-**Fix:** In `SEO.tsx` das Canonical aus aktueller Sprache + `slugs.json` ableiten (analoge Logik zu hreflang), `og:url` mitziehen. Danach: Sitemap neu einreichen, Priority-URLs über `request-indexing.mjs` pushen.
+**Fix:** ✅ **Umgesetzt in diesem PR.** `SEO.tsx` lokalisiert das Canonical (und damit `og:url`) jetzt per Reverse-Lookup über `slugs.json` für die aktive Sprache; bereits lokalisierte Pfade und dynamische Slugs bleiben unverändert. Im Prerender-Build verifiziert: `/en/` → `/en/`, `/en/reservation/` → `/en/reservation/`, `/fr/carte/` → `/fr/carte/`; DE-Seiten und hreflang unverändert. **Nach Deploy:** Sitemap neu einreichen, Priority-URLs über `request-indexing.mjs` pushen.
 
 ### 1.2 🟡 Sitemap: `lastmod` = Build-Datum für alle URLs
 
@@ -51,7 +51,7 @@ Auch `og:url` ist auf den EN/IT/FR-Seiten falsch (zeigt auf die DE-URL).
 
 ### 1.3 🟡 Geo-Koordinaten-Mismatch
 
-Meta-Tags (`SEO.tsx`): `48.1467;11.5641` vs. JSON-LD (`storia-entity.ts`): `48.1456;11.5656`. Kleine, aber unnötige NAP-Inkonsistenz — auf einen Wert (den GBP-Wert) vereinheitlichen.
+Meta-Tags (`SEO.tsx`): `48.1467;11.5641` vs. JSON-LD (`storia-entity.ts`): `48.1456;11.5656`. Kleine, aber unnötige NAP-Inkonsistenz. ✅ **Umgesetzt in diesem PR:** `SEO.tsx` bezieht die Koordinaten jetzt aus `storia-entity.ts` (Single Source of Truth).
 
 ### 1.4 ✅ Stark
 
@@ -69,7 +69,7 @@ Meta-Tags (`SEO.tsx`): `48.1467;11.5641` vs. JSON-LD (`storia-entity.ts`): `48.1
 | Problem | Messwert | Fix |
 |---------|----------|-----|
 | Haupt-JS-Bundle | `index-*.js` **1,39 MB raw / 405 KB gzip** (heute gemessen); dazu Supabase-Chunk 174 KB auf Marketing-Seiten | Admin-/Supabase-Code aus dem Public-Bundle splitten (Admin darf lazy sein — Pre-Render-Regeln erlauben das explizit) |
-| Cache-Lifetimes | Est. Savings **1.088 KiB** (PSI) | `.htaccess`: `Cache-Control: public, max-age=31536000, immutable` für `/assets/*` (gehashte Dateinamen) |
+| Cache-Lifetimes | Est. Savings 1.088 KiB (PSI 26.06.) | ✅ **Bereits behoben** — live verifiziert (05.07.): Assets liefern `Cache-Control: public, max-age=31536000, immutable`, HTML `max-age=0, must-revalidate`. Rest-Savings betreffen Third-Party (GTM/Clarity/Elfsight) |
 | Image Delivery | Est. Savings 678 KiB (Desktop-PSI) | AVIF-Varianten ergänzen (aktuell nur WebP, 0× AVIF im Code), responsive `srcset` prüfen |
 | Unused JS | 320 KiB | Folgt aus Bundle-Split |
 
@@ -102,6 +102,37 @@ Mobile-LCP ist der einzige CWV-Ausreißer — bei einem Restaurant kommt der Gro
 - Jahresziel „500+ Google Reviews Q3" ist mit 810 **längst übertroffen** → `seo-log.md` aktualisieren, neues Ziel setzen (z. B. 1.000 + Halten der 4,5★).
 - UTM-Tracking vom GBP-Profil ist aktiv (GSC zeigt `/?utm_source=gmb&utm_medium=organic&utm_campaign=profile`) ✅
 - Review-Antwort-Playbook (`gbp-review-responses.md`) existiert und ist hochwertig ✅
+
+### 4.2a 🔴 P0 Local — STORIA fehlt im Local Pack UND in Google Maps (DataForSEO, 05.07.)
+
+Live-Abfragen (mobil, Standort München, google.de) über DataForSEO:
+
+| Query | Local Pack (Top 12) | Maps (Top 30) |
+|-------|--------------------|----|
+| italienisches restaurant münchen | ❌ nicht enthalten | — |
+| italiener maxvorstadt | ❌ nicht enthalten | — |
+| beste pizza münchen | ❌ nicht enthalten | — |
+| neapolitanische pizza münchen | ❌ nicht enthalten | — |
+| italienisches restaurant (Maps) | — | ❌ **nicht in Top 30** |
+| pizzeria münchen maxvorstadt (Maps) | — | ❌ **nicht in Top 31** |
+
+Das ist der gravierendste Local-Befund: Mit 4,5★/810 Bewertungen müsste STORIA hier auftauchen — es erscheinen aber Wettbewerber mit deutlich weniger Bewertungen (Ciao Napoli: 4,9★/172; Napoli Slice Maxvorstadt: 4,9★/273; MOZZAMO: 4,7★/433; La Cicchetteria: 4,8★/39!). Benchmarks der Local-Pack-Gewinner: Pizzarei 4,7★/2.034, The Italian Shot 4,4★/1.069, Mentor's 4,9★/965.
+
+**Mögliche Ursachen (im GBP prüfen, Reihenfolge = Wahrscheinlichkeit):**
+1. **Primärkategorie/Kategorien** — rankt Google STORIA überhaupt als „Italienisches Restaurant"/„Pizzeria"? (Wettbewerber-Kategorien in den Maps-Daten: „Italienisch", „Pizzeria")
+2. **Rating-Schwelle** — 4,5★ liegt unter dem 4,6–4,9-Niveau fast aller Local-Pack-Treffer; jüngere Review-Velocity zählt stärker als Gesamtzahl.
+3. **Profil-Aktivität/Prominenz** — Fotos, Posts, Q&A (alle offen, §4.2) sind genau die Prominenz-Signale, die fehlen.
+4. Öffnungsstatus/Attribute/Duplikat-Listing — Sanity-Check im GBP-Dashboard.
+
+**Kontext Suchvolumen (Google Ads, DE):** italiener münchen **9.900**/Monat, pizza münchen 5.400, pizzeria münchen 5.400, italienisches restaurant münchen 4.400, beste pizza münchen 1.300, neapolitanische pizza münchen 1.300, restaurant maxvorstadt 480, italiener maxvorstadt 320. Local Pack + Maps fangen den Großteil dieser Nachfrage ab — die Website allein sieht davon nur den Rest (GSC: „in der Nähe"-Keywords = 0 Impressionen). **Jeder Platz im Local Pack ist hier mehr wert als 5 organische Positionen.**
+
+**Organische SERP-Positionen (mobil, München, 05.07. — Ergänzung zur GSC-Baseline):**
+- `beste pizza münchen` → **#5** (`/pizza-muenchen/`) — Seite-1 erreicht, Baseline war Pos 11 ✅
+- `neapolitanische pizza münchen` → **#7** (`/neapolitanische-pizza-muenchen/`)
+- `italiener maxvorstadt` → **#7 Homepage** + #20 `/italienisches-restaurant-muenchen/` — **Kannibalisierung live bestätigt** (§3)
+- `italienisches restaurant münchen` → nicht in Top 20 (organisch dominieren TripAdvisor, Mit Vergnügen, Michelin, Quandoo)
+- `firmenfeier location münchen` → nicht in Top 20; es ranken Portale (munich-eventlocations #1, fiylo #2, eventinc #4) → **Einträge auf diesen Portalen schlagen eigenes Ranking** (deckt sich mit Outreach-Liste)
+- **Keine AI Overviews** auf diesen Queries (mobil/München) → GEO-Traffic läuft hier weiterhin über Listicles + Local Pack, nicht über Google-KI-Boxen.
 
 ### 4.2 Offene GBP-Maßnahmen (aus `seo-log.md`, weiterhin unerledigt)
 
@@ -159,10 +190,11 @@ Positiv: Bei „italienisches Restaurant Maxvorstadt" erscheint STORIA bereits i
 ### Sofort (Woche 1)
 | # | Maßnahme | Aufwand | Typ |
 |---|----------|---------|-----|
-| 1 | **Canonical-Fix EN/IT/FR** (`SEO.tsx`) + Deploy + Re-Indexing der Priority-URLs | ~1–2 h Code | P0 Bug |
+| 1 | ~~Canonical-Fix EN/IT/FR~~ ✅ in diesem PR — nach Deploy: Sitemap + Priority-URLs neu einreichen | 15 min Rest | P0 Bug |
+| 1b | **GBP-Maps-Diagnose (§4.2a):** Primärkategorie, Kategorien, Öffnungsstatus, Duplikate im GBP-Dashboard prüfen | 30 min | P0 Owner-Login |
 | 2 | **WM-Outreach-Mails versenden** (Fenster bis 19.07.!) | 1 h | Owner |
 | 3 | TripAdvisor-Faktenfehler korrigieren | 15 min | Owner-Login |
-| 4 | Cache-Header für `/assets/*` in `.htaccess` | 30 min | Code |
+| 4 | ~~Cache-Header~~ ✅ bereits live korrekt (verifiziert 05.07.) | — | erledigt |
 
 ### 30 Tage
 | # | Maßnahme | Aufwand | Typ |
@@ -179,7 +211,7 @@ Positiv: Bei „italienisches Restaurant Maxvorstadt" erscheint STORIA bereits i
 |---|----------|---------|-----|
 | 11 | AVIF-Bildvarianten + `srcset` | 0,5 Tag | Code |
 | 12 | Sitemap-lastmod pro Route (Git-Datum) | 2 h | Code |
-| 13 | Geo-Koordinaten vereinheitlichen | 15 min | Code |
+| 13 | ~~Geo-Koordinaten vereinheitlichen~~ ✅ in diesem PR | — | erledigt |
 | 14 | `/weihnachtsfeier-muenchen/` Content-Refresh + GBP-Posts ab September (Q4 = umsatzstärkstes Event-Geschäft) | 0,5 Tag | Code+Owner |
 | 15 | `geo-monitor.mjs` monatlich + KPI-Review in `seo-log.md` | laufend | Ops |
 

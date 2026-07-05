@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "@/contexts/LanguageContext";
 import allSlugs from "@/config/slugs.json";
+import { STORIA } from "@/config/storia-entity";
 
 const BASE_URL = "https://www.ristorantestoria.de";
 const LANGUAGES = ["de", "en", "it", "fr"] as const;
@@ -51,6 +52,73 @@ function normalizeTrailingSlash(path: string): string {
   if (lastSegment.includes(".")) return path;
   // Trailing Slash hinzufügen falls nicht vorhanden
   return path.endsWith("/") ? path : path + "/";
+}
+
+/**
+ * Zerlegt einen canonical-Pfad in Pfad-Sprache und lokalisierten Slug.
+ * Absolute URLs werden auf ihren Pfad reduziert.
+ */
+function parseCanonicalPath(canonical: string): { pathLang: string; slug: string } {
+  let path = canonical;
+  if (path.startsWith("http")) {
+    try {
+      path = new URL(path).pathname;
+    } catch {
+      path = "/";
+    }
+  }
+  path = path.split("#")[0].split("?")[0];
+  if (!path.startsWith("/")) path = "/" + path;
+  const trimmed = path.replace(/\/$/, "");
+
+  let pathLang = "de";
+  let slug = trimmed.slice(1);
+  for (const lang of ["en", "it", "fr"]) {
+    if (trimmed === `/${lang}`) {
+      pathLang = lang;
+      slug = "";
+      break;
+    }
+    if (trimmed.startsWith(`/${lang}/`)) {
+      pathLang = lang;
+      slug = trimmed.slice(lang.length + 2);
+      break;
+    }
+  }
+  return { pathLang, slug };
+}
+
+/**
+ * Lokalisiert einen canonical-Pfad für die aktive Sprache.
+ * Viele Seiten übergeben statisch den DE-Basis-Pfad; auf EN/IT/FR-Routen muss
+ * das Canonical aber selbstreferenzierend sein, sonst widerspricht es hreflang
+ * und Google konsolidiert die Sprachversionen auf die DE-URL.
+ * Slugs, die nicht in slugs.json auflösbar sind (z. B. dynamische
+ * Anlass-Slugs), bleiben unverändert — diese Seiten lokalisieren selbst.
+ */
+function localizeCanonicalPath(canonical: string, language: string): string {
+  const { pathLang, slug } = parseCanonicalPath(canonical);
+  if (pathLang === language) return canonical;
+
+  if (slug === "") {
+    return language === "de" ? "/" : `/${language}/`;
+  }
+
+  const langSlugs = (allSlugs as any)[pathLang] as Record<string, string> | undefined;
+  if (!langSlugs) return canonical;
+
+  let baseSlug: string | null = null;
+  for (const [base, localized] of Object.entries(langSlugs)) {
+    if (localized === slug) {
+      baseSlug = base;
+      break;
+    }
+  }
+  if (!baseSlug) return canonical;
+
+  const targetSlug = (allSlugs as any)[language]?.[baseSlug];
+  if (targetSlug === undefined || targetSlug === null) return canonical;
+  return language === "de" ? `/${targetSlug}` : `/${language}/${targetSlug}`;
 }
 
 /**
@@ -144,10 +212,11 @@ const SEO = ({
     ? (title.includes('STORIA') ? title : `${title} – STORIA München`)
     : "STORIA – Ristorante Pizzeria Bar München";
 
-  // Kanonische URL normalisiert
-  const canonicalUrl = canonical
-    ? buildCanonicalUrl(canonical)
-    : `${BASE_URL}/`;
+  // Kanonische URL normalisiert — für die aktive Sprache lokalisiert,
+  // damit Canonical und hreflang nie widersprechen (self-referencing).
+  const localizedCanonical = hreflangUrls?.[language as keyof typeof hreflangUrls]
+    || (canonical ? localizeCanonicalPath(canonical, language) : (language === "de" ? "/" : `/${language}/`));
+  const canonicalUrl = buildCanonicalUrl(localizedCanonical);
 
   // OG-Image Fallback
   const ogImageUrl = ogImage || `${BASE_URL}/og-image.jpg`;
@@ -192,8 +261,8 @@ const SEO = ({
       {/* Geo-Tags für lokales SEO */}
       <meta name="geo.region" content="DE-BY" />
       <meta name="geo.placename" content="München" />
-      <meta name="geo.position" content="48.1467;11.5641" />
-      <meta name="ICBM" content="48.1467, 11.5641" />
+      <meta name="geo.position" content={`${STORIA.geo.lat};${STORIA.geo.lng}`} />
+      <meta name="ICBM" content={`${STORIA.geo.lat}, ${STORIA.geo.lng}`} />
 
       {/* hreflang — kein Fragment (react-helmet-async SSR-Kompatibilität) */}
       {!noHreflang && !noIndex && <link rel="alternate" hrefLang="de" href={effectiveHreflang.de} />}
