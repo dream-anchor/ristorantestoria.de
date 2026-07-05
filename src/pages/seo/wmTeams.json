@@ -1,10 +1,33 @@
 {
-  "_comment": "Team-Paarungen je Spiel-Slot. Wird automatisch von der GitHub Action 'Update WM Fixtures' gefuellt, sobald eine K.o.-Paarung feststeht (football-data.org). Manuelle Eintraege (z. B. Deutschland-Paraguay, TV-Sender) bleiben erhalten und werden nie ueberschrieben. Steht ein Slot hier NICHT (oder ohne teamA/teamB), rendert die Seite ihn als offenen Runden-Slot ('Gegner stehen noch nicht fest'). TV-Sender (ZDF/ARD) liefert keine API -> immer manuell.",
+  "_comment": "Team-Paarungen je Spiel-Slot. Bestaetigte Teams: name (de/en/it/fr) + Flaggen-Emoji aus scripts/wm-nations.mjs. Noch offene Gegner werden als Sieger-Platzhalter dargestellt (name lokalisiert 'Sieger X/Y', flag = beide Flaggen), damit Zuschauer die moegliche Paarung sehen. Stand: 05.07.2026 (K.o.-Phase). Slots ohne Eintrag (Halbfinale, Spiel um Platz 3, Finale) rendern als offener Runden-Slot.",
   "teams": {
-    "ger-par-2026-06-29": {
-      "teamA": { "name": { "de": "Deutschland", "en": "Germany", "it": "Germania", "fr": "Allemagne" }, "flag": "🇩🇪" },
-      "teamB": { "name": { "de": "Paraguay", "en": "Paraguay", "it": "Paraguay", "fr": "Paraguay" }, "flag": "🇵🇾" },
-      "tv": "ZDF"
+    "af-por-esp-2026-07-06": {
+      "teamA": { "name": { "de": "Portugal", "en": "Portugal", "it": "Portogallo", "fr": "Portugal" }, "flag": "🇵🇹" },
+      "teamB": { "name": { "de": "Spanien", "en": "Spain", "it": "Spagna", "fr": "Espagne" }, "flag": "🇪🇸" }
+    },
+    "af-arg-egy-2026-07-07": {
+      "teamA": { "name": { "de": "Argentinien", "en": "Argentina", "it": "Argentina", "fr": "Argentine" }, "flag": "🇦🇷" },
+      "teamB": { "name": { "de": "Ägypten", "en": "Egypt", "it": "Egitto", "fr": "Égypte" }, "flag": "🇪🇬" }
+    },
+    "af-sui-col-2026-07-07": {
+      "teamA": { "name": { "de": "Schweiz", "en": "Switzerland", "it": "Svizzera", "fr": "Suisse" }, "flag": "🇨🇭" },
+      "teamB": { "name": { "de": "Kolumbien", "en": "Colombia", "it": "Colombia", "fr": "Colombie" }, "flag": "🇨🇴" }
+    },
+    "vf-2026-07-09": {
+      "teamA": { "name": { "de": "Frankreich", "en": "France", "it": "Francia", "fr": "France" }, "flag": "🇫🇷" },
+      "teamB": { "name": { "de": "Marokko", "en": "Morocco", "it": "Marocco", "fr": "Maroc" }, "flag": "🇲🇦" }
+    },
+    "vf-2026-07-10": {
+      "teamA": { "name": { "de": "Sieger Portugal/Spanien", "en": "Winner Portugal/Spain", "it": "Vincente Portogallo/Spagna", "fr": "Vainqueur Portugal/Espagne" }, "flag": "🇵🇹🇪🇸" },
+      "teamB": { "name": { "de": "Sieger USA/Belgien", "en": "Winner USA/Belgium", "it": "Vincente USA/Belgio", "fr": "Vainqueur USA/Belgique" }, "flag": "🇺🇸🇧🇪" }
+    },
+    "vf-2026-07-11": {
+      "teamA": { "name": { "de": "Norwegen", "en": "Norway", "it": "Norvegia", "fr": "Norvège" }, "flag": "🇳🇴" },
+      "teamB": { "name": { "de": "Sieger Mexiko/England", "en": "Winner Mexico/England", "it": "Vincente Messico/Inghilterra", "fr": "Vainqueur Mexique/Angleterre" }, "flag": "🇲🇽🏴󠁧󠁢󠁥󠁮󠁧󠁿" }
+    },
+    "vf-2026-07-12": {
+      "teamA": { "name": { "de": "Sieger Argentinien/Ägypten", "en": "Winner Argentina/Egypt", "it": "Vincente Argentina/Egitto", "fr": "Vainqueur Argentine/Égypte" }, "flag": "🇦🇷🇪🇬" },
+      "teamB": { "name": { "de": "Sieger Schweiz/Kolumbien", "en": "Winner Switzerland/Colombia", "it": "Vincente Svizzera/Colombia", "fr": "Vainqueur Suisse/Colombie" }, "flag": "🇨🇭🇨🇴" }
     }
   }
 }

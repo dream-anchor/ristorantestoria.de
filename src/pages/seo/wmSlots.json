@@ -1,25 +1,25 @@
 {
-  "_comment": "Basis-Spielplan der WM-2026-Public-Viewing-Seite (Termine, Orte, Runden). Aendert sich praktisch nie. Quelle: FIFA-Spielplan, Stand 27.06.2026. Die Team-Paarungen liegen getrennt in wmTeams.json und werden automatisch (GitHub Action 'Update WM Fixtures') oder manuell gepflegt. Redaktionsregel: nur Deutschland-Spiele (jede Runde) + fremde Spiele ab Achtelfinale.",
+  "_comment": "Basis-Spielplan der WM-2026-Public-Viewing-Seite (Termine, Orte, Runden). Stand: K.o.-Phase, 05.07.2026. Redaktionsregel: kommende Achtelfinals (zu STORIA-Oeffnungszeiten spielbar) + alle Runden ab Viertelfinale. Team-Paarungen liegen getrennt in wmTeams.json (bestaetigte Teams ODER Sieger-Platzhalter fuer noch offene Gegner). Slots ohne Eintrag in wmTeams.json rendern als offener Runden-Slot.",
   "slots": [
     {
-      "id": "ger-par-2026-06-29",
-      "startISO": "2026-06-29T22:30:00+02:00",
-      "endISO": "2026-06-30T01:00:00+02:00",
-      "ort": "Boston",
-      "runde": "sechzehntelfinale"
-    },
-    {
-      "id": "af-2026-07-04",
-      "startISO": "2026-07-04T23:00:00+02:00",
-      "endISO": "2026-07-05T01:30:00+02:00",
-      "ort": "Philadelphia",
+      "id": "af-por-esp-2026-07-06",
+      "startISO": "2026-07-06T21:00:00+02:00",
+      "endISO": "2026-07-06T23:30:00+02:00",
+      "ort": "",
       "runde": "achtelfinale"
     },
     {
-      "id": "af-2026-07-05",
-      "startISO": "2026-07-05T22:00:00+02:00",
-      "endISO": "2026-07-06T00:30:00+02:00",
-      "ort": "New York / NJ",
+      "id": "af-arg-egy-2026-07-07",
+      "startISO": "2026-07-07T18:00:00+02:00",
+      "endISO": "2026-07-07T20:30:00+02:00",
+      "ort": "",
+      "runde": "achtelfinale"
+    },
+    {
+      "id": "af-sui-col-2026-07-07",
+      "startISO": "2026-07-07T22:00:00+02:00",
+      "endISO": "2026-07-08T00:30:00+02:00",
+      "ort": "",
       "runde": "achtelfinale"
     },
     {
@@ -30,10 +30,24 @@
       "runde": "viertelfinale"
     },
     {
+      "id": "vf-2026-07-10",
+      "startISO": "2026-07-10T22:00:00+02:00",
+      "endISO": "2026-07-11T00:30:00+02:00",
+      "ort": "",
+      "runde": "viertelfinale"
+    },
+    {
       "id": "vf-2026-07-11",
       "startISO": "2026-07-11T23:00:00+02:00",
       "endISO": "2026-07-12T01:30:00+02:00",
       "ort": "Miami",
+      "runde": "viertelfinale"
+    },
+    {
+      "id": "vf-2026-07-12",
+      "startISO": "2026-07-12T22:00:00+02:00",
+      "endISO": "2026-07-13T00:30:00+02:00",
+      "ort": "",
       "runde": "viertelfinale"
     },
     {
