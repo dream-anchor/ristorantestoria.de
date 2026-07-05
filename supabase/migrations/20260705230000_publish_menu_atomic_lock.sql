@@ -1,18 +1,11 @@
--- Atomisches Veröffentlichen von Speisekarten (Fix: destruktives Publizieren)
+-- Race-Condition-Fix für publish_menu_atomic (Codex-Review PR #32)
 --
--- Bisher lief das Publizieren clientseitig: Live-Menü depublizieren, alte
--- Kategorien löschen, neue in einer Schleife einfügen, wieder publizieren.
--- Brach der Vorgang ab, war die Karte offline bzw. halb befüllt.
---
--- Neuer Ablauf:
---   1. Der Uploader legt ein NEUES, UNVERÖFFENTLICHTES Staging-Menü an
---      (samt Kategorien/Items) – für Besucher unsichtbar (RLS).
---   2. Diese Funktion tauscht in EINER Transaktion die Inhalte:
---      alte Kategorien des Ziel-Menüs löschen (Items via CASCADE),
---      Staging-Kategorien umhängen, Titel übernehmen, veröffentlichen,
---      Staging-Menü entfernen.
---   3. Schlägt irgendetwas fehl, rollt die Transaktion zurück und die
---      alte Karte bleibt vollständig unangetastet online.
+-- Die zuvor via Lovable eingespielte Version tauscht Kategorien destruktiv,
+-- ohne die Ziel-Menü-Zeile zu sperren. Zwei gleichzeitige Publish-Vorgänge
+-- auf dasselbe Ziel (z. B. zwei Admin-Tabs) können so interleaven und
+-- Kategorien verlieren bzw. doppelt anhängen. Diese Migration ersetzt die
+-- Funktion 1:1 – ergänzt aber ein SELECT ... FOR UPDATE auf die Zielzeile,
+-- das gleichzeitige Aufrufe serialisiert.
 CREATE OR REPLACE FUNCTION public.publish_menu_atomic(
   p_staging_menu_id uuid,
   p_target_menu_id uuid DEFAULT NULL
@@ -85,7 +78,6 @@ BEGIN
 END;
 $function$;
 
--- Ausführung nur für eingeloggte Nutzer (Admin-Check erfolgt in der Funktion)
 REVOKE ALL ON FUNCTION public.publish_menu_atomic(uuid, uuid) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.publish_menu_atomic(uuid, uuid) FROM anon;
 GRANT EXECUTE ON FUNCTION public.publish_menu_atomic(uuid, uuid) TO authenticated;
