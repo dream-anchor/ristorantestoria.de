@@ -23,8 +23,16 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
     return null;
   }
 
-  const getLocalizedText = (de: string | null | undefined, en: string | null | undefined) => {
+  // Lokalisierter Text für alle 4 Sprachen mit Fallback auf Deutsch
+  const getLocalizedText = (
+    de: string | null | undefined,
+    en: string | null | undefined,
+    it?: string | null,
+    fr?: string | null
+  ) => {
     if (language === 'en' && en) return en;
+    if (language === 'it' && it) return it;
+    if (language === 'fr' && fr) return fr;
     return de || '';
   };
 
@@ -36,22 +44,22 @@ const BotContent = ({ menuType, menuId }: BotContentProps) => {
 
   const content = (
     <article>
-      <h2>{getLocalizedText(menu.title, menu.title_en)}</h2>
-      {menu.subtitle && <p>{getLocalizedText(menu.subtitle, menu.subtitle_en)}</p>}
-      
+      <h2>{getLocalizedText(menu.title, menu.title_en, menu.title_it, menu.title_fr)}</h2>
+      {menu.subtitle && <p>{getLocalizedText(menu.subtitle, menu.subtitle_en, menu.subtitle_it, menu.subtitle_fr)}</p>}
+
       {menu.categories.map((category) => (
         <section key={category.id}>
-          <h2>{getLocalizedText(category.name, category.name_en)}</h2>
+          <h2>{getLocalizedText(category.name, category.name_en, category.name_it, category.name_fr)}</h2>
           {category.description && (
-            <p>{getLocalizedText(category.description, category.description_en)}</p>
+            <p>{getLocalizedText(category.description, category.description_en, category.description_it, category.description_fr)}</p>
           )}
-          
+
           <ul>
             {category.items.map((item) => (
               <li key={item.id}>
-                <strong>{getLocalizedText(item.name, item.name_en)}</strong>
+                <strong>{getLocalizedText(item.name, item.name_en, item.name_it, item.name_fr)}</strong>
                 {item.description && (
-                  <span> – {getLocalizedText(item.description, item.description_en)}</span>
+                  <span> – {getLocalizedText(item.description, item.description_en, item.description_it, item.description_fr)}</span>
                 )}
                 {(item.price || item.price_display) && (
                   <span> – {formatPrice(item.price, item.price_display)}</span>

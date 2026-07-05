@@ -29,6 +29,10 @@ export interface ParsedMenuItem {
   price_display_en: string;
   price_display_it: string;
   price_display_fr: string;
+  // LMIV-relevante Felder (Allergene, Vegetarisch/Vegan)
+  allergens?: string;
+  is_vegetarian?: boolean;
+  is_vegan?: boolean;
   sort_order: number;
 }
 
@@ -334,6 +338,10 @@ export const useMenuContent = (menuId: string | undefined) => {
               price_display_en: (item as any).price_display_en || '',
               price_display_it: (item as any).price_display_it || '',
               price_display_fr: (item as any).price_display_fr || '',
+              // LMIV-Felder mitladen, damit sie beim erneuten Speichern erhalten bleiben
+              allergens: item.allergens || '',
+              is_vegetarian: item.is_vegetarian ?? false,
+              is_vegan: item.is_vegan ?? false,
               sort_order: item.sort_order || 0,
             })),
         })) || [],
@@ -482,9 +490,9 @@ export const useSaveMenuContent = () => {
             description_fr: item.description_fr || null,
             price: item.price ?? null,
             price_display: item.price_display || null,
-            allergens: (item as any).allergens || null,
-            is_vegetarian: (item as any).is_vegetarian ?? false,
-            is_vegan: (item as any).is_vegan ?? false,
+            allergens: item.allergens || null,
+            is_vegetarian: item.is_vegetarian ?? false,
+            is_vegan: item.is_vegan ?? false,
             sort_order: itemIndex,
           }));
 

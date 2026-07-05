@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Trash2, Plus, GripVertical, SpellCheck, Loader2, Languages } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -68,7 +69,7 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
     onUpdate({ ...data, categories: newCategories });
   };
 
-  const updateItem = (catIndex: number, itemIndex: number, field: keyof ParsedMenuItem, value: string | number | null) => {
+  const updateItem = (catIndex: number, itemIndex: number, field: keyof ParsedMenuItem, value: string | number | boolean | null) => {
     const newCategories = [...data.categories];
     const newItems = [...newCategories[catIndex].items];
     newItems[itemIndex] = { ...newItems[itemIndex], [field]: value };
@@ -99,6 +100,9 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
       price_display_en: '',
       price_display_it: '',
       price_display_fr: '',
+      allergens: '',
+      is_vegetarian: false,
+      is_vegan: false,
       sort_order: newCategories[catIndex].items.length,
     };
     newCategories[catIndex] = {
@@ -413,6 +417,34 @@ const MenuPreview = ({ data, onUpdate }: MenuPreviewProps) => {
                       className="min-h-[60px] resize-y text-base"
                       rows={2}
                     />
+                  </div>
+                  {/* LMIV: Allergene & Vegetarisch/Vegan vor dem Veröffentlichen prüfbar machen */}
+                  <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+                    <div className="flex-1">
+                      <label className="text-xs font-medium text-muted-foreground mb-1 block">Allergene (Kürzel, z.&nbsp;B. a,c,g)</label>
+                      <Input
+                        value={item.allergens || ''}
+                        onChange={(e) => updateItem(catIndex, itemIndex, 'allergens', e.target.value)}
+                        placeholder="a,c,g"
+                        className="text-base h-12"
+                      />
+                    </div>
+                    <div className="flex items-center gap-4 pb-2">
+                      <label className="flex items-center gap-2 text-sm cursor-pointer">
+                        <Checkbox
+                          checked={item.is_vegetarian ?? false}
+                          onCheckedChange={(checked) => updateItem(catIndex, itemIndex, 'is_vegetarian', checked === true)}
+                        />
+                        Vegetarisch
+                      </label>
+                      <label className="flex items-center gap-2 text-sm cursor-pointer">
+                        <Checkbox
+                          checked={item.is_vegan ?? false}
+                          onCheckedChange={(checked) => updateItem(catIndex, itemIndex, 'is_vegan', checked === true)}
+                        />
+                        Vegan
+                      </label>
+                    </div>
                   </div>
                 </div>
               ))}
