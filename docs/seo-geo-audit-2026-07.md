@@ -3,7 +3,7 @@
 **Stand:** 2026-07-05 | **Ziel:** Mehr zahlende Gäste (Reservierungen, Anrufe, Laufkundschaft)
 **Methodik:** Live-Site-Checks (HTML, robots.txt, sitemap.xml, llms.txt), Codebase-Analyse, GSC-Baseline (`keyword-rank-baseline-2026-06-29.md`), PSI-Snapshots (26.06.), gecachte GBP-Reviews, Web-Recherche (Listicles, Verzeichnisse) sowie **DataForSEO via Composio** (Live-SERPs mobil/München, Google-Maps-Rankings, Google-Ads-Suchvolumina, Stand 05.07.). Baut auf `geo-audit-2026-05.md`, `seo-strategy.md`, `seo-log.md`, `outreach-listings-2026.md` auf — dieses Audit berichtet **Deltas + neue Befunde**.
 
-**Nicht prüfbar in dieser Session:** GBP-API live (kein `.env`/Token im Container), GSC live (Composio-Call erfordert Genehmigung), Semrush (Plan ohne MCP-Zugang). Betroffene Punkte sind als „manuell prüfen" markiert.
+**Nicht prüfbar in dieser Session:** GBP-API live (kein `.env`/Token im Container), Semrush (Plan ohne MCP-Zugang). Betroffene Punkte sind als „manuell prüfen" markiert. **GSC live:** nachgeliefert am 05.07. über eine parallele Composio-Session → `gsc-kpi-baseline-2026-07-05.md`, Kernzahlen in §3 eingearbeitet.
 
 ---
 
@@ -83,7 +83,8 @@ Mobile-LCP ist der einzige CWV-Ausreißer — bei einem Restaurant kommt der Gro
 - Landing-Page-Architektur deckt alle Money-Intents ab (Lunch, Aperitivo, Firmenfeier, Geburtstag, romantisches Dinner, Pizza, Hauptbahnhof/Königsplatz-Geo-Cluster).
 - **Kannibalisierungs-Watchpoints** (aus Baseline 29.06., Recheck 27.07.): Homepage rankt noch für „italiener maxvorstadt"/„pizzeria münchen" statt der dedizierten Seiten → interne Anker-Texte konsequent auf die Zielseiten ausrichten („pizzeria münchen" → `/pizza-muenchen/`, „italienisches restaurant maxvorstadt" → `/italienisches-restaurant-muenchen/`).
 - Seite-1-Kandidaten mit hohem Volumen: `beste pizza münchen` (Pos 11, 613 Impr.), `pizzeria münchen` (Pos 10,8, 833 Impr.), `neapolitanische pizza münchen` (Pos 11,2, 275 Impr.) — Push über Canonical-Fix, interne Links, frisches Bildmaterial und Listicle-Backlinks (§5).
-- GSC-Basis (Mai): 819 Klicks / 30.702 Impr. / CTR 2,67 % / Ø-Pos 12,9. Sandbox-Phase läuft laut `seo-log.md` ~Mai–Aug aus → Positionssprünge realistisch, wenn P0 gefixt ist.
+- **KPI-Baseline live (GSC `sc-domain:ristorantestoria.de`, 05.06.–02.07., final — Details: `gsc-kpi-baseline-2026-07-05.md`):** **1.282 Klicks (+56,5 %)** / **53.541 Impr. (+74,4 %)** / CTR 2,39 % (−0,28 pp, Longtail-Mix-Effekt) / **Ø-Pos 10,4** (vorher 12,9). Der Sprung ist stark WM-getrieben: `/wm-2026-public-viewing-muenchen/` ist Klick-Seite #2 (211 Klicks / 8.695 Impr.), `public viewing wm 2026 münchen` allein 1.201 Impr. bei Pos 9,6 / CTR 0,33 % → Listicle-Backlinks (§5.2) würden genau hier hebeln, Fenster bis 19.07.
+- Weitere Signale aus der Live-Baseline: **GBP-Profil liefert 122 Klicks/28T** (UTM `gmb`, CTR 13,15 % — Local wirkt, §4); `/en/`-Seiten holen trotz Canonical-Bug bereits Klicks (`/en/` 31, `/en/romantic-dinner-munich/` 14 bei 3.022 Impr. / CTR 0,46 % — nach dem Canonical-Fix ist hier Luft); `beste pizza münchen` 543 Impr. @ Pos 11,1 in GSC vs. **live #5** (DataForSEO) → Aufwärtsbewegung bestätigt; `/aperitivo-muenchen/` CTR weiter schwach (0,77 %). Sandbox-Phase läuft laut `seo-log.md` ~Mai–Aug aus → weitere Positionssprünge realistisch, jetzt wo P0 gefixt ist.
 
 ---
 
@@ -216,8 +217,8 @@ Positiv: Bei „italienisches Restaurant Maxvorstadt" erscheint STORIA bereits i
 | 15 | `geo-monitor.mjs` monatlich + KPI-Review in `seo-log.md` | laufend | Ops |
 
 ### KPIs (messen, was Gäste bringt — nicht nur Rankings)
-- GBP-Insights: Anrufe, Wegbeschreibungen, Reservierungs-Klicks / Woche (Baseline jetzt ziehen!)
-- GSC: Klicks auf Money-Pages (`/reservierung/`, `/lunch-…/`, `/firmenfeier-…/`)
+- GBP-Insights: Anrufe, Wegbeschreibungen, Reservierungs-Klicks / Woche (Baseline jetzt ziehen!) — GSC-Proxy bereits gemessen: 122 Klicks/28T über das GBP-Profil (UTM `gmb`)
+- GSC: Klicks auf Money-Pages (`/reservierung/`, `/lunch-…/`, `/firmenfeier-…/`) — **Baseline 05.07. liegt vor:** `gsc-kpi-baseline-2026-07-05.md` (1.282 Klicks / 53.541 Impr. / Ø-Pos 10,4)
 - Reservierungen mit UTM-Quelle gmb/organic
 - Review-Velocity + Rating-Stabilität (4,5★ halten)
 - GEO: STORIA in AI-Antworten für Top-10-Queries (monatlich via geo-monitor)
