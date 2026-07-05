@@ -12,8 +12,10 @@
 
 ## Öffnungszeiten
 
-- Montag bis Freitag: 09:00 - 01:00 Uhr
-- Samstag und Sonntag: 12:00 - 01:00 Uhr
+- Montag bis Mittwoch: 09:00 - 00:00 Uhr
+- Donnerstag und Freitag: 09:00 - 01:00 Uhr
+- Samstag: 11:00 - 14:30 Uhr und 17:30 - 01:00 Uhr
+- Sonntag: 12:00 - 14:30 Uhr und 17:30 - 22:30 Uhr
 
 ## Unsere Küche
 

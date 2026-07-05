@@ -626,7 +626,7 @@ const WildEssenMuenchen = () => {
               </div>
               <div className="mt-8 text-sm opacity-80">
                 <p>{t.contact.openingHours}</p>
-                <p>{t.footer.monFri}: 09:00 – 01:00 | {t.footer.satSun}: 12:00 – 01:00</p>
+                <p>{t.footer.monWed}: 09:00 – 00:00 | {t.footer.thuFri}: 09:00 – 01:00 | {t.footer.sat}: 11:00 – 14:30 & 17:30 – 01:00 | {t.footer.sun}: 12:00 – 14:30 & 17:30 – 22:30</p>
               </div>
             </div>
           </section>

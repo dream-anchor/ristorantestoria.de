@@ -368,8 +368,10 @@ const NeapolitanischePizza = () => {
                 <div className="bg-card p-6 rounded-lg border border-border">
                   <h3 className="font-semibold mb-3">🕐 {t.seo.neapolitanPizza.locationHoursTitle}</h3>
                   <p className="text-muted-foreground text-sm">
-                    {t.contact.monFri}: 09:00 - 01:00<br />
-                    {t.contact.satSun}: 12:00 - 01:00
+                    {t.contact.monWed}: 09:00 - 00:00<br />
+                    {t.contact.thuFri}: 09:00 - 01:00<br />
+                    {t.contact.sat}: 11:00 - 14:30 & 17:30 - 01:00<br />
+                    {t.contact.sun}: 12:00 - 14:30 & 17:30 - 22:30
                   </p>
                 </div>
               </div>

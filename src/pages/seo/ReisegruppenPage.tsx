@@ -246,15 +246,39 @@ const ReisegruppenPage = () => {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday"],
+        opens: "09:00",
+        closes: "00:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Thursday", "Friday"],
         opens: "09:00",
         closes: "01:00",
       },
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Saturday", "Sunday"],
-        opens: "12:00",
+        dayOfWeek: ["Saturday"],
+        opens: "11:00",
+        closes: "14:30",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Saturday"],
+        opens: "17:30",
         closes: "01:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Sunday"],
+        opens: "12:00",
+        closes: "14:30",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Sunday"],
+        opens: "17:30",
+        closes: "22:30",
       },
     ],
     aggregateRating: {

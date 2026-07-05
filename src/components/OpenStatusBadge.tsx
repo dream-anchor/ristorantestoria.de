@@ -4,7 +4,11 @@ import { useLanguage } from '@/contexts/LanguageContext';
 /**
  * OpenStatusBadge - Dynamischer Öffnungsstatus für Local SEO
  * Zeigt "Jetzt geöffnet" oder "Geschlossen" basierend auf aktueller Uhrzeit
- * Öffnungszeiten: Mo-Fr 09:00-01:00, Sa-So 12:00-01:00
+ * Öffnungszeiten:
+ *   Mo–Mi 09:00–00:00
+ *   Do–Fr 09:00–01:00
+ *   Sa 11:00–14:30 & 17:30–01:00
+ *   So 12:00–14:30 & 17:30–22:30
  */
 const OpenStatusBadge = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,24 +31,22 @@ const OpenStatusBadge = () => {
       const minute = now.getMinutes();
       const currentTime = hour * 60 + minute; // Zeit in Minuten seit Mitternacht
 
-      // Öffnungszeiten in Minuten:
-      // Mo-Fr: 09:00 (540) bis 01:00 nächster Tag (1500 = 25*60, oder 0-60 für nach Mitternacht)
-      // Sa-So: 12:00 (720) bis 01:00 nächster Tag
+      // Offene Intervalle je Wochentag in Minuten seit Mitternacht [start, ende).
+      // Die Schließzeit 01:00 (Do–Fr und Sa) läuft in den Folgetag über:
+      // der Slot 00:00–01:00 gehört daher zum Morgen von Fr, Sa und So.
+      const schedule: Record<number, Array<[number, number]>> = {
+        0: [[0, 60], [720, 870], [1050, 1350]],   // So: Überlauf von Sa + 12:00–14:30 + 17:30–22:30
+        1: [[540, 1440]],                          // Mo: 09:00–00:00
+        2: [[540, 1440]],                          // Di: 09:00–00:00
+        3: [[540, 1440]],                          // Mi: 09:00–00:00
+        4: [[540, 1440]],                          // Do: 09:00–01:00 (00:00–01:00 zählt zu Fr)
+        5: [[0, 60], [540, 1440]],                 // Fr: Überlauf von Do + 09:00–01:00
+        6: [[0, 60], [660, 870], [1050, 1440]],    // Sa: Überlauf von Fr + 11:00–14:30 + 17:30–01:00
+      };
 
-      const isWeekday = day >= 1 && day <= 5; // Montag bis Freitag
-      const isWeekend = day === 0 || day === 6; // Samstag oder Sonntag
-
-      let openStatus = false;
-
-      if (isWeekday) {
-        // Mo-Fr: 09:00-01:00
-        // Geöffnet von 9:00 (540 min) bis Mitternacht (1440 min) ODER von Mitternacht bis 1:00 (60 min)
-        openStatus = currentTime >= 540 || currentTime < 60;
-      } else if (isWeekend) {
-        // Sa-So: 12:00-01:00
-        // Geöffnet von 12:00 (720 min) bis Mitternacht (1440 min) ODER von Mitternacht bis 1:00 (60 min)
-        openStatus = currentTime >= 720 || currentTime < 60;
-      }
+      const openStatus = (schedule[day] ?? []).some(
+        ([start, end]) => currentTime >= start && currentTime < end
+      );
 
       setIsOpen(openStatus);
     };

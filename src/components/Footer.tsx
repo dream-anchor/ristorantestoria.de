@@ -165,9 +165,11 @@ const Footer = () => {
               <div className="space-y-2 text-base font-sans text-primary-foreground/70">
                 <div className="flex items-center justify-center md:justify-end gap-2.5">
                   <Clock className="h-4 w-4" aria-hidden="true" />
-                  <span>{t.footer.monFri}: 09:00 – 01:00</span>
+                  <span>{t.footer.monWed}: 09:00 – 00:00</span>
                 </div>
-                <p>{t.footer.satSun}: 12:00 – 01:00</p>
+                <p>{t.footer.thuFri}: 09:00 – 01:00</p>
+                <p>{t.footer.sat}: 11:00 – 14:30 & 17:30 – 01:00</p>
+                <p>{t.footer.sun}: 12:00 – 14:30 & 17:30 – 22:30</p>
                 <p className="pt-2 italic text-primary-foreground/70">{t.footer.welcomeMessage}</p>
               </div>
             </div>

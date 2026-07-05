@@ -154,8 +154,8 @@ const AperitivoMuenchen = () => {
           ]
         },
         "openingHoursSpecification": [
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "17:00", "closes": "22:30", "description": "Aperitivo-Zeit" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "17:00", "closes": "22:30", "description": "Aperitivo-Zeit" }
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "17:30", "closes": "22:30", "description": "Aperitivo-Zeit" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "17:30", "closes": "22:30", "description": "Aperitivo-Zeit" }
         ]
       })}} />
 

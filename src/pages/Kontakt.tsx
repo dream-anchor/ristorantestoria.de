@@ -29,7 +29,7 @@ const Kontakt = () => {
   const seoContent = {
     de: {
       title: 'Kontakt & Anfahrt – STORIA Ristorante München Maxvorstadt',
-      description: 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr 9-1 Uhr. Jetzt anrufen: +49 89 51519696!',
+      description: 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr ab 9 Uhr. Jetzt anrufen: +49 89 51519696!',
       h1: 'Kontakt & Anfahrt – Italiener nahe Königsplatz München',
       intro: 'Besuchen Sie uns in der Karlstraße 47a – zentral in der Maxvorstadt, nur wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.',
       introP2: 'Ob Geschäftsessen in der Mittagspause, romantisches Dinner am Abend oder Feierabend-Aperitivo mit Freunden: Das STORIA ist Ihr italienisches Restaurant in München mit persönlichem Service und authentischer Küche. Rufen Sie uns an, schreiben Sie per WhatsApp oder planen Sie Ihre Route – wir freuen uns auf Ihren Besuch in der Münchner Maxvorstadt.',
@@ -42,7 +42,7 @@ const Kontakt = () => {
     },
     en: {
       title: 'Contact & Directions – STORIA Ristorante Munich Maxvorstadt',
-      description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Near main station, Königsplatz & TU Munich. Open Mon-Fri 9am-1am. Call now: +49 89 51519696!',
+      description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Near main station, Königsplatz & TU Munich. Open Mon-Fri from 9am. Call now: +49 89 51519696!',
       h1: 'Contact & Directions – Italian Restaurant near Königsplatz Munich',
       intro: 'Visit us at Karlstraße 47a – centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.',
       introP2: 'Whether you are looking for a business lunch, a romantic dinner or an after-work aperitivo with friends: STORIA is your Italian restaurant in Munich with personal service and authentic cuisine. Call us, write via WhatsApp or plan your route – we look forward to your visit.',
@@ -55,7 +55,7 @@ const Kontakt = () => {
     },
     it: {
       title: 'Contatto & Indicazioni – STORIA Ristorante Monaco Maxvorstadt',
-      description: 'STORIA Monaco contatto: Karlstraße 47a, Maxvorstadt. Vicino alla stazione centrale, Königsplatz & TU Monaco. Aperto Lun-Ven 9-1. Chiamaci: +49 89 51519696!',
+      description: 'STORIA Monaco contatto: Karlstraße 47a, Maxvorstadt. Vicino alla stazione centrale, Königsplatz & TU Monaco. Aperto Lun-Ven dalle 9. Chiamaci: +49 89 51519696!',
       h1: 'Contatto & Come Raggiungerci – Ristorante Italiano vicino Königsplatz Monaco',
       intro: 'Visitateci in Karlstraße 47a – posizione centrale a Maxvorstadt, a pochi minuti a piedi dalla stazione centrale, Königsplatz e TU Monaco.',
       introP2: 'Che si tratti di un pranzo di lavoro, una cena romantica o un aperitivo con gli amici: lo STORIA è il vostro ristorante italiano a Monaco con servizio personale e cucina autentica. Chiamateci, scriveteci su WhatsApp o pianificate il vostro percorso.',
@@ -68,7 +68,7 @@ const Kontakt = () => {
     },
     fr: {
       title: 'Contact & Itinéraire – STORIA Ristorante Munich Maxvorstadt',
-      description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Près de la gare centrale, Königsplatz & TU Munich. Ouvert Lun-Ven 9h-1h. Appelez: +49 89 51519696!',
+      description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Près de la gare centrale, Königsplatz & TU Munich. Ouvert Lun-Ven dès 9h. Appelez: +49 89 51519696!',
       h1: 'Contact & Itinéraire – Restaurant Italien près de Königsplatz Munich',
       intro: 'Rendez-nous visite au Karlstraße 47a – au centre de Maxvorstadt, à quelques minutes à pied de la gare centrale, Königsplatz et TU Munich.',
       introP2: 'Que ce soit pour un déjeuner d\'affaires, un dîner romantique ou un apéritif entre amis : le STORIA est votre restaurant italien à Munich avec un service personnalisé et une cuisine authentique. Appelez-nous, écrivez-nous sur WhatsApp ou planifiez votre itinéraire.',
@@ -230,12 +230,20 @@ const Kontakt = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between mb-3 pb-3 border-b border-border/50">
-                      <span className="font-medium">{t.contact.monFri}</span>
+                      <span className="font-medium">{t.contact.monWed}</span>
+                      <span className="text-muted-foreground font-mono">09:00 - 00:00</span>
+                    </div>
+                    <div className="flex justify-between mb-3 pb-3 border-b border-border/50">
+                      <span className="font-medium">{t.contact.thuFri}</span>
                       <span className="text-muted-foreground font-mono">09:00 - 01:00</span>
                     </div>
+                    <div className="flex justify-between mb-3 pb-3 border-b border-border/50">
+                      <span className="font-medium">{t.contact.sat}</span>
+                      <span className="text-muted-foreground font-mono">11:00 - 14:30 & 17:30 - 01:00</span>
+                    </div>
                     <div className="flex justify-between">
-                      <span className="font-medium">{t.contact.satSun}</span>
-                      <span className="text-muted-foreground font-mono">12:00 - 01:00</span>
+                      <span className="font-medium">{t.contact.sun}</span>
+                      <span className="text-muted-foreground font-mono">12:00 - 14:30 & 17:30 - 22:30</span>
                     </div>
                   </div>
                 </div>
