@@ -1899,6 +1899,10 @@ export type Database = {
         Returns: boolean
       }
       normalize_seo_path: { Args: { p_url: string }; Returns: string }
+      publish_menu_atomic: {
+        Args: { p_staging_menu_id: string; p_target_menu_id?: string }
+        Returns: string
+      }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
     }
