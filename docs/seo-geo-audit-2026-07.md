@@ -119,11 +119,19 @@ Live-Abfragen (mobil, Standort München, google.de) über DataForSEO:
 
 Das ist der gravierendste Local-Befund: Mit 4,5★/810 Bewertungen müsste STORIA hier auftauchen — es erscheinen aber Wettbewerber mit deutlich weniger Bewertungen (Ciao Napoli: 4,9★/172; Napoli Slice Maxvorstadt: 4,9★/273; MOZZAMO: 4,7★/433; La Cicchetteria: 4,8★/39!). Benchmarks der Local-Pack-Gewinner: Pizzarei 4,7★/2.034, The Italian Shot 4,4★/1.069, Mentor's 4,9★/965.
 
-**Mögliche Ursachen (im GBP prüfen, Reihenfolge = Wahrscheinlichkeit):**
-1. **Primärkategorie/Kategorien** — rankt Google STORIA überhaupt als „Italienisches Restaurant"/„Pizzeria"? (Wettbewerber-Kategorien in den Maps-Daten: „Italienisch", „Pizzeria")
-2. **Rating-Schwelle** — 4,5★ liegt unter dem 4,6–4,9-Niveau fast aller Local-Pack-Treffer; jüngere Review-Velocity zählt stärker als Gesamtzahl.
-3. **Profil-Aktivität/Prominenz** — Fotos, Posts, Q&A (alle offen, §4.2) sind genau die Prominenz-Signale, die fehlen.
-4. Öffnungsstatus/Attribute/Duplikat-Listing — Sanity-Check im GBP-Dashboard.
+**Diagnose-Update (05.07., nach Owner-Screenshots + DataForSEO-Kontrolltests):**
+
+Ausgeschlossen: Kategorien (Primär „Italienisches Restaurant" + Pizzeria/Neapolitanisch/Mittags-/Süditalienisch ✓), Fotos (103 ✓), Posts (wöchentlich ✓), Q&A/Reviews (beantwortet ✓), Menü-Sync ✓, Verifizierung ✓ — das Profil ist vorbildlich gepflegt. Auch das Listing selbst ist gesund: Marken-Suche „storia" in Maps → **#1** (4,5★/810, CID 3761590175870856939 = identisch mit Website-Entity), „restaurant karlstraße münchen" → **#4**. Kein Suspend, kein Pin-Problem.
+
+**Wahrscheinlichste Ursache — Same-Address-Duplikat:** In Maps existiert ein zweites Listing **„STORIA Catering & Events München"** an derselben Adresse Karlstraße 47A (CID 11755986300334707833) mit **2,0★ aus 1 Bewertung** (vermutlich die „neue 2-Sterne-Rezension" aus dem GBP-Dashboard). Zwei Listings derselben Marke an derselben Adresse triggern Googles Same-Address-/Possum-Filter: Bei Kategorie-Suchen wird häufig nur eines (oder keines) angezeigt — konsistent mit dem Befund, dass STORIA bei Marken-/Straßen-Suchen normal rankt, bei „italienisches restaurant"/„pizzeria" aber komplett fehlt.
+
+**Fix (Owner, GBP-Dashboard → Unternehmensliste):**
+1. Prüfen, ob „STORIA Catering & Events München" im eigenen Konto liegt.
+2. Wenn nicht aktiv genutzt → Listing entfernen bzw. mit dem Haupt-Listing zusammenführen (Google-Support: „Duplikat melden/zusammenführen").
+3. Wenn bewusst behalten (Catering-Geschäft) → ausschließlich Kategorie „Caterer" (keine Restaurant-Kategorien), keine identische Adresse-/Kategorie-Konkurrenz zum Haupt-Listing; die 2★-Bewertung beantworten.
+4. Danach 1–2 Wochen warten und Maps-Rank rechecken (DataForSEO, Queries: „italienisches restaurant", „pizzeria maxvorstadt").
+
+Sekundär bleibt: **Rating-Schwelle** — die Local-Pack-Gewinner liegen bei 4,6–4,9★; Review-Velocity Richtung 4,6★ treiben (QR-Code-System).
 
 **Kontext Suchvolumen (Google Ads, DE):** italiener münchen **9.900**/Monat, pizza münchen 5.400, pizzeria münchen 5.400, italienisches restaurant münchen 4.400, beste pizza münchen 1.300, neapolitanische pizza münchen 1.300, restaurant maxvorstadt 480, italiener maxvorstadt 320. Local Pack + Maps fangen den Großteil dieser Nachfrage ab — die Website allein sieht davon nur den Rest (GSC: „in der Nähe"-Keywords = 0 Impressionen). **Jeder Platz im Local Pack ist hier mehr wert als 5 organische Positionen.**
 
@@ -192,7 +200,7 @@ Positiv: Bei „italienisches Restaurant Maxvorstadt" erscheint STORIA bereits i
 | # | Maßnahme | Aufwand | Typ |
 |---|----------|---------|-----|
 | 1 | ~~Canonical-Fix EN/IT/FR~~ ✅ in diesem PR — nach Deploy: Sitemap + Priority-URLs neu einreichen | 15 min Rest | P0 Bug |
-| 1b | **GBP-Maps-Diagnose (§4.2a):** Primärkategorie, Kategorien, Öffnungsstatus, Duplikate im GBP-Dashboard prüfen | 30 min | P0 Owner-Login |
+| 1b | **Duplikat-Listing „STORIA Catering & Events München" bereinigen (§4.2a)** — entfernen/zusammenführen oder auf reine Caterer-Kategorie umstellen; 2★-Review beantworten | 30 min | P0 Owner-Login |
 | 2 | **WM-Outreach-Mails versenden** (Fenster bis 19.07.!) | 1 h | Owner |
 | 3 | TripAdvisor-Faktenfehler korrigieren | 15 min | Owner-Login |
 | 4 | ~~Cache-Header~~ ✅ bereits live korrekt (verifiziert 05.07.) | — | erledigt |
