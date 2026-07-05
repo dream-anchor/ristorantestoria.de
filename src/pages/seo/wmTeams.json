@@ -1,10 +1,4 @@
 {
   "_comment": "Team-Paarungen je Spiel-Slot. Wird automatisch von der GitHub Action 'Update WM Fixtures' gefuellt, sobald eine K.o.-Paarung feststeht (football-data.org). Manuelle Eintraege (z. B. Deutschland-Paraguay, TV-Sender) bleiben erhalten und werden nie ueberschrieben. Steht ein Slot hier NICHT (oder ohne teamA/teamB), rendert die Seite ihn als offenen Runden-Slot ('Gegner stehen noch nicht fest'). TV-Sender (ZDF/ARD) liefert keine API -> immer manuell.",
-  "teams": {
-    "ger-par-2026-06-29": {
-      "teamA": { "name": { "de": "Deutschland", "en": "Germany", "it": "Germania", "fr": "Allemagne" }, "flag": "🇩🇪" },
-      "teamB": { "name": { "de": "Paraguay", "en": "Paraguay", "it": "Paraguay", "fr": "Paraguay" }, "flag": "🇵🇾" },
-      "tv": "ZDF"
-    }
-  }
+  "teams": {}
 }
