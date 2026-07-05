@@ -500,26 +500,7 @@ async function generateRoutesToPrerender() {
 
 // Main execution
 (async () => {
-  let template = fs.readFileSync(toAbsolute("dist/index.html"), "utf-8");
-
-  // Render-blockierendes CSS eliminieren: den <link rel="stylesheet"> durch ein
-  // inline <style> im <head> ersetzen. Das CSS liegt damit synchron vor dem ersten
-  // Paint vor (kein FOUC, kein Extra-Roundtrip) → schnelleres FCP/LCP. Gilt für alle
-  // prerenderten Seiten, da sie dieses Template teilen.
-  try {
-    const cssLink = template.match(/<link[^>]*rel="stylesheet"[^>]*href="([^"]+\.css)"[^>]*>/i);
-    if (cssLink) {
-      const cssPath = toAbsolute("dist" + cssLink[1].split("?")[0]);
-      const css = fs.readFileSync(cssPath, "utf-8");
-      template = template.replace(cssLink[0], `<style>${css}</style>`);
-      console.log(`🎨 CSS inline gesetzt (${Math.round(css.length / 1024)} KB) – render-blockierendes <link> entfernt.`);
-    } else {
-      console.warn("⚠️  Kein <link rel=stylesheet> im Template gefunden – CSS-Inlining übersprungen.");
-    }
-  } catch (e) {
-    console.warn("⚠️  CSS-Inlining fehlgeschlagen, behalte <link>:", e.message);
-  }
-
+  const template = fs.readFileSync(toAbsolute("dist/index.html"), "utf-8");
   const { render } = await import("./dist/server/entry-server.js");
 
   const routesToPrerender = await generateRoutesToPrerender();
