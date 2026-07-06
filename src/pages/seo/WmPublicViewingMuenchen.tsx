@@ -15,7 +15,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
 import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { wmContent } from "./wmContent";
-import { wmSpiele, wmSpieleSorted, wmWeekday, wmDateLabel, wmKickoff, wmRundeLabel, buildWmEventSchema } from "./wmSpiele";
+import { wmSpiele, wmSpieleSorted, wmWeekday, wmDateLabel, wmKickoff, wmRundeLabel, wmHinweisLabel, buildWmEventSchema } from "./wmSpiele";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen.webp";
 import heroImg600 from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen-600w.webp";
@@ -368,6 +368,9 @@ const WmPublicViewingMuenchen = () => {
                         {s.tv ? <span className="wm-tv">{s.tv}</span> : null}
                       </span>
                     </div>
+                    {s.hinweis ? (
+                      <p className="wm-match-hint">{wmHinweisLabel(s.hinweis, language)}</p>
+                    ) : null}
                   </Reveal>
                 );
               })}
@@ -593,6 +596,9 @@ const wmStyles = `
 .wm-where{font-family:var(--mono);font-size:.82rem;color:rgba(244,236,224,.6);}
 .wm-tv{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:rgba(244,236,224,.82);border:1px solid var(--line);border-radius:7px;padding:4px 10px;}
 .wm-note{margin-top:26px;font-family:var(--mono);font-size:.86rem;color:rgba(244,236,224,.5);}
+/* Karten-Hinweis (z. B. Anstoß außerhalb der Öffnungszeiten) */
+.wm-match-hint{margin:14px 0 0;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--amber-bright);border-top:1px solid var(--line);padding-top:14px;}
+.wm-match-hint::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber-bright);flex-shrink:0;box-shadow:0 0 8px 1px rgba(232,161,74,.6);}
 /* Datums-Zustände (clientseitig nach Mount): vergangen ausgegraut, nächstes hervorgehoben */
 .wm-match.is-past{opacity:.42;}
 .wm-match.is-past:hover{transform:none;border-color:var(--line);}

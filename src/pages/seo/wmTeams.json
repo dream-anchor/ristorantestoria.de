@@ -5,6 +5,10 @@
       "teamA": { "name": { "de": "Portugal", "en": "Portugal", "it": "Portogallo", "fr": "Portugal" }, "flag": "🇵🇹" },
       "teamB": { "name": { "de": "Spanien", "en": "Spain", "it": "Spagna", "fr": "Espagne" }, "flag": "🇪🇸" }
     },
+    "af-usa-bel-2026-07-07": {
+      "teamA": { "name": { "de": "USA", "en": "USA", "it": "Stati Uniti", "fr": "États-Unis" }, "flag": "🇺🇸" },
+      "teamB": { "name": { "de": "Belgien", "en": "Belgium", "it": "Belgio", "fr": "Belgique" }, "flag": "🇧🇪" }
+    },
     "af-arg-egy-2026-07-07": {
       "teamA": { "name": { "de": "Argentinien", "en": "Argentina", "it": "Argentina", "fr": "Argentine" }, "flag": "🇦🇷" },
       "teamB": { "name": { "de": "Ägypten", "en": "Egypt", "it": "Egitto", "fr": "Égypte" }, "flag": "🇪🇬" }
