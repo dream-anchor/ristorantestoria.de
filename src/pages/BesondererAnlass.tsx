@@ -231,6 +231,7 @@ const BesondererAnlass = () => {
         title={menuTitle}
         description={getSeoDescription()}
         canonical={canonicalPath}
+        noIndex={menu.slug === "neuer-anlass"}
       />
       <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData

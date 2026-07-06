@@ -560,6 +560,12 @@ async function generateRoutesToPrerender() {
 
       // 5. Inject SEO Tags (Helmet)
       if (helmet) {
+        // <html lang="…"> aus Helmet übernehmen — sonst tragen alle
+        // EN/IT/FR-Seiten das statische lang="de" aus index.html
+        const htmlAttrs = helmet.htmlAttributes ? helmet.htmlAttributes.toString() : "";
+        if (htmlAttrs) {
+          finalHtml = finalHtml.replace(/<html[^>]*>/, `<html ${htmlAttrs}>`);
+        }
         const helmetHtml = `
           ${helmet.title ? helmet.title.toString() : ""}
           ${helmet.meta ? helmet.meta.toString() : ""}

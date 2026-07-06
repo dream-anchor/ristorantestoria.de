@@ -58,6 +58,8 @@ const enBase = {
   },
   internalLinks: {
     title: "Discover more",
+    oktoberfestMunich: "Oktoberfest Munich",
+    groupDining: "Group Dining Munich",
     lunchMunich: "Lunch Munich",
     aperitivoMunich: "Aperitivo Munich",
     neapolitanPizza: "Neapolitan Pizza",
@@ -258,6 +260,7 @@ const enBase = {
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Group Dining Munich", slug: "reisegruppen-muenchen" },
       { label: "Corporate Events Munich", slug: "firmenfeier-muenchen" },
+      { label: "Oktoberfest Munich", slug: "oktoberfest-muenchen" },
       { label: "Birthday Party Munich", slug: "geburtstagsfeier-muenchen" },
       { label: "Wedding Celebration Munich", slug: "hochzeitsfeier-muenchen" },
       { label: "Christmas Party Munich", slug: "weihnachtsfeier-muenchen" },

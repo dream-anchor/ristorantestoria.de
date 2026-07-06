@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 import ImageGrid from "@/components/ImageGrid";
 import HomeVideo from "@/components/HomeVideo";
 import HomeIntro from "@/components/HomeIntro";
-import InternalLinks from "@/components/InternalLinks";
 import GoogleReviews from "@/components/GoogleReviews";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -46,7 +45,6 @@ const Index = () => {
           <HomeAbout />
 
           <GoogleReviews />
-          <InternalLinks />
 
         </main>
         <Footer />

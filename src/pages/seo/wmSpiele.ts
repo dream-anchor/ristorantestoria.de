@@ -189,5 +189,18 @@ export const buildWmEventSchema = (ogImage: string) =>
         name: "STORIA",
         url: "https://www.ristorantestoria.de/",
       },
+      performer: {
+        "@type": "Organization",
+        name: "FIFA Fussball-Weltmeisterschaft 2026",
+      },
+      offers: {
+        "@type": "Offer",
+        name: "Public Viewing mit Tischreservierung",
+        price: "0",
+        priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+        validFrom: "2026-06-01T00:00:00+02:00",
+        url: "https://www.ristorantestoria.de/wm-2026-public-viewing-muenchen/",
+      },
     };
   });

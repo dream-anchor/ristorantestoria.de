@@ -232,6 +232,12 @@ ErrorDocument 500 /index.html
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
+# Verzeichnisse ohne index.html (z.B. /assets/, /fonts/) → 404 statt 403
+# (Options -Indexes bei IONOS liefert sonst „Zugriffsverbot" in GSC)
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html !-f
+RewriteRule ^ - [R=404,L]
+
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 

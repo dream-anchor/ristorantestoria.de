@@ -24,6 +24,9 @@ const InternalLinks = () => {
     { baseSlug: "valentinstag-muenchen", label: t.internalLinks.valentinstagMunich },
     { baseSlug: "silvester-muenchen", label: t.internalLinks.silvesterMunich },
     { baseSlug: "weihnachten-muenchen", label: t.internalLinks.christmasMunich },
+    { baseSlug: "pasta-fresca-muenchen", label: t.internalLinks.pastaFrescaMuenchen },
+    { baseSlug: "oktoberfest-muenchen", label: t.internalLinks.oktoberfestMunich },
+    { baseSlug: "reisegruppen-muenchen", label: t.internalLinks.groupDining },
   ];
 
   return (

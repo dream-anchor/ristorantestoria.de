@@ -81,6 +81,8 @@ const itBase = {
   },
   internalLinks: {
     title: "Scopri di più",
+    oktoberfestMunich: "Oktoberfest Monaco",
+    groupDining: "Ristorante per Gruppi",
     lunchMunich: "Pranzo Monaco",
     aperitivoMunich: "Aperitivo Monaco",
     neapolitanPizza: "Pizza Napoletana",
@@ -278,6 +280,7 @@ const itBase = {
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Gruppi Turistici Monaco", slug: "reisegruppen-muenchen" },
       { label: "Feste Aziendali Monaco", slug: "firmenfeier-muenchen" },
+      { label: "Oktoberfest Monaco", slug: "oktoberfest-muenchen" },
       { label: "Feste di Compleanno Monaco", slug: "geburtstagsfeier-muenchen" },
       { label: "Ricevimento Matrimoniale Monaco", slug: "hochzeitsfeier-muenchen" },
       { label: "Festa di Natale Monaco", slug: "weihnachtsfeier-muenchen" },
