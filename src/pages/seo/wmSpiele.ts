@@ -31,6 +31,9 @@ export type WmRunde =
   | "spiel-um-platz-3"
   | "finale";
 
+/** Optionaler Hinweis auf einer Karte (z. B. Anstoß außerhalb der STORIA-Öffnungszeiten). */
+export type WmHinweis = "ausserhalb-oeffnungszeiten";
+
 interface WmTeam {
   /** Lokalisierter Mannschaftsname je Sprache. */
   name: Record<Language, string>;
@@ -55,13 +58,15 @@ export interface WmSpiel {
   /** TV-Sender (ARD/ZDF/…). Leer lassen, solange (noch) nicht gesichert. */
   tv?: string;
   runde: WmRunde;
+  /** Optionaler Hinweis (z. B. Anstoß außerhalb der Öffnungszeiten). */
+  hinweis?: WmHinweis;
 }
 
 /** Kurzhelfer für die vier Sprachvarianten eines Namens. */
 const N = (de: string, en: string, it: string, fr: string): Record<Language, string> => ({ de, en, it, fr });
 
 /** Basis-Spielplan (Termine/Orte/Runden) aus wmSlots.json. */
-type WmSlot = Pick<WmSpiel, "id" | "startISO" | "endISO" | "ort" | "runde">;
+type WmSlot = Pick<WmSpiel, "id" | "startISO" | "endISO" | "ort" | "runde" | "hinweis">;
 const wmSlots = (wmSlotsData as { slots: WmSlot[] }).slots;
 
 /** Team-Zuordnung je Slot aus wmTeams.json (automatisch/manuell gepflegt). */
@@ -86,6 +91,7 @@ export const wmSpiele: WmSpiel[] = wmSlots.map((slot) => {
     teamB: t?.teamB,
     tv: t?.tv,
     offen: !hasTeams,
+    hinweis: slot.hinweis,
   };
 });
 
@@ -106,6 +112,18 @@ const RUNDE_LABEL: Record<WmRunde, Record<Language, string>> = {
 
 /** Lokalisierte Bezeichnung der Runde, z. B. „Achtelfinale" / „Round of 16". */
 export const wmRundeLabel = (runde: WmRunde, lang: Language): string => RUNDE_LABEL[runde][lang];
+
+const HINWEIS_LABEL: Record<WmHinweis, Record<Language, string>> = {
+  "ausserhalb-oeffnungszeiten": N(
+    "Außerhalb unserer Öffnungszeiten",
+    "Outside our opening hours",
+    "Fuori dai nostri orari di apertura",
+    "En dehors de nos heures d'ouverture"
+  ),
+};
+
+/** Lokalisierter Karten-Hinweis, z. B. „Außerhalb unserer Öffnungszeiten". */
+export const wmHinweisLabel = (hinweis: WmHinweis, lang: Language): string => HINWEIS_LABEL[hinweis][lang];
 
 // ---- Lokalisierte Datums-/Zeit-Formatierung (Intl, Zeitzone Europe/Berlin = MESZ) ----
 
