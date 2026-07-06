@@ -23,7 +23,7 @@
     },
     "vf-2026-07-11": {
       "teamA": { "name": { "de": "Norwegen", "en": "Norway", "it": "Norvegia", "fr": "Norvège" }, "flag": "🇳🇴" },
-      "teamB": { "name": { "de": "Sieger Mexiko/England", "en": "Winner Mexico/England", "it": "Vincente Messico/Inghilterra", "fr": "Vainqueur Mexique/Angleterre" }, "flag": "🇲🇽🏴󠁧󠁢󠁥󠁮󠁧󠁿" }
+      "teamB": { "name": { "de": "England", "en": "England", "it": "Inghilterra", "fr": "Angleterre" }, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }
     },
     "vf-2026-07-12": {
       "teamA": { "name": { "de": "Sieger Argentinien/Ägypten", "en": "Winner Argentina/Egypt", "it": "Vincente Argentina/Egitto", "fr": "Vainqueur Argentine/Égypte" }, "flag": "🇦🇷🇪🇬" },
