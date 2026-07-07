@@ -22,8 +22,8 @@
       "teamB": { "name": { "de": "Marokko", "en": "Morocco", "it": "Marocco", "fr": "Maroc" }, "flag": "🇲🇦" }
     },
     "vf-2026-07-10": {
-      "teamA": { "name": { "de": "Sieger Portugal/Spanien", "en": "Winner Portugal/Spain", "it": "Vincente Portogallo/Spagna", "fr": "Vainqueur Portugal/Espagne" }, "flag": "🇵🇹🇪🇸" },
-      "teamB": { "name": { "de": "Sieger USA/Belgien", "en": "Winner USA/Belgium", "it": "Vincente USA/Belgio", "fr": "Vainqueur USA/Belgique" }, "flag": "🇺🇸🇧🇪" }
+      "teamA": { "name": { "de": "Spanien", "en": "Spain", "it": "Spagna", "fr": "Espagne" }, "flag": "🇪🇸" },
+      "teamB": { "name": { "de": "Belgien", "en": "Belgium", "it": "Belgio", "fr": "Belgique" }, "flag": "🇧🇪" }
     },
     "vf-2026-07-11": {
       "teamA": { "name": { "de": "Norwegen", "en": "Norway", "it": "Norvegia", "fr": "Norvège" }, "flag": "🇳🇴" },
