@@ -15,7 +15,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
 import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { wmContent } from "./wmContent";
-import { wmSpiele, wmSpieleSorted, wmWeekday, wmDateLabel, wmKickoff, wmRundeLabel, wmHinweisLabel, buildWmEventSchema } from "./wmSpiele";
+import { wmSpieleUpcoming, wmSpielePast, wmWeekday, wmDateLabel, wmKickoff, wmRundeLabel, wmHinweisLabel, wmErgebnisLabel, buildWmEventSchema } from "./wmSpiele";
 import storiaLogo from "@/assets/storia-logo.webp";
 import heroImg from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen.webp";
 import heroImg600 from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen-600w.webp";
@@ -109,27 +109,9 @@ const WmPublicViewingMuenchen = () => {
   // Cross-Link zur Filmfest-Seite nur im Überschneidungszeitraum (26.6.–5.7.2026).
   const showFilmfestCrossLink = isWmFilmfestOverlap();
 
-  // Vergangene/nächstes Spiel werden erst clientseitig nach Mount ermittelt.
-  // Guard: SSR + erster Client-Render = null (keine Klassen), damit der prerenderte
-  // Inhalt nicht von leerem Client-State überschrieben wird (kein Hydration-Mismatch/Flicker).
-  const [matchClass, setMatchClass] = useState<{ past: Set<string>; nextId: string | null } | null>(null);
-  useEffect(() => {
-    const now = Date.now();
-    const past = new Set<string>();
-    let nextId: string | null = null;
-    let nextStart = Infinity;
-    for (const s of wmSpiele) {
-      const end = new Date(s.endISO).getTime();
-      const start = new Date(s.startISO).getTime();
-      if (now > end) {
-        past.add(s.id);
-      } else if (start < nextStart) {
-        nextStart = start;
-        nextId = s.id;
-      }
-    }
-    setMatchClass({ past, nextId });
-  }, []);
+  // Nächstes Spiel = erstes kommendes (Ergebnis gesetzt = gespielt, siehe wmSpiele.ts).
+  // Rein datengetrieben (kein „jetzt"-Vergleich) → identisch bei SSR und Client, kein Hydration-Risiko.
+  const nextId = wmSpieleUpcoming[0]?.id ?? null;
 
   // Mehrsprachige Seite: hreflang verweist für jede Sprache auf die lokalisierte WM-URL.
   useEffect(() => {
@@ -336,10 +318,9 @@ const WmPublicViewingMuenchen = () => {
               <h2 className="wm-h2">{c.spiele.h2}</h2>
             </Reveal>
             <div className="wm-match-grid">
-              {wmSpieleSorted.map((s, i) => {
-                const isPast = matchClass?.past.has(s.id) ?? false;
-                const isNext = matchClass?.nextId === s.id;
-                const cls = `wm-match${isPast ? " is-past" : ""}${isNext ? " is-next" : ""}`;
+              {wmSpieleUpcoming.map((s, i) => {
+                const isNext = nextId === s.id;
+                const cls = `wm-match${isNext ? " is-next" : ""}`;
                 return (
                   <Reveal key={s.id} delay={i * 0.08} className={cls}>
                     <span className="wm-match-date">{wmWeekday(s.startISO, language)} · {wmDateLabel(s.startISO, language)}</span>
@@ -379,6 +360,29 @@ const WmPublicViewingMuenchen = () => {
               {c.spiele.note}
             </Reveal>
             <WmBlockCta label={c.reservieren.ctaReserve} />
+
+            {wmSpielePast.length > 0 && (
+              <Reveal className="wm-results">
+                <h3 className="wm-results-head">{c.spiele.ergebnisseHead}</h3>
+                <ul className="wm-results-list">
+                  {wmSpielePast.map((s) => (
+                    <li key={s.id} className="wm-result-row">
+                      <span className="wm-result-date">{wmDateLabel(s.startISO, language)}</span>
+                      <span className="wm-result-runde">{wmRundeLabel(s.runde, language)}</span>
+                      {s.teamA && s.teamB && s.ergebnis ? (
+                        <span className="wm-result-match">
+                          <span className="flag" aria-hidden="true">{s.teamA.flag}</span>
+                          {s.teamA.name[language]}
+                          <span className="wm-result-score">{wmErgebnisLabel(s.ergebnis, language)}</span>
+                          {s.teamB.name[language]}
+                          <span className="flag" aria-hidden="true">{s.teamB.flag}</span>
+                        </span>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
           </div>
         </section>
 
@@ -599,10 +603,19 @@ const wmStyles = `
 /* Karten-Hinweis (z. B. Anstoß außerhalb der Öffnungszeiten) */
 .wm-match-hint{margin:14px 0 0;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--amber-bright);border-top:1px solid var(--line);padding-top:14px;}
 .wm-match-hint::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber-bright);flex-shrink:0;box-shadow:0 0 8px 1px rgba(232,161,74,.6);}
-/* Datums-Zustände (clientseitig nach Mount): vergangen ausgegraut, nächstes hervorgehoben */
-.wm-match.is-past{opacity:.42;}
-.wm-match.is-past:hover{transform:none;border-color:var(--line);}
+/* Nächstes Spiel hervorgehoben (rein datengetrieben, kein "jetzt"-Vergleich) */
 .wm-match.is-next{border-color:rgba(63,185,80,.6);box-shadow:0 0 0 1px rgba(63,185,80,.35),0 18px 50px -22px rgba(63,185,80,.55);}
+/* Bereits gespielte Spiele: kompakte Ergebnisliste, klar abgesetzt von den kommenden Spielen */
+.wm-results{margin-top:clamp(48px,6vw,72px);padding-top:32px;border-top:1px solid var(--line);}
+.wm-results-head{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,236,224,.5);margin:0 0 16px;}
+.wm-results-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;background:var(--line);border-radius:12px;overflow:hidden;}
+.wm-result-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:rgba(244,236,224,.03);padding:11px 18px;font-size:.86rem;}
+.wm-result-date{font-family:var(--mono);font-size:.72rem;color:rgba(244,236,224,.45);min-width:6.5em;}
+.wm-result-runde{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:rgba(244,236,224,.4);min-width:9em;}
+.wm-result-match{display:inline-flex;align-items:center;gap:8px;color:rgba(244,236,224,.85);font-weight:600;}
+.wm-result-match .flag{font-size:1rem;}
+.wm-result-score{font-family:var(--mono);font-weight:700;color:var(--green-soft);padding:0 2px;}
+@media(max-width:640px){.wm-result-row{gap:6px 12px;}.wm-result-runde{min-width:0;}}
 /* TURNIER */
 .wm-turnier{background:var(--ink);}
 .wm-timeline{position:relative;margin-top:14px;overflow-x:auto;padding-bottom:6px;}

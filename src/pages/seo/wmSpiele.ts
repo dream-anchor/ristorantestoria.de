@@ -41,6 +41,14 @@ interface WmTeam {
   flag: string;
 }
 
+/** Endergebnis eines bereits gespielten Spiels (Toren nach 90 bzw. 120 Minuten). */
+export interface WmErgebnis {
+  teamA: number;
+  teamB: number;
+  /** Nur bei Entscheidung im Elfmeterschießen (z. B. nach 0:0 n. V.). */
+  elfmeter?: { teamA: number; teamB: number };
+}
+
 /** Ein WM-Spiel. Datum/Wochentag/Uhrzeit werden aus startISO abgeleitet (lokalisiert). */
 export interface WmSpiel {
   id: string;
@@ -60,6 +68,8 @@ export interface WmSpiel {
   runde: WmRunde;
   /** Optionaler Hinweis (z. B. Anstoß außerhalb der Öffnungszeiten). */
   hinweis?: WmHinweis;
+  /** Endergebnis – nur gesetzt, wenn das Spiel bereits gespielt wurde. */
+  ergebnis?: WmErgebnis;
 }
 
 /** Kurzhelfer für die vier Sprachvarianten eines Namens. */
@@ -74,6 +84,7 @@ interface WmTeamsEntry {
   teamA?: WmTeam;
   teamB?: WmTeam;
   tv?: string;
+  ergebnis?: WmErgebnis;
 }
 const wmTeams = (wmTeamsData as { teams: Record<string, WmTeamsEntry> }).teams;
 
@@ -92,11 +103,21 @@ export const wmSpiele: WmSpiel[] = wmSlots.map((slot) => {
     tv: t?.tv,
     offen: !hasTeams,
     hinweis: slot.hinweis,
+    ergebnis: t?.ergebnis,
   };
 });
 
 /** Spiele chronologisch (ISO mit gleichem Offset sortiert lexikografisch = zeitlich). */
 export const wmSpieleSorted: WmSpiel[] = [...wmSpiele].sort((a, b) => a.startISO.localeCompare(b.startISO));
+
+/**
+ * Kommende/laufende Spiele (noch kein Ergebnis) – chronologisch, nächstes zuerst.
+ * Rein datengetrieben (kein „jetzt"-Vergleich nötig): Ergebnis gesetzt = gespielt.
+ */
+export const wmSpieleUpcoming: WmSpiel[] = wmSpieleSorted.filter((s) => !s.ergebnis);
+
+/** Bereits gespielte Spiele – neuestes Ergebnis zuerst. */
+export const wmSpielePast: WmSpiel[] = [...wmSpieleSorted].filter((s) => s.ergebnis).reverse();
 
 // ---- Lokalisierte Runden-Bezeichnungen (für offene Slot-Karten + Schema) ----
 
@@ -124,6 +145,21 @@ const HINWEIS_LABEL: Record<WmHinweis, Record<Language, string>> = {
 
 /** Lokalisierter Karten-Hinweis, z. B. „Außerhalb unserer Öffnungszeiten". */
 export const wmHinweisLabel = (hinweis: WmHinweis, lang: Language): string => HINWEIS_LABEL[hinweis][lang];
+
+/** Lokalisiertes Kürzel für „nach Elfmeterschießen". */
+const ELFMETER_SUFFIX: Record<Language, string> = {
+  de: "n. E.",
+  en: "on pens.",
+  it: "ai rigori",
+  fr: "t.a.b.",
+};
+
+/** Formatiertes Endergebnis, z. B. „0:1" oder „0:0 (4:3 n. E.)". */
+export const wmErgebnisLabel = (ergebnis: WmErgebnis, lang: Language): string => {
+  const basis = `${ergebnis.teamA}:${ergebnis.teamB}`;
+  if (!ergebnis.elfmeter) return basis;
+  return `${basis} (${ergebnis.elfmeter.teamA}:${ergebnis.elfmeter.teamB} ${ELFMETER_SUFFIX[lang]})`;
+};
 
 // ---- Lokalisierte Datums-/Zeit-Formatierung (Intl, Zeitzone Europe/Berlin = MESZ) ----
 

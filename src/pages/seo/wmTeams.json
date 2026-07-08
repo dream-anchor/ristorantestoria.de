@@ -1,21 +1,25 @@
 {
-  "_comment": "Team-Paarungen je Spiel-Slot. Bestaetigte Teams: name (de/en/it/fr) + Flaggen-Emoji aus scripts/wm-nations.mjs. Noch offene Gegner werden als Sieger-Platzhalter dargestellt (name lokalisiert 'Sieger X/Y', flag = beide Flaggen), damit Zuschauer die moegliche Paarung sehen. Stand: 05.07.2026 (K.o.-Phase). Slots ohne Eintrag (Halbfinale, Spiel um Platz 3, Finale) rendern als offener Runden-Slot.",
+  "_comment": "Team-Paarungen je Spiel-Slot. Bestaetigte Teams: name (de/en/it/fr) + Flaggen-Emoji aus scripts/wm-nations.mjs. Noch offene Gegner werden als Sieger-Platzhalter dargestellt (name lokalisiert 'Sieger X/Y', flag = beide Flaggen), damit Zuschauer die moegliche Paarung sehen. Optionales Feld 'ergebnis' ({teamA, teamB, elfmeter?}): nur setzen, wenn das Spiel bereits gespielt wurde (macht den Slot automatisch zum 'bereits gespielt'-Eintrag, siehe wmSpiele.ts). Stand: 08.07.2026 (K.o.-Phase, Achtelfinale komplett). Slots ohne Eintrag (Halbfinale, Spiel um Platz 3, Finale) rendern als offener Runden-Slot.",
   "teams": {
     "af-por-esp-2026-07-06": {
       "teamA": { "name": { "de": "Portugal", "en": "Portugal", "it": "Portogallo", "fr": "Portugal" }, "flag": "🇵🇹" },
-      "teamB": { "name": { "de": "Spanien", "en": "Spain", "it": "Spagna", "fr": "Espagne" }, "flag": "🇪🇸" }
+      "teamB": { "name": { "de": "Spanien", "en": "Spain", "it": "Spagna", "fr": "Espagne" }, "flag": "🇪🇸" },
+      "ergebnis": { "teamA": 0, "teamB": 1 }
     },
     "af-usa-bel-2026-07-07": {
       "teamA": { "name": { "de": "USA", "en": "USA", "it": "Stati Uniti", "fr": "États-Unis" }, "flag": "🇺🇸" },
-      "teamB": { "name": { "de": "Belgien", "en": "Belgium", "it": "Belgio", "fr": "Belgique" }, "flag": "🇧🇪" }
+      "teamB": { "name": { "de": "Belgien", "en": "Belgium", "it": "Belgio", "fr": "Belgique" }, "flag": "🇧🇪" },
+      "ergebnis": { "teamA": 1, "teamB": 4 }
     },
     "af-arg-egy-2026-07-07": {
       "teamA": { "name": { "de": "Argentinien", "en": "Argentina", "it": "Argentina", "fr": "Argentine" }, "flag": "🇦🇷" },
-      "teamB": { "name": { "de": "Ägypten", "en": "Egypt", "it": "Egitto", "fr": "Égypte" }, "flag": "🇪🇬" }
+      "teamB": { "name": { "de": "Ägypten", "en": "Egypt", "it": "Egitto", "fr": "Égypte" }, "flag": "🇪🇬" },
+      "ergebnis": { "teamA": 3, "teamB": 2 }
     },
     "af-sui-col-2026-07-07": {
       "teamA": { "name": { "de": "Schweiz", "en": "Switzerland", "it": "Svizzera", "fr": "Suisse" }, "flag": "🇨🇭" },
-      "teamB": { "name": { "de": "Kolumbien", "en": "Colombia", "it": "Colombia", "fr": "Colombie" }, "flag": "🇨🇴" }
+      "teamB": { "name": { "de": "Kolumbien", "en": "Colombia", "it": "Colombia", "fr": "Colombie" }, "flag": "🇨🇴" },
+      "ergebnis": { "teamA": 0, "teamB": 0, "elfmeter": { "teamA": 4, "teamB": 3 } }
     },
     "vf-2026-07-09": {
       "teamA": { "name": { "de": "Frankreich", "en": "France", "it": "Francia", "fr": "France" }, "flag": "🇫🇷" },
