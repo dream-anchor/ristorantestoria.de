@@ -2,6 +2,34 @@
   "_comment": "Basis-Spielplan der WM-2026-Public-Viewing-Seite (Termine, Orte, Runden). Stand: K.o.-Phase, 05.07.2026. Redaktionsregel: kommende Achtelfinals (zu STORIA-Oeffnungszeiten spielbar) + alle Runden ab Viertelfinale. Team-Paarungen liegen getrennt in wmTeams.json (bestaetigte Teams ODER Sieger-Platzhalter fuer noch offene Gegner). Slots ohne Eintrag in wmTeams.json rendern als offener Runden-Slot.",
   "slots": [
     {
+      "id": "af-fra-par-2026-07-04",
+      "startISO": "2026-07-04T21:00:00+02:00",
+      "endISO": "2026-07-04T23:30:00+02:00",
+      "ort": "Philadelphia",
+      "runde": "achtelfinale"
+    },
+    {
+      "id": "af-mar-can-2026-07-04",
+      "startISO": "2026-07-04T19:00:00+02:00",
+      "endISO": "2026-07-04T21:30:00+02:00",
+      "ort": "Houston",
+      "runde": "achtelfinale"
+    },
+    {
+      "id": "af-nor-bra-2026-07-05",
+      "startISO": "2026-07-05T21:00:00+02:00",
+      "endISO": "2026-07-05T23:30:00+02:00",
+      "ort": "New York / NJ",
+      "runde": "achtelfinale"
+    },
+    {
+      "id": "af-mex-eng-2026-07-06",
+      "startISO": "2026-07-06T20:00:00+02:00",
+      "endISO": "2026-07-06T22:30:00+02:00",
+      "ort": "Mexico City",
+      "runde": "achtelfinale"
+    },
+    {
       "id": "af-por-esp-2026-07-06",
       "startISO": "2026-07-06T21:00:00+02:00",
       "endISO": "2026-07-06T23:30:00+02:00",

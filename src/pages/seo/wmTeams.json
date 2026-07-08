@@ -1,6 +1,26 @@
 {
-  "_comment": "Team-Paarungen je Spiel-Slot. Bestaetigte Teams: name (de/en/it/fr) + Flaggen-Emoji aus scripts/wm-nations.mjs. Noch offene Gegner werden als Sieger-Platzhalter dargestellt (name lokalisiert 'Sieger X/Y', flag = beide Flaggen), damit Zuschauer die moegliche Paarung sehen. Optionales Feld 'ergebnis' ({teamA, teamB, elfmeter?}): nur setzen, wenn das Spiel bereits gespielt wurde (macht den Slot automatisch zum 'bereits gespielt'-Eintrag, siehe wmSpiele.ts). Stand: 08.07.2026 (K.o.-Phase, Achtelfinale komplett). Slots ohne Eintrag (Halbfinale, Spiel um Platz 3, Finale) rendern als offener Runden-Slot.",
+  "_comment": "Team-Paarungen je Spiel-Slot. Bestaetigte Teams: name (de/en/it/fr) + Flaggen-Emoji aus scripts/wm-nations.mjs. Noch offene Gegner werden als Sieger-Platzhalter dargestellt (name lokalisiert 'Sieger X/Y', flag = beide Flaggen), damit Zuschauer die moegliche Paarung sehen. Optionales Feld 'ergebnis' ({teamA, teamB, elfmeter?}): nur setzen, wenn das Spiel bereits gespielt wurde (macht den Slot automatisch zum 'bereits gespielt'-Eintrag, siehe wmSpiele.ts). Stand: 08.07.2026 (K.o.-Phase, Achtelfinale komplett, alle 8 Spiele erfasst). Slots ohne Eintrag (Halbfinale, Spiel um Platz 3, Finale) rendern als offener Runden-Slot.",
   "teams": {
+    "af-fra-par-2026-07-04": {
+      "teamA": { "name": { "de": "Frankreich", "en": "France", "it": "Francia", "fr": "France" }, "flag": "🇫🇷" },
+      "teamB": { "name": { "de": "Paraguay", "en": "Paraguay", "it": "Paraguay", "fr": "Paraguay" }, "flag": "🇵🇾" },
+      "ergebnis": { "teamA": 1, "teamB": 0 }
+    },
+    "af-mar-can-2026-07-04": {
+      "teamA": { "name": { "de": "Marokko", "en": "Morocco", "it": "Marocco", "fr": "Maroc" }, "flag": "🇲🇦" },
+      "teamB": { "name": { "de": "Kanada", "en": "Canada", "it": "Canada", "fr": "Canada" }, "flag": "🇨🇦" },
+      "ergebnis": { "teamA": 3, "teamB": 0 }
+    },
+    "af-nor-bra-2026-07-05": {
+      "teamA": { "name": { "de": "Norwegen", "en": "Norway", "it": "Norvegia", "fr": "Norvège" }, "flag": "🇳🇴" },
+      "teamB": { "name": { "de": "Brasilien", "en": "Brazil", "it": "Brasile", "fr": "Brésil" }, "flag": "🇧🇷" },
+      "ergebnis": { "teamA": 2, "teamB": 1 }
+    },
+    "af-mex-eng-2026-07-06": {
+      "teamA": { "name": { "de": "Mexiko", "en": "Mexico", "it": "Messico", "fr": "Mexique" }, "flag": "🇲🇽" },
+      "teamB": { "name": { "de": "England", "en": "England", "it": "Inghilterra", "fr": "Angleterre" }, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+      "ergebnis": { "teamA": 2, "teamB": 3 }
+    },
     "af-por-esp-2026-07-06": {
       "teamA": { "name": { "de": "Portugal", "en": "Portugal", "it": "Portogallo", "fr": "Portugal" }, "flag": "🇵🇹" },
       "teamB": { "name": { "de": "Spanien", "en": "Spain", "it": "Spagna", "fr": "Espagne" }, "flag": "🇪🇸" },
