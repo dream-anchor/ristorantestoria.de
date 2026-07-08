@@ -50,6 +50,8 @@ export interface WmContent {
     note: string;
     /** Label auf offenen K.-o.-Slot-Karten, wenn Gegner/Teams noch nicht feststehen. */
     offen: string;
+    /** Überschrift über der kompakten Liste bereits gespielter Spiele. */
+    ergebnisseHead: string;
   };
   turnier: {
     eyebrow: string;
@@ -145,6 +147,7 @@ export const wmContent: Record<Language, WmContent> = {
       mesz: "MESZ",
       note: "Alle Zeiten in MESZ. Die Gegner der K.-o.-Spiele stehen erst nach den jeweiligen Runden fest – wir tragen sie laufend nach.",
       offen: "Gegner stehen noch nicht fest",
+      ergebnisseHead: "Bereits gespielt",
     },
     turnier: {
       eyebrow: "So läuft das Turnier",
@@ -198,7 +201,13 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "Zeigt ihr auch die Deutschland-Spiele?",
-          answer: "Ja, alle drei Gruppenspiele. Kommt Deutschland weiter, auch die K.-o.-Runde.",
+          answer:
+            "Deutschland ist im Sechzehntelfinale gegen Paraguay ausgeschieden (3:4 n. E.). Alle Gruppenspiele und das Sechzehntelfinale haben wir natürlich gezeigt – und übertragen weiterhin jedes K.-o.-Spiel bis zum Finale.",
+        },
+        {
+          question: "Was ist mit Spielen mitten in der Nacht?",
+          answer:
+            "Einige K.-o.-Spiele stoßen erst nach unserer Schließzeit an, z. B. um 2:00 oder 2:30 Uhr MESZ. Diese sind in der Spieletabelle mit dem Hinweis „Außerhalb unserer Öffnungszeiten\" markiert – die zeigen wir leider nicht live.",
         },
         {
           question: "Kann ich auch nur etwas trinken kommen?",
@@ -261,6 +270,7 @@ export const wmContent: Record<Language, WmContent> = {
       mesz: "CEST",
       note: "All times in CEST. Opponents in the knockout matches are confirmed only after each round – we add them as we go.",
       offen: "Opponents to be confirmed",
+      ergebnisseHead: "Already played",
     },
     turnier: {
       eyebrow: "How the tournament runs",
@@ -314,7 +324,13 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "Do you show Germany's matches too?",
-          answer: "Yes, all three group games. If Germany go through, the knockout rounds as well.",
+          answer:
+            "Germany were eliminated in the round of 32 against Paraguay (3-4 on penalties). We showed all three group games and that match, of course – and we're still showing every knockout game through to the final.",
+        },
+        {
+          question: "What about matches in the middle of the night?",
+          answer:
+            "A few knockout matches kick off after we've closed, for example at 2:00 or 2:30 am CEST. These are marked in the match schedule with an \"Outside our opening hours\" note – we're not able to show those live.",
         },
         {
           question: "Can I just come for a drink?",
@@ -377,6 +393,7 @@ export const wmContent: Record<Language, WmContent> = {
       mesz: "ora di Roma",
       note: "Tutti gli orari sono ora di Roma. Gli avversari delle partite a eliminazione si conoscono solo dopo ogni turno – li aggiungiamo man mano.",
       offen: "Avversari da definire",
+      ergebnisseHead: "Già giocate",
     },
     turnier: {
       eyebrow: "Come si svolge il torneo",
@@ -430,7 +447,13 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "Mostrate anche le partite della Germania?",
-          answer: "Sì, tutte e tre le gare del girone. Se la Germania passa, anche la fase a eliminazione diretta.",
+          answer:
+            "La Germania è stata eliminata nei sedicesimi contro il Paraguay (3-4 ai rigori). Abbiamo trasmesso tutte e tre le gare del girone e anche quella partita – e continuiamo a trasmettere ogni partita a eliminazione diretta fino alla finale.",
+        },
+        {
+          question: "E le partite nel cuore della notte?",
+          answer:
+            "Alcune partite a eliminazione diretta iniziano dopo la nostra chiusura, ad esempio alle 2:00 o alle 2:30 (ora di Roma). Nel calendario sono contrassegnate con l'indicazione \"Fuori dai nostri orari di apertura\" – purtroppo non possiamo trasmetterle dal vivo.",
         },
         {
           question: "Posso venire solo per bere qualcosa?",
@@ -493,6 +516,7 @@ export const wmContent: Record<Language, WmContent> = {
       mesz: "heure de Paris",
       note: "Tous les horaires à l'heure de Paris. Les adversaires des matchs à élimination ne sont connus qu'après chaque tour – nous les ajoutons au fur et à mesure.",
       offen: "Adversaires à définir",
+      ergebnisseHead: "Déjà joués",
     },
     turnier: {
       eyebrow: "Comment se déroule le tournoi",
@@ -546,7 +570,13 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "Diffusez-vous aussi les matchs de l'Allemagne ?",
-          answer: "Oui, les trois matchs de groupe. Si l'Allemagne passe, les phases à élimination directe aussi.",
+          answer:
+            "L'Allemagne a été éliminée en seizièmes de finale contre le Paraguay (3-4 aux tirs au but). Nous avons bien sûr diffusé les trois matchs de groupe et ce match-là – et nous continuons à diffuser chaque match à élimination directe jusqu'à la finale.",
+        },
+        {
+          question: "Et les matchs en pleine nuit ?",
+          answer:
+            "Certains matchs à élimination directe débutent après notre fermeture, par exemple à 2h00 ou 2h30 (heure de Paris). Ils sont signalés dans le calendrier par la mention « En dehors de nos heures d'ouverture » – nous ne pouvons malheureusement pas les diffuser en direct.",
         },
         {
           question: "Puis-je venir juste pour boire un verre ?",
