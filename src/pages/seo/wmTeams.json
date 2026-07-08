@@ -30,8 +30,8 @@
       "teamB": { "name": { "de": "England", "en": "England", "it": "Inghilterra", "fr": "Angleterre" }, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }
     },
     "vf-2026-07-12": {
-      "teamA": { "name": { "de": "Sieger Argentinien/Ägypten", "en": "Winner Argentina/Egypt", "it": "Vincente Argentina/Egitto", "fr": "Vainqueur Argentine/Égypte" }, "flag": "🇦🇷🇪🇬" },
-      "teamB": { "name": { "de": "Sieger Schweiz/Kolumbien", "en": "Winner Switzerland/Colombia", "it": "Vincente Svizzera/Colombia", "fr": "Vainqueur Suisse/Colombie" }, "flag": "🇨🇭🇨🇴" }
+      "teamA": { "name": { "de": "Argentinien", "en": "Argentina", "it": "Argentina", "fr": "Argentine" }, "flag": "🇦🇷" },
+      "teamB": { "name": { "de": "Schweiz", "en": "Switzerland", "it": "Svizzera", "fr": "Suisse" }, "flag": "🇨🇭" }
     }
   }
 }
