@@ -409,6 +409,21 @@ const WmPublicViewingMuenchen = () => {
           </div>
         </section>
 
+        {/* WM/EM-RHYTHMUS (evergreen, zahlt auf die spätere EM-2028-Umwidmung der Seite ein) */}
+        <section className="wm-sec wm-zyklus" id="wm-em-zyklus">
+          <div className="wm-wrap">
+            <Reveal className="wm-sec-head">
+              <span className="wm-eyebrow wm-eyebrow-line">{c.zyklus.eyebrow}</span>
+              <h2 className="wm-h2">{c.zyklus.h2}</h2>
+            </Reveal>
+            {c.zyklus.blocks.map((b) => (
+              <Reveal as="p" key={b.lead} className="wm-lead wm-zyklus-p">
+                <strong>{b.lead}</strong> {b.body}
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
         {/* RESERVIEREN */}
         <section className="wm-sec wm-reservieren" id="reservieren">
           <div className="wm-wrap">
@@ -577,6 +592,11 @@ const wmStyles = `
 .wm-longtail-p{margin-top:24px;}
 .wm-longtail-p:first-of-type{margin-top:8px;}
 .wm-longtail-p strong{color:var(--amber-bright);font-weight:600;}
+/* WM/EM-RHYTHMUS */
+.wm-zyklus{background:var(--ink-2);}
+.wm-zyklus-p{margin-top:24px;}
+.wm-zyklus-p:first-of-type{margin-top:8px;}
+.wm-zyklus-p strong{color:var(--amber-bright);font-weight:600;}
 /* DEUTSCHE SPIELE */
 .wm-spiele{background:var(--ink-2);}
 .wm-match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}

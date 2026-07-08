@@ -41,6 +41,16 @@ export interface WmContent {
     h2: string;
     blocks: { lead: string; body: string }[];
   };
+  /**
+   * Evergreen-Abschnitt zum WM/EM-Zwei-Jahres-Rhythmus. Zahlt bewusst schon jetzt auf die
+   * spätere Umwidmung dieser Seite zum SEO/GEO-Platzhalter für die EM 2028 ein (Content-Tiefe
+   * statt Title/H1/URL-Änderung – die bleiben bis zum eigentlichen Umbau auf WM 2026 fokussiert).
+   */
+  zyklus: {
+    eyebrow: string;
+    h2: string;
+    blocks: { lead: string; body: string }[];
+  };
   /** Spiel-Daten (Teams, Termine, Orte) liegen in wmSpiele.ts – hier nur Rahmentexte. */
   spiele: {
     eyebrow: string;
@@ -117,7 +127,7 @@ export const wmContent: Record<Language, WmContent> = {
         "Alle Spiele der WM 2026, von der Gruppenphase bis zum Finale.",
         "Übertragung auf der überdachten Terrasse. Bei schlechtem Wetter zeigen wir drinnen weiter.",
         "Keine Sportkneipe: süditalienische Küche, eigene Weinkarte, Aperitivo zum Anstoß.",
-        "Reservierung empfohlen, gerade an den Abenden mit deutscher Beteiligung.",
+        "Reservierung empfohlen, besonders an den K.-o.-Abenden ab dem Viertelfinale.",
       ],
       menuPhrase: "süditalienische Küche",
     },
@@ -136,13 +146,27 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           lead: "An den großen Spieltagen vorher reservieren.",
-          body: "Wenn Deutschland, Italien oder ein Achtel- bzw. Viertelfinale läuft, ist die Terrasse schnell voll. Sichern Sie sich Ihren Tisch vorab – dann bleibt vor dem Anpfiff noch Zeit für einen Aperitivo.",
+          body: "Läuft ein Achtel-, Viertel- oder Halbfinale, ist die Terrasse schnell voll. Sichern Sie sich Ihren Tisch vorab – dann bleibt vor dem Anpfiff noch Zeit für einen Aperitivo.",
+        },
+      ],
+    },
+    zyklus: {
+      eyebrow: "WM & EM · Der Rhythmus des Fußballs",
+      h2: "Nach der WM ist vor der EM.",
+      blocks: [
+        {
+          lead: "Alle zwei Jahre ein großes Turnier.",
+          body: "Seit den 1960er-Jahren wechseln sich Fußball-Weltmeisterschaft und Fußball-Europameisterschaft im Zwei-Jahres-Rhythmus ab: WM 2022, EM 2024, WM 2026 – und im Sommer 2028 die nächste Europameisterschaft. Für uns ist Public Viewing deshalb kein einmaliges Ereignis, sondern gelebte Praxis: Läuft ein großes Turnier, läuft es auf unserer Terrasse.",
+        },
+        {
+          lead: "Nach der WM: die EM 2028.",
+          body: "Die nächste Europameisterschaft findet 2028 im Vereinigten Königreich und in Irland statt. Auch dafür öffnen wir wieder die Terrasse in der Karlstraße – Termine und Spielplan folgen, sobald die UEFA sie veröffentlicht. Bis dahin bleibt diese Seite unsere Adresse für jedes große Turnier.",
         },
       ],
     },
     spiele: {
       eyebrow: "Die größten Spiele · K.-o.-Phase",
-      h2: "Von Deutschland bis zum Finale – live bei uns.",
+      h2: "Vom Achtelfinale bis zum Finale – live bei uns.",
       vs: "gegen",
       mesz: "MESZ",
       note: "Alle Zeiten in MESZ. Die Gegner der K.-o.-Spiele stehen erst nach den jeweiligen Runden fest – wir tragen sie laufend nach.",
@@ -165,7 +189,7 @@ export const wmContent: Record<Language, WmContent> = {
     reservieren: {
       eyebrow: "Platz sichern",
       h2: "Reservieren",
-      lead: "An Spieltagen sind die Tische schnell vergeben, bei den deutschen Spielen besonders. Sichert euch euren Platz auf der Terrasse oder drinnen – eine kurze Reservierung genügt.",
+      lead: "An Spieltagen sind die Tische schnell vergeben, bei den K.-o.-Spielen besonders. Sichert euch euren Platz auf der Terrasse oder drinnen – eine kurze Reservierung genügt.",
       ctaReserve: "Tisch reservieren →",
       ctaWhatsapp: "WhatsApp",
     },
@@ -193,7 +217,7 @@ export const wmContent: Record<Language, WmContent> = {
         {
           question: "Muss ich reservieren?",
           answer:
-            "Empfohlen, vor allem an Spieltagen und bei den deutschen Spielen. Reservieren geht über das Formular oder per WhatsApp.",
+            "Empfohlen, vor allem an Spieltagen und bei den K.-o.-Spielen. Reservieren geht über das Formular oder per WhatsApp.",
         },
         {
           question: "Was passiert bei schlechtem Wetter?",
@@ -208,6 +232,11 @@ export const wmContent: Record<Language, WmContent> = {
           question: "Was ist mit Spielen mitten in der Nacht?",
           answer:
             "Einige K.-o.-Spiele stoßen erst nach unserer Schließzeit an, z. B. um 2:00 oder 2:30 Uhr MESZ. Diese sind in der Spieletabelle mit dem Hinweis „Außerhalb unserer Öffnungszeiten\" markiert – die zeigen wir leider nicht live.",
+        },
+        {
+          question: "Wann ist das nächste große Fußballturnier nach der WM 2026?",
+          answer:
+            "Die UEFA Euro 2028, ausgetragen im Vereinigten Königreich und in Irland, im Sommer 2028. Weltmeisterschaft und Europameisterschaft wechseln sich im Zwei-Jahres-Rhythmus ab – wir zeigen beide live im STORIA.",
         },
         {
           question: "Kann ich auch nur etwas trinken kommen?",
@@ -254,7 +283,7 @@ export const wmContent: Record<Language, WmContent> = {
         "Every World Cup 2026 match, from the group stage to the final.",
         "Shown on the covered terrace. If the weather turns, we carry on inside.",
         "Not a sports bar: southern Italian cooking, our own wine list, an aperitivo at kick-off.",
-        "Booking recommended, especially on the evenings Germany are playing.",
+        "Booking recommended, especially on knockout evenings from the quarter-finals on.",
       ],
       menuPhrase: "southern Italian cooking",
     },
@@ -263,9 +292,23 @@ export const wmContent: Record<Language, WmContent> = {
       anchor: "Filmfest München at the same time",
       post: ". Premiere dinners and industry evenings under one roof.",
     },
+    zyklus: {
+      eyebrow: "World Cup & Euro · Football's two-year rhythm",
+      h2: "Once the World Cup ends, the Euros are already on the horizon.",
+      blocks: [
+        {
+          lead: "A major tournament every two years.",
+          body: "The World Cup and the European Championship have alternated every two years since the 1960s: World Cup 2022, Euro 2024, World Cup 2026 – and the next Euro in summer 2028. For us, public viewing isn't a one-off event, it's a habit: whenever a major tournament is on, it's on at STORIA.",
+        },
+        {
+          lead: "After the World Cup: Euro 2028.",
+          body: "The next European Championship takes place in 2028 in the United Kingdom and Ireland. We'll open the terrace on Karlstraße for that too – dates and fixtures to follow once UEFA confirms them. Until then, this page stays our home for every major tournament.",
+        },
+      ],
+    },
     spiele: {
       eyebrow: "The biggest matches · Knockout stage",
-      h2: "From Germany to the final – live with us.",
+      h2: "From the round of 16 to the final – live with us.",
       vs: "vs",
       mesz: "CEST",
       note: "All times in CEST. Opponents in the knockout matches are confirmed only after each round – we add them as we go.",
@@ -288,7 +331,7 @@ export const wmContent: Record<Language, WmContent> = {
     reservieren: {
       eyebrow: "Secure your spot",
       h2: "Book a table",
-      lead: "On match days tables go fast, especially for Germany's games. Grab your spot on the terrace or inside – a quick booking is all it takes.",
+      lead: "On match days tables go fast, especially for the knockout games. Grab your spot on the terrace or inside – a quick booking is all it takes.",
       ctaReserve: "Book a table →",
       ctaWhatsapp: "WhatsApp",
     },
@@ -316,7 +359,7 @@ export const wmContent: Record<Language, WmContent> = {
         {
           question: "Do I need to book?",
           answer:
-            "Recommended, especially on match days and for Germany's games. Book via the form or over WhatsApp.",
+            "Recommended, especially on match days and for the knockout games. Book via the form or over WhatsApp.",
         },
         {
           question: "What happens if the weather turns?",
@@ -331,6 +374,11 @@ export const wmContent: Record<Language, WmContent> = {
           question: "What about matches in the middle of the night?",
           answer:
             "A few knockout matches kick off after we've closed, for example at 2:00 or 2:30 am CEST. These are marked in the match schedule with an \"Outside our opening hours\" note – we're not able to show those live.",
+        },
+        {
+          question: "When's the next major tournament after the 2026 World Cup?",
+          answer:
+            "UEFA Euro 2028, held in the United Kingdom and Ireland, in summer 2028. The World Cup and the Euros alternate every two years – and we show both live at STORIA.",
         },
         {
           question: "Can I just come for a drink?",
@@ -377,7 +425,7 @@ export const wmContent: Record<Language, WmContent> = {
         "Tutte le partite dei Mondiali 2026, dalla fase a gironi alla finale.",
         "Trasmissione sulla terrazza coperta. Se il tempo peggiora, continuiamo al chiuso.",
         "Non un pub sportivo: cucina del Sud Italia, carta dei vini nostra, aperitivo al fischio d'inizio.",
-        "Prenotazione consigliata, soprattutto nelle serate in cui gioca la Germania.",
+        "Prenotazione consigliata, soprattutto nelle serate a eliminazione diretta dai quarti in poi.",
       ],
       menuPhrase: "cucina del Sud Italia",
     },
@@ -386,9 +434,23 @@ export const wmContent: Record<Language, WmContent> = {
       anchor: "Filmfest München in contemporanea",
       post: ". Cene di premiere e serate di settore nella stessa casa.",
     },
+    zyklus: {
+      eyebrow: "Mondiali & Europei · Il ritmo del calcio",
+      h2: "Finiti i Mondiali, si guarda già agli Europei.",
+      blocks: [
+        {
+          lead: "Un grande torneo ogni due anni.",
+          body: "Dagli anni '60, Mondiali ed Europei si alternano ogni due anni: Mondiali 2022, Europei 2024, Mondiali 2026 – e i prossimi Europei nell'estate 2028. Per noi il public viewing non è un evento isolato, ma un'abitudine: quando c'è un grande torneo, si vede allo STORIA.",
+        },
+        {
+          lead: "Dopo i Mondiali: Euro 2028.",
+          body: "I prossimi Campionati Europei si giocheranno nel 2028 nel Regno Unito e in Irlanda. Anche per quell'occasione riapriremo la terrazza in Karlstraße – date e calendario appena la UEFA li renderà noti. Fino ad allora, questa pagina resta il nostro punto di riferimento per ogni grande torneo.",
+        },
+      ],
+    },
     spiele: {
       eyebrow: "Le partite più grandi · Fase a eliminazione",
-      h2: "Dalla Germania alla finale – in diretta da noi.",
+      h2: "Dagli ottavi alla finale – in diretta da noi.",
       vs: "contro",
       mesz: "ora di Roma",
       note: "Tutti gli orari sono ora di Roma. Gli avversari delle partite a eliminazione si conoscono solo dopo ogni turno – li aggiungiamo man mano.",
@@ -411,7 +473,7 @@ export const wmContent: Record<Language, WmContent> = {
     reservieren: {
       eyebrow: "Assicurati il posto",
       h2: "Prenota",
-      lead: "Nei giorni di partita i tavoli si esauriscono in fretta, ancora di più per le gare della Germania. Assicurati il tuo posto in terrazza o al chiuso – basta una breve prenotazione.",
+      lead: "Nei giorni di partita i tavoli si esauriscono in fretta, ancora di più per le gare a eliminazione diretta. Assicurati il tuo posto in terrazza o al chiuso – basta una breve prenotazione.",
       ctaReserve: "Prenota un tavolo →",
       ctaWhatsapp: "WhatsApp",
     },
@@ -439,7 +501,7 @@ export const wmContent: Record<Language, WmContent> = {
         {
           question: "Devo prenotare?",
           answer:
-            "Consigliato, soprattutto nei giorni di partita e per le gare della Germania. Si prenota dal modulo o via WhatsApp.",
+            "Consigliato, soprattutto nei giorni di partita e per le gare a eliminazione diretta. Si prenota dal modulo o via WhatsApp.",
         },
         {
           question: "Cosa succede se il tempo peggiora?",
@@ -454,6 +516,11 @@ export const wmContent: Record<Language, WmContent> = {
           question: "E le partite nel cuore della notte?",
           answer:
             "Alcune partite a eliminazione diretta iniziano dopo la nostra chiusura, ad esempio alle 2:00 o alle 2:30 (ora di Roma). Nel calendario sono contrassegnate con l'indicazione \"Fuori dai nostri orari di apertura\" – purtroppo non possiamo trasmetterle dal vivo.",
+        },
+        {
+          question: "Quando si gioca il prossimo grande torneo dopo i Mondiali 2026?",
+          answer:
+            "Gli Europei UEFA 2028, che si disputeranno nel Regno Unito e in Irlanda nell'estate 2028. Mondiali ed Europei si alternano ogni due anni – e li trasmettiamo entrambi dal vivo allo STORIA.",
         },
         {
           question: "Posso venire solo per bere qualcosa?",
@@ -500,7 +567,7 @@ export const wmContent: Record<Language, WmContent> = {
         "Tous les matchs de la Coupe du monde 2026, de la phase de groupes à la finale.",
         "Diffusion sur la terrasse couverte. Si le temps se gâte, on continue à l'intérieur.",
         "Pas un bar à sport : cuisine du sud de l'Italie, notre propre carte des vins, un apéritif au coup d'envoi.",
-        "Réservation conseillée, surtout les soirs où joue l'Allemagne.",
+        "Réservation conseillée, surtout les soirs de matchs à élimination directe à partir des quarts.",
       ],
       menuPhrase: "cuisine du sud de l'Italie",
     },
@@ -509,9 +576,23 @@ export const wmContent: Record<Language, WmContent> = {
       anchor: "Filmfest München en parallèle",
       post: ". Dîners de première et soirées de l'industrie sous le même toit.",
     },
+    zyklus: {
+      eyebrow: "Coupe du monde & Euro · Le rythme du football",
+      h2: "La Coupe du monde à peine finie, l'Euro pointe déjà.",
+      blocks: [
+        {
+          lead: "Un grand tournoi tous les deux ans.",
+          body: "Depuis les années 1960, la Coupe du monde et l'Euro s'alternent tous les deux ans : Coupe du monde 2022, Euro 2024, Coupe du monde 2026 – puis le prochain Euro à l'été 2028. Chez nous, le public viewing n'est pas un événement isolé mais une habitude : dès qu'un grand tournoi a lieu, on le voit au STORIA.",
+        },
+        {
+          lead: "Après la Coupe du monde : l'Euro 2028.",
+          body: "Le prochain Championnat d'Europe se déroulera en 2028 au Royaume-Uni et en Irlande. Nous rouvrirons la terrasse de la Karlstraße pour l'occasion aussi – dates et calendrier suivront dès que l'UEFA les publiera. D'ici là, cette page reste notre adresse pour chaque grand tournoi.",
+        },
+      ],
+    },
     spiele: {
       eyebrow: "Les plus grands matchs · Phase à élimination",
-      h2: "De l'Allemagne à la finale – en direct chez nous.",
+      h2: "Des huitièmes à la finale – en direct chez nous.",
       vs: "contre",
       mesz: "heure de Paris",
       note: "Tous les horaires à l'heure de Paris. Les adversaires des matchs à élimination ne sont connus qu'après chaque tour – nous les ajoutons au fur et à mesure.",
@@ -534,7 +615,7 @@ export const wmContent: Record<Language, WmContent> = {
     reservieren: {
       eyebrow: "Réservez votre place",
       h2: "Réserver",
-      lead: "Les jours de match, les tables partent vite, surtout pour les matchs de l'Allemagne. Réservez votre place sur la terrasse ou à l'intérieur – une courte réservation suffit.",
+      lead: "Les jours de match, les tables partent vite, surtout pour les matchs à élimination directe. Réservez votre place sur la terrasse ou à l'intérieur – une courte réservation suffit.",
       ctaReserve: "Réserver une table →",
       ctaWhatsapp: "WhatsApp",
     },
@@ -562,7 +643,7 @@ export const wmContent: Record<Language, WmContent> = {
         {
           question: "Dois-je réserver ?",
           answer:
-            "Conseillé, surtout les jours de match et pour les matchs de l'Allemagne. La réservation se fait via le formulaire ou par WhatsApp.",
+            "Conseillé, surtout les jours de match et pour les matchs à élimination directe. La réservation se fait via le formulaire ou par WhatsApp.",
         },
         {
           question: "Que se passe-t-il s'il pleut ?",
@@ -577,6 +658,11 @@ export const wmContent: Record<Language, WmContent> = {
           question: "Et les matchs en pleine nuit ?",
           answer:
             "Certains matchs à élimination directe débutent après notre fermeture, par exemple à 2h00 ou 2h30 (heure de Paris). Ils sont signalés dans le calendrier par la mention « En dehors de nos heures d'ouverture » – nous ne pouvons malheureusement pas les diffuser en direct.",
+        },
+        {
+          question: "Quel est le prochain grand tournoi après la Coupe du monde 2026 ?",
+          answer:
+            "L'Euro UEFA 2028, organisé au Royaume-Uni et en Irlande, à l'été 2028. La Coupe du monde et l'Euro s'alternent tous les deux ans – nous diffusons les deux en direct au STORIA.",
         },
         {
           question: "Puis-je venir juste pour boire un verre ?",
