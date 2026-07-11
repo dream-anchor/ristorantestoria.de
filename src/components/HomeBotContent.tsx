@@ -32,10 +32,16 @@ const HomeBotContent = () => {
       <section>
         <h2>{language === 'de' ? 'Öffnungszeiten' : 'Opening Hours'}</h2>
         <p>
-          {language === 'de' ? 'Montag - Freitag: 09:00 - 01:00 Uhr' : 'Monday - Friday: 9:00 AM - 1:00 AM'}
+          {language === 'de' ? 'Montag - Mittwoch: 09:00 - 00:00 Uhr' : 'Monday - Wednesday: 9:00 AM - 12:00 midnight'}
         </p>
         <p>
-          {language === 'de' ? 'Samstag - Sonntag: 12:00 - 01:00 Uhr' : 'Saturday - Sunday: 12:00 PM - 1:00 AM'}
+          {language === 'de' ? 'Donnerstag - Freitag: 09:00 - 01:00 Uhr' : 'Thursday - Friday: 9:00 AM - 1:00 AM'}
+        </p>
+        <p>
+          {language === 'de' ? 'Samstag: 11:00 - 14:30 & 17:30 - 01:00 Uhr' : 'Saturday: 11:00 AM - 2:30 PM & 5:30 PM - 1:00 AM'}
+        </p>
+        <p>
+          {language === 'de' ? 'Sonntag: 12:00 - 14:30 & 17:30 - 22:30 Uhr' : 'Sunday: 12:00 PM - 2:30 PM & 5:30 PM - 10:30 PM'}
         </p>
       </section>
 

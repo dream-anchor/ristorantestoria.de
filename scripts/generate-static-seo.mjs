@@ -44,7 +44,8 @@ const STATIC_FALLBACK_HTML = `
       <a href="mailto:info@ristorantestoria.de" itemprop="email">info@ristorantestoria.de</a>
     </p>
     <p itemprop="openingHours">
-      Öffnungszeiten: Montag bis Freitag 09:00–01:00 Uhr, Samstag und Sonntag 12:00–01:00 Uhr.
+      Öffnungszeiten: Montag bis Mittwoch 09:00–00:00 Uhr, Donnerstag und Freitag 09:00–01:00 Uhr,
+      Samstag 11:00–14:30 und 17:30–01:00 Uhr, Sonntag 12:00–14:30 und 17:30–22:30 Uhr.
     </p>
   </section>
 

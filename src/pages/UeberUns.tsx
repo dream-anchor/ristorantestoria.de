@@ -98,8 +98,9 @@ const UeberUns = () => {
                   neapolitanische Steinofen-Pizza
                 </a>
                 {" "}bei 400 °C (UNESCO-anerkannte Tradition), hausgemachte Pasta und über 60 italienische
-                Weine. 4,5 Sterne bei über 780 Google-Bewertungen. Geöffnet Mo–Fr 09:00–01:00,
-                Sa–So 12:00–01:00. Reservierung: <a href={`tel:${STORIA.phoneTel}`} className="text-foreground hover:underline">{STORIA.phone}</a>.
+                Weine. 4,5 Sterne bei über 780 Google-Bewertungen. Geöffnet Mo–Mi 09:00–00:00,
+                Do–Fr 09:00–01:00, Sa 11:00–14:30 & 17:30–01:00, So 12:00–14:30 & 17:30–22:30.
+                Reservierung: <a href={`tel:${STORIA.phoneTel}`} className="text-foreground hover:underline">{STORIA.phone}</a>.
               </p>
             </div>
 
@@ -254,7 +255,7 @@ const UeberUns = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock className="w-4 h-4 mt-0.5 text-primary flex-shrink-0" />
-                  <span>Mo–Fr 09:00–01:00 · Sa–So 12:00–01:00</span>
+                  <span>Mo–Mi 09:00–00:00 · Do–Fr 09:00–01:00 · Sa 11:00–14:30 & 17:30–01:00 · So 12:00–14:30 & 17:30–22:30</span>
                 </div>
                 <ul className="list-disc list-inside space-y-1 ml-7">
                   <li>5 Min. zu Fuß vom Königsplatz (U2, U8)</li>

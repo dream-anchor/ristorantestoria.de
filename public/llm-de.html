@@ -67,15 +67,39 @@
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
+            "opens": "09:00",
+            "closes": "00:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Thursday", "Friday"],
             "opens": "09:00",
             "closes": "01:00"
           },
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Saturday", "Sunday"],
-            "opens": "12:00",
+            "dayOfWeek": ["Saturday"],
+            "opens": "11:00",
+            "closes": "14:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday"],
+            "opens": "17:30",
             "closes": "01:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Sunday"],
+            "opens": "12:00",
+            "closes": "14:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Sunday"],
+            "opens": "17:30",
+            "closes": "22:30"
           }
         ],
         "servesCuisine": ["Italian", "Neapolitan Pizza", "Mediterranean"],
@@ -445,8 +469,10 @@
       <h2>Öffnungszeiten</h2>
       
       <ul>
-        <li><strong>Montag – Freitag:</strong> 09:00 – 01:00 Uhr</li>
-        <li><strong>Samstag – Sonntag:</strong> 12:00 – 01:00 Uhr</li>
+        <li><strong>Montag – Mittwoch:</strong> 09:00 – 00:00 Uhr</li>
+        <li><strong>Donnerstag – Freitag:</strong> 09:00 – 01:00 Uhr</li>
+        <li><strong>Samstag:</strong> 11:00 – 14:30 Uhr &amp; 17:30 – 01:00 Uhr</li>
+        <li><strong>Sonntag:</strong> 12:00 – 14:30 Uhr &amp; 17:30 – 22:30 Uhr</li>
         <li><strong>Frühstück:</strong> Montag – Freitag ab 09:00 Uhr</li>
         <li><strong>Mittagsmenü:</strong> Montag – Freitag, 12:00 – 14:30 Uhr</li>
         <li><strong>Aperitivo:</strong> Täglich – Klassische italienische Aperitivi</li>

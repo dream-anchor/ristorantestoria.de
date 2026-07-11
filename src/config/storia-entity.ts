@@ -72,13 +72,19 @@ export const STORIA = {
 
   // Öffnungszeiten
   openingHours: {
-    weekday: { label: "Mo–Fr", open: "09:00", close: "01:00" },
-    weekend: { label: "Sa–So", open: "12:00", close: "01:00" },
+    monWed: { label: "Mo–Mi", slots: [{ open: "09:00", close: "00:00" }] },
+    thuFri: { label: "Do–Fr", slots: [{ open: "09:00", close: "01:00" }] },
+    sat: { label: "Sa", slots: [{ open: "11:00", close: "14:30" }, { open: "17:30", close: "01:00" }] },
+    sun: { label: "So", slots: [{ open: "12:00", close: "14:30" }, { open: "17:30", close: "22:30" }] },
   },
   // Schema.org OpeningHoursSpecification
   openingHoursSpec: [
-    { dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "01:00" },
-    { dayOfWeek: ["Saturday", "Sunday"], opens: "12:00", closes: "01:00" },
+    { dayOfWeek: ["Monday", "Tuesday", "Wednesday"], opens: "09:00", closes: "00:00" },
+    { dayOfWeek: ["Thursday", "Friday"], opens: "09:00", closes: "01:00" },
+    { dayOfWeek: ["Saturday"], opens: "11:00", closes: "14:30" },
+    { dayOfWeek: ["Saturday"], opens: "17:30", closes: "01:00" },
+    { dayOfWeek: ["Sunday"], opens: "12:00", closes: "14:30" },
+    { dayOfWeek: ["Sunday"], opens: "17:30", closes: "22:30" },
   ],
 
   // Kapazität
