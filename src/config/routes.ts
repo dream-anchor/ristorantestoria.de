@@ -16,6 +16,7 @@ const LEGAL_ONLY_DE = new Set([
   "impressum", "datenschutz", "cookie-richtlinie",
   "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
   "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+  "barrierefreiheit",
 ]);
 
 // Get slugs for a specific language

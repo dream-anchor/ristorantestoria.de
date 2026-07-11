@@ -1,4 +1,5 @@
 import LocalizedLink from "@/components/LocalizedLink";
+import InternalLinks from "@/components/InternalLinks";
 import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
 import domenicoImage from "@/assets/domenico-speranza.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -18,6 +19,10 @@ const Footer = () => {
   );
 
   return (
+    <>
+    {/* Sitewide interne Verlinkung — jede Seite mit Footer verlinkt alle
+        Landingpages (Indexierung: behebt Orphan-Seiten wie pasta-fresca) */}
+    <InternalLinks />
     <footer className="bg-primary text-primary-foreground">
       {/* La Famiglia Speranza */}
       <div id="la-famiglia" className="border-b border-primary-foreground/5">
@@ -208,6 +213,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 

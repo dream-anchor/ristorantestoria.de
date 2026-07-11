@@ -56,6 +56,8 @@ export const de = {
   },
   internalLinks: {
     title: "Entdecken Sie mehr",
+    oktoberfestMunich: "Oktoberfest München",
+    groupDining: "Restaurant für Reisegruppen",
     lunchMunich: "Lunch München",
     aperitivoMunich: "Aperitivo München",
     neapolitanPizza: "Neapolitanische Pizza",
@@ -257,6 +259,7 @@ export const de = {
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Restaurant für Reisegruppen", slug: "reisegruppen-muenchen" },
       { label: "Firmenfeier München", slug: "firmenfeier-muenchen" },
+      { label: "Oktoberfest München", slug: "oktoberfest-muenchen" },
       { label: "Geburtstagsfeier München", slug: "geburtstagsfeier-muenchen" },
       { label: "Hochzeitsfeier München", slug: "hochzeitsfeier-muenchen" },
       { label: "Weihnachtsfeier München", slug: "weihnachtsfeier-muenchen" },

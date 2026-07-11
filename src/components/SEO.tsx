@@ -110,6 +110,50 @@ function computeHreflangFromCanonical(canonical: string): Record<string, string>
   return urls.de ? urls : null;
 }
 
+/**
+ * Lokalisiert einen (deutschen) canonical-Pfad in die aktive Sprache.
+ * Viele Seiten übergeben den DE-Basis-Pfad hartkodiert — ohne Lokalisierung
+ * würden EN/IT/FR-Seiten die deutsche URL als canonical deklarieren und
+ * sich damit selbst zum Duplikat erklären (GSC: „Alternative Seite mit
+ * richtigem kanonischen Tag").
+ * Nicht auflösbare Segmente (Admin, dynamische Slugs) bleiben unverändert.
+ */
+function localizeCanonicalPath(canonical: string, language: string): string {
+  if (language === "de" || !canonical) return canonical;
+
+  // Pfad normalisieren (Query/Hash weg, leading slash, kein trailing slash)
+  let path = canonical.split("?")[0].split("#")[0];
+  if (!path.startsWith("/")) path = "/" + path;
+  path = path.replace(/\/$/, "");
+
+  if (path === "") return `/${language}/`;
+  // Bereits sprachlokalisiert (z. B. von BesondererAnlass berechnet)
+  for (const lang of ["en", "it", "fr"]) {
+    if (path === `/${lang}` || path.startsWith(`/${lang}/`)) return canonical;
+  }
+
+  const deSlugs = (allSlugs as any).de as Record<string, string>;
+  const targetSlugs = (allSlugs as any)[language] as Record<string, string> | undefined;
+  if (!targetSlugs) return canonical;
+
+  // Jedes Pfadsegment: DE-Slug → Base-Slug → Ziel-Slug
+  const localizedSegments: string[] = [];
+  for (const segment of path.slice(1).split("/")) {
+    let baseSlug: string | null = null;
+    for (const [base, localized] of Object.entries(deSlugs)) {
+      if (localized === segment) {
+        baseSlug = base;
+        break;
+      }
+    }
+    const targetSlug = baseSlug !== null ? targetSlugs[baseSlug] : undefined;
+    if (targetSlug === undefined || targetSlug === null) return canonical;
+    localizedSegments.push(targetSlug);
+  }
+
+  return `/${language}/${localizedSegments.join("/")}/`;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -144,10 +188,14 @@ const SEO = ({
     ? (title.includes('STORIA') ? title : `${title} – STORIA München`)
     : "STORIA – Ristorante Pizzeria Bar München";
 
-  // Kanonische URL normalisiert
-  const canonicalUrl = canonical
-    ? buildCanonicalUrl(canonical)
-    : `${BASE_URL}/`;
+  // Kanonische URL normalisiert — sprachabhängig lokalisiert.
+  // Legal-Seiten (noHreflang) sind DE-only und behalten den DE-Canonical.
+  const localizedCanonical = canonical && !noHreflang && !noIndex
+    ? localizeCanonicalPath(canonical, language)
+    : canonical;
+  const canonicalUrl = localizedCanonical
+    ? buildCanonicalUrl(localizedCanonical)
+    : language === "de" ? `${BASE_URL}/` : `${BASE_URL}/${language}/`;
 
   // OG-Image Fallback
   const ogImageUrl = ogImage || `${BASE_URL}/og-image.jpg`;
