@@ -43,6 +43,29 @@ Falls Token abläuft: Re-Auth über `gbp-auth-test.ts` → `migrate-tokens-to-db
 
 ---
 
+## Faktenprüfung bei externen Zeit-/Datumsangaben (Vier-Augen- + Sechs-Augen-Prinzip)
+
+**BLOCKING RULE:** Jede Uhrzeit, jedes Datum oder sonstiger externer Fakt (z. B. Anstoßzeiten,
+Turniertermine), der aus einer nicht-primären Quelle stammt (Nutzer-eingefügter Text, AI-
+Zusammenfassung, Aggregator-Snippet) und auf einer Live-Kundenseite landet, MUSS vor Veröffentlichung
+so geprüft werden:
+
+1. **Vier Augen:** Mindestens 2 unabhängige, glaubwürdige Quellen suchen, die den Fakt in
+   **mehreren Zeitzonen/Referenzpunkten** nennen (z. B. US-Ortszeit + UK/BST + eine dritte Referenz
+   wie "11pm in Norway" oder "21:00 horario peninsular"). Die Umrechnung selbst nachrechnen, nicht
+   nur einer einzelnen "X pm ET"-Angabe vertrauen — einzelne Zahlen ohne Gegenrechnung sind die
+   häufigste Fehlerquelle (mehrfach erlebt: falsche MESZ-Umrechnung aus Nutzer-Vorlagen, z. T. um
+   bis zu 19 Stunden daneben).
+2. **Sechs Augen:** Zusätzlich zur Vier-Augen-Prüfung eine **offizielle Primärquelle** heranziehen
+   (z. B. FIFA.com/offizieller Verband bei Sport-Terminen, offizielle Behörden-/Herstellerseiten
+   sonst) und den Fakt dort ein drittes Mal unabhängig bestätigen.
+3. Erst wenn beide Stufen übereinstimmen, den Fakt übernehmen. Bei Widerspruch: nicht raten,
+   weitere Quellen suchen oder den Nutzer fragen.
+
+Gilt projektübergreifend für alle zeitkritischen/externen Fakten auf Live-Seiten, nicht nur für die
+WM/EM-Seite. Bei Terminseiten (Public Viewing, Events, Öffnungszeiten-Ausnahmen) IMMER anwenden, da
+falsche Zeiten Gäste vor verschlossene Türen schicken oder verpasste Reservierungen verursachen.
+
 ## Sub-Agents
 | Agent | Model | Zweck |
 |-------|-------|-------|
