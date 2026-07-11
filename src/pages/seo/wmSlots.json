@@ -1,10 +1,10 @@
 {
-  "_comment": "Basis-Spielplan der WM-2026-Public-Viewing-Seite (Termine, Orte, Runden). Stand: K.o.-Phase, 05.07.2026. Redaktionsregel: kommende Achtelfinals (zu STORIA-Oeffnungszeiten spielbar) + alle Runden ab Viertelfinale. Team-Paarungen liegen getrennt in wmTeams.json (bestaetigte Teams ODER Sieger-Platzhalter fuer noch offene Gegner). Slots ohne Eintrag in wmTeams.json rendern als offener Runden-Slot.",
+  "_comment": "Basis-Spielplan der WM-2026-Public-Viewing-Seite (Termine, Orte, Runden). Stand: 11.07.2026, alle Uhrzeiten am 11.07. per Vier-Augen-Prinzip gegengeprueft (mehrere unabhaengige Quellen je Zeitzone-Triangulation: US-Ortszeit + BST/GMT + Europa-Referenz). Dabei 4 fehlerhafte Zeiten korrigiert (Frankreich-Paraguay, Norwegen-Brasilien, Mexiko-England, Spanien-Belgien). Redaktionsregel: kommende Achtelfinals (zu STORIA-Oeffnungszeiten spielbar) + alle Runden ab Viertelfinale. Team-Paarungen liegen getrennt in wmTeams.json (bestaetigte Teams ODER Sieger-Platzhalter fuer noch offene Gegner). Slots ohne Eintrag in wmTeams.json rendern als offener Runden-Slot.",
   "slots": [
     {
       "id": "af-fra-par-2026-07-04",
-      "startISO": "2026-07-04T21:00:00+02:00",
-      "endISO": "2026-07-04T23:30:00+02:00",
+      "startISO": "2026-07-04T23:00:00+02:00",
+      "endISO": "2026-07-05T01:30:00+02:00",
       "ort": "Philadelphia",
       "runde": "achtelfinale"
     },
@@ -17,30 +17,31 @@
     },
     {
       "id": "af-nor-bra-2026-07-05",
-      "startISO": "2026-07-05T21:00:00+02:00",
-      "endISO": "2026-07-05T23:30:00+02:00",
+      "startISO": "2026-07-05T22:00:00+02:00",
+      "endISO": "2026-07-06T00:30:00+02:00",
       "ort": "New York / NJ",
       "runde": "achtelfinale"
     },
     {
       "id": "af-mex-eng-2026-07-06",
-      "startISO": "2026-07-06T20:00:00+02:00",
-      "endISO": "2026-07-06T22:30:00+02:00",
+      "startISO": "2026-07-06T02:00:00+02:00",
+      "endISO": "2026-07-06T04:30:00+02:00",
       "ort": "Mexico City",
-      "runde": "achtelfinale"
+      "runde": "achtelfinale",
+      "hinweis": "ausserhalb-oeffnungszeiten"
     },
     {
       "id": "af-por-esp-2026-07-06",
       "startISO": "2026-07-06T21:00:00+02:00",
       "endISO": "2026-07-06T23:30:00+02:00",
-      "ort": "",
+      "ort": "Dallas",
       "runde": "achtelfinale"
     },
     {
       "id": "af-usa-bel-2026-07-07",
       "startISO": "2026-07-07T02:00:00+02:00",
       "endISO": "2026-07-07T04:30:00+02:00",
-      "ort": "",
+      "ort": "Seattle",
       "runde": "achtelfinale",
       "hinweis": "ausserhalb-oeffnungszeiten"
     },
@@ -48,14 +49,14 @@
       "id": "af-arg-egy-2026-07-07",
       "startISO": "2026-07-07T18:00:00+02:00",
       "endISO": "2026-07-07T20:30:00+02:00",
-      "ort": "",
+      "ort": "Atlanta",
       "runde": "achtelfinale"
     },
     {
       "id": "af-sui-col-2026-07-07",
       "startISO": "2026-07-07T22:00:00+02:00",
       "endISO": "2026-07-08T00:30:00+02:00",
-      "ort": "",
+      "ort": "Vancouver",
       "runde": "achtelfinale"
     },
     {
@@ -67,8 +68,8 @@
     },
     {
       "id": "vf-2026-07-10",
-      "startISO": "2026-07-10T22:00:00+02:00",
-      "endISO": "2026-07-11T00:30:00+02:00",
+      "startISO": "2026-07-10T21:00:00+02:00",
+      "endISO": "2026-07-10T23:30:00+02:00",
       "ort": "Los Angeles",
       "runde": "viertelfinale"
     },
