@@ -141,7 +141,7 @@ const Footer = () => {
                   title="STORIA auf Google Maps"
                 >
                   <MapPin className="h-4 w-4" aria-hidden="true" />
-                  <span>STORIA ristorante pizzeria bar<br />Karlstraße 47A, 80333 München</span>
+                  <span>STORIA ristorante pizzeria bar<br />Karlstraße 47a, 80333 München</span>
                 </a>
               </div>
             </div>

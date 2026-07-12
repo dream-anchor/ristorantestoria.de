@@ -56,7 +56,7 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, includeRev
     priceRange: STORIA.priceRange,
     servesCuisine: STORIA.cuisine,
     acceptsReservations: true,
-    hasMenu: `${STORIA.url}/speisekarte`,
+    hasMenu: `${STORIA.url}/speisekarte/`,
     address: addressSchema,
     geo: geoSchema,
     foundingDate: STORIA.foundedISO,
