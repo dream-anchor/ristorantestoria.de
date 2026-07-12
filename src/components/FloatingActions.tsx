@@ -50,6 +50,9 @@ const FloatingActions = () => {
   // Don't render until hydrated (prevents hydration mismatch)
   if (!isHydrated) return null;
 
+  // Auf Mobil übernimmt die MobileActionBar die Conversion-CTAs.
+  if (isMobile) return null;
+
   const buttonClasses = "bg-white hover:bg-gray-50 text-primary border-2 border-primary/20 rounded-2xl px-5 py-3 shadow-xl transition-shadow flex flex-col items-center gap-1";
   const whatsappButtonClasses = "bg-[#25D366] hover:bg-[#20BD5A] text-white border-2 border-[#25D366]/20 rounded-2xl px-5 py-3 shadow-xl transition-shadow flex flex-col items-center gap-1";
 
