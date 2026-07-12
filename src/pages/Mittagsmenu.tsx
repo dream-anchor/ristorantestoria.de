@@ -8,6 +8,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuStructuredData from "@/components/MenuStructuredData";
 import ReservationCTA from "@/components/ReservationCTA";
+import InlineReservationCTA from "@/components/InlineReservationCTA";
 import BackToLandingPage from "@/components/BackToLandingPage";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -72,7 +73,9 @@ const Mittagsmenu = () => {
             </div>
           </div>
 
-          <MenuDisplay menuType="lunch" />
+          <InlineReservationCTA source="mittags-menu" />
+
+          <MenuDisplay menuType="lunch" interstitialCta={<InlineReservationCTA source="mittags-menu" />} interstitialEvery={3} />
 
           {/* SEO Internal Link to Lunch Landing Page */}
           <div className="mt-12 max-w-xl mx-auto">
