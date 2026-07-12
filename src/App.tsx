@@ -290,6 +290,7 @@ const App = ({ queryClient: serverQueryClient }: { queryClient?: QueryClient } =
               <ScrollToTop />
               <NormalizePath />
               <FloatingActions />
+              <MobileActionBar />
               <CookieBanner />
               <CookieSettingsButton />
               <AppRoutes />
