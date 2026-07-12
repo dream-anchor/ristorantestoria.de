@@ -23,6 +23,7 @@ import UeberUns from "./pages/UeberUns";
 import NotFound from "./pages/NotFound";
 
 import FloatingActions from "./components/FloatingActions";
+import MobileActionBar from "./components/MobileActionBar";
 import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
 import ScrollToTop from "./components/ScrollToTop";
