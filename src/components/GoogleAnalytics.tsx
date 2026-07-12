@@ -42,7 +42,11 @@ const GoogleAnalytics = () => {
     if (!hasStatisticsConsent) return;
 
     const handleClick = (e: MouseEvent) => {
-      const anchor = (e.target as Element).closest("a");
+      const target = e.target as Element;
+      // Skip Elemente, die ihr Tracking selbst übernehmen (z. B. MobileActionBar),
+      // sonst würde reservation_click/phone_click doppelt gezählt.
+      if (target.closest("[data-no-global-track]")) return;
+      const anchor = target.closest("a");
       if (!anchor) return;
       const href = anchor.getAttribute("href") || "";
       const page = window.location.pathname;

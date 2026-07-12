@@ -12,7 +12,7 @@ const CookieSettingsButton = () => {
   return (
     <button
       onClick={openSettings}
-      className="fixed bottom-4 left-4 z-50 bg-card border border-border rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-105 group"
+      className="fixed bottom-20 left-4 z-50 md:bottom-4 bg-card border border-border rounded-full p-3 shadow-lg hover:shadow-xl transition-all hover:scale-105 group"
       aria-label={t.cookies.changeSettings}
       title={t.cookies.changeSettings}
     >

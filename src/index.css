@@ -165,3 +165,12 @@ All colors MUST be HSL.
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
+
+/* Content-Offset für die mobile Conversion-Leiste (MobileActionBar).
+   Verhindert, dass die fixe Bottom-Bar Footer-Inhalte dauerhaft verdeckt
+   (u. a. den gesetzlich nötigen Cookie-Settings-Link). */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+}
