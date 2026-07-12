@@ -75,9 +75,9 @@ const Speisekarte = () => {
             </div>
           </div>
 
-          <InlineReservationCTA />
+          <InlineReservationCTA source="speisekarte" />
 
-          <MenuDisplay menuType="food" interstitialCta={<InlineReservationCTA />} interstitialEvery={3} />
+          <MenuDisplay menuType="food" interstitialCta={<InlineReservationCTA source="speisekarte" />} interstitialEvery={3} />
 
           <InlineVoucherCTA location="speisekarte" />
 
