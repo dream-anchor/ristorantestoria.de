@@ -1,5 +1,5 @@
 {
-  "_comment": "Team-Paarungen je Spiel-Slot. Bestaetigte Teams: name (de/en/it/fr) + Flaggen-Emoji aus scripts/wm-nations.mjs. Noch offene Gegner werden als Sieger-Platzhalter dargestellt (name lokalisiert 'Sieger X/Y', flag = beide Flaggen), damit Zuschauer die moegliche Paarung sehen. Optionales Feld 'ergebnis' ({teamA, teamB, elfmeter?}): nur setzen, wenn das Spiel bereits gespielt wurde (macht den Slot automatisch zum 'bereits gespielt'-Eintrag, siehe wmSpiele.ts). Stand: 11.07.2026 (K.o.-Phase, Achtelfinale komplett, 2 von 4 Viertelfinals gespielt, 1. Halbfinale bereits fixiert). Slots ohne Eintrag (Halbfinale, Spiel um Platz 3, Finale) rendern als offener Runden-Slot.",
+  "_comment": "Team-Paarungen je Spiel-Slot. Bestaetigte Teams: name (de/en/it/fr) + Flaggen-Emoji aus scripts/wm-nations.mjs. Noch offene Gegner werden als Sieger-Platzhalter dargestellt (name lokalisiert 'Sieger X/Y', flag = beide Flaggen), damit Zuschauer die moegliche Paarung sehen. Optionales Feld 'ergebnis' ({teamA, teamB, elfmeter?}): nur setzen, wenn das Spiel bereits gespielt wurde (macht den Slot automatisch zum 'bereits gespielt'-Eintrag, siehe wmSpiele.ts). Stand: 14.07.2026 (K.o.-Phase, Viertelfinale komplett, beide Halbfinal-Paarungen fixiert). Slots ohne Eintrag (Spiel um Platz 3, Finale) rendern als offener Runden-Slot.",
   "teams": {
     "af-fra-par-2026-07-04": {
       "teamA": { "name": { "de": "Frankreich", "en": "France", "it": "Francia", "fr": "France" }, "flag": "🇫🇷" },
@@ -53,15 +53,21 @@
     },
     "vf-2026-07-11": {
       "teamA": { "name": { "de": "Norwegen", "en": "Norway", "it": "Norvegia", "fr": "Norvège" }, "flag": "🇳🇴" },
-      "teamB": { "name": { "de": "England", "en": "England", "it": "Inghilterra", "fr": "Angleterre" }, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }
+      "teamB": { "name": { "de": "England", "en": "England", "it": "Inghilterra", "fr": "Angleterre" }, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
+      "ergebnis": { "teamA": 1, "teamB": 2 }
     },
     "vf-2026-07-12": {
       "teamA": { "name": { "de": "Argentinien", "en": "Argentina", "it": "Argentina", "fr": "Argentine" }, "flag": "🇦🇷" },
-      "teamB": { "name": { "de": "Schweiz", "en": "Switzerland", "it": "Svizzera", "fr": "Suisse" }, "flag": "🇨🇭" }
+      "teamB": { "name": { "de": "Schweiz", "en": "Switzerland", "it": "Svizzera", "fr": "Suisse" }, "flag": "🇨🇭" },
+      "ergebnis": { "teamA": 3, "teamB": 1 }
     },
     "hf-2026-07-14": {
       "teamA": { "name": { "de": "Frankreich", "en": "France", "it": "Francia", "fr": "France" }, "flag": "🇫🇷" },
       "teamB": { "name": { "de": "Spanien", "en": "Spain", "it": "Spagna", "fr": "Espagne" }, "flag": "🇪🇸" }
+    },
+    "hf-2026-07-15": {
+      "teamA": { "name": { "de": "Argentinien", "en": "Argentina", "it": "Argentina", "fr": "Argentine" }, "flag": "🇦🇷" },
+      "teamB": { "name": { "de": "England", "en": "England", "it": "Inghilterra", "fr": "Angleterre" }, "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }
     }
   }
 }
