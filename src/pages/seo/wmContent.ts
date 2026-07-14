@@ -221,7 +221,8 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "Was passiert bei schlechtem Wetter?",
-          answer: "Die Terrasse ist überdacht. Wird es zu ungemütlich, zeigen wir die Spiele drinnen.",
+          answer:
+            "Die Terrasse ist wirklich überdacht – nicht mit einer Markise oder einem Sonnensegel, sondern fest ins Gebäude integriert: Das Haus setzt sich über ihr fort wie ein richtiges Dach. Ein kurzer Schauer ist bei uns also kein Problem, und ist es warm, merkt man davon kaum etwas – drinnen und draußen zugleich zu sitzen, ist in München eine Seltenheit. Wird es doch zu ungemütlich, zeigen wir die Spiele drinnen.",
         },
         {
           question: "Zeigt ihr auch die Deutschland-Spiele?",
@@ -363,7 +364,8 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "What happens if the weather turns?",
-          answer: "The terrace is covered. If it gets too uncomfortable, we show the matches inside.",
+          answer:
+            "The terrace is genuinely covered — not by an awning or a sail canopy, but built right into the building: the house continues over it like a proper roof. A short rain shower is no problem at all, and on a warm evening you'll barely notice it's raining — sitting outside under a real roof is a rarity in Munich. If it does get too much, we show the matches inside.",
         },
         {
           question: "Do you show Germany's matches too?",
@@ -505,7 +507,8 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "Cosa succede se il tempo peggiora?",
-          answer: "La terrazza è coperta. Se diventa troppo scomodo, mostriamo le partite al chiuso.",
+          answer:
+            "La terrazza è davvero coperta – non con una tenda o un telo parasole, ma integrata nell'edificio stesso: la casa si prolunga sopra di essa come un vero tetto. Un breve acquazzone non è un problema, e se fa caldo non ve ne accorgerete quasi. Sedersi all'aperto sotto un tetto vero è una rarità a Monaco di Baviera. Se il tempo peggiora comunque, mostriamo le partite al chiuso.",
         },
         {
           question: "Mostrate anche le partite della Germania?",
@@ -647,7 +650,8 @@ export const wmContent: Record<Language, WmContent> = {
         },
         {
           question: "Que se passe-t-il s'il pleut ?",
-          answer: "La terrasse est couverte. Si ça devient trop inconfortable, nous diffusons les matchs à l'intérieur.",
+          answer:
+            "La terrasse est vraiment couverte – pas par un store ou une voile d'ombrage, mais intégrée directement au bâtiment : la maison se prolonge au-dessus comme un vrai toit. Une petite averse n'est donc pas un problème, et s'il fait chaud, on ne s'en aperçoit presque pas – s'asseoir dehors sous un vrai toit est une rareté à Munich. Si le temps devient vraiment désagréable, nous diffusons les matchs à l'intérieur.",
         },
         {
           question: "Diffusez-vous aussi les matchs de l'Allemagne ?",
