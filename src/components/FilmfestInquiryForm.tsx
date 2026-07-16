@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { submitMaestroInquiry, collectIntakeDetails } from "@/lib/maestroIntake";
 
 const FORMAT_OPTIONS = [
   "Premierendinner",
@@ -55,30 +55,21 @@ const FilmfestInquiryForm = () => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      const { data: result, error } = await supabase.functions.invoke(
-        "submit-event-inquiry",
-        {
-          body: {
-            companyName: data.name.trim(),
-            contactName: data.name.trim(),
-            email: data.email.trim().toLowerCase(),
-            phone: data.phone?.trim() || null,
-            guestCount: data.guest_count?.trim() || null,
-            eventType: "filmfest",
-            preferredDate: data.preferred_date || null,
-            message:
-              `Format: ${data.format}` +
-              (data.message?.trim() ? `\n\n${data.message.trim()}` : ""),
-            source: "filmfest-landingpage",
-          },
-        },
-      );
-
-      if (error || (result && (result as { error?: string }).error)) {
-        throw new Error(
-          (result as { error?: string })?.error || error?.message || "Failed to submit inquiry",
-        );
-      }
+      // STORIA-Cutover: Lead ausschliesslich nach MAESTRO 2.0 (Tenant serverseitig; kein tenant_id
+      // im Browser). Erfolg NUR bei konkreter Inquiry-ID (submitMaestroInquiry wirft sonst).
+      const guestsNum = data.guest_count?.trim() ? Number.parseInt(data.guest_count.trim(), 10) : NaN;
+      await submitMaestroInquiry({
+        customerName: data.name.trim(),
+        customerEmail: data.email.trim().toLowerCase(),
+        phone: data.phone?.trim() || undefined,
+        guests: Number.isFinite(guestsNum) && guestsNum > 0 ? guestsNum : undefined,
+        eventType: "Filmfest",
+        eventDate: data.preferred_date ? new Date(data.preferred_date).toISOString() : undefined,
+        message: `Format: ${data.format}` + (data.message?.trim() ? `\n\n${data.message.trim()}` : ""),
+        language: "de",
+        sourceDetail: "ristorante_filmfest",
+        details: collectIntakeDetails({ format: data.format }),
+      });
 
       // GA4 Conversion-Event: generate_lead (analog zum Reisegruppen-Formular)
       if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {

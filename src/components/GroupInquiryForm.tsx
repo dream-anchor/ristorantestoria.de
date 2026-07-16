@@ -14,9 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Loader2, Send, ChevronDown, MessageCircle } from "lucide-react";
 import { useGroupMenus, getLocalizedText } from "@/hooks/useGroupMenus";
 import LocalizedLink from "@/components/LocalizedLink";
-
-const EVENTS_FUNCTION_URL =
-  "https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/receive-group-inquiry";
+import { submitMaestroInquiry, uploadMaestroAttachment, collectIntakeDetails } from "@/lib/maestroIntake";
 
 // ── Schema ───────────────────────────────────────────────────────────────────
 
@@ -100,15 +98,6 @@ export const GroupInquiryForm = () => {
           { value: "custom", label: f.menuCustom },
         ];
 
-  // Convert File to base64 string
-  const fileToBase64 = (file: File): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve((reader.result as string).split(",")[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-
   const onSubmit = async (data: FormData) => {
     // Honeypot check
     if (data._hp) return;
@@ -120,40 +109,37 @@ export const GroupInquiryForm = () => {
     setSubmitError(null);
 
     try {
-      let travelPlanBase64: string | null = null;
-      let travelPlanFilename: string | null = null;
-
+      // STORIA-Cutover: Lead ausschliesslich nach MAESTRO 2.0 (Tenant serverseitig; kein tenant_id
+      // im Browser). Erfolg NUR bei konkreter Inquiry-ID (submitMaestroInquiry wirft sonst).
+      // Reiseplan-PDF ist OPTIONAL: best-effort hochgeladen; schlaegt der Upload fehl, geht die
+      // Anfrage trotzdem durch (kein Blocker), der Reiseplan kann spaeter nachgereicht werden.
+      let attachments: Array<{ uploadId: string; claimToken: string }> | undefined;
       if (travelPlanFile) {
-        travelPlanBase64 = await fileToBase64(travelPlanFile);
-        travelPlanFilename = travelPlanFile.name;
+        try {
+          attachments = [await uploadMaestroAttachment(travelPlanFile)];
+        } catch (uploadErr) {
+          console.warn("[reisegruppen] Reiseplan-Upload fehlgeschlagen (Anfrage geht trotzdem):", uploadErr);
+        }
       }
 
-      const response = await fetch(EVENTS_FUNCTION_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          companyName: data.company_name?.trim() || null,
-          contactName: data.contact_name.trim(),
-          email: data.email.trim().toLowerCase(),
-          phone: data.phone?.trim() || null,
+      await submitMaestroInquiry({
+        customerName: data.contact_name.trim(),
+        customerEmail: data.email.trim().toLowerCase(),
+        company: data.company_name?.trim() || undefined,
+        phone: data.phone?.trim() || undefined,
+        guests: data.group_size,
+        eventDate: data.preferred_date ? new Date(data.preferred_date).toISOString() : undefined,
+        message: data.message?.trim() || undefined,
+        language: language === "en" ? "en" : "de",
+        sourceDetail: "ristorante_reisegruppen",
+        details: collectIntakeDetails({
+          dateFlexible: data.preferred_date_flexible ?? false,
+          arrivalTime: data.arrival_time?.trim() || undefined,
+          preferredMenu: data.preferred_menu || undefined,
           groupSize: data.group_size,
-          preferredDate: data.preferred_date || null,
-          preferredDateFlexible: data.preferred_date_flexible ?? false,
-          arrivalTime: data.arrival_time?.trim() || null,
-          preferredMenu: data.preferred_menu,
-          message: data.message?.trim() || null,
-          travelPlanBase64,
-          travelPlanFilename,
-          language,
-          source: "ristorantestoria-reisegruppen",
-          ...utmParams,
         }),
+        attachments,
       });
-
-      if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw new Error((err as Record<string, string>).error ?? "Submit failed");
-      }
 
       // GA4 Conversion-Event: generate_lead
       if (typeof window !== "undefined" && typeof (window as Window & { gtag?: (...args: unknown[]) => void }).gtag === "function") {
