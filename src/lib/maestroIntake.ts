@@ -6,7 +6,20 @@
  * tenant_id). Erfolg gilt NUR bei konkreter Inquiry-ID; jeder 4xx/5xx oder eine Antwort ohne ID
  * wirft (kein Silent-Fallback auf Supabase v1, keine falsche Erfolgsmeldung).
  */
-export const MAESTRO_INTAKE_URL = "https://storia.schrittmacher.ai/api/public/inquiries";
+/**
+ * Ziel-Endpunkte AUSSCHLIESSLICH aus der Build-Time-Konfiguration (VITE_MAESTRO_INTAKE_URL /
+ * VITE_MAESTRO_UPLOAD_URL). KEIN hartkodierter Produktions-Fallback; fehlt/ungültig -> sichtbarer
+ * Fehler (kein stiller Rückfall von Preview auf Produktion). Nur öffentliche URLs, keine Secrets.
+ */
+export function requireMaestroUrl(raw: string | undefined, name: string): string {
+  const u = (raw ?? "").trim();
+  if (!/^https:\/\/[^\s]+$/.test(u)) {
+    throw new Error(`${name} ist nicht konfiguriert (erwartet https-URL) — Build-Time-Konfiguration fehlt.`);
+  }
+  return u;
+}
+const intakeUrl = () => requireMaestroUrl(import.meta.env.VITE_MAESTRO_INTAKE_URL, "VITE_MAESTRO_INTAKE_URL");
+const uploadUrl = () => requireMaestroUrl(import.meta.env.VITE_MAESTRO_UPLOAD_URL, "VITE_MAESTRO_UPLOAD_URL");
 
 export interface MaestroInquiryInput {
   customerName: string;
@@ -47,7 +60,7 @@ function clean(input: MaestroInquiryInput): Record<string, unknown> {
 export async function submitMaestroInquiry(input: MaestroInquiryInput): Promise<MaestroInquiryResult> {
   let res: Response;
   try {
-    res = await fetch(MAESTRO_INTAKE_URL, {
+    res = await fetch(intakeUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(clean(input)),
@@ -80,14 +93,13 @@ export async function submitMaestroInquiry(input: MaestroInquiryInput): Promise<
  * für den anschliessenden Inquiry-Submit. Wirft bei Fehler; der Aufrufer entscheidet, ob der Anhang
  * zwingend ist (bei Reisegruppen: NICHT — die Anfrage geht auch ohne durch).
  */
-export const MAESTRO_UPLOAD_URL = "https://storia.schrittmacher.ai/api/public/inquiries/upload";
 export async function uploadMaestroAttachment(file: File): Promise<{ uploadId: string; claimToken: string }> {
   const buf = await file.arrayBuffer();
   let bin = "";
   const bytes = new Uint8Array(buf);
   for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
   const dataBase64 = btoa(bin);
-  const res = await fetch(MAESTRO_UPLOAD_URL, {
+  const res = await fetch(uploadUrl(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ mediaType: file.type, dataBase64 }),
