@@ -2244,7 +2244,7 @@ const enBase = {
       heroReserveBtn: "Reserve table",
       heroMenuBtn: "View pizza menu",
       // Social Proof Bar
-      socialProofRating: "4.8 Google Rating",
+      socialProofRating: "4.5 Google Rating",
       socialProofSince: "Since 2015",
       socialProofLocation: "5 min. Königsplatz",
       // Intro
@@ -2603,7 +2603,7 @@ const enBase = {
       maxvorstadtP1: "Looking for a pizzeria in Maxvorstadt? STORIA at Karlstra\u00dfe 47a has been the go-to address for pizza lovers in the neighbourhood since 2015. Whether after a day at TU Munich, a museum visit at the Pinakothek, or during your lunch break \u2013 our Maxvorstadt pizzeria is ideally located between K\u00f6nigsplatz and the Central Station.",
       maxvorstadtP2: "As a Munich city-centre pizzeria, we combine Neapolitan tradition with a central location. Our stone-oven pizza is baked in just 60\u201390 seconds, the dough ferments for 48 hours \u2013 for authentic flavour just like in Southern Italy. Come and see for yourself why STORIA is one of the most popular pizzerias in Maxvorstadt.",
       maxvorstadtP3: "Just a few minutes\u2019 walk from Schwabing, right at the Karlstra\u00dfe tram stop, STORIA is also easy to reach for guests from Schwabing and Neuhausen. Beyond our stone-oven pizza, we also offer homemade pasta \u2013 from spaghetti alle vongole to creamy risotto. Whether you\u2019re looking for a spaghettata dinner in Munich or a ristorante with great risotto, STORIA delivers the full range of Italian cuisine.",
-      socialProofRating: "4.5\u2605 Google (1,000+ Reviews)",
+      socialProofRating: "4.5\u2605 Google (800+ Reviews)",
       socialProofSince: "Since 2015",
       socialProofLocation: "Maxvorstadt, Munich",
       relatedTitle: "You Might Also Like",
@@ -3260,7 +3260,7 @@ const enBase = {
       heroDescription: "Experience homemade pasta like in Southern Italy \u2013 made fresh daily at Ristorante STORIA in Munich Maxvorstadt.",
       heroButton: "Reserve a table",
       menuButton: "See pasta menu",
-      tldr: "Fresh pasta Munich: Ristorante STORIA (Karlstra\u00dfe 47a) serves daily homemade pasta following original Cilento recipes. Tagliatelle, spaghetti, pappardelle & seasonal specials. 4.5 stars with over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Fresh pasta Munich: Ristorante STORIA (Karlstra\u00dfe 47a) serves daily homemade pasta following original Cilento recipes. Tagliatelle, spaghetti, pappardelle & seasonal specials. 4.5 stars with over 800 Google reviews. Reservations: +49 89 51519696.",
       introTitle: "Pasta like in Southern Italy",
       introP1: "At Ristorante STORIA in Munich Maxvorstadt, pasta represents more than a dish \u2013 it is an expression of passion and craftsmanship. Our pasta is prepared fresh daily following recipes from the Cilento, a UNESCO Biosphere Reserve in Southern Italy. The doughs are shaped by hand, the sauces cooked from fresh, seasonal ingredients.",
       introP2: "From classic Spaghetti al Pomodoro to hearty Pappardelle al Rag\u00f9 and delicate Tagliatelle with seasonal truffle creams \u2013 our pasta menu changes with the seasons, reflecting the diversity of Southern Italian cuisine. Every plate is made \u00e0 la minute, fresh and with care.",
@@ -4059,7 +4059,7 @@ const enExtra = {
   seo: {
     lunch: {
       seoDescription: "Lunch in Maxvorstadt: pasta from €14.50, pizza from €12.50, 3-course menu from €14.90. Mon–Fri 11:30–14:30, back at the office in 45 min. 5 min from Königsplatz.",
-      tldr: "STORIA in Munich's Maxvorstadt (Karlstraße 47a) serves Italian lunch Mon–Fri from 09:00. Changing lunch menu with fresh pasta, stone-oven pizza and salads. 5 min walk from Königsplatz, ideal for business lunch and students. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "STORIA in Munich's Maxvorstadt (Karlstraße 47a) serves Italian lunch Mon–Fri from 09:00. Changing lunch menu with fresh pasta, stone-oven pizza and salads. 5 min walk from Königsplatz, ideal for business lunch and students. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     firmenfeier: {
       tldr: "Corporate events at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for company parties, Christmas parties and team events with 20–180 guests. 100 seats inside + 100 on the covered terrace. Custom menus from €39 per person, professional event service. 5 min from Königsplatz, 7 min from the main station. Family-run since 2015. Inquiries: +49 89 51519696.",
@@ -4071,20 +4071,20 @@ const enExtra = {
       faq12Answer: "Popular December dates (Thursday/Friday) tend to be booked out from October – we recommend inquiring from July.",
     },
     aperitivo: {
-      tldr: "Aperitivo at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian bar culture with Aperol Spritz, Negroni, Hugo and over 60 Italian wines. Daily from 17:00 with stuzzichini and antipasti. Covered terrace, 5 min walk from Königsplatz. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Aperitivo at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian bar culture with Aperol Spritz, Negroni, Hugo and over 60 Italian wines. Daily from 17:00 with stuzzichini and antipasti. Covered terrace, 5 min walk from Königsplatz. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
       introLinkPre: "Read more about our ",
       introLinkAnchor: "Italian restaurant in Munich",
       introLinkPost: " and the Speranza family's cuisine on our restaurant page.",
     },
     romanticDinner: {
-      tldr: "Romantic dinner at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian candlelight dinner with tasting menus, wine pairings and an intimate atmosphere. Ideal for anniversaries, proposals and date nights. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Romantic dinner at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian candlelight dinner with tasting menus, wine pairings and an intimate atmosphere. Ideal for anniversaries, proposals and date nights. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
       candlelightLinkText: "To the candlelight menu",
     },
     eventlocation: {
       tldr: "Event location STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for corporate events, birthdays, weddings and Christmas parties with 20–180 guests. 100 seats inside + 100 on the covered terrace. Custom menus, professional event service. 5 min from Königsplatz. Family-run since 2015 by the Speranza family. Inquiries: +49 89 51519696.",
     },
     birthday: {
-      tldr: "Birthday party at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for birthday celebrations with 10–100 guests. Custom menus, birthday cake and personal service from the Speranza family. 5 min from Königsplatz. Family-run since 2015. 4.5 stars from over 780 Google reviews. Inquiries: +49 89 51519696.",
+      tldr: "Birthday party at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for birthday celebrations with 10–100 guests. Custom menus, birthday cake and personal service from the Speranza family. 5 min from Königsplatz. Family-run since 2015. 4.5 stars from over 800 Google reviews. Inquiries: +49 89 51519696.",
       faq7Question: "How much does a birthday party for 30 people at the restaurant cost?",
       faq7Answer: "At STORIA, expect around €40–70 per person including drinks, depending on the menu. There is no room hire – you only pay for food and drinks.",
     },
@@ -4095,31 +4095,31 @@ const enExtra = {
       tldr: "Christmas menu at STORIA Munich Maxvorstadt (Karlstraße 47a): Festive Italian Christmas menus from €45 per person for 6–100 guests. Homemade pasta, fine wines and traditional panettone. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Reservations: +49 89 51519696.",
     },
     valentinstag: {
-      tldr: "Valentine's Day at STORIA Munich Maxvorstadt (Karlstraße 47a): Romantic Italian Valentine's dinner with a multi-course candlelight menu, fine wines and a rose at the table. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Valentine's Day at STORIA Munich Maxvorstadt (Karlstraße 47a): Romantic Italian Valentine's dinner with a multi-course candlelight menu, fine wines and a rose at the table. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     neapolitanPizza: {
-      tldr: "Neapolitan pizza at STORIA Munich Maxvorstadt (Karlstraße 47a): Authentic pizza napoletana from the stone oven at over 400 °C. San Marzano DOP tomatoes, buffalo mozzarella from Campania, 48-hour dough proofing. Head chef Domenico Speranza from Campania, in German hospitality since 1995. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Neapolitan pizza at STORIA Munich Maxvorstadt (Karlstraße 47a): Authentic pizza napoletana from the stone oven at over 400 °C. San Marzano DOP tomatoes, buffalo mozzarella from Campania, 48-hour dough proofing. Head chef Domenico Speranza from Campania, in German hospitality since 1995. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     wild: {
-      tldr: "Game dining at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian game specialities from September to February. Venison saddle, deer ragout, wild boar ragù and duck breast – traditionally Italian, prepared by head chef Domenico Speranza. 5 min from Königsplatz. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Game dining at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian game specialities from September to February. Venison saddle, deer ragout, wild boar ragù and duck breast – traditionally Italian, prepared by head chef Domenico Speranza. 5 min from Königsplatz. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     pizzaMuenchen: {
-      tldr: "Pizza Munich at STORIA Maxvorstadt (Karlstraße 47a): Original Italian stone-oven pizza baked at over 400 °C. San Marzano tomatoes, buffalo mozzarella and 48-hour dough proofing. Family-run since 2015 by the Speranza family from Campania. 5 min walk from Königsplatz. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Pizza Munich at STORIA Maxvorstadt (Karlstraße 47a): Original Italian stone-oven pizza baked at over 400 °C. San Marzano tomatoes, buffalo mozzarella and 48-hour dough proofing. Family-run since 2015 by the Speranza family from Campania. 5 min walk from Königsplatz. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
       introLinkPre: "Read more about our ",
       introLinkAnchor: "Italian restaurant in Munich",
       introLinkPost: " and the Speranza family behind it on our restaurant page.",
     },
     italienerMuenchen: {
-      tldr: "Italian in Munich: STORIA in Maxvorstadt (Karlstraße 47a) is an Italian restaurant run by the Speranza family since 2015. Neapolitan stone-oven pizza, homemade pasta, over 60 Italian wines and a covered terrace with 100 seats. Mon–Fri 09:00–01:00, Sat–Sun 12:00–01:00. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Italian in Munich: STORIA in Maxvorstadt (Karlstraße 47a) is an Italian restaurant run by the Speranza family since 2015. Neapolitan stone-oven pizza, homemade pasta, over 60 Italian wines and a covered terrace with 100 seats. Mon–Fri 09:00–01:00, Sat–Sun 12:00–01:00. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     italienerKoenigsplatz: {
-      tldr: "Italian near Königsplatz Munich: STORIA (Karlstraße 47a) is just a 5-minute walk from Königsplatz, the Pinakotheken and TU Munich. Authentic Italian cuisine with stone-oven pizza, homemade pasta and over 60 Italian wines. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Italian near Königsplatz Munich: STORIA (Karlstraße 47a) is just a 5-minute walk from Königsplatz, the Pinakotheken and TU Munich. Authentic Italian cuisine with stone-oven pizza, homemade pasta and over 60 Italian wines. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     weihnachtsfeier: {
       tldr: "Christmas party Munich at STORIA Maxvorstadt (Karlstraße 47a): Italian restaurant for corporate Christmas parties, private Christmas dinners and Advent celebrations with 6–180 guests. Festive menus from €45 per person, 100 seats inside + 100 on the terrace. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Inquiries: +49 89 51519696.",
     },
     terrasse: {
-      tldr: "Restaurant terrace Munich at STORIA Maxvorstadt (Karlstraße 47a): Covered terrace with 100 seats, cushions and blankets – smoking welcome. Italian dining and aperitivo in the open air, weatherproof in any weather. 5 min from Königsplatz. Family-run since 2015 by the Speranza family. 4.5 stars from over 780 Google reviews. Reservations: +49 89 51519696.",
+      tldr: "Restaurant terrace Munich at STORIA Maxvorstadt (Karlstraße 47a): Covered terrace with 100 seats, cushions and blankets – smoking welcome. Italian dining and aperitivo in the open air, weatherproof in any weather. 5 min from Königsplatz. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     italienischesRestaurant: {
       tldr: "Italian restaurant Munich: STORIA in Maxvorstadt (Karlstraße 47a) is an authentic Italian restaurant run by the Speranza family since 2015. Neapolitan stone-oven pizza at 400 °C, homemade pasta, seafood and over 60 Italian wines. 100 seats inside + 100 on the covered terrace. Mon–Fri 09:00–01:00, Sat–Sun 12:00–01:00. Reservations: +49 89 51519696.",

@@ -98,7 +98,7 @@ const UeberUns = () => {
                   neapolitanische Steinofen-Pizza
                 </a>
                 {" "}bei 400 °C (UNESCO-anerkannte Tradition), hausgemachte Pasta und über 60 italienische
-                Weine. 4,5 Sterne bei über 780 Google-Bewertungen. Geöffnet Mo–Fr 09:00–01:00,
+                Weine. 4,5 Sterne bei über 800 Google-Bewertungen. Geöffnet Mo–Fr 09:00–01:00,
                 Sa–So 12:00–01:00. Reservierung: <a href={`tel:${STORIA.phoneTel}`} className="text-foreground hover:underline">{STORIA.phone}</a>.
               </p>
             </div>
@@ -123,7 +123,7 @@ const UeberUns = () => {
               <div className="bg-card border rounded-xl p-4 text-center">
                 <Star className="w-5 h-5 mx-auto mb-2 text-primary" />
                 <div className="font-semibold text-foreground">4,5★</div>
-                <div className="text-xs text-muted-foreground">780+ Reviews</div>
+                <div className="text-xs text-muted-foreground">800+ Reviews</div>
               </div>
               <div className="bg-card border rounded-xl p-4 text-center">
                 <Users className="w-5 h-5 mx-auto mb-2 text-primary" />

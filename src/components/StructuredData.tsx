@@ -2,6 +2,7 @@ import { Helmet } from '@/lib/helmetAsync';
 import { useLanguage } from '@/contexts/LanguageContext';
 import reviewsData from '@/data/google-reviews-de.json';
 import { STORIA } from '@/config/storia-entity';
+import { FACTS } from '@/config/facts';
 import { normalizeUrl } from '@/lib/urlNormalization';
 
 interface StructuredDataProps {
@@ -125,13 +126,16 @@ const StructuredData = ({ type = 'restaurant', includeReviews = true, includeRev
         },
       },
     ],
-    ...(includeReviews && reviewsData.rating > 0 && reviewsData.totalReviews > 0 ? {
+    // Bewertungszahl & Durchschnitt aus facts.ts (SSoT), NICHT aus der ggf.
+    // driftenden Fetch-JSON. aggregateRating wird bewusst nur ausgegeben, wenn
+    // die aufrufende Seite Reviews anzeigt (includeReviews).
+    ...(includeReviews && FACTS.reviews.avg > 0 && FACTS.reviews.count > 0 ? {
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: reviewsData.rating,
+        ratingValue: FACTS.reviews.avg,
         bestRating: 5,
         worstRating: 1,
-        ratingCount: reviewsData.totalReviews,
+        ratingCount: FACTS.reviews.count,
       },
     } : {}),
     ...(includeReviews && includeReviewList && reviewsData.reviews?.length > 0 ? {

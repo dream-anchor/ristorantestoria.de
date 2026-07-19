@@ -182,14 +182,14 @@ export const wmKickoff = (iso: string): string =>
 
 /**
  * Inline-Restaurant-Place (die Seite rendert keinen Restaurant-@id-Knoten).
- * Adresse wie bestehend: Karlstraße 47A.
+ * Adresse wie bestehend: Karlstraße 47a.
  */
 const WM_EVENT_LOCATION = {
   "@type": "Restaurant",
   name: "STORIA",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Karlstraße 47A",
+    streetAddress: "Karlstraße 47a",
     postalCode: "80333",
     addressLocality: "München",
     addressCountry: "DE",

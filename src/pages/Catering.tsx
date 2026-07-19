@@ -18,6 +18,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { Phone, Mail, ExternalLink, Star, CheckCircle } from "lucide-react";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
+import { FACTS } from "@/config/facts";
 
 const cateringServiceSchema = {
   "@context": "https://schema.org",
@@ -27,12 +28,12 @@ const cateringServiceSchema = {
   "description": "Italienisches Event-Catering in München – von Fingerfood bis Full-Service-Buffet. Pizza, Pasta, Antipasti für Firmenevents, Hochzeiten und private Feiern.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Karlstraße 47A",
-    "addressLocality": "München",
-    "postalCode": "80333",
+    "streetAddress": FACTS.address.street,
+    "addressLocality": FACTS.address.city,
+    "postalCode": FACTS.address.zip,
     "addressCountry": "DE"
   },
-  "telephone": "+498951519696",
+  "telephone": FACTS.phoneTel,
   "url": "https://www.ristorantestoria.de/catering/",
   "areaServed": {
     "@type": "GeoCircle",
@@ -41,10 +42,12 @@ const cateringServiceSchema = {
   },
   "priceRange": "€€",
   "servesCuisine": "Italienisch",
+  // Bewertungszahl aus facts.ts (SSoT); Catering-Seite rendert <GoogleReviews />,
+  // daher ist aggregateRating hier zulässig.
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "700"
+    "ratingValue": String(FACTS.reviews.avg),
+    "reviewCount": String(FACTS.reviews.count)
   }
 };
 
@@ -156,7 +159,7 @@ const whyReasons = [
   {
     icon: "🏆",
     title: "Bewährt & beliebt",
-    desc: "Über 4.8 Sterne bei Google mit 700+ Bewertungen. Zahlreiche Stammkunden buchen jährlich.",
+    desc: "4,5 Sterne bei Google mit 800+ Bewertungen. Zahlreiche Stammkunden buchen jährlich.",
   },
 ];
 

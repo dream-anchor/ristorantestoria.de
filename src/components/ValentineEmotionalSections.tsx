@@ -34,7 +34,7 @@ const content = {
     momentCta: "Abend planen",
     quoteText: "Sehr sch\u00f6ne Location, gutes Essen, angenehmes Ambiente.",
     quoteAuthor: "Gast auf Google",
-    quoteRating: "4,5 \u2605 aus \u00fcber 810 Bewertungen auf Google",
+    quoteRating: "4,5 \u2605 aus \u00fcber 800 Bewertungen auf Google",
     scarcity: "Begrenzte Anzahl an Tischen am 14.2. \u2013 fr\u00fchzeitige Reservierung empfohlen.",
     romanticFaqTitle: "H\u00e4ufige Fragen f\u00fcr Ihren romantischen Abend",
     romanticFaqs: [
@@ -73,7 +73,7 @@ const content = {
     momentCta: "Plan the evening",
     quoteText: "Very beautiful location, great food, pleasant ambiance.",
     quoteAuthor: "Guest on Google",
-    quoteRating: "4.5 \u2605 from over 810 reviews on Google",
+    quoteRating: "4.5 \u2605 from over 800 reviews on Google",
     scarcity: "Limited number of tables on Feb 14 \u2013 early reservation recommended.",
     romanticFaqTitle: "Frequently asked questions for your romantic evening",
     romanticFaqs: [
@@ -112,7 +112,7 @@ const content = {
     momentCta: "Organizza la serata",
     quoteText: "Location molto bella, ottimo cibo, ambiente piacevole.",
     quoteAuthor: "Ospite su Google",
-    quoteRating: "4,5 \u2605 da oltre 810 recensioni su Google",
+    quoteRating: "4,5 \u2605 da oltre 800 recensioni su Google",
     scarcity: "Numero limitato di tavoli il 14/2 \u2013 si consiglia di prenotare per tempo.",
     romanticFaqTitle: "Domande frequenti per la vostra serata romantica",
     romanticFaqs: [
@@ -151,7 +151,7 @@ const content = {
     momentCta: "Planifier la soir\u00e9e",
     quoteText: "Tr\u00e8s bel endroit, bonne cuisine, ambiance agr\u00e9able.",
     quoteAuthor: "Client sur Google",
-    quoteRating: "4,5 \u2605 sur plus de 810 avis sur Google",
+    quoteRating: "4,5 \u2605 sur plus de 800 avis sur Google",
     scarcity: "Nombre limit\u00e9 de tables le 14/2 \u2013 r\u00e9servation anticip\u00e9e recommand\u00e9e.",
     romanticFaqTitle: "Questions fr\u00e9quentes pour votre soir\u00e9e romantique",
     romanticFaqs: [

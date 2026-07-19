@@ -6,6 +6,7 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import nicolaImage from "@/assets/nicola-speranza.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
+import { FACTS } from "@/config/facts";
 import { trackEvent } from "@/lib/analytics";
 import { VOUCHER_SHOP_URL } from "@/lib/eventsLinks";
 
@@ -116,20 +117,20 @@ const Footer = () => {
             <div className="space-y-4 text-center md:text-left">
               <h3 className="font-serif font-medium text-base tracking-[0.2em] uppercase mb-6 text-primary-foreground/90">{t.footer.contact}</h3>
               <div className="space-y-3 text-base font-sans text-primary-foreground/70">
-              <a href="tel:+498951519696" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
+              <a href={`tel:${FACTS.phoneTel}`} className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
                   <Phone className="h-4 w-4" aria-hidden="true" />
-                  +49 89 51519696
+                  {FACTS.phone}
                 </a>
                 <EmailLink className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
                   <Mail className="h-4 w-4" aria-hidden="true" />
                   <EmailAddress />
                 </EmailLink>
-                <a 
-                  href="https://wa.me/491636033912" 
-                  target="_blank" 
+                <a
+                  href={`https://wa.me/${FACTS.whatsappTel}`}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center md:justify-start gap-2.5 hover:text-[#25D366] transition-colors"
-                  title="WhatsApp: +49 163 603 3912"
+                  title={`WhatsApp: ${FACTS.whatsapp}`}
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
                   WhatsApp
@@ -142,7 +143,7 @@ const Footer = () => {
                   title="STORIA auf Google Maps"
                 >
                   <MapPin className="h-4 w-4" aria-hidden="true" />
-                  <span>STORIA ristorante pizzeria bar<br />Karlstraße 47a, 80333 München</span>
+                  <span>STORIA ristorante pizzeria bar<br />{FACTS.address.full}</span>
                 </a>
               </div>
             </div>
@@ -166,9 +167,9 @@ const Footer = () => {
               <div className="space-y-2 text-base font-sans text-primary-foreground/70">
                 <div className="flex items-center justify-center md:justify-end gap-2.5">
                   <Clock className="h-4 w-4" aria-hidden="true" />
-                  <span>{t.footer.monFri}: 09:00 – 01:00</span>
+                  <span>{t.footer.monFri}: {FACTS.openingHours.weekday.open} – {FACTS.openingHours.weekday.close}</span>
                 </div>
-                <p>{t.footer.satSun}: 12:00 – 01:00</p>
+                <p>{t.footer.satSun}: {FACTS.openingHours.weekend.open} – {FACTS.openingHours.weekend.close}</p>
                 <p className="pt-2 italic text-primary-foreground/70">{t.footer.welcomeMessage}</p>
               </div>
             </div>

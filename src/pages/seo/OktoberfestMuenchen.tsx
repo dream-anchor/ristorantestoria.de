@@ -329,7 +329,7 @@ const OktoberfestMuenchen = () => {
               <a href="#reservieren" className="okt-btn okt-btn-p" onClick={() => fireLead("oktoberfest_reservierung")}>{o.reserveButton}</a>
               <a href="tel:+498951519696" className="okt-btn okt-btn-g"><Phone size={18} /> 089 51519696</a>
             </Reveal>
-            <Reveal delay={0.32} className="okt-trust"><span className="okt-stars">★★★★★</span> 4,5 · 780+ Google-Bewertungen</Reveal>
+            <Reveal delay={0.32} className="okt-trust"><span className="okt-stars">★★★★★</span> 4,5 · 800+ Google-Bewertungen</Reveal>
           </div>
         </header>
         <div className="okt-raute" aria-hidden="true" />
