@@ -551,7 +551,7 @@ const enBase = {
       silvester: "New Year\u2019s Eve Gala Dinner",
       wm: "2026 World Cup Public Viewing",
       wmTeaser: "11 June \u2013 19 July \u2013 every match live on the covered terrace, with Southern Italian cuisine & aperitivo.",
-      oktoberfest: "Oktoberfest Munich",
+      oktoberfest: "Oktoberfest 2026 – Wiesn season at STORIA",
       oktoberfestTeaser: "19 Sept \u2013 4 Oct 2026 \u2013 Bavarian-Italian friendship at an Italian restaurant: Wiesnbier from the cask (Ma\u00df), Brotzeit & specials. Ideal for groups.",
     },
     lunch: {

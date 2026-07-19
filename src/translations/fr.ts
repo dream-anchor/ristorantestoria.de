@@ -551,7 +551,7 @@ const frBase = {
       silvester: "Gala du Nouvel An",
       wm: "Coupe du monde 2026 en direct",
       wmTeaser: "11 juin \u2013 19 juillet \u2013 tous les matchs en direct sur la terrasse couverte, avec cuisine du Sud de l\u2019Italie & ap\u00e9ritif.",
-      oktoberfest: "Oktoberfest Munich",
+      oktoberfest: "Oktoberfest 2026 – L'esprit Wiesn au STORIA",
       oktoberfestTeaser: "19 sept \u2013 4 oct 2026 \u2013 amiti\u00e9 bavaroise-italienne chez l'Italien: bi\u00e8re de la Wiesn au f\u00fbt (Ma\u00df), Brotzeit & sp\u00e9cialit\u00e9s. Id\u00e9al pour groupes.",
     },
     lunch: {

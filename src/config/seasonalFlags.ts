@@ -22,6 +22,13 @@ export const WM_END = new Date("2026-07-20T00:00:00+02:00").getTime();
 export const FILMFEST_START = new Date("2026-06-26T00:00:00+02:00").getTime();
 export const FILMFEST_END = new Date("2026-07-06T00:00:00+02:00").getTime(); // bis einschließlich 5.7.2026
 
+// Oktoberfest-Push 2026: Marketing-Fenster ab 15. August (Vorlauf) bis zum letzten
+// Wiesn-Tag 4. Oktober 2026. Bewusst früher als der eigentliche Wiesn-Zeitraum
+// (19.9.–4.10.), damit Gruppen/Reisegruppen rechtzeitig reservieren. Steuert die
+// Oktoberfest-Teaser-Kachel; die Seite /oktoberfest-muenchen/ selbst bleibt evergreen.
+export const OKTOBERFEST_START = new Date("2026-08-15T00:00:00+02:00").getTime();
+export const OKTOBERFEST_END = new Date("2026-10-05T00:00:00+02:00").getTime(); // bis einschließlich 4.10.2026
+
 /** Interne Slugs der beiden Saison-Event-Seiten (für Footer-Filter etc.). */
 export const WM_SLUG = "wm-2026-public-viewing-muenchen";
 export const FILMFEST_SLUG = "filmfest-muenchen";
@@ -33,6 +40,10 @@ export const isWmActive = (now: number = Date.now()): boolean => now < WM_END;
 /** Filmfest-Saison aktiv (26.6.–5.7.2026). */
 export const isFilmfestActive = (now: number = Date.now()): boolean =>
   now >= FILMFEST_START && now < FILMFEST_END;
+
+/** Oktoberfest-Saison aktiv (Vorlauf ab 15.8. bis einschließlich 4.10.2026). */
+export const isOktoberfestActive = (now: number = Date.now()): boolean =>
+  now >= OKTOBERFEST_START && now < OKTOBERFEST_END;
 
 /** Überschneidung WM ↔ Filmfest aktiv (Ende Juni / Anfang Juli) – steuert die Cross-Links. */
 export const isWmFilmfestOverlap = (now: number = Date.now()): boolean =>

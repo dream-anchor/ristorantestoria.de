@@ -13,7 +13,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
-import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
+import { isWmActive, isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { wmContent } from "./wmContent";
 import { wmSpieleUpcoming, wmSpielePast, wmWeekday, wmDateLabel, wmKickoff, wmRundeLabel, wmHinweisLabel, wmErgebnisLabel, buildWmEventSchema } from "./wmSpiele";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -108,6 +108,9 @@ const WmPublicViewingMuenchen = () => {
   const c = wmContent[language];
   // Cross-Link zur Filmfest-Seite nur im Überschneidungszeitraum (26.6.–5.7.2026).
   const showFilmfestCrossLink = isWmFilmfestOverlap();
+  // Nach dem Finale (19.7.2026): Turnier vorbei → Spielplan durch Hinweis ersetzen,
+  // Abschluss-Block einblenden, Event-JSON-LD nicht mehr ausgeben (BreadcrumbList bleibt).
+  const wmActive = isWmActive();
 
   // Nächstes Spiel = erstes kommendes (Ergebnis gesetzt = gespielt, siehe wmSpiele.ts).
   // Rein datengetrieben (kein „jetzt"-Vergleich) → identisch bei SSR und Client, kein Hydration-Risiko.
@@ -144,11 +147,13 @@ const WmPublicViewingMuenchen = () => {
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={OG_IMAGE_ALT} />
         <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
-        {WM_EVENTS.map((ev) => (
-          <script type="application/ld+json" key={ev.name}>
-            {JSON.stringify(ev)}
-          </script>
-        ))}
+        {/* Event-JSON-LD nur während des Turniers – nach dem Finale nicht mehr ausgeben. */}
+        {wmActive &&
+          WM_EVENTS.map((ev) => (
+            <script type="application/ld+json" key={ev.name}>
+              {JSON.stringify(ev)}
+            </script>
+          ))}
       </Helmet>
       <StructuredData
         type="breadcrumb"
@@ -247,6 +252,31 @@ const WmPublicViewingMuenchen = () => {
           </div>
         </header>
 
+        {/* ABSCHLUSS – nur nach dem Finale (19.7.2026). Title/H1 der Seite bleiben unberührt. */}
+        {!wmActive && (
+          <section className="wm-sec wm-abschluss" id="abschluss">
+            <div className="wm-wrap">
+              <Reveal className="wm-sec-head">
+                <span className="wm-eyebrow wm-eyebrow-line">{c.abschluss.eyebrow}</span>
+                <h2 className="wm-h2">{c.abschluss.h2}</h2>
+              </Reveal>
+              <Reveal as="p" className="wm-lead">
+                {c.abschluss.body}
+              </Reveal>
+              <Reveal className="wm-abschluss-links">
+                <span className="wm-abschluss-lead">{c.abschluss.linksLead}</span>
+                <LocalizedLink to="oktoberfest-muenchen" className="wm-inline-link">
+                  {c.abschluss.linkOktoberfest}
+                </LocalizedLink>
+                <span className="wm-abschluss-sep" aria-hidden="true">·</span>
+                <LocalizedLink to="terrasse-muenchen" className="wm-inline-link">
+                  {c.abschluss.linkTerrasse}
+                </LocalizedLink>
+              </Reveal>
+            </div>
+          </section>
+        )}
+
         {/* WAS LÄUFT */}
         <section className="wm-sec wm-angebot" id="angebot">
           <div className="wm-wrap wm-angebot-grid">
@@ -317,6 +347,8 @@ const WmPublicViewingMuenchen = () => {
               <span className="wm-eyebrow wm-eyebrow-line">{c.spiele.eyebrow}</span>
               <h2 className="wm-h2">{c.spiele.h2}</h2>
             </Reveal>
+            {wmActive ? (
+              <>
             <div className="wm-match-grid">
               {wmSpieleUpcoming.map((s, i) => {
                 const isNext = nextId === s.id;
@@ -359,7 +391,6 @@ const WmPublicViewingMuenchen = () => {
             <Reveal as="p" className="wm-note">
               {c.spiele.note}
             </Reveal>
-            <WmBlockCta label={c.reservieren.ctaReserve} />
 
             {wmSpielePast.length > 0 && (
               <Reveal className="wm-results">
@@ -383,6 +414,13 @@ const WmPublicViewingMuenchen = () => {
                 </ul>
               </Reveal>
             )}
+              </>
+            ) : (
+              <Reveal as="p" className="wm-note wm-spiele-closed">
+                {c.spieleClosed}
+              </Reveal>
+            )}
+            <WmBlockCta label={c.reservieren.ctaReserve} />
           </div>
         </section>
 
@@ -676,6 +714,12 @@ const wmStyles = `
 .wm-faq-item p{font-size:.96rem;color:rgba(244,236,224,.76);line-height:1.6;}
 .wm-disclaimer{margin-top:48px;padding-top:28px;border-top:1px solid var(--line);font-size:.82rem;color:rgba(244,236,224,.45);max-width:80ch;}
 .wm-foot-logo{height:54px;width:auto;margin-top:24px;opacity:.85;filter:brightness(0) invert(1);}
+/* ABSCHLUSS (nach dem Finale) */
+.wm-abschluss{background:var(--ink-2);}
+.wm-abschluss-links{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
+.wm-abschluss-lead{font-size:1.02rem;color:rgba(244,236,224,.7);}
+.wm-abschluss-sep{color:rgba(244,236,224,.35);}
+.wm-spiele-closed{max-width:62ch;}
 /* REVEAL */
 .wm-reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
 .wm-reveal.in{opacity:1;transform:none;}

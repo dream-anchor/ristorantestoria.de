@@ -9,7 +9,7 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import InlineVoucherCTA from "@/components/InlineVoucherCTA";
-import { isWmActive, WM_SLUG, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
+import { isWmActive, isOktoberfestActive, WM_SLUG, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
 
 // Parent slug mapping for each language
 const PARENT_SLUGS = {
@@ -25,6 +25,8 @@ const BesondereAnlaesse = () => {
 
   // Saisonale WM-2026-Verlinkung – blendet sich nach dem Finale (19.7.2026) automatisch aus.
   const wmActive = isWmActive();
+  // Oktoberfest-Teaser – aktiv im Vorlauf-/Festzeitraum (15.8.–4.10.2026), sonst ausgeblendet.
+  const oktoberfestActive = isOktoberfestActive();
 
   const eventLinks = [
     {
@@ -74,7 +76,8 @@ const BesondereAnlaesse = () => {
           { "@type": "ListItem", "position": 1, "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "name": "Valentinstag-Menü" },
           { "@type": "ListItem", "position": 2, "url": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/", "name": "Weihnachtsmenü" },
           { "@type": "ListItem", "position": 3, "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "name": "Silvester Gala-Dinner" },
-          ...(wmActive ? [{ "@type": "ListItem", "position": 4, "url": `https://www.ristorantestoria.de/${WM_SLUG}/`, "name": "WM 2026 Public Viewing" }] : [])
+          ...(wmActive ? [{ "@type": "ListItem", "position": 4, "url": `https://www.ristorantestoria.de/${WM_SLUG}/`, "name": "WM 2026 Public Viewing" }] : []),
+          ...(oktoberfestActive ? [{ "@type": "ListItem", "position": wmActive ? 5 : 4, "url": `https://www.ristorantestoria.de/${OKTOBERFEST_SLUG}/`, "name": "Oktoberfest 2026 im STORIA" }] : [])
         ]
       },
       {
@@ -149,17 +152,19 @@ const BesondereAnlaesse = () => {
                   </LocalizedLink>
                 )}
 
-                <LocalizedLink
-                  to={OKTOBERFEST_SLUG}
-                  className="block p-6 rounded-2xl border bg-card hover:bg-accent transition-colors"
-                >
-                  <h2 className="text-xl font-semibold">
-                    {t.seo?.besondereAnlaesse?.oktoberfest || "Oktoberfest München"}
-                  </h2>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {t.seo?.besondereAnlaesse?.oktoberfestTeaser || "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier vom Holzfass (Maß), Brotzeit & Specials. Ideal für Gruppen."}
-                  </p>
-                </LocalizedLink>
+                {oktoberfestActive && (
+                  <LocalizedLink
+                    to={OKTOBERFEST_SLUG}
+                    className="block p-6 rounded-2xl border bg-card hover:bg-accent transition-colors"
+                  >
+                    <h2 className="text-xl font-semibold">
+                      {t.seo?.besondereAnlaesse?.oktoberfest || "Oktoberfest 2026 – Wiesn-Zeit im STORIA"}
+                    </h2>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {t.seo?.besondereAnlaesse?.oktoberfestTeaser || "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier vom Holzfass (Maß), Brotzeit & Specials. Ideal für Gruppen."}
+                    </p>
+                  </LocalizedLink>
+                )}
               </div>
 
               <div className="mt-8 p-6 rounded-2xl bg-card border">

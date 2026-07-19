@@ -571,7 +571,7 @@ const itBase = {
       silvester: "Gala di Capodanno",
       wm: "Mondiali 2026 in diretta",
       wmTeaser: "11 giugno – 19 luglio – tutte le partite in diretta sulla terrazza coperta, con cucina del Sud Italia e aperitivo.",
-      oktoberfest: "Oktoberfest Monaco di Baviera",
+      oktoberfest: "Oktoberfest 2026 – Aria di Wiesn allo STORIA",
       oktoberfestTeaser: "19 set – 4 ott 2026 – amicizia bavarese-italiana dall'italiano: Wiesnbier alla spina (Maß), Brotzeit & specialità. Ideale per gruppi.",
     },
     lunch: {

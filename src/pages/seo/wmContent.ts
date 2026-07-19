@@ -94,6 +94,17 @@ export interface WmContent {
     items: FaqItem[];
     disclaimer: string;
   };
+  /** Nach-Turnier-Abschluss – nur bei !isWmActive() sichtbar. Title/H1 der Seite bleiben. */
+  abschluss: {
+    eyebrow: string;
+    h2: string;
+    body: string;
+    linksLead: string;
+    linkOktoberfest: string;
+    linkTerrasse: string;
+  };
+  /** Kompakter Hinweis, der nach dem Turnier den Spielplan-Block ersetzt. */
+  spieleClosed: string;
 }
 
 export const wmContent: Record<Language, WmContent> = {
@@ -253,6 +264,16 @@ export const wmContent: Record<Language, WmContent> = {
       disclaimer:
         "Eine Sonderseite zur Fußball-Weltmeisterschaft 2026 (11. Juni – 19. Juli). Diese Seite steht in keiner offiziellen Verbindung zur FIFA. Spielzeiten und Übertragungen ohne Gewähr.",
     },
+    abschluss: {
+      eyebrow: "WM 2026 · Abpfiff",
+      h2: "Das war die WM 2026 im STORIA – grazie!",
+      body: "Vier Wochen Fußball auf der überdachten Terrasse, von der Eröffnung bis zum Finale – danke, dass ihr dabei wart. Es war laut, es war voll, es war ein Fest. Bis zum nächsten großen Turnier bleibt bei uns alles, was den Sommer ausmacht: Aperitivo, süditalienische Küche und ein Platz unter unserem echten Terrassendach.",
+      linksLead: "Weiter im STORIA:",
+      linkOktoberfest: "Oktoberfest im STORIA",
+      linkTerrasse: "Unsere überdachte Terrasse",
+    },
+    spieleClosed:
+      "Die WM 2026 ist vorbei – von der Eröffnung bis zum Finale liefen alle Spiele live auf unserer überdachten Terrasse. Der Spielplan ist damit abgeschlossen.",
   },
   en: {
     seo: {
@@ -396,6 +417,16 @@ export const wmContent: Record<Language, WmContent> = {
       disclaimer:
         "A special page for the 2026 FIFA World Cup (11 June – 19 July). This page has no official connection to FIFA. Kick-off times and broadcasts subject to change.",
     },
+    abschluss: {
+      eyebrow: "World Cup 2026 · Final whistle",
+      h2: "That was the World Cup 2026 at STORIA – grazie!",
+      body: "Four weeks of football on the covered terrace, from the opening match to the final – thank you for being part of it. It was loud, it was busy, it was a joy. Until the next big tournament, everything that makes summer here stays: aperitivo, southern Italian food and a seat under our real terrace roof.",
+      linksLead: "More at STORIA:",
+      linkOktoberfest: "Oktoberfest at STORIA",
+      linkTerrasse: "Our covered terrace",
+    },
+    spieleClosed:
+      "The World Cup 2026 is over – from the opening match to the final, every game was live on our covered terrace. The fixture list is now closed.",
   },
   it: {
     seo: {
@@ -539,6 +570,16 @@ export const wmContent: Record<Language, WmContent> = {
       disclaimer:
         "Una pagina speciale dedicata ai Mondiali di calcio 2026 (11 giugno – 19 luglio). Questa pagina non ha alcun legame ufficiale con la FIFA. Orari delle partite e trasmissioni salvo modifiche.",
     },
+    abschluss: {
+      eyebrow: "Mondiali 2026 · Fischio finale",
+      h2: "Questi erano i Mondiali 2026 allo STORIA – grazie!",
+      body: "Quattro settimane di calcio sulla terrazza coperta, dalla partita inaugurale alla finale – grazie di esserci stati. È stato rumoroso, pieno, una festa. Fino al prossimo grande torneo resta tutto ciò che rende l'estate da noi: aperitivo, cucina del Sud Italia e un posto sotto il nostro vero tetto in terrazza.",
+      linksLead: "Continua allo STORIA:",
+      linkOktoberfest: "Oktoberfest allo STORIA",
+      linkTerrasse: "La nostra terrazza coperta",
+    },
+    spieleClosed:
+      "I Mondiali 2026 sono finiti – dalla partita inaugurale alla finale, tutte le gare sono andate in diretta sulla nostra terrazza coperta. Il calendario è così concluso.",
   },
   fr: {
     seo: {
@@ -682,5 +723,15 @@ export const wmContent: Record<Language, WmContent> = {
       disclaimer:
         "Une page spéciale consacrée à la Coupe du monde de football 2026 (11 juin – 19 juillet). Cette page n'a aucun lien officiel avec la FIFA. Horaires des matchs et diffusions sous réserve de modifications.",
     },
+    abschluss: {
+      eyebrow: "Coupe du monde 2026 · Coup de sifflet final",
+      h2: "C'était la Coupe du monde 2026 au STORIA – grazie !",
+      body: "Quatre semaines de football sur la terrasse couverte, du match d'ouverture à la finale – merci d'avoir été là. C'était bruyant, c'était plein, c'était une fête. Jusqu'au prochain grand tournoi, tout ce qui fait l'été chez nous reste : apéritif, cuisine du sud de l'Italie et une place sous notre vrai toit de terrasse.",
+      linksLead: "À suivre au STORIA :",
+      linkOktoberfest: "Oktoberfest au STORIA",
+      linkTerrasse: "Notre terrasse couverte",
+    },
+    spieleClosed:
+      "La Coupe du monde 2026 est terminée – du match d'ouverture à la finale, tous les matchs ont été diffusés en direct sur notre terrasse couverte. Le calendrier est désormais clos.",
   },
 };

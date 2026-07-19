@@ -550,7 +550,7 @@ export const de = {
       silvester: "Silvester Gala-Dinner",
       wm: "WM 2026 Public Viewing",
       wmTeaser: "11. Juni – 19. Juli – alle Spiele live auf der überdachten Terrasse, dazu süditalienische Küche & Aperitivo.",
-      oktoberfest: "Oktoberfest München",
+      oktoberfest: "Oktoberfest 2026 – Wiesn-Zeit im STORIA",
       oktoberfestTeaser: "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier vom Holzfass (Maß), Brotzeit & Specials. Ideal für Gruppen.",
     },
     lunch: {
@@ -897,8 +897,8 @@ export const de = {
       contactWhatsapp: "Schreiben Sie uns per",
     },
     aperitivo: {
-      seoTitle: "Aperitivo München – Spritz ab 7,90 € auf der Terrasse | STORIA",
-      seoDescription: "Italienischer Aperitivo in München: 10 Spritz-Varianten ab 7,90 €, Negroni & mehr – täglich 17–22:30 Uhr auf der Terrasse. Jetzt reservieren!",
+      seoTitle: "Aperitivo München – 10 Spritz-Varianten 9,90 €, Terrasse | STORIA",
+      seoDescription: "Italienischer Aperitivo wie in Mailand: Aperol, Hugo & Co. 9,90 €, alkoholfrei 7,90 € – täglich 17–22:30 Uhr auf der überdachten Terrasse, 5 Min. vom Königsplatz.",
       title: "Aperitivo München – Aperol Spritz & Negroni im STORIA",
       heroSubtitle: "Italienische Bar-Kultur im STORIA Maxvorstadt",
       heroTime: "🍸 Täglich 17:00 – 22:30 Uhr",
