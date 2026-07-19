@@ -116,6 +116,8 @@ interface SEOProps {
   canonical?: string;
   noIndex?: boolean;
   noHreflang?: boolean;
+  /** Unterdrückt den self-referencing Canonical komplett (z. B. für die 404-Seite). */
+  noCanonical?: boolean;
   ogImage?: string;
   ogType?: string;
   /** Optionale hreflang-Overrides für Seiten mit dynamischen Slugs */
@@ -133,6 +135,7 @@ const SEO = ({
   canonical,
   noIndex = false,
   noHreflang = false,
+  noCanonical = false,
   ogImage,
   ogType = "website",
   hreflangUrls,
@@ -171,8 +174,9 @@ const SEO = ({
       {/* Indexierung */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
-      {/* Canonical — self-referencing, immer www + trailing slash */}
-      <link rel="canonical" href={canonicalUrl} />
+      {/* Canonical — self-referencing, immer www + trailing slash.
+          Für die 404-Seite (noCanonical) bewusst NICHT ausgeben. */}
+      {!noCanonical && <link rel="canonical" href={canonicalUrl} />}
 
       {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />

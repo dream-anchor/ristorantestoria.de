@@ -223,19 +223,35 @@ RewriteRule ^fr/avertissement/?$ /haftungsausschluss/ [R=301,L]
 # ============================================
 # 9. Error Documents
 # ============================================
-ErrorDocument 404 /index.html
+# Echte 404-Seite (gebrandet, noindex, kein Canonical) statt Startseiten-Fallback.
+ErrorDocument 404 /404.html
 ErrorDocument 500 /index.html
 
 # ============================================
-# 10. SPA-Routing & SSG Support
+# 10. SPA-Routing, SSG-Support & echte 404s
 # ============================================
+# 10a. Existierende Dateien direkt ausliefern (Assets, 404.html, robots.txt, …).
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
+# 10b. Existierende Verzeichnisse (Prerender-Ordner mit index.html) direkt ausliefern.
+#      DirectoryIndex liefert dort die vorgerenderte index.html mit Status 200.
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-RewriteRule ^ index.html [L]
+# 10c. Client-only SPA-Routen (NICHT prerendert) → index.html, React übernimmt.
+#      Diese Pfade existieren nur im React-Router und dürfen KEINE 404 liefern:
+#      Admin-Bereich, Double-Opt-in-Bestätigung (Link aus E-Mail!),
+#      Formular-Danke-Seite, Kampagnen-Kurz-URL /filmfest.
+RewriteRule ^admin(/.*)?$ index.html [L]
+RewriteRule ^reisegruppen/danke/?$ index.html [L]
+RewriteRule ^newsletter-bestaetigen/?$ index.html [L]
+RewriteRule ^(en/confirm-newsletter|it/conferma-newsletter|fr/confirmation-newsletter)/?$ index.html [L]
+RewriteRule ^filmfest/?$ index.html [L]
+
+# 10d. Alle übrigen unbekannten Pfade: echte 404 (kein Startseiten-Catch-all mehr).
+#      Apache liefert den ErrorDocument 404 (/404.html) aus Abschnitt 9 aus.
+RewriteRule ^ - [R=404,L]
 
 # ============================================
 # 11. MIME-Types

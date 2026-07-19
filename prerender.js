@@ -589,6 +589,51 @@ async function generateRoutesToPrerender() {
     }
   }
 
+  // ---------------------------------------------------------------
+  // Echte 404-Seite: dist/404.html (flach, NICHT als Verzeichnis).
+  // Wird von Apache via `ErrorDocument 404 /404.html` ausgeliefert.
+  // Rendert die NotFound-Route → noindex, KEIN Canonical (noCanonical).
+  // KEIN data-prerendered-path: der Client erkennt „kein Match" und
+  // rendert frisch für den tatsächlichen (unbekannten) Pfad.
+  // ---------------------------------------------------------------
+  try {
+    const { html, helmet, dehydratedState } = await render("/__not-found__", {
+      menuData: null,
+      menuType: null,
+      specialMenuData: null,
+    });
+
+    let notFoundHtml = template.replace(
+      /<div id="root">(?:<!--app-html-->|\s)*<\/div>/,
+      `<div id="root">${html}</div>`
+    );
+
+    if (dehydratedState && dehydratedState.queries?.length > 0) {
+      const safeState = JSON.stringify(dehydratedState).replace(/<\/script>/gi, "<\\/script>");
+      notFoundHtml = notFoundHtml.replace(
+        "</head>",
+        `<script>window.__REACT_QUERY_STATE__=${safeState}</script></head>`
+      );
+    }
+
+    if (helmet) {
+      const helmetHtml = `
+        ${helmet.title ? helmet.title.toString() : ""}
+        ${helmet.meta ? helmet.meta.toString() : ""}
+        ${helmet.link ? helmet.link.toString() : ""}
+        ${helmet.script ? helmet.script.toString() : ""}
+      `;
+      notFoundHtml = notFoundHtml.replace("</head>", `${helmetHtml}</head>`);
+    }
+
+    fs.writeFileSync(toAbsolute("dist/404.html"), notFoundHtml);
+    console.log("✓ Rendered: dist/404.html (NotFound, noindex, kein Canonical)");
+    successCount++;
+  } catch (e) {
+    console.error("❌ Error rendering dist/404.html:", e.message);
+    errorCount++;
+  }
+
   // Cleanup: Remove server build folder
   try {
     fs.rmSync(toAbsolute('dist/server'), { recursive: true, force: true });

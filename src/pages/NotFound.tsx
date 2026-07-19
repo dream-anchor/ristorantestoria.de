@@ -17,10 +17,11 @@ const NotFound = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Seite nicht gefunden"
         description="Die angeforderte Seite konnte nicht gefunden werden. Besuchen Sie unsere Startseite oder kontaktieren Sie uns."
         noIndex={true}
+        noCanonical={true}
       />
       <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
         <Link to="/">
@@ -40,7 +41,7 @@ const NotFound = () => {
             Die angeforderte Seite existiert leider nicht. Vielleicht finden Sie hier, was Sie suchen:
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center mb-12">
             <Button asChild size="lg" className="gap-2">
               <LocalizedLink to="home">
                 <Home className="h-4 w-4" />
@@ -48,8 +49,18 @@ const NotFound = () => {
               </LocalizedLink>
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2">
+              <LocalizedLink to="speisekarte">
+                Speisekarte
+              </LocalizedLink>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="gap-2">
               <LocalizedLink to="reservierung">
                 Tisch reservieren
+              </LocalizedLink>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="gap-2">
+              <LocalizedLink to="kontakt">
+                Kontakt
               </LocalizedLink>
             </Button>
           </div>
