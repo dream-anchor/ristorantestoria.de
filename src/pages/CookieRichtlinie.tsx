@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -177,9 +178,9 @@ const CookieRichtlinie = () => {
                 Karlstraße 47a<br />
                 80333 München<br />
                 E-Mail:{" "}
-                <a href="mailto:info@ristorantestoria.de" className="text-primary hover:underline">
-                  info@ristorantestoria.de
-                </a>
+                <EmailLink className="text-primary hover:underline">
+                  <EmailAddress />
+                </EmailLink>
               </p>
             </section>
           </div>

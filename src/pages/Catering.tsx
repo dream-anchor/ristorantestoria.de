@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -624,9 +625,9 @@ const Catering = () => {
               </div>
               <p className="mt-4 opacity-70 text-sm">
                 Oder per E-Mail:{" "}
-                <a href="mailto:info@ristorantestoria.de" className="underline hover:opacity-80">
-                  info@ristorantestoria.de
-                </a>
+                <EmailLink className="underline hover:opacity-80">
+                  <EmailAddress />
+                </EmailLink>
               </p>
             </div>
           </section>

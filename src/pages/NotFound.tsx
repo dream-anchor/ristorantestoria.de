@@ -1,4 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { useEffect } from "react";
 import { Home, Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -75,13 +76,12 @@ const NotFound = () => {
                 <Phone className="h-4 w-4" />
                 +49 89 51519696
               </a>
-              <a 
-                href="mailto:info@ristorantestoria.de" 
+              <EmailLink
                 className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
               >
                 <Mail className="h-4 w-4" />
-                info@ristorantestoria.de
-              </a>
+                <EmailAddress />
+              </EmailLink>
             </div>
             <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4" />

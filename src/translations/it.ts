@@ -575,7 +575,8 @@ const itBase = {
       oktoberfestTeaser: "19 set – 4 ott 2026 – amicizia bavarese-italiana dall'italiano: Wiesnbier alla spina (Maß), Brotzeit & specialità. Ideale per gruppi.",
     },
     lunch: {
-      seoTitle: "Business Lunch Monaco Maxvorstadt | Ristorante Italiano STORIA vicino K\u00f6nigsplatz",
+      seoTitle: "Pranzo a Monaco Maxvorstadt | Men\u00f9 Business | STORIA",
+      seoDescription: "Pranzo italiano a Monaco: business lunch con pasta fresca e pizza da luned\u00ec a venerd\u00ec, 3 portate da 14,90 \u20ac, a 5 minuti da K\u00f6nigsplatz. Servizio veloce!",
       heroTitle: "Business Lunch Monaco \u2013 Pranzo Italiano nella Maxvorstadt",
       heroSubtitle: "Business Lunch a Maxvorstadt",
       heroDescription: "Pranzo italiano a Monaco: business lunch, pasta fresca & pizza dalle 11:30. 5 min da Königsplatz. Menù pranzo lun-ven!",
@@ -1743,6 +1744,8 @@ const itBase = {
     silvester: {
       seoTitle: "Capodanno al Ristorante STORIA Monaco – Cena di Gala 2026",
       seoDescription: "Ristorante Monaco Capodanno: Cena di gala italiana al STORIA Maxvorstadt. Da 99 € a persona con musica, abbinamento vini e brindisi di mezzanotte.",
+      standaloneSeoTitle: "Capodanno a Monaco 2026 | Cena di Gala | STORIA",
+      standaloneSeoDescription: "Capodanno a Monaco allo STORIA: cena di gala italiana in Maxvorstadt con menù delle feste, musica e brindisi di mezzanotte, a 5 minuti da Königsplatz.",
       breadcrumb: "Capodanno Monaco",
       heroTitle: "Capodanno al Ristorante STORIA Monaco – Cena di Gala 2026",
       heroSubtitle: "Cena festiva di Capodanno con musica, abbinamento vini e countdown di mezzanotte nella Maxvorstadt",
@@ -2003,6 +2006,8 @@ const itBase = {
     valentinstag: {
       seoTitle: "San Valentino Monaco 2026 – Cena Romantica | STORIA",
       seoDescription: "San Valentino a Monaco: Cena romantica a lume di candela allo STORIA Maxvorstadt. Da 55 € a persona con aperitivo, menù & rosa. Vicino a Königsplatz. Prenotate ora!",
+      standaloneSeoTitle: "San Valentino a Monaco 2026 | Cena Romantica | STORIA",
+      standaloneSeoDescription: "San Valentino a Monaco allo STORIA: cena romantica a lume di candela con menù italiano e rosa, a 5 minuti da Königsplatz. Prenota il vostro tavolo!",
       breadcrumb: "San Valentino Monaco",
       heroTitle: "San Valentino a Monaco – Cena Romantica allo STORIA",
       heroSubtitle: "Cena a lume di candela con aperitivo, abbinamento vini e rosa al tavolo – nella Maxvorstadt",
@@ -2839,6 +2844,20 @@ const itBase = {
       ctaDesc: "Gusta la pasta fatta in casa secondo la tradizione del Cilento nel cuore di Monaco. Vi aspettiamo!",
       ctaButton: "Prenota ora",
     },
+    hochzeitsfeier: {
+      seoTitle: "Festa di Matrimonio a Monaco | Ristorante | STORIA",
+      seoDescription: "Festeggia il tuo matrimonio a Monaco allo STORIA: cucina italiana per 6–300 invitati, menù su misura e terrazza coperta, a 5 minuti da Königsplatz.",
+    },
+    italienerHauptbahnhof: {
+      seoTitle: "Italiano vicino Stazione Centrale Monaco | STORIA",
+      seoDescription: "Vero ristorante italiano a due passi dalla Stazione Centrale di Monaco: pizza al forno a pietra, pasta fresca e aperitivo. Aperto fino all'una di notte.",
+    },
+    weihnachten: {
+      seoTitle: "Menù di Natale a Monaco 2026 | STORIA Maxvorstadt",
+      seoDescription: "Menù di Natale italiani allo STORIA Maxvorstadt: da 45 € a persona per 6–100 ospiti, per feste aziendali e in famiglia. Nel cuore di Monaco, vicino a Königsplatz.",
+      standaloneSeoTitle: "Natale a Monaco 2026 | Menù di Natale | STORIA",
+      standaloneSeoDescription: "Natale a Monaco allo STORIA: menù natalizi italiani in Maxvorstadt, da 45 € a persona per 6–100 ospiti, in famiglia o in azienda. A 5 min dal Königsplatz.",
+    },
   },
   spellCheck: {
     title: "Controllo ortografico",
@@ -3560,27 +3579,29 @@ const itBase = {
   },
 };
 
+// Deep-Merge (eine Ebene) ALLER seo-Unterschlüssel: DE ist die Basis, italienische
+// Overrides gewinnen pro Feld. Fehlt in einem IT-Block ein einzelnes Feld (z. B.
+// seoDescription oder standaloneSeoTitle), bleibt NUR dieses Feld deutsch – der
+// restliche Block bleibt italienisch. Das ersetzt die frühere, handgepflegte
+// Merge-Liste (die fehlende Keys komplett auf Deutsch zurückfallen ließ – Ursache
+// der 6 deutschen IT-Metas) durch einen generischen, wartungsfreien Merge.
+const mergeSeo = (deSeo: any, itSeo: any): any => {
+  const out: any = { ...deSeo };
+  for (const key of Object.keys(itSeo)) {
+    const itVal = itSeo[key];
+    const deVal = deSeo[key];
+    const bothObjects =
+      itVal && typeof itVal === "object" && !Array.isArray(itVal) &&
+      deVal && typeof deVal === "object" && !Array.isArray(deVal);
+    out[key] = bothObjects ? { ...deVal, ...itVal } : itVal;
+  }
+  return out;
+};
+
 // Ensure key parity with German (source-of-truth) while keeping Italian overrides.
 // Any keys missing from itBase will fall back to German so the app compiles.
 export const it = deepMapStrings({
   ...de,
   ...itBase,
-  seo: {
-    ...de.seo,
-    ...itBase.seo,
-    besondereAnlaesse: { ...de.seo.besondereAnlaesse, ...itBase.seo.besondereAnlaesse },
-    lunch: { ...de.seo.lunch, ...itBase.seo.lunch },
-    firmenfeier: { ...de.seo.firmenfeier, ...itBase.seo.firmenfeier },
-    aperitivo: { ...de.seo.aperitivo, ...itBase.seo.aperitivo },
-    romanticDinner: { ...de.seo.romanticDinner, ...itBase.seo.romanticDinner },
-    eventlocation: { ...de.seo.eventlocation, ...itBase.seo.eventlocation },
-    birthday: { ...de.seo.birthday, ...itBase.seo.birthday },
-    silvester: { ...de.seo.silvester, ...itBase.seo.silvester },
-    weihnachtsfeier: { ...de.seo.weihnachtsfeier, ...itBase.seo.weihnachtsfeier },
-    valentinstag: { ...de.seo.valentinstag, ...itBase.seo.valentinstag },
-    terrasse: { ...de.seo.terrasse, ...itBase.seo.terrasse },
-    neapolitanPizza: { ...de.seo.neapolitanPizza, ...itBase.seo.neapolitanPizza },
-    wild: { ...de.seo.wild, ...itBase.seo.wild },
-    pizzaMuenchen: { ...de.seo.pizzaMuenchen, ...itBase.seo.pizzaMuenchen },
-  },
+  seo: mergeSeo(de.seo, itBase.seo),
 }) as typeof de;

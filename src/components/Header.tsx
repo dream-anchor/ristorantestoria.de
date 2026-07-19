@@ -1,4 +1,5 @@
 import { Phone, Mail, Instagram, MessageCircle } from "lucide-react";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -21,10 +22,10 @@ const Header = () => {
               <Phone className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">+49 89 51519696</span>
             </a>
-            <a href="mailto:info@ristorantestoria.de" aria-label="E-Mail an STORIA: info@ristorantestoria.de" className="flex items-center justify-center gap-2 min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors">
+            <EmailLink className="flex items-center justify-center gap-2 min-h-[48px] min-w-[48px] p-2 hover:text-foreground transition-colors">
               <Mail className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden sm:inline">info@ristorantestoria.de</span>
-            </a>
+              <span className="hidden sm:inline"><EmailAddress /></span>
+            </EmailLink>
             <a
               href="https://wa.me/491636033912"
               target="_blank"

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 import { useLocation } from "react-router-dom";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, isAdminPath } from "@/lib/analytics";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 /**
@@ -66,6 +66,7 @@ const GoogleAnalytics = () => {
 
   useEffect(() => {
     if (!hasStatisticsConsent) return;
+    if (isAdminPath()) return; // Admin-Bereich: kein gtag.js-Load, kein Pageview
 
     // Prüfe ob gtag.js Library-Script bereits im DOM existiert
     // (window.gtag existiert IMMER durch Consent-Defaults in index.html — kein geeigneter Check)

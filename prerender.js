@@ -634,6 +634,26 @@ async function generateRoutesToPrerender() {
     errorCount++;
   }
 
+  // ---------------------------------------------------------------
+  // Admin-Bereich: statische noindex-Shell (dist/admin/index.html).
+  // /admin ist client-only (lazy, nie SSR-gerendert) und wird via .htaccess
+  // auf diese Shell gemappt. Die Shell trägt ein echtes <meta robots noindex>
+  // im HTML (für Crawler, die kein JS ausführen) und bootet die SPA:
+  // KEIN data-prerendered-path → der Client rendert die Admin-Route frisch.
+  // ---------------------------------------------------------------
+  try {
+    const adminNoindex = '<meta name="robots" content="noindex, nofollow" />';
+    const adminHtml = template.replace("</head>", `${adminNoindex}</head>`);
+    const adminDir = toAbsolute("dist/admin");
+    if (!fs.existsSync(adminDir)) fs.mkdirSync(adminDir, { recursive: true });
+    fs.writeFileSync(toAbsolute("dist/admin/index.html"), adminHtml);
+    console.log("✓ Rendered: dist/admin/index.html (noindex-Shell)");
+    successCount++;
+  } catch (e) {
+    console.error("❌ Error rendering dist/admin/index.html:", e.message);
+    errorCount++;
+  }
+
   // Cleanup: Remove server build folder
   try {
     fs.rmSync(toAbsolute('dist/server'), { recursive: true, force: true });

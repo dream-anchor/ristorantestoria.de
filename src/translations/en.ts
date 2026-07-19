@@ -1282,8 +1282,8 @@ const enBase = {
     },
     romanticDinner: {
       // SEO
-      seoTitle: "Romantic Dinner Munich | Candlelight Dinner – STORIA",
-      seoDescription: "Romantic dinner in Munich with candlelight, Italian cuisine and wine pairing. Perfect for date night & anniversary. STORIA Maxvorstadt.",
+      seoTitle: "Romantic Dinner Munich | 5 min from Königsplatz | STORIA",
+      seoDescription: "Romantic dinner in Munich by candlelight at STORIA Maxvorstadt: Italian menu, wine pairing and a rose, just 5 minutes from Königsplatz. Perfect for date night.",
       breadcrumb: "Romantic Dinner Munich",
       // Hero
       heroTitle: "Romantic Dinner Munich – Candlelight at STORIA",
@@ -3043,8 +3043,8 @@ const enBase = {
       relatedCandlelightDesc: "A candlelit menu for two",
     },
     italienischesRestaurant: {
-      seoTitle: "Southern Italian Restaurant Munich-Maxvorstadt | STORIA",
-      seoDescription: "At STORIA the Speranza family cooks the cuisine of the Cilento: homemade pasta, fresh fish and Neapolitan stone-oven pizza \u2013 in the heart of Munich\u2019s Maxvorstadt.",
+      seoTitle: "Best Italian Restaurant Munich | Wood-Fired Pizza | STORIA",
+      seoDescription: "Speranza family\u2019s authentic Italian restaurant in Munich-Maxvorstadt: Neapolitan wood-fired pizza at 400\u00b0C, homemade pasta & 60+ wines, 5 min from K\u00f6nigsplatz.",
       breadcrumb: "Southern Italian Restaurant Munich",
       heroTitle: "Authentically Southern Italian \u2013 the Cuisine of the Cilento in Maxvorstadt",
       heroSubtitle: "Authentically Southern Italian since 2015 \u2022 Speranza Family",

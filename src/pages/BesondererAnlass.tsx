@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -290,7 +291,7 @@ const BesondererAnlass = () => {
                   <a href="tel:+498951519696">+49 89 51519696</a>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <a href="mailto:info@ristorantestoria.de">{t.specialOccasions.sendEmail}</a>
+                  <EmailLink>{t.specialOccasions.sendEmail}</EmailLink>
                 </Button>
               </div>
             </div>
@@ -450,7 +451,7 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
                   <a href="tel:+498951519696">+49 89 51519696</a>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <a href="mailto:info@ristorantestoria.de">{t.specialOccasions.sendEmail}</a>
+                  <EmailLink>{t.specialOccasions.sendEmail}</EmailLink>
                 </Button>
               </div>
             </div>

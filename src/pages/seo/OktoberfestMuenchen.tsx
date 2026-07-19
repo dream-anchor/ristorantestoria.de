@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { Phone, Mail, MapPin, MessageCircle, Instagram, ArrowUpRight } from "lucide-react";
 import SEO from "@/components/SEO";
@@ -300,7 +301,7 @@ const OktoberfestMuenchen = () => {
           <LocalizedLink to="home" className="okt-brand" aria-label="STORIA">STORIA<span>.</span></LocalizedLink>
           <div className="okt-nav-right">
             <a href="tel:+498951519696" className="okt-nav-icon" aria-label="Anrufen" title="+49 89 51519696"><Phone size={16} /></a>
-            <a href="mailto:info@ristorantestoria.de" className="okt-nav-icon" aria-label="E-Mail" title="info@ristorantestoria.de"><Mail size={16} /></a>
+            <EmailLink className="okt-nav-icon" aria-label="E-Mail" title="info@ristorantestoria.de"><Mail size={16} /></EmailLink>
             <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="okt-nav-icon okt-nav-wa" aria-label="WhatsApp" title="WhatsApp" onClick={() => fireLead("oktoberfest_whatsapp")}><MessageCircle size={16} /></a>
             <a href="https://www.instagram.com/ristorante_storia/" target="_blank" rel="noopener noreferrer" className="okt-nav-icon" aria-label="Instagram" title="Instagram"><Instagram size={16} /></a>
             <span className="okt-nav-sep" aria-hidden="true" />

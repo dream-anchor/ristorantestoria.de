@@ -244,6 +244,7 @@ Allow: /
 
 # ─── GESCHÜTZTE BEREICHE ───
 Disallow: /admin
+Disallow: /admin/
 Disallow: /admin-login
 
 # ─── ALTE CMS-PFADE (WordPress) ───

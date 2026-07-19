@@ -1,4 +1,5 @@
 import LocalizedLink from "@/components/LocalizedLink";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
 import domenicoImage from "@/assets/domenico-speranza.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -119,10 +120,10 @@ const Footer = () => {
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   +49 89 51519696
                 </a>
-                <a href="mailto:info@ristorantestoria.de" className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
+                <EmailLink className="flex items-center justify-center md:justify-start gap-2.5 hover:text-primary-foreground transition-colors">
                   <Mail className="h-4 w-4" aria-hidden="true" />
-                  info@ristorantestoria.de
-                </a>
+                  <EmailAddress />
+                </EmailLink>
                 <a 
                   href="https://wa.me/491636033912" 
                   target="_blank" 
@@ -203,7 +204,6 @@ const Footer = () => {
               <Instagram className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Instagram</span>
             </a>
-            <a href="/admin/" rel="nofollow" className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground transition-colors">Admin</a>
           </div>
         </div>
       </div>

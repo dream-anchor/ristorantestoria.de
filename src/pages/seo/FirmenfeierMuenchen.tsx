@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -156,7 +157,7 @@ const FirmenfeierMuenchen = () => {
               <h2 className="text-2xl font-serif font-bold mb-4">{t.seo.firmenfeier.eventsCta}</h2>
               <p className="text-muted-foreground mb-6">{t.seo.firmenfeier.eventsCtaDesc}</p>
               <Button size="lg" asChild><a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{t.seo.firmenfeier.eventsCtaButton}</a></Button>
-              <p className="text-sm text-muted-foreground mt-6">{t.seo.firmenfeier.eventsContactNote}<br /><a href="tel:+498951519696" className="text-foreground hover:text-primary">089 51519696</a> · <a href="mailto:info@ristorantestoria.de" className="text-foreground hover:text-primary">info@ristorantestoria.de</a></p>
+              <p className="text-sm text-muted-foreground mt-6">{t.seo.firmenfeier.eventsContactNote}<br /><a href="tel:+498951519696" className="text-foreground hover:text-primary">089 51519696</a> · <EmailLink className="text-foreground hover:text-primary"><EmailAddress /></EmailLink></p>
             </section>
 
             {/* Event Types */}

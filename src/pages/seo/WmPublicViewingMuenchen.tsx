@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { Phone, Mail, MapPin, ArrowUpRight, Instagram, MessageCircle } from "lucide-react";
 import { Helmet } from "@/lib/helmetAsync";
@@ -183,9 +184,9 @@ const WmPublicViewingMuenchen = () => {
             <a href="tel:+498951519696" className="wm-nav-icon" aria-label="Anrufen +49 89 51519696" title="+49 89 51519696">
               <Phone size={16} />
             </a>
-            <a href="mailto:info@ristorantestoria.de" className="wm-nav-icon" aria-label="E-Mail an info@ristorantestoria.de" title="info@ristorantestoria.de">
+            <EmailLink className="wm-nav-icon" aria-label="E-Mail an info@ristorantestoria.de" title="info@ristorantestoria.de">
               <Mail size={16} />
-            </a>
+            </EmailLink>
             <a
               href="https://wa.me/491636033912"
               target="_blank"

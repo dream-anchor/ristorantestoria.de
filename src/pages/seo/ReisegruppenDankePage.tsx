@@ -9,7 +9,25 @@ import { CheckCircle, Star, Users, Languages, MapPin, Phone, ArrowLeft } from "l
 
 const ReisegruppenDankePage = () => {
   useEffect(() => {
-    trackEvent("lead_confirmation_view", { page_type: "reisegruppen_danke" });
+    // lead_confirmation_view genau EINMAL pro Anfrage feuern.
+    // Reloads der Danke-Seite dürfen das Event NICHT erneut auslösen (sonst
+    // überzählte Conversions). sessionStorage-Flag + Reload-Erkennung verhindern
+    // das Doppelfeuern; die lead_id ist anonym (keine PII, nur Zeit + Zufall).
+    const FIRED_KEY = "rg_danke_confirmation";
+    try {
+      const nav = performance.getEntriesByType?.("navigation")?.[0] as
+        | PerformanceNavigationTiming
+        | undefined;
+      const isReload = nav?.type === "reload";
+      if (isReload && sessionStorage.getItem(FIRED_KEY)) return;
+
+      const leadId = `rg-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+      sessionStorage.setItem(FIRED_KEY, leadId);
+      trackEvent("lead_confirmation_view", { page_type: "reisegruppen_danke", lead_id: leadId });
+    } catch {
+      // sessionStorage/performance nicht verfügbar → einmalig ohne Guard feuern.
+      trackEvent("lead_confirmation_view", { page_type: "reisegruppen_danke" });
+    }
   }, []);
 
   return (

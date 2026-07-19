@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -146,9 +147,9 @@ const Zahlungsinformationen = () => {
                 </a>
                 <br />
                 <strong>E-Mail:</strong>{" "}
-                <a href="mailto:info@ristorantestoria.de" className="text-primary hover:underline">
-                  info@ristorantestoria.de
-                </a>
+                <EmailLink className="text-primary hover:underline">
+                  <EmailAddress />
+                </EmailLink>
               </p>
             </section>
 

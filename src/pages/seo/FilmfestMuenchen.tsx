@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { Phone, Mail, MapPin, ArrowUpRight, Instagram, MessageCircle } from "lucide-react";
 import SEO from "@/components/SEO";
@@ -154,14 +155,13 @@ const FilmfestMuenchen = () => {
             >
               <Phone size={16} />
             </a>
-            <a
-              href="mailto:info@ristorantestoria.de"
+            <EmailLink
               className="ff-nav-icon"
               aria-label="E-Mail an info@ristorantestoria.de"
               title="info@ristorantestoria.de"
             >
               <Mail size={16} />
-            </a>
+            </EmailLink>
             <a
               href="https://wa.me/491636033912"
               target="_blank"
@@ -413,7 +413,7 @@ const FilmfestMuenchen = () => {
               <p className="ff-lead">{c.kontakt.lead}</p>
               <div className="ff-direct">
                 <a href="tel:+498951519696"><span className="ic"><Phone size={18} /></span><span><b>{c.kontakt.callLabel}</b>+49 89 51519696</span></a>
-                <a href={`mailto:info@ristorantestoria.de?subject=${c.kontakt.mailSubject}`}><span className="ic"><Mail size={18} /></span><span><b>{c.kontakt.mailLabel}</b>info@ristorantestoria.de</span></a>
+                <EmailLink subject={c.kontakt.mailSubject}><span className="ic"><Mail size={18} /></span><span><b>{c.kontakt.mailLabel}</b><EmailAddress /></span></EmailLink>
                 <a href="https://www.events-storia.de" target="_blank" rel="noopener noreferrer"><span className="ic"><ArrowUpRight size={18} /></span><span><b>{c.kontakt.platformLabel}</b>events-storia.de</span></a>
                 <a href="https://maps.google.com/?q=Ristorante+Storia+Karlstra%C3%9Fe+47a+M%C3%BCnchen" target="_blank" rel="noopener noreferrer"><span className="ic"><MapPin size={18} /></span><span><b>{c.kontakt.directionsLabel}</b>{c.kontakt.directionsValue}</span></a>
               </div>

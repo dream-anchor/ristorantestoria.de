@@ -243,7 +243,7 @@ RewriteRule ^ - [L]
 #      Diese Pfade existieren nur im React-Router und dürfen KEINE 404 liefern:
 #      Admin-Bereich, Double-Opt-in-Bestätigung (Link aus E-Mail!),
 #      Formular-Danke-Seite, Kampagnen-Kurz-URL /filmfest.
-RewriteRule ^admin(/.*)?$ index.html [L]
+RewriteRule ^admin(/.*)?$ admin/index.html [L]
 RewriteRule ^reisegruppen/danke/?$ index.html [L]
 RewriteRule ^newsletter-bestaetigen/?$ index.html [L]
 RewriteRule ^(en/confirm-newsletter|it/conferma-newsletter|fr/confirmation-newsletter)/?$ index.html [L]

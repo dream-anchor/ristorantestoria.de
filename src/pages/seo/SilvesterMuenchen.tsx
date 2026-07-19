@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -305,7 +306,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                   </Button>
                 )}
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" /> info@ristorantestoria.de</a>
+                  <EmailLink><Mail className="w-5 h-5 mr-2" /> <EmailAddress /></EmailLink>
                 </Button>
               </div>
               <p className="mt-6 text-white/70 text-sm">
@@ -352,7 +353,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                   <p className="text-muted-foreground mb-6">{s.standaloneInactiveDesc}</p>
                   <div className="flex flex-wrap justify-center gap-4">
                     <Button asChild><a href="tel:+498951519696"><Phone className="w-4 h-4 mr-2" /> 089 51519696</a></Button>
-                    <Button variant="outline" asChild><a href="mailto:info@ristorantestoria.de"><Mail className="w-4 h-4 mr-2" /> E-Mail</a></Button>
+                    <Button variant="outline" asChild><EmailLink><Mail className="w-4 h-4 mr-2" /> E-Mail</EmailLink></Button>
                     <Button variant="outline" asChild>
                       <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer"><MessageCircle className="w-4 h-4 mr-2" /> WhatsApp</a>
                     </Button>
@@ -396,7 +397,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               <p className="mt-6 opacity-80 text-sm"><PhoneText>{s.ctaBoxNote}</PhoneText></p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
-                <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> info@ristorantestoria.de</a>
+                <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
                 <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 text-[#25D366]"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
               </div>
             </section>
@@ -508,7 +509,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               <p className="mt-6 opacity-80 text-sm">{s.finalCtaAlt}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
-                <a href="mailto:info@ristorantestoria.de" className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> info@ristorantestoria.de</a>
+                <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
                 <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
               </div>
             </section>

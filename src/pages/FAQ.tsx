@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import Header from "@/components/Header";
@@ -206,10 +207,10 @@ const FAQ = () => {
                   </a>
                 </Button>
                 <Button asChild variant="outline">
-                  <a href="mailto:info@ristorantestoria.de" className="gap-2">
+                  <EmailLink className="gap-2">
                     <Mail className="h-4 w-4" />
                     E-Mail
-                  </a>
+                  </EmailLink>
                 </Button>
                 <Button asChild>
                   <LocalizedLink to="reservierung">

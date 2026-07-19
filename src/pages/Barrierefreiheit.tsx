@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
@@ -67,9 +68,9 @@ const Barrierefreiheit = () => {
                 <p>Theresienstra\u00dfe 56, 80333 M\u00fcnchen</p>
                 <p>
                   E-Mail:{" "}
-                  <a href="mailto:info@ristorantestoria.de" className="text-primary hover:underline">
-                    info@ristorantestoria.de
-                  </a>
+                  <EmailLink className="text-primary hover:underline">
+                    <EmailAddress />
+                  </EmailLink>
                 </p>
                 <p>
                   Telefon:{" "}

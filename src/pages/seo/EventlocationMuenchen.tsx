@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -128,7 +129,7 @@ const EventlocationMuenchen = () => {
                   <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />Jetzt anrufen</a>
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" />Anfrage senden</a>
+                  <EmailLink><Mail className="w-5 h-5 mr-2" />Anfrage senden</EmailLink>
                 </Button>
               </div>
               <p className="text-white/60 text-sm mt-4">Oder besuchen Sie unser Event-Portal: <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white hover:underline">events-storia.de</a></p>
@@ -158,7 +159,7 @@ const EventlocationMuenchen = () => {
                   <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" />E-Mail senden</a>
+                  <EmailLink><Mail className="w-5 h-5 mr-2" />E-Mail senden</EmailLink>
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground mt-6">
@@ -448,7 +449,7 @@ const EventlocationMuenchen = () => {
                   <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />089 51519696</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
-                  <a href="mailto:info@ristorantestoria.de"><Mail className="w-5 h-5 mr-2" />E-Mail senden</a>
+                  <EmailLink><Mail className="w-5 h-5 mr-2" />E-Mail senden</EmailLink>
                 </Button>
               </div>
               <div className="flex flex-wrap justify-center gap-4 mt-4 opacity-90">

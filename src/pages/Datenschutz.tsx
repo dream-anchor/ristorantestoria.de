@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -62,9 +63,9 @@ const Datenschutz = () => {
                   <PhoneText>+49 89 51519696</PhoneText>
                 </a><br />
                 E-Mail:{" "}
-                <a href="mailto:info@ristorantestoria.de" className="text-primary hover:underline">
-                  info@ristorantestoria.de
-                </a>
+                <EmailLink className="text-primary hover:underline">
+                  <EmailAddress />
+                </EmailLink>
               </p>
               <p className="mt-2">
                 <strong>Vertreten durch die Geschäftsführerin:</strong> Agnese Lettieri
