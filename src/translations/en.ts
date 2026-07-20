@@ -255,6 +255,7 @@ const enBase = {
     discoverRestaurant: "Discover our restaurant",
     eventsGroupsTitle: "Events & Groups",
     eventsGroupsLinks: [
+      { label: "Public Viewing Munich", slug: "public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Group Dining Munich", slug: "reisegruppen-muenchen" },
       { label: "Corporate Events Munich", slug: "firmenfeier-muenchen" },
@@ -3521,7 +3522,7 @@ const enBase = {
     "firmenfeier-muenchen": "corporate-event-munich",
     "oktoberfest-muenchen": "oktoberfest-munich",
     "filmfest-muenchen": "filmfest-muenchen",
-    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
+    "public-viewing-muenchen": "public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "birthday-party-munich",
     "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
     "wild-essen-muenchen": "game-dishes-munich",

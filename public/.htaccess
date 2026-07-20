@@ -181,6 +181,12 @@ RewriteRule ^it/occasioni-speciali/capodanno-party/?$ /it/occasioni-speciali/cap
 RewriteRule ^fr/occasions-speciales/silvesterparty/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/nouvel-an-party/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
 
+# WM 2026 Public Viewing → evergreen Public Viewing (nach dem Finale 19.7.2026 umgebaut)
+RewriteRule ^wm-2026-public-viewing-muenchen/?$ /public-viewing-muenchen/ [R=301,L]
+RewriteRule ^en/wm-2026-public-viewing-muenchen/?$ /en/public-viewing-muenchen/ [R=301,L]
+RewriteRule ^it/wm-2026-public-viewing-muenchen/?$ /it/public-viewing-muenchen/ [R=301,L]
+RewriteRule ^fr/wm-2026-public-viewing-muenchen/?$ /fr/public-viewing-muenchen/ [R=301,L]
+
 # ============================================
 # 8. Legal Pages — Nur DE
 # ============================================

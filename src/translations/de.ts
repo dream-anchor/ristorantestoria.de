@@ -253,7 +253,7 @@ export const de = {
     discoverRestaurant: "Unser Restaurant entdecken",
     eventsGroupsTitle: "Anlässe & Gruppen",
     eventsGroupsLinks: [
-      { label: "WM 2026 Public Viewing", slug: "wm-2026-public-viewing-muenchen" },
+      { label: "Public Viewing München", slug: "public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Restaurant für Reisegruppen", slug: "reisegruppen-muenchen" },
       { label: "Firmenfeier München", slug: "firmenfeier-muenchen" },
@@ -3603,7 +3603,7 @@ export const de = {
     "firmenfeier-muenchen": "firmenfeier-muenchen",
     "oktoberfest-muenchen": "oktoberfest-muenchen",
     "filmfest-muenchen": "filmfest-muenchen",
-    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
+    "public-viewing-muenchen": "public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
     "wild-essen-muenchen": "wild-essen-muenchen",
