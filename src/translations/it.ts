@@ -275,6 +275,7 @@ const itBase = {
     discoverRestaurant: "Scopri il nostro ristorante",
     eventsGroupsTitle: "Occasioni & Gruppi",
     eventsGroupsLinks: [
+      { label: "Public Viewing Monaco", slug: "public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Gruppi Turistici Monaco", slug: "reisegruppen-muenchen" },
       { label: "Feste Aziendali Monaco", slug: "firmenfeier-muenchen" },
@@ -3080,7 +3081,7 @@ const itBase = {
     "firmenfeier-muenchen": "evento-aziendale-monaco",
     "oktoberfest-muenchen": "oktoberfest-monaco",
     "filmfest-muenchen": "filmfest-muenchen",
-    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
+    "public-viewing-muenchen": "public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
     "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
     "wild-essen-muenchen": "selvaggina-monaco",

@@ -9,9 +9,10 @@
  * Solange ein Build im aktiven Zeitraum läuft, steht der interne Link crawlbar im HTML;
  * nach dem Enddatum blendet ihn der Client beim Rendern automatisch aus.
  *
- * ▸ AUFRÄUMEN NACH DER SAISON: Sobald beide Zeiträume vorbei sind, können die
- *   saisonalen Banner-/Hinweis-Komponenten entfernt werden. Die Event-Seiten selbst
- *   (wm-2026-public-viewing-muenchen, filmfest-muenchen) bleiben online.
+ * ▸ AUFRÄUMEN NACH DER SAISON: WmBanner + der WM-Zweig von ReservationSeasonalHints
+ *   wurden nach dem WM-2026-Finale bereits entfernt (die Zielseite public-viewing-muenchen
+ *   ist seitdem evergreen und läuft ohne Datums-Gate weiter). Der Filmfest-Zweig kann
+ *   analog entfernt werden, sobald auch dessen Saison endgültig vorbei ist.
  */
 
 // WM 2026: Eröffnung 11. Juni, Finale 19. Juli 2026 → Banner/Hinweise bis einschließlich 19.7.2026.
@@ -30,7 +31,7 @@ export const OKTOBERFEST_START = new Date("2026-08-15T00:00:00+02:00").getTime()
 export const OKTOBERFEST_END = new Date("2026-10-05T00:00:00+02:00").getTime(); // bis einschließlich 4.10.2026
 
 /** Interne Slugs der beiden Saison-Event-Seiten (für Footer-Filter etc.). */
-export const WM_SLUG = "wm-2026-public-viewing-muenchen";
+export const WM_SLUG = "public-viewing-muenchen";
 export const FILMFEST_SLUG = "filmfest-muenchen";
 export const OKTOBERFEST_SLUG = "oktoberfest-muenchen";
 
