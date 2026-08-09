@@ -5,7 +5,7 @@
 
 import postgres from 'postgres';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: '/Users/antoinemonot/Documents/Websites/VISUAL STUDIO CODE/ristorantestoria.de/.env', quiet: true });
+dotenv.config({ path: '/Users/antoinemonot/Developer/Websites/ristorantestoria.de/.env', quiet: true });
 
 const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL!;
 

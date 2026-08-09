@@ -1,7 +1,7 @@
 import postgres from "postgres";
 import dotenv from "dotenv";
 import { resolve } from "path";
-dotenv.config({ path: resolve("/Users/antoinemonot/Documents/Websites/VISUAL STUDIO CODE/ristorantestoria.de", ".env") });
+dotenv.config({ path: resolve("/Users/antoinemonot/Developer/Websites/ristorantestoria.de", ".env") });
 
 const sql = postgres(process.env.DATABASE_URL!, { ssl: "require" });
 

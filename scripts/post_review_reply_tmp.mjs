@@ -1,7 +1,7 @@
 import { createDecipheriv, createCipheriv, randomBytes } from 'crypto';
 import postgres from 'postgres';
 import { config } from 'dotenv';
-config({ path: '/Users/antoinemonot/Documents/Websites/VISUAL STUDIO CODE/ristorantestoria.de/.env' });
+config({ path: '/Users/antoinemonot/Developer/Websites/ristorantestoria.de/.env' });
 
 const ACCOUNT_ID = '114367954632843728381';
 const LOCATION_ID = '17586248070861131392';
