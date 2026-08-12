@@ -26,10 +26,12 @@ Die zehn Punkte gelten **projektübergreifend**, im Wortlaut von Antoine (12.08.
 
 **Umsetzung, Messungen und offene Punkte: `docs/ci/CI-KOSTEN-STANDARD.md`.** Drei Dinge daraus,
 die man ohne Lesen falsch macht:
-- **Alarme laufen über DISCORD** (Secret `DISCORD_WEBHOOK_URL`), nicht über Telegram. Die
-  Telegram-Secrets liegen noch im Repo, der Kanal wird aber nicht mehr gelesen — wer einen neuen
-  Workflow baut, alarmiert nach Discord und lässt den Schritt bei fehlendem Secret **laut**
-  scheitern statt still zu verpuffen.
+- **Es gibt keinen Melde-Kanal und kein Alarm-Secret. Wer etwas melden will, lässt den Job
+  scheitern** (`::error::` + `exit 1`). Zugestellt wird über GitHubs Standardbenachrichtigung
+  für fehlgeschlagene geplante Läufe. Kein `curl` an Telegram, Discord oder sonstwohin — ein
+  `curl -s` ohne `-f` endet mit 0, der Schritt bliebe grün, obwohl nichts ankam.
+  **Wer eine `cron`-Zeile ändert, wird laut GitHub-Doku zum Empfänger dieser Benachrichtigungen**
+  — das ist der Mechanismus, nicht ein Nebeneffekt.
 - **Dieses Repo ist öffentlich**, alle Jobs laufen auf Standard-Runnern — Actions-Minuten werden
   hier voraussichtlich gar nicht abgerechnet. Der Grund aufzuräumen ist die Verlässlichkeit der
   Melder, nicht die Rechnung.

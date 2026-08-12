@@ -50,20 +50,11 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
 
-      # Alarmkanal ist DISCORD (korrigiert 12.08.2026, vorher Telegram — wird nicht mehr gelesen).
-      - name: Discord Alert on Failure
-        if: failure()
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          set -euo pipefail
-          if [ -z "${DISCORD_WEBHOOK_URL:-}" ]; then
-            echo "::error::DISCORD_WEBHOOK_URL ist nicht gesetzt — der Alarm konnte NICHT zugestellt werden."
-            exit 1
-          fi
-          jq -nc \
-            --arg kopf "🔴 **GBP Menu Sync fehlgeschlagen** — ristorantestoria.de" \
-            --arg zeile "Trigger: ${{ github.event_name }}" \
-            --arg link "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            '{content: ($kopf + "\n" + $zeile + "\n" + $link)}' \
-            | curl -sS -f -X POST -H 'Content-Type: application/json' -d @- "$DISCORD_WEBHOOK_URL"
+      # ── Kein eigener Alarmschritt mehr (12.08.2026) ────────────────────────────────────
+      # Vorher meldete dieser Workflow nach Telegram — ein Kanal, der nicht mehr gelesen wird.
+      # Statt eines neuen Secrets ist jetzt der FEHLGESCHLAGENE JOB selbst der Alarm; zugestellt
+      # wird er ueber GitHubs Standardbenachrichtigung. Bedingung dafuer (GitHub-Doku,
+      # "Notifications for workflow runs"): Actions-Benachrichtigungen unter
+      # github.com/settings/notifications eingeschaltet, und bei geplanten Laeufen geht die
+      # Nachricht an den Nutzer, der die `cron`-Zeile zuletzt geaendert hat.
+      # Regel: docs/ci/CI-KOSTEN-STANDARD.md.

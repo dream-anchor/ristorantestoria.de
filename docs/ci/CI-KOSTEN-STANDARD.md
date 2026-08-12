@@ -59,18 +59,51 @@ Verlässlichkeit der Melder, nicht die Rechnung.**
 
 ---
 
-## Der Alarmkanal ist Discord
+## Der Alarm ist der fehlgeschlagene Job — kein eigener Alarmschritt, kein Secret
 
-Korrigiert am 12.08.2026 in allen vier alarmierenden Workflows (`uptime-monitor`,
-`deploy-ionos`, `fetch-reviews`, `sync-gbp-menu`). **Vorher ging jeder Alarm nach Telegram —
-ein Kanal, der nicht mehr gelesen wird.** Ein Melder, der in einen toten Kanal meldet, ist
-schlimmer als keiner: er erzeugt das Gefühl, überwacht zu sein.
+Umgestellt am 12.08.2026 in **allen sechs** Workflows mit Meldelogik (`uptime-monitor`,
+`deploy-ionos`, `fetch-reviews`, `sync-gbp-menu`, `gbp-routine`, `update-wm-fixtures`).
+**Vorher ging jeder Alarm nach Telegram — ein Kanal, der nicht mehr gelesen wird.** Ein Melder,
+der in einen toten Kanal meldet, ist schlimmer als keiner: er erzeugt das Gefühl, überwacht zu
+sein. Ein Webhook-Kanal kam nicht als Ersatz in Frage (Antoines Entscheidung 12.08.2026: kein
+Discord, kein neues Secret).
 
-Benötigtes Secret: **`DISCORD_WEBHOOK_URL`**. Fehlt es, wird der Alarmschritt **laut rot**
-(`::error::` + `exit 1`) statt still zu verpuffen.
+**Regel für neue Workflows: kein `curl` an irgendeinen Melder. Wer etwas melden will, lässt den
+Job scheitern** (`::error::` + `exit 1`). Ein stiller `curl -s` ohne `-f` endet mit 0 — der
+Schritt bleibt grün, obwohl nichts zugestellt wurde. Genau das lag hier sechsmal im Repo.
+
+### Was dafür stimmen muss — sonst trägt der Kanal nicht
+
+Laut GitHub-Doku („Notifications for workflow runs"):
+
+> „Notifications for scheduled workflows are sent to the user who initially created the
+> workflow." — und wer die `cron`-Syntax ändert, wird zum neuen Empfänger.
+
+Daraus folgen zwei Bedingungen, und **beide lagen hier im Argen**:
+
+1. **Actions-Benachrichtigungen müssen eingeschaltet sein** — `github.com/settings/notifications`,
+   Abschnitt „Actions", Haken bei E-Mail. Das ist eine **persönliche Kontoeinstellung** und aus
+   dem Repo heraus **nicht prüfbar**; es gibt dafür keinen API-Endpunkt.
+2. **Der Empfänger muss der Richtige sein.** Geprüft am 12.08.2026 über `git log`:
+
+| Workflow | Erstautor | Folge |
+|---|---|---|
+| `sync-gbp-menu.yml` | **`gpt-engineer-app[bot]`** (Lovable) | Benachrichtigungen gingen an einen **Bot**. Das erklärt, warum 14 rote Läufe in Folge niemandem auffielen |
+| `uptime-monitor.yml` | `antoinemonot@Antoines-MacBook-Pro-2.local` | eine **lokale Adresse ohne GitHub-Konto** — Empfänger unbestimmt |
+| `update-wm-fixtures.yml` | `info@monot.com` | korrekt zugeordnet |
+
+Deshalb wurden am 12.08.2026 die `cron`-Zeilen von `uptime-monitor` und `update-wm-fixtures`
+bewusst von `info@monot.com` angefasst — **das überträgt den Empfang**. Wer künftig einen
+Zeitplan ändert, übernimmt damit den Alarm. Das ist kein Nebeneffekt, sondern der Mechanismus.
+
+### Tote Secrets — können gelöscht werden
+
+Nach dieser Umstellung wird **keines** der beiden noch von irgendeinem Workflow benutzt
+(`grep -rn TELEGRAM .github/workflows/` → leer):
 
 ```bash
-gh secret set DISCORD_WEBHOOK_URL --repo dream-anchor/ristorantestoria.de
+gh secret delete TELEGRAM_BOT_TOKEN --repo dream-anchor/ristorantestoria.de
+gh secret delete TELEGRAM_CHAT_ID   --repo dream-anchor/ristorantestoria.de
 ```
 
 ---
@@ -112,13 +145,17 @@ Checks sind zudem nicht Teil des kostenlosen Tarifs. **Kein 1:1-Ersatz, nur eine
 |---|---|---|
 | Monitore | **50** | 10 |
 | Intervall | **5 Minuten** | nicht ausgewiesen |
-| Discord | **enthalten** (eine der 5 Integrationen) | **nicht** aufgeführt |
-| E-Mail | enthalten | enthalten |
+| E-Mail-Alarm | **enthalten** | enthalten |
 
-Better Stack führt auf der Preisseite für den kostenlosen Tarif nur „Slack & e-mail alerts" —
-damit fällt es für die Discord-Anforderung aus. UptimeRobot deckt mit 7 von 50 Monitoren und
-5-Minuten-Intervall alles ab, was hier gebraucht wird, und prüft von mehreren Standorten aus
-(das behebt zugleich den Runner-Artefakt-Fehlalarm, siehe unten).
+UptimeRobot deckt mit 7 von 50 Monitoren und 5-Minuten-Intervall alles ab, was hier gebraucht
+wird, und prüft von mehreren Standorten aus (das behebt zugleich den Runner-Artefakt-Fehlalarm,
+siehe unten).
+
+**Ehrlich offen:** die Preisseite weist E-Mail für den kostenlosen Tarif als enthalten aus,
+**nennt aber keine Zahl** für erlaubte Alarmkontakte und keine Angabe zu einer möglichen
+Verzögerung gegenüber bezahlten Tarifen. Beides ließ sich am 12.08.2026 aus den offiziellen
+Quellen **nicht** belegen — es wird hier deshalb nicht behauptet. Für den Bedarf (eine Adresse)
+ist das ohne Belang; der belastbare Nachweis ist ohnehin der Testmonitor unten.
 
 ### Was beim Anlegen einzutragen ist
 
@@ -134,8 +171,8 @@ https://www.trauworte.com/
 https://schrittmacher.ai/
 ```
 
-**Alarmkanäle:** Discord-Webhook (derselbe wie `DISCORD_WEBHOOK_URL`) **plus E-Mail als
-Rückfall**. Zwei Kanäle, weil ein Webhook stillschweigend ablaufen kann.
+**Alarmkanal: E-Mail, und zwar als einziger** (Antoines Festlegung 12.08.2026 — kein Discord,
+kein Webhook).
 
 **Nicht eintragen:** `https://www.schrittmacher.ai/` — dieser Host ist nicht eingerichtet und
 antwortet dauerhaft mit HTTP 530. Richtig ist `https://schrittmacher.ai/` (geprüft: 200).
@@ -143,8 +180,8 @@ antwortet dauerhaft mit HTTP 530. Richtig ist `https://schrittmacher.ai/` (gepr�
 ### Die Abschaltbedingung — nicht verhandelbar
 
 `uptime-monitor.yml` bleibt in Betrieb, **bis der Ersatz nachweislich alarmiert hat**. Nachweis =
-ein Discord-Alarm von UptimeRobot ist tatsächlich angekommen (Testmonitor auf eine garantiert
-tote Adresse genügt). Erst danach wird die Datei entfernt. Ein blinder Monitor ist teurer als
+eine **E-Mail** von UptimeRobot ist tatsächlich angekommen; ein Testmonitor auf eine garantiert
+tote Adresse genügt. Erst danach wird die Datei entfernt. Ein blinder Monitor ist teurer als
 die gesparten Minuten.
 
 ---

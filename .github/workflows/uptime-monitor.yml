@@ -2,8 +2,17 @@ name: Uptime Monitor (All Sites)
 
 on:
   schedule:
-    # Alle 30 Minuten prüfen
-    - cron: '*/30 * * * *'
+    # Alle 30 Minuten, aber VERSETZT statt zur vollen und halben Stunde (geändert 12.08.2026).
+    # Zwei Gründe, beide belegt:
+    # 1. GitHub empfiehlt ausdrücklich, Zeitpläne NICHT auf den Stundenanfang zu legen — dort
+    #    laufen die meisten Cron-Jobs der Plattform zusammen, und Actions-Zeitpläne sind
+    #    „best effort". Gemessen an 100 Läufen (08.–12.08.2026): konfiguriert 30 Minuten,
+    #    tatsächlich Median 55, Maximum 137, 39 von 99 Abständen über einer Stunde.
+    # 2. Wer die `cron`-Zeile ändert, wird laut GitHub-Doku zum EMPFÄNGER der Benachrichtigung
+    #    über fehlgeschlagene geplante Läufe — und die ist seit 12.08.2026 der einzige
+    #    Alarmkanal dieses Workflows (siehe Prüfschritt unten). Der erste Commit dieser Datei
+    #    trug eine lokale Adresse ohne GitHub-Konto; der Empfänger war damit unbestimmt.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -54,7 +63,7 @@ jobs:
 
           # Wenn nichts fehlgeschlagen: fertig
           if [ -z "$FAILED_FIRST" ]; then
-            echo "failed=false" >> $GITHUB_OUTPUT
+            echo "Alle Adressen erreichbar."
             exit 0
           fi
 
@@ -74,33 +83,25 @@ jobs:
             fi
           done
 
+          # ── Der Befund IST der Alarm (12.08.2026) ────────────────────────────────────────
+          # Es gibt bewusst keinen eigenen Alarmschritt mehr: kein Discord, kein Telegram,
+          # kein zusaetzliches Secret. Ein Ausfall laesst diesen Job FEHLSCHLAGEN; der Kanal
+          # ist GitHubs Standardbenachrichtigung fuer fehlgeschlagene geplante Laeufe.
+          #
+          # DAMIT DIESER KANAL TRAEGT, MUSS ZWEIERLEI STIMMEN (GitHub-Doku, "Notifications for
+          # workflow runs"): "Notifications for scheduled workflows are sent to the user who
+          # initially created the workflow" — und wer die `cron`-Zeile aendert, wird zum neuen
+          # Empfaenger. Zweitens muessen unter github.com/settings/notifications die
+          # Actions-Benachrichtigungen eingeschaltet sein.
+          # Deshalb wurde die `cron`-Zeile oben am 12.08.2026 bewusst von info@monot.com
+          # angefasst: der erste Commit dieser Datei (09.03.2026) trug die lokale Adresse
+          # antoinemonot@Antoines-MacBook-Pro-2.local, die zu keinem GitHub-Konto gehoert —
+          # der Empfaenger der Benachrichtigung war damit unbestimmt.
+          # WER HIER DEN ZEITPLAN AENDERT, UEBERNIMMT DEN ALARM. Das ist kein Nebeneffekt,
+          # sondern der Mechanismus.
           if [ -n "$FAILED" ]; then
-            echo "failed=true" >> $GITHUB_OUTPUT
-            echo "details=$FAILED" >> $GITHUB_OUTPUT
-          else
-            echo "failed=false" >> $GITHUB_OUTPUT
-          fi
-
-      # Alarmkanal ist DISCORD (korrigiert 12.08.2026). Vorher ging der Alarm nach Telegram —
-      # dieser Kanal wird nicht mehr gelesen, der Melder haette also ins Leere gemeldet.
-      - name: Discord Alert on Downtime
-        if: steps.check.outputs.failed == 'true'
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          set -euo pipefail
-          # Fehlt das Secret, wird der Schritt LAUT rot statt still nichts zu tun. Ein Melder,
-          # der im Ernstfall schweigt, ist schlimmer als gar keiner.
-          if [ -z "${DISCORD_WEBHOOK_URL:-}" ]; then
-            echo "::error::DISCORD_WEBHOOK_URL ist nicht gesetzt — der Ausfall-Alarm konnte NICHT zugestellt werden. Secret anlegen: gh secret set DISCORD_WEBHOOK_URL"
+            echo "::error::Site(s) dauerhaft offline:"
+            printf '%s' "$FAILED" | sed 's/%0A/\n/g'
             exit 1
           fi
-          # Die Ausgabe des Pruefschritts benutzt %0A als Zeilentrenner (Erbe des
-          # Telegram-Formats). Fuer Discord wird daraus ein echter Zeilenumbruch.
-          details=$(printf '%s' "${{ steps.check.outputs.details }}" | sed 's/%0A/\n/g')
-          jq -nc \
-            --arg kopf "🔴 **Site(s) dauerhaft offline!**" \
-            --arg details "$details" \
-            --arg link "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            '{content: ($kopf + "\n" + $details + "\n" + $link)}' \
-            | curl -sS -f -X POST -H 'Content-Type: application/json' -d @- "$DISCORD_WEBHOOK_URL"
+          echo "Alle Adressen erreichbar."
