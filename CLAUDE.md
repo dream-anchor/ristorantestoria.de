@@ -1,7 +1,7 @@
 # ristorantestoria.de
 
 ## CI-Kosten (LIES DIESE REGEL, BEVOR du einen Workflow anfasst)
-Die zehn Punkte gelten **projektübergreifend**, im Wortlaut von Antoine (12.08.2026):
+Die elf Punkte gelten **projektübergreifend**, im Wortlaut von Antoine (12.08.2026):
 
 1. Vor jeder Optimierung messen — GitHub-Usage-Report-CSV nach Repo/Workflow aggregieren, nie
    nach Vermutung optimieren; Vergleiche gegen vergleichbare Zeiträume, nicht gegen
@@ -23,6 +23,10 @@ Die zehn Punkte gelten **projektübergreifend**, im Wortlaut von Antoine (12.08.
 9. Budget-Alert aktiv halten.
 10. CI-Änderungen immer in EINEM PR, keine Fixup-Serie (jeder Push kostet einen Volllauf);
     Check-Zeilen, auf die Loops pollen, müssen weiter entstehen und grün werden.
+11. Bei geplanten Workflows gehen Fehlermeldungen an den Erstautor der cron-Zeile, nicht an den
+    Repo-Eigentümer. Nach dem Anlegen oder Übernehmen eines Workflows prüfen, wer das ist
+    (git log), und die cron-Zeile nötigenfalls unter der eigenen Adresse anfassen. Bot-Commits
+    (Lovable, gpt-engineer-app) erzeugen Workflows, deren Fehler an niemanden gehen.
 
 **Umsetzung, Messungen und offene Punkte: `docs/ci/CI-KOSTEN-STANDARD.md`.** Drei Dinge daraus,
 die man ohne Lesen falsch macht:

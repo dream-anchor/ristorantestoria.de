@@ -8,7 +8,7 @@ bewusst nicht versioniert).
 
 ---
 
-## Die zehn Punkte (Antoines Wortlaut, projektübergreifend für alle Repos)
+## Die elf Punkte (Antoines Wortlaut, projektübergreifend für alle Repos)
 
 > 1.  Vor jeder Optimierung messen — GitHub-Usage-Report-CSV nach Repo/Workflow
 >     aggregieren, nie nach Vermutung optimieren; Vergleiche gegen vergleichbare
@@ -32,6 +32,11 @@ bewusst nicht versioniert).
 > 10. CI-Änderungen immer in EINEM PR, keine Fixup-Serie (jeder Push kostet einen
 >     Volllauf); Check-Zeilen, auf die Loops pollen, müssen weiter entstehen und
 >     grün werden.
+> 11. Bei geplanten Workflows gehen Fehlermeldungen an den Erstautor der cron-
+>     Zeile, nicht an den Repo-Eigentümer. Nach dem Anlegen oder Übernehmen eines
+>     Workflows prüfen, wer das ist (git log), und die cron-Zeile nötigenfalls
+>     unter der eigenen Adresse anfassen. Bot-Commits (Lovable, gpt-engineer-app)
+>     erzeugen Workflows, deren Fehler an niemanden gehen.
 
 ---
 
@@ -49,6 +54,7 @@ bewusst nicht versioniert).
 | 8 | nicht anwendbar | 0 self-hosted Runner. **Achtung:** das Repo ist öffentlich mit `allow_forking: true` — käme je einer dazu, wäre er sofort über Fork-PRs erreichbar |
 | 9 | Konto-Ebene | nicht aus dem Repo prüfbar; der Billing-Endpunkt braucht den `user`-Scope |
 | 10 | erfüllt | alle Änderungen dieses Audits in einem PR |
+| 11 | **war verletzt, behoben** | vier von fünf geplanten Workflows meldeten an niemanden. Belege unten |
 
 **Wichtig für jede Kostenrechnung in diesem Repo:** es ist **öffentlich**
 (`private: false`, geprüft 12.08.2026), und alle Jobs laufen auf Standard-Runnern. GitHub
@@ -86,15 +92,42 @@ Daraus folgen zwei Bedingungen, und **beide lagen hier im Argen**:
    dem Repo heraus **nicht prüfbar**; es gibt dafür keinen API-Endpunkt.
 2. **Der Empfänger muss der Richtige sein.** Geprüft am 12.08.2026 über `git log`:
 
-| Workflow | Erstautor | Folge |
-|---|---|---|
-| `sync-gbp-menu.yml` | **`gpt-engineer-app[bot]`** (Lovable) | Benachrichtigungen gingen an einen **Bot**. Das erklärt, warum 14 rote Läufe in Folge niemandem auffielen |
-| `uptime-monitor.yml` | `antoinemonot@Antoines-MacBook-Pro-2.local` | eine **lokale Adresse ohne GitHub-Konto** — Empfänger unbestimmt |
-| `update-wm-fixtures.yml` | `info@monot.com` | korrekt zugeordnet |
+Vollständig nachgemessen am 12.08.2026 — für jeden geplanten Workflow der **erste** Commit
+(`git log --diff-filter=A`), und dazu über die API geprüft, welchem **GitHub-Konto** dieser
+Commit tatsächlich zugeordnet ist (`gh api repos/.../commits/<sha> --jq .author.login`):
 
-Deshalb wurden am 12.08.2026 die `cron`-Zeilen von `uptime-monitor` und `update-wm-fixtures`
-bewusst von `info@monot.com` angefasst — **das überträgt den Empfang**. Wer künftig einen
-Zeitplan ändert, übernimmt damit den Alarm. Das ist kein Nebeneffekt, sondern der Mechanismus.
+| Workflow | Erstautor laut git | GitHub-Konto |
+|---|---|---|
+| `uptime-monitor.yml` | `antoinemonot@Antoines-MacBook-Pro-2.local` | **NICHT ZUGEORDNET** |
+| `fetch-reviews.yml` | `antoinemonot@Antoines-MacBook-Pro-2.local` | **NICHT ZUGEORDNET** |
+| `gbp-routine.yml` | `antoinemonot@MacBookPro.fritz.box` | **NICHT ZUGEORDNET** |
+| `update-wm-fixtures.yml` | `info@monot.com` | **NICHT ZUGEORDNET** |
+| `sync-gbp-menu.yml` | `gpt-engineer-app[bot]` | **`lovable-dev[bot]`** |
+
+**Vier von fünf geplanten Workflows meldeten an niemanden, der fünfte an einen Bot.** Das ist
+die Erklärung dafür, dass 14 rote `sync-gbp-menu`-Läufe in Folge unbemerkt blieben — und der
+Grund, warum „der Job scheitert halt" als Kanal ohne diese Prüfung wertlos gewesen wäre.
+
+**Bemerkenswert und leicht zu übersehen: auch `info@monot.com` ist NICHT mit dem Konto
+verknüpft.** Wer lokal mit dieser Adresse committet, erzeugt unzugeordnete Commits. Verknüpft
+ist `antoine@monot.com` (geprüft am Merge-Commit `0240ade` → `author.login: dream-anchor`).
+
+### Was den Empfang tatsächlich überträgt
+
+**Nicht der Commit im Branch, sondern der Commit, der auf `main` landet.** Bei einem
+Squash-Merge über `gh pr merge --squash` erzeugt GitHub den Commit selbst und setzt als Autor
+die **primäre, verifizierte Adresse des mergenden Kontos** — hier `antoine@monot.com`, also
+sauber `dream-anchor` zugeordnet. Genau deshalb greift die Übertragung, obwohl die
+Branch-Commits mit `info@monot.com` unzugeordnet waren.
+
+Praktische Folge: **eine `cron`-Zeile über einen normalen PR anfassen genügt.** Wer stattdessen
+direkt auf `main` pusht, muss auf die eigene git-Konfiguration achten — mit einer nicht
+verknüpften Adresse geht der Empfang wieder verloren.
+
+Am 12.08.2026 so geschehen für `uptime-monitor` und `update-wm-fixtures`. **Offen bleiben
+`fetch-reviews` und `gbp-routine`** — beide haben unveränderte `cron`-Zeilen und melden damit
+weiterhin an niemanden. Sie sind hier bewusst nicht angefasst worden (kein Auftrag); wer sie
+das nächste Mal ohnehin bearbeitet, sollte die `cron`-Zeile mitnehmen.
 
 ### Tote Secrets — können gelöscht werden
 
