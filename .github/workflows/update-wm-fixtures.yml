@@ -10,8 +10,17 @@ name: Update WM Fixtures (Daily)
 
 on:
   schedule:
-    # 07:00 & 15:00 UTC – nach den nächtlichen K.o.-Spielen (Anstoß bis ~01:30 MESZ).
-    - cron: '0 7,15 * * *'
+    # EINMAL täglich, 07:00 UTC (Stand 12.08.2026). Gemessen wurden vorher 29 Läufe in 14 Tagen
+    # bei zweimal täglich (07:00 + 15:00) – jeder Lauf, der etwas ändert, zieht über
+    # `workflow_run` einen vollen Build + SFTP-Spiegel nach sich.
+    #
+    # WARUM EINMAL REICHT: es läuft gerade kein Turnier. Die WM endete am 19.07.2026, die
+    # 2. Bundesliga startete am 07.08., die Bundesliga folgt am 28.08., der DFB-Pokal vom
+    # 21.–24.08. Ausserhalb eines Turnierfensters ist das Script ohnehin ein No-Op (siehe oben).
+    #
+    # WIEDER HOCHDREHEN (eine Zeile): ab dem 20.08.2026 sind zwei Läufe wieder sinnvoll –
+    # dann die Zeile unten durch  - cron: '0 7,15 * * *'  ersetzen. Mehr ist nicht nötig.
+    - cron: '0 7 * * *'
   workflow_dispatch:
     inputs:
       force:
@@ -62,18 +71,18 @@ jobs:
           git commit -m "data: WM-2026-Paarungen automatisch nachgetragen ($(date +%Y-%m-%d))"
           git push
 
-      - name: Telegram – manuelle Aktion nötig
+      # ── Kein eigener Alarmschritt mehr (12.08.2026) ────────────────────────────────────
+      # Beide Telegram-Schritte sind entfallen — der Kanal wird nicht mehr gelesen, und die
+      # Secrets werden geloescht. Ein `curl` gegen eine tote Bot-Adresse haette hier
+      # STILLSCHWEIGEND nichts getan (`curl -s` ohne `-f` endet mit 0), der Schritt waere gruen
+      # geblieben. Genau diese Sorte Melder ist schlimmer als keiner.
+      #
+      # Der "manuelle Aktion noetig"-Fall meldet sich jetzt, indem der Job FEHLSCHLAEGT: nur so
+      # entsteht ueberhaupt eine Benachrichtigung. Die Liste steht in der Fehlermeldung.
+      - name: Manuelle Aktion noetig? Dann laut scheitern.
         if: steps.update.outputs.manual != ''
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d parse_mode="HTML" \
-            --data-urlencode "text=🟡 <b>WM-Paarung manuell nachtragen</b>%0A%0AFolgende Teams stehen fest, konnten aber nicht automatisch zugeordnet werden (Nation fehlt in der Tabelle):%0A%0A${{ steps.update.outputs.manual }}%0A%0ABitte in <code>src/pages/seo/wmTeams.json</code> ergänzen (Nation in scripts/wm-nations.mjs aufnehmen)."
-
-      - name: Telegram Alert on Failure
-        if: failure()
-        run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d parse_mode="HTML" \
-            -d text="🔴 <b>WM-Fixtures-Update fehlgeschlagen</b>%0A%0ARepo: ristorantestoria.de%0ATrigger: ${{ github.event_name }}%0A%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Logs ansehen</a>"
+          echo "::error::WM-Paarung manuell nachtragen — diese Teams stehen fest, konnten aber nicht automatisch zugeordnet werden (Nation fehlt in der Tabelle):"
+          printf '%s' "${{ steps.update.outputs.manual }}" | sed 's/%0A/\n/g'
+          echo "Bitte in src/pages/seo/wmTeams.json ergaenzen (Nation in scripts/wm-nations.mjs aufnehmen)."
+          exit 1

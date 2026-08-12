@@ -51,10 +51,11 @@ jobs:
           git commit -m "data: Google Reviews aktualisiert ($(date +%Y-%m-%d))"
           git push
 
-      - name: Telegram Alert on Failure
-        if: failure()
-        run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d parse_mode="HTML" \
-            -d text="🔴 <b>Reviews-Fetch fehlgeschlagen</b>%0A%0ARepo: ristorantestoria.de%0ATrigger: ${{ github.event_name }}%0A%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Logs ansehen</a>"
+      # ── Kein eigener Alarmschritt mehr (12.08.2026) ────────────────────────────────────
+      # Vorher meldete dieser Workflow nach Telegram — ein Kanal, der nicht mehr gelesen wird.
+      # Statt eines neuen Secrets ist jetzt der FEHLGESCHLAGENE JOB selbst der Alarm; zugestellt
+      # wird er ueber GitHubs Standardbenachrichtigung. Bedingung dafuer (GitHub-Doku,
+      # "Notifications for workflow runs"): Actions-Benachrichtigungen unter
+      # github.com/settings/notifications eingeschaltet, und bei geplanten Laeufen geht die
+      # Nachricht an den Nutzer, der die `cron`-Zeile zuletzt geaendert hat.
+      # Regel: docs/ci/CI-KOSTEN-STANDARD.md.

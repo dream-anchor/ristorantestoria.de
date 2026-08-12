@@ -1,5 +1,43 @@
 # ristorantestoria.de
 
+## CI-Kosten (LIES DIESE REGEL, BEVOR du einen Workflow anfasst)
+Die zehn Punkte gelten **projektübergreifend**, im Wortlaut von Antoine (12.08.2026):
+
+1. Vor jeder Optimierung messen — GitHub-Usage-Report-CSV nach Repo/Workflow aggregieren, nie
+   nach Vermutung optimieren; Vergleiche gegen vergleichbare Zeiträume, nicht gegen
+   Monatsschnitte.
+2. Jeder Job braucht timeout-minutes (GitHub-Default sonst 360 Min).
+3. concurrency mit group je Ref, cancel-in-progress für pull_request.
+4. Kein voller Nachlauf auf main nach Squash-Merge, wenn der Tree identisch ist: push auf main
+   fährt nur Smoke (filter + typecheck), volle Suite über nächtlichen Cron.
+5. Jeder Job kostet ca. 1,5 Min Fixkosten (Rüstzeit + Aufrundung auf ganze Minuten) — Sharding
+   nur so weit, wie Wall-Clock es zwingend braucht.
+6. Doku-/Asset-Pfade per paths-ignore ausnehmen — aber nicht, wenn dadurch eine Check-Zeile
+   entfällt, auf die Loops pollen; dann stattdessen ein Filter-Job, der in Sekunden durchläuft
+   und die Zeile grün setzt.
+7. Cron-Monitoring (Uptime, Health, Pings) gehört NICHT in Actions, sondern zu Cloudflare Health
+   Checks o. ä.
+8. Self-hosted Runner nur mit Online-Check und Auto-Fallback auf ubuntu-latest (offline Runner
+   lassen Jobs bis 22 h in der Queue hängen statt zu scheitern) und nie für pull_request, solange
+   Fork-PRs möglich sind.
+9. Budget-Alert aktiv halten.
+10. CI-Änderungen immer in EINEM PR, keine Fixup-Serie (jeder Push kostet einen Volllauf);
+    Check-Zeilen, auf die Loops pollen, müssen weiter entstehen und grün werden.
+
+**Umsetzung, Messungen und offene Punkte: `docs/ci/CI-KOSTEN-STANDARD.md`.** Drei Dinge daraus,
+die man ohne Lesen falsch macht:
+- **Es gibt keinen Melde-Kanal und kein Alarm-Secret. Wer etwas melden will, lässt den Job
+  scheitern** (`::error::` + `exit 1`). Zugestellt wird über GitHubs Standardbenachrichtigung
+  für fehlgeschlagene geplante Läufe. Kein `curl` an Telegram, Discord oder sonstwohin — ein
+  `curl -s` ohne `-f` endet mit 0, der Schritt bliebe grün, obwohl nichts ankam.
+  **Wer eine `cron`-Zeile ändert, wird laut GitHub-Doku zum Empfänger dieser Benachrichtigungen**
+  — das ist der Mechanismus, nicht ein Nebeneffekt.
+- **Dieses Repo ist öffentlich**, alle Jobs laufen auf Standard-Runnern — Actions-Minuten werden
+  hier voraussichtlich gar nicht abgerechnet. Der Grund aufzuräumen ist die Verlässlichkeit der
+  Melder, nicht die Rechnung.
+- **`uptime-monitor.yml` wird erst entfernt, wenn der Ersatz (UptimeRobot) nachweislich
+  alarmiert hat.** Ein blinder Monitor ist teurer als die gesparten Minuten.
+
 ## Bildbearbeitung / Bildgenerierung (projektübergreifend)
 **IMMER über OpenRouter** (erreichbar via Composio). Nicht Pixelcut/Higsfield für Bild-Edits nutzen.
 Bild-zu-Bild-Editing (z. B. Fotos anpassen) läuft über OpenRouter-Bildmodelle (z. B. Gemini Flash Image / „nano-banana").

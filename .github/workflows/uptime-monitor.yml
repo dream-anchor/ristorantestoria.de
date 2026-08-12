@@ -2,8 +2,17 @@ name: Uptime Monitor (All Sites)
 
 on:
   schedule:
-    # Alle 30 Minuten prüfen
-    - cron: '*/30 * * * *'
+    # Alle 30 Minuten, aber VERSETZT statt zur vollen und halben Stunde (geändert 12.08.2026).
+    # Zwei Gründe, beide belegt:
+    # 1. GitHub empfiehlt ausdrücklich, Zeitpläne NICHT auf den Stundenanfang zu legen — dort
+    #    laufen die meisten Cron-Jobs der Plattform zusammen, und Actions-Zeitpläne sind
+    #    „best effort". Gemessen an 100 Läufen (08.–12.08.2026): konfiguriert 30 Minuten,
+    #    tatsächlich Median 55, Maximum 137, 39 von 99 Abständen über einer Stunde.
+    # 2. Wer die `cron`-Zeile ändert, wird laut GitHub-Doku zum EMPFÄNGER der Benachrichtigung
+    #    über fehlgeschlagene geplante Läufe — und die ist seit 12.08.2026 der einzige
+    #    Alarmkanal dieses Workflows (siehe Prüfschritt unten). Der erste Commit dieser Datei
+    #    trug eine lokale Adresse ohne GitHub-Konto; der Empfänger war damit unbestimmt.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,6 +24,11 @@ jobs:
       - name: Check all sites (1. Durchlauf)
         id: check
         run: |
+          # ── Adressliste, korrigiert am 12.08.2026 ────────────────────────────────────────
+          # Vorher stand hier "https://www.schrittmacher.ai/". Dieser Host ist NICHT
+          # eingerichtet und antwortet dauerhaft mit HTTP 530 (Cloudflare) — der Dienst selbst
+          # laeuft: schrittmacher.ai = 200, storia.schrittmacher.ai = 200 (geprueft 12.08.2026).
+          # Der Monitor hat damit bei JEDEM Lauf einen Ausfall gemeldet, der keiner war.
           SITES=(
             "https://www.ristorantestoria.de/"
             "https://events-storia.de/"
@@ -22,12 +36,23 @@ jobs:
             "https://www.franzmeiller.com/"
             "https://www.stefaniesick.com/"
             "https://www.trauworte.com/"
-            "https://www.schrittmacher.ai/"
+            "https://schrittmacher.ai/"
           )
 
           FAILED_FIRST=""
           for site in "${SITES[@]}"; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$site" || echo "000")
+            # --retry/--max-time seit 12.08.2026 grosszuegiger: www.franzmeiller.com meldete aus
+            # den GitHub-Runnern heraus dauerhaft "000" (Verbindung kam nicht zustande),
+            # antwortet von aussen aber in 0,15 s mit HTTP 200 (geprueft 12.08.2026). Die
+            # Ursache ist NICHT geklaert — es ist ein Runner-seitiges Netzproblem, kein
+            # Ausfall der Seite. Ein einzelner Fehlversuch darf deshalb nicht sofort den
+            # 3-Minuten-Zweig ausloesen. Endgueltig behoben wird das erst mit dem Umzug zu
+            # einem echten Uptime-Dienst, der von mehreren Standorten prueft (docs/ci/CI-KOSTEN-STANDARD.md Punkt 7).
+            #
+            # `|| echo 000` ist entfallen: curl schreibt bei Verbindungsfehlern bereits "000",
+            # der zusaetzliche echo haengte ein zweites an -> die Logs zeigten "HTTP 000000".
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 --retry 2 --retry-delay 3 "$site")
+            STATUS=${STATUS:-000}
             if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
               echo "✅ $site — HTTP $STATUS"
             else
@@ -38,7 +63,7 @@ jobs:
 
           # Wenn nichts fehlgeschlagen: fertig
           if [ -z "$FAILED_FIRST" ]; then
-            echo "failed=false" >> $GITHUB_OUTPUT
+            echo "Alle Adressen erreichbar."
             exit 0
           fi
 
@@ -48,7 +73,8 @@ jobs:
 
           FAILED=""
           for site in $FAILED_FIRST; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$site" || echo "000")
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 --retry 2 --retry-delay 3 "$site")
+            STATUS=${STATUS:-000}
             if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
               echo "✅ $site — nach Retry wieder OK"
             else
@@ -57,17 +83,25 @@ jobs:
             fi
           done
 
+          # ── Der Befund IST der Alarm (12.08.2026) ────────────────────────────────────────
+          # Es gibt bewusst keinen eigenen Alarmschritt mehr: kein Discord, kein Telegram,
+          # kein zusaetzliches Secret. Ein Ausfall laesst diesen Job FEHLSCHLAGEN; der Kanal
+          # ist GitHubs Standardbenachrichtigung fuer fehlgeschlagene geplante Laeufe.
+          #
+          # DAMIT DIESER KANAL TRAEGT, MUSS ZWEIERLEI STIMMEN (GitHub-Doku, "Notifications for
+          # workflow runs"): "Notifications for scheduled workflows are sent to the user who
+          # initially created the workflow" — und wer die `cron`-Zeile aendert, wird zum neuen
+          # Empfaenger. Zweitens muessen unter github.com/settings/notifications die
+          # Actions-Benachrichtigungen eingeschaltet sein.
+          # Deshalb wurde die `cron`-Zeile oben am 12.08.2026 bewusst von info@monot.com
+          # angefasst: der erste Commit dieser Datei (09.03.2026) trug die lokale Adresse
+          # antoinemonot@Antoines-MacBook-Pro-2.local, die zu keinem GitHub-Konto gehoert —
+          # der Empfaenger der Benachrichtigung war damit unbestimmt.
+          # WER HIER DEN ZEITPLAN AENDERT, UEBERNIMMT DEN ALARM. Das ist kein Nebeneffekt,
+          # sondern der Mechanismus.
           if [ -n "$FAILED" ]; then
-            echo "failed=true" >> $GITHUB_OUTPUT
-            echo "details=$FAILED" >> $GITHUB_OUTPUT
-          else
-            echo "failed=false" >> $GITHUB_OUTPUT
+            echo "::error::Site(s) dauerhaft offline:"
+            printf '%s' "$FAILED" | sed 's/%0A/\n/g'
+            exit 1
           fi
-
-      - name: Telegram Alert on Downtime
-        if: steps.check.outputs.failed == 'true'
-        run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d parse_mode="HTML" \
-            -d text="🔴 <b>Site(s) dauerhaft offline!</b>%0A%0A${{ steps.check.outputs.details }}%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Details</a>"
+          echo "Alle Adressen erreichbar."

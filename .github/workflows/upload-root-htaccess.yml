@@ -6,6 +6,13 @@ on:
 jobs:
   upload:
     runs-on: ubuntu-latest
+    # 10 Minuten (12.08.2026). Der Job laedt EINE Datei per SFTP hoch; er lief im gemessenen
+    # Fenster 29.07.–12.08.2026 kein einziges Mal, deshalb gibt es keinen eigenen Messwert.
+    # Zum Vergleich: der vollstaendige Deploy inklusive Build und Spiegel braucht ø 93 s.
+    # WARUM UEBERHAUPT EIN DECKEL: ohne `timeout-minutes` gilt GitHubs Vorgabe von 360 Minuten —
+    # ein haengender SFTP-Aufruf blockiert sonst sechs Stunden lang einen Laeufer.
+    # Regel: docs/ci/CI-KOSTEN-STANDARD.md Punkt 2.
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
