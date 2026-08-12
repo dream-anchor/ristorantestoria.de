@@ -10,8 +10,17 @@ name: Update WM Fixtures (Daily)
 
 on:
   schedule:
-    # 07:00 & 15:00 UTC – nach den nächtlichen K.o.-Spielen (Anstoß bis ~01:30 MESZ).
-    - cron: '0 7,15 * * *'
+    # EINMAL täglich, 07:00 UTC (Stand 12.08.2026). Gemessen wurden vorher 29 Läufe in 14 Tagen
+    # bei zweimal täglich (07:00 + 15:00) – jeder Lauf, der etwas ändert, zieht über
+    # `workflow_run` einen vollen Build + SFTP-Spiegel nach sich.
+    #
+    # WARUM EINMAL REICHT: es läuft gerade kein Turnier. Die WM endete am 19.07.2026, die
+    # 2. Bundesliga startete am 07.08., die Bundesliga folgt am 28.08., der DFB-Pokal vom
+    # 21.–24.08. Ausserhalb eines Turnierfensters ist das Script ohnehin ein No-Op (siehe oben).
+    #
+    # WIEDER HOCHDREHEN (eine Zeile): ab dem 20.08.2026 sind zwei Läufe wieder sinnvoll –
+    # dann die Zeile unten durch  - cron: '0 7,15 * * *'  ersetzen. Mehr ist nicht nötig.
+    - cron: '0 7 * * *'
   workflow_dispatch:
     inputs:
       force:

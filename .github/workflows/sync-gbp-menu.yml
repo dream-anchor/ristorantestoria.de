@@ -1,9 +1,30 @@
-name: Sync GBP Menu (Daily)
+name: Sync GBP Menu (pausiert)
 
+# ── PAUSIERT SEIT 12.08.2026 — der Zeitplan ist bewusst abgeschaltet ─────────────────────────
+# GRUND: der Lauf scheiterte in 14 von 14 Läufen (gemessen 29.07.–12.08.2026), immer an
+# derselben Stelle:
+#
+#     Error: Refresh failed (400): {"error": "invalid_grant", "error_description": "Bad Request"}
+#
+# Das Google-OAuth-Refresh-Token ist abgelaufen oder zurückgezogen. Der Workflow hat einen
+# Alarm bei `failure()` — er hat also täglich um 09:00 UTC eine Fehlermeldung geschickt, ohne
+# jemals etwas zu synchronisieren. Ein Melder, der jeden Tag dasselbe meldet, wird nicht mehr
+# gelesen; genau das macht einen echten Fehler unsichtbar.
+#
+# ZUM REAKTIVIEREN (in dieser Reihenfolge):
+#   1. Google-OAuth-Refresh-Token für das Business Profile neu erzeugen und im Repo hinterlegen
+#      (die Token liegen verschlüsselt in der Datenbank, entschlüsselt mit
+#      GBP_TOKEN_ENCRYPTION_KEY — siehe scripts/sync-gbp-menu.ts und CLAUDE.md § GBP API).
+#   2. EINEN Lauf von Hand anstoßen: Actions → "Sync GBP Menu" → Run workflow.
+#      `workflow_dispatch` ist absichtlich erhalten geblieben, damit das ohne PR geht.
+#   3. Erst wenn dieser Lauf grün ist, die `schedule`-Zeile unten wieder einkommentieren.
+#
+# NICHT einfach den Zeitplan wieder anschalten und hoffen — das Ergebnis wäre wieder ein
+# täglicher Fehlalarm.
 on:
-  schedule:
-    # Täglich um 09:00 UTC (10:00 Uhr MEZ / 11:00 Uhr MESZ)
-    - cron: '0 9 * * *'
+  # schedule:
+  #   # Täglich um 09:00 UTC (10:00 Uhr MEZ / 11:00 Uhr MESZ)
+  #   - cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:
@@ -29,10 +50,20 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GBP_TOKEN_ENCRYPTION_KEY: ${{ secrets.GBP_TOKEN_ENCRYPTION_KEY }}
 
-      - name: Telegram Alert on Failure
+      # Alarmkanal ist DISCORD (korrigiert 12.08.2026, vorher Telegram — wird nicht mehr gelesen).
+      - name: Discord Alert on Failure
         if: failure()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            -d parse_mode="HTML" \
-            -d text="🔴 <b>GBP Menu Sync fehlgeschlagen</b>%0A%0ARepo: ristorantestoria.de%0ATrigger: ${{ github.event_name }}%0A%0A<a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">→ Logs ansehen</a>"
+          set -euo pipefail
+          if [ -z "${DISCORD_WEBHOOK_URL:-}" ]; then
+            echo "::error::DISCORD_WEBHOOK_URL ist nicht gesetzt — der Alarm konnte NICHT zugestellt werden."
+            exit 1
+          fi
+          jq -nc \
+            --arg kopf "🔴 **GBP Menu Sync fehlgeschlagen** — ristorantestoria.de" \
+            --arg zeile "Trigger: ${{ github.event_name }}" \
+            --arg link "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            '{content: ($kopf + "\n" + $zeile + "\n" + $link)}' \
+            | curl -sS -f -X POST -H 'Content-Type: application/json' -d @- "$DISCORD_WEBHOOK_URL"
