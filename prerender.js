@@ -416,7 +416,9 @@ async function generateRoutesToPrerender() {
   const manualRoutes = [
     "/mittags-menu",
     "/speisekarte",
-    "/getraenke"
+    "/getraenke",
+    // Interne Widget-Testseite (noindex, nicht in slugs.json/Sitemap)
+    "/test"
     // Add translations if needed, e.g. "/en/lunch-menu"
   ];
   routes.push(...manualRoutes);

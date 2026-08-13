@@ -59,6 +59,8 @@ import ReisegruppenPage from "./pages/seo/ReisegruppenPage";
 import ReisegruppenDankePage from "./pages/seo/ReisegruppenDankePage";
 import FAQ from "./pages/FAQ";
 import NewsletterBestaetigung from "./pages/NewsletterBestaetigung";
+// Interne Widget-Testseite (/test, noindex, nicht in slugs.json/Sitemap)
+import TestWidget from "./pages/TestWidget";
 
 // Eager: Legal-Seiten (müssen pre-rendered werden)
 import Impressum from "./pages/Impressum";
@@ -228,6 +230,10 @@ const AppRoutes = () => {
 
         {/* /italiener-muenchen → / : echter 301 via public/.htaccess (Keyword-Konsolidierung,
             alle Sprachversionen). Server-Redirect ist die einzige Quelle – keine SPA-Navigate-Route mehr. */}
+
+        {/* Interne Testseite für Widget-Einbindungen (noindex) */}
+        <Route path="/test" element={<TestWidget />} />
+        <Route path="/test/" element={<TestWidget />} />
 
         {/* Thank-you page after group inquiry form submit */}
         <Route path="/reisegruppen/danke" element={<ReisegruppenDankePage />} />
