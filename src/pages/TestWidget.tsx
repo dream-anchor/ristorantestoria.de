@@ -13,7 +13,8 @@ import heroImage from "@/assets/ristorante-storia-uebersicht.webp";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { FACTS } from "@/config/facts";
 
-const WIDGET_SRC = "https://storia.schrittmacher.ai/api/public/widgets/v1/maestro.js";
+const WIDGET_API = "https://storia.schrittmacher.ai";
+const WIDGET_SRC = `${WIDGET_API}/api/public/widgets/v1/maestro.js`;
 const WIDGET_ID = "b61887bf-7f94-4e2c-a4cb-0615c7aa20e5";
 
 type ScriptState = "idle" | "loading" | "loaded" | "error";
@@ -173,8 +174,10 @@ const TestWidget = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {/* Einbindungspunkt des Widgets */}
-                  <div data-maestro-widget={WIDGET_ID} />
+                  {/* Einbindungspunkt des Widgets.
+                      data-maestro-api setzt die API-Basis explizit; der Loader würde sie sonst
+                      aus document.currentScript.src ableiten — eine Variable weniger beim Testen. */}
+                  <div data-maestro-widget={WIDGET_ID} data-maestro-api={WIDGET_API} />
                 </CardContent>
               </Card>
             </div>
