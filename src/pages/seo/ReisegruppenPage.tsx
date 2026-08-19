@@ -51,6 +51,16 @@ const ReisegruppenPage = () => {
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
 
+  const scrollToGroupInquiry = () => {
+    document.getElementById("gruppenanfrage")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    trackEvent("form_cta_click", {
+      page_path: window.location.pathname,
+      page_type: "reisegruppen",
+      placement: "hero",
+      ...utmParams,
+    });
+  };
+
   // Scroll-depth tracking: fires at 25 / 50 / 75 / 100 %
   useEffect(() => {
     const thresholds = [25, 50, 75, 100];
@@ -387,11 +397,12 @@ const ReisegruppenPage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
+                  type="button"
                   size="lg"
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
-                  asChild
+                  onClick={scrollToGroupInquiry}
                 >
-                  <a href="#gruppenanfrage">{rg.heroCta1}</a>
+                  {rg.heroCta1}
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
                   <a href="#gruppenmenus">{rg.heroCta2}</a>
