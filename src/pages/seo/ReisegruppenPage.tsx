@@ -733,7 +733,7 @@ const ReisegruppenPage = () => {
           <GoogleReviews />
 
           {/* SECTION 10: CTA Kontakt */}
-          <section className="py-16 md:py-20 bg-primary text-primary-foreground">
+          <section id="gruppenanfrage" className="py-16 md:py-20 bg-primary text-primary-foreground scroll-mt-24">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
                 {rg.ctaTitle}
@@ -746,14 +746,14 @@ const ReisegruppenPage = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <EmailLink
-                    subject={rg.emailSubject}
+                  <a
+                    href="#gruppenanfrage-formular"
                     onClick={() => {
                       trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
                     }}
                   >
                     {rg.ctaEmail}
-                  </EmailLink>
+                  </a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
                   <a
@@ -774,7 +774,9 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
-              <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" />
+              <div id="gruppenanfrage-formular" className="mt-10 scroll-mt-24 text-left">
+                <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" />
+              </div>
             </div>
           </section>
 
