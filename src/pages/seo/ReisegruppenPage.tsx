@@ -797,7 +797,7 @@ const ReisegruppenPage = () => {
                 </EmailLink>
               </p>
               <div id="gruppenanfrage-formular" className="mt-10 scroll-mt-24 text-left">
-                <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" />
+                <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" primaryColor="#8a2019" />
               </div>
             </div>
           </section>

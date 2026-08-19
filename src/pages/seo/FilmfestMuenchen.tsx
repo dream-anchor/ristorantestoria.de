@@ -419,7 +419,7 @@ const FilmfestMuenchen = () => {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <MaestroWidget widgetId="54621f68-6849-485a-92e4-04ad9a69524e" />
+              <MaestroWidget widgetId="54621f68-6849-485a-92e4-04ad9a69524e" primaryColor="#8a2019" />
             </Reveal>
           </div>
           <div className="ff-wrap ff-faq" id="faq">
