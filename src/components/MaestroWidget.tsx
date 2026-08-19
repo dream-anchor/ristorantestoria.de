@@ -20,24 +20,54 @@ const MaestroWidget = ({ widgetId, className }: MaestroWidgetProps) => {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    if (!document.querySelector(`script[src="${MAESTRO_SRC}"]`)) {
-      const script = document.createElement("script");
-      script.src = MAESTRO_SRC;
-      script.defer = true;
-      document.body.appendChild(script);
+    const host = hostRef.current;
+    if (!host) return;
+
+    // Der Loader läuft nur einmal pro Dokument und überspringt bereits
+    // initialisierte Container. Bei SPA-Navigation muss er daher erneut
+    // angestoßen werden, damit neu gemountete Container erkannt werden.
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${MAESTRO_SRC}"]`);
+    existing?.remove();
+    delete (window as unknown as Record<string, unknown>).__maestroWidgetLoader;
+
+    const script = document.createElement("script");
+    script.src = MAESTRO_SRC;
+    script.defer = true;
+    script.addEventListener("error", () => setFailed(true));
+    document.body.appendChild(script);
+
+    // Sicherheitsnetz: Das Widget lädt erst, wenn es in den Viewport kommt.
+    // Bleibt es danach leer, zeigen wir Direktkontakte, damit nie ein leerer
+    // Anfragebereich stehen bleibt.
+    let timer = 0;
+    const startWatch = () => {
+      timer = window.setTimeout(() => {
+        const rendered = !!host.shadowRoot || host.childElementCount > 0;
+        if (!rendered) setFailed(true);
+      }, 8000);
+    };
+
+    let observer: IntersectionObserver | undefined;
+    if (typeof IntersectionObserver === "function") {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer?.disconnect();
+            startWatch();
+          }
+        },
+        { rootMargin: "200px" },
+      );
+      observer.observe(host);
+    } else {
+      startWatch();
     }
 
-    // Sicherheitsnetz: Rendert das externe Widget nicht, zeigen wir Direktkontakte,
-    // damit nie ein leerer Anfragebereich stehen bleibt.
-    const timer = window.setTimeout(() => {
-      const host = hostRef.current;
-      if (!host) return;
-      const rendered = !!host.shadowRoot || host.childElementCount > 0;
-      if (!rendered) setFailed(true);
-    }, 6000);
-
-    return () => window.clearTimeout(timer);
-  }, []);
+    return () => {
+      observer?.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, [widgetId]);
 
   return (
     <div className={className}>
