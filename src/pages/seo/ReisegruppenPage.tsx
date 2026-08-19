@@ -391,9 +391,7 @@ const ReisegruppenPage = () => {
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
                   asChild
                 >
-                  <EmailLink subject={rg.emailSubject}>
-                    {rg.heroCta1}
-                  </EmailLink>
+                  <a href="#gruppenanfrage">{rg.heroCta1}</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
                   <a href="#gruppenmenus">{rg.heroCta2}</a>
