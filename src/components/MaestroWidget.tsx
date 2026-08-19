@@ -71,7 +71,8 @@ const MaestroWidget = ({ widgetId, className }: MaestroWidgetProps) => {
 
   return (
     <div className={className}>
-      <div ref={hostRef} data-maestro-widget={widgetId} />
+      {/* Mindesthöhe, damit der Lazy-Load-Beobachter des Widgets zuverlässig auslöst */}
+      <div ref={hostRef} data-maestro-widget={widgetId} className="min-h-[2px]" />
       {failed && (
         <div className="mt-4 rounded-lg border border-current/20 bg-background/10 p-5 text-left">
           <p className="mb-3 text-sm">
