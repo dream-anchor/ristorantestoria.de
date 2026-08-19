@@ -744,19 +744,19 @@ const ReisegruppenPage = () => {
           <GoogleReviews />
 
           {/* SECTION 10: CTA Kontakt */}
-          <section id="gruppenanfrage" className="py-16 md:py-20 bg-primary text-primary-foreground scroll-mt-24">
+          <section id="gruppenanfrage" className="py-16 md:py-20 bg-background scroll-mt-24">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
                 {rg.ctaTitle}
               </h2>
-              <p className="text-lg mb-4 opacity-90 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground mb-4 max-w-2xl mx-auto">
                 {rg.ctaIntro}
               </p>
-              <p className="text-sm opacity-80 mb-8 max-w-2xl mx-auto">
+              <p className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto">
                 {rg.ctaHint}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="secondary" asChild>
+                <Button size="lg" variant="default" asChild>
                   <a
                     href="#gruppenanfrage-formular"
                     onClick={() => {
@@ -766,7 +766,7 @@ const ReisegruppenPage = () => {
                     {rg.heroCta1}
                   </a>
                 </Button>
-                <Button size="lg" variant="outlineWhite" asChild>
+                <Button size="lg" variant="outline" asChild>
                   <a
                     href="tel:+498951519696"
                     onClick={() => {
@@ -774,7 +774,7 @@ const ReisegruppenPage = () => {
                     }}
                   >{rg.ctaPhone}</a>
                 </Button>
-                <Button size="lg" variant="outlineWhite" asChild>
+                <Button size="lg" variant="outline" asChild>
                   <a
                     href="https://wa.me/491636033912?text=Hallo%2C%20wir%20planen%20eine%20Reisegruppe%20bei%20Ihnen."
                     target="_blank"
@@ -785,7 +785,7 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
-              <p className="mt-4 text-sm opacity-90">
+              <p className="mt-4 text-sm text-muted-foreground">
                 <EmailLink
                   subject={rg.emailSubject}
                   className="underline underline-offset-4"

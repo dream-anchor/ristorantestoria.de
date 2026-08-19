@@ -1,6 +1,7 @@
 /**
- * Centralized deep-link builder for events-storia.de/anfrage funnel.
- * Use a preset for each source page CTA so the funnel pre-fills Step 1/2.
+ * Centralized deep-link builder for events-storia.de/kontakt (MAESTRO Contact
+ * Widget). Use a preset for each source page CTA so the funnel pre-fills
+ * intent/occasion/people via query params on the widget's landing page.
  */
 
 export type AnfrageParams = {
@@ -16,7 +17,7 @@ export type AnfrageParams = {
   utm_campaign?: string;
 };
 
-const BASE = "https://www.events-storia.de/anfrage";
+const BASE = "https://www.events-storia.de/kontakt";
 
 export function buildEventsAnfrageUrl(params: AnfrageParams = {}): string {
   const sp = new URLSearchParams();
