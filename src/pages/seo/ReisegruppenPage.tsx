@@ -749,10 +749,10 @@ const ReisegruppenPage = () => {
                   <a
                     href="#gruppenanfrage-formular"
                     onClick={() => {
-                      trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
+                      trackEvent("form_cta_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
                     }}
                   >
-                    {rg.ctaEmail}
+                    {rg.heroCta1}
                   </a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
