@@ -23,7 +23,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
-import GroupInquiryForm from "@/components/GroupInquiryForm";
+import MaestroWidget from "@/components/MaestroWidget";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
   MapPin,
@@ -776,7 +776,7 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
-              <GroupInquiryForm />
+              <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" />
             </div>
           </section>
 
