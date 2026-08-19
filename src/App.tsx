@@ -24,6 +24,7 @@ import NotFound from "./pages/NotFound";
 
 import FloatingActions from "./components/FloatingActions";
 import MobileActionBar from "./components/MobileActionBar";
+import MaestroInquiryBridge from "./components/MaestroInquiryBridge";
 import CookieBanner from "./components/CookieBanner";
 import CookieSettingsButton from "./components/CookieSettingsButton";
 import ScrollToTop from "./components/ScrollToTop";
@@ -57,6 +58,7 @@ import SilvesterMuenchen from "./pages/seo/SilvesterMuenchen";
 import WeihnachtenMuenchen from "./pages/seo/WeihnachtenMuenchen";
 import ReisegruppenPage from "./pages/seo/ReisegruppenPage";
 import ReisegruppenDankePage from "./pages/seo/ReisegruppenDankePage";
+import Danke from "./pages/Danke";
 import FAQ from "./pages/FAQ";
 import NewsletterBestaetigung from "./pages/NewsletterBestaetigung";
 // Interne Widget-Testseite (/test, noindex, nicht in slugs.json/Sitemap)
@@ -239,6 +241,10 @@ const AppRoutes = () => {
         <Route path="/reisegruppen/danke" element={<ReisegruppenDankePage />} />
         <Route path="/reisegruppen/danke/" element={<ReisegruppenDankePage />} />
 
+        {/* Thank-you page after MAESTRO widget submit */}
+        <Route path="/danke" element={<Danke />} />
+        <Route path="/danke/" element={<Danke />} />
+
         {/* Newsletter double-opt-in confirmation (4 languages, noindex) */}
         <Route path="/newsletter-bestaetigen" element={<NewsletterBestaetigung lang="de" />} />
         <Route path="/newsletter-bestaetigen/" element={<NewsletterBestaetigung lang="de" />} />
@@ -298,6 +304,7 @@ const App = ({ queryClient: serverQueryClient }: { queryClient?: QueryClient } =
               <NormalizePath />
               <FloatingActions />
               <MobileActionBar />
+              <MaestroInquiryBridge />
               <CookieBanner />
               <CookieSettingsButton />
               <AppRoutes />
