@@ -774,6 +774,17 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
+              <p className="mt-4 text-sm opacity-90">
+                <EmailLink
+                  subject={rg.emailSubject}
+                  className="underline underline-offset-4"
+                  onClick={() => {
+                    trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
+                  }}
+                >
+                  <EmailAddress />
+                </EmailLink>
+              </p>
               <div id="gruppenanfrage-formular" className="mt-10 scroll-mt-24 text-left">
                 <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" />
               </div>
