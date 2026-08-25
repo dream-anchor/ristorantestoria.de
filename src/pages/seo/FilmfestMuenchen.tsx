@@ -5,7 +5,7 @@ import { Phone, Mail, MapPin, ArrowUpRight, Instagram, MessageCircle } from "luc
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import Footer from "@/components/Footer";
-import MaestroWidget from "@/components/MaestroWidget";
+import FilmfestInquiryForm from "@/components/FilmfestInquiryForm";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -419,7 +419,7 @@ const FilmfestMuenchen = () => {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <MaestroWidget widgetId="54621f68-6849-485a-92e4-04ad9a69524e" primaryColor="#8a2019" />
+              <FilmfestInquiryForm />
             </Reveal>
           </div>
           <div className="ff-wrap ff-faq" id="faq">

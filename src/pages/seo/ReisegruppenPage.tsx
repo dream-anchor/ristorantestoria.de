@@ -23,7 +23,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
-import MaestroWidget from "@/components/MaestroWidget";
+import GroupInquiryForm from "@/components/GroupInquiryForm";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
   MapPin,
@@ -50,16 +50,6 @@ const ReisegruppenPage = () => {
   const rg = t.reisegruppen;
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
-
-  const scrollToGroupInquiry = () => {
-    document.getElementById("gruppenanfrage")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    trackEvent("form_cta_click", {
-      page_path: window.location.pathname,
-      page_type: "reisegruppen",
-      placement: "hero",
-      ...utmParams,
-    });
-  };
 
   // Scroll-depth tracking: fires at 25 / 50 / 75 / 100 %
   useEffect(() => {
@@ -397,12 +387,13 @@ const ReisegruppenPage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  type="button"
                   size="lg"
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
-                  onClick={scrollToGroupInquiry}
+                  asChild
                 >
-                  {rg.heroCta1}
+                  <EmailLink subject={rg.emailSubject}>
+                    {rg.heroCta1}
+                  </EmailLink>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
                   <a href="#gruppenmenus">{rg.heroCta2}</a>
@@ -744,29 +735,29 @@ const ReisegruppenPage = () => {
           <GoogleReviews />
 
           {/* SECTION 10: CTA Kontakt */}
-          <section id="gruppenanfrage" className="py-16 md:py-20 bg-background scroll-mt-24">
+          <section className="py-16 md:py-20 bg-primary text-primary-foreground">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
                 {rg.ctaTitle}
               </h2>
-              <p className="text-lg text-muted-foreground mb-4 max-w-2xl mx-auto">
+              <p className="text-lg mb-4 opacity-90 max-w-2xl mx-auto">
                 {rg.ctaIntro}
               </p>
-              <p className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-sm opacity-80 mb-8 max-w-2xl mx-auto">
                 {rg.ctaHint}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="default" asChild>
-                  <a
-                    href="#gruppenanfrage-formular"
+                <Button size="lg" variant="secondary" asChild>
+                  <EmailLink
+                    subject={rg.emailSubject}
                     onClick={() => {
-                      trackEvent("form_cta_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
+                      trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
                     }}
                   >
-                    {rg.heroCta1}
-                  </a>
+                    {rg.ctaEmail}
+                  </EmailLink>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="outlineWhite" asChild>
                   <a
                     href="tel:+498951519696"
                     onClick={() => {
@@ -774,7 +765,7 @@ const ReisegruppenPage = () => {
                     }}
                   >{rg.ctaPhone}</a>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="outlineWhite" asChild>
                   <a
                     href="https://wa.me/491636033912?text=Hallo%2C%20wir%20planen%20eine%20Reisegruppe%20bei%20Ihnen."
                     target="_blank"
@@ -785,20 +776,7 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground">
-                <EmailLink
-                  subject={rg.emailSubject}
-                  className="underline underline-offset-4"
-                  onClick={() => {
-                    trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
-                  }}
-                >
-                  <EmailAddress />
-                </EmailLink>
-              </p>
-              <div id="gruppenanfrage-formular" className="mt-10 scroll-mt-24 text-left">
-                <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" primaryColor="#8a2019" />
-              </div>
+              <GroupInquiryForm />
             </div>
           </section>
 
