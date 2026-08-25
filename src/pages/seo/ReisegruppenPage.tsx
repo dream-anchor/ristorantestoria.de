@@ -396,7 +396,7 @@ const ReisegruppenPage = () => {
                   </EmailLink>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
-                  <a href="#gruppenmenus">{rg.heroCta2}</a>
+                  <a href="#anfrageformular">{rg.heroCta2}</a>
                 </Button>
               </div>
             </div>
@@ -734,6 +734,17 @@ const ReisegruppenPage = () => {
           {/* SECTION 9: Google Reviews */}
           <GoogleReviews />
 
+          {/* SECTION 9.5: Anfrageformular */}
+          <section id="anfrageformular" className="py-16 md:py-20">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
+                Jetzt unverbindlich anfragen
+              </h2>
+              <GroupInquiryForm />
+            </div>
+          </section>
+
+
           {/* SECTION 10: CTA Kontakt */}
           <section className="py-16 md:py-20 bg-primary text-primary-foreground">
             <div className="container mx-auto px-4 text-center max-w-3xl">
@@ -776,9 +787,9 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
-              <GroupInquiryForm />
             </div>
           </section>
+
 
           {/* SECTION 11: Crosslinks */}
           <section className="py-12 bg-secondary/30">
