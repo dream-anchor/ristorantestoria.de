@@ -181,7 +181,9 @@ export const GroupInquiryForm = () => {
       setSubmitError(f.errorMessage);
     } finally {
       setIsSubmitting(false);
+      submitLock.current = false;
     }
+
   };
 
   // WhatsApp-Prefill aus aktuellen Formularwerten (Datum + Gruppengröße)
