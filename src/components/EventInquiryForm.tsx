@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -30,6 +30,8 @@ export const EventInquiryForm = () => {
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Anti-Doppelklick: synchroner Riegel (State-Updates sind async)
+  const submitLock = useRef(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -62,6 +64,8 @@ export const EventInquiryForm = () => {
   ];
 
   const onSubmit = async (data: FormData) => {
+    if (submitLock.current) return;
+    submitLock.current = true;
     setIsSubmitting(true);
     try {
       // Forwarded server-to-server to the Events & Catering project via our proxy
@@ -102,6 +106,7 @@ export const EventInquiryForm = () => {
       });
     } finally {
       setIsSubmitting(false);
+      submitLock.current = false;
     }
   };
 

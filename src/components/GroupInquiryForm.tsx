@@ -56,6 +56,9 @@ export const GroupInquiryForm = () => {
 
   // Timestamp spam check: form must be open ≥ 3 seconds before submit
   const openedAt = useRef<number>(Date.now());
+  // Anti-Doppelklick: synchroner Riegel (State-Updates sind async)
+  const submitLock = useRef(false);
+
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -110,14 +113,19 @@ export const GroupInquiryForm = () => {
     });
 
   const onSubmit = async (data: FormData) => {
+    // Doppel-/Parallel-Submits sofort blockieren
+    if (submitLock.current || isSubmitting) return;
+
     // Honeypot check
     if (data._hp) return;
 
     // Timing check: reject if < 3 seconds
     if (Date.now() - openedAt.current < 3000) return;
 
+    submitLock.current = true;
     setIsSubmitting(true);
     setSubmitError(null);
+
 
     try {
       let travelPlanBase64: string | null = null;
@@ -173,7 +181,9 @@ export const GroupInquiryForm = () => {
       setSubmitError(f.errorMessage);
     } finally {
       setIsSubmitting(false);
+      submitLock.current = false;
     }
+
   };
 
   // WhatsApp-Prefill aus aktuellen Formularwerten (Datum + Gruppengröße)

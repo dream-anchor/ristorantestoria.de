@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -29,6 +29,8 @@ const SeasonalSignupForm = ({ seasonalEvent }: SeasonalSignupFormProps) => {
   const { t, language } = useLanguage();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Anti-Doppelklick: synchroner Riegel (State-Updates sind async)
+  const submitLock = useRef(false);
 
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -39,6 +41,8 @@ const SeasonalSignupForm = ({ seasonalEvent }: SeasonalSignupFormProps) => {
   });
 
   const onSubmit = async (data: SignupFormData) => {
+    if (submitLock.current) return;
+    submitLock.current = true;
     setIsSubmitting(true);
     try {
       const consentText = t.seasonalSignup.privacyCheckbox.replace(
@@ -74,6 +78,7 @@ const SeasonalSignupForm = ({ seasonalEvent }: SeasonalSignupFormProps) => {
       console.error('Signup error:', err);
     } finally {
       setIsSubmitting(false);
+      submitLock.current = false;
     }
   };
 
