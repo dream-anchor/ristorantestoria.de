@@ -56,6 +56,9 @@ export const GroupInquiryForm = () => {
 
   // Timestamp spam check: form must be open ≥ 3 seconds before submit
   const openedAt = useRef<number>(Date.now());
+  // Anti-Doppelklick: synchroner Riegel (State-Updates sind async)
+  const submitLock = useRef(false);
+
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
