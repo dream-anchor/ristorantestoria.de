@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,6 +34,8 @@ const FilmfestInquiryForm = () => {
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Anti-Doppelklick: synchroner Riegel (State-Updates sind async)
+  const submitLock = useRef(false);
 
   const {
     register,
@@ -53,6 +55,8 @@ const FilmfestInquiryForm = () => {
   });
 
   const onSubmit = async (data: FormData) => {
+    if (submitLock.current) return;
+    submitLock.current = true;
     setIsSubmitting(true);
     try {
       const { data: result, error } = await supabase.functions.invoke(
@@ -105,6 +109,7 @@ const FilmfestInquiryForm = () => {
       });
     } finally {
       setIsSubmitting(false);
+      submitLock.current = false;
     }
   };
 
