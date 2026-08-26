@@ -537,17 +537,18 @@ const ReisegruppenPage = () => {
               <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
                 {rg.menuIntro}
               </p>
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-3 gap-8 md:grid-rows-[auto_1fr_auto_auto]">
                 {displayMenus.map((menu) => {
                   const badgeText = menu.badge
                     ? getLocalizedText(menu.badge, language)
                     : null;
                   const isFeatured = !!badgeText;
                   const items = getLocalizedArray(menu.items, language);
+                  const menuTitle = getLocalizedText(menu.title, language);
                   return (
                     <div
                       key={menu.id}
-                      className={`bg-card ${isFeatured ? "border-2 border-primary" : "border border-border"} rounded-2xl overflow-hidden flex flex-col relative`}
+                      className={`bg-card ${isFeatured ? "border-2 border-primary" : "border border-border"} rounded-2xl overflow-hidden relative grid grid-rows-[auto_1fr_auto_auto] md:row-span-4 md:grid-rows-subgrid`}
                     >
                       {isFeatured && (
                         <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
@@ -558,21 +559,26 @@ const ReisegruppenPage = () => {
                         <p className="text-xs uppercase tracking-widest text-primary font-medium mb-1">
                           {`Menü ${menu.menu_key}`}
                         </p>
-                        <h3 className="text-xl font-serif font-bold">
-                          {getLocalizedText(menu.title, language)}
+                        <h3
+                          className="text-lg md:text-xl font-serif font-bold leading-snug line-clamp-3 hyphens-auto break-words"
+                          title={menuTitle}
+                        >
+                          {menuTitle}
                         </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="text-sm text-muted-foreground mt-1 line-clamp-3">
                           {getLocalizedText(menu.subtitle, language)}
                         </p>
                       </div>
-                      <div className="px-6 py-5 flex-grow flex flex-col">
+                      <div className="px-6 py-5">
                         <MenuItemsList items={items} moreLabel={ml.more} lessLabel={ml.less} />
                         <p className="text-xs text-muted-foreground mt-4">
                           {getLocalizedText(menu.duration, language)}
                         </p>
+                      </div>
+                      <div className="px-6 pb-5">
                         <Button
                           type="button"
-                          className="mt-4 w-full"
+                          className="w-full"
                           onClick={() => scrollToInquiryForm(menu.menu_key)}
                         >
                           <Send className="w-4 h-4 mr-2" />
@@ -580,7 +586,7 @@ const ReisegruppenPage = () => {
                         </Button>
                       </div>
                       <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
-                        <p className="text-2xl font-bold text-primary">
+                        <p className="text-xl font-bold text-primary leading-snug">
                           {getLocalizedText(menu.price_label, language)}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -591,6 +597,7 @@ const ReisegruppenPage = () => {
                   );
                 })}
               </div>
+
 
               {/* Hinweisblock */}
               <div className="mt-10 bg-secondary/30 border border-border rounded-xl p-6 max-w-3xl mx-auto">
