@@ -66,7 +66,14 @@ const MenuItemsList = ({ items, moreLabel, lessLabel }: MenuItemsListProps) => {
 
   const joined = lines.join(" ");
   const isLong = lines.length > COLLAPSED_LINES || joined.length > LONG_TEXT_CHARS;
-  const visible = expanded || !isLong ? lines : lines.slice(0, COLLAPSED_LINES);
+  let visible = expanded || !isLong ? lines : lines.slice(0, COLLAPSED_LINES);
+  // Keine "nackte" Gang-Überschrift als letzte sichtbare Zeile
+  if (!expanded && isLong) {
+    while (visible.length > 1 && isHeadingLine(visible[visible.length - 1])) {
+      visible = visible.slice(0, -1);
+    }
+  }
+
 
   return (
     <div className="text-left">
