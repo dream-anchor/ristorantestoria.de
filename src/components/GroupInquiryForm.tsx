@@ -113,14 +113,19 @@ export const GroupInquiryForm = () => {
     });
 
   const onSubmit = async (data: FormData) => {
+    // Doppel-/Parallel-Submits sofort blockieren
+    if (submitLock.current || isSubmitting) return;
+
     // Honeypot check
     if (data._hp) return;
 
     // Timing check: reject if < 3 seconds
     if (Date.now() - openedAt.current < 3000) return;
 
+    submitLock.current = true;
     setIsSubmitting(true);
     setSubmitError(null);
+
 
     try {
       let travelPlanBase64: string | null = null;
