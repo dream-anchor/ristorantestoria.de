@@ -66,6 +66,7 @@ const ReisegruppenPage = () => {
   usePrerenderReady(true);
 
   const rg = t.reisegruppen;
+  const ml = menuListLabels[language as keyof typeof menuListLabels] ?? menuListLabels.de;
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
 
@@ -564,18 +565,19 @@ const ReisegruppenPage = () => {
                           {getLocalizedText(menu.subtitle, language)}
                         </p>
                       </div>
-                      <div className="px-6 py-5 flex-grow">
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                          {items.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="px-6 py-5 flex-grow flex flex-col">
+                        <MenuItemsList items={items} moreLabel={ml.more} lessLabel={ml.less} />
                         <p className="text-xs text-muted-foreground mt-4">
                           {getLocalizedText(menu.duration, language)}
                         </p>
+                        <Button
+                          type="button"
+                          className="mt-4 w-full"
+                          onClick={() => scrollToInquiryForm(menu.menu_key)}
+                        >
+                          <Send className="w-4 h-4 mr-2" />
+                          {ml.inquire}
+                        </Button>
                       </div>
                       <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
                         <p className="text-2xl font-bold text-primary">
