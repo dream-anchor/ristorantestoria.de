@@ -24,6 +24,7 @@ import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useG
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
 import GroupInquiryForm from "@/components/GroupInquiryForm";
+import MenuItemsList from "@/components/MenuItemsList";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
   MapPin,
@@ -36,7 +37,24 @@ import {
   Building2,
   ArrowRight,
   CheckCircle,
+  Send,
 } from "lucide-react";
+
+/** Labels für Menü-Listen (Expand-Toggle + Anfrage-Button) je Sprache. */
+const menuListLabels = {
+  de: { more: "Mehr anzeigen", less: "Weniger anzeigen", inquire: "Jetzt anfragen" },
+  en: { more: "Show more", less: "Show less", inquire: "Inquire now" },
+  it: { more: "Mostra di più", less: "Mostra meno", inquire: "Richiedi ora" },
+  fr: { more: "Afficher plus", less: "Afficher moins", inquire: "Demander maintenant" },
+} as const;
+
+/** Scrollt zum Anfrageformular und wählt das Menü im Formular vor. */
+export const scrollToInquiryForm = (menuKey?: string) => {
+  if (menuKey) {
+    window.dispatchEvent(new CustomEvent("storia:preselect-menu", { detail: menuKey }));
+  }
+  document.getElementById("anfrageformular")?.scrollIntoView({ behavior: "smooth" });
+};
 
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -48,6 +66,7 @@ const ReisegruppenPage = () => {
   usePrerenderReady(true);
 
   const rg = t.reisegruppen;
+  const ml = menuListLabels[language as keyof typeof menuListLabels] ?? menuListLabels.de;
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
 
@@ -546,18 +565,19 @@ const ReisegruppenPage = () => {
                           {getLocalizedText(menu.subtitle, language)}
                         </p>
                       </div>
-                      <div className="px-6 py-5 flex-grow">
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                          {items.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="px-6 py-5 flex-grow flex flex-col">
+                        <MenuItemsList items={items} moreLabel={ml.more} lessLabel={ml.less} />
                         <p className="text-xs text-muted-foreground mt-4">
                           {getLocalizedText(menu.duration, language)}
                         </p>
+                        <Button
+                          type="button"
+                          className="mt-4 w-full"
+                          onClick={() => scrollToInquiryForm(menu.menu_key)}
+                        >
+                          <Send className="w-4 h-4 mr-2" />
+                          {ml.inquire}
+                        </Button>
                       </div>
                       <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
                         <p className="text-2xl font-bold text-primary">
@@ -733,7 +753,7 @@ const ReisegruppenPage = () => {
           <GoogleReviews />
 
           {/* SECTION 9.5: Anfrageformular */}
-          <section id="anfrageformular" className="py-16 md:py-20 bg-primary text-primary-foreground">
+          <section id="anfrageformular" className="py-16 md:py-20 bg-primary text-primary-foreground scroll-mt-24">
             <div className="container mx-auto px-4 max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
                 Jetzt unverbindlich anfragen

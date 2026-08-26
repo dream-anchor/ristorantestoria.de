@@ -83,6 +83,19 @@ export const GroupInquiryForm = () => {
     openedAt.current = Date.now();
   }, []);
 
+  // Menü-Vorauswahl per Klick auf "Jetzt anfragen" einer Menü-Karte
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const key = (e as CustomEvent<string>).detail;
+      if (typeof key === "string" && key) {
+        setShowMore(true);
+        form.setValue("preferred_menu", key, { shouldDirty: true });
+      }
+    };
+    window.addEventListener("storia:preselect-menu", handler);
+    return () => window.removeEventListener("storia:preselect-menu", handler);
+  }, [form]);
+
   // Menu options: dynamic from Supabase if available, else fallback
   const adviceOption = { value: "advice", label: f.menuAdvice };
   const menuOptions =
