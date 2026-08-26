@@ -24,6 +24,7 @@ import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useG
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
 import GroupInquiryForm from "@/components/GroupInquiryForm";
+import MenuItemsList from "@/components/MenuItemsList";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
   MapPin,
@@ -36,7 +37,24 @@ import {
   Building2,
   ArrowRight,
   CheckCircle,
+  Send,
 } from "lucide-react";
+
+/** Labels für Menü-Listen (Expand-Toggle + Anfrage-Button) je Sprache. */
+const menuListLabels = {
+  de: { more: "Mehr anzeigen", less: "Weniger anzeigen", inquire: "Jetzt anfragen" },
+  en: { more: "Show more", less: "Show less", inquire: "Inquire now" },
+  it: { more: "Mostra di più", less: "Mostra meno", inquire: "Richiedi ora" },
+  fr: { more: "Afficher plus", less: "Afficher moins", inquire: "Demander maintenant" },
+} as const;
+
+/** Scrollt zum Anfrageformular und wählt das Menü im Formular vor. */
+export const scrollToInquiryForm = (menuKey?: string) => {
+  if (menuKey) {
+    window.dispatchEvent(new CustomEvent("storia:preselect-menu", { detail: menuKey }));
+  }
+  document.getElementById("anfrageformular")?.scrollIntoView({ behavior: "smooth" });
+};
 
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
