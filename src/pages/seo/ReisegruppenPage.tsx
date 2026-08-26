@@ -391,9 +391,7 @@ const ReisegruppenPage = () => {
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
                   asChild
                 >
-                  <EmailLink subject={rg.emailSubject}>
-                    {rg.heroCta1}
-                  </EmailLink>
+                  <a href="#anfrageformular">{rg.heroCta1}</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
                   <a href="#anfrageformular">{rg.heroCta2}</a>
@@ -735,7 +733,7 @@ const ReisegruppenPage = () => {
           <GoogleReviews />
 
           {/* SECTION 9.5: Anfrageformular */}
-          <section id="anfrageformular" className="py-16 md:py-20">
+          <section id="anfrageformular" className="py-16 md:py-20 bg-primary text-primary-foreground">
             <div className="container mx-auto px-4 max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
                 Jetzt unverbindlich anfragen
