@@ -157,6 +157,17 @@ npm run prerender    # SSG für SEO — KRITISCH
 - `LEGAL_ONLY_DE` konsistent in: `routes.ts`, `App.tsx`, `generate-sitemap.mjs`
 - `.htaccess`: 301-Redirects alter übersetzter URLs → DE
 
+## Search Console & SEO-Kontext (hierher verschoben 13.08.2026, vorher global)
+- **Zugriff:** MCP-Server `gscServer` (User-MCP, OAuth `amonot@gmail.com`) deckt diese Property mit
+  ab. Einrichtung/Neuaufsetzen: `~/.claude/docs/mcp-server.md`. Der Service-Account
+  `gsc-auditor-storia@evocative-shore-486623-v4.iam.gserviceaccount.com`
+  (`scripts/service-account.json`) existiert nur als Fallback.
+- **Phase beim Bewerten von Rankings mitdenken:** Website neu aufgesetzt 12/2025, SEO aktiv seit
+  01/2026 → Google-Sandbox-Phase (3–6 Monate), Positionsschwankungen sind normal.
+- **Stand:** Branded Keywords ranken bereits (Pos. 1–2 für „storia münchen"); Potenzial bei
+  generischen wie „italiener münchen" (aktuell ~31).
+- **GA4-Property:** `515836390` (weitere IDs: `~/.claude/docs/mcp-server.md`).
+
 ## Local SEO
 - NAP: Ristorante STORIA, Karlstraße 47a, 80333 München
 - Tel: +49 89 51519696
