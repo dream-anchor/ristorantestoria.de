@@ -13,8 +13,30 @@ Konzept ab, gilt das Konzept.
 **Einheiten:** Einheit A = P0+P1 (5 Kriterien, reine Bugfixes + Meta/Title), Einheit B = P2+P3
 (5 Kriterien, Redirects + interne Verlinkung — höheres Risiko, eigene Einheit). P4 (Deliverable,
 kein Code) und P5 (Indexierungs-Script, erst nach Einheit-B-Deploy) laufen danach separat.
+P-1 (Oktoberfest, dringend) läuft VOR allem anderen, siehe unten.
+
+**Harte Regel (Antoine, 01.09.2026):** Formulare (`Kontakt.tsx`, `Reservierung.tsx`) werden nicht
+angefasst/umgebaut — das sind die Lead-Eingänge. Bei P1 ausschließlich `title`/`description`-
+Strings ändern (KONZEPT § „Harte Regel: Formulare nicht anfassen").
 
 ---
+
+## P-1 — DRINGEND: Oktoberfest 2026 (Wiesn 19.09.–04.10., Auftrag 01.09.2026)
+
+- [x] **P-1.1** Alle 4 Oktoberfest-Landingpage-URLs (DE/EN/IT/FR) aktiv zur Google-Indexierung
+      eingereicht (KONZEPT § „Dringend — Oktoberfest").
+      ✓ 2026-09-01 · `node scripts/request-indexing.mjs` mit den 4 URLs
+      (`oktoberfest-muenchen/`, `en/oktoberfest-munich/`, `it/oktoberfest-monaco/`,
+      `fr/oktoberfest-munich/`) → „Ergebnis: 4 eingereicht, 0 fehlgeschlagen (von 4 URLs)".
+- [ ] **P-1.2** Verwaiste `besondere-anlaesse/oktoberfest-menue/`-Dubletten (DE/FR/IT nie gecrawlt,
+      EN 404) geklärt: Absicht vs. Bug, dann Redirect oder Doku-Entscheidung (KONZEPT §
+      „Nebenbefund: verwaiste Dubletten").
+      Beweis: Fund + Entscheidung + ggf. `public/.htaccess`-Diff + `curl -IL` vorher/nachher +
+      `npm run build`/`lint` grün.
+- [ ] **P-1.3** Antoine im Chat auf die drei nicht code-seitig lösbaren Hebel hingewiesen
+      (WirtshausWiesn-Registrierung, GBP-Beitrag, Listicle-Outreach) — zeitkritisch, Frist prüfen
+      (KONZEPT § „Was NICHT code-seitig lösbar ist").
+      Beweis: Nachricht im Chat-Verlauf, Antoine-Reaktion falls vorhanden.
 
 ## P0 — Structured-Data-Bugfixes
 
@@ -28,15 +50,21 @@ kein Code) und P5 (Indexierungs-Script, erst nach Einheit-B-Deploy) laufen danac
 
 ## P1 — CTR-Killer auf Top-Rankings
 
-- [ ] **P1.1** Title/Meta-Description für `kontakt/` überarbeitet (Pos. 3,56, CTR 0,33% → Ziel:
-      klickstärker, <60/<160 Zeichen) (KONZEPT § P1).
-      Beweis: `npm run build`/`lint` grün + Diff + neue Title/Description-Strings im Wortlaut.
-- [ ] **P1.2** Title/Meta-Description für `reservierung/` überarbeitet (Pos. 3,72, CTR 0,52%)
-      (KONZEPT § P1).
+**Vor P1.1–P1.3: Copy-Vorschläge aus KONZEPT § P1-Tabelle mit Antoine im Chat abstimmen** (Text ist
+Geschäftsentscheidung, kein reiner Bugfix) — erst nach Freigabe committen. Bei allen dreien gilt
+die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vor Commit prüfen.
+
+- [ ] **P1.1** Title/Meta-Description für `kontakt/` überarbeitet (Pos. 3,56, CTR 0,33% — Vorschlag
+      in KONZEPT § P1, `Kontakt.tsx` Zeilen 32-33/45-46) (KONZEPT § P1).
+      Beweis: Freigabe-Status + `npm run build`/`lint` grün + Diff (nur String-Literale) + neue
+      Title/Description im Wortlaut.
+- [ ] **P1.2** Title/Meta-Description für `reservierung/` überarbeitet (Pos. 3,72, CTR 0,52% —
+      Vorschlag in KONZEPT § P1, `translations/{de,en}.ts` `pages.reservierung`) (KONZEPT § P1).
       Beweis: wie P1.1.
 - [ ] **P1.3** Title/Meta-Description für `mittags-menu/` + `en/food-menu/` überarbeitet (Pos. ~4,6,
-      CTR <1%) (KONZEPT § P1).
-      Beweis: wie P1.1, für beide Sprachvarianten.
+      CTR <1% — Vorschlag in KONZEPT § P1; zwei unabhängige Seiten, nicht dieselbe Übersetzung)
+      (KONZEPT § P1).
+      Beweis: wie P1.1, für beide Seiten einzeln.
 
 ## Einheit A (P0+P1): Branch, Beweis, Merge
 
