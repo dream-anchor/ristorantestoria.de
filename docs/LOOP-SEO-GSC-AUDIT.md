@@ -33,10 +33,16 @@ Strings ändern (KONZEPT § „Harte Regel: Formulare nicht anfassen").
       „Nebenbefund: verwaiste Dubletten").
       Beweis: Fund + Entscheidung + ggf. `public/.htaccess`-Diff + `curl -IL` vorher/nachher +
       `npm run build`/`lint` grün.
-- [ ] **P-1.3** Antoine im Chat auf die drei nicht code-seitig lösbaren Hebel hingewiesen
+- [x] **P-1.3** Antoine im Chat auf die drei nicht code-seitig lösbaren Hebel hingewiesen
       (WirtshausWiesn-Registrierung, GBP-Beitrag, Listicle-Outreach) — zeitkritisch, Frist prüfen
       (KONZEPT § „Was NICHT code-seitig lösbar ist").
-      Beweis: Nachricht im Chat-Verlauf, Antoine-Reaktion falls vorhanden.
+      ✓ 2026-09-01 · GBP-Beitrag „Oktoberfest im STORIA" von Antoine verfasst (Text + Bild von
+      Claude vorbereitet, `~/Downloads/Oktoberfest-GBP-Post.txt` +
+      `Oktoberfest-GBP-Post-Bild.jpg`) und laut Antoine veröffentlicht („ist raus", 01.09.2026).
+      Bild: reales Terrassen-/Hero-Foto (kein KI-Bild, kein Oktoberfest-Deko-Motiv im
+      Bestand vorhanden — geprüft, siehe Chat-Verlauf). WirtshausWiesn-Registrierung und
+      Listicle-Outreach weiterhin offen, nicht bestätigt — Antoine bei Gelegenheit erneut
+      erinnern, kein hartes Blocking für den Rest des Loops.
 
 ## P0 — Structured-Data-Bugfixes
 
