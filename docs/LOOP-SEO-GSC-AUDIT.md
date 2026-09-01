@@ -28,11 +28,26 @@ Strings ändern (KONZEPT § „Harte Regel: Formulare nicht anfassen").
       ✓ 2026-09-01 · `node scripts/request-indexing.mjs` mit den 4 URLs
       (`oktoberfest-muenchen/`, `en/oktoberfest-munich/`, `it/oktoberfest-monaco/`,
       `fr/oktoberfest-munich/`) → „Ergebnis: 4 eingereicht, 0 fehlgeschlagen (von 4 URLs)".
-- [ ] **P-1.2** Verwaiste `besondere-anlaesse/oktoberfest-menue/`-Dubletten (DE/FR/IT nie gecrawlt,
+- [x] **P-1.2** Verwaiste `besondere-anlaesse/oktoberfest-menue/`-Dubletten (DE/FR/IT nie gecrawlt,
       EN 404) geklärt: Absicht vs. Bug, dann Redirect oder Doku-Entscheidung (KONZEPT §
       „Nebenbefund: verwaiste Dubletten").
-      Beweis: Fund + Entscheidung + ggf. `public/.htaccess`-Diff + `curl -IL` vorher/nachher +
-      `npm run build`/`lint` grün.
+      ✓ 2026-09-02 · Echte Ursache gefunden (kein DB-Routing-Bug wie ursprünglich vermutet,
+      sondern Sitemap-Generator): `scripts/generate-sitemap.mjs` nutzte für EN/IT/FR-Sondermenü-
+      URLs immer den deutschen DB-Slug (`menu.slug`) statt `slug_en`/`slug_it`/`slug_fr` —
+      `BesondererAnlass.tsx` selbst (`getLocalizedSlug`) hatte die korrekte Logik schon immer,
+      nur die Sitemap-Logik hat es falsch abgebildet. Dadurch listete die Sitemap
+      `en/special-occasions/oktoberfest-menue/` (nie existente Route) statt der echten
+      `en/special-occasions/oktoberfest-menu/` — reines Sitemap-Artefakt, **kein Redirect
+      nötig** (die falsche URL war nie real verlinkt). Fix: Supabase-Query um
+      `slug_en,slug_it,slug_fr` erweitert, Sitemap-Mapping nutzt sie mit `|| menu.slug`-
+      Fallback (Commit `97765e2` auf Branch `seo-gsc-audit-p-1-oktoberfest`). `npm run lint` →
+      0 Findings in `generate-sitemap.mjs` · `npm run build` → Exit 0, Prerender „Success: 177,
+      Errors: 0" · frisch generierte `dist/sitemap.xml` zeigt korrekt
+      `en/special-occasions/oktoberfest-menu/`, `it/occasioni-speciali/oktoberfest-menu-it/`,
+      `fr/occasions-speciales/oktoberfest-menu-fr/` (vorher überall `-menue`). **Nebenbefund:**
+      derselbe Bug betraf strukturell auch Valentinstag/Weihnachten/Silvester-Sondermenüs —
+      relevant für KONZEPT § P2.1 (tote Locale-Kombinationen), dort gegenprüfen ob sich manche
+      der dort gelisteten 404s durch diesen einen Fix mit erledigen.
 - [x] **P-1.3** Antoine im Chat auf die drei nicht code-seitig lösbaren Hebel hingewiesen
       (WirtshausWiesn-Registrierung, GBP-Beitrag, Listicle-Outreach) — zeitkritisch, Frist prüfen
       (KONZEPT § „Was NICHT code-seitig lösbar ist").
