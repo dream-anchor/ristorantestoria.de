@@ -81,7 +81,7 @@ async function fetchDynamicRoutes() {
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/menus?menu_type=eq.special&is_published=eq.true&select=slug`,
+      `${SUPABASE_URL}/rest/v1/menus?menu_type=eq.special&is_published=eq.true&select=slug,slug_en,slug_it,slug_fr`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -103,13 +103,17 @@ async function fetchDynamicRoutes() {
 
     console.log(`📦 Found ${menus.length} published special menus in database`);
 
+    // Jede Sprache braucht ihren EIGENEN DB-Slug (slug_en/it/fr), sonst landen im Sitemap
+    // Locale-URLs mit dem deutschen Slug-Wert, die real 404en (Fallback nur, wenn ein
+    // Sondermenü keine eigene Übersetzung hat — dieselbe Fallback-Logik wie
+    // BesondererAnlass.tsx getLocalizedSlug()).
     return menus.map((menu) => ({
       baseSlug: `special-menu-${menu.slug}`, // Unique identifier
       slugs: {
         de: `${parentSlugs.de}/${menu.slug}`,
-        en: `${parentSlugs.en}/${menu.slug}`,
-        it: `${parentSlugs.it}/${menu.slug}`,
-        fr: `${parentSlugs.fr}/${menu.slug}`,
+        en: `${parentSlugs.en}/${menu.slug_en || menu.slug}`,
+        it: `${parentSlugs.it}/${menu.slug_it || menu.slug}`,
+        fr: `${parentSlugs.fr}/${menu.slug_fr || menu.slug}`,
       },
       priority: "0.7",
       changefreq: "weekly",
