@@ -23,7 +23,8 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
-import MaestroWidget from "@/components/MaestroWidget";
+import GroupInquiryForm from "@/components/GroupInquiryForm";
+import MenuItemsList from "@/components/MenuItemsList";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
   MapPin,
@@ -36,7 +37,24 @@ import {
   Building2,
   ArrowRight,
   CheckCircle,
+  Send,
 } from "lucide-react";
+
+/** Labels für Menü-Listen (Expand-Toggle + Anfrage-Button) je Sprache. */
+const menuListLabels = {
+  de: { more: "Mehr anzeigen", less: "Weniger anzeigen", inquire: "Jetzt anfragen" },
+  en: { more: "Show more", less: "Show less", inquire: "Inquire now" },
+  it: { more: "Mostra di più", less: "Mostra meno", inquire: "Richiedi ora" },
+  fr: { more: "Afficher plus", less: "Afficher moins", inquire: "Demander maintenant" },
+} as const;
+
+/** Scrollt zum Anfrageformular und wählt das Menü im Formular vor. */
+export const scrollToInquiryForm = (menuKey?: string) => {
+  if (menuKey) {
+    window.dispatchEvent(new CustomEvent("storia:preselect-menu", { detail: menuKey }));
+  }
+  document.getElementById("anfrageformular")?.scrollIntoView({ behavior: "smooth" });
+};
 
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -48,18 +66,9 @@ const ReisegruppenPage = () => {
   usePrerenderReady(true);
 
   const rg = t.reisegruppen;
+  const ml = menuListLabels[language as keyof typeof menuListLabels] ?? menuListLabels.de;
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
-
-  const scrollToGroupInquiry = () => {
-    document.getElementById("gruppenanfrage")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    trackEvent("form_cta_click", {
-      page_path: window.location.pathname,
-      page_type: "reisegruppen",
-      placement: "hero",
-      ...utmParams,
-    });
-  };
 
   // Scroll-depth tracking: fires at 25 / 50 / 75 / 100 %
   useEffect(() => {
@@ -397,15 +406,14 @@ const ReisegruppenPage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  type="button"
                   size="lg"
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
-                  onClick={scrollToGroupInquiry}
+                  asChild
                 >
-                  {rg.heroCta1}
+                  <a href="#anfrageformular">{rg.heroCta1}</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
-                  <a href="#gruppenmenus">{rg.heroCta2}</a>
+                  <a href="#anfrageformular">{rg.heroCta2}</a>
                 </Button>
               </div>
             </div>
@@ -529,17 +537,18 @@ const ReisegruppenPage = () => {
               <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
                 {rg.menuIntro}
               </p>
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-3 gap-8 md:grid-rows-[auto_1fr_auto_auto]">
                 {displayMenus.map((menu) => {
                   const badgeText = menu.badge
                     ? getLocalizedText(menu.badge, language)
                     : null;
                   const isFeatured = !!badgeText;
                   const items = getLocalizedArray(menu.items, language);
+                  const menuTitle = getLocalizedText(menu.title, language);
                   return (
                     <div
                       key={menu.id}
-                      className={`bg-card ${isFeatured ? "border-2 border-primary" : "border border-border"} rounded-2xl overflow-hidden flex flex-col relative`}
+                      className={`bg-card ${isFeatured ? "border-2 border-primary" : "border border-border"} rounded-2xl overflow-hidden relative grid grid-rows-[auto_1fr_auto_auto] md:row-span-4 md:grid-rows-subgrid`}
                     >
                       {isFeatured && (
                         <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
@@ -550,28 +559,34 @@ const ReisegruppenPage = () => {
                         <p className="text-xs uppercase tracking-widest text-primary font-medium mb-1">
                           {`Menü ${menu.menu_key}`}
                         </p>
-                        <h3 className="text-xl font-serif font-bold">
-                          {getLocalizedText(menu.title, language)}
+                        <h3
+                          className="text-lg md:text-xl font-serif font-bold leading-snug line-clamp-3 hyphens-auto break-words"
+                          title={menuTitle}
+                        >
+                          {menuTitle}
                         </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="text-sm text-muted-foreground mt-1 line-clamp-3">
                           {getLocalizedText(menu.subtitle, language)}
                         </p>
                       </div>
-                      <div className="px-6 py-5 flex-grow">
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                          {items.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="px-6 py-5">
+                        <MenuItemsList items={items} moreLabel={ml.more} lessLabel={ml.less} />
                         <p className="text-xs text-muted-foreground mt-4">
                           {getLocalizedText(menu.duration, language)}
                         </p>
                       </div>
+                      <div className="px-6 pb-5">
+                        <Button
+                          type="button"
+                          className="w-full"
+                          onClick={() => scrollToInquiryForm(menu.menu_key)}
+                        >
+                          <Send className="w-4 h-4 mr-2" />
+                          {ml.inquire}
+                        </Button>
+                      </div>
                       <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
-                        <p className="text-2xl font-bold text-primary">
+                        <p className="text-xl font-bold text-primary leading-snug">
                           {getLocalizedText(menu.price_label, language)}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -582,6 +597,7 @@ const ReisegruppenPage = () => {
                   );
                 })}
               </div>
+
 
               {/* Hinweisblock */}
               <div className="mt-10 bg-secondary/30 border border-border rounded-xl p-6 max-w-3xl mx-auto">
@@ -743,30 +759,41 @@ const ReisegruppenPage = () => {
           {/* SECTION 9: Google Reviews */}
           <GoogleReviews />
 
+          {/* SECTION 9.5: Anfrageformular */}
+          <section id="anfrageformular" className="py-16 md:py-20 bg-primary text-primary-foreground scroll-mt-24">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
+                Jetzt unverbindlich anfragen
+              </h2>
+              <GroupInquiryForm />
+            </div>
+          </section>
+
+
           {/* SECTION 10: CTA Kontakt */}
-          <section id="gruppenanfrage" className="py-16 md:py-20 bg-background scroll-mt-24">
+          <section className="py-16 md:py-20 bg-primary text-primary-foreground">
             <div className="container mx-auto px-4 text-center max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-serif font-semibold mb-4">
                 {rg.ctaTitle}
               </h2>
-              <p className="text-lg text-muted-foreground mb-4 max-w-2xl mx-auto">
+              <p className="text-lg mb-4 opacity-90 max-w-2xl mx-auto">
                 {rg.ctaIntro}
               </p>
-              <p className="text-sm text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-sm opacity-80 mb-8 max-w-2xl mx-auto">
                 {rg.ctaHint}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="default" asChild>
-                  <a
-                    href="#gruppenanfrage-formular"
+                <Button size="lg" variant="secondary" asChild>
+                  <EmailLink
+                    subject={rg.emailSubject}
                     onClick={() => {
-                      trackEvent("form_cta_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
+                      trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
                     }}
                   >
-                    {rg.heroCta1}
-                  </a>
+                    {rg.ctaEmail}
+                  </EmailLink>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="outlineWhite" asChild>
                   <a
                     href="tel:+498951519696"
                     onClick={() => {
@@ -774,7 +801,7 @@ const ReisegruppenPage = () => {
                     }}
                   >{rg.ctaPhone}</a>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="outlineWhite" asChild>
                   <a
                     href="https://wa.me/491636033912?text=Hallo%2C%20wir%20planen%20eine%20Reisegruppe%20bei%20Ihnen."
                     target="_blank"
@@ -785,22 +812,9 @@ const ReisegruppenPage = () => {
                   </a>
                 </Button>
               </div>
-              <p className="mt-4 text-sm text-muted-foreground">
-                <EmailLink
-                  subject={rg.emailSubject}
-                  className="underline underline-offset-4"
-                  onClick={() => {
-                    trackEvent("email_click", { page_path: window.location.pathname, page_type: "reisegruppen", ...utmParams });
-                  }}
-                >
-                  <EmailAddress />
-                </EmailLink>
-              </p>
-              <div id="gruppenanfrage-formular" className="mt-10 scroll-mt-24 text-left">
-                <MaestroWidget widgetId="be84b421-ac13-444e-8c40-1f01e5878347" primaryColor="#8a2019" />
-              </div>
             </div>
           </section>
+
 
           {/* SECTION 11: Crosslinks */}
           <section className="py-12 bg-secondary/30">
