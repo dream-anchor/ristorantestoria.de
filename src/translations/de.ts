@@ -78,6 +78,7 @@ export const de = {
     faqLinkDesc: "Antworten auf h\u00e4ufige Fragen zum STORIA",
     pizzaMunich: "Pizza M\u00fcnchen",
     pastaFrescaMuenchen: "Frische Pasta M\u00fcnchen",
+    dailyLunchMenu: "Mittagsmen\u00fc",
   },
   eventForm: {
     title: "Event-Anfrage",

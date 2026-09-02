@@ -307,6 +307,12 @@ const ItalienerMuenchen = () => {
                 <LocalizedLink to="italiener-koenigsplatz" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
                   <span className="font-medium">{t.internalLinks.italienerKoenigsplatz}</span>
                 </LocalizedLink>
+                <LocalizedLink to="italiener-hauptbahnhof-muenchen" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
+                  <span className="font-medium">{t.internalLinks.italianCentralStationMunich}</span>
+                </LocalizedLink>
+                <LocalizedLink to="mittags-menu" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
+                  <span className="font-medium">{t.internalLinks.dailyLunchMenu}</span>
+                </LocalizedLink>
                 <LocalizedLink to="faq" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
                   <span className="font-medium">{t.internalLinks.faqLink}</span>
                 </LocalizedLink>

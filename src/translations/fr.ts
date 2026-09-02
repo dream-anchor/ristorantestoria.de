@@ -80,6 +80,7 @@ const frBase = {
     faqLinkDesc: "R\u00e9ponses \u00e0 vos questions sur STORIA",
     pizzaMunich: "Pizza Munich",
     pastaFrescaMuenchen: "Pâtes Fraîches Munich",
+    dailyLunchMenu: "Menu Déjeuner",
   },
   eventForm: {
     title: "Demande d'événement",

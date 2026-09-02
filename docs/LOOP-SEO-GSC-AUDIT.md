@@ -245,9 +245,25 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
 
 ## P3 — Interne Verlinkung stärken
 
-- [ ] **P3.1** `italiener-hauptbahnhof-muenchen/` und `mittags-menu/` prominenter intern verlinkt
+- [x] **P3.1** `italiener-hauptbahnhof-muenchen/` und `mittags-menu/` prominenter intern verlinkt
       (KONZEPT § P3).
       Beweis: `npm run build`/`lint` grün + Diff der Linkquelle(n).
+      ✓ 2026-09-02 · Bestandsmuster "Related Pages"-Sektion (pro SEO-Landingpage, z. B.
+      `ItalienischesRestaurantMuenchen.tsx`/`LunchMuenchen.tsx`) kopiert statt neu erfunden.
+      Vorher/Nachher-Linkzahl (`grep -rn 'to="…"' src/`, nur echte `LocalizedLink`/`baseSlug`-
+      Referenzen, ohne Config/Übersetzungsdateien): `italiener-hauptbahnhof-muenchen` 1 → 3
+      (`InternalLinks.tsx` bereits vorhanden; neu: `ItalienerMuenchen.tsx`,
+      `ItalienerKoenigsplatz.tsx` Related-Pages-Sektion — Schwesterseite zu Königsplatz, gleiches
+      Themenfeld "Italiener-Standorte"), `mittags-menu` +2 neue Quellen (`InternalLinks.tsx`
+      Home-Widget, `ItalienerMuenchen.tsx` Related-Pages) zusätzlich zu den bereits bestehenden
+      Navigation-/Speisekarte-/FAQ-/LunchMuenchen-/WildEssenMuenchen-Links. Neuer
+      Übersetzungsschlüssel `internalLinks.dailyLunchMenu` in `de.ts`/`en.ts`/`it.ts`/`fr.ts`
+      ergänzt. `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) ·
+      `npm run lint` → 182 Probleme (163 Fehler, 19 Warnungen), identisch zum dokumentierten
+      Baseline-Stand (siehe P0.1 ff.) — die 7 geänderten Dateien selbst 0 neue Findings (der
+      einzige Treffer in `it.ts` liegt bei Zeile 3589, weit entfernt vom Diff bei Zeile ~106,
+      vorbestehend). Kontakt.tsx/Reservierung.tsx nicht angefasst (`git diff` leer). Commit
+      `79bd114` auf Branch `seo-gsc-audit-p2-p3`, kein Push, kein PR (Einheit B erst nach P3.2).
 - [ ] **P3.2** Dünn verlinkte Sekundärsprachen-Seiten (`fr/occasions-speciales/nouvel-an/`,
       `en/wm-2026-public-viewing-muenchen/`) ergänzend verlinkt (KONZEPT § P3).
       Beweis: `npm run build`/`lint` grün + Diff.

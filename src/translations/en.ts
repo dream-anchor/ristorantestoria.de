@@ -80,6 +80,7 @@ const enBase = {
     faqLinkDesc: "Answers to your questions about STORIA",
     pizzaMunich: "Pizza Munich",
     pastaFrescaMuenchen: "Fresh Pasta Munich",
+    dailyLunchMenu: "Lunch Menu",
   },
   eventForm: {
     title: "Event Inquiry",

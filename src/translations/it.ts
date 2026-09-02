@@ -103,6 +103,7 @@ const itBase = {
     faqLinkDesc: "Risposte alle domande frequenti su STORIA",
     pizzaMunich: "Pizza Monaco",
     pastaFrescaMuenchen: "Pasta Fresca Monaco",
+    dailyLunchMenu: "Menu Pranzo",
   },
   eventForm: {
     title: "Richiesta Evento",

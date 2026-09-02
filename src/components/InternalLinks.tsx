@@ -6,6 +6,7 @@ const InternalLinks = () => {
 
   const links = [
     { baseSlug: "lunch-muenchen-maxvorstadt", label: t.internalLinks.lunchMunich },
+    { baseSlug: "mittags-menu", label: t.internalLinks.dailyLunchMenu },
     { baseSlug: "aperitivo-muenchen", label: t.internalLinks.aperitivoMunich },
     { baseSlug: "pizza-muenchen", label: "Pizza & Pizzeria M\u00fcnchen" },
     { baseSlug: "neapolitanische-pizza-muenchen", label: t.internalLinks.neapolitanPizza },
