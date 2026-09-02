@@ -61,10 +61,12 @@ Strings ändern (KONZEPT § „Harte Regel: Formulare nicht anfassen").
 
 ## P0 — Structured-Data-Bugfixes
 
-- [ ] **P0.1** `HomeVideo.tsx:42` `uploadDate` auf vollständigen ISO-8601-Zeitstempel mit
+- [x] **P0.1** `HomeVideo.tsx:42` `uploadDate` auf vollständigen ISO-8601-Zeitstempel mit
       Zeitzonen-Offset ändern (KONZEPT § P0.1).
-      Beweis: `npm run build` grün + `npm run lint` grün + Diff zeigt neuen `uploadDate`-Wert im
-      ISO-8601-Format mit Offset.
+      ✓ 2026-09-02 · `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) ·
+      `npm run lint` → 182 Probleme (163 Fehler, 19 Warnungen), identisch zum Stand vor dem Fix
+      (Stash-Vergleich gegen `main`), `HomeVideo.tsx` selbst ohne Lint-Findings · Diff:
+      `uploadDate: "2026-06-05"` → `uploadDate: "2026-06-05T18:00:00+02:00"`.
 - [ ] **P0.2** `performer`-Feld in den Event-JSON-LD-Blöcken `SilvesterMuenchen.tsx:168-183` und
       `ValentinstagMuenchen.tsx:166-179` ergänzen (KONZEPT § P0.2).
       Beweis: `npm run build`/`lint` grün + Diff zeigt `performer` in beiden Event-Objekten.
