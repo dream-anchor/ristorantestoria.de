@@ -203,9 +203,45 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
       `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` →
       182 Probleme (163 Fehler, 19 Warnungen), identisch zum dokumentierten Baseline-Stand (P2.1) —
       `.htaccess` wird vom Linter nicht erfasst.
-- [ ] **P2.3** CMS-Altlasten-Pfade geprüft: bereits durch Bestandsregeln abgedeckt oder Lücke
+- [x] **P2.3** CMS-Altlasten-Pfade geprüft: bereits durch Bestandsregeln abgedeckt oder Lücke
       geschlossen (KONZEPT § P2.3).
       Beweis: Bestandsregel-Fund im Wortlaut + ggf. Diff + `npm run build`/`lint` grün.
+      ✓ 2026-09-02 · Alle 5 URL-Gruppen live per `curl -sIL` gegen
+      `https://www.ristorantestoria.de` geprüft — **keine Lücke gefunden, `.htaccess` bleibt
+      unverändert**:
+      1. `/cms/wp-content/uploads/*.pdf` (3 alte Mittagskarten-PDFs): bereits vollständig
+      abgedeckt durch zwei Bestandsregeln in `public/.htaccess` § 4 — 6 explizit gelistete
+      PDFs bekommen `410 Gone` (Zeile 98-103, Live-Curl auf `Mittagskarte-Deutsch-
+      26.02.2025-din.pdf` → `410` bestätigt), und der Catch-All darunter
+      (`^cms/wp-content/uploads/ /mittags-menu/ [R=301,L]`, Zeile 114) fängt jeden nicht
+      explizit gelisteten PDF-Pfad ab (Live-Curl auf einen erfundenen Test-Pfad unter
+      demselben Verzeichnis → `301` → `/mittags-menu/` → `200`, bestätigt dass die Regel
+      pfadbasiert und nicht dateinamen-spezifisch greift). Die im GSC-Bucket gemeldeten 3
+      PDFs landen so in jedem Fall entweder auf `410` (bewusst entfernt) oder `301` auf den
+      inhaltlichen Nachfolger `/mittags-menu/` — kein Redirect-Ziel geraten, da die
+      Regel-Struktur die gesamte Pfadklasse abdeckt, nicht einzelne Dateinamen.
+      2. `/cms/speisekarte-2/`: bereits abgedeckt, `public/.htaccess:112` → Live-Curl `301` →
+      `/speisekarte/` → `200`.
+      3. `/cms/?page_id=2881`: bereits abgedeckt — die KONZEPT-Vermutung („fehlt vermutlich
+      als expliziter Fall") ist überholt, der explizite Fall existiert bereits in
+      `public/.htaccess:49-50` (WordPress Query-String Redirects, § 2, laufen VOR den
+      CMS-Pfad-Regeln in § 4). Live-Curl `301` → `/impressum/` → `200`.
+      4. `/admin/`: bereits korrekt behandelt, aber NICHT als WordPress-Altlast — `/admin/`
+      ist der reale, aktuelle Admin-Bereich des heutigen React/Refine-Stacks (siehe
+      Projekt-`CLAUDE.md` „Refine v5 Admin-Panel"), kein CMS-Rest. Live-Curl → `200` mit
+      `<meta name="robots" content="noindex, nofollow">` im HTML, zusätzlich
+      `Disallow: /admin/` in `robots.txt` (mit Kommentar „GESCHÜTZTE BEREICHE"). Der GSC-
+      Bucket-Eintrag „gecrawlt – nicht indexiert" ist hier das GEWÜNSCHTE Verhalten (Google
+      crawlt, respektiert aber noindex) — kein Bugfix nötig, explizit KEINEN Redirect/410
+      ergänzt, da das eine funktionierende Seite kaputt machen würde.
+      5. `http://www.ristorantestoria.de/?page_id=1753`: bereits abgedeckt — Live-Curl folgt
+      korrekt `http→https` (§1b) dann `page_id=1753→/kontakt/` (§2) → `200`. 2 Hops (Protokoll-
+      Upgrade + Query-String-Mapping), kein Canonical-Fehler wie bei P2.2 (dort ging es um
+      vermeidbare Pfad-Hops bei gleichem Protokoll) — kein Fix nötig.
+      **Ergebnis: 0 von 5 Gruppen mit echter Lücke, keine Code-Änderung.** `npm run build` →
+      grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` → 182 Probleme
+      (163 Fehler, 19 Warnungen), identisch zum dokumentierten Baseline-Stand (siehe P0.1 ff.)
+      — `git diff public/.htaccess` ist leer, keine Code-Änderung in diesem Kriterium.
 
 ## P3 — Interne Verlinkung stärken
 
