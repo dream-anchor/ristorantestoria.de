@@ -2,6 +2,7 @@ import weinserviceImage from "@/assets/weinservice.webp";
 import ravioliImage from "@/assets/ravioli.webp";
 import drinksImage from "@/assets/cocktails.webp";
 import breakfastImage from "@/assets/aussen.webp";
+import breakfastImage600 from "@/assets/aussen-600w.webp";
 import restaurantImage from "@/assets/haus-aussen-2.webp";
 import aperitivoImage from "@/assets/meeresfruchte.webp";
 import dessertImage from "@/assets/tiramisu.webp";
@@ -21,13 +22,18 @@ interface ImageCardProps {
   internalSlug?: string;
   /** LCP-Bild above-the-fold: eager + hohe Priorität statt lazy. */
   priority?: boolean;
+  /** Optional: kleinere Bild-Variante(n) für srcSet (Vermeidung von Overfetching). */
+  srcSet?: string;
+  sizes?: string;
 }
 
-const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug, priority = false }: ImageCardProps) => {
+const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug, priority = false, srcSet, sizes }: ImageCardProps) => {
   const content = (
     <div className={`relative overflow-hidden group ${className}`}>
       <img
         src={image}
+        srcSet={srcSet}
+        sizes={srcSet ? sizes : undefined}
         alt={alt}
         width={400}
         height={400}
@@ -125,6 +131,8 @@ const ImageGrid = () => {
           {/* Row 2 */}
           <ImageCard
             image={breakfastImage}
+            srcSet={`${breakfastImage600} 600w, ${breakfastImage} 896w`}
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
             alt={t.imageGrid.altTerrasse}
             title={t.imageGrid.breakfastTitle}
             subtitle={t.imageGrid.breakfastText}
