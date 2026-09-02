@@ -391,7 +391,7 @@ const RomantischesDinner = () => {
               </Button>
               <p className="mt-6 opacity-80 text-sm">{t.seo.romanticDinner.ctaTip}</p>
               <div className="flex flex-wrap justify-center gap-4 mt-6">
-                <a href="tel:+4989515196" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 515196</a>
+                <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
               </div>
             </section>

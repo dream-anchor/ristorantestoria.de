@@ -1724,7 +1724,7 @@ export const de = {
       heroEventsLink: "events-storia.de",
       // Intro
       introTitle: "Geburtstagsfeier M\u00fcnchen \u2013 Das STORIA f\u00fcr Ihren besonderen Tag",
-      introP1: "Sie planen eine Geburtstagsfeier in M\u00fcnchen und suchen die perfekte Location? Das Ristorante STORIA bietet seit 2015 den idealen Rahmen f\u00fcr Geburtstagsfeiern jeder Gr\u00f6\u00dfe. Von der intimen Feier mit den engsten Freunden bis zur gro\u00dfen Party f\u00fcr 80 G\u00e4ste \u2013 Familie Speranza und ihr Team sorgen daf\u00fcr, dass Ihr Geburtstag genau so wird, wie Sie es sich w\u00fcnschen.",
+      introP1: "Sie planen eine Geburtstagsfeier in M\u00fcnchen und suchen die perfekte Location? Das Ristorante STORIA bietet seit 2015 den idealen Rahmen f\u00fcr Geburtstagsfeiern jeder Gr\u00f6\u00dfe. Von der intimen Feier mit den engsten Freunden bis zur gro\u00dfen Party f\u00fcr 200 G\u00e4ste \u2013 Familie Speranza und ihr Team sorgen daf\u00fcr, dass Ihr Geburtstag genau so wird, wie Sie es sich w\u00fcnschen.",
       introP2: "Als Ihr Italiener in M\u00fcnchen Maxvorstadt verwandeln wir jeden Geburtstag in ein italienisches Fest: mit hausgemachter Pasta, Pizza aus dem Steinofen, erlesenen Weinen und der Herzlichkeit, die Italien so besonders macht.",
       // Birthday Types Section (5 event-based)
       typesTitle: "\ud83c\udf82 Welche Geburtstagsfeiern k\u00f6nnen Sie im STORIA feiern?",
