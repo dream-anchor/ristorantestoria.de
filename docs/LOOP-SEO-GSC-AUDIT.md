@@ -86,10 +86,21 @@ Strings ändern (KONZEPT § „Harte Regel: Formulare nicht anfassen").
 Geschäftsentscheidung, kein reiner Bugfix) — erst nach Freigabe committen. Bei allen dreien gilt
 die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vor Commit prüfen.
 
-- [ ] **P1.1** Title/Meta-Description für `kontakt/` überarbeitet (Pos. 3,56, CTR 0,33% — Vorschlag
+- [x] **P1.1** Title/Meta-Description für `kontakt/` überarbeitet (Pos. 3,56, CTR 0,33% — Vorschlag
       in KONZEPT § P1, `Kontakt.tsx` Zeilen 32-33/45-46) (KONZEPT § P1).
-      Beweis: Freigabe-Status + `npm run build`/`lint` grün + Diff (nur String-Literale) + neue
-      Title/Description im Wortlaut.
+      ✓ 2026-09-02 · Freigabe durch Antoine im Chat, 2026-09-02 ("Ja, setz alles um") · Geändert:
+      nur die 4 String-Literale `seoContent.de.title`/`.description` und `seoContent.en.title`/
+      `.description` in `Kontakt.tsx` (Zeilen 32-33/45-46), `git diff` verifiziert — keine
+      JSX-Struktur, keine Formularfelder angefasst. Neue Strings im Wortlaut:
+      DE Title: „STORIA München: Telefon, Anfahrt & Öffnungszeiten | Jetzt anrufen"
+      DE Description: „Sofort erreichbar: ☎ +49 89 51519696. Karlstraße 47a, Maxvorstadt — 5 Min.
+      vom Hauptbahnhof. Geöffnet Mo–Fr 9–1 Uhr. Jetzt anrufen oder Tisch reservieren!"
+      EN Title: „STORIA Munich: Phone, Directions & Opening Hours | Call Now"
+      EN Description: „Reach us instantly: call +49 89 51519696. Karlstraße 47a, Maxvorstadt — 5
+      min. from the main station. Open Mon–Fri 9am–1am. Call now or book a table!"
+      `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` →
+      182 Probleme (163 Fehler, 19 Warnungen), identisch zum Stand vor dem Fix (siehe P0.1/P0.2),
+      `Kontakt.tsx` selbst 0 Findings.
 - [ ] **P1.2** Title/Meta-Description für `reservierung/` überarbeitet (Pos. 3,72, CTR 0,52% —
       Vorschlag in KONZEPT § P1, `translations/{de,en}.ts` `pages.reservierung`) (KONZEPT § P1).
       Beweis: wie P1.1.

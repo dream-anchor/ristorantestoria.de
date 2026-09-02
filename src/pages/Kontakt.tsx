@@ -29,8 +29,8 @@ const Kontakt = () => {
   // SEO titles and descriptions per language
   const seoContent = {
     de: {
-      title: 'Kontakt & Anfahrt – STORIA Ristorante München Maxvorstadt',
-      description: 'STORIA München Kontakt: Karlstraße 47a, Maxvorstadt. Nähe Hauptbahnhof, Königsplatz & TU München. Öffnungszeiten Mo-Fr 9-1 Uhr. Jetzt anrufen: +49 89 51519696!',
+      title: 'STORIA München: Telefon, Anfahrt & Öffnungszeiten | Jetzt anrufen',
+      description: 'Sofort erreichbar: ☎ +49 89 51519696. Karlstraße 47a, Maxvorstadt — 5 Min. vom Hauptbahnhof. Geöffnet Mo–Fr 9–1 Uhr. Jetzt anrufen oder Tisch reservieren!',
       h1: 'Kontakt & Anfahrt – Italiener nahe Königsplatz München',
       intro: 'Besuchen Sie uns in der Karlstraße 47a – zentral in der Maxvorstadt, nur wenige Gehminuten vom Hauptbahnhof, Königsplatz und der TU München entfernt.',
       introP2: 'Ob Geschäftsessen in der Mittagspause, romantisches Dinner am Abend oder Feierabend-Aperitivo mit Freunden: Das STORIA ist Ihr italienisches Restaurant in München mit persönlichem Service und authentischer Küche. Rufen Sie uns an, schreiben Sie per WhatsApp oder planen Sie Ihre Route – wir freuen uns auf Ihren Besuch in der Münchner Maxvorstadt.',
@@ -42,8 +42,8 @@ const Kontakt = () => {
       nearby: 'In der Nähe',
     },
     en: {
-      title: 'Contact & Directions – STORIA Ristorante Munich Maxvorstadt',
-      description: 'STORIA Munich contact: Karlstraße 47a, Maxvorstadt. Near main station, Königsplatz & TU Munich. Open Mon-Fri 9am-1am. Call now: +49 89 51519696!',
+      title: 'STORIA Munich: Phone, Directions & Opening Hours | Call Now',
+      description: 'Reach us instantly: call +49 89 51519696. Karlstraße 47a, Maxvorstadt — 5 min. from the main station. Open Mon–Fri 9am–1am. Call now or book a table!',
       h1: 'Contact & Directions – Italian Restaurant near Königsplatz Munich',
       intro: 'Visit us at Karlstraße 47a – centrally located in Maxvorstadt, just a few minutes walk from the main station, Königsplatz and TU Munich.',
       introP2: 'Whether you are looking for a business lunch, a romantic dinner or an after-work aperitivo with friends: STORIA is your Italian restaurant in Munich with personal service and authentic cuisine. Call us, write via WhatsApp or plan your route – we look forward to your visit.',
