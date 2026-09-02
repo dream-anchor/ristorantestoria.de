@@ -53,14 +53,15 @@ export const FACTS = {
   },
 
   // ── Kapazität — Werte exakt wie auf der Startseite ──
-  // "Innen und auf der Terrasse jeweils bis zu 100 Sitzplätze oder 180 Stehplätze."
-  // Hinweis: An anderen Stellen (Filmfest-/Reisegruppen-/Saison-Seiten) stehen
-  // abweichend "bis 300 Stehplätze" / "200 Sitzplätze gesamt". Diese sind bewusst
-  // NICHT hier vereinheitlicht – siehe Follow-up im Report (Kundenklärung offen).
+  // Sitzplätze: 100 innen + 100 auf der Terrasse (unverändert).
+  // Stehempfang: einheitlich bis zu 300 Gäste – unabhängig davon, ob innen,
+  // außen oder gemischt (Fakten-Klärung Antoine, 2026-09-02). Die zuvor hier
+  // dokumentierte, uneinheitliche "180 pro Bereich"-Angabe war falsch und
+  // wurde branchweit auf 300 korrigiert (siehe PR fix-standing-capacity-300).
   capacity: {
-    indoorSeats: 100, // Innenbereich, Sitzplätze
-    terraceSeats: 100, // Terrasse, Sitzplätze
-    standingPerArea: 180, // Stehplätze je Bereich
+    indoorSeats: STORIA.capacity.indoor.seats, // Innenbereich, Sitzplätze
+    terraceSeats: STORIA.capacity.terrace.seats, // Terrasse, Sitzplätze
+    standing: STORIA.capacity.indoor.standing, // Stehempfang, einheitlich (innen/außen/gemischt)
   },
 
   // ── TODO(Kundenklärung): Weihnachts-Menüpreis uneinheitlich (45 € vs. 49 €) ──
