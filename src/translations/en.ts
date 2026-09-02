@@ -1674,13 +1674,13 @@ const enBase = {
     },
     birthday: {
       // SEO
-      seoTitle: "Birthday Party Munich | Up to 100 Guests from €35 – STORIA",
-      seoDescription: "Birthday party Munich at STORIA: menu, birthday cake & up to 100 guests. 30th, 40th, 50th birthday – from €35 p.p. Inquire now!",
+      seoTitle: "Birthday Party Munich | Up to 200 Guests from €35 – STORIA",
+      seoDescription: "Birthday party Munich at STORIA: menu, birthday cake & up to 200 guests. 30th, 40th, 50th birthday – from €35 p.p. Inquire now!",
       breadcrumb: "Birthday Party Munich",
       // Hero
       heroTitle: "Birthday Party Munich – Celebrate Italian Style at STORIA",
       heroSubtitle: "Milestone Birthdays, Surprise Parties & Family Celebrations | STORIA at Königsplatz",
-      heroBadge1: "🎂 up to 100 Guests",
+      heroBadge1: "🎂 up to 200 Guests",
       heroBadge2: "🍕 Italian Cuisine",
       heroBadge3: "📍 Central Königsplatz",
       heroDescription: "Your birthday deserves a special celebration at a special place. At Ristorante STORIA in Maxvorstadt, celebrate your birthday with authentic Italian cuisine, warm service and an atmosphere that delights every guest. Whether milestone birthday, surprise party or relaxed dinner with friends – we make your day unforgettable.",
@@ -4084,7 +4084,7 @@ const enExtra = {
       tldr: "Event location STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for corporate events, birthdays, weddings and Christmas parties with 20–180 guests. 100 seats inside + 100 on the covered terrace. Custom menus, professional event service. 5 min from Königsplatz. Family-run since 2015 by the Speranza family. Inquiries: +49 89 51519696.",
     },
     birthday: {
-      tldr: "Birthday party at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for birthday celebrations with 10–100 guests. Custom menus, birthday cake and personal service from the Speranza family. 5 min from Königsplatz. Family-run since 2015. 4.5 stars from over 800 Google reviews. Inquiries: +49 89 51519696.",
+      tldr: "Birthday party at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian restaurant for birthday celebrations with 2–200 guests. Custom menus, birthday cake and personal service from the Speranza family. 5 min from Königsplatz. Family-run since 2015. 4.5 stars from over 800 Google reviews. Inquiries: +49 89 51519696.",
       faq7Question: "How much does a birthday party for 30 people at the restaurant cost?",
       faq7Answer: "At STORIA, expect around €40–70 per person including drinks, depending on the menu. There is no room hire – you only pay for food and drinks.",
     },

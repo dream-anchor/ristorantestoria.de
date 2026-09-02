@@ -1704,17 +1704,17 @@ export const de = {
     },
     birthday: {
       // SEO
-      seoTitle: "Geburtstagsfeier München – Restaurant für 10–100 Gäste | STORIA",
+      seoTitle: "Geburtstagsfeier München – Restaurant für 2–200 Gäste | STORIA",
       seoDescription: "Geburtstag feiern beim Italiener: eigene Bereiche, Menü oder Buffet, Terrasse, faire Preise pro Person. Jetzt unverbindlich anfragen – Karlstraße 47a, Maxvorstadt.",
       breadcrumb: "Geburtstagsfeier M\u00fcnchen",
       // Hero
       heroTitle: "Geburtstagsfeier München – Italienisch feiern im STORIA",
       heroSubtitle: "Runder Geburtstag, \u00dcberraschungsparty & Familienfeiern | STORIA am K\u00f6nigsplatz",
-      heroBadge1: "🎂 bis 100 Gäste",
+      heroBadge1: "🎂 bis 200 Gäste",
       heroBadge2: "\ud83c\udf55 Italienische K\u00fcche",
       heroBadge3: "\ud83d\udccd Zentral K\u00f6nigsplatz",
       heroDescription: "Ihr Geburtstag verdient eine besondere Feier an einem besonderen Ort. Im Ristorante STORIA in der Maxvorstadt feiern Sie Ihren Geburtstag mit authentischer italienischer K\u00fcche, herzlichem Service und einem Ambiente, das jeden Gast begeistert. Ob runder Geburtstag, \u00dcberraschungsparty oder entspanntes Dinner mit Freunden \u2013 wir machen Ihren Tag unvergesslich.",
-      tldr: "Geburtstagsfeier im STORIA München Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Geburtstagsfeiern mit 10–100 Gästen. Individuelle Menüs, Geburtstagstorte und persönlicher Service von Familie Speranza. 5 Min. vom Königsplatz. Seit 2015 Familienbetrieb. 4,5 Sterne bei über 800 Google-Bewertungen. Anfragen: +49 89 51519696.",
+      tldr: "Geburtstagsfeier im STORIA München Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Geburtstagsfeiern mit 2–200 Gästen. Individuelle Menüs, Geburtstagstorte und persönlicher Service von Familie Speranza. 5 Min. vom Königsplatz. Seit 2015 Familienbetrieb. 4,5 Sterne bei über 800 Google-Bewertungen. Anfragen: +49 89 51519696.",
       heroCta: "Geburtstagsfeier anfragen",
       heroCtaSecondary: "089 51519696",
       heroEventsNote: "Alle Geburtstags-Anfragen \u00fcber unsere Event-Website:",
