@@ -3646,9 +3646,9 @@ export const de = {
       breadcrumb: 'Getränke',
     },
     mittagsmenu: {
-      title: 'Mittagskarte M\u00fcnchen \u2013 wechselndes Men\u00fc Mo\u2013Fr | STORIA',
+      title: 'Mittagstisch Maxvorstadt ab 14,90 \u20ac \u2013 STORIA, Mo\u2013Fr',
       h1: 'Mittagskarte \u2013 Tagesgerichte frisch aus der K\u00fcche',
-      description: 'Mittagsmenü im STORIA München Maxvorstadt: Frische italienische Küche Mo-Fr. Lunch nahe Hauptbahnhof & Königsplatz. Jetzt genießen!',
+      description: 'Business Lunch ab 14,90 €: wechselndes 3-Gänge-Menü Mo–Fr ab 11:30 Uhr. 5 Min. vom Königsplatz. Reservierung empfohlen — jetzt Karte ansehen!',
       introSeo: 'Unser Mittagstisch in der Maxvorstadt bietet Ihnen montags bis freitags frische italienische Küche zu fairen Preisen – ideal für den Business Lunch in München. Ab 11:30 Uhr servieren wir ein wöchentlich wechselndes Mittagsmenü mit Vorspeise, Hauptgang und Dessert, zubereitet aus saisonalen Zutaten direkt aus Italien. Ob knusprige Steinofen-Pizza, hausgemachte Pasta, ein leichter Salat oder ein wärmendes Risotto – bei uns finden Sie das perfekte Mittagessen für eine entspannte Pause vom Büroalltag. Dazu bieten wir Tagessuppen und frische Fischgerichte als Alternative.',
       introSeoP2: 'Das STORIA liegt nur fünf Gehminuten vom Königsplatz und wenige Minuten vom Hauptbahnhof München entfernt – ideal erreichbar für alle, die in der Maxvorstadt, der Innenstadt oder rund um die TU München arbeiten. Mit der U-Bahn erreichen Sie uns bequem über die Station Königsplatz. Unser Mittagstisch ist bei Stammgästen beliebt, weil wir Wert auf schnellen, aufmerksamen Service legen, ohne bei der Qualität Kompromisse zu machen. Reservierungen für den Lunch sind empfehlenswert, besonders an sonnigen Tagen mit geöffneter Terrasse. Kommen Sie vorbei und überzeugen Sie sich selbst – ein Stück Italien in Ihrer Mittagspause.',
       breadcrumb: 'Mittagsmenü',
@@ -3669,9 +3669,9 @@ export const de = {
       breadcrumb: 'Über uns',
     },
     reservierung: {
-      title: 'Tisch reservieren – Restaurant München',
+      title: 'Jetzt Tisch reservieren – STORIA Maxvorstadt, Königsplatz',
       h1: 'Tisch reservieren',
-      description: 'Tisch reservieren im STORIA München Maxvorstadt: Online buchen oder anrufen. Ihr Italiener nahe Königsplatz & Hauptbahnhof. Jetzt Platz sichern!',
+      description: 'In 2 Minuten online buchen oder anrufen: +49 89 28806855. Ihr Italiener am Königsplatz, Maxvorstadt. Plätze sind schnell vergeben — jetzt sichern!',
       introSeo: 'Reservieren Sie Ihren Tisch im Ristorante STORIA – Ihrem Italiener in der Münchner Maxvorstadt, direkt am Königsplatz. Ob ein romantisches Dinner zu zweit, ein geselliges Abendessen mit Freunden oder eine größere Feier im Familien- oder Kollegenkreis: Mit einer Reservierung sichern Sie sich Ihren Platz in einem der beliebtesten italienischen Restaurants in München. Buchen Sie bequem online über unser Reservierungssystem oder rufen Sie uns direkt an unter +49 89 28806855 – wir beraten Sie gerne persönlich zu Tischoptionen und besonderen Wünschen.',
       introSeoP2: 'Das STORIA liegt zentral in der Maxvorstadt, nur fünf Gehminuten vom Königsplatz und wenige Minuten vom Hauptbahnhof München entfernt. Mit der U-Bahn (Haltestelle Königsplatz) oder zu Fuß von den Pinakotheken sind wir schnell erreichbar. Wir empfehlen besonders an Wochenenden und Feiertagen eine rechtzeitige Reservierung, da unsere Plätze schnell vergeben sind. Im Sommer ist auch unsere überdachte Terrasse ein beliebter Platz. Für Gruppen ab 10 Personen erstellen wir gerne ein individuelles Menü – sprechen Sie uns einfach bei der Buchung darauf an. Unser Team freut sich darauf, Sie mit authentischer italienischer Gastfreundschaft zu empfangen und Ihnen einen unvergesslichen Abend zu bereiten.',
       breadcrumb: 'Reservierung',

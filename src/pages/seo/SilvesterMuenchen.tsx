@@ -175,6 +175,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
               "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
+              "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "image": ["https://www.ristorantestoria.de/silvester-gala-storia-muenchen.jpg"],
               "offers": [
                 { "@type": "Offer", "name": "4-Gänge-Degustationsmenü", "price": "65.90", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },

@@ -39,7 +39,7 @@ const HomeVideo = () => {
     description: VIDEO_DESCRIPTION,
     thumbnailUrl: POSTER_URL,
     contentUrl: VIDEO_URL,
-    uploadDate: "2026-06-05",
+    uploadDate: "2026-06-05T18:00:00+02:00",
     inLanguage: "de-DE",
     publisher: { "@id": `${STORIA.url}/#restaurant` },
     regionsAllowed: "DE",

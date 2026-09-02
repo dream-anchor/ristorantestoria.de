@@ -173,6 +173,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
               "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
+              "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "image": ["https://www.ristorantestoria.de/valentinstag-menue-storia-muenchen.jpg"],
               "offers": [
                 { "@type": "Offer", "name": "Valentinstag Classic – 3-Gang-Menü", "price": "55.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "validFrom": "2027-01-15" },
