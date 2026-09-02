@@ -3674,8 +3674,8 @@ export const de = {
     reservierung: {
       title: 'Jetzt Tisch reservieren – STORIA Maxvorstadt, Königsplatz',
       h1: 'Tisch reservieren',
-      description: 'In 2 Minuten online buchen oder anrufen: +49 89 28806855. Ihr Italiener am Königsplatz, Maxvorstadt. Plätze sind schnell vergeben — jetzt sichern!',
-      introSeo: 'Reservieren Sie Ihren Tisch im Ristorante STORIA – Ihrem Italiener in der Münchner Maxvorstadt, direkt am Königsplatz. Ob ein romantisches Dinner zu zweit, ein geselliges Abendessen mit Freunden oder eine größere Feier im Familien- oder Kollegenkreis: Mit einer Reservierung sichern Sie sich Ihren Platz in einem der beliebtesten italienischen Restaurants in München. Buchen Sie bequem online über unser Reservierungssystem oder rufen Sie uns direkt an unter +49 89 28806855 – wir beraten Sie gerne persönlich zu Tischoptionen und besonderen Wünschen.',
+      description: 'In 2 Minuten online buchen oder anrufen: +49 89 51519696. Ihr Italiener am Königsplatz, Maxvorstadt. Plätze sind schnell vergeben — jetzt sichern!',
+      introSeo: 'Reservieren Sie Ihren Tisch im Ristorante STORIA – Ihrem Italiener in der Münchner Maxvorstadt, direkt am Königsplatz. Ob ein romantisches Dinner zu zweit, ein geselliges Abendessen mit Freunden oder eine größere Feier im Familien- oder Kollegenkreis: Mit einer Reservierung sichern Sie sich Ihren Platz in einem der beliebtesten italienischen Restaurants in München. Buchen Sie bequem online über unser Reservierungssystem oder rufen Sie uns direkt an unter +49 89 51519696 – wir beraten Sie gerne persönlich zu Tischoptionen und besonderen Wünschen.',
       introSeoP2: 'Das STORIA liegt zentral in der Maxvorstadt, nur fünf Gehminuten vom Königsplatz und wenige Minuten vom Hauptbahnhof München entfernt. Mit der U-Bahn (Haltestelle Königsplatz) oder zu Fuß von den Pinakotheken sind wir schnell erreichbar. Wir empfehlen besonders an Wochenenden und Feiertagen eine rechtzeitige Reservierung, da unsere Plätze schnell vergeben sind. Im Sommer ist auch unsere überdachte Terrasse ein beliebter Platz. Für Gruppen ab 10 Personen erstellen wir gerne ein individuelles Menü – sprechen Sie uns einfach bei der Buchung darauf an. Unser Team freut sich darauf, Sie mit authentischer italienischer Gastfreundschaft zu empfangen und Ihnen einen unvergesslichen Abend zu bereiten.',
       breadcrumb: 'Reservierung',
     },
@@ -3702,7 +3702,7 @@ export const de = {
     },
     {
       question: 'Wie kann ich einen Tisch im STORIA reservieren?',
-      answer: 'Sie können einen Tisch online über OpenTable auf unserer Reservierungsseite buchen oder telefonisch unter +49 89 515196 reservieren. Als beliebte Pizzeria Maxvorstadt empfehlen wir besonders für Wochenenden eine vorherige Reservierung.',
+      answer: 'Sie können einen Tisch online über OpenTable auf unserer Reservierungsseite buchen oder telefonisch unter +49 89 51519696 reservieren. Als beliebte Pizzeria Maxvorstadt empfehlen wir besonders für Wochenenden eine vorherige Reservierung.',
     },
     {
       question: 'Was bietet La Storia an?',

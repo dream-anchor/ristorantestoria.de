@@ -3572,7 +3572,7 @@ const frBase = {
       title: 'R\u00e9server une Table \u2013 Restaurant Munich',
       h1: 'R\u00e9server une Table',
       description: 'R\u00e9servez une table chez STORIA Munich Maxvorstadt: R\u00e9servez en ligne ou appelez. Votre restaurant italien pr\u00e8s de K\u00f6nigsplatz & gare centrale. R\u00e9servez votre place!',
-      introSeo: 'R\u00e9servez votre table au Ristorante STORIA \u2013 votre restaurant italien dans la Maxvorstadt de Munich, directement \u00e0 K\u00f6nigsplatz. Que ce soit un d\u00eener romantique \u00e0 deux, une soir\u00e9e conviviale entre amis ou une plus grande c\u00e9l\u00e9bration en famille ou entre coll\u00e8gues : avec une r\u00e9servation, vous vous assurez une place dans l\u2019un des restaurants italiens les plus appr\u00e9ci\u00e9s de Munich. R\u00e9servez facilement en ligne via notre syst\u00e8me de r\u00e9servation ou appelez-nous directement au +49 89 28806855.',
+      introSeo: 'R\u00e9servez votre table au Ristorante STORIA \u2013 votre restaurant italien dans la Maxvorstadt de Munich, directement \u00e0 K\u00f6nigsplatz. Que ce soit un d\u00eener romantique \u00e0 deux, une soir\u00e9e conviviale entre amis ou une plus grande c\u00e9l\u00e9bration en famille ou entre coll\u00e8gues : avec une r\u00e9servation, vous vous assurez une place dans l\u2019un des restaurants italiens les plus appr\u00e9ci\u00e9s de Munich. R\u00e9servez facilement en ligne via notre syst\u00e8me de r\u00e9servation ou appelez-nous directement au +49 89 51519696.',
       introSeoP2: 'Le STORIA est situ\u00e9 au c\u0153ur de Maxvorstadt, \u00e0 seulement cinq minutes \u00e0 pied de K\u00f6nigsplatz et \u00e0 quelques minutes de la gare centrale de Munich. Vous pouvez nous rejoindre facilement en m\u00e9tro (arr\u00eat K\u00f6nigsplatz) ou \u00e0 pied depuis les Pinacoth\u00e8ques. Nous recommandons particuli\u00e8rement de r\u00e9server \u00e0 l\u2019avance les week-ends et jours f\u00e9ri\u00e9s, car nos places se remplissent vite. En \u00e9t\u00e9, notre terrasse couverte est un lieu particuli\u00e8rement pris\u00e9. Pour les groupes de 10 personnes ou plus, nous cr\u00e9ons volontiers un menu sur mesure \u2013 mentionnez-le simplement lors de votre r\u00e9servation.',
       breadcrumb: 'R\u00e9servation',
     },
@@ -3599,7 +3599,7 @@ const frBase = {
     },
     {
       question: 'Comment puis-je réserver une table chez STORIA?',
-      answer: 'Vous pouvez réserver une table en ligne via OpenTable sur notre page de réservation ou en appelant le +49 89 515196. En tant que pizzeria populaire à Maxvorstadt, nous recommandons particulièrement de réserver pour les week-ends.',
+      answer: 'Vous pouvez réserver une table en ligne via OpenTable sur notre page de réservation ou en appelant le +49 89 51519696. En tant que pizzeria populaire à Maxvorstadt, nous recommandons particulièrement de réserver pour les week-ends.',
     },
     {
       question: 'Que propose La Storia?',

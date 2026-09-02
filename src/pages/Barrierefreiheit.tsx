@@ -65,7 +65,7 @@ const Barrierefreiheit = () => {
               </p>
               <address className="not-italic space-y-1">
                 <p><strong>Speranza GmbH</strong></p>
-                <p>Theresienstra\u00dfe 56, 80333 M\u00fcnchen</p>
+                <p>Karlstra\u00dfe 47a, 80333 M\u00fcnchen</p>
                 <p>
                   E-Mail:{" "}
                   <EmailLink className="text-primary hover:underline">
@@ -74,8 +74,8 @@ const Barrierefreiheit = () => {
                 </p>
                 <p>
                   Telefon:{" "}
-                  <a href="tel:+498928806855" className="text-primary hover:underline">
-                    <PhoneText>+49 89 28806855</PhoneText>
+                  <a href="tel:+498951519696" className="text-primary hover:underline">
+                    <PhoneText>+49 89 51519696</PhoneText>
                   </a>
                 </p>
               </address>
