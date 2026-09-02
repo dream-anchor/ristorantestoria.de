@@ -1519,7 +1519,7 @@ export const de = {
       eventTypesTitle: "Welche Events können Sie im STORIA feiern?",
       eventTypeBirthday: "Geburtstagsfeiern",
       eventTypeBirthdayIcon: "🎂",
-      eventTypeBirthdayDesc: "Runder Geburtstag, Überraschungsparty oder gemütliche Feier: Das STORIA ist perfekt für Geburtstagsfeiern jeder Art. Von 10 bis 100 Gästen – mit italienischem Buffet oder Menü nach Wahl.",
+      eventTypeBirthdayDesc: "Runder Geburtstag, Überraschungsparty oder gemütliche Feier: Das STORIA ist perfekt für Geburtstagsfeiern jeder Art. Von 2 bis 200 Gästen – mit italienischem Buffet oder Menü nach Wahl.",
       eventTypeBirthdayItem1: "30., 40., 50. Geburtstag",
       eventTypeBirthdayItem2: "Überraschungspartys möglich",
       eventTypeBirthdayItem3: "Individuelle Dekoration",
