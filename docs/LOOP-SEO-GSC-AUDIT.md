@@ -316,9 +316,38 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
 
 ## P5 — Indexierung anstoßen (hartes Gate: erst nach Einheit-B-Deploy)
 
-- [ ] **P5.1** 9 „gefunden – nicht indexiert"-URLs per `scripts/request-indexing.mjs` eingereicht
+- [x] **P5.1** 9 „gefunden – nicht indexiert"-URLs per `scripts/request-indexing.mjs` eingereicht
       (KONZEPT § P5).
       Beweis: Script-Output je URL (eingereicht/fehlgeschlagen).
+      ✓ 2026-09-02 · Hartes Gate geprüft: `curl -I https://www.ristorantestoria.de/it/besondere-
+      anlaesse/valentinstag-menue/` → `301` (Redirect-Kette, live seit Einheit-B-Merge PR #61) →
+      Einheit B bestätigt live. Die exakten 9 Original-URLs aus dem GSC-Export von 01.09.2026
+      lagen nicht mehr vor; rekonstruiert aus KONZEPT § P5 ("candlelight-menue/oktoberfest-menue/
+      capodanno-Varianten in EN/FR/IT" + `barrierefreiheit`) gegen die tatsächlich aktuellen
+      Slugs: `src/config/seasonalMenus.ts` (Silvester-Slugs en=`new-years-eve`, it=`capodanno`,
+      fr=`nouvel-an`; `PARENT_SLUGS`), `src/data/special-menus-fallback.json` (Oktoberfest
+      `slug_en`/`slug_it`/`slug_fr` = `oktoberfest-menu`/`oktoberfest-menu-it`/
+      `oktoberfest-menu-fr`), `TerrasseMuenchen.tsx`/`HochzeitsfeierMuenchen.tsx`
+      (Candlelight-Slug für EN/IT/FR einheitlich `candlelight-menu`) und `src/config/slugs.json`
+      (`barrierefreiheit` nur in DE vorhanden, root-level). Ergibt 3 Menüs × 3 Sprachen (EN/IT/FR)
+      = 9 Seiten + `barrierefreiheit` = **10 URLs** — eine mehr als im KONZEPT-Text beziffert;
+      Diskrepanz vermutlich Zähl-Ungenauigkeit im ursprünglichen GSC-Export-Wortlaut, nicht
+      korrigiert da nicht mehr nachvollziehbar, stattdessen alle 10 sauber verifizierten URLs
+      eingereicht statt eine davon zu raten/wegzulassen. Jede der 10 URLs vor Einreichung per
+      `curl -s -o /dev/null -w "%{http_code}" -L` einzeln geprüft → alle 10× `200`. Eingereicht:
+      `en/special-occasions/new-years-eve/`, `fr/occasions-speciales/nouvel-an/`,
+      `it/occasioni-speciali/capodanno/`, `en/special-occasions/oktoberfest-menu/`,
+      `it/occasioni-speciali/oktoberfest-menu-it/`, `fr/occasions-speciales/oktoberfest-menu-fr/`,
+      `en/special-occasions/candlelight-menu/`, `it/occasioni-speciali/candlelight-menu/`,
+      `fr/occasions-speciales/candlelight-menu/`, `barrierefreiheit/`. Script-Output: „Ergebnis:
+      10 eingereicht, 0 fehlgeschlagen (von 10 URLs)". **Nebenbefund:** `node scripts/
+      request-indexing.mjs --help` wird vom Script nicht als Hilfe-Flag erkannt (kein `--help`-
+      Handling im Quelltext) und fällt auf den Default-Modus zurück — dabei wurden versehentlich
+      2× alle 48 DE-Sitemap-URLs erneut zur Indexierung eingereicht (harmlos, da bereits bekannte/
+      indexierte Bestandsseiten, nur Recrawl-Anstoß, kein Fehlverhalten, Tageskontingent
+      200/Tag nicht ausgeschöpft — 48+48+10 = 106 von 200). Für künftige Aufrufe: Script-Optionen
+      immer aus dem Quelltext-Kommentar lesen (`--dry-run`, `--all`, `--priority`, Pfade als
+      positionelle Argumente), nicht `--help` verwenden.
 
 ---
 
