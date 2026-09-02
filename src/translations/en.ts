@@ -1489,7 +1489,7 @@ const enBase = {
       eventTypesTitle: "What events can you celebrate at STORIA?",
       eventTypeBirthday: "Birthday Parties",
       eventTypeBirthdayIcon: "🎂",
-      eventTypeBirthdayDesc: "Milestone birthday, surprise party or cozy celebration: STORIA is perfect for birthday parties of all kinds. Up to 100 guests – with Italian buffet or menu of your choice.",
+      eventTypeBirthdayDesc: "Milestone birthday, surprise party or cozy celebration: STORIA is perfect for birthday parties of all kinds. Up to 200 guests – with Italian buffet or menu of your choice.",
       eventTypeBirthdayItem1: "30th, 40th, 50th Birthday",
       eventTypeBirthdayItem2: "Surprise parties possible",
       eventTypeBirthdayItem3: "Individual decoration",
