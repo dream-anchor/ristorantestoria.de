@@ -1479,7 +1479,7 @@ const frBase = {
       eventTypesTitle: "Quels événements pouvez-vous célébrer au STORIA ?",
       eventTypeBirthday: "Fêtes d'Anniversaire",
       eventTypeBirthdayIcon: "🎂",
-      eventTypeBirthdayDesc: "Anniversaire important, fête surprise ou célébration conviviale : STORIA est parfait pour les fêtes d'anniversaire de toutes sortes. Jusqu'à 100 invités – avec buffet italien ou menu au choix.",
+      eventTypeBirthdayDesc: "Anniversaire important, fête surprise ou célébration conviviale : STORIA est parfait pour les fêtes d'anniversaire de toutes sortes. Jusqu'à 200 invités – avec buffet italien ou menu au choix.",
       eventTypeBirthdayItem1: "30ème, 40ème, 50ème Anniversaire",
       eventTypeBirthdayItem2: "Fêtes surprises possibles",
       eventTypeBirthdayItem3: "Décoration individuelle",

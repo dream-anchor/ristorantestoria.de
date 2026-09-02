@@ -1505,7 +1505,7 @@ const itBase = {
       eventTypesTitle: "Quali eventi potete festeggiare in STORIA?",
       eventTypeBirthday: "Feste di Compleanno",
       eventTypeBirthdayIcon: "🎂",
-      eventTypeBirthdayDesc: "Compleanno importante, festa a sorpresa o celebrazione accogliente: STORIA è perfetto per feste di compleanno di ogni tipo. Fino a 300 ospiti possibili – con buffet italiano o menu a scelta.",
+      eventTypeBirthdayDesc: "Compleanno importante, festa a sorpresa o celebrazione accogliente: STORIA è perfetto per feste di compleanno di ogni tipo. Fino a 200 ospiti – con buffet italiano o menu a scelta.",
       eventTypeBirthdayItem1: "30°, 40°, 50° Compleanno",
       eventTypeBirthdayItem2: "Feste a sorpresa possibili",
       eventTypeBirthdayItem3: "Decorazione individuale",
