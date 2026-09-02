@@ -310,9 +310,21 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
 
 ## P4 — GEO-Content-Ausbau (Deliverable, kein Code)
 
-- [ ] **P4.1** Content-Gap-Analyse für die AI-Overview-Top-Seiten erstellt und Antoine im Chat zur
+- [x] **P4.1** Content-Gap-Analyse für die AI-Overview-Top-Seiten erstellt und Antoine im Chat zur
       Freigabe vorgelegt (KONZEPT § P4). Kein Code-Commit in diesem Kriterium.
-      Beweis: Konzeptpapier-Inhalt in der Rückmeldung + Freigabe-Status (angefragt/erhalten).
+      ✓ 2026-09-02 · Ursprünglicher KONZEPT-Vorschlag „FAQ-Ausbau" per `grep -c -i faq` auf den
+      5 Top-AI-Overview-Seiten gegengeprüft — alle bereits umfangreich ausgestattet
+      (Aperitivo 18, Romantic Dinner/Geburtstag/Silvester je 21, Catering 14 FAQ-Bezüge) →
+      Vorschlag verworfen, trägt nicht. Stattdessen im Chat vorgelegt: Risiko liegt nicht in
+      fehlendem Content, sondern in falschen Fakten in bestehendem Content (Beleg: die
+      Geburtstagsseite hatte bis heute falsche Gästekapazität, siehe PR #59/#60) — empfohlen
+      und von Antoine freigegeben ("Kannst du alles umsetzen?", 2026-09-02): Fakten-Stichprobe
+      (Preise/Kapazitäten/Öffnungszeiten) in den FAQ-Antworten der 5 Top-Seiten gegen aktuelle
+      Werte, als Anschlussarbeit unter „P4.2" nachgetragen.
+- [ ] **P4.2** Fakten-Stichprobe (Preise/Kapazitäten/Öffnungszeiten) in den FAQ-Antworten der
+      5 Top-AI-Overview-Seiten (Aperitivo, Romantic Dinner, Geburtstagsfeier, Silvester,
+      Catering) gegen aktuelle Werte geprüft, Abweichungen korrigiert.
+      Beweis: pro Seite Fund (stimmt/Abweichung) + ggf. Diff + `npm run build`/`lint` grün.
 
 ## P5 — Indexierung anstoßen (hartes Gate: erst nach Einheit-B-Deploy)
 
