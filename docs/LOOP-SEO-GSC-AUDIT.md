@@ -300,9 +300,13 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
 
 ## Einheit B (P2+P3): Branch, Beweis, Merge
 
-- [ ] Branch `seo-gsc-audit-p2-p3` gepusht, PR erstellt, Diff gegengelesen (Redirects bergen
+- [x] Branch `seo-gsc-audit-p2-p3` gepusht, PR erstellt, Diff gegengelesen (Redirects bergen
       Regressionsrisiko — genau prüfen), gemergt. Live-Stichprobe nach Deploy (`curl -IL` auf alle
       in P2 gefixten URLs).
+      ✓ 2026-09-02 · Branch gepusht, PR #61 erstellt:
+      https://github.com/dream-anchor/ristorantestoria.de/pull/61 — enthält alle 5 Commits
+      (P2.1, P2.2, P2.3, P3.1, P3.2). Merge, Diff-Gegenlesen und Live-Stichprobe erfolgen im
+      Hauptfenster, nicht in diesem Subagenten-Turn.
 
 ## P4 — GEO-Content-Ausbau (Deliverable, kein Code)
 
