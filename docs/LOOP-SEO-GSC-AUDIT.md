@@ -67,9 +67,18 @@ Strings ändern (KONZEPT § „Harte Regel: Formulare nicht anfassen").
       `npm run lint` → 182 Probleme (163 Fehler, 19 Warnungen), identisch zum Stand vor dem Fix
       (Stash-Vergleich gegen `main`), `HomeVideo.tsx` selbst ohne Lint-Findings · Diff:
       `uploadDate: "2026-06-05"` → `uploadDate: "2026-06-05T18:00:00+02:00"`.
-- [ ] **P0.2** `performer`-Feld in den Event-JSON-LD-Blöcken `SilvesterMuenchen.tsx:168-183` und
+- [x] **P0.2** `performer`-Feld in den Event-JSON-LD-Blöcken `SilvesterMuenchen.tsx:168-183` und
       `ValentinstagMuenchen.tsx:166-179` ergänzen (KONZEPT § P0.2).
-      Beweis: `npm run build`/`lint` grün + Diff zeigt `performer` in beiden Event-Objekten.
+      ✓ 2026-09-02 · Statt des im KONZEPT vorgeschlagenen Literals `{"@type": "Restaurant", "name":
+      "Ristorante STORIA"}` wiederverwendet: `"performer": { "@id":
+      "https://www.ristorantestoria.de/#restaurant" }` — referenziert dieselbe `#restaurant`-Node
+      (`StructuredData.tsx:43-46`, `@type: 'Restaurant'`, `name: STORIA.schemaName`), die im selben
+      Objekt bereits für `location` verwendet wird, statt den Namen ein zweites Mal hart zu
+      kodieren. `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) ·
+      `npm run lint` → 182 Probleme (163 Fehler, 19 Warnungen), beide Dateien nur mit
+      vorbestehenden `no-explicit-any`-Findings in Zeile 30-53 (außerhalb des Diffs), 0 neue
+      Findings · Diff: je eine neue Zeile `"performer": { "@id":
+      "https://www.ristorantestoria.de/#restaurant" },` in beiden Event-Objekten.
 
 ## P1 — CTR-Killer auf Top-Rankings
 
