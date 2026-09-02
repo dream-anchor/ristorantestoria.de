@@ -140,8 +140,12 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
 
 ## Einheit A (P0+P1): Branch, Beweis, Merge
 
-- [ ] Branch `seo-gsc-audit-p0-p1` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
+- [x] Branch `seo-gsc-audit-p0-p1` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy (mind. 1 `curl`/Sichtprüfung je Fix).
+      ✓ 2026-09-02 · Branch gepusht, PR #58 erstellt:
+      https://github.com/dream-anchor/ristorantestoria.de/pull/58 — enthält alle 5 Commits
+      (P0.1, P0.2, P1.1, P1.2, P1.3). Merge + Live-Stichprobe erfolgen im Hauptfenster, nicht in
+      diesem Subagenten-Turn.
 
 ## P2 — Tote Locale-Kombinationen + Duplikate
 
