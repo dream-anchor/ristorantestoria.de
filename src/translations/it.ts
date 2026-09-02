@@ -103,6 +103,9 @@ const itBase = {
     faqLinkDesc: "Risposte alle domande frequenti su STORIA",
     pizzaMunich: "Pizza Monaco",
     pastaFrescaMuenchen: "Pasta Fresca Monaco",
+    dailyLunchMenu: "Menu Pranzo",
+    wmPublicViewing: "Mondiali 2026 in diretta",
+    wmPublicViewingDesc: "Guarda le partite dei Mondiali sulla nostra terrazza – finale compreso.",
   },
   eventForm: {
     title: "Richiesta Evento",

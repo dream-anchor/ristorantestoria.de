@@ -419,6 +419,10 @@ const EventlocationMuenchen = () => {
                   <h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3>
                   <p className="text-muted-foreground text-sm">Feiern Sie den Jahreswechsel mit einem italienischen 5-Gänge-Menü im STORIA.</p>
                 </Link>
+                <LocalizedLink to="wm-2026-public-viewing-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{t.internalLinks.wmPublicViewing}</h3>
+                  <p className="text-muted-foreground text-sm">{t.internalLinks.wmPublicViewingDesc}</p>
+                </LocalizedLink>
                 <LocalizedLink to="reisegruppen-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">Gastronomie für Reisegruppen</h3>
                   <p className="text-muted-foreground text-sm">Spezialisierte Gruppenmenüs für 20–100 Personen, Reiseleiter isst gratis.</p>

@@ -80,6 +80,9 @@ const frBase = {
     faqLinkDesc: "R\u00e9ponses \u00e0 vos questions sur STORIA",
     pizzaMunich: "Pizza Munich",
     pastaFrescaMuenchen: "Pâtes Fraîches Munich",
+    dailyLunchMenu: "Menu Déjeuner",
+    wmPublicViewing: "Coupe du monde 2026 en direct",
+    wmPublicViewingDesc: "Suivez la Coupe du monde sur notre terrasse – matchs et finale en direct.",
   },
   eventForm: {
     title: "Demande d'événement",

@@ -6,6 +6,7 @@ const InternalLinks = () => {
 
   const links = [
     { baseSlug: "lunch-muenchen-maxvorstadt", label: t.internalLinks.lunchMunich },
+    { baseSlug: "mittags-menu", label: t.internalLinks.dailyLunchMenu },
     { baseSlug: "aperitivo-muenchen", label: t.internalLinks.aperitivoMunich },
     { baseSlug: "pizza-muenchen", label: "Pizza & Pizzeria M\u00fcnchen" },
     { baseSlug: "neapolitanische-pizza-muenchen", label: t.internalLinks.neapolitanPizza },
@@ -16,6 +17,7 @@ const InternalLinks = () => {
     { baseSlug: "geburtstagsfeier-muenchen", label: t.internalLinks.birthdayParty },
     { baseSlug: "terrasse-muenchen", label: t.internalLinks.terraceMunich },
     { baseSlug: "wild-essen-muenchen", label: t.internalLinks.gameDishesMunich },
+    { baseSlug: "wm-2026-public-viewing-muenchen", label: t.internalLinks.wmPublicViewing },
 
     { baseSlug: "italiener-koenigsplatz", label: t.internalLinks.italienerKoenigsplatz },
     { baseSlug: "italienisches-restaurant-muenchen", label: t.internalLinks.italianRestaurantMunich },

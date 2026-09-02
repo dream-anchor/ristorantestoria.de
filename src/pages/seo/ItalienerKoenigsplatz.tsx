@@ -377,6 +377,13 @@ const ItalienerKoenigsplatz = () => {
                   <span className="font-medium">{t.internalLinks.romanticDinner}</span>
                 </LocalizedLink>
                 <LocalizedLink
+                  to="italiener-hauptbahnhof-muenchen"
+                  className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
+                >
+                  <span className="text-2xl mb-2 block">🚉</span>
+                  <span className="font-medium">{t.internalLinks.italianCentralStationMunich}</span>
+                </LocalizedLink>
+                <LocalizedLink
                   to="faq"
                   className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center"
                 >
