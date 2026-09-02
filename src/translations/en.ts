@@ -1693,7 +1693,7 @@ const enBase = {
       heroEventsLink: "events-storia.de",
       // Intro
       introTitle: "Birthday Party Munich – STORIA for Your Special Day",
-      introP1: "Planning a birthday party in Munich and looking for the perfect location? Ristorante STORIA has been offering the ideal setting for birthday celebrations of any size since 2015. From intimate gatherings with closest friends to large parties for up to 100 guests – the Speranza family and their team ensure your birthday turns out exactly as you wish.",
+      introP1: "Planning a birthday party in Munich and looking for the perfect location? Ristorante STORIA has been offering the ideal setting for birthday celebrations of any size since 2015. From intimate gatherings with closest friends to large parties for up to 200 guests – the Speranza family and their team ensure your birthday turns out exactly as you wish.",
       introP2: "As your Italian restaurant in Munich Maxvorstadt, we transform every birthday into an Italian celebration: with homemade pasta, stone-oven pizza, exquisite wines and the warmth that makes Italy so special.",
       // Birthday Types Section (5 event-based)
       typesTitle: "🎂 What Birthday Parties Can You Celebrate at STORIA?",

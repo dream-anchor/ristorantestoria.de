@@ -85,7 +85,7 @@ const GeburtstagsfeierMuenchen = () => {
         "address": { "@type": "PostalAddress", "streetAddress": "Karlstraße 47a", "addressLocality": "München", "addressRegion": "Bayern", "postalCode": "80333", "addressCountry": "DE" },
         "geo": { "@type": "GeoCoordinates", "latitude": 48.1465, "longitude": 11.5658 },
         "telephone": "+49-89-51519696",
-        "maximumAttendeeCapacity": 80,
+        "maximumAttendeeCapacity": 200,
         "priceRange": "€€",
         "amenityFeature": [
           { "@type": "LocationFeatureSpecification", "name": "Geburtstagsservice", "value": "Geburtstagskuchen, Dekoration, Überraschungen" },
