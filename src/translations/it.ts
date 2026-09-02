@@ -3151,7 +3151,7 @@ const itBase = {
       title: 'Prenota un Tavolo \u2013 Ristorante Monaco',
       h1: 'Prenota un Tavolo',
       description: 'Prenota un tavolo da STORIA Monaco Maxvorstadt: Prenota online o chiama. Il vostro ristorante italiano vicino a K\u00f6nigsplatz & stazione centrale. Assicuratevi il vostro posto!',
-      introSeo: 'Prenotate il vostro tavolo al Ristorante STORIA \u2013 il vostro ristorante italiano nella Maxvorstadt di Monaco, direttamente a K\u00f6nigsplatz. Che si tratti di una cena romantica per due, una serata conviviale con amici o una festa pi\u00f9 grande con famiglia o colleghi: con una prenotazione vi assicurate il posto in uno dei ristoranti italiani pi\u00f9 amati di Monaco. Prenotate comodamente online tramite il nostro sistema di prenotazione o chiamateci direttamente al +49 89 28806855.',
+      introSeo: 'Prenotate il vostro tavolo al Ristorante STORIA \u2013 il vostro ristorante italiano nella Maxvorstadt di Monaco, direttamente a K\u00f6nigsplatz. Che si tratti di una cena romantica per due, una serata conviviale con amici o una festa pi\u00f9 grande con famiglia o colleghi: con una prenotazione vi assicurate il posto in uno dei ristoranti italiani pi\u00f9 amati di Monaco. Prenotate comodamente online tramite il nostro sistema di prenotazione o chiamateci direttamente al +49 89 51519696.',
       introSeoP2: 'Lo STORIA si trova in posizione centrale nella Maxvorstadt, a soli cinque minuti a piedi da K\u00f6nigsplatz e a pochi minuti dalla stazione centrale di Monaco. Potete raggiungerci facilmente con la metropolitana (fermata K\u00f6nigsplatz) o a piedi dalle Pinacoteche. Vi consigliamo di prenotare in anticipo soprattutto nei fine settimana e nei giorni festivi, poich\u00e9 i nostri posti si esauriscono rapidamente. In estate, la nostra terrazza coperta \u00e8 un posto particolarmente ambito. Per gruppi da 10 persone creiamo volentieri un menu personalizzato \u2013 basta menzionarlo al momento della prenotazione.',
       breadcrumb: 'Prenotazione',
     },
@@ -3178,7 +3178,7 @@ const itBase = {
     },
     {
       question: 'Come posso prenotare un tavolo da STORIA?',
-      answer: 'Potete prenotare un tavolo online tramite OpenTable sulla nostra pagina prenotazioni o chiamando il +49 89 515196. Come popolare pizzeria a Maxvorstadt, consigliamo soprattutto di prenotare per i fine settimana.',
+      answer: 'Potete prenotare un tavolo online tramite OpenTable sulla nostra pagina prenotazioni o chiamando il +49 89 51519696. Come popolare pizzeria a Maxvorstadt, consigliamo soprattutto di prenotare per i fine settimana.',
     },
     {
       question: 'Cosa offre La Storia?',
