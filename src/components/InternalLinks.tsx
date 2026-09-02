@@ -17,6 +17,7 @@ const InternalLinks = () => {
     { baseSlug: "geburtstagsfeier-muenchen", label: t.internalLinks.birthdayParty },
     { baseSlug: "terrasse-muenchen", label: t.internalLinks.terraceMunich },
     { baseSlug: "wild-essen-muenchen", label: t.internalLinks.gameDishesMunich },
+    { baseSlug: "wm-2026-public-viewing-muenchen", label: t.internalLinks.wmPublicViewing },
 
     { baseSlug: "italiener-koenigsplatz", label: t.internalLinks.italienerKoenigsplatz },
     { baseSlug: "italienisches-restaurant-muenchen", label: t.internalLinks.italianRestaurantMunich },

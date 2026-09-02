@@ -264,9 +264,39 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
       einzige Treffer in `it.ts` liegt bei Zeile 3589, weit entfernt vom Diff bei Zeile ~106,
       vorbestehend). Kontakt.tsx/Reservierung.tsx nicht angefasst (`git diff` leer). Commit
       `79bd114` auf Branch `seo-gsc-audit-p2-p3`, kein Push, kein PR (Einheit B erst nach P3.2).
-- [ ] **P3.2** Dünn verlinkte Sekundärsprachen-Seiten (`fr/occasions-speciales/nouvel-an/`,
+- [x] **P3.2** Dünn verlinkte Sekundärsprachen-Seiten (`fr/occasions-speciales/nouvel-an/`,
       `en/wm-2026-public-viewing-muenchen/`) ergänzend verlinkt (KONZEPT § P3).
       Beweis: `npm run build`/`lint` grün + Diff.
+      ✓ 2026-09-02 · **nouvel-an:** Root Cause war ein Bug statt eines fehlenden Links —
+      `BesondereAnlaesse.tsx` (FR-Übersicht) hatte `slug_fr: "reveillon"` statt `"nouvel-an"`
+      (Live-curl vorher: `fr/occasions-speciales/reveillon/` → `404`); `WeihnachtenMuenchen.tsx`
+      (`related3`) und `ValentinstagMuenchen.tsx` (`related5`) verlinken beide bereits per
+      `LocalizedLink to="besondere-anlaesse/silvester"`, der Baseslug fehlte aber in
+      `runtime-slugs.json` → Identity-Fallback ergab für FR `fr/besondere-anlaesse/silvester/`
+      (Live-curl vorher → `404`). Fix: `slug_fr` korrigiert + Baseslug-Eintrag in
+      **`runtime-slugs.json` (bewusst NICHT in `slugs.json`)** ergänzt — Diff-Vergleich vor/nach
+      zeigte, dass ein Eintrag in `slugs.json` von `generate-sitemap.mjs`/`prerender.js` als
+      eigene Static-Route gelesen wird und die dort bereits per Supabase generierte
+      Silvester-URL dupliziert hätte (`grep -c` auf `dist/sitemap.xml` zeigte testweise 2×
+      `<loc>.../besondere-anlaesse/silvester/</loc>` statt 1×; mit dem finalen Fix (nur
+      `runtime-slugs.json`) wieder 1× — Sitemap-Statistik identisch zur Baseline: 43 Static
+      Routes, Total 162 URLs). Nachher: 3 Seiten (Übersicht, Weihnachten, Valentinstag) verlinken
+      in FR korrekt auf `/fr/occasions-speciales/nouvel-an/` (per `grep -o 'href="[^"]*"'` in den
+      generierten `dist/`-Dateien bestätigt, vorher 0 von 3 korrekt).
+      **wm-2026-public-viewing-muenchen:** alle 3 bisherigen Linkquellen (`Hero.tsx`,
+      `ReservationSeasonalHints.tsx`, `WmBanner.tsx`) sind an `isWmActive()` gekoppelt (Ende
+      19.7.2026) und rendern seit dem 20.7. keinen Link mehr — die Seite soll laut
+      `seasonalFlags.ts`-Kommentar aber evergreen bleiben. 2 permanente Links ergänzt:
+      `InternalLinks.tsx` (Home-Widget, alle 4 Sprachen) und `EventlocationMuenchen.tsx`
+      (Related-Content-Kachel), neue Übersetzungsschlüssel `internalLinks.wmPublicViewing`/
+      `-Desc` in de/en/it/fr — per `grep -o 'href="[^"]*"' dist/en/index.html` und
+      `dist/en/event-venue-munich/index.html` auf `/en/wm-2026-public-viewing-muenchen/`
+      bestätigt. `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert,
+      identische Statistik zur Baseline) · `npm run lint` → 182 Probleme (163 Fehler, 19
+      Warnungen), identisch zum dokumentierten Baseline-Stand — die 8 geänderten Dateien selbst
+      0 neue Findings (einziger Treffer in `it.ts` bei Zeile 3591, vorbestehend, weit vom Diff
+      entfernt). `git diff --name-only | grep -i "kontakt\|reservierung"` → leer, keine
+      Formulardatei betroffen. Commit `17f1d11` auf Branch `seo-gsc-audit-p2-p3`.
 
 ## Einheit B (P2+P3): Branch, Beweis, Merge
 

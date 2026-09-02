@@ -43,7 +43,7 @@ const BesondereAnlaesse = () => {
     },
     {
       slug: "silvester",
-      slug_en: "new-years-eve", slug_it: "capodanno", slug_fr: "reveillon",
+      slug_en: "new-years-eve", slug_it: "capodanno", slug_fr: "nouvel-an",
       label: t.seo?.besondereAnlaesse?.silvester || "Silvester Gala-Dinner",
       teaser: "31. Dezember – Gala-Dinner mit 4-Gänge-Degustationsmenü ab 65,90 € p. P. (mit Weinbegleitung 99 €).",
     },

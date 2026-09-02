@@ -79,6 +79,8 @@ export const de = {
     pizzaMunich: "Pizza M\u00fcnchen",
     pastaFrescaMuenchen: "Frische Pasta M\u00fcnchen",
     dailyLunchMenu: "Mittagsmen\u00fc",
+    wmPublicViewing: "WM 2026 Public Viewing",
+    wmPublicViewingDesc: "Fu\u00dfball-Public-Viewing auf der Terrasse \u2013 Spiele & Finale live bei uns verfolgen.",
   },
   eventForm: {
     title: "Event-Anfrage",
