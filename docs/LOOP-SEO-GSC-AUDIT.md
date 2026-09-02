@@ -321,10 +321,57 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
       und von Antoine freigegeben ("Kannst du alles umsetzen?", 2026-09-02): Fakten-Stichprobe
       (Preise/Kapazitäten/Öffnungszeiten) in den FAQ-Antworten der 5 Top-Seiten gegen aktuelle
       Werte, als Anschlussarbeit unter „P4.2" nachgetragen.
-- [ ] **P4.2** Fakten-Stichprobe (Preise/Kapazitäten/Öffnungszeiten) in den FAQ-Antworten der
+- [x] **P4.2** Fakten-Stichprobe (Preise/Kapazitäten/Öffnungszeiten) in den FAQ-Antworten der
       5 Top-AI-Overview-Seiten (Aperitivo, Romantic Dinner, Geburtstagsfeier, Silvester,
       Catering) gegen aktuelle Werte geprüft, Abweichungen korrigiert.
       Beweis: pro Seite Fund (stimmt/Abweichung) + ggf. Diff + `npm run build`/`lint` grün.
+      ✓ 2026-09-02 · Pro Seite geprüft (Zahlen mit Einheiten in DE/EN/IT/FR quer verglichen,
+      wo möglich gegen `src/config/storia-entity.ts`/`facts.ts` als SSoT):
+      **Aperitivo** — Preise (9,90/14,90/11,50/7,90 €), Öffnungszeiten (17:00–22:30, Restaurant
+      Mo–Fr 09–01/Sa–So 12–01) und Distanzangaben (7 Min. Hauptbahnhof) über alle 4 Sprachen
+      identisch, matcht JSON-LD-Preise im selben File — kein Befund.
+      **Romantisches Dinner** — Menüpreise (62/89/96 €), Valentinstag-Menü (65,90 €), Extras
+      (Rosen 25 €, Champagner 13,80 €) über alle 4 Sprachen identisch — **1 Fund**: Footer-CTA
+      hatte kaputte Telefonnummer `tel:+4989515196`/„089 515196" (fehlende Ziffern) statt der
+      kanonischen Nummer (Hero-CTA derselben Seite + `storia-entity.ts`: `+498951519696`/
+      „089 51519696") — korrigiert.
+      **Geburtstagsfeier** — Kapazität war laut Auftrag bereits heute auf DE „2–200 Gäste"
+      korrigiert (PR #59/#60); Gegenprobe fand **3 nicht mitgezogene Stellen**: DE `introP1`
+      selbst sagte noch „80 Gäste" (vermutlich Ursprung des ebenfalls falschen
+      `maximumAttendeeCapacity: 80` im EventVenue-JSON-LD), EN `introP1` noch „up to 100
+      guests", IT (`seoTitle`/`seoDescription`/`heroBadge1`/`introP1`) und FR
+      (`seoTitle`/`seoDescription`/`heroBadge1`/`introP1` + separate FR-tldr) noch „100"/„300"
+      bzw. „10 à 100 convives" — alle auf 2-200 bzw. 200 vereinheitlicht, `maximumAttendeeCapacity`
+      im JSON-LD auf 200 korrigiert.
+      **Silvester** — Preise (99/150 €), Timeline (19:00–00:00), Kapazität „2 bis 100 Gäste"
+      über alle 4 Sprachen identisch — kein Befund.
+      **Catering** — Seite ist einsprachig DE (kein `t.seo.*`-Namespace für den Haupttext);
+      Preise (25/30/35/55/12 € p.P.), Mindestpersonenzahl (20) und Lieferradius (50 km) intern
+      konsistent zwischen Hero, Paketen und FAQ — kein Befund.
+      **Offen für Antoine (nicht korrigiert, keine eindeutige kanonische Quelle):**
+      Geburtstagsseite FAQ1 nennt für Stehempfänge DE „180 Gäste", EN/IT/FR „300 Gäste" — exakt
+      dieselbe FAQ, unterschiedlicher Wert je Sprachversion. `facts.ts` dokumentiert bereits
+      allgemein eine ungeklärte Diskrepanz bei Stehplatz-Zahlen (180 vs. 300) als offene
+      Kundenklärung; dieser konkrete Fall reiht sich dort ein, wurde aber bewusst nicht
+      einseitig entschieden. **Nebenbefund außerhalb der 5 Zielseiten** (nicht korrigiert, nicht
+      Teil des PRs): Weihnachtsmenü-Seite — IT `seoTitle` sagt „Fino a 300 Ospiti", DE/EN sagen
+      „6-100 Gäste"/„6-100 guests".
+      `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint`
+      → 182 Probleme (163 Fehler, 19 Warnungen), identisch zum dokumentierten Baseline-Stand —
+      einziger Treffer in einer geänderten Datei (`it.ts:3591`, `mergeSeo`-Funktionssignatur)
+      vorbestehend, weit vom Diff entfernt. `git diff --name-only | grep -i
+      "kontakt\|reservierung"` → leer, keine Formulardatei betroffen. Commit `ba1fd39` auf
+      Branch `seo-gsc-audit-p4-2-fact-check`, PR #63:
+      https://github.com/dream-anchor/ristorantestoria.de/pull/63 — gepusht, nicht gemergt
+      (Merge erfolgt im Hauptfenster). **Nebenbefund zur Loop-Disziplin:** dieser Subagent teilte
+      sich das Arbeitsverzeichnis mit einem parallelen Performance-Subagenten (kein Git-Worktree)
+      — ein Commit landete durch einen Branch-Wechsel des anderen Subagenten kurzzeitig auf
+      dessen Branch `perf-page-weight-homepage`, wurde aber vor jedem Push bemerkt und per
+      `git cherry-pick` sauber auf den richtigen Branch verschoben; `origin/perf-page-weight-
+      homepage` war zu keinem Zeitpunkt betroffen (verifiziert: Remote stand exakt auf dem
+      letzten legitimen Commit des anderen Subagenten). Für künftige parallele Subagenten-Läufe:
+      wo möglich `EnterWorktree`/eigenes Arbeitsverzeichnis je Subagent verwenden, um dieses
+      Race strukturell auszuschließen.
 
 ## P5 — Indexierung anstoßen (hartes Gate: erst nach Einheit-B-Deploy)
 
