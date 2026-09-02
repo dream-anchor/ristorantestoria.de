@@ -3646,9 +3646,9 @@ export const de = {
       breadcrumb: 'Getränke',
     },
     mittagsmenu: {
-      title: 'Mittagskarte M\u00fcnchen \u2013 wechselndes Men\u00fc Mo\u2013Fr | STORIA',
+      title: 'Mittagstisch Maxvorstadt ab 14,90 \u20ac \u2013 STORIA, Mo\u2013Fr',
       h1: 'Mittagskarte \u2013 Tagesgerichte frisch aus der K\u00fcche',
-      description: 'Mittagsmenü im STORIA München Maxvorstadt: Frische italienische Küche Mo-Fr. Lunch nahe Hauptbahnhof & Königsplatz. Jetzt genießen!',
+      description: 'Business Lunch ab 14,90 €: wechselndes 3-Gänge-Menü Mo–Fr ab 11:30 Uhr. 5 Min. vom Königsplatz. Reservierung empfohlen — jetzt Karte ansehen!',
       introSeo: 'Unser Mittagstisch in der Maxvorstadt bietet Ihnen montags bis freitags frische italienische Küche zu fairen Preisen – ideal für den Business Lunch in München. Ab 11:30 Uhr servieren wir ein wöchentlich wechselndes Mittagsmenü mit Vorspeise, Hauptgang und Dessert, zubereitet aus saisonalen Zutaten direkt aus Italien. Ob knusprige Steinofen-Pizza, hausgemachte Pasta, ein leichter Salat oder ein wärmendes Risotto – bei uns finden Sie das perfekte Mittagessen für eine entspannte Pause vom Büroalltag. Dazu bieten wir Tagessuppen und frische Fischgerichte als Alternative.',
       introSeoP2: 'Das STORIA liegt nur fünf Gehminuten vom Königsplatz und wenige Minuten vom Hauptbahnhof München entfernt – ideal erreichbar für alle, die in der Maxvorstadt, der Innenstadt oder rund um die TU München arbeiten. Mit der U-Bahn erreichen Sie uns bequem über die Station Königsplatz. Unser Mittagstisch ist bei Stammgästen beliebt, weil wir Wert auf schnellen, aufmerksamen Service legen, ohne bei der Qualität Kompromisse zu machen. Reservierungen für den Lunch sind empfehlenswert, besonders an sonnigen Tagen mit geöffneter Terrasse. Kommen Sie vorbei und überzeugen Sie sich selbst – ein Stück Italien in Ihrer Mittagspause.',
       breadcrumb: 'Mittagsmenü',

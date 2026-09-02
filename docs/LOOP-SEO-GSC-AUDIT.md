@@ -116,10 +116,27 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
       `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` →
       182 Probleme (163 Fehler, 19 Warnungen), identisch zum Stand vor dem Fix (siehe P0.1/P0.2/
       P1.1), `translations/de.ts`/`translations/en.ts` selbst 0 Findings.
-- [ ] **P1.3** Title/Meta-Description für `mittags-menu/` + `en/food-menu/` überarbeitet (Pos. ~4,6,
+- [x] **P1.3** Title/Meta-Description für `mittags-menu/` + `en/food-menu/` überarbeitet (Pos. ~4,6,
       CTR <1% — Vorschlag in KONZEPT § P1; zwei unabhängige Seiten, nicht dieselbe Übersetzung)
       (KONZEPT § P1).
-      Beweis: wie P1.1, für beide Seiten einzeln.
+      ✓ 2026-09-02 · Freigabe durch Antoine im Chat, 2026-09-02 ("Ja, setz alles um") · Geändert:
+      nur `title`/`description` in `pages.mittagsmenu` in `src/translations/de.ts` sowie
+      `title`/`description` im ERSTEN `speisekarte`-Block (~Zeile 3549) in `src/translations/en.ts`
+      (nicht im zweiten Block ~Zeile 4147, der nur `lunchHint` via deepMerge überschreibt), `git
+      diff` verifiziert — `h1`/`introSeo`/`introSeoP2`/`breadcrumb`/`intro`/`introP2` unverändert,
+      keine Formular-Datei betroffen. Preis-Verifikation: „14,90 €" gegen
+      `src/data/menu-lunch-fallback.json` (`price_display: "ab 14,90 €"`) geprüft — aktuell
+      korrekt, Vorschlag unverändert übernommen. Neue Strings im Wortlaut:
+      DE (mittags-menu) Title: „Mittagstisch Maxvorstadt ab 14,90 € – STORIA, Mo–Fr"
+      DE (mittags-menu) Description: „Business Lunch ab 14,90 €: wechselndes 3-Gänge-Menü Mo–Fr ab
+      11:30 Uhr. 5 Min. vom Königsplatz. Reservierung empfohlen — jetzt Karte ansehen!"
+      EN (en/food-menu) Title: „Authentic Italian Menu Munich – Pizza, Pasta & More | STORIA"
+      EN (en/food-menu) Description: „Neapolitan stone-oven pizza, fresh handmade pasta &
+      antipasti. Munich's favourite Italian in Maxvorstadt, 5 min from Königsplatz. Book a table
+      now!"
+      `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` →
+      182 Probleme (163 Fehler, 19 Warnungen), identisch zum Stand vor dem Fix (siehe P0.1/P0.2/
+      P1.1/P1.2), `translations/de.ts`/`translations/en.ts` selbst 0 Findings.
 
 ## Einheit A (P0+P1): Branch, Beweis, Merge
 
