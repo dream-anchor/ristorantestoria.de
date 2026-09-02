@@ -258,7 +258,7 @@ const UeberUns = () => {
                 </div>
                 <ul className="list-disc list-inside space-y-1 ml-7">
                   <li>5 Min. zu Fuß vom Königsplatz (U2, U8)</li>
-                  <li>7 Min. vom Hauptbahnhof München</li>
+                  <li>5 Min. vom Hauptbahnhof München</li>
                   <li>Nahe TU München, LMU und Pinakotheken</li>
                   <li>Parkhaus {STORIA.parking.name}, {STORIA.parking.address}</li>
                 </ul>

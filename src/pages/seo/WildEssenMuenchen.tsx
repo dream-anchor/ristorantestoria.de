@@ -482,7 +482,7 @@ const WildEssenMuenchen = () => {
                   <h3 className="font-semibold mb-4">{t.seo.wild.nearbyTitle}</h3>
                   <ul className="text-muted-foreground space-y-1 text-sm">
                     <li>• Königsplatz: 5 Min. zu Fuß</li>
-                    <li>• München Hauptbahnhof: 7 Min. zu Fuß</li>
+                    <li>• München Hauptbahnhof: 5 Min. zu Fuß</li>
                     <li>• TU München: 8 Min. zu Fuß</li>
                     <li>• Pinakotheken: 10 Min. zu Fuß</li>
                   </ul>
