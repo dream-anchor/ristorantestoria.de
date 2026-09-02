@@ -3585,9 +3585,9 @@ const enBase = {
       breadcrumb: 'About Us',
     },
     reservierung: {
-      title: 'Reserve a Table \u2013 Restaurant Munich',
+      title: 'Reserve a Table Now \u2013 STORIA Maxvorstadt, K\u00f6nigsplatz',
       h1: 'Reserve a Table',
-      description: 'Reserve a table at STORIA Munich Maxvorstadt: Book online or call us. Your Italian restaurant near K\u00f6nigsplatz & main station. Secure your spot!',
+      description: 'Book online in 2 minutes or call +49 89 28806855. Your Italian restaurant at K\u00f6nigsplatz, Maxvorstadt. Tables fill up fast \u2014 reserve yours now!',
       introSeo: 'Reserve your table at Ristorante STORIA \u2013 your Italian restaurant in Munich\u2019s Maxvorstadt, right by K\u00f6nigsplatz. Whether a romantic dinner for two, a convivial evening with friends, or a larger celebration with family or colleagues: with a reservation you secure your place at one of Munich\u2019s most popular Italian restaurants. Book conveniently online through our reservation system or call us directly on +49 89 28806855 \u2013 we\u2019re happy to advise you personally on table options and special requests.',
       introSeoP2: 'STORIA is centrally located in Maxvorstadt, just five minutes\u2019 walk from K\u00f6nigsplatz and a few minutes from Munich\u2019s main station. You can reach us easily by U-Bahn (K\u00f6nigsplatz stop) or on foot from the Pinakothek museums. We especially recommend booking ahead for weekends and public holidays, as our tables fill up quickly. In summer, our covered terrace is a particularly popular spot. For groups of 10 or more, we\u2019re happy to create a bespoke menu \u2013 simply mention it when booking. Our team looks forward to welcoming you with authentic Italian hospitality and creating an unforgettable evening.',
       breadcrumb: 'Reservation',

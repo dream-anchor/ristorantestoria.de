@@ -101,9 +101,21 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
       `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` →
       182 Probleme (163 Fehler, 19 Warnungen), identisch zum Stand vor dem Fix (siehe P0.1/P0.2),
       `Kontakt.tsx` selbst 0 Findings.
-- [ ] **P1.2** Title/Meta-Description für `reservierung/` überarbeitet (Pos. 3,72, CTR 0,52% —
+- [x] **P1.2** Title/Meta-Description für `reservierung/` überarbeitet (Pos. 3,72, CTR 0,52% —
       Vorschlag in KONZEPT § P1, `translations/{de,en}.ts` `pages.reservierung`) (KONZEPT § P1).
-      Beweis: wie P1.1.
+      ✓ 2026-09-02 · Freigabe durch Antoine im Chat, 2026-09-02 ("Ja, setz alles um") · Geändert:
+      nur `title`/`description` in `pages.reservierung` in `src/translations/de.ts` und
+      `src/translations/en.ts`, `git diff` verifiziert — `h1`/`introSeo`/`introSeoP2`/`breadcrumb`
+      unverändert, `Reservierung.tsx` (Formular-Seite) NICHT angefasst. Neue Strings im Wortlaut:
+      DE Title: „Jetzt Tisch reservieren – STORIA Maxvorstadt, Königsplatz"
+      DE Description: „In 2 Minuten online buchen oder anrufen: +49 89 28806855. Ihr Italiener am
+      Königsplatz, Maxvorstadt. Plätze sind schnell vergeben — jetzt sichern!"
+      EN Title: „Reserve a Table Now – STORIA Maxvorstadt, Königsplatz"
+      EN Description: „Book online in 2 minutes or call +49 89 28806855. Your Italian restaurant
+      at Königsplatz, Maxvorstadt. Tables fill up fast — reserve yours now!"
+      `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` →
+      182 Probleme (163 Fehler, 19 Warnungen), identisch zum Stand vor dem Fix (siehe P0.1/P0.2/
+      P1.1), `translations/de.ts`/`translations/en.ts` selbst 0 Findings.
 - [ ] **P1.3** Title/Meta-Description für `mittags-menu/` + `en/food-menu/` überarbeitet (Pos. ~4,6,
       CTR <1% — Vorschlag in KONZEPT § P1; zwei unabhängige Seiten, nicht dieselbe Übersetzung)
       (KONZEPT § P1).
