@@ -149,10 +149,34 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
 
 ## P2 — Tote Locale-Kombinationen + Duplikate
 
-- [ ] **P2.1** 301-Redirects für die 6 toten `{lang}/besondere-anlaesse/{slug}`-Kombinationen in
+- [x] **P2.1** 301-Redirects für die 6 toten `{lang}/besondere-anlaesse/{slug}`-Kombinationen in
       `public/.htaccess` ergänzt, Ziel-Slugs gegen `slugs.json` verifiziert (KONZEPT § P2.1).
       Beweis: `curl -IL` auf alle 6 URLs vorher (404) und nachher (301→200) + `npm run build`/`lint`
       grün.
+      ✓ 2026-09-02 · Live-`curl -IL` vor dem Fix auf alle 6 URLs → alle 6× `404`. Ziel-Slugs NICHT
+      aus `slugs.json` (deckt nur Parent-Slugs ab), sondern aus `src/config/seasonalMenus.ts`
+      `SEASONAL_MENUS[].slugs` verifiziert (valentinstag: it=`san-valentino-menu`,
+      en=`valentines-menu`; silvester: it=`capodanno`, en=`new-years-eve`) sowie die
+      Oktoberfest-Ausnahme gegen `src/data/special-menus-fallback.json`
+      (`slug_en: "oktoberfest-menu"`) — dann jedes Ziel per `curl -IL` live gegengeprüft: alle 5
+      Ziel-URLs → `200` (Oktoberfest-Ziel war bereits durch P-1.2 als 200 bestätigt). 6 neue
+      `RewriteRule`-Zeilen in `public/.htaccess` § 5 „Multi-Language Slug Redirects" ergänzt, exakt
+      im Bestandsmuster (`^{pfad}/?$ {ziel} [R=301,L]`) unter den passenden Event-Subsections
+      (Valentinstag/Silvester) bzw. neuer Subsection „Oktoberfest": `it/besondere-anlaesse/
+      valentinstag-menue/` → `it/occasioni-speciali/san-valentino-menu/`,
+      `en/besondere-anlaesse/valentinstag-menue/` → `en/special-occasions/valentines-menu/`,
+      `en/special-occasions/valentines-day-menu/` → `en/special-occasions/valentines-menu/`,
+      `it/besondere-anlaesse/silvester/` → `it/occasioni-speciali/capodanno/`,
+      `en/besondere-anlaesse/silvester/` → `en/special-occasions/new-years-eve/`,
+      `en/special-occasions/oktoberfest-menue/` → `en/special-occasions/oktoberfest-menu/` (trotz
+      P-1.2-Einschätzung „kein Redirect nötig" zusätzlich redirected, da GSC die URL bereits
+      gecrawlt/gelistet hat und das echte Ziel jetzt bekannt+verifiziert ist — Weisung im Auftrag
+      „falls die Zielseite jetzt anders heißt entsprechend redirecten"). `npm run build` → grün
+      (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` → 182 Probleme (163 Fehler,
+      19 Warnungen), identisch zum dokumentierten Baseline-Stand (siehe P0.1 ff.) — `.htaccess` wird
+      vom Linter nicht erfasst, lokaler Apache/mod_rewrite nicht testbar, daher zusätzlich
+      Syntax-Gegenprobe: alle 6 neuen Zeilen exakt im Bestandsmuster der funktionierenden
+      Nachbarzeilen (z. B. Zeile 127/137) — keine Syntaxabweichung.
 - [ ] **P2.2** www/Trailing-Slash-Dubletten (5 URLs) auf kanonische Form redirected, nachdem geprüft
       ist, welche bereits von der generischen Regel abgedeckt sind (KONZEPT § P2.2).
       Beweis: `curl -IL` auf alle 5 URLs vorher/nachher + `npm run build`/`lint` grün.
