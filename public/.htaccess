@@ -17,6 +17,11 @@ RewriteBase /
 # Greift host-unabhängig (Regel schreibt absolute Ziel-URL), verhindert
 # so die Kette non-www → www → trailing-slash (GSC-Umleitungsfehler).
 RewriteRule ^reisegruppen$ https://www.ristorantestoria.de/reisegruppen/ [R=301,L]
+# Gleiches Muster für die beiden anderen live bestätigten non-www+ohne-Slash-Dubletten
+# aus dem GSC-„Gecrawlt-nicht-indexiert"-Bucket (P2.2): ohne diese Regel läuft
+# ristorantestoria.de/<slug> über zwei Hops (non-www→www, dann Trailing-Slash) statt einem.
+RewriteRule ^geburtstagsfeier-muenchen$ https://www.ristorantestoria.de/geburtstagsfeier-muenchen/ [R=301,L]
+RewriteRule ^aperitivo-muenchen$ https://www.ristorantestoria.de/aperitivo-muenchen/ [R=301,L]
 
 # ============================================
 # 1. Host-Kanonisierung

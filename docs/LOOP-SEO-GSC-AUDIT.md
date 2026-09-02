@@ -177,9 +177,32 @@ die Formular-Regel oben: nur `title`/`description`-String ändern, `git diff` vo
       vom Linter nicht erfasst, lokaler Apache/mod_rewrite nicht testbar, daher zusätzlich
       Syntax-Gegenprobe: alle 6 neuen Zeilen exakt im Bestandsmuster der funktionierenden
       Nachbarzeilen (z. B. Zeile 127/137) — keine Syntaxabweichung.
-- [ ] **P2.2** www/Trailing-Slash-Dubletten (5 URLs) auf kanonische Form redirected, nachdem geprüft
+- [x] **P2.2** www/Trailing-Slash-Dubletten (5 URLs) auf kanonische Form redirected, nachdem geprüft
       ist, welche bereits von der generischen Regel abgedeckt sind (KONZEPT § P2.2).
       Beweis: `curl -IL` auf alle 5 URLs vorher/nachher + `npm run build`/`lint` grün.
+      ✓ 2026-09-02 · Live-`curl -IL` auf alle 5 URLs (kanonische Host-Annahme www bzw. wie in der
+      Liste angegeben): 3 von 5 bereits sauber durch die generische Regel abgedeckt (EIN 301-Hop
+      → 200) — `www.ristorantestoria.de/italiener-hauptbahnhof-muenchen` → 301 →
+      `.../italiener-hauptbahnhof-muenchen/` → 200; `www.ristorantestoria.de/it/catering` → 301 →
+      `.../it/catering/` → 200; `www.ristorantestoria.de/faq` → 301 → `.../faq/` → 200 — hier war
+      nichts zu tun. Echte Lücke bei den 2 non-www+ohne-Slash-URLs: `ristorantestoria.de/
+      geburtstagsfeier-muenchen` und `ristorantestoria.de/aperitivo-muenchen` liefen VOR dem Fix
+      über eine 301→301-Kette (non-www→www ohne Slash, danach erst Trailing-Slash-Regel) statt
+      einem Hop — exakt das Muster, das laut Bestandskommentar in `public/.htaccess` § 0
+      („Einzel-Hop Canonical-Fixes", Zeile 14-19, bereits für `/reisegruppen` gelöst) von GSC als
+      Umleitungsfehler gemeldet wird. Ursache im Code verifiziert (nicht geraten): generische Regeln
+      1c (non-www→www, Zeile 34) und § 4 Trailing-Slash (Zeile 116-120) laufen nacheinander in
+      getrennten Rewrite-Durchläufen, ergeben pro Kombination aus fehlendem www UND fehlendem Slash
+      zwei Hops. Fix: 2 neue `RewriteRule`-Zeilen in § 0 exakt im Bestandsmuster von `/reisegruppen`
+      ergänzt (absolute Ziel-URL, `[R=301,L]`), Ziel-Slugs gegen `src/config/slugs.json` verifiziert
+      (`geburtstagsfeier-muenchen`, `aperitivo-muenchen` beide als Root-DE-Slug bestätigt) und live
+      gegen die bereits oben eingefangene 200-Response geprüft. Post-Fix-Live-Curl auf die
+      `.htaccess`-Regel selbst nicht möglich (wirkt erst nach Deploy) — stattdessen Regel-Logik
+      gegen die 3 bereits funktionierenden Einzel-Hop-Beispiele (Zeile 19 `/reisegruppen` sowie die
+      P2.1-Multi-Language-Redirects) verglichen: identisches Muster, keine Syntaxabweichung.
+      `npm run build` → grün (Prerendering 177/177 Success, Sitemap generiert) · `npm run lint` →
+      182 Probleme (163 Fehler, 19 Warnungen), identisch zum dokumentierten Baseline-Stand (P2.1) —
+      `.htaccess` wird vom Linter nicht erfasst.
 - [ ] **P2.3** CMS-Altlasten-Pfade geprüft: bereits durch Bestandsregeln abgedeckt oder Lücke
       geschlossen (KONZEPT § P2.3).
       Beweis: Bestandsregel-Fund im Wortlaut + ggf. Diff + `npm run build`/`lint` grün.
