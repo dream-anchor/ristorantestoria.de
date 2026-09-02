@@ -4040,7 +4040,7 @@ const frExtra = {
       tldr: "Le STORIA, à Maxvorstadt à Munich (Karlstraße 47a), sert un déjeuner italien du lundi au vendredi dès 09h00. Carte du midi changeante avec pâtes fraîches, pizza au four à bois et salades. À 5 min à pied de Königsplatz, idéal pour un déjeuner d'affaires et les étudiants. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     firmenfeier: {
-      tldr: "Fêtes d'entreprise au STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'entreprise, fêtes de Noël et événements d'équipe de 20 à 180 convives. 100 places à l'intérieur + 100 sur la terrasse couverte. Menus personnalisés dès 39 € par personne, service événementiel professionnel. À 5 min de Königsplatz, 7 min de la gare centrale. Entreprise familiale depuis 2015. Demandes : +49 89 51519696.",
+      tldr: "Fêtes d'entreprise au STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'entreprise, fêtes de Noël et événements d'équipe de 20 à 300 convives. 100 places à l'intérieur + 100 sur la terrasse couverte. Menus personnalisés dès 39 € par personne, service événementiel professionnel. À 5 min de Königsplatz, 7 min de la gare centrale. Entreprise familiale depuis 2015. Demandes : +49 89 51519696.",
       faq10Question: "Combien coûte une fête d'entreprise au STORIA Munich ?",
       faq10Answer: "Les menus de fête sont proposés dès 45 € par personne (par ex. menus de Noël) ; buffets individuels et forfaits boissons sur demande. Pour 50 personnes, un menu 3 plats avec forfait boissons se situe généralement entre 65 et 85 € par personne.",
       faq11Question: "Combien d'invités peut accueillir le STORIA ?",
@@ -4059,7 +4059,7 @@ const frExtra = {
       candlelightLinkText: "Vers le menu aux chandelles",
     },
     eventlocation: {
-      tldr: "Lieu d'événements STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'entreprise, anniversaires, mariages et fêtes de Noël de 20 à 180 convives. 100 places à l'intérieur + 100 sur la terrasse couverte. Menus personnalisés, service événementiel professionnel. À 5 min de Königsplatz. Entreprise familiale depuis 2015, gérée par la famille Speranza. Demandes : +49 89 51519696.",
+      tldr: "Lieu d'événements STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'entreprise, anniversaires, mariages et fêtes de Noël de 20 à 300 convives. 100 places à l'intérieur + 100 sur la terrasse couverte. Menus personnalisés, service événementiel professionnel. À 5 min de Königsplatz. Entreprise familiale depuis 2015, gérée par la famille Speranza. Demandes : +49 89 51519696.",
     },
     birthday: {
       tldr: "Anniversaire au STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'anniversaire de 2 à 200 convives. Menus personnalisés, gâteau d'anniversaire et service personnalisé de la famille Speranza. À 5 min de Königsplatz. Entreprise familiale depuis 2015. 4,5 étoiles sur plus de 800 avis Google. Demandes : +49 89 51519696.",
@@ -4094,7 +4094,7 @@ const frExtra = {
       tldr: "Italien près de Königsplatz Munich : le STORIA (Karlstraße 47a) se trouve à seulement 5 min à pied de Königsplatz, des Pinakotheken et de la TU Munich. Cuisine italienne authentique avec pizza au four à bois, pâtes maison et plus de 60 vins italiens. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     weihnachtsfeier: {
-      tldr: "Fête de Noël Munich au STORIA Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes de Noël d'entreprise, dîners de Noël privés et célébrations de l'Avent de 6 à 180 convives. Menus festifs dès 45 € par personne, 100 places à l'intérieur + 100 sur la terrasse. Entreprise familiale depuis 2015, gérée par la famille Speranza. À 5 min de Königsplatz. Demandes : +49 89 51519696.",
+      tldr: "Fête de Noël Munich au STORIA Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes de Noël d'entreprise, dîners de Noël privés et célébrations de l'Avent de 6 à 300 convives. Menus festifs dès 45 € par personne, 100 places à l'intérieur + 100 sur la terrasse. Entreprise familiale depuis 2015, gérée par la famille Speranza. À 5 min de Königsplatz. Demandes : +49 89 51519696.",
     },
     terrasse: {
       tldr: "Terrasse de restaurant Munich au STORIA Maxvorstadt (Karlstraße 47a) : terrasse couverte de 100 places, coussins et couvertures – fumeurs bienvenus. Cuisine italienne et aperitivo en plein air, à l'abri par tous les temps. À 5 min de Königsplatz. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
@@ -4112,7 +4112,7 @@ const frExtra = {
       heroBadge3: "🎯 Depuis 2015",
     },
     hochzeitsfeier: {
-      tldr: "Mariage au STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour mariages de 6 à 300 convives. 100 places à l'intérieur + 100 sur la terrasse couverte + réception debout jusqu'à 180 convives. Menus de mariage personnalisés, réception aperitivo, planification personnalisée. À 5 min de Königsplatz. Entreprise familiale depuis 2015. Demandes : +49 89 51519696.",
+      tldr: "Mariage au STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour mariages de 6 à 300 convives. 100 places à l'intérieur + 100 sur la terrasse couverte + réception debout jusqu'à 300 convives. Menus de mariage personnalisés, réception aperitivo, planification personnalisée. À 5 min de Königsplatz. Entreprise familiale depuis 2015. Demandes : +49 89 51519696.",
       heroBadge1: "💍 6–300 convives",
       heroBadge2: "🍷 Menu personnalisé",
       heroBadge3: "☀️ Terrasse couverte",
