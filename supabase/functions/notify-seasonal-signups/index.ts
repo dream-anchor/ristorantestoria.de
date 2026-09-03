@@ -302,7 +302,7 @@ serve(async (req) => {
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const resendApiKey = Deno.env.get("RESEND_API_KEY_RISTORANTE");
+    const brevoApiKey = Deno.env.get("BREVO_API_KEY_RISTORANTE");
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Fetch unnotified, CONFIRMED signups only (double-opt-in)
@@ -423,19 +423,20 @@ serve(async (req) => {
           ? body_html.replace("</body>", `${unsubFooter}</body>`)
           : body_html + unsubFooter;
 
-        if (resendApiKey) {
+        if (brevoApiKey) {
           try {
-            const emailResponse = await fetch("https://api.resend.com/emails", {
+            const emailResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
               method: "POST",
               headers: {
-                Authorization: `Bearer ${resendApiKey}`,
+                "api-key": brevoApiKey,
                 "Content-Type": "application/json",
+                Accept: "application/json",
               },
               body: JSON.stringify({
-                from: "Ristorante STORIA <info@ristorantestoria.de>",
-                to: [recipient.email],
+                sender: { name: "Ristorante STORIA", email: "info@ristorantestoria.de" },
+                to: [{ email: recipient.email }],
                 subject,
-                html: htmlWithUnsub,
+                htmlContent: htmlWithUnsub,
                 headers: {
                   "List-Unsubscribe": `<${unsubUrl}>`,
                   "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
@@ -445,13 +446,13 @@ serve(async (req) => {
 
             if (!emailResponse.ok) {
               const errText = await emailResponse.text();
-              console.error(`[notify] Resend error for ${recipient.email}:`, errText);
+              console.error(`[notify] Brevo error for ${recipient.email}:`, errText);
               emailStatus = "failed";
               emailError = errText.slice(0, 500);
               failedCount++;
             } else {
-              const resendData = await emailResponse.json();
-              resendId = resendData?.id ?? null;
+              const brevoData = await emailResponse.json();
+              resendId = brevoData?.messageId ?? null;
               sentCount++;
             }
           } catch (err) {
@@ -460,7 +461,7 @@ serve(async (req) => {
             failedCount++;
           }
         } else {
-          // Dev mode — no Resend key
+          // Dev mode — no Brevo key
           console.log(`[notify] DEV — would send to ${recipient.email} (${lang}): "${subject}"`);
           sentCount++;
         }
