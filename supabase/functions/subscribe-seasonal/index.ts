@@ -75,7 +75,7 @@ function buildDoiEmail(lang: string, seasonalEvent: string, confirmUrl: string):
 <body style="margin:0;padding:0;background-color:#f5f0eb;font-family:Georgia,serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f5f0eb;">
     <tr><td align="center" style="padding:40px 20px;">
-      <table width="600" cellpadding="0" cellspacing="0" style="background-color:#FDF5E6;border-radius:12px;overflow:hidden;max-width:600px;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#FDF5E6;border-radius:12px;overflow:hidden;max-width:600px;">
         <tr>
           <td style="background-color:#8B4513;padding:32px 40px;text-align:center;">
             <img src="https://www.ristorantestoria.de/storia-logo.webp" alt="STORIA" width="100" style="display:block;margin:0 auto;opacity:0.95;" />
