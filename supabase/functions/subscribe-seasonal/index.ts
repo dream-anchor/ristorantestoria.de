@@ -205,24 +205,25 @@ serve(async (req) => {
     const confirmUrl = `https://www.ristorantestoria.de/${confirmPath}?token=${token}`;
     const { subject, html } = buildDoiEmail(lang, seasonal_event, confirmUrl);
 
-    const resendApiKey = Deno.env.get("RESEND_API_KEY_RISTORANTE");
-    if (resendApiKey) {
-      const emailResponse = await fetch("https://api.resend.com/emails", {
+    const brevoApiKey = Deno.env.get("BREVO_API_KEY_RISTORANTE");
+    if (brevoApiKey) {
+      const emailResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${resendApiKey}`,
+          "api-key": brevoApiKey,
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
-          from: "Ristorante STORIA <info@ristorantestoria.de>",
-          to: [email],
+          sender: { name: "Ristorante STORIA", email: "info@ristorantestoria.de" },
+          to: [{ email }],
           subject,
-          html,
+          htmlContent: html,
         }),
       });
       if (!emailResponse.ok) {
         const errText = await emailResponse.text();
-        console.error("[subscribe-seasonal] Resend error:", emailResponse.status, errText);
+        console.error("[subscribe-seasonal] Brevo error:", emailResponse.status, errText);
         return new Response(JSON.stringify({ error: "email_send_failed" }), {
           status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
