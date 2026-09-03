@@ -222,7 +222,7 @@ serve(async (req) => {
       });
       if (!emailResponse.ok) {
         const errText = await emailResponse.text();
-        console.error("[subscribe-seasonal] Resend error:", errText);
+        console.error("[subscribe-seasonal] Resend error:", emailResponse.status, errText);
         return new Response(JSON.stringify({ error: "email_send_failed" }), {
           status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
