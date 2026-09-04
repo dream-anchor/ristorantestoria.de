@@ -14,7 +14,7 @@ const SUPABASE_URL =
   'https://iieethejhwfsyzhbweps.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY =
   (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || '').trim() ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZWV0aGVqaHdmc3l6aGJ3ZXBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2OTkyMTcsImV4cCI6MjA4MDI3NTIxN30.s6hsm234IxF3NbYc2oNCjWZ28huDNSt588WLDxlV1hM';
+  'sb_publishable_F0SI_-tK5Bp3bilh-daPFA_8xjC6om8';
 
 // Guard: wenn Env-Vars nicht gesetzt (z.B. CI ohne Secrets), nicht crashen.
 // SSG-Seiten nutzen React-Query-Hydration und brauchen keinen Live-Client.
