@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import LocalizedLink from "@/components/LocalizedLink";
 import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { Phone, Mail, MapPin, Clock, Instagram, MessageCircle } from "lucide-react";
@@ -205,6 +206,12 @@ const Footer = () => {
               <Instagram className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Instagram</span>
             </a>
+            <Link
+              to="/admin"
+              className="flex items-center justify-center min-h-[48px] p-2 hover:text-primary-foreground transition-colors"
+            >
+              Admin
+            </Link>
           </div>
         </div>
       </div>
