@@ -125,9 +125,13 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
 
 ## Einheit A: Branch, Beweis, Merge
 
-- [ ] Branch `striking-distance-a` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
+- [x] Branch `striking-distance-a` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy (Title/H1 je Seite per `curl -s` oder Browser-Check, sobald `chrome-devtools`-MCP
       verbunden ist — sonst `curl` + Sichtprüfung wie im Vorgänger-Loop).
+      ✓ 2026-09-12 · PR #67 erstellt, Diff im Hauptfenster gegengelesen (nur String-Literale,
+      Preis-Anker/Fakten erhalten, keine Formular-Dateien) → `gh pr merge 67 --squash
+      --delete-branch` → Merge-Commit `d4ef17b` auf `main`. Deploy-Workflow „Deploy Lovable SSG to
+      IONOS (SFTP)" ausgelöst (Run 34709812407), Live-Stichprobe folgt nach Abschluss.
       PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/67, Merge steht noch
       aus (Hauptfenster).
 
@@ -135,10 +139,28 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
 
 ## Einheit B — mittlere Cluster
 
-**Vor B1–B4: Copy-Tabelle aus KONZEPT § B1–B4 im Chat abstimmen.**
+**Freigegeben:** Antoine, 12.09.2026, „Ja, setz alles im /loop um" — gilt für B1–B4 (Copy-Tabelle
+wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
 
-- [ ] **B1** Firmenfeier München (`firmenfeier-muenchen/`) — nur H2 anpassen, Title/H1 unverändert
-      (KONZEPT § B1).
+- [x] **B1** Firmenfeier München (`firmenfeier-muenchen/`) — H2 (erste Sektion) additiv angepasst
+      (KONZEPT § B1): „Firmenevents München – Das STORIA für erfolgreiche Firmenevents" →
+      „Firmenfeier München – Ihre Betriebsfeier im STORIA" (schließt fehlende H2-Wiederholung von
+      „Firmenfeier München" + fehlendes Synonym „Betriebsfeier" in einer Überschrift). Absatz
+      darunter (`introP1`) trug die neue Überschrift nicht vollständig — um „Ihre Betriebsfeier" in
+      der Anlass-Aufzählung ergänzt (additiv, keine neuen Fakten). Title/H1 unverändert (enthalten
+      „Firmenfeier München" bereits).
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+2/-2,
+      `t.seo.firmenfeier.introTitle` + `.introP1`) — keine JSX-Struktur, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/firmenfeier-muenchen/index.html` geprüft: `<title>`
+      unverändert „Firmenfeier München – Location für 20–300 Gäste | STORIA", `<h1>` unverändert
+      „Firmenfeier München – Feiern im STORIA Maxvorstadt", erstes `<h2>` „Firmenfeier München –
+      Ihre Betriebsfeier im STORIA" vorhanden, „Betriebsfeier" erscheint jetzt 3× auf der Seite
+      (Hero-Subtitle, neues H2, neuer introP1-Zusatz).
 - [ ] **B2** Italienisches Restaurant München, DE (`italienisches-restaurant-muenchen/`) — Title/H1/H2
       anpassen (KONZEPT § B2, größte Einzel-Phrase-Lücke im Audit).
 - [ ] **B3** Italiener Königsplatz (`italiener-koenigsplatz/`) — Title/H1/H2 anpassen, „Maxvorstadt"
