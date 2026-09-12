@@ -397,19 +397,34 @@ wie im Chat vorgelegt, siehe KONZEPT § C1–C4).
 
 ## Einheit C: Branch, Beweis, Merge
 
-- [ ] Branch `striking-distance-c` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
+- [x] Branch `striking-distance-c` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy.
-      PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/73, Merge steht noch
-      aus (Hauptfenster).
+      ✓ 2026-09-12 · PR #73 erstellt, im Hauptfenster gegengelesen (nur C1–C4-Strings additiv,
+      kein „forno a legna"/Holzofen eingeführt) → `gh pr merge 73 --squash --delete-branch` →
+      Fast-Forward-Merge `cc67459` auf `main`. Deploy erfolgreich (Run 34713916659). Live-Stichprobe
+      bestätigt alle 4 Kriterien (Neapolitanische Pizza, Aperitivo, Geburtstagsfeier DE+EN,
+      IT Ristorante) mit neuem Text. **Einheiten A+B+C damit vollständig gemergt und deployt.**
+
+**STRIKING-DISTANCE-EINHEITEN-FERTIG**
 
 ---
 
 ## Einheit D — Struktur-Klärung Silvester/Weihnachten (unabhängig von A/B/C)
 
-- [ ] **D1** Mit Antoine im Chat klären: Silvester/Weihnachten Zwei-URL-Struktur — Absicht (Option 1)
-      oder Dublette (Option 2)? (KONZEPT § 5). Frage zuerst hier stellen, 5 Min. warten, dann
-      Slack-Backup (`~/.claude/CLAUDE.md` § „Fragen & Meldungen"). Ergebnis hier dokumentieren.
-      Bei Option 2: Folge-Kriterium D2 (Redirect + Konsolidierung) ergänzen, nicht vorab umsetzen.
+- [x] **D1** Mit Antoine im Chat geklärt (KONZEPT § 5).
+      ✓ 2026-09-12 · **Option 2 (Dublette) bestätigt.** Antoine wörtlich: „Die Historie war die,
+      dass unter Besondere Anlässe in der Navi immer Specials angezeigt werden. Weihnachten,
+      Silvester, Ostern etc. Und dann haben wir eine Landingpage angelegt. Am besten wäre es die
+      Seiten zu konsolidieren und per 301 umzuleiten. Wichtig ist, die Inhalte zu verschmelzen,
+      damit nichts verloren geht." — explizit als „Deep dive" angefordert, Rolle „Senior SEO
+      Experte + Senior GEO Experte". Root Cause damit historisch geklärt: `besondere-anlaesse/`
+      war zuerst da (Navi-Pillar für saisonale Specials), die eigenständigen Landingpages
+      (`silvester-muenchen/`, `weihnachten-muenchen/`) kamen später hinzu — keine Absicht, sondern
+      organisch gewachsene Dublette.
+      **D2 (Deep-Dive-Analyse + Konsolidierungsplan) läuft als eigenes Dokument, siehe
+      `docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md`** (wird in dieser Session erstellt) —
+      nicht in diesem LOOP-Dokument dupliziert, da eigener Scope (Redirects + Content-Merge sind
+      strukturell risikoreicher als reine Title/H1/H2-Textänderungen, eigene Freigabe nötig).
 
 ---
 
