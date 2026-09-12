@@ -171,20 +171,94 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
       Inhaltlich unproblematisch (B1 war bereits Teil der freigegebenen Einheit-B-Copy, additiv,
       korrekt getestet) — nur die Bündelung wurde für dieses eine Kriterium gebrochen. Branch
       `striking-distance-b` bleibt Arbeitsgrundlage für B2–B4; der spätere Merge dieses Branches
-      wird für den B1-Teil ein No-Op sein (Inhalt bereits auf `main`). **Lehre für weitere
-      Iterationen:** bei geteiltem Arbeitsverzeichnis vor jedem `git branch`/`git checkout` im
-      Hauptfenster erst `git branch --show-current` prüfen, nicht von HEAD blind ausgehen.
-- [ ] **B2** Italienisches Restaurant München, DE (`italienisches-restaurant-muenchen/`) — Title/H1/H2
-      anpassen (KONZEPT § B2, größte Einzel-Phrase-Lücke im Audit).
-- [ ] **B3** Italiener Königsplatz (`italiener-koenigsplatz/`) — Title/H1/H2 anpassen, „Maxvorstadt"
-      ergänzen (KONZEPT § B3).
-- [ ] **B4** Italiener Hauptbahnhof (`italiener-hauptbahnhof-muenchen/`) — nur H2 anpassen, Title/H1
-      bewusst unverändert (KONZEPT § B4).
+      ist für den B1-Teil ein No-Op (Inhalt bereits auf `main`, verifiziert per Zwei-Punkt-Diff
+      `origin/main..striking-distance-b` — keine B1/firmenfeier-Hunk mehr vorhanden). **Lehre für
+      weitere Iterationen:** bei geteiltem Arbeitsverzeichnis vor jedem `git branch`/`git checkout`
+      im Hauptfenster erst `git branch --show-current` prüfen, nicht von HEAD blind ausgehen.
+- [x] **B2** Italienisches Restaurant München, DE (`italienisches-restaurant-muenchen/`) — Title/H1/H2
+      additiv angepasst (KONZEPT § B2, größte Einzel-Phrase-Lücke im Audit): Seite rankt Ø Pos.
+      6,95 (6.305 Impr.), aber nur Pos. 20,88 für „italienisches restaurant münchen" (81 Impr.), weil
+      die Phrase in Title/H1/H2 nie zusammenhängend vorkam. Title „Bestes italienisches Restaurant
+      Maxvorstadt München \| STORIA" → „Bestes Italienisches Restaurant München \| STORIA
+      Maxvorstadt", H1 (`heroTitle`) „Bestes italienisches Restaurant in der Maxvorstadt – STORIA
+      München" → „Italienisches Restaurant München – Authentische Küche des Cilento", H2 erste
+      Sektion (`introTitle`) „Süditalien in der Maxvorstadt – die Küche des Cilento im STORIA" →
+      „Ihr Italienisches Restaurant München – Süditalienische Küche des Cilento". Alle Wörter aus
+      Title/H1 erhalten, nur umgestellt. `introP1` trägt die neue H2 bereits inhaltlich (Küche/
+      Cilento/München) — keine Ergänzung nötig. „italiener münchen" (380 Impr., Pos. 14,34) bewusst
+      **nicht** zusätzlich gepresst (KONZEPT-Hinweis, separates Register, eigenes Kriterium falls
+      nach 4–8 Wochen keine Bewegung). Nur DE-Werte geändert — EN
+      (`en/best-italian-restaurant-munich/`, A4) und IT
+      (`it/miglior-ristorante-italiano-monaco/`, C4) nutzen dieselbe Component, nicht angefasst.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+3/-3,
+      `t.seo.italienischesRestaurant.seoTitle` + `.heroTitle` + `.introTitle`) — keine JSX-Struktur,
+      keine Formular-Dateien, keine EN/IT/FR-Werte angefasst.
+      ✓ 2026-09-12 · Prerendered `dist/italienisches-restaurant-muenchen/index.html` geprüft:
+      `<title>`/og:title/twitter:title „Bestes Italienisches Restaurant München \| STORIA
+      Maxvorstadt", `<h1>` „Italienisches Restaurant München – Authentische Küche des Cilento",
+      erstes `<h2>` „Ihr Italienisches Restaurant München – Süditalienische Küche des Cilento"
+      vorhanden. `dist/en/best-italian-restaurant-munich/index.html` (Title „Best Italian Restaurant
+      Munich \| Wood-Fired Pizza \| STORIA", H1 „Munich's Best Italian Restaurant – Authentic
+      Cuisine of the Cilento") und `dist/it/miglior-ristorante-italiano-monaco/index.html`
+      unverändert auf ihrem Vor-B2-Stand.
+- [x] **B3** Italiener Königsplatz (`italiener-koenigsplatz/`) — Title/H1/H2 additiv angepasst
+      (KONZEPT § B3): „Maxvorstadt" fehlte trotz 265+39 Impr. auf Maxvorstadt-spezifischen Queries
+      (`italiener maxvorstadt` 265 Impr./Pos. 9,50, `italienisches restaurant maxvorstadt` 39
+      Impr./Pos. 7,97) komplett in Title/H1/H2. Title „Italiener Königsplatz München – STORIA
+      Restaurant" → „Italiener Königsplatz München – Maxvorstadt \| STORIA Restaurant", H1
+      „Italiener Königsplatz München" → „Italiener Königsplatz München – Ihr Restaurant in der
+      Maxvorstadt", H2 (erste Sektion, `highlightsTitle`) „Warum STORIA am Königsplatz?" →
+      „Restaurant Königsplatz München – Warum STORIA?" (deckt „restaurant königsplatz münchen"/
+      „königsplatz restaurant" ab, additiv da nur die Frage umformuliert; die vier Highlight-Cards
+      darunter — Authentische Küche, Zentrale Lage, Flexible Zeiten, Fußläufig erreichbar — tragen
+      die Frage „Warum STORIA?" weiterhin inhaltlich, keine Ergänzung nötig).
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1/B2-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+3/-3,
+      `t.seo.italienerKoenigsplatz.seoTitle` + `.heroTitle` + `.highlightsTitle`) — keine
+      JSX-Struktur, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/italiener-koenigsplatz/index.html` geprüft: `<title>`/
+      og:title/twitter:title „Italiener Königsplatz München – Maxvorstadt \| STORIA Restaurant",
+      `<h1>` „Italiener Königsplatz München – Ihr Restaurant in der Maxvorstadt", H2 „Restaurant
+      Königsplatz München – Warum STORIA?" vorhanden; alter H2-String „Warum STORIA am
+      Königsplatz?" nicht mehr im Output (0 Treffer).
+- [x] **B4** Italiener Hauptbahnhof (`italiener-hauptbahnhof-muenchen/`) — nur H2 anpassen, Title/H1
+      bewusst unverändert (KONZEPT § B4). H2 (`introTitle`) „Ihr Italiener am Münchner Hauptbahnhof"
+      → „Restaurant am Hauptbahnhof München – Italienisch essen bei STORIA" (deckt „münchen
+      hauptbahnhof essen"/„restaurant hauptbahnhof münchen"/„restaurants münchen hauptbahnhof" in
+      einer Überschrift ab). `introP1` „Das STORIA ist nur 5 Gehminuten entfernt" → „Unser
+      Restaurant STORIA ist nur 5 Gehminuten entfernt" (Absatz trug „Restaurant"-Bezug vorher nicht
+      explizit, additiv ergänzt, keine neuen Fakten). Title/H1 unverändert (Marke „Italiener am
+      Hauptbahnhof" rankt bereits Pos. 3,79 für „italiener münchen hauptbahnhof", Kannibalisierung
+      vermeiden).
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B3-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+2/-2,
+      `t.seo.italienerHauptbahnhof.introTitle` + `.introP1`) — keine JSX-Struktur, keine
+      Formular-Dateien, Title/H1 nicht angefasst.
+      ✓ 2026-09-12 · Prerendered `dist/italiener-hauptbahnhof-muenchen/index.html` geprüft:
+      `<title>` unverändert „Italiener am Hauptbahnhof München – 5 Min. zu Fuß | STORIA", `<h1>`
+      unverändert „Italiener am Hauptbahnhof München – STORIA", H2 „Restaurant am Hauptbahnhof
+      München – Italienisch essen bei STORIA" vorhanden; alter H2-String „Ihr Italiener am Münchner
+      Hauptbahnhof" nicht mehr im Output (0 Treffer); introP1 enthält „Unser Restaurant STORIA".
 
 ## Einheit B: Branch, Beweis, Merge
 
 - [ ] Branch `striking-distance-b` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy.
+      PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/70, Merge steht noch
+      aus (Hauptfenster).
 
 ---
 
