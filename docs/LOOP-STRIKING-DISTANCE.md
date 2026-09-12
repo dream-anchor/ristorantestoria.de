@@ -43,11 +43,27 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
       H2/Description sowie „Your Romantic Evening at STORIA" vorhanden, kein deutscher Reststring
       mehr auf der EN-Seite; `dist/romantisches-dinner-muenchen/index.html` (DE) unverändert mit
       „Ihr romantischer Abend im STORIA".
-- [ ] **A2** Pizza München (`pizza-muenchen/`) — Title/H1 additiv anpassen (KONZEPT § A2). **Kein**
-      Holzofen-Synonym (Korrektur 12.09.2026, siehe KONZEPT). **SERP-Hinweis:** ebenfalls
-      Aggregator-dominiert, Erwartung dämpfen.
-      Beweis: `npm run build`/`lint` grün + `git diff` zeigt nur `src/translations/de.ts`
-      (`t.seo.pizzaMuenchen`).
+- [x] **A2** Pizza München (`pizza-muenchen/`) — Title/H1 additiv angepasst (KONZEPT § A2): Title
+      „Pizza München – Steinofen-Pizza ab 9,90 €…" → „Beste Pizza München – Pizzeria ab 9,90 € |
+      STORIA Maxvorstadt" (Preis-Anker erhalten), H1 „Pizza München – Steinofen-Pizza in der
+      Maxvorstadt" → „Beste Pizza München – Ihre Pizzeria in der Maxvorstadt". **Kein**
+      Holzofen-Synonym eingeführt (Korrektur 12.09.2026, siehe KONZEPT). H2-Block unverändert
+      gelassen (enthält „beste pizza münchen"/„pizzeria münchen" bereits, verifiziert im
+      Prerender-Output). **SERP-Hinweis:** ebenfalls Aggregator-dominiert (TripAdvisor/Falstaff/
+      Mit Vergnügen/PRINZ), Erwartung gedämpft (KONZEPT § A2, bereits recherchiert, keine erneute
+      Suche nötig).
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch, unabhängig von dieser Änderung)
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` (nur A2-relevante Datei) → nur `src/translations/de.ts`
+      (+2/-2, `t.seo.pizzaMuenchen.seoTitle` + `.heroTitle`) — keine JSX-Struktur, keine H2-/Preis-
+      Änderung.
+      ✓ 2026-09-12 · Prerendered `dist/pizza-muenchen/index.html` geprüft: `<title>`, `<h1>`,
+      og:title, twitter:title zeigen „Beste Pizza München – Pizzeria ab 9,90 € | STORIA
+      Maxvorstadt" bzw. „Beste Pizza München – Ihre Pizzeria in der Maxvorstadt"; alle vier H2
+      unverändert („Pizzeria München – Warum STORIA die beste Pizza München bietet" etc.), kein
+      „Holzofen" neu eingeführt.
 - [ ] **A3** Catering (`catering/`) — Title/H1/H2 anpassen + FAQ-Preisfrage ergänzen + Tech-Debt-
       Konsolidierung (Component auf `t.pages.catering.*` umstellen statt Hardcode) (KONZEPT § A3).
       Beweis: `npm run build`/`lint` grün + `git diff` zeigt `src/pages/Catering.tsx` und

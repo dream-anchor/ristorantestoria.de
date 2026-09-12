@@ -2579,11 +2579,11 @@ export const de = {
     },
     pizzaMuenchen: {
       // SEO
-      seoTitle: "Pizza M\u00fcnchen \u2013 Steinofen-Pizza ab 9,90 \u20ac | STORIA Maxvorstadt",
+      seoTitle: "Beste Pizza M\u00fcnchen \u2013 Pizzeria ab 9,90 \u20ac | STORIA Maxvorstadt",
       seoDescription: "Steinofen-Pizza wie in Neapel: 400 \u00b0C, 48 h Teig, ab 9,90 \u20ac. T\u00e4glich bis 01:00 Uhr, 5 Gehminuten vom Hauptbahnhof. Jetzt Tisch reservieren oder abholen.",
       breadcrumb: "Pizza M\u00fcnchen",
       // Hero
-      heroTitle: "Pizza M\u00fcnchen \u2013 Steinofen-Pizza in der Maxvorstadt",
+      heroTitle: "Beste Pizza M\u00fcnchen \u2013 Ihre Pizzeria in der Maxvorstadt",
       heroSubtitle: "Pizzeria STORIA \u2022 Authentisch seit 2015",
       heroDescription: "Pizza M\u00fcnchen: Original italienische Steinofen-Pizza bei 400\u00b0C gebacken. San Marzano Tomaten, B\u00fcffelmozzarella und 48-Stunden Teigf\u00fchrung \u2013 nur 5 Gehminuten vom K\u00f6nigsplatz.",
       tldr: "Pizza München im STORIA Maxvorstadt (Karlstraße 47a): Original italienische Steinofen-Pizza bei über 400 °C gebacken. San Marzano Tomaten, Büffelmozzarella und 48-Stunden Teigführung. Familienbetrieb seit 2015 von Familie Speranza aus Kampanien. 5 Gehminuten vom Königsplatz. 4,5 Sterne bei über 800 Google-Bewertungen. Reservierung: +49 89 51519696.",
