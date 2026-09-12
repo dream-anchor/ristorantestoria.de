@@ -270,19 +270,137 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
 **Freigegeben:** Antoine, 12.09.2026, „Ja, setz alles im /loop um" — gilt für C1–C4 (Copy-Tabelle
 wie im Chat vorgelegt, siehe KONZEPT § C1–C4).
 
-- [ ] **C1** Neapolitanische Pizza München (`neapolitanische-pizza-muenchen/`) — nur „beste" in H1
-      ergänzen. **Kein** Holzofen-Synonym (Korrektur 12.09.2026) (KONZEPT § C1).
-- [ ] **C2** Aperitivo München (`aperitivo-muenchen/`) — nur H2 anpassen (KONZEPT § C2).
-- [ ] **C3** Geburtstagsfeier München DE (`geburtstagsfeier-muenchen/`) + EN
-      (`en/birthday-party-munich/`) — DE: H2 anpassen (KONZEPT § C3). EN: **erst Title/H1/H2 live
-      nachlesen** (war nicht Teil der Erstrecherche), dann analog fixen.
-- [ ] **C4** IT Ristorante-Cluster (`it/miglior-ristorante-italiano-monaco/`) — Title/H1/H2 anpassen
-      (KONZEPT § C4, zweitgrößte Einzel-Phrase-Lücke).
+- [x] **C1** Neapolitanische Pizza München (`neapolitanische-pizza-muenchen/`) — nur H1 additiv
+      angepasst (KONZEPT § C1): „Neapolitanische Pizza München – Steinofen 400°C im STORIA" →
+      „Beste Neapolitanische Pizza München – Steinofen 400°C im STORIA" (fügt „beste" ein, deckt
+      „beste neapolitanische pizza münchen", 222 Impr./Pos. 11,98). Title und H2-Block unverändert
+      (Kopf-Keyword „neapolitanische pizza münchen" bereits vorhanden, kein struktureller Fix
+      nötig). **Kein** Holzofen-Synonym eingeführt (Korrektur 12.09.2026, STORIA hat nachweislich
+      einen Steinofen, keinen Holzofen) — `holzofenpizza münchen` (149 Impr.) bleibt unadressiert,
+      wie im KONZEPT vermerkt.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+1/-1,
+      `t.seo.neapolitanPizza.heroTitle`) — keine JSX-Struktur, keine Formular-Dateien, kein
+      „Holzofen" im Diff.
+      ✓ 2026-09-12 · Prerendered `dist/neapolitanische-pizza-muenchen/index.html` geprüft: `<h1>`
+      „Beste Neapolitanische Pizza München – Steinofen 400°C im STORIA" vorhanden; `<title>`/
+      og:title/twitter:title unverändert „Neapolitanische Pizza München – 90 Sek. bei 400 °C |
+      STORIA"; 0 Treffer für „Holzofen" im gesamten Output.
+      Commit `18ef0ee` auf Branch `striking-distance-c` (kein Push, kein PR — C2–C4 stehen noch
+      aus, Bündelung „ein PR je Einheit").
+- [x] **C2** Aperitivo München (`aperitivo-muenchen/`) — nur H2 additiv angepasst (KONZEPT § C2):
+      „Warum Aperitivo im STORIA München?" → „Aperitivo Bar München – Warum STORIA?" (fehlendes Wort
+      war „Bar", nicht „Aperitivo" selbst; deckt „aperitivo bar münchen", 207 Impr./Pos. 11,02).
+      Title/H1 unverändert (enthalten „Aperitivo" bereits stark). Feature-Cards direkt unter der H2
+      (Frage-Antwort-Format) tragen die neue Überschrift bereits inhaltlich —
+      `featureAmbienceDesc` nennt bereits „italienische Bar-Kultur" — keine Ergänzung nötig.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4/C1-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+1/-1,
+      `t.seo.aperitivo.whyTitle`) — keine JSX-Struktur, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/aperitivo-muenchen/index.html` geprüft: `<h2>` „Aperitivo Bar
+      München – Warum STORIA?" vorhanden, alter H2-String „Warum Aperitivo im STORIA München?" 0
+      Treffer; `<title>` unverändert „Aperitivo München – 10 Spritz-Varianten 9,90 €, Terrasse |
+      STORIA", `<h1>` unverändert „Aperitivo München – Aperol Spritz & Negroni im STORIA".
+      Commit `cb8f94f` auf Branch `striking-distance-c` (kein Push, kein PR — C3/C4 stehen noch aus,
+      Bündelung „ein PR je Einheit").
+- [x] **C3** Geburtstagsfeier München DE (`geburtstagsfeier-muenchen/`) + EN
+      (`en/birthday-party-munich/`) — nur H2 additiv angepasst (KONZEPT § C3), Title/H1 auf beiden
+      Sprachen unverändert. Component ist dieselbe für DE+EN (`GeburtstagsfeierMuenchen.tsx`,
+      `en`-Slug `birthday-party-munich` via `slugs.json`-Mapping), analog zum A4/B2/C4-Muster.
+      DE: H2 (`typesTitle`) „🎂 Welche Geburtstagsfeiern können Sie im STORIA feiern?" →
+      „Geburtstag feiern im Restaurant München – STORIA" (deckt „geburtstag feiern restaurant
+      münchen", 206 Impr./Pos. 7,30, + „restaurant für geburtstag münchen", 78 Impr./Pos. 8,49, in
+      einer Überschrift ab).
+      **EN-Recherche (nicht Teil der KONZEPT-Erstrecherche, hier nachgetragen):** IST-Zustand vor
+      Fix — `seoTitle`: „Birthday Party Munich \| Up to 200 Guests from €35 – STORIA", `heroTitle`
+      (H1): „Birthday Party Munich – Celebrate Italian Style at STORIA", `introTitle` (H2 Sektion 1):
+      „Birthday Party Munich – STORIA for Your Special Day", `typesTitle` (H2 Sektion 2): „🎂 What
+      Birthday Parties Can You Celebrate at STORIA?". Beide Ziel-Queries „munich birthday
+      celebration" (233 Impr./Pos. 11,76) und „best restaurant for birthday celebration" (158
+      Impr./Pos. 9,36) fehlten als Phrase in Title/H1/H2 komplett (nur beiläufig in `introP1`/
+      Testimonial, nicht in einer Überschrift). **Entscheidung:** Title/H1 tragen das Kopf-Keyword
+      „birthday party munich" bereits — laut Vorgabe deshalb nicht angefasst, nur `typesTitle`
+      geändert: „🎂 What Birthday Parties Can You Celebrate at STORIA?" → „Best Restaurant for
+      Birthday Celebration in Munich – STORIA" (deckt beide EN-Ziel-Queries additiv ab).
+      Beide H2 sitzen über derselben unveränderten 5er-Kartenliste (Meilenstein/Überraschung/
+      Familie/Pizza/Dinner) — trägt die neue Überschrift weiterhin inhaltlich als
+      Feier-Typ-Übersicht, keine Ergänzung nötig.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4/C1/C2-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+1/-1, `t.seo.birthday.
+      typesTitle`) und `src/translations/en.ts` (+1/-1, `t.seo.birthday.typesTitle`) — keine
+      JSX-Struktur, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/geburtstagsfeier-muenchen/index.html` geprüft: `<title>`
+      unverändert „Geburtstagsfeier München – Restaurant für 2–200 Gäste \| STORIA", `<h1>`
+      unverändert „Geburtstagsfeier München – Italienisch feiern im STORIA", zweites `<h2>`
+      „Geburtstag feiern im Restaurant München – STORIA" vorhanden. Prerendered
+      `dist/en/birthday-party-munich/index.html` geprüft: `<title>` unverändert „Birthday Party
+      Munich \| Up to 200 Guests from €35 – STORIA", `<h1>` unverändert „Birthday Party Munich –
+      Celebrate Italian Style at STORIA", zweites `<h2>` „Best Restaurant for Birthday Celebration
+      in Munich – STORIA" vorhanden; alter H2-String „What Birthday Parties Can You Celebrate at
+      STORIA?" 0 Treffer in beiden Sprachversionen.
+      Commit `7ea2473` auf Branch `striking-distance-c` (kein Push, kein PR — C4 steht noch aus,
+      Bündelung „ein PR je Einheit").
+- [x] **C4** IT Ristorante-Cluster (`it/miglior-ristorante-italiano-monaco/`) — Title/H1/H2 additiv
+      angepasst (KONZEPT § C4, zweitgrößter Einzel-Phrase-Befund im Audit): 1.145 Impr. über die
+      Top-3-IT-Queries (`ristoranti italiani a monaco di baviera` 585 Impr./Pos. 13,07,
+      `ristorante italiano monaco di baviera` 243 Impr./Pos. 10,33,
+      `migliori ristoranti italiani monaco di baviera` 57 Impr./Pos. 11,74), aber **keine** davon kam
+      in Title/H1/H2 vor — Seite sprach durchgängig von „Ristorante del Sud Italia"/„Monaco" statt
+      „Ristorante Italiano"/voller Ortsbezeichnung „Monaco di Baviera". Title „Ristorante del Sud
+      Italia Monaco-Maxvorstadt \| STORIA" → „Ristorante Italiano Monaco di Baviera – Cucina del Sud
+      \| STORIA" (KONZEPT-Wortlaut übernommen, nicht die im Auftrag leicht abweichende Variante mit
+      zusätzlichem „Italia" am Ende — Konzept ist bei Abweichung bindend). H1 „Autenticamente del Sud
+      Italia – la cucina del Cilento nel Maxvorstadt" → „Ristorante Italiano a Monaco di Baviera –
+      Autentica Cucina del Sud Italia". H2 (erste Sektion, `introTitle`) „Il Sud Italia nel
+      Maxvorstadt – la cucina del Cilento allo STORIA" → „Il Miglior Ristorante Italiano a Monaco di
+      Baviera – STORIA Maxvorstadt" (deckt zusätzlich „migliori ristoranti italiani" ab). `introP1`
+      trägt Küche/Herkunft/Ort (Cilento, Campania, Monaco) bereits inhaltlich — keine Ergänzung nötig
+      (gleiches Muster wie A4/B2 bei derselben Component). Nur IT-Werte geändert — DE
+      (`italienisches-restaurant-muenchen/`, B2) und EN (`en/best-italian-restaurant-munich/`, A4)
+      nutzen dieselbe Component, nicht angefasst. **SERP-Check** (WebSearch, 12.09.2026, Query
+      „ristorante italiano monaco di baviera"): Top-Ergebnisse ausschließlich Aggregatoren/
+      Verzeichnisse (TripAdvisor, Falstaff, TuttoBaviera, CitySeeker, Milan Foodie Insider,
+      BigMammaGroup) — STORIA selbst nicht in den angezeigten Treffern. Erwartung entsprechend
+      gedämpft (Muster wie A1/A2), Fix trotzdem additiv/kostenlos umgesetzt. GSC-UI-Zuordnung
+      (Seite→Suchanfragen) mangels Zugriff in dieser Session nicht gegengeprüft (kein `gscServer`-
+      MCP verbunden) — entfällt hiermit explizit statt stillschweigend übersprungen.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4/C1–C3-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/it.ts` (+3/-3,
+      `t.seo.italienischesRestaurant.seoTitle` + `.heroTitle` + `.introTitle`) — keine JSX-Struktur,
+      keine Formular-Dateien, keine DE/EN/FR-Werte angefasst.
+      ✓ 2026-09-12 · Prerendered `dist/it/miglior-ristorante-italiano-monaco/index.html` geprüft:
+      `<title>`/og:title/twitter:title „Ristorante Italiano Monaco di Baviera – Cucina del Sud \|
+      STORIA", `<h1>` „Ristorante Italiano a Monaco di Baviera – Autentica Cucina del Sud Italia",
+      erstes `<h2>` „Il Miglior Ristorante Italiano a Monaco di Baviera – STORIA Maxvorstadt"
+      vorhanden; alle drei alten Strings 0 Treffer im Output.
+      `dist/italienisches-restaurant-muenchen/index.html` (DE, Title „Bestes Italienisches
+      Restaurant München \| STORIA Maxvorstadt") und `dist/en/best-italian-restaurant-munich/
+      index.html` (EN, Title „Best Italian Restaurant Munich \| Wood-Fired Pizza \| STORIA") beide
+      unverändert auf ihrem Vor-C4-Stand.
+      Commit auf Branch `striking-distance-c` — mit diesem Commit ist Einheit C (C1–C4) vollständig.
 
 ## Einheit C: Branch, Beweis, Merge
 
 - [ ] Branch `striking-distance-c` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy.
+      PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/73, Merge steht noch
+      aus (Hauptfenster).
 
 ---
 

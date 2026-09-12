@@ -996,7 +996,7 @@ export const de = {
       openingHours: "Mo–Fr: 09:00 – 01:00 Uhr | Sa–So: 12:00 – 01:00 Uhr",
       openingNote: "Aperitivo-Service zwischen 17:00 und 22:30 Uhr. Außerhalb dieser Zeiten genießen Sie unsere italienische Küche und reguläre Getränkekarte.",
       // Why STORIA
-      whyTitle: "Warum Aperitivo im STORIA München?",
+      whyTitle: "Aperitivo Bar München – Warum STORIA?",
       featureAuthenticTitle: "Authentisch Italienisch",
       featureAuthenticDesc: "Unsere Aperitivi werden nach original italienischen Rezepturen gemixt. Die Familie Speranza bringt die Bar-Kultur aus der Region Cilento direkt nach München.",
       featurePremiumTitle: "Premium-Zutaten",
@@ -1729,7 +1729,7 @@ export const de = {
       introP1: "Sie planen eine Geburtstagsfeier in M\u00fcnchen und suchen die perfekte Location? Das Ristorante STORIA bietet seit 2015 den idealen Rahmen f\u00fcr Geburtstagsfeiern jeder Gr\u00f6\u00dfe. Von der intimen Feier mit den engsten Freunden bis zur gro\u00dfen Party f\u00fcr 200 G\u00e4ste \u2013 Familie Speranza und ihr Team sorgen daf\u00fcr, dass Ihr Geburtstag genau so wird, wie Sie es sich w\u00fcnschen.",
       introP2: "Als Ihr Italiener in M\u00fcnchen Maxvorstadt verwandeln wir jeden Geburtstag in ein italienisches Fest: mit hausgemachter Pasta, Pizza aus dem Steinofen, erlesenen Weinen und der Herzlichkeit, die Italien so besonders macht.",
       // Birthday Types Section (5 event-based)
-      typesTitle: "\ud83c\udf82 Welche Geburtstagsfeiern k\u00f6nnen Sie im STORIA feiern?",
+      typesTitle: "Geburtstag feiern im Restaurant M\u00fcnchen \u2013 STORIA",
       type1Icon: "\ud83c\udf88",
       type1Title: "\ud83c\udf88 Runder Geburtstag",
       type1Desc: "30, 40, 50, 60 oder 70 \u2013 ein runder Geburtstag verdient ein besonderes Setting. Feiern Sie diesen Meilenstein im STORIA mit einem mehrg\u00e4ngigen Festmen\u00fc, erlesenen Weinen und festlicher Dekoration.",
@@ -2288,7 +2288,7 @@ export const de = {
       seoTitle: "Neapolitanische Pizza München – 90 Sek. bei 400 °C | STORIA",
       seoDescription: "Echte Pizza napoletana: 48 h Teigführung, San-Marzano-Tomaten DOP, Büffelmozzarella. Margherita 12,50 €. Maxvorstadt, 5 Min. vom Hbf – auch zum Mitnehmen.",
       // Hero
-      heroTitle: "Neapolitanische Pizza München – Steinofen 400°C im STORIA",
+      heroTitle: "Beste Neapolitanische Pizza München – Steinofen 400°C im STORIA",
       heroSubtitle: "Authentisch im Steinofen | STORIA Maxvorstadt",
       heroDescription: "Erleben Sie echte Pizza napoletana in München: Nach traditioneller neapolitanischer Art im Steinofen bei 400°C gebacken. Mit San Marzano Tomaten DOP, Büffelmozzarella aus Kampanien und 48-Stunden Teigführung – nur 5 Gehminuten vom Königsplatz.",
       tldr: "Neapolitanische Pizza im STORIA München Maxvorstadt (Karlstraße 47a): Echte Pizza napoletana aus dem Steinofen bei über 400 °C. San Marzano Tomaten DOP, Büffelmozzarella aus Kampanien, 48-Stunden Teigführung. Küchenchef Domenico Speranza aus Kampanien, seit 1995 in der deutschen Gastronomie. 4,5 Sterne bei über 800 Google-Bewertungen. Reservierung: +49 89 51519696.",
