@@ -161,8 +161,37 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
       „Firmenfeier München – Feiern im STORIA Maxvorstadt", erstes `<h2>` „Firmenfeier München –
       Ihre Betriebsfeier im STORIA" vorhanden, „Betriebsfeier" erscheint jetzt 3× auf der Seite
       (Hero-Subtitle, neues H2, neuer introP1-Zusatz).
-- [ ] **B2** Italienisches Restaurant München, DE (`italienisches-restaurant-muenchen/`) — Title/H1/H2
-      anpassen (KONZEPT § B2, größte Einzel-Phrase-Lücke im Audit).
+- [x] **B2** Italienisches Restaurant München, DE (`italienisches-restaurant-muenchen/`) — Title/H1/H2
+      additiv angepasst (KONZEPT § B2, größte Einzel-Phrase-Lücke im Audit): Seite rankt Ø Pos.
+      6,95 (6.305 Impr.), aber nur Pos. 20,88 für „italienisches restaurant münchen" (81 Impr.), weil
+      die Phrase in Title/H1/H2 nie zusammenhängend vorkam. Title „Bestes italienisches Restaurant
+      Maxvorstadt München \| STORIA" → „Bestes Italienisches Restaurant München \| STORIA
+      Maxvorstadt", H1 (`heroTitle`) „Bestes italienisches Restaurant in der Maxvorstadt – STORIA
+      München" → „Italienisches Restaurant München – Authentische Küche des Cilento", H2 erste
+      Sektion (`introTitle`) „Süditalien in der Maxvorstadt – die Küche des Cilento im STORIA" →
+      „Ihr Italienisches Restaurant München – Süditalienische Küche des Cilento". Alle Wörter aus
+      Title/H1 erhalten, nur umgestellt. `introP1` trägt die neue H2 bereits inhaltlich (Küche/
+      Cilento/München) — keine Ergänzung nötig. „italiener münchen" (380 Impr., Pos. 14,34) bewusst
+      **nicht** zusätzlich gepresst (KONZEPT-Hinweis, separates Register, eigenes Kriterium falls
+      nach 4–8 Wochen keine Bewegung). Nur DE-Werte geändert — EN
+      (`en/best-italian-restaurant-munich/`, A4) und IT
+      (`it/miglior-ristorante-italiano-monaco/`, C4) nutzen dieselbe Component, nicht angefasst.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+3/-3,
+      `t.seo.italienischesRestaurant.seoTitle` + `.heroTitle` + `.introTitle`) — keine JSX-Struktur,
+      keine Formular-Dateien, keine EN/IT/FR-Werte angefasst.
+      ✓ 2026-09-12 · Prerendered `dist/italienisches-restaurant-muenchen/index.html` geprüft:
+      `<title>`/og:title/twitter:title „Bestes Italienisches Restaurant München \| STORIA
+      Maxvorstadt", `<h1>` „Italienisches Restaurant München – Authentische Küche des Cilento",
+      erstes `<h2>` „Ihr Italienisches Restaurant München – Süditalienische Küche des Cilento"
+      vorhanden. `dist/en/best-italian-restaurant-munich/index.html` (Title „Best Italian Restaurant
+      Munich \| Wood-Fired Pizza \| STORIA", H1 „Munich's Best Italian Restaurant – Authentic
+      Cuisine of the Cilento") und `dist/it/miglior-ristorante-italiano-monaco/index.html`
+      unverändert auf ihrem Vor-B2-Stand.
 - [ ] **B3** Italiener Königsplatz (`italiener-koenigsplatz/`) — Title/H1/H2 anpassen, „Maxvorstadt"
       ergänzen (KONZEPT § B3).
 - [ ] **B4** Italiener Hauptbahnhof (`italiener-hauptbahnhof-muenchen/`) — nur H2 anpassen, Title/H1
