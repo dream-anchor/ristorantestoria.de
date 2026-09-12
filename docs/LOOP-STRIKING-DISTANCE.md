@@ -311,9 +311,47 @@ wie im Chat vorgelegt, siehe KONZEPT § C1–C4).
       STORIA", `<h1>` unverändert „Aperitivo München – Aperol Spritz & Negroni im STORIA".
       Commit `cb8f94f` auf Branch `striking-distance-c` (kein Push, kein PR — C3/C4 stehen noch aus,
       Bündelung „ein PR je Einheit").
-- [ ] **C3** Geburtstagsfeier München DE (`geburtstagsfeier-muenchen/`) + EN
-      (`en/birthday-party-munich/`) — DE: H2 anpassen (KONZEPT § C3). EN: **erst Title/H1/H2 live
-      nachlesen** (war nicht Teil der Erstrecherche), dann analog fixen.
+- [x] **C3** Geburtstagsfeier München DE (`geburtstagsfeier-muenchen/`) + EN
+      (`en/birthday-party-munich/`) — nur H2 additiv angepasst (KONZEPT § C3), Title/H1 auf beiden
+      Sprachen unverändert. Component ist dieselbe für DE+EN (`GeburtstagsfeierMuenchen.tsx`,
+      `en`-Slug `birthday-party-munich` via `slugs.json`-Mapping), analog zum A4/B2/C4-Muster.
+      DE: H2 (`typesTitle`) „🎂 Welche Geburtstagsfeiern können Sie im STORIA feiern?" →
+      „Geburtstag feiern im Restaurant München – STORIA" (deckt „geburtstag feiern restaurant
+      münchen", 206 Impr./Pos. 7,30, + „restaurant für geburtstag münchen", 78 Impr./Pos. 8,49, in
+      einer Überschrift ab).
+      **EN-Recherche (nicht Teil der KONZEPT-Erstrecherche, hier nachgetragen):** IST-Zustand vor
+      Fix — `seoTitle`: „Birthday Party Munich \| Up to 200 Guests from €35 – STORIA", `heroTitle`
+      (H1): „Birthday Party Munich – Celebrate Italian Style at STORIA", `introTitle` (H2 Sektion 1):
+      „Birthday Party Munich – STORIA for Your Special Day", `typesTitle` (H2 Sektion 2): „🎂 What
+      Birthday Parties Can You Celebrate at STORIA?". Beide Ziel-Queries „munich birthday
+      celebration" (233 Impr./Pos. 11,76) und „best restaurant for birthday celebration" (158
+      Impr./Pos. 9,36) fehlten als Phrase in Title/H1/H2 komplett (nur beiläufig in `introP1`/
+      Testimonial, nicht in einer Überschrift). **Entscheidung:** Title/H1 tragen das Kopf-Keyword
+      „birthday party munich" bereits — laut Vorgabe deshalb nicht angefasst, nur `typesTitle`
+      geändert: „🎂 What Birthday Parties Can You Celebrate at STORIA?" → „Best Restaurant for
+      Birthday Celebration in Munich – STORIA" (deckt beide EN-Ziel-Queries additiv ab).
+      Beide H2 sitzen über derselben unveränderten 5er-Kartenliste (Meilenstein/Überraschung/
+      Familie/Pizza/Dinner) — trägt die neue Überschrift weiterhin inhaltlich als
+      Feier-Typ-Übersicht, keine Ergänzung nötig.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4/C1/C2-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+1/-1, `t.seo.birthday.
+      typesTitle`) und `src/translations/en.ts` (+1/-1, `t.seo.birthday.typesTitle`) — keine
+      JSX-Struktur, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/geburtstagsfeier-muenchen/index.html` geprüft: `<title>`
+      unverändert „Geburtstagsfeier München – Restaurant für 2–200 Gäste \| STORIA", `<h1>`
+      unverändert „Geburtstagsfeier München – Italienisch feiern im STORIA", zweites `<h2>`
+      „Geburtstag feiern im Restaurant München – STORIA" vorhanden. Prerendered
+      `dist/en/birthday-party-munich/index.html` geprüft: `<title>` unverändert „Birthday Party
+      Munich \| Up to 200 Guests from €35 – STORIA", `<h1>` unverändert „Birthday Party Munich –
+      Celebrate Italian Style at STORIA", zweites `<h2>` „Best Restaurant for Birthday Celebration
+      in Munich – STORIA" vorhanden; alter H2-String „What Birthday Parties Can You Celebrate at
+      STORIA?" 0 Treffer in beiden Sprachversionen.
+      Commit `7ea2473` auf Branch `striking-distance-c` (kein Push, kein PR — C4 steht noch aus,
+      Bündelung „ein PR je Einheit").
 - [ ] **C4** IT Ristorante-Cluster (`it/miglior-ristorante-italiano-monaco/`) — Title/H1/H2 anpassen
       (KONZEPT § C4, zweitgrößte Einzel-Phrase-Lücke).
 
