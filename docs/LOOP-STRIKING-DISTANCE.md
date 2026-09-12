@@ -255,10 +255,13 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
 
 ## Einheit B: Branch, Beweis, Merge
 
-- [ ] Branch `striking-distance-b` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
+- [x] Branch `striking-distance-b` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy.
-      PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/70, Merge steht noch
-      aus (Hauptfenster).
+      ✓ 2026-09-12 · PR #70 erstellt, im Hauptfenster gegengelesen (nur B2/B3/B4-Strings, additiv,
+      B1 korrekt als No-Op da bereits auf `main` — siehe Prozess-Notiz oben) → `gh pr merge 70
+      --squash --delete-branch` → Fast-Forward-Merge `d66ae5e` auf `main` (kein Konflikt mit lokalem
+      main, sauber synchronisiert). Deploy-Workflow ausgelöst (Run 34712174947), Live-Stichprobe
+      folgt nach Abschluss.
 
 ---
 
