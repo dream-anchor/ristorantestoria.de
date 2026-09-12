@@ -24,7 +24,7 @@ const InternalLinks = () => {
     { baseSlug: "italiener-hauptbahnhof-muenchen", label: t.internalLinks.italianCentralStationMunich },
     { baseSlug: "hochzeitsfeier-muenchen", label: t.internalLinks.weddingMunich },
     { baseSlug: "valentinstag-muenchen", label: t.internalLinks.valentinstagMunich },
-    { baseSlug: "silvester-muenchen", label: t.internalLinks.silvesterMunich },
+    { baseSlug: "besondere-anlaesse/silvester", label: t.internalLinks.silvesterMunich },
     { baseSlug: "weihnachten-muenchen", label: t.internalLinks.christmasMunich },
   ];
 

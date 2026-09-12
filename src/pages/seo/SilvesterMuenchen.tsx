@@ -168,7 +168,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               "@type": "Event",
               "@id": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/#event",
               "name": "Silvester Gala-Dinner im STORIA München",
-              "description": "Italienisches Gala-Dinner zum Jahreswechsel in der Maxvorstadt: Champagner-Aperitif und 4-Gänge-Degustationsmenü zur Wahl (Vegetale, Mare oder Terra). 65,90 € pro Person, mit Weinbegleitung 99 €.",
+              "description": "Italienisches Gala-Dinner zum Jahreswechsel in der Maxvorstadt: Champagner-Aperitif und 4-Gänge-Degustationsmenü zur Wahl (Vegetale, Mare oder Terra). Ab 99 € pro Person, mit Weinbegleitung 150 €.",
               "startDate": "2026-12-31T19:00:00+01:00",
               "endDate": "2027-01-01T02:00:00+01:00",
               "eventStatus": "https://schema.org/EventScheduled",
@@ -178,8 +178,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "image": ["https://www.ristorantestoria.de/silvester-gala-storia-muenchen.jpg"],
               "offers": [
-                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü", "price": "65.90", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
-                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
+                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü", "price": "99.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
+                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
               ]
             },
             {
@@ -192,8 +192,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                   "@type": "MenuSection",
                   "name": "4 Gänge Menü «Vegetale»",
                   "offers": [
-                    { "@type": "Offer", "price": "65.90", "priceCurrency": "EUR" },
-                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR" }
+                    { "@type": "Offer", "price": "99.00", "priceCurrency": "EUR" },
+                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR" }
                   ],
                   "hasMenuItem": [
                     { "@type": "MenuItem", "name": "Champagner-Kastaniencremesuppe mit getrüffelter Crème Fraîche" },
@@ -206,8 +206,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                   "@type": "MenuSection",
                   "name": "4 Gänge Menü «Mare»",
                   "offers": [
-                    { "@type": "Offer", "price": "65.90", "priceCurrency": "EUR" },
-                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR" }
+                    { "@type": "Offer", "price": "99.00", "priceCurrency": "EUR" },
+                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR" }
                   ],
                   "hasMenuItem": [
                     { "@type": "MenuItem", "name": "Carpaccio vom Octopus mit Jakobsmuscheln in feiner Kräuter-Zitrus-Marinade" },
@@ -220,8 +220,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                   "@type": "MenuSection",
                   "name": "4 Gänge Menü «Terra»",
                   "offers": [
-                    { "@type": "Offer", "price": "65.90", "priceCurrency": "EUR" },
-                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "99.00", "priceCurrency": "EUR" }
+                    { "@type": "Offer", "price": "99.00", "priceCurrency": "EUR" },
+                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR" }
                   ],
                   "hasMenuItem": [
                     { "@type": "MenuItem", "name": "Vitello Tonnato, Auberginenkaviar und Parmesanpraline" },
