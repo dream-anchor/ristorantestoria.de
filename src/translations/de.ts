@@ -2288,7 +2288,7 @@ export const de = {
       seoTitle: "Neapolitanische Pizza München – 90 Sek. bei 400 °C | STORIA",
       seoDescription: "Echte Pizza napoletana: 48 h Teigführung, San-Marzano-Tomaten DOP, Büffelmozzarella. Margherita 12,50 €. Maxvorstadt, 5 Min. vom Hbf – auch zum Mitnehmen.",
       // Hero
-      heroTitle: "Neapolitanische Pizza München – Steinofen 400°C im STORIA",
+      heroTitle: "Beste Neapolitanische Pizza München – Steinofen 400°C im STORIA",
       heroSubtitle: "Authentisch im Steinofen | STORIA Maxvorstadt",
       heroDescription: "Erleben Sie echte Pizza napoletana in München: Nach traditioneller neapolitanischer Art im Steinofen bei 400°C gebacken. Mit San Marzano Tomaten DOP, Büffelmozzarella aus Kampanien und 48-Stunden Teigführung – nur 5 Gehminuten vom Königsplatz.",
       tldr: "Neapolitanische Pizza im STORIA München Maxvorstadt (Karlstraße 47a): Echte Pizza napoletana aus dem Steinofen bei über 400 °C. San Marzano Tomaten DOP, Büffelmozzarella aus Kampanien, 48-Stunden Teigführung. Küchenchef Domenico Speranza aus Kampanien, seit 1995 in der deutschen Gastronomie. 4,5 Sterne bei über 800 Google-Bewertungen. Reservierung: +49 89 51519696.",
