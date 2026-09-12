@@ -1285,11 +1285,11 @@ const enBase = {
     },
     romanticDinner: {
       // SEO
-      seoTitle: "Romantic Dinner Munich | 5 min from Königsplatz | STORIA",
-      seoDescription: "Romantic dinner in Munich by candlelight at STORIA Maxvorstadt: Italian menu, wine pairing and a rose, just 5 minutes from Königsplatz. Perfect for date night.",
+      seoTitle: "Best Romantic Dinner Munich – Date Night Restaurant | STORIA",
+      seoDescription: "Munich's best romantic dinner for date night: candlelight at STORIA Maxvorstadt, Italian menu, wine pairing & a rose — 5 min from Königsplatz.",
       breadcrumb: "Romantic Dinner Munich",
       // Hero
-      heroTitle: "Romantic Dinner Munich – Candlelight at STORIA",
+      heroTitle: "Munich's Best Romantic Dinner – Candlelight Restaurant at STORIA",
       heroSubtitle: "Italian cuisine for special moments together | STORIA Maxvorstadt",
       heroBadge1: "🕯️ Candlelight Atmosphere",
       heroBadge2: "🍷 Fine Wines",
@@ -1297,7 +1297,7 @@ const enBase = {
       heroDescription: "Experience an unforgettable romantic evening at STORIA: Exquisite Italian cuisine, soft candlelight, intimate atmosphere and attentive service. Perfect for anniversary, engagement, date night or simply a special evening together – just 5 minutes from Königsplatz.",
       heroCta: "Reserve Romantic Table",
       // Intro
-      introTitle: "Romantic Dining Munich – The Perfect Date Restaurant for Special Evenings",
+      introTitle: "The Best Romantic Restaurant in Munich – Perfect for Date Night",
       introP1: "Looking for a date restaurant in Munich? At Ristorante STORIA Maxvorstadt, we create the perfect atmosphere for special moments together: Soft candlelight, intimate tables with enough privacy, attentive but discreet service and exquisite Italian cuisine that enchants all senses. Romantic dining in Munich – every evening becomes something special with us.",
       introP2: "Whether first date in Munich, anniversary, proposal, engagement celebration or simply an evening for two – with us your romantic dinner becomes an unforgettable experience. Our tasting menus with wine pairing are especially popular for romantic occasions. As your Italian restaurant in Munich, we combine authentic cuisine with a romantic dining Munich experience.",
       // Why STORIA
@@ -1314,6 +1314,8 @@ const enBase = {
       whyExtrasDesc: "On request we organize rose bouquet, welcome champagne or special table decoration. Just let us know when booking.",
       whyLocationTitle: "📍 Central Romantic Location",
       whyLocationDesc: "Just 5 minutes from Königsplatz, perfectly accessible for a date after work or after a stroll through Maxvorstadt. In summer: idyllic terrace.",
+      // Photo Gallery
+      yourEveningTitle: "Your Romantic Evening at STORIA",
       // Menus
       menuSectionTitle: "Our Menu Recommendations for Romantic Evenings",
       menuSectionIntro: "For a romantic dinner we recommend our tasting menus – a culinary experience in 4 courses with perfectly matched wine pairing.",

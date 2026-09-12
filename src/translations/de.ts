@@ -1342,6 +1342,8 @@ export const de = {
       whyExtrasDesc: "Auf Wunsch organisieren wir Rosenstrauß, Champagner zum Empfang oder eine Sonderdekoration für Ihren Tisch. Sprechen Sie uns einfach bei der Reservierung an.",
       whyLocationTitle: "📍 Zentrale romantische Lage",
       whyLocationDesc: "Nur 5 Minuten vom Königsplatz, perfekt erreichbar für ein Date nach der Arbeit oder nach einem Spaziergang durch die Maxvorstadt. Im Sommer: idyllische Terrasse.",
+      // Photo Gallery
+      yourEveningTitle: "Ihr romantischer Abend im STORIA",
       // Menus
       menuSectionTitle: "Unsere Menü-Empfehlungen für romantische Abende",
       menuSectionIntro: "Für ein romantisches Dinner empfehlen wir unsere Degustationsmenüs – ein kulinarisches Erlebnis in 4 Gängen mit perfekt abgestimmter Weinbegleitung.",
