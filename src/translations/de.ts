@@ -662,8 +662,8 @@ export const de = {
       heroCta: "Firmenfeier anfragen bei STORIA Events",
       heroEventsNote: "Alle Firmenfeier-Anfragen werden über unsere Event-Website bearbeitet:",
       // Intro
-      introTitle: "Firmenevents M\u00fcnchen \u2013 Das STORIA f\u00fcr erfolgreiche Firmenevents",
-      introP1: "Sie planen Firmenevents in M\u00fcnchen und suchen die perfekte Location? Das Ristorante STORIA in der Maxvorstadt ist die ideale Adresse f\u00fcr Firmenevents, Weihnachtsfeiern, Teambuilding-Events, Sommerfeste, Firmenjubil\u00e4en und Gesch\u00e4ftsessen. Mit flexiblen Raumkonzepten für bis zu 100 Sitz- und 300 Stehplätze, exquisiter italienischer Küche und zentraler Lage direkt am K\u00f6nigsplatz bietet das STORIA alles f\u00fcr ein erfolgreiches Firmenevent in M\u00fcnchen.",
+      introTitle: "Firmenfeier M\u00fcnchen \u2013 Ihre Betriebsfeier im STORIA",
+      introP1: "Sie planen Firmenevents in M\u00fcnchen und suchen die perfekte Location? Das Ristorante STORIA in der Maxvorstadt ist die ideale Adresse f\u00fcr Ihre Betriebsfeier, Firmenevents, Weihnachtsfeiern, Teambuilding-Events, Sommerfeste, Firmenjubil\u00e4en und Gesch\u00e4ftsessen. Mit flexiblen Raumkonzepten für bis zu 100 Sitz- und 300 Stehplätze, exquisiter italienischer Küche und zentraler Lage direkt am K\u00f6nigsplatz bietet das STORIA alles f\u00fcr ein erfolgreiches Firmenevent in M\u00fcnchen.",
       introP2: "Zentrale Business-Lage f\u00fcr Ihre Firmenevents in M\u00fcnchen: Nur 5 Gehminuten vom K\u00f6nigsplatz, 5 Minuten vom Hauptbahnhof \u2013 perfekt erreichbar f\u00fcr Teams aus der ganzen Stadt. Als Ihr Italiener in M\u00fcnchen und bew\u00e4hrte Eventlocation M\u00fcnchen sorgen Familie Speranza und ihr Team f\u00fcr einen reibungslosen Ablauf.",
       // Events CTA
       eventsCta: "💼 Firmenfeier anfragen bei STORIA Events",
