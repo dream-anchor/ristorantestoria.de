@@ -56,10 +56,21 @@ Live-Menü, die bisher nur die Pillar-Variante hatte) — kein Inhalt geht verlo
 
 ## K1: Branch, Beweis, Merge
 
-- [ ] Branch `silvester-weihnachten-k1` gepusht, PR erstellt, Diff gegengelesen, gemergt.
+- [x] Branch `silvester-weihnachten-k1` gepusht, PR erstellt, Diff gegengelesen, gemergt.
       Live-Stichprobe nach Deploy (alle 4 Sprachvarianten `curl -IL`).
-      PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/77, Merge steht noch
-      aus (Hauptfenster).
+      ✓ 2026-09-12 · PR #77 erstellt, im Hauptfenster gegengelesen (nur die erwarteten Dateien:
+      `App.tsx`, `.htaccess`, `InternalLinks.tsx`, `slugs.json`, `SilvesterMuenchen.tsx` — Preise
+      durchgängig auf 99€/150€ vereinheitlicht) → `gh pr merge 77 --squash --delete-branch` →
+      Fast-Forward-Merge `8e25135` auf `main`. Deploy ausgelöst (Run 34719384643), Live-Stichprobe
+      folgt nach Abschluss.
+      **Korrektur zum KONZEPT:** der dort vermutete `SeasonalBanner.tsx`-Bug existiert nicht —
+      `cta1`/`cta2` sind zwei separate, korrekte Buttons (Weihnachtsfeier bzw. Silvester), beide
+      bereits richtig verlinkt. Der Subagent hat das verifiziert und bewusst nicht angefasst statt
+      blind der KONZEPT-Annahme zu folgen — KONZEPT § 4 Nebenbefund 2 damit als falsch-positiv
+      erledigt, kein Fix nötig.
+      **Zusatzfund gegenüber KONZEPT:** `src/config/slugs.json` musste ebenfalls angepasst werden
+      (nicht im ursprünglichen Plan genannt) — Prerender/Sitemap-Generator lesen die Routenliste
+      von dort, nicht aus `App.tsx` allein.
 
 ---
 
