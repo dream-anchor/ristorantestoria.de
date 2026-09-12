@@ -352,13 +352,54 @@ wie im Chat vorgelegt, siehe KONZEPT § C1–C4).
       STORIA?" 0 Treffer in beiden Sprachversionen.
       Commit `7ea2473` auf Branch `striking-distance-c` (kein Push, kein PR — C4 steht noch aus,
       Bündelung „ein PR je Einheit").
-- [ ] **C4** IT Ristorante-Cluster (`it/miglior-ristorante-italiano-monaco/`) — Title/H1/H2 anpassen
-      (KONZEPT § C4, zweitgrößte Einzel-Phrase-Lücke).
+- [x] **C4** IT Ristorante-Cluster (`it/miglior-ristorante-italiano-monaco/`) — Title/H1/H2 additiv
+      angepasst (KONZEPT § C4, zweitgrößter Einzel-Phrase-Befund im Audit): 1.145 Impr. über die
+      Top-3-IT-Queries (`ristoranti italiani a monaco di baviera` 585 Impr./Pos. 13,07,
+      `ristorante italiano monaco di baviera` 243 Impr./Pos. 10,33,
+      `migliori ristoranti italiani monaco di baviera` 57 Impr./Pos. 11,74), aber **keine** davon kam
+      in Title/H1/H2 vor — Seite sprach durchgängig von „Ristorante del Sud Italia"/„Monaco" statt
+      „Ristorante Italiano"/voller Ortsbezeichnung „Monaco di Baviera". Title „Ristorante del Sud
+      Italia Monaco-Maxvorstadt \| STORIA" → „Ristorante Italiano Monaco di Baviera – Cucina del Sud
+      \| STORIA" (KONZEPT-Wortlaut übernommen, nicht die im Auftrag leicht abweichende Variante mit
+      zusätzlichem „Italia" am Ende — Konzept ist bei Abweichung bindend). H1 „Autenticamente del Sud
+      Italia – la cucina del Cilento nel Maxvorstadt" → „Ristorante Italiano a Monaco di Baviera –
+      Autentica Cucina del Sud Italia". H2 (erste Sektion, `introTitle`) „Il Sud Italia nel
+      Maxvorstadt – la cucina del Cilento allo STORIA" → „Il Miglior Ristorante Italiano a Monaco di
+      Baviera – STORIA Maxvorstadt" (deckt zusätzlich „migliori ristoranti italiani" ab). `introP1`
+      trägt Küche/Herkunft/Ort (Cilento, Campania, Monaco) bereits inhaltlich — keine Ergänzung nötig
+      (gleiches Muster wie A4/B2 bei derselben Component). Nur IT-Werte geändert — DE
+      (`italienisches-restaurant-muenchen/`, B2) und EN (`en/best-italian-restaurant-munich/`, A4)
+      nutzen dieselbe Component, nicht angefasst. **SERP-Check** (WebSearch, 12.09.2026, Query
+      „ristorante italiano monaco di baviera"): Top-Ergebnisse ausschließlich Aggregatoren/
+      Verzeichnisse (TripAdvisor, Falstaff, TuttoBaviera, CitySeeker, Milan Foodie Insider,
+      BigMammaGroup) — STORIA selbst nicht in den angezeigten Treffern. Erwartung entsprechend
+      gedämpft (Muster wie A1/A2), Fix trotzdem additiv/kostenlos umgesetzt. GSC-UI-Zuordnung
+      (Seite→Suchanfragen) mangels Zugriff in dieser Session nicht gegengeprüft (kein `gscServer`-
+      MCP verbunden) — entfällt hiermit explizit statt stillschweigend übersprungen.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4/C1–C3-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/it.ts` (+3/-3,
+      `t.seo.italienischesRestaurant.seoTitle` + `.heroTitle` + `.introTitle`) — keine JSX-Struktur,
+      keine Formular-Dateien, keine DE/EN/FR-Werte angefasst.
+      ✓ 2026-09-12 · Prerendered `dist/it/miglior-ristorante-italiano-monaco/index.html` geprüft:
+      `<title>`/og:title/twitter:title „Ristorante Italiano Monaco di Baviera – Cucina del Sud \|
+      STORIA", `<h1>` „Ristorante Italiano a Monaco di Baviera – Autentica Cucina del Sud Italia",
+      erstes `<h2>` „Il Miglior Ristorante Italiano a Monaco di Baviera – STORIA Maxvorstadt"
+      vorhanden; alle drei alten Strings 0 Treffer im Output.
+      `dist/italienisches-restaurant-muenchen/index.html` (DE, Title „Bestes Italienisches
+      Restaurant München \| STORIA Maxvorstadt") und `dist/en/best-italian-restaurant-munich/
+      index.html` (EN, Title „Best Italian Restaurant Munich \| Wood-Fired Pizza \| STORIA") beide
+      unverändert auf ihrem Vor-C4-Stand.
+      Commit auf Branch `striking-distance-c` — mit diesem Commit ist Einheit C (C1–C4) vollständig.
 
 ## Einheit C: Branch, Beweis, Merge
 
 - [ ] Branch `striking-distance-c` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy.
+      PR erstellt: siehe Rückmeldung dieser Iteration, Merge steht noch aus (Hauptfenster).
 
 ---
 
