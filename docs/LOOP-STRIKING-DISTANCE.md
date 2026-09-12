@@ -128,6 +128,8 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
 - [ ] Branch `striking-distance-a` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy (Title/H1 je Seite per `curl -s` oder Browser-Check, sobald `chrome-devtools`-MCP
       verbunden ist — sonst `curl` + Sichtprüfung wie im Vorgänger-Loop).
+      PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/67, Merge steht noch
+      aus (Hauptfenster).
 
 ---
 
