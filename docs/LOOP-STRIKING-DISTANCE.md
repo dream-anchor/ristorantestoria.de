@@ -243,6 +243,8 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
 
 - [ ] Branch `striking-distance-b` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy.
+      PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/70, Merge steht noch
+      aus (Hauptfenster).
 
 ---
 
