@@ -136,7 +136,23 @@ function getMenuTypeForRoute(url) {
  * Extract special menu slug from URL
  * Returns the slug if this is a special occasion page, null otherwise
  */
+// Weihnachten K2-Konsolidierung (KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b): die
+// flache Standalone-URL ist jetzt kanonisch und braucht deshalb dieselbe SSR-Datenanbindung, die
+// zuvor nur die (jetzt abgeschaltete) Pillar-Route (besondere-anlaesse/weihnachtsmenue) bekam.
+// Werte = DB-Slug pro Sprache, exakt wie in src/config/seasonalMenus.ts (weihnachten.slugs).
+const FLAT_SPECIAL_MENU_ROUTES = {
+  "/weihnachten-muenchen": "weihnachtsmenue",
+  "/en/christmas-munich": "christmas-menu",
+  "/it/natale-monaco": "natale-menu",
+  "/fr/noel-munich": "noel-menu",
+};
+
 function getSpecialMenuSlugFromRoute(url) {
+  const cleanUrl = url.replace(/\/$/, "");
+  if (FLAT_SPECIAL_MENU_ROUTES[cleanUrl]) {
+    return FLAT_SPECIAL_MENU_ROUTES[cleanUrl];
+  }
+
   const specialParentPatterns = [
     "/besondere-anlaesse/",
     "/special-occasions/",
@@ -451,10 +467,13 @@ async function generateRoutesToPrerender() {
     fr: 'occasions-speciales',
   };
 
+  // Weihnachten (besondere-anlaesse/weihnachtsmenue) entfernt: K2-Konsolidierung schaltet diese
+  // Pillar-Route ab (301 → weihnachten-muenchen, siehe public/.htaccess). Die flache Route wird
+  // bereits über die "Static Routes from slugs.json"-Sektion oben prerendert und bekommt ihre
+  // Menü-Daten jetzt über FLAT_SPECIAL_MENU_ROUTES in getSpecialMenuSlugFromRoute().
   const SEASONAL_MENUS = [
     { de: 'ostermontag-menue', en: 'easter-monday-menu', it: 'menu-di-pasqua', fr: 'menu-de-paques' },
     { de: 'valentinstag-menue', en: 'valentines-menu', it: 'san-valentino-menu', fr: 'saint-valentin-menu' },
-    { de: 'weihnachtsmenue', en: 'christmas-menu', it: 'natale-menu', fr: 'noel-menu' },
     { de: 'silvester', en: 'new-years-eve', it: 'capodanno', fr: 'nouvel-an' },
   ];
 

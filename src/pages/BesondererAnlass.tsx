@@ -28,10 +28,10 @@ import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
 import { useArchivedSeasonalMenu } from "@/hooks/useArchivedSeasonalMenu";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { findSeasonalMenuBySlug, PARENT_SLUGS, SEO_TO_SUPABASE_SLUG_MAP } from "@/config/seasonalMenus";
+import allSlugs from "@/config/slugs.json";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import { ArrowUp, Utensils, Calendar, BookOpen } from "lucide-react";
 import SilvesterMuenchen from "@/pages/seo/SilvesterMuenchen";
-import WeihnachtenMuenchen from "@/pages/seo/WeihnachtenMuenchen";
 import ValentinstagMuenchen from "@/pages/seo/ValentinstagMuenchen";
 
 // Map seasonal event keys to hero images
@@ -127,9 +127,19 @@ const BesondererAnlass = () => {
     return <SilvesterMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
   }
 
-  // Weihnachten: dedicated rich landing page (both active and inactive states)
+  // Weihnachten: K2-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b) —
+  // die Standalone-URL (weihnachten-muenchen) hat mehr Google-Vertrauen und ist jetzt kanonisch,
+  // ausgestattet mit derselben Event/Menu-JSON-LD + Live-Menü-Anbindung wie zuvor nur diese
+  // Pillar-Route (siehe App.tsx WeihnachtenMuenchenStandalone + useSeasonalMenuData). Diese
+  // Pillar-Route selbst rendert nicht mehr eigenständig, sondern leitet weiter — public/.htaccess
+  // erledigt das serverseitig per 301 für normale Navigation; dieser Guard fängt zusätzlich
+  // SPA-interne Navigation ab (z. B. ein noch nicht umgestellter <Link>), die den
+  // Server-Redirect nie durchläuft.
   if (seasonalConfig?.key === 'weihnachten') {
-    return <WeihnachtenMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
+    const flatSlugs = allSlugs as Record<string, Record<string, string>>;
+    const flatSlug = flatSlugs[language]?.['weihnachten-muenchen'] || 'weihnachten-muenchen';
+    const flatPath = language === 'de' ? `/${flatSlug}/` : `/${language}/${flatSlug}/`;
+    return <Navigate to={flatPath} replace />;
   }
 
   // Valentinstag: dedicated rich landing page (both active and inactive states)

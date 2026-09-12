@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp, ArrowRight } from "lucide-react";
+import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierImage from "@/assets/weihnachtsfeier-italiener-storia-muenchen.webp";
 import weihnachtsfeierImage600 from "@/assets/weihnachtsfeier-italiener-storia-muenchen-600w.webp";
@@ -36,9 +36,15 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
   const { t, language } = useLanguage();
   usePrerenderReady(true);
   const s = t.seo.weihnachten;
-  const { isActive: configActive, config: hookConfig } = useSeasonalMenuActive('weihnachten');
+  // K2-Konsolidierung (KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b): `standalone`
+  // steuert nur noch SEO-Metadaten/Breadcrumb (siehe canonicalPath/breadcrumbSchema unten) —
+  // NICHT mehr, ob Event/Menu-JSON-LD oder das Live-Menü gerendert werden. Der Standalone-Mount
+  // in App.tsx übergibt jetzt dieselbe echte `menu`-Prop wie zuvor nur BesondererAnlass.tsx, also
+  // ist `isActive` hier immer datengetrieben. `useSeasonalMenuActive` bleibt als defensiver
+  // Fallback für `effectiveConfig`, falls `seasonalConfig` doch mal nicht übergeben wird.
+  const { config: hookConfig } = useSeasonalMenuActive('weihnachten');
   const effectiveConfig = seasonalConfig || hookConfig!;
-  const isActive = standalone ? configActive : !!menu;
+  const isActive = !!menu;
   const currentYear = new Date().getFullYear();
 
   // --- Canonical + Hreflang ---
@@ -120,14 +126,6 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
     { title: s.related6Title, desc: s.related6Desc, to: "kontakt" },
   ];
 
-  // Standalone: link to the besondere-anlaesse page when menu is active
-  const menuPagePath = (() => {
-    if (!standalone) return '';
-    const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
-    const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
-    return language === 'de' ? `/${parentSlug}/${seasonalSlug}/` : `/${language}/${parentSlug}/${seasonalSlug}/`;
-  })();
-
   return (
     <>
       <SEO
@@ -138,42 +136,35 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={breadcrumbSchema} />
 
-      {/* Event @graph – Weihnachtsmenü (non-standalone only) — references #restaurant / #organization by @id */}
-      {!standalone && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.ristorantestoria.de/" },
-                { "@type": "ListItem", "position": 2, "name": "Besondere Anlässe", "item": "https://www.ristorantestoria.de/besondere-anlaesse/" },
-                { "@type": "ListItem", "position": 3, "name": "Weihnachtsmenü", "item": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/" }
-              ]
-            },
-            {
-              "@type": "Event",
-              "@id": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/#event",
-              "name": "Weihnachtsmenü im STORIA München",
-              "description": "Festliches italienisches Weihnachtsmenü in der Adventszeit – ideal für Familien und Firmen-Weihnachtsfeiern in der Maxvorstadt. Gruppen-Menü ab 45 € pro Person.",
-              "startDate": "2026-11-25T17:00:00+01:00",
-              "endDate": "2026-12-23T23:30:00+01:00",
-              "eventStatus": "https://schema.org/EventScheduled",
-              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-              "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
-              "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
-              "image": ["https://www.ristorantestoria.de/weihnachtsmenue-storia-muenchen.jpg"],
-              "offers": {
-                "@type": "AggregateOffer",
-                "lowPrice": "45.00",
-                "priceCurrency": "EUR",
-                "availability": "https://schema.org/InStock",
-                "url": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/"
-              }
-            }
-          ]
-        })}} />
-      )}
+      {/* Event-Schema – Weihnachtsmenü — references #restaurant / #organization by @id.
+          K2-Konsolidierung: früher an `!standalone` gebunden (nur auf der Pillar-Route sichtbar),
+          jetzt unconditional, weil die Standalone-URL (weihnachten-muenchen) seit der
+          Konsolidierung die kanonische, einzige URL ist (KONZEPT § 3b). Die früher hier
+          eingebettete "BreadcrumbList" wurde entfernt — sie ist redundant zur bereits oben
+          gerenderten <StructuredData type="breadcrumb">, die (anders als dieser hartcodierte
+          Block) standalone-bewusst die korrekte 2-stufige Breadcrumb liefert. @id/offers.url
+          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "@id": "https://www.ristorantestoria.de/weihnachten-muenchen/#event",
+        "name": "Weihnachtsmenü im STORIA München",
+        "description": "Festliches italienisches Weihnachtsmenü in der Adventszeit – ideal für Familien und Firmen-Weihnachtsfeiern in der Maxvorstadt. Gruppen-Menü ab 45 € pro Person.",
+        "startDate": "2026-11-25T17:00:00+01:00",
+        "endDate": "2026-12-23T23:30:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
+        "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
+        "image": ["https://www.ristorantestoria.de/weihnachtsmenue-storia-muenchen.jpg"],
+        "offers": {
+          "@type": "AggregateOffer",
+          "lowPrice": "45.00",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.ristorantestoria.de/weihnachten-muenchen/"
+        }
+      })}} />
 
       {/* FAQ Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -207,11 +198,7 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </div>
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{s.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {standalone ? (
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.heroCtaPhone}</a>
-                  </Button>
-                ) : isActive ? (
+                {isActive ? (
                   <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                     <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{s.heroCta}</a>
                   </Button>
@@ -248,34 +235,10 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               <p className="text-muted-foreground">{s.introP3}</p>
             </section>
 
-            {/* Standalone: Teaser or CTA — Non-standalone: Packages or Live Menu */}
-            {standalone ? (
-              isActive ? (
-                <section className="mb-16">
-                  <Card className="border-primary bg-primary/5">
-                    <CardContent className="p-8 text-center">
-                      <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneTeaserTitle}</h2>
-                      <p className="text-muted-foreground mb-6">{s.standaloneTeaserDesc}</p>
-                      <Button size="lg" asChild>
-                        <Link to={menuPagePath}><ArrowRight className="w-5 h-5 mr-2" />{s.standaloneTeaserButton}</Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </section>
-              ) : (
-                <section className="mb-16 bg-card rounded-lg border border-border p-8 md:p-12 text-center">
-                  <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneInactiveTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{s.standaloneInactiveDesc}</p>
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <Button asChild><a href="tel:+498951519696"><Phone className="w-4 h-4 mr-2" /> 089 51519696</a></Button>
-                    <Button variant="outline" asChild><EmailLink><Mail className="w-4 h-4 mr-2" /> E-Mail</EmailLink></Button>
-                    <Button variant="outline" asChild>
-                      <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer"><MessageCircle className="w-4 h-4 mr-2" /> WhatsApp</a>
-                    </Button>
-                  </div>
-                </section>
-              )
-            ) : !isActive ? (
+            {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K2-Konsolidierung
+                nur auf der Pillar-Route, jetzt auch hier (KONZEPT § 3b: nichts geht verloren,
+                die Standalone-URL wird aufgewertet statt nur redirected). */}
+            {!isActive ? (
               <section className="mb-16">
                 <h2 className="text-3xl font-serif font-bold mb-4 text-center">{s.packagesTitle}</h2>
                 <p className="text-muted-foreground text-center mb-8">{s.packagesIntro}</p>
@@ -357,8 +320,8 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </Accordion>
             </section>
 
-            {/* Email Signup (inactive + non-standalone only) */}
-            {!isActive && !standalone && (
+            {/* Email Signup (inactive) — K2: bis dahin nur non-standalone, jetzt auch hier */}
+            {!isActive && (
               <section id="signup-form" className="mb-16 scroll-mt-24">
                 <div className="bg-card rounded-lg border border-border p-8 md:p-12 text-center">
                   <h2 className="text-2xl font-serif font-bold mb-3">{s.signupTitle}</h2>
@@ -370,8 +333,8 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </section>
             )}
 
-            {/* Archived Menu (inactive + non-standalone only) */}
-            {!isActive && !standalone && archivedMenu && (
+            {/* Archived Menu (inactive) — K2: bis dahin nur non-standalone, jetzt auch hier */}
+            {!isActive && archivedMenu && (
               <section className="mb-16">
                 <div className="border-2 border-dashed border-border rounded-lg p-6 md:p-8 opacity-90">
                   <div className="flex items-center justify-center gap-3 mb-4">
@@ -408,11 +371,7 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
-              {standalone ? (
-                <Button size="lg" variant="secondary" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.finalCtaButton}</a>
-                </Button>
-              ) : isActive ? (
+              {isActive ? (
                 <Button size="lg" variant="secondary" asChild>
                   <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{s.finalCtaButton}</a>
                 </Button>

@@ -61,7 +61,7 @@ RewriteRule ^.*$ /? [R=301,L,QSD]
 # ============================================
 RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
 RewriteRule ^busreisen/?$ /reisegruppen/ [R=301,L]
-RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
+RewriteRule ^weihnachtsmenues/?$ /weihnachten-muenchen/ [R=301,L]
 RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
 # Silvester-Konsolidierung K1 (12.09.2026): Standalone-Route abgeschaltet, Pillar hat mehr
 # Google-Vertrauen (25x Impressionen, KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 2).
@@ -69,6 +69,12 @@ RewriteRule ^silvester-muenchen/?$ /besondere-anlaesse/silvester/ [R=301,L]
 RewriteRule ^en/new-years-eve-munich/?$ /en/special-occasions/new-years-eve/ [R=301,L]
 RewriteRule ^it/capodanno-monaco/?$ /it/occasioni-speciali/capodanno/ [R=301,L]
 RewriteRule ^fr/nouvel-an-munich/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
+# Weihnachten-Konsolidierung K2 (12.09.2026): Pillar-Route abgeschaltet, Standalone hat mehr
+# Google-Vertrauen (761 Impr. vs. praktisch 0, KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 2).
+RewriteRule ^besondere-anlaesse/weihnachtsmenue/?$ /weihnachten-muenchen/ [R=301,L]
+RewriteRule ^en/special-occasions/christmas-menu/?$ /en/christmas-munich/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/natale-menu/?$ /it/natale-monaco/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/noel-menu/?$ /fr/noel-munich/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
@@ -108,7 +114,7 @@ RewriteRule ^cms/wp-content/uploads/2025/10/Mittagskarte-08\.10\.2025-din\.pdf$ 
 RewriteRule ^cms/wp-content/uploads/2025/10/Mittagskarte-27\.10\.2025-din\.pdf$ - [G]
 RewriteRule ^cms/wp-content/uploads/2025/10/STORIA_Spritz_Notturno-2-pagine\.pdf$ - [G]
 RewriteRule ^cms/getraenke/?$ /getraenke/ [R=301,L]
-RewriteRule ^cms/weihnachtsmenues-2/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
+RewriteRule ^cms/weihnachtsmenues-2/?$ /weihnachten-muenchen/ [R=301,L]
 RewriteRule ^cms/impressum/?$ /impressum/ [R=301,L]
 RewriteRule ^cms/our-team/?$ /ueber-uns/ [R=301,L]
 RewriteRule ^cms/reservations/?$ /reservierung/ [R=301,L]
@@ -144,9 +150,11 @@ RewriteRule ^en/besondere-anlaesse/valentinstag-menue/?$ /en/special-occasions/v
 RewriteRule ^en/special-occasions/valentines-day-menu/?$ /en/special-occasions/valentines-menu/ [R=301,L]
 
 # --- Weihnachten ---
-RewriteRule ^en/special-occasions/weihnachtsmenue/?$ /en/special-occasions/christmas-menu/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/weihnachtsmenue/?$ /it/occasioni-speciali/natale-menu/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/weihnachtsmenue/?$ /fr/occasions-speciales/noel-menu/ [R=301,L]
+# Ziel direkt die Standalone-URL (nicht mehr der Pillar-Zwischenschritt), sonst entstünde seit
+# der K2-Konsolidierung ein zusätzlicher Redirect-Hop über die abgeschaltete Pillar-Route.
+RewriteRule ^en/special-occasions/weihnachtsmenue/?$ /en/christmas-munich/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/weihnachtsmenue/?$ /it/natale-monaco/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/weihnachtsmenue/?$ /fr/noel-munich/ [R=301,L]
 
 # --- Silvester ---
 RewriteRule ^en/special-occasions/silvester/?$ /en/special-occasions/new-years-eve/ [R=301,L]
@@ -186,13 +194,14 @@ RewriteRule ^en/besondere-anlaesse/winter-dinner-experience/?$ /en/special-occas
 # ============================================
 # 6. Alte Seasonal Slugs → Neue permanente Slugs
 # ============================================
-# Weihnachten: Plural → Singular
-RewriteRule ^besondere-anlaesse/weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
-RewriteRule ^en/special-occasions/christmas-menus/?$ /en/special-occasions/christmas-menu/ [R=301,L]
-RewriteRule ^en/special-occasions/weihnachtsmenues/?$ /en/special-occasions/christmas-menu/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/weihnachtsmenues/?$ /it/occasioni-speciali/natale-menu/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/noel-menus/?$ /fr/occasions-speciales/noel-menu/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/weihnachtsmenues/?$ /fr/occasions-speciales/noel-menu/ [R=301,L]
+# Weihnachten: Plural → Singular (Ziel direkt Standalone-URL, siehe K2-Kommentar oben — kein
+# zusätzlicher Hop mehr über die abgeschaltete Pillar-Route)
+RewriteRule ^besondere-anlaesse/weihnachtsmenues/?$ /weihnachten-muenchen/ [R=301,L]
+RewriteRule ^en/special-occasions/christmas-menus/?$ /en/christmas-munich/ [R=301,L]
+RewriteRule ^en/special-occasions/weihnachtsmenues/?$ /en/christmas-munich/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/weihnachtsmenues/?$ /it/natale-monaco/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/noel-menus/?$ /fr/noel-munich/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/weihnachtsmenues/?$ /fr/noel-munich/ [R=301,L]
 
 # Silvester: -party → ohne
 RewriteRule ^besondere-anlaesse/silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
