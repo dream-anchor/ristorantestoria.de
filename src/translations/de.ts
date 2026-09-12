@@ -996,7 +996,7 @@ export const de = {
       openingHours: "Mo–Fr: 09:00 – 01:00 Uhr | Sa–So: 12:00 – 01:00 Uhr",
       openingNote: "Aperitivo-Service zwischen 17:00 und 22:30 Uhr. Außerhalb dieser Zeiten genießen Sie unsere italienische Küche und reguläre Getränkekarte.",
       // Why STORIA
-      whyTitle: "Warum Aperitivo im STORIA München?",
+      whyTitle: "Aperitivo Bar München – Warum STORIA?",
       featureAuthenticTitle: "Authentisch Italienisch",
       featureAuthenticDesc: "Unsere Aperitivi werden nach original italienischen Rezepturen gemixt. Die Familie Speranza bringt die Bar-Kultur aus der Region Cilento direkt nach München.",
       featurePremiumTitle: "Premium-Zutaten",
