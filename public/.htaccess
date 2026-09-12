@@ -75,6 +75,12 @@ RewriteRule ^besondere-anlaesse/weihnachtsmenue/?$ /weihnachten-muenchen/ [R=301
 RewriteRule ^en/special-occasions/christmas-menu/?$ /en/christmas-munich/ [R=301,L]
 RewriteRule ^it/occasioni-speciali/natale-menu/?$ /it/natale-monaco/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/noel-menu/?$ /fr/noel-munich/ [R=301,L]
+# Valentinstag-Konsolidierung K3 (13.09.2026): Pillar-Route abgeschaltet, Standalone hat mehr
+# Google-Vertrauen (1.452 Impr. vs. 418, KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 2).
+RewriteRule ^besondere-anlaesse/valentinstag-menue/?$ /valentinstag-muenchen/ [R=301,L]
+RewriteRule ^en/special-occasions/valentines-menu/?$ /en/valentines-day-munich/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/san-valentino-menu/?$ /it/san-valentino-monaco/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/saint-valentin-menu/?$ /fr/saint-valentin-munich/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
@@ -141,13 +147,15 @@ RewriteRule ^(.*)$ /$1/ [R=301,L]
 # ============================================
 
 # --- Valentinstag ---
-RewriteRule ^en/special-occasions/valentinstag-menue/?$ /en/special-occasions/valentines-menu/ [R=301,L]
-RewriteRule ^it/occasioni-speciali/valentinstag-menue/?$ /it/occasioni-speciali/san-valentino-menu/ [R=301,L]
-RewriteRule ^fr/occasions-speciales/valentinstag-menue/?$ /fr/occasions-speciales/saint-valentin-menu/ [R=301,L]
+# Ziel direkt die Standalone-URL (nicht mehr der Pillar-Zwischenschritt), sonst entstünde seit
+# der K3-Konsolidierung ein zusätzlicher Redirect-Hop über die abgeschaltete Pillar-Route.
+RewriteRule ^en/special-occasions/valentinstag-menue/?$ /en/valentines-day-munich/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/valentinstag-menue/?$ /it/san-valentino-monaco/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/valentinstag-menue/?$ /fr/saint-valentin-munich/ [R=301,L]
 # Falscher (deutscher) Elternpfad + fremde Sprache bzw. abweichender EN-Kind-Slug (GSC P2.1, 404s)
-RewriteRule ^it/besondere-anlaesse/valentinstag-menue/?$ /it/occasioni-speciali/san-valentino-menu/ [R=301,L]
-RewriteRule ^en/besondere-anlaesse/valentinstag-menue/?$ /en/special-occasions/valentines-menu/ [R=301,L]
-RewriteRule ^en/special-occasions/valentines-day-menu/?$ /en/special-occasions/valentines-menu/ [R=301,L]
+RewriteRule ^it/besondere-anlaesse/valentinstag-menue/?$ /it/san-valentino-monaco/ [R=301,L]
+RewriteRule ^en/besondere-anlaesse/valentinstag-menue/?$ /en/valentines-day-munich/ [R=301,L]
+RewriteRule ^en/special-occasions/valentines-day-menu/?$ /en/valentines-day-munich/ [R=301,L]
 
 # --- Weihnachten ---
 # Ziel direkt die Standalone-URL (nicht mehr der Pillar-Zwischenschritt), sonst entstünde seit

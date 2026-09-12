@@ -238,7 +238,7 @@ const RomantischesDinner = () => {
               <h2 className="text-2xl font-serif font-bold mb-4">{t.seo.romanticDinner.valentineTitle}</h2>
               <p className="text-muted-foreground mb-6">{t.seo.romanticDinner.valentineTeaser}</p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Button asChild><LocalizedLink to="besondere-anlaesse/valentinstag-menue">{t.seo.romanticDinner.valentineLinkText}</LocalizedLink></Button>
+                <Button asChild><LocalizedLink to="valentinstag-muenchen">{t.seo.romanticDinner.valentineLinkText}</LocalizedLink></Button>
                 {t.seo.romanticDinner.candlelightLinkText && (
                   <Button asChild variant="outline"><LocalizedLink to="besondere-anlaesse/candlelight-menue">{t.seo.romanticDinner.candlelightLinkText}</LocalizedLink></Button>
                 )}

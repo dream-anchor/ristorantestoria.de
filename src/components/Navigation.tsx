@@ -51,6 +51,7 @@ const PARENT_SLUGS: Record<string, string> = {
 // die anderen flachen Nav-Items (z. B. "terrasse-muenchen").
 const STANDALONE_OVERRIDES: Record<string, string> = {
   weihnachten: 'weihnachten-muenchen',
+  valentinstag: 'valentinstag-muenchen',
 };
 
 const Navigation = () => {

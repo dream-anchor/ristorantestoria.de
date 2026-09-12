@@ -32,7 +32,6 @@ import allSlugs from "@/config/slugs.json";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import { ArrowUp, Utensils, Calendar, BookOpen } from "lucide-react";
 import SilvesterMuenchen from "@/pages/seo/SilvesterMuenchen";
-import ValentinstagMuenchen from "@/pages/seo/ValentinstagMuenchen";
 
 // Map seasonal event keys to hero images
 const SEASONAL_HERO_IMAGES: Record<string, string> = {
@@ -142,9 +141,19 @@ const BesondererAnlass = () => {
     return <Navigate to={flatPath} replace />;
   }
 
-  // Valentinstag: dedicated rich landing page (both active and inactive states)
+  // Valentinstag: K3-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b,
+  // identisches Muster wie K2/Weihnachten) — die Standalone-URL (valentinstag-muenchen) hat mehr
+  // Google-Vertrauen und ist jetzt kanonisch, ausgestattet mit derselben Event/Menu-JSON-LD +
+  // Live-Menü-Anbindung wie zuvor nur diese Pillar-Route (siehe App.tsx
+  // ValentinstagMuenchenStandalone + useSeasonalMenuData). Diese Pillar-Route selbst rendert
+  // nicht mehr eigenständig, sondern leitet weiter — public/.htaccess erledigt das serverseitig
+  // per 301 für normale Navigation; dieser Guard fängt zusätzlich SPA-interne Navigation ab
+  // (z. B. ein noch nicht umgestellter <Link>), die den Server-Redirect nie durchläuft.
   if (seasonalConfig?.key === 'valentinstag') {
-    return <ValentinstagMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;
+    const flatSlugs = allSlugs as Record<string, Record<string, string>>;
+    const flatSlug = flatSlugs[language]?.['valentinstag-muenchen'] || 'valentinstag-muenchen';
+    const flatPath = language === 'de' ? `/${flatSlug}/` : `/${language}/${flatSlug}/`;
+    return <Navigate to={flatPath} replace />;
   }
 
   // Seasonal placeholder: known seasonal slug but no published menu in Supabase.

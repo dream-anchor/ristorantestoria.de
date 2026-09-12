@@ -150,9 +150,73 @@ Live-Menü, die bisher nur die Pillar-Variante hatte) — kein Inhalt geht verlo
 
 ## K3 — Valentinstag (Pillar → Standalone, identisches Muster wie K2)
 
-- [ ] **K3** Analog zu K2, für `valentinstag-muenchen`/`besondere-anlaesse/valentinstag-menue`
-      (KONZEPT § 5, K3).
-      Beweis: analog K2.
+- [x] **K3** Analog zu K2: `useSeasonalMenuData('valentinstag')` (bereits in K2 generisch gebaut,
+      1:1 wiederverwendet) in `App.tsx` `ValentinstagMuenchenStandalone` verdrahtet — lädt jetzt
+      echte Menü-Daten und reicht `menu`/`archivedMenu`/`seasonalConfig` an `ValentinstagMuenchen`
+      durch. `ValentinstagMuenchen.tsx`: Event/Menu-JSON-LD, Hero-CTA, Pakete-Grid/Live-Menü,
+      Email-Signup und Archiv-Menü von `!standalone`-Gating auf `isActive`/`menu`-Gating
+      umgestellt (`isActive = !!menu` statt `standalone ? configActive : !!menu`) — `standalone`
+      steuert seitdem nur noch SEO-Title/-Description, `canonicalPath` und `breadcrumbSchema`
+      (unverändert, Zeilen 58-76), NICHT mehr Event/Menu-JSON-LD/Live-Menü. Redundante,
+      3-stufige `BreadcrumbList` im eingebetteten Event-JSON-LD entfernt (Duplikat zur bereits
+      vorhandenen `<StructuredData type="breadcrumb">`), `@id`/`offers.url` von der toten
+      Pillar-URL auf `valentinstag-muenchen/` korrigiert. Standalone-Teaser-Card und
+      Standalone-Inactive-Sektion (Telefon/E-Mail/WhatsApp-Buttons) entfernt — ersatzlos, weil
+      Pakete-Grid/Live-Menü jetzt direkt hier rendern (dieselbe Blaupause wie K2). Nicht
+      angetastet (bewusst, wie bei K2): `relatedLinks`/Breadcrumb-Text/SEO-Titel bleiben
+      `standalone`-gegated (unverändert korrekt, betrifft nur Metadaten, keine Datenanbindung).
+      `BesondererAnlass.tsx`: Valentinstag-Zweig rendert nicht mehr `<ValentinstagMuenchen>`,
+      sondern `<Navigate>` auf die neue flache URL (Defense-in-Depth unter dem .htaccess-301,
+      identisches Muster wie K2 für Weihnachten) — Silvester- und Ostern/generischer Zweig
+      unverändert. Nicht mehr benötigten `ValentinstagMuenchen`-Import entfernt.
+      Exakte Slugs (aus `slugs.json`/`seasonalMenus.ts`, nicht geraten): Standalone
+      de=`valentinstag-muenchen`, en=`valentines-day-munich`, it=`san-valentino-monaco`,
+      fr=`saint-valentin-munich`; Pillar (abgeschaltet) de=`besondere-anlaesse/valentinstag-menue`,
+      en=`special-occasions/valentines-menu`, it=`occasioni-speciali/san-valentino-menu`,
+      fr=`occasions-speciales/saint-valentin-menu`.
+      `public/.htaccess`: neuer Pillar→Standalone-Redirect-Block (4 Sprachen, § 3 Legacy URL
+      Redirects) + die fünf bestehenden Valentinstag-Legacy-Redirects (§ 5, u. a. der vom
+      KONZEPT genannte `en/special-occasions/valentines-day-menu`) direkt auf die neuen
+      Standalone-Ziele umgebogen (kein Redirect-Hop mehr über die tote Pillar-Route).
+      Zusätzlich zum Plan (dieselbe Kategorie „Cross-Link zeigt auf Pillar" wie bei K2):
+      `SeasonalBanner.tsx` (`cta1` für den Januar/Februar-Banner zeigte auf die Pillar-URL, jetzt
+      auf `valentinstag-muenchen`) — nicht im KONZEPT wörtlich benannt, aber derselbe Fund wie
+      K2s Navigation.tsx/BesondereAnlaesse.tsx-Erweiterung. Cross-Links laut KONZEPT-Recherche
+      korrigiert: `SilvesterMuenchen.tsx:120`, `WeihnachtenMuenchen.tsx:124`,
+      `RomantischesDinner.tsx:241`, `BesondereAnlaesse.tsx` (`FLAT_EVENT_SLUGS`-Eintrag +
+      ItemList-JSON-LD Position 1). `Navigation.tsx`: `STANDALONE_OVERRIDES` um
+      `valentinstag: 'valentinstag-muenchen'` ergänzt. `prerender.js` +
+      `scripts/generate-sitemap.mjs`: eigene hartcodierte Pillar-Routenlisten um Valentinstag
+      gekürzt; `prerender.js` zusätzlich `FLAT_SPECIAL_MENU_ROUTES` um die 4 Valentinstag-
+      Sprachvarianten erweitert (DB-Slugs `valentinstag-menue`/`valentines-menu`/
+      `san-valentino-menu`/`saint-valentin-menu`, exakt wie `seasonalMenus.ts` valentinstag.slugs).
+      `supabase/functions/notify-seasonal-signups/index.ts`: Valentinstag-Benachrichtigungs-
+      Mail-URLs auf die neue Standalone-URL korrigiert (gleicher Fund wie K2 bei Weihnachten).
+      `src/config/slugs.json`: geprüft wie in K1/K2 — hier KEINE Änderung nötig (Pillar-Slug
+      `valentinstag-menue` stand nie als eigener Key dort, nur die flache `valentinstag-muenchen`
+      bleibt unverändert; für K3 selbst verifiziert, nicht von K2 angenommen).
+      Beweis: `npm run build` grün — Prerender 157 statt 161 Routen (−4, exakt die 4
+      abgeschalteten Valentinstag-Pillar-Sprachvarianten; Vorher/Nachher-Vergleich per
+      `git worktree` gegen `origin/main` verifiziert: main/K2-Baseline 161 Prerender-Routen/146
+      Sitemap-URLs, K3-Branch 157/142 — beide exakt −4). `npm run lint`: 728 Probleme (652
+      Fehler/76 Warnungen) — identisch zur K1/K2-Baseline, keine Regression (kein neuer
+      `no-unused-vars`, `ArrowRight`/`ExternalLink`-Imports in `ValentinstagMuenchen.tsx` sauber
+      entfernt). Prerender-Content-Check `dist/valentinstag-muenchen/index.html`: Event-JSON-LD
+      vorhanden (`"@type":"Event"`, `@id`.../valentinstag-muenchen/#event), Pakete-Grid mit
+      echten Preisen (Valentinstag Classic/Premium) gerendert statt Teaser-Card, kein
+      `standaloneTeaser`-Text mehr, keine Referenz auf die alte Pillar-URL im Output.
+      `dist/besondere-anlaesse/valentinstag-menue/` existiert nicht mehr im Build-Output (nur
+      noch `ostermontag-menue`/`silvester` unter `dist/besondere-anlaesse/`). EN/IT/FR-Varianten
+      (`dist/en/valentines-day-munich/`, `dist/it/san-valentino-monaco/`,
+      `dist/fr/saint-valentin-munich/`) geprüft: Event-Schema vorhanden, korrektes lokalisiertes
+      `<link rel="canonical">`, keine alte Pillar-URL-Referenz. Gegenprobe: Silvester-Pillar
+      (`dist/besondere-anlaesse/silvester/`), Weihnachten-Standalone
+      (`dist/weihnachten-muenchen/`) und Ostern (`dist/besondere-anlaesse/ostermontag-menue/`)
+      rendern unverändert weiter (Code-Pfad nicht berührt, im selben Build bestätigt).
+      „Failed to fetch dynamic routes: 401" in `generate-sitemap.mjs`-Output ist identisch in
+      main-Baseline UND K3-Branch aufgetreten — bestätigt vorbestehendes Environment-Problem
+      (fehlender/abgelaufener Supabase-Token in dieser lokalen Build-Umgebung), keine durch K3
+      verursachte Regression.
 
 ## K3: Branch, Beweis, Merge
 

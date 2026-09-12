@@ -215,11 +215,12 @@ async function generateSitemap() {
   }
 
   // Process seasonal routes (permanent URLs — always in sitemap, even when inactive)
-  // Weihnachten (besondere-anlaesse/weihnachtsmenue) entfernt: K2-Konsolidierung schaltet diese
-  // Pillar-Route ab (301 → weihnachten-muenchen). Die flache Route steht bereits in slugs.json
-  // und landet dadurch über den "Static Routes from slugs.json"-Block oben im Sitemap.
+  // Weihnachten/Valentinstag (besondere-anlaesse/weihnachtsmenue bzw.
+  // besondere-anlaesse/valentinstag-menue) entfernt: K2/K3-Konsolidierung schaltet diese
+  // Pillar-Routen ab (301 → weihnachten-muenchen bzw. valentinstag-muenchen). Die flachen Routen
+  // stehen bereits in slugs.json und landen dadurch über den "Static Routes from
+  // slugs.json"-Block oben im Sitemap.
   const SEASONAL_MENUS = [
-    { de: 'besondere-anlaesse/valentinstag-menue', en: 'special-occasions/valentines-menu', it: 'occasioni-speciali/san-valentino-menu', fr: 'occasions-speciales/saint-valentin-menu' },
     { de: 'besondere-anlaesse/silvester', en: 'special-occasions/new-years-eve', it: 'occasioni-speciali/capodanno', fr: 'occasions-speciales/nouvel-an' },
   ];
 

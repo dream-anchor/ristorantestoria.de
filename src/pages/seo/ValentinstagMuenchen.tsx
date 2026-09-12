@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp, ArrowRight } from "lucide-react";
+import { Phone, MessageCircle, Mail, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import romantischesDinnerImage from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
 import romantischesDinnerImage600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
@@ -36,9 +36,16 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
   const { t, language } = useLanguage();
   usePrerenderReady(true);
   const s = t.seo.valentinstag;
-  const { isActive: configActive, config: hookConfig } = useSeasonalMenuActive('valentinstag');
+  // K3-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b, identisches
+  // Muster wie K2/Weihnachten): `standalone` steuert nur noch SEO-Metadaten/Breadcrumb (siehe
+  // canonicalPath/breadcrumbSchema unten) — NICHT mehr, ob Event/Menu-JSON-LD oder das Live-Menü
+  // gerendert werden. Der Standalone-Mount in App.tsx übergibt jetzt dieselbe echte `menu`-Prop
+  // wie zuvor nur BesondererAnlass.tsx, also ist `isActive` hier immer datengetrieben.
+  // `useSeasonalMenuActive` bleibt als defensiver Fallback für `effectiveConfig`, falls
+  // `seasonalConfig` doch mal nicht übergeben wird.
+  const { config: hookConfig } = useSeasonalMenuActive('valentinstag');
   const effectiveConfig = seasonalConfig || hookConfig!;
-  const isActive = standalone ? configActive : !!menu;
+  const isActive = !!menu;
   const currentYear = new Date().getFullYear();
 
   // --- Canonical + Hreflang ---
@@ -120,14 +127,6 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
     { title: s.related6Title, desc: s.related6Desc, to: "kontakt" },
   ];
 
-  // Standalone: link to the besondere-anlaesse page when menu is active
-  const menuPagePath = (() => {
-    if (!standalone) return '';
-    const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
-    const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
-    return language === 'de' ? `/${parentSlug}/${seasonalSlug}/` : `/${language}/${parentSlug}/${seasonalSlug}/`;
-  })();
-
   return (
     <>
       <SEO
@@ -149,40 +148,33 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
         }))
       })}} />
 
-      {/* Event @graph (non-standalone only) — references #restaurant / #organization by @id */}
-      {!standalone && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.ristorantestoria.de/" },
-                { "@type": "ListItem", "position": 2, "name": "Besondere Anlässe", "item": "https://www.ristorantestoria.de/besondere-anlaesse/" },
-                { "@type": "ListItem", "position": 3, "name": "Valentinstag-Menü", "item": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/" }
-              ]
-            },
-            {
-              "@type": "Event",
-              "@id": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/#event",
-              "name": "Valentinstag-Dinner im STORIA München",
-              "description": "Romantisches Valentinstag-Dinner zu zweit in der Maxvorstadt: Aperitivo, mehrgängiges italienisches Menü, Rose am Tisch und Kerzenlicht. Drei Pakete – Classic ab 55 €, Premium ab 85 €, Exclusive auf Anfrage.",
-              "startDate": "2027-02-14T18:00:00+01:00",
-              "endDate": "2027-02-14T23:30:00+01:00",
-              "eventStatus": "https://schema.org/EventScheduled",
-              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-              "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
-              "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
-              "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
-              "image": ["https://www.ristorantestoria.de/valentinstag-menue-storia-muenchen.jpg"],
-              "offers": [
-                { "@type": "Offer", "name": "Valentinstag Classic – 3-Gang-Menü", "price": "55.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "validFrom": "2027-01-15" },
-                { "@type": "Offer", "name": "Valentinstag Premium – 4-Gang-Menü mit Weinbegleitung", "price": "85.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "validFrom": "2027-01-15" }
-              ]
-            }
-          ]
-        })}} />
-      )}
+      {/* Event-Schema – Valentinstag-Dinner — references #restaurant / #organization by @id.
+          K3-Konsolidierung: früher an `!standalone` gebunden (nur auf der Pillar-Route sichtbar),
+          jetzt unconditional, weil die Standalone-URL (valentinstag-muenchen) seit der
+          Konsolidierung die kanonische, einzige URL ist (KONZEPT § 3b). Die früher hier
+          eingebettete "BreadcrumbList" wurde entfernt — sie ist redundant zur bereits oben
+          gerenderten <StructuredData type="breadcrumb">, die (anders als dieser hartcodierte
+          Block) standalone-bewusst die korrekte 2-stufige Breadcrumb liefert. @id/offers.url
+          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "@id": "https://www.ristorantestoria.de/valentinstag-muenchen/#event",
+        "name": "Valentinstag-Dinner im STORIA München",
+        "description": "Romantisches Valentinstag-Dinner zu zweit in der Maxvorstadt: Aperitivo, mehrgängiges italienisches Menü, Rose am Tisch und Kerzenlicht. Drei Pakete – Classic ab 55 €, Premium ab 85 €, Exclusive auf Anfrage.",
+        "startDate": "2027-02-14T18:00:00+01:00",
+        "endDate": "2027-02-14T23:30:00+01:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
+        "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
+        "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
+        "image": ["https://www.ristorantestoria.de/valentinstag-menue-storia-muenchen.jpg"],
+        "offers": [
+          { "@type": "Offer", "name": "Valentinstag Classic – 3-Gang-Menü", "price": "55.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/valentinstag-muenchen/", "validFrom": "2027-01-15" },
+          { "@type": "Offer", "name": "Valentinstag Premium – 4-Gang-Menü mit Weinbegleitung", "price": "85.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/valentinstag-muenchen/", "validFrom": "2027-01-15" }
+        ]
+      })}} />
 
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
@@ -205,11 +197,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               </div>
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{s.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {standalone ? (
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.heroCtaPhone}</a>
-                  </Button>
-                ) : isActive ? (
+                {isActive ? (
                   <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                     <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.heroCta}</a>
                   </Button>
@@ -246,34 +234,10 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               <p className="text-muted-foreground">{s.introP3}</p>
             </section>
 
-            {/* Standalone: Teaser or CTA — Non-standalone: Packages or Live Menu */}
-            {standalone ? (
-              isActive ? (
-                <section className="mb-16">
-                  <Card className="border-primary bg-primary/5">
-                    <CardContent className="p-8 text-center">
-                      <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneTeaserTitle}</h2>
-                      <p className="text-muted-foreground mb-6">{s.standaloneTeaserDesc}</p>
-                      <Button size="lg" asChild>
-                        <Link to={menuPagePath}><ArrowRight className="w-5 h-5 mr-2" />{s.standaloneTeaserButton}</Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </section>
-              ) : (
-                <section className="mb-16 bg-card rounded-lg border border-border p-8 md:p-12 text-center">
-                  <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneInactiveTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{s.standaloneInactiveDesc}</p>
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <Button asChild><a href="tel:+498951519696"><Phone className="w-4 h-4 mr-2" /> 089 51519696</a></Button>
-                    <Button variant="outline" asChild><EmailLink><Mail className="w-4 h-4 mr-2" /> E-Mail</EmailLink></Button>
-                    <Button variant="outline" asChild>
-                      <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer"><MessageCircle className="w-4 h-4 mr-2" /> WhatsApp</a>
-                    </Button>
-                  </div>
-                </section>
-              )
-            ) : !isActive ? (
+            {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K3-Konsolidierung
+                nur auf der Pillar-Route, jetzt auch hier (KONZEPT § 3b: nichts geht verloren,
+                die Standalone-URL wird aufgewertet statt nur redirected). */}
+            {!isActive ? (
               <section className="mb-16">
                 <h2 className="text-3xl font-serif font-bold mb-4 text-center">{s.packagesTitle}</h2>
                 <p className="text-muted-foreground text-center mb-8">{s.packagesIntro}</p>
@@ -355,8 +319,8 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               </Accordion>
             </section>
 
-            {/* Email Signup (inactive + non-standalone only) */}
-            {!isActive && !standalone && (
+            {/* Email Signup (inactive) — K3: bis dahin nur non-standalone, jetzt auch hier */}
+            {!isActive && (
               <section id="signup-form" className="mb-16 scroll-mt-24">
                 <div className="bg-card rounded-lg border border-border p-8 md:p-12 text-center">
                   <h2 className="text-2xl font-serif font-bold mb-3">{s.signupTitle}</h2>
@@ -368,8 +332,8 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               </section>
             )}
 
-            {/* Archived Menu (inactive + non-standalone only) */}
-            {!isActive && !standalone && archivedMenu && (
+            {/* Archived Menu (inactive) — K3: bis dahin nur non-standalone, jetzt auch hier */}
+            {!isActive && archivedMenu && (
               <section className="mb-16">
                 <div className="border-2 border-dashed border-border rounded-lg p-6 md:p-8 opacity-90">
                   <div className="flex items-center justify-center gap-3 mb-4">
@@ -406,11 +370,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
-              {standalone ? (
-                <Button size="lg" variant="secondary" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.finalCtaButton}</a>
-                </Button>
-              ) : isActive ? (
+              {isActive ? (
                 <Button size="lg" variant="secondary" asChild>
                   <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.finalCtaButton}</a>
                 </Button>
