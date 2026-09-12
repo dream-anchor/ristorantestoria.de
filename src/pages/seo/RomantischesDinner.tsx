@@ -196,7 +196,7 @@ const RomantischesDinner = () => {
 
             {/* Photo Gallery */}
             <section className="mb-16">
-              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Ihr romantischer Abend im STORIA</h2>
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">{t.seo.romanticDinner.yourEveningTitle}</h2>
               <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Warmes Licht, edle Weinkarte, authentische italienische Küche — entdecken Sie das Ambiente, das Ihren besonderen Abend unvergesslich macht.</p>
               <PhotoGallery images={[
                 { src: locationDetails, srcSet: `${locationDetails600} 600w, ${locationDetails} 1400w`, sizes: "(max-width: 768px) 100vw, 50vw", alt: "Ristorante STORIA München — Dining Area mit Kerzenlicht, Bar und romantische Terrasse", caption: "Dining Area · Bar · Kerzenlicht · Terrasse" },

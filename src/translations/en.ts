@@ -1285,11 +1285,11 @@ const enBase = {
     },
     romanticDinner: {
       // SEO
-      seoTitle: "Romantic Dinner Munich | 5 min from Königsplatz | STORIA",
-      seoDescription: "Romantic dinner in Munich by candlelight at STORIA Maxvorstadt: Italian menu, wine pairing and a rose, just 5 minutes from Königsplatz. Perfect for date night.",
+      seoTitle: "Best Romantic Dinner Munich – Date Night Restaurant | STORIA",
+      seoDescription: "Munich's best romantic dinner for date night: candlelight at STORIA Maxvorstadt, Italian menu, wine pairing & a rose — 5 min from Königsplatz.",
       breadcrumb: "Romantic Dinner Munich",
       // Hero
-      heroTitle: "Romantic Dinner Munich – Candlelight at STORIA",
+      heroTitle: "Munich's Best Romantic Dinner – Candlelight Restaurant at STORIA",
       heroSubtitle: "Italian cuisine for special moments together | STORIA Maxvorstadt",
       heroBadge1: "🕯️ Candlelight Atmosphere",
       heroBadge2: "🍷 Fine Wines",
@@ -1297,7 +1297,7 @@ const enBase = {
       heroDescription: "Experience an unforgettable romantic evening at STORIA: Exquisite Italian cuisine, soft candlelight, intimate atmosphere and attentive service. Perfect for anniversary, engagement, date night or simply a special evening together – just 5 minutes from Königsplatz.",
       heroCta: "Reserve Romantic Table",
       // Intro
-      introTitle: "Romantic Dining Munich – The Perfect Date Restaurant for Special Evenings",
+      introTitle: "The Best Romantic Restaurant in Munich – Perfect for Date Night",
       introP1: "Looking for a date restaurant in Munich? At Ristorante STORIA Maxvorstadt, we create the perfect atmosphere for special moments together: Soft candlelight, intimate tables with enough privacy, attentive but discreet service and exquisite Italian cuisine that enchants all senses. Romantic dining in Munich – every evening becomes something special with us.",
       introP2: "Whether first date in Munich, anniversary, proposal, engagement celebration or simply an evening for two – with us your romantic dinner becomes an unforgettable experience. Our tasting menus with wine pairing are especially popular for romantic occasions. As your Italian restaurant in Munich, we combine authentic cuisine with a romantic dining Munich experience.",
       // Why STORIA
@@ -1314,6 +1314,8 @@ const enBase = {
       whyExtrasDesc: "On request we organize rose bouquet, welcome champagne or special table decoration. Just let us know when booking.",
       whyLocationTitle: "📍 Central Romantic Location",
       whyLocationDesc: "Just 5 minutes from Königsplatz, perfectly accessible for a date after work or after a stroll through Maxvorstadt. In summer: idyllic terrace.",
+      // Photo Gallery
+      yourEveningTitle: "Your Romantic Evening at STORIA",
       // Menus
       menuSectionTitle: "Our Menu Recommendations for Romantic Evenings",
       menuSectionIntro: "For a romantic dinner we recommend our tasting menus – a culinary experience in 4 courses with perfectly matched wine pairing.",
@@ -3049,7 +3051,7 @@ const enBase = {
       seoTitle: "Best Italian Restaurant Munich | Wood-Fired Pizza | STORIA",
       seoDescription: "Speranza family\u2019s authentic Italian restaurant in Munich-Maxvorstadt: Neapolitan wood-fired pizza at 400\u00b0C, homemade pasta & 60+ wines, 5 min from K\u00f6nigsplatz.",
       breadcrumb: "Southern Italian Restaurant Munich",
-      heroTitle: "Authentically Southern Italian \u2013 the Cuisine of the Cilento in Maxvorstadt",
+      heroTitle: "Munich\u2019s Best Italian Restaurant \u2013 Authentic Cuisine of the Cilento",
       heroSubtitle: "Authentically Southern Italian since 2015 \u2022 Speranza Family",
       heroDescription: "Welcome to STORIA \u2013 Southern Italian cuisine from the Cilento in Munich\u2019s Maxvorstadt. Stone-oven pizza, homemade pasta and the Speranza family\u2019s warm hospitality since 2015. Just 5 min from K\u00f6nigsplatz.",
       heroButton: "Reserve a table",
@@ -3057,7 +3059,7 @@ const enBase = {
       locationBadge1: "Karlstra\u00dfe 47a, Maxvorstadt",
       locationBadge2: "In Munich since 2015",
       locationBadge3: "MON-FRI 09:00-01:00",
-      introTitle: "Southern Italy in Maxvorstadt \u2013 the Cuisine of the Cilento at STORIA",
+      introTitle: "Italian Restaurant Munich \u2013 Southern Italy in Maxvorstadt at STORIA",
       introP1: "The Speranza family has run STORIA since 2015 \u2013 with the cuisine of their homeland, the Cilento in Southern Italy. Domenico and Nicola Speranza bring a piece of Campania to Maxvorstadt: Neapolitan stone-oven pizza at over 400\u00b0C with 48 to 72 hours of dough maturation, daily homemade pasta and fresh fish \u2013 in the heart of Munich.",
       introP2: "Our promise: every dish is prepared with passion and the finest Italian ingredients. From stone-oven pizza at over 400\u00b0C to homemade pasta and fresh seafood \u2013 at STORIA, you taste the difference.",
       introP3: "Whether a cosy dinner for two, a family meal with children or a business lunch in stylish surroundings \u2013 our Italian restaurant in Munich offers the right setting for every occasion. 100 seats indoors and 100 on the covered terrace.",
