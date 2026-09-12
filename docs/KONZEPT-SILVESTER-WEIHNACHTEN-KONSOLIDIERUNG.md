@@ -19,9 +19,16 @@ Structured Data).
 
 **Das ändert die Aufgabe von „Content vorsichtig zusammenführen" zu „redundante, schwächere Route
 abschalten und per 301 auf die stärkere, vollständigere Route umleiten"** — strukturell sehr nah am
-P2-Muster aus dem Vorgänger-Loop (`docs/KONZEPT-SEO-GSC-AUDIT.md` § P2.1), nur mit einer
-zusätzlichen Komponente: die **Pillar-Variante hat das reichhaltigere Schema** (Event/Menu-JSON-LD),
-die Standalone-Variante hat gar keines. Der Gewinner steht damit für alle drei Paare bereits fest.
+P2-Muster aus dem Vorgänger-Loop (`docs/KONZEPT-SEO-GSC-AUDIT.md` § P2.1).
+
+**Update 12.09.2026, nach rigoroser Zahlen-Gegenprobe (Rolle: Senior Data Analyst, auf Antoines
+Nachfrage):** Der ursprüngliche Reflex „Pillar gewinnt strukturell immer, weil reichhaltigeres
+Schema" wurde geprüft und **für 2 von 3 Paaren widerlegt**. Google zeigt die jeweils andere URL
+längst häufiger — dorthin umzuleiten wäre das riskantere Redirect. Gewinner steht **pro Anlass
+einzeln fest**, nicht einheitlich (Details Abschnitt 2). Konsequenz: bei Weihnachten und
+Valentinstag muss die **Standalone**-URL zusätzlich das bisher Pillar-exklusive Schema
+(Event/Menu-JSON-LD, Live-Menü-Anbindung) bekommen, sonst ginge dabei tatsächlich etwas verloren —
+siehe Abschnitt 3a.
 
 ## 1. Vollständige Bestandsaufnahme
 
@@ -40,40 +47,86 @@ aber **nicht alle davon sind tatsächlich Dubletten:**
 Alle drei bestätigten Paare existieren **in allen 4 Sprachen** (DE/EN/IT/FR) — die Dublette ist kein
 DE-Sonderfall.
 
-## 2. Warum die Pillar-Variante in allen drei Fällen die richtige Ziel-URL ist
+## 2. Gewinner-URL pro Anlass — nach Zahlen, nicht nach Einheitlichkeit
 
-| Kriterium | Standalone | Pillar | Gewinner |
+**Grundsatz:** URL-Tiefe/Verschachtelung ist kein Google-Rankingfaktor — `/besondere-anlaesse/x/`
+ist gegenüber `/x-muenchen/` weder strukturell besser noch schlechter. Was zählt, ist wo Google
+bereits nachweislich Vertrauen aufgebaut hat (Impressionen/Position) — von der URL mit **mehr**
+Vertrauen auf die URL mit **weniger** Vertrauen umzuleiten ist das riskantere Redirect, unabhängig
+von der URL-Form.
+
+| Anlass | Standalone (Impr./Pos.) | Pillar (Impr./Pos.) | **Gewinner (Ziel-URL)** |
 |---|---|---|---|
-| Interne Verlinkung | 1 Link (nur `InternalLinks.tsx`, Homepage) | Hauptnavigation (sitewide, „Besondere Anlässe"-Dropdown) + mehrere Cross-Links von anderen Landingpages + Übersichtsseite | **Pillar** |
-| Event/Menu-JSON-LD | keines | vorhanden (`{!standalone && (...)}`) | **Pillar** |
-| Live-Menü-Integration | nein (nur Teaser/Inaktiv-Card) | ja (Supabase `MenuDisplay`, sobald Saison-Menü veröffentlicht) | **Pillar** |
-| GSC-Performance Silvester | 189 Impr. / Pos. 10,5 | 4.774 Impr. / Pos. 10,61 | **Pillar** (25× mehr Volumen) |
-| GSC-Performance Weihnachten | 761 Impr. / Pos. 11,86 | nicht in Top-163 (zu wenig Traffic) | Pillar hat aktuell weniger Volumen — trotzdem technisch überlegen, siehe unten |
-| GSC-Performance Valentinstag | 1.452 Impr. / Pos. 20,56 | 418 Impr. / Pos. 41,3 | Standalone hat mehr Volumen, aber schlechtere Position auf beiden — siehe Nuance unten |
+| Silvester | 189 / 10,5 | **4.774 / 10,61** | **Pillar** — 25× mehr Volumen, eindeutig |
+| Weihnachten | **761 / 11,86** | nicht in Top-163 (praktisch kein Traffic) | **Standalone** — deutlich |
+| Valentinstag | **1.452 / 20,56** | 418 / 41,3 | **Standalone** — mehr Volumen UND bessere Position |
 
-**Nuance Valentinstag:** hier hat die Standalone-URL aktuell mehr Impressionen, aber beide Varianten
-ranken schlecht (Pos. 20,56 bzw. 41,3 — deutlich schlechter als Silvester/Weihnachten). Das ist ein
-Lehrbuchbeispiel für **Keyword-Kannibalisierung**: die Suchintention „Valentinstag München" wird auf
-zwei URLs aufgeteilt, keine bekommt genug gebündeltes Signal, um gut zu ranken. Genau das behebt die
-Konsolidierung — nicht „welche URL gewinnt heute", sondern „beide Signale auf eine URL bündeln,
-damit die Summe besser rankt als beide Teile einzeln". Die Pillar-URL bleibt trotzdem die technisch
-richtige Zielseite (Schema, Navigation, Live-Menü), unabhängig vom aktuellen Impressionen-Snapshot.
+Nur Silvester spricht für Pillar. Bei Weihnachten und Valentinstag hat Google die **flache** URL
+bereits klar bevorzugt — eine einheitliche „immer Pillar"-Regel hätte in 2 von 3 Fällen die von
+Google bereits bevorzugte URL abgeschaltet.
+
+**Zusatzargument für die flache URL, unabhängig von den Zahlen:** die dynamische
+`besondere-anlaesse/:slug`-Route mit ihrem Slug-Matching war in diesem Projekt bereits mehrfach
+Fehlerquelle (Oktoberfest-Sitemap-Dublette, verwaiste 404-Kombinationen, falscher `slug_fr:
+"reveillon"` — alle dokumentiert im Vorgänger-Loop). Flache Routen sind einfacher und robuster.
+Das spricht zusätzlich dafür, wo immer die Daten es zulassen (Weihnachten, Valentinstag) die
+flache URL zu bevorzugen, statt sie ohne Not auf die fehleranfälligere dynamische Route zu ziehen.
+
+**Nuance Valentinstag:** beide Varianten ranken aktuell schlecht (Pos. 20,56 bzw. 41,3) —
+Lehrbuchbeispiel für Keyword-Kannibalisierung: die Suchintention wird auf zwei URLs aufgeteilt,
+keine bekommt genug gebündeltes Signal. Die Konsolidierung selbst (Signale bündeln) ist hier
+wichtiger als die Frage, welche der beiden URLs „gewinnt" — die flache URL wird gewählt, weil sie
+schon mehr Volumen hat und weil sie die robustere Route ist.
 
 ## 3. Was beim Redirect NICHT verloren geht (Antoines Kernsorge)
 
 Da beide Varianten **dieselbe Komponente mit identischem Intro/Gründe/Timeline/FAQ-Text** rendern,
-gibt es keinen inhaltlichen Merge durchzuführen. Was tatsächlich beim Wegfall der Standalone-Route
-verschwindet — und wie es aufgefangen wird:
+gibt es keinen inhaltlichen Merge auf Textebene durchzuführen. Aber: pro Anlass überlebt eine
+andere URL (Abschnitt 2), und die beiden Varianten sind **nicht** in jeder Hinsicht gleich
+ausgestattet — das muss sauber aufgefangen werden, nicht nur der Text.
+
+### 3a. Silvester (Pillar überlebt — einfacher Fall)
 
 | Element | Nur auf Standalone | Auffang-Maßnahme |
 |---|---|---|
-| SEO-Title/Description/H1 (Standalone-Variante) | ja | Verworfen — Pillar-Variante hat eigene, ebenfalls funktionierende SEO-Texte (Teil der Striking-Distance-Arbeit selbst, falls Cluster relevant) |
-| Teaser-/Inaktiv-Card | ja | Ersatzlos — Pillar zeigt an derselben Stelle die vollständigen Pakete bzw. das Live-Menü, keine Funktionslücke |
-| 1 interner Link von `InternalLinks.tsx` (Homepage) | ja | Ziel auf die Pillar-URL ummünzen (3 Zeilen in `InternalLinks.tsx`, nicht löschen) |
-| Direkter Traffic auf die alte URL (Lesezeichen, alte Backlinks) | — | 301-Redirect fängt das ab, kein Traffic-Verlust |
+| SEO-Title/Description/H1 (Standalone) | ja | Verworfen — Pillar hat eigene SEO-Texte |
+| Teaser-/Inaktiv-Card | ja | Ersatzlos — Pillar zeigt Pakete/Live-Menü an derselben Stelle |
+| 1 interner Link (`InternalLinks.tsx`) | ja | Ziel auf Pillar-URL ummünzen |
 
-**Ergebnis: es gibt nichts zu „verschmelzen"** — der Auftrag reduziert sich auf (a) Redirect,
-(b) einen internen Link umbiegen, (c) die Standalone-Route aus Prerender/Sitemap nehmen.
+Pillar hat bereits alles (Schema, Live-Menü) — reiner Redirect, keine Komponentenänderung nötig.
+
+### 3b. Weihnachten + Valentinstag (Standalone überlebt — der eigentliche Sorgfaltsfall)
+
+Hier ist die Lage umgekehrt: die überlebende URL (Standalone) ist aktuell die **schwächer
+ausgestattete** Variante — sie hat kein Event/Menu-JSON-LD und keine Live-Supabase-Menü-Anbindung
+(nur Teaser-/Inaktiv-Card), weil diese laut Code exklusiv an `{!standalone && (...)}` hängen. Würde
+man hier naiv nur redirecten, **ginge tatsächlich etwas verloren** — genau das, wovor Antoine
+gewarnt hat.
+
+**Auffang-Maßnahme (kein reiner Redirect, sondern eine kleine Komponentenanpassung):** die
+Standalone-Route muss dieselben `menu`/`archivedMenu`/`seasonalConfig`-Props bekommen, die aktuell
+nur `BesondererAnlass.tsx` an die Pillar-Route liefert. Konkret: die Supabase-Datenladelogik, die
+`BesondererAnlass.tsx` für das Menü-Laden nutzt (Hook/Query zuerst exakt identifizieren, nicht
+raten — vermutlich analog zu `useSpecialMenuBySlug` bzw. dem in `OktoberfestMuenchen.tsx:96`
+referenzierten Muster laut Vorgänger-KONZEPT), auch am Mount-Punkt der Standalone-Route in
+`src/App.tsx` aufrufen und die Ergebnisse als Props durchreichen — **statt** `standalone` zu
+setzen. Der `standalone`-Boolean steuert dann nur noch die SEO-Metadaten/Breadcrumb-Auswahl, nicht
+mehr, ob Schema/Live-Menü gerendert werden. Effekt: die überlebende flache URL bekommt exakt dieselbe
+Ausstattung, die heute nur die Pillar-URL hat — **nichts geht verloren, es wird eher aufgewertet**
+(die bisher schwächere URL wird jetzt vollwertig).
+
+| Element | Bisher nur auf Pillar | Auffang-Maßnahme |
+|---|---|---|
+| Event/Menu-JSON-LD | ja | Auf Standalone-Mount-Punkt mit übertragen (siehe oben) |
+| Live-Menü (Supabase) | ja | dito |
+| Pakete-Grid (wenn kein Live-Menü aktiv) | ja | dito |
+| E-Mail-Signup + Archiv-Menü (wenn inaktiv) | ja | dito |
+| 1 interner Link (`InternalLinks.tsx`) | — (zeigt schon auf Standalone) | unverändert |
+| Nav-Dropdown-Ziel | zeigt auf Pillar | auf Standalone-URL ummünzen |
+| Mehrere Cross-Links von anderen Landingpages (siehe Recherche § 3) | zeigen auf Pillar | auf Standalone-URL ummünzen |
+
+**Das ist der Grund, warum dieses KONZEPT mehr ist als ein reiner Redirect-Task** — bei Weihnachten
+und Valentinstag wird die Zielseite technisch aufgewertet, nicht nur umgeleitet.
 
 ## 4. Nebenbefunde aus der Recherche (unabhängig von der Konsolidierung, aber im selben Zug fixbar)
 
@@ -94,58 +147,72 @@ verschwindet — und wie es aufgefangen wird:
    sprachabhängiger JSON-LD-Text (name/description je Locale). **Empfehlung: als separates,
    nachgelagertes Kriterium behandeln** (GEO-Verbesserung, kein Blocker für den Redirect selbst).
 
-## 5. Umsetzungsplan (Vorschlag, vor Freigabe nicht committen)
+## 5. Umsetzungsplan — freigegeben von Antoine, 12.09.2026 („Ja, setze das so um als /loop")
 
-Analog zum P2-Redirect-Muster des Vorgänger-Loops, aber mit einem zusätzlichen Routing-Schritt, da
-hier — anders als bei reinen 404-Fixes — eine **aktuell aktive, indexierte** Route abgeschaltet wird:
+Drei Einheiten, da Silvester strukturell einfacher ist (reiner Redirect) als Weihnachten/
+Valentinstag (Redirect + Komponenten-Aufwertung). Navigation bleibt für den Gast optisch/strukturell
+identisch (Dropdown „Besondere Anlässe" zeigt weiterhin alle Anlässe gruppiert) — nur die
+Link-Ziele ändern sich pro Anlass gemäß Abschnitt 2.
 
-### Schritt 1 — Route deaktivieren
-In `src/App.tsx` `generateRoutes()`: die drei Standalone-Routen (`silvester-muenchen`,
-`weihnachten-muenchen`, `valentinstag-muenchen`, je 4 Sprachen) aus der generierten Routenliste
-entfernen, damit Prerender dafür keine statischen HTML-Dateien mehr baut und sie nicht mehr im
-Sitemap-Generator (`scripts/generate-sitemap.mjs`) auftauchen.
+### K1 — Silvester (Standalone → Pillar, reiner Redirect)
+1. `src/App.tsx` `generateRoutes()`: Standalone-Route `silvester-muenchen` (4 Sprachen) entfernen.
+2. `public/.htaccess`: 301-Redirects `silvester-muenchen` (4 Sprachen) → `besondere-anlaesse/
+   silvester` (korrekte Locale-Slugs aus `seasonalMenus.ts` verifizieren, nicht raten).
+3. `src/components/InternalLinks.tsx` Zeile 27: Ziel von `silvester-muenchen` auf
+   `besondere-anlaesse/silvester` ändern.
+4. `Navigation.tsx`: Silvester-Nav-Ziel bleibt unverändert (zeigt schon auf Pillar).
+5. Nebenbefund-Fix: `SilvesterMuenchen.tsx` Event/Menu-JSON-LD-Preise auf 99/150 € (Classic/
+   Premium) korrigieren, damit sie zum sichtbaren Paket-Text passen.
+6. Nebenbefund-Fix: `SeasonalBanner.tsx:28` — `cta1`-Ziel für Silvester von
+   `weihnachtsfeier-muenchen` auf `besondere-anlaesse/silvester` korrigieren.
 
-### Schritt 2 — 301-Redirects ergänzen
-In `public/.htaccess`, Bestandsmuster „Legacy URL Redirects"/§ P2.1 des Vorgänger-Loops
-wiederverwenden: je Anlass × 4 Sprachen ein `RewriteRule` von der alten Standalone-URL auf die
-korrekte Pillar-URL. **Exakte Ziel-Slugs vor Umsetzung gegen `src/config/seasonalMenus.ts`
-(`slugs.en/it/fr`) verifizieren, nicht raten** — dieselbe Sorgfaltsregel wie beim Vorgänger-Loop
-(„ein falscher Redirect auf einer Live-Domain mit sofortigem Deploy ist teurer als der ursprüngliche
-Zustand").
+### K2 — Weihnachten (Pillar → Standalone, Redirect + Komponenten-Aufwertung)
+1. **Zuerst recherchieren, nicht raten:** exakte Supabase-Datenladelogik in
+   `BesondererAnlass.tsx` identifizieren (Hook/Query für `menu`/`archivedMenu`), die für den
+   Weihnachten-Slug (`weihnachtsmenue`) verwendet wird.
+2. `src/App.tsx`: Mount-Punkt für `weihnachten-muenchen` (4 Sprachen) so anpassen, dass er
+   dieselbe Datenladelogik aufruft und `menu`/`archivedMenu`/`seasonalConfig` an
+   `WeihnachtenMuenchen` durchreicht, statt `standalone` zu setzen (siehe § 3b) — `standalone`
+   steuert danach nur noch SEO-Metadaten-Auswahl.
+3. `public/.htaccess`: 301-Redirects `besondere-anlaesse/weihnachtsmenue` (4 Sprachen) →
+   `weihnachten-muenchen` (Ziel-Slugs verifizieren).
+4. `src/App.tsx` `generateRoutes()`/Pillar-Matching: Weihnachten-Slug aus dem generischen
+   `besondere-anlaesse/:slug`-Matching entfernen (verhindert doppeltes Rendering).
+5. `Navigation.tsx`: Weihnachten-Nav-Ziel von Pillar auf `weihnachten-muenchen` ändern.
+6. Cross-Links von anderen Landingpages, die laut Recherche auf die Weihnachten-Pillar-URL
+   zeigen (`SilvesterMuenchen.tsx:119`, `ValentinstagMuenchen.tsx:118`), auf
+   `weihnachten-muenchen` umstellen.
+7. `src/components/InternalLinks.tsx` Zeile 28: bereits auf Standalone — unverändert.
 
-### Schritt 3 — Internen Link umbiegen
-`src/components/InternalLinks.tsx` Zeilen 26–28: die drei Standalone-Ziele durch die entsprechenden
-Pillar-URLs ersetzen.
+### K3 — Valentinstag (Pillar → Standalone, identisches Muster wie K2)
+Analog zu K2, für `valentinstag-muenchen`/`besondere-anlaesse/valentinstag-menue`. Cross-Links laut
+Recherche: `SilvesterMuenchen.tsx:120`, `WeihnachtenMuenchen.tsx:118`,
+`RomantischesDinner.tsx:241`, `BesondereAnlaesse.tsx` — auf `valentinstag-muenchen` umstellen.
 
-### Schritt 4 — Nebenbefunde mitfixen (selber PR, da ohnehin dieselben Dateien offen)
-- `SilvesterMuenchen.tsx`: Event/Menu-JSON-LD-Preise auf 99/150 € (Classic/Premium) korrigieren,
-  damit sie zum sichtbaren Seiteninhalt passen.
-- `SeasonalBanner.tsx:28`: `cta1`-Ziel für Silvester von `weihnachtsfeier-muenchen` auf die
-  kanonische Silvester-Pillar-URL korrigieren.
+### Beweis je Einheit
+`npm run build` (Prerender-Routenzahl darf sich nur um die entfernte Route ändern, nicht mehr) +
+`npm run lint` grün. **Vorher/Nachher `curl -IL`** auf alle 4 Sprachvarianten der jeweils
+abgeschalteten URL: vorher 200, nachher 301→200 auf die neue Ziel-URL — dasselbe
+Verifikationsmuster wie im Vorgänger-Loop § P2.1. Zusätzlich bei K2/K3: Live-Check, dass die
+überlebende URL jetzt tatsächlich Event/Menu-JSON-LD und Live-Menü/Pakete zeigt (nicht mehr die
+alte Teaser-Karte).
 
-### Schritt 5 — Beweis
-`npm run build` (Prerendering muss 3×4=12 Routen weniger zeigen als vorher, Sitemap ebenso) +
-`npm run lint` grün. **Vorher/Nachher `curl -IL` auf alle 12 betroffenen URLs** (4 Sprachen × 3
-Anlässe): vorher 200, nachher 301→200 auf die Pillar-URL — exakt das Verifikationsmuster aus dem
-Vorgänger-Loop § P2.1.
-
-### Was NICHT in diesem Schritt passiert
-Die sprachabhängige JSON-LD-Übersetzung (Nebenbefund 3) ist bewusst **kein** Teil dieses
-Umsetzungsplans — eigenständige GEO-Verbesserung, kein Blocker, würde den Scope unnötig aufblähen.
+### Was NICHT in diesem Umsetzungsplan passiert
+Die sprachabhängige JSON-LD-Übersetzung (Nebenbefund 3, hartcodiertes Deutsch in EN/IT/FR-Aufrufen)
+ist bewusst **kein** Teil dieses Plans — eigenständige GEO-Verbesserung, kein Blocker.
 
 ## 6. Risikoeinschätzung
 
-**Höheres Risiko als die reinen Striking-Distance-Textänderungen** (Einheiten A–C), da hier
-Routing/Redirects statt reiner Strings geändert werden — ein falscher Redirect auf einer Live-Domain
-mit sofortigem SFTP-Deploy ist nicht trivial rückgängig zu machen. Mitigation: exaktes Kopieren des
-bereits bewährten P2-Redirect-Musters, Slug-Verifikation vor jedem Redirect, `curl -IL`
-Vorher/Nachher-Beweis pro URL (12 Stück), keine Abkürzung.
+**Höheres Risiko als die reinen Striking-Distance-Textänderungen** (Einheiten A–C) — hier werden
+Routing/Redirects **und** bei K2/K3 eine Komponenten-Datenanbindung geändert, nicht nur Strings.
+Ein falscher Redirect auf einer Live-Domain mit sofortigem SFTP-Deploy ist nicht trivial rückgängig
+zu machen. Mitigation: exaktes Kopieren des bewährten P2-Redirect-Musters, Slug-Verifikation vor
+jedem Redirect, `curl -IL` Vorher/Nachher-Beweis pro URL, **K1 zuerst** (einfachster, risikoärmster
+Fall) um das Muster zu bestätigen, bevor K2/K3 (mit Komponentenänderung) angegangen werden.
 
-## 7. Freigabe-Frage
+## 7. Freigabe
 
-Bevor ein LOOP/Umsetzungsprotokoll dafür gebaut wird: **Freigabe für den Umsetzungsplan in
-Abschnitt 5 nötig** (wie bei den Striking-Distance-Einheiten — Redirects sind hier zusätzlich eine
-strukturelle statt reine Text-Entscheidung). Insbesondere: Einverständnis, dass die drei
-Standalone-URLs **abgeschaltet** werden (nicht nur inhaltlich angeglichen) — das ist die Konsequenz
-aus Abschnitt 3 (nichts geht verloren, weil nichts Eigenständiges drin steht), aber eine explizite
-Bestätigung ist sinnvoll, da es eine andere Art Eingriff ist als die bisherigen Kriterien.
+**Erteilt: Antoine, 12.09.2026, „Ja, setze das so um als /loop"** — nach Klärung, dass die
+Navigation für den Gast unverändert bleibt und pro Anlass einzeln nach Datenlage entschieden wird
+(nicht einheitlich „immer Pillar"). Umsetzung läuft als eigener Loop, siehe
+`docs/LOOP-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md`.
