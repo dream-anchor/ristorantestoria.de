@@ -21,7 +21,9 @@ const SEASON_BY_MONTH: (Season | null)[] = [
 ];
 
 const SEASON_LINKS: Record<Season, { cta1: string; cta2?: string }> = {
-  valentinstag: { cta1: "besondere-anlaesse/valentinstag-menue" },
+  // Valentinstag K3-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b):
+  // Ziel jetzt die kanonische Standalone-URL statt der abgeschalteten Pillar-Route.
+  valentinstag: { cta1: "valentinstag-muenchen" },
   terrasse: { cta1: "terrasse-muenchen", cta2: "aperitivo-muenchen" },
   wild: { cta1: "wild-essen-muenchen" },
   weihnachtsfeier: { cta1: "weihnachtsfeier-muenchen" },

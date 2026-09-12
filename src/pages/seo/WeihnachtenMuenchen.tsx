@@ -121,7 +121,7 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
     { title: s.related1Title, desc: s.related1Desc, to: "speisekarte" },
     { title: s.related2Title, desc: s.related2Desc, to: "eventlocation-muenchen-maxvorstadt" },
     { title: s.related3Title, desc: s.related3Desc, to: "besondere-anlaesse/silvester" },
-    { title: s.related4Title, desc: s.related4Desc, to: "besondere-anlaesse/valentinstag-menue" },
+    { title: s.related4Title, desc: s.related4Desc, to: "valentinstag-muenchen" },
     { title: s.related5Title, desc: s.related5Desc, to: "firmenfeier-muenchen" },
     { title: s.related6Title, desc: s.related6Desc, to: "kontakt" },
   ];

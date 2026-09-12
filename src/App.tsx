@@ -90,7 +90,20 @@ const getDehydratedState = () => {
 };
 
 // Standalone wrappers for seasonal SEO pages (flat URLs)
-const ValentinstagMuenchenStandalone = () => <ValentinstagMuenchen standalone />;
+
+// Valentinstag K3-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b,
+// identisches Muster wie K2/Weihnachten): die flache Standalone-URL (valentinstag-muenchen) ist
+// jetzt kanonisch (mehr Google-Vertrauen als die alte Pillar-Route, KONZEPT § 2) und muss deshalb
+// dieselbe Datenladelogik bekommen, die zuvor nur BesondererAnlass.tsx für die Pillar-Route
+// (besondere-anlaesse/valentinstag-menue) aufrief — sonst gingen Event/Menu-JSON-LD und das
+// Live-Menü verloren. useSeasonalMenuData() bündelt dieselben Hooks (useSpecialMenuBySlug +
+// useArchivedSeasonalMenu), die BesondererAnlass.tsx inline nutzt, nur ohne :slug-Parameter.
+const ValentinstagMuenchenStandalone = () => {
+  const { menu, archivedMenu, seasonalConfig } = useSeasonalMenuData('valentinstag');
+  return (
+    <ValentinstagMuenchen standalone menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />
+  );
+};
 
 // Weihnachten K2-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b):
 // die flache Standalone-URL ist jetzt kanonisch (mehr Google-Vertrauen als die alte Pillar-Route,

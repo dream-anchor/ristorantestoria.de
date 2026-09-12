@@ -59,11 +59,13 @@ const BesondereAnlaesse = () => {
     return event.slug;
   };
 
-  // Weihnachten: K2-Konsolidierung (KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b) — die
-  // flache Standalone-URL ist jetzt kanonisch statt der Pillar-Kind-Route. Verifizierte Slugs aus
-  // src/config/slugs.json (nicht die hier separat gepflegten, teils veralteten slug_it/slug_fr).
+  // Weihnachten/Valentinstag: K2/K3-Konsolidierung (KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md
+  // § 3b) — die flachen Standalone-URLs sind jetzt kanonisch statt der Pillar-Kind-Routen.
+  // Verifizierte Slugs aus src/config/slugs.json (nicht die hier separat gepflegten, teils
+  // veralteten slug_it/slug_fr).
   const FLAT_EVENT_SLUGS: Record<string, Record<string, string>> = {
     weihnachtsmenue: { de: 'weihnachten-muenchen', en: 'christmas-munich', it: 'natale-monaco', fr: 'noel-munich' },
+    "valentinstag-menue": { de: 'valentinstag-muenchen', en: 'valentines-day-munich', it: 'san-valentino-monaco', fr: 'saint-valentin-munich' },
   };
 
   const getEventHref = (event: typeof eventLinks[0]) => {
@@ -89,7 +91,7 @@ const BesondereAnlaesse = () => {
         "@type": "ItemList",
         "name": "Besondere Anlässe im Ristorante STORIA München",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "name": "Valentinstag-Menü" },
+          { "@type": "ListItem", "position": 1, "url": "https://www.ristorantestoria.de/valentinstag-muenchen/", "name": "Valentinstag-Menü" },
           { "@type": "ListItem", "position": 2, "url": "https://www.ristorantestoria.de/weihnachten-muenchen/", "name": "Weihnachtsmenü" },
           { "@type": "ListItem", "position": 3, "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "name": "Silvester Gala-Dinner" },
           ...(wmActive ? [{ "@type": "ListItem", "position": 4, "url": `https://www.ristorantestoria.de/${WM_SLUG}/`, "name": "WM 2026 Public Viewing" }] : []),
