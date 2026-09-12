@@ -50,11 +50,14 @@ const EVENT_URLS: Record<string, Record<string, string>> = {
     it: "https://www.ristorantestoria.de/it/occasioni-speciali/san-valentino-menu/",
     fr: "https://www.ristorantestoria.de/fr/occasions-speciales/saint-valentin-menu/",
   },
+  // K2-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b): Standalone-URL
+  // ist jetzt kanonisch statt der abgeschalteten Pillar-Route — sonst würde jede Benachrichtigungs-
+  // Mail einen unnötigen 301-Hop verursachen.
   weihnachten: {
-    de: "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/",
-    en: "https://www.ristorantestoria.de/en/special-occasions/christmas-menu/",
-    it: "https://www.ristorantestoria.de/it/occasioni-speciali/natale-menu/",
-    fr: "https://www.ristorantestoria.de/fr/occasions-speciales/noel-menu/",
+    de: "https://www.ristorantestoria.de/weihnachten-muenchen/",
+    en: "https://www.ristorantestoria.de/en/christmas-munich/",
+    it: "https://www.ristorantestoria.de/it/natale-monaco/",
+    fr: "https://www.ristorantestoria.de/fr/noel-munich/",
   },
   silvester: {
     de: "https://www.ristorantestoria.de/besondere-anlaesse/silvester/",

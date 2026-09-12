@@ -54,6 +54,7 @@ import ItalienerHauptbahnhofMuenchen from "./pages/seo/ItalienerHauptbahnhofMuen
 import HochzeitsfeierMuenchen from "./pages/seo/HochzeitsfeierMuenchen";
 import ValentinstagMuenchen from "./pages/seo/ValentinstagMuenchen";
 import WeihnachtenMuenchen from "./pages/seo/WeihnachtenMuenchen";
+import { useSeasonalMenuData } from "./hooks/useSeasonalMenuData";
 import ReisegruppenPage from "./pages/seo/ReisegruppenPage";
 import ReisegruppenDankePage from "./pages/seo/ReisegruppenDankePage";
 import FAQ from "./pages/FAQ";
@@ -90,7 +91,19 @@ const getDehydratedState = () => {
 
 // Standalone wrappers for seasonal SEO pages (flat URLs)
 const ValentinstagMuenchenStandalone = () => <ValentinstagMuenchen standalone />;
-const WeihnachtenMuenchenStandalone = () => <WeihnachtenMuenchen standalone />;
+
+// Weihnachten K2-Konsolidierung (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b):
+// die flache Standalone-URL ist jetzt kanonisch (mehr Google-Vertrauen als die alte Pillar-Route,
+// KONZEPT § 2) und muss deshalb dieselbe Datenladelogik bekommen, die zuvor nur BesondererAnlass.tsx
+// für die Pillar-Route (besondere-anlaesse/weihnachtsmenue) aufrief — sonst gingen Event/Menu-JSON-LD
+// und das Live-Menü verloren. useSeasonalMenuData() bündelt dieselben Hooks (useSpecialMenuBySlug +
+// useArchivedSeasonalMenu), die BesondererAnlass.tsx inline nutzt, nur ohne :slug-Parameter.
+const WeihnachtenMuenchenStandalone = () => {
+  const { menu, archivedMenu, seasonalConfig } = useSeasonalMenuData('weihnachten');
+  return (
+    <WeihnachtenMuenchen standalone menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />
+  );
+};
 
 // Route configuration with components
 const routeComponents: Record<string, React.ComponentType> = {
@@ -256,7 +269,9 @@ const AppRoutes = () => {
         <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu/" replace />} />
         {/* Kurz-URL für Filmfest-Kampagnenseite */}
         <Route path="/filmfest" element={<Navigate to="/filmfest-muenchen/" replace />} />
-        <Route path="/weihnachtsmenues" element={<Navigate to="/besondere-anlaesse/weihnachtsmenue/" replace />} />
+        {/* K2-Konsolidierung: Ziel jetzt die kanonische Standalone-URL (nicht mehr die
+            abgeschaltete Pillar-Route), sonst entstünde ein zusätzlicher Redirect-Hop. */}
+        <Route path="/weihnachtsmenues" element={<Navigate to="/weihnachten-muenchen/" replace />} />
         <Route path="/silvesterparty" element={<Navigate to="/besondere-anlaesse/silvester/" replace />} />
         <Route path="/lunch-muenchen" element={<Navigate to="/lunch-muenchen-maxvorstadt/" replace />} />
         <Route path="/eventlocation-muenchen" element={<Navigate to="/eventlocation-muenchen-maxvorstadt/" replace />} />

@@ -45,6 +45,14 @@ const PARENT_SLUGS: Record<string, string> = {
   fr: 'occasions-speciales',
 };
 
+// Anlässe, die auf ihre flache Standalone-URL statt auf die Pillar-Route (besondere-anlaesse/...)
+// konsolidiert wurden (docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md). Wert ist der
+// baseSlug OHNE führenden "/" — wird unten via LocalizedLink/getLocalizedPath aufgelöst, genau wie
+// die anderen flachen Nav-Items (z. B. "terrasse-muenchen").
+const STANDALONE_OVERRIDES: Record<string, string> = {
+  weihnachten: 'weihnachten-muenchen',
+};
+
 const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
@@ -97,9 +105,15 @@ const Navigation = () => {
     if (specialMenus && specialMenus.length > 0) {
       for (const menu of specialMenus) {
         const menuSlug = getLocalizedMenuSlug(menu);
-        const fullPath = language === 'de'
-          ? `/${parentSlug}/${menuSlug}/`
-          : `/${language}/${parentSlug}/${menuSlug}/`;
+        const seasonalMatch = SEASONAL_MENUS.find(sm =>
+          sm.supabaseSlug === menu.slug || Object.values(sm.slugs).includes(menu.slug)
+        );
+        const override = seasonalMatch && STANDALONE_OVERRIDES[seasonalMatch.key];
+        const fullPath = override
+          ? override
+          : language === 'de'
+            ? `/${parentSlug}/${menuSlug}/`
+            : `/${language}/${parentSlug}/${menuSlug}/`;
         children.push({
           label: getLocalizedMenuTitle(menu).toUpperCase() || 'MENÜ',
           baseSlug: fullPath,
@@ -112,9 +126,12 @@ const Navigation = () => {
     for (const seasonal of SEASONAL_MENUS) {
       const seasonalSlug = seasonal.slugs[language as keyof typeof seasonal.slugs] || seasonal.slugs.de;
       if (!seenSlugs.has(seasonalSlug)) {
-        const fullPath = language === 'de'
-          ? `/${parentSlug}/${seasonalSlug}/`
-          : `/${language}/${parentSlug}/${seasonalSlug}/`;
+        const override = STANDALONE_OVERRIDES[seasonal.key];
+        const fullPath = override
+          ? override
+          : language === 'de'
+            ? `/${parentSlug}/${seasonalSlug}/`
+            : `/${language}/${parentSlug}/${seasonalSlug}/`;
         children.push({
           label: (seasonal.titles[language as keyof typeof seasonal.titles] || seasonal.titles.de).toUpperCase(),
           baseSlug: fullPath,

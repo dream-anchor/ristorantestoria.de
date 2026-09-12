@@ -76,12 +76,59 @@ Live-Menü, die bisher nur die Pillar-Variante hatte) — kein Inhalt geht verlo
 
 ## K2 — Weihnachten (Pillar → Standalone, Redirect + Komponenten-Aufwertung)
 
-- [ ] **K2** Supabase-Datenladelogik identifiziert, Standalone-Mount-Punkt aufgewertet
-      (Event/Menu-JSON-LD + Live-Menü), 301-Redirects (4 Sprachen) Pillar→Standalone,
-      Pillar-Slug aus generischem Matching entfernt, Nav + Cross-Links umgebogen (KONZEPT § 5, K2).
-      Beweis: `npm run build`/`lint` grün + `curl -IL` auf alle 4 Sprachvarianten der
-      Pillar-URL vorher (200) und nachher (301→200 auf `weihnachten-muenchen`) + Live-Check
-      Event/Menu-JSON-LD und Live-Menü/Pakete auf der überlebenden URL vorhanden.
+- [x] **K2** Supabase-Datenladelogik identifiziert und wiederverwendet: `BesondererAnlass.tsx`
+      Zeilen 49-60 nutzt inline `findSeasonalMenuBySlug()` (Config) + `useSpecialMenuBySlug()`
+      (`src/hooks/useSpecialMenus.ts:534`) + `useArchivedSeasonalMenu()`
+      (`src/hooks/useArchivedSeasonalMenu.ts:10`) — alle drei bereits eigenständig exportiert,
+      keine Extraktion aus `BesondererAnlass.tsx` nötig. Neu gebaut: `src/hooks/useSeasonalMenuData.ts`
+      bündelt dieselben drei Bausteine parametrisiert nach Event-Key (ohne `:slug`-Routenparameter),
+      damit K3 (Valentinstag) sie 1:1 wiederverwenden kann. `App.tsx`
+      `WeihnachtenMuenchenStandalone` ruft `useSeasonalMenuData('weihnachten')` auf und reicht
+      `menu`/`archivedMenu`/`seasonalConfig` an `WeihnachtenMuenchen` durch — `standalone` steuert
+      seitdem nur noch SEO-Title/-Description, `canonicalPath` und `breadcrumbSchema`
+      (`WeihnachtenMuenchen.tsx` Zeilen 39-75), NICHT mehr Event/Menu-JSON-LD, Hero-CTA-Ziel,
+      Pakete-Grid/Live-Menü, Email-Signup oder Archiv-Menü — die sind jetzt rein `isActive`/`menu`-
+      getrieben (vorher `!standalone`-gegated). Im eingebetteten Event-JSON-LD die redundante,
+      3-stufige `BreadcrumbList` entfernt (Duplikat zur bereits vorhandenen
+      `<StructuredData type="breadcrumb">`) und `@id`/`offers.url` von der toten Pillar-URL auf
+      `weihnachten-muenchen/` korrigiert. `BesondererAnlass.tsx`: Weihnachten-Zweig rendert nicht
+      mehr `<WeihnachtenMuenchen>`, sondern `<Navigate>` auf die neue flache URL (Defense-in-Depth
+      unter dem .htaccess-301, fängt SPA-interne Navigation ab) — Ostern/generische Pillar-Route
+      bleibt unverändert (eigener Codepfad, nicht betroffen).
+      Exakte Slugs (aus `slugs.json`/`seasonalMenus.ts`, nicht geraten): Standalone
+      de=`weihnachten-muenchen`, en=`christmas-munich`, it=`natale-monaco`, fr=`noel-munich`;
+      Pillar (abgeschaltet) de=`besondere-anlaesse/weihnachtsmenue`,
+      en=`special-occasions/christmas-menu`, it=`occasioni-speciali/natale-menu`,
+      fr=`occasions-speciales/noel-menu`.
+      Zusätzlich zum Plan: `Navigation.tsx` (Dropdown „Besondere Anlässe") und
+      `BesondereAnlaesse.tsx` (Übersichts-Karten + JSON-LD-ItemList) linken Weihnachten jetzt auch
+      auf die flache URL — beide bauten bisher generisch die Pillar-URL, nicht in KONZEPT § 5
+      wörtlich benannt, aber dieselbe Kategorie „Cross-Link zeigt auf Pillar" aus § 3b. `prerender.js`
+      + `scripts/generate-sitemap.mjs`: eigene hartcodierte Pillar-Routenlisten um den
+      Weihnachten-Eintrag gekürzt (beide Skripte lesen NICHT aus `seasonalMenus.ts`, sondern
+      pflegen eigene Kopien); `prerender.js` zusätzlich um `FLAT_SPECIAL_MENU_ROUTES` erweitert,
+      damit die flache Route jetzt echte Supabase-Daten für SSR bekommt (vorher unnötig, weil nur
+      Teaser). `src/config/slugs.json`: geprüft wie in K1 — hier KEINE Änderung nötig (anders als
+      K1), weil Pillar-Routen dort nie als eigene Keys standen (nur die flache
+      `weihnachten-muenchen` bleibt unverändert). Nebenfund: `supabase/functions/notify-seasonal-signups/index.ts`
+      hatte alle 4 Weihnachten-Benachrichtigungs-Mail-URLs hartcodiert auf die Pillar-Route —
+      auf die neue Standalone-URL korrigiert (verhindert einen Redirect-Hop in echten Kunden-Mails).
+      Beweis: `npm run build` grün — Prerender 169 statt 173 Routen (−4, exakt die 4
+      abgeschalteten Weihnachten-Pillar-Sprachvarianten; Vorher/Nachher-Vergleich per
+      `git stash`/Rebuild verifiziert), Sitemap 154 statt 158 URLs (−4, kongruent). `npm run lint`:
+      728 Probleme (652 Fehler/76 Warnungen) — identisch zur K1-Baseline, keine Regression (ein
+      neu erzeugter `no-explicit-any` in `BesondererAnlass.tsx` wurde vor dem finalen Lauf durch
+      einen konkreten `Record<string, Record<string,string>>`-Cast statt `any` vermieden).
+      Prerender-Content-Check `dist/weihnachten-muenchen/index.html`: Event-JSON-LD vorhanden
+      (`"@type":"Event"`, `@id`.../weihnachten-muenchen/#event), FAQPage-JSON-LD vorhanden, kein
+      „standaloneTeaser"-Text mehr, Pakete-Grid mit echten Preisen gerendert (aktuell keine
+      Live-Supabase-Daten, da im September saisonal kein Weihnachtsmenü veröffentlicht ist — geprüft
+      per Supabase-REST-Query, kein Fake). `dist/besondere-anlaesse/weihnachtsmenue/` existiert
+      nicht mehr im Build-Output. EN/IT/FR-Varianten (`dist/en/christmas-munich/`,
+      `dist/it/natale-monaco/`, `dist/fr/noel-munich/`) geprüft: Event-Schema vorhanden, korrektes
+      lokalisiertes `<link rel="canonical">` (z. B. `https://www.ristorantestoria.de/en/christmas-munich/`),
+      kein Teaser-Text. Ostern (`dist/besondere-anlaesse/ostermontag-menue/`) und Valentinstag/
+      Silvester-Pillar rendern unverändert weiter (Code-Pfad nicht berührt, im Build bestätigt).
 
 ## K2: Branch, Beweis, Merge
 

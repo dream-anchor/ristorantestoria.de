@@ -59,6 +59,22 @@ const BesondereAnlaesse = () => {
     return event.slug;
   };
 
+  // Weihnachten: K2-Konsolidierung (KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 3b) — die
+  // flache Standalone-URL ist jetzt kanonisch statt der Pillar-Kind-Route. Verifizierte Slugs aus
+  // src/config/slugs.json (nicht die hier separat gepflegten, teils veralteten slug_it/slug_fr).
+  const FLAT_EVENT_SLUGS: Record<string, Record<string, string>> = {
+    weihnachtsmenue: { de: 'weihnachten-muenchen', en: 'christmas-munich', it: 'natale-monaco', fr: 'noel-munich' },
+  };
+
+  const getEventHref = (event: typeof eventLinks[0]) => {
+    const flat = FLAT_EVENT_SLUGS[event.slug];
+    if (flat) {
+      const flatSlug = flat[language] || flat.de;
+      return language === 'de' ? `/${flatSlug}/` : `/${language}/${flatSlug}/`;
+    }
+    return `${basePath}/${parentSlug}/${getSlug(event)}/`;
+  };
+
   const eventsJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -74,7 +90,7 @@ const BesondereAnlaesse = () => {
         "name": "Besondere Anlässe im Ristorante STORIA München",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "url": "https://www.ristorantestoria.de/besondere-anlaesse/valentinstag-menue/", "name": "Valentinstag-Menü" },
-          { "@type": "ListItem", "position": 2, "url": "https://www.ristorantestoria.de/besondere-anlaesse/weihnachtsmenue/", "name": "Weihnachtsmenü" },
+          { "@type": "ListItem", "position": 2, "url": "https://www.ristorantestoria.de/weihnachten-muenchen/", "name": "Weihnachtsmenü" },
           { "@type": "ListItem", "position": 3, "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "name": "Silvester Gala-Dinner" },
           ...(wmActive ? [{ "@type": "ListItem", "position": 4, "url": `https://www.ristorantestoria.de/${WM_SLUG}/`, "name": "WM 2026 Public Viewing" }] : []),
           ...(oktoberfestActive ? [{ "@type": "ListItem", "position": wmActive ? 5 : 4, "url": `https://www.ristorantestoria.de/${OKTOBERFEST_SLUG}/`, "name": "Oktoberfest 2026 im STORIA" }] : [])
@@ -128,7 +144,7 @@ const BesondereAnlaesse = () => {
                 {eventLinks.map((event) => (
                   <Link
                     key={event.slug}
-                    to={`${basePath}/${parentSlug}/${getSlug(event)}/`}
+                    to={getEventHref(event)}
                     className="block p-6 rounded-2xl border bg-card hover:bg-accent transition-colors"
                   >
                     <h2 className="text-xl font-semibold">{event.label}</h2>
