@@ -192,8 +192,30 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
       Munich \| Wood-Fired Pizza \| STORIA", H1 „Munich's Best Italian Restaurant – Authentic
       Cuisine of the Cilento") und `dist/it/miglior-ristorante-italiano-monaco/index.html`
       unverändert auf ihrem Vor-B2-Stand.
-- [ ] **B3** Italiener Königsplatz (`italiener-koenigsplatz/`) — Title/H1/H2 anpassen, „Maxvorstadt"
-      ergänzen (KONZEPT § B3).
+- [x] **B3** Italiener Königsplatz (`italiener-koenigsplatz/`) — Title/H1/H2 additiv angepasst
+      (KONZEPT § B3): „Maxvorstadt" fehlte trotz 265+39 Impr. auf Maxvorstadt-spezifischen Queries
+      (`italiener maxvorstadt` 265 Impr./Pos. 9,50, `italienisches restaurant maxvorstadt` 39
+      Impr./Pos. 7,97) komplett in Title/H1/H2. Title „Italiener Königsplatz München – STORIA
+      Restaurant" → „Italiener Königsplatz München – Maxvorstadt \| STORIA Restaurant", H1
+      „Italiener Königsplatz München" → „Italiener Königsplatz München – Ihr Restaurant in der
+      Maxvorstadt", H2 (erste Sektion, `highlightsTitle`) „Warum STORIA am Königsplatz?" →
+      „Restaurant Königsplatz München – Warum STORIA?" (deckt „restaurant königsplatz münchen"/
+      „königsplatz restaurant" ab, additiv da nur die Frage umformuliert; die vier Highlight-Cards
+      darunter — Authentische Küche, Zentrale Lage, Flexible Zeiten, Fußläufig erreichbar — tragen
+      die Frage „Warum STORIA?" weiterhin inhaltlich, keine Ergänzung nötig).
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1/B2-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+3/-3,
+      `t.seo.italienerKoenigsplatz.seoTitle` + `.heroTitle` + `.highlightsTitle`) — keine
+      JSX-Struktur, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/italiener-koenigsplatz/index.html` geprüft: `<title>`/
+      og:title/twitter:title „Italiener Königsplatz München – Maxvorstadt \| STORIA Restaurant",
+      `<h1>` „Italiener Königsplatz München – Ihr Restaurant in der Maxvorstadt", H2 „Restaurant
+      Königsplatz München – Warum STORIA?" vorhanden; alter H2-String „Warum STORIA am
+      Königsplatz?" nicht mehr im Output (0 Treffer).
 - [ ] **B4** Italiener Hauptbahnhof (`italiener-hauptbahnhof-muenchen/`) — nur H2 anpassen, Title/H1
       bewusst unverändert (KONZEPT § B4).
 
