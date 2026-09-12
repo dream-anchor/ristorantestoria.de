@@ -292,7 +292,25 @@ wie im Chat vorgelegt, siehe KONZEPT § C1–C4).
       STORIA"; 0 Treffer für „Holzofen" im gesamten Output.
       Commit `18ef0ee` auf Branch `striking-distance-c` (kein Push, kein PR — C2–C4 stehen noch
       aus, Bündelung „ein PR je Einheit").
-- [ ] **C2** Aperitivo München (`aperitivo-muenchen/`) — nur H2 anpassen (KONZEPT § C2).
+- [x] **C2** Aperitivo München (`aperitivo-muenchen/`) — nur H2 additiv angepasst (KONZEPT § C2):
+      „Warum Aperitivo im STORIA München?" → „Aperitivo Bar München – Warum STORIA?" (fehlendes Wort
+      war „Bar", nicht „Aperitivo" selbst; deckt „aperitivo bar münchen", 207 Impr./Pos. 11,02).
+      Title/H1 unverändert (enthalten „Aperitivo" bereits stark). Feature-Cards direkt unter der H2
+      (Frage-Antwort-Format) tragen die neue Überschrift bereits inhaltlich —
+      `featureAmbienceDesc` nennt bereits „italienische Bar-Kultur" — keine Ergänzung nötig.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4/C1-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+1/-1,
+      `t.seo.aperitivo.whyTitle`) — keine JSX-Struktur, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/aperitivo-muenchen/index.html` geprüft: `<h2>` „Aperitivo Bar
+      München – Warum STORIA?" vorhanden, alter H2-String „Warum Aperitivo im STORIA München?" 0
+      Treffer; `<title>` unverändert „Aperitivo München – 10 Spritz-Varianten 9,90 €, Terrasse |
+      STORIA", `<h1>` unverändert „Aperitivo München – Aperol Spritz & Negroni im STORIA".
+      Commit `cb8f94f` auf Branch `striking-distance-c` (kein Push, kein PR — C3/C4 stehen noch aus,
+      Bündelung „ein PR je Einheit").
 - [ ] **C3** Geburtstagsfeier München DE (`geburtstagsfeier-muenchen/`) + EN
       (`en/birthday-party-munich/`) — DE: H2 anpassen (KONZEPT § C3). EN: **erst Title/H1/H2 live
       nachlesen** (war nicht Teil der Erstrecherche), dann analog fixen.
