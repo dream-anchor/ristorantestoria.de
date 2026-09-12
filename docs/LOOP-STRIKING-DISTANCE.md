@@ -95,10 +95,33 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
       Firmenfeiern – STORIA", H2 „Hochzeits-Catering & Event-Catering München" und FAQ „Was kostet
       Catering in München?" vorhanden; meta description/og:description/twitter:description
       unverändert identisch zur vorherigen Live-Version (nur Quelle migriert, kein Copy-Diff).
-- [ ] **A4** EN Best Italian Restaurant Munich (`en/best-italian-restaurant-munich/`) — H1/H2
-      anpassen, Title bleibt unverändert (KONZEPT § A4).
-      Beweis: `npm run build`/`lint` grün + `git diff` zeigt nur `src/translations/en.ts`
-      (`t.seo.italienischesRestaurant`).
+- [x] **A4** EN Best Italian Restaurant Munich (`en/best-italian-restaurant-munich/`) — H1/H2
+      additiv angepasst (KONZEPT § A4): H1 „Authentically Southern Italian – the Cuisine of the
+      Cilento in Maxvorstadt" (enthielt „Italian Restaurant" gar nicht, obwohl die Seite bereits
+      Pos. 8,9 für „best italian restaurant munich" rankt) → „Munich's Best Italian Restaurant –
+      Authentic Cuisine of the Cilento". H2 (erste Sektion) „Southern Italy in Maxvorstadt – the
+      Cuisine of the Cilento at STORIA" → „Italian Restaurant Munich – Southern Italy in
+      Maxvorstadt at STORIA". Absatz darunter (`introP1`) trägt die neue Überschrift bereits
+      inhaltlich (Küche/Herkunft/Munich) — keine Ergänzung nötig. **Title unverändert gelassen**
+      (enthält „Best Italian Restaurant Munich" bereits). Nur `src/translations/en.ts` geändert —
+      DE (`italienisches-restaurant-muenchen/`, KONZEPT § B2) und IT
+      (`miglior-ristorante-italiano-monaco/`, KONZEPT § C4) nutzen dieselbe Component, sind aber
+      eigene Kriterien, nicht angefasst.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1/A2/A3-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/en.ts` (+2/-2,
+      `t.seo.italienischesRestaurant.heroTitle` + `.introTitle`) — keine JSX-Struktur, keine
+      DE/IT/FR-Werte angefasst.
+      ✓ 2026-09-12 · Prerendered `dist/en/best-italian-restaurant-munich/index.html` geprüft:
+      `<title>` unverändert „Best Italian Restaurant Munich | Wood-Fired Pizza | STORIA", `<h1>`
+      „Munich's Best Italian Restaurant – Authentic Cuisine of the Cilento", erstes `<h2>` „Italian
+      Restaurant Munich – Southern Italy in Maxvorstadt at STORIA" vorhanden; DE
+      (`dist/italienisches-restaurant-muenchen/index.html`) und IT
+      (`dist/it/miglior-ristorante-italiano-monaco/index.html`) beide unverändert auf ihrem
+      Vor-A4-Stand.
 
 ## Einheit A: Branch, Beweis, Merge
 
