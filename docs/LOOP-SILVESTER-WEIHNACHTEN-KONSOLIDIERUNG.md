@@ -222,6 +222,8 @@ Live-Menü, die bisher nur die Pillar-Variante hatte) — kein Inhalt geht verlo
 
 - [ ] Branch `silvester-weihnachten-k3` gepusht, PR erstellt, Diff gegengelesen, gemergt.
       Live-Stichprobe nach Deploy.
+      PR: https://github.com/dream-anchor/ristorantestoria.de/pull/81 (noch offen, noch nicht
+      gemergt — Merge + Live-Verifikation erfolgen im Hauptfenster).
 
 ---
 
