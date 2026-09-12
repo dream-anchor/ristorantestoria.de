@@ -263,6 +263,10 @@ const extendedFaqs = [
     a: "Unser Catering-Service beginnt ab 20 Personen. Für kleinere Gruppen empfehlen wir die Buchung unserer Eventlocation direkt im Restaurant.",
   },
   {
+    q: "Was kostet Catering in München?",
+    a: "Die Preise richten sich nach dem gewählten Paket: Antipasti-Buffet ab 25 € p.P., Flying Dinner/Fingerfood ab 30 € p.P., Pizza & Pasta Buffet ab 35 € p.P., Premium Italienisches Buffet ab 55 € p.P. und unsere Dolci/Dessert-Station ab 12 € p.P. Alle Preise sind Richtwerte – auf Anfrage erstellen wir Ihnen ein individuelles Angebot.",
+  },
+  {
     q: "In welchem Umkreis liefern Sie in München?",
     a: "Wir liefern innerhalb von München und im Umkreis von bis zu 50 km. Für größere Entfernungen sprechen Sie uns an.",
   },
@@ -332,8 +336,8 @@ const Catering = () => {
   return (
     <>
       <SEO
-        title="Catering München | Italienisches Event-Catering ab 25€ – STORIA"
-        description="Italienisches Catering in München: Pizza, Pasta, Antipasti-Buffets für Firmenfeiern, Hochzeiten & Events. Ab 25 € p.P. Lieferung München + 50 km. ☎ 089 51519696"
+        title={t.pages.catering.title}
+        description={t.pages.catering.description}
         canonical="/catering"
       />
       <StructuredData type="restaurant" includeReviews={false} />
@@ -378,7 +382,7 @@ const Catering = () => {
             </Link>
             <div className="bg-black/50 backdrop-blur-sm rounded-2xl px-6 py-8 md:px-12 md:py-12 max-w-4xl mx-auto">
               <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">
-                Catering München – Italienisches Event-Catering vom STORIA
+                {t.pages.catering.h1}
               </h1>
               <p className="text-lg md:text-xl text-white/90 mb-6">
                 Authentische italienische Küche für Ihr Event – von Fingerfood bis Full-Service-Buffet
@@ -427,9 +431,9 @@ const Catering = () => {
           {/* Anlass Cards */}
           <section className="py-16 bg-secondary/20">
             <div className="container mx-auto px-4 max-w-5xl">
-              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Catering für jeden Anlass</h2>
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Hochzeits-Catering & Event-Catering München</h2>
               <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">
-                Von der kleinen Geburtstagsfeier bis zum großen Firmenevent – wir liefern frisches italienisches Catering für jeden Rahmen.
+                Von der Hochzeit über die Firmenfeier bis zur kleinen Geburtstagsfeier – wir liefern frisches italienisches Event-Catering für jeden Rahmen in München.
               </p>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {anlassCards.map((card, i) => (

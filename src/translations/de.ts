@@ -3661,9 +3661,9 @@ export const de = {
       seoLinkDesc: 'Mehr über unseren Business-Lunch – Lage, Ambiente & Anfahrt',
     },
     catering: {
-      title: 'Catering München | Italienisches Event-Catering – STORIA',
-      h1: 'Catering München – Italienisches Event-Catering vom STORIA',
-      description: 'Italienisches Catering München: Pizza, Pasta & Antipasti für 20–300 Gäste. Firmenfeier, Hochzeit & Events. STORIA Maxvorstadt – Jetzt anfragen!',
+      title: 'Catering München – Preise ab 25€, Hochzeit & Events | STORIA',
+      h1: 'Catering München für Hochzeit, Events & Firmenfeiern – STORIA',
+      description: 'Italienisches Catering in München: Pizza, Pasta, Antipasti-Buffets für Firmenfeiern, Hochzeiten & Events. Ab 25 € p.P. Lieferung München + 50 km. ☎ 089 51519696',
       intro: 'Das Ristorante STORIA bietet zwei Formen des Catering-Angebots: Feiern Sie direkt im Restaurant – von einem privaten Dinner f\u00fcr wenige G\u00e4ste bis zur Firmenfeier oder Hochzeit f\u00fcr bis zu 300 Personen (mehr unter Besondere Anl\u00e4sse). Oder buchen Sie unser Au\u00dfer-Haus-Catering: Wir liefern frische Pizza, hausgemachte Pasta und Antipasti-Buffets zu Ihrem Firmenevent, Ihrer Hochzeit oder Ihrem Sommerfest \u2013 in M\u00fcnchen und Umgebung.',
       introP2: 'Unser Au\u00dfer-Haus-Catering ist flexibel und passt sich Ihren W\u00fcnschen an. Dabei legen wir besonderen Wert auf frische Zutaten, authentische Rezepturen und eine Pr\u00e4sentation, die Ihre G\u00e4ste begeistert. F\u00fcr strukturierte Event-Pakete, Delivery und Full-Service-Catering mit professioneller Veranstaltungsplanung besuchen Sie unser Event-Portal events-storia.de.',
       breadcrumb: 'Catering & Events',

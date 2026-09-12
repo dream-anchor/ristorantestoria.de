@@ -64,10 +64,37 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
       Maxvorstadt" bzw. „Beste Pizza München – Ihre Pizzeria in der Maxvorstadt"; alle vier H2
       unverändert („Pizzeria München – Warum STORIA die beste Pizza München bietet" etc.), kein
       „Holzofen" neu eingeführt.
-- [ ] **A3** Catering (`catering/`) — Title/H1/H2 anpassen + FAQ-Preisfrage ergänzen + Tech-Debt-
-      Konsolidierung (Component auf `t.pages.catering.*` umstellen statt Hardcode) (KONZEPT § A3).
-      Beweis: `npm run build`/`lint` grün + `git diff` zeigt `src/pages/Catering.tsx` und
-      `src/translations/de.ts` (`t.pages.catering`).
+- [x] **A3** Catering (`catering/`) — Title/H1/H2 additiv angepasst (KONZEPT § A3): Title „Catering
+      München \| Italienisches Event-Catering ab 25€ – STORIA" → „Catering München – Preise ab 25€,
+      Hochzeit & Events \| STORIA" (Preis-Anker „ab 25€" erhalten), H1 „Catering München –
+      Italienisches Event-Catering vom STORIA" → „Catering München für Hochzeit, Events &
+      Firmenfeiern – STORIA", H2 „Catering für jeden Anlass" → „Hochzeits-Catering & Event-Catering
+      München" + Absatz darunter um „Hochzeit" ergänzt (deckte die neue Überschrift vorher nicht
+      explizit ab, Gemini-Regel 3). Neue FAQ-Frage „Was kostet Catering in München?" ergänzt
+      (zitiert nur bestehende Paket-Preise aus „Unsere Catering-Pakete": 25/30/35/55/12 € p.P.,
+      keine neuen Zahlen). **Tech-Debt-Konsolidierung** (selber Commit): `Catering.tsx` liest Title/
+      Description/H1 jetzt aus `t.pages.catering.title/.description/.h1` (`src/translations/de.ts`)
+      statt Hardcode — vorher toter Key, jetzt angebunden. Description dabei unverändert 1:1
+      übernommen (keine Copy-Änderung, nur Migration). en/it/fr haben laut Audit keinen
+      `pages.catering`-Key (Catering ist einsprachig DE, verifiziert: `pages.catering` fehlt in
+      allen drei Dateien) — keine neuen EN/IT/FR-Keys angelegt. **Search-Intent-Check** (WebSearch,
+      12.09.2026): „catering münchen preise" und „hochzeit catering münchen" — anders als A1/A2
+      dominieren hier **einzelne Catering-Anbieter** (Da Baffo, LEKKEREI, Steinmaier, UNIKORN,
+      Aurich, Schumacher, eventcatering-muenchen), keine Aggregatoren/Listicles — On-Page-Fix hat
+      hier strukturell bessere Erfolgschancen als bei A1/A2.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1/A2-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/pages/Catering.tsx` (+14/-9) und
+      `src/translations/de.ts` (+6/-2, `t.pages.catering.title/.h1/.description`) — keine
+      JSX-Struktur außer den Text-Ersetzungen, keine Formular-Dateien.
+      ✓ 2026-09-12 · Prerendered `dist/catering/index.html` geprüft: `<title>` „Catering München –
+      Preise ab 25€, Hochzeit & Events \| STORIA", `<h1>` „Catering München für Hochzeit, Events &
+      Firmenfeiern – STORIA", H2 „Hochzeits-Catering & Event-Catering München" und FAQ „Was kostet
+      Catering in München?" vorhanden; meta description/og:description/twitter:description
+      unverändert identisch zur vorherigen Live-Version (nur Quelle migriert, kein Copy-Diff).
 - [ ] **A4** EN Best Italian Restaurant Munich (`en/best-italian-restaurant-munich/`) — H1/H2
       anpassen, Title bleibt unverändert (KONZEPT § A4).
       Beweis: `npm run build`/`lint` grün + `git diff` zeigt nur `src/translations/en.ts`
