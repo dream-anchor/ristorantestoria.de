@@ -63,6 +63,12 @@ RewriteRule ^mittagsmenu/?$ /mittags-menu/ [R=301,L]
 RewriteRule ^busreisen/?$ /reisegruppen/ [R=301,L]
 RewriteRule ^weihnachtsmenues/?$ /besondere-anlaesse/weihnachtsmenue/ [R=301,L]
 RewriteRule ^silvesterparty/?$ /besondere-anlaesse/silvester/ [R=301,L]
+# Silvester-Konsolidierung K1 (12.09.2026): Standalone-Route abgeschaltet, Pillar hat mehr
+# Google-Vertrauen (25x Impressionen, KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md § 2).
+RewriteRule ^silvester-muenchen/?$ /besondere-anlaesse/silvester/ [R=301,L]
+RewriteRule ^en/new-years-eve-munich/?$ /en/special-occasions/new-years-eve/ [R=301,L]
+RewriteRule ^it/capodanno-monaco/?$ /it/occasioni-speciali/capodanno/ [R=301,L]
+RewriteRule ^fr/nouvel-an-munich/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]

@@ -53,7 +53,6 @@ import ItalienischesRestaurantMuenchen from "./pages/seo/ItalienischesRestaurant
 import ItalienerHauptbahnhofMuenchen from "./pages/seo/ItalienerHauptbahnhofMuenchen";
 import HochzeitsfeierMuenchen from "./pages/seo/HochzeitsfeierMuenchen";
 import ValentinstagMuenchen from "./pages/seo/ValentinstagMuenchen";
-import SilvesterMuenchen from "./pages/seo/SilvesterMuenchen";
 import WeihnachtenMuenchen from "./pages/seo/WeihnachtenMuenchen";
 import ReisegruppenPage from "./pages/seo/ReisegruppenPage";
 import ReisegruppenDankePage from "./pages/seo/ReisegruppenDankePage";
@@ -91,7 +90,6 @@ const getDehydratedState = () => {
 
 // Standalone wrappers for seasonal SEO pages (flat URLs)
 const ValentinstagMuenchenStandalone = () => <ValentinstagMuenchen standalone />;
-const SilvesterMuenchenStandalone = () => <SilvesterMuenchen standalone />;
 const WeihnachtenMuenchenStandalone = () => <WeihnachtenMuenchen standalone />;
 
 // Route configuration with components
@@ -136,7 +134,6 @@ const routeComponents: Record<string, React.ComponentType> = {
   "italiener-hauptbahnhof-muenchen": ItalienerHauptbahnhofMuenchen,
   "hochzeitsfeier-muenchen": HochzeitsfeierMuenchen,
   "valentinstag-muenchen": ValentinstagMuenchenStandalone,
-  "silvester-muenchen": SilvesterMuenchenStandalone,
   "weihnachten-muenchen": WeihnachtenMuenchenStandalone,
   "reisegruppen-muenchen": ReisegruppenPage,
   "faq": FAQ,
