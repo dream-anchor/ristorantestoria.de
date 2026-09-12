@@ -161,6 +161,19 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
       „Firmenfeier München – Feiern im STORIA Maxvorstadt", erstes `<h2>` „Firmenfeier München –
       Ihre Betriebsfeier im STORIA" vorhanden, „Betriebsfeier" erscheint jetzt 3× auf der Seite
       (Hero-Subtitle, neues H2, neuer introP1-Zusatz).
+      ⚠ **Prozess-Abweichung (Hauptfenster, 12.09.2026):** B1 ist entgegen der geplanten
+      „ein PR je Einheit"-Bündelung bereits **vorzeitig live** — nicht erst zusammen mit B2–B4.
+      Ursache: Hauptfenster und B1-Subagent teilten sich dasselbe Arbeitsverzeichnis (kein
+      `EnterWorktree`); ein separater Doku-Nachlauf-Commit (Einheit-A-Merge-Checkbox +
+      seo-log-Baseline) wurde versehentlich vom Branch-Kopf `striking-distance-b` (der zu dem
+      Zeitpunkt bereits B1 enthielt) statt von `main` abgezweigt und als PR #68 gemergt — dadurch
+      landete B1 mit auf `main` und deployte automatisch. Live-Check bestätigt korrekten Inhalt.
+      Inhaltlich unproblematisch (B1 war bereits Teil der freigegebenen Einheit-B-Copy, additiv,
+      korrekt getestet) — nur die Bündelung wurde für dieses eine Kriterium gebrochen. Branch
+      `striking-distance-b` bleibt Arbeitsgrundlage für B2–B4; der spätere Merge dieses Branches
+      wird für den B1-Teil ein No-Op sein (Inhalt bereits auf `main`). **Lehre für weitere
+      Iterationen:** bei geteiltem Arbeitsverzeichnis vor jedem `git branch`/`git checkout` im
+      Hauptfenster erst `git branch --show-current` prüfen, nicht von HEAD blind ausgehen.
 - [ ] **B2** Italienisches Restaurant München, DE (`italienisches-restaurant-muenchen/`) — Title/H1/H2
       anpassen (KONZEPT § B2, größte Einzel-Phrase-Lücke im Audit).
 - [ ] **B3** Italiener Königsplatz (`italiener-koenigsplatz/`) — Title/H1/H2 anpassen, „Maxvorstadt"
