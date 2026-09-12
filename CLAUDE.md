@@ -131,6 +131,9 @@ npm run prerender    # SSG für SEO — KRITISCH
 - Slugs: `src/config/slugs.json`
 - Landing Pages: `/besondere-anlaesse/[slug]/`
 - Keyword-Mapping: `docs/seo-strategy.md` (VOR Seitenänderung prüfen!)
+- **SEO-Log (alle Maßnahmen, Analysen, Ergebnisse, Review-Termine): `docs/seo-log.md` — IMMER zu
+  Beginn jeder SEO-Session lesen**, damit nichts doppelt gemacht wird und offene Review-Termine
+  (z. B. Striking-Distance-Ergebnisprüfung) nicht verfallen.
 
 ## Pre-Render-Regeln (MANDATORY)
 - **KEIN `React.lazy()`** für pre-rendered Seiten (nur Admin darf lazy)

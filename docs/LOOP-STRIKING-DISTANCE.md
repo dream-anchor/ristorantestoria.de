@@ -125,9 +125,13 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
 
 ## Einheit A: Branch, Beweis, Merge
 
-- [ ] Branch `striking-distance-a` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
+- [x] Branch `striking-distance-a` gepusht, PR erstellt, Diff gegengelesen, gemergt. Live-Stichprobe
       nach Deploy (Title/H1 je Seite per `curl -s` oder Browser-Check, sobald `chrome-devtools`-MCP
       verbunden ist — sonst `curl` + Sichtprüfung wie im Vorgänger-Loop).
+      ✓ 2026-09-12 · PR #67 erstellt, Diff im Hauptfenster gegengelesen (nur String-Literale,
+      Preis-Anker/Fakten erhalten, keine Formular-Dateien) → `gh pr merge 67 --squash
+      --delete-branch` → Merge-Commit `d4ef17b` auf `main`. Deploy-Workflow „Deploy Lovable SSG to
+      IONOS (SFTP)" ausgelöst (Run 34709812407), Live-Stichprobe folgt nach Abschluss.
       PR erstellt: https://github.com/dream-anchor/ristorantestoria.de/pull/67, Merge steht noch
       aus (Hauptfenster).
 
@@ -135,7 +139,8 @@ KONZEPT § A1–A4 wie vorgelegt, inkl. Gemini-Review-Korrekturen additiv/Steino
 
 ## Einheit B — mittlere Cluster
 
-**Vor B1–B4: Copy-Tabelle aus KONZEPT § B1–B4 im Chat abstimmen.**
+**Freigegeben:** Antoine, 12.09.2026, „Ja, setz alles im /loop um" — gilt für B1–B4 (Copy-Tabelle
+wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
 
 - [ ] **B1** Firmenfeier München (`firmenfeier-muenchen/`) — nur H2 anpassen, Title/H1 unverändert
       (KONZEPT § B1).

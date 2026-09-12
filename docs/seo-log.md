@@ -81,6 +81,89 @@ Vor jeder Session lesen, damit nichts doppelt gemacht wird.
 
 ---
 
+## 2026-09 — September
+
+### Striking-Distance-Audit + KONZEPT/LOOP (12.09.2026)
+
+**Auslöser:** Antoine legte frischen GSC-Export vor (`ristorantestoria.de-Performance-on-Search-
+2026-09-12.zip`, 92-Tage-Fenster) mit der Frage, ob die „Striking-Distance"-Theorie (Seite-2-
+Keywords Pos. 8–20 durch Title/H2/Content-Ergänzung auf Seite 1 heben) hier greift.
+
+**Was analysiert wurde:**
+- `Suchanfragen.csv` (1.000 Queries) + `Seiten.csv` (163 URLs) ausgewertet, Filter Pos. 7–20 /
+  Impr. ≥ 25 → 331 Rohkandidaten.
+- 15 wichtigste SEO-Landingpages live im Repo gelesen (Title/H1/H2-Ist-Zustand gegen die Queries
+  abgeglichen) — keine Annahme aus dem CSV allein übernommen.
+- Externe Zweitmeinung (Gemini) zur Striking-Distance-Methodik eingeholt und gegengeprüft, nicht
+  blind übernommen: additive statt ersetzende Title-Änderungen (2 Vorschläge korrigiert), Search-
+  Intent-Check per Web-Suche für die 2 größten Cluster (Ergebnis: beide SERPs Aggregator-dominiert
+  — TripAdvisor/TheFork/Falstaff/OpenTable, kein Einzelrestaurant sichtbar → Erwartung gedämpft,
+  Fix trotzdem durchgeführt, da kostenlos/risikofrei).
+
+**Wichtigste Erkenntnisse:**
+- Systematisches Muster: auf praktisch jeder Zielseite fehlt die exakte Kopf-Keyword-Phrase in
+  Title/H1/H2 wegen Wortstellung („Pizza München" statt „Beste Pizza München", „Restaurant **in**
+  München" statt „Restaurant München") — kein Einzelfall, ein wiederkehrender Root Cause.
+  Auffälligster Fall: `italienisches-restaurant-muenchen/` rankt im Schnitt Pos. 6,95, für das
+  exakte Kopf-Keyword selbst aber nur Pos. 20,88.
+  Zweitauffälligster Fall: die IT-Seite `it/miglior-ristorante-italiano-monaco/` matcht bei 1.145
+  Impr. keines der drei Top-Keywords.
+- Adressierbares Volumen nach Noise-Bereinigung: **~23.400 Impr./92 Tage über 12 Cluster**
+  (ausgeschlossen: WM-2026-Queries — Finale war 19.07.2026, ~2 Monate vorbei —, Marken-
+  verwechslungen „Storia Stadeln"/„La Storia"/„La Famiglia München" — andere Unternehmen —,
+  Near-me-Queries — GBP-Thema, nicht On-Page).
+- **Wichtige Korrektur während der Umsetzung (Antoine, 12.09.2026): STORIA hat einen Steinofen,
+  keinen Holzofen (offene Flamme) — nicht austauschbar.** Ursprünglicher Plan, „Holzofenpizza
+  München" (149+209 Impr.) als Synonym-Lücke zu schließen, zurückgezogen — wäre eine falsche
+  Tatsachenbehauptung gewesen. Für künftige Pizza-/Ofen-bezogene Texte: **immer Steinofen, nie
+  Holzofen.**
+- Mögliche Kannibalisierung entdeckt (noch nicht geklärt): `silvester-muenchen/` und
+  `besondere-anlaesse/silvester/` sind dieselbe Komponente mit unterschiedlichem Title/H1 für
+  denselben Intent, beide aktuell `isActive=false`. Analog bei Weihnachten. Klärung mit Antoine
+  aussteht (siehe „Offene Maßnahmen" unten, Kriterium D1).
+
+**Dokumente (Bauplan bleibt bestehen, nicht duplizieren):**
+- `docs/striking-distance-audit-2026-09-12.md` — Rohanalyse, Theorie-Einordnung, Noise-Liste.
+- `docs/KONZEPT-STRIKING-DISTANCE.md` — alle 12 Kriterien mit Datei/Zeile, Baseline-Zahlen,
+  konkretem Vor-/Nach-Text.
+- `docs/LOOP-STRIKING-DISTANCE.md` — Umsetzungsstand (Checkboxen + Beweiszeilen, lebendes
+  Dokument — dort steht der aktuelle Fortschritt, hier im Log nur die Zusammenfassung).
+- `.claude/commands/striking-distance-loop.md` — Subagenten-Protokoll für die Umsetzung.
+
+**Umsetzungsstand (12.09.2026):** Einheit A (4 Kriterien, größte Volumen-Cluster) von Antoine
+freigegeben („Ja, setz alles um"). A1 (EN Romantic Dinner) umgesetzt und committet (Branch
+`striking-distance-a`, noch nicht gemergt/live) — Details/Beweiszeile in
+`docs/LOOP-STRIKING-DISTANCE.md`. A2–A4 sowie Einheiten B/C/D zum Zeitpunkt dieses Log-Eintrags
+noch offen — aktuellen Stand immer in `docs/LOOP-STRIKING-DISTANCE.md` prüfen, nicht hier (dieser
+Log-Eintrag wird nicht laufend nachgepflegt, nur bei Abschluss/Review aktualisiert).
+
+**Baseline für die Erfolgsmessung** (GSC-Export 12.09.2026, 92-Tage-Fenster — vollständige Tabelle
+mit allen Einzel-Queries in `docs/KONZEPT-STRIKING-DISTANCE.md` § 3):
+
+| Cluster | Zielseite | Impr. (Top-Query) | Pos. (Top-Query) |
+|---|---|---|---|
+| Romantic Dinner (EN) | `en/romantic-dinner-munich/` | 4.864 (`best restaurants romantic`) | 9,28 |
+| Pizza München | `pizza-muenchen/` | 1.751 (`beste pizza münchen`) | 9,79 |
+| Catering | `catering/` | 474 (`hochzeit catering münchen`) | 17,23 |
+| Best Italian Restaurant (EN) | `en/best-italian-restaurant-munich/` | 734 (`best italian restaurant munich`) | 8,90 |
+| Firmenfeier | `firmenfeier-muenchen/` | 1.144 (`firmenfeier münchen`) | 15,12 |
+| Italienisches Restaurant (DE) | `italienisches-restaurant-muenchen/` | 81 (`italienisches restaurant münchen`) | 20,88 |
+| Italiener Königsplatz | `italiener-koenigsplatz/` | 265 (`italiener maxvorstadt`) | 9,50 |
+| Italiener Hauptbahnhof | `italiener-hauptbahnhof-muenchen/` | 210 (`münchen hauptbahnhof essen`) | 12,46 |
+| Neapolitanische Pizza | `neapolitanische-pizza-muenchen/` | 1.083 (`neapolitanische pizza münchen`) | 10,23 |
+| Aperitivo | `aperitivo-muenchen/` | 207 (`aperitivo bar münchen`) | 11,02 |
+| Geburtstagsfeier | `geburtstagsfeier-muenchen/` | 206 (`geburtstag feiern restaurant münchen`) | 7,30 |
+| IT Ristorante | `it/miglior-ristorante-italiano-monaco/` | 585 (`ristoranti italiani a monaco di baviera`) | 13,07 |
+
+**Review-Termin: zwischen 07.10.2026 und 04.11.2026** (4–8 Wochen nach dem letzten Einheit-Deploy —
+Datum beim Deploy jeder Einheit in `docs/LOOP-STRIKING-DISTANCE.md` fortschreiben, hier erst bei
+der tatsächlichen Review nachtragen). **Review-Vorgehen:** neuen GSC-Export ziehen (gleiche zwei
+CSVs, gleiches Verfahren), obige Tabelle mit denselben Queries neu abfragen, Delta eintragen. Bei
+Queries ohne Bewegung: nicht nachjustieren (Gefahr Keyword-Stuffing), als „braucht Autorität statt
+Text" einordnen (siehe KONZEPT § „Erfolgsmessung").
+
+---
+
 ## Monatliche Ziele & Review
 
 ### Juni 2026 — Ziele (bis 07.06.2026 messen)
@@ -122,4 +205,5 @@ Vor jeder Session lesen, damit nichts doppelt gemacht wird.
 - **Aktueller Status:** Google Sandbox-Phase läuft aus (~Mai–Aug 2026 → Positionssprünge erwartet)
 - **Ziel:** Top-3 Local Pack für "Italienisches Restaurant München" / "Italiener München"
 - **Branded Keywords:** ranken bereits auf Pos 1–2 (storia münchen, storia munich etc.)
-- **Nächste GSC-Review:** Juni 2026 (Vergleich mit Mai-Werten)
+- **Nächste GSC-Review:** 07.10.–04.11.2026 (Striking-Distance-Ergebnis, Vergleich mit
+  12.09.2026-Baseline — siehe § „2026-09 — September" oben)
