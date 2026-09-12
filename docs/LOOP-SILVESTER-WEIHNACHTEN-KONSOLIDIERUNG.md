@@ -132,8 +132,19 @@ Live-Menü, die bisher nur die Pillar-Variante hatte) — kein Inhalt geht verlo
 
 ## K2: Branch, Beweis, Merge
 
-- [ ] Branch `silvester-weihnachten-k2` gepusht, PR erstellt, Diff gegengelesen, gemergt.
-      Live-Stichprobe nach Deploy.
+- [x] Branch `silvester-weihnachten-k2` gepusht, PR #79 erstellt. Subagenten-Turn brach durch
+      Verbindungsabbruch (ECONNRESET) mitten in der Bestätigung ab — Commit `e61e54b` war laut
+      `git log`/`git status` bereits sauber vorhanden, im Hauptfenster unabhängig nachverifiziert:
+      Diff vollständig gegengelesen (13 Dateien, inkl. neuem Hook, Komponentenumbau,
+      Supabase-Edge-Function), `npm run build` im Hauptfenster selbst erneut ausgeführt +
+      per separatem `git worktree` gegen `main` verglichen (165 → 161 Routen, exakt −4),
+      Prerender-HTML auf Event-JSON-LD + fehlenden Teaser-Text geprüft. Danach PR gepusht/erstellt,
+      gemergt (`gh pr merge 79 --squash --delete-branch` → Fast-Forward `484d700`), Deploy
+      abgewartet, Live-Stichprobe: alle 4 Sprachvarianten Single-Hop 301→200, Event-JSON-LD live
+      auf `weihnachten-muenchen/`, kein Teaser-Text mehr.
+      **Hinweis an Antoine (im Chat mitgeteilt):** die Supabase-Edge-Function-Änderung
+      (`notify-seasonal-signups`) ist im Repo, wirkt aber erst nach separatem Lovable-Deploy —
+      nicht Teil des automatischen SFTP-Builds.
 
 ---
 
