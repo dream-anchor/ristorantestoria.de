@@ -162,18 +162,44 @@ CSVs, gleiches Verfahren), obige Tabelle mit denselben Queries neu abfragen, Del
 Queries ohne Bewegung: nicht nachjustieren (Gefahr Keyword-Stuffing), als „braucht Autorität statt
 Text" einordnen (siehe KONZEPT § „Erfolgsmessung").
 
-**Umsetzungsstand, Ende Session 12.09.2026:** Einheiten A+B+C vollständig gemergt, deployt, live
-verifiziert (12 Kriterien, PR #67/#70/#73). D1 (Silvester/Weihnachten/Valentinstag-Struktur) mit
-Antoine geklärt: bestätigte Dublette (historisch gewachsen — „Besondere Anlässe"-Pillar zuerst,
-später eigenständige Landingpages), Konsolidierung gewünscht. Deep-Dive-Analyse als Senior-SEO+GEO-
-Rolle durchgeführt → `docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md`: Kernbefund, alle drei
-Paare (Silvester/Weihnachten/Valentinstag) sind technisch **dieselbe Komponente** an zwei URLs
-(`standalone`-Prop), Intro/Gründe/Timeline/FAQ bereits wortidentisch — kein Content-Merge nötig, nur
-301-Redirect der schwächeren Standalone-URL auf die Pillar-URL (bessere interne Verlinkung + Event-
-JSON-LD + Live-Menü). Nebenbefunde: Silvester-JSON-LD-Preis widerspricht sichtbarem Seiteninhalt
-(65,90/99€ vs. 99–150€), `SeasonalBanner.tsx` verlinkt Silvester-CTA fälschlich auf
-`weihnachtsfeier-muenchen`. **Umsetzung noch nicht freigegeben** — Freigabe-Frage steht im Chat,
-siehe KONZEPT § 7. Nächste Session: dort weiterlesen, nicht neu recherchieren.
+**Umsetzungsstand, 12.–13.09.2026 (Session abgeschlossen):** Einheiten A+B+C vollständig gemergt,
+deployt, live verifiziert (12 Kriterien, PR #67/#70/#73).
+
+**D1/D2 — Silvester/Weihnachten/Valentinstag-Konsolidierung:** bestätigte Dublette (historisch
+gewachsen — „Besondere Anlässe"-Pillar zuerst, später eigenständige Landingpages). Deep-Dive als
+Senior-SEO+GEO-Rolle → `docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md`: alle drei Paare sind
+technisch dieselbe Komponente an zwei URLs (`standalone`-Prop), Kerntext (Intro/Gründe/Timeline/FAQ)
+bereits identisch — kein Content-Merge auf Textebene nötig. **Korrektur nach Zahlen-Gegenprobe
+(Senior-Data-Analyst-Rolle, auf Antoines Nachfrage):** ursprüngliche Annahme „Pillar gewinnt
+strukturell immer" war für 2 von 3 Paaren falsch — Google bevorzugt bei Weihnachten und Valentinstag
+bereits die flache Standalone-URL (Weihnachten 761 Impr. vs. praktisch 0; Valentinstag 1.452 vs. 418
+Impr., zusätzlich bessere Position). Finale Entscheidung **pro Anlass einzeln**: Silvester→Pillar,
+Weihnachten/Valentinstag→Standalone. Bei Weihnachten/Valentinstag musste dafür die überlebende
+Standalone-Seite technisch aufgewertet werden (Event/Menu-JSON-LD + Live-Menü-Anbindung per neuem
+Hook `useSeasonalMenuData` — vorher pillar-exklusiv), damit nichts verloren geht.
+
+**Umgesetzt und live (K1–K3, PR #77/#79/#81):**
+- K1 Silvester: reiner 301-Redirect Standalone→Pillar + JSON-LD-Preiswiderspruch behoben
+  (65,90/99€ → 99/150€, jetzt konsistent zum sichtbaren Seiteninhalt).
+- K2 Weihnachten: Pillar→Standalone-Redirect + Komponenten-Aufwertung (neuer Hook
+  `src/hooks/useSeasonalMenuData.ts`), Nav/Cross-Links umgebogen.
+- K3 Valentinstag: identisches Muster wie K2, inkl. Bereinigung der alten P2.1-Legacy-Redirects
+  (Vorgänger-Loop) auf Single-Hop statt Kette.
+- Alle 12 betroffenen URLs (3 Anlässe × 4 Sprachen) live per `curl -IL` auf Single-Hop-301
+  verifiziert, Event-JSON-LD/Live-Menü-Content live bestätigt, Gegenprobe Ostern/generische
+  Pillar-Route unverändert funktionsfähig.
+- **Falsch-positiv aus dem KONZEPT:** der dort vermutete `SeasonalBanner.tsx`-Bug (Silvester-CTA
+  zeigt auf `weihnachtsfeier-muenchen`) existierte nicht — zwei separate, korrekte Buttons. Nicht
+  angefasst.
+- **Offen, nicht Teil dieser Session:** die Supabase-Edge-Function-Änderung
+  (`notify-seasonal-signups`, korrigierte Benachrichtigungs-Mail-URLs) liegt im Repo, wirkt aber
+  erst nach separatem Lovable-Deploy — Antoine im Chat informiert.
+- **Bewusst zurückgestellt (GEO-Verbesserung, kein Blocker):** sprachabhängige JSON-LD-Übersetzung
+  (Event-Schema ist auf EN/IT/FR-Aufrufen weiterhin hartcodiert deutsch).
+
+**Review-Termin (gemeinsam mit Striking-Distance, siehe oben): 07.10.–04.11.2026** — zusätzlich zur
+dortigen Tabelle prüfen, ob sich Valentinstags gebündeltes Signal (vorher Kannibalisierung auf zwei
+URLs) in einer besseren Position niederschlägt.
 
 ---
 

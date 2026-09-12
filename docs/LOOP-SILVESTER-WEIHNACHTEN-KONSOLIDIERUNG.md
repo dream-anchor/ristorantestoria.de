@@ -220,10 +220,21 @@ Live-Menü, die bisher nur die Pillar-Variante hatte) — kein Inhalt geht verlo
 
 ## K3: Branch, Beweis, Merge
 
-- [ ] Branch `silvester-weihnachten-k3` gepusht, PR erstellt, Diff gegengelesen, gemergt.
-      Live-Stichprobe nach Deploy.
-      PR: https://github.com/dream-anchor/ristorantestoria.de/pull/81 (noch offen, noch nicht
-      gemergt — Merge + Live-Verifikation erfolgen im Hauptfenster).
+- [x] Branch `silvester-weihnachten-k3` gepusht, PR #81 erstellt, im Hauptfenster gegengelesen
+      (14 Dateien, exakt dasselbe Muster wie K2 — inkl. korrekt umgebogener Legacy-Redirects aus
+      dem Vorgänger-Loop P2.1, kein Redirect-Hop mehr), unabhängig per `npm run build` + Prerender-
+      Content-Check nachverifiziert (Event-JSON-LD live, kein Teaser-Text, Pillar-URL nicht mehr im
+      Build). `gh pr merge 81 --squash --delete-branch` → Fast-Forward `8bb32e5` auf `main`.
+      ✓ 2026-09-12 · Deploy abgeschlossen (Run 34723006499). Live-Stichprobe: alle 4
+      Sprachvarianten (DE/EN/IT/FR) Single-Hop 301→200 auf die neue Standalone-URL, inkl. der
+      beiden P2.1-Legacy-Redirects (`en/special-occasions/valentines-day-menu`,
+      `it/besondere-anlaesse/valentinstag-menue`) jetzt ebenfalls Single-Hop statt Kette.
+      Event-JSON-LD live auf `valentinstag-muenchen/`, kein Teaser-Text mehr. Gegenprobe: K1
+      (Silvester) und K2 (Weihnachten) weiterhin unverändert live und funktionsfähig.
+
+**K1–K3 vollständig abgehakt, alle drei PRs gemergt und live verifiziert.**
+
+**SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG VOLLSTÄNDIG ABGESCHLOSSEN**
 
 ---
 
