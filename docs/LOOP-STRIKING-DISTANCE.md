@@ -267,7 +267,8 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
 
 ## Einheit C — kleinere Cluster + IT-Markt
 
-**Vor C1–C4: Copy-Tabelle aus KONZEPT § C1–C4 im Chat abstimmen.**
+**Freigegeben:** Antoine, 12.09.2026, „Ja, setz alles im /loop um" — gilt für C1–C4 (Copy-Tabelle
+wie im Chat vorgelegt, siehe KONZEPT § C1–C4).
 
 - [ ] **C1** Neapolitanische Pizza München (`neapolitanische-pizza-muenchen/`) — nur „beste" in H1
       ergänzen. **Kein** Holzofen-Synonym (Korrektur 12.09.2026) (KONZEPT § C1).
