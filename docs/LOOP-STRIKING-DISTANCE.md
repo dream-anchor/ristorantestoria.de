@@ -216,8 +216,28 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
       `<h1>` „Italiener Königsplatz München – Ihr Restaurant in der Maxvorstadt", H2 „Restaurant
       Königsplatz München – Warum STORIA?" vorhanden; alter H2-String „Warum STORIA am
       Königsplatz?" nicht mehr im Output (0 Treffer).
-- [ ] **B4** Italiener Hauptbahnhof (`italiener-hauptbahnhof-muenchen/`) — nur H2 anpassen, Title/H1
-      bewusst unverändert (KONZEPT § B4).
+- [x] **B4** Italiener Hauptbahnhof (`italiener-hauptbahnhof-muenchen/`) — nur H2 anpassen, Title/H1
+      bewusst unverändert (KONZEPT § B4). H2 (`introTitle`) „Ihr Italiener am Münchner Hauptbahnhof"
+      → „Restaurant am Hauptbahnhof München – Italienisch essen bei STORIA" (deckt „münchen
+      hauptbahnhof essen"/„restaurant hauptbahnhof münchen"/„restaurants münchen hauptbahnhof" in
+      einer Überschrift ab). `introP1` „Das STORIA ist nur 5 Gehminuten entfernt" → „Unser
+      Restaurant STORIA ist nur 5 Gehminuten entfernt" (Absatz trug „Restaurant"-Bezug vorher nicht
+      explizit, additiv ergänzt, keine neuen Fakten). Title/H1 unverändert (Marke „Italiener am
+      Hauptbahnhof" rankt bereits Pos. 3,79 für „italiener münchen hauptbahnhof", Kannibalisierung
+      vermeiden).
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B3-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+2/-2,
+      `t.seo.italienerHauptbahnhof.introTitle` + `.introP1`) — keine JSX-Struktur, keine
+      Formular-Dateien, Title/H1 nicht angefasst.
+      ✓ 2026-09-12 · Prerendered `dist/italiener-hauptbahnhof-muenchen/index.html` geprüft:
+      `<title>` unverändert „Italiener am Hauptbahnhof München – 5 Min. zu Fuß | STORIA", `<h1>`
+      unverändert „Italiener am Hauptbahnhof München – STORIA", H2 „Restaurant am Hauptbahnhof
+      München – Italienisch essen bei STORIA" vorhanden; alter H2-String „Ihr Italiener am Münchner
+      Hauptbahnhof" nicht mehr im Output (0 Treffer); introP1 enthält „Unser Restaurant STORIA".
 
 ## Einheit B: Branch, Beweis, Merge
 
