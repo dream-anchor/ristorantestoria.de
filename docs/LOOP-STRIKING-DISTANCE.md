@@ -270,8 +270,28 @@ wie im Chat vorgelegt, siehe KONZEPT § B1–B4).
 **Freigegeben:** Antoine, 12.09.2026, „Ja, setz alles im /loop um" — gilt für C1–C4 (Copy-Tabelle
 wie im Chat vorgelegt, siehe KONZEPT § C1–C4).
 
-- [ ] **C1** Neapolitanische Pizza München (`neapolitanische-pizza-muenchen/`) — nur „beste" in H1
-      ergänzen. **Kein** Holzofen-Synonym (Korrektur 12.09.2026) (KONZEPT § C1).
+- [x] **C1** Neapolitanische Pizza München (`neapolitanische-pizza-muenchen/`) — nur H1 additiv
+      angepasst (KONZEPT § C1): „Neapolitanische Pizza München – Steinofen 400°C im STORIA" →
+      „Beste Neapolitanische Pizza München – Steinofen 400°C im STORIA" (fügt „beste" ein, deckt
+      „beste neapolitanische pizza münchen", 222 Impr./Pos. 11,98). Title und H2-Block unverändert
+      (Kopf-Keyword „neapolitanische pizza münchen" bereits vorhanden, kein struktureller Fix
+      nötig). **Kein** Holzofen-Synonym eingeführt (Korrektur 12.09.2026, STORIA hat nachweislich
+      einen Steinofen, keinen Holzofen) — `holzofenpizza münchen` (149 Impr.) bleibt unadressiert,
+      wie im KONZEPT vermerkt.
+      ✓ 2026-09-12 · `npm run build` → Exit 0, Prerendering 169/169 Success, 0 Errors (identischer
+      vorbestehender 401-Hinweis beim Supabase-Dynamic-Slug-Fetch/Sitemap, unabhängig von dieser
+      Änderung).
+      ✓ 2026-09-12 · `npm run lint` → 728 problems (652 errors/76 warnings), identisch zur
+      A1–A4/B1–B4-Baseline — 0 neue Probleme durch diesen Commit.
+      ✓ 2026-09-12 · `git diff --stat` → nur `src/translations/de.ts` (+1/-1,
+      `t.seo.neapolitanPizza.heroTitle`) — keine JSX-Struktur, keine Formular-Dateien, kein
+      „Holzofen" im Diff.
+      ✓ 2026-09-12 · Prerendered `dist/neapolitanische-pizza-muenchen/index.html` geprüft: `<h1>`
+      „Beste Neapolitanische Pizza München – Steinofen 400°C im STORIA" vorhanden; `<title>`/
+      og:title/twitter:title unverändert „Neapolitanische Pizza München – 90 Sek. bei 400 °C |
+      STORIA"; 0 Treffer für „Holzofen" im gesamten Output.
+      Commit `18ef0ee` auf Branch `striking-distance-c` (kein Push, kein PR — C2–C4 stehen noch
+      aus, Bündelung „ein PR je Einheit").
 - [ ] **C2** Aperitivo München (`aperitivo-muenchen/`) — nur H2 anpassen (KONZEPT § C2).
 - [ ] **C3** Geburtstagsfeier München DE (`geburtstagsfeier-muenchen/`) + EN
       (`en/birthday-party-munich/`) — DE: H2 anpassen (KONZEPT § C3). EN: **erst Title/H1/H2 live
