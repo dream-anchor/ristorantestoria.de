@@ -162,6 +162,19 @@ CSVs, gleiches Verfahren), obige Tabelle mit denselben Queries neu abfragen, Del
 Queries ohne Bewegung: nicht nachjustieren (Gefahr Keyword-Stuffing), als „braucht Autorität statt
 Text" einordnen (siehe KONZEPT § „Erfolgsmessung").
 
+**Umsetzungsstand, Ende Session 12.09.2026:** Einheiten A+B+C vollständig gemergt, deployt, live
+verifiziert (12 Kriterien, PR #67/#70/#73). D1 (Silvester/Weihnachten/Valentinstag-Struktur) mit
+Antoine geklärt: bestätigte Dublette (historisch gewachsen — „Besondere Anlässe"-Pillar zuerst,
+später eigenständige Landingpages), Konsolidierung gewünscht. Deep-Dive-Analyse als Senior-SEO+GEO-
+Rolle durchgeführt → `docs/KONZEPT-SILVESTER-WEIHNACHTEN-KONSOLIDIERUNG.md`: Kernbefund, alle drei
+Paare (Silvester/Weihnachten/Valentinstag) sind technisch **dieselbe Komponente** an zwei URLs
+(`standalone`-Prop), Intro/Gründe/Timeline/FAQ bereits wortidentisch — kein Content-Merge nötig, nur
+301-Redirect der schwächeren Standalone-URL auf die Pillar-URL (bessere interne Verlinkung + Event-
+JSON-LD + Live-Menü). Nebenbefunde: Silvester-JSON-LD-Preis widerspricht sichtbarem Seiteninhalt
+(65,90/99€ vs. 99–150€), `SeasonalBanner.tsx` verlinkt Silvester-CTA fälschlich auf
+`weihnachtsfeier-muenchen`. **Umsetzung noch nicht freigegeben** — Freigabe-Frage steht im Chat,
+siehe KONZEPT § 7. Nächste Session: dort weiterlesen, nicht neu recherchieren.
+
 ---
 
 ## Monatliche Ziele & Review
