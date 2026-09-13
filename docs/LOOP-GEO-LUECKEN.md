@@ -261,11 +261,13 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
 
 ## V4 — Messpunkte setzen
 
-- [ ] **V4.1** Baseline-Tabelle (Cluster-Queries, Positionen, Impressionen aus diesem Loop) in
-      `docs/seo-log.md` einfrieren — Vergleichsbasis für die beiden Review-Termine.
-- [ ] **V4.2** Review-Termine eintragen: Anfang Dezember 2026 (Weihnachtssaison-Peak) und Anfang
-      März 2027 (erste echte Valentinssaison dieser Seite) — mit denselben GSC-API-Abfragen
-      (Query+Page-Dimension, siehe Plan-Datei) wiederholbar dokumentieren.
+- [x] ~~**V4.1** Baseline-Tabelle in `docs/seo-log.md` einfrieren~~ — **erledigt 13.09.2026**,
+      Abschnitte „GEO-Lücken-Loop V2"/„V3" mit den GSC-Query-Zahlen vor der Änderung angelegt.
+      Nebenbei einen veralteten Jahresziel-Eintrag korrigiert (`/weihnachtsfeier-muenchen/ live`
+      stand noch als „Offen", obwohl seit E4.2/PR #93 live).
+- [x] ~~**V4.2** Review-Termine eintragen~~ — **erledigt 13.09.2026**, Tabelle „GEO-Lücken-Loop —
+      Review-Termine" in `docs/seo-log.md` mit Dezember 2026 und März 2027 samt konkreten
+      Prüffragen je Termin.
 
 ## V4: Branch, Beweis, Merge
 

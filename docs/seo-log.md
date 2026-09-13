@@ -217,6 +217,38 @@ toten internen Links darauf repariert. **Offen:** falls die Seite künftig als e
 weitergeführt werden soll (statt dauerhaft nur Redirect-Ziel), die Supabase-Zeile über Lovable
 prüfen/reaktivieren lassen.
 
+### GEO-Lücken-Loop V2 — Weihnachtsfeier gewinnt B2B-Cluster (13.09.2026)
+
+Umgesetzt: PR #103. GSC-Baseline (Query+Page-Dimension, Fenster 11.06.–10.09.2026) vor der
+Änderung, zum Vergleich bei der Dezember-Review (siehe unten):
+
+| Query | Impr. | `firmenfeier-muenchen` | `weihnachtsfeier-muenchen` |
+|---|---|---|---|
+| firmenweihnachtsfeier münchen | 109 | Pos. 52,3 | nicht vertreten |
+| firmen weihnachtsfeier münchen | 47 | Pos. 39,0 | nicht vertreten |
+| weihnachtsfeier münchen restaurant | 230 | Pos. 27,9 (52 Impr.) | **Pos. 13,2 (177 Impr., 2 Klicks)** |
+| restaurant weihnachtsfeier münchen | 106 | Pos. 29,9 (56 Impr.) | Pos. 36,6 (48 Impr., 1 Klick) |
+| weihnachtsfeier münchen | 75 | Pos. 54,9 (52 Impr.) | Pos. 40,4 (23 Impr.) |
+
+Maßnahme: Weihnachts-Spezifika aus `firmenfeier-muenchen` reduziert, „Firmenweihnachtsfeier"/
+„Betriebsweihnachtsfeier" auf `weihnachtsfeier-muenchen` ergänzt, GEO nachgerüstet
+(Definition-Lead, TL;DR, „Auf einen Blick", Outbound-Link), Fakten auf `FACTS.weihnachten`/
+`FACTS.capacity` zentralisiert.
+
+### GEO-Lücken-Loop V3 — Valentinstag geschärft (13.09.2026)
+
+Umgesetzt: PR #105. GSC-Baseline vor der Änderung (Fenster 11.06.–10.09.2026):
+`valentinstag-muenchen` ~1.100 Impr., **0 Klicks (CTR 0,00 %)**; bei „romantische restaurants
+münchen" Pos. 50,7 (89 Impr.) gegen `romantisches-dinner-muenchen` Pos. 12,9 (300 Impr., 1 Klick);
+bei „romantisches restaurant münchen" Pos. 44,2 gegen Pos. 11,7; eigenes Volumen „valentinstag
+münchen" 421 Impr. Pos. 19,5 (0 Klicks), „valentinstag menü münchen" 186 Impr. Pos. 15,0 (0 Klicks).
+
+Maßnahme: Romantik-Generika abgegeben (interner Link auf `romantisches-dinner-muenchen`), Title/
+Description auf die beiden Volumen-Queries zugespitzt, GEO nachgerüstet, `Event`→`FoodEvent`,
+kaputte `image`-URL repariert, Preise auf `FACTS.valentinstag` zentralisiert. **V3.3
+(Reservierungsstrecke) bleibt offen** — abhängig von der unbeantworteten Frage, ob am 14.02. à la
+carte serviert wird.
+
 ---
 
 ## Monatliche Ziele & Review
@@ -248,7 +280,24 @@ prüfen/reaktivieren lassen.
 | /aperitivo-muenchen/ Pos <5 | Q3 2026 | ⬜ Offen |
 | "Italiener Maxvorstadt" Pos <5 | Q2 2026 | ⬜ Offen |
 | /pasta-fresca-muenchen/ live | Q2 2026 | ⬜ Offen |
-| /weihnachtsfeier-muenchen/ live | Okt 2026 | ⬜ Offen |
+| ~~/weihnachtsfeier-muenchen/ live~~ | Okt 2026 | ✅ Erledigt — Seite ist seit E4.2 (13.09.2026,
+  PR #93) live, Eintrag war veraltet |
+
+### GEO-Lücken-Loop — Review-Termine (angelegt 13.09.2026)
+
+Baseline-Zahlen für den Vergleich stehen oben unter „GEO-Lücken-Loop V2"/„V3". Beide Termine mit
+derselben GSC-API-Abfrage wiederholbar (Query+Page-Dimension, `sc-domain:ristorantestoria.de`):
+
+| Termin | Fokus | Zu prüfen |
+|---|---|---|
+| **Anfang Dezember 2026** | Weihnachtssaison-Peak | Hat `weihnachtsfeier-muenchen` bei
+  „firmenweihnachtsfeier münchen"/„firmen weihnachtsfeier münchen" jetzt überhaupt eine Position
+  (vorher: nicht vertreten)? Ist der Abstand zu `firmenfeier-muenchen` bei den übrigen
+  Cluster-Queries kleiner geworden? |
+| **Anfang März 2027** | Erste echte Valentinssaison dieser Seite (Februar 2026 existierte sie
+  noch nicht) | Hat sich die CTR von 0,00 % bewegt? Ist die Position bei „valentinstag münchen"/
+  „valentinstag menü münchen" stabil oder besser? Rankt die Seite noch bei den drei
+  Romantik-Generika-Queries, oder ist die Übergabe an `romantisches-dinner-muenchen` sichtbar? |
 
 ---
 
