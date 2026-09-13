@@ -1384,6 +1384,7 @@ const enBase = {
       valentineTitle: "Valentine's Day at STORIA",
       valentineTeaser: "On Valentine's Day we offer a special menu – with exclusive courses, wine pairing and romantic ambiance for an unforgettable evening for two.",
       valentineLinkText: "Discover Valentine's Day at STORIA",
+      candlelightLinkText: "To the Candle-Light Menu",
       // Occasions
       occasionsTitle: "Perfect for Every Romantic Occasion",
       occasion1Title: "💕 First Date",
@@ -3180,6 +3181,8 @@ const enBase = {
       related3Desc: "Stone oven pizza on the terrace",
       related4Title: "\ud83c\udf89 Event Location Munich",
       related4Desc: "Terrace for private celebrations",
+      relatedCandlelightTitle: "🕯️ Candle-Light Dinner",
+      relatedCandlelightDesc: "A candlelit menu for two",
     },
     italienischesRestaurant: {
       seoTitle: "Best Italian Restaurant Munich | Stone-Oven Pizza | STORIA",
@@ -3387,6 +3390,8 @@ const enBase = {
       related3Desc: "Dinner for two",
       related4Title: "\ud83c\udf78 Aperitivo Munich",
       related4Desc: "Italian after-work",
+      relatedCandlelightTitle: "🕯️ Candle-Light Dinner",
+      relatedCandlelightDesc: "A candlelit menu for two",
     },
     pastaFrescaMuenchen: {
       seoTitle: "Fresh Pasta Munich – Homemade at STORIA Maxvorstadt",

@@ -201,21 +201,43 @@ Hook `useSeasonalMenuData` — vorher pillar-exklusiv), damit nichts verloren ge
 dortigen Tabelle prüfen, ob sich Valentinstags gebündeltes Signal (vorher Kannibalisierung auf zwei
 URLs) in einer besseren Position niederschlägt.
 
-### GEO-Lücken-Loop V1 — candlelight-menue 404 (13.09.2026)
+### GEO-Lücken-Loop V1 — candlelight-menue 404, korrigiert (13.09.2026)
 
-**Nebenbefund, kein Code-Fix möglich:** `besondere-anlaesse/candlelight-menue/` (DE + 3
-Sprachvarianten) war eine Supabase-gestützte generische Anlass-Seite (`BesondererAnlass.tsx` →
-`findSeasonalMenuBySlug`, kein Code-Fallback — `candlelight` existiert nicht als Key in
-`src/config/seasonalMenus.ts`). Laut `docs/LOOP-SEO-GSC-AUDIT.md` § P5.1 lief sie am 02.09.2026
-noch nachweislich (200, curl-verifiziert). Heute (13.09.2026) liefert sie 404 in allen 4 Sprachen,
-rankt aber weiterhin bei Google auf Pos. ~5,5 für „candle light dinner münchen"-nahe Anfragen.
-Ursache vermutlich eine deaktivierte/gelöschte Supabase-Zeile — liegt außerhalb des Codes; in
-diesem Projekt laufen Supabase-Änderungen ausschließlich über Lovable, nicht per direktem
-DB-Zugriff. **Sofortmaßnahme umgesetzt (V1.1/V1.2, Branch `geo-luecken-v1`):** 301-Redirect aller 4
-URLs auf `romantisches-dinner-muenchen` (rankt für dasselbe Cluster bereits auf Pos. 6,9) + die drei
-toten internen Links darauf repariert. **Offen:** falls die Seite künftig als eigenständiges Angebot
-weitergeführt werden soll (statt dauerhaft nur Redirect-Ziel), die Supabase-Zeile über Lovable
-prüfen/reaktivieren lassen.
+**Ursprüngliche Diagnose (V1.1/V1.2, PR #101) war falsch — hier korrigiert.** Erste Annahme: die
+Supabase-Zeile hinter `besondere-anlaesse/candlelight-menue/` sei deaktiviert/gelöscht worden;
+Sofortmaßnahme war ein 301-Redirect aller 4 Sprachvarianten auf `romantisches-dinner-muenchen`
+plus Umbiegen der drei internen Links (Hochzeitsfeier/Terrasse/RomantischesDinner), die auf die
+Seite zeigten.
+
+**Per Lovable-Anfrage widerlegt:** Die Zeile in `menus` existiert unverändert seit 01.06.2026,
+`is_published = true`, `menu_type = 'special'` — beides korrekt, nichts deaktiviert oder gelöscht.
+
+**Echte Ursache gefunden (13.09.2026):** Supabase hat am **03.09.2026** projektweit die alten
+Legacy-API-Keys deaktiviert (Umstellung auf das neue „publishable/secret"-Format). Ein
+automatisierter Lovable-Bot-Commit (`a4bd498`, `gpt-engineer-app[bot]`, 04.09.2026) reagierte
+korrekt für den Client-Bundle-Pfad — `src/integrations/supabase/client.ts` bekam einen neuen
+hartkodierten Fallback-Key —, entfernte aber gleichzeitig `VITE_SUPABASE_PUBLISHABLE_KEY` aus dem
+GitHub-Actions-Build-Schritt (`.github/workflows/deploy-ionos.yml`), OHNE dass `prerender.js` einen
+eigenen Fallback bekam. Seit 04.09.2026 lieferte `fetchDynamicSlugs()` in JEDEM CI-Build eine leere
+Liste (`⚠️ Supabase credentials not found`) — **jede** über die generische
+`BesondererAnlass.tsx`/Supabase-`menus`-Tabelle verwaltete „special"-Anlassseite ohne eigene
+statische Route (wie Oktoberfest sie hat) bekam seitdem keine prerenderte Datei mehr, unabhängig
+vom Datenbankinhalt. Verifiziert per direktem REST-Aufruf: mit dem alten (Legacy-)Key aus der
+lokalen `.env` → `"Legacy API keys are disabled"`; mit dem neuen `sb_publishable_…`-Key → Zeile
+kommt korrekt zurück.
+
+**Echter Fix:** `prerender.js` bekam denselben hartkodierten Fallback (URL + neuer Publishable-Key)
+wie `client.ts` bereits hatte — lokal mit `VITE_SUPABASE_PUBLISHABLE_KEY=""` (simuliert den echten
+CI-Zustand) verifiziert: 165 statt 157 Routen, `dist/besondere-anlaesse/candlelight-menue/`
+existiert wieder mit echtem Inhalt (`<title>Candlelight Menü – STORIA München</title>`). Der
+Redirect aus PR #101 wurde entfernt, die drei internen Links zeigen wieder auf
+`candlelight-menue`.
+
+**Lehre:** ein automatisierter Bot-Commit kann eine Client-seitige Reaktion auf eine externe
+Plattform-Änderung „korrekt" umsetzen und trotzdem eine Server-seitige Build-Abhängigkeit
+brechen, die niemand geprüft hat, weil der Build selbst grün blieb (die Route fehlt einfach
+lautlos, kein Fehler, kein rotes CI). Bei künftigen Supabase-Key-Rotationen: `prerender.js`
+explizit mitprüfen, nicht nur den Client-Bundle-Pfad.
 
 ### GEO-Lücken-Loop V2 — Weihnachtsfeier gewinnt B2B-Cluster (13.09.2026)
 

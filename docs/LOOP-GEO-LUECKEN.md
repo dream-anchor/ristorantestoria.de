@@ -84,6 +84,15 @@ reparieren kann (Supabase-Änderungen laufen laut Projekt-CLAUDE.md ausschließl
       `slugs.json`). `hochzeitsfeier-muenchen/` und `terrasse-muenchen/` enthalten 0 Treffer für
       `candlelight-menue` im ausgelieferten HTML.
 
+      **Korrektur 13.09.2026 (selber Tag, nach Lovable-Rückfrage):** Diagnose war falsch — die
+      Supabase-Zeile war nie deaktiviert/gelöscht. Echte Ursache: fehlender Fallback in
+      `prerender.js` nach einer Supabase-Key-Migration (siehe `docs/seo-log.md` § „GEO-Lücken-Loop
+      V1 — candlelight-menue 404, korrigiert" für die volle Herleitung). Redirect entfernt, die
+      drei internen Links zeigen wieder auf `candlelight-menue`, `prerender.js` hat jetzt denselben
+      hartkodierten Fallback wie `src/integrations/supabase/client.ts`. Lokal mit
+      `VITE_SUPABASE_PUBLISHABLE_KEY=""` (simuliert den echten CI-Zustand) verifiziert: 165 statt
+      157 Routen, Seite rendert mit echtem Inhalt.
+
 ---
 
 ## V2 — Weihnachtsfeier gewinnt den B2B-Cluster
@@ -310,8 +319,11 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
 
 ## Offen, außerhalb des Codes
 
-- Supabase-Zeile hinter `candlelight-menue` — vermutlich deaktiviert/gelöscht, Prüfung nur über
-  Lovable möglich (siehe V1.3).
+- ~~Supabase-Zeile hinter `candlelight-menue` — vermutlich deaktiviert/gelöscht~~ — **widerlegt und
+  gelöst 13.09.2026.** Lovable bestätigte: Zeile unverändert korrekt (`is_published=true`,
+  `menu_type='special'` seit 01.06.2026). Echte Ursache war ein fehlender Fallback in
+  `prerender.js` nach einer Supabase-Key-Migration (03.09.2026) — Details und Fix in
+  `docs/seo-log.md` § „GEO-Lücken-Loop V1 — candlelight-menue 404, korrigiert".
 
 ## Abschluss
 

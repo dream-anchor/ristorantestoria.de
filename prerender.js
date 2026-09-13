@@ -34,8 +34,26 @@ try {
 const LANGUAGES = ["de", "en", "it", "fr"];
 
 // Supabase configuration
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+//
+// Hardcoded Fallback (13.09.2026): dieselbe URL + derselbe neue "publishable"-Key wie in
+// src/integrations/supabase/client.ts — öffentlich/publishable, also sicher hartzukodieren
+// (identische Begründung wie dort). NÖTIG, weil .github/workflows/deploy-ionos.yml
+// VITE_SUPABASE_PUBLISHABLE_KEY bewusst NICHT mehr an den Build-Step durchreicht (Commit
+// a4bd498, 04.09.2026, Reaktion auf die Supabase-Umstellung von Legacy- auf
+// Publishable/Secret-Keys am 03.09.2026 — der alte GitHub-Secret-Wert war noch im Legacy-
+// Format und wurde von Supabase serverseitig deaktiviert). client.ts bekam bei derselben
+// Gelegenheit einen neuen hartkodierten Fallback-Key, dieses Skript hier nicht — ohne
+// SUPABASE_ANON_KEY gibt fetchDynamicSlugs() seit dem 04.09.2026 in JEDEM CI-Build eine
+// leere Liste zurück, wodurch KEINE per Supabase verwalteten "special"-Anlass-Seiten mehr
+// prerendert wurden, die nicht wie Oktoberfest eine eigene statische Route haben (Fund:
+// besondere-anlaesse/candlelight-menue lieferte deshalb einen echten 404, obwohl die
+// Datenzeile in Supabase durchgehend korrekt und veröffentlicht war — docs/seo-log.md).
+const SUPABASE_URL =
+  (process.env.VITE_SUPABASE_URL || "").trim() ||
+  "https://iieethejhwfsyzhbweps.supabase.co";
+const SUPABASE_ANON_KEY =
+  (process.env.VITE_SUPABASE_PUBLISHABLE_KEY || "").trim() ||
+  "sb_publishable_F0SI_-tK5Bp3bilh-daPFA_8xjC6om8";
 
 // Static fallback menu data (used when Supabase is unavailable)
 const MENU_FALLBACKS = {};
