@@ -691,15 +691,15 @@ export const de = {
       heroTitle: "Firmenfeier M\u00fcnchen \u2013 Feiern im STORIA Maxvorstadt",
       heroSubtitle: "Betriebsfeier, Business Dinner & Teamevents | STORIA am Königsplatz",
       heroBadge1: "💼 bis 300 Gäste",
-      heroBadge2: "🎄 Weihnachtsfeiern",
+      heroBadge2: "🍝 Italienische Küche",
       heroBadge3: "📍 Zentral Königsplatz",
-      heroDescription: "Planen Sie Ihre nächste Firmenfeier in München: Von der Betriebsweihnachtsfeier über Teambuilding-Events bis zum Sommerfest – das STORIA Maxvorstadt bietet den perfekten Rahmen für Ihr Firmenevent. Zentrale Lage (5 Min. vom Königsplatz), authentische italienische Küche und professioneller Event-Service f\u00fcr bis zu 100 Sitzpl\u00e4tze innen, 100 weitere auf der Terrasse und Stehemfp\u00e4nge bis 300 G\u00e4ste.",
-      tldr: "Firmenfeier im STORIA München Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Betriebsfeiern, Weihnachtsfeiern und Teamevents mit 20–300 Gästen. 100 Plätze innen + 100 auf der überdachten Terrasse. Individuelle Menüs ab 35 € pro Person, professioneller Event-Service. 5 Min. vom Königsplatz, 5 Min. vom Hauptbahnhof. Familienbetrieb seit 2015. Anfragen: +49 89 51519696.",
+      heroDescription: "Planen Sie Ihre nächste Firmenfeier in München: Von Teambuilding-Events über Sommerfeste bis zum Firmenjubiläum – das STORIA Maxvorstadt bietet den perfekten Rahmen für Ihr Firmenevent. Zentrale Lage (5 Min. vom Königsplatz), authentische italienische Küche und professioneller Event-Service f\u00fcr bis zu 100 Sitzpl\u00e4tze innen, 100 weitere auf der Terrasse und Stehemfp\u00e4nge bis 300 G\u00e4ste.",
+      tldr: "Firmenfeier im STORIA München Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Betriebsfeiern und Teamevents mit 20–300 Gästen. 100 Plätze innen + 100 auf der überdachten Terrasse. Individuelle Menüs ab 35 € pro Person, professioneller Event-Service. 5 Min. vom Königsplatz, 5 Min. vom Hauptbahnhof. Familienbetrieb seit 2015. Anfragen: +49 89 51519696.",
       heroCta: "Firmenfeier anfragen bei STORIA Events",
       heroEventsNote: "Alle Firmenfeier-Anfragen werden über unsere Event-Website bearbeitet:",
       // Intro
       introTitle: "Firmenfeier M\u00fcnchen \u2013 Ihre Betriebsfeier im STORIA",
-      introP1: "Sie planen Firmenevents in M\u00fcnchen und suchen die perfekte Location? Das Ristorante STORIA in der Maxvorstadt ist die ideale Adresse f\u00fcr Ihre Betriebsfeier, Firmenevents, Weihnachtsfeiern, Teambuilding-Events, Sommerfeste, Firmenjubil\u00e4en und Gesch\u00e4ftsessen. Mit flexiblen Raumkonzepten für bis zu 100 Sitz- und 300 Stehplätze, exquisiter italienischer Küche und zentraler Lage direkt am K\u00f6nigsplatz bietet das STORIA alles f\u00fcr ein erfolgreiches Firmenevent in M\u00fcnchen.",
+      introP1: "Sie planen Firmenevents in M\u00fcnchen und suchen die perfekte Location? Das Ristorante STORIA in der Maxvorstadt ist die ideale Adresse f\u00fcr Ihre Betriebsfeier, Firmenevents, Teambuilding-Events, Sommerfeste, Firmenjubil\u00e4en und Gesch\u00e4ftsessen \u2013 auch f\u00fcr Ihre Weihnachtsfeier finden Sie das passende Angebot auf unserer Weihnachtsfeier-Seite. Mit flexiblen Raumkonzepten für bis zu 100 Sitz- und 300 Stehplätze, exquisiter italienischer Küche und zentraler Lage direkt am K\u00f6nigsplatz bietet das STORIA alles f\u00fcr ein erfolgreiches Firmenevent in M\u00fcnchen.",
       introP2: "Zentrale Business-Lage f\u00fcr Ihre Firmenevents in M\u00fcnchen: Nur 5 Gehminuten vom K\u00f6nigsplatz, 5 Minuten vom Hauptbahnhof \u2013 perfekt erreichbar f\u00fcr Teams aus der ganzen Stadt. Als Ihr Italiener in M\u00fcnchen und bew\u00e4hrte Eventlocation M\u00fcnchen sorgen Familie Speranza und ihr Team f\u00fcr einen reibungslosen Ablauf.",
       // Events CTA
       eventsCta: "💼 Firmenfeier anfragen bei STORIA Events",
@@ -710,12 +710,12 @@ export const de = {
       eventTypesTitle: "Welche Firmenfeiern können Sie im STORIA ausrichten?",
       eventTypeChristmas: "Betriebsweihnachtsfeier",
       eventTypeChristmasIcon: "🎄",
-      eventTypeChristmasDesc: "Die Weihnachtsfeier ist DER Klassiker: Feiern Sie mit Ihrem Team den Jahresabschluss im STORIA. Von November bis Dezember bieten wir spezielle Weihnachtsmenüs, festliche Dekoration und weihnachtliche Atmosphäre.",
-      eventTypeChristmasItem1: "Spezielle Weihnachtsmenüs",
-      eventTypeChristmasItem2: "Festliche Dekoration inklusive",
-      eventTypeChristmasItem3: "Glühwein & Weihnachts-Aperitivo",
-      eventTypeChristmasItem4: "Flexible Zeitfenster (auch nachmittags)",
-      eventTypeChristmasNote: "⚠️ Wichtig: Weihnachtsfeiern sind sehr beliebt – buchen Sie bereits im September/Oktober!",
+      // V2.1 (GEO-Lücken-Loop, 13.09.2026): Weihnachts-Substanz (Menüs, Dekoration,
+      // Buchungsvorlauf) bewusst nicht mehr hier im Detail beschrieben — sie wandert auf die
+      // dedizierte weihnachtsfeier-muenchen-Seite, die im B2B-Weihnachtscluster gewinnen soll
+      // (Entscheidung Antoine 13.09.2026). Diese Karte bleibt als Wegweiser bestehen.
+      eventTypeChristmasDesc: "Auch Ihre Betriebsweihnachtsfeier ist im STORIA möglich – alle Menüs, Termine und die Anfrage finden Sie auf unserer dedizierten Weihnachtsfeier-Seite.",
+      eventTypeChristmasLinkLabel: "Weihnachtsfeier München – Details & Anfrage",
       eventTypeTeam: "Teambuilding & Team-Events",
       eventTypeTeamIcon: "🤝",
       eventTypeTeamDesc: "Teambuilding München im STORIA: Team-Workshops, Kick-off-Meetings oder Teambuilding-Dinner – kombinieren Sie Business mit Genuss. Wir bieten separate Bereiche für Präsentationen und anschließendes gemeinsames Essen.",
@@ -766,7 +766,7 @@ export const de = {
       whyServiceTitle: "👔 Professioneller Business-Service",
       whyServiceDesc: "Unser Team ist geschult im Umgang mit Firmenevents in München. Diskreter Service, pünktlicher Ablauf, professionelles Auftreten. Die Familie Speranza koordiniert persönlich.",
       whyRepeatTitle: "🔄 Wiederholungskunden willkommen",
-      whyRepeatDesc: "Viele Unternehmen buchen jährlich ihre Weihnachtsfeier München bei uns. Als Stammkunde für Firmenevents München profitieren Sie von bevorzugten Terminen und persönlicher Betreuung.",
+      whyRepeatDesc: "Viele Unternehmen buchen jährlich ihre Firmenfeier bei uns – von Sommerfest bis Jahresabschluss. Als Stammkunde für Firmenevents München profitieren Sie von bevorzugten Terminen und persönlicher Betreuung.",
       whyTerraceTitle: "🏖️ Terrasse für Sommerfeste",
       whyTerraceDesc: "Von Mai bis September: Unsere große Terrasse. Perfekt für Sommerfeste, After-Work-Events. Bis zu 300 Gäste bei Stehempfängen.",
       whyWineTitle: "🍷 Erlesene Weinauswahl",
@@ -788,7 +788,7 @@ export const de = {
       package2Item2: "3-Gang-Menü (Antipasto, Primo, Dolce)",
       package2Item3: "Wein, Wasser, Softdrinks inklusive",
       package2Item4: "Espresso/Cappuccino zum Abschluss",
-      package2Ideal: "Ideal für: Weihnachtsfeiern, Firmenjubiläen, Kundenempfänge (15-60 Personen)",
+      package2Ideal: "Ideal für: Firmenjubiläen, Kundenempfänge, Geschäftsessen (15-60 Personen)",
       package2Price: "Ab €55 p.P.",
       package2Badge: "Beliebt",
       package3Title: "🥂 Premium Gala-Paket",
@@ -826,9 +826,9 @@ export const de = {
       processCtaButton: "→ Firmenfeier-Planung starten",
       // Testimonials
       testimonialsTitle: "Das sagen Unternehmen über Firmenevents München im STORIA",
-      testimonial1Quote: "Unsere Weihnachtsfeier war ein voller Erfolg! Die zentrale Lage machte die Anreise für alle einfach, das Essen war hervorragend und der Service sehr professionell.",
+      testimonial1Quote: "Unsere Firmenfeier war ein voller Erfolg! Die zentrale Lage machte die Anreise für alle einfach, das Essen war hervorragend und der Service sehr professionell.",
       testimonial1Author: "— Marketing-Abteilung, Tech-Startup München",
-      testimonial1Details: "Weihnachtsfeier, 35 Personen",
+      testimonial1Details: "Firmenfeier, 35 Personen",
       testimonial2Quote: "Für unser 25-jähriges Firmenjubiläum war das STORIA die perfekte Wahl. Elegantes Ambiente, exzellente Küche und die Familie Speranza hat sich persönlich um alles gekümmert.",
       testimonial2Author: "— Geschäftsführung, Beratungsunternehmen",
       testimonial2Details: "Firmenjubiläum, 50 Personen",
@@ -855,15 +855,15 @@ export const de = {
       locationHotelsTitle: "🏨 Hotels in der Nähe",
       locationHotelsDesc: "Für auswärtige Mitarbeiter oder Partner: Mehrere Hotels in 5-10 Minuten Fußweg. Wir vermitteln gerne Kontingente bei Bedarf.",
       locationTip: "💡 Anreise-Tipp für Firmenfeiern",
-      locationTipText: "Empfehlen Sie Ihren Mitarbeitern die Anreise mit öffentlichen Verkehrsmitteln – das STORIA ist perfekt angebunden. Für Weihnachtsfeiern: MVG-Gruppenticket als Team nutzen!",
+      locationTipText: "Empfehlen Sie Ihren Mitarbeitern die Anreise mit öffentlichen Verkehrsmitteln – das STORIA ist perfekt angebunden. Für größere Gruppen: MVG-Gruppenticket als Team nutzen!",
       // FAQ
       faqTitle: "Häufige Fragen zu Firmenfeiern im STORIA",
       faq1Question: "Was kostet eine Firmenfeier im STORIA München?",
       faq1Answer: "Unsere Firmenfeier-Pakete beginnen bei \u20ac35 p.P. (Pizza & Aperitivo) bis \u20ac85 p.P. (Premium Gala-Paket). Das beliebteste Business-Men\u00fc Paket (3 G\u00e4nge mit Getr\u00e4nken) kostet ab \u20ac55 p.P. Preise auf Anfrage \u2014 rufen Sie uns an: 089 51519696.",
       faq2Question: "Wie viele Personen passen für eine Firmenfeier ins STORIA?",
       faq2Answer: "Das STORIA bietet flexible Kapazit\u00e4ten: 10\u201330 Personen im separaten Bereich, 30\u201360 Personen semi-privat, 60\u2013100 Sitzpl\u00e4tze bei exklusiver Raummiete. Dazu die Terrasse mit ebenfalls bis zu 100 Sitzpl\u00e4tzen. Stehempf\u00e4nge bis 300 G\u00e4ste.",
-      faq3Question: "Wann sollte ich die Weihnachtsfeier buchen?",
-      faq3Answer: "Weihnachtsfeiern sind sehr gefragt und sollten bereits im September oder Oktober gebucht werden – besonders für die beliebten Termine Anfang bis Mitte Dezember.",
+      faq3Question: "Wann sollte ich meine Firmenfeier buchen?",
+      faq3Answer: "Der ideale Buchungsvorlauf hängt vom Anlass ab. Für Weihnachtsfeiern gelten eigene, stark nachgefragte Termine – Details dazu auf unserer Weihnachtsfeier-München-Seite. Für andere Firmenfeiern wie Sommerfeste, Teambuilding-Events oder Firmenjubiläen sprechen Sie uns gerne frühzeitig an, damit wir Ihren Wunschtermin reservieren können.",
       faq4Question: "Können wir Rechnungen direkt an die Firma schicken?",
       faq4Answer: "Ja, selbstverständlich! Wir stellen die Rechnung direkt an Ihre Firma aus – mit allen erforderlichen Angaben für die Buchhaltung.",
       faq5Question: "Gibt es vegetarische/vegane Optionen für Firmenfeiern?",
@@ -877,11 +877,11 @@ export const de = {
       faq9Question: "Welche Unterhaltungsm\u00f6glichkeiten gibt es bei Firmenfeiern im STORIA?",
       faq9Answer: "F\u00fcr Firmenfeier-Unterhaltung bieten wir auf Anfrage verschiedene Optionen: Live-Musik von Jazzband oder Gitarrist, einen DJ f\u00fcr Tanzevents, einen organisierten italienischen Abend mit Verkostung oder eine Pizza-Back-Station als interaktives Highlight. Teilen Sie uns Ihre W\u00fcnsche bei der Buchung mit \u2013 wir koordinieren gerne.",
       faq10Question: "Was kostet eine Firmenfeier im STORIA München?",
-      faq10Answer: "Festliche Menüs gibt es ab 45 € pro Person (z. B. Weihnachtsmenüs), individuelle Buffets und Getränkepauschalen auf Anfrage. Für 50 Personen liegt ein 3-Gänge-Menü mit Getränkepauschale typischerweise bei 65–85 € pro Person.",
+      faq10Answer: "Festliche Menüs gibt es ab 45 € pro Person, individuelle Buffets und Getränkepauschalen auf Anfrage. Für 50 Personen liegt ein 3-Gänge-Menü mit Getränkepauschale typischerweise bei 65–85 € pro Person.",
       faq11Question: "Wie viele Gäste passen ins STORIA?",
       faq11Answer: "100 Sitzplätze innen, 100 auf der überdachten Terrasse, bis zu 300 Gäste beim Stehempfang. Exklusive Buchung des Restaurants oder der Terrasse ist ab ca. 20 Personen möglich.",
       faq12Question: "Bis wann sollten wir unsere Weihnachtsfeier anfragen?",
-      faq12Answer: "Beliebte Dezember-Termine (Donnerstag/Freitag) sind erfahrungsgemäß ab Oktober ausgebucht – wir empfehlen eine Anfrage ab Juli.",
+      faq12Answer: "Weihnachtsfeiern sind sehr gefragt und sollten frühzeitig angefragt werden – den empfohlenen Zeitplan und alle Details finden Sie auf unserer Weihnachtsfeier-München-Seite.",
       // Related
       relatedTitle: "Das könnte Sie auch interessieren",
       relatedEventsTitle: "💼 STORIA Events Website",
@@ -895,9 +895,14 @@ export const de = {
       relatedLunchDesc: "Günstiges Mittagsmenü für Geschäftsessen Mo-Fr",
       relatedCateringTitle: "🍽️ Catering & Events",
       relatedCateringDesc: "Professionelles Catering für Ihre Veranstaltung",
+      // V2.1 (GEO-Lücken-Loop): prominenter Wegweiser auf weihnachtsfeier-muenchen, das den
+      // B2B-Weihnachtscluster gewinnen soll — Preis über FACTS.weihnachten.groupMenuPriceFrom
+      // per {price}-Platzhalter, kein zweiter hartkodierter Wert.
+      relatedChristmasTitle: "🎄 Weihnachtsfeier München",
+      relatedChristmasDesc: "Italienische Weihnachtsfeier für Ihr Team mit festlichen Menüs ab {price} € pro Person.",
       // CTA
       ctaTitle: "Jetzt Ihre Firmenfeier im STORIA planen",
-      ctaDesc: "Bereit für erfolgreiche Firmenevents in München? Ob Weihnachtsfeier München, Teambuilding München, Sommerfest oder Firmenjubiläum – als Ihr Italiener in München machen wir Ihr Event unvergesslich. Alle Pakete, Menüs und Preise finden Sie auf unserer Event-Website.",
+      ctaDesc: "Bereit für erfolgreiche Firmenevents in München? Ob Teambuilding München, Sommerfest oder Firmenjubiläum – als Ihr Italiener in München machen wir Ihr Event unvergesslich. Alle Pakete, Menüs und Preise finden Sie auf unserer Event-Website.",
       ctaButton: "→ Jetzt Firmenfeier reservieren",
       ctaAlternative: "Oder kontaktieren Sie uns direkt:",
       ctaHoursTitle: "Firmenfeier-Beratung:",
@@ -2894,8 +2899,11 @@ export const de = {
       reisegruppenLink: "Gruppenmenüs für bis zu 100 Personen – ideal als kulinarischer Programmpunkt.",
     },
     weihnachtsfeier: {
-      seoTitle: "Weihnachtsfeier München | Bis 300 Gäste ab 45 € – STORIA",
-      seoDescription: "Weihnachtsfeier München im STORIA: Italienisches Weihnachtsmenü ab 45 € p.P., bis 300 Gäste. Firmenweihnachtsfeier & Familienessen – zentral am Königsplatz. Jetzt anfragen!",
+      // V2.4 (GEO-Lücken-Loop, 13.09.2026): {groupPrice} statt hartkodiertem "45 €" — SSoT
+      // FACTS.weihnachten.groupMenuPriceFrom, über fillFacts() in WeihnachtsfeierMuenchen.tsx
+      // ersetzt. Reine Konsolidierung, keine neue Zahl.
+      seoTitle: "Weihnachtsfeier München | Bis 300 Gäste ab {groupPrice} € – STORIA",
+      seoDescription: "Weihnachtsfeier München im STORIA: Italienisches Weihnachtsmenü ab {groupPrice} € p.P., bis 300 Gäste. Firmenweihnachtsfeier & Familienessen – zentral am Königsplatz. Jetzt anfragen!",
       breadcrumb: "Weihnachtsfeier M\u00fcnchen",
       heroTitle: "Weihnachtsfeier München – Italienisch feiern im STORIA",
       heroSubtitle: "Firmenweihnachtsfeier, private Feier & Weihnachtsessen | STORIA am Königsplatz",
@@ -2903,14 +2911,38 @@ export const de = {
       heroBadge2: "🍷 Weihnachtsmenü",
       heroBadge3: "📍 Zentral Königsplatz",
       heroDescription: "Planen Sie Ihre Weihnachtsfeier München in einem authentischen italienischen Restaurant mit besonderem Charme? Im Ristorante STORIA in der Maxvorstadt feiern Sie Weihnachten so, wie es sein soll: in gemütlicher Atmosphäre, mit exquisiter italienischer Küche und einem Service, der sich um alles kümmert.",
-      tldr: "Weihnachtsfeier München im STORIA Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Firmenweihnachtsfeiern, private Weihnachtsessen und Adventsfeiern mit 6–300 Gästen. Festliche Menüs ab 45 € pro Person, 100 Plätze innen + 100 auf der Terrasse. Seit 2015 Familienbetrieb von Familie Speranza. 5 Min. vom Königsplatz. Anfragen: +49 89 51519696.",
+      tldr: "Weihnachtsfeier München im STORIA Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Firmenweihnachtsfeiern, private Weihnachtsessen und Adventsfeiern mit 6–300 Gästen. Festliche Menüs ab {groupPrice} € pro Person, {indoorSeats} Plätze innen + {terraceSeats} auf der Terrasse. Seit 2015 Familienbetrieb von Familie Speranza. 5 Min. vom Königsplatz. Anfragen: +49 89 51519696.",
       heroCta: "Weihnachtsfeier anfragen",
       heroEventsNote: "Alle Weihnachtsfeier-Anfragen werden über unsere Event-Website bearbeitet:",
       introTitle: "Weihnachtsfeier München – Das STORIA für unvergessliche Feiertage",
-      introP1: "Sie suchen die perfekte Weihnachtsfeier Location München? Das STORIA vereint alles, was eine gelungene Weihnachtsfeier braucht: zentrale Lage in der Maxvorstadt, stilvolles italienisches Ambiente, erstklassige Küche und einen Service, der keine Wünsche offenlässt. Die Familie Speranza und ihr Team bringen über 30 Jahre Gastronomie-Erfahrung mit – von der intimen Feier für 10 Personen bis zum großen Event für 300 Gäste.",
+      // V2.3 (GEO-Lücken-Loop, 13.09.2026): Definition-Lead statt rhetorischer Frage
+      // (docs/geo-content-guidelines.md Regel 1, Muster wie WeihnachtenMuenchen.tsx introP1).
+      introP1: "Die Weihnachtsfeier München im Ristorante STORIA ist ein italienisches Festmenü-Angebot in der Karlstraße 47a, München Maxvorstadt – von der romantischen Weihnachtsfeier zu zweit bis zur Firmenweihnachtsfeier für bis zu 300 Gäste. Seit 2015 bringt die Familie Speranza aus dem Cilento über 30 Jahre Gastronomie-Erfahrung mit und stimmt jedes Weihnachtsmenü individuell mit Ihnen ab – ein festes Menü von der Karte gibt es bewusst nicht.",
+      // Autoritativer Outbound-Link (GEO-Regel 3) — eigene Quelle, nicht dieselbe wie
+      // SilvesterMuenchen.tsx (champagne.fr) oder WeihnachtenMuenchen.tsx (UNESCO Mediterranean
+      // Diet): die Accademia Italiana della Cucina, 1953 gegründet, offizielle italienische
+      // Institution zur Dokumentation/Bewahrung regionaler Kochtraditionen (Sitz Mailand,
+      // staatlich als Kultureinrichtung anerkannt) — thematisch passend zur italienischen
+      // Festtagsküche dieser Seite, weder Wettbewerber noch Aggregator.
+      citationPre: "Die italienische Festtagsküche zu Weihnachten hat eine lange kulinarische Tradition, dokumentiert unter anderem von der ",
+      citationAnchor: "Accademia Italiana della Cucina",
+      citationPost: ", der 1953 gegründeten offiziellen italienischen Institution zur Bewahrung regionaler Kochtraditionen.",
+      // "Auf einen Blick" (V2.3, GEO-Lücken-Loop, 13.09.2026) — Muster wie WeihnachtenMuenchen.tsx/
+      // SilvesterMuenchen.tsx. Alle Werte bereits an anderer Stelle dieser Seite belegt
+      // (reason5Desc/faq2Answer für Kapazität, type1Note/bookingTip für Anfragezeitpunkt) bzw.
+      // aus FACTS.weihnachten.groupMenuPriceFrom — keine neuen Zahlen.
+      atAGlanceTitle: "Weihnachtsfeier im STORIA auf einen Blick",
+      atAGlanceCapacityLabel: "Kapazität",
+      atAGlanceCapacityValue: "10–100 Sitzplätze je nach Raumkonzept, dazu {terraceSeats} auf der Terrasse – Stehempfang bis {standing} Gäste",
+      atAGlancePriceLabel: "Preis ab",
+      atAGlancePriceValue: "{groupPrice} € pro Person",
+      atAGlanceMinGuestsLabel: "Mindestgruppengröße",
+      atAGlanceMinGuestsValue: "Keine – von der Feier zu zweit bis zum Firmenevent",
+      atAGlanceRequestLabel: "Anfrage",
+      atAGlanceRequestValue: "Für Gruppen ab September/Oktober empfohlen",
       typesTitle: "🎄 Welche Weihnachtsfeiern können Sie im STORIA feiern?",
       type1Title: "🏢 Firmenweihnachtsfeier",
-      type1Desc: "Die Firmenweihnachtsfeier München im STORIA ist der perfekte Jahresabschluss für Ihr Team. Feiern Sie den gemeinsamen Erfolg mit einem festlichen italienischen Menü, Wein und weihnachtlicher Atmosphäre.",
+      type1Desc: "Die Firmenweihnachtsfeier München im STORIA – auch Betriebsweihnachtsfeier genannt – ist der perfekte Jahresabschluss für Ihr Team. Feiern Sie den gemeinsamen Erfolg mit einem festlichen italienischen Menü, Wein und weihnachtlicher Atmosphäre.",
       type1Item1: "Spezielle Firmen-Weihnachtsmenüs",
       type1Item2: "Separate Bereiche für Teams",
       type1Item3: "Rechnung direkt an die Firma",
@@ -2986,7 +3018,9 @@ export const de = {
       reason4Title: "💰 Transparente Preise",
       reason4Desc: "Keine versteckten Kosten. Sie erhalten ein detailliertes Angebot mit allen Leistungen. Flexible Pakete für jedes Budget.",
       reason5Title: "🎯 Flexible Raumkonzepte",
-      reason5Desc: "Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen oder exklusive Raummiete f\u00fcr 60\u2013100 Sitzpl\u00e4tze. Dazu die Terrasse mit bis zu 100 weiteren Pl\u00e4tzen. Stehempf\u00e4nge bis 300 G\u00e4ste.",
+      // V2.4: {indoorSeats}/{terraceSeats}/{standing} statt hartkodierter 100/100/300 \u2014 dieselben
+      // Werte standen unabh\u00e4ngig auch in faq2Answer (jetzt ebenfalls \u00fcber FACTS).
+      reason5Desc: "Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen oder exklusive Raummiete f\u00fcr 60\u2013{indoorSeats} Sitzpl\u00e4tze. Dazu die Terrasse mit bis zu {terraceSeats} weiteren Pl\u00e4tzen. Stehempf\u00e4nge bis {standing} G\u00e4ste.",
       reason6Title: "🍷 Erlesene Wein- & Getränkeauswahl",
       reason6Desc: "Über 50 italienische Weine, Prosecco, Cocktails und alkoholfreie Optionen. Glühwein und Weihnachts-Aperitivo auf Wunsch.",
       reason7Title: "👔 Professionelle Organisation",
@@ -3036,9 +3070,9 @@ export const de = {
       locationTipDesc: "Empfehlen Sie Ihren Gästen die Anreise mit öffentlichen Verkehrsmitteln – die U-Bahn-Station Königsplatz liegt nur 5 Gehminuten entfernt.",
       faqTitle: "Häufige Fragen zu Weihnachtsfeiern im STORIA",
       faq1Question: "Was kostet eine Weihnachtsfeier im STORIA München?",
-      faq1Answer: "Die Kosten richten sich nach Gruppengröße, Menüwahl und gewünschten Extras. Unsere Weihnachtsmenüs beginnen ab ca. 45€ pro Person (Menü Natale Classico). Kontaktieren Sie uns für ein individuelles Angebot.",
+      faq1Answer: "Die Kosten richten sich nach Gruppengröße, Menüwahl und gewünschten Extras. Unsere Weihnachtsmenüs beginnen ab ca. {groupPrice} € pro Person (Menü Natale Classico). Kontaktieren Sie uns für ein individuelles Angebot.",
       faq2Question: "Wie viele Personen passen für eine Weihnachtsfeier ins STORIA?",
-      faq2Answer: "Wir bieten flexible Raumkonzepte: Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen, exklusive Raummiete f\u00fcr 60\u2013100 Sitzpl\u00e4tze. Dazu die Terrasse mit ebenfalls bis zu 100 Pl\u00e4tzen. Stehempf\u00e4nge bis 300 G\u00e4ste.",
+      faq2Answer: "Wir bieten flexible Raumkonzepte: Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen, exklusive Raummiete f\u00fcr 60\u2013{indoorSeats} Sitzpl\u00e4tze. Dazu die Terrasse mit ebenfalls bis zu {terraceSeats} Pl\u00e4tzen. Stehempf\u00e4nge bis {standing} G\u00e4ste.",
       faq3Question: "Wann sollte ich die Weihnachtsfeier M\u00fcnchen buchen?",
       faq3Answer: "Idealerweise im September oder Oktober. Die beliebten Termine Anfang bis Mitte Dezember (Do, Fr, Sa) sind oft schon früh ausgebucht.",
       // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, Fakt Antoine 13.09.2026): präzisiert gegen
@@ -3058,6 +3092,12 @@ export const de = {
       // E3.3: neue FAQ, entstanden aus E3.1 (Stornostaffel) — schließt direkt an step3Desc an.
       faq9Question: "Was passiert mit meiner Anzahlung, wenn ich absagen muss?",
       faq9Answer: "Ihre Anzahlung (30 %) wird mit der Stornogebühr verrechnet, die sich nach dem Zeitpunkt Ihrer Absage richtet – von kostenlos bei mehr als 30 Tagen Vorlauf bis 100 % ab 48 Stunden vorher oder bei Nichterscheinen. Ein etwaiger Überschuss wird Ihnen zurückerstattet. Details finden Sie weiter oben unter „Stornobedingungen“.",
+      // V2.2 (GEO-Lücken-Loop, 13.09.2026): "Betriebsweihnachtsfeier" kam auf dieser Seite bisher
+      // nicht vor (geprüft, 0 Treffer) — anders als "Firmenweihnachtsfeier", das bereits 9× auf der
+      // Seite steht. Eigener FAQ-Eintrag statt Umformulierung bestehender Sätze, exakte
+      // Nutzerphrase als Frage (GEO-Regel 5).
+      faq10Question: "Bietet das STORIA auch eine Betriebsweihnachtsfeier für kleinere Teams an?",
+      faq10Answer: "Ja – für separate Bereiche ab 10 Personen richten wir Ihre Betriebsweihnachtsfeier individuell aus, von der kleinen Teamrunde bis zum großen Firmenevent für bis zu 300 Gäste.",
       ctaTitle: "Jetzt Ihre Weihnachtsfeier München planen",
       ctaDesc: "Sichern Sie sich Ihren Wunschtermin – die besten Termine sind schnell vergeben!",
       ctaButton: "\u2192 Jetzt Weihnachtsfeier reservieren",

@@ -36,7 +36,10 @@ const FirmenfeierMuenchen = () => {
   usePrerenderReady(true);
 
   const eventTypes = [
-    { icon: t.seo.firmenfeier.eventTypeChristmasIcon, title: t.seo.firmenfeier.eventTypeChristmas, desc: t.seo.firmenfeier.eventTypeChristmasDesc, items: [t.seo.firmenfeier.eventTypeChristmasItem1, t.seo.firmenfeier.eventTypeChristmasItem2, t.seo.firmenfeier.eventTypeChristmasItem3, t.seo.firmenfeier.eventTypeChristmasItem4], note: t.seo.firmenfeier.eventTypeChristmasNote },
+    // V2.1 (GEO-Lücken-Loop, 13.09.2026): kein eigener Item-/Note-Detailblock mehr für
+    // Weihnachten — die Karte verweist stattdessen mit einem echten Link auf
+    // weihnachtsfeier-muenchen, das den B2B-Weihnachtscluster gewinnen soll.
+    { icon: t.seo.firmenfeier.eventTypeChristmasIcon, title: t.seo.firmenfeier.eventTypeChristmas, desc: t.seo.firmenfeier.eventTypeChristmasDesc, items: [], linkLabel: t.seo.firmenfeier.eventTypeChristmasLinkLabel },
     { icon: t.seo.firmenfeier.eventTypeTeamIcon, title: t.seo.firmenfeier.eventTypeTeam, desc: t.seo.firmenfeier.eventTypeTeamDesc, items: [t.seo.firmenfeier.eventTypeTeamItem1, t.seo.firmenfeier.eventTypeTeamItem2, t.seo.firmenfeier.eventTypeTeamItem3, t.seo.firmenfeier.eventTypeTeamItem4] },
     { icon: t.seo.firmenfeier.eventTypeSummerIcon, title: t.seo.firmenfeier.eventTypeSummer, desc: t.seo.firmenfeier.eventTypeSummerDesc, items: [t.seo.firmenfeier.eventTypeSummerItem1, t.seo.firmenfeier.eventTypeSummerItem2, t.seo.firmenfeier.eventTypeSummerItem3, t.seo.firmenfeier.eventTypeSummerItem4] },
     { icon: t.seo.firmenfeier.eventTypeJubileeIcon, title: t.seo.firmenfeier.eventTypeJubilee, desc: t.seo.firmenfeier.eventTypeJubileeDesc, items: [t.seo.firmenfeier.eventTypeJubileeItem1, t.seo.firmenfeier.eventTypeJubileeItem2, t.seo.firmenfeier.eventTypeJubileeItem3, t.seo.firmenfeier.eventTypeJubileeItem4] },
@@ -173,8 +176,14 @@ const FirmenfeierMuenchen = () => {
                     </CardHeader>
                     <CardContent>
                       <p className="text-muted-foreground text-sm mb-4">{ev.desc}</p>
-                      <ul className="text-sm space-y-1">{ev.items.map((item, j) => <li key={j} className="text-muted-foreground">✓ {item}</li>)}</ul>
-                      {ev.note && <p className="text-xs text-primary mt-3">{ev.note}</p>}
+                      {ev.items.length > 0 && (
+                        <ul className="text-sm space-y-1">{ev.items.map((item, j) => <li key={j} className="text-muted-foreground">✓ {item}</li>)}</ul>
+                      )}
+                      {ev.linkLabel && (
+                        <LocalizedLink to="weihnachtsfeier-muenchen" className="text-primary text-sm font-medium hover:underline">
+                          {ev.linkLabel} →
+                        </LocalizedLink>
+                      )}
                     </CardContent>
                   </Card>
                 ))}
@@ -275,11 +284,18 @@ const FirmenfeierMuenchen = () => {
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{t.seo.firmenfeier.relatedTitle}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <a href={EVENTS_LINKS.firmenfeier} target="_blank" rel="noopener noreferrer" className="bg-primary/10 border border-primary/30 rounded-lg p-6 hover:bg-primary/20 transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventsTitle}</h3><p className="text-muted-foreground text-sm mb-2">{t.seo.firmenfeier.relatedEventsDesc}</p><span className="text-primary text-sm">{t.seo.firmenfeier.relatedEventsButton} →</span></a>
+                {/* V2.1 (GEO-Lücken-Loop, 13.09.2026): prominent hervorgehoben (border-2 statt
+                    border, direkt an zweiter Stelle) statt einer von neun gleichwertigen Karten —
+                    dieser Link ist der wichtigste Wegweiser für Besucher, die eigentlich nach
+                    einer Weihnachtsfeier suchen. Text kommt jetzt aus Übersetzungs-Keys (vorher
+                    hartkodiertes Deutsch, das auch auf EN/IT/FR-Seiten Deutsch zeigte) und der
+                    Preis aus FACTS.weihnachten.groupMenuPriceFrom statt einem zweiten
+                    hartkodierten "45 €". */}
+                <LocalizedLink to="weihnachtsfeier-muenchen" className="bg-primary/5 border-2 border-primary rounded-lg p-6 hover:bg-primary/10 transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedChristmasTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedChristmasDesc.replace('{price}', FACTS.weihnachten.groupMenuPriceFrom)}</p></LocalizedLink>
                 <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventlocationTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedEventlocationDesc}</p></LocalizedLink>
                 <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedCateringTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedCateringDesc}</p></LocalizedLink>
                 <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedMenuTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedMenuDesc}</p></LocalizedLink>
                 <LocalizedLink to="lunch-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedLunchTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedLunchDesc}</p></LocalizedLink>
-                <LocalizedLink to="weihnachtsfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Weihnachtsfeier München</h3><p className="text-muted-foreground text-sm">Italienische Weihnachtsfeier für Ihr Team mit festlichen Menüs ab 45 € pro Person.</p></LocalizedLink>
                 <Link to="/besondere-anlaesse/silvester/" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3><p className="text-muted-foreground text-sm">Jahresabschluss-Dinner mit italienischem {FACTS.silvester.courses}-Gänge-Menü für {FACTS.silvester.price} € pro Person (mit Weinbegleitung {FACTS.silvester.priceWithWine} €).</p></Link>
                 <LocalizedLink to="reisegruppen-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Reisegruppen München</h3><p className="text-muted-foreground text-sm">Auch für Reisegruppen bieten wir spezielle Menü-Pakete an – ab 20 Personen, Reiseleiter isst gratis.</p></LocalizedLink>
                 <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3><p className="text-muted-foreground text-sm">{t.internalLinks.faqLinkDesc}</p></LocalizedLink>

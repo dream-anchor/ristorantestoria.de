@@ -23,10 +23,39 @@ import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
 import { FACTS } from "@/config/facts";
 
+/**
+ * Autoritative Outbound-Quelle (V2.3, GEO-Lücken-Loop, GEO-Regel 3 aus
+ * docs/geo-content-guidelines.md). Accademia Italiana della Cucina, 1953 gegründet, offizielle
+ * italienische Institution zur Dokumentation/Bewahrung regionaler Kochtraditionen (Sitz Mailand,
+ * staatlich als Kultureinrichtung anerkannt) — eigene Quelle, nicht dieselbe wie
+ * SilvesterMuenchen.tsx (champagne.fr) oder WeihnachtenMuenchen.tsx (UNESCO Mediterranean Diet).
+ */
+const CITATION_URL = "https://www.accademiaitalianadellacucina.it/en";
+
+/**
+ * Ersetzt die Zahlen-Platzhalter der Übersetzungen durch die Werte aus FACTS (Muster wie
+ * WeihnachtenMuenchen.tsx) — damit Preis und Kapazität im "Auf einen Blick"-Block aus derselben
+ * einzigen Quelle kommen statt hartkodiert zu sein.
+ */
+const fillFacts = (text: string): string =>
+  text
+    .replace(/\{groupPrice\}/g, FACTS.weihnachten.groupMenuPriceFrom)
+    .replace(/\{indoorSeats\}/g, String(FACTS.capacity.indoorSeats))
+    .replace(/\{terraceSeats\}/g, String(FACTS.capacity.terraceSeats))
+    .replace(/\{standing\}/g, String(FACTS.capacity.standing));
+
 const WeihnachtsfeierMuenchen = () => {
   const { t } = useLanguage();
   usePrerenderReady(true);
   const w = t.seo.weihnachtsfeier;
+
+  // "Auf einen Blick" (V2.3) — Muster wie WeihnachtenMuenchen.tsx/SilvesterMuenchen.tsx.
+  const atAGlance = [
+    { label: w.atAGlanceCapacityLabel, value: fillFacts(w.atAGlanceCapacityValue) },
+    { label: w.atAGlancePriceLabel, value: fillFacts(w.atAGlancePriceValue) },
+    { label: w.atAGlanceMinGuestsLabel, value: w.atAGlanceMinGuestsValue },
+    { label: w.atAGlanceRequestLabel, value: w.atAGlanceRequestValue },
+  ];
 
   const eventTypes = [
     { icon: "🏢", title: w.type1Title, desc: w.type1Desc, items: [w.type1Item1, w.type1Item2, w.type1Item3, w.type1Item4], note: w.type1Note },
@@ -46,7 +75,9 @@ const WeihnachtsfeierMuenchen = () => {
     { title: w.reason2Title, desc: w.reason2Desc },
     { title: w.reason3Title, desc: w.reason3Desc },
     { title: w.reason4Title, desc: w.reason4Desc },
-    { title: w.reason5Title, desc: w.reason5Desc },
+    // V2.4 (GEO-Lücken-Loop, 13.09.2026): FACTS.capacity.* statt hartkodierter Zahlen, siehe
+    // fillFacts() oben — dieselben Werte standen unabhängig auch in faq2Answer.
+    { title: w.reason5Title, desc: fillFacts(w.reason5Desc) },
     { title: w.reason6Title, desc: w.reason6Desc },
     { title: w.reason7Title, desc: w.reason7Desc },
     { title: w.reason8Title, desc: w.reason8Desc },
@@ -67,8 +98,10 @@ const WeihnachtsfeierMuenchen = () => {
   ];
 
   const faqs = [
-    { q: w.faq1Question, a: w.faq1Answer },
-    { q: w.faq2Question, a: w.faq2Answer },
+    // V2.4 (GEO-Lücken-Loop, 13.09.2026): FACTS.weihnachten.groupMenuPriceFrom /
+    // FACTS.capacity.* statt hartkodierter "45 €"/Kapazitätszahlen, siehe fillFacts() oben.
+    { q: w.faq1Question, a: fillFacts(w.faq1Answer) },
+    { q: w.faq2Question, a: fillFacts(w.faq2Answer) },
     { q: w.faq3Question, a: w.faq3Answer },
     { q: w.faq4Question, a: w.faq4Answer },
     { q: w.faq5Question, a: w.faq5Answer },
@@ -77,6 +110,9 @@ const WeihnachtsfeierMuenchen = () => {
     { q: w.faq8Question, a: w.faq8Answer },
     // E3.3: neue FAQ, entstanden aus E3.1 (Stornostaffel) — schließt an step3Desc an.
     { q: w.faq9Question, a: w.faq9Answer },
+    // V2.2 (GEO-Lücken-Loop, 13.09.2026): "Betriebsweihnachtsfeier" deckt eine eigene Query ab,
+    // die bisher auf dieser Seite nicht vorkam.
+    { q: w.faq10Question, a: w.faq10Answer },
   ];
 
   /**
@@ -94,7 +130,7 @@ const WeihnachtsfeierMuenchen = () => {
 
   return (
     <>
-      <SEO title={w.seoTitle} description={w.seoDescription} canonical="/weihnachtsfeier-muenchen" />
+      <SEO title={fillFacts(w.seoTitle)} description={fillFacts(w.seoDescription)} canonical="/weihnachtsfeier-muenchen" />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[
         { name: 'Home', url: '/' },
@@ -149,10 +185,50 @@ const WeihnachtsfeierMuenchen = () => {
           <article className="max-w-5xl mx-auto">
             <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: t.internalLinks.eventLocation, href: '/eventlocation-muenchen-maxvorstadt' }, { label: w.breadcrumb }]} />
 
-            {/* Intro */}
+            {/* TL;DR (V2.3, GEO-Lücken-Loop) — der fertige `tldr`-Text lag bisher ungenutzt in den
+                Übersetzungen. Muster wie WeihnachtenMuenchen.tsx: eine Karte direkt unter der
+                Breadcrumb, vor allen anderen Inhalten. */}
+            <div className="bg-card border rounded-2xl p-6 md:p-8 mb-12">
+              <p className="text-muted-foreground leading-relaxed">{fillFacts(w.tldr)}</p>
+            </div>
+
+            {/* Intro — erster Satz ist seit V2.3 der Definition-Lead (GEO-Regel 1); der letzte
+                Absatz trägt die autoritative Outbound-Citation (GEO-Regel 3). */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{w.introTitle}</h2>
               <p className="text-lg text-muted-foreground mb-4">{w.introP1}</p>
+              <p className="text-muted-foreground">
+                {w.citationPre}
+                <a
+                  href={CITATION_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground underline decoration-muted-foreground hover:decoration-foreground transition-colors"
+                >
+                  {w.citationAnchor}
+                </a>
+                {w.citationPost}
+              </p>
+            </section>
+
+            {/* Auf einen Blick (V2.3, GEO-Lücken-Loop) — Definitionsliste statt Fließtext, Muster
+                wie WeihnachtenMuenchen.tsx/SilvesterMuenchen.tsx. */}
+            <section className="mb-16" aria-labelledby="weihnachtsfeier-auf-einen-blick">
+              <Card className="border-primary/30 bg-secondary/30">
+                <CardHeader className="pb-3">
+                  <h2 id="weihnachtsfeier-auf-einen-blick" className="text-2xl font-serif font-bold">{w.atAGlanceTitle}</h2>
+                </CardHeader>
+                <CardContent>
+                  <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                    {atAGlance.map((item, i) => (
+                      <div key={i}>
+                        <dt className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1">{item.label}</dt>
+                        <dd className="font-medium">{item.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </CardContent>
+              </Card>
             </section>
 
             {/* Event Types */}

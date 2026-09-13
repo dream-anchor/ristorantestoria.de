@@ -91,28 +91,64 @@ reparieren kann (Supabase-Änderungen laufen laut Projekt-CLAUDE.md ausschließl
 Entscheidung Antoine: `weihnachtsfeier-muenchen` gewinnt, `firmenfeier-muenchen` gibt
 Weihnachtsbegriffe ab. AKUT — Buchungssaison läuft laut eigener Seite „ab September/Oktober".
 
-- [ ] **V2.1** `FirmenfeierMuenchen.tsx` + Übersetzungen: Weihnachts-Formulierungen aus `tldr`,
+- [x] **V2.1** `FirmenfeierMuenchen.tsx` + Übersetzungen: Weihnachts-Formulierungen aus `tldr`,
       `introP1`, Paket-/Anlass-Texten auf einen kurzen Satz + Link auf `weihnachtsfeier-muenchen`
       reduzieren. Generische Firmenfeier-Substanz (Sommerfest, Teambuilding, Jubiläum etc.)
       unangetastet lassen. Beleg vor/nachher: `grep -c -i "weihnacht" src/translations/de.ts`
       innerhalb des `firmenfeier`-Blocks.
-- [ ] **V2.2** `WeihnachtsfeierMuenchen.tsx` + Übersetzungen: „Firmenweihnachtsfeier" und
+      ✓ 13.09.2026 · Commit `e880117` · `grep -ic "weihnacht"` auf den `firmenfeier`-Block in
+      `de.ts` (Zeilen 685–942): 21 → 15 Zeilen, davon 2 unveränderte Legacy-Keys
+      (`galleryChristmas`/`testimonial1Quote_legacy`, ungenutzt, nicht Teil des Renderings) und die
+      bewusst belassenen Wegweiser (Kartentitel „Betriebsweihnachtsfeier", Link-Label,
+      Related-Karte). Event-Typen-Karte „Betriebsweihnachtsfeier" verweist jetzt mit echtem
+      `LocalizedLink` auf `weihnachtsfeier-muenchen` statt eigener Item-/Note-Liste. Bestehende
+      Related-Karte auf `weihnachtsfeier-muenchen` prominent hervorgehoben (2. Position,
+      `border-2`) statt einer von neun gleichwertigen Karten; dabei hartkodiertes Deutsch (zeigte
+      bisher auch auf EN/IT/FR Deutsch) durch Übersetzungs-Keys ersetzt und hartkodiertes „45 €"
+      durch `FACTS.weihnachten.groupMenuPriceFrom` ersetzt. Alle 4 Sprachen editiert
+      (en/it/fr.ts, inkl. `enExtra`/`frExtra`-Override-Blöcke).
+- [x] **V2.2** `WeihnachtsfeierMuenchen.tsx` + Übersetzungen: „Firmenweihnachtsfeier" und
       „Betriebsweihnachtsfeier" als Begriffe aufnehmen (H2 oder FAQ-Frage/Antwort) — beide Queries
       (zusammen 156 Impressionen) sind heute auf dieser Seite nicht vertreten. Keine neuen Fakten,
       nur Begriffsabdeckung für die bereits beschriebene Leistung.
-- [ ] **V2.3** GEO nachrüsten nach Muster `WeihnachtenMuenchen.tsx`: Definition-Lead als
+      ✓ 13.09.2026 · Commit `e880117` · Recherche vor Umsetzung ergab: „Firmenweihnachtsfeier"
+      stand entgegen der Plan-Annahme bereits 9× auf der Seite (`grep -ic` auf den
+      `weihnachtsfeier`-Block), „Betriebsweihnachtsfeier" dagegen 0× — Umfang entsprechend auf den
+      tatsächlich fehlenden Begriff angepasst. Neuer FAQ10-Eintrag mit der exakten Nutzerphrase als
+      Frage (GEO-Regel 5) plus zusätzliche Nennung in `type1Desc`. Prerender-Beleg:
+      `grep -io "betriebsweihnachtsfeier" dist/weihnachtsfeier-muenchen/index.html | wc -l` → 3.
+      Alle 4 Sprachen (it.ts: FAQ10 hier eigener Key, da it.ts für faq1-9 bereits vollübersetzt war).
+- [x] **V2.3** GEO nachrüsten nach Muster `WeihnachtenMuenchen.tsx`: Definition-Lead als
       allererster Satz (`introP1` umformulieren, weg von „Sie suchen die perfekte …?"), `tldr`
       rendern (Schlüssel existiert bereits, `de.ts:2907`, nur einbauen), „Auf einen Blick"-Block
       (Kapazität/Preis ab/Mindestgröße/Anfragezeitpunkt), ein autoritativer Outbound-Link (Thema
       passend wählen, z. B. zu italienischer Weihnachtstradition — nicht denselben Link wie
       Weihnachten/Silvester duplizieren, eigene Quelle suchen).
-- [ ] **V2.4** Fakten zentralisieren: `FACTS.capacity.*` (existiert, wird auf dieser Seite nicht
+      ✓ 13.09.2026 · Commit `d66e1d6` · `introP1` auf Definition-Lead-Muster umgestellt
+      ("Die Weihnachtsfeier München im Ristorante STORIA ist ein italienisches
+      Festmenü-Angebot..."). TL;DR-Card gerendert (vorher ungenutzter Key). Neuer
+      "Auf einen Blick"-Block (Kapazität/Preis ab/Mindestgruppengröße/Anfrage), alle Werte aus
+      bereits vorhandenem Seiteninhalt bzw. `FACTS.*` über neuen `fillFacts()`-Helper. Outbound-Link:
+      Accademia Italiana della Cucina (1953, offizielle italienische Institution zur Bewahrung
+      regionaler Kochtraditionen, https://www.accademiaitalianadellacucina.it/en) — per WebFetch
+      verifiziert als offizielle, autoritative, nicht-kommerzielle Quelle, eigenständig gegenüber
+      champagne.fr (Silvester) und UNESCO Mediterranean Diet (Weihnachten). Verifiziert am
+      prerenderten HTML: Definition-Lead als erster Fließtext-Satz, TL;DR sichtbar,
+      "Auf einen Blick" sichtbar, Outbound-Link vorhanden. Alle 4 Sprachen.
+- [x] **V2.4** Fakten zentralisieren: `FACTS.capacity.*` (existiert, wird auf dieser Seite nicht
       genutzt) statt der doppelten Kapazitätsangaben in `reason5Desc` UND `faq2Answer`;
       `FACTS.weihnachten.groupMenuPriceFrom` statt hartkodiertem „45 €" an den vier Fundstellen
       (`seoTitle`, `seoDescription`, `tldr`, `faq1Answer`). Reine Deduplizierung bereits angezeigter
       Werte, keine neue Preisbehauptung — die offene Frage „ist 45 € betrieblich korrekt" bleibt
       unabhängig davon offen (siehe BLOCKED-Log) und wird durch diesen Schritt nicht beantwortet.
       Alle Texte in 4 Sprachen, `it.ts`-Teilübersetzungsmuster beachten falls einschlägig.
+      ✓ 13.09.2026 · Commit `d953d43` · `fillFacts()` (aus V2.3) erweitert um `{indoorSeats}` und
+      auf `seoTitle`/`seoDescription`/`tldr`/`faq1Answer`/`reason5Desc`/`faq2Answer` angewendet.
+      `it.ts` hat keinen eigenen `tldr`-Override (Teilübersetzungsmuster) — fällt korrekt auf den
+      jetzt aktualisierten deutschen Platzhalter-Text zurück, nicht angetastet. Verifiziert am
+      prerenderten HTML aller 4 Sprachen: `grep -o '{[a-zA-Z]*}'` liefert 0 Treffer (keine
+      unaufgelösten Platzhalter), korrekte Werte (45 €, 100 Sitzplätze, 300 Stehempfang) in
+      Title/Description/FAQ/TL;DR.
 
 ## V2: Branch, Beweis, Merge
 
@@ -120,6 +156,8 @@ Weihnachtsbegriffe ab. AKUT — Buchungssaison läuft laut eigener Seite „ab S
       Beweis zusätzlich: `firmenfeier-muenchen` prerendertes HTML zeigt reduzierte
       Weihnachts-Nennungen, `weihnachtsfeier-muenchen` zeigt „Firmenweihnachtsfeier"/
       „Betriebsweihnachtsfeier", Definition-Lead als erster Satz, TL;DR gerendert.
+      (V2.1–V2.4 lokal fertig und verifiziert, Commits `e880117`/`d66e1d6`/`d953d43` auf
+      `geo-luecken-v2` — Push/PR/Merge/Live-Stichprobe macht das Hauptfenster.)
 
 ---
 
