@@ -9,16 +9,26 @@ import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import ReservationBooking from "@/components/ReservationBooking";
 import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
+import GoogleReviews from "@/components/GoogleReviews";
+import PhotoGallery from "@/components/PhotoGallery";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Mail, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import silvesterHeroImage from "@/assets/silvester-dinner-gala-storia-muenchen.webp";
 import silvesterHeroImage600 from "@/assets/silvester-dinner-gala-storia-muenchen-600w.webp";
+// Bildstrecke (E3.3) — bereits vorhandene Projekt-Assets, keine neuen Bilder generiert.
+import aperitivoBarImage from "@/assets/aperitivo-muenchen-italienische-bar-storia.webp";
+import aperitivoBarImage600 from "@/assets/aperitivo-muenchen-italienische-bar-storia-600w.webp";
+import candlelightImage from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
+import candlelightImage600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
+import interiorDetailsImage from "@/assets/ristorante-storia-uebersicht-details.webp";
+import interiorDetailsImage600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
@@ -221,6 +231,22 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
     { q: s.faq6Question, a: s.faq6Answer },
     { q: s.faq7Question, a: s.faq7Answer },
     { q: s.faq8Question, a: s.faq8Answer },
+    // E3.3: neue FAQ, entstanden aus E3.1 (Stornostaffel).
+    { q: s.faq9Question, a: s.faq9Answer },
+  ];
+
+  /**
+   * Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Gilt für Silvester, weil die
+   * ganze Seite ein bezahltes Gala-Dinner-Event ist (99/150 € p.P.), anders als die reguläre
+   * à-la-carte-Tischreservierung auf `weihnachten-muenchen`, wo dieselbe Staffel sachlich falsch
+   * wäre (KONZEPT/LOOP-SAISONSEITEN-AUSBAU.md § E3.1).
+   */
+  const cancellationTiers = [
+    { period: s.cancellationTier1Period, fee: s.cancellationTier1Fee },
+    { period: s.cancellationTier2Period, fee: s.cancellationTier2Fee },
+    { period: s.cancellationTier3Period, fee: s.cancellationTier3Fee },
+    { period: s.cancellationTier4Period, fee: s.cancellationTier4Fee },
+    { period: s.cancellationTier5Period, fee: s.cancellationTier5Fee },
   ];
 
   const relatedLinks = [
@@ -442,6 +468,20 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </Card>
             </section>
 
+            {/* Bildstrecke (E3.3) — bisher hatte die Seite nur Hero + Vorjahresmenü-Karten als
+                Bildmaterial. Ausschließlich bereits vorhandene Projekt-Assets (keine neuen Bilder
+                generiert/hochgeladen), thematisch zum Gala-Abend passend: Aperitivo-Empfang
+                (deckt sich mit dem 19:00-Timeline-Punkt), Kerzenlicht-Ambiente, Interieur. */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Impressionen vom Silvesterabend</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Aperitivo-Empfang, festliches Ambiente und stilvolles Interieur – ein Eindruck vom Rahmen Ihres Silvesterabends im STORIA.</p>
+              <PhotoGallery columns={3} images={[
+                { src: aperitivoBarImage, srcSet: `${aperitivoBarImage600} 600w, ${aperitivoBarImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Aperitivo-Empfang im Ristorante STORIA München – stilvolle Bar-Atmosphäre", caption: "Aperitivo-Empfang · Bar" },
+                { src: candlelightImage, srcSet: `${candlelightImage600} 600w, ${candlelightImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Festliches Kerzenlicht-Ambiente im Ristorante STORIA München", caption: "Festliches Ambiente · Kerzenlicht" },
+                { src: interiorDetailsImage, srcSet: `${interiorDetailsImage600} 600w, ${interiorDetailsImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Elegantes Interieur des Ristorante STORIA München in der Maxvorstadt", caption: "Interieur · Details" },
+              ]} />
+            </section>
+
             {/* Packages (kein Live-Menü aktiv) oder Live-Menü */}
             {!isActive ? (
               <section className="mb-16">
@@ -545,6 +585,40 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </div>
             </section>
 
+            {/* Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Bewusst OHNE Verweis
+                auf eine "AGB für Veranstaltungen"-Seite: die gibt es im Repo nicht (nur
+                agb-restaurant, agb-gutscheine in slugs.json), ein Link darauf wäre eine 404 bzw.
+                eine falsche Erwartung — siehe `cancellationDepositNote`, die stattdessen auf die
+                Buchungsbestätigung verweist. */}
+            <section className="mb-16" aria-labelledby="silvester-storno">
+              <Card className="border-border">
+                <CardHeader className="pb-3">
+                  <h2 id="silvester-storno" className="text-2xl font-serif font-bold">{s.cancellationTitle}</h2>
+                  <p className="text-muted-foreground text-sm">{s.cancellationIntro}</p>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>{s.cancellationColPeriod}</TableHead>
+                        <TableHead>{s.cancellationColFee}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {cancellationTiers.map((tier, i) => (
+                        <TableRow key={i}>
+                          <TableCell>{tier.period}</TableCell>
+                          <TableCell className="font-medium">{tier.fee}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                  <p className="text-sm text-muted-foreground mt-4">{s.cancellationBasisNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{s.cancellationDepositNote}</p>
+                </CardContent>
+              </Card>
+            </section>
+
             {/* Kontaktwege (E2.3) — die EINZIGE Stelle der Seite, an der Telefon, E-Mail und
                 WhatsApp stehen. Vorher war dieser Block eine dritte CTA-Box, die nach
                 events-storia.de führte und die Kontaktkanäle zusätzlich in Hero und Final-CTA
@@ -586,6 +660,11 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                 ))}
               </div>
             </section>
+
+            {/* Social Proof (E3.2) — bisher hatte diese Seite keine Google-Bewertungen-Sektion.
+                `GoogleReviews` zieht echte Daten aus `src/data/google-reviews-*.json`, keine
+                Props nötig (Muster: AperitivoMuenchen.tsx, WeihnachtsfeierMuenchen.tsx). */}
+            <GoogleReviews />
 
             {/* FAQ */}
             <section className="mb-16">
