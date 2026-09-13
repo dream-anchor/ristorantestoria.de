@@ -2922,8 +2922,12 @@ export const de = {
       type4Item2: "Prosecco-Empfang möglich",
       type4Item3: "Individuelle Tischdekoration",
       type4Item4: "Visitenkarten-Atmosphäre",
-      menuTitle: "Unser Weihnachtsmenü München",
-      menuIntro: "Für die Weihnachtssaison kreiert unser Küchenchef jedes Jahr besondere Festmenüs, die italienische Weihnachtstradition mit saisonalen Zutaten verbinden.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, Fakt Antoine 13.09.2026): kein festes,
+      // vorgegebenes Weihnachtsmenü — auch nicht für Firmen/Gruppen. menuTitle/menuIntro
+      // umformuliert, damit die drei Karten unten (Preise/Struktur unverändert) eindeutig als
+      // Orientierungsbeispiele lesbar sind, nicht als buchbares Bestellmenü.
+      menuTitle: "Ihr Weihnachtsmenü – individuell mit Ihnen abgestimmt",
+      menuIntro: "Ein pauschal buchbares Weihnachtsmenü gibt es nicht: Was am Ende auf den Tisch kommt, besprechen wir gemeinsam mit Ihnen – abgestimmt auf Anlass, Vorlieben und Budget. Die folgenden drei Menüs sind Orientierungsbeispiele für Umfang und Preisrahmen, kein fertiges Bestellmenü von der Karte.",
       menu1Title: "🌟 Menü Natale Classico – 4 Gänge",
       menu1Subtitle: "Unser Klassiker für Weihnachtsfeiern",
       menu1Desc: "Antipasto della casa, Primo Piatto (Pasta oder Risotto), Secondo Piatto (Fleisch oder Fisch) und Dolce della casa. Inklusive Aperitivo zur Begrüßung und einem Glas Wein pro Gang.",
@@ -2935,6 +2939,11 @@ export const de = {
       menu3Subtitle: "Für größere Gruppen",
       menu3Desc: "Italienisches Festbuffet mit großer Antipasti-Auswahl, drei Hauptgängen, Dessert-Variation und Softdrinks. Ideal für Firmenweihnachtsfeiern ab 30 Personen, bei denen Networking und lockere Atmosphäre im Vordergrund stehen.",
       menuPriceNote: "Aktuelle Preise und saisonale Details: events-storia.de oder direkt unter 089 51519696",
+      // Anfrageformular (E4.2, `AnlassAnfrageForm` mit `anlass="weihnachtsfeier"`) — der
+      // Gruppen-/Firmen-Weg, der bei der Kannibalisierungs-Auflösung von weihnachten-muenchen zu
+      // dieser Seite gewandert ist. Ergänzt die bestehenden events-storia-CTAs, ersetzt sie nicht.
+      inquiryTitle: "Weihnachtsfeier anfragen",
+      inquiryIntro: "Planen Sie eine Firmen- oder Gruppenfeier? Schreiben Sie uns Wunschtermin, Gästezahl und Ihre Vorstellungen – das Menü besprechen wir individuell mit Ihnen.",
       reasonsTitle: "8 Gründe für Ihre Weihnachtsfeier im STORIA",
       reason1Title: "🎄 Festliche italienische Atmosphäre",
       reason1Desc: "Weihnachtliche Dekoration trifft auf italienisches Flair. Das STORIA verwandelt sich in der Adventszeit in einen gemütlichen, festlichen Ort – ohne Kitsch, mit viel Stil.",
@@ -2956,13 +2965,19 @@ export const de = {
       step1Title: "Anfrage & Erstberatung",
       step1Desc: "Kontaktieren Sie uns über events-storia.de oder telefonisch. Teilen Sie uns Wunschtermin, Personenzahl und Ihre Vorstellungen mit. Antwort innerhalb von 48 Stunden.",
       step2Title: "Besichtigung & Menüauswahl",
-      step2Desc: "Optional: Besichtigen Sie die Räumlichkeiten vor Ort. Wählen Sie Ihr Weihnachtsmenü und besprechen Sie individuelle Wünsche.",
+      // E4.2: "Wählen Sie Ihr Weihnachtsmenü" umformuliert — es gibt kein Menü zum Auswählen,
+      // nur ein gemeinsames Gespräch (siehe menuIntro/faq4Answer).
+      step2Desc: "Optional: Besichtigen Sie die Räumlichkeiten vor Ort. Wir besprechen Ihr individuelles Weihnachtsmenü – die Menüs weiter oben dienen dabei als Orientierung.",
       step3Title: "Angebot & Buchung",
       step3Desc: "Sie erhalten ein transparentes Angebot. Nach Ihrer Zusage sichert eine Anzahlung (30%) Ihren Termin. Rechnung an die Firma möglich.",
       step4Title: "Finale Abstimmung",
       step4Desc: "1-2 Wochen vorher: Finale Abstimmung zu Ablauf, Sitzordnung, Sonderwünschen. Ihr persönlicher Ansprechpartner steht bereit.",
       step5Title: "Ihre Weihnachtsfeier – Buon Natale!",
-      step5Desc: "Am Abend kümmern wir uns um alles. Festliches Ambiente, perfekter Service, exquisites Essen. Sie und Ihre Gäste können den Abend genießen.",
+      // E4.2: sinngemäß die Timeline „So läuft Ihre Weihnachtsfeier ab" übernommen, die in E4.1
+      // aus WeihnachtenMuenchen.tsx entfernt wurde (Aperitivo-Empfang, Menü Gang für Gang, Weine,
+      // Dolci & Digestif, Ausklang) — verschmolzen in diesen letzten Schritt statt einer zweiten,
+      // separaten Timeline-Sektion (dieser processTitle-Block deckt den Ablauf bereits ab).
+      step5Desc: "Am Abend kümmern wir uns um alles: vom Aperitivo-Empfang über Ihr Weihnachtsmenü Gang für Gang, begleitet von ausgewählten Weinen, bis zu Dolci und Digestif zum Ausklang. Festliches Ambiente, perfekter Service – Sie und Ihre Gäste genießen einfach den Abend.",
       testimonialsTitle: "Das sagen Unternehmen über Weihnachtsfeiern im STORIA",
       testimonial1Quote: "Unsere Weihnachtsfeier war ein voller Erfolg! Die festliche Atmosphäre, das italienische Weihnachtsmenü und der herzliche Service haben alle begeistert. Wir kommen nächstes Jahr wieder.",
       testimonial1Author: "Marketing-Team, Tech-Startup München",
@@ -2994,8 +3009,12 @@ export const de = {
       faq2Answer: "Wir bieten flexible Raumkonzepte: Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen, exklusive Raummiete f\u00fcr 60\u2013100 Sitzpl\u00e4tze. Dazu die Terrasse mit ebenfalls bis zu 100 Pl\u00e4tzen. Stehempf\u00e4nge bis 300 G\u00e4ste.",
       faq3Question: "Wann sollte ich die Weihnachtsfeier M\u00fcnchen buchen?",
       faq3Answer: "Idealerweise im September oder Oktober. Die beliebten Termine Anfang bis Mitte Dezember (Do, Fr, Sa) sind oft schon früh ausgebucht.",
-      faq4Question: "Gibt es ein spezielles Weihnachtsmenü München?",
-      faq4Answer: "Ja, unser Küchenchef kreiert jedes Jahr besondere Weihnachtsmenüs mit saisonalen italienischen Spezialitäten: 4-Gänge (Classico), 5-Gänge (Grande) und Buffet-Optionen.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, Fakt Antoine 13.09.2026): präzisiert gegen
+      // den in der E4-Recherche gefundenen Widerspruch zu weihnachten-muenchen faq3 ("kein festes
+      // Weihnachtsmenü"). Frage und Antwort machen jetzt explizit, dass die Menüs oben
+      // Orientierung sind, kein Bestellmenü — und verweisen für Einzelgäste auf die Schwesterseite.
+      faq4Question: "Können wir eines der Menüs oben einfach so buchen?",
+      faq4Answer: "Nein – ein pauschal buchbares Menü gibt es nicht: Wir besprechen Ihr Weihnachtsmenü für die Feier individuell mit Ihnen, abgestimmt auf Anlass, Vorlieben und Budget. Die Menüs Natale Classico, Grande und Buffet weiter oben dienen dabei als Orientierung für Umfang und Preisrahmen, nicht als fertiges Bestellmenü. Möchten Sie als Einzelgast oder Familie à la carte feiern, finden Sie alle Details auf unserer Weihnachtsseite.",
       faq5Question: "Kann ich die Location exklusiv für eine Weihnachtsfeier buchen?",
       faq5Answer: "Ja, ab ca. 40 Personen bieten wir exklusive Raummiete an. Fragen Sie nach Verfügbarkeit und Konditionen.",
       faq6Question: "Können Rechnungen an die Firma gestellt werden?",
@@ -3008,6 +3027,10 @@ export const de = {
       ctaDesc: "Sichern Sie sich Ihren Wunschtermin – die besten Termine sind schnell vergeben!",
       ctaButton: "\u2192 Jetzt Weihnachtsfeier reservieren",
       relatedTitle: "Das könnte Sie auch interessieren",
+      // E4.2: weihnachten-muenchen ergänzt (fehlte bisher komplett) — Gegenrichtung zu der Seite,
+      // die seit E4.1 umgekehrt schon prominent hierher verlinkt.
+      related5Title: "🎅 Weihnachten à la carte",
+      related5Desc: "Privates Weihnachtsessen für Einzelgäste und Familien – Tisch reservieren, von der saisonalen Karte wählen.",
       related1Title: "💼 Firmenevents München",
       related1Desc: "Alle Event-Formate im Überblick",
       related2Title: "🎉 Eventlocation München",

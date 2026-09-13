@@ -2171,8 +2171,12 @@ const frBase = {
       type4Item2: "Réception au prosecco possible",
       type4Item3: "Décoration de table individuelle",
       type4Item4: "Ambiance networking professionnel",
-      menuTitle: "Notre Menu de Noël Munich",
-      menuIntro: "Pour la saison de Noël, notre chef crée chaque année des menus festifs spéciaux qui allient tradition de Noël italienne et ingrédients de saison.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fait confirmé par Antoine le 13.09.2026) :
+      // aucun menu de Noël fixe et prédéfini — même pas pour les entreprises/groupes. menuTitle/
+      // menuIntro reformulés pour que les trois cartes ci-dessous (prix/structure inchangés) se
+      // lisent clairement comme des exemples indicatifs, pas un menu réservable tel quel.
+      menuTitle: "Votre Menu de Noël – Convenu Individuellement Avec Vous",
+      menuIntro: "Il n'existe pas de menu de Noël fixe à réserver simplement : ce qui arrivera finalement à table, nous le décidons ensemble avec vous – adapté à l'occasion, à vos préférences et à votre budget. Les trois menus ci-dessous sont des exemples indicatifs pour l'ampleur et la fourchette de prix, pas un menu prêt à commander.",
       menu1Title: "🌟 Menu Natale Classico – 4 Services",
       menu1Subtitle: "Notre classique pour les fêtes de Noël",
       menu1Desc: "Antipasto della casa, Primo Piatto (pâtes ou risotto), Secondo Piatto (viande ou poisson) et Dolce della casa. Apéritif de bienvenue et un verre de vin par service inclus.",
@@ -2184,6 +2188,12 @@ const frBase = {
       menu3Subtitle: "Pour les grands groupes",
       menu3Desc: "Buffet festif italien avec large sélection d\u2019antipasti, trois plats principaux, variété de desserts et boissons sans alcool. Idéal pour les fêtes d\u2019entreprise à partir de 30 invités, où networking et ambiance détendue sont au premier plan.",
       menuPriceNote: "Prix actuels et détails saisonniers : events-storia.de ou directement au 089 51519696",
+      // Formulaire de demande (E4.2, `AnlassAnfrageForm` avec `anlass="weihnachtsfeier"`) — la
+      // voie groupe/entreprise qui a migré vers cette page lors de la résolution de la
+      // cannibalisation avec weihnachten-muenchen. S'ajoute aux CTA events-storia existants, ne
+      // les remplace pas.
+      inquiryTitle: "Demander votre Fête de Noël",
+      inquiryIntro: "Vous planifiez une fête d'entreprise ou de groupe ? Écrivez-nous la date souhaitée, le nombre d'invités et vos idées – nous discuterons du menu individuellement avec vous.",
       reasonsTitle: "8 Raisons pour Votre Fête de Noël au STORIA",
       reason1Title: "🎄 Ambiance Italienne Festive",
       reason1Desc: "Les décorations de Noël rencontrent le charme italien. STORIA se transforme pendant l\u2019Avent en un lieu chaleureux et festif – sans kitsch, avec beaucoup de style.",
@@ -2205,13 +2215,19 @@ const frBase = {
       step1Title: "Demande et Première Consultation",
       step1Desc: "Contactez-nous via events-storia.de ou par téléphone. Indiquez-nous la date souhaitée, le nombre d\u2019invités et vos souhaits. Réponse sous 48 heures.",
       step2Title: "Visite et Choix du Menu",
-      step2Desc: "Optionnel : Visitez les lieux en personne. Choisissez votre menu de Noël et discutez de vos souhaits individuels.",
+      // E4.2 : « Choisissez votre menu de Noël » reformulé — il n'y a pas de menu à choisir,
+      // seulement un échange direct (voir menuIntro/faq4Answer).
+      step2Desc: "Optionnel : Visitez les lieux en personne. Nous discutons de votre menu de Noël individuel – les menus ci-dessus servent d'indication.",
       step3Title: "Devis et Réservation",
       step3Desc: "Vous recevez un devis transparent. Après votre confirmation, un acompte (30 %) garantit votre date. Facturation à l\u2019entreprise possible.",
       step4Title: "Coordination Finale",
       step4Desc: "1-2 semaines avant : Coordination finale du programme, plan de table, demandes spéciales. Votre interlocuteur personnel est prêt.",
       step5Title: "Votre Fête de Noël – Buon Natale !",
-      step5Desc: "Le soir venu, nous nous occupons de tout. Ambiance festive, service parfait, cuisine exquise. Vous et vos invités pouvez profiter de la soirée.",
+      // E4.2 : intègre, dans l'esprit, la timeline « Comment se déroule votre fête de Noël »
+      // supprimée de WeihnachtenMuenchen.tsx en E4.1 (réception apéritif, menu plat par plat,
+      // vins, dolci & digestif, épilogue) — fusionnée dans cette dernière étape plutôt qu'une
+      // seconde section timeline distincte (ce bloc processTitle couvre déjà le déroulé).
+      step5Desc: "Le soir venu, nous nous occupons de tout : de la réception apéritif à votre menu de Noël servi plat par plat, accompagné de vins sélectionnés, jusqu'aux dolci et au digestif pour clore la soirée. Ambiance festive, service parfait – vous et vos invités profitez simplement de la soirée.",
       testimonialsTitle: "Ce que les Entreprises Disent des Fêtes de Noël au STORIA",
       testimonial1Quote: "Notre fête de Noël a été un succès total ! L\u2019ambiance festive, le menu de Noël italien et le service chaleureux ont enthousiasmé tout le monde. Nous reviendrons l\u2019année prochaine.",
       testimonial1Author: "Équipe Marketing, Startup Tech Munich",
@@ -2243,8 +2259,13 @@ const frBase = {
       faq2Answer: "Nous proposons des concepts d\u2019espace flexibles : Espace séparé pour 10-30 personnes, espace semi-privé pour 30-60 personnes, location exclusive de salle pour 60-100 places assises. Réceptions debout jusqu'à 300 invités.",
       faq3Question: "Quand dois-je réserver la fête de Noël Munich ?",
       faq3Answer: "Idéalement en septembre ou octobre. Les dates populaires de début à mi-décembre (jeu, ven, sam) sont souvent réservées tôt.",
-      faq4Question: "Y a-t-il un menu de Noël spécial Munich ?",
-      faq4Answer: "Oui, notre chef crée chaque année des menus de Noël spéciaux avec des spécialités italiennes de saison : 4 services (Classico), 5 services (Grande) et options buffet.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fait confirmé par Antoine le 13.09.2026) :
+      // précisé face à la contradiction trouvée lors de la recherche E4 avec faq3 de
+      // weihnachten-muenchen (« pas de menu de Noël fixe »). La question et la réponse rendent
+      // désormais explicite que les menus ci-dessus sont indicatifs, pas un menu réservable — et
+      // renvoient les convives individuels vers la page sœur.
+      faq4Question: "Pouvons-nous simplement réserver l'un des menus ci-dessus ?",
+      faq4Answer: "Non – il n'existe pas de menu réservable tel quel : nous discutons de votre menu de Noël pour la fête individuellement avec vous, adapté à l'occasion, à vos préférences et à votre budget. Les menus Natale Classico, Grande et Buffet ci-dessus servent d'indication pour l'ampleur et la fourchette de prix, pas de menu prêt à commander. Si vous êtes un convive individuel ou une famille souhaitant fêter Noël à la carte, vous trouverez tous les détails sur notre page Noël.",
       faq5Question: "Puis-je réserver le lieu en exclusivité pour une fête de Noël ?",
       faq5Answer: "Oui, à partir d\u2019environ 40 invités, nous proposons la location exclusive de salle. Renseignez-vous sur la disponibilité et les conditions.",
       faq6Question: "Les factures peuvent-elles être adressées à l\u2019entreprise ?",
@@ -2257,6 +2278,10 @@ const frBase = {
       ctaDesc: "Réservez votre date préférée – les meilleures dates partent vite !",
       ctaButton: "\u2192 R\u00e9server f\u00eate de No\u00ebl maintenant",
       relatedTitle: "Cela Pourrait Aussi Vous Intéresser",
+      // E4.2 : weihnachten-muenchen ajouté (absent jusqu'ici) — sens inverse du lien que
+      // weihnachten-muenchen pointe déjà ici de manière proéminente depuis E4.1.
+      related5Title: "🎅 Noël à la Carte",
+      related5Desc: "Un dîner de Noël privé pour convives individuels et familles – réservez une table, commandez à la carte de saison.",
       related1Title: "💼 Événements d\u2019Entreprise Munich",
       related1Desc: "Tous les formats d\u2019événements en un coup d\u2019œil",
       related2Title: "🎉 Lieu d\u2019Événement Munich",

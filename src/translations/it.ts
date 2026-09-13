@@ -1978,8 +1978,12 @@ const itBase = {
       type4Item2: "Ricevimento con prosecco disponibile",
       type4Item3: "Decorazione tavoli individuale",
       type4Item4: "Atmosfera business networking",
-      menuTitle: "Il Nostro Menu Natalizio Monaco",
-      menuIntro: "Per la stagione natalizia, il nostro chef crea ogni anno menu festivi speciali che combinano la tradizione natalizia italiana con ingredienti stagionali.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fatto confermato da Antoine il
+      // 13.09.2026): nessun menu di Natale fisso e predeterminato — nemmeno per aziende/gruppi.
+      // menuTitle/menuIntro riformulati perché le tre schede sotto (prezzo/struttura invariati)
+      // si leggano chiaramente come esempi orientativi, non un menu prenotabile così com'è.
+      menuTitle: "Il Vostro Menu di Natale – Concordato Individualmente con Voi",
+      menuIntro: "Non esiste un menu di Natale fisso da prenotare semplicemente: ciò che finisce in tavola lo decidiamo insieme a voi – su misura per l'occasione, le preferenze e il budget. I tre menu qui sotto sono esempi orientativi per portata e fascia di prezzo, non un menu pronto da ordinare.",
       menu1Title: "🌟 Menu Natale Classico – 4 Portate",
       menu1Subtitle: "Il nostro classico per le feste di Natale",
       menu1Desc: "Antipasto della casa, Primo Piatto (pasta o risotto), Secondo Piatto (carne o pesce) e Dolce della casa. Incluso aperitivo di benvenuto e un bicchiere di vino per portata.",
@@ -1991,6 +1995,12 @@ const itBase = {
       menu3Subtitle: "Per gruppi più grandi",
       menu3Desc: "Buffet festivo italiano con ampia selezione di antipasti, tre portate principali, varietà di dessert e bevande analcoliche. Ideale per feste aziendali da 30 ospiti, dove networking e atmosfera rilassata sono al centro.",
       menuPriceNote: "Prezzi attuali e dettagli stagionali: events-storia.de o direttamente al 089 51519696",
+      // Modulo di richiesta (E4.2, `AnlassAnfrageForm` con `anlass="weihnachtsfeier"`) — il
+      // percorso gruppo/azienda migrato su questa pagina con la risoluzione della
+      // cannibalizzazione rispetto a weihnachten-muenchen. Si aggiunge alle CTA events-storia
+      // esistenti, non le sostituisce.
+      inquiryTitle: "Richiedi la Tua Festa di Natale",
+      inquiryIntro: "State pianificando una festa aziendale o di gruppo? Scriveteci la data desiderata, il numero di ospiti e le vostre idee – discuteremo il menu individualmente con voi.",
       reasonsTitle: "8 Motivi per la Vostra Festa di Natale al STORIA",
       reason1Title: "🎄 Atmosfera Italiana Festiva",
       reason1Desc: "Le decorazioni natalizie incontrano il fascino italiano. STORIA si trasforma durante l'Avvento in un luogo accogliente e festivo – senza kitsch, con molto stile.",
@@ -2012,13 +2022,20 @@ const itBase = {
       step1Title: "Richiesta e Prima Consulenza",
       step1Desc: "Contattateci tramite events-storia.de o telefonicamente. Comunicateci la data desiderata, il numero di ospiti e le vostre idee. Risposta entro 48 ore.",
       step2Title: "Visita e Scelta Menu",
-      step2Desc: "Opzionale: Visitate i locali di persona. Scegliete il vostro menu natalizio e discutete desideri individuali.",
+      // E4.2: "Scegliete il vostro menu natalizio" riformulato — non c'è un menu da scegliere,
+      // solo un confronto diretto (vedi menuIntro/faq4Answer).
+      step2Desc: "Opzionale: Visitate i locali di persona. Discutiamo il vostro menu natalizio individuale – i menu sopra riportati servono come orientamento.",
       step3Title: "Preventivo e Prenotazione",
       step3Desc: "Ricevete un preventivo trasparente. Dopo la vostra conferma, un acconto (30%) garantisce la vostra data. Fatturazione all'azienda possibile.",
       step4Title: "Coordinamento Finale",
       step4Desc: "1-2 settimane prima: Coordinamento finale su programma, disposizione posti, richieste speciali. Il vostro referente personale è pronto.",
       step5Title: "La Vostra Festa di Natale – Buon Natale!",
-      step5Desc: "La sera, ci occupiamo di tutto. Ambiente festivo, servizio perfetto, cibo squisito. Voi e i vostri ospiti potete godervi la serata.",
+      // E4.2: integra, nello spirito, la timeline "Come funziona la vostra festa di Natale"
+      // rimossa da WeihnachtenMuenchen.tsx in E4.1 (ricevimento aperitivo, menu portata per
+      // portata, vini, dolci & digestivo, conclusione) — fusa in quest'ultimo passaggio invece
+      // di una seconda sezione timeline separata (questo blocco processTitle copre già lo
+      // svolgimento).
+      step5Desc: "La sera, ci occupiamo di tutto: dal ricevimento aperitivo al vostro menu natalizio servito portata per portata, accompagnato da vini selezionati, fino a dolci e digestivo per concludere. Ambiente festivo, servizio perfetto – voi e i vostri ospiti vi godete semplicemente la serata.",
       testimonialsTitle: "Cosa Dicono le Aziende sulle Feste di Natale al STORIA",
       testimonial1Quote: "La nostra festa di Natale è stata un successo completo! L'atmosfera festiva, il menu natalizio italiano e il servizio caloroso hanno entusiasmato tutti. Torneremo l'anno prossimo.",
       testimonial1Author: "Team Marketing, Tech Startup Monaco",
@@ -2050,8 +2067,13 @@ const itBase = {
       faq2Answer: "10-30 ospiti in area separata, 30-60 semi-privato, 60-100 posti a sedere con affitto esclusivo. Ricevimenti in piedi fino a 300 ospiti. Più grande terrazza in estate.",
       faq3Question: "Quando dovrei prenotare la festa di Natale Monaco?",
       faq3Answer: "Idealmente a settembre o ottobre. Le date popolari da inizio a metà dicembre (gio, ven, sab) sono spesso prenotate presto.",
-      faq4Question: "C'è un menu natalizio speciale Monaco?",
-      faq4Answer: "Sì, il nostro chef crea ogni anno menu natalizi speciali con specialità italiane stagionali: 4 portate (Classico), 5 portate (Grande) e opzioni buffet.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fatto confermato da Antoine il
+      // 13.09.2026): precisato contro la contraddizione trovata nella ricerca E4 rispetto a
+      // faq3 di weihnachten-muenchen ("nessun menu di Natale fisso"). Domanda e risposta ora
+      // rendono esplicito che i menu sopra sono orientativi, non un menu prenotabile — e
+      // rimandano gli ospiti singoli alla pagina sorella.
+      faq4Question: "Possiamo semplicemente prenotare uno dei menu sopra riportati?",
+      faq4Answer: "No – non esiste un menu prenotabile così com'è: discutiamo il vostro menu natalizio per la festa individualmente con voi, su misura per l'occasione, le preferenze e il budget. I menu Natale Classico, Grande e Buffet sopra riportati servono come orientamento per portata e fascia di prezzo, non come menu pronto. Se siete un ospite singolo o una famiglia e desiderate festeggiare alla carta, trovate tutti i dettagli nella nostra pagina di Natale.",
       faq5Question: "Posso prenotare la location in esclusiva per una festa di Natale?",
       faq5Answer: "Sì, da circa 40 ospiti offriamo l'affitto sala esclusivo. Chiedete disponibilità e condizioni.",
       faq6Question: "Le fatture possono essere inviate all'azienda?",
@@ -2064,6 +2086,10 @@ const itBase = {
       ctaDesc: "Assicuratevi la data desiderata – i posti migliori si esauriscono rapidamente!",
       ctaButton: "\u2192 Prenota festa di Natale ora",
       relatedTitle: "Potrebbe Interessarvi Anche",
+      // E4.2: weihnachten-muenchen aggiunto (finora assente) — direzione inversa del link che
+      // weihnachten-muenchen punta già qui in modo prominente dalla E4.1.
+      related5Title: "🎅 Natale alla Carta",
+      related5Desc: "Una cena di Natale privata per ospiti singoli e famiglie – prenotate un tavolo, ordinate dal menù stagionale.",
       related1Title: "💼 Eventi Aziendali Monaco",
       related1Desc: "Tutti i formati evento in sintesi",
       related2Title: "🎉 Location Eventi Monaco",

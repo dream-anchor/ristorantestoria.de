@@ -2835,8 +2835,12 @@ const enBase = {
       type4Item2: "Prosecco reception available",
       type4Item3: "Individual table decoration",
       type4Item4: "Business networking atmosphere",
-      menuTitle: "Our Christmas Menu Munich",
-      menuIntro: "For the Christmas season, our chef creates special holiday menus each year that combine Italian Christmas tradition with seasonal ingredients.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fact confirmed by Antoine 13.09.2026): no
+      // fixed, predetermined Christmas menu — not even for companies/groups. menuTitle/menuIntro
+      // reworded so the three cards below (price/structure unchanged) read clearly as orientation
+      // examples, not a bookable off-the-shelf menu.
+      menuTitle: "Your Christmas Menu – Discussed Individually With You",
+      menuIntro: "There is no fixed Christmas menu you can simply book: what ends up on the table is something we work out together with you – tailored to the occasion, preferences and budget. The three menus below are orientation examples for scope and price range, not a ready-made menu to order.",
       menu1Title: "🌟 Menu Natale Classico – 4 Courses",
       menu1Subtitle: "Our classic for Christmas parties",
       menu1Desc: "Antipasto della casa, Primo Piatto (pasta or risotto), Secondo Piatto (meat or fish) and Dolce della casa. Including welcome aperitivo and one glass of wine per course.",
@@ -2848,6 +2852,11 @@ const enBase = {
       menu3Subtitle: "For larger groups",
       menu3Desc: "Italian holiday buffet with extensive antipasti selection, three main courses, dessert variety and soft drinks. Ideal for corporate Christmas parties from 30 guests, where networking and relaxed atmosphere take center stage.",
       menuPriceNote: "Current prices and seasonal details: events-storia.de or directly at 089 51519696",
+      // Inquiry form (E4.2, `AnlassAnfrageForm` with `anlass="weihnachtsfeier"`) — the group/
+      // corporate route that moved to this page when the cannibalization with weihnachten-muenchen
+      // was resolved. Adds to the existing events-storia CTAs, does not replace them.
+      inquiryTitle: "Inquire About Your Christmas Party",
+      inquiryIntro: "Planning a corporate or group celebration? Send us your preferred date, number of guests and ideas – we'll discuss the menu with you individually.",
       reasonsTitle: "8 Reasons for Your Christmas Party at STORIA",
       reason1Title: "🎄 Festive Italian Atmosphere",
       reason1Desc: "Christmas decoration meets Italian flair. STORIA transforms during Advent into a cozy, festive venue – without kitsch, with plenty of style.",
@@ -2869,13 +2878,19 @@ const enBase = {
       step1Title: "Inquiry & Initial Consultation",
       step1Desc: "Contact us via events-storia.de or by phone. Tell us your preferred date, number of guests and your ideas. Response within 48 hours.",
       step2Title: "Viewing & Menu Selection",
-      step2Desc: "Optional: Visit the premises in person. Choose your Christmas menu and discuss individual wishes.",
+      // E4.2: "Choose your Christmas menu" reworded — there is no menu to choose from, only a
+      // joint conversation (see menuIntro/faq4Answer).
+      step2Desc: "Optional: Visit the premises in person. We'll discuss your individual Christmas menu – the menus above serve as orientation.",
       step3Title: "Quote & Booking",
       step3Desc: "You receive a transparent quote. After your confirmation, a deposit (30%) secures your date. Invoice to company possible.",
       step4Title: "Final Coordination",
       step4Desc: "1-2 weeks before: Final coordination on schedule, seating arrangement, special requests. Your personal contact is ready.",
       step5Title: "Your Christmas Party – Buon Natale!",
-      step5Desc: "On the evening, we take care of everything. Festive ambiance, perfect service, exquisite food. You and your guests can enjoy the evening.",
+      // E4.2: merged in, in spirit, the "How your Christmas party unfolds" timeline removed from
+      // WeihnachtenMuenchen.tsx in E4.1 (aperitivo reception, menu course by course, wines, dolci
+      // & digestif, wind-down) — folded into this last step instead of a second, separate
+      // timeline section (this processTitle block already covers the sequence of events).
+      step5Desc: "On the evening, we take care of everything: from the aperitivo reception through your Christmas menu served course by course, accompanied by selected wines, to dolci and digestif to wind down. Festive ambiance, perfect service – you and your guests simply enjoy the evening.",
       testimonialsTitle: "What Companies Say About Christmas Parties at STORIA",
       testimonial1Quote: "Our Christmas party was a complete success! The festive atmosphere, the Italian Christmas menu and the warm service impressed everyone. We'll be back next year.",
       testimonial1Author: "Marketing Team, Tech Startup Munich",
@@ -2907,8 +2922,12 @@ const enBase = {
       faq2Answer: "10-30 guests in separate area, 30-60 semi-private, 60\u2013100 seats with exclusive venue rental. Plus the terrace with up to 100 additional seats. Standing receptions up to 300 guests.",
       faq3Question: "When should I book the Christmas party Munich?",
       faq3Answer: "Ideally in September or October. The popular dates in early to mid-December (Thu, Fri, Sat) are often booked up early.",
-      faq4Question: "Is there a special Christmas menu Munich?",
-      faq4Answer: "Yes, our chef creates special Christmas menus each year with seasonal Italian specialties: 4-course (Classico), 5-course (Grande) and buffet options.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fact confirmed by Antoine 13.09.2026):
+      // precised against the contradiction found in the E4 research vs. weihnachten-muenchen
+      // faq3 ("no fixed Christmas menu"). Question and answer now make explicit that the menus
+      // above are orientation, not a bookable menu — and point individual guests to the sister page.
+      faq4Question: "Can we simply book one of the menus above?",
+      faq4Answer: "No – there is no menu you can book off the shelf: we discuss your Christmas menu for the party individually with you, tailored to the occasion, preferences and budget. The Natale Classico, Grande and Buffet menus above serve as orientation for scope and price range, not a ready-made menu. If you're an individual guest or family looking to celebrate à la carte, you'll find all the details on our Christmas page.",
       faq5Question: "Can I book the venue exclusively for a Christmas party?",
       faq5Answer: "Yes, from approx. 40 guests we offer exclusive room rental. Ask about availability and conditions.",
       faq6Question: "Can invoices be sent to the company?",
@@ -2921,6 +2940,10 @@ const enBase = {
       ctaDesc: "Secure your preferred date – the best dates fill up fast!",
       ctaButton: "\u2192 Reserve Christmas party now",
       relatedTitle: "You Might Also Be Interested In",
+      // E4.2: weihnachten-muenchen added (missing until now) — the reverse direction of the link
+      // weihnachten-muenchen has prominently pointed here since E4.1.
+      related5Title: "🎅 Christmas à la Carte",
+      related5Desc: "A private Christmas dinner for individual guests and families – reserve a table, order from the seasonal menu.",
       related1Title: "💼 Corporate Events Munich",
       related1Desc: "All event formats at a glance",
       related2Title: "🎉 Event Location Munich",
