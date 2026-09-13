@@ -112,34 +112,33 @@ const OktoberfestMuenchen = () => {
     { icon: "🤝", title: o.conceptBavareseTitle, desc: o.conceptBavareseDesc },
   ];
   const biere = [
-    { name: o.beerMassName, desc: o.beerMassDesc, price: "€ 15,00", badge: o.badgeFass, kind: "fass" },
+    { name: o.beerMassName, desc: o.beerMassDesc, price: "€ 15,00" },
     { name: o.beerRadlerName, desc: o.beerRadlerDesc, price: "€ 15,00" },
     { name: o.beerRussName, desc: o.beerRussDesc, price: "€ 15,00" },
-    { name: o.beerAlkoholfreiName, desc: o.beerAlkoholfreiDesc, price: "€ 6,90" },
   ];
   const aperitivi = [
-    { name: o.spritzBavareseName, desc: o.spritzBavareseDesc, price: "€ 9,90", badge: o.badgeHaus, kind: "ita" },
-    { name: o.spritzAperolName, desc: o.spritzAperolDesc, price: "€ 9,90" },
-    { name: o.spritzHugoName, desc: o.spritzHugoDesc, price: "€ 9,90" },
+    { name: o.spritzBavareseName, desc: o.spritzBavareseDesc, price: "€ 11,50", badge: o.badgeHaus, kind: "ita" },
+    { name: o.spritzAlpengluehenName, desc: o.spritzAlpengluehenDesc, price: "€ 11,50" },
+    { name: o.spritzWiesngoldName, desc: o.spritzWiesngoldDesc, price: "€ 11,50" },
   ];
   const brotzeit = [
     { name: o.brettBavareseName, desc: o.brettBavareseDesc, price: "€ 39,90", badge: o.badgeBestseller, kind: "bay" },
     { name: o.brettMuenchenName, desc: o.brettMuenchenDesc, price: "€ 27,90" },
     { name: o.brettItaliaName, desc: o.brettItaliaDesc, price: "€ 29,90" },
-    { name: o.breznName, desc: o.breznDesc, price: "€ 5,90" },
-    { name: o.obatzdaName, desc: o.obatzdaDesc, price: "€ 14,90" },
-    { name: o.weisswurstName, desc: o.weisswurstDesc, price: "€ 13,90" },
+    { name: o.breznName, desc: o.breznDesc, price: "€ 6,90" },
+    { name: o.obatzdaName, desc: o.obatzdaDesc, price: "€ 18,90" },
+    { name: o.salsicciaObatzdaName, desc: o.salsicciaObatzdaDesc, price: "€ 16,90" },
   ];
   const pizzen = [
-    { name: o.pizzaBratwurstName, desc: o.pizzaBratwurstDesc, price: "€ 16,90", badge: o.badgeBayerisch, kind: "bay" },
+    { name: o.pizzaBratwurstName, desc: o.pizzaBratwurstDesc, price: "€ 17,90", badge: o.badgeBayerisch, kind: "bay" },
     { name: o.pizzaSpanferkelName, desc: o.pizzaSpanferkelDesc, price: "€ 19,90", badge: o.badgeBayerisch, kind: "bay" },
-    { name: o.pizzaSalamiName, desc: o.pizzaSalamiDesc, price: "€ 15,90", badge: o.badgeItalienisch, kind: "ita" },
-    { name: o.pizzaObatzdaName, desc: o.pizzaObatzdaDesc, price: "€ 17,90", badge: o.badgeItalienisch, kind: "ita" },
+    { name: o.pizzaSpeckName, desc: o.pizzaSpeckDesc, price: "€ 18,90", badge: o.badgeItalienisch, kind: "ita" },
+    { name: o.pizzaObatzdaName, desc: o.pizzaObatzdaDesc, price: "€ 18,90", badge: o.badgeItalienisch, kind: "ita" },
   ];
   const braten = [
-    { name: o.schweinsbratenName, desc: o.schweinsbratenDesc, price: "€ 26,90" },
-    { name: o.rinderbratenName, desc: o.rinderbratenDesc, price: "€ 29,90" },
-    { name: o.vegetarischName, desc: o.vegetarischDesc, price: "€ 22,90" },
+    { name: o.schweinsbratenName, desc: o.schweinsbratenDesc, price: "€ 19,90" },
+    { name: o.rinderbratenName, desc: o.rinderbratenDesc, price: "€ 26,90" },
+    { name: o.parmigianaName, desc: o.parmigianaDesc, price: "€ 15,50" },
   ];
   const whyFeatures = [
     { icon: "🍺", title: o.featureHolzfassTitle, desc: o.featureHolzfassDesc },
@@ -185,6 +184,7 @@ const OktoberfestMuenchen = () => {
     { name: "Augusten Hotel", time: o.hotelAugustenTime, note: o.hotelAugustenNote },
     { name: "25hours The Royal Bavarian", time: o.hotel25hTime, note: o.hotel25hNote },
     { name: "Koenigshof – Luxury Collection", time: o.hotelKoenigshofTime, note: o.hotelKoenigshofNote },
+    { name: "The Charles Hotel", time: o.hotelCharlesTime, note: o.hotelCharlesNote },
     { name: "Ruby Rosi Hotel", time: o.hotelRosiTime, note: o.hotelRosiNote },
     { name: "Eurostars Grand Central", time: o.hotelEurostarsTime, note: o.hotelEurostarsNote },
   ];
@@ -594,6 +594,12 @@ const oktStyles = `
 .okt-btn-p:hover{transform:translateY(-2px);background:#e8b74a;}
 .okt-btn-g{color:#f4ece0;border:1.5px solid rgba(255,255,255,.42);}
 .okt-btn-g:hover{transform:translateY(-2px);border-color:var(--gold);}
+/* .okt-btn-g ist für den dunklen Hero gestylt (helle Schrift auf transparentem Hintergrund).
+   In hellen Sektionen (CtaRow, u.a. WhatsApp-Button) braucht derselbe Button dunkle Schrift,
+   sonst kaum lesbar (Fund 13.09.2026) — Regel höher spezifisch (main-Vorfahr), gilt daher
+   unabhängig von der Reihenfolge nur innerhalb <main>, der Hero liegt außerhalb davon. */
+main .okt-btn-g{color:var(--blaud);border-color:rgba(27,107,176,.35);}
+main .okt-btn-g:hover{border-color:var(--blau);background:rgba(27,107,176,.06);}
 .okt-btn-sm{padding:12px 22px;font-size:14px;margin-top:20px;color:var(--blaud);border-color:rgba(27,107,176,.4);}
 .okt-btn-sm:hover{border-color:var(--blau);}
 .okt-trust{margin-top:22px;color:#e8dcc8;font-size:14px;}
@@ -636,6 +642,11 @@ const oktStyles = `
 .okt-cards-2{grid-template-columns:repeat(2,1fr);}
 @media(max-width:880px){.okt-cards-3{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:600px){.okt-cards-3,.okt-cards-2{grid-template-columns:1fr;}}
+/* Verwaiste Einzelkarte in der letzten Zeile zentrieren statt links hängen zu lassen (Fund
+   13.09.2026, z. B. 4 Pizzen oder 7 Hotels in einem 3er-Grid). Nur bei genau 1 Karte Rest
+   relevant (aktuell der einzige vorkommende Fall); nur oberhalb des 2-Spalten-Breakpoints, weil
+   Spalte 2 von 3 dort nicht mehr existiert. */
+@media(min-width:881px){.okt-cards-3>*:last-child:nth-child(3n+1):not(:first-child){grid-column:2;}}
 .okt-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 38px -30px rgba(80,50,10,.4);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;}
 .okt-card:hover{transform:translateY(-4px);box-shadow:0 24px 46px -26px rgba(80,50,10,.45);}
 .okt-gingham{height:12px;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(27,107,176,.5) 0 6px,transparent 6px 12px),repeating-linear-gradient(90deg,rgba(27,107,176,.5) 0 6px,transparent 6px 12px);}
@@ -673,12 +684,19 @@ const oktStyles = `
 .okt-paket p{color:var(--muted);line-height:1.55;flex-grow:1;margin-bottom:16px;}
 .okt-paket-price{font-family:var(--serif);font-weight:700;font-size:1.3rem;color:var(--amber);}
 /* RESERVIEREN (blau) */
-.okt-sec-blue{background:linear-gradient(180deg,var(--blau),var(--blaud));color:#fff;}
+/* KEIN pauschales 'color:#fff' auf der Section mehr (Fund 13.09.2026): das kaskadierte in die
+   eingebettete ReservationBooking-Karte hinein und machte deren Telefon/WhatsApp-Kontaktbuttons
+   auf hellem Kartenhintergrund fast unlesbar. Eyebrow/H2/Lead haben ohnehin bereits eigene
+   Overrides direkt darunter — die brauchen das pauschale 'color:#fff' gar nicht. */
+.okt-sec-blue{background:linear-gradient(180deg,var(--blau),var(--blaud));}
 .okt-sec-blue .okt-eyebrow{color:#ffe6a8;}
 .okt-sec-blue .okt-eyebrow::before{background:#ffe6a8;}
 .okt-sec-blue .okt-h2{color:#fff;}
 .okt-sec-blue .okt-lead{color:rgba(255,255,255,.9);}
-.okt-booking{margin-top:8px;background:#fff;border-radius:20px;padding:8px;box-shadow:0 30px 60px -30px rgba(0,0,0,.5);}
+/* Vorher eine zweite, äußere weiße Box (Padding+Schatten) um die bereits eigenständig gestylte
+   ReservationBooking-Karte — "Box-in-Box", wirkte auf dem dunklen Hintergrund abgeschnitten/
+   deplatziert (Fund 13.09.2026). Nur noch Abstand, kein eigenes Box-Styling mehr. */
+.okt-booking{margin-top:8px;}
 /* HOTELS */
 .okt-hotel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;box-shadow:0 14px 34px -30px rgba(80,50,10,.4);transition:transform .3s;}
 .okt-hotel:hover{transform:translateY(-3px);}
