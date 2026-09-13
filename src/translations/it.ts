@@ -1747,8 +1747,6 @@ const itBase = {
     silvester: {
       seoTitle: "Capodanno al Ristorante STORIA Monaco – Cena di Gala 2026",
       seoDescription: "Ristorante Monaco Capodanno: Cena di gala italiana al STORIA Maxvorstadt. Da 99 € a persona con musica, abbinamento vini e brindisi di mezzanotte.",
-      standaloneSeoTitle: "Capodanno a Monaco 2026 | Cena di Gala | STORIA",
-      standaloneSeoDescription: "Capodanno a Monaco allo STORIA: cena di gala italiana in Maxvorstadt con menù delle feste, musica e brindisi di mezzanotte, a 5 minuti da Königsplatz.",
       breadcrumb: "Capodanno Monaco",
       heroTitle: "Capodanno al Ristorante STORIA Monaco – Cena di Gala 2026",
       heroSubtitle: "Cena festiva di Capodanno con musica, abbinamento vini e countdown di mezzanotte nella Maxvorstadt",
@@ -1761,7 +1759,6 @@ const itBase = {
       tldr: "Il Capodanno al Ristorante STORIA Monaco Maxvorstadt (Karlstraße 47a) è una cena di gala italiana per il passaggio al nuovo anno: menù degustazione di {courses} portate in tre varianti (Vegetale, Mare, Terra) a {price} € a persona, {priceWine} € a persona con abbinamento vini. Inizio alle ore 19:00 con aperitivo di benvenuto, musica e champagne di mezzanotte, da 2 a 100 ospiti. Attività familiare della famiglia Speranza dal 2015, a 5 minuti da Königsplatz. Prenotazioni: +49 89 51519696.",
       heroCta: "Richiedi Capodanno",
       heroCtaInactive: "Registrati per aggiornamenti",
-      heroCtaPhone: "089 51519696",
       heroEventsNote: "Per gruppi da 20+ ospiti:",
       heroEventsLink: "events-storia.de",
       // Definition-Lead (E1.5, GEO-Regel 1) — der emotionale Einstieg ist laut

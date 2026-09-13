@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp, ArrowRight } from "lucide-react";
+import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import silvesterHeroImage from "@/assets/silvester-dinner-gala-storia-muenchen.webp";
 import silvesterHeroImage600 from "@/assets/silvester-dinner-gala-storia-muenchen-600w.webp";
@@ -23,7 +23,6 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
-import allSlugs from "@/config/slugs.json";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
 import { FACTS } from "@/config/facts";
 
@@ -109,48 +108,56 @@ const fillFacts = (text: string): string =>
     .replace(/\{price\}/g, FACTS.silvester.price)
     .replace(/\{priceWine\}/g, FACTS.silvester.priceWithWine);
 
+/**
+ * Props — bewusst OHNE `standalone` (E1.7).
+ *
+ * Bis zur URL-Konsolidierung vom 12.09.2026 gab es eine zweite, flache Route
+ * (`/silvester-muenchen/`), die diese Komponente mit `standalone` rendern ließ. Seit der
+ * Konsolidierung existiert dieser Mount nicht mehr: `src/App.tsx` hat keinen
+ * `"silvester-muenchen"`-Eintrag in `routeComponents` (und `slugs.json` keinen solchen Slug), die
+ * einzige Aufrufstelle im gesamten Repo ist `BesondererAnlass.tsx` — und die übergibt `standalone`
+ * NICHT. Der Prop war damit dauerhaft `undefined`, sein kompletter Zweig toter Code: eine zweite
+ * Canonical-Berechnung, ein zweiter Breadcrumb, eigene SEO-Texte, ein eigener Hero-Titel, eine
+ * Teaser- und eine Inaktiv-Sektion, eine zweite Related-Links-Liste und die Unterdrückung des
+ * Event/Menu-JSON-LD — alles unerreichbar, aber bei jeder Änderung mitzupflegen und mitzulesen.
+ *
+ * Gegenprobe vor dem Entfernen: `grep -rn "SilvesterMuenchen" src/ scripts/ prerender.js` →
+ * Definition, Default-Export und genau ein `<SilvesterMuenchen menu=… archivedMenu=…
+ * seasonalConfig=… />` ohne `standalone`.
+ *
+ * ACHTUNG bei Übertragung auf die Schwesterseite: `WeihnachtenMuenchen.tsx` wird sehr wohl mit
+ * `standalone` gerendert (`App.tsx` → `WeihnachtenMuenchenStandalone`). Dort darf nichts entfernt
+ * werden.
+ */
 interface SilvesterMuenchenProps {
-  standalone?: boolean;
   menu?: any | null;
   archivedMenu?: any | undefined;
   seasonalConfig?: SeasonalMenuConfig;
 }
 
-const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: SilvesterMuenchenProps) => {
+const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuenchenProps) => {
   const { t, language } = useLanguage();
   usePrerenderReady(true);
   const s = t.seo.silvester;
-  const { isActive: configActive, config: hookConfig } = useSeasonalMenuActive('silvester');
+  // `useSeasonalMenuActive` liefert nur noch den defensiven Fallback für `effectiveConfig`, falls
+  // `seasonalConfig` nicht übergeben wird. Sein `isActive` speiste ausschließlich den
+  // standalone-Zweig (E1.7) — `isActive` ist hier jetzt rein datengetrieben, wie bei Weihnachten.
+  const { config: hookConfig } = useSeasonalMenuActive('silvester');
   const effectiveConfig = seasonalConfig || hookConfig!;
-  const isActive = standalone ? configActive : !!menu;
+  const isActive = !!menu;
   const currentYear = new Date().getFullYear();
 
   // --- Canonical + Hreflang ---
-  const slugKey = 'silvester-muenchen' as const;
-  const langKey = language as 'de' | 'en' | 'it' | 'fr';
-
-  let canonicalPath: string;
-  let breadcrumbSchema: Array<{ name: string; url: string }>;
-
-  if (standalone) {
-    const flatSlug = (allSlugs as any)[langKey]?.[slugKey] || slugKey;
-    canonicalPath = language === 'de' ? `/${flatSlug}` : `/${language}/${flatSlug}`;
-    breadcrumbSchema = [
-      { name: 'Home', url: '/' },
-      { name: s.standaloneBreadcrumb || 'Silvester M\u00fcnchen', url: canonicalPath },
-    ];
-  } else {
-    const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
-    const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
-    canonicalPath = language === 'de'
-      ? `/${parentSlug}/${seasonalSlug}`
-      : `/${language}/${parentSlug}/${seasonalSlug}`;
-    breadcrumbSchema = [
-      { name: 'Home', url: '/' },
-      { name: t.nav.specialOccasions, url: `/${PARENT_SLUGS[language] || PARENT_SLUGS.de}` },
-      { name: effectiveConfig.titles[language] || effectiveConfig.titles.de, url: canonicalPath },
-    ];
-  }
+  const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
+  const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
+  const canonicalPath = language === 'de'
+    ? `/${parentSlug}/${seasonalSlug}`
+    : `/${language}/${parentSlug}/${seasonalSlug}`;
+  const breadcrumbSchema: Array<{ name: string; url: string }> = [
+    { name: 'Home', url: '/' },
+    { name: t.nav.specialOccasions, url: `/${parentSlug}` },
+    { name: effectiveConfig.titles[language] || effectiveConfig.titles.de, url: canonicalPath },
+  ];
 
   const packages = [
     { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4, s.package1Item5], ideal: s.package1Ideal, price: s.package1Price },
@@ -205,14 +212,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
     { q: s.faq8Question, a: s.faq8Answer },
   ];
 
-  const relatedLinks = standalone ? [
-    { title: s.standaloneRelated1Title, desc: s.standaloneRelated1Desc, to: "eventlocation-muenchen-maxvorstadt" },
-    { title: s.standaloneRelated2Title, desc: s.standaloneRelated2Desc, to: "aperitivo-muenchen" },
-    { title: s.standaloneRelated3Title, desc: s.standaloneRelated3Desc, to: "firmenfeier-muenchen" },
-    { title: s.standaloneRelated4Title, desc: s.standaloneRelated4Desc, to: "speisekarte" },
-    { title: s.standaloneRelated5Title, desc: s.standaloneRelated5Desc, to: "reservierung" },
-    { title: s.standaloneRelated6Title, desc: s.standaloneRelated6Desc, to: "terrasse-muenchen" },
-  ] : [
+  const relatedLinks = [
     { title: s.related1Title, desc: s.related1Desc, to: "speisekarte" },
     { title: s.related2Title, desc: s.related2Desc, to: "eventlocation-muenchen-maxvorstadt" },
     { title: s.related3Title, desc: s.related3Desc, to: "weihnachten-muenchen" },
@@ -221,19 +221,11 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
     { title: s.related6Title, desc: s.related6Desc, to: "kontakt" },
   ];
 
-  // Standalone: link to the besondere-anlaesse page when menu is active
-  const menuPagePath = (() => {
-    if (!standalone) return '';
-    const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
-    const seasonalSlug = effectiveConfig.slugs[language] || effectiveConfig.slugs.de;
-    return language === 'de' ? `/${parentSlug}/${seasonalSlug}/` : `/${language}/${parentSlug}/${seasonalSlug}/`;
-  })();
-
   return (
     <>
       <SEO
-        title={standalone ? s.standaloneSeoTitle : s.seoTitle}
-        description={standalone ? s.standaloneSeoDescription : s.seoDescription}
+        title={s.seoTitle}
+        description={s.seoDescription}
         canonical={canonicalPath}
       />
       <StructuredData type="restaurant" />
@@ -250,10 +242,13 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
         }))
       })}} />
 
-      {/* Event + Menu @graph (non-standalone only) — references #restaurant / #organization by @id.
+      {/* Event + Menu @graph — references #restaurant / #organization by @id.
           Die früher hier eingebettete "BreadcrumbList" wurde entfernt (E1.1, Widerspruch 7): sie war
           redundant zur bereits oben gerenderten <StructuredData type="breadcrumb">. Die Seite
           rendert damit genau EINE BreadcrumbList — wie bei Weihnachten seit der K2-Konsolidierung.
+
+          E1.7: der frühere `!standalone`-Guard ist entfallen — der standalone-Mount existiert seit
+          der URL-Konsolidierung vom 12.09.2026 nicht mehr, der Guard war immer wahr.
 
           E1.6: `FoodEvent` statt `Event`. `docs/geo-content-guidelines.md` § Regel 8 schreibt für
           Event-Seiten ausdrücklich `FoodEvent` vor; der Typ ist ein Untertyp von `Event`, alle
@@ -263,8 +258,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
           Schema zu stehen — dieselbe Quelle, aus der auch „Auf einen Blick", TL;DR, Intro und die
           Menü-Karten gespeist werden. Damit kann das Schema nicht mehr vom sichtbaren Inhalt
           abweichen (das war Widerspruch 2 aus E1.1: fünf Gänge im Text, vier im Schema). */}
-      {!standalone && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
             {
@@ -342,7 +336,6 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
             }
           ]
         })}} />
-      )}
 
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
@@ -355,7 +348,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
             <Link to="/"><img src={storiaLogo} alt="STORIA Logo" loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert" /></Link>
             <div className="bg-black/50 backdrop-blur-sm rounded-2xl px-6 py-8 md:px-12 md:py-12 max-w-4xl mx-auto">
               <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">
-                {standalone ? s.standaloneHeroTitle || s.heroTitle : s.heroTitle}
+                {s.heroTitle}
               </h1>
               <p className="text-lg md:text-xl text-white/90 mb-6">{s.heroSubtitle}</p>
               <div className="flex flex-wrap justify-center gap-3 mb-6">
@@ -365,11 +358,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               </div>
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{s.heroDescription}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {standalone ? (
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.heroCtaPhone}</a>
-                  </Button>
-                ) : isActive ? (
+                {isActive ? (
                   <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                     <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{s.heroCta}</a>
                   </Button>
@@ -393,10 +382,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
 
         <main className="container mx-auto px-4 py-12 flex-grow">
           <article className="max-w-5xl mx-auto">
-            <BreadcrumbNav crumbs={standalone
-              ? [{ label: t.breadcrumb.home, href: '/' }, { label: s.standaloneBreadcrumb || s.breadcrumb }]
-              : [{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]
-            } />
+            <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]} />
 
             {/* TL;DR (E1.5) — der fertige `tldr`-Text lag bisher ungenutzt in den Übersetzungen.
                 Muster übernommen von `UeberUns.tsx` („TLDR — Citation-optimized intro"): eine
@@ -447,34 +433,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               </Card>
             </section>
 
-            {/* Standalone: Teaser or CTA — Non-standalone: Packages or Live Menu */}
-            {standalone ? (
-              isActive ? (
-                <section className="mb-16">
-                  <Card className="border-primary bg-primary/5">
-                    <CardContent className="p-8 text-center">
-                      <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneTeaserTitle}</h2>
-                      <p className="text-muted-foreground mb-6">{s.standaloneTeaserDesc}</p>
-                      <Button size="lg" asChild>
-                        <Link to={menuPagePath}><ArrowRight className="w-5 h-5 mr-2" />{s.standaloneTeaserButton}</Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </section>
-              ) : (
-                <section className="mb-16 bg-card rounded-lg border border-border p-8 md:p-12 text-center">
-                  <h2 className="text-2xl font-serif font-bold mb-3">{s.standaloneInactiveTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{s.standaloneInactiveDesc}</p>
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <Button asChild><a href="tel:+498951519696"><Phone className="w-4 h-4 mr-2" /> 089 51519696</a></Button>
-                    <Button variant="outline" asChild><EmailLink><Mail className="w-4 h-4 mr-2" /> E-Mail</EmailLink></Button>
-                    <Button variant="outline" asChild>
-                      <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer"><MessageCircle className="w-4 h-4 mr-2" /> WhatsApp</a>
-                    </Button>
-                  </div>
-                </section>
-              )
-            ) : !isActive ? (
+            {/* Packages (kein Live-Menü aktiv) oder Live-Menü */}
+            {!isActive ? (
               <section className="mb-16">
                 <h2 className="text-3xl font-serif font-bold mb-4 text-center">{s.packagesTitle}</h2>
                 <p className="text-muted-foreground text-center mb-8">{s.packagesIntro}</p>
@@ -504,7 +464,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
             {/* Menü der vergangenen Saison (E1.2) — nur solange kein aktuelles Menü live ist.
                 Sobald `isActive`, zeigt die Seite oben das echte Menü; ein Vorjahres-Beispiel
                 daneben wäre dann nur noch verwirrend. */}
-            {!standalone && !isActive && (
+            {!isActive && (
               <section className="mb-16" aria-labelledby="silvester-vorjahresmenue">
                 <div className="text-center mb-8">
                   <Badge variant="secondary" className="mb-3">{s.previousMenuBadge}</Badge>
@@ -592,8 +552,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               </Accordion>
             </section>
 
-            {/* Email Signup (inactive + non-standalone only) */}
-            {!isActive && !standalone && (
+            {/* Email Signup (nur wenn kein Live-Menü aktiv) */}
+            {!isActive && (
               <section id="signup-form" className="mb-16 scroll-mt-24">
                 <div className="bg-card rounded-lg border border-border p-8 md:p-12 text-center">
                   <h2 className="text-2xl font-serif font-bold mb-3">{s.signupTitle}</h2>
@@ -605,8 +565,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               </section>
             )}
 
-            {/* Archived Menu (inactive + non-standalone only) */}
-            {!isActive && !standalone && archivedMenu && (
+            {/* Archived Menu (nur wenn kein Live-Menü aktiv) */}
+            {!isActive && archivedMenu && (
               <section className="mb-16">
                 <div className="border-2 border-dashed border-border rounded-lg p-6 md:p-8 opacity-90">
                   <div className="flex items-center justify-center gap-3 mb-4">
@@ -643,11 +603,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
-              {standalone ? (
-                <Button size="lg" variant="secondary" asChild>
-                  <a href="tel:+498951519696"><Phone className="w-5 h-5 mr-2" />{s.finalCtaButton}</a>
-                </Button>
-              ) : isActive ? (
+              {isActive ? (
                 <Button size="lg" variant="secondary" asChild>
                   <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer">{s.finalCtaButton}</a>
                 </Button>

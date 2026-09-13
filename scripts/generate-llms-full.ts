@@ -66,7 +66,7 @@ URL: https://www.ristorantestoria.de/terrasse-muenchen/
 
 ### Firmenfeier München
 URL: https://www.ristorantestoria.de/firmenfeier-muenchen/
-Bis zu 180 Personen (stehend) oder 200 Sitzplätze (innen + Terrasse). Individuelle Menüpakete, flexibel gestaltbar.
+Bis zu 300 Personen (stehend) oder 200 Sitzplätze (innen + Terrasse). Individuelle Menüpakete, flexibel gestaltbar.
 
 ### Geburtstagsfeier München
 URL: https://www.ristorantestoria.de/geburtstagsfeier-muenchen/

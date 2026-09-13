@@ -185,8 +185,68 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
       **Bereits in E1.1 erledigt, hier nur gegengeprüft:** die doppelte BreadcrumbList auf Silvester
       (je Seite genau 1, siehe Zählung oben) und das `image`-Feld (beide zeigen auf per Vite-Import
       aufgelöste, in `dist/` vorhandene Assets).
-- [ ] **E1.7** `llms.txt` aktualisieren, toten `standalone`-Zweig in `SilvesterMuenchen.tsx`
+- [x] **E1.7** `llms.txt` aktualisieren, toten `standalone`-Zweig in `SilvesterMuenchen.tsx`
       entfernen.
+      **Beweis 13.09.2026:** `npm run build` grün (157 Seiten prerendert, 0 Errors),
+      `npx tsc --noEmit` ohne Ausgabe, `npm run lint` **727 Probleme = 1 WENIGER als Baseline 728**
+      (das entfallene `(allSlugs as any)` war ein `no-explicit-any`); kein neues Problem.
+      **Belegkette, dass `standalone` hier nie `true` sein kann** (vor dem Löschen geführt, nicht
+      nach Zeilennummer gelöscht): `grep -rn "SilvesterMuenchen" src/ scripts/ prerender.js` liefert
+      genau drei Fundstellen im Code — Interface, Komponenten-Definition, Default-Export — plus die
+      EINE Aufrufstelle `src/pages/BesondererAnlass.tsx:126`
+      `return <SilvesterMuenchen menu={menu} archivedMenu={archivedMenu} seasonalConfig={seasonalConfig} />;`
+      **ohne** `standalone`. `grep -n "silvester-muenchen" src/App.tsx src/config/slugs.json
+      src/config/routes.ts scripts/generate-sitemap.mjs` → **0 Treffer**: seit der
+      URL-Konsolidierung vom 12.09.2026 gibt es weder einen `routeComponents`-Eintrag noch einen
+      Slug für die flache Route.
+      **Entfernt** (`src/pages/seo/SilvesterMuenchen.tsx`, −101/+57 Zeilen, netto −44; die
+      hinzugefügten Zeilen sind fast vollständig der neue Doc-Kommentar, der die Belegkette im Code
+      festhält): der Prop selbst, die zweite Canonical-/Breadcrumb-Berechnung, `menuPagePath`, die
+      standalone-SEO-Texte, der standalone-Hero-Titel samt Telefon-CTA, die Teaser- und die
+      Inaktiv-Sektion, die zweite Related-Links-Liste, vier `!standalone`-Guards
+      (Event/Menu-JSON-LD, Vorjahresmenü, Signup, Archiv) und der standalone-Zweig der Final-CTA;
+      dazu die dadurch unbenutzten Imports `allSlugs` und `ArrowRight` und das nur noch für den
+      toten Zweig gebrauchte `isActive` aus `useSeasonalMenuActive`.
+      **Verwaiste Übersetzungsschlüssel: ja, 69 Stück** — in allen vier Sprachdateien aus dem
+      `seo.silvester`-Block entfernt (de/en/fr je 22, it 3 — Italienisch hatte den Block ohnehin nur
+      teilweise übersetzt), plus 3 verwaiste Kommentarzeilen `// Standalone SEO page keys`;
+      zusammen −72 Zeilen. Vorher per `grep` geprüft, dass die **Namen** zwar in `weihnachten`/
+      `valentinstag` weiterleben (beide Seiten rendern weiterhin `standalone`), aber nichts mehr
+      `t.seo.silvester.standalone*` oder `t.seo.silvester.heroCtaPhone` liest; Gegenprobe nach dem
+      Löschen: im `seo.silvester`-Block aller vier Dateien **0 Treffer** für
+      `/^\s*(standalone[A-Za-z0-9]*|heroCtaPhone):/`.
+      **Prerender-Beweis, alle vier Silvester-Routen** (`dist/besondere-anlaesse/silvester/`,
+      `dist/en/special-occasions/new-years-eve/`, `dist/it/occasioni-speciali/capodanno/`,
+      `dist/fr/occasions-speciales/nouvel-an/`): **0 Treffer** für die standalone-exklusiven Texte
+      („Silvester-Programm ansehen", „Unser Silvester-Programm ist verfügbar", „Silvester im STORIA
+      – Jetzt informieren", „Italienische Aperitivo-Kultur in der Maxvorstadt", „Silvester in
+      München – Italienisch ins neue Jahr feiern", „Unsere Terrasse in der Maxvorstadt" und deren
+      en/fr-Entsprechungen). Der Related-Links-Block zeigt die Nicht-standalone-Liste:
+      `/speisekarte/`, `/eventlocation-muenchen-maxvorstadt/`, `/weihnachten-muenchen/`,
+      `/valentinstag-muenchen/`, `/firmenfeier-muenchen/`, `/kontakt/`. JSON-LD unverändert korrekt:
+      je 6 Blöcke, 6/6 per `JSON.parse()` gültig, 1 × FoodEvent, 1 × BreadcrumbList, 1 × FAQPage.
+      **Nichts kaputt gegangen:** `WeihnachtenMuenchen.tsx` nicht angefasst (`git diff` leer), ihr
+      standalone-Hero „Weihnachten in München – Festlich italienisch genießen" steht weiter im HTML;
+      das Vorjahresmenü „4 Gänge Menü «Vegetale»" (E1.2) rendert weiter; `id="signup-form"`
+      (Vormerk-Formular, wird erst in E2.3 ausgehängt) weiterhin in Silvester, Weihnachten UND
+      Valentinstag.
+      **`llms.txt`:** Silvester-Abschnitt um die E1.2/E1.3-Inhalte ergänzt (drei Varianten Vegetale/
+      Mare/Terra, Beginn 19:00 Uhr Aperitivo-Empfang, 2 bis 100 Gäste, Reservierung bis Ende
+      November, Preisklarstellung „dasselbe Menü"); der Abschnitt „### Weihnachtsmenüs" heißt jetzt
+      „### Weihnachten – zwei Wege" und bildet die E1.4-Realität ab (Weg 1 à la carte ab 1 Person
+      ohne Vorbestellung, Weg 2 Gruppenmenü ab 6 Personen ab 45 €, 24./25.12. geschlossen); in
+      „Firmenfeier & Weihnachtsfeier" steht die Mindestpersonenzahl jetzt dabei.
+      `public/llms-full.txt` wird aus `llms.txt` generiert (`npx tsx scripts/generate-llms-full.ts`)
+      und war seit Mai 2026 nicht neu erzeugt — jetzt regeneriert, wodurch auch Candle-Light-,
+      Oktoberfest- und Firmenfeier-Abschnitt dort ankommen und die Reisegruppen-URL auf
+      `/reisegruppen-muenchen/` korrigiert wird. **Dabei aufgefallen und mitgefixt:** der Generator
+      hatte „Bis zu 180 Personen (stehend)" hart kodiert — der Wert aus der Zeit VOR der
+      Korrektur auf 300 (`fix-standing-capacity-300`); ohne diesen Fix hätte die Regenerierung die
+      falsche Kapazität wieder eingeschleppt. `grep "180 Personen" public/llms*.txt` → 0 Treffer.
+      **Offener Punkt (nicht angefasst, keine neuen Fakten):** `llms.txt` empfiehlt Anfragen für
+      Weihnachtsfeiern „am besten ab Juli", die Weihnachtsseite „für Gruppen ab September/Oktober".
+      Kein Widerspruch im engen Sinn (Juli ist früher), aber zwei verschiedene Zahlen für dieselbe
+      Aussage — gehört in eine Faktenklärung mit Antoine, nicht in dieses Kriterium.
 
 ## E1: Branch, Beweis, Merge
 
