@@ -134,6 +134,28 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
     { title: s.package3Title, subtitle: s.package3Subtitle, items: [s.package3Item1, s.package3Item2, s.package3Item3, s.package3Item4, s.package3Item5], ideal: s.package3Ideal, price: s.package3Price },
   ];
 
+  /**
+   * „Auf einen Blick" (E1.3) — Gangzahl · Preis · Beginn · Kapazität · Reservierungsfrist.
+   *
+   * Alle Wettbewerber im Ranking-Artikel werden nach genau diesem Raster verglichen; der Block
+   * ist außerdem das, was KI-Systeme aus einer Seite extrahieren. Die Zahlen kommen aus
+   * `FACTS.silvester` (SSoT) bzw. aus bereits vorhandenem Seiteninhalt (19:00-Empfang aus der
+   * Timeline, 2–100 Gäste und „Ende November" aus der FAQ) — neu erfunden wird nichts. Die
+   * Übersetzungen liefern nur die Satzschablone, die Werte werden hier eingesetzt.
+   */
+  const atAGlance = [
+    {
+      label: s.atAGlanceMenuLabel,
+      value: s.atAGlanceMenuValue
+        .replace('{courses}', String(FACTS.silvester.courses))
+        .replace('{price}', FACTS.silvester.price)
+        .replace('{priceWine}', FACTS.silvester.priceWithWine),
+    },
+    { label: s.atAGlanceStartLabel, value: s.atAGlanceStartValue },
+    { label: s.atAGlanceCapacityLabel, value: s.atAGlanceCapacityValue },
+    { label: s.atAGlanceReservationLabel, value: s.atAGlanceReservationValue },
+  ];
+
   const reasons = [
     { title: s.reason1Title, desc: s.reason1Desc },
     { title: s.reason2Title, desc: s.reason2Desc },
@@ -356,6 +378,26 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               <p className="text-lg text-muted-foreground mb-4">{s.introP1}</p>
               <p className="text-muted-foreground mb-4">{s.introP2}</p>
               <p className="text-muted-foreground">{s.introP3}</p>
+            </section>
+
+            {/* Auf einen Blick (E1.3) — bewusst als Definitionsliste, nicht als Fließtext:
+                Gangzahl · Preis · Beginn · Kapazität · Frist sollen maschinenlesbar bleiben. */}
+            <section className="mb-16" aria-labelledby="silvester-auf-einen-blick">
+              <Card className="border-primary/30 bg-secondary/30">
+                <CardHeader className="pb-3">
+                  <h2 id="silvester-auf-einen-blick" className="text-2xl font-serif font-bold">{s.atAGlanceTitle}</h2>
+                </CardHeader>
+                <CardContent>
+                  <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                    {atAGlance.map((item, i) => (
+                      <div key={i}>
+                        <dt className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1">{item.label}</dt>
+                        <dd className="font-medium">{item.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </CardContent>
+              </Card>
             </section>
 
             {/* Standalone: Teaser or CTA — Non-standalone: Packages or Live Menu */}

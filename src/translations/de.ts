@@ -1860,6 +1860,17 @@ export const de = {
       introP1: "Sie suchen ein Restaurant in München für Silvester? Seit 2015 feiert die Familie Speranza in der Karlstraße mit ihren Gästen ins neue Jahr. Was als kleines Silvester-Dinner begann, ist heute eines der beliebtesten italienischen Silvester-Events in München Maxvorstadt – mit authentischer Küche, Musik und dem unverwechselbaren STORIA-Charme.",
       introP2: "Unser Silvester ist bewusst kein Massenabfertigung: Wir setzen auf Qualität statt Quantität. Jeder Gang wird frisch zubereitet, der Service ist persönlich und aufmerksam. Für Paare, Freundesgruppen und Firmen bieten wir flexible Pakete von 2 bis 100 Gästen.",
       introP3: "Die zentrale Lage in der Maxvorstadt – nur 5 Minuten vom Königsplatz und 5 Minuten vom Hauptbahnhof – macht das STORIA zum idealen Ort für Ihren Silvesterabend. Für kleinere Feiern bis 20 Gäste reservieren Sie direkt im Restaurant. Für größere Gruppen ab 20 Gäste fragen Sie bitte über events-storia.de an.",
+      // Auf einen Blick (E1.3) — Platzhalter {courses}/{price}/{priceWine} werden in
+      // SilvesterMuenchen.tsx aus FACTS.silvester gefüllt, damit die Zahlen nur EINE Quelle haben.
+      atAGlanceTitle: "Silvester im STORIA auf einen Blick",
+      atAGlanceMenuLabel: "Menü",
+      atAGlanceMenuValue: "{courses} Gänge · {price} € p. P., mit Weinbegleitung {priceWine} € p. P.",
+      atAGlanceStartLabel: "Beginn",
+      atAGlanceStartValue: "19:00 Uhr Aperitivo-Empfang",
+      atAGlanceCapacityLabel: "Kapazität",
+      atAGlanceCapacityValue: "2 bis 100 Gäste",
+      atAGlanceReservationLabel: "Reservierung",
+      atAGlanceReservationValue: "Bis spätestens Ende November – Silvester ist jedes Jahr schnell ausgebucht.",
       // Packages (inactive only)
       packagesTitle: "Unsere Silvester-Pakete",
       packagesIntro: "Alle Pakete sind individuell anpassbar. Detaillierte Menüs und Preise erhalten Sie auf Anfrage.",
@@ -2025,6 +2036,17 @@ export const de = {
       introP1: "Seit 2015 ist das STORIA in der Karlstraße ein beliebter Ort für Weihnachtsfeiern in München Maxvorstadt. Ob Firmenweihnachtsfeier, Familienessen oder Adventsrunde mit Freunden – die Familie Speranza aus dem Cilento bringt echte italienische Weihnachtstradition nach München.",
       introP2: "Unsere Weihnachtsmenüs verbinden süditalienische Festtagsküche mit bayerischer Gemütlichkeit: La Vigilia, das traditionelle Fest der sieben Fische, hausgemachte Pasta, erlesene Weine und natürlich Panettone zum Dessert. Jeder Gang wird frisch zubereitet – keine Massenware, sondern Qualität mit Liebe.",
       introP3: "Die zentrale Lage – nur 5 Minuten vom Königsplatz und Christkindlmarkt – macht das STORIA zum perfekten Ort nach dem Weihnachtsmarkt-Besuch. Für kleinere Feiern bis 20 Gäste reservieren Sie direkt im Restaurant. Für größere Gruppen ab 20 Gäste fragen Sie bitte über events-storia.de an.",
+      // Auf einen Blick (E1.3) — Platzhalter {minGuests}/{groupPrice}/{indoorSeats}/{terraceSeats}
+      // werden in WeihnachtenMuenchen.tsx aus FACTS gefüllt (eine Quelle für alle Zahlen).
+      atAGlanceTitle: "Weihnachten im STORIA auf einen Blick",
+      atAGlanceOptionsLabel: "Zwei Wege",
+      atAGlanceOptionsValue: "À la carte am Tisch (ab 1 Person) oder Weihnachtsmenü für Gruppen (ab {minGuests} Personen, ab {groupPrice} € p. P.)",
+      atAGlancePeriodLabel: "Zeitraum",
+      atAGlancePeriodValue: "Adventszeit – am 24. und 25. Dezember ist das Restaurant geschlossen",
+      atAGlanceCapacityLabel: "Kapazität",
+      atAGlanceCapacityValue: "{indoorSeats} Plätze innen, {terraceSeats} auf der überdachten Terrasse",
+      atAGlanceRequestLabel: "Anfrage",
+      atAGlanceRequestValue: "Für Gruppen ab September/Oktober empfohlen – die Adventszeit ist schnell ausgebucht.",
       packagesTitle: "Unsere Weihnachts-Pakete",
       packagesIntro: "Alle Pakete sind individuell anpassbar. Detaillierte Menüs und Preise erhalten Sie auf Anfrage.",
       package1Title: "Weihnachten Classic",

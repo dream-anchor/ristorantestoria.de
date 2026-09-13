@@ -24,6 +24,7 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
+import { FACTS } from "@/config/facts";
 
 /**
  * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
@@ -89,6 +90,32 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
     { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4], ideal: s.package1Ideal, price: s.package1Price },
     { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5], ideal: s.package2Ideal, price: s.package2Price, badge: s.package2Badge },
     { title: s.package3Title, subtitle: s.package3Subtitle, items: [s.package3Item1, s.package3Item2, s.package3Item3, s.package3Item4, s.package3Item5], ideal: s.package3Ideal, price: s.package3Price },
+  ];
+
+  /**
+   * „Auf einen Blick" (E1.3) — dasselbe Raster wie auf der Silvester-Seite, nur mit den
+   * Weihnachts-Fakten: die zwei Wege (à la carte am Tisch vs. Gruppen-Menü), der Zeitraum
+   * inklusive der beiden Ruhetage, die Kapazität und der empfohlene Anfragezeitpunkt.
+   *
+   * Quellen, alle bereits im Repo: `FACTS.weihnachten` (Gruppenpreis, Mindestpersonenzahl),
+   * `FACTS.capacity` (100 innen / 100 Terrasse), `ReservationBooking.getClosedDays` (24. und
+   * 25.12. als Ruhetage) sowie die FAQ auf dieser Seite (Anfrage ab September/Oktober).
+   */
+  const atAGlance = [
+    {
+      label: s.atAGlanceOptionsLabel,
+      value: s.atAGlanceOptionsValue
+        .replace('{minGuests}', String(FACTS.weihnachten.groupMenuMinGuests))
+        .replace('{groupPrice}', FACTS.weihnachten.groupMenuPriceFrom),
+    },
+    { label: s.atAGlancePeriodLabel, value: s.atAGlancePeriodValue },
+    {
+      label: s.atAGlanceCapacityLabel,
+      value: s.atAGlanceCapacityValue
+        .replace('{indoorSeats}', String(FACTS.capacity.indoorSeats))
+        .replace('{terraceSeats}', String(FACTS.capacity.terraceSeats)),
+    },
+    { label: s.atAGlanceRequestLabel, value: s.atAGlanceRequestValue },
   ];
 
   const reasons = [
@@ -244,6 +271,26 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               <p className="text-lg text-muted-foreground mb-4">{s.introP1}</p>
               <p className="text-muted-foreground mb-4">{s.introP2}</p>
               <p className="text-muted-foreground">{s.introP3}</p>
+            </section>
+
+            {/* Auf einen Blick (E1.3) — Definitionsliste statt Fließtext, damit die Eckdaten
+                maschinenlesbar bleiben (Wettbewerbsraster: Angebot · Zeitraum · Kapazität · Frist). */}
+            <section className="mb-16" aria-labelledby="weihnachten-auf-einen-blick">
+              <Card className="border-primary/30 bg-secondary/30">
+                <CardHeader className="pb-3">
+                  <h2 id="weihnachten-auf-einen-blick" className="text-2xl font-serif font-bold">{s.atAGlanceTitle}</h2>
+                </CardHeader>
+                <CardContent>
+                  <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                    {atAGlance.map((item, i) => (
+                      <div key={i}>
+                        <dt className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1">{item.label}</dt>
+                        <dd className="font-medium">{item.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </CardContent>
+              </Card>
             </section>
 
             {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K2-Konsolidierung
