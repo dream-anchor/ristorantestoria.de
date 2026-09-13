@@ -84,10 +84,76 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
       (Bestandslage, itBase überschreibt dort nur die SEO-Metas). Die neuen „Auf einen
       Blick"-Schlüssel sind auf Italienisch gesetzt; die Altbestände bleiben unangetastet, das
       wäre eigener Scope.
-- [ ] **E1.4** Weihnachtsseite auf die Zwei-Wege-Realität umstellen (à la carte am Tisch vs.
+- [x] **E1.4** Weihnachtsseite auf die Zwei-Wege-Realität umstellen (à la carte am Tisch vs.
       Gruppenmenü nach Absprache) statt „Menü folgt im Herbst".
-- [ ] **E1.5** Definition-Lead als ersten Satz beider Intros, `tldr` rendern, je ein autoritativer
+      **Beweis 13.09.2026** (Commit `5ca3044`): `npm run build` grün (157 Seiten prerendert,
+      0 Errors), `npm run lint` 728 Probleme = Baseline unverändert. Sichtbares HTML (nach
+      Entfernen ALLER `<script>`-Blöcke), `dist/weihnachten-muenchen/index.html`: neuer Abschnitt
+      „Zwei Wege, Weihnachten im STORIA zu feiern" mit „Weg 1 · Privat & spontan Tisch reservieren
+      und à la carte essen" und „Weg 2 · Firma & Gruppe Weihnachtsmenü nach Absprache",
+      Eckpunkte „Ab 6 Personen • Menü, Ablauf und Getränke werden im Gespräch festgelegt •
+      Orientierungspreis ab 45 € pro Person". Pakete gerahmt als „Orientierung für Ihr
+      Gruppen-Menü Die folgenden drei Pakete sind keine fertigen Menüs zum Bestellen, sondern
+      Anhaltspunkte für Umfang und Preis auf dem zweiten Weg." FAQ: „Gibt es ein festes
+      Weihnachtsmenü zum Vorbestellen? Nein. In der Adventszeit essen Sie am Tisch à la carte von
+      unserer saisonalen Karte." und „Ist das STORIA an Heiligabend geöffnet? Nein. Am 24. und am
+      25. Dezember ist das Restaurant geschlossen." (vorher nur 24.12. — Widerspruch zum
+      „Auf einen Blick"-Block und zu `ReservationBooking.getClosedDays`).
+      Alle vier Sprachen: „Two ways to celebrate Christmas at STORIA" /
+      „Due modi di festeggiare il Natale allo STORIA" / „Deux façons de fêter Noël au STORIA"
+      in `dist/en/christmas-munich/`, `dist/it/natale-monaco/`, `dist/fr/noel-munich/`.
+      **grep-Beweis, dass die Texte weg sind:**
+      `grep -rn "Weihnachtsmen[üu]s\? werden im Herbst\|Weihnachtsmen[üu]s 2026\|Christmas menus will be published\|Christmas Menus 2026\|menus de No[ëe]l seront publi\|Menus de No[ëe]l 2026\|Weihnachtsmen[üu]s sind verf[üu]gbar\|Christmas menus are available\|menus de No[ëe]l sont disponibles" src/ public/`
+      → **0 Treffer**; im sichtbaren HTML aller vier Weihnachts-Routen 0 Treffer für
+      „im Herbst veröffentlicht|Jetzt vormerken|Vormerken lassen|published in autumn|publiés en automne".
+      Gegenprobe Silvester (dort kommt das Menü wirklich noch): „Silvester-Programm 2026/2027 –
+      Jetzt vormerken" steht unverändert im HTML.
+      **Vormerk-Formular nicht angefasst** (E2.3): `id="signup-form"` weiterhin in
+      `dist/weihnachten-muenchen/index.html`, nur die Texte drumherum umgeschrieben.
+- [x] **E1.5** Definition-Lead als ersten Satz beider Intros, `tldr` rendern, je ein autoritativer
       Outbound-Link (GEO-Regeln 1 und 3).
+      **Beweis 13.09.2026** (Commit `29fdca1`): `npm run build` grün (157 Seiten prerendert,
+      0 Errors), `npm run lint` 728 Probleme = Baseline unverändert. Alles Folgende im
+      **sichtbaren** HTML, geprüft nach Entfernen ALLER `<script>`-Blöcke.
+      **Regel 1, Definition-Lead**, `dist/besondere-anlaesse/silvester/index.html`: „Silvester im
+      Ristorante STORIA ist ein italienisches Gala-Dinner in der Karlstraße 47a in München
+      Maxvorstadt: ein 4-Gänge-Degustationsmenü in drei Varianten für 99 € pro Person, mit
+      Weinbegleitung 150 € pro Person, ab 19:00 Uhr mit Aperitivo-Empfang, Musik und
+      Mitternachts-Champagner." — `dist/weihnachten-muenchen/index.html`: „Weihnachten im
+      Ristorante STORIA ist ein italienisches Festtagsangebot in der Karlstraße 47a in München
+      Maxvorstadt, das auf zwei Wegen funktioniert: à la carte von der saisonalen Karte am
+      reservierten Tisch, ab 1 Person – oder ein Weihnachtsmenü, das Firmen und Gruppen ab
+      6 Personen direkt mit dem Restaurant abstimmen, ab 45 € pro Person." (dieser Satz kam
+      bereits mit E1.4). Alle vier Sprachen geprüft (en/it/fr-Routen tragen denselben Lead).
+      **Regel 3, externe Citation** — im sichtbaren HTML, nicht im JSON-LD:
+      `<a href="https://www.champagne.fr/" target="_blank" rel="noopener noreferrer" …>Comité Champagne</a>`
+      auf der Silvesterseite und
+      `<a href="https://ich.unesco.org/en/RL/mediterranean-diet-00884" target="_blank" rel="noopener noreferrer" …>UNESCO-Liste des immateriellen Kulturerbes</a>`
+      auf der Weihnachtsseite. Beide URLs vor der Auswahl per Fetch geprüft (200, erwarteter
+      Inhalt): champagne.fr = offizielle Seite des Comité Champagne; der UNESCO-Eintrag nennt
+      ausdrücklich die „Consent of Cilento community, Italy" — das Cilento ist die
+      Herkunftsregion der Familie Speranza, die auf der Weihnachtsseite im Intro steht.
+      **`tldr` sichtbar**: Silvester „Silvester im Ristorante STORIA München Maxvorstadt
+      (Karlstraße 47a) ist ein italienisches Gala-Dinner zum Jahreswechsel: 4-Gänge-
+      Degustationsmenü in drei Varianten (Vegetale, Mare, Terra) für 99 € pro Person, mit
+      Weinbegleitung 150 € pro Person." · Weihnachten „Weihnachten im Ristorante STORIA München
+      Maxvorstadt (Karlstraße 47a) funktioniert auf zwei Wegen: Tisch reservieren und à la carte
+      von der saisonalen Karte essen – ab 1 Person, ohne Vorbestellung – oder ein Weihnachtsmenü
+      für Firmen und Gruppen ab 6 Personen, das direkt mit dem Restaurant abgestimmt wird,
+      ab 45 € pro Person."
+      **Muster übernommen, nicht erfunden:** kein Repo-Seite rendert den `tldr`-*Schlüssel*; die
+      einzige vorhandene TL;DR-Darstellung ist `UeberUns.tsx:85-104` („TLDR — Citation-optimized
+      intro", `bg-card border rounded-2xl p-6 md:p-8 mb-12` + ein `<p>`, mit der
+      UNESCO-Outbound-Citation darin). Genau dieses Markup ist übernommen, direkt unter der
+      Breadcrumb.
+      **Keine neuen Zahlen:** Gangzahl/Preise/Mindestpersonenzahl/Kapazität stehen in den
+      Übersetzungen nur als Platzhalter und werden über `fillFacts()` aus `FACTS` gefüllt;
+      `grep -rE "\{(courses|price|priceWine|minGuests|groupPrice|indoorSeats|terraceSeats)\}" dist`
+      → 0 Treffer (kein Platzhalter ausgeliefert).
+      **Vermerk:** Italienisch hatte für beide Seiten überhaupt keinen `tldr` und wäre beim
+      Rendern auf den deutschen Text zurückgefallen — jetzt in `itBase` ergänzt. Der übrige
+      italienische Fließtext des Weihnachts-Blocks erbt weiterhin das Deutsche (Bestandslage,
+      siehe Vermerk bei E1.3); die von E1.4/E1.5 angefassten Schlüssel sind italienisch gesetzt.
 - [ ] **E1.6** JSON-LD: `FoodEvent` statt `Event`, doppelte BreadcrumbList auf Silvester entfernen,
       `image` reparieren, bei Weihnachten `highPrice` ergänzen.
 - [ ] **E1.7** `llms.txt` aktualisieren, toten `standalone`-Zweig in `SilvesterMuenchen.tsx`
