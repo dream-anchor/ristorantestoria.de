@@ -271,8 +271,8 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
 
 ## V4: Branch, Beweis, Merge
 
-- [ ] Branch `geo-luecken-v4` gepusht, PR erstellt, gemergt (reine Doku, kein Code — kleiner PR
-      ohne Build/Lint-Beweis nötig, aber trotzdem Diff gegenlesen).
+- [x] ~~Branch `geo-luecken-v4` gepusht, PR erstellt, gemergt~~ — **erledigt 13.09.2026** (PR #107,
+      squash-merged nach `main`). Reine Doku, Diff gegengelesen vor dem Merge.
 
 ---
 
