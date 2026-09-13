@@ -3048,8 +3048,8 @@ const enBase = {
       relatedCandlelightDesc: "A candlelit menu for two",
     },
     italienischesRestaurant: {
-      seoTitle: "Best Italian Restaurant Munich | Wood-Fired Pizza | STORIA",
-      seoDescription: "Speranza family\u2019s authentic Italian restaurant in Munich-Maxvorstadt: Neapolitan wood-fired pizza at 400\u00b0C, homemade pasta & 60+ wines, 5 min from K\u00f6nigsplatz.",
+      seoTitle: "Best Italian Restaurant Munich | Stone-Oven Pizza | STORIA",
+      seoDescription: "Speranza family\u2019s authentic Italian restaurant in Munich-Maxvorstadt: Neapolitan stone-oven pizza at 400\u00b0C, homemade pasta & 60+ wines, 5 min from K\u00f6nigsplatz.",
       breadcrumb: "Southern Italian Restaurant Munich",
       heroTitle: "Munich\u2019s Best Italian Restaurant \u2013 Authentic Cuisine of the Cilento",
       heroSubtitle: "Authentically Southern Italian since 2015 \u2022 Speranza Family",
