@@ -201,6 +201,22 @@ Hook `useSeasonalMenuData` — vorher pillar-exklusiv), damit nichts verloren ge
 dortigen Tabelle prüfen, ob sich Valentinstags gebündeltes Signal (vorher Kannibalisierung auf zwei
 URLs) in einer besseren Position niederschlägt.
 
+### GEO-Lücken-Loop V1 — candlelight-menue 404 (13.09.2026)
+
+**Nebenbefund, kein Code-Fix möglich:** `besondere-anlaesse/candlelight-menue/` (DE + 3
+Sprachvarianten) war eine Supabase-gestützte generische Anlass-Seite (`BesondererAnlass.tsx` →
+`findSeasonalMenuBySlug`, kein Code-Fallback — `candlelight` existiert nicht als Key in
+`src/config/seasonalMenus.ts`). Laut `docs/LOOP-SEO-GSC-AUDIT.md` § P5.1 lief sie am 02.09.2026
+noch nachweislich (200, curl-verifiziert). Heute (13.09.2026) liefert sie 404 in allen 4 Sprachen,
+rankt aber weiterhin bei Google auf Pos. ~5,5 für „candle light dinner münchen"-nahe Anfragen.
+Ursache vermutlich eine deaktivierte/gelöschte Supabase-Zeile — liegt außerhalb des Codes; in
+diesem Projekt laufen Supabase-Änderungen ausschließlich über Lovable, nicht per direktem
+DB-Zugriff. **Sofortmaßnahme umgesetzt (V1.1/V1.2, Branch `geo-luecken-v1`):** 301-Redirect aller 4
+URLs auf `romantisches-dinner-muenchen` (rankt für dasselbe Cluster bereits auf Pos. 6,9) + die drei
+toten internen Links darauf repariert. **Offen:** falls die Seite künftig als eigenständiges Angebot
+weitergeführt werden soll (statt dauerhaft nur Redirect-Ziel), die Supabase-Zeile über Lovable
+prüfen/reaktivieren lassen.
+
 ---
 
 ## Monatliche Ziele & Review
