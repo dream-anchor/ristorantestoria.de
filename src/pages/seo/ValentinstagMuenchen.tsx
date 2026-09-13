@@ -8,6 +8,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
+import ReservationBooking from "@/components/ReservationBooking";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
@@ -25,6 +26,7 @@ import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
 import { FACTS } from "@/config/facts";
+import { fireLead } from "@/lib/analytics";
 
 /**
  * Ersetzt die Zahlen-Platzhalter der Übersetzungen durch die Werte aus `FACTS.valentinstag`
@@ -81,6 +83,23 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
   const effectiveConfig = seasonalConfig || hookConfig!;
   const isActive = !!menu;
   const currentYear = new Date().getFullYear();
+
+  /**
+   * Vorbelegung der Buchungsstrecke auf den 14. Februar (GEO-Lücken-Loop V3.3).
+   *
+   * Anders als bei Silvester (`SilvesterMuenchen.tsx`, immer derselbe Jahreswechsel-Termin
+   * innerhalb des laufenden Jahres) liegt der Valentinstag im ersten Quartal — je nachdem,
+   * wann die Seite aufgerufen wird, ist der "nächste" 14. Februar noch im laufenden Jahr oder
+   * schon im nächsten. Datumsvergleich statt hart codiertem `currentYear + 1`, damit die
+   * Vorbelegung außerhalb der Saison (z. B. im September) automatisch auf das kommende Jahr
+   * zeigt — konsistent mit dem im FoodEvent-JSON-LD oben hart kodierten "2027-02-14" (heute,
+   * 13.09.2026, liegt der 14.02.2026 bereits in der Vergangenheit, der nächste Termin ist 2027).
+   * Monat 1 = Februar (0-indiziert).
+   */
+  const valentinstagThisYear = new Date(currentYear, 1, 14);
+  const valentinstagDate = valentinstagThisYear < new Date()
+    ? new Date(currentYear + 1, 1, 14)
+    : valentinstagThisYear;
 
   // --- Canonical + Hreflang ---
   const slugKey = 'valentinstag-muenchen' as const;
@@ -345,6 +364,30 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
                 <MenuDisplay menuType="special" menuId={menu!.id} showTitle={false} />
               </section>
             )}
+
+            {/* Reservierung (GEO-Lücken-Loop V3.3) — echte OpenTable-Buchungsstrecke im
+                etablierten Landingpage-Muster (`headingLevel="h3"` + `onBook`-Lead-Callback,
+                Muster `SilvesterMuenchen.tsx:566-575`), ZUSÄTZLICH zum bestehenden
+                `SeasonalSignupForm` weiter unten — ersetzt/entfernt nichts davon.
+
+                Anders als bei Silvester (dort AUSSCHLIESSLICH das Gala-Menü, kein à la carte,
+                daher dort eine Zeitfenster-Einschränkung 19:00–20:00 in `ReservationBooking`)
+                gibt es am Valentinstag laut Antoine (13.09.2026, BLOCKED-Log aufgelöst) BEIDES:
+                das Valentinstag-Menü UND die reguläre Karte à la carte. Der Text muss das
+                aussprechen, damit niemand denkt, eine Tischreservierung sei automatisch eine
+                Menü-Buchung. Platzierung bewusst direkt nach den Paketen/dem Live-Menü und vor
+                Reasons/Timeline/FAQ/Vormerk-Formular — der stärkere von zwei Wegen (direkte
+                Buchung statt bloßer Vormerkung) steht damit vorne im Seitenfluss. */}
+            <section className="mb-16" id="reservieren" aria-labelledby="valentinstag-reservieren">
+              <h2 id="valentinstag-reservieren" className="text-3xl font-serif font-bold mb-4 text-center">{s.reservationTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.reservationIntro}</p>
+              <ReservationBooking
+                headingLevel="h3"
+                defaultDate={valentinstagDate}
+                onBook={() => fireLead("valentinstag_reservierung")}
+              />
+              <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
+            </section>
 
             {/* CTA Box */}
             <section className="mb-16 bg-primary text-primary-foreground rounded-xl p-8 text-center">

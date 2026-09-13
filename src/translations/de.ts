@@ -2293,6 +2293,12 @@ export const de = {
       package3Item5: "Überraschungs-Koordination (Antrag, Geschenk)",
       package3Ideal: "Ideal für: Heiratsanträge, Verlobungsfeiern, besondere Überraschungen",
       package3Price: "Auf Anfrage",
+      // GEO-Lücken-Loop V3.3: echte Buchungsstrecke (ReservationBooking) zusätzlich zu den
+      // Paketen/dem Vormerk-Formular. Muss aussprechen, dass am 14.02. sowohl das
+      // Valentinstag-Menü als auch die reguläre Karte à la carte verfügbar sind.
+      reservationTitle: "Tisch für den Valentinstag reservieren",
+      reservationIntro: "Am 14. Februar servieren wir im STORIA beides: unser Valentinstag-Menü in den Paketen Classic, Premium und Exclusive – oder ganz klassisch à la carte von unserer regulären Karte. Sie legen sich bei der Reservierung nicht fest und entscheiden erst am Tisch.",
+      reservationNote: "Für Gruppen ab 6 Personen oder individuelle Wünsche rund um Ihre Valentinstag-Reservierung erreichen Sie uns telefonisch unter 089 51519696.",
       ctaBoxTitle: "Valentinstag im STORIA reservieren",
       ctaBoxDesc: "Alle Valentinstag-Pakete sind individuell anpassbar. Detaillierte Informationen zu Menüs und Preisen:",
       ctaBoxButton: "→ Valentinstag reservieren",
