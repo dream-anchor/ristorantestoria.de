@@ -250,7 +250,15 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 ## E1: Branch, Beweis, Merge
 
-- [ ] Branch `saisonseiten-e1` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.
+- [x] Branch `saisonseiten-e1` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.
+      ✓ 2026-09-13 · PR #86 im Hauptfenster gegengelesen (14 Dateien, +1104/−362; `facts.ts`-SSoT
+      und die gerenderten Blöcke stichprobenartig geprüft) → `gh pr merge 86 --squash
+      --delete-branch`. Deploy erfolgreich (Run 34731514415). **Live verifiziert** auf beiden
+      Seiten: „Auf einen Blick"-Block mit 4 Gängen/99 €/150 €, Vorjahresmenü sichtbar („Vitello
+      Tonnato" außerhalb der `<script>`-Blöcke), `"@type":"FoodEvent"`, Outbound-Links
+      (champagne.fr bzw. ich.unesco.org), Weihnachten mit „Zwei Wege" und `highPrice 65.00`.
+      Zusätzlich live bestätigt: EN-Title zeigt jetzt „Stone-Oven Pizza" statt „Wood-Fired Pizza"
+      (separater Hotfix PR #85).
       **PR: https://github.com/dream-anchor/ristorantestoria.de/pull/86** — Branch gepusht,
       `origin/main` (PR #85, Steinofen-Terminologie) vorher in den Branch gemergt (Auto-Merge ohne
       Konflikt, `src/translations/en.ts` + `fr.ts`; danach `grep -rniE
