@@ -79,12 +79,15 @@ export const FACTS = {
   },
 
   // ── Weihnachten — Gruppen-Menüpreis ──
-  // TODO(Kundenklärung): Menüpreis uneinheitlich dokumentiert (45 € vs. 49 €).
-  // ENTSCHIEDEN IST NUR DIE VERWENDUNG, NICHT DIE WAHRHEIT: Auf allen
-  // Live-Seiten steht konsistent 45 €, deshalb bleibt 45 € der verwendete Wert.
-  // Die Klärung mit Familie Speranza steht weiterhin aus – erst danach darf der
-  // Wert geändert (oder bestätigt) werden. Bis dahin keine 49 € irgendwo
-  // einführen (KONZEPT-SAISONSEITEN-AUSBAU.md § Faktenwidersprüche, Nr. 8).
+  // ── Weihnachten — Gruppen-Menüpreis ──
+  // Historie (recherchiert 13.09.2026): Der früher hier vermerkte Widerspruch
+  // „45 € vs. 49 €" ist AUFGELÖST. Die 49 € stammten aus einem Paket
+  // „Menü C – Tradizione (ab 49 €)" und der zugehörigen FAQ auf
+  // weihnachtsfeier-muenchen (Commits Feb–Mai 2026) und wurden seitdem überall
+  // auf 45 € vereinheitlicht. Im gesamten Repo steht heute kein 49-€-Wert mehr.
+  // Verbleibende offene Frage ist daher NICHT mehr „welcher der beiden Werte",
+  // sondern nur noch, ob 45 € betrieblich korrekt ist — bestätigen kann das nur
+  // Familie Speranza. Bis dahin bleibt 45 € der überall verwendete Wert.
   weihnachten: {
     groupMenuPriceFrom: "45", // € pro Person, Gruppen-Menü ab 6 Personen
     groupMenuMinGuests: 6, // festes Gruppen-Menü erst ab 6 Personen
