@@ -251,6 +251,14 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 ## E1: Branch, Beweis, Merge
 
 - [ ] Branch `saisonseiten-e1` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.
+      **PR: https://github.com/dream-anchor/ristorantestoria.de/pull/86** — Branch gepusht,
+      `origin/main` (PR #85, Steinofen-Terminologie) vorher in den Branch gemergt (Auto-Merge ohne
+      Konflikt, `src/translations/en.ts` + `fr.ts`; danach `grep -rniE
+      "holzofen|wood-fired|four à bois" src/ public/ scripts/` → 0 Treffer, die
+      `stone-oven`/`four à pierre`-Begriffe aus #85 sind erhalten).
+      Stand nach dem Merge: `npm run build` grün (157 Seiten, 0 Errors), `npx tsc --noEmit` sauber,
+      `npm run lint` 727 (Baseline 728, kein neues Problem), JSON-LD-Validierung beider Seiten grün.
+      **Merge passiert im Hauptfenster** — hier bewusst nicht abgehakt.
 
 ---
 
