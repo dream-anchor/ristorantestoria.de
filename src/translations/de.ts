@@ -1924,6 +1924,12 @@ export const de = {
       previousMenuIntro: "Damit Sie einen Eindruck bekommen, was Sie erwartet: So sah unser Gala-Menü zum vergangenen Jahreswechsel aus – drei Varianten zur Wahl. Das Menü für die kommende Silvesternacht stellen wir gerade zusammen und veröffentlichen es voraussichtlich im Oktober.",
       previousMenuCoursesLabel: "{courses} Gänge Menü",
       previousMenuNote: "Bitte beachten: Diese Gerichte sind ein Rückblick auf die vergangene Saison und nicht buchbar. Das kommende Silvester-Menü kann davon abweichen.",
+      // Reservierung (E2.1) — Platzhalter {courses}/{price}/{priceWine} werden in
+      // SilvesterMuenchen.tsx aus FACTS.silvester gefüllt. Der Text muss aussprechen, dass
+      // am 31.12. ausschließlich das Gala-Menü serviert wird (Festlegung Antoine 13.09.2026).
+      reservationTitle: "Tisch für Silvester reservieren",
+      reservationIntro: "Am 31. Dezember servieren wir ausschließlich das Gala-Menü – à la carte gibt es an diesem Abend nicht. Wer hier einen Tisch bucht, bucht damit das {courses}-Gänge-Gala-Menü für {price} € pro Person, mit Weinbegleitung {priceWine} € pro Person.",
+      reservationNote: "Das Datum ist auf den 31. Dezember vorbelegt. Für die Silvesternacht stehen ausschließlich Tischzeiten zwischen 19:00 und 20:00 Uhr zur Wahl – der Abend beginnt um 19:00 Uhr mit dem Aperitivo-Empfang. Die Reservierung selbst schließen Sie bei OpenTable ab.",
       // CTA Box
       ctaBoxTitle: "Silvester im STORIA anfragen",
       ctaBoxDesc: "Alle Silvester-Pakete sind individuell anpassbar. Detaillierte Informationen zu Menüs und Preisen:",
@@ -2065,6 +2071,11 @@ export const de = {
       twoWay2Item1: "Ab {minGuests} Personen",
       twoWay2Item2: "Menü, Ablauf und Getränke werden im Gespräch festgelegt",
       twoWay2Item3: "Orientierungspreis ab {groupPrice} € pro Person",
+      // Reservierung (E2.1) — das ist Weg 1 in Handlungsform. Die beiden Ruhetage stehen
+      // ausdrücklich im Hinweis, weil ReservationBooking sie im Kalender sperrt.
+      reservationTitle: "Tisch in der Adventszeit reservieren",
+      reservationIntro: "Weg 1 in Kurzform: Tisch reservieren und à la carte von der saisonalen Karte essen – ab 1 Person, ohne Vorbestellung und ohne Menü-Absprache.",
+      reservationNote: "Am 24. und 25. Dezember ist das Restaurant geschlossen; diese beiden Tage lassen sich im Kalender nicht auswählen. Die Reservierung selbst schließen Sie bei OpenTable ab.",
       packagesTitle: "Orientierung für Ihr Gruppen-Menü",
       packagesIntro: "Die folgenden drei Pakete sind keine fertigen Menüs zum Bestellen, sondern Anhaltspunkte für Umfang und Preis auf dem zweiten Weg. Was am Ende auf den Tisch kommt, legen wir gemeinsam im Gespräch fest.",
       package1Title: "Weihnachten Classic",

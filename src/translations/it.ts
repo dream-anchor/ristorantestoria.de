@@ -1821,6 +1821,11 @@ const itBase = {
       previousMenuIntro: "Per darvi un'idea di cosa vi aspetta: così era il nostro menù di gala dell'ultimo passaggio d'anno – tre varianti a scelta. Il menù per il prossimo Capodanno è in preparazione e sarà pubblicato presumibilmente a ottobre.",
       previousMenuCoursesLabel: "Menù a {courses} portate",
       previousMenuNote: "Attenzione: questi piatti sono uno sguardo alla scorsa stagione e non sono prenotabili. Il prossimo menù di Capodanno potrà differire.",
+      // Prenotazione (E2.1) — i segnaposto {courses}/{price}/{priceWine} vengono da
+      // FACTS.silvester. Il testo deve dire che il 31 dicembre si serve solo il menù di gala.
+      reservationTitle: "Prenota un tavolo per Capodanno",
+      reservationIntro: "Il 31 dicembre serviamo esclusivamente il menù di gala: quella sera non c'è la carta. Chi prenota qui un tavolo prenota quindi il menù di gala da {courses} portate a {price} € a persona, con abbinamento vini {priceWine} € a persona.",
+      reservationNote: "La data è già impostata sul 31 dicembre. Per la notte di Capodanno sono disponibili solo orari tra le 19:00 e le 20:00: la serata inizia alle 19:00 con l'aperitivo di benvenuto. La prenotazione si conclude su OpenTable.",
       ctaBoxTitle: "Richiedi Capodanno allo STORIA",
       ctaBoxDesc: "Tutti i pacchetti di Capodanno sono personalizzabili. Informazioni dettagliate su menù e prezzi:",
       ctaBoxButton: "→ Richiedi Capodanno su events-storia.de",
@@ -2918,6 +2923,11 @@ const itBase = {
       twoWay2Item1: "Da {minGuests} persone",
       twoWay2Item2: "Menù, svolgimento e bevande vengono definiti insieme",
       twoWay2Item3: "Prezzo indicativo da {groupPrice} € a persona",
+      // Prenotazione (E2.1) — è il primo modo, in forma di azione. I due giorni di chiusura
+      // sono nominati perché ReservationBooking li blocca nel calendario.
+      reservationTitle: "Prenota un tavolo durante l'Avvento",
+      reservationIntro: "Il primo modo in breve: prenotare un tavolo e ordinare alla carta dal menù stagionale, da 1 persona, senza preordine e senza accordi sul menù.",
+      reservationNote: "Il 24 e il 25 dicembre il ristorante è chiuso: questi due giorni non sono selezionabili nel calendario. La prenotazione si conclude su OpenTable.",
       packagesTitle: "Punti di riferimento per il vostro menù di gruppo",
       packagesIntro: "I tre pacchetti qui sotto non sono menù pronti da ordinare, ma punti di riferimento per entità e prezzo sulla seconda strada. Ciò che arriva davvero in tavola lo decidiamo insieme.",
       faq3Question: "Esiste un menù di Natale fisso da ordinare in anticipo?",

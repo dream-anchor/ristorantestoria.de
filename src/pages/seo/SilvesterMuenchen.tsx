@@ -8,6 +8,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
+import ReservationBooking from "@/components/ReservationBooking";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
+import { fireLead } from "@/lib/analytics";
 import { FACTS } from "@/config/facts";
 
 /**
@@ -146,6 +148,16 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
   const effectiveConfig = seasonalConfig || hookConfig!;
   const isActive = !!menu;
   const currentYear = new Date().getFullYear();
+
+  /**
+   * Vorbelegung der Buchungsstrecke auf den 31. Dezember (E2.1).
+   *
+   * Bewusst aus dem laufenden Jahr berechnet statt hart „2026" zu schreiben — die Seite
+   * soll in den Folgejahren ohne Codeänderung weiter das richtige Datum vorbelegen.
+   * Monat 11 = Dezember (0-indiziert). `ReservationBooking` bietet an diesem Datum von
+   * sich aus nur die Slots 19:00–20:00 an (`isNewYearsEve`), passend zum Gala-Abend.
+   */
+  const newYearsEveDate = new Date(currentYear, 11, 31);
 
   // --- Canonical + Hreflang ---
   const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
@@ -496,6 +508,26 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                 <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.previousMenuNote}</p>
               </section>
             )}
+
+            {/* Reservierung (E2.1) — OpenTable-Strecke im etablierten Landingpage-Muster
+                (`headingLevel="h3"` + `onBook`-Lead-Callback, wie OktoberfestMuenchen.tsx:460
+                und WmPublicViewingMuenchen.tsx:477).
+
+                Der Text darüber muss die Betriebsrealität aussprechen (Festlegung Antoine,
+                13.09.2026): am 31.12. gibt es AUSSCHLIESSLICH das Gala-Menü, kein à la carte.
+                Wer hier einen Tisch bucht, bucht damit das Gala-Menü — das darf niemand erst
+                am Abend erfahren. Gangzahl und Preise kommen über `fillFacts` aus
+                `FACTS.silvester`, damit sie nicht neben „Auf einen Blick" driften können. */}
+            <section className="mb-16" id="reservieren" aria-labelledby="silvester-reservieren">
+              <h2 id="silvester-reservieren" className="text-3xl font-serif font-bold mb-4 text-center">{s.reservationTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{fillFacts(s.reservationIntro)}</p>
+              <ReservationBooking
+                headingLevel="h3"
+                defaultDate={newYearsEveDate}
+                onBook={() => fireLead("silvester_reservierung")}
+              />
+              <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
+            </section>
 
             {/* CTA Box */}
             <section className="mb-16 bg-primary text-primary-foreground rounded-xl p-8 text-center">

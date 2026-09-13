@@ -8,6 +8,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
+import ReservationBooking from "@/components/ReservationBooking";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
+import { fireLead } from "@/lib/analytics";
 import { FACTS } from "@/config/facts";
 
 /**
@@ -405,6 +407,27 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                   </Card>
                 ))}
               </div>
+            </section>
+
+            {/* Reservierung (E2.1) — das ist WEG 1 der Zwei-Wege-Logik in Handlungsform:
+                Tisch buchen und à la carte von der saisonalen Karte essen. Deshalb steht der
+                Block direkt hinter „Zwei Wege" und vor den Paketen (die nur Orientierung für
+                Weg 2 sind). Muster wie auf den anderen Landingpages: `headingLevel="h3"`
+                plus `onBook`-Lead-Callback.
+
+                KEINE `defaultDate`-Vorbelegung: anders als bei Silvester gibt es hier keinen
+                einzelnen Termin, sondern die ganze Adventszeit — die Komponente bleibt also
+                auf „heute". Der 24. und 25. Dezember sind Ruhetage und werden von
+                `ReservationBooking.getClosedDays` im Kalender automatisch gesperrt; der Text
+                sagt das ausdrücklich, damit es niemand vergeblich versucht. */}
+            <section className="mb-16" id="reservieren" aria-labelledby="weihnachten-reservieren">
+              <h2 id="weihnachten-reservieren" className="text-3xl font-serif font-bold mb-4 text-center">{s.reservationTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.reservationIntro}</p>
+              <ReservationBooking
+                headingLevel="h3"
+                onBook={() => fireLead("weihnachten_reservierung")}
+              />
+              <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
             </section>
 
             {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K2-Konsolidierung

@@ -1855,6 +1855,11 @@ const frBase = {
       previousMenuIntro: "Pour vous donner une idée de ce qui vous attend : voici à quoi ressemblait notre menu de gala au dernier passage à la nouvelle année – trois variantes au choix. Le menu du prochain Réveillon est en cours d'élaboration et sera publié en octobre selon toute vraisemblance.",
       previousMenuCoursesLabel: "Menu {courses} plats",
       previousMenuNote: "À noter : ces plats sont un retour sur la saison passée et ne sont pas réservables. Le prochain menu du Réveillon pourra en différer.",
+      // Réservation (E2.1) — les valeurs {courses}/{price}/{priceWine} viennent de
+      // FACTS.silvester. Le texte doit dire que le 31 décembre, seul le menu de gala est servi.
+      reservationTitle: "Réserver une table pour le Nouvel An",
+      reservationIntro: "Le 31 décembre, nous servons exclusivement le menu de gala : il n'y a pas de carte ce soir-là. Réserver une table ici revient donc à réserver le menu de gala en {courses} plats à {price} € par personne, ou {priceWine} € par personne avec les vins.",
+      reservationNote: "La date est pré-remplie au 31 décembre. Pour le réveillon, seuls les horaires entre 19h00 et 20h00 sont proposés : la soirée commence à 19h00 avec l'apéritif de bienvenue. La réservation se finalise sur OpenTable.",
       ctaBoxTitle: "Demander le Réveillon au STORIA",
       ctaBoxDesc: "Toutes les formules du Réveillon sont personnalisables. Informations détaillées sur les menus et les prix :",
       ctaBoxButton: "→ Demander le Réveillon sur events-storia.de",
@@ -1982,6 +1987,11 @@ const frBase = {
       twoWay2Item1: "D\u00e8s {minGuests} personnes",
       twoWay2Item2: "Menu, d\u00e9roul\u00e9 et boissons sont d\u00e9finis en concertation",
       twoWay2Item3: "Prix indicatif \u00e0 partir de {groupPrice} \u20ac par personne",
+      // R\u00e9servation (E2.1) \u2014 la premi\u00e8re voie, sous forme d'action. Les deux jours de
+      // fermeture sont nomm\u00e9s car ReservationBooking les bloque dans le calendrier.
+      reservationTitle: "R\u00e9server une table pendant l'Avent",
+      reservationIntro: "La premi\u00e8re voie en bref : r\u00e9server une table et commander \u00e0 la carte notre menu de saison \u2013 d\u00e8s 1 personne, sans pr\u00e9commande ni accord pr\u00e9alable sur le menu.",
+      reservationNote: "Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre ; ces deux jours ne peuvent pas \u00eatre s\u00e9lectionn\u00e9s dans le calendrier. La r\u00e9servation se finalise sur OpenTable.",
       packagesTitle: "Rep\u00e8res pour votre menu de groupe",
       packagesIntro: "Les trois forfaits ci-dessous ne sont pas des menus tout faits \u00e0 commander, mais des rep\u00e8res d'ampleur et de prix pour la deuxi\u00e8me voie. Ce qui arrive finalement \u00e0 table se d\u00e9cide ensemble, en concertation.",
       package1Title: "No\u00ebl Classic",

@@ -1878,6 +1878,11 @@ const enBase = {
       previousMenuIntro: "So you know what to expect: this is what our gala menu looked like at the last turn of the year – three variations to choose from. We are putting together the menu for the coming New Year's Eve right now and expect to publish it in October.",
       previousMenuCoursesLabel: "{courses}-course menu",
       previousMenuNote: "Please note: these dishes are a look back at last season and cannot be booked. The upcoming New Year's Eve menu may differ.",
+      // Reservation (E2.1) — placeholders come from FACTS.silvester. The text has to state
+      // that on 31 December the gala menu is the only option (Antoine, 13 Sept 2026).
+      reservationTitle: "Reserve a table for New Year's Eve",
+      reservationIntro: "On 31 December we serve the gala menu only – there is no à la carte that evening. Booking a table here means booking the {courses}-course gala menu at €{price} per person, or €{priceWine} per person with wine pairing.",
+      reservationNote: "The date is pre-filled with 31 December. For New Year's Eve only table times between 19:00 and 20:00 are available – the evening starts at 19:00 with the aperitivo reception. You complete the reservation itself on OpenTable.",
       ctaBoxTitle: "Enquire About NYE at STORIA",
       ctaBoxDesc: "All New Year's Eve packages are individually customisable. Detailed information on menus and prices:",
       ctaBoxButton: "→ Enquire about NYE on events-storia.de",
@@ -2002,6 +2007,11 @@ const enBase = {
       twoWay2Item1: "From {minGuests} people",
       twoWay2Item2: "Menu, schedule and drinks are agreed in conversation",
       twoWay2Item3: "Guide price from €{groupPrice} per person",
+      // Reservation (E2.1) — route 1 as an action. The two closing days are named because
+      // ReservationBooking blocks them in the calendar.
+      reservationTitle: "Reserve a table during Advent",
+      reservationIntro: "Route 1 in short: reserve a table and order à la carte from our seasonal menu – from 1 person, with no pre-order and no menu arrangement.",
+      reservationNote: "The restaurant is closed on 24 and 25 December; those two days cannot be selected in the calendar. You complete the reservation itself on OpenTable.",
       packagesTitle: "Guidance for your group menu",
       packagesIntro: "The three packages below are not ready-made menus to order, but reference points for scope and price on the second route. What finally reaches the table is decided together in conversation.",
       package1Title: "Christmas Classic",
