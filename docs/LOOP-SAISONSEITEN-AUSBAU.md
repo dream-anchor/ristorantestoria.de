@@ -46,11 +46,44 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
       stellen wir ab 6 Personen zusammen." („ab 2 Personen" nicht mehr im HTML). Alle URLs in
       `llms.txt`/`llms-full.txt` zeigen auf prerenderte Routen (0 Redirect-Ziele).
       **Offen bleibt:** `facts.ts` TODO Weihnachtspreis 45 € vs. 49 € (bewusst, siehe BLOCKED-Log).
-- [ ] **E1.2** Silvester-Vorjahresmenü sichtbar rendern (3 Varianten aus dem JSON-LD), klar als
+- [x] **E1.2** Silvester-Vorjahresmenü sichtbar rendern (3 Varianten aus dem JSON-LD), klar als
       Beispiel gekennzeichnet + Hinweis auf das kommende Menü.
       Beweis: Gerichtsnamen im prerenderten HTML sichtbar, nicht nur im JSON-LD.
-- [ ] **E1.3** „Auf einen Blick"-Block auf beiden Seiten (Gangzahl · Preis · Beginn · Kapazität ·
+      **Beweis 13.09.2026** (Commit `6fcc70c`): `npm run build` grün (157 Seiten prerendert,
+      0 Errors), `npm run lint` 728 Probleme = Baseline unverändert. Im **sichtbaren** HTML von
+      `dist/besondere-anlaesse/silvester/index.html` — geprüft nach Entfernen ALLER
+      `<script>`-Blöcke, also ausdrücklich außerhalb des JSON-LD: „4 Gänge Menü «Vegetale»",
+      „4 Gänge Menü «Mare»", „4 Gänge Menü «Terra»", „Vitello Tonnato, Auberginenkaviar und
+      Parmesanpraline", „Seeteufel auf einer sanften Gelbtomaten-Basilikum-Sauce, serviert mit
+      cremigem Safranrisotto", „Champagner-Kastaniencremesuppe mit getrüffelter Crème Fraîche",
+      „Carpaccio vom Octopus mit Jakobsmuscheln in feiner Kräuter-Zitrus-Marinade", „Brasato di
+      manzo al Barolo „Rinderschmorbraten in Barolo" mit getrüffelter Petersilienwurzelcreme".
+      Kennzeichnung als Vorjahr dreifach im HTML: Badge „Menü der vergangenen Saison",
+      Überschrift „Das war unser Silvester-Menü der letzten Saison", Hinweiszeile „… nicht
+      buchbar. Das kommende Silvester-Menü kann davon abweichen." plus „voraussichtlich im
+      Oktober". Alle vier Sprachen: `4-course menu «Vegetale»` / `Menù a 4 portate` /
+      `Menu 4 plats «Vegetale»` in den jeweiligen Sprachrouten. JSON-LD unverändert (dieselben
+      drei `MenuSection`-Namen, weiterhin genau 1 BreadcrumbList) — Sichtbares und Schema kommen
+      jetzt aus EINER Konstante `PREVIOUS_SEASON_MENUS`.
+- [x] **E1.3** „Auf einen Blick"-Block auf beiden Seiten (Gangzahl · Preis · Beginn · Kapazität ·
       Reservierungsfrist).
+      **Beweis 13.09.2026** (Commit `3d91285`): `npm run build` grün (157 Seiten, 0 Errors),
+      `npm run lint` 728 Probleme = Baseline unverändert. Sichtbares HTML (ohne `<script>`-Blöcke),
+      `dist/besondere-anlaesse/silvester/index.html`: „Silvester im STORIA auf einen Blick",
+      „4 Gänge · 99 € p. P., mit Weinbegleitung 150 € p. P.", „19:00 Uhr Aperitivo-Empfang",
+      „2 bis 100 Gäste", „Bis spätestens Ende November – Silvester ist jedes Jahr schnell
+      ausgebucht."; `dist/weihnachten-muenchen/index.html`: „Weihnachten im STORIA auf einen
+      Blick", „À la carte am Tisch (ab 1 Person) oder Weihnachtsmenü für Gruppen (ab 6 Personen,
+      ab 45 € p. P.)", „Adventszeit – am 24. und 25. Dezember ist das Restaurant geschlossen",
+      „100 Plätze innen, 100 auf der überdachten Terrasse", „Für Gruppen ab September/Oktober
+      empfohlen …". Semantik: je Seite genau eine `<dl>` mit 4 `<dt>`/`<dd>`-Paaren. Keine neue
+      Zahl — Werte aus `FACTS.silvester`, `FACTS.weihnachten`, `FACTS.capacity`,
+      `ReservationBooking.getClosedDays` (24./25.12.) sowie Timeline/FAQ der Seiten; die
+      Übersetzungen enthalten nur Satzschablonen mit Platzhaltern.
+      **Vermerk:** `t.seo.weihnachten` erbt im Italienischen weiterhin den deutschen Fließtext
+      (Bestandslage, itBase überschreibt dort nur die SEO-Metas). Die neuen „Auf einen
+      Blick"-Schlüssel sind auf Italienisch gesetzt; die Altbestände bleiben unangetastet, das
+      wäre eigener Scope.
 - [ ] **E1.4** Weihnachtsseite auf die Zwei-Wege-Realität umstellen (à la carte am Tisch vs.
       Gruppenmenü nach Absprache) statt „Menü folgt im Herbst".
 - [ ] **E1.5** Definition-Lead als ersten Satz beider Intros, `tldr` rendern, je ein autoritativer
