@@ -22,6 +22,7 @@ import eventGaeste from "@/assets/ristorante-storia-uebersicht-gaeste.webp";
 import eventGaeste600 from "@/assets/ristorante-storia-uebersicht-gaeste-600w.webp";
 import locationDetails from "@/assets/ristorante-storia-uebersicht-details.webp";
 import locationDetails600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
+import { FACTS } from "@/config/facts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -279,7 +280,7 @@ const FirmenfeierMuenchen = () => {
                 <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedMenuTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedMenuDesc}</p></LocalizedLink>
                 <LocalizedLink to="lunch-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedLunchTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedLunchDesc}</p></LocalizedLink>
                 <LocalizedLink to="weihnachtsfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Weihnachtsfeier München</h3><p className="text-muted-foreground text-sm">Italienische Weihnachtsfeier für Ihr Team mit festlichen Menüs ab 45 € pro Person.</p></LocalizedLink>
-                <Link to="/besondere-anlaesse/silvester/" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3><p className="text-muted-foreground text-sm">Jahresabschluss-Dinner mit italienischem 5-Gänge-Menü ab 99 € pro Person.</p></Link>
+                <Link to="/besondere-anlaesse/silvester/" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3><p className="text-muted-foreground text-sm">Jahresabschluss-Dinner mit italienischem {FACTS.silvester.courses}-Gänge-Menü für {FACTS.silvester.price} € pro Person (mit Weinbegleitung {FACTS.silvester.priceWithWine} €).</p></Link>
                 <LocalizedLink to="reisegruppen-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">Reisegruppen München</h3><p className="text-muted-foreground text-sm">Auch für Reisegruppen bieten wir spezielle Menü-Pakete an – ab 20 Personen, Reiseleiter isst gratis.</p></LocalizedLink>
                 <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3><p className="text-muted-foreground text-sm">{t.internalLinks.faqLinkDesc}</p></LocalizedLink>
               </div>

@@ -1779,7 +1779,7 @@ const itBase = {
       package2Title: "Capodanno Premium",
       package2Subtitle: "Il pacchetto all-inclusive",
       package2Item1: "Ricevimento con champagne",
-      package2Item2: "Menù di gala a 5 portate",
+      package2Item2: "Menù di gala a 4 portate (lo stesso menù del Classic)",
       package2Item3: "Abbinamento vini premium (4 bicchieri)",
       package2Item4: "Musica & intrattenimento",
       package2Item5: "Champagne di mezzanotte & countdown",

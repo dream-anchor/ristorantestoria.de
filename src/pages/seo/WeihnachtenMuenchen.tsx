@@ -25,6 +25,17 @@ import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
 
+/**
+ * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
+ *
+ * Vorher zeigte das `image`-Feld auf `/weihnachtsmenue-storia-muenchen.jpg` — eine Datei, die in
+ * `public/` NICHT existiert (404). Statt eine zweite, thematisch nur halb passende Datei zu
+ * erfinden, verweist das Schema jetzt auf das Hero-Bild der Seite selbst: dieselbe Aufnahme, die
+ * Besucher oben sehen. Der Import wird von Vite auf den gehashten Build-Pfad aufgelöst, die URL
+ * kann also nicht mehr von der ausgelieferten Datei abweichen.
+ */
+const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${weihnachtsfeierImage}`;
+
 interface WeihnachtenMuenchenProps {
   standalone?: boolean;
   menu?: any | null;
@@ -156,7 +167,7 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
         "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
-        "image": ["https://www.ristorantestoria.de/weihnachtsmenue-storia-muenchen.jpg"],
+        "image": [EVENT_IMAGE_URL],
         "offers": {
           "@type": "AggregateOffer",
           "lowPrice": "45.00",

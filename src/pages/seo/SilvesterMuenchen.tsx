@@ -26,6 +26,17 @@ import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
 
+/**
+ * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
+ *
+ * Vorher zeigte das `image`-Feld auf `/silvester-gala-storia-muenchen.jpg` — eine Datei, die in
+ * `public/` NICHT existiert (404). Statt eine zweite, thematisch nur halb passende Datei zu
+ * erfinden, verweist das Schema jetzt auf das Hero-Bild der Seite selbst: dieselbe Aufnahme, die
+ * Besucher oben sehen. Der Import wird von Vite auf den gehashten Build-Pfad aufgelöst, die URL
+ * kann also nicht mehr von der ausgelieferten Datei abweichen.
+ */
+const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${silvesterHeroImage}`;
+
 interface SilvesterMuenchenProps {
   standalone?: boolean;
   menu?: any | null;
@@ -151,19 +162,15 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
         }))
       })}} />
 
-      {/* Event + Menu @graph (non-standalone only) — references #restaurant / #organization by @id */}
+      {/* Event + Menu @graph (non-standalone only) — references #restaurant / #organization by @id.
+          Die früher hier eingebettete "BreadcrumbList" wurde entfernt (E1.1, Widerspruch 7): sie war
+          redundant zur bereits oben gerenderten <StructuredData type="breadcrumb">, die (anders als
+          dieser hartcodierte Block) standalone-bewusst die korrekte Breadcrumb liefert. Die Seite
+          rendert damit genau EINE BreadcrumbList — wie bei Weihnachten seit der K2-Konsolidierung. */}
       {!standalone && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
-            {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.ristorantestoria.de/" },
-                { "@type": "ListItem", "position": 2, "name": "Besondere Anlässe", "item": "https://www.ristorantestoria.de/besondere-anlaesse/" },
-                { "@type": "ListItem", "position": 3, "name": "Silvester Gala-Dinner", "item": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/" }
-              ]
-            },
             {
               "@type": "Event",
               "@id": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/#event",
@@ -176,7 +183,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
               "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
-              "image": ["https://www.ristorantestoria.de/silvester-gala-storia-muenchen.jpg"],
+              "image": [EVENT_IMAGE_URL],
               "offers": [
                 { "@type": "Offer", "name": "4-Gänge-Degustationsmenü", "price": "99.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
                 { "@type": "Offer", "name": "4-Gänge-Degustationsmenü mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }

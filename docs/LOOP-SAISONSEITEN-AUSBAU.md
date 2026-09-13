@@ -28,10 +28,24 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 ## E1 — Fakten, Menü sichtbar machen, GEO-Basis
 
-- [ ] **E1.1** Acht Faktenwidersprüche auflösen (KONZEPT § Faktenwidersprüche, Spalte „Auflösung"),
+- [x] **E1.1** Acht Faktenwidersprüche auflösen (KONZEPT § Faktenwidersprüche, Spalte „Auflösung"),
       kanonische Werte in `src/config/facts.ts`. Betrifft `BesondereAnlaesse.tsx:48`,
       `de.ts` (Silvester-Pakete), `FirmenfeierMuenchen.tsx:282`, `llms.txt`.
       Beweis: `grep` zeigt überall denselben Preis und dieselbe Gangzahl.
+      **Beweis 13.09.2026:** `npm run build` grün (157 Seiten prerendert, 0 Errors), `npm run lint`
+      728 Probleme = Baseline unverändert. `grep -rniE "5[- ](gäng|gang|course|portate|plats|services)"
+      src/ public/` → 0 Treffer im Silvester-Kontext (verbleibende Treffer ausschließlich in den
+      Abschnitten `birthday`, `weihnachtsfeier`, `hochzeitsfeier`, `filmfest`); „65,90" kommt nicht
+      mehr als Silvester-Preis vor (nur noch Valentinstag). Prerender: `dist/besondere-anlaesse/silvester/index.html`
+      und `dist/weihnachten-muenchen/index.html` je **1 × BreadcrumbList**; JSON-LD-`image` zeigt auf
+      `/assets/silvester-dinner-gala-storia-muenchen-BkEV-w6f.webp` bzw.
+      `/assets/weihnachtsfeier-italiener-storia-muenchen-CAN4qqU6.webp` — beide Dateien in `dist/`
+      vorhanden. Sichtbar im HTML: Hub-Teaser „4-Gänge-Degustationsmenü für 99 € p. P. (mit
+      Weinbegleitung 150 €)", Silvester-Paket „4-Gang Gala-Menü (dasselbe Menü wie Classic)" in
+      de/en/it/fr, Weihnachts-FAQ „…dafür genügt 1 Person. Ein festes Weihnachtsmenü für Gruppen
+      stellen wir ab 6 Personen zusammen." („ab 2 Personen" nicht mehr im HTML). Alle URLs in
+      `llms.txt`/`llms-full.txt` zeigen auf prerenderte Routen (0 Redirect-Ziele).
+      **Offen bleibt:** `facts.ts` TODO Weihnachtspreis 45 € vs. 49 € (bewusst, siehe BLOCKED-Log).
 - [ ] **E1.2** Silvester-Vorjahresmenü sichtbar rendern (3 Varianten aus dem JSON-LD), klar als
       Beispiel gekennzeichnet + Hinweis auf das kommende Menü.
       Beweis: Gerichtsnamen im prerenderten HTML sichtbar, nicht nur im JSON-LD.
