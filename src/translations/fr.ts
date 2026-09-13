@@ -1227,6 +1227,9 @@ const frBase = {
       paketFirmaName: "Formule Wiesn entreprise",
       paketFirmaDesc: "Sur mesure pour votre équipe: brotzeit, plat principal, forfait boissons et espace réservé – sur demande.",
       paketFirmaPrice: "sur demande",
+      paketHolzfassName: "Fût à précommander",
+      paketHolzfassDesc: "Un fût de 30 litres de véritable bière Paulaner Wiesnbier pour votre groupe – précommandez à temps, il sera prêt pour vous.",
+      paketHolzfassPrice: "€ 400",
       paketeNote: "Toutes les formules sont données à titre d'exemple et personnalisables individuellement. Prix indicatifs. Contactez-nous pour une offre concrète: +49 89 51519696.",
       // Location
       locationTitle: "Oktoberfest Munich Maxvorstadt – notre emplacement",

@@ -1273,6 +1273,10 @@ export const de = {
       paketFirmaName: "Firmen-Wiesn-Paket",
       paketFirmaDesc: "Individuell für euer Team: Brotzeit, Hauptgang, Getränkepauschale und reservierter Bereich – auf Anfrage.",
       paketFirmaPrice: "auf Anfrage",
+      // Preiskorrektur 13.09.2026 (Betreiber, WhatsApp): 30-Liter-Fass für Gruppen zum Vorbestellen.
+      paketHolzfassName: "Holzfass zum Vorbestellen",
+      paketHolzfassDesc: "30-Liter-Fass original Paulaner Wiesnbier für eure Gruppe – rechtzeitig vorbestellen, dann steht es startklar für euch bereit.",
+      paketHolzfassPrice: "€ 400",
       paketeNote: "Alle Pakete sind beispielhaft und individuell anpassbar. Preise ca.-Angaben. Sprecht uns für ein konkretes Angebot an: +49 89 51519696.",
       // Location
       locationTitle: "Oktoberfest München Maxvorstadt – unser Standort",

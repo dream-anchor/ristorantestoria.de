@@ -1256,6 +1256,9 @@ const itBase = {
       paketFirmaName: "Pacchetto Wiesn aziendale",
       paketFirmaDesc: "Su misura per il vostro team: Brotzeit, secondo, forfait bevande e area riservata – su richiesta.",
       paketFirmaPrice: "su richiesta",
+      paketHolzfassName: "Fusto da prenotare",
+      paketHolzfassDesc: "Un fusto da 30 litri di autentica birra Paulaner Wiesnbier per il vostro gruppo – prenotatelo in tempo e sarà pronto per voi.",
+      paketHolzfassPrice: "€ 400",
       paketeNote: "Tutti i pacchetti sono esemplificativi e personalizzabili. Prezzi indicativi. Parlatene con noi per un'offerta concreta: +49 89 51519696.",
       // Location
       locationTitle: "Oktoberfest Monaco di Baviera Maxvorstadt – la nostra sede",
