@@ -4071,7 +4071,7 @@ const frExtra = {
   seo: {
     lunch: {
       seoDescription: "Déjeuner à Maxvorstadt : pâtes dès 14,50 €, pizza dès 12,50 €, menu 3 plats dès 14,90 €. Lun–ven 11h30–14h30, de retour au bureau en 45 min. À 5 min de Königsplatz.",
-      tldr: "Le STORIA, à Maxvorstadt à Munich (Karlstraße 47a), sert un déjeuner italien du lundi au vendredi dès 09h00. Carte du midi changeante avec pâtes fraîches, pizza au four à bois et salades. À 5 min à pied de Königsplatz, idéal pour un déjeuner d'affaires et les étudiants. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
+      tldr: "Le STORIA, à Maxvorstadt à Munich (Karlstraße 47a), sert un déjeuner italien du lundi au vendredi dès 09h00. Carte du midi changeante avec pâtes fraîches, pizza au four à pierre et salades. À 5 min à pied de Königsplatz, idéal pour un déjeuner d'affaires et les étudiants. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     firmenfeier: {
       tldr: "Fêtes d'entreprise au STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'entreprise, fêtes de Noël et événements d'équipe de 20 à 300 convives. 100 places à l'intérieur + 100 sur la terrasse couverte. Menus personnalisés dès 35 € par personne, service événementiel professionnel. À 5 min de Königsplatz, 5 min de la gare centrale. Entreprise familiale depuis 2015. Demandes : +49 89 51519696.",
@@ -4112,22 +4112,22 @@ const frExtra = {
       tldr: "Saint-Valentin au STORIA Munich Maxvorstadt (Karlstraße 47a) : dîner italien romantique de la Saint-Valentin avec menu à plusieurs plats aux chandelles, vins raffinés et une rose à table. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     neapolitanPizza: {
-      tldr: "Pizza napolitaine au STORIA Munich Maxvorstadt (Karlstraße 47a) : véritable pizza napoletana au four à bois à plus de 400 °C. Tomates San Marzano DOP, mozzarella de bufflonne de Campanie, pâte maturée 48 heures. Chef Domenico Speranza, originaire de Campanie, dans la restauration allemande depuis 1995. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
+      tldr: "Pizza napolitaine au STORIA Munich Maxvorstadt (Karlstraße 47a) : véritable pizza napoletana au four à pierre à plus de 400 °C. Tomates San Marzano DOP, mozzarella de bufflonne de Campanie, pâte maturée 48 heures. Chef Domenico Speranza, originaire de Campanie, dans la restauration allemande depuis 1995. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     wild: {
       tldr: "Gibier au STORIA Munich Maxvorstadt (Karlstraße 47a) : spécialités italiennes de gibier de septembre à février. Selle de chevreuil, ragoût de cerf, ragù de sanglier et magret de canard – préparés à l'italienne par le chef Domenico Speranza. À 5 min de Königsplatz. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     pizzaMuenchen: {
-      tldr: "Pizza Munich au STORIA Maxvorstadt (Karlstraße 47a) : pizza italienne authentique au four à bois cuite à plus de 400 °C. Tomates San Marzano, mozzarella de bufflonne et pâte maturée 48 heures. Entreprise familiale depuis 2015, gérée par la famille Speranza originaire de Campanie. À 5 min à pied de Königsplatz. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
+      tldr: "Pizza Munich au STORIA Maxvorstadt (Karlstraße 47a) : pizza italienne authentique au four à pierre cuite à plus de 400 °C. Tomates San Marzano, mozzarella de bufflonne et pâte maturée 48 heures. Entreprise familiale depuis 2015, gérée par la famille Speranza originaire de Campanie. À 5 min à pied de Königsplatz. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
       introLinkPre: "Découvrez-en plus sur notre ",
       introLinkAnchor: "restaurant italien à Munich",
       introLinkPost: " et la famille Speranza derrière celui-ci sur notre page restaurant.",
     },
     italienerMuenchen: {
-      tldr: "Italien à Munich : le STORIA à Maxvorstadt (Karlstraße 47a) est un restaurant italien géré par la famille Speranza depuis 2015. Pizza napolitaine au four à bois, pâtes maison, plus de 60 vins italiens et une terrasse couverte de 100 places. Lun–ven 09h00–01h00, sam–dim 12h00–01h00. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
+      tldr: "Italien à Munich : le STORIA à Maxvorstadt (Karlstraße 47a) est un restaurant italien géré par la famille Speranza depuis 2015. Pizza napolitaine au four à pierre, pâtes maison, plus de 60 vins italiens et une terrasse couverte de 100 places. Lun–ven 09h00–01h00, sam–dim 12h00–01h00. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     italienerKoenigsplatz: {
-      tldr: "Italien près de Königsplatz Munich : le STORIA (Karlstraße 47a) se trouve à seulement 5 min à pied de Königsplatz, des Pinakotheken et de la TU Munich. Cuisine italienne authentique avec pizza au four à bois, pâtes maison et plus de 60 vins italiens. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
+      tldr: "Italien près de Königsplatz Munich : le STORIA (Karlstraße 47a) se trouve à seulement 5 min à pied de Königsplatz, des Pinakotheken et de la TU Munich. Cuisine italienne authentique avec pizza au four à pierre, pâtes maison et plus de 60 vins italiens. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     weihnachtsfeier: {
       tldr: "Fête de Noël Munich au STORIA Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes de Noël d'entreprise, dîners de Noël privés et célébrations de l'Avent de 6 à 300 convives. Menus festifs dès 45 € par personne, 100 places à l'intérieur + 100 sur la terrasse. Entreprise familiale depuis 2015, gérée par la famille Speranza. À 5 min de Königsplatz. Demandes : +49 89 51519696.",
@@ -4136,13 +4136,13 @@ const frExtra = {
       tldr: "Terrasse de restaurant Munich au STORIA Maxvorstadt (Karlstraße 47a) : terrasse couverte de 100 places, coussins et couvertures – fumeurs bienvenus. Cuisine italienne et aperitivo en plein air, à l'abri par tous les temps. À 5 min de Königsplatz. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     italienischesRestaurant: {
-      tldr: "Restaurant italien Munich : le STORIA à Maxvorstadt (Karlstraße 47a) est un authentique restaurant italien géré par la famille Speranza depuis 2015. Pizza napolitaine au four à bois à 400 °C, pâtes maison, fruits de mer et plus de 60 vins italiens. 100 places à l'intérieur + 100 sur la terrasse couverte. Lun–ven 09h00–01h00, sam–dim 12h00–01h00. Réservations : +49 89 51519696.",
+      tldr: "Restaurant italien Munich : le STORIA à Maxvorstadt (Karlstraße 47a) est un authentique restaurant italien géré par la famille Speranza depuis 2015. Pizza napolitaine au four à pierre à 400 °C, pâtes maison, fruits de mer et plus de 60 vins italiens. 100 places à l'intérieur + 100 sur la terrasse couverte. Lun–ven 09h00–01h00, sam–dim 12h00–01h00. Réservations : +49 89 51519696.",
       heroBadge1: "🇮🇹 Authentiquement italien",
       heroBadge2: "👨‍👩‍👧 Entreprise familiale",
       heroBadge3: "🎯 Depuis 2015",
     },
     italienerHauptbahnhof: {
-      tldr: "Italien près de la gare centrale de Munich : le STORIA à Maxvorstadt (Karlstraße 47a) est à seulement 5 min à pied ou 1 arrêt de tram de la gare centrale de Munich. Pizza napolitaine au four à bois, pâtes maison, menu du midi lun–ven. Idéal avant/après un voyage en train ou pour un déjeuner d'affaires. Lun–ven 09h00–01h00, sam–dim 12h00–01h00. Réservations : +49 89 51519696.",
+      tldr: "Italien près de la gare centrale de Munich : le STORIA à Maxvorstadt (Karlstraße 47a) est à seulement 5 min à pied ou 1 arrêt de tram de la gare centrale de Munich. Pizza napolitaine au four à pierre, pâtes maison, menu du midi lun–ven. Idéal avant/après un voyage en train ou pour un déjeuner d'affaires. Lun–ven 09h00–01h00, sam–dim 12h00–01h00. Réservations : +49 89 51519696.",
       heroBadge1: "🚉 5 min de la gare",
       heroBadge2: "🚋 1 arrêt de tram",
       heroBadge3: "🎯 Depuis 2015",
