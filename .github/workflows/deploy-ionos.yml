@@ -57,6 +57,12 @@ jobs:
           # nicht hier gesetzt: Der GitHub-Wert kann nach einer Key-Rotation veralten
           # und würde dann den aktuellen, öffentlichen Fallback im Client überschreiben.
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          # MAESTRO-Intake-Endpunkt für die Anlass-Anfrageformulare (Silvester/Weihnachten).
+          # Kein Secret: Die URL wird ohnehin vom Browser des Gastes aufgerufen und steht damit
+          # im ausgelieferten JavaScript. Ohne diese Variable baut Vite die Formulare bewusst
+          # nicht ein, sondern zeigt einen Telefon/E-Mail-Ausweichblock — der Build bleibt also
+          # grün, aber die Formulare fehlen live.
+          VITE_MAESTRO_INTAKE_URL: https://storia.schrittmacher.ai/api/public/inquiries
 
       - name: Copy .htaccess files to dist
         run: |
