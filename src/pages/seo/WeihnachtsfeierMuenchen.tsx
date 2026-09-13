@@ -10,6 +10,7 @@ import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Star } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -74,6 +75,21 @@ const WeihnachtsfeierMuenchen = () => {
     { q: w.faq6Question, a: w.faq6Answer },
     { q: w.faq7Question, a: w.faq7Answer },
     { q: w.faq8Question, a: w.faq8Answer },
+    // E3.3: neue FAQ, entstanden aus E3.1 (Stornostaffel) — schließt an step3Desc an.
+    { q: w.faq9Question, a: w.faq9Answer },
+  ];
+
+  /**
+   * Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Schließt die Lücke, dass
+   * `step3Desc` bereits "Anzahlung (30%) sichert Ihren Termin" erwähnt, ohne dass bisher eine
+   * begleitende Stornoregel dazu auf der Seite stand.
+   */
+  const cancellationTiers = [
+    { period: w.cancellationTier1Period, fee: w.cancellationTier1Fee },
+    { period: w.cancellationTier2Period, fee: w.cancellationTier2Fee },
+    { period: w.cancellationTier3Period, fee: w.cancellationTier3Fee },
+    { period: w.cancellationTier4Period, fee: w.cancellationTier4Fee },
+    { period: w.cancellationTier5Period, fee: w.cancellationTier5Fee },
   ];
 
   return (
@@ -205,6 +221,41 @@ const WeihnachtsfeierMuenchen = () => {
                   minGuests={FACTS.weihnachten.groupMenuMinGuests}
                 />
               </div>
+            </section>
+
+            {/* Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Bewusst OHNE Verweis
+                auf eine "AGB für Veranstaltungen"-Seite: die gibt es im Repo nicht (nur
+                agb-restaurant, agb-gutscheine in slugs.json), ein Link darauf wäre eine 404 bzw.
+                eine falsche Erwartung — siehe `cancellationDepositNote`, die stattdessen auf die
+                Buchungsbestätigung verweist. Schließt die Lücke zu `step3Desc` ("Anzahlung
+                (30%) sichert Ihren Termin"), die bisher ohne begleitende Stornoregel stand. */}
+            <section className="mb-16" aria-labelledby="weihnachtsfeier-storno">
+              <Card className="border-border">
+                <CardHeader className="pb-3">
+                  <h2 id="weihnachtsfeier-storno" className="text-2xl font-serif font-bold">{w.cancellationTitle}</h2>
+                  <p className="text-muted-foreground text-sm">{w.cancellationIntro}</p>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>{w.cancellationColPeriod}</TableHead>
+                        <TableHead>{w.cancellationColFee}</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {cancellationTiers.map((tier, i) => (
+                        <TableRow key={i}>
+                          <TableCell>{tier.period}</TableCell>
+                          <TableCell className="font-medium">{tier.fee}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                  <p className="text-sm text-muted-foreground mt-4">{w.cancellationBasisNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{w.cancellationDepositNote}</p>
+                </CardContent>
+              </Card>
             </section>
 
             {/* 8 Gründe */}

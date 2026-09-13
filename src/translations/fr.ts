@@ -1902,6 +1902,24 @@ const frBase = {
       // Les canaux n'apparaissent plus qu'ici, juste derrière le formulaire de demande.
       contactBoxTitle: "Vous préférez nous parler directement ?",
       contactBoxDesc: "Téléphone, e-mail ou WhatsApp – pour vos questions sur le menu de gala, pour des souhaits particuliers ou si vous préférez nous transmettre votre demande autrement.",
+      // Conditions d'annulation (E3.1). Volontairement sans lien vers une page « CGV Événements »
+      // — elle n'existe pas dans ce dépôt (seulement agb-restaurant, agb-gutscheine).
+      cancellationTitle: "Conditions d'annulation",
+      cancellationIntro: "Si vous devez annuler votre événement, les frais d'annulation suivants s'appliquent – calculés en pourcentage du montant réservé :",
+      cancellationColPeriod: "Délai avant l'événement",
+      cancellationColFee: "Frais d'annulation",
+      cancellationTier1Period: "Plus de 30 jours avant",
+      cancellationTier1Fee: "Gratuit",
+      cancellationTier2Period: "15 à 30 jours avant",
+      cancellationTier2Fee: "25 %",
+      cancellationTier3Period: "8 à 14 jours avant",
+      cancellationTier3Fee: "50 %",
+      cancellationTier4Period: "3 à 7 jours avant",
+      cancellationTier4Fee: "80 %",
+      cancellationTier5Period: "À partir de 48 heures avant, ou non-présentation",
+      cancellationTier5Fee: "100 %",
+      cancellationBasisNote: "La date de réception de votre annulation écrite fait foi.",
+      cancellationDepositNote: "Les acomptes déjà versés sont déduits des frais d'annulation – un éventuel excédent vous est remboursé. Nous en discutons volontiers avec vous lors de la confirmation de votre réservation.",
       reasonsTitle: "8 Raisons de Fêter le Réveillon au STORIA",
       reason1Title: "🍝 Authentique Dîner de Gala Italien",
       reason1Desc: "Pas de buffet standard : pâtes maison, pizza au four à pierre, antipasti frais. Une qualité qui ravira vos convives.",
@@ -1950,6 +1968,9 @@ const frBase = {
       faq7Answer: "Bien sûr ! Qu'il s'agisse d'une demande en mariage, décoration spéciale ou gâteau – parlez-nous-en, nous aidons volontiers avec discrétion.",
       faq8Question: "Y a-t-il des places de parking ?",
       faq8Answer: "Parking Marsstraße (P22), Hirtenstraße 14, 750 places, ouvert 24h, 5 minutes à pied.",
+      // E3.3 : nouvelle FAQ, issue de E3.1 (conditions d'annulation).
+      faq9Question: "Dois-je verser un acompte – et que se passe-t-il si je dois annuler ?",
+      faq9Answer: "Pour les groupes et les demandes plus importantes, un acompte peut être convenu. En cas d'annulation, des frais d'annulation échelonnés s'appliquent selon le délai avant l'événement – gratuit à plus de 30 jours, jusqu'à 100 % à partir de 48 heures avant ou en cas de non-présentation. Voir « Conditions d'annulation » ci-dessus pour les détails.",
       // signupTitle/signupDesc retirés avec E2.3 — le bloc d'inscription est décroché de cette
       // page. `t.seasonalSignup.*` reste intact (Saint-Valentin + page d'occasion générique).
       archivedTitle: "Notre Menu du Réveillon {year} – Rétrospective",
@@ -2194,6 +2215,25 @@ const frBase = {
       // les remplace pas.
       inquiryTitle: "Demander votre Fête de Noël",
       inquiryIntro: "Vous planifiez une fête d'entreprise ou de groupe ? Écrivez-nous la date souhaitée, le nombre d'invités et vos idées – nous discuterons du menu individuellement avec vous.",
+      // Conditions d'annulation (E3.1) — comble le manque : step3Desc mentionne déjà un acompte
+      // (30 %) sans règle d'annulation associée. Pas de lien vers une page « CGV Événements »
+      // inexistante.
+      cancellationTitle: "Conditions d'annulation",
+      cancellationIntro: "Si vous devez annuler votre fête, les frais d'annulation suivants s'appliquent – calculés en pourcentage du montant réservé :",
+      cancellationColPeriod: "Délai avant la fête",
+      cancellationColFee: "Frais d'annulation",
+      cancellationTier1Period: "Plus de 30 jours avant",
+      cancellationTier1Fee: "Gratuit",
+      cancellationTier2Period: "15 à 30 jours avant",
+      cancellationTier2Fee: "25 %",
+      cancellationTier3Period: "8 à 14 jours avant",
+      cancellationTier3Fee: "50 %",
+      cancellationTier4Period: "3 à 7 jours avant",
+      cancellationTier4Fee: "80 %",
+      cancellationTier5Period: "À partir de 48 heures avant, ou non-présentation",
+      cancellationTier5Fee: "100 %",
+      cancellationBasisNote: "La date de réception de votre annulation écrite fait foi.",
+      cancellationDepositNote: "Votre acompte est déduit des frais d'annulation – un éventuel excédent vous est remboursé. Nous en discutons volontiers avec vous lors de la confirmation de votre réservation.",
       reasonsTitle: "8 Raisons pour Votre Fête de Noël au STORIA",
       reason1Title: "🎄 Ambiance Italienne Festive",
       reason1Desc: "Les décorations de Noël rencontrent le charme italien. STORIA se transforme pendant l\u2019Avent en un lieu chaleureux et festif – sans kitsch, avec beaucoup de style.",
@@ -2274,6 +2314,9 @@ const frBase = {
       faq7Answer: "Oui, tous nos menus de Noël incluent des options végétariennes. Des menus entièrement véganes peuvent être préparés sur demande.",
       faq8Question: "STORIA propose-t-il aussi un dîner de Noël pour deux ?",
       faq8Answer: "Oui, notre menu de Noël est aussi disponible pour les couples. Pour un dîner de Noël romantique Munich, nous recommandons de réserver.",
+      // E3.3 : nouvelle FAQ, issue de E3.1 (conditions d'annulation) — fait écho à step3Desc.
+      faq9Question: "Que devient mon acompte si je dois annuler ?",
+      faq9Answer: "Votre acompte (30 %) est déduit des frais d'annulation, qui dépendent du délai avant l'événement – gratuit à plus de 30 jours, jusqu'à 100 % à partir de 48 heures avant ou en cas de non-présentation. Un éventuel excédent vous est remboursé. Voir « Conditions d'annulation » ci-dessus pour les détails.",
       ctaTitle: "Planifiez Votre Fête de Noël Munich Maintenant",
       ctaDesc: "Réservez votre date préférée – les meilleures dates partent vite !",
       ctaButton: "\u2192 R\u00e9server f\u00eate de No\u00ebl maintenant",
