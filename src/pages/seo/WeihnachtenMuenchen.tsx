@@ -213,20 +213,41 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={breadcrumbSchema} />
 
-      {/* Event-Schema – Weihnachtsmenü — references #restaurant / #organization by @id.
+      {/* Event-Schema – Weihnachtsmenü für Gruppen — references #restaurant / #organization by @id.
           K2-Konsolidierung: früher an `!standalone` gebunden (nur auf der Pillar-Route sichtbar),
           jetzt unconditional, weil die Standalone-URL (weihnachten-muenchen) seit der
           Konsolidierung die kanonische, einzige URL ist (KONZEPT § 3b). Die früher hier
           eingebettete "BreadcrumbList" wurde entfernt — sie ist redundant zur bereits oben
           gerenderten <StructuredData type="breadcrumb">, die (anders als dieser hartcodierte
           Block) standalone-bewusst die korrekte 2-stufige Breadcrumb liefert. @id/offers.url
-          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route. */}
+          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route.
+
+          E1.6, Typ: `FoodEvent` statt `Event` — `docs/geo-content-guidelines.md` § Regel 8
+          schreibt für Event-Seiten `FoodEvent` vor. Untertyp von `Event`, alle Felder bleiben.
+
+          E1.6, ENTSCHEIDUNG — was dieses Event beschreibt: Seit E1.4 bildet die Seite zwei Wege
+          ab. Weg 1 (à la carte am reservierten Tisch, ab 1 Person, keine Vorbestellung) ist
+          regulärer Restaurantbetrieb an beliebigen Abenden der Adventszeit — er hat weder einen
+          festen Termin noch ein festes Angebot und ist damit KEIN Event im Sinne von schema.org;
+          er ist bereits über das `Restaurant`-Schema (oben, `<StructuredData type="restaurant">`)
+          samt Öffnungszeiten abgedeckt. Das Event-Schema beschreibt deshalb ausschließlich Weg 2:
+          das Weihnachtsmenü für Firmen und Gruppen ab `FACTS.weihnachten.groupMenuMinGuests`
+          Personen. `name`, `description` und `eligibleQuantity` sagen das jetzt ausdrücklich —
+          vorher versprach der generische Name „Weihnachtsmenü im STORIA München" ein festes,
+          für jeden buchbares Menü, das es laut Faktenklärung vom 13.09.2026 gar nicht gibt.
+
+          E1.6, `highPrice`: bisher trug das AggregateOffer nur `lowPrice`. Der obere
+          Orientierungspreis ist der des Pakets „Weihnachten Premium" (`weihnachten.package2Price`
+          in den Übersetzungen: „ab 65 € p.P.") — der höchste bezifferte Wert auf der Seite. Das
+          dritte Paket („Weihnachten Exclusive") ist mit „Auf Anfrage" ausgewiesen und liefert
+          bewusst keine Zahl; erfunden wird hier keine. `lowPrice` kommt aus `FACTS.weihnachten`,
+          damit er nicht getrennt vom sichtbaren Inhalt driften kann. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "Event",
+        "@type": "FoodEvent",
         "@id": "https://www.ristorantestoria.de/weihnachten-muenchen/#event",
-        "name": "Weihnachtsmenü im STORIA München",
-        "description": "Festliches italienisches Weihnachtsmenü in der Adventszeit – ideal für Familien und Firmen-Weihnachtsfeiern in der Maxvorstadt. Gruppen-Menü ab 45 € pro Person.",
+        "name": "Weihnachtsmenü für Gruppen im STORIA München",
+        "description": `Weihnachtsmenü für Firmen und Gruppen ab ${FACTS.weihnachten.groupMenuMinGuests} Personen im Ristorante STORIA in München Maxvorstadt: süditalienische Festtagsküche, im Gespräch mit dem Restaurant auf Anlass, Vorlieben und Budget abgestimmt, ab ${FACTS.weihnachten.groupMenuPriceFrom} € pro Person. Ein festes Weihnachtsmenü zum Vorbestellen gibt es nicht. Am 24. und 25. Dezember ist das Restaurant geschlossen.`,
         "startDate": "2026-11-25T17:00:00+01:00",
         "endDate": "2026-12-23T23:30:00+01:00",
         "eventStatus": "https://schema.org/EventScheduled",
@@ -236,10 +257,16 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
         "image": [EVENT_IMAGE_URL],
         "offers": {
           "@type": "AggregateOffer",
-          "lowPrice": "45.00",
+          "lowPrice": `${FACTS.weihnachten.groupMenuPriceFrom}.00`,
+          "highPrice": "65.00",
           "priceCurrency": "EUR",
           "availability": "https://schema.org/InStock",
-          "url": "https://www.ristorantestoria.de/weihnachten-muenchen/"
+          "url": "https://www.ristorantestoria.de/weihnachten-muenchen/",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": FACTS.weihnachten.groupMenuMinGuests,
+            "unitText": "Personen"
+          }
         }
       })}} />
 

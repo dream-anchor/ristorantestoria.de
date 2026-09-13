@@ -154,8 +154,37 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
       Rendern auf den deutschen Text zurückgefallen — jetzt in `itBase` ergänzt. Der übrige
       italienische Fließtext des Weihnachts-Blocks erbt weiterhin das Deutsche (Bestandslage,
       siehe Vermerk bei E1.3); die von E1.4/E1.5 angefassten Schlüssel sind italienisch gesetzt.
-- [ ] **E1.6** JSON-LD: `FoodEvent` statt `Event`, doppelte BreadcrumbList auf Silvester entfernen,
+- [x] **E1.6** JSON-LD: `FoodEvent` statt `Event`, doppelte BreadcrumbList auf Silvester entfernen,
       `image` reparieren, bei Weihnachten `highPrice` ergänzen.
+      **Beweis 13.09.2026:** `npm run build` grün (157 Seiten prerendert, 0 Errors), `npm run lint`
+      728 Probleme = Baseline unverändert. Aus dem gebauten HTML extrahiert und je Block per
+      `JSON.parse()` validiert: `dist/besondere-anlaesse/silvester/index.html` und
+      `dist/weihnachten-muenchen/index.html` haben je **6 JSON-LD-Blöcke, 6/6 syntaktisch gültig**,
+      je **1 × FoodEvent**, **0 × Event**, **1 × BreadcrumbList**, **1 × FAQPage**.
+      Silvester-`@graph`: `"@type":"FoodEvent"`, `name` „Silvester Gala-Dinner im STORIA München",
+      `description` „… Champagner-Aperitif und 4-Gänge-Degustationsmenü zur Wahl (Vegetale, Mare
+      oder Terra). Ab 99 € pro Person, mit Weinbegleitung 150 € pro Person — dasselbe Menü, der
+      Unterschied ist nur die Weinbegleitung.", `offers` = `99.00` / `150.00`, `Menu`-Block
+      `"4 Gänge Menü «Vegetale»"` mit denselben `99.00`/`150.00` — Gangzahl und beide Preise kommen
+      jetzt per Template-Literal aus `FACTS.silvester`, nicht mehr als Literale im Schema.
+      Weihnachten: `"@type":"FoodEvent"`, `name` „Weihnachtsmenü **für Gruppen** im STORIA München",
+      `offers` `{"@type":"AggregateOffer","lowPrice":"45.00","highPrice":"65.00","priceCurrency":"EUR",…,"eligibleQuantity":{"@type":"QuantitativeValue","minValue":6,"unitText":"Personen"}}`.
+      **Entscheidung Weihnachts-Event (E1.4-Folge):** Das Event-Schema beschreibt ausschließlich
+      **Weg 2** (Gruppen-/Menü-Weg). Weg 1 (à la carte am reservierten Tisch, ab 1 Person, keine
+      Vorbestellung) hat weder festen Termin noch festes Angebot, ist also kein Event im Sinne von
+      schema.org und bereits über das `Restaurant`-Schema samt Öffnungszeiten abgedeckt. `name`,
+      `description` und `eligibleQuantity` sagen den Gruppen-Weg jetzt ausdrücklich; vorher
+      versprach der generische Name „Weihnachtsmenü im STORIA München" ein festes, für jeden
+      buchbares Menü, das es laut Faktenklärung vom 13.09.2026 nicht gibt. Begründung im
+      Code-Kommentar über dem Block.
+      **Entscheidung `highPrice` = 65.00:** oberer Orientierungspreis der Pakete, belegt durch
+      `weihnachten.package2Price` („ab 65 € p.P.", Paket „Weihnachten Premium") — der höchste
+      bezifferte Wert auf der Seite. Paket 3 („Weihnachten Exclusive") steht auf „Auf Anfrage" und
+      liefert bewusst keine Zahl; erfunden wurde keine. `lowPrice` kommt jetzt aus
+      `FACTS.weihnachten.groupMenuPriceFrom` statt als Literal.
+      **Bereits in E1.1 erledigt, hier nur gegengeprüft:** die doppelte BreadcrumbList auf Silvester
+      (je Seite genau 1, siehe Zählung oben) und das `image`-Feld (beide zeigen auf per Vite-Import
+      aufgelöste, in `dist/` vorhandene Assets).
 - [ ] **E1.7** `llms.txt` aktualisieren, toten `standalone`-Zweig in `SilvesterMuenchen.tsx`
       entfernen.
 

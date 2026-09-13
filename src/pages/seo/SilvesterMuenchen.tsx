@@ -252,18 +252,26 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
 
       {/* Event + Menu @graph (non-standalone only) — references #restaurant / #organization by @id.
           Die früher hier eingebettete "BreadcrumbList" wurde entfernt (E1.1, Widerspruch 7): sie war
-          redundant zur bereits oben gerenderten <StructuredData type="breadcrumb">, die (anders als
-          dieser hartcodierte Block) standalone-bewusst die korrekte Breadcrumb liefert. Die Seite
-          rendert damit genau EINE BreadcrumbList — wie bei Weihnachten seit der K2-Konsolidierung. */}
+          redundant zur bereits oben gerenderten <StructuredData type="breadcrumb">. Die Seite
+          rendert damit genau EINE BreadcrumbList — wie bei Weihnachten seit der K2-Konsolidierung.
+
+          E1.6: `FoodEvent` statt `Event`. `docs/geo-content-guidelines.md` § Regel 8 schreibt für
+          Event-Seiten ausdrücklich `FoodEvent` vor; der Typ ist ein Untertyp von `Event`, alle
+          bisherigen Felder bleiben gültig, aber der Anlass wird als Essens-Event erkennbar.
+
+          E1.6: Gangzahl und beide Preise kommen jetzt aus `FACTS.silvester` statt als Literale im
+          Schema zu stehen — dieselbe Quelle, aus der auch „Auf einen Blick", TL;DR, Intro und die
+          Menü-Karten gespeist werden. Damit kann das Schema nicht mehr vom sichtbaren Inhalt
+          abweichen (das war Widerspruch 2 aus E1.1: fünf Gänge im Text, vier im Schema). */}
       {!standalone && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": "Event",
+              "@type": "FoodEvent",
               "@id": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/#event",
               "name": "Silvester Gala-Dinner im STORIA München",
-              "description": "Italienisches Gala-Dinner zum Jahreswechsel in der Maxvorstadt: Champagner-Aperitif und 4-Gänge-Degustationsmenü zur Wahl (Vegetale, Mare oder Terra). Ab 99 € pro Person, mit Weinbegleitung 150 €.",
+              "description": `Italienisches Gala-Dinner zum Jahreswechsel in der Maxvorstadt: Champagner-Aperitif und ${FACTS.silvester.courses}-Gänge-Degustationsmenü zur Wahl (Vegetale, Mare oder Terra). Ab ${FACTS.silvester.price} € pro Person, mit Weinbegleitung ${FACTS.silvester.priceWithWine} € pro Person — dasselbe Menü, der Unterschied ist nur die Weinbegleitung.`,
               "startDate": "2026-12-31T19:00:00+01:00",
               "endDate": "2027-01-01T02:00:00+01:00",
               "eventStatus": "https://schema.org/EventScheduled",
@@ -273,8 +281,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "image": [EVENT_IMAGE_URL],
               "offers": [
-                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü", "price": "99.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
-                { "@type": "Offer", "name": "4-Gänge-Degustationsmenü mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge-Degustationsmenü`, "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge-Degustationsmenü mit Weinbegleitung`, "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
               ]
             },
             {
@@ -289,8 +297,8 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
                   "@type": "MenuSection",
                   "name": `${FACTS.silvester.courses} Gänge Menü «${menuVariant.variant}»`,
                   "offers": [
-                    { "@type": "Offer", "price": "99.00", "priceCurrency": "EUR" },
-                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR" }
+                    { "@type": "Offer", "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR" },
+                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR" }
                   ],
                   "hasMenuItem": menuVariant.courses.map((course) => ({ "@type": "MenuItem", "name": course }))
                 })),
