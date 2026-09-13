@@ -431,8 +431,22 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 ## E2: Branch, Beweis, Merge
 
-- [ ] Branch `saisonseiten-e2` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe
+- [x] Branch `saisonseiten-e2` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe
       **inklusive echter Testanfrage** über das Formular (Browser, nicht `curl` — CORS + JS).
+      ✓ 2026-09-13 · PR #89 im Hauptfenster gegengelesen — Dateiliste gegen die Schutzgüter
+      geprüft: `SeasonalSignupForm`, `BesondererAnlass`, `ValentinstagMuenchen`, `supabase/`,
+      `Kontakt.tsx`, `Reservierung.tsx` und die Admin-Manager sind **nicht** im Diff. Die
+      `ReservationBooking`-Erweiterung ist echt abwärtskompatibel (ohne Props `defaultDate ??
+      new Date()`, `defaultGuests ?? "2"` → altes Verhalten), `Reservierung.tsx` damit unberührt.
+      → `gh pr merge 89 --squash --delete-branch`. Deploy erfolgreich (Run 34733620706).
+      **Live verifiziert:** beide Seiten haben `id="reservieren"` und `id="anfrage"`,
+      `id="signup-form"` ist auf beiden weg (0 Treffer), events-storia nur noch auf
+      Chrome-Niveau (2 = Footer, 0 seitenbezogen). Honeypot `name="website"` im Markup, im
+      ausgelieferten CSS `.hp-field{position:absolute;left:-9999px;…;opacity:0;pointer-events:none}`.
+      **Endpunkt-URL im ausgelieferten JS-Bundle bestätigt** (`/assets/index-vXrEPVDR.js`) — der
+      Workflow-Fix aus PR #88 hat gegriffen, das Formular läuft nicht in den Ausweichblock.
+      **Noch offen:** die echte Testanfrage (erzeugt einen realen Lead in MAESTRO) — bewusst nicht
+      eigenmächtig abgesetzt, siehe „Offen, außerhalb des Codes".
       **PR: https://github.com/dream-anchor/ristorantestoria.de/pull/89** — Branch gepusht,
       `origin/main` vorher in den Branch gemergt (PR #88, `VITE_MAESTRO_INTAKE_URL` im
       Deploy-Workflow; Auto-Merge ohne Konflikt, nur `.github/workflows/deploy-ionos.yml`,
