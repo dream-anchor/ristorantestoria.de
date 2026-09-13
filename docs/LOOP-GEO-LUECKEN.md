@@ -73,9 +73,16 @@ reparieren kann (Supabase-Änderungen laufen laut Projekt-CLAUDE.md ausschließl
 
 ## V1: Branch, Beweis, Merge
 
-- [ ] Branch `geo-luecken-v1` gepusht, PR erstellt, gemergt, Live-Stichprobe: alle 4 Sprachvarianten
-      `curl -sIL` → 301 in maximal 1 Hop auf `romantisches-dinner-muenchen`, kein 404 mehr, die drei
-      reparierten Seiten enthalten keinen Link mehr auf die alte URL.
+- [x] ~~Branch `geo-luecken-v1` gepusht, PR erstellt, gemergt, Live-Stichprobe~~ — **erledigt
+      13.09.2026** (PR #101, squash-merged, Deploy-Run `34773870601` erfolgreich). Zusätzlich beim
+      Review gefunden und mitbehoben (nicht im ursprünglichen Auftrag): die umgebogene
+      Candlelight-Karte auf `HochzeitsfeierMuenchen.tsx`/`TerrasseMuenchen.tsx` verlinkte auf
+      dieselbe URL wie eine bereits vorhandene Karte im selben Grid — entfernt statt Duplikat zu
+      belassen, verwaiste `relatedCandlelightTitle/Desc`-Keys in allen 4 Sprachen mitbereinigt.
+      Live-Beweis per `curl` gegen `www.ristorantestoria.de`: alle 4 Sprachvarianten `200`,
+      `hops:1`, korrektes Ziel (`romantisches-dinner-muenchen` bzw. Sprachäquivalent laut
+      `slugs.json`). `hochzeitsfeier-muenchen/` und `terrasse-muenchen/` enthalten 0 Treffer für
+      `candlelight-menue` im ausgelieferten HTML.
 
 ---
 
