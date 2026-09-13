@@ -526,14 +526,56 @@ Rundum-Service). **Bleibt:** Hero, Intro (neu gefasst auf reinen à-la-carte-Fok
 Blick", Reservierungs-Sektion (OpenTable, `id="reservieren"`), die verbleibenden 6 „Gründe", FAQ
 (nur privat-relevante Fragen: Heiligabend/Parkplatz/vegetarisch-Karte/unter der Woche).
 
-- [ ] **E4.1** `WeihnachtenMuenchen.tsx` auf reinen à-la-carte-Fokus zuschneiden: alle
-      Gruppen-only-Abschnitte entfernen (siehe Liste oben), „Zwei Wege"-Sektion vereinfachen zu
-      „für Gruppen/Firmen siehe unsere Weihnachtsfeier-Seite" mit prominentem Link, FAQ auf
-      privat-relevante Fragen kürzen, FoodEvent-JSON-LD prüfen (beschreibt aktuell laut Kommentar
-      ausschließlich Weg 2 — nach dem Wegfall von Weg 2 auf dieser Seite ggf. ganz entfernen oder
-      auf `Restaurant`/`FAQPage` reduzieren, keinen Event mehr behaupten, den es hier nicht mehr
-      gibt). Related-Links: `weihnachtsfeier-muenchen` **prominent an erster Stelle**, nicht nur
-      im (laut Recherche vermutlich toten) standalone-Nebenzweig.
+- [x] ~~**E4.1** `WeihnachtenMuenchen.tsx` auf reinen à-la-carte-Fokus zuschneiden~~ —
+      **erledigt 13.09.2026** (Branch `saisonseiten-e4`, noch nicht gepusht/PR, siehe E4.2 zuerst).
+      Entfernt: Pakete-Grid („Orientierung für Ihr Gruppen-Menü"), Anfrageformular-Sektion
+      (`id="anfrage"`, `AnlassAnfrageForm`-Einbindung — Komponente selbst bleibt), Kontaktbox
+      („Lieber persönlich sprechen?"), Timeline („So läuft Ihre Weihnachtsfeier ab"). „Zwei
+      Wege"-Sektion: Weg 1 (privat) unverändert als Karte, Weg 2 zu einem Hinweisblock mit
+      Link auf `weihnachtsfeier-muenchen` reduziert (`twoWay2HintBadge/Title/Desc/LinkLabel`
+      ersetzen `twoWay2Badge/Title/Desc/Item1-3`). „8 Gründe" auf 6 reduziert (reason4
+      Gruppengrößen, reason8 Rundum-Service entfernt, keine erfundenen Ersatzgründe). FAQ von
+      8 auf 5 gekürzt: `faq8` (Heiligabend), `faq3` (festes Menü — präzisiert, siehe unten),
+      `faq5` (unter der Woche), `faq4` (vegetarisch — Gruppen-Menü-Klausel entfernt), `faq7`
+      (Parkplatz); `faq1`/`faq2` (Buchungsvorlauf, Mindestpersonenzahl) und `faq6`
+      (Geschenke/Dekoration) entfernt. FAQ-Widerspruch zu `weihnachtsfeier-muenchen` FAQ4
+      aufgelöst: `faq3Answer` sagt jetzt explizit „Nein – für Einzelgäste und Familien…, für
+      Firmen und Gruppen ab 6 Personen bieten wir dagegen feste Weihnachtsmenüs an … Details
+      dazu auf unserer Weihnachtsfeier-Seite" statt eines unqualifizierten „Nein". FoodEvent-
+      JSON-LD **ersatzlos entfernt** (kein Ersatzschema — Begründung: Weg 2 wird auf dieser
+      Seite nicht mehr im Detail beschrieben, ein Event-Schema für ein Angebot ohne Termine/
+      Preise/Anfrageweg auf der Seite wäre irreführend; `Restaurant`+`FAQPage` bleiben).
+      Related-Links: `weihnachtsfeier-muenchen` **prominent an erster Stelle**
+      (`standaloneRelated1`, umbenannt zu „🎄 Firmen- & Gruppenfeier"), visuell hervorgehoben
+      (`border-2 border-primary bg-primary/5` statt Standardkarte). Hero-CTA und Final-CTA
+      „…anfragen"-Button führen jetzt auf `weihnachtsfeier-muenchen` statt auf das entfernte
+      `#anfrage`. Zwei stale Kommentar-/Textstellen korrigiert, die noch „Anfrageformular
+      weiter unten" behaupteten (introP3 in allen 4 Sprachen). 60 verwaiste
+      Übersetzungsschlüssel pro Sprache in de/en/fr entfernt (per Skript-Diff exakt gezählt):
+      packagesTitle/Intro + package1-3* [29], inquiryTitle/Intro [2], contactBoxTitle/Desc
+      [2], timelineTitle [1] + step1-5Title/Desc [10], twoWay2Badge/Title/Desc/Item1-3 [6],
+      reason4/reason8 Title/Desc [4], faq1/faq2/faq6 Question/Answer [6] — Gegenprobe: `grep`
+      in `WeihnachtenMuenchen.tsx` zeigt keine Nutzung mehr. it.ts (nur Teilübersetzung)
+      entsprechend schlanker bereinigt: 12 dort vorhandene Keys entfernt
+      (twoWay2Badge/Title/Desc/Item1-3 [6], inquiryTitle/Intro [2], packagesTitle/Intro [2],
+      contactBoxTitle/Desc [2]). 4 neue Keys ergänzt (`twoWay2HintBadge/Title/Desc/LinkLabel`)
+      in allen 4 Sprachen. **Nebenbefund (E4.2-Punkt) vorab geprüft:**
+      `grep -rn "<WeihnachtenMuenchen" src/ scripts/ prerender.js` → einziger Aufrufer ist
+      `App.tsx` → `WeihnachtenMuenchenStandalone`, **immer** mit `standalone` (nie `false`,
+      nie ganz ohne Prop) — die `!standalone`-Zweige (canonicalPath/breadcrumbSchema-Else,
+      nicht-standalone SEO-Texte, nicht-standalone Related-Links) sind damit nachweislich toter
+      Code, wie bei Silvesters E1.7. **Nicht entfernt** in E4.1 (optional, aufwändig — mehrere
+      Ternaries plus ca. 14 zusätzlich verwaiste Keys pro Sprache): bleibt offener Punkt für
+      eine spätere Iteration, nicht blockierend für E4.2.
+      Beweis: `npx tsc --noEmit` sauber, `npm run lint` unverändert bei 727 Problemen
+      (Baseline bestätigt vor Start), `npm run build` 157/157 Seiten gerendert, 0 Fehler.
+      `dist/weihnachten-muenchen/index.html` (Skript-Blöcke ausgeklammert): kein
+      `id="anfrage"` (0 Treffer), `id="reservieren"` vorhanden, kein `FoodEvent` im Rohcode
+      (0 Treffer), `FAQPage` mit genau 5 Question/Answer-Paaren, Related-Links-Reihenfolge
+      `weihnachtsfeier-muenchen → eventlocation-muenchen-maxvorstadt → firmenfeier-muenchen →
+      speisekarte → reservierung → catering` mit `weihnachtsfeier-muenchen` optisch
+      hervorgehoben (`bg-primary/5 border-2 border-primary` vs. `bg-card border` bei den
+      übrigen fünf).
 - [ ] **E4.2** `WeihnachtsfeierMuenchen.tsx` um den Gruppen-Weg erweitern: `AnlassAnfrageForm`
       einbinden (neuer `anlass`-Wert, damit `sourceDetail` sauber `ristorante_weihnachtsfeier`
       statt `ristorante_weihnachten` lautet — Lead-Attribution muss unterscheidbar bleiben),

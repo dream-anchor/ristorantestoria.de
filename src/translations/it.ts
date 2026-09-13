@@ -2928,21 +2928,25 @@ const itBase = {
       standaloneSeoTitle: "Natale a Monaco 2026 | Menù di Natale | STORIA",
       standaloneSeoDescription: "Natale a Monaco allo STORIA: menù natalizi italiani in Maxvorstadt, da 45 € a persona per 6–100 ospiti, in famiglia o in azienda. A 5 min dal Königsplatz.",
       // Hinweis: der übrige Fließtext dieses Blocks erbt weiterhin das Deutsche (Bestandslage);
-      // übersetzt sind die Schlüssel, die E1.3–E1.5 angefasst haben.
+      // übersetzt sind die Schlüssel, die E1.3–E1.5 und E4.1 angefasst haben.
       heroBadge1: "🍽️ Alla carta al tavolo",
       heroBadge3: "🎄 Menù di Natale per gruppi",
       heroDescription: "Il Natale allo STORIA funziona in due modi: prenotare un tavolo e mangiare alla carta dal nostro menù stagionale – oppure concordare un menù di Natale direttamente con noi, come azienda o come gruppo. In entrambi i casi in un'autentica atmosfera italiana, nel cuore della Maxvorstadt.",
       // CTA dell'hero (E2.3): esattamente due, corrispondenti una a una alle due strade (E1.4).
       // Sostituiscono heroCta/heroCtaInactive e la nota heroEventsNote/heroEventsLink.
       heroCtaReserve: "Prenota un tavolo durante l'Avvento",
-      heroCtaInquiry: "Richiedi il menù di Natale per gruppi",
+      // E4.1: non porta più a un modulo di richiesta su questa pagina (rimosso) — rimanda
+      // direttamente alla pagina Festa di Natale con la strada gruppo.
+      heroCtaInquiry: "Festa di Natale per aziende e gruppi",
       // TL;DR (E1.5) — reso visibile sopra l'introduzione; i segnaposto vengono riempiti da FACTS.
       tldr: "Il Natale al Ristorante STORIA Monaco Maxvorstadt (Karlstraße 47a) funziona in due modi: prenotare un tavolo e mangiare alla carta dal menù stagionale – da 1 persona, senza ordinazione anticipata – oppure un menù di Natale per aziende e gruppi da {minGuests} persone, concordato direttamente con il ristorante, a partire da {groupPrice} € a persona. Il 24 e il 25 dicembre il ristorante è chiuso. {indoorSeats} posti all'interno, {terraceSeats} sulla terrazza coperta. Attività familiare della famiglia Speranza dal 2015, a 5 minuti da Königsplatz. Prenotazioni: +49 89 51519696.",
       // Definition-Lead (E1.5, GEO-Regel 1) + Zwei-Wege-Realität (E1.4).
       introTitle: "Festa di Natale a Monaco – alla carta al tavolo oppure menù di Natale per gruppi",
       introP1: "Il Natale al Ristorante STORIA è un'offerta italiana per le feste in Karlstraße 47a a Monaco Maxvorstadt che funziona in due modi: alla carta dal menù stagionale al tavolo prenotato, da 1 persona – oppure un menù di Natale che aziende e gruppi da {minGuests} persone concordano direttamente con il ristorante, a partire da {groupPrice} € a persona. Dal 2015 la famiglia Speranza del Cilento guida il ristorante; un menù di Natale fisso da ordinare in anticipo non esiste, ed è una scelta voluta.",
       introP2: "Sulla prima strada prenotate semplicemente un tavolo durante l'Avvento e ordinate alla carta dal nostro menù stagionale – senza ordinazione anticipata e senza numero minimo di ospiti. Sulla seconda strada componiamo un menù di Natale per aziende e gruppi da {minGuests} persone: cucina delle feste del Sud Italia con pasta fatta in casa, vini pregiati e panettone come dessert, concordato di volta in volta secondo l'occasione e il budget.",
-      introP3: "La posizione centrale – a soli 5 minuti da Königsplatz e dal mercatino di Natale – rende lo STORIA la meta ideale dopo la visita al Christkindlmarkt. Il 24 e il 25 dicembre il ristorante è chiuso. Un menù di gruppo si concorda direttamente con noi: tramite il modulo di richiesta qui sotto, per telefono o via e-mail.",
+      // E4.1: "tramite il modulo di richiesta qui sotto" corretto — quel modulo non esiste più su
+      // questa pagina; un menù di gruppo si concorda ora tramite la pagina Festa di Natale.
+      introP3: "La posizione centrale – a soli 5 minuti da Königsplatz e dal mercatino di Natale – rende lo STORIA la meta ideale dopo la visita al Christkindlmarkt. Il 24 e il 25 dicembre il ristorante è chiuso. Un menù di gruppo per aziende e gruppi più numerosi si concorda direttamente con noi tramite la nostra pagina Festa di Natale.",
       // Citazione esterna (E1.5, GEO-Regel 3) — lista UNESCO del patrimonio culturale immateriale;
       // il Cilento, regione d'origine della famiglia Speranza, è la comunità italiana della dieta
       // mediterranea in quella lista.
@@ -2951,41 +2955,53 @@ const itBase = {
       citationPost: ".",
       // Due strade (E1.4) — i segnaposto vengono riempiti da FACTS.weihnachten.
       twoWaysTitle: "Due modi di festeggiare il Natale allo STORIA",
-      twoWaysIntro: "Allo STORIA non esiste un menù di Natale fisso da ordinare in anticipo. Scegliete invece una delle due strade – a seconda che veniate in privato o che festeggiate come azienda o come gruppo.",
+      // E4.1 (cannibalizzazione tra weihnachten-muenchen e weihnachtsfeier-muenchen risolta,
+      // docs/LOOP-SAISONSEITEN-AUSBAU.md § E4): nomina ancora entrambe le strade, ma la seconda
+      // rimanda ora alla pagina sorella invece di promettere un modulo su questa pagina.
+      twoWaysIntro: "Per ospiti singoli, coppie e famiglie non esiste un menù di Natale fisso da ordinare in anticipo: prenotate un tavolo e mangiate alla carta dal menù stagionale. Se state organizzando con un'azienda o un gruppo più numeroso, la pagina giusta è la nostra Festa di Natale.",
       twoWay1Badge: "Strada 1 · In privato e all'ultimo momento",
       twoWay1Title: "Prenotare un tavolo e mangiare alla carta",
       twoWay1Desc: "Durante l'Avvento prenotate un tavolo e ordinate alla carta dal nostro menù stagionale – come in ogni altra serata, solo con una tavola più festosa.",
       twoWay1Item1: "Da 1 persona",
       twoWay1Item2: "Nessuna ordinazione anticipata e nessun accordo sul menù",
       twoWay1Item3: "Menù stagionale, ordinato e conteggiato alla carta",
-      twoWay2Badge: "Strada 2 · Azienda e gruppo",
-      twoWay2Title: "Menù di Natale su accordo",
-      twoWay2Desc: "Da {minGuests} persone componiamo il vostro menù di Natale direttamente con voi – per telefono o via e-mail, su misura per occasione, preferenze e budget.",
-      twoWay2Item1: "Da {minGuests} persone",
-      twoWay2Item2: "Menù, svolgimento e bevande vengono definiti insieme",
-      twoWay2Item3: "Prezzo indicativo da {groupPrice} € a persona",
+      // E4.1: la seconda strada non è più un blocco d'azione autonomo su questa pagina — box
+      // contatti, modulo di richiesta e timeline migrano a weihnachtsfeier-muenchen in E4.2. Resta
+      // solo un breve rimando con link, per non mantenere due volte lo stesso contenuto gruppo.
+      twoWay2HintBadge: "Azienda & gruppo",
+      twoWay2HintTitle: "State organizzando con colleghi o un gruppo più numeroso?",
+      twoWay2HintDesc: "Sulla nostra pagina Festa di Natale trovate pacchetti di menù fissi, capienza fino a 300 ospiti e il modulo di richiesta per la vostra festa aziendale o di gruppo.",
+      twoWay2HintLinkLabel: "Vai alla pagina Festa di Natale",
       // Prenotazione (E2.1) — è il primo modo, in forma di azione. I due giorni di chiusura
       // sono nominati perché ReservationBooking li blocca nel calendario.
       reservationTitle: "Prenota un tavolo durante l'Avvento",
       reservationIntro: "Il primo modo in breve: prenotare un tavolo e ordinare alla carta dal menù stagionale, da 1 persona, senza preordine e senza accordi sul menù.",
       reservationNote: "Il 24 e il 25 dicembre il ristorante è chiuso: questi due giorni non sono selezionabili nel calendario. La prenotazione si conclude su OpenTable.",
-      // Modulo di richiesta (E2.2) — è il secondo modo, in forma di azione. {minGuests} da FACTS.
-      inquiryTitle: "Richiedi il menù di Natale per gruppi",
-      inquiryIntro: "Secondo modo: da {minGuests} persone componiamo il vostro menù di Natale insieme a voi. Scriveteci occasione, data desiderata e numero di ospiti: vi risponderemo con una proposta.",
-      packagesTitle: "Punti di riferimento per il vostro menù di gruppo",
-      packagesIntro: "I tre pacchetti qui sotto non sono menù pronti da ordinare, ma punti di riferimento per entità e prezzo sulla seconda strada. Ciò che arriva davvero in tavola lo decidiamo insieme.",
+      // E4.1: sezione modulo di richiesta (id="anfrage"), griglia pacchetti e box contatti
+      // rimosse da questa pagina (solo gruppo, migrano a weihnachtsfeier-muenchen in E4.2).
+      // inquiryTitle/Intro, packagesTitle/Intro, contactBoxTitle/Desc rimossi senza sostituzione
+      // (verificato: non più referenziati altrove).
       faq3Question: "Esiste un menù di Natale fisso da ordinare in anticipo?",
-      faq3Answer: "No. Durante l'Avvento al tavolo si mangia alla carta dal nostro menù stagionale. Un menù di Natale lo componiamo individualmente per aziende e gruppi da 6 persone – su misura, secondo i vostri desideri e il vostro budget, concordato per telefono o via e-mail.",
-      faq4Answer: "Sì, il menù stagionale comprende piatti vegetariani e ogni menù di gruppo è disponibile anche in variante vegetariana. Opzioni vegane su richiesta.",
+      // E4.1: precisata contro la contraddizione trovata nella ricerca E4 con
+      // weihnachtsfeier-muenchen FAQ4 ("Sì, tre pacchetti"). Entrambe le risposte sono corrette
+      // nel proprio contesto (ospite singolo vs. gruppo) — questa risposta lo rende ora esplicito
+      // e rimanda alla pagina sorella invece di un semplice "No".
+      faq3Answer: "No – non per ospiti singoli e famiglie: prenotate un tavolo e mangiate alla carta dal nostro menù stagionale. Per aziende e gruppi da 6 persone, invece, offriamo menù di Natale fissi concordati direttamente con il ristorante – dettagli sulla nostra pagina Festa di Natale.",
+      // E4.1: clausola sul menù di gruppo rimossa (appartiene a weihnachtsfeier-muenchen),
+      // risposta ora centrata sulla carta stagionale.
+      faq4Answer: "Sì, la nostra carta stagionale comprende piatti vegetariani. Opzioni vegane su richiesta.",
       faq8Answer: "No. Il 24 e il 25 dicembre il ristorante è chiuso. Per tutto il resto del periodo dell'Avvento siamo a vostra disposizione.",
-      // Contatti (E2.3) — sostituiscono la vecchia CTA box che portava a events-storia.de.
-      contactBoxTitle: "Preferite parlarci direttamente?",
-      contactBoxDesc: "Telefono, e-mail o WhatsApp – per il menù di gruppo la conversazione è spesso la via più rapida, perché menù, svolgimento e bevande si definiscono comunque insieme.",
       // signupTitle/signupDesc e finalCtaButtonInactive rimossi con E2.3 — il blocco di
       // preiscrizione è staccato da questa pagina. `t.seasonalSignup.*` resta intatto.
       finalCtaButtonReserve: "→ Prenota un tavolo",
-      finalCtaButtonInquiry: "→ Richiedi il menù per gruppi",
+      // E4.1: rimanda alla pagina Festa di Natale invece del modulo #anfrage rimosso da questa pagina.
+      finalCtaButtonInquiry: "→ Vai alla pagina Festa di Natale",
       standaloneInactiveDesc: "Durante l'Avvento da noi si mangia alla carta dal menù stagionale; un menù di Natale per gruppi lo concordiamo direttamente con voi. Contattateci per la vostra prenotazione o per la vostra richiesta di gruppo.",
+      // E4.1: prima posizione, in evidenza, con etichetta esplicita azienda/gruppo (Related Links,
+      // cannibalizzazione risolta, docs/LOOP-SAISONSEITEN-AUSBAU.md § E4) — messa in risalto anche
+      // visivamente nel rendering (vedi WeihnachtenMuenchen.tsx, map relatedLinks, i === 0).
+      standaloneRelated1Title: "🎄 Festa di Natale Aziende & Gruppi",
+      standaloneRelated1Desc: "Festa di Natale per aziende e gruppi da 6 persone – pacchetti di menù fissi e modulo di richiesta",
       // In sintesi (E1.3) — i segnaposto vengono riempiti da FACTS in WeihnachtenMuenchen.tsx.
       atAGlanceTitle: "Il Natale allo STORIA in sintesi",
       atAGlanceOptionsLabel: "Due possibilità",

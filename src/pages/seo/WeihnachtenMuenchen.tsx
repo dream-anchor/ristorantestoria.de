@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
@@ -8,14 +7,13 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import ReservationBooking from "@/components/ReservationBooking";
-import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, Mail, ArrowUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierImage from "@/assets/weihnachtsfeier-italiener-storia-muenchen.webp";
 import weihnachtsfeierImage600 from "@/assets/weihnachtsfeier-italiener-storia-muenchen-600w.webp";
@@ -27,17 +25,6 @@ import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
 import { fireLead } from "@/lib/analytics";
 import { FACTS } from "@/config/facts";
-
-/**
- * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
- *
- * Vorher zeigte das `image`-Feld auf `/weihnachtsmenue-storia-muenchen.jpg` — eine Datei, die in
- * `public/` NICHT existiert (404). Statt eine zweite, thematisch nur halb passende Datei zu
- * erfinden, verweist das Schema jetzt auf das Hero-Bild der Seite selbst: dieselbe Aufnahme, die
- * Besucher oben sehen. Der Import wird von Vite auf den gehashten Build-Pfad aufgelöst, die URL
- * kann also nicht mehr von der ausgelieferten Datei abweichen.
- */
-const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${weihnachtsfeierImage}`;
 
 /**
  * Autoritative Outbound-Quelle (E1.5, GEO-Regel 3 aus `docs/geo-content-guidelines.md`).
@@ -112,11 +99,9 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
     ];
   }
 
-  const packages = [
-    { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4], ideal: s.package1Ideal, price: s.package1Price },
-    { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5], ideal: s.package2Ideal, price: s.package2Price, badge: s.package2Badge },
-    { title: s.package3Title, subtitle: s.package3Subtitle, items: [s.package3Item1, s.package3Item2, s.package3Item3, s.package3Item4, s.package3Item5], ideal: s.package3Ideal, price: s.package3Price },
-  ];
+  // E4.1: `packages` (Pakete-Grid „Orientierung für Ihr Gruppen-Menü") entfernt — Gruppen-only,
+  // wandert in E4.2 zu weihnachtsfeier-muenchen. Nur der Live-Menü-Zweig bleibt (siehe unten,
+  // `{isActive && <MenuDisplay .../>}`).
 
   /**
    * „Auf einen Blick" (E1.3) — dasselbe Raster wie auf der Silvester-Seite, nur mit den
@@ -125,7 +110,8 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
    *
    * Quellen, alle bereits im Repo: `FACTS.weihnachten` (Gruppenpreis, Mindestpersonenzahl),
    * `FACTS.capacity` (100 innen / 100 Terrasse), `ReservationBooking.getClosedDays` (24. und
-   * 25.12. als Ruhetage) sowie die FAQ auf dieser Seite (Anfrage ab September/Oktober).
+   * 25.12. als Ruhetage) sowie `atAGlanceRequestValue` (Anfrage ab September/Oktober — die
+   * FAQ dazu ist seit E4.1 nicht mehr auf dieser Seite, sondern auf weihnachtsfeier-muenchen).
    */
   const atAGlance = [
     { label: s.atAGlanceOptionsLabel, value: fillFacts(s.atAGlanceOptionsValue) },
@@ -144,49 +130,41 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
    * Bewusst ein eigener Abschnitt weit oben statt nur einer Zeile im „Auf einen Blick"-Block:
    * die Trennung der beiden Wege ist die zentrale Aussage der Seite, nicht eine Eckdate.
    */
-  const twoWays = [
-    {
-      badge: s.twoWay1Badge,
-      title: s.twoWay1Title,
-      desc: s.twoWay1Desc,
-      items: [s.twoWay1Item1, s.twoWay1Item2, s.twoWay1Item3],
-    },
-    {
-      badge: s.twoWay2Badge,
-      title: s.twoWay2Title,
-      desc: fillFacts(s.twoWay2Desc),
-      items: [fillFacts(s.twoWay2Item1), s.twoWay2Item2, fillFacts(s.twoWay2Item3)],
-    },
-  ];
+  // E4.1: Weg 1 bleibt eine echte Karte; Weg 2 ist kein eigener Handlungsblock mehr, sondern ein
+  // Hinweis mit Link (siehe JSX unten) — deshalb kein gemeinsames `twoWays`-Array mehr, Weg 1
+  // wird direkt referenziert.
+  const twoWay1 = {
+    badge: s.twoWay1Badge,
+    title: s.twoWay1Title,
+    desc: s.twoWay1Desc,
+    items: [s.twoWay1Item1, s.twoWay1Item2, s.twoWay1Item3],
+  };
 
+  // E4.1: reason4 (Gruppengrößen) und reason8 (Rundum-Service) entfernt — Gruppen-only, auf
+  // 6 Gründe reduziert statt mit erfundenen Fakten aufgefüllt (siehe reasonsTitle in den
+  // Übersetzungen).
   const reasons = [
     { title: s.reason1Title, desc: s.reason1Desc },
     { title: s.reason2Title, desc: s.reason2Desc },
     { title: s.reason3Title, desc: s.reason3Desc },
-    { title: s.reason4Title, desc: s.reason4Desc },
     { title: s.reason5Title, desc: s.reason5Desc },
     { title: s.reason6Title, desc: s.reason6Desc },
     { title: s.reason7Title, desc: s.reason7Desc },
-    { title: s.reason8Title, desc: s.reason8Desc },
   ];
 
-  const steps = [
-    { title: s.step1Title, desc: s.step1Desc },
-    { title: s.step2Title, desc: s.step2Desc },
-    { title: s.step3Title, desc: s.step3Desc },
-    { title: s.step4Title, desc: s.step4Desc },
-    { title: s.step5Title, desc: s.step5Desc },
-  ];
+  // E4.1: Timeline „So läuft Ihre Weihnachtsfeier ab" entfernt — Gruppen-only (bedientes
+  // Gruppenmenü), wandert in E4.2 zu weihnachtsfeier-muenchen.
 
+  // E4.1: faq1 (Buchungsvorlauf), faq2 (Mindestpersonenzahl) und faq6 (Geschenke/Dekoration)
+  // entfernt — Gruppen-only bzw. auf ein betreutes Gruppen-Event gemünzt. faq3/faq4 sind
+  // gegen den in der E4-Recherche gefundenen Widerspruch zu weihnachtsfeier-muenchen FAQ4
+  // präzisiert (siehe Übersetzungen).
   const faqs = [
-    { q: s.faq1Question, a: s.faq1Answer },
-    { q: s.faq2Question, a: s.faq2Answer },
-    { q: s.faq3Question, a: s.faq3Answer },
-    { q: s.faq4Question, a: s.faq4Answer },
-    { q: s.faq5Question, a: s.faq5Answer },
-    { q: s.faq6Question, a: s.faq6Answer },
-    { q: s.faq7Question, a: s.faq7Answer },
     { q: s.faq8Question, a: s.faq8Answer },
+    { q: s.faq3Question, a: s.faq3Answer },
+    { q: s.faq5Question, a: s.faq5Answer },
+    { q: s.faq4Question, a: s.faq4Answer },
+    { q: s.faq7Question, a: s.faq7Answer },
   ];
 
   const relatedLinks = standalone ? [
@@ -215,62 +193,27 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={breadcrumbSchema} />
 
-      {/* Event-Schema – Weihnachtsmenü für Gruppen — references #restaurant / #organization by @id.
-          K2-Konsolidierung: früher an `!standalone` gebunden (nur auf der Pillar-Route sichtbar),
-          jetzt unconditional, weil die Standalone-URL (weihnachten-muenchen) seit der
-          Konsolidierung die kanonische, einzige URL ist (KONZEPT § 3b). Die früher hier
-          eingebettete "BreadcrumbList" wurde entfernt — sie ist redundant zur bereits oben
-          gerenderten <StructuredData type="breadcrumb">, die (anders als dieser hartcodierte
-          Block) standalone-bewusst die korrekte 2-stufige Breadcrumb liefert. @id/offers.url
-          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route.
+      {/* E4.1, ENTSCHEIDUNG — FoodEvent-JSON-LD ersatzlos entfernt (nicht auf ein
+          eventloses Schema reduziert):
 
-          E1.6, Typ: `FoodEvent` statt `Event` — `docs/geo-content-guidelines.md` § Regel 8
-          schreibt für Event-Seiten `FoodEvent` vor. Untertyp von `Event`, alle Felder bleiben.
+          Das bisherige `FoodEvent`-Schema (E1.6) beschrieb laut eigenem Kommentar ausschließlich
+          Weg 2 (das Weihnachtsmenü für Firmen und Gruppen ab `FACTS.weihnachten.groupMenuMinGuests`
+          Personen) — Weg 1 (à la carte am Tisch) war schon damals als regulärer Restaurantbetrieb
+          ohne festen Termin explizit KEIN Event im Sinne von schema.org.
 
-          E1.6, ENTSCHEIDUNG — was dieses Event beschreibt: Seit E1.4 bildet die Seite zwei Wege
-          ab. Weg 1 (à la carte am reservierten Tisch, ab 1 Person, keine Vorbestellung) ist
-          regulärer Restaurantbetrieb an beliebigen Abenden der Adventszeit — er hat weder einen
-          festen Termin noch ein festes Angebot und ist damit KEIN Event im Sinne von schema.org;
-          er ist bereits über das `Restaurant`-Schema (oben, `<StructuredData type="restaurant">`)
-          samt Öffnungszeiten abgedeckt. Das Event-Schema beschreibt deshalb ausschließlich Weg 2:
-          das Weihnachtsmenü für Firmen und Gruppen ab `FACTS.weihnachten.groupMenuMinGuests`
-          Personen. `name`, `description` und `eligibleQuantity` sagen das jetzt ausdrücklich —
-          vorher versprach der generische Name „Weihnachtsmenü im STORIA München" ein festes,
-          für jeden buchbares Menü, das es laut Faktenklärung vom 13.09.2026 gar nicht gibt.
+          Mit E4.1 wird Weg 2 auf dieser Seite kein eigener Handlungsblock mehr (kein
+          Anfrageformular, keine Timeline, keine Pakete-Grid hier — das alles wandert in E4.2 zu
+          weihnachtsfeier-muenchen). Die Seite bewirbt und beschreibt das Gruppen-Event damit nicht
+          mehr selbst, sondern verweist nur noch kurz mit Link darauf. Ein `FoodEvent`-Schema für
+          ein Angebot zu behaupten, das die Seite gar nicht mehr im Detail beschreibt (kein
+          Startdatum-Angebot, kein Preis-Grid, kein Anfrageweg hier), wäre irreführend gegenüber
+          Suchmaschinen — genau das im Zielbild von docs/LOOP-SAISONSEITEN-AUSBAU.md § E4
+          benannte Risiko. Das vollständige, aktuelle Event-Schema für das Gruppenmenü gehört
+          stattdessen zu weihnachtsfeier-muenchen (E4.2), wo Pakete, Anfrageformular und Ablauf
+          tatsächlich stehen.
 
-          E1.6, `highPrice`: bisher trug das AggregateOffer nur `lowPrice`. Der obere
-          Orientierungspreis ist der des Pakets „Weihnachten Premium" (`weihnachten.package2Price`
-          in den Übersetzungen: „ab 65 € p.P.") — der höchste bezifferte Wert auf der Seite. Das
-          dritte Paket („Weihnachten Exclusive") ist mit „Auf Anfrage" ausgewiesen und liefert
-          bewusst keine Zahl; erfunden wird hier keine. `lowPrice` kommt aus `FACTS.weihnachten`,
-          damit er nicht getrennt vom sichtbaren Inhalt driften kann. */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FoodEvent",
-        "@id": "https://www.ristorantestoria.de/weihnachten-muenchen/#event",
-        "name": "Weihnachtsmenü für Gruppen im STORIA München",
-        "description": `Weihnachtsmenü für Firmen und Gruppen ab ${FACTS.weihnachten.groupMenuMinGuests} Personen im Ristorante STORIA in München Maxvorstadt: süditalienische Festtagsküche, im Gespräch mit dem Restaurant auf Anlass, Vorlieben und Budget abgestimmt, ab ${FACTS.weihnachten.groupMenuPriceFrom} € pro Person. Ein festes Weihnachtsmenü zum Vorbestellen gibt es nicht. Am 24. und 25. Dezember ist das Restaurant geschlossen.`,
-        "startDate": "2026-11-25T17:00:00+01:00",
-        "endDate": "2026-12-23T23:30:00+01:00",
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
-        "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
-        "image": [EVENT_IMAGE_URL],
-        "offers": {
-          "@type": "AggregateOffer",
-          "lowPrice": `${FACTS.weihnachten.groupMenuPriceFrom}.00`,
-          "highPrice": "65.00",
-          "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock",
-          "url": "https://www.ristorantestoria.de/weihnachten-muenchen/",
-          "eligibleQuantity": {
-            "@type": "QuantitativeValue",
-            "minValue": FACTS.weihnachten.groupMenuMinGuests,
-            "unitText": "Personen"
-          }
-        }
-      })}} />
+          Kein Ersatz-Schema ohne Event-Charakter nötig: `Restaurant`-Schema (oben) deckt den
+          reinen Gastronomiebetrieb bereits vollständig ab, `FAQPage` (unten) bleibt unverändert. */}
 
       {/* FAQ Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -305,16 +248,14 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{s.heroDescription}</p>
               {/* CTA-Hierarchie (E2.3): genau ZWEI Ziele — und sie decken sich eins zu eins mit
                   den zwei Wegen aus E1.4. Weg 1 (à la carte am Tisch) = `#reservieren`, Weg 2
-                  (Gruppen-/Firmenmenü) = `#anfrage`. Vorher führten hier drei konkurrierende
-                  Wege weg (events-storia.de, Vormerk-Formular, E-Mail) plus eine Fußnote als
-                  vierter Weg zu events-storia.de. Die Fußnote ist ersatzlos entfallen: ihre
-                  Absicht („für Gruppen") ist jetzt der zweite Button. */}
+                  (Gruppen-/Firmenmenü) führt seit E4.1 nicht mehr zu einem Formular auf dieser
+                  Seite (entfernt, Gegenstand von E4.2), sondern direkt zur Weihnachtsfeier-Seite. */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                   <a href="#reservieren">{s.heroCtaReserve}</a>
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <a href="#anfrage">{s.heroCtaInquiry}</a>
+                  <LocalizedLink to="weihnachtsfeier-muenchen">{s.heroCtaInquiry}</LocalizedLink>
                 </Button>
               </div>
             </div>
@@ -380,37 +321,47 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </Card>
             </section>
 
-            {/* Zwei Wege (E1.4) — direkt unter „Auf einen Blick" und VOR den Paketen, damit der
-                Besucher die Entscheidung trifft, bevor er Preise sieht. Die Pakete darunter sind
-                nur noch Orientierung für Weg 2, nicht mehr ein Katalog fester Menüs. */}
+            {/* Zwei Wege (E1.4) — direkt unter „Auf einen Blick" und vor der Reservierung, damit
+                der Besucher die Entscheidung trifft, bevor er weiterliest.
+
+                E4.1 (Kannibalisierung aufgelöst, docs/LOOP-SAISONSEITEN-AUSBAU.md § E4): Weg 2 ist
+                hier kein eigener Handlungsblock mit Karte mehr — nur noch ein kurzer Hinweis mit
+                prominentem Link auf weihnachtsfeier-muenchen, wo Pakete, Anfrageformular und
+                Ablauf tatsächlich stehen (E4.2). So werden die Gruppen-Inhalte nicht auf zwei
+                Seiten parallel gepflegt. */}
             <section className="mb-16" aria-labelledby="weihnachten-zwei-wege">
               <h2 id="weihnachten-zwei-wege" className="text-3xl font-serif font-bold mb-4 text-center">{s.twoWaysTitle}</h2>
               <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.twoWaysIntro}</p>
-              <div className="grid md:grid-cols-2 gap-6">
-                {twoWays.map((way, i) => (
-                  <Card key={i} className="border-primary/30">
-                    <CardHeader className="pb-2">
-                      <Badge variant="secondary" className="w-fit mb-2">{way.badge}</Badge>
-                      <CardTitle className="text-xl font-serif">{way.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground mb-4">{way.desc}</p>
-                      <ul className="text-sm space-y-1">
-                        {way.items.map((item, j) => (
-                          <li key={j} className="text-muted-foreground">{'•'} {item}</li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="max-w-xl mx-auto">
+                <Card className="border-primary/30">
+                  <CardHeader className="pb-2">
+                    <Badge variant="secondary" className="w-fit mb-2">{twoWay1.badge}</Badge>
+                    <CardTitle className="text-xl font-serif">{twoWay1.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4">{twoWay1.desc}</p>
+                    <ul className="text-sm space-y-1">
+                      {twoWay1.items.map((item, j) => (
+                        <li key={j} className="text-muted-foreground">{'•'} {item}</li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="max-w-xl mx-auto mt-6 bg-secondary/40 border border-primary/20 rounded-xl p-6 text-center">
+                <Badge variant="outline" className="mb-2">{s.twoWay2HintBadge}</Badge>
+                <h3 className="font-semibold text-lg mb-2">{s.twoWay2HintTitle}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{s.twoWay2HintDesc}</p>
+                <Button variant="outline" asChild>
+                  <LocalizedLink to="weihnachtsfeier-muenchen">{s.twoWay2HintLinkLabel}</LocalizedLink>
+                </Button>
               </div>
             </section>
 
             {/* Reservierung (E2.1) — das ist WEG 1 der Zwei-Wege-Logik in Handlungsform:
                 Tisch buchen und à la carte von der saisonalen Karte essen. Deshalb steht der
-                Block direkt hinter „Zwei Wege" und vor den Paketen (die nur Orientierung für
-                Weg 2 sind). Muster wie auf den anderen Landingpages: `headingLevel="h3"`
-                plus `onBook`-Lead-Callback.
+                Block direkt hinter „Zwei Wege". Muster wie auf den anderen Landingpages:
+                `headingLevel="h3"` plus `onBook`-Lead-Callback.
 
                 KEINE `defaultDate`-Vorbelegung: anders als bei Silvester gibt es hier keinen
                 einzelnen Termin, sondern die ganze Adventszeit — die Komponente bleibt also
@@ -427,69 +378,22 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
             </section>
 
-            {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K2-Konsolidierung
-                nur auf der Pillar-Route, jetzt auch hier (KONZEPT § 3b: nichts geht verloren,
-                die Standalone-URL wird aufgewertet statt nur redirected). */}
-            {!isActive ? (
-              <section className="mb-16">
-                <h2 className="text-3xl font-serif font-bold mb-4 text-center">{s.packagesTitle}</h2>
-                <p className="text-muted-foreground text-center mb-8">{s.packagesIntro}</p>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {packages.map((pkg, i) => (
-                    <Card key={i} className={pkg.badge ? "border-primary bg-primary/5 relative" : "border-border"}>
-                      {pkg.badge && <span className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded">{pkg.badge}</span>}
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg font-serif">{pkg.title}</CardTitle>
-                        <p className="text-muted-foreground text-sm">{pkg.subtitle}</p>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="text-sm space-y-1 mb-4">{pkg.items.map((item, j) => <li key={j} className="text-muted-foreground">{'\u2022'} {item}</li>)}</ul>
-                        <p className="text-xs text-muted-foreground mb-2">{pkg.ideal}</p>
-                        <p className="font-bold text-primary">{pkg.price}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-            ) : (
+            {/* E4.1: Pakete-Grid "Orientierung für Ihr Gruppen-Menü" (Gruppen-only) entfernt —
+                wandert in E4.2 zu weihnachtsfeier-muenchen. Der Live-Menü-Zweig bleibt: falls
+                admin-seitig ein aktives Saison-Menü hinterlegt ist, wird es weiterhin gezeigt. */}
+            {isActive && (
               <section className="mb-16">
                 <MenuDisplay menuType="special" menuId={menu!.id} showTitle={false} />
               </section>
             )}
 
-            {/* Anfrage (E2.2) — das ist WEG 2 in Handlungsform: das Gruppen-/Firmenmenü, das
-                direkt mit dem Restaurant abgestimmt wird. Steht bewusst DIREKT hinter den
-                Paketen, die nur Orientierung für genau diesen Weg sind. Weg 1 (à la carte am
-                Tisch) läuft über die Reservierungsstrecke weiter oben, nicht über dieses
-                Formular. Eigenes Formular gegen den MAESTRO-Intake-Endpunkt, kein Widget. */}
-            <section className="mb-16" id="anfrage" aria-labelledby="weihnachten-anfrage">
-              <h2 id="weihnachten-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{s.inquiryTitle}</h2>
-              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{fillFacts(s.inquiryIntro)}</p>
-              <div className="max-w-2xl mx-auto">
-                <AnlassAnfrageForm
-                  anlass="weihnachten"
-                  minGuests={FACTS.weihnachten.groupMenuMinGuests}
-                />
-              </div>
-            </section>
+            {/* E4.1: Anfrageformular-Sektion (id="anfrage", AnlassAnfrageForm) und Kontaktbox
+                ("Lieber persönlich sprechen?") entfernt — beide waren auf Weg 2 (Gruppen-/
+                Firmenmenü) gemünzt und wandern in E4.2 zu weihnachtsfeier-muenchen. Die
+                AnlassAnfrageForm-Komponente selbst bleibt bestehen (wird dort gebraucht), nur
+                die Einbindung hier ist entfallen. */}
 
-            {/* Kontaktwege (E2.3) — die EINZIGE Stelle der Seite, an der Telefon, E-Mail und
-                WhatsApp stehen. Vorher war dieser Block eine dritte CTA-Box, die nach
-                events-storia.de führte und die Kontaktkanäle zusätzlich in Hero und Final-CTA
-                wiederholte. Für Weg 2 ist das Gespräch ohnehin der Kern der Sache (das Menü wird
-                besprochen, nicht bestellt) — deshalb steht der Block unmittelbar hinter dem
-                Anfrageformular. */}
-            <section className="mb-16 bg-primary text-primary-foreground rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-serif font-bold mb-4">{s.contactBoxTitle}</h2>
-              <p className="mb-6 opacity-90">{s.contactBoxDesc}</p>
-              <div className="flex flex-wrap justify-center gap-6">
-                <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
-                <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
-                <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
-              </div>
-            </section>
-
-            {/* 8 Reasons */}
+            {/* 6 Gründe (E4.1: von 8 auf 6 reduziert — reason4/reason8 waren Gruppen-only) */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{s.reasonsTitle}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -502,24 +406,13 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </div>
             </section>
 
-            {/* Timeline */}
-            <section className="mb-16">
-              <h2 className="text-3xl font-serif font-bold mb-8 text-center">{s.timelineTitle}</h2>
-              <div className="flex flex-wrap justify-center gap-6">
-                {steps.map((step, i) => (
-                  <div key={i} className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] flex flex-col items-center text-center">
-                    <span className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-3">{i + 1}</span>
-                    <h3 className="font-semibold mb-1">{step.title}</h3>
-                    <p className="text-muted-foreground text-sm">{step.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
+            {/* E4.1: Timeline "So läuft Ihre Weihnachtsfeier ab" entfernt — Gruppen-only
+                (bedientes Gruppenmenü), wandert in E4.2 zu weihnachtsfeier-muenchen. */}
 
-            {/* FAQ */}
+            {/* FAQ (E4.1: von 8 auf 5 privat-relevante Fragen reduziert, faq3/faq4 präzisiert) */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{s.faqTitle}</h2>
-              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4","faq-5","faq-6","faq-7","faq-8","faq-9"]} className="max-w-3xl mx-auto">
+              <Accordion type="multiple" defaultValue={["faq-0","faq-1","faq-2","faq-3","faq-4"]} className="max-w-3xl mx-auto">
                 {faqs.map((faq, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
@@ -533,8 +426,9 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                 Hier stand bis E2.3 ein `<section id="signup-form">` mit `<SeasonalSignupForm
                 seasonalEvent="weihnachten" />`. Auf dieser Seite war es zusätzlich sachlich
                 schief: seit E1.4 gibt es gar kein Menü mehr, auf das man sich vormerken lassen
-                könnte — Weg 1 ist eine Reservierung, Weg 2 ein Gespräch. Beide sind jetzt als
-                echte Strecke da (`#reservieren`, `#anfrage`).
+                könnte — Weg 1 ist eine Reservierung, Weg 2 ein Gespräch. Weg 1 ist als echte
+                Strecke da (`#reservieren`); Weg 2 verweist seit E4.1 auf weihnachtsfeier-muenchen
+                (das dortige `#anfrage`-Formular, siehe E4.2), nicht mehr auf einen Anker hier.
 
                 ENTFERNT wurde ausschließlich dieser Mount-Punkt. Komponente
                 (`src/components/SeasonalSignupForm.tsx`), Edge Functions (`subscribe-seasonal`,
@@ -570,12 +464,20 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </section>
             )}
 
-            {/* Related Links */}
+            {/* Related Links — E4.1: weihnachtsfeier-muenchen (relatedLinks[0] im
+                standalone-Zweig) prominent hervorgehoben statt nur einer von sechs
+                gleichwertigen Karten (Kannibalisierung, docs/LOOP-SAISONSEITEN-AUSBAU.md § E4). */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{s.relatedTitle}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedLinks.map((link, i) => (
-                  <LocalizedLink key={i} to={link.to} className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <LocalizedLink
+                    key={i}
+                    to={link.to}
+                    className={i === 0
+                      ? "bg-primary/5 border-2 border-primary rounded-lg p-6 hover:bg-primary/10 transition-colors"
+                      : "bg-card border rounded-lg p-6 hover:border-primary transition-colors"}
+                  >
                     <h3 className="font-semibold mb-2">{link.title}</h3>
                     <p className="text-muted-foreground text-sm">{link.desc}</p>
                   </LocalizedLink>
@@ -587,7 +489,10 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                 angeboten; die Kontaktkanäle stehen NICHT mehr auch hier (einmal gebündelt beim
                 Formular reicht). Die `isActive`-Verzweigung ist entfallen: ob ein Live-Menü
                 hinterlegt ist oder nicht, ändert nichts daran, wie reserviert und angefragt
-                wird. */}
+                wird.
+
+                E4.1: der zweite Button führt nicht mehr zum entfernten #anfrage-Formular dieser
+                Seite, sondern direkt zur Weihnachtsfeier-Seite. */}
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
@@ -596,7 +501,7 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                   <a href="#reservieren">{s.finalCtaButtonReserve}</a>
                 </Button>
                 <Button size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" asChild>
-                  <a href="#anfrage">{s.finalCtaButtonInquiry}</a>
+                  <LocalizedLink to="weihnachtsfeier-muenchen">{s.finalCtaButtonInquiry}</LocalizedLink>
                 </Button>
               </div>
             </section>

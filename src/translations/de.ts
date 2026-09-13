@@ -2068,14 +2068,18 @@ export const de = {
       // Ersetzen heroCta/heroCtaInactive (events-storia.de bzw. Vormerk-Formular) und die Fußnote
       // heroEventsNote/heroEventsLink. `heroCtaPhone` war schon vorher unbenutzt und fällt mit weg.
       heroCtaReserve: "Tisch in der Adventszeit reservieren",
-      heroCtaInquiry: "Weihnachtsmenü für Gruppen anfragen",
+      // E4.1: führt nicht mehr zu einem eigenen Anfrageformular auf dieser Seite (entfernt),
+      // sondern direkt zur Weihnachtsfeier-Seite mit dem Gruppen-Weg.
+      heroCtaInquiry: "Weihnachtsfeier für Firmen & Gruppen",
       // Definition-Lead (E1.5, GEO-Regel 1) + Zwei-Wege-Realität (E1.4): Der erste Satz definiert
       // die Entity und benennt sofort beide Wege. Emotionale Einstiege sind laut
       // docs/geo-content-guidelines.md § Anti-Pattern verboten. Platzhalter kommen aus FACTS.
       introTitle: "Weihnachtsfeier in München – à la carte am Tisch oder Weihnachtsmenü für Gruppen",
       introP1: "Weihnachten im Ristorante STORIA ist ein italienisches Festtagsangebot in der Karlstraße 47a in München Maxvorstadt, das auf zwei Wegen funktioniert: à la carte von der saisonalen Karte am reservierten Tisch, ab 1 Person – oder ein Weihnachtsmenü, das Firmen und Gruppen ab {minGuests} Personen direkt mit dem Restaurant abstimmen, ab {groupPrice} € pro Person. Seit 2015 führt die Familie Speranza aus dem Cilento das Restaurant; ein festes Weihnachtsmenü zum Vorbestellen gibt es bewusst nicht.",
       introP2: "Auf dem ersten Weg reservieren Sie in der Adventszeit einfach einen Tisch und essen à la carte von der saisonalen Karte – ohne Vorbestellung, ohne Mindestteilnehmerzahl. Auf dem zweiten Weg stellen wir für Firmen und Gruppen ab {minGuests} Personen ein Weihnachtsmenü zusammen: süditalienische Festtagsküche mit hausgemachter Pasta, erlesenen Weinen und Panettone zum Dessert, im Gespräch auf Anlass und Budget abgestimmt.",
-      introP3: "Die zentrale Lage – nur 5 Minuten vom Königsplatz und Christkindlmarkt – macht das STORIA zum perfekten Ort nach dem Weihnachtsmarkt-Besuch. Am 24. und 25. Dezember ist das Restaurant geschlossen. Ein Gruppenmenü stimmen Sie direkt mit uns ab: über das Anfrageformular weiter unten, telefonisch oder per E-Mail.",
+      // E4.1: „über das Anfrageformular weiter unten" korrigiert — dieses Formular gibt es auf
+      // dieser Seite nicht mehr, das Gruppenmenü wird über die Weihnachtsfeier-Seite abgestimmt.
+      introP3: "Die zentrale Lage – nur 5 Minuten vom Königsplatz und Christkindlmarkt – macht das STORIA zum perfekten Ort nach dem Weihnachtsmarkt-Besuch. Am 24. und 25. Dezember ist das Restaurant geschlossen. Ein Gruppenmenü für Firmen und größere Gruppen stimmen Sie direkt mit uns über unsere Weihnachtsfeier-Seite ab.",
       // Externe Citation (E1.5, GEO-Regel 3): Outbound-Link auf die UNESCO-Liste des immateriellen
       // Kulturerbes. Passt sachlich, weil das Cilento – die Herkunftsregion der Familie Speranza –
       // die italienische Trägergemeinschaft der mediterranen Ernährung in dieser Liste ist.
@@ -2096,101 +2100,67 @@ export const de = {
       // Zwei Wege (E1.4) — die beiden Wege werden weit oben als eigener Abschnitt getrennt und
       // benannt. Platzhalter {minGuests}/{groupPrice} kommen aus FACTS.weihnachten.
       twoWaysTitle: "Zwei Wege, Weihnachten im STORIA zu feiern",
-      twoWaysIntro: "Ein festes Weihnachtsmenü zum Vorbestellen gibt es im STORIA nicht. Stattdessen entscheiden Sie sich für einen von zwei Wegen – je nachdem, ob Sie privat kommen oder als Firma beziehungsweise Gruppe feiern.",
+      // E4.1 (Kannibalisierung weihnachten-muenchen vs. weihnachtsfeier-muenchen aufgelöst,
+      // docs/LOOP-SAISONSEITEN-AUSBAU.md § E4): twoWaysIntro benennt weiterhin beide Wege, verweist
+      // für Weg 2 aber auf die Schwesterseite statt ein eigenes Anfrageformular zu versprechen.
+      twoWaysIntro: "Für Einzelgäste, Paare und Familien gibt es kein festes Weihnachtsmenü zum Vorbestellen: Sie reservieren einen Tisch und essen à la carte von der saisonalen Karte. Planen Sie mit einer Firma oder einer größeren Gruppe, ist unsere Weihnachtsfeier-Seite die richtige Adresse.",
       twoWay1Badge: "Weg 1 · Privat & spontan",
       twoWay1Title: "Tisch reservieren und à la carte essen",
       twoWay1Desc: "In der Adventszeit reservieren Sie einen Tisch und bestellen à la carte von unserer saisonalen Karte – wie an jedem anderen Abend, nur festlicher gedeckt.",
       twoWay1Item1: "Ab 1 Person",
       twoWay1Item2: "Keine Vorbestellung und keine Menü-Absprache nötig",
       twoWay1Item3: "Saisonale Karte, à la carte bestellt und abgerechnet",
-      twoWay2Badge: "Weg 2 · Firma & Gruppe",
-      twoWay2Title: "Weihnachtsmenü nach Absprache",
-      twoWay2Desc: "Ab {minGuests} Personen stellen wir Ihr Weihnachtsmenü direkt mit Ihnen zusammen – telefonisch oder per E-Mail, abgestimmt auf Anlass, Vorlieben und Budget.",
-      twoWay2Item1: "Ab {minGuests} Personen",
-      twoWay2Item2: "Menü, Ablauf und Getränke werden im Gespräch festgelegt",
-      twoWay2Item3: "Orientierungspreis ab {groupPrice} € pro Person",
+      // E4.1: Weg 2 ist auf dieser Seite kein eigener Handlungsblock mehr — Kontaktbox,
+      // Anfrageformular und Timeline wandern in E4.2 zu weihnachtsfeier-muenchen. Hier bleibt nur
+      // ein kurzer Hinweis mit Link, damit die Gruppen-Inhalte nicht doppelt gepflegt werden.
+      twoWay2HintBadge: "Firma & Gruppe",
+      twoWay2HintTitle: "Planen Sie mit Kollegen oder einer größeren Gruppe?",
+      twoWay2HintDesc: "Auf unserer Weihnachtsfeier-Seite finden Sie feste Menüpakete, Kapazitäten bis 300 Gäste und das Anfrageformular für Ihre Firmen- oder Gruppenfeier.",
+      twoWay2HintLinkLabel: "Zur Weihnachtsfeier-Seite",
       // Reservierung (E2.1) — das ist Weg 1 in Handlungsform. Die beiden Ruhetage stehen
       // ausdrücklich im Hinweis, weil ReservationBooking sie im Kalender sperrt.
       reservationTitle: "Tisch in der Adventszeit reservieren",
       reservationIntro: "Weg 1 in Kurzform: Tisch reservieren und à la carte von der saisonalen Karte essen – ab 1 Person, ohne Vorbestellung und ohne Menü-Absprache.",
       reservationNote: "Am 24. und 25. Dezember ist das Restaurant geschlossen; diese beiden Tage lassen sich im Kalender nicht auswählen. Die Reservierung selbst schließen Sie bei OpenTable ab.",
-      // Anfrageformular (E2.2) — das ist Weg 2 in Handlungsform. {minGuests} kommt aus FACTS.
-      inquiryTitle: "Weihnachtsmenü für Gruppen anfragen",
-      inquiryIntro: "Weg 2: Ab {minGuests} Personen stellen wir Ihr Weihnachtsmenü gemeinsam mit Ihnen zusammen. Schreiben Sie uns Anlass, Wunschtermin und Gästezahl – wir melden uns mit einem Vorschlag zurück.",
-      packagesTitle: "Orientierung für Ihr Gruppen-Menü",
-      packagesIntro: "Die folgenden drei Pakete sind keine fertigen Menüs zum Bestellen, sondern Anhaltspunkte für Umfang und Preis auf dem zweiten Weg. Was am Ende auf den Tisch kommt, legen wir gemeinsam im Gespräch fest.",
-      package1Title: "Weihnachten Classic",
-      package1Subtitle: "Das italienische Weihnachtserlebnis",
-      package1Item1: "Aperitivo mit Prosecco",
-      package1Item2: "3-Gang Weihnachtsmenü",
-      package1Item3: "Wasser inklusive",
-      package1Item4: "Festliche Tischdekoration",
-      package1Ideal: "Ideal für: Teamessen, Adventsrunden, kleine Gruppen (6–20 Gäste)",
-      package1Price: "ab 45 € p.P.",
-      package2Title: "Weihnachten Premium",
-      package2Subtitle: "Das festliche Rundum-Paket",
-      package2Item1: "Prosecco-Empfang mit weihnachtlichen Antipasti",
-      package2Item2: "4-Gang Weihnachtsmenü",
-      package2Item3: "Weinbegleitung (3 Gläser)",
-      package2Item4: "Festliche Dekoration & Kerzenlicht",
-      package2Item5: "Digestif (Limoncello oder Grappa)",
-      package2Ideal: "Ideal für: Firmenweihnachtsfeiern, Familienfeiern (20–60 Gäste)",
-      package2Price: "ab 65 € p.P.",
-      package2Badge: "Beliebteste Option",
-      package3Title: "Weihnachten Exclusive",
-      package3Subtitle: "Ihre private Weihnachtsfeier",
-      package3Item1: "Private Venue (Terrasse oder Innenbereich exklusiv)",
-      package3Item2: "Individuelles Menü nach Wunsch",
-      package3Item3: "Premium-Weinbegleitung",
-      package3Item4: "Weihnachtliche Komplett-Dekoration",
-      package3Item5: "Komplette Event-Koordination",
-      package3Ideal: "Ideal für: Große Firmenweihnachtsfeiern (40–100+ Gäste)",
-      package3Price: "Auf Anfrage",
-      // Kontaktwege (E2.3) — ersetzen die frühere CTA-Box, die nach events-storia.de führte.
-      // Die Kanäle stehen jetzt nur noch hier, direkt hinter dem Anfrageformular.
-      contactBoxTitle: "Lieber persönlich sprechen?",
-      contactBoxDesc: "Telefon, E-Mail oder WhatsApp – gerade beim Gruppen-Menü ist das Gespräch oft der schnellste Weg, weil Menü, Ablauf und Getränke ohnehin gemeinsam festgelegt werden.",
-      reasonsTitle: "8 Gründe für Weihnachten im STORIA",
+      // E4.1: Anfrageformular-Sektion (id="anfrage"), Pakete-Grid und Kontaktbox sind auf dieser
+      // Seite entfernt (Gruppen-only, wandern in E4.2 zu weihnachtsfeier-muenchen). Die Keys
+      // inquiryTitle/inquiryIntro, packagesTitle/packagesIntro, package1-3*, contactBoxTitle/Desc
+      // wurden hier ersatzlos gestrichen (Gegenprobe: nirgends sonst referenziert).
+      reasonsTitle: "6 Gründe für Weihnachten im STORIA",
       reason1Title: "🍝 Authentische italienische Festtagsküche",
       reason1Desc: "Traditionelle italienische Festtagsküche: von Antipasti über hausgemachte Pasta bis zum Panettone – à la carte am Tisch genauso wie im Gruppen-Menü.",
       reason2Title: "🕯️ Festliches Ambiente mit italienischem Flair",
       reason2Desc: "Kerzenlicht, weihnachtliche Dekoration und warme Atmosphäre – das STORIA wird zur italienischen Weihnachtsstube.",
       reason3Title: "📍 Zentrale Lage in der Maxvorstadt",
       reason3Desc: "5 Minuten vom Königsplatz, 5 Minuten vom Hauptbahnhof. Perfekt erreichbar für alle Gäste – auch nach dem Weihnachtsmarkt.",
-      reason4Title: "👥 Flexible Gruppengrößen",
-      reason4Desc: "Von der intimen Familienfeier (6 Gäste) bis zur großen Firmenweihnachtsfeier (100+ Gäste) – alles möglich.",
+      // E4.1: reason4 (Gruppengrößen) und reason8 (Rundum-Service) waren Gruppen-only und sind
+      // ersatzlos gestrichen (auf 6 Gründe reduziert statt mit erfundenen Fakten aufgefüllt).
       reason5Title: "👨‍👩‍👧‍👦 Familie Speranza – Weihnachten wie in Italien",
       reason5Desc: "La Famiglia aus dem Cilento bringt echte italienische Weihnachtstradition nach München.",
       reason6Title: "🎄 Weihnachtsmarkt-Nähe",
       reason6Desc: "Nach dem Christkindlmarkt am Königsplatz oder in der Innenstadt – perfekt für einen festlichen Ausklang im STORIA.",
       reason7Title: "🏖️ Überdachte Terrasse",
       reason7Desc: "Auch im Winter nutzbar – für größere Gruppen oder als stimmungsvoller Empfangsbereich.",
-      reason8Title: "📅 Frühzeitig planen, entspannt genießen",
-      reason8Desc: "Wir kümmern uns um alles: Menü, Dekoration, Ablauf. Sie lehnen sich zurück und genießen.",
-      timelineTitle: "So läuft Ihre Weihnachtsfeier ab",
-      step1Title: "Aperitivo-Empfang",
-      step1Desc: "Prosecco oder Glühwein-Empfang – ankommen und die festliche Atmosphäre genießen.",
-      step2Title: "Festliches Weihnachtsmenü",
-      step2Desc: "Gang für Gang serviert – von der Vorspeise bis zum Dessert, alles frisch zubereitet.",
-      step3Title: "Weine & Gespräche",
-      step3Desc: "Ausgewählte italienische Weine begleiten Ihr Menü. Zeit für gute Gespräche und Gemeinschaft.",
-      step4Title: "Dolci & Digestif",
-      step4Desc: "Panettone, Tiramisu oder Panna Cotta – der süße Abschluss eines festlichen Abends.",
-      step5Title: "Ausklang",
-      step5Desc: "Grappa, Limoncello oder Espresso – lassen Sie den Abend gemütlich ausklingen.",
+      // E4.1: Timeline „So läuft Ihre Weihnachtsfeier ab" war Gruppen-only (bedientes
+      // Gruppenmenü) und wandert in E4.2 zu weihnachtsfeier-muenchen. timelineTitle/step1-5*
+      // ersatzlos gestrichen.
       faqTitle: "Häufige Fragen zur Weihnachtsfeier im STORIA",
-      faq1Question: "Wann sollte ich unsere Weihnachtsfeier buchen?",
-      faq1Answer: "Je früher, desto besser! Die Adventszeit ist schnell ausgebucht. Wir empfehlen Anfragen ab September/Oktober.",
-      faq2Question: "Ab wie vielen Personen kann ich buchen?",
-      faq2Answer: "Es gibt zwei Wege: Am Tisch essen Sie in der Adventszeit à la carte von unserer saisonalen Karte – dafür genügt 1 Person. Ein festes Weihnachtsmenü für Gruppen stellen wir ab 6 Personen zusammen; schreiben Sie uns dafür über das Anfrageformular auf dieser Seite.",
+      // E4.1: faq1 (Buchungsvorlauf) und faq2 (Mindestpersonenzahl) waren Gruppen-only und sind
+      // ersatzlos gestrichen (die Antworten gehören inhaltlich zu weihnachtsfeier-muenchen).
       faq3Question: "Gibt es ein festes Weihnachtsmenü zum Vorbestellen?",
-      faq3Answer: "Nein. In der Adventszeit essen Sie am Tisch à la carte von unserer saisonalen Karte. Ein Weihnachtsmenü stellen wir für Firmen und Gruppen ab 6 Personen individuell zusammen – maßgeschneidert nach Ihren Wünschen und Ihrem Budget, telefonisch oder per E-Mail abgestimmt.",
+      // E4.1: präzisiert gegen den in der E4-Recherche gefundenen Widerspruch zu
+      // weihnachtsfeier-muenchen FAQ4 („Ja, drei Menüpakete"). Beide Antworten stimmen im
+      // jeweiligen Kontext (Einzelgast vs. Gruppe) — die Antwort hier macht das jetzt explizit
+      // und verlinkt auf die Schwesterseite, statt unqualifiziert „Nein" zu sagen.
+      faq3Answer: "Nein – für Einzelgäste und Familien gibt es kein festes Weihnachtsmenü zum Vorbestellen: Sie reservieren einen Tisch und essen à la carte von unserer saisonalen Karte. Für Firmen und Gruppen ab 6 Personen bieten wir dagegen feste Weihnachtsmenüs an, die direkt mit dem Restaurant abgestimmt werden – Details dazu auf unserer Weihnachtsfeier-Seite.",
       faq4Question: "Gibt es vegetarische/vegane Optionen?",
-      faq4Answer: "Ja, die saisonale Karte enthält vegetarische Gerichte, und jedes Gruppen-Menü gibt es auch in vegetarischer Variante. Vegane Optionen auf Anfrage.",
+      // E4.1: Gruppen-Menü-Satzteil entfernt (gehört zu weihnachtsfeier-muenchen), Antwort jetzt
+      // auf die reguläre Karte fokussiert.
+      faq4Answer: "Ja, unsere saisonale Karte enthält vegetarische Gerichte. Vegane Optionen auf Anfrage.",
       faq5Question: "Ist eine Weihnachtsfeier auch unter der Woche möglich?",
       faq5Answer: "Ja, Montag bis Sonntag. Unter der Woche haben Sie oft mehr Auswahl bei den Terminen.",
-      faq6Question: "Kann ich Geschenke oder Dekoration mitbringen?",
-      faq6Answer: "Natürlich! Wir helfen gerne bei der Vorbereitung. Sprechen Sie uns einfach an.",
+      // E4.1: faq6 (Geschenke/Dekoration mitbringen, „Wir kümmern uns um die Vorbereitung") war
+      // auf ein betreutes Gruppen-Event gemünzt und ist ersatzlos gestrichen.
       faq7Question: "Gibt es Parkmöglichkeiten?",
       faq7Answer: "Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 Stellplätze, 24h geöffnet, 5 Minuten Fußweg.",
       faq8Question: "Ist das STORIA an Heiligabend geöffnet?",
@@ -2215,7 +2185,8 @@ export const de = {
       finalCtaTitle: "Weihnachtsfeier im STORIA – Jetzt planen",
       finalCtaDesc: "Sichern Sie sich Ihren Wunschtermin für die schönste Weihnachtsfeier in München. Für einen Tisch in der Adventszeit genügt eine Reservierung; für ein Gruppen-Menü sprechen wir die Details gemeinsam durch.",
       finalCtaButtonReserve: "→ Tisch reservieren",
-      finalCtaButtonInquiry: "→ Gruppen-Menü anfragen",
+      // E4.1: führt zur Weihnachtsfeier-Seite statt zum entfernten #anfrage-Formular dieser Seite.
+      finalCtaButtonInquiry: "→ Zur Weihnachtsfeier-Seite",
       // Standalone SEO page keys
       standaloneSeoTitle: "Weihnachten M\u00fcnchen 2026 \u2013 Italienisches Weihnachtsmen\u00fc | STORIA",
       standaloneSeoDescription: "Weihnachten in M\u00fcnchen feiern: Festliche italienische Weihnachtsmen\u00fcs im Ristorante STORIA Maxvorstadt. Ab 45 \u20ac p.P. f\u00fcr 6\u2013100 G\u00e4ste. Jetzt informieren!",
@@ -2226,8 +2197,11 @@ export const de = {
       standaloneTeaserButton: "Saisonale Karte ansehen",
       standaloneInactiveTitle: "Weihnachten im STORIA \u2013 Jetzt informieren",
       standaloneInactiveDesc: "In der Adventszeit essen Sie bei uns \u00e0 la carte von der saisonalen Karte; ein Weihnachtsmen\u00fc f\u00fcr Gruppen stimmen wir direkt mit Ihnen ab. Kontaktieren Sie uns f\u00fcr Ihre Reservierung oder Ihre Gruppenanfrage.",
-      standaloneRelated1Title: "\ud83c\udf84 Weihnachtsfeier",
-      standaloneRelated1Desc: "Weihnachtsfeiern im STORIA planen",
+      // E4.1: prominent an erster Stelle mit klarer Firmen-/Gruppen-Beschriftung (Related Links,
+      // Kannibalisierung docs/LOOP-SAISONSEITEN-AUSBAU.md \u00a7 E4) \u2014 im Rendering zus\u00e4tzlich optisch
+      // hervorgehoben (siehe WeihnachtenMuenchen.tsx, relatedLinks-Map, i === 0).
+      standaloneRelated1Title: "\ud83c\udf84 Firmen- & Gruppenfeier",
+      standaloneRelated1Desc: "Weihnachtsfeier f\u00fcr Firmen und Gruppen ab 6 Personen \u2013 feste Men\u00fcpakete & Anfrageformular",
       standaloneRelated2Title: "\ud83c\udf89 Eventlocation",
       standaloneRelated2Desc: "Feiern & Events im STORIA M\u00fcnchen",
       standaloneRelated3Title: "\ud83c\udfe2 Firmenfeier",
