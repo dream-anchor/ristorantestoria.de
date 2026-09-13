@@ -2110,12 +2110,13 @@ export const de = {
       twoWay1Item1: "Ab 1 Person",
       twoWay1Item2: "Keine Vorbestellung und keine Menü-Absprache nötig",
       twoWay1Item3: "Saisonale Karte, à la carte bestellt und abgerechnet",
+      twoWay1Item4: "Auf der Karte zusätzlich ein Weihnachtsmenü mit Fleisch, Fisch oder vegetarisch – einzeln bestellbar",
       // E4.1: Weg 2 ist auf dieser Seite kein eigener Handlungsblock mehr — Kontaktbox,
       // Anfrageformular und Timeline wandern in E4.2 zu weihnachtsfeier-muenchen. Hier bleibt nur
       // ein kurzer Hinweis mit Link, damit die Gruppen-Inhalte nicht doppelt gepflegt werden.
       twoWay2HintBadge: "Firma & Gruppe",
       twoWay2HintTitle: "Planen Sie mit Kollegen oder einer größeren Gruppe?",
-      twoWay2HintDesc: "Auf unserer Weihnachtsfeier-Seite finden Sie feste Menüpakete, Kapazitäten bis 300 Gäste und das Anfrageformular für Ihre Firmen- oder Gruppenfeier.",
+      twoWay2HintDesc: "Auf unserer Weihnachtsfeier-Seite finden Sie Orientierungspreise, Kapazitäten bis 300 Gäste und das Anfrageformular für Ihre Firmen- oder Gruppenfeier – das Menü besprechen wir individuell mit Ihnen.",
       twoWay2HintLinkLabel: "Zur Weihnachtsfeier-Seite",
       // Reservierung (E2.1) — das ist Weg 1 in Handlungsform. Die beiden Ruhetage stehen
       // ausdrücklich im Hinweis, weil ReservationBooking sie im Kalender sperrt.
@@ -2152,7 +2153,7 @@ export const de = {
       // weihnachtsfeier-muenchen FAQ4 („Ja, drei Menüpakete"). Beide Antworten stimmen im
       // jeweiligen Kontext (Einzelgast vs. Gruppe) — die Antwort hier macht das jetzt explizit
       // und verlinkt auf die Schwesterseite, statt unqualifiziert „Nein" zu sagen.
-      faq3Answer: "Nein – für Einzelgäste und Familien gibt es kein festes Weihnachtsmenü zum Vorbestellen: Sie reservieren einen Tisch und essen à la carte von unserer saisonalen Karte. Für Firmen und Gruppen ab 6 Personen bieten wir dagegen feste Weihnachtsmenüs an, die direkt mit dem Restaurant abgestimmt werden – Details dazu auf unserer Weihnachtsfeier-Seite.",
+      faq3Answer: "Nein – ein für alle Gäste vorgegebenes, festes Weihnachtsmenü gibt es nicht. Als Einzelgast oder Familie reservieren Sie einen Tisch und wählen à la carte von unserer saisonalen Karte – dort finden Sie auch ein Weihnachtsmenü mit Fleisch, Fisch oder vegetarisch, das Sie individuell bestellen können. Für Firmen und Gruppen ab 6 Personen besprechen wir das Weihnachtsmenü direkt und individuell mit Ihnen – Details dazu auf unserer Weihnachtsfeier-Seite.",
       faq4Question: "Gibt es vegetarische/vegane Optionen?",
       // E4.1: Gruppen-Menü-Satzteil entfernt (gehört zu weihnachtsfeier-muenchen), Antwort jetzt
       // auf die reguläre Karte fokussiert.

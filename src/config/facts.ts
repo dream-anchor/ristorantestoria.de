@@ -78,8 +78,7 @@ export const FACTS = {
     priceWithWine: "150", // € pro Person, inkl. Weinbegleitung
   },
 
-  // ── Weihnachten — Gruppen-Menüpreis ──
-  // ── Weihnachten — Gruppen-Menüpreis ──
+  // ── Weihnachten ──
   // Historie (recherchiert 13.09.2026): Der früher hier vermerkte Widerspruch
   // „45 € vs. 49 €" ist AUFGELÖST. Die 49 € stammten aus einem Paket
   // „Menü C – Tradizione (ab 49 €)" und der zugehörigen FAQ auf
@@ -88,9 +87,17 @@ export const FACTS = {
   // Verbleibende offene Frage ist daher NICHT mehr „welcher der beiden Werte",
   // sondern nur noch, ob 45 € betrieblich korrekt ist — bestätigen kann das nur
   // Familie Speranza. Bis dahin bleibt 45 € der überall verwendete Wert.
+  //
+  // Fakt (Antoine, 13.09.2026): Es gibt KEIN festes, vorgegebenes Weihnachtsmenü
+  // für Gruppen/Firmen — das wird individuell mit dem Betreiber besprochen (siehe
+  // AnlassAnfrageForm-Weg). Für Einzelgäste gilt: innerhalb der regulären
+  // saisonalen à-la-carte-Karte gibt es zusätzlich EIN Weihnachtsmenü in drei
+  // Varianten (Fleisch / Fisch / vegetarisch), das jeder Gast individuell
+  // bestellen kann — ohne Vorbestellung, ohne Gruppenzwang.
   weihnachten: {
-    groupMenuPriceFrom: "45", // € pro Person, Gruppen-Menü ab 6 Personen
-    groupMenuMinGuests: 6, // festes Gruppen-Menü erst ab 6 Personen
+    groupMenuPriceFrom: "45", // € pro Person, Gruppen-Menü ab 6 Personen (individuell besprochen, kein festes Paket)
+    groupMenuMinGuests: 6, // ab 6 Personen wird ein Gruppen-Menü individuell abgesprochen
+    altaCarteMenuVariants: ["Fleisch", "Fisch", "vegetarisch"], // Weihnachtsmenü auf der saisonalen à-la-carte-Karte, einzeln bestellbar
   },
 } as const;
 

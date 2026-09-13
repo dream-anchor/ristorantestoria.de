@@ -2965,12 +2965,13 @@ const itBase = {
       twoWay1Item1: "Da 1 persona",
       twoWay1Item2: "Nessuna ordinazione anticipata e nessun accordo sul menù",
       twoWay1Item3: "Menù stagionale, ordinato e conteggiato alla carta",
+      twoWay1Item4: "Nel menù anche un piatto natalizio a scelta tra carne, pesce o vegetariano – ordinabile singolarmente",
       // E4.1: la seconda strada non è più un blocco d'azione autonomo su questa pagina — box
       // contatti, modulo di richiesta e timeline migrano a weihnachtsfeier-muenchen in E4.2. Resta
       // solo un breve rimando con link, per non mantenere due volte lo stesso contenuto gruppo.
       twoWay2HintBadge: "Azienda & gruppo",
       twoWay2HintTitle: "State organizzando con colleghi o un gruppo più numeroso?",
-      twoWay2HintDesc: "Sulla nostra pagina Festa di Natale trovate pacchetti di menù fissi, capienza fino a 300 ospiti e il modulo di richiesta per la vostra festa aziendale o di gruppo.",
+      twoWay2HintDesc: "Sulla nostra pagina Festa di Natale trovate prezzi orientativi, capienza fino a 300 ospiti e il modulo di richiesta per la vostra festa aziendale o di gruppo – il menù lo concordiamo individualmente con voi.",
       twoWay2HintLinkLabel: "Vai alla pagina Festa di Natale",
       // Prenotazione (E2.1) — è il primo modo, in forma di azione. I due giorni di chiusura
       // sono nominati perché ReservationBooking li blocca nel calendario.
@@ -2986,7 +2987,7 @@ const itBase = {
       // weihnachtsfeier-muenchen FAQ4 ("Sì, tre pacchetti"). Entrambe le risposte sono corrette
       // nel proprio contesto (ospite singolo vs. gruppo) — questa risposta lo rende ora esplicito
       // e rimanda alla pagina sorella invece di un semplice "No".
-      faq3Answer: "No – non per ospiti singoli e famiglie: prenotate un tavolo e mangiate alla carta dal nostro menù stagionale. Per aziende e gruppi da 6 persone, invece, offriamo menù di Natale fissi concordati direttamente con il ristorante – dettagli sulla nostra pagina Festa di Natale.",
+      faq3Answer: "No – non esiste un menù di Natale fisso uguale per tutti. Come ospite singolo o famiglia, prenotate un tavolo e ordinate alla carta dal nostro menù stagionale – che include anche un piatto di Natale a scelta tra carne, pesce o vegetariano, ordinabile singolarmente. Per aziende e gruppi da 6 persone in su, concordiamo il menù di Natale direttamente e individualmente con voi – dettagli sulla nostra pagina Festa di Natale.",
       // E4.1: clausola sul menù di gruppo rimossa (appartiene a weihnachtsfeier-muenchen),
       // risposta ora centrata sulla carta stagionale.
       faq4Answer: "Sì, la nostra carta stagionale comprende piatti vegetariani. Opzioni vegane su richiesta.",

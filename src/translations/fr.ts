@@ -2026,12 +2026,13 @@ const frBase = {
       twoWay1Item1: "D\u00e8s 1 personne",
       twoWay1Item2: "Aucune commande pr\u00e9alable ni concertation sur le menu",
       twoWay1Item3: "Carte de saison, command\u00e9e et factur\u00e9e \u00e0 la carte",
+      twoWay1Item4: "La carte propose aussi un plat de No\u00ebl au choix \u2013 viande, poisson ou v\u00e9g\u00e9tarien \u2013 \u00e0 commander individuellement",
       // E4.1 : la voie 2 n'est plus un bloc d'action propre sur cette page \u2014 la CTA box, le
       // formulaire de demande et la timeline migrent vers weihnachtsfeier-muenchen en E4.2. Seul
       // un bref renvoi avec lien subsiste, pour ne pas entretenir deux fois le contenu groupe.
       twoWay2HintBadge: "Entreprise & groupe",
       twoWay2HintTitle: "Vous planifiez avec des coll\u00e8gues ou un groupe plus important ?",
-      twoWay2HintDesc: "Notre page F\u00eate de No\u00ebl propose des forfaits de menu fixes, une capacit\u00e9 jusqu'\u00e0 300 invit\u00e9s et le formulaire de demande pour votre f\u00eate d'entreprise ou de groupe.",
+      twoWay2HintDesc: "Notre page F\u00eate de No\u00ebl propose des tarifs indicatifs, une capacit\u00e9 jusqu'\u00e0 300 invit\u00e9s et le formulaire de demande pour votre f\u00eate d'entreprise ou de groupe \u2013 le menu est convenu individuellement avec vous.",
       twoWay2HintLinkLabel: "Vers la page F\u00eate de No\u00ebl",
       // R\u00e9servation (E2.1) \u2014 la premi\u00e8re voie, sous forme d'action. Les deux jours de
       // fermeture sont nomm\u00e9s car ReservationBooking les bloque dans le calendrier.
@@ -2069,7 +2070,7 @@ const frBase = {
       // weihnachtsfeier-muenchen FAQ4 (\u00ab Oui, trois forfaits \u00bb). Les deux r\u00e9ponses sont correctes
       // dans leur contexte respectif (convive individuel vs. groupe) \u2014 cette r\u00e9ponse le rend
       // d\u00e9sormais explicite et renvoie vers la page s\u0153ur au lieu d'un simple \u00ab Non \u00bb.
-      faq3Answer: "Non \u2013 pas pour les convives individuels et les familles : vous r\u00e9servez une table et d\u00eenez \u00e0 la carte de notre carte de saison. Pour les entreprises et les groupes \u00e0 partir de 6 personnes, en revanche, nous proposons des menus de No\u00ebl fixes convenus directement avec le restaurant \u2013 d\u00e9tails sur notre page F\u00eate de No\u00ebl.",
+      faq3Answer: "Non \u2013 il n'existe pas de menu de No\u00ebl fixe identique pour tous. En tant que client individuel ou famille, vous r\u00e9servez une table et commandez \u00e0 la carte de notre carte de saison \u2013 qui propose aussi un plat de No\u00ebl au choix (viande, poisson ou v\u00e9g\u00e9tarien), \u00e0 commander individuellement. Pour les entreprises et les groupes \u00e0 partir de 6 personnes, nous convenons du menu de No\u00ebl directement et individuellement avec vous \u2013 d\u00e9tails sur notre page F\u00eate de No\u00ebl.",
       faq4Question: "Y a-t-il des options v\u00e9g\u00e9tariennes/v\u00e9ganes ?",
       // E4.1 : clause sur le menu de groupe supprim\u00e9e (rel\u00e8ve de weihnachtsfeier-muenchen), r\u00e9ponse
       // d\u00e9sormais centr\u00e9e sur la carte de saison.

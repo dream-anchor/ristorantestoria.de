@@ -2045,12 +2045,13 @@ const enBase = {
       twoWay1Item1: "From 1 person",
       twoWay1Item2: "No pre-order and no menu arrangement needed",
       twoWay1Item3: "Seasonal menu, ordered and billed à la carte",
+      twoWay1Item4: "The menu also features a Christmas dish with meat, fish or vegetarian – order individually",
       // E4.1: route 2 is no longer its own action block on this page — the contact box, enquiry
       // form and timeline move to weihnachtsfeier-muenchen in E4.2. Only a short hint with a link
       // remains, so the group content is not maintained twice.
       twoWay2HintBadge: "Company & Group",
       twoWay2HintTitle: "Planning with colleagues or a larger group?",
-      twoWay2HintDesc: "Our Christmas party page has fixed menu packages, capacity for up to 300 guests, and the enquiry form for your corporate or group celebration.",
+      twoWay2HintDesc: "Our Christmas party page has orientation pricing, capacity for up to 300 guests, and the enquiry form for your corporate or group celebration – we'll discuss the menu with you individually.",
       twoWay2HintLinkLabel: "Go to the Christmas party page",
       // Reservation (E2.1) — route 1 as an action. The two closing days are named because
       // ReservationBooking blocks them in the calendar.
@@ -2086,7 +2087,7 @@ const enBase = {
       // weihnachtsfeier-muenchen FAQ4 ("Yes, three menu packages"). Both answers are correct in
       // their own context (individual guest vs. group) — this answer now makes that explicit and
       // links to the sister page instead of a plain "No".
-      faq3Answer: "No – not for individual guests and families: you reserve a table and dine à la carte from our seasonal menu. For companies and groups of 6 or more, however, we do offer fixed Christmas menus arranged directly with the restaurant – see our Christmas party page for details.",
+      faq3Answer: "No – there is no fixed Christmas menu set for everyone. As an individual guest or family, you reserve a table and order à la carte from our seasonal menu – which also features a Christmas dish with meat, fish or vegetarian, available individually. For companies and groups of 6 or more, we discuss the Christmas menu directly and individually with you – see our Christmas party page for details.",
       faq4Question: "Are there vegetarian/vegan options?",
       // E4.1: group-menu clause removed (belongs to weihnachtsfeier-muenchen), answer now focused
       // on the regular seasonal menu.

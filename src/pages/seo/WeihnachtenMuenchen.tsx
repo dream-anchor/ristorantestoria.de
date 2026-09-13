@@ -137,7 +137,7 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
     badge: s.twoWay1Badge,
     title: s.twoWay1Title,
     desc: s.twoWay1Desc,
-    items: [s.twoWay1Item1, s.twoWay1Item2, s.twoWay1Item3],
+    items: [s.twoWay1Item1, s.twoWay1Item2, s.twoWay1Item3, s.twoWay1Item4],
   };
 
   // E4.1: reason4 (Gruppengrößen) und reason8 (Rundum-Service) entfernt — Gruppen-only, auf
