@@ -108,7 +108,26 @@ Wildcard. **Kein Handlungsbedarf.**
 | `language` | `"de"` \| `"en"` | nur diese zwei |
 | `serviceKind` | `"catering"` \| `"event"` | hier `"event"` (im Haus) |
 | `details` | Objekt, siehe unten | unbekannte Schlüssel werden verworfen, max. 8 KB |
-| `website` | string ≤2000 | **Honeypot** — muss im Formular versteckt existieren |
+| `packageId` / `packageName` | string | optional, falls ein konkretes Paket angefragt wird |
+| `website` | string ≤2000 | **Honeypot** — muss im Formular existieren, aber **per CSS ausgeblendet, nicht `type="hidden"`** (Bots füllen hidden-Felder trotzdem aus, Hinweis Antoine 13.09.2026) |
+
+### Pflichtfelder: Abweichung zwischen Schema und fachlicher Vorgabe
+
+Das Zod-Schema (`public-inquiry.ts:80-111`) verlangt technisch **nur `customerName`**;
+`customerEmail` und `message` sind dort `.optional()`. Antoine hat am 13.09.2026 jedoch
+**`customerName` + `customerEmail` + `message`** als fachliche Pflichtfelder vorgegeben (message
+zusätzlich: nicht nur Leerzeichen).
+
+**Verbindlich für die Umsetzung ist die fachliche Vorgabe** — das Formular validiert client-seitig
+strenger als der Server verlangt. Das ist unkritisch (echte Teilmenge des Erlaubten) und
+verhindert unbrauchbare Anfragen ohne Rückkanal. Hier festgehalten, damit niemand später beim
+Blick ins Schema stolpert.
+
+### Dateianhänge (aktuell nicht Teil des Scopes)
+
+Zweistufig: zuerst `POST /api/public/inquiries/upload` (liefert `uploadId` + `claimToken`), diese
+dann im Feld `attachments` der eigentlichen Anfrage mitschicken. Max. 5 Dateien, PDF/JPEG/PNG/WebP,
+10 MB. Für die zwei Anlass-Formulare nicht vorgesehen.
 
 `details` (alle optional): `dateFlexible`, `arrivalTime`, `preferredMenu`, `estimatedPrice`,
 `budget`, `dietaryRequirements`, `deliveryAddress`, `groupSize`, `format`, `originalPage`,
