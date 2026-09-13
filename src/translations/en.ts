@@ -1237,6 +1237,9 @@ const enBase = {
       paketFirmaName: "Company Wiesn package",
       paketFirmaDesc: "Tailored to your team: Brotzeit, main course, drinks flat rate and a reserved area – on request.",
       paketFirmaPrice: "on request",
+      paketHolzfassName: "Pre-order a beer keg",
+      paketHolzfassDesc: "A 30-litre keg of original Paulaner Wiesnbier for your group – pre-order in time and it'll be ready and waiting for you.",
+      paketHolzfassPrice: "€ 400",
       paketeNote: "All packages are examples and can be tailored individually. Prices are approximate. Get in touch for a specific quote: +49 89 51519696.",
       // Location
       locationTitle: "Oktoberfest Munich Maxvorstadt – our location",

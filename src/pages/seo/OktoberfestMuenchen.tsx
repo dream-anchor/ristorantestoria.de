@@ -112,9 +112,9 @@ const OktoberfestMuenchen = () => {
     { icon: "🤝", title: o.conceptBavareseTitle, desc: o.conceptBavareseDesc },
   ];
   const biere = [
-    { name: o.beerMassName, desc: o.beerMassDesc, price: "€ 12,90", badge: o.badgeFass, kind: "fass" },
-    { name: o.beerRadlerName, desc: o.beerRadlerDesc, price: "€ 12,90" },
-    { name: o.beerRussName, desc: o.beerRussDesc, price: "€ 12,90" },
+    { name: o.beerMassName, desc: o.beerMassDesc, price: "€ 15,00", badge: o.badgeFass, kind: "fass" },
+    { name: o.beerRadlerName, desc: o.beerRadlerDesc, price: "€ 15,00" },
+    { name: o.beerRussName, desc: o.beerRussDesc, price: "€ 15,00" },
     { name: o.beerAlkoholfreiName, desc: o.beerAlkoholfreiDesc, price: "€ 6,90" },
   ];
   const aperitivi = [
@@ -123,23 +123,23 @@ const OktoberfestMuenchen = () => {
     { name: o.spritzHugoName, desc: o.spritzHugoDesc, price: "€ 9,90" },
   ];
   const brotzeit = [
-    { name: o.brettBavareseName, desc: o.brettBavareseDesc, price: "ca. € 24,90", badge: o.badgeBestseller, kind: "bay" },
-    { name: o.brettMuenchenName, desc: o.brettMuenchenDesc, price: "ca. € 19,90" },
-    { name: o.brettItaliaName, desc: o.brettItaliaDesc, price: "ca. € 19,90" },
-    { name: o.breznName, desc: o.breznDesc, price: "€ 4,50" },
-    { name: o.obatzdaName, desc: o.obatzdaDesc, price: "€ 8,90" },
-    { name: o.weisswurstName, desc: o.weisswurstDesc, price: "€ 8,90" },
+    { name: o.brettBavareseName, desc: o.brettBavareseDesc, price: "€ 39,90", badge: o.badgeBestseller, kind: "bay" },
+    { name: o.brettMuenchenName, desc: o.brettMuenchenDesc, price: "€ 27,90" },
+    { name: o.brettItaliaName, desc: o.brettItaliaDesc, price: "€ 29,90" },
+    { name: o.breznName, desc: o.breznDesc, price: "€ 5,90" },
+    { name: o.obatzdaName, desc: o.obatzdaDesc, price: "€ 14,90" },
+    { name: o.weisswurstName, desc: o.weisswurstDesc, price: "€ 13,90" },
   ];
   const pizzen = [
-    { name: o.pizzaBratwurstName, desc: o.pizzaBratwurstDesc, price: "ca. € 15,90", badge: o.badgeBayerisch, kind: "bay" },
-    { name: o.pizzaSpanferkelName, desc: o.pizzaSpanferkelDesc, price: "ca. € 16,90", badge: o.badgeBayerisch, kind: "bay" },
-    { name: o.pizzaSalamiName, desc: o.pizzaSalamiDesc, price: "ca. € 14,90", badge: o.badgeItalienisch, kind: "ita" },
-    { name: o.pizzaObatzdaName, desc: o.pizzaObatzdaDesc, price: "ca. € 14,90", badge: o.badgeItalienisch, kind: "ita" },
+    { name: o.pizzaBratwurstName, desc: o.pizzaBratwurstDesc, price: "€ 16,90", badge: o.badgeBayerisch, kind: "bay" },
+    { name: o.pizzaSpanferkelName, desc: o.pizzaSpanferkelDesc, price: "€ 19,90", badge: o.badgeBayerisch, kind: "bay" },
+    { name: o.pizzaSalamiName, desc: o.pizzaSalamiDesc, price: "€ 15,90", badge: o.badgeItalienisch, kind: "ita" },
+    { name: o.pizzaObatzdaName, desc: o.pizzaObatzdaDesc, price: "€ 17,90", badge: o.badgeItalienisch, kind: "ita" },
   ];
   const braten = [
-    { name: o.schweinsbratenName, desc: o.schweinsbratenDesc, price: "ca. € 19,90" },
-    { name: o.rinderbratenName, desc: o.rinderbratenDesc, price: "ca. € 22,90" },
-    { name: o.vegetarischName, desc: o.vegetarischDesc, price: "ca. € 16,90" },
+    { name: o.schweinsbratenName, desc: o.schweinsbratenDesc, price: "€ 26,90" },
+    { name: o.rinderbratenName, desc: o.rinderbratenDesc, price: "€ 29,90" },
+    { name: o.vegetarischName, desc: o.vegetarischDesc, price: "€ 22,90" },
   ];
   const whyFeatures = [
     { icon: "🍺", title: o.featureHolzfassTitle, desc: o.featureHolzfassDesc },
@@ -161,6 +161,7 @@ const OktoberfestMuenchen = () => {
     { name: o.paketBrotzeitName, desc: o.paketBrotzeitDesc, price: o.paketBrotzeitPrice },
     { name: o.paketBavareseName, desc: o.paketBavareseDesc, price: o.paketBavarasePrice },
     { name: o.paketFirmaName, desc: o.paketFirmaDesc, price: o.paketFirmaPrice },
+    { name: o.paketHolzfassName, desc: o.paketHolzfassDesc, price: o.paketHolzfassPrice },
   ];
 
   // Menü-Sektionen: aus DB-Sondermenü (im Admin editierbar) – sonst der aktuelle Inhalt als Fallback
