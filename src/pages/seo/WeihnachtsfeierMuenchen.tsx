@@ -77,6 +77,9 @@ const WeihnachtsfeierMuenchen = () => {
     { q: w.faq8Question, a: w.faq8Answer },
     // E3.3: neue FAQ, entstanden aus E3.1 (Stornostaffel) — schließt an step3Desc an.
     { q: w.faq9Question, a: w.faq9Answer },
+    // V2.2 (GEO-Lücken-Loop, 13.09.2026): "Betriebsweihnachtsfeier" deckt eine eigene Query ab,
+    // die bisher auf dieser Seite nicht vorkam.
+    { q: w.faq10Question, a: w.faq10Answer },
   ];
 
   /**
