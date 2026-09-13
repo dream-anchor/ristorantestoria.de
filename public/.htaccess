@@ -81,6 +81,16 @@ RewriteRule ^besondere-anlaesse/valentinstag-menue/?$ /valentinstag-muenchen/ [R
 RewriteRule ^en/special-occasions/valentines-menu/?$ /en/valentines-day-munich/ [R=301,L]
 RewriteRule ^it/occasioni-speciali/san-valentino-menu/?$ /it/san-valentino-monaco/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/saint-valentin-menu/?$ /fr/saint-valentin-munich/ [R=301,L]
+# Candlelight-Menü-404-Fix (13.09.2026): generische Supabase-gestützte Anlass-Seite lieferte bis
+# mindestens 02.09.2026 200 in allen 4 Sprachen, heute 404 — vermutlich deaktivierte/gelöschte
+# Supabase-Zeile außerhalb des Codes (siehe docs/seo-log.md, docs/LOOP-GEO-LUECKEN.md § V1).
+# Seite rankte bei Google auf Pos. ~5,5 für „candle light dinner münchen"-nahe Anfragen;
+# romantisches-dinner-muenchen rankt für dasselbe Cluster bereits auf Pos. 6,9 mit 719 Impr./
+# 48 Klicks — inhaltlich der richtige Fänger für den Traffic.
+RewriteRule ^besondere-anlaesse/candlelight-menue/?$ /romantisches-dinner-muenchen/ [R=301,L]
+RewriteRule ^en/special-occasions/candlelight-menu/?$ /en/romantic-dinner-munich/ [R=301,L]
+RewriteRule ^it/occasioni-speciali/candlelight-menu/?$ /it/cena-romantica-monaco/ [R=301,L]
+RewriteRule ^fr/occasions-speciales/candlelight-menu/?$ /fr/diner-romantique-munich/ [R=301,L]
 RewriteRule ^lunch-muenchen/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^mittagessen-maxvorstadt/?$ /lunch-muenchen-maxvorstadt/ [R=301,L]
 RewriteRule ^eventlocation-muenchen/?$ /eventlocation-muenchen-maxvorstadt/ [R=301,L]
