@@ -1832,6 +1832,13 @@ const frBase = {
       package3Item5: "Coordination complète de l'événement",
       package3Ideal: "Idéal pour : Grandes fêtes du Réveillon (50–100+ convives)",
       package3Price: "Sur demande",
+      // Menu de la saison passée (E1.2) — un exemple, expressément non réservable. Les noms des
+      // plats restent en allemand dans toutes les langues (ce sont les noms propres des plats).
+      previousMenuBadge: "Menu de la saison passée",
+      previousMenuTitle: "Voici notre menu du Réveillon de la saison passée",
+      previousMenuIntro: "Pour vous donner une idée de ce qui vous attend : voici à quoi ressemblait notre menu de gala au dernier passage à la nouvelle année – trois variantes au choix. Le menu du prochain Réveillon est en cours d'élaboration et sera publié en octobre selon toute vraisemblance.",
+      previousMenuCoursesLabel: "Menu {courses} plats",
+      previousMenuNote: "À noter : ces plats sont un retour sur la saison passée et ne sont pas réservables. Le prochain menu du Réveillon pourra en différer.",
       ctaBoxTitle: "Demander le Réveillon au STORIA",
       ctaBoxDesc: "Toutes les formules du Réveillon sont personnalisables. Informations détaillées sur les menus et les prix :",
       ctaBoxButton: "→ Demander le Réveillon sur events-storia.de",

@@ -1893,6 +1893,14 @@ export const de = {
       package3Item5: "Komplette Event-Koordination",
       package3Ideal: "Ideal für: Große Silvesterpartys (50–100+ Gäste)",
       package3Price: "Auf Anfrage",
+      // Menü der vergangenen Saison (E1.2) — Beispiel zum Eindruck, ausdrücklich NICHT buchbar.
+      // Die Gerichtsnamen selbst stehen in SilvesterMuenchen.tsx und bleiben in allen vier
+      // Sprachen deutsch (Eigennamen der Speisen).
+      previousMenuBadge: "Menü der vergangenen Saison",
+      previousMenuTitle: "Das war unser Silvester-Menü der letzten Saison",
+      previousMenuIntro: "Damit Sie einen Eindruck bekommen, was Sie erwartet: So sah unser Gala-Menü zum vergangenen Jahreswechsel aus – drei Varianten zur Wahl. Das Menü für die kommende Silvesternacht stellen wir gerade zusammen und veröffentlichen es voraussichtlich im Oktober.",
+      previousMenuCoursesLabel: "{courses} Gänge Menü",
+      previousMenuNote: "Bitte beachten: Diese Gerichte sind ein Rückblick auf die vergangene Saison und nicht buchbar. Das kommende Silvester-Menü kann davon abweichen.",
       // CTA Box
       ctaBoxTitle: "Silvester im STORIA anfragen",
       ctaBoxDesc: "Alle Silvester-Pakete sind individuell anpassbar. Detaillierte Informationen zu Menüs und Preisen:",

@@ -25,6 +25,7 @@ import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
+import { FACTS } from "@/config/facts";
 
 /**
  * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
@@ -36,6 +37,53 @@ import { EVENTS_LINKS } from "@/lib/eventsLinks";
  * kann also nicht mehr von der ausgelieferten Datei abweichen.
  */
 const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${silvesterHeroImage}`;
+
+/**
+ * Die drei Degustationsmenüs der vergangenen Silvester-Saison (E1.2).
+ *
+ * EINZIGE Quelle für diese Gerichte: sie speist sowohl den sichtbaren Menü-Abschnitt auf der
+ * Seite als auch das Menu-JSON-LD weiter unten. Vorher standen die Gänge ausschließlich im
+ * JSON-LD — Suchmaschinen und KI-Systeme sahen das vollständige Menü, Besucher nicht
+ * (KONZEPT-SAISONSEITEN-AUSBAU.md § „Der größte sofort hebbare Fund"). Beide Darstellungen aus
+ * derselben Konstante zu speisen ist der einzige Weg, der garantiert, dass sie nicht auseinander
+ * laufen.
+ *
+ * Die Gerichtsnamen bleiben in ALLEN vier Sprachen deutsch: es sind die Eigennamen der Speisen,
+ * genau wie sie auf der Karte stehen. Übersetzt werden nur Überschrift, Kennzeichnung und Hinweis
+ * (`t.seo.silvester.previousMenu*`).
+ *
+ * Es sind ausdrücklich KEINE buchbaren Menüs, sondern ein Eindruck aus der letzten Saison — die
+ * Kennzeichnung im UI (Badge + Hinweiszeile) ist Teil des Kriteriums, nicht Dekoration.
+ */
+const PREVIOUS_SEASON_MENUS = [
+  {
+    variant: "Vegetale",
+    courses: [
+      "Champagner-Kastaniencremesuppe mit getrüffelter Crème Fraîche",
+      "Auberginenkaviar, Parmesanpraline und Avocadocreme, Basilikumessenz",
+      "Gnocconi gefüllt mit Steinpilzen, gehobeltem Parmigiano und schwarzem Trüffel",
+      "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis",
+    ],
+  },
+  {
+    variant: "Mare",
+    courses: [
+      "Carpaccio vom Octopus mit Jakobsmuscheln in feiner Kräuter-Zitrus-Marinade",
+      "Tagliolini mit Scampi im Hummerfond",
+      "Seeteufel auf einer sanften Gelbtomaten-Basilikum-Sauce, serviert mit cremigem Safranrisotto",
+      "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis",
+    ],
+  },
+  {
+    variant: "Terra",
+    courses: [
+      "Vitello Tonnato, Auberginenkaviar und Parmesanpraline",
+      "Gnocconi gefüllt mit Steinpilzen, gehobeltem Parmigiano und schwarzem Trüffel",
+      "Brasato di manzo al Barolo „Rinderschmorbraten in Barolo“ mit getrüffelter Petersilienwurzelcreme",
+      "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis",
+    ],
+  },
+] as const;
 
 interface SilvesterMuenchenProps {
   standalone?: boolean;
@@ -195,48 +243,17 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               "name": "Degustationsmenüs",
               "inLanguage": "de-DE",
               "hasMenuSection": [
-                {
+                // E1.2: dieselben drei Menüs, die die Seite jetzt auch sichtbar rendert —
+                // erzeugt aus PREVIOUS_SEASON_MENUS, damit Schema und Sichtbares nie abweichen.
+                ...PREVIOUS_SEASON_MENUS.map((menuVariant) => ({
                   "@type": "MenuSection",
-                  "name": "4 Gänge Menü «Vegetale»",
+                  "name": `${FACTS.silvester.courses} Gänge Menü «${menuVariant.variant}»`,
                   "offers": [
                     { "@type": "Offer", "price": "99.00", "priceCurrency": "EUR" },
                     { "@type": "Offer", "name": "mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR" }
                   ],
-                  "hasMenuItem": [
-                    { "@type": "MenuItem", "name": "Champagner-Kastaniencremesuppe mit getrüffelter Crème Fraîche" },
-                    { "@type": "MenuItem", "name": "Auberginenkaviar, Parmesanpraline und Avocadocreme, Basilikumessenz" },
-                    { "@type": "MenuItem", "name": "Gnocconi gefüllt mit Steinpilzen, gehobeltem Parmigiano und schwarzem Trüffel" },
-                    { "@type": "MenuItem", "name": "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis" }
-                  ]
-                },
-                {
-                  "@type": "MenuSection",
-                  "name": "4 Gänge Menü «Mare»",
-                  "offers": [
-                    { "@type": "Offer", "price": "99.00", "priceCurrency": "EUR" },
-                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR" }
-                  ],
-                  "hasMenuItem": [
-                    { "@type": "MenuItem", "name": "Carpaccio vom Octopus mit Jakobsmuscheln in feiner Kräuter-Zitrus-Marinade" },
-                    { "@type": "MenuItem", "name": "Tagliolini mit Scampi im Hummerfond" },
-                    { "@type": "MenuItem", "name": "Seeteufel auf einer sanften Gelbtomaten-Basilikum-Sauce, serviert mit cremigem Safranrisotto" },
-                    { "@type": "MenuItem", "name": "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis" }
-                  ]
-                },
-                {
-                  "@type": "MenuSection",
-                  "name": "4 Gänge Menü «Terra»",
-                  "offers": [
-                    { "@type": "Offer", "price": "99.00", "priceCurrency": "EUR" },
-                    { "@type": "Offer", "name": "mit Weinbegleitung", "price": "150.00", "priceCurrency": "EUR" }
-                  ],
-                  "hasMenuItem": [
-                    { "@type": "MenuItem", "name": "Vitello Tonnato, Auberginenkaviar und Parmesanpraline" },
-                    { "@type": "MenuItem", "name": "Gnocconi gefüllt mit Steinpilzen, gehobeltem Parmigiano und schwarzem Trüffel" },
-                    { "@type": "MenuItem", "name": "Brasato di manzo al Barolo „Rinderschmorbraten in Barolo“ mit getrüffelter Petersilienwurzelcreme" },
-                    { "@type": "MenuItem", "name": "Schokoladentarte mit hausgemachtem Zimt-Vanille-Eis" }
-                  ]
-                },
+                  "hasMenuItem": menuVariant.courses.map((course) => ({ "@type": "MenuItem", "name": course }))
+                })),
                 {
                   "@type": "MenuSection",
                   "name": "À la carte",
@@ -392,6 +409,42 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
             ) : (
               <section className="mb-16">
                 <MenuDisplay menuType="special" menuId={menu!.id} showTitle={false} />
+              </section>
+            )}
+
+            {/* Menü der vergangenen Saison (E1.2) — nur solange kein aktuelles Menü live ist.
+                Sobald `isActive`, zeigt die Seite oben das echte Menü; ein Vorjahres-Beispiel
+                daneben wäre dann nur noch verwirrend. */}
+            {!standalone && !isActive && (
+              <section className="mb-16" aria-labelledby="silvester-vorjahresmenue">
+                <div className="text-center mb-8">
+                  <Badge variant="secondary" className="mb-3">{s.previousMenuBadge}</Badge>
+                  <h2 id="silvester-vorjahresmenue" className="text-3xl font-serif font-bold mb-4">{s.previousMenuTitle}</h2>
+                  <p className="text-muted-foreground max-w-3xl mx-auto">{s.previousMenuIntro}</p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {PREVIOUS_SEASON_MENUS.map((menuVariant) => (
+                    <Card key={menuVariant.variant} className="border-border">
+                      <CardHeader className="pb-2">
+                        {/* Titel bewusst als EIN Ausdruck: React würde sonst zwischen den
+                            Textknoten SSR-Kommentare setzen und „4 Gänge Menü «Vegetale»" im
+                            ausgelieferten HTML zerstückeln — schlecht für Extraktion durch
+                            Suchmaschinen und KI-Systeme. */}
+                        <CardTitle className="text-lg font-serif">
+                          {`${s.previousMenuCoursesLabel.replace('{courses}', String(FACTS.silvester.courses))} «${menuVariant.variant}»`}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ol className="text-sm space-y-3 list-decimal list-inside marker:text-primary marker:font-semibold">
+                          {menuVariant.courses.map((course, j) => (
+                            <li key={j} className="text-muted-foreground">{course}</li>
+                          ))}
+                        </ol>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.previousMenuNote}</p>
               </section>
             )}
 

@@ -1855,6 +1855,13 @@ const enBase = {
       package3Item5: "Complete event coordination",
       package3Ideal: "Ideal for: Large NYE parties (50–100+ guests)",
       package3Price: "On request",
+      // Last season's menu (E1.2) — an example, explicitly not bookable. The dish names stay
+      // German in every language (they are the proper names of the dishes).
+      previousMenuBadge: "Last season's menu",
+      previousMenuTitle: "This was our New Year's Eve menu last season",
+      previousMenuIntro: "So you know what to expect: this is what our gala menu looked like at the last turn of the year – three variations to choose from. We are putting together the menu for the coming New Year's Eve right now and expect to publish it in October.",
+      previousMenuCoursesLabel: "{courses}-course menu",
+      previousMenuNote: "Please note: these dishes are a look back at last season and cannot be booked. The upcoming New Year's Eve menu may differ.",
       ctaBoxTitle: "Enquire About NYE at STORIA",
       ctaBoxDesc: "All New Year's Eve packages are individually customisable. Detailed information on menus and prices:",
       ctaBoxButton: "→ Enquire about NYE on events-storia.de",

@@ -1797,6 +1797,13 @@ const itBase = {
       package3Item5: "Coordinamento completo dell'evento",
       package3Ideal: "Ideale per: Grandi feste di Capodanno (50–100+ ospiti)",
       package3Price: "Su richiesta",
+      // Menù della scorsa stagione (E1.2) — un esempio, espressamente NON prenotabile. I nomi dei
+      // piatti restano in tedesco in tutte le lingue (sono i nomi propri dei piatti).
+      previousMenuBadge: "Menù della scorsa stagione",
+      previousMenuTitle: "Ecco il nostro menù di Capodanno della scorsa stagione",
+      previousMenuIntro: "Per darvi un'idea di cosa vi aspetta: così era il nostro menù di gala dell'ultimo passaggio d'anno – tre varianti a scelta. Il menù per il prossimo Capodanno è in preparazione e sarà pubblicato presumibilmente a ottobre.",
+      previousMenuCoursesLabel: "Menù a {courses} portate",
+      previousMenuNote: "Attenzione: questi piatti sono uno sguardo alla scorsa stagione e non sono prenotabili. Il prossimo menù di Capodanno potrà differire.",
       ctaBoxTitle: "Richiedi Capodanno allo STORIA",
       ctaBoxDesc: "Tutti i pacchetti di Capodanno sono personalizzabili. Informazioni dettagliate su menù e prezzi:",
       ctaBoxButton: "→ Richiedi Capodanno su events-storia.de",
