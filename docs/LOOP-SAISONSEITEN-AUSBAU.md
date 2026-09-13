@@ -540,7 +540,14 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 ## E3: Branch, Beweis, Merge
 
-- [ ] Branch `saisonseiten-e3` gepusht, PR erstellt, gemergt, Live-Stichprobe.
+- [x] ~~Branch `saisonseiten-e3` gepusht, PR erstellt, gemergt, Live-Stichprobe.~~ **erledigt
+      13.09.2026** (PR #95, squash-merged nach `main`, Deploy-Run `34754104046` erfolgreich).
+      Live-Beweis per `curl` gegen `www.ristorantestoria.de`: alle drei URLs `200`, keine
+      Redirects (`besondere-anlaesse/silvester/`, `weihnachten-muenchen/`,
+      `weihnachtsfeier-muenchen/`). „Stornobedingungen" sichtbar auf Silvester und
+      Weihnachtsfeier, „Impressionen vom Silvesterabend"/„Impressionen aus dem STORIA"
+      (Bildstrecken) sichtbar auf Silvester bzw. Weihnachten, 0 Treffer für eine nicht
+      existierende „agb-veranstaltungen"-Referenz auf beiden Storno-Seiten.
 
 ---
 
