@@ -180,10 +180,18 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
     { name: effectiveConfig.titles[language] || effectiveConfig.titles.de, url: canonicalPath },
   ];
 
+  /**
+   * Auf zwei Karten vereinfacht (Content-Abgleich 13.09.2026, Antoine bestätigt): die frühere
+   * dritte Stufe "Exclusive" (Private Venue, DJ/Live-Band) und die Premium-Zusatzposten Digestif
+   * + Blumendekoration waren veraltete Kopie von vor der Preis-Vereinfachung und gingen über die
+   * bestätigte Faktenlage hinaus ("Silvester Menü ist 99 oder 150 €, letzteres mit
+   * Weinbegleitung — dasselbe Menü, der Unterschied ist NUR die Weinbegleitung"). Jetzt bilden
+   * beide Karten exakt das ab, was "Auf einen Blick" und das JSON-LD bereits sagen: dasselbe
+   * 4-Gänge-Menü, einmal ohne und einmal mit Weinbegleitung zu allen vier Gängen.
+   */
   const packages = [
-    { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4, s.package1Item5], ideal: s.package1Ideal, price: s.package1Price },
-    { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5, s.package2Item6, s.package2Item7], ideal: s.package2Ideal, price: s.package2Price, badge: s.package2Badge },
-    { title: s.package3Title, subtitle: s.package3Subtitle, items: [s.package3Item1, s.package3Item2, s.package3Item3, s.package3Item4, s.package3Item5], ideal: s.package3Ideal, price: s.package3Price },
+    { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4], ideal: s.package1Ideal, price: s.package1Price },
+    { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5], ideal: s.package2Ideal, price: s.package2Price, badge: s.package2Badge },
   ];
 
   /**
@@ -487,7 +495,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               <section className="mb-16">
                 <h2 className="text-3xl font-serif font-bold mb-4 text-center">{s.packagesTitle}</h2>
                 <p className="text-muted-foreground text-center mb-8">{s.packagesIntro}</p>
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                   {packages.map((pkg, i) => (
                     <Card key={i} className={pkg.badge ? "border-primary bg-primary/5 relative" : "border-border"}>
                       {pkg.badge && <span className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded">{pkg.badge}</span>}
