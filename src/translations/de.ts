@@ -2233,7 +2233,7 @@ export const de = {
     },
     valentinstag: {
       seoTitle: "Valentinstag München 2026 – Romantisches Dinner | STORIA",
-      seoDescription: "Valentinstag in München: Romantisches Candle-Light-Dinner im STORIA Maxvorstadt. Ab 55 € p.P. mit Aperitivo, Menü & Rose. Nähe Königsplatz. Jetzt reservieren!",
+      seoDescription: "Valentinstag in München: Romantisches Candle-Light-Dinner im STORIA Maxvorstadt. Ab {price} € p.P. mit Aperitivo, Menü & Rose. Nähe Königsplatz. Jetzt reservieren!",
       breadcrumb: "Valentinstag M\u00fcnchen",
       heroTitle: "Valentinstag in München – Romantisches Dinner im STORIA",
       heroSubtitle: "Candle-Light-Dinner mit Aperitivo, Menü-Begleitung und Rose am Tisch – in der Maxvorstadt",
@@ -2241,16 +2241,29 @@ export const de = {
       heroBadge2: "🌹 Rose am Tisch",
       heroBadge3: "🍷 Weinbegleitung",
       heroDescription: "Überraschen Sie Ihren Lieblingsmenschen mit einem unvergesslichen Valentinstag-Dinner in authentisch italienischer Atmosphäre: Mehrgängiges Menü bei Kerzenschein, erlesene Weine und eine Rose am Tisch – mitten in der Maxvorstadt.",
-      tldr: "Valentinstag im STORIA München Maxvorstadt (Karlstraße 47a): Romantisches italienisches Valentinstag-Dinner mit mehrgängigem Menü bei Kerzenschein, erlesenen Weinen und einer Rose am Tisch. Familienbetrieb seit 2015 von Familie Speranza. 4,5 Sterne bei über 800 Google-Bewertungen. Reservierung: +49 89 51519696.",
+      // GEO-Lücken-Loop V3.4: tldr auf Definition-Lead-Stil umgestellt (konkretes Datum + Preis
+      // statt "Romantisches ... Dinner"), Platzhalter via fillFacts() in ValentinstagMuenchen.tsx.
+      tldr: "Valentinstag im STORIA München Maxvorstadt (Karlstraße 47a): Italienisches Candle-Light-Dinner am 14. Februar mit mehrgängigem Menü, erlesenen Weinen und einer Rose am Tisch, ab {price} € pro Person. Familienbetrieb seit 2015 von Familie Speranza. 4,5 Sterne bei über 800 Google-Bewertungen. Reservierung: +49 89 51519696.",
       heroCta: "Valentinstag reservieren",
       heroCtaInactive: "Vormerken lassen",
       heroCtaPhone: "089 51519696",
       heroEventsNote: "Für private Feiern ab 20 Gäste:",
       heroEventsLink: "events-storia.de",
       introTitle: "Valentinstag in München – La Dolce Vita für Verliebte",
-      introP1: "Seit 2015 ist das STORIA am Valentinstag ein beliebter Ort für Paare, die einen besonderen Abend zu zweit suchen. Die Familie Speranza aus dem Cilento kreiert jedes Jahr ein spezielles Valentinstag-Menü, das süditalienische Romantik mit münchner Gastfreundschaft verbindet.",
+      // GEO-Lücken-Loop V3.4: Definition-Lead als erster Satz (GEO-Regel 1: "[Entity] ist ein
+      // [Kategorie], das/der [Differenzierung]"), statt des früheren emotionalen Einstiegs.
+      introP1: "Das Valentinstag-Dinner im STORIA München ist ein italienisches Candle-Light-Menü für Paare am 14. Februar in der Maxvorstadt: mehrgängiges Menü, erlesene Weine und eine Rose am Tisch, ab {price} € pro Person. Die Familie Speranza aus dem Cilento kreiert es seit 2015 jedes Jahr neu.",
+      citationPre: "Der 14. Februar als Tag der Liebenden geht auf den heiligen Valentin zurück, dessen Grab in der Basilika San Valentino in Terni liegt – dokumentiert von der ",
+      citationAnchor: "offiziellen Tourismusseite der Stadt Terni",
+      citationPost: ", die ihn seit 1644 als Stadtpatron führt.",
       introP2: "Unser Valentinstag-Dinner ist bewusst intim gehalten: Kerzenlicht, eine Rose am Tisch, dezente Musik und ein Menü, das mit Liebe zubereitet wird. Jeder Gang wird frisch gekocht – kein Einheitsmenü, sondern Qualität, die von Herzen kommt.",
-      introP3: "Die zentrale Lage in der Maxvorstadt – nur 5 Minuten vom Königsplatz – macht das STORIA zum idealen Ort für ein romantisches Dinner nach einem Spaziergang durch die Stadt. Reservieren Sie frühzeitig, denn der Valentinstag ist unser meistgebuchter Abend des Jahres.",
+      introP3: "Die zentrale Lage in der Maxvorstadt – nur 5 Minuten vom Königsplatz – macht das STORIA zum idealen Ort für den Valentinstag nach einem Spaziergang durch die Stadt. Reservieren Sie frühzeitig, denn der 14. Februar ist unser meistgebuchter Abend des Jahres.",
+      // GEO-Lücken-Loop V3.1: interner Link statt Romantik-Generika — wer ein romantisches Dinner
+      // unabhängig vom Kalenderdatum sucht, wird hier aktiv auf die eigene, dafür zuständige Seite
+      // verwiesen, statt dass diese Seite selbst um das generische Keyword mitbietet.
+      introRomanticLinkPre: "Suchen Sie ein romantisches Dinner unabhängig vom Datum? Unser ",
+      introRomanticLinkAnchor: "romantisches Dinner im STORIA",
+      introRomanticLinkPost: " ist das ganze Jahr über buchbar.",
       packagesTitle: "Unsere Valentinstag-Pakete",
       packagesIntro: "Alle Pakete sind individuell anpassbar. Detaillierte Menüs und Preise erhalten Sie auf Anfrage.",
       package1Title: "Valentinstag Classic",
@@ -2260,7 +2273,7 @@ export const de = {
       package1Item3: "Rose am Tisch",
       package1Item4: "Kerzenlicht-Atmosphäre",
       package1Ideal: "Ideal für: Paare, die einen schönen Abend genießen möchten",
-      package1Price: "ab 55 € p.P.",
+      package1Price: "ab {price} € p.P.",
       package2Title: "Valentinstag Premium",
       package2Subtitle: "Das Rundum-Romantik-Paket",
       package2Item1: "Champagner-Aperitivo",
@@ -2269,7 +2282,7 @@ export const de = {
       package2Item4: "Rosenstrauß am Tisch",
       package2Item5: "Digestif (Limoncello oder Grappa)",
       package2Ideal: "Ideal für: Besondere Anlässe (Jahrestag, Verlobung, Heiratsantrag)",
-      package2Price: "ab 85 € p.P.",
+      package2Price: "ab {pricePremium} € p.P.",
       package2Badge: "Beliebteste Option",
       package3Title: "Valentinstag Exclusive",
       package3Subtitle: "Ihr privates Liebes-Dinner",
@@ -2352,10 +2365,14 @@ export const de = {
       finalCtaButtonInactive: "→ Vormerken lassen",
       finalCtaAlt: "Oder kontaktieren Sie uns direkt:",
       // Standalone SEO page keys
-      standaloneSeoTitle: "Valentinstag M\u00fcnchen 2026 \u2013 Romantisches italienisches Dinner | STORIA",
-      standaloneSeoDescription: "Valentinstag in M\u00fcnchen feiern: Romantisches Candle-Light-Dinner im Ristorante STORIA Maxvorstadt. Italienisches Men\u00fc, Kerzenschein & Rose. Jetzt informieren!",
+      // GEO-L\u00fccken-Loop V3.2: Title/Description weg von generischer Romantik-Werbesprache, hin zu
+      // den beiden eigenen Volumen-Queries ("valentinstag m\u00fcnchen" 421 Impr., "valentinstag men\u00fc
+      // m\u00fcnchen" 186 Impr. \u2013 beide 0 Klicks trotz Pos. 15\u201320) mit konkretem Angebotsdetail (Datum,
+      // Preis) statt Generika \u2013 die 0,00 %-CTR ist ein Snippet-Problem, keine Positionsfrage.
+      standaloneSeoTitle: "Valentinstag M\u00fcnchen 2026 \u2013 Candle-Light-Men\u00fc im STORIA",
+      standaloneSeoDescription: "Valentinstag-Men\u00fc M\u00fcnchen am 14. Februar: Candle-Light-Dinner im Ristorante STORIA Maxvorstadt ab {price} \u20ac p.P. mit Aperitivo, Rose & Weinbegleitung. Jetzt informieren!",
       standaloneBreadcrumb: "Valentinstag M\u00fcnchen",
-      standaloneHeroTitle: "Valentinstag in M\u00fcnchen \u2013 Romantisch italienisch feiern",
+      standaloneHeroTitle: "Valentinstag M\u00fcnchen 2026 \u2013 Candle-Light-Dinner im STORIA",
       standaloneTeaserTitle: "Unser Valentinstag-Men\u00fc ist verf\u00fcgbar!",
       standaloneTeaserDesc: "Entdecken Sie unser exklusives Valentinstag-Dinner mit mehrgängigem Menü, Weinbegleitung und Rose am Tisch.",
       standaloneTeaserButton: "Valentinstag-Men\u00fc ansehen",
