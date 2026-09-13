@@ -2495,8 +2495,6 @@ const frBase = {
       related3Desc: "Pizza au four à pierre en terrasse",
       related4Title: "🎉 Lieu d\u2019Événement Munich",
       related4Desc: "Terrasse pour fêtes privées",
-      relatedCandlelightTitle: "🕯️ Dîner aux chandelles",
-      relatedCandlelightDesc: "Menu pour deux aux chandelles",
     },
     valentinstag: {
       seoTitle: "Saint-Valentin Munich 2026 – Dîner Romantique | STORIA",
@@ -3351,8 +3349,6 @@ const frBase = {
       related3Desc: "D\u00eener \u00e0 deux",
       related4Title: "\ud83c\udf78 Aperitivo Munich",
       related4Desc: "After-work italien",
-      relatedCandlelightTitle: "🕯️ Dîner aux chandelles",
-      relatedCandlelightDesc: "Menu pour deux aux chandelles",
     },
     pastaFrescaMuenchen: {
       seoTitle: "P\u00e2tes Fra\u00eeches Munich \u2013 Faites Maison \u00e0 STORIA Maxvorstadt",
@@ -4176,7 +4172,6 @@ const frExtra = {
     },
     romanticDinner: {
       tldr: "Dîner romantique au STORIA Munich Maxvorstadt (Karlstraße 47a) : dîner italien aux chandelles avec menus dégustation, accords mets et vins et ambiance intime. Idéal pour un anniversaire de couple, une demande en mariage ou une soirée en amoureux. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
-      candlelightLinkText: "Vers le menu aux chandelles",
     },
     eventlocation: {
       tldr: "Lieu d'événements STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'entreprise, anniversaires, mariages et fêtes de Noël de 20 à 300 convives. 100 places à l'intérieur + 100 sur la terrasse couverte. Menus personnalisés, service événementiel professionnel. À 5 min de Königsplatz. Entreprise familiale depuis 2015, gérée par la famille Speranza. Demandes : +49 89 51519696.",

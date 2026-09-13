@@ -1413,7 +1413,6 @@ export const de = {
       valentineTitle: "Valentinstag im STORIA",
       valentineTeaser: "Am Valentinstag bieten wir ein spezielles Menü an – mit exklusiven Gängen, Weinbegleitung und romantischem Ambiente für einen unvergesslichen Abend zu zweit.",
       valentineLinkText: "Valentinstag im STORIA entdecken",
-      candlelightLinkText: "Zum Candle-Light-Menü",
       // Occasions
       occasionsTitle: "Perfekt für jeden romantischen Anlass",
       occasion1Title: "💕 Erstes Date",
@@ -3246,8 +3245,6 @@ export const de = {
       related3Desc: "Steinofen-Pizza auf der Terrasse",
       related4Title: "\ud83c\udf89 Eventlocation M\u00fcnchen",
       related4Desc: "Terrasse f\u00fcr private Feiern",
-      relatedCandlelightTitle: "\ud83d\udd6f\ufe0f Candle-Light-Dinner",
-      relatedCandlelightDesc: "Men\u00fc zu zweit bei Kerzenschein",
     },
     italienischesRestaurant: {
       seoTitle: "Bestes Italienisches Restaurant M\u00fcnchen | STORIA Maxvorstadt",
@@ -3467,8 +3464,6 @@ export const de = {
       related3Desc: "Dinner zu zweit",
       related4Title: "\ud83c\udf78 Aperitivo M\u00fcnchen",
       related4Desc: "Italienischer Feierabend",
-      relatedCandlelightTitle: "\ud83d\udd6f\ufe0f Candle-Light-Dinner",
-      relatedCandlelightDesc: "Men\u00fc zu zweit bei Kerzenschein",
     },
     pastaFrescaMuenchen: {
       seoTitle: "Frische Pasta M\u00fcnchen \u2013 Hausgemacht im STORIA Maxvorstadt",

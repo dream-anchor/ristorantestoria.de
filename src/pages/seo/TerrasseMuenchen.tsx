@@ -15,7 +15,6 @@ import storiaLogo from "@/assets/storia-logo.webp";
 import menschenAussen from "@/assets/aussen.webp";
 import menschenAussen600 from "@/assets/aussen-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import ReservationCTA from "@/components/ReservationCTA";
@@ -23,9 +22,7 @@ import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { trackEvent } from "@/lib/analytics";
 
 const TerrasseMuenchen = () => {
-  const { t, language } = useLanguage();
-  // Candle-Light-Dinner ist eine dynamische Anlass-Seite: localized parent + Slug (de: -menue, sonst -menu)
-  const candlelightTo = `${PARENT_SLUGS[language]}/${language === "de" ? "candlelight-menue" : "candlelight-menu"}`;
+  const { t } = useLanguage();
   usePrerenderReady(true);
   const tr = t.seo.terrasse;
 
@@ -359,10 +356,6 @@ const TerrasseMuenchen = () => {
                 <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{tr.related4Title}</h3>
                   <p className="text-muted-foreground text-sm">{tr.related4Desc}</p>
-                </LocalizedLink>
-                <LocalizedLink to={candlelightTo} className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
-                  <h3 className="font-semibold mb-2">{tr.relatedCandlelightTitle}</h3>
-                  <p className="text-muted-foreground text-sm">{tr.relatedCandlelightDesc}</p>
                 </LocalizedLink>
                 <LocalizedLink to="oktoberfest-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.seo?.besondereAnlaesse?.oktoberfest || "Oktoberfest 2026 – Wiesn-Zeit im STORIA"}</h3>
