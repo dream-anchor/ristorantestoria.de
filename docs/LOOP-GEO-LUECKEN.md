@@ -30,14 +30,19 @@ reparieren kann (Supabase-Änderungen laufen laut Projekt-CLAUDE.md ausschließl
 **Zusätzlich aktiv verlinkt** von `HochzeitsfeierMuenchen.tsx:338`, `RomantischesDinner.tsx:243`,
 `TerrasseMuenchen.tsx:363` — alle drei zeigen aktuell auf eine 404-Seite.
 
-- [ ] **V1.1** 404 auflösen: `.htaccess`-Redirects für `besondere-anlaesse/candlelight-menue` (DE)
+- [x] **V1.1** 404 auflösen: `.htaccess`-Redirects für `besondere-anlaesse/candlelight-menue` (DE)
       und die drei Sprachvarianten `en/special-occasions/candlelight-menu`,
       `it/occasioni-speciali/candlelight-menu`, `fr/occasions-speciales/candlelight-menu` auf die
       jeweilige Sprachroute von `romantisches-dinner-muenchen` (Ziel-Keyword „candle light dinner
       münchen" rankt dort bereits auf Pos. 6,9 mit 719 Impr./48 Klicks — inhaltlich der richtige
       Fänger). Muster: bestehende K1-K3-Redirect-Blöcke in `public/.htaccess` (Kommentar mit Datum
       + Begründung, 4 Sprachvarianten wie bei den anderen Konsolidierungen).
-- [ ] **V1.2** Die drei toten internen Links reparieren — NICHT auf die neue Redirect-Ziel-URL
+      ✓ 13.09.2026 · Commit `0d1d599` · 4-Sprachen-Block in `public/.htaccess` nach dem
+      K3-Valentinstag-Block ergänzt (Ziel: `/romantisches-dinner-muenchen/`,
+      `/en/romantic-dinner-munich/`, `/it/cena-romantica-monaco/`,
+      `/fr/diner-romantique-munich/`). `.htaccess` wirkt erst nach Live-Deploy — Live-`curl` folgt
+      im offenen Punkt „Branch/PR/Merge" unten, nicht hier.
+- [x] **V1.2** Die drei toten internen Links reparieren — NICHT auf die neue Redirect-Ziel-URL
       verlinken (ein weiterer Hop), sondern direkt auf `romantisches-dinner-muenchen` (Muster
       `LocalizedLink to="romantisches-dinner-muenchen"`, wie an anderer Stelle im selben Repo
       verwendet). Betroffen: `HochzeitsfeierMuenchen.tsx` (`candlelightTo`-Konstante + Verwendung),
@@ -46,10 +51,25 @@ reparieren kann (Supabase-Änderungen laufen laut Projekt-CLAUDE.md ausschließl
       Eigenlink ergibt keinen Sinn, eher entfernen oder auf einen Bereich der eigenen Seite
       ankern). `candlelightLinkText`-Übersetzungsschlüssel (4 Sprachen) nur behalten, wo er nach
       der Umverlinkung noch gebraucht wird.
-- [ ] **V1.3** Nebenbefund dokumentieren (kein Code-Fix hier möglich): in `docs/seo-log.md` einen
+      ✓ 13.09.2026 · Commit `26a9911` · `grep -rn "candlelight-menue\|besondere-anlaesse/candlelight"
+      src/` → keine Treffer mehr. Hochzeitsfeier/Terrasse direkt auf `romantisches-dinner-muenchen`
+      umgebogen (`candlelightTo` + ungenutzter `PARENT_SLUGS`-Import + `language`-Destructuring
+      entfernt). RomantischesDinner.tsx: Button komplett entfernt (Seite hat keine id-Anker, ein
+      Umbiegen auf sich selbst wäre ein Leerlauf-Link gewesen) — Entscheidung im Commit
+      dokumentiert. `candlelightLinkText` (de/en/fr; it.ts hatte den Key nie) verwaist entfernt.
+      **Beobachtung, nicht Teil des Auftrags:** `grep -c 'href="/romantisches-dinner-muenchen/"'
+      dist/hochzeitsfeier-muenchen/index.html` und dieselbe Prüfung für `terrasse-muenchen`
+      liefern je `2` — die Related-Pages-Grids beider Seiten hatten bereits eine eigene Karte auf
+      `romantisches-dinner-muenchen`, die umgebogene Candlelight-Karte verlinkt jetzt zusätzlich
+      dorthin (Duplikat im selben Grid). Wie im Auftrag explizit vorgegeben umgesetzt: kein
+      zusätzlicher Judgment-Call hier, nur dokumentiert.
+- [x] **V1.3** Nebenbefund dokumentieren (kein Code-Fix hier möglich): in `docs/seo-log.md` einen
       Eintrag, dass die Supabase-Zeile hinter `candlelight-menue` vermutlich deaktiviert/gelöscht
       wurde und das über Lovable geprüft werden sollte, falls die Seite als eigenständiges Angebot
       (nicht nur als Redirect-Ziel) weitergeführt werden soll.
+      ✓ 13.09.2026 · Commit `395b00d` · Abschnitt „GEO-Lücken-Loop V1 — candlelight-menue 404
+      (13.09.2026)" in `docs/seo-log.md` (nach dem K1-K3-Review-Termin-Absatz, vor „Monatliche
+      Ziele & Review") ergänzt.
 
 ## V1: Branch, Beweis, Merge
 
