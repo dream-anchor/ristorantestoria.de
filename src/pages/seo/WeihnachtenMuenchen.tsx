@@ -37,6 +37,20 @@ import { FACTS } from "@/config/facts";
  */
 const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${weihnachtsfeierImage}`;
 
+/**
+ * Ersetzt die Zahlen-Platzhalter der Übersetzungen durch die Werte aus `FACTS`.
+ *
+ * Die Übersetzungen enthalten nur Satzschablonen, damit Mindestpersonenzahl, Gruppenpreis und
+ * Kapazitäten auf allen vier Sprachen aus derselben einzigen Quelle kommen. Global ersetzen,
+ * weil ein Platzhalter innerhalb eines Textes mehrfach vorkommen kann.
+ */
+const fillFacts = (text: string): string =>
+  text
+    .replace(/\{minGuests\}/g, String(FACTS.weihnachten.groupMenuMinGuests))
+    .replace(/\{groupPrice\}/g, FACTS.weihnachten.groupMenuPriceFrom)
+    .replace(/\{indoorSeats\}/g, String(FACTS.capacity.indoorSeats))
+    .replace(/\{terraceSeats\}/g, String(FACTS.capacity.terraceSeats));
+
 interface WeihnachtenMuenchenProps {
   standalone?: boolean;
   menu?: any | null;
@@ -102,20 +116,35 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
    * 25.12. als Ruhetage) sowie die FAQ auf dieser Seite (Anfrage ab September/Oktober).
    */
   const atAGlance = [
-    {
-      label: s.atAGlanceOptionsLabel,
-      value: s.atAGlanceOptionsValue
-        .replace('{minGuests}', String(FACTS.weihnachten.groupMenuMinGuests))
-        .replace('{groupPrice}', FACTS.weihnachten.groupMenuPriceFrom),
-    },
+    { label: s.atAGlanceOptionsLabel, value: fillFacts(s.atAGlanceOptionsValue) },
     { label: s.atAGlancePeriodLabel, value: s.atAGlancePeriodValue },
-    {
-      label: s.atAGlanceCapacityLabel,
-      value: s.atAGlanceCapacityValue
-        .replace('{indoorSeats}', String(FACTS.capacity.indoorSeats))
-        .replace('{terraceSeats}', String(FACTS.capacity.terraceSeats)),
-    },
+    { label: s.atAGlanceCapacityLabel, value: fillFacts(s.atAGlanceCapacityValue) },
     { label: s.atAGlanceRequestLabel, value: s.atAGlanceRequestValue },
+  ];
+
+  /**
+   * Die zwei Wege (E1.4) — die eigentliche Realität dieser Seite, festgelegt von Antoine am
+   * 13.09.2026: Weihnachten im STORIA ist entweder ein regulärer Tisch mit à-la-carte-Essen von
+   * der saisonalen Karte (ab 1 Person, keine Vorbestellung) ODER ein Weihnachtsmenü, das Firmen
+   * und Gruppen direkt mit dem Restaurant absprechen. Ein festes, noch zu veröffentlichendes
+   * Weihnachtsmenü — wie die Seite es bis E1.4 suggerierte — gibt es nicht.
+   *
+   * Bewusst ein eigener Abschnitt weit oben statt nur einer Zeile im „Auf einen Blick"-Block:
+   * die Trennung der beiden Wege ist die zentrale Aussage der Seite, nicht eine Eckdate.
+   */
+  const twoWays = [
+    {
+      badge: s.twoWay1Badge,
+      title: s.twoWay1Title,
+      desc: s.twoWay1Desc,
+      items: [s.twoWay1Item1, s.twoWay1Item2, s.twoWay1Item3],
+    },
+    {
+      badge: s.twoWay2Badge,
+      title: s.twoWay2Title,
+      desc: fillFacts(s.twoWay2Desc),
+      items: [fillFacts(s.twoWay2Item1), s.twoWay2Item2, fillFacts(s.twoWay2Item3)],
+    },
   ];
 
   const reasons = [
@@ -265,11 +294,11 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               : [{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]
             } />
 
-            {/* Intro */}
+            {/* Intro — der erste Satz benennt seit E1.4 beide Wege. */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{s.introTitle}</h2>
-              <p className="text-lg text-muted-foreground mb-4">{s.introP1}</p>
-              <p className="text-muted-foreground mb-4">{s.introP2}</p>
+              <p className="text-lg text-muted-foreground mb-4">{fillFacts(s.introP1)}</p>
+              <p className="text-muted-foreground mb-4">{fillFacts(s.introP2)}</p>
               <p className="text-muted-foreground">{s.introP3}</p>
             </section>
 
@@ -291,6 +320,32 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                   </dl>
                 </CardContent>
               </Card>
+            </section>
+
+            {/* Zwei Wege (E1.4) — direkt unter „Auf einen Blick" und VOR den Paketen, damit der
+                Besucher die Entscheidung trifft, bevor er Preise sieht. Die Pakete darunter sind
+                nur noch Orientierung für Weg 2, nicht mehr ein Katalog fester Menüs. */}
+            <section className="mb-16" aria-labelledby="weihnachten-zwei-wege">
+              <h2 id="weihnachten-zwei-wege" className="text-3xl font-serif font-bold mb-4 text-center">{s.twoWaysTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.twoWaysIntro}</p>
+              <div className="grid md:grid-cols-2 gap-6">
+                {twoWays.map((way, i) => (
+                  <Card key={i} className="border-primary/30">
+                    <CardHeader className="pb-2">
+                      <Badge variant="secondary" className="w-fit mb-2">{way.badge}</Badge>
+                      <CardTitle className="text-xl font-serif">{way.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground mb-4">{way.desc}</p>
+                      <ul className="text-sm space-y-1">
+                        {way.items.map((item, j) => (
+                          <li key={j} className="text-muted-foreground">{'•'} {item}</li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </section>
 
             {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K2-Konsolidierung
