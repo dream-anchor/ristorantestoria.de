@@ -9,6 +9,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import SeasonalSignupForm from "@/components/SeasonalSignupForm";
 import ReservationBooking from "@/components/ReservationBooking";
+import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
@@ -459,6 +460,22 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                 <MenuDisplay menuType="special" menuId={menu!.id} showTitle={false} />
               </section>
             )}
+
+            {/* Anfrage (E2.2) — das ist WEG 2 in Handlungsform: das Gruppen-/Firmenmenü, das
+                direkt mit dem Restaurant abgestimmt wird. Steht bewusst DIREKT hinter den
+                Paketen, die nur Orientierung für genau diesen Weg sind. Weg 1 (à la carte am
+                Tisch) läuft über die Reservierungsstrecke weiter oben, nicht über dieses
+                Formular. Eigenes Formular gegen den MAESTRO-Intake-Endpunkt, kein Widget. */}
+            <section className="mb-16" id="anfrage" aria-labelledby="weihnachten-anfrage">
+              <h2 id="weihnachten-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{s.inquiryTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{fillFacts(s.inquiryIntro)}</p>
+              <div className="max-w-2xl mx-auto">
+                <AnlassAnfrageForm
+                  anlass="weihnachten"
+                  minGuests={FACTS.weihnachten.groupMenuMinGuests}
+                />
+              </div>
+            </section>
 
             {/* CTA Box */}
             <section className="mb-16 bg-primary text-primary-foreground rounded-xl p-8 text-center">
