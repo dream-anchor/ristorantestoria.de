@@ -1,5 +1,11 @@
 # ristorantestoria.de
 
+## Aufgaben-Tracking
+**`aufgaben.md` im Projekt-Root zu Beginn jeder Session lesen, falls vorhanden** — führt laufende
+und offene Aufgaben (nicht committet, siehe `.gitignore`). Format/Regel: `~/.claude/CLAUDE.md` §
+„Aufgaben-Tracking". Abgeschlossene SEO-Einheiten stehen im Detail in `docs/seo-log.md` und
+`docs/LOOP-*.md` — `aufgaben.md` verweist dorthin, statt Inhalte zu duplizieren.
+
 ## CI-Kosten (LIES DIESE REGEL, BEVOR du einen Workflow anfasst)
 Die elf Punkte gelten **projektübergreifend**, im Wortlaut von Antoine (12.08.2026):
 
