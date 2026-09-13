@@ -357,10 +357,6 @@ const TerrasseMuenchen = () => {
                   <h3 className="font-semibold mb-2">{tr.related4Title}</h3>
                   <p className="text-muted-foreground text-sm">{tr.related4Desc}</p>
                 </LocalizedLink>
-                <LocalizedLink to="romantisches-dinner-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
-                  <h3 className="font-semibold mb-2">{tr.relatedCandlelightTitle}</h3>
-                  <p className="text-muted-foreground text-sm">{tr.relatedCandlelightDesc}</p>
-                </LocalizedLink>
                 <LocalizedLink to="oktoberfest-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.seo?.besondereAnlaesse?.oktoberfest || "Oktoberfest 2026 – Wiesn-Zeit im STORIA"}</h3>
                   <p className="text-muted-foreground text-sm">{t.seo?.besondereAnlaesse?.oktoberfestTeaser || "19. Sept – 4. Okt 2026 – Wiesnbier vom Holzfass, Brotzeit & Specials auf der überdachten Terrasse. Ideal für Gruppen."}</p>

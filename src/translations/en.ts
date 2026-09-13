@@ -3156,8 +3156,6 @@ const enBase = {
       related3Desc: "Stone oven pizza on the terrace",
       related4Title: "\ud83c\udf89 Event Location Munich",
       related4Desc: "Terrace for private celebrations",
-      relatedCandlelightTitle: "🕯️ Candle-Light Dinner",
-      relatedCandlelightDesc: "A candlelit menu for two",
     },
     italienischesRestaurant: {
       seoTitle: "Best Italian Restaurant Munich | Stone-Oven Pizza | STORIA",
@@ -3365,8 +3363,6 @@ const enBase = {
       related3Desc: "Dinner for two",
       related4Title: "\ud83c\udf78 Aperitivo Munich",
       related4Desc: "Italian after-work",
-      relatedCandlelightTitle: "🕯️ Candle-Light Dinner",
-      relatedCandlelightDesc: "A candlelit menu for two",
     },
     pastaFrescaMuenchen: {
       seoTitle: "Fresh Pasta Munich – Homemade at STORIA Maxvorstadt",
