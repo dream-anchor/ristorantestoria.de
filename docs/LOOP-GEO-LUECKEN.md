@@ -279,11 +279,14 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
 ## BLOCKED-Log
 
 <!-- Format: DATUM · Kriterium · Grund · was gebraucht wird -->
-- 13.09.2026 · V3.3 · à la carte am 14.02. verfügbar? · Antwort Antoine (Chat, Frage steht)
-- 13.09.2026 · V3.5 (Faktenfrage, nicht die Code-Konsolidierung) · sind 55 €/85 € noch aktuell? ·
-  Antwort Antoine
-- 13.09.2026 · V2.4 (Faktenfrage) · „ab 45 €" bei Weihnachtsfeier betrieblich bestätigt? · bereits
-  offene Randfrage aus `facts.ts`, nicht neu durch diesen Loop
+- ~~13.09.2026 · V3.3 · à la carte am 14.02. verfügbar?~~ — **beantwortet 13.09.2026**: „am 14.02.
+  gibt es à la carte und Menü" (Antoine). Entsperrt V3.3.
+- ~~13.09.2026 · V3.5 (Faktenfrage) · sind 55 €/85 € noch aktuell?~~ — **bestätigt 13.09.2026**
+  (Antoine: „Faktenfragen = stimmen"). Keine Code-Änderung nötig, Werte waren bereits korrekt in
+  `FACTS.valentinstag` zentralisiert.
+- ~~13.09.2026 · V2.4 (Faktenfrage) · „ab 45 €" bei Weihnachtsfeier betrieblich bestätigt?~~ —
+  **bestätigt 13.09.2026** (Antoine: „Faktenfragen = stimmen"). Keine Code-Änderung nötig, Wert war
+  bereits korrekt in `FACTS.weihnachten.groupMenuPriceFrom` zentralisiert.
 
 ## Offen, außerhalb des Codes
 
