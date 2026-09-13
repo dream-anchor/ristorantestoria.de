@@ -242,10 +242,14 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
 
 ## V3: Branch, Beweis, Merge
 
-- [ ] Branch `geo-luecken-v3` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.
-      **Kein Formular gebrochen:** `id="signup-form"` weiterhin in allen 4 Sprachrouten, alle drei
-      Anker (Hero/Archived-Menu/Final-CTA) zielen korrekt, `git diff` leer für
-      `SeasonalSignupForm.tsx`. Beweis zusätzlich: `FoodEvent`-Schema mit auflösender `image`-URL,
+- [x] ~~Branch `geo-luecken-v3` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.~~
+      **erledigt 13.09.2026** (PR #105, squash-merged, Deploy-Run `34777311970` erfolgreich).
+      **Kein Formular gebrochen** (live bestätigt): `curl` gegen `valentinstag-muenchen/` zeigt
+      `200`, `id="signup-form"` 1× im HTML, `SeasonalSignupForm.tsx` im gemergten Diff unangetastet.
+      Live-Beweis zusätzlich: `"@type":"FoodEvent"` im JSON-LD, Outbound-Link
+      `turismo.comune.terni.it` vorhanden, interner Link auf `romantisches-dinner-muenchen`
+      vorhanden, „Candle-Light"-Formulierung (neuer Title/H1) im ausgelieferten HTML sichtbar.
+      Beweis zusätzlich: `FoodEvent`-Schema mit auflösender `image`-URL,
       Definition-Lead, TL;DR gerendert, keine Romantik-Generika mehr in Title/H1.
       Lokal bereits verifiziert (13.09.2026, Commit `75c547a` auf `geo-luecken-v3`):
       `id="signup-form"` 1× im ausgelieferten HTML, `git diff --stat -- src/components/
