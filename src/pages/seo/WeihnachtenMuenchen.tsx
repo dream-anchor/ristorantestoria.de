@@ -7,6 +7,8 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import ReservationBooking from "@/components/ReservationBooking";
+import GoogleReviews from "@/components/GoogleReviews";
+import PhotoGallery from "@/components/PhotoGallery";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
@@ -17,6 +19,13 @@ import { ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierImage from "@/assets/weihnachtsfeier-italiener-storia-muenchen.webp";
 import weihnachtsfeierImage600 from "@/assets/weihnachtsfeier-italiener-storia-muenchen-600w.webp";
+// Bildstrecke (E3.3) — bereits vorhandene Projekt-Assets, keine neuen Bilder generiert.
+import weihnachtenGuestsImage from "@/assets/ristorante-storia-uebersicht-gaeste.webp";
+import weihnachtenGuestsImage600 from "@/assets/ristorante-storia-uebersicht-gaeste-600w.webp";
+import weihnachtenOverviewImage from "@/assets/ristorante-storia-uebersicht.webp";
+import weihnachtenOverviewImage600 from "@/assets/ristorante-storia-uebersicht-600w.webp";
+import weihnachtenTerraceImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen.webp";
+import weihnachtenTerraceImage600 from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muenchen-600w.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
@@ -321,6 +330,20 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </Card>
             </section>
 
+            {/* Bildstrecke (E3.3) — bisher hatte die Seite nur Hero + Vorjahresmenü-Karten als
+                Bildmaterial. Ausschließlich bereits vorhandene Projekt-Assets (keine neuen Bilder
+                generiert/hochgeladen): Gäste am Tisch, Restaurant-Ambiente und die überdachte
+                Terrasse (deckt sich mit `atAGlanceCapacityValue`, {terraceSeats} Plätze). */}
+            <section className="mb-16">
+              <h2 className="text-3xl font-serif font-bold mb-4 text-center">Impressionen aus dem STORIA</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Gemütliche Atmosphäre am Tisch, stilvolles Ambiente und die überdachte Terrasse – ein Eindruck vom STORIA in der Adventszeit.</p>
+              <PhotoGallery columns={3} images={[
+                { src: weihnachtenGuestsImage, srcSet: `${weihnachtenGuestsImage600} 600w, ${weihnachtenGuestsImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Gäste beim Essen im Ristorante STORIA München – gemütliche Tischatmosphäre", caption: "Gäste am Tisch" },
+                { src: weihnachtenOverviewImage, srcSet: `${weihnachtenOverviewImage600} 600w, ${weihnachtenOverviewImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Ristorante STORIA München — stilvolles Restaurant-Ambiente im Überblick", caption: "Restaurant-Ambiente" },
+                { src: weihnachtenTerraceImage, srcSet: `${weihnachtenTerraceImage600} 600w, ${weihnachtenTerraceImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Überdachte Terrasse des Ristorante STORIA in der Maxvorstadt München", caption: "Überdachte Terrasse" },
+              ]} />
+            </section>
+
             {/* Zwei Wege (E1.4) — direkt unter „Auf einen Blick" und vor der Reservierung, damit
                 der Besucher die Entscheidung trifft, bevor er weiterliest.
 
@@ -408,6 +431,18 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
 
             {/* E4.1: Timeline "So läuft Ihre Weihnachtsfeier ab" entfernt — Gruppen-only
                 (bedientes Gruppenmenü), wandert in E4.2 zu weihnachtsfeier-muenchen. */}
+
+            {/* Social Proof (E3.2) — bisher hatte diese Seite keine Google-Bewertungen-Sektion.
+                `GoogleReviews` zieht echte Daten aus `src/data/google-reviews-*.json`, keine
+                Props nötig (Muster: AperitivoMuenchen.tsx, WeihnachtsfeierMuenchen.tsx).
+                Kapazitätsblock (E3.2, zweiter Teil): kein zusätzlicher Zahlenblock über „Auf
+                einen Blick" hinaus — die Innen-/Terrassen-Aufschlüsselung steht dort bereits
+                (`atAGlanceCapacityValue`). Die tiefer gestaffelte Kapazitätslogik von
+                WeihnachtsfeierMuenchen.tsx FAQ2 (10–30/30–60/60–100 Plätze, private Raummiete)
+                ist Gruppen-/Privatevent-spezifisch und wurde mit E4.1 bewusst von dieser Seite
+                entfernt (Kannibalisierung weihnachten-muenchen/weihnachtsfeier-muenchen); sie
+                hier erneut einzuführen widerspräche dieser Entscheidung. */}
+            <GoogleReviews />
 
             {/* FAQ (E4.1: von 8 auf 5 privat-relevante Fragen reduziert, faq3/faq4 präzisiert) */}
             <section className="mb-16">
