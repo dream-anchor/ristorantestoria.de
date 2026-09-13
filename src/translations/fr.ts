@@ -1825,16 +1825,17 @@ const frBase = {
       heroBadge2: "🎶 Musique",
       heroBadge3: "🍾 Countdown de Minuit",
       heroDescription: "Vivez un Réveillon inoubliable en atmosphère italienne : Dîner de gala à plusieurs plats, musique, champagne de minuit et fête jusque tard dans la nuit – au cœur de la Maxvorstadt.",
-      heroCta: "Demander le Réveillon",
-      heroCtaInactive: "Se faire notifier",
-      heroEventsNote: "Pour groupes de 20+ convives :",
-      heroEventsLink: "events-storia.de",
+      // CTA du hero (E2.3) : exactement deux, une par intention. Remplacent
+      // heroCta/heroCtaInactive (events-storia.de / formulaire d'inscription) et la note de bas
+      // de hero heroEventsNote/heroEventsLink.
+      heroCtaReserve: "Réserver une table pour le Réveillon",
+      heroCtaInquiry: "Faire une demande groupe ou entreprise",
       // Definition-Lead (E1.5, GEO-Regel 1) — der emotionale Einstieg ist laut
       // docs/geo-content-guidelines.md § Anti-Pattern verboten.
       introTitle: "Réveillon à Munich – le dîner de gala italien du Ristorante STORIA",
       introP1: "Le Réveillon au Ristorante STORIA est un dîner de gala italien au Karlstraße 47a à Munich Maxvorstadt : un menu dégustation de {courses} plats en trois variantes à {price} € par personne, {priceWine} € par personne avec accord mets et vins, à partir de 19h00 avec accueil aperitivo, musique et champagne de minuit. Depuis 2015, la famille Speranza fête le passage à la nouvelle année avec ses convives dans la Karlstraße – ce qui a commencé comme un petit dîner du Réveillon est devenu l'un des événements italiens du Nouvel An les plus populaires de Munich Maxvorstadt.",
       introP2: "Notre Réveillon n'est délibérément pas un événement de masse : nous misons sur la qualité plutôt que la quantité. Chaque plat est préparé frais, le service est personnel et attentionné. Pour couples, groupes d'amis et entreprises, nous proposons des formules flexibles de 2 à 100 convives.",
-      introP3: "L'emplacement central dans la Maxvorstadt – à seulement 5 minutes de Königsplatz et 7 de la gare centrale – fait du STORIA le lieu idéal pour votre Réveillon. Pour les petites fêtes jusqu'à 20 convives, réservez directement au restaurant. Pour les groupes de 20+, veuillez faire votre demande via events-storia.de.",
+      introP3: "L'emplacement central dans la Maxvorstadt – à seulement 5 minutes de Königsplatz et 7 de la gare centrale – fait du STORIA le lieu idéal pour votre Réveillon. Votre table se réserve directement sur cette page. Pour les groupes plus importants et les entreprises, utilisez le formulaire de demande plus bas – nous vous répondons personnellement.",
       // Citation externe (E1.5, GEO-Regel 3) — Comité Champagne, l'organisme officiel de
       // l'appellation protégée Champagne ; correspond au champagne de minuit de cette page.
       citationPre: "À minuit, nous trinquons au champagne : l'appellation d'origine protégée Champagne est gérée par le ",
@@ -1897,10 +1898,10 @@ const frBase = {
       // Formulaire de demande (E2.2) — textes d'encadrement ; les libellés sont dans `anlassInquiry`.
       inquiryTitle: "Demander le dîner de gala du Nouvel An",
       inquiryIntro: "Vous fêtez en grand groupe, vous avez des questions sur le menu de gala ou des souhaits particuliers ? Écrivez-nous : nous vous répondons personnellement.",
-      ctaBoxTitle: "Demander le Réveillon au STORIA",
-      ctaBoxDesc: "Toutes les formules du Réveillon sont personnalisables. Informations détaillées sur les menus et les prix :",
-      ctaBoxButton: "→ Demander le Réveillon sur events-storia.de",
-      ctaBoxNote: "Ou contactez-nous directement : 089 51519696 · info@ristorantestoria.de · WhatsApp : 0163 6033912",
+      // Canaux de contact (E2.3) — remplacent l'ancienne CTA box qui menait à events-storia.de.
+      // Les canaux n'apparaissent plus qu'ici, juste derrière le formulaire de demande.
+      contactBoxTitle: "Vous préférez nous parler directement ?",
+      contactBoxDesc: "Téléphone, e-mail ou WhatsApp – pour vos questions sur le menu de gala, pour des souhaits particuliers ou si vous préférez nous transmettre votre demande autrement.",
       reasonsTitle: "8 Raisons de Fêter le Réveillon au STORIA",
       reason1Title: "🍝 Authentique Dîner de Gala Italien",
       reason1Desc: "Pas de buffet standard : pâtes maison, pizza au four à pierre, antipasti frais. Une qualité qui ravira vos convives.",
@@ -1933,7 +1934,8 @@ const frBase = {
       step6Desc: "Digestif, dolci et on continue la fête – aussi longtemps que vous le souhaitez.",
       faqTitle: "Questions Fréquentes sur le Réveillon au STORIA",
       faq1Question: "Quand le menu du Réveillon 2026/2027 sera-t-il publié ?",
-      faq1Answer: "Prévu en octobre. Inscrivez-vous pour être informé en premier !",
+      // E2.3 : renvoyait au formulaire d'inscription décroché, donc à une action impossible.
+      faq1Answer: "Prévu en octobre. Vous pouvez réserver votre table dès maintenant ; pour un groupe plus important, envoyez-nous votre demande via le formulaire de cette page.",
       faq2Question: "Combien coûte le Réveillon au STORIA ?",
       faq2Answer: "À partir de 99 € p.p. (Classic) jusqu'à 150 € p.p. (Premium). Formules exclusives sur demande individuelle.",
       faq3Question: "Combien de convives peuvent participer ?",
@@ -1948,8 +1950,8 @@ const frBase = {
       faq7Answer: "Bien sûr ! Qu'il s'agisse d'une demande en mariage, décoration spéciale ou gâteau – parlez-nous-en, nous aidons volontiers avec discrétion.",
       faq8Question: "Y a-t-il des places de parking ?",
       faq8Answer: "Parking Marsstraße (P22), Hirtenstraße 14, 750 places, ouvert 24h, 5 minutes à pied.",
-      signupTitle: "Programme du Réveillon 2026/2027 – Inscrivez-vous",
-      signupDesc: "Notre programme du Réveillon sera publié en octobre. Inscrivez-vous pour être les premiers informés.",
+      // signupTitle/signupDesc retirés avec E2.3 — le bloc d'inscription est décroché de cette
+      // page. `t.seasonalSignup.*` reste intact (Saint-Valentin + page d'occasion générique).
       archivedTitle: "Notre Menu du Réveillon {year} – Rétrospective",
       archivedDisclaimer: "Le menu de la prochaine saison peut différer.",
       relatedTitle: "Cela Pourrait Aussi Vous Intéresser",
@@ -1966,10 +1968,9 @@ const frBase = {
       related6Title: "📞 Contact",
       related6Desc: "Contactez-nous directement",
       finalCtaTitle: "Réveillon au STORIA – Planifiez Maintenant",
-      finalCtaDesc: "Réservez votre place pour le Réveillon le plus inoubliable de Munich. Toutes les formules, menus et prix sur notre site événements.",
-      finalCtaButton: "→ Demander le Réveillon sur events-storia.de",
-      finalCtaButtonInactive: "→ Se faire notifier",
-      finalCtaAlt: "Ou contactez-nous directement :",
+      finalCtaDesc: "Réservez votre place pour le Réveillon à Munich : réservez une table – ou, si vous venez avec un groupe plus important, envoyez-nous une demande.",
+      finalCtaButtonReserve: "→ Réserver une table",
+      finalCtaButtonInquiry: "→ Faire une demande groupe",
     },
     weihnachten: {
       seoTitle: "No\u00ebl Munich 2026 \u2013 Menus de No\u00ebl Italiens | STORIA",
@@ -1983,16 +1984,16 @@ const frBase = {
       heroDescription: "No\u00ebl au STORIA fonctionne de deux mani\u00e8res : r\u00e9servez une table et d\u00eenez \u00e0 la carte de notre carte de saison \u2013 ou composez un menu de No\u00ebl directement avec nous, en entreprise ou en groupe. Les deux dans une authentique atmosph\u00e8re italienne, au c\u0153ur de Maxvorstadt.",
       // TL;DR (E1.5) \u2014 visible au-dessus de l'intro ; les valeurs entre accolades viennent de FACTS.
       tldr: "No\u00ebl au Ristorante STORIA Munich Maxvorstadt (Karlstra\u00dfe 47a) fonctionne de deux mani\u00e8res : r\u00e9server une table et d\u00eener \u00e0 la carte de la carte de saison \u2013 d\u00e8s 1 personne, sans commande pr\u00e9alable \u2013 ou un menu de No\u00ebl pour entreprises et groupes d\u00e8s {minGuests} personnes, convenu directement avec le restaurant, \u00e0 partir de {groupPrice} \u20ac par personne. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. {indoorSeats} places \u00e0 l'int\u00e9rieur, {terraceSeats} sur la terrasse couverte. Entreprise familiale de la famille Speranza depuis 2015, \u00e0 5 minutes de K\u00f6nigsplatz. R\u00e9servation : +49 89 51519696.",
-      heroCta: "Demander f\u00eate de No\u00ebl",
-      heroCtaInactive: "Rester inform\u00e9",
-      heroCtaPhone: "089 51519696",
-      heroEventsNote: "Pour groupes d\u00e8s 20 invit\u00e9s :",
-      heroEventsLink: "events-storia.de",
+      // CTA du hero (E2.3) : exactement deux, correspondant une \u00e0 une aux deux voies (E1.4).
+      // Remplacent heroCta/heroCtaInactive et la note heroEventsNote/heroEventsLink ;
+      // `heroCtaPhone` \u00e9tait d\u00e9j\u00e0 inutilis\u00e9 et dispara\u00eet avec eux.
+      heroCtaReserve: "R\u00e9server une table pendant l\u2019Avent",
+      heroCtaInquiry: "Demander un menu de No\u00ebl pour groupes",
       // Definition-Lead (E1.5, GEO-Regel 1) + Zwei-Wege-Realit\u00e4t (E1.4).
       introTitle: "F\u00eate de No\u00ebl \u00e0 Munich \u2013 \u00e0 la carte \u00e0 table ou menu de No\u00ebl pour les groupes",
       introP1: "No\u00ebl au Ristorante STORIA est une offre de f\u00eate italienne au Karlstra\u00dfe 47a \u00e0 Munich Maxvorstadt qui fonctionne de deux mani\u00e8res : \u00e0 la carte, \u00e0 partir de la carte de saison, \u00e0 la table r\u00e9serv\u00e9e, d\u00e8s 1 personne \u2013 ou un menu de No\u00ebl que les entreprises et les groupes d\u00e8s {minGuests} personnes conviennent directement avec le restaurant, \u00e0 partir de {groupPrice} \u20ac par personne. La famille Speranza du Cilento dirige le restaurant depuis 2015 ; il n'existe volontairement aucun menu de No\u00ebl fixe \u00e0 commander \u00e0 l'avance.",
       introP2: "Sur la premi\u00e8re voie, vous r\u00e9servez simplement une table pendant l'Avent et commandez \u00e0 la carte de notre carte de saison \u2013 sans commande pr\u00e9alable, sans nombre minimum de convives. Sur la deuxi\u00e8me voie, nous composons un menu de No\u00ebl pour les entreprises et les groupes d\u00e8s {minGuests} personnes : cuisine festive du sud de l'Italie avec p\u00e2tes maison, vins raffin\u00e9s et panettone en dessert, adapt\u00e9 en concertation \u00e0 l'occasion et au budget.",
-      introP3: "L\u2019emplacement central \u2013 \u00e0 5 minutes de K\u00f6nigsplatz et du march\u00e9 de No\u00ebl \u2013 fait du STORIA le lieu id\u00e9al apr\u00e8s la visite du march\u00e9 de No\u00ebl. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. Un menu de groupe se convient directement avec nous : par t\u00e9l\u00e9phone, par e-mail ou \u2013 d\u00e8s 20 convives \u2013 via events-storia.de.",
+      introP3: "L\u2019emplacement central \u2013 \u00e0 5 minutes de K\u00f6nigsplatz et du march\u00e9 de No\u00ebl \u2013 fait du STORIA le lieu id\u00e9al apr\u00e8s la visite du march\u00e9 de No\u00ebl. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. Un menu de groupe se convient directement avec nous : via le formulaire de demande plus bas, par t\u00e9l\u00e9phone ou par e-mail.",
       // Citation externe (E1.5, GEO-Regel 3) \u2014 liste du patrimoine immat\u00e9riel de l'UNESCO ; le
       // Cilento, r\u00e9gion d'origine de la famille Speranza, y est la communaut\u00e9 italienne de
       // la di\u00e8te m\u00e9diterran\u00e9enne.
@@ -2061,10 +2062,10 @@ const frBase = {
       package3Item5: "Coordination compl\u00e8te de l\u2019\u00e9v\u00e9nement",
       package3Ideal: "Id\u00e9al pour : Grandes f\u00eates d\u2019entreprise (40\u2013100+ invit\u00e9s)",
       package3Price: "Sur demande",
-      ctaBoxTitle: "Demander votre f\u00eate de No\u00ebl au STORIA",
-      ctaBoxDesc: "Tous les forfaits de No\u00ebl sont personnalisables. Informations d\u00e9taill\u00e9es sur les menus et les prix :",
-      ctaBoxButton: "\u2192 Demander f\u00eate de No\u00ebl sur events-storia.de",
-      ctaBoxNote: "Ou contactez-nous directement : 089 51519696 \u00b7 info@ristorantestoria.de \u00b7 WhatsApp : 0163 6033912",
+      // Canaux de contact (E2.3) \u2014 remplacent l\u2019ancienne CTA box qui menait \u00e0 events-storia.de.
+      // Les canaux n\u2019apparaissent plus qu\u2019ici, juste derri\u00e8re le formulaire de demande.
+      contactBoxTitle: "Vous pr\u00e9f\u00e9rez nous parler directement ?",
+      contactBoxDesc: "T\u00e9l\u00e9phone, e-mail ou WhatsApp \u2013 pour un menu de groupe, la conversation est souvent la voie la plus rapide, puisque le menu, le d\u00e9roul\u00e9 et les boissons se d\u00e9finissent de toute fa\u00e7on ensemble.",
       reasonsTitle: "8 Raisons de F\u00eater No\u00ebl au STORIA",
       reason1Title: "\ud83c\udf5d Authentique cuisine festive italienne",
       reason1Desc: "Cuisine festive traditionnelle italienne : des antipasti aux p\u00e2tes maison jusqu\u2019au panettone \u2013 \u00e0 la carte \u00e0 table comme dans le menu de groupe.",
@@ -2097,7 +2098,7 @@ const frBase = {
       faq1Question: "Quand dois-je r\u00e9server notre f\u00eate de No\u00ebl ?",
       faq1Answer: "Le plus t\u00f4t sera le mieux ! La p\u00e9riode de l\u2019Avent est vite r\u00e9serv\u00e9e. Nous recommandons de demander d\u00e8s septembre/octobre.",
       faq2Question: "\u00c0 partir de combien de personnes puis-je r\u00e9server ?",
-      faq2Answer: "Deux possibilit\u00e9s : \u00e0 table, vous d\u00eenez \u00e0 la carte de notre carte de saison pendant l\u2019Avent \u2013 1 personne suffit. Un menu de No\u00ebl fixe pour les groupes est compos\u00e9 \u00e0 partir de 6 personnes. Pour les groupes de plus de 20 : events-storia.de.",
+      faq2Answer: "Deux possibilit\u00e9s : \u00e0 table, vous d\u00eenez \u00e0 la carte de notre carte de saison pendant l\u2019Avent \u2013 1 personne suffit. Un menu de No\u00ebl fixe pour les groupes est compos\u00e9 \u00e0 partir de 6 personnes ; pour cela, \u00e9crivez-nous via le formulaire de demande de cette page.",
       faq3Question: "Existe-t-il un menu de No\u00ebl fixe \u00e0 commander \u00e0 l'avance ?",
       faq3Answer: "Non. Pendant l'Avent, vous d\u00eenez \u00e0 table \u00e0 la carte de notre carte de saison. Un menu de No\u00ebl est compos\u00e9 individuellement pour les entreprises et les groupes d\u00e8s 6 personnes \u2013 sur mesure, selon vos souhaits et votre budget, convenu par t\u00e9l\u00e9phone ou par e-mail.",
       faq4Question: "Y a-t-il des options v\u00e9g\u00e9tariennes/v\u00e9ganes ?",
@@ -2110,8 +2111,8 @@ const frBase = {
       faq7Answer: "Parking Marsstra\u00dfe (P22), Hirtenstra\u00dfe 14, 750 places, ouvert 24h, 5 minutes \u00e0 pied.",
       faq8Question: "Le STORIA est-il ouvert le r\u00e9veillon de No\u00ebl ?",
       faq8Answer: "Non. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. Nous sommes \u00e0 votre disposition pendant tout le reste de la p\u00e9riode de l\u2019Avent.",
-      signupTitle: "No\u00ebl au STORIA \u2013 rester inform\u00e9",
-      signupDesc: "Vous souhaitez savoir ce qui se passe au STORIA pendant l\u2019Avent ? Indiquez votre adresse e-mail. Pour un menu de No\u00ebl pour votre groupe, contactez-nous directement \u2013 par t\u00e9l\u00e9phone au 089 51519696.",
+      // signupTitle/signupDesc retir\u00e9s avec E2.3 \u2014 le bloc d'inscription est d\u00e9croch\u00e9 de cette
+      // page. `t.seasonalSignup.*` reste intact (Saint-Valentin + page d'occasion g\u00e9n\u00e9rique).
       archivedTitle: "Nos Menus de No\u00ebl {year} \u2013 Un R\u00e9trospective",
       archivedDisclaimer: "Les menus de la prochaine saison peuvent varier.",
       relatedTitle: "Cela pourrait aussi vous int\u00e9resser",
@@ -2129,9 +2130,8 @@ const frBase = {
       related6Desc: "Nous contacter directement",
       finalCtaTitle: "F\u00eate de No\u00ebl au STORIA \u2013 Planifiez Maintenant",
       finalCtaDesc: "R\u00e9servez votre date pr\u00e9f\u00e9r\u00e9e pour la plus belle f\u00eate de No\u00ebl \u00e0 Munich. Pour une table pendant l\u2019Avent, une r\u00e9servation suffit ; pour un menu de groupe, nous en discutons ensemble en d\u00e9tail.",
-      finalCtaButton: "\u2192 Demander f\u00eate de No\u00ebl sur events-storia.de",
-      finalCtaButtonInactive: "\u2192 Rester inform\u00e9",
-      finalCtaAlt: "Ou contactez-nous directement :",
+      finalCtaButtonReserve: "\u2192 R\u00e9server une table",
+      finalCtaButtonInquiry: "\u2192 Demander un menu de groupe",
       // Standalone SEO page keys
       standaloneSeoTitle: "No\u00ebl Munich 2026 \u2013 Menu de No\u00ebl Italien | STORIA",
       standaloneSeoDescription: "F\u00eatez No\u00ebl \u00e0 Munich : Menus de No\u00ebl italiens festifs au Ristorante STORIA Maxvorstadt. D\u00e8s 45 \u20ac p.p. pour 6\u2013100 invit\u00e9s. En savoir plus !",

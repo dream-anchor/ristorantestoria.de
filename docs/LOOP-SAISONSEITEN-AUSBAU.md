@@ -344,9 +344,90 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
       `serviceKind` `"event"`, `language` nur `de`/`en`. Leerer Honeypot wird gar nicht erst
       mitgeschickt, damit der Server ihn nicht als befüllt werten kann.
       **Keine Testanfrage abgesetzt** (Vorgabe: kein echter Lead im System).
-- [ ] **E2.3** Vormerk-Formular auf beiden Seiten aushängen (nur die zwei Mount-Punkte),
+- [x] **E2.3** Vormerk-Formular auf beiden Seiten aushängen (nur die zwei Mount-Punkte),
       events-storia-CTAs auf diesen zwei Seiten ersetzen, CTA-Hierarchie vereinheitlichen.
       Beweis: Valentinstag + generische Anlass-Seite rendern das Vormerk-Formular weiterhin.
+      **Beweis 13.09.2026** (Branch `saisonseiten-e2`): `npm run build` grün (157 Seiten
+      prerendert, 0 Errors), `npx tsc --noEmit` ohne Ausgabe, `npm run lint` **727 Probleme =
+      Baseline unverändert**, kein neues Problem. Geändert wurden genau 8 Dateien:
+      `SilvesterMuenchen.tsx`, `WeihnachtenMuenchen.tsx`, `eventsLinks.ts`, die vier
+      Übersetzungsdateien und dieses Loop-Dokument.
+      **Ausgehängt, nicht abgebaut:** entfernt wurden ausschließlich die zwei `<section
+      id="signup-form">`-Mount-Punkte samt `<SeasonalSignupForm seasonalEvent="silvester" |
+      "weihnachten" />`. `git diff` ist LEER für `src/components/SeasonalSignupForm.tsx`,
+      `src/pages/BesondererAnlass.tsx`, `src/pages/seo/ValentinstagMuenchen.tsx`,
+      `src/pages/NewsletterBestaetigung.tsx`, `src/components/admin/SeasonalSignupsManager.tsx`,
+      `src/components/admin/SeasonalNotificationsManager.tsx` und für `supabase/` komplett (die
+      vier Edge Functions `subscribe-seasonal`, `confirm-seasonal`, `unsubscribe-seasonal`,
+      `notify-seasonal-signups` und die Tabelle `seasonal_signups` also unangetastet). Ebenfalls
+      `git diff`-leer, wie von der harten Regel verlangt: `Kontakt.tsx`, `Reservierung.tsx`,
+      `ReservationBooking.tsx`, `GroupInquiryForm.tsx`, `FilmfestMuenchen.tsx`.
+      **Prerender-Beweis, alle 8 Zielrouten** (`dist/besondere-anlaesse/silvester/`,
+      `dist/en/special-occasions/new-years-eve/`, `dist/it/occasioni-speciali/capodanno/`,
+      `dist/fr/occasions-speciales/nouvel-an/`, `dist/weihnachten-muenchen/`,
+      `dist/en/christmas-munich/`, `dist/it/natale-monaco/`, `dist/fr/noel-munich/`), jeweils im
+      **sichtbaren** HTML nach Entfernen ALLER `<script>`-Blöcke: **0 Treffer** für
+      `id="signup-form"` UND **0 Treffer** für `href="#signup-form"` (kein toter Anker), dafür je
+      `id="reservieren"` + `id="anfrage"` und je **2 × `href="#reservieren"` + 2 ×
+      `href="#anfrage"`** (Hero und Final-CTA).
+      **events-storia:** je Zielroute exakt **2** Vorkommen — derselbe Wert wie auf den
+      Kontrollseiten `dist/reservierung/index.html` und `dist/kontakt/index.html` (je 2), die nie
+      seitenbezogene events-storia-Links hatten. Die zwei verbleibenden sind also ausschließlich
+      globales Chrome (Navigation → Catering, Footer → Gutschein-Shop), **0 seitenbezogene**.
+      Vorher-Messung am selben Build-Skript (`git stash`, Baseline gebaut, zurückgeholt):
+      Silvester **7 → 2**, Weihnachten **8 → 2**.
+      **Gegenprobe, dass nichts kaputtging:** `id="signup-form"` + E-Mail-Feld + Anker
+      `href="#signup-form"` weiterhin in allen vier Valentinstag-Routen
+      (`dist/valentinstag-muenchen/`, `dist/en/valentines-day-munich/`,
+      `dist/it/san-valentino-monaco/`, `dist/fr/saint-valentin-munich/`). events-storia-Links
+      weiterhin vorhanden auf `firmenfeier-muenchen` (9), `geburtstagsfeier-muenchen` (5),
+      `catering` (10), `weihnachtsfeier-muenchen` (8) — alle deutlich über dem Chrome-Wert 2.
+      **Generische Anlass-Seite:** ihr Vormerk-Block sitzt in `SeasonalPlaceholder`
+      (`BesondererAnlass.tsx:448`) und greift erst, wenn eine Saisonkonfiguration **kein**
+      veröffentlichtes Menü hat; heute ist keine solche Route prerendert (`grep -rl
+      'id="signup-form"' dist/` liefert genau die vier Valentinstag-Routen). Der Beweis ist
+      deshalb der leere `git diff` der Datei plus die unveränderte Mount-Stelle — nicht eine
+      dist-Datei, die es nicht gibt.
+      **CTA-Hierarchie:** aus bis zu sechs konkurrierenden Zielen sind zwei geworden — Tisch
+      reservieren → `#reservieren`, Gruppe/Firma anfragen → `#anfrage`. Sichtbar im HTML:
+      Silvester „Tisch für Silvester reservieren" / „Gruppe oder Firma anfragen" (Hero) und
+      „→ Tisch reservieren" / „→ Gruppe anfragen" (Final-CTA); Weihnachten „Tisch in der
+      Adventszeit reservieren" / „Weihnachtsmenü für Gruppen anfragen" bzw. „→ Tisch
+      reservieren" / „→ Gruppen-Menü anfragen". Telefon/E-Mail/WhatsApp stehen jetzt **genau
+      einmal** im Seitenkörper, gebündelt direkt hinter dem Anfrageformular („Lieber persönlich
+      sprechen?"): gemessen gegen die Kontrollseite `dist/reservierung/index.html` (3 × `wa.me`,
+      4 × `tel:` allein aus dem Chrome) liegen beide Zielseiten bei 4 bzw. 5 — Differenz **je 1**.
+      Vorher waren es 5 × `wa.me` / 7 × `tel:` (= 2 bzw. 3 im Seitenkörper).
+      **Verwaiste Übersetzungsschlüssel: 25 Stück entfernt**, verteilt auf die vier Sprachdateien
+      und ausschließlich innerhalb der Blöcke `seo.silvester` und `seo.weihnachten` — de 14
+      (silvester `heroCta`, `heroCtaInactive`, `heroEventsNote`, `heroEventsLink`, `ctaBoxTitle`,
+      `ctaBoxDesc`, `ctaBoxButton`, `ctaBoxNote`, `signupTitle`, `signupDesc`, `finalCtaButton`,
+      `finalCtaButtonInactive`, `finalCtaAlt` + weihnachten dieselben plus `heroCtaPhone`), en 14,
+      fr 14, it 6 (Italienisch hatte den Weihnachtsblock ohnehin nur teilweise übersetzt).
+      Gegenprobe vor dem Löschen: dieselben **Namen** leben in `seo.valentinstag`,
+      `seo.firmenfeier`, `seo.geburtstag` und `seo.weihnachtsfeier` weiter und werden dort
+      gelesen — deshalb wurde blockweise gelöscht, nicht per Dateisuche. Gegenprobe danach: ein
+      Skript, das die Blockgrenzen von `silvester`/`weihnachten` in allen vier Dateien bestimmt,
+      findet dort **0** dieser Schlüssel und **0** `events-storia`-Vorkommen in Stringwerten (die
+      13 verbleibenden Treffer sind Kommentarzeilen, die dokumentieren, was ersetzt wurde).
+      `t.seasonalSignup.*` ist unangetastet — diese Schlüssel gehören der Komponente selbst.
+      **Mitgefunden und mitgefixt:** die Silvester-FAQ „Wann wird das Silvester-Menü
+      veröffentlicht?" antwortete in allen vier Sprachen „Lassen Sie sich vormerken, um als
+      Erster informiert zu werden!" — eine Handlungsaufforderung ins Leere, sobald das Formular
+      weg ist. Sie zeigt jetzt auf die zwei realen Wege. Sweep über alle acht Zielrouten: **0
+      Treffer** für „vormerk", „notified", „Registratevi", „Inscrivez-vous", „Auf dem Laufenden
+      bleiben", „stay in the loop".
+      **`src/lib/eventsLinks.ts` nicht gelöscht** — das Preset `silvester` ist jetzt ungenutzt
+      (die Silvesterseite war seine einzige Aufrufstelle) und trägt einen Kommentar, der das
+      festhält und begründet, warum es stehen bleibt; alle übrigen Presets werden von
+      Firmenfeier, Weihnachtsfeier, Hochzeit, Geburtstag, Catering und Reisegruppen weiter
+      gebraucht.
+      **Keine neuen Fakten:** die angefassten Fließtexte (`introP3` beider Seiten, Weihnachts-FAQ
+      `faq2Answer`, Silvester-FAQ `faq1Answer`, `finalCtaDesc` Silvester) haben nur den Verweis
+      „ab 20 Gäste über events-storia.de" durch den Verweis auf das Formular derselben Seite
+      ersetzt; die 20-Gäste-Schwelle war eine reine Weiterleitungsregel zu events-storia und
+      steuert nichts mehr. Preise, Gangzahlen, Kapazitäten und Fristen sind unberührt und kommen
+      weiterhin über `fillFacts()` aus `FACTS`.
 
 ## E2: Branch, Beweis, Merge
 
