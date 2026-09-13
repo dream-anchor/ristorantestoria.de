@@ -388,8 +388,10 @@ const OktoberfestMuenchen = () => {
                 {i === 0 && (
                   <Reveal className="okt-partner">
                     <span className="okt-partner-lbl">{o.partnerLabel}</span>
-                    <span className="okt-partner-name">PAULANER</span>
-                    <span className="okt-partner-note">{o.partnerNote}</span>
+                    <span className="okt-partner-brand">
+                      <span className="okt-partner-name">PAULANER</span>
+                      <span className="okt-partner-note">{o.partnerNote}</span>
+                    </span>
                   </Reveal>
                 )}
                 <SecHead eyebrow="Bavarese" title={sec.title} lead={sec.subtitle} />
@@ -660,10 +662,11 @@ main .okt-btn-g:hover{border-color:var(--blau);background:rgba(27,107,176,.06);}
 .okt-tag-bay{background:rgba(27,107,176,.14);color:var(--blaud);}
 .okt-tag-ita{background:rgba(47,143,80,.14);color:var(--gruen);}
 /* PARTNER */
-.okt-partner{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:100px;padding:9px 20px;margin-bottom:8px;box-shadow:0 12px 30px -24px rgba(80,50,10,.5);}
+.okt-partner{display:flex;flex-direction:column;align-items:center;gap:3px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 22px;margin-bottom:8px;box-shadow:0 12px 30px -24px rgba(80,50,10,.5);text-align:center;}
 .okt-partner-lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a795f;font-weight:600;}
-.okt-partner-name{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:var(--blaud);letter-spacing:.06em;}
-.okt-partner-note{color:var(--muted);font-size:.92rem;}
+.okt-partner-brand{display:inline-flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:6px;}
+.okt-partner-name{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:var(--blaud);letter-spacing:.06em;white-space:nowrap;}
+.okt-partner-note{color:var(--muted);font-size:.92rem;white-space:nowrap;}
 /* PANELS */
 .okt-twocol{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 @media(max-width:820px){.okt-twocol{grid-template-columns:1fr;}}
