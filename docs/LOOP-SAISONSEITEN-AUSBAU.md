@@ -554,7 +554,8 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 ## BLOCKED-Log
 
 <!-- Format: DATUM · Kriterium · Grund · was gebraucht wird -->
-- 13.09.2026 · E3.1 · Stornobedingungen/Anzahlung unbekannt · Angaben von Antoine
+- ~~13.09.2026 · E3.1 · Stornobedingungen/Anzahlung unbekannt · Angaben von Antoine~~ —
+  **erledigt 13.09.2026**, Staffel von Antoine im Chat bestätigt, umgesetzt in PR #95.
 - ~~13.09.2026 · E1.1 (Teil) · `facts.ts:67` TODO Weihnachtspreis 45 € vs. 49 €~~ — **erledigt
   13.09.2026** (PR #91): Widerspruch war historisch, im Repo existiert kein 49-€-Wert mehr.
   Offen bleibt nur, ob 45 € betrieblich korrekt ist — kein Blocker.
@@ -571,6 +572,22 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 - **Listicle-Aufnahme** (in-muenchen.de Silvester, Mit Vergnügen Weihnachtsfeier) — größter
   Sichtbarkeitshebel, Betreiber-Aktion, kein Code.
+- ~~**Echte MAESTRO-Testanfrage** (E2.2/E2.3)~~ — **erledigt 13.09.2026**, Antoine hat zugestimmt.
+  Korrektur zur ursprünglichen Annahme „braucht einen Browser (CORS)": CORS ist eine
+  browser-seitige Beschränkung beim **Lesen** der Antwort, kein serverseitiger Schutz gegen den
+  Request selbst — ein direkter `curl`-POST an den Endpunkt ist ein normaler Server-zu-Server-Call
+  und funktioniert daher. Zwei klar als TEST markierte Anfragen abgesetzt (`customerName`/
+  `message` beginnen mit „TEST"/„TESTANFRAGE – bitte ignorieren", `customerEmail`
+  `info@monot.com`):
+  - Silvester (`sourceDetail: ristorante_silvester`): `201`, `id: 3a77f9b8-e539-431b-bc22-584821b18585`,
+    `confirmationSent: true`, `operatorNotified: true`.
+  - Weihnachtsfeier (`sourceDetail: ristorante_weihnachtsfeier`): `201`,
+    `id: 4da2c3bf-91dc-43c8-982a-c245a5041532`, `confirmationSent: **false**`,
+    `operatorNotified: true`. Auffälligkeit: keine Bestätigungsmail beim zweiten Test — naheliegend
+    ein Anti-Spam-Rate-Limit pro E-Mail-Adresse (beide Tests liefen kurz hintereinander mit
+    derselben `customerEmail`), kein Formularfehler, da der Betreiber in beiden Fällen
+    benachrichtigt wurde. Falls bei einer echten Doppelanfrage desselben Gasts dasselbe auftritt,
+    wäre das ein Punkt für Rückfrage bei MAESTRO — kein Blocker hier.
 
 ---
 
