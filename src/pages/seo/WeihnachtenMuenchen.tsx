@@ -217,9 +217,16 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
           ein Angebot zu behaupten, das die Seite gar nicht mehr im Detail beschreibt (kein
           Startdatum-Angebot, kein Preis-Grid, kein Anfrageweg hier), wäre irreführend gegenüber
           Suchmaschinen — genau das im Zielbild von docs/LOOP-SAISONSEITEN-AUSBAU.md § E4
-          benannte Risiko. Das vollständige, aktuelle Event-Schema für das Gruppenmenü gehört
-          stattdessen zu weihnachtsfeier-muenchen (E4.2), wo Pakete, Anfrageformular und Ablauf
-          tatsächlich stehen.
+          benannte Risiko. Pakete, Anfrageformular und Ablauf für das Gruppenmenü stehen seit
+          E4.2 auf weihnachtsfeier-muenchen.
+
+          Korrektur (13.09.2026, SEO/GEO-Audit): ANDERS als eine frühere Version dieses
+          Kommentars behauptete, bekommt weihnachtsfeier-muenchen dort KEIN eigenes
+          FoodEvent-Schema — Prüfung ergab, dass die Seite (wie firmenfeier-muenchen,
+          hochzeitsfeier-muenchen, geburtstagsfeier-muenchen) ein individuell mit dem Betreiber
+          abgestimmtes, undatiertes Angebot beschreibt, für das schema.org FoodEvent (verlangt
+          ein konkretes startDate) fachlich nicht passt — genau dieselbe Begründung, aus der es
+          hier oben entfernt wurde. `Restaurant` + `FAQPage` decken beide Seiten korrekt ab.
 
           Kein Ersatz-Schema ohne Event-Charakter nötig: `Restaurant`-Schema (oben) deckt den
           reinen Gastronomiebetrieb bereits vollständig ab, `FAQPage` (unten) bleibt unverändert. */}
