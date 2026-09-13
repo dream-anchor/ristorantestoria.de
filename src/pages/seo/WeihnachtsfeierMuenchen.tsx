@@ -40,6 +40,7 @@ const CITATION_URL = "https://www.accademiaitalianadellacucina.it/en";
 const fillFacts = (text: string): string =>
   text
     .replace(/\{groupPrice\}/g, FACTS.weihnachten.groupMenuPriceFrom)
+    .replace(/\{indoorSeats\}/g, String(FACTS.capacity.indoorSeats))
     .replace(/\{terraceSeats\}/g, String(FACTS.capacity.terraceSeats))
     .replace(/\{standing\}/g, String(FACTS.capacity.standing));
 
@@ -74,7 +75,9 @@ const WeihnachtsfeierMuenchen = () => {
     { title: w.reason2Title, desc: w.reason2Desc },
     { title: w.reason3Title, desc: w.reason3Desc },
     { title: w.reason4Title, desc: w.reason4Desc },
-    { title: w.reason5Title, desc: w.reason5Desc },
+    // V2.4 (GEO-Lücken-Loop, 13.09.2026): FACTS.capacity.* statt hartkodierter Zahlen, siehe
+    // fillFacts() oben — dieselben Werte standen unabhängig auch in faq2Answer.
+    { title: w.reason5Title, desc: fillFacts(w.reason5Desc) },
     { title: w.reason6Title, desc: w.reason6Desc },
     { title: w.reason7Title, desc: w.reason7Desc },
     { title: w.reason8Title, desc: w.reason8Desc },
@@ -95,8 +98,10 @@ const WeihnachtsfeierMuenchen = () => {
   ];
 
   const faqs = [
-    { q: w.faq1Question, a: w.faq1Answer },
-    { q: w.faq2Question, a: w.faq2Answer },
+    // V2.4 (GEO-Lücken-Loop, 13.09.2026): FACTS.weihnachten.groupMenuPriceFrom /
+    // FACTS.capacity.* statt hartkodierter "45 €"/Kapazitätszahlen, siehe fillFacts() oben.
+    { q: w.faq1Question, a: fillFacts(w.faq1Answer) },
+    { q: w.faq2Question, a: fillFacts(w.faq2Answer) },
     { q: w.faq3Question, a: w.faq3Answer },
     { q: w.faq4Question, a: w.faq4Answer },
     { q: w.faq5Question, a: w.faq5Answer },
@@ -125,7 +130,7 @@ const WeihnachtsfeierMuenchen = () => {
 
   return (
     <>
-      <SEO title={w.seoTitle} description={w.seoDescription} canonical="/weihnachtsfeier-muenchen" />
+      <SEO title={fillFacts(w.seoTitle)} description={fillFacts(w.seoDescription)} canonical="/weihnachtsfeier-muenchen" />
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={[
         { name: 'Home', url: '/' },
@@ -184,7 +189,7 @@ const WeihnachtsfeierMuenchen = () => {
                 Übersetzungen. Muster wie WeihnachtenMuenchen.tsx: eine Karte direkt unter der
                 Breadcrumb, vor allen anderen Inhalten. */}
             <div className="bg-card border rounded-2xl p-6 md:p-8 mb-12">
-              <p className="text-muted-foreground leading-relaxed">{w.tldr}</p>
+              <p className="text-muted-foreground leading-relaxed">{fillFacts(w.tldr)}</p>
             </div>
 
             {/* Intro — erster Satz ist seit V2.3 der Definition-Lead (GEO-Regel 1); der letzte

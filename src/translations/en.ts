@@ -2806,8 +2806,8 @@ const enBase = {
       reisegruppenLink: "group menus for up to 100 guests – the perfect culinary programme stop.",
     },
     weihnachtsfeier: {
-      seoTitle: "Christmas Party Munich | Up to 300 Guests from €45 – STORIA",
-      seoDescription: "Christmas party Munich at STORIA: Italian Christmas menu from €45 p.p., up to 300 guests. Corporate & family celebrations – central at Königsplatz. Inquire now!",
+      seoTitle: "Christmas Party Munich | Up to 300 Guests from €{groupPrice} – STORIA",
+      seoDescription: "Christmas party Munich at STORIA: Italian Christmas menu from €{groupPrice} p.p., up to 300 guests. Corporate & family celebrations – central at Königsplatz. Inquire now!",
       breadcrumb: "Christmas Party Munich",
       heroTitle: "Christmas Party Munich – Celebrate Italian Style at STORIA",
       heroSubtitle: "Corporate Christmas party, private celebration & Christmas dinner | STORIA at Königsplatz",
@@ -2908,7 +2908,7 @@ const enBase = {
       reason4Title: "💰 Transparent Pricing",
       reason4Desc: "No hidden costs. You receive a detailed quote with all services. Flexible packages for every budget.",
       reason5Title: "🎯 Flexible Room Concepts",
-      reason5Desc: "Separate area for 10\u201330 people, semi-private area for 30\u201360 people or exclusive rental for 60\u2013100 seats. Plus the terrace with up to 100 additional seats. Standing receptions up to 300.",
+      reason5Desc: "Separate area for 10\u201330 people, semi-private area for 30\u201360 people or exclusive rental for 60\u2013{indoorSeats} seats. Plus the terrace with up to {terraceSeats} additional seats. Standing receptions up to {standing}.",
       reason6Title: "🍷 Fine Wine & Beverage Selection",
       reason6Desc: "Over 50 Italian wines, prosecco, cocktails and non-alcoholic options. Mulled wine and Christmas aperitivo on request.",
       reason7Title: "👔 Professional Organization",
@@ -2958,9 +2958,9 @@ const enBase = {
       locationTipDesc: "Recommend your guests to travel by public transport – the Königsplatz subway station is just a 5-minute walk away.",
       faqTitle: "Frequently Asked Questions About Christmas Parties at STORIA",
       faq1Question: "How much does a Christmas party at STORIA Munich cost?",
-      faq1Answer: "Costs depend on group size, menu choice and desired extras. Our Christmas menus start from approx. €45 per person (Menu Natale Classico). Contact us for an individual quote.",
+      faq1Answer: "Costs depend on group size, menu choice and desired extras. Our Christmas menus start from approx. €{groupPrice} per person (Menu Natale Classico). Contact us for an individual quote.",
       faq2Question: "How many guests can attend a Christmas party at STORIA?",
-      faq2Answer: "10-30 guests in separate area, 30-60 semi-private, 60\u2013100 seats with exclusive venue rental. Plus the terrace with up to 100 additional seats. Standing receptions up to 300 guests.",
+      faq2Answer: "10-30 guests in separate area, 30-60 semi-private, 60\u2013{indoorSeats} seats with exclusive venue rental. Plus the terrace with up to {terraceSeats} additional seats. Standing receptions up to {standing} guests.",
       faq3Question: "When should I book the Christmas party Munich?",
       faq3Answer: "Ideally in September or October. The popular dates in early to mid-December (Thu, Fri, Sat) are often booked up early.",
       // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fact confirmed by Antoine 13.09.2026):
@@ -4242,7 +4242,7 @@ const enExtra = {
       tldr: "Italian near Königsplatz Munich: STORIA (Karlstraße 47a) is just a 5-minute walk from Königsplatz, the Pinakotheken and TU Munich. Authentic Italian cuisine with stone-oven pizza, homemade pasta and over 60 Italian wines. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",
     },
     weihnachtsfeier: {
-      tldr: "Christmas party Munich at STORIA Maxvorstadt (Karlstraße 47a): Italian restaurant for corporate Christmas parties, private Christmas dinners and Advent celebrations with 6–300 guests. Festive menus from €45 per person, 100 seats inside + 100 on the terrace. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Inquiries: +49 89 51519696.",
+      tldr: "Christmas party Munich at STORIA Maxvorstadt (Karlstraße 47a): Italian restaurant for corporate Christmas parties, private Christmas dinners and Advent celebrations with 6–300 guests. Festive menus from €{groupPrice} per person, {indoorSeats} seats inside + {terraceSeats} on the terrace. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Inquiries: +49 89 51519696.",
     },
     terrasse: {
       tldr: "Restaurant terrace Munich at STORIA Maxvorstadt (Karlstraße 47a): Covered terrace with 100 seats, cushions and blankets – smoking welcome. Italian dining and aperitivo in the open air, weatherproof in any weather. 5 min from Königsplatz. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",

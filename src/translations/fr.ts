@@ -2143,8 +2143,8 @@ const frBase = {
       standaloneRelated6Desc: "Traiteur italien pour votre f\u00eate",
     },
     weihnachtsfeier: {
-      seoTitle: "Fête de Noël Munich | Jusqu'à 300 Invités dès 45 € – STORIA",
-      seoDescription: "Fête de Noël Munich au STORIA : Menu de Noël italien dès 45 € p.p., jusqu'à 300 invités. Fêtes d'entreprise & familiales – central à Königsplatz. Demandez maintenant !",
+      seoTitle: "Fête de Noël Munich | Jusqu'à 300 Invités dès {groupPrice} € – STORIA",
+      seoDescription: "Fête de Noël Munich au STORIA : Menu de Noël italien dès {groupPrice} € p.p., jusqu'à 300 invités. Fêtes d'entreprise & familiales – central à Königsplatz. Demandez maintenant !",
       breadcrumb: "F\u00eate de No\u00ebl Munich",
       heroTitle: "Fête de Noël Munich – Célébrer à l'Italienne chez STORIA",
       heroSubtitle: "Fête de Noël d\u2019entreprise, fête privée et dîner de Noël | STORIA à Königsplatz",
@@ -2246,7 +2246,7 @@ const frBase = {
       reason4Title: "💰 Prix Transparents",
       reason4Desc: "Pas de coûts cachés. Vous recevez un devis détaillé avec toutes les prestations. Forfaits flexibles pour tous les budgets.",
       reason5Title: "🎯 Concepts d\u2019Espace Flexibles",
-      reason5Desc: "Espace séparé pour 10-30 personnes, espace semi-privé pour 30-60 personnes ou location exclusive de salle pour 60-100 places assises. Réceptions debout jusqu'à 300 invités.",
+      reason5Desc: "Espace séparé pour 10-30 personnes, espace semi-privé pour 30-60 personnes ou location exclusive de salle pour 60-{indoorSeats} places assises. Réceptions debout jusqu'à {standing} invités.",
       reason6Title: "🍷 Sélection de Vins et Boissons Raffinée",
       reason6Desc: "Plus de 50 vins italiens, prosecco, cocktails et options sans alcool. Vin chaud et apéritif de Noël sur demande.",
       reason7Title: "👔 Organisation Professionnelle",
@@ -2296,9 +2296,9 @@ const frBase = {
       locationTipDesc: "Conseillez à vos invités de venir en transports en commun – la station de métro Königsplatz est à seulement 5 minutes à pied.",
       faqTitle: "Questions Fréquentes sur les Fêtes de Noël au STORIA",
       faq1Question: "Combien coûte une fête de Noël au STORIA Munich ?",
-      faq1Answer: "Les coûts dépendent de la taille du groupe, du choix du menu et des extras souhaités. Nos menus de Noël débutent à environ 45 € par personne (Menu Natale Classico). Contactez-nous pour un devis personnalisé.",
+      faq1Answer: "Les coûts dépendent de la taille du groupe, du choix du menu et des extras souhaités. Nos menus de Noël débutent à environ {groupPrice} € par personne (Menu Natale Classico). Contactez-nous pour un devis personnalisé.",
       faq2Question: "Combien d\u2019invités peuvent participer à une fête de Noël au STORIA ?",
-      faq2Answer: "Nous proposons des concepts d\u2019espace flexibles : Espace séparé pour 10-30 personnes, espace semi-privé pour 30-60 personnes, location exclusive de salle pour 60-100 places assises. Réceptions debout jusqu'à 300 invités.",
+      faq2Answer: "Nous proposons des concepts d\u2019espace flexibles : Espace séparé pour 10-30 personnes, espace semi-privé pour 30-60 personnes, location exclusive de salle pour 60-{indoorSeats} places assises. Réceptions debout jusqu'à {standing} invités.",
       faq3Question: "Quand dois-je réserver la fête de Noël Munich ?",
       faq3Answer: "Idéalement en septembre ou octobre. Les dates populaires de début à mi-décembre (jeu, ven, sam) sont souvent réservées tôt.",
       // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fait confirmé par Antoine le 13.09.2026) :
@@ -4223,7 +4223,7 @@ const frExtra = {
       tldr: "Italien près de Königsplatz Munich : le STORIA (Karlstraße 47a) se trouve à seulement 5 min à pied de Königsplatz, des Pinakotheken et de la TU Munich. Cuisine italienne authentique avec pizza au four à pierre, pâtes maison et plus de 60 vins italiens. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
     },
     weihnachtsfeier: {
-      tldr: "Fête de Noël Munich au STORIA Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes de Noël d'entreprise, dîners de Noël privés et célébrations de l'Avent de 6 à 300 convives. Menus festifs dès 45 € par personne, 100 places à l'intérieur + 100 sur la terrasse. Entreprise familiale depuis 2015, gérée par la famille Speranza. À 5 min de Königsplatz. Demandes : +49 89 51519696.",
+      tldr: "Fête de Noël Munich au STORIA Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes de Noël d'entreprise, dîners de Noël privés et célébrations de l'Avent de 6 à 300 convives. Menus festifs dès {groupPrice} € par personne, {indoorSeats} places à l'intérieur + {terraceSeats} sur la terrasse. Entreprise familiale depuis 2015, gérée par la famille Speranza. À 5 min de Königsplatz. Demandes : +49 89 51519696.",
     },
     terrasse: {
       tldr: "Terrasse de restaurant Munich au STORIA Maxvorstadt (Karlstraße 47a) : terrasse couverte de 100 places, coussins et couvertures – fumeurs bienvenus. Cuisine italienne et aperitivo en plein air, à l'abri par tous les temps. À 5 min de Königsplatz. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",

@@ -2899,8 +2899,11 @@ export const de = {
       reisegruppenLink: "Gruppenmenüs für bis zu 100 Personen – ideal als kulinarischer Programmpunkt.",
     },
     weihnachtsfeier: {
-      seoTitle: "Weihnachtsfeier München | Bis 300 Gäste ab 45 € – STORIA",
-      seoDescription: "Weihnachtsfeier München im STORIA: Italienisches Weihnachtsmenü ab 45 € p.P., bis 300 Gäste. Firmenweihnachtsfeier & Familienessen – zentral am Königsplatz. Jetzt anfragen!",
+      // V2.4 (GEO-Lücken-Loop, 13.09.2026): {groupPrice} statt hartkodiertem "45 €" — SSoT
+      // FACTS.weihnachten.groupMenuPriceFrom, über fillFacts() in WeihnachtsfeierMuenchen.tsx
+      // ersetzt. Reine Konsolidierung, keine neue Zahl.
+      seoTitle: "Weihnachtsfeier München | Bis 300 Gäste ab {groupPrice} € – STORIA",
+      seoDescription: "Weihnachtsfeier München im STORIA: Italienisches Weihnachtsmenü ab {groupPrice} € p.P., bis 300 Gäste. Firmenweihnachtsfeier & Familienessen – zentral am Königsplatz. Jetzt anfragen!",
       breadcrumb: "Weihnachtsfeier M\u00fcnchen",
       heroTitle: "Weihnachtsfeier München – Italienisch feiern im STORIA",
       heroSubtitle: "Firmenweihnachtsfeier, private Feier & Weihnachtsessen | STORIA am Königsplatz",
@@ -2908,7 +2911,7 @@ export const de = {
       heroBadge2: "🍷 Weihnachtsmenü",
       heroBadge3: "📍 Zentral Königsplatz",
       heroDescription: "Planen Sie Ihre Weihnachtsfeier München in einem authentischen italienischen Restaurant mit besonderem Charme? Im Ristorante STORIA in der Maxvorstadt feiern Sie Weihnachten so, wie es sein soll: in gemütlicher Atmosphäre, mit exquisiter italienischer Küche und einem Service, der sich um alles kümmert.",
-      tldr: "Weihnachtsfeier München im STORIA Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Firmenweihnachtsfeiern, private Weihnachtsessen und Adventsfeiern mit 6–300 Gästen. Festliche Menüs ab 45 € pro Person, 100 Plätze innen + 100 auf der Terrasse. Seit 2015 Familienbetrieb von Familie Speranza. 5 Min. vom Königsplatz. Anfragen: +49 89 51519696.",
+      tldr: "Weihnachtsfeier München im STORIA Maxvorstadt (Karlstraße 47a): Italienisches Restaurant für Firmenweihnachtsfeiern, private Weihnachtsessen und Adventsfeiern mit 6–300 Gästen. Festliche Menüs ab {groupPrice} € pro Person, {indoorSeats} Plätze innen + {terraceSeats} auf der Terrasse. Seit 2015 Familienbetrieb von Familie Speranza. 5 Min. vom Königsplatz. Anfragen: +49 89 51519696.",
       heroCta: "Weihnachtsfeier anfragen",
       heroEventsNote: "Alle Weihnachtsfeier-Anfragen werden über unsere Event-Website bearbeitet:",
       introTitle: "Weihnachtsfeier München – Das STORIA für unvergessliche Feiertage",
@@ -3015,7 +3018,9 @@ export const de = {
       reason4Title: "💰 Transparente Preise",
       reason4Desc: "Keine versteckten Kosten. Sie erhalten ein detailliertes Angebot mit allen Leistungen. Flexible Pakete für jedes Budget.",
       reason5Title: "🎯 Flexible Raumkonzepte",
-      reason5Desc: "Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen oder exklusive Raummiete f\u00fcr 60\u2013100 Sitzpl\u00e4tze. Dazu die Terrasse mit bis zu 100 weiteren Pl\u00e4tzen. Stehempf\u00e4nge bis 300 G\u00e4ste.",
+      // V2.4: {indoorSeats}/{terraceSeats}/{standing} statt hartkodierter 100/100/300 \u2014 dieselben
+      // Werte standen unabh\u00e4ngig auch in faq2Answer (jetzt ebenfalls \u00fcber FACTS).
+      reason5Desc: "Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen oder exklusive Raummiete f\u00fcr 60\u2013{indoorSeats} Sitzpl\u00e4tze. Dazu die Terrasse mit bis zu {terraceSeats} weiteren Pl\u00e4tzen. Stehempf\u00e4nge bis {standing} G\u00e4ste.",
       reason6Title: "🍷 Erlesene Wein- & Getränkeauswahl",
       reason6Desc: "Über 50 italienische Weine, Prosecco, Cocktails und alkoholfreie Optionen. Glühwein und Weihnachts-Aperitivo auf Wunsch.",
       reason7Title: "👔 Professionelle Organisation",
@@ -3065,9 +3070,9 @@ export const de = {
       locationTipDesc: "Empfehlen Sie Ihren Gästen die Anreise mit öffentlichen Verkehrsmitteln – die U-Bahn-Station Königsplatz liegt nur 5 Gehminuten entfernt.",
       faqTitle: "Häufige Fragen zu Weihnachtsfeiern im STORIA",
       faq1Question: "Was kostet eine Weihnachtsfeier im STORIA München?",
-      faq1Answer: "Die Kosten richten sich nach Gruppengröße, Menüwahl und gewünschten Extras. Unsere Weihnachtsmenüs beginnen ab ca. 45€ pro Person (Menü Natale Classico). Kontaktieren Sie uns für ein individuelles Angebot.",
+      faq1Answer: "Die Kosten richten sich nach Gruppengröße, Menüwahl und gewünschten Extras. Unsere Weihnachtsmenüs beginnen ab ca. {groupPrice} € pro Person (Menü Natale Classico). Kontaktieren Sie uns für ein individuelles Angebot.",
       faq2Question: "Wie viele Personen passen für eine Weihnachtsfeier ins STORIA?",
-      faq2Answer: "Wir bieten flexible Raumkonzepte: Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen, exklusive Raummiete f\u00fcr 60\u2013100 Sitzpl\u00e4tze. Dazu die Terrasse mit ebenfalls bis zu 100 Pl\u00e4tzen. Stehempf\u00e4nge bis 300 G\u00e4ste.",
+      faq2Answer: "Wir bieten flexible Raumkonzepte: Separater Bereich f\u00fcr 10\u201330 Personen, halbprivater Bereich f\u00fcr 30\u201360 Personen, exklusive Raummiete f\u00fcr 60\u2013{indoorSeats} Sitzpl\u00e4tze. Dazu die Terrasse mit ebenfalls bis zu {terraceSeats} Pl\u00e4tzen. Stehempf\u00e4nge bis {standing} G\u00e4ste.",
       faq3Question: "Wann sollte ich die Weihnachtsfeier M\u00fcnchen buchen?",
       faq3Answer: "Idealerweise im September oder Oktober. Die beliebten Termine Anfang bis Mitte Dezember (Do, Fr, Sa) sind oft schon früh ausgebucht.",
       // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, Fakt Antoine 13.09.2026): präzisiert gegen
