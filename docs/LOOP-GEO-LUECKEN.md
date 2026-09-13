@@ -152,10 +152,16 @@ Weihnachtsbegriffe ab. AKUT — Buchungssaison läuft laut eigener Seite „ab S
 
 ## V2: Branch, Beweis, Merge
 
-- [ ] Branch `geo-luecken-v2` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.
-      Beweis zusätzlich: `firmenfeier-muenchen` prerendertes HTML zeigt reduzierte
-      Weihnachts-Nennungen, `weihnachtsfeier-muenchen` zeigt „Firmenweihnachtsfeier"/
-      „Betriebsweihnachtsfeier", Definition-Lead als erster Satz, TL;DR gerendert.
+- [x] ~~Branch `geo-luecken-v2` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.~~
+      **erledigt 13.09.2026** (PR #103, squash-merged, Deploy-Run `34776092206` erfolgreich).
+      Beim Review zusätzlich einen echten Vorab-Bug gefunden und mitverifiziert: die
+      Related-Link-Karte auf `firmenfeier-muenchen` zeigte hartkodiertes deutsches „45 €"-
+      Marketingtext auch auf den EN/IT/FR-Routen — jetzt über Übersetzungs-Keys +
+      `FACTS.weihnachten.groupMenuPriceFrom` gelöst, live auf `en/corporate-event-munich/`
+      bestätigt (0 Treffer für den alten deutschen String). Live-Beweis per `curl`:
+      `weihnachtsfeier-muenchen/`, `firmenfeier-muenchen/`, `en/corporate-event-munich/` alle
+      `200`; „Betriebsweihnachtsfeier" und der Outbound-Link zur Accademia Italiana della Cucina
+      sichtbar im ausgelieferten HTML von `weihnachtsfeier-muenchen/`.
       (V2.1–V2.4 lokal fertig und verifiziert, Commits `e880117`/`d66e1d6`/`d953d43` auf
       `geo-luecken-v2` — Push/PR/Merge/Live-Stichprobe macht das Hauptfenster.)
 
