@@ -99,6 +99,18 @@ export const FACTS = {
     groupMenuMinGuests: 6, // ab 6 Personen wird ein Gruppen-Menü individuell abgesprochen
     altaCarteMenuVariants: ["Fleisch", "Fisch", "vegetarisch"], // Weihnachtsmenü auf der saisonalen à-la-carte-Karte, einzeln bestellbar
   },
+
+  // ── Valentinstag — SSoT (GEO-Lücken-Loop V3.5, 13.09.2026) ──
+  // Zwei Pakete: Classic ab 55 € p.P. (3-Gang-Menü), Premium ab 85 € p.P. (4-Gang-Menü mit
+  // Weinbegleitung). Vorher an vier unabhängigen Stellen hart kodiert (JSON-LD-Description, zwei
+  // JSON-LD-Offers, package1Price/package2Price, seoDescription) — reine Konsolidierung der
+  // bereits angezeigten Werte. Ob 55 €/85 € betrieblich noch aktuell sind, ist eine offene,
+  // unabhängige Faktenfrage (docs/LOOP-GEO-LUECKEN.md § BLOCKED-Log), NICHT durch diesen Schritt
+  // beantwortet oder verändert.
+  valentinstag: {
+    price: "55", // € pro Person, Classic-Paket (3-Gang-Menü)
+    pricePremium: "85", // € pro Person, Premium-Paket (4-Gang-Menü mit Weinbegleitung)
+  },
 } as const;
 
 /**

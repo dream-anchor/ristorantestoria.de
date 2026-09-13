@@ -24,6 +24,40 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
+import { FACTS } from "@/config/facts";
+
+/**
+ * Ersetzt die Zahlen-Platzhalter der Übersetzungen durch die Werte aus `FACTS.valentinstag`
+ * (GEO-Lücken-Loop V3.4/V3.5, Muster identisch zu `SilvesterMuenchen.tsx`/`WeihnachtenMuenchen.tsx`).
+ * Global ersetzen, weil ein Platzhalter (z. B. {price} im TL;DR) mehrfach vorkommen kann.
+ */
+const fillFacts = (text: string): string =>
+  text
+    .replace(/\{price\}/g, FACTS.valentinstag.price)
+    .replace(/\{pricePremium\}/g, FACTS.valentinstag.pricePremium);
+
+/**
+ * Absolute Bild-URL für das FoodEvent-JSON-LD (GEO-Lücken-Loop V3.4).
+ *
+ * Vorher zeigte das `image`-Feld auf `/valentinstag-menue-storia-muenchen.jpg` — eine Datei, die
+ * in `public/` NICHT existiert (404, siehe Audit). Muster identisch zu `SilvesterMuenchen.tsx`:
+ * statt eine neue Datei zu erfinden, verweist das Schema auf das Hero-Bild der Seite selbst. Der
+ * Import wird von Vite auf den gehashten Build-Pfad aufgelöst, die URL kann also nicht mehr von
+ * der ausgelieferten Datei abweichen.
+ */
+const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${romantischesDinnerImage}`;
+
+/**
+ * Autoritative Outbound-Quelle (GEO-Lücken-Loop V3.4, GEO-Regel 3 aus
+ * `docs/geo-content-guidelines.md`).
+ *
+ * Offizielle Tourismusseite der Stadt Terni (Comune di Terni) — dokumentiert Grab und Verehrung
+ * des heiligen Valentin, seit 1644 Stadtpatron von Terni. Ein amtliches, nicht-kommerzielles
+ * Stadtportal, thematisch am Ursprung des 14. Februar als Tag der Liebenden. Eigenständig
+ * gegenüber champagne.fr (Silvester), der UNESCO Mediterranean Diet (Weihnachten) und der
+ * Accademia Italiana della Cucina (Weihnachtsfeier) — per `curl -sIL` verifiziert (200).
+ */
+const CITATION_URL = "https://turismo.comune.terni.it/en/things-to-do/ternis-st-valentine";
 
 interface ValentinstagMuenchenProps {
   standalone?: boolean;
@@ -76,8 +110,8 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
   }
 
   const packages = [
-    { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4], ideal: s.package1Ideal, price: s.package1Price },
-    { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5], ideal: s.package2Ideal, price: s.package2Price, badge: s.package2Badge },
+    { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4], ideal: s.package1Ideal, price: fillFacts(s.package1Price) },
+    { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5], ideal: s.package2Ideal, price: fillFacts(s.package2Price), badge: s.package2Badge },
     { title: s.package3Title, subtitle: s.package3Subtitle, items: [s.package3Item1, s.package3Item2, s.package3Item3, s.package3Item4, s.package3Item5], ideal: s.package3Ideal, price: s.package3Price },
   ];
 
@@ -131,7 +165,7 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
     <>
       <SEO
         title={standalone ? s.standaloneSeoTitle : s.seoTitle}
-        description={standalone ? s.standaloneSeoDescription : s.seoDescription}
+        description={fillFacts(standalone ? s.standaloneSeoDescription : s.seoDescription)}
         canonical={canonicalPath}
       />
       <StructuredData type="restaurant" />
@@ -155,13 +189,22 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
           eingebettete "BreadcrumbList" wurde entfernt — sie ist redundant zur bereits oben
           gerenderten <StructuredData type="breadcrumb">, die (anders als dieser hartcodierte
           Block) standalone-bewusst die korrekte 2-stufige Breadcrumb liefert. @id/offers.url
-          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route. */}
+          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route.
+
+          GEO-Lücken-Loop V3.4: `FoodEvent` statt `Event` (docs/geo-content-guidelines.md § Regel 8
+          schreibt für Event-Seiten ausdrücklich `FoodEvent` vor, Muster `SilvesterMuenchen.tsx` —
+          Untertyp von `Event`, alle Felder bleiben gültig). `image` zeigt jetzt auf das
+          tatsächlich ausgelieferte Hero-Bild (`EVENT_IMAGE_URL`) statt auf die nicht existierende
+          `/valentinstag-menue-storia-muenchen.jpg` (404, Audit-Fund).
+          GEO-Lücken-Loop V3.5: Preise kommen jetzt aus `FACTS.valentinstag` statt als Literale im
+          Schema zu stehen — dieselbe Quelle, aus der auch TL;DR, Intro und die Paket-Karten
+          gespeist werden. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "Event",
+        "@type": "FoodEvent",
         "@id": "https://www.ristorantestoria.de/valentinstag-muenchen/#event",
         "name": "Valentinstag-Dinner im STORIA München",
-        "description": "Romantisches Valentinstag-Dinner zu zweit in der Maxvorstadt: Aperitivo, mehrgängiges italienisches Menü, Rose am Tisch und Kerzenlicht. Drei Pakete – Classic ab 55 €, Premium ab 85 €, Exclusive auf Anfrage.",
+        "description": `Valentinstag-Dinner zu zweit in der Maxvorstadt: Aperitivo, mehrgängiges italienisches Menü, Rose am Tisch und Kerzenlicht. Zwei Pakete – Classic ab ${FACTS.valentinstag.price} €, Premium ab ${FACTS.valentinstag.pricePremium} €, Exclusive auf Anfrage.`,
         "startDate": "2027-02-14T18:00:00+01:00",
         "endDate": "2027-02-14T23:30:00+01:00",
         "eventStatus": "https://schema.org/EventScheduled",
@@ -169,10 +212,10 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
         "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
         "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
         "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
-        "image": ["https://www.ristorantestoria.de/valentinstag-menue-storia-muenchen.jpg"],
+        "image": [EVENT_IMAGE_URL],
         "offers": [
-          { "@type": "Offer", "name": "Valentinstag Classic – 3-Gang-Menü", "price": "55.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/valentinstag-muenchen/", "validFrom": "2027-01-15" },
-          { "@type": "Offer", "name": "Valentinstag Premium – 4-Gang-Menü mit Weinbegleitung", "price": "85.00", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/valentinstag-muenchen/", "validFrom": "2027-01-15" }
+          { "@type": "Offer", "name": "Valentinstag Classic – 3-Gang-Menü", "price": `${FACTS.valentinstag.price}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/valentinstag-muenchen/", "validFrom": "2027-01-15" },
+          { "@type": "Offer", "name": "Valentinstag Premium – 4-Gang-Menü mit Weinbegleitung", "price": `${FACTS.valentinstag.pricePremium}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/valentinstag-muenchen/", "validFrom": "2027-01-15" }
         ]
       })}} />
 
@@ -226,12 +269,51 @@ const ValentinstagMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }
               : [{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]
             } />
 
+            {/* TL;DR (GEO-Lücken-Loop V3.4) — der fertige `tldr`-Text lag bisher ungenutzt in den
+                Übersetzungen. Muster identisch zu `SilvesterMuenchen.tsx`/`WeihnachtenMuenchen.tsx`:
+                eine Karte direkt unter der Breadcrumb, vor allen anderen Inhalten, damit
+                KI-Systeme die Kernaussage der Seite in einem einzigen Chunk vorfinden. */}
+            <div className="bg-card border rounded-2xl p-6 md:p-8 mb-12">
+              <p className="text-muted-foreground leading-relaxed">{fillFacts(s.tldr)}</p>
+            </div>
+
             {/* Intro */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{s.introTitle}</h2>
-              <p className="text-lg text-muted-foreground mb-4">{s.introP1}</p>
+              <p className="text-lg text-muted-foreground mb-4">{fillFacts(s.introP1)}</p>
               <p className="text-muted-foreground mb-4">{s.introP2}</p>
-              <p className="text-muted-foreground">{s.introP3}</p>
+              <p className="text-muted-foreground mb-4">{s.introP3}</p>
+              {/* GEO-Lücken-Loop V3.1: interner Link statt Romantik-Generika — wer ein
+                  romantisches Dinner unabhängig vom Valentinstag sucht, wird aktiv auf die dafür
+                  zuständige Seite verwiesen, statt dass diese Seite selbst um das generische
+                  Keyword mitbietet. */}
+              <p className="text-muted-foreground mb-4">
+                {s.introRomanticLinkPre}
+                <LocalizedLink
+                  to="romantisches-dinner-muenchen"
+                  className="text-foreground underline decoration-muted-foreground hover:decoration-foreground transition-colors"
+                >
+                  {s.introRomanticLinkAnchor}
+                </LocalizedLink>
+                {s.introRomanticLinkPost}
+              </p>
+              {/* GEO-Lücken-Loop V3.4: autoritativer Outbound-Link (GEO-Regel 3) — eigene Quelle,
+                  nicht dieselbe wie Silvester (champagne.fr), Weihnachten (UNESCO Mediterranean
+                  Diet) oder Weihnachtsfeier (Accademia Italiana della Cucina). Offizielle
+                  Tourismusseite der Stadt Terni, die das Grab des heiligen Valentin und seine
+                  Verehrung als Stadtpatron seit 1644 dokumentiert — per curl verifiziert (200). */}
+              <p className="text-muted-foreground">
+                {s.citationPre}
+                <a
+                  href={CITATION_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground underline decoration-muted-foreground hover:decoration-foreground transition-colors"
+                >
+                  {s.citationAnchor}
+                </a>
+                {s.citationPost}
+              </p>
             </section>
 
             {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K3-Konsolidierung
