@@ -23,6 +23,7 @@ import eventGaeste600 from "@/assets/ristorante-storia-uebersicht-gaeste-600w.we
 import locationDetails from "@/assets/ristorante-storia-uebersicht-details.webp";
 import locationDetails600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
 import { FACTS } from "@/config/facts";
+import { isOktoberfestActive, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -292,6 +293,9 @@ const FirmenfeierMuenchen = () => {
                     Preis aus FACTS.weihnachten.groupMenuPriceFrom statt einem zweiten
                     hartkodierten "45 €". */}
                 <LocalizedLink to="weihnachtsfeier-muenchen" className="bg-primary/5 border-2 border-primary rounded-lg p-6 hover:bg-primary/10 transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedChristmasTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedChristmasDesc.replace('{price}', FACTS.weihnachten.groupMenuPriceFrom)}</p></LocalizedLink>
+                {isOktoberfestActive() && (
+                  <LocalizedLink to={OKTOBERFEST_SLUG} className="bg-primary/5 border-2 border-primary rounded-lg p-6 hover:bg-primary/10 transition-colors"><h3 className="font-semibold mb-2">Oktoberfest 2026 – Firmenfeier zur Wiesn-Zeit</h3><p className="text-muted-foreground text-sm">19. Sept – 4. Okt 2026: Wiesnbier, Brotzeit & bayerisch-italienische Specials für Ihr Team – ideal als Firmenfeier vor oder statt der Wiesn.</p></LocalizedLink>
+                )}
                 <LocalizedLink to="eventlocation-muenchen-maxvorstadt" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedEventlocationTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedEventlocationDesc}</p></LocalizedLink>
                 <LocalizedLink to="catering" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedCateringTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedCateringDesc}</p></LocalizedLink>
                 <LocalizedLink to="speisekarte" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors"><h3 className="font-semibold mb-2">{t.seo.firmenfeier.relatedMenuTitle}</h3><p className="text-muted-foreground text-sm">{t.seo.firmenfeier.relatedMenuDesc}</p></LocalizedLink>

@@ -32,6 +32,10 @@ const frBase = {
       cta1: "F\u00eate de No\u00ebl",
       cta2: "Menu du Nouvel An",
     },
+    oktoberfest: {
+      label: "Oktoberfest 2026 \u2013 Wiesnbier & Brotzeit au STORIA",
+      cta1: "Voir Oktoberfest Munich",
+    },
   },
   floatingActions: {
     call: "Appeler",
@@ -258,6 +262,7 @@ const frBase = {
     discoverRestaurant: "Découvrez notre restaurant",
     eventsGroupsTitle: "Événements & Groupes",
     eventsGroupsLinks: [
+      { label: "Oktoberfest Munich", slug: "oktoberfest-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Groupes Touristiques Munich", slug: "reisegruppen-muenchen" },
       { label: "Événements d'Entreprise Munich", slug: "firmenfeier-muenchen" },

@@ -181,7 +181,7 @@ const BesondereAnlaesse = () => {
                       {t.seo?.besondereAnlaesse?.oktoberfest || "Oktoberfest 2026 – Wiesn-Zeit im STORIA"}
                     </h2>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      {t.seo?.besondereAnlaesse?.oktoberfestTeaser || "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier vom Holzfass (Maß), Brotzeit & Specials. Ideal für Gruppen."}
+                      {t.seo?.besondereAnlaesse?.oktoberfestTeaser || "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier (Maß), Brotzeit & Specials. Ideal für Gruppen."}
                     </p>
                   </LocalizedLink>
                 )}

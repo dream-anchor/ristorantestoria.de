@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { isOktoberfestActive, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
 
-type Season = "valentinstag" | "terrasse" | "wild" | "weihnachtsfeier" | "silvester";
+type Season = "valentinstag" | "terrasse" | "wild" | "weihnachtsfeier" | "silvester" | "oktoberfest";
 
 const SEASON_BY_MONTH: (Season | null)[] = [
   "valentinstag",  // Jan
@@ -28,6 +29,7 @@ const SEASON_LINKS: Record<Season, { cta1: string; cta2?: string }> = {
   wild: { cta1: "wild-essen-muenchen" },
   weihnachtsfeier: { cta1: "weihnachtsfeier-muenchen" },
   silvester: { cta1: "weihnachtsfeier-muenchen", cta2: "besondere-anlaesse/silvester" },
+  oktoberfest: { cta1: OKTOBERFEST_SLUG },
 };
 
 const SEASON_ICONS: Record<Season, string> = {
@@ -36,6 +38,7 @@ const SEASON_ICONS: Record<Season, string> = {
   wild: "\ud83e\udd8c",
   weihnachtsfeier: "\ud83c\udf84",
   silvester: "\ud83c\udf86",
+  oktoberfest: "\ud83c\udf7a",
 };
 
 const SeasonalBanner = () => {
@@ -43,6 +46,13 @@ const SeasonalBanner = () => {
   const [season, setSeason] = useState<Season | null>(null);
 
   useEffect(() => {
+    // Oktoberfest-Marketingfenster (15.8.\u20134.10.) \u00fcbersteuert den Monats-Fallback ("wild" f\u00fcr
+    // Sep/Okt) mit dem exakten, tagesgenauen Zeitraum aus seasonalFlags.ts \u2014 konsistent mit
+    // BesondereAnlaesse.tsx/Footer.tsx, statt hier eine zweite, ungenaue Monatsgrenze zu pflegen.
+    if (isOktoberfestActive()) {
+      setSeason("oktoberfest");
+      return;
+    }
     const month = new Date().getMonth();
     setSeason(SEASON_BY_MONTH[month]);
   }, []);
