@@ -527,7 +527,8 @@ Blick", Reservierungs-Sektion (OpenTable, `id="reservieren"`), die verbleibenden
 (nur privat-relevante Fragen: Heiligabend/Parkplatz/vegetarisch-Karte/unter der Woche).
 
 - [x] ~~**E4.1** `WeihnachtenMuenchen.tsx` auf reinen à-la-carte-Fokus zuschneiden~~ —
-      **erledigt 13.09.2026** (Branch `saisonseiten-e4`, noch nicht gepusht/PR, siehe E4.2 zuerst).
+      **erledigt 13.09.2026** (Branch `saisonseiten-e4`, gepusht/gemergt zusammen mit E4.2 als
+      PR #93 — siehe „E4: Branch, Beweis, Merge" unten).
       Entfernt: Pakete-Grid („Orientierung für Ihr Gruppen-Menü"), Anfrageformular-Sektion
       (`id="anfrage"`, `AnlassAnfrageForm`-Einbindung — Komponente selbst bleibt), Kontaktbox
       („Lieber persönlich sprechen?"), Timeline („So läuft Ihre Weihnachtsfeier ab"). „Zwei
@@ -645,10 +646,19 @@ Blick", Reservierungs-Sektion (OpenTable, `id="reservieren"`), die verbleibenden
 
 ## E4: Branch, Beweis, Merge
 
-- [ ] Branch `saisonseiten-e4` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.
-      Beweis zusätzlich: FAQ-Widerspruch nicht mehr feststellbar (beide Antworten im jeweiligen
-      Kontext eindeutig), gegenseitige Verlinkung in beiden Richtungen vorhanden, kein
-      `id="anfrage"` mehr doppelt auf zwei Seiten mit identischem `sourceDetail`.
+- [x] ~~Branch `saisonseiten-e4` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.~~
+      **erledigt 13.09.2026** (PR #93, squash-merged nach `main`, Deploy-Run `34751113823`
+      erfolgreich). Live-Beweis per `curl` gegen `www.ristorantestoria.de`:
+      - Beide URLs `200`, keine Redirects (`weihnachten-muenchen/`, `weihnachtsfeier-muenchen/`).
+      - `weihnachten-muenchen/index.html`: 0× `id="anfrage"`, 0× `FoodEvent`, 5× Link auf
+        `weihnachtsfeier-muenchen`.
+      - `weihnachtsfeier-muenchen/index.html`: 1× `id="anfrage"`, 1× Link zurück auf
+        `weihnachten-muenchen`, 0 Treffer für „feste[s/n]? Men(ü|u)/Paket" im sichtbaren Text.
+      - FAQ4-Antwort live bestätigt: „Nein – ein pauschal buchbares Menü gibt es nicht: Wir
+        besprechen Ihr Weihnachtsmenü für die Feier individuell mit Ihnen …" — FAQ-Widerspruch
+        zwischen den beiden Seiten damit nicht mehr feststellbar, gegenseitige Verlinkung in
+        beiden Richtungen vorhanden, kein `id="anfrage"` mehr doppelt mit identischem
+        `sourceDetail` (getrennt: `ristorante_weihnachten` vs. `ristorante_weihnachtsfeier`).
 
 ## Abschluss
 
