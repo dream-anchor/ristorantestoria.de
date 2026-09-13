@@ -476,28 +476,84 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 <!-- Format: DATUM · Kriterium · Grund · was gebraucht wird -->
 - 13.09.2026 · E3.1 · Stornobedingungen/Anzahlung unbekannt · Angaben von Antoine
-- 13.09.2026 · E1.1 (Teil) · `facts.ts:67` TODO Weihnachtspreis 45 € vs. 49 € · Entscheidung von
-  Antoine; bis dahin bleibt 45 € (überall konsistent live), kein Blocker für den Rest von E1
+- ~~13.09.2026 · E1.1 (Teil) · `facts.ts:67` TODO Weihnachtspreis 45 € vs. 49 €~~ — **erledigt
+  13.09.2026** (PR #91): Widerspruch war historisch, im Repo existiert kein 49-€-Wert mehr.
+  Offen bleibt nur, ob 45 € betrieblich korrekt ist — kein Blocker.
 
 ## Offen, außerhalb des Codes
 
-- **`VITE_MAESTRO_INTAKE_URL` muss in die CI, nicht nur in die lokale `.env`** (13.09.2026, bei
-  E2.2 aufgefallen): Der Produktionsbuild läuft in GitHub Actions
-  (`.github/workflows/deploy-ionos.yml`, Schritt „Build Project (SSG)"); dessen `env:`-Block
-  kennt heute nur `DATABASE_URL` und `VITE_SUPABASE_URL`. Ohne einen dortigen Eintrag
-  (`VITE_MAESTRO_INTAKE_URL: https://storia.schrittmacher.ai/api/public/inquiries` — die URL
-  ist kein Geheimnis, ein Secret ist nicht nötig) rendert die Live-Seite statt des Formulars
-  den Telefon/E-Mail-Ausweichblock. **Vor E2.3 erledigen**, weil E2.3 die bisherigen
-  Vormerk-/events-storia-CTAs entfernt. Workflow bewusst NICHT in diesem Durchgang angefasst:
-  `.github/workflows/` gehört laut Projektregel in einen eigenen, sofortigen PR.
+- ~~`VITE_MAESTRO_INTAKE_URL` muss in die CI~~ — **erledigt 13.09.2026** (PR #88, vor E2.3 gemergt).
 - **`.env.example` existiert im Repo nicht** — der Eintrag konnte deshalb nicht dort ergänzt
   werden; die Datei wurde absichtlich nicht neu angelegt. Die Variable ist stattdessen im
   Kopfkommentar von `src/components/AnlassAnfrageForm.tsx` dokumentiert, inklusive des
   Hinweises auf den CI-Build.
+- ~~`llms.txt`/`llms-full.txt` „Anfragen … ab Juli" vs. Seite „ab September/Oktober"~~ —
+  **erledigt 13.09.2026** (PR #91), Antoine hat September/Oktober bestätigt.
 
 - **Listicle-Aufnahme** (in-muenchen.de Silvester, Mit Vergnügen Weihnachtsfeier) — größter
   Sichtbarkeitshebel, Betreiber-Aktion, kein Code.
 
+---
+
+## E4 — Kannibalisierung auflösen: Weihnachten (privat) vs. Weihnachtsfeier (B2B)
+
+**Befund (Antoine, 13.09.2026):** `weihnachten-muenchen` und `weihnachtsfeier-muenchen` bespielen
+inzwischen beide Begriffe gegenseitig — Title/H2 der einen Seite nennen den Kernbegriff der
+anderen. GSC bestätigt das: 16 Weihnachts-Queries, 1.009 Impressionen, 6 Klicks, nur 1 Query auf
+Seite 1, 12 von 16 schlechter als Position 20 (u. a. „weihnachtsfeier münchen" Pos. 50,
+„firmenweihnachtsfeier münchen" Pos. 52 — trotz eigener Zielseite). Zum Vergleich: Silvester
+(nach Konsolidierung nur eine Seite) rankt für seine Kern-Queries auf Pos. 8–10.
+
+**Recherche 13.09.2026 fand zusätzlich einen echten Faktenwiderspruch:** `WeihnachtenMuenchen`
+FAQ3 sagt „Nein, kein festes Weihnachtsmenü zum Vorbestellen", `WeihnachtsfeierMuenchen` FAQ4
+nennt drei benannte Menüpakete (Natale Classico/Grande/Buffet). Beides stimmt im jeweiligen
+Kontext (Einzelgast vs. Gruppen-Event), liest sich aber ohne Kontext widersprüchlich.
+
+**Entscheidung (Antoine):** trennen, nicht zusammenlegen — anders als bei Silvester (dort war es
+dieselbe Seite zweimal), hier sind es zwei echte Angebote mit unterschiedlichem Publikum.
+
+**Zielbild:**
+- `weihnachten-muenchen` = privates à-la-carte-Weihnachtsessen (Familie, Paare, spontan). Gruppen-
+  /Firmenweg wird nur noch kurz benannt und verlinkt auf die Feier-Seite.
+- `weihnachtsfeier-muenchen` = Firmen-/Gruppen-Weihnachtsfeier, B2B, bis 300 Gäste. Bekommt den
+  Gruppen-Weg samt Anfrageformular exklusiv.
+
+**Was laut Recherche konkret wandert** (aus `WeihnachtenMuenchen.tsx`, alle Gruppen-only-Inhalte):
+Pakete-Sektion (`packagesTitle`, H2 „Orientierung für Ihr Gruppen-Menü"), Anfrageformular-Sektion
+(`AnlassAnfrageForm`, `id="anfrage"`), Kontaktbox („Lieber persönlich sprechen?"), Timeline/Ablauf
+(„So läuft Ihre Weihnachtsfeier ab"), zwei der „8 Gründe" (reason4 Gruppengrößen, reason8
+Rundum-Service). **Bleibt:** Hero, Intro (neu gefasst auf reinen à-la-carte-Fokus), „Auf einen
+Blick", Reservierungs-Sektion (OpenTable, `id="reservieren"`), die verbleibenden 6 „Gründe", FAQ
+(nur privat-relevante Fragen: Heiligabend/Parkplatz/vegetarisch-Karte/unter der Woche).
+
+- [ ] **E4.1** `WeihnachtenMuenchen.tsx` auf reinen à-la-carte-Fokus zuschneiden: alle
+      Gruppen-only-Abschnitte entfernen (siehe Liste oben), „Zwei Wege"-Sektion vereinfachen zu
+      „für Gruppen/Firmen siehe unsere Weihnachtsfeier-Seite" mit prominentem Link, FAQ auf
+      privat-relevante Fragen kürzen, FoodEvent-JSON-LD prüfen (beschreibt aktuell laut Kommentar
+      ausschließlich Weg 2 — nach dem Wegfall von Weg 2 auf dieser Seite ggf. ganz entfernen oder
+      auf `Restaurant`/`FAQPage` reduzieren, keinen Event mehr behaupten, den es hier nicht mehr
+      gibt). Related-Links: `weihnachtsfeier-muenchen` **prominent an erster Stelle**, nicht nur
+      im (laut Recherche vermutlich toten) standalone-Nebenzweig.
+- [ ] **E4.2** `WeihnachtsfeierMuenchen.tsx` um den Gruppen-Weg erweitern: `AnlassAnfrageForm`
+      einbinden (neuer `anlass`-Wert, damit `sourceDetail` sauber `ristorante_weihnachtsfeier`
+      statt `ristorante_weihnachten` lautet — Lead-Attribution muss unterscheidbar bleiben),
+      Timeline/Ablauf aus E4.1 übernehmen (bereits vorhandene Menü-Pakete `Natale
+      Classico/Grande/Buffet` bleiben führend, nicht duplizieren). Events-storia-CTAs bleiben
+      unverändert (diese Seite ist NICHT Teil des MAESTRO-Ersatzes aus E2.3 — dort war
+      ausdrücklich nur `weihnachten-muenchen` gemeint). FAQ-Widerspruch auflösen: FAQ4 präzisieren
+      („feste Menüpakete für Gruppen/Firmen — für Einzelgäste à la carte siehe unsere
+      Weihnachtsseite"), Related-Links um `weihnachten-muenchen` ergänzen (fehlt heute komplett).
+      **Nebenbefund prüfen, nicht Pflicht:** ob der `standalone=false`-Zweig in
+      `WeihnachtenMuenchen.tsx` seit der K2-Konsolidierung noch erreichbar ist (Muster wie bei
+      Silvesters E1.7-Cleanup) — falls tot, im selben Zug entfernen.
+
+## E4: Branch, Beweis, Merge
+
+- [ ] Branch `saisonseiten-e4` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe.
+      Beweis zusätzlich: FAQ-Widerspruch nicht mehr feststellbar (beide Antworten im jeweiligen
+      Kontext eindeutig), gegenseitige Verlinkung in beiden Richtungen vorhanden, kein
+      `id="anfrage"` mehr doppelt auf zwei Seiten mit identischem `sourceDetail`.
+
 ## Abschluss
 
-Sind E1–E3 abgehakt und alle PRs gemergt: wörtlich `SAISONSEITEN-AUSBAU ABGESCHLOSSEN` ausgeben.
+Sind E1–E4 abgehakt und alle PRs gemergt: wörtlich `SAISONSEITEN-AUSBAU ABGESCHLOSSEN` ausgeben.

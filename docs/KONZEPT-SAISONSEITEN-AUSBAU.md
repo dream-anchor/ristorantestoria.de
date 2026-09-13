@@ -197,8 +197,24 @@ Bildstrecke · FAQ-Ausbau.
 (in-muenchen.de Silvester, Mit Vergnügen Weihnachtsfeier) schlägt jede weitere On-Page-Arbeit für
 diese Queries.
 
+### E4 — Kannibalisierung auflösen (ergänzt 13.09.2026)
+
+Bei der Umsetzung von E1/E2 ist eine echte Überschneidung zwischen `weihnachten-muenchen`
+(privates à-la-carte-Essen) und `weihnachtsfeier-muenchen` (Firmen-/Gruppen-Event, B2B, bis 300
+Gäste) sichtbar geworden: beide Seiten bewarben zuletzt beide Zielgruppen in Title/H2, und die
+Recherche fand einen echten FAQ-Widerspruch (Weihnachten „kein festes Menü" vs. Weihnachtsfeier
+„drei benannte Menüpakete"). GSC bestätigt schwache Rankings für die B2B-Cluster (12 von 16
+Weihnachts-Queries schlechter als Pos. 20, „firmenweihnachtsfeier münchen" Pos. 52 trotz eigener
+Zielseite).
+
+**Entscheidung Antoine: trennen, nicht zusammenlegen** — anders als bei Silvester (dieselbe Seite
+zweimal), hier zwei echte Angebote mit unterschiedlichem Publikum. Vollständiges Vorgehen,
+Kriterien E4.1/E4.2 und Beweispflichten stehen in `docs/LOOP-SAISONSEITEN-AUSBAU.md` § E4 — dort
+nicht duplizieren, dieser Abschnitt ist nur der Kontext für künftige Sessions.
+
 ## Nicht in diesem Konzept
 
 MAESTRO-Widgets (bleiben deaktiviert), sprachabhängiges JSON-LD (Event-Schema auf EN/IT/FR
 weiterhin hartcodiert deutsch — eigener GEO-Punkt), Umstellung weiterer Seiten auf das neue
-Formular, Valentinstag, Preisanpassung nach oben.
+Formular, Valentinstag, Preisanpassung nach oben, Nav-Aufnahme von `weihnachtsfeier-muenchen`
+(betrifft auch Firmenfeier/Geburtstagsfeier gleichermaßen — eigenes, breiteres Thema).
