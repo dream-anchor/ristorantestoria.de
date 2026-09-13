@@ -2912,7 +2912,31 @@ export const de = {
       heroCta: "Weihnachtsfeier anfragen",
       heroEventsNote: "Alle Weihnachtsfeier-Anfragen werden über unsere Event-Website bearbeitet:",
       introTitle: "Weihnachtsfeier München – Das STORIA für unvergessliche Feiertage",
-      introP1: "Sie suchen die perfekte Weihnachtsfeier Location München? Das STORIA vereint alles, was eine gelungene Weihnachtsfeier braucht: zentrale Lage in der Maxvorstadt, stilvolles italienisches Ambiente, erstklassige Küche und einen Service, der keine Wünsche offenlässt. Die Familie Speranza und ihr Team bringen über 30 Jahre Gastronomie-Erfahrung mit – von der intimen Feier für 10 Personen bis zum großen Event für 300 Gäste.",
+      // V2.3 (GEO-Lücken-Loop, 13.09.2026): Definition-Lead statt rhetorischer Frage
+      // (docs/geo-content-guidelines.md Regel 1, Muster wie WeihnachtenMuenchen.tsx introP1).
+      introP1: "Die Weihnachtsfeier München im Ristorante STORIA ist ein italienisches Festmenü-Angebot in der Karlstraße 47a, München Maxvorstadt – von der romantischen Weihnachtsfeier zu zweit bis zur Firmenweihnachtsfeier für bis zu 300 Gäste. Seit 2015 bringt die Familie Speranza aus dem Cilento über 30 Jahre Gastronomie-Erfahrung mit und stimmt jedes Weihnachtsmenü individuell mit Ihnen ab – ein festes Menü von der Karte gibt es bewusst nicht.",
+      // Autoritativer Outbound-Link (GEO-Regel 3) — eigene Quelle, nicht dieselbe wie
+      // SilvesterMuenchen.tsx (champagne.fr) oder WeihnachtenMuenchen.tsx (UNESCO Mediterranean
+      // Diet): die Accademia Italiana della Cucina, 1953 gegründet, offizielle italienische
+      // Institution zur Dokumentation/Bewahrung regionaler Kochtraditionen (Sitz Mailand,
+      // staatlich als Kultureinrichtung anerkannt) — thematisch passend zur italienischen
+      // Festtagsküche dieser Seite, weder Wettbewerber noch Aggregator.
+      citationPre: "Die italienische Festtagsküche zu Weihnachten hat eine lange kulinarische Tradition, dokumentiert unter anderem von der ",
+      citationAnchor: "Accademia Italiana della Cucina",
+      citationPost: ", der 1953 gegründeten offiziellen italienischen Institution zur Bewahrung regionaler Kochtraditionen.",
+      // "Auf einen Blick" (V2.3, GEO-Lücken-Loop, 13.09.2026) — Muster wie WeihnachtenMuenchen.tsx/
+      // SilvesterMuenchen.tsx. Alle Werte bereits an anderer Stelle dieser Seite belegt
+      // (reason5Desc/faq2Answer für Kapazität, type1Note/bookingTip für Anfragezeitpunkt) bzw.
+      // aus FACTS.weihnachten.groupMenuPriceFrom — keine neuen Zahlen.
+      atAGlanceTitle: "Weihnachtsfeier im STORIA auf einen Blick",
+      atAGlanceCapacityLabel: "Kapazität",
+      atAGlanceCapacityValue: "10–100 Sitzplätze je nach Raumkonzept, dazu {terraceSeats} auf der Terrasse – Stehempfang bis {standing} Gäste",
+      atAGlancePriceLabel: "Preis ab",
+      atAGlancePriceValue: "{groupPrice} € pro Person",
+      atAGlanceMinGuestsLabel: "Mindestgruppengröße",
+      atAGlanceMinGuestsValue: "Keine – von der Feier zu zweit bis zum Firmenevent",
+      atAGlanceRequestLabel: "Anfrage",
+      atAGlanceRequestValue: "Für Gruppen ab September/Oktober empfohlen",
       typesTitle: "🎄 Welche Weihnachtsfeiern können Sie im STORIA feiern?",
       type1Title: "🏢 Firmenweihnachtsfeier",
       type1Desc: "Die Firmenweihnachtsfeier München im STORIA – auch Betriebsweihnachtsfeier genannt – ist der perfekte Jahresabschluss für Ihr Team. Feiern Sie den gemeinsamen Erfolg mit einem festlichen italienischen Menü, Wein und weihnachtlicher Atmosphäre.",
