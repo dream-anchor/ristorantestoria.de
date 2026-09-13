@@ -6,7 +6,7 @@ import domenicoImage from "@/assets/domenico-speranza.webp";
 import storiaLogo from "@/assets/storia-logo.webp";
 import nicolaImage from "@/assets/nicola-speranza.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { isWmActive, WM_SLUG } from "@/config/seasonalFlags";
+import { isWmActive, WM_SLUG, isOktoberfestActive, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
 import { FACTS } from "@/config/facts";
 import { trackEvent } from "@/lib/analytics";
 import { VOUCHER_SHOP_URL } from "@/lib/eventsLinks";
@@ -17,7 +17,9 @@ const Footer = () => {
   // Saison-Link „WM 2026" nach dem Finale (19.7.2026) automatisch ausblenden –
   // die Seite selbst bleibt online, nur der tote Footer-Link verschwindet.
   const eventsGroupsLinks = t.footer.eventsGroupsLinks.filter(
-    (link: { label: string; slug: string }) => link.slug !== WM_SLUG || isWmActive()
+    (link: { label: string; slug: string }) =>
+      (link.slug !== WM_SLUG || isWmActive()) &&
+      (link.slug !== OKTOBERFEST_SLUG || isOktoberfestActive())
   );
 
   return (

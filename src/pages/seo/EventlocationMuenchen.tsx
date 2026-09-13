@@ -23,6 +23,7 @@ import eventSetupWeiss from "@/assets/ristorante-storia-uebersicht-stehtische-we
 import eventSetupWeiss600 from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen-600w.webp";
 import PhotoGallery from "@/components/PhotoGallery";
 import { FACTS } from "@/config/facts";
+import { isOktoberfestActive, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -420,6 +421,12 @@ const EventlocationMuenchen = () => {
                   <h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3>
                   <p className="text-muted-foreground text-sm">Feiern Sie den Jahreswechsel mit einem italienischen {FACTS.silvester.courses}-Gänge-Menü im STORIA.</p>
                 </Link>
+                {isOktoberfestActive() && (
+                  <LocalizedLink to={OKTOBERFEST_SLUG} className="bg-primary/5 border-2 border-primary rounded-lg p-6 hover:bg-primary/10 transition-colors">
+                    <h3 className="font-semibold mb-2">Oktoberfest 2026 im STORIA</h3>
+                    <p className="text-muted-foreground text-sm">19. Sept – 4. Okt 2026: Wiesnbier, Brotzeit & bayerisch-italienische Specials – ideal für Gruppen und Firmenevents zur Wiesn-Zeit.</p>
+                  </LocalizedLink>
+                )}
                 <LocalizedLink to="wm-2026-public-viewing-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.internalLinks.wmPublicViewing}</h3>
                   <p className="text-muted-foreground text-sm">{t.internalLinks.wmPublicViewingDesc}</p>

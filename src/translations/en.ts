@@ -32,6 +32,10 @@ const enBase = {
       cta1: "Christmas Party",
       cta2: "New Year's Menu",
     },
+    oktoberfest: {
+      label: "Oktoberfest 2026 – Wiesnbier & Brotzeit at STORIA",
+      cta1: "See Oktoberfest Munich",
+    },
   },
   floatingActions: {
     call: "Call",
@@ -258,6 +262,7 @@ const enBase = {
     discoverRestaurant: "Discover our restaurant",
     eventsGroupsTitle: "Events & Groups",
     eventsGroupsLinks: [
+      { label: "Oktoberfest Munich", slug: "oktoberfest-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Group Dining Munich", slug: "reisegruppen-muenchen" },
       { label: "Corporate Events Munich", slug: "firmenfeier-muenchen" },

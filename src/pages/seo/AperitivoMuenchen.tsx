@@ -1,4 +1,5 @@
 import LocalizedLink from "@/components/LocalizedLink";
+import { isOktoberfestActive, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -532,6 +533,12 @@ const AperitivoMuenchen = () => {
                   <h3 className="font-semibold mb-1">Terrasse München</h3>
                   <p className="text-muted-foreground">Aperitivo auf unserer Terrasse – der perfekte Ort für laue Sommerabende.</p>
                 </LocalizedLink>
+                {isOktoberfestActive() && (
+                  <LocalizedLink to={OKTOBERFEST_SLUG} className="bg-primary/5 border-2 border-primary p-4 rounded-lg transition-colors hover:bg-primary/10">
+                    <h3 className="font-semibold mb-1">Oktoberfest 2026</h3>
+                    <p className="text-muted-foreground">Wiesnbier statt Aperol: 19. Sept – 4. Okt 2026 servieren wir Paulaner Wiesnbier & bayerisch-italienische Specials.</p>
+                  </LocalizedLink>
+                )}
                 <LocalizedLink to="faq" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-1">{t.internalLinks.faqLink}</h3>
                   <p className="text-muted-foreground">{t.internalLinks.faqLinkDesc}</p>

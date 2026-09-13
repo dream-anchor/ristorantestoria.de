@@ -55,6 +55,10 @@ const itBase = {
       cta1: "Festa di Natale",
       cta2: "Men\u00f9 di Capodanno",
     },
+    oktoberfest: {
+      label: "Oktoberfest 2026 \u2013 Wiesnbier & Brotzeit allo STORIA",
+      cta1: "Vedi Oktoberfest Monaco",
+    },
   },
   floatingActions: {
     call: "Chiama",
@@ -278,6 +282,7 @@ const itBase = {
     discoverRestaurant: "Scopri il nostro ristorante",
     eventsGroupsTitle: "Occasioni & Gruppi",
     eventsGroupsLinks: [
+      { label: "Oktoberfest Monaco", slug: "oktoberfest-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Gruppi Turistici Monaco", slug: "reisegruppen-muenchen" },
       { label: "Feste Aziendali Monaco", slug: "firmenfeier-muenchen" },

@@ -30,6 +30,10 @@ export const de = {
       cta1: "Weihnachtsfeier",
       cta2: "Silvester Men\u00fc",
     },
+    oktoberfest: {
+      label: "Oktoberfest 2026 \u2013 Wiesnbier & Brotzeit im STORIA",
+      cta1: "Oktoberfest M\u00fcnchen ansehen",
+    },
   },
   floatingActions: {
     call: "Anrufen",
@@ -256,6 +260,7 @@ export const de = {
     discoverRestaurant: "Unser Restaurant entdecken",
     eventsGroupsTitle: "Anlässe & Gruppen",
     eventsGroupsLinks: [
+      { label: "Oktoberfest München", slug: "oktoberfest-muenchen" },
       { label: "WM 2026 Public Viewing", slug: "wm-2026-public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Restaurant für Reisegruppen", slug: "reisegruppen-muenchen" },
