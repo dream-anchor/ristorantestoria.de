@@ -64,9 +64,31 @@ export const FACTS = {
     standing: STORIA.capacity.indoor.standing, // Stehempfang, einheitlich (innen/außen/gemischt)
   },
 
-  // ── TODO(Kundenklärung): Weihnachts-Menüpreis uneinheitlich (45 € vs. 49 €) ──
-  // Wird bewusst NICHT vereinheitlicht, bis Familie Speranza die korrekte Zahl
-  // bestätigt hat. Bis dahin keine der beiden Angaben als "wahr" hardcoden.
+  // ── Silvester Gala-Dinner — SSoT (Fakten-Festlegung Antoine, 2026-09-13) ──
+  // Es gibt EIN Gala-Menü mit VIER Gängen. Es kostet 99 € pro Person, mit
+  // Weinbegleitung 150 € pro Person. Der Unterschied zwischen den beiden
+  // Preisen ist AUSSCHLIESSLICH die Weinbegleitung – nicht die Gangzahl.
+  // Die frühere Darstellung (Classic mit vier, Premium mit fünf Gängen) war in
+  // der Gangzahl falsch und wurde branchweit korrigiert
+  // (KONZEPT-SAISONSEITEN-AUSBAU.md § Faktenwidersprüche, Nr. 2).
+  // Preise als Anzeige-Strings (ganze Euro); im JSON-LD als "99.00"/"150.00".
+  silvester: {
+    courses: 4, // Gangzahl – identisch mit und ohne Weinbegleitung
+    price: "99", // € pro Person, ohne Weinbegleitung
+    priceWithWine: "150", // € pro Person, inkl. Weinbegleitung
+  },
+
+  // ── Weihnachten — Gruppen-Menüpreis ──
+  // TODO(Kundenklärung): Menüpreis uneinheitlich dokumentiert (45 € vs. 49 €).
+  // ENTSCHIEDEN IST NUR DIE VERWENDUNG, NICHT DIE WAHRHEIT: Auf allen
+  // Live-Seiten steht konsistent 45 €, deshalb bleibt 45 € der verwendete Wert.
+  // Die Klärung mit Familie Speranza steht weiterhin aus – erst danach darf der
+  // Wert geändert (oder bestätigt) werden. Bis dahin keine 49 € irgendwo
+  // einführen (KONZEPT-SAISONSEITEN-AUSBAU.md § Faktenwidersprüche, Nr. 8).
+  weihnachten: {
+    groupMenuPriceFrom: "45", // € pro Person, Gruppen-Menü ab 6 Personen
+    groupMenuMinGuests: 6, // festes Gruppen-Menü erst ab 6 Personen
+  },
 } as const;
 
 /**

@@ -24,6 +24,42 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
+import { FACTS } from "@/config/facts";
+
+/**
+ * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
+ *
+ * Vorher zeigte das `image`-Feld auf `/weihnachtsmenue-storia-muenchen.jpg` — eine Datei, die in
+ * `public/` NICHT existiert (404). Statt eine zweite, thematisch nur halb passende Datei zu
+ * erfinden, verweist das Schema jetzt auf das Hero-Bild der Seite selbst: dieselbe Aufnahme, die
+ * Besucher oben sehen. Der Import wird von Vite auf den gehashten Build-Pfad aufgelöst, die URL
+ * kann also nicht mehr von der ausgelieferten Datei abweichen.
+ */
+const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${weihnachtsfeierImage}`;
+
+/**
+ * Autoritative Outbound-Quelle (E1.5, GEO-Regel 3 aus `docs/geo-content-guidelines.md`).
+ *
+ * UNESCO-Eintrag „Mediterranean diet" auf der Repräsentativen Liste des immateriellen
+ * Kulturerbes. Die italienische Trägergemeinschaft dieses Eintrags ist das Cilento — genau die
+ * Herkunftsregion der Familie Speranza, die auf dieser Seite im Intro genannt wird. UNESCO-URLs
+ * sind institutionell stabil, die Quelle ist weder Wettbewerber noch Aggregator.
+ */
+const CITATION_URL = "https://ich.unesco.org/en/RL/mediterranean-diet-00884";
+
+/**
+ * Ersetzt die Zahlen-Platzhalter der Übersetzungen durch die Werte aus `FACTS`.
+ *
+ * Die Übersetzungen enthalten nur Satzschablonen, damit Mindestpersonenzahl, Gruppenpreis und
+ * Kapazitäten auf allen vier Sprachen aus derselben einzigen Quelle kommen. Global ersetzen,
+ * weil ein Platzhalter innerhalb eines Textes mehrfach vorkommen kann.
+ */
+const fillFacts = (text: string): string =>
+  text
+    .replace(/\{minGuests\}/g, String(FACTS.weihnachten.groupMenuMinGuests))
+    .replace(/\{groupPrice\}/g, FACTS.weihnachten.groupMenuPriceFrom)
+    .replace(/\{indoorSeats\}/g, String(FACTS.capacity.indoorSeats))
+    .replace(/\{terraceSeats\}/g, String(FACTS.capacity.terraceSeats));
 
 interface WeihnachtenMuenchenProps {
   standalone?: boolean;
@@ -78,6 +114,47 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
     { title: s.package1Title, subtitle: s.package1Subtitle, items: [s.package1Item1, s.package1Item2, s.package1Item3, s.package1Item4], ideal: s.package1Ideal, price: s.package1Price },
     { title: s.package2Title, subtitle: s.package2Subtitle, items: [s.package2Item1, s.package2Item2, s.package2Item3, s.package2Item4, s.package2Item5], ideal: s.package2Ideal, price: s.package2Price, badge: s.package2Badge },
     { title: s.package3Title, subtitle: s.package3Subtitle, items: [s.package3Item1, s.package3Item2, s.package3Item3, s.package3Item4, s.package3Item5], ideal: s.package3Ideal, price: s.package3Price },
+  ];
+
+  /**
+   * „Auf einen Blick" (E1.3) — dasselbe Raster wie auf der Silvester-Seite, nur mit den
+   * Weihnachts-Fakten: die zwei Wege (à la carte am Tisch vs. Gruppen-Menü), der Zeitraum
+   * inklusive der beiden Ruhetage, die Kapazität und der empfohlene Anfragezeitpunkt.
+   *
+   * Quellen, alle bereits im Repo: `FACTS.weihnachten` (Gruppenpreis, Mindestpersonenzahl),
+   * `FACTS.capacity` (100 innen / 100 Terrasse), `ReservationBooking.getClosedDays` (24. und
+   * 25.12. als Ruhetage) sowie die FAQ auf dieser Seite (Anfrage ab September/Oktober).
+   */
+  const atAGlance = [
+    { label: s.atAGlanceOptionsLabel, value: fillFacts(s.atAGlanceOptionsValue) },
+    { label: s.atAGlancePeriodLabel, value: s.atAGlancePeriodValue },
+    { label: s.atAGlanceCapacityLabel, value: fillFacts(s.atAGlanceCapacityValue) },
+    { label: s.atAGlanceRequestLabel, value: s.atAGlanceRequestValue },
+  ];
+
+  /**
+   * Die zwei Wege (E1.4) — die eigentliche Realität dieser Seite, festgelegt von Antoine am
+   * 13.09.2026: Weihnachten im STORIA ist entweder ein regulärer Tisch mit à-la-carte-Essen von
+   * der saisonalen Karte (ab 1 Person, keine Vorbestellung) ODER ein Weihnachtsmenü, das Firmen
+   * und Gruppen direkt mit dem Restaurant absprechen. Ein festes, noch zu veröffentlichendes
+   * Weihnachtsmenü — wie die Seite es bis E1.4 suggerierte — gibt es nicht.
+   *
+   * Bewusst ein eigener Abschnitt weit oben statt nur einer Zeile im „Auf einen Blick"-Block:
+   * die Trennung der beiden Wege ist die zentrale Aussage der Seite, nicht eine Eckdate.
+   */
+  const twoWays = [
+    {
+      badge: s.twoWay1Badge,
+      title: s.twoWay1Title,
+      desc: s.twoWay1Desc,
+      items: [s.twoWay1Item1, s.twoWay1Item2, s.twoWay1Item3],
+    },
+    {
+      badge: s.twoWay2Badge,
+      title: s.twoWay2Title,
+      desc: fillFacts(s.twoWay2Desc),
+      items: [fillFacts(s.twoWay2Item1), s.twoWay2Item2, fillFacts(s.twoWay2Item3)],
+    },
   ];
 
   const reasons = [
@@ -136,33 +213,60 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
       <StructuredData type="restaurant" />
       <StructuredData type="breadcrumb" breadcrumbs={breadcrumbSchema} />
 
-      {/* Event-Schema – Weihnachtsmenü — references #restaurant / #organization by @id.
+      {/* Event-Schema – Weihnachtsmenü für Gruppen — references #restaurant / #organization by @id.
           K2-Konsolidierung: früher an `!standalone` gebunden (nur auf der Pillar-Route sichtbar),
           jetzt unconditional, weil die Standalone-URL (weihnachten-muenchen) seit der
           Konsolidierung die kanonische, einzige URL ist (KONZEPT § 3b). Die früher hier
           eingebettete "BreadcrumbList" wurde entfernt — sie ist redundant zur bereits oben
           gerenderten <StructuredData type="breadcrumb">, die (anders als dieser hartcodierte
           Block) standalone-bewusst die korrekte 2-stufige Breadcrumb liefert. @id/offers.url
-          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route. */}
+          zeigen jetzt auf die neue kanonische URL statt auf die abgeschaltete Pillar-Route.
+
+          E1.6, Typ: `FoodEvent` statt `Event` — `docs/geo-content-guidelines.md` § Regel 8
+          schreibt für Event-Seiten `FoodEvent` vor. Untertyp von `Event`, alle Felder bleiben.
+
+          E1.6, ENTSCHEIDUNG — was dieses Event beschreibt: Seit E1.4 bildet die Seite zwei Wege
+          ab. Weg 1 (à la carte am reservierten Tisch, ab 1 Person, keine Vorbestellung) ist
+          regulärer Restaurantbetrieb an beliebigen Abenden der Adventszeit — er hat weder einen
+          festen Termin noch ein festes Angebot und ist damit KEIN Event im Sinne von schema.org;
+          er ist bereits über das `Restaurant`-Schema (oben, `<StructuredData type="restaurant">`)
+          samt Öffnungszeiten abgedeckt. Das Event-Schema beschreibt deshalb ausschließlich Weg 2:
+          das Weihnachtsmenü für Firmen und Gruppen ab `FACTS.weihnachten.groupMenuMinGuests`
+          Personen. `name`, `description` und `eligibleQuantity` sagen das jetzt ausdrücklich —
+          vorher versprach der generische Name „Weihnachtsmenü im STORIA München" ein festes,
+          für jeden buchbares Menü, das es laut Faktenklärung vom 13.09.2026 gar nicht gibt.
+
+          E1.6, `highPrice`: bisher trug das AggregateOffer nur `lowPrice`. Der obere
+          Orientierungspreis ist der des Pakets „Weihnachten Premium" (`weihnachten.package2Price`
+          in den Übersetzungen: „ab 65 € p.P.") — der höchste bezifferte Wert auf der Seite. Das
+          dritte Paket („Weihnachten Exclusive") ist mit „Auf Anfrage" ausgewiesen und liefert
+          bewusst keine Zahl; erfunden wird hier keine. `lowPrice` kommt aus `FACTS.weihnachten`,
+          damit er nicht getrennt vom sichtbaren Inhalt driften kann. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "Event",
+        "@type": "FoodEvent",
         "@id": "https://www.ristorantestoria.de/weihnachten-muenchen/#event",
-        "name": "Weihnachtsmenü im STORIA München",
-        "description": "Festliches italienisches Weihnachtsmenü in der Adventszeit – ideal für Familien und Firmen-Weihnachtsfeiern in der Maxvorstadt. Gruppen-Menü ab 45 € pro Person.",
+        "name": "Weihnachtsmenü für Gruppen im STORIA München",
+        "description": `Weihnachtsmenü für Firmen und Gruppen ab ${FACTS.weihnachten.groupMenuMinGuests} Personen im Ristorante STORIA in München Maxvorstadt: süditalienische Festtagsküche, im Gespräch mit dem Restaurant auf Anlass, Vorlieben und Budget abgestimmt, ab ${FACTS.weihnachten.groupMenuPriceFrom} € pro Person. Ein festes Weihnachtsmenü zum Vorbestellen gibt es nicht. Am 24. und 25. Dezember ist das Restaurant geschlossen.`,
         "startDate": "2026-11-25T17:00:00+01:00",
         "endDate": "2026-12-23T23:30:00+01:00",
         "eventStatus": "https://schema.org/EventScheduled",
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "location": { "@id": "https://www.ristorantestoria.de/#restaurant" },
         "organizer": { "@id": "https://www.ristorantestoria.de/#organization" },
-        "image": ["https://www.ristorantestoria.de/weihnachtsmenue-storia-muenchen.jpg"],
+        "image": [EVENT_IMAGE_URL],
         "offers": {
           "@type": "AggregateOffer",
-          "lowPrice": "45.00",
+          "lowPrice": `${FACTS.weihnachten.groupMenuPriceFrom}.00`,
+          "highPrice": "65.00",
           "priceCurrency": "EUR",
           "availability": "https://schema.org/InStock",
-          "url": "https://www.ristorantestoria.de/weihnachten-muenchen/"
+          "url": "https://www.ristorantestoria.de/weihnachten-muenchen/",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "minValue": FACTS.weihnachten.groupMenuMinGuests,
+            "unitText": "Personen"
+          }
         }
       })}} />
 
@@ -227,12 +331,80 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               : [{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]
             } />
 
-            {/* Intro */}
+            {/* TL;DR (E1.5) — der fertige `tldr`-Text lag bisher ungenutzt in den Übersetzungen.
+                Muster übernommen von `UeberUns.tsx` („TLDR — Citation-optimized intro"): eine
+                Karte direkt unter der Breadcrumb, vor allen anderen Inhalten. Inhaltlich trägt
+                sie seit E1.4 die Zwei-Wege-Realität als allererste Aussage der Seite. */}
+            <div className="bg-card border rounded-2xl p-6 md:p-8 mb-12">
+              <p className="text-muted-foreground leading-relaxed">{fillFacts(s.tldr)}</p>
+            </div>
+
+            {/* Intro — erster Satz ist seit E1.5 der Definition-Lead (GEO-Regel 1) und benennt
+                zugleich beide Wege (E1.4); der letzte Absatz trägt die autoritative
+                Outbound-Citation (GEO-Regel 3). */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{s.introTitle}</h2>
-              <p className="text-lg text-muted-foreground mb-4">{s.introP1}</p>
-              <p className="text-muted-foreground mb-4">{s.introP2}</p>
-              <p className="text-muted-foreground">{s.introP3}</p>
+              <p className="text-lg text-muted-foreground mb-4">{fillFacts(s.introP1)}</p>
+              <p className="text-muted-foreground mb-4">{fillFacts(s.introP2)}</p>
+              <p className="text-muted-foreground mb-4">{s.introP3}</p>
+              <p className="text-muted-foreground">
+                {s.citationPre}
+                <a
+                  href={CITATION_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground underline decoration-muted-foreground hover:decoration-foreground transition-colors"
+                >
+                  {s.citationAnchor}
+                </a>
+                {s.citationPost}
+              </p>
+            </section>
+
+            {/* Auf einen Blick (E1.3) — Definitionsliste statt Fließtext, damit die Eckdaten
+                maschinenlesbar bleiben (Wettbewerbsraster: Angebot · Zeitraum · Kapazität · Frist). */}
+            <section className="mb-16" aria-labelledby="weihnachten-auf-einen-blick">
+              <Card className="border-primary/30 bg-secondary/30">
+                <CardHeader className="pb-3">
+                  <h2 id="weihnachten-auf-einen-blick" className="text-2xl font-serif font-bold">{s.atAGlanceTitle}</h2>
+                </CardHeader>
+                <CardContent>
+                  <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                    {atAGlance.map((item, i) => (
+                      <div key={i}>
+                        <dt className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-1">{item.label}</dt>
+                        <dd className="font-medium">{item.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Zwei Wege (E1.4) — direkt unter „Auf einen Blick" und VOR den Paketen, damit der
+                Besucher die Entscheidung trifft, bevor er Preise sieht. Die Pakete darunter sind
+                nur noch Orientierung für Weg 2, nicht mehr ein Katalog fester Menüs. */}
+            <section className="mb-16" aria-labelledby="weihnachten-zwei-wege">
+              <h2 id="weihnachten-zwei-wege" className="text-3xl font-serif font-bold mb-4 text-center">{s.twoWaysTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.twoWaysIntro}</p>
+              <div className="grid md:grid-cols-2 gap-6">
+                {twoWays.map((way, i) => (
+                  <Card key={i} className="border-primary/30">
+                    <CardHeader className="pb-2">
+                      <Badge variant="secondary" className="w-fit mb-2">{way.badge}</Badge>
+                      <CardTitle className="text-xl font-serif">{way.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground mb-4">{way.desc}</p>
+                      <ul className="text-sm space-y-1">
+                        {way.items.map((item, j) => (
+                          <li key={j} className="text-muted-foreground">{'•'} {item}</li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </section>
 
             {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K2-Konsolidierung

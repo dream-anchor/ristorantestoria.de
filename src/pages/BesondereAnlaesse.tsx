@@ -10,6 +10,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import InlineVoucherCTA from "@/components/InlineVoucherCTA";
 import { isWmActive, isOktoberfestActive, WM_SLUG, OKTOBERFEST_SLUG } from "@/config/seasonalFlags";
+import { FACTS } from "@/config/facts";
 
 // Parent slug mapping for each language
 const PARENT_SLUGS = {
@@ -45,7 +46,8 @@ const BesondereAnlaesse = () => {
       slug: "silvester",
       slug_en: "new-years-eve", slug_it: "capodanno", slug_fr: "nouvel-an",
       label: t.seo?.besondereAnlaesse?.silvester || "Silvester Gala-Dinner",
-      teaser: "31. Dezember – Gala-Dinner mit 4-Gänge-Degustationsmenü ab 65,90 € p. P. (mit Weinbegleitung 99 €).",
+      // Preise/Gangzahl aus FACTS.silvester (SSoT) – nicht erneut hart eintippen.
+      teaser: `31. Dezember – Gala-Dinner mit ${FACTS.silvester.courses}-Gänge-Degustationsmenü für ${FACTS.silvester.price} € p. P. (mit Weinbegleitung ${FACTS.silvester.priceWithWine} €).`,
     },
   ];
 

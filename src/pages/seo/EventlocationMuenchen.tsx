@@ -22,6 +22,7 @@ import eventSetupSchwarz600 from "@/assets/ristorante-storia-uebersicht-stehtisc
 import eventSetupWeiss from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen.webp";
 import eventSetupWeiss600 from "@/assets/ristorante-storia-uebersicht-stehtische-weissen-hussen-600w.webp";
 import PhotoGallery from "@/components/PhotoGallery";
+import { FACTS } from "@/config/facts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -417,7 +418,7 @@ const EventlocationMuenchen = () => {
                 </LocalizedLink>
                 <Link to="/besondere-anlaesse/silvester/" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">Silvester Gala-Dinner</h3>
-                  <p className="text-muted-foreground text-sm">Feiern Sie den Jahreswechsel mit einem italienischen 5-Gänge-Menü im STORIA.</p>
+                  <p className="text-muted-foreground text-sm">Feiern Sie den Jahreswechsel mit einem italienischen {FACTS.silvester.courses}-Gänge-Menü im STORIA.</p>
                 </Link>
                 <LocalizedLink to="wm-2026-public-viewing-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.internalLinks.wmPublicViewing}</h3>
