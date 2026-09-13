@@ -526,26 +526,122 @@ Rundum-Service). **Bleibt:** Hero, Intro (neu gefasst auf reinen à-la-carte-Fok
 Blick", Reservierungs-Sektion (OpenTable, `id="reservieren"`), die verbleibenden 6 „Gründe", FAQ
 (nur privat-relevante Fragen: Heiligabend/Parkplatz/vegetarisch-Karte/unter der Woche).
 
-- [ ] **E4.1** `WeihnachtenMuenchen.tsx` auf reinen à-la-carte-Fokus zuschneiden: alle
-      Gruppen-only-Abschnitte entfernen (siehe Liste oben), „Zwei Wege"-Sektion vereinfachen zu
-      „für Gruppen/Firmen siehe unsere Weihnachtsfeier-Seite" mit prominentem Link, FAQ auf
-      privat-relevante Fragen kürzen, FoodEvent-JSON-LD prüfen (beschreibt aktuell laut Kommentar
-      ausschließlich Weg 2 — nach dem Wegfall von Weg 2 auf dieser Seite ggf. ganz entfernen oder
-      auf `Restaurant`/`FAQPage` reduzieren, keinen Event mehr behaupten, den es hier nicht mehr
-      gibt). Related-Links: `weihnachtsfeier-muenchen` **prominent an erster Stelle**, nicht nur
-      im (laut Recherche vermutlich toten) standalone-Nebenzweig.
-- [ ] **E4.2** `WeihnachtsfeierMuenchen.tsx` um den Gruppen-Weg erweitern: `AnlassAnfrageForm`
-      einbinden (neuer `anlass`-Wert, damit `sourceDetail` sauber `ristorante_weihnachtsfeier`
-      statt `ristorante_weihnachten` lautet — Lead-Attribution muss unterscheidbar bleiben),
-      Timeline/Ablauf aus E4.1 übernehmen (bereits vorhandene Menü-Pakete `Natale
-      Classico/Grande/Buffet` bleiben führend, nicht duplizieren). Events-storia-CTAs bleiben
-      unverändert (diese Seite ist NICHT Teil des MAESTRO-Ersatzes aus E2.3 — dort war
-      ausdrücklich nur `weihnachten-muenchen` gemeint). FAQ-Widerspruch auflösen: FAQ4 präzisieren
-      („feste Menüpakete für Gruppen/Firmen — für Einzelgäste à la carte siehe unsere
-      Weihnachtsseite"), Related-Links um `weihnachten-muenchen` ergänzen (fehlt heute komplett).
-      **Nebenbefund prüfen, nicht Pflicht:** ob der `standalone=false`-Zweig in
-      `WeihnachtenMuenchen.tsx` seit der K2-Konsolidierung noch erreichbar ist (Muster wie bei
-      Silvesters E1.7-Cleanup) — falls tot, im selben Zug entfernen.
+- [x] ~~**E4.1** `WeihnachtenMuenchen.tsx` auf reinen à-la-carte-Fokus zuschneiden~~ —
+      **erledigt 13.09.2026** (Branch `saisonseiten-e4`, noch nicht gepusht/PR, siehe E4.2 zuerst).
+      Entfernt: Pakete-Grid („Orientierung für Ihr Gruppen-Menü"), Anfrageformular-Sektion
+      (`id="anfrage"`, `AnlassAnfrageForm`-Einbindung — Komponente selbst bleibt), Kontaktbox
+      („Lieber persönlich sprechen?"), Timeline („So läuft Ihre Weihnachtsfeier ab"). „Zwei
+      Wege"-Sektion: Weg 1 (privat) unverändert als Karte, Weg 2 zu einem Hinweisblock mit
+      Link auf `weihnachtsfeier-muenchen` reduziert (`twoWay2HintBadge/Title/Desc/LinkLabel`
+      ersetzen `twoWay2Badge/Title/Desc/Item1-3`). „8 Gründe" auf 6 reduziert (reason4
+      Gruppengrößen, reason8 Rundum-Service entfernt, keine erfundenen Ersatzgründe). FAQ von
+      8 auf 5 gekürzt: `faq8` (Heiligabend), `faq3` (festes Menü — präzisiert, siehe unten),
+      `faq5` (unter der Woche), `faq4` (vegetarisch — Gruppen-Menü-Klausel entfernt), `faq7`
+      (Parkplatz); `faq1`/`faq2` (Buchungsvorlauf, Mindestpersonenzahl) und `faq6`
+      (Geschenke/Dekoration) entfernt. FAQ-Widerspruch zu `weihnachtsfeier-muenchen` FAQ4
+      aufgelöst: `faq3Answer` sagt jetzt explizit „Nein – für Einzelgäste und Familien…, für
+      Firmen und Gruppen ab 6 Personen bieten wir dagegen feste Weihnachtsmenüs an … Details
+      dazu auf unserer Weihnachtsfeier-Seite" statt eines unqualifizierten „Nein". FoodEvent-
+      JSON-LD **ersatzlos entfernt** (kein Ersatzschema — Begründung: Weg 2 wird auf dieser
+      Seite nicht mehr im Detail beschrieben, ein Event-Schema für ein Angebot ohne Termine/
+      Preise/Anfrageweg auf der Seite wäre irreführend; `Restaurant`+`FAQPage` bleiben).
+      Related-Links: `weihnachtsfeier-muenchen` **prominent an erster Stelle**
+      (`standaloneRelated1`, umbenannt zu „🎄 Firmen- & Gruppenfeier"), visuell hervorgehoben
+      (`border-2 border-primary bg-primary/5` statt Standardkarte). Hero-CTA und Final-CTA
+      „…anfragen"-Button führen jetzt auf `weihnachtsfeier-muenchen` statt auf das entfernte
+      `#anfrage`. Zwei stale Kommentar-/Textstellen korrigiert, die noch „Anfrageformular
+      weiter unten" behaupteten (introP3 in allen 4 Sprachen). 60 verwaiste
+      Übersetzungsschlüssel pro Sprache in de/en/fr entfernt (per Skript-Diff exakt gezählt):
+      packagesTitle/Intro + package1-3* [29], inquiryTitle/Intro [2], contactBoxTitle/Desc
+      [2], timelineTitle [1] + step1-5Title/Desc [10], twoWay2Badge/Title/Desc/Item1-3 [6],
+      reason4/reason8 Title/Desc [4], faq1/faq2/faq6 Question/Answer [6] — Gegenprobe: `grep`
+      in `WeihnachtenMuenchen.tsx` zeigt keine Nutzung mehr. it.ts (nur Teilübersetzung)
+      entsprechend schlanker bereinigt: 12 dort vorhandene Keys entfernt
+      (twoWay2Badge/Title/Desc/Item1-3 [6], inquiryTitle/Intro [2], packagesTitle/Intro [2],
+      contactBoxTitle/Desc [2]). 4 neue Keys ergänzt (`twoWay2HintBadge/Title/Desc/LinkLabel`)
+      in allen 4 Sprachen. **Nebenbefund (E4.2-Punkt) vorab geprüft:**
+      `grep -rn "<WeihnachtenMuenchen" src/ scripts/ prerender.js` → einziger Aufrufer ist
+      `App.tsx` → `WeihnachtenMuenchenStandalone`, **immer** mit `standalone` (nie `false`,
+      nie ganz ohne Prop) — die `!standalone`-Zweige (canonicalPath/breadcrumbSchema-Else,
+      nicht-standalone SEO-Texte, nicht-standalone Related-Links) sind damit nachweislich toter
+      Code, wie bei Silvesters E1.7. **Nicht entfernt** in E4.1 (optional, aufwändig — mehrere
+      Ternaries plus ca. 14 zusätzlich verwaiste Keys pro Sprache): bleibt offener Punkt für
+      eine spätere Iteration, nicht blockierend für E4.2.
+      Beweis: `npx tsc --noEmit` sauber, `npm run lint` unverändert bei 727 Problemen
+      (Baseline bestätigt vor Start), `npm run build` 157/157 Seiten gerendert, 0 Fehler.
+      `dist/weihnachten-muenchen/index.html` (Skript-Blöcke ausgeklammert): kein
+      `id="anfrage"` (0 Treffer), `id="reservieren"` vorhanden, kein `FoodEvent` im Rohcode
+      (0 Treffer), `FAQPage` mit genau 5 Question/Answer-Paaren, Related-Links-Reihenfolge
+      `weihnachtsfeier-muenchen → eventlocation-muenchen-maxvorstadt → firmenfeier-muenchen →
+      speisekarte → reservierung → catering` mit `weihnachtsfeier-muenchen` optisch
+      hervorgehoben (`bg-primary/5 border-2 border-primary` vs. `bg-card border` bei den
+      übrigen fünf).
+
+      **Nachtrag 13.09.2026 (Fakten-Korrektur, eigener Commit `6f498aa` auf demselben Branch):**
+      Antoine hat präzisiert, dass es **kein festes Weihnachtsmenü gibt — auch nicht für
+      Gruppen/Firmen**. Die in E4.1 geschriebene FAQ3-Antwort („…bieten wir dagegen feste
+      Weihnachtsmenüs an") widersprach dem und wurde korrigiert zu: kein für alle Gäste
+      vorgegebenes festes Menü; Einzelgäste/Familien wählen à la carte (dort zusätzlich ein
+      Weihnachtsmenü in drei Varianten Fleisch/Fisch/vegetarisch, einzeln bestellbar); Firmen/
+      Gruppen ab 6 Personen **besprechen** das Menü individuell mit dem Betreiber (nicht: wählen
+      aus festen Paketen). Gleiche Korrektur in `twoWay2HintDesc` („Orientierungspreise" statt
+      „feste Menüpakete"). Betrifft **alle 4 Sprachen**. `facts.ts` um
+      `altaCarteMenuVariants: ["Fleisch", "Fisch", "vegetarisch"]` ergänzt. **Wichtig für E4.2:**
+      dieselbe „kein festes Menü, wird individuell besprochen"-Sprachregel gilt für
+      `weihnachtsfeier-muenchen` genauso — siehe korrigierte E4.2-Beschreibung unten.
+- [x] ~~**E4.2** `WeihnachtsfeierMuenchen.tsx` um den Gruppen-Weg erweitern~~ — **erledigt
+      13.09.2026** (Branch `saisonseiten-e4`, noch nicht gepusht/PR).
+      **`src/components/AnlassAnfrageForm.tsx`:** `Anlass`-Union um `"weihnachtsfeier"` ergänzt,
+      `SOURCE_DETAIL.weihnachtsfeier = "ristorante_weihnachtsfeier"` und
+      `EVENT_TYPE.weihnachtsfeier = "Weihnachtsfeier für Firmen & Gruppen"` — eigener Wert statt
+      `"weihnachten"` mitzubenutzen, damit die Lead-Attribution zwischen den beiden Seiten
+      unterscheidbar bleibt (harte Vorgabe aus der Aufgabenstellung). `silvester`/`weihnachten`
+      unverändert, `WeihnachtenMuenchen.tsx`/`SilvesterMuenchen.tsx` nicht angefasst.
+      **`src/pages/seo/WeihnachtsfeierMuenchen.tsx`:** neue Anfrage-Sektion (`id="anfrage"`,
+      Muster identisch zu `SilvesterMuenchen.tsx`) direkt hinter der Menü-Sektion eingefügt —
+      `<AnlassAnfrageForm anlass="weihnachtsfeier" minGuests={FACTS.weihnachten.groupMenuMinGuests} />`
+      in einem `max-w-2xl`-Container, Überschrift/Intro aus neuen Keys `inquiryTitle`/
+      `inquiryIntro`. Events-storia-CTAs (Hero, Final-CTA) unverändert gelassen — diese Seite ist
+      nicht Teil des MAESTRO-Ersatzes aus E2.3, das Formular ergänzt nur. Related-Links-Grid um
+      eine erste Karte auf `weihnachten-muenchen` ergänzt (`related5Title/Desc`, fehlte bisher
+      komplett — Gegenrichtung zu der Karte, die `weihnachten-muenchen` seit E4.1 umgekehrt schon
+      prominent hierher setzt).
+      **Menü-Pakete umformuliert (Fakt Antoine 13.09.2026, kein festes Menü auch für Gruppen):**
+      Preise/Struktur der drei Karten (Natale Classico/Grande/Buffet) unverändert, nur Framing
+      angepasst — `menuTitle`/`menuIntro` sagen jetzt explizit „kein pauschal buchbares Menü,
+      Orientierungsbeispiele fürs gemeinsame Gespräch" statt sie als Bestellmenü zu präsentieren;
+      `step2Desc` im Ablauf-Block („Wählen Sie Ihr Weihnachtsmenü") auf „wir besprechen es
+      individuell" korrigiert. **FAQ4 präzisiert** (Frage bewusst NICHT „feste Menüpakete"
+      formuliert, um den in E4 gefundenen Faktenwiderspruch nicht in der sichtbaren Frage zu
+      wiederholen): „Können wir eines der Menüs oben einfach so buchen?" → „Nein – ein pauschal
+      buchbares Menü gibt es nicht: wir besprechen Ihr Weihnachtsmenü individuell mit Ihnen … die
+      Menüs oben dienen als Orientierung … für Einzelgäste/Familien siehe unsere Weihnachtsseite."
+      **Timeline/Ablauf aus E4.1 sinngemäß übernommen, nicht dupliziert:** die Seite hatte mit
+      `processTitle`/`step1-5` bereits einen eigenen Ablauf-Block (Anfrage → Besichtigung →
+      Angebot → Abstimmung → Feiertag), fachlich aber der B2B-*Planungsprozess*, während die aus
+      `WeihnachtenMuenchen.tsx` entfernte Timeline den *Abend selbst* beschrieb (Aperitivo-Empfang,
+      Menü Gang für Gang, Weine, Dolci & Digestif, Ausklang) — beides zusammen zu übernehmen hätte
+      zwei „Ablauf"-Sektionen nebeneinander bedeutet. Stattdessen in den bestehenden letzten Schritt
+      (`step5Desc`, „Buon Natale!") verschmolzen: der beschreibt bereits den Abend selbst und trägt
+      jetzt zusätzlich die Aperitivo→Menü→Wein→Dolci→Ausklang-Reihenfolge sinngemäß mit.
+      Alle Textänderungen (`menuTitle/Intro`, `step2Desc`, `step5Desc`, `faq4Question/Answer`,
+      `inquiryTitle/Intro`, `related5Title/Desc`) in **allen 4 Sprachen** (de/en/fr/it) — anders
+      als bei `WeihnachtenMuenchen.tsx` ist `it.ts` für diese Seite vollständig übersetzt, deshalb
+      hier volle Übersetzung statt Teilübersetzungs-Muster.
+      **Nebenbefund (`standalone`-Zweig) geprüft — entfällt:** `WeihnachtsfeierMuenchen` hat
+      (anders als `WeihnachtenMuenchen`) gar keine Props und keinen `standalone`-Zweig
+      (`const WeihnachtsfeierMuenchen = () => {`, Mount in `App.tsx` ohne jede Prop) — der
+      Nebenbefund aus der Aufgabenstellung ist damit nicht anwendbar, nichts zu entfernen.
+      Beweis: `npx tsc --noEmit` sauber, `npm run lint` unverändert bei 727 Problemen (651 Errors,
+      76 Warnings — Baseline vor und nach Änderung identisch), `npm run build` 157/157 Seiten
+      gerendert, 0 Fehler. `dist/weihnachtsfeier-muenchen/index.html` (Skript-Blöcke ausgeklammert
+      via `perl -0pe 's/<script.*?<\/script>//gs'`): `grep -oiE "feste[sn]? (Men(ü|u)|Paket)"` →
+      0 Treffer (sichtbarer Text), `id="anfrage"` vorhanden, `href="/weihnachten-muenchen/"`
+      vorhanden, FAQPage-Schema weiterhin 8 Question/Answer-Paare, FAQ4-Antwort im Rohtext beginnt
+      mit „Nein – ein pauschal buchbares Menü gibt es nicht…". `weihnachten-muenchen/index.html`
+      und `besondere-anlaesse/silvester/index.html` gegengeprüft: unverändert (`id="anfrage"`
+      weiterhin nur bei Silvester bzw. jetzt zusätzlich bei Weihnachtsfeier, nicht bei Weihnachten;
+      Silvester-Formular unangetastet).
 
 ## E4: Branch, Beweis, Merge
 

@@ -1988,12 +1988,16 @@ const frBase = {
       // Remplacent heroCta/heroCtaInactive et la note heroEventsNote/heroEventsLink ;
       // `heroCtaPhone` \u00e9tait d\u00e9j\u00e0 inutilis\u00e9 et dispara\u00eet avec eux.
       heroCtaReserve: "R\u00e9server une table pendant l\u2019Avent",
-      heroCtaInquiry: "Demander un menu de No\u00ebl pour groupes",
+      // E4.1 : ne m\u00e8ne plus \u00e0 un formulaire de demande sur cette page (supprim\u00e9) \u2014 renvoie
+      // directement \u00e0 la page F\u00eate de No\u00ebl avec la voie groupe.
+      heroCtaInquiry: "F\u00eate de No\u00ebl pour entreprises & groupes",
       // Definition-Lead (E1.5, GEO-Regel 1) + Zwei-Wege-Realit\u00e4t (E1.4).
       introTitle: "F\u00eate de No\u00ebl \u00e0 Munich \u2013 \u00e0 la carte \u00e0 table ou menu de No\u00ebl pour les groupes",
       introP1: "No\u00ebl au Ristorante STORIA est une offre de f\u00eate italienne au Karlstra\u00dfe 47a \u00e0 Munich Maxvorstadt qui fonctionne de deux mani\u00e8res : \u00e0 la carte, \u00e0 partir de la carte de saison, \u00e0 la table r\u00e9serv\u00e9e, d\u00e8s 1 personne \u2013 ou un menu de No\u00ebl que les entreprises et les groupes d\u00e8s {minGuests} personnes conviennent directement avec le restaurant, \u00e0 partir de {groupPrice} \u20ac par personne. La famille Speranza du Cilento dirige le restaurant depuis 2015 ; il n'existe volontairement aucun menu de No\u00ebl fixe \u00e0 commander \u00e0 l'avance.",
       introP2: "Sur la premi\u00e8re voie, vous r\u00e9servez simplement une table pendant l'Avent et commandez \u00e0 la carte de notre carte de saison \u2013 sans commande pr\u00e9alable, sans nombre minimum de convives. Sur la deuxi\u00e8me voie, nous composons un menu de No\u00ebl pour les entreprises et les groupes d\u00e8s {minGuests} personnes : cuisine festive du sud de l'Italie avec p\u00e2tes maison, vins raffin\u00e9s et panettone en dessert, adapt\u00e9 en concertation \u00e0 l'occasion et au budget.",
-      introP3: "L\u2019emplacement central \u2013 \u00e0 5 minutes de K\u00f6nigsplatz et du march\u00e9 de No\u00ebl \u2013 fait du STORIA le lieu id\u00e9al apr\u00e8s la visite du march\u00e9 de No\u00ebl. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. Un menu de groupe se convient directement avec nous : via le formulaire de demande plus bas, par t\u00e9l\u00e9phone ou par e-mail.",
+      // E4.1 : \u00ab via le formulaire de demande plus bas \u00bb corrig\u00e9 \u2014 ce formulaire n'existe plus sur
+      // cette page ; un menu de groupe se convient d\u00e9sormais via la page F\u00eate de No\u00ebl.
+      introP3: "L\u2019emplacement central \u2013 \u00e0 5 minutes de K\u00f6nigsplatz et du march\u00e9 de No\u00ebl \u2013 fait du STORIA le lieu id\u00e9al apr\u00e8s la visite du march\u00e9 de No\u00ebl. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. Un menu de groupe pour entreprises et groupes plus importants se convient directement avec nous via notre page F\u00eate de No\u00ebl.",
       // Citation externe (E1.5, GEO-Regel 3) \u2014 liste du patrimoine immat\u00e9riel de l'UNESCO ; le
       // Cilento, r\u00e9gion d'origine de la famille Speranza, y est la communaut\u00e9 italienne de
       // la di\u00e8te m\u00e9diterran\u00e9enne.
@@ -2012,101 +2016,69 @@ const frBase = {
       atAGlanceRequestValue: "Pour les groupes, demande conseill\u00e9e d\u00e8s septembre/octobre \u2013 l'Avent affiche vite complet.",
       // Deux voies (E1.4) \u2014 les valeurs entre accolades viennent de FACTS.weihnachten.
       twoWaysTitle: "Deux fa\u00e7ons de f\u00eater No\u00ebl au STORIA",
-      twoWaysIntro: "Il n'existe pas de menu de No\u00ebl fixe \u00e0 commander \u00e0 l'avance au STORIA. Vous choisissez plut\u00f4t l'une des deux voies \u2013 selon que vous venez \u00e0 titre priv\u00e9 ou que vous f\u00eatez en entreprise ou en groupe.",
+      // E4.1 (cannibalisation entre weihnachten-muenchen et weihnachtsfeier-muenchen r\u00e9solue,
+      // docs/LOOP-SAISONSEITEN-AUSBAU.md \u00a7 E4) : nomme toujours les deux voies, mais la voie 2
+      // renvoie d\u00e9sormais vers la page s\u0153ur au lieu de promettre un formulaire sur cette page.
+      twoWaysIntro: "Pour les convives individuels, les couples et les familles, il n'existe pas de menu de No\u00ebl fixe \u00e0 commander \u00e0 l'avance : vous r\u00e9servez une table et d\u00eenez \u00e0 la carte de la carte de saison. Si vous planifiez avec une entreprise ou un groupe plus important, notre page F\u00eate de No\u00ebl est la bonne adresse.",
       twoWay1Badge: "Voie 1 \u00b7 Priv\u00e9 & spontan\u00e9",
       twoWay1Title: "R\u00e9server une table et d\u00eener \u00e0 la carte",
       twoWay1Desc: "Pendant l'Avent, vous r\u00e9servez une table et commandez \u00e0 la carte de notre carte de saison \u2013 comme tous les autres soirs, avec une table dress\u00e9e plus festive.",
       twoWay1Item1: "D\u00e8s 1 personne",
       twoWay1Item2: "Aucune commande pr\u00e9alable ni concertation sur le menu",
       twoWay1Item3: "Carte de saison, command\u00e9e et factur\u00e9e \u00e0 la carte",
-      twoWay2Badge: "Voie 2 \u00b7 Entreprise & groupe",
-      twoWay2Title: "Menu de No\u00ebl sur concertation",
-      twoWay2Desc: "D\u00e8s {minGuests} personnes, nous composons votre menu de No\u00ebl directement avec vous \u2013 par t\u00e9l\u00e9phone ou par e-mail, adapt\u00e9 \u00e0 l'occasion, \u00e0 vos pr\u00e9f\u00e9rences et \u00e0 votre budget.",
-      twoWay2Item1: "D\u00e8s {minGuests} personnes",
-      twoWay2Item2: "Menu, d\u00e9roul\u00e9 et boissons sont d\u00e9finis en concertation",
-      twoWay2Item3: "Prix indicatif \u00e0 partir de {groupPrice} \u20ac par personne",
+      twoWay1Item4: "La carte propose aussi un plat de No\u00ebl au choix \u2013 viande, poisson ou v\u00e9g\u00e9tarien \u2013 \u00e0 commander individuellement",
+      // E4.1 : la voie 2 n'est plus un bloc d'action propre sur cette page \u2014 la CTA box, le
+      // formulaire de demande et la timeline migrent vers weihnachtsfeier-muenchen en E4.2. Seul
+      // un bref renvoi avec lien subsiste, pour ne pas entretenir deux fois le contenu groupe.
+      twoWay2HintBadge: "Entreprise & groupe",
+      twoWay2HintTitle: "Vous planifiez avec des coll\u00e8gues ou un groupe plus important ?",
+      twoWay2HintDesc: "Notre page F\u00eate de No\u00ebl propose des tarifs indicatifs, une capacit\u00e9 jusqu'\u00e0 300 invit\u00e9s et le formulaire de demande pour votre f\u00eate d'entreprise ou de groupe \u2013 le menu est convenu individuellement avec vous.",
+      twoWay2HintLinkLabel: "Vers la page F\u00eate de No\u00ebl",
       // R\u00e9servation (E2.1) \u2014 la premi\u00e8re voie, sous forme d'action. Les deux jours de
       // fermeture sont nomm\u00e9s car ReservationBooking les bloque dans le calendrier.
       reservationTitle: "R\u00e9server une table pendant l'Avent",
       reservationIntro: "La premi\u00e8re voie en bref : r\u00e9server une table et commander \u00e0 la carte notre menu de saison \u2013 d\u00e8s 1 personne, sans pr\u00e9commande ni accord pr\u00e9alable sur le menu.",
       reservationNote: "Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre ; ces deux jours ne peuvent pas \u00eatre s\u00e9lectionn\u00e9s dans le calendrier. La r\u00e9servation se finalise sur OpenTable.",
-      // Formulaire de demande (E2.2) \u2014 la deuxi\u00e8me voie, sous forme d'action. {minGuests} vient de FACTS.
-      inquiryTitle: "Demander un menu de No\u00ebl pour les groupes",
-      inquiryIntro: "Deuxi\u00e8me voie : \u00e0 partir de {minGuests} personnes, nous composons votre menu de No\u00ebl avec vous. Indiquez-nous l'occasion, la date souhait\u00e9e et le nombre de convives \u2013 nous revenons vers vous avec une proposition.",
-      packagesTitle: "Rep\u00e8res pour votre menu de groupe",
-      packagesIntro: "Les trois forfaits ci-dessous ne sont pas des menus tout faits \u00e0 commander, mais des rep\u00e8res d'ampleur et de prix pour la deuxi\u00e8me voie. Ce qui arrive finalement \u00e0 table se d\u00e9cide ensemble, en concertation.",
-      package1Title: "No\u00ebl Classic",
-      package1Subtitle: "L\u2019exp\u00e9rience de No\u00ebl italienne",
-      package1Item1: "Ap\u00e9ritif au Prosecco",
-      package1Item2: "Menu de No\u00ebl 3 plats",
-      package1Item3: "Eau incluse",
-      package1Item4: "D\u00e9coration de table festive",
-      package1Ideal: "Id\u00e9al pour : Repas d\u2019\u00e9quipe, soir\u00e9es de l\u2019Avent, petits groupes (6\u201320 invit\u00e9s)",
-      package1Price: "d\u00e8s 45 \u20ac p.p.",
-      package2Title: "No\u00ebl Premium",
-      package2Subtitle: "Le forfait festif complet",
-      package2Item1: "R\u00e9ception Prosecco avec antipasti de No\u00ebl",
-      package2Item2: "Menu de No\u00ebl 4 plats",
-      package2Item3: "Accord vins (3 verres)",
-      package2Item4: "D\u00e9coration festive & bougies",
-      package2Item5: "Digestif (Limoncello ou Grappa)",
-      package2Ideal: "Id\u00e9al pour : F\u00eates d\u2019entreprise, f\u00eates de famille (20\u201360 invit\u00e9s)",
-      package2Price: "d\u00e8s 65 \u20ac p.p.",
-      package2Badge: "Option la plus populaire",
-      package3Title: "No\u00ebl Exclusive",
-      package3Subtitle: "Votre f\u00eate de No\u00ebl priv\u00e9e",
-      package3Item1: "Lieu priv\u00e9 (terrasse ou int\u00e9rieur exclusif)",
-      package3Item2: "Menu personnalis\u00e9 selon vos souhaits",
-      package3Item3: "Accord vins premium",
-      package3Item4: "D\u00e9coration compl\u00e8te de No\u00ebl",
-      package3Item5: "Coordination compl\u00e8te de l\u2019\u00e9v\u00e9nement",
-      package3Ideal: "Id\u00e9al pour : Grandes f\u00eates d\u2019entreprise (40\u2013100+ invit\u00e9s)",
-      package3Price: "Sur demande",
-      // Canaux de contact (E2.3) \u2014 remplacent l\u2019ancienne CTA box qui menait \u00e0 events-storia.de.
-      // Les canaux n\u2019apparaissent plus qu\u2019ici, juste derri\u00e8re le formulaire de demande.
-      contactBoxTitle: "Vous pr\u00e9f\u00e9rez nous parler directement ?",
-      contactBoxDesc: "T\u00e9l\u00e9phone, e-mail ou WhatsApp \u2013 pour un menu de groupe, la conversation est souvent la voie la plus rapide, puisque le menu, le d\u00e9roul\u00e9 et les boissons se d\u00e9finissent de toute fa\u00e7on ensemble.",
-      reasonsTitle: "8 Raisons de F\u00eater No\u00ebl au STORIA",
+      // E4.1 : section formulaire de demande (id="anfrage"), grille de forfaits et CTA box
+      // supprim\u00e9es de cette page (groupe uniquement, migrent vers weihnachtsfeier-muenchen en
+      // E4.2). inquiryTitle/Intro, packagesTitle/Intro, package1-3*, contactBoxTitle/Desc
+      // supprim\u00e9s sans remplacement ici (v\u00e9rifi\u00e9 : plus r\u00e9f\u00e9renc\u00e9s nulle part ailleurs).
+      reasonsTitle: "6 Raisons de F\u00eater No\u00ebl au STORIA",
       reason1Title: "\ud83c\udf5d Authentique cuisine festive italienne",
       reason1Desc: "Cuisine festive traditionnelle italienne : des antipasti aux p\u00e2tes maison jusqu\u2019au panettone \u2013 \u00e0 la carte \u00e0 table comme dans le menu de groupe.",
       reason2Title: "\ud83d\udd6f\ufe0f Ambiance Festive avec Flair Italien",
       reason2Desc: "Bougies, d\u00e9coration de No\u00ebl et atmosph\u00e8re chaleureuse \u2013 le STORIA devient un salon de No\u00ebl italien.",
       reason3Title: "\ud83d\udccd Emplacement Central \u00e0 Maxvorstadt",
       reason3Desc: "5 min de K\u00f6nigsplatz, 5 min de la gare centrale. Parfaitement accessible pour tous \u2013 m\u00eame apr\u00e8s le march\u00e9 de No\u00ebl.",
-      reason4Title: "\ud83d\udc65 Tailles de Groupe Flexibles",
-      reason4Desc: "De la f\u00eate intime en famille (6 invit\u00e9s) \u00e0 la grande f\u00eate d\u2019entreprise (100+ invit\u00e9s) \u2013 tout est possible.",
+      // E4.1 : reason4 (tailles de groupe) et reason8 (service complet) \u00e9taient r\u00e9serv\u00e9es au
+      // groupe et sont supprim\u00e9es sans remplacement (r\u00e9duit \u00e0 6 raisons plut\u00f4t que d'inventer
+      // de nouveaux faits).
       reason5Title: "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66 Famille Speranza \u2013 No\u00ebl comme en Italie",
       reason5Desc: "La famille du Cilento apporte la v\u00e9ritable tradition de No\u00ebl italienne \u00e0 Munich.",
       reason6Title: "\ud83c\udf84 Proximit\u00e9 du March\u00e9 de No\u00ebl",
       reason6Desc: "Apr\u00e8s le march\u00e9 de No\u00ebl de K\u00f6nigsplatz ou du centre-ville \u2013 fin de soir\u00e9e festive id\u00e9ale au STORIA.",
       reason7Title: "\ud83c\udfd6\ufe0f Terrasse Couverte",
       reason7Desc: "Utilisable m\u00eame en hiver \u2013 pour les grands groupes ou comme zone d\u2019accueil.",
-      reason8Title: "\ud83d\udcc5 Planifiez T\u00f4t, Profitez Sereinement",
-      reason8Desc: "Nous nous occupons de tout : menu, d\u00e9coration, d\u00e9roulement. Vous n\u2019avez qu\u2019\u00e0 profiter.",
-      timelineTitle: "D\u00e9roulement de Votre F\u00eate de No\u00ebl",
-      step1Title: "R\u00e9ception Ap\u00e9ritif",
-      step1Desc: "Prosecco ou vin chaud \u2013 arrivez et profitez de l\u2019atmosph\u00e8re festive.",
-      step2Title: "Menu de No\u00ebl Festif",
-      step2Desc: "Servi plat par plat \u2013 de l\u2019entr\u00e9e au dessert, tout est pr\u00e9par\u00e9 frais.",
-      step3Title: "Vins & Conversations",
-      step3Desc: "Vins italiens s\u00e9lectionn\u00e9s accompagnent votre menu. Temps pour de bonnes conversations.",
-      step4Title: "Dolci & Digestif",
-      step4Desc: "Panettone, tiramisu ou panna cotta \u2013 la douce conclusion d\u2019une soir\u00e9e festive.",
-      step5Title: "\u00c9pilogue",
-      step5Desc: "Grappa, limoncello ou espresso \u2013 terminez la soir\u00e9e en douceur.",
+      // E4.1 : la timeline \u00ab D\u00e9roulement de Votre F\u00eate de No\u00ebl \u00bb \u00e9tait r\u00e9serv\u00e9e au groupe (menu de
+      // groupe servi) et migre vers weihnachtsfeier-muenchen en E4.2. timelineTitle/step1-5*
+      // supprim\u00e9s.
       faqTitle: "Questions Fr\u00e9quentes sur No\u00ebl au STORIA",
-      faq1Question: "Quand dois-je r\u00e9server notre f\u00eate de No\u00ebl ?",
-      faq1Answer: "Le plus t\u00f4t sera le mieux ! La p\u00e9riode de l\u2019Avent est vite r\u00e9serv\u00e9e. Nous recommandons de demander d\u00e8s septembre/octobre.",
-      faq2Question: "\u00c0 partir de combien de personnes puis-je r\u00e9server ?",
-      faq2Answer: "Deux possibilit\u00e9s : \u00e0 table, vous d\u00eenez \u00e0 la carte de notre carte de saison pendant l\u2019Avent \u2013 1 personne suffit. Un menu de No\u00ebl fixe pour les groupes est compos\u00e9 \u00e0 partir de 6 personnes ; pour cela, \u00e9crivez-nous via le formulaire de demande de cette page.",
+      // E4.1 : faq1 (d\u00e9lai de r\u00e9servation) et faq2 (nombre minimum de convives) \u00e9taient r\u00e9serv\u00e9es
+      // au groupe et sont supprim\u00e9es sans remplacement (rel\u00e8vent de weihnachtsfeier-muenchen).
       faq3Question: "Existe-t-il un menu de No\u00ebl fixe \u00e0 commander \u00e0 l'avance ?",
-      faq3Answer: "Non. Pendant l'Avent, vous d\u00eenez \u00e0 table \u00e0 la carte de notre carte de saison. Un menu de No\u00ebl est compos\u00e9 individuellement pour les entreprises et les groupes d\u00e8s 6 personnes \u2013 sur mesure, selon vos souhaits et votre budget, convenu par t\u00e9l\u00e9phone ou par e-mail.",
+      // E4.1 : pr\u00e9cis\u00e9e contre la contradiction trouv\u00e9e lors de la recherche E4 avec
+      // weihnachtsfeier-muenchen FAQ4 (\u00ab Oui, trois forfaits \u00bb). Les deux r\u00e9ponses sont correctes
+      // dans leur contexte respectif (convive individuel vs. groupe) \u2014 cette r\u00e9ponse le rend
+      // d\u00e9sormais explicite et renvoie vers la page s\u0153ur au lieu d'un simple \u00ab Non \u00bb.
+      faq3Answer: "Non \u2013 il n'existe pas de menu de No\u00ebl fixe identique pour tous. En tant que client individuel ou famille, vous r\u00e9servez une table et commandez \u00e0 la carte de notre carte de saison \u2013 qui propose aussi un plat de No\u00ebl au choix (viande, poisson ou v\u00e9g\u00e9tarien), \u00e0 commander individuellement. Pour les entreprises et les groupes \u00e0 partir de 6 personnes, nous convenons du menu de No\u00ebl directement et individuellement avec vous \u2013 d\u00e9tails sur notre page F\u00eate de No\u00ebl.",
       faq4Question: "Y a-t-il des options v\u00e9g\u00e9tariennes/v\u00e9ganes ?",
-      faq4Answer: "Oui, la carte de saison comprend des plats v\u00e9g\u00e9tariens et chaque menu de groupe est \u00e9galement disponible en version v\u00e9g\u00e9tarienne. Options v\u00e9ganes sur demande.",
+      // E4.1 : clause sur le menu de groupe supprim\u00e9e (rel\u00e8ve de weihnachtsfeier-muenchen), r\u00e9ponse
+      // d\u00e9sormais centr\u00e9e sur la carte de saison.
+      faq4Answer: "Oui, notre carte de saison comprend des plats v\u00e9g\u00e9tariens. Options v\u00e9ganes sur demande.",
       faq5Question: "Une f\u00eate de No\u00ebl en semaine est-elle possible ?",
       faq5Answer: "Oui, du lundi au dimanche. En semaine, vous avez souvent plus de choix de dates.",
-      faq6Question: "Puis-je apporter des cadeaux ou de la d\u00e9coration ?",
-      faq6Answer: "Bien s\u00fbr ! Nous vous aidons volontiers dans la pr\u00e9paration. N\u2019h\u00e9sitez pas \u00e0 nous contacter.",
+      // E4.1 : faq6 (apporter cadeaux/d\u00e9coration, \u00ab nous nous occupons de la pr\u00e9paration \u00bb) visait
+      // un \u00e9v\u00e9nement de groupe encadr\u00e9 et est supprim\u00e9e sans remplacement.
       faq7Question: "Y a-t-il des possibilit\u00e9s de stationnement ?",
       faq7Answer: "Parking Marsstra\u00dfe (P22), Hirtenstra\u00dfe 14, 750 places, ouvert 24h, 5 minutes \u00e0 pied.",
       faq8Question: "Le STORIA est-il ouvert le r\u00e9veillon de No\u00ebl ?",
@@ -2131,7 +2103,8 @@ const frBase = {
       finalCtaTitle: "F\u00eate de No\u00ebl au STORIA \u2013 Planifiez Maintenant",
       finalCtaDesc: "R\u00e9servez votre date pr\u00e9f\u00e9r\u00e9e pour la plus belle f\u00eate de No\u00ebl \u00e0 Munich. Pour une table pendant l\u2019Avent, une r\u00e9servation suffit ; pour un menu de groupe, nous en discutons ensemble en d\u00e9tail.",
       finalCtaButtonReserve: "\u2192 R\u00e9server une table",
-      finalCtaButtonInquiry: "\u2192 Demander un menu de groupe",
+      // E4.1 : renvoie vers la page F\u00eate de No\u00ebl au lieu du formulaire #anfrage supprim\u00e9 de cette page.
+      finalCtaButtonInquiry: "\u2192 Vers la page F\u00eate de No\u00ebl",
       // Standalone SEO page keys
       standaloneSeoTitle: "No\u00ebl Munich 2026 \u2013 Menu de No\u00ebl Italien | STORIA",
       standaloneSeoDescription: "F\u00eatez No\u00ebl \u00e0 Munich : Menus de No\u00ebl italiens festifs au Ristorante STORIA Maxvorstadt. D\u00e8s 45 \u20ac p.p. pour 6\u2013100 invit\u00e9s. En savoir plus !",
@@ -2142,8 +2115,11 @@ const frBase = {
       standaloneTeaserButton: "Voir la carte de saison",
       standaloneInactiveTitle: "No\u00ebl au STORIA \u2013 En savoir plus",
       standaloneInactiveDesc: "Pendant l\u2019Avent, vous d\u00eenez \u00e0 la carte de notre carte de saison ; un menu de No\u00ebl pour les groupes se convient directement avec vous. Contactez-nous pour votre r\u00e9servation ou votre demande de groupe.",
-      standaloneRelated1Title: "\ud83c\udf84 F\u00eate de No\u00ebl",
-      standaloneRelated1Desc: "Planifiez votre f\u00eate de No\u00ebl au STORIA",
+      // E4.1 : premi\u00e8re position, mise en avant, avec un libell\u00e9 entreprise/groupe explicite
+      // (Related Links, cannibalisation r\u00e9solue, docs/LOOP-SAISONSEITEN-AUSBAU.md \u00a7 E4) \u2014 aussi
+      // mise en avant visuellement dans le rendu (voir WeihnachtenMuenchen.tsx, map relatedLinks, i === 0).
+      standaloneRelated1Title: "\ud83c\udf84 F\u00eate de No\u00ebl Entreprise & Groupe",
+      standaloneRelated1Desc: "F\u00eate de No\u00ebl pour entreprises et groupes \u00e0 partir de 6 personnes \u2013 forfaits fixes & formulaire de demande",
       standaloneRelated2Title: "\ud83c\udf89 Lieu d\u2019\u00c9v\u00e9nement",
       standaloneRelated2Desc: "\u00c9v\u00e9nements & c\u00e9l\u00e9brations au STORIA Munich",
       standaloneRelated3Title: "\ud83c\udfe2 \u00c9v\u00e9nement d\u2019Entreprise",
@@ -2195,8 +2171,12 @@ const frBase = {
       type4Item2: "Réception au prosecco possible",
       type4Item3: "Décoration de table individuelle",
       type4Item4: "Ambiance networking professionnel",
-      menuTitle: "Notre Menu de Noël Munich",
-      menuIntro: "Pour la saison de Noël, notre chef crée chaque année des menus festifs spéciaux qui allient tradition de Noël italienne et ingrédients de saison.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fait confirmé par Antoine le 13.09.2026) :
+      // aucun menu de Noël fixe et prédéfini — même pas pour les entreprises/groupes. menuTitle/
+      // menuIntro reformulés pour que les trois cartes ci-dessous (prix/structure inchangés) se
+      // lisent clairement comme des exemples indicatifs, pas un menu réservable tel quel.
+      menuTitle: "Votre Menu de Noël – Convenu Individuellement Avec Vous",
+      menuIntro: "Il n'existe pas de menu de Noël fixe à réserver simplement : ce qui arrivera finalement à table, nous le décidons ensemble avec vous – adapté à l'occasion, à vos préférences et à votre budget. Les trois menus ci-dessous sont des exemples indicatifs pour l'ampleur et la fourchette de prix, pas un menu prêt à commander.",
       menu1Title: "🌟 Menu Natale Classico – 4 Services",
       menu1Subtitle: "Notre classique pour les fêtes de Noël",
       menu1Desc: "Antipasto della casa, Primo Piatto (pâtes ou risotto), Secondo Piatto (viande ou poisson) et Dolce della casa. Apéritif de bienvenue et un verre de vin par service inclus.",
@@ -2208,6 +2188,12 @@ const frBase = {
       menu3Subtitle: "Pour les grands groupes",
       menu3Desc: "Buffet festif italien avec large sélection d\u2019antipasti, trois plats principaux, variété de desserts et boissons sans alcool. Idéal pour les fêtes d\u2019entreprise à partir de 30 invités, où networking et ambiance détendue sont au premier plan.",
       menuPriceNote: "Prix actuels et détails saisonniers : events-storia.de ou directement au 089 51519696",
+      // Formulaire de demande (E4.2, `AnlassAnfrageForm` avec `anlass="weihnachtsfeier"`) — la
+      // voie groupe/entreprise qui a migré vers cette page lors de la résolution de la
+      // cannibalisation avec weihnachten-muenchen. S'ajoute aux CTA events-storia existants, ne
+      // les remplace pas.
+      inquiryTitle: "Demander votre Fête de Noël",
+      inquiryIntro: "Vous planifiez une fête d'entreprise ou de groupe ? Écrivez-nous la date souhaitée, le nombre d'invités et vos idées – nous discuterons du menu individuellement avec vous.",
       reasonsTitle: "8 Raisons pour Votre Fête de Noël au STORIA",
       reason1Title: "🎄 Ambiance Italienne Festive",
       reason1Desc: "Les décorations de Noël rencontrent le charme italien. STORIA se transforme pendant l\u2019Avent en un lieu chaleureux et festif – sans kitsch, avec beaucoup de style.",
@@ -2229,13 +2215,19 @@ const frBase = {
       step1Title: "Demande et Première Consultation",
       step1Desc: "Contactez-nous via events-storia.de ou par téléphone. Indiquez-nous la date souhaitée, le nombre d\u2019invités et vos souhaits. Réponse sous 48 heures.",
       step2Title: "Visite et Choix du Menu",
-      step2Desc: "Optionnel : Visitez les lieux en personne. Choisissez votre menu de Noël et discutez de vos souhaits individuels.",
+      // E4.2 : « Choisissez votre menu de Noël » reformulé — il n'y a pas de menu à choisir,
+      // seulement un échange direct (voir menuIntro/faq4Answer).
+      step2Desc: "Optionnel : Visitez les lieux en personne. Nous discutons de votre menu de Noël individuel – les menus ci-dessus servent d'indication.",
       step3Title: "Devis et Réservation",
       step3Desc: "Vous recevez un devis transparent. Après votre confirmation, un acompte (30 %) garantit votre date. Facturation à l\u2019entreprise possible.",
       step4Title: "Coordination Finale",
       step4Desc: "1-2 semaines avant : Coordination finale du programme, plan de table, demandes spéciales. Votre interlocuteur personnel est prêt.",
       step5Title: "Votre Fête de Noël – Buon Natale !",
-      step5Desc: "Le soir venu, nous nous occupons de tout. Ambiance festive, service parfait, cuisine exquise. Vous et vos invités pouvez profiter de la soirée.",
+      // E4.2 : intègre, dans l'esprit, la timeline « Comment se déroule votre fête de Noël »
+      // supprimée de WeihnachtenMuenchen.tsx en E4.1 (réception apéritif, menu plat par plat,
+      // vins, dolci & digestif, épilogue) — fusionnée dans cette dernière étape plutôt qu'une
+      // seconde section timeline distincte (ce bloc processTitle couvre déjà le déroulé).
+      step5Desc: "Le soir venu, nous nous occupons de tout : de la réception apéritif à votre menu de Noël servi plat par plat, accompagné de vins sélectionnés, jusqu'aux dolci et au digestif pour clore la soirée. Ambiance festive, service parfait – vous et vos invités profitez simplement de la soirée.",
       testimonialsTitle: "Ce que les Entreprises Disent des Fêtes de Noël au STORIA",
       testimonial1Quote: "Notre fête de Noël a été un succès total ! L\u2019ambiance festive, le menu de Noël italien et le service chaleureux ont enthousiasmé tout le monde. Nous reviendrons l\u2019année prochaine.",
       testimonial1Author: "Équipe Marketing, Startup Tech Munich",
@@ -2267,8 +2259,13 @@ const frBase = {
       faq2Answer: "Nous proposons des concepts d\u2019espace flexibles : Espace séparé pour 10-30 personnes, espace semi-privé pour 30-60 personnes, location exclusive de salle pour 60-100 places assises. Réceptions debout jusqu'à 300 invités.",
       faq3Question: "Quand dois-je réserver la fête de Noël Munich ?",
       faq3Answer: "Idéalement en septembre ou octobre. Les dates populaires de début à mi-décembre (jeu, ven, sam) sont souvent réservées tôt.",
-      faq4Question: "Y a-t-il un menu de Noël spécial Munich ?",
-      faq4Answer: "Oui, notre chef crée chaque année des menus de Noël spéciaux avec des spécialités italiennes de saison : 4 services (Classico), 5 services (Grande) et options buffet.",
+      // E4.2 (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4, fait confirmé par Antoine le 13.09.2026) :
+      // précisé face à la contradiction trouvée lors de la recherche E4 avec faq3 de
+      // weihnachten-muenchen (« pas de menu de Noël fixe »). La question et la réponse rendent
+      // désormais explicite que les menus ci-dessus sont indicatifs, pas un menu réservable — et
+      // renvoient les convives individuels vers la page sœur.
+      faq4Question: "Pouvons-nous simplement réserver l'un des menus ci-dessus ?",
+      faq4Answer: "Non – il n'existe pas de menu réservable tel quel : nous discutons de votre menu de Noël pour la fête individuellement avec vous, adapté à l'occasion, à vos préférences et à votre budget. Les menus Natale Classico, Grande et Buffet ci-dessus servent d'indication pour l'ampleur et la fourchette de prix, pas de menu prêt à commander. Si vous êtes un convive individuel ou une famille souhaitant fêter Noël à la carte, vous trouverez tous les détails sur notre page Noël.",
       faq5Question: "Puis-je réserver le lieu en exclusivité pour une fête de Noël ?",
       faq5Answer: "Oui, à partir d\u2019environ 40 invités, nous proposons la location exclusive de salle. Renseignez-vous sur la disponibilité et les conditions.",
       faq6Question: "Les factures peuvent-elles être adressées à l\u2019entreprise ?",
@@ -2281,6 +2278,10 @@ const frBase = {
       ctaDesc: "Réservez votre date préférée – les meilleures dates partent vite !",
       ctaButton: "\u2192 R\u00e9server f\u00eate de No\u00ebl maintenant",
       relatedTitle: "Cela Pourrait Aussi Vous Intéresser",
+      // E4.2 : weihnachten-muenchen ajouté (absent jusqu'ici) — sens inverse du lien que
+      // weihnachten-muenchen pointe déjà ici de manière proéminente depuis E4.1.
+      related5Title: "🎅 Noël à la Carte",
+      related5Desc: "Un dîner de Noël privé pour convives individuels et familles – réservez une table, commandez à la carte de saison.",
       related1Title: "💼 Événements d\u2019Entreprise Munich",
       related1Desc: "Tous les formats d\u2019événements en un coup d\u2019œil",
       related2Title: "🎉 Lieu d\u2019Événement Munich",

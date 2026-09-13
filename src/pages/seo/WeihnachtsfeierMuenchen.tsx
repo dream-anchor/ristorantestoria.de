@@ -7,6 +7,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
+import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -19,6 +20,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
+import { FACTS } from "@/config/facts";
 
 const WeihnachtsfeierMuenchen = () => {
   const { t } = useLanguage();
@@ -157,7 +159,13 @@ const WeihnachtsfeierMuenchen = () => {
               </div>
             </section>
 
-            {/* Weihnachtsmenü */}
+            {/* Weihnachtsmenü — E4.2, Fakt (Antoine, 13.09.2026, gilt hier genauso wie auf
+                weihnachten-muenchen): es gibt KEIN festes, vorgegebenes Weihnachtsmenü, auch nicht
+                für Firmen/Gruppen. Die drei Karten (Natale Classico/Grande/Buffet) bleiben in
+                Preis und Struktur unverändert (Geschäftsfakt), sind aber laut `menuIntro` jetzt
+                ausdrücklich Orientierungsbeispiele für das gemeinsame Gespräch, kein
+                Bestellmenü von der Karte — siehe auch `faq4Answer` und die Anfrage-Sektion
+                direkt darunter. */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-4 text-center">{w.menuTitle}</h2>
               <p className="text-muted-foreground text-center mb-8">{w.menuIntro}</p>
@@ -176,6 +184,27 @@ const WeihnachtsfeierMuenchen = () => {
                 ))}
               </div>
               <p className="text-center text-muted-foreground mt-6 text-sm"><PhoneText>{w.menuPriceNote}</PhoneText></p>
+            </section>
+
+            {/* Anfrage (E4.2, docs/LOOP-SAISONSEITEN-AUSBAU.md § E4) — der Gruppen-/Firmen-Weg,
+                der bei der Kannibalisierungs-Auflösung von weihnachten-muenchen zu dieser Seite
+                gewandert ist. Eigener `anlass="weihnachtsfeier"` (nicht "weihnachten"), damit
+                `sourceDetail` als `ristorante_weihnachtsfeier` unterscheidbar bleibt — siehe
+                AnlassAnfrageForm.tsx. Steht bewusst direkt hinter den Menü-Beispielen: wer die
+                Orientierung oben gesehen hat, kann hier sofort anfragen.
+
+                Events-storia-CTAs (Hero, Final-CTA) bleiben unverändert bestehen — diese Seite ist
+                NICHT Teil des MAESTRO-Ersatzes aus E2.3 (dort war ausdrücklich nur
+                weihnachten-muenchen gemeint). Das Formular ist ein zusätzlicher Weg, kein Ersatz. */}
+            <section className="mb-16" id="anfrage" aria-labelledby="weihnachtsfeier-anfrage">
+              <h2 id="weihnachtsfeier-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{w.inquiryTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{w.inquiryIntro}</p>
+              <div className="max-w-2xl mx-auto">
+                <AnlassAnfrageForm
+                  anlass="weihnachtsfeier"
+                  minGuests={FACTS.weihnachten.groupMenuMinGuests}
+                />
+              </div>
             </section>
 
             {/* 8 Gründe */}
@@ -273,10 +302,17 @@ const WeihnachtsfeierMuenchen = () => {
               </Accordion>
             </section>
 
-            {/* Related */}
+            {/* Related — E4.2: weihnachten-muenchen ergänzt (fehlte bisher komplett, obwohl
+                weihnachten-muenchen umgekehrt schon seit E4.1 prominent hierher verlinkt).
+                Gegenrichtung für Einzelgäste/Familien, die eigentlich nur à la carte am Tisch
+                essen wollen und hier fälschlich gelandet sind. */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-8 text-center">{w.relatedTitle}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <LocalizedLink to="weihnachten-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                  <h3 className="font-semibold mb-2">{w.related5Title}</h3>
+                  <p className="text-muted-foreground text-sm">{w.related5Desc}</p>
+                </LocalizedLink>
                 <LocalizedLink to="firmenfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{w.related1Title}</h3>
                   <p className="text-muted-foreground text-sm">{w.related1Desc}</p>

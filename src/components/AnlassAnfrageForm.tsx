@@ -41,18 +41,25 @@ import { fireLead } from "@/lib/analytics";
  */
 const INTAKE_URL = (import.meta.env.VITE_MAESTRO_INTAKE_URL || "").trim();
 
-type Anlass = "silvester" | "weihnachten";
+// E4.2: `weihnachtsfeier` ergänzt (eigener Wert statt `weihnachten` mitzubenutzen) — die
+// Kannibalisierungs-Auflösung (docs/LOOP-SAISONSEITEN-AUSBAU.md § E4) trennt den privaten
+// à-la-carte-Weg (weihnachten-muenchen) vom Firmen-/Gruppen-Weg (weihnachtsfeier-muenchen).
+// Damit die Lead-Attribution unterscheidbar bleibt, braucht der Gruppen-Weg ein eigenes
+// `sourceDetail` statt weiterhin `ristorante_weihnachten` mitzubenutzen.
+type Anlass = "silvester" | "weihnachten" | "weihnachtsfeier";
 
 /** `sourceDetail` muss `^[a-zA-Z0-9_-]{1,100}$` erfüllen; `ristorante_*` ist die Konvention im System. */
 const SOURCE_DETAIL: Record<Anlass, string> = {
   silvester: "ristorante_silvester",
   weihnachten: "ristorante_weihnachten",
+  weihnachtsfeier: "ristorante_weihnachtsfeier",
 };
 
 /** Freitextfeld des Endpunkts (≤ 120 Zeichen) — grobe Einordnung der Anfrage für die Bearbeitung. */
 const EVENT_TYPE: Record<Anlass, string> = {
   silvester: "Silvester Gala-Dinner",
   weihnachten: "Weihnachtsmenü für Gruppen",
+  weihnachtsfeier: "Weihnachtsfeier für Firmen & Gruppen",
 };
 
 /**
