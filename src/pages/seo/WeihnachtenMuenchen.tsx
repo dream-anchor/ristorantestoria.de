@@ -38,6 +38,16 @@ import { FACTS } from "@/config/facts";
 const EVENT_IMAGE_URL = `https://www.ristorantestoria.de${weihnachtsfeierImage}`;
 
 /**
+ * Autoritative Outbound-Quelle (E1.5, GEO-Regel 3 aus `docs/geo-content-guidelines.md`).
+ *
+ * UNESCO-Eintrag „Mediterranean diet" auf der Repräsentativen Liste des immateriellen
+ * Kulturerbes. Die italienische Trägergemeinschaft dieses Eintrags ist das Cilento — genau die
+ * Herkunftsregion der Familie Speranza, die auf dieser Seite im Intro genannt wird. UNESCO-URLs
+ * sind institutionell stabil, die Quelle ist weder Wettbewerber noch Aggregator.
+ */
+const CITATION_URL = "https://ich.unesco.org/en/RL/mediterranean-diet-00884";
+
+/**
  * Ersetzt die Zahlen-Platzhalter der Übersetzungen durch die Werte aus `FACTS`.
  *
  * Die Übersetzungen enthalten nur Satzschablonen, damit Mindestpersonenzahl, Gruppenpreis und
@@ -294,12 +304,34 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               : [{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]
             } />
 
-            {/* Intro — der erste Satz benennt seit E1.4 beide Wege. */}
+            {/* TL;DR (E1.5) — der fertige `tldr`-Text lag bisher ungenutzt in den Übersetzungen.
+                Muster übernommen von `UeberUns.tsx` („TLDR — Citation-optimized intro"): eine
+                Karte direkt unter der Breadcrumb, vor allen anderen Inhalten. Inhaltlich trägt
+                sie seit E1.4 die Zwei-Wege-Realität als allererste Aussage der Seite. */}
+            <div className="bg-card border rounded-2xl p-6 md:p-8 mb-12">
+              <p className="text-muted-foreground leading-relaxed">{fillFacts(s.tldr)}</p>
+            </div>
+
+            {/* Intro — erster Satz ist seit E1.5 der Definition-Lead (GEO-Regel 1) und benennt
+                zugleich beide Wege (E1.4); der letzte Absatz trägt die autoritative
+                Outbound-Citation (GEO-Regel 3). */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{s.introTitle}</h2>
               <p className="text-lg text-muted-foreground mb-4">{fillFacts(s.introP1)}</p>
               <p className="text-muted-foreground mb-4">{fillFacts(s.introP2)}</p>
-              <p className="text-muted-foreground">{s.introP3}</p>
+              <p className="text-muted-foreground mb-4">{s.introP3}</p>
+              <p className="text-muted-foreground">
+                {s.citationPre}
+                <a
+                  href={CITATION_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground underline decoration-muted-foreground hover:decoration-foreground transition-colors"
+                >
+                  {s.citationAnchor}
+                </a>
+                {s.citationPost}
+              </p>
             </section>
 
             {/* Auf einen Blick (E1.3) — Definitionsliste statt Fließtext, damit die Eckdaten

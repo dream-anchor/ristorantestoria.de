@@ -85,6 +85,30 @@ const PREVIOUS_SEASON_MENUS = [
   },
 ] as const;
 
+/**
+ * Autoritative Outbound-Quelle (E1.5, GEO-Regel 3 aus `docs/geo-content-guidelines.md`).
+ *
+ * Das Comité Champagne ist der offizielle Branchenverband der geschützten Ursprungsbezeichnung
+ * Champagne — eine Institution, keine Redaktion: die URL ist auf Jahre stabil, es ist weder ein
+ * Wettbewerber noch ein Aggregator. Thematisch hängt sie am Mitternachts-Champagner, der auf
+ * dieser Seite an vier Stellen vorkommt (Hero-Badge, Paket, Timeline, „8 Gründe").
+ */
+const CITATION_URL = "https://www.champagne.fr/";
+
+/**
+ * Ersetzt die Zahlen-Platzhalter der Übersetzungen durch die Werte aus `FACTS.silvester`.
+ *
+ * Die Übersetzungen enthalten bewusst nur Satzschablonen ({courses}/{price}/{priceWine}), damit
+ * Gangzahl und Preise auf allen vier Sprachen aus derselben einzigen Quelle kommen. Global
+ * ersetzen, weil ein Platzhalter (z. B. {price} im TL;DR) mehrfach vorkommen kann;
+ * `{price}` matcht dabei nicht `{priceWine}`, weil die schließende Klammer Teil des Musters ist.
+ */
+const fillFacts = (text: string): string =>
+  text
+    .replace(/\{courses\}/g, String(FACTS.silvester.courses))
+    .replace(/\{price\}/g, FACTS.silvester.price)
+    .replace(/\{priceWine\}/g, FACTS.silvester.priceWithWine);
+
 interface SilvesterMuenchenProps {
   standalone?: boolean;
   menu?: any | null;
@@ -144,13 +168,7 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
    * Übersetzungen liefern nur die Satzschablone, die Werte werden hier eingesetzt.
    */
   const atAGlance = [
-    {
-      label: s.atAGlanceMenuLabel,
-      value: s.atAGlanceMenuValue
-        .replace('{courses}', String(FACTS.silvester.courses))
-        .replace('{price}', FACTS.silvester.price)
-        .replace('{priceWine}', FACTS.silvester.priceWithWine),
-    },
+    { label: s.atAGlanceMenuLabel, value: fillFacts(s.atAGlanceMenuValue) },
     { label: s.atAGlanceStartLabel, value: s.atAGlanceStartValue },
     { label: s.atAGlanceCapacityLabel, value: s.atAGlanceCapacityValue },
     { label: s.atAGlanceReservationLabel, value: s.atAGlanceReservationValue },
@@ -372,12 +390,33 @@ const SilvesterMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }: S
               : [{ label: t.breadcrumb.home, href: '/' }, { label: s.breadcrumb }]
             } />
 
-            {/* Intro */}
+            {/* TL;DR (E1.5) — der fertige `tldr`-Text lag bisher ungenutzt in den Übersetzungen.
+                Muster übernommen von `UeberUns.tsx` („TLDR — Citation-optimized intro"): eine
+                Karte direkt unter der Breadcrumb, vor allen anderen Inhalten, damit KI-Systeme
+                die Kernaussage der Seite in einem einzigen Chunk vorfinden. */}
+            <div className="bg-card border rounded-2xl p-6 md:p-8 mb-12">
+              <p className="text-muted-foreground leading-relaxed">{fillFacts(s.tldr)}</p>
+            </div>
+
+            {/* Intro — erster Satz ist seit E1.5 der Definition-Lead (GEO-Regel 1), der letzte
+                Absatz trägt die autoritative Outbound-Citation (GEO-Regel 3). */}
             <section className="mb-16">
               <h2 className="text-3xl font-serif font-bold mb-6 text-center">{s.introTitle}</h2>
-              <p className="text-lg text-muted-foreground mb-4">{s.introP1}</p>
+              <p className="text-lg text-muted-foreground mb-4">{fillFacts(s.introP1)}</p>
               <p className="text-muted-foreground mb-4">{s.introP2}</p>
-              <p className="text-muted-foreground">{s.introP3}</p>
+              <p className="text-muted-foreground mb-4">{s.introP3}</p>
+              <p className="text-muted-foreground">
+                {s.citationPre}
+                <a
+                  href={CITATION_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground underline decoration-muted-foreground hover:decoration-foreground transition-colors"
+                >
+                  {s.citationAnchor}
+                </a>
+                {s.citationPost}
+              </p>
             </section>
 
             {/* Auf einen Blick (E1.3) — bewusst als Definitionsliste, nicht als Fließtext:

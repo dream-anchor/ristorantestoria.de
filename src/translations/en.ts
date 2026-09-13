@@ -1819,10 +1819,17 @@ const enBase = {
       heroCtaPhone: "089 51519696",
       heroEventsNote: "For groups of 20+ guests:",
       heroEventsLink: "events-storia.de",
-      introTitle: "New Year's Eve in Munich – La Dolce Vita at Midnight",
-      introP1: "Looking for a restaurant in Munich for New Year's Eve? Since 2015, the Speranza family has been ringing in the new year with their guests on Karlstraße. What started as a small NYE dinner has become one of Munich Maxvorstadt's most popular Italian New Year's events – with authentic cuisine, music and the unmistakable STORIA charm.",
+      // Definition lead (E1.5, GEO rule 1) — the first sentence defines the entity; the previous
+      // emotional opener is an explicit anti-pattern in docs/geo-content-guidelines.md.
+      introTitle: "New Year's Eve in Munich – the Italian gala dinner at Ristorante STORIA",
+      introP1: "New Year's Eve at Ristorante STORIA is an Italian gala dinner at Karlstraße 47a in Munich Maxvorstadt: a {courses}-course tasting menu in three variants for €{price} per person, €{priceWine} per person with wine pairing, starting at 7:00 pm with an aperitivo reception, music and midnight champagne. Since 2015, the Speranza family has been ringing in the new year with their guests on Karlstraße – what started as a small NYE dinner has become one of Munich Maxvorstadt's most popular Italian New Year's events.",
       introP2: "Our New Year's Eve is deliberately not a mass event: We focus on quality over quantity. Every course is freshly prepared, the service is personal and attentive. For couples, groups of friends and companies, we offer flexible packages from 2 to 100 guests.",
       introP3: "The central location in Maxvorstadt – just 5 minutes from Königsplatz and 5 minutes from the main station – makes STORIA the ideal venue for your New Year's Eve. For smaller celebrations up to 20 guests, reserve directly at the restaurant. For larger groups of 20+, please enquire via events-storia.de.",
+      // External citation (E1.5, GEO rule 3) — Comité Champagne, the official trade body of the
+      // protected Champagne appellation; matches the midnight champagne on this page.
+      citationPre: "At midnight we raise a glass of champagne: the protected designation of origin Champagne is administered by the ",
+      citationAnchor: "Comité Champagne",
+      citationPost: ", the official trade body of the French growing region – only wine from there may be called champagne.",
       // At a glance (E1.3) — placeholders are filled from FACTS.silvester in SilvesterMuenchen.tsx.
       atAGlanceTitle: "New Year's Eve at STORIA at a glance",
       atAGlanceMenuLabel: "Menu",
@@ -1988,6 +1995,11 @@ const enBase = {
       introP1: "Christmas at Ristorante STORIA is an Italian festive offering at Karlstraße 47a in Munich Maxvorstadt that works in two ways: à la carte from the seasonal menu at your reserved table, from 1 person – or a Christmas menu that companies and groups of {minGuests} or more arrange directly with the restaurant, from €{groupPrice} per person. The Speranza family from Cilento has run the restaurant since 2015; there is deliberately no fixed Christmas menu to pre-order.",
       introP2: "On the first route you simply reserve a table during Advent and order à la carte from our seasonal menu – no pre-order, no minimum number of guests. On the second route we put together a Christmas menu for companies and groups of {minGuests} or more: Southern Italian festive cuisine with homemade pasta, fine wines and Panettone for dessert, tailored in conversation to the occasion and your budget.",
       introP3: "The central location – just 5 minutes from Königsplatz and the Christmas market – makes STORIA the perfect place after visiting the Christkindlmarkt. The restaurant is closed on 24 and 25 December. Arrange a group menu directly with us: by phone, by email or – from 20 guests – via events-storia.de.",
+      // External citation (E1.5, GEO rule 3) — UNESCO Representative List; Cilento, the Speranza
+      // family's home region, is the Italian community behind the Mediterranean diet entry.
+      citationPre: "The Speranza family's festive cuisine comes from Cilento in the province of Salerno – the Italian community through which the Mediterranean diet was added to the ",
+      citationAnchor: "UNESCO list of intangible cultural heritage",
+      citationPost: ".",
       // At a glance (E1.3) — placeholders are filled from FACTS in WeihnachtenMuenchen.tsx.
       atAGlanceTitle: "Christmas at STORIA at a glance",
       atAGlanceOptionsLabel: "Two options",
@@ -4137,10 +4149,12 @@ const enExtra = {
       faq7Answer: "At STORIA, expect around €40–70 per person including drinks, depending on the menu. There is no room hire – you only pay for food and drinks.",
     },
     silvester: {
-      tldr: "New Year's Eve at STORIA Munich Maxvorstadt (Karlstraße 47a): Italian gala dinner with a multi-course festive menu, wine pairing, music and midnight champagne. From €99 per person. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Reservations: +49 89 51519696.",
+      // E1.5: rendered visibly above the intro; placeholders are filled from FACTS.silvester.
+      tldr: "New Year's Eve at Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) is an Italian gala dinner to see in the new year: a {courses}-course tasting menu in three variants (Vegetale, Mare, Terra) for €{price} per person, €{priceWine} per person with wine pairing. Starts at 7:00 pm with an aperitivo reception, plus music and midnight champagne, 2 to 100 guests. Family-run by the Speranza family since 2015, 5 minutes from Königsplatz. Reservations: +49 89 51519696.",
     },
     weihnachten: {
-      tldr: "Christmas menu at STORIA Munich Maxvorstadt (Karlstraße 47a): Festive Italian Christmas menus from €45 per person for 6–100 guests. Homemade pasta, fine wines and traditional panettone. Family-run since 2015 by the Speranza family. 5 min from Königsplatz. Reservations: +49 89 51519696.",
+      // E1.4/E1.5: two-route reality, rendered visibly; placeholders are filled from FACTS.
+      tldr: "Christmas at Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) works in two ways: reserve a table and dine à la carte from the seasonal menu – from 1 person, no pre-order – or a Christmas menu for companies and groups of {minGuests} or more, arranged directly with the restaurant, from €{groupPrice} per person. The restaurant is closed on 24 and 25 December. {indoorSeats} seats inside, {terraceSeats} on the covered terrace. Family-run by the Speranza family since 2015, 5 minutes from Königsplatz. Reservations: +49 89 51519696.",
     },
     valentinstag: {
       tldr: "Valentine's Day at STORIA Munich Maxvorstadt (Karlstraße 47a): Romantic Italian Valentine's dinner with a multi-course candlelight menu, fine wines and a rose at the table. Family-run since 2015 by the Speranza family. 4.5 stars from over 800 Google reviews. Reservations: +49 89 51519696.",

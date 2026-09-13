@@ -1849,17 +1849,30 @@ export const de = {
       heroBadge2: "🎶 Musik",
       heroBadge3: "🍾 Mitternachts-Countdown",
       heroDescription: "Erleben Sie einen unvergesslichen Silvesterabend in italienischer Atmosphäre: Mehrgängiges Gala-Dinner, Musik, Mitternachts-Champagner und Party bis in die Nacht – mitten in der Maxvorstadt.",
-      tldr: "Silvester im STORIA München Maxvorstadt (Karlstraße 47a): Italienisches Gala-Dinner mit mehrgängigem Festmenü, Weinbegleitung, Musik und Mitternachts-Champagner. Ab 99 € pro Person. Familienbetrieb seit 2015 von Familie Speranza. 5 Min. vom Königsplatz. Reservierung: +49 89 51519696.",
+      // TL;DR (E1.5) — wird seit E1.5 sichtbar über dem Intro gerendert (Muster: UeberUns.tsx).
+      // Platzhalter {courses}/{price}/{priceWine} werden in SilvesterMuenchen.tsx aus
+      // FACTS.silvester gefüllt, damit die Zahlen dieselbe einzige Quelle haben wie „Auf einen Blick".
+      tldr: "Silvester im Ristorante STORIA München Maxvorstadt (Karlstraße 47a) ist ein italienisches Gala-Dinner zum Jahreswechsel: {courses}-Gänge-Degustationsmenü in drei Varianten (Vegetale, Mare, Terra) für {price} € pro Person, mit Weinbegleitung {priceWine} € pro Person. Beginn 19:00 Uhr mit Aperitivo-Empfang, dazu Musik und Mitternachts-Champagner, 2 bis 100 Gäste. Familienbetrieb der Familie Speranza seit 2015, 5 Minuten vom Königsplatz. Reservierung: +49 89 51519696.",
       heroCta: "Silvester anfragen",
       heroCtaInactive: "Vormerken lassen",
       heroCtaPhone: "089 51519696",
       heroEventsNote: "Für Gruppen ab 20 Gäste:",
       heroEventsLink: "events-storia.de",
       // Intro
-      introTitle: "Silvester feiern in München – La Dolce Vita zum Jahreswechsel",
-      introP1: "Sie suchen ein Restaurant in München für Silvester? Seit 2015 feiert die Familie Speranza in der Karlstraße mit ihren Gästen ins neue Jahr. Was als kleines Silvester-Dinner begann, ist heute eines der beliebtesten italienischen Silvester-Events in München Maxvorstadt – mit authentischer Küche, Musik und dem unverwechselbaren STORIA-Charme.",
+      // Definition-Lead (E1.5, GEO-Regel 1): Der erste Satz definiert die Entity nach dem Muster
+      // „[Entity] ist ein [Kategorie], das [Differenzierung]". Der frühere emotionale Einstieg
+      // („La Dolce Vita zum Jahreswechsel" / „Sie suchen ein Restaurant …?") ist laut
+      // docs/geo-content-guidelines.md § Anti-Pattern ausdrücklich verboten.
+      introTitle: "Silvester in München – das italienische Gala-Dinner im Ristorante STORIA",
+      introP1: "Silvester im Ristorante STORIA ist ein italienisches Gala-Dinner in der Karlstraße 47a in München Maxvorstadt: ein {courses}-Gänge-Degustationsmenü in drei Varianten für {price} € pro Person, mit Weinbegleitung {priceWine} € pro Person, ab 19:00 Uhr mit Aperitivo-Empfang, Musik und Mitternachts-Champagner. Seit 2015 feiert die Familie Speranza in der Karlstraße mit ihren Gästen ins neue Jahr – aus einem kleinen Silvester-Dinner ist eines der beliebtesten italienischen Silvester-Events in München Maxvorstadt geworden.",
       introP2: "Unser Silvester ist bewusst kein Massenabfertigung: Wir setzen auf Qualität statt Quantität. Jeder Gang wird frisch zubereitet, der Service ist persönlich und aufmerksam. Für Paare, Freundesgruppen und Firmen bieten wir flexible Pakete von 2 bis 100 Gästen.",
       introP3: "Die zentrale Lage in der Maxvorstadt – nur 5 Minuten vom Königsplatz und 5 Minuten vom Hauptbahnhof – macht das STORIA zum idealen Ort für Ihren Silvesterabend. Für kleinere Feiern bis 20 Gäste reservieren Sie direkt im Restaurant. Für größere Gruppen ab 20 Gäste fragen Sie bitte über events-storia.de an.",
+      // Externe Citation (E1.5, GEO-Regel 3): mindestens ein Outbound-Link auf eine autoritative,
+      // dauerhaft stabile Quelle. Ziel: Comité Champagne, der offizielle Branchenverband der
+      // geschützten Ursprungsbezeichnung Champagne — passt zum Mitternachts-Champagner der Seite.
+      citationPre: "Um Mitternacht stoßen wir mit Champagner an: Die geschützte Ursprungsbezeichnung Champagne verwaltet das ",
+      citationAnchor: "Comité Champagne",
+      citationPost: ", der offizielle Branchenverband der französischen Anbauregion – Champagner darf nur heißen, was von dort kommt.",
       // Auf einen Blick (E1.3) — Platzhalter {courses}/{price}/{priceWine} werden in
       // SilvesterMuenchen.tsx aus FACTS.silvester gefüllt, damit die Zahlen nur EINE Quelle haben.
       atAGlanceTitle: "Silvester im STORIA auf einen Blick",
@@ -2026,7 +2039,10 @@ export const de = {
       heroBadge2: "🕯️ Festliches Ambiente",
       heroBadge3: "🎄 Weihnachtsmenü für Gruppen",
       heroDescription: "Weihnachten im STORIA geht auf zwei Wegen: Tisch reservieren und à la carte von der saisonalen Karte essen – oder als Firma oder Gruppe ein Weihnachtsmenü direkt mit uns abstimmen. Beides in authentisch italienischer Atmosphäre, mitten in der Maxvorstadt.",
-      tldr: "Weihnachtsmenü im STORIA München Maxvorstadt (Karlstraße 47a): Festliche italienische Weihnachtsmenüs ab 45 € pro Person für 6–100 Gäste. Hausgemachte Pasta, erlesene Weine und traditioneller Panettone. Familienbetrieb seit 2015 von Familie Speranza. 5 Min. vom Königsplatz. Reservierung: +49 89 51519696.",
+      // TL;DR (E1.5) — wird seit E1.5 sichtbar über dem Intro gerendert (Muster: UeberUns.tsx).
+      // Platzhalter werden in WeihnachtenMuenchen.tsx aus FACTS gefüllt. Inhaltlich auf die
+      // Zwei-Wege-Realität umgestellt (E1.4): es gibt KEIN festes Weihnachtsmenü zum Vorbestellen.
+      tldr: "Weihnachten im Ristorante STORIA München Maxvorstadt (Karlstraße 47a) funktioniert auf zwei Wegen: Tisch reservieren und à la carte von der saisonalen Karte essen – ab 1 Person, ohne Vorbestellung – oder ein Weihnachtsmenü für Firmen und Gruppen ab {minGuests} Personen, das direkt mit dem Restaurant abgestimmt wird, ab {groupPrice} € pro Person. Am 24. und 25. Dezember ist das Restaurant geschlossen. {indoorSeats} Plätze innen, {terraceSeats} auf der überdachten Terrasse. Familienbetrieb der Familie Speranza seit 2015, 5 Minuten vom Königsplatz. Reservierung: +49 89 51519696.",
       heroCta: "Weihnachtsfeier anfragen",
       heroCtaInactive: "Auf dem Laufenden bleiben",
       heroCtaPhone: "089 51519696",
@@ -2039,6 +2055,12 @@ export const de = {
       introP1: "Weihnachten im Ristorante STORIA ist ein italienisches Festtagsangebot in der Karlstraße 47a in München Maxvorstadt, das auf zwei Wegen funktioniert: à la carte von der saisonalen Karte am reservierten Tisch, ab 1 Person – oder ein Weihnachtsmenü, das Firmen und Gruppen ab {minGuests} Personen direkt mit dem Restaurant abstimmen, ab {groupPrice} € pro Person. Seit 2015 führt die Familie Speranza aus dem Cilento das Restaurant; ein festes Weihnachtsmenü zum Vorbestellen gibt es bewusst nicht.",
       introP2: "Auf dem ersten Weg reservieren Sie in der Adventszeit einfach einen Tisch und essen à la carte von der saisonalen Karte – ohne Vorbestellung, ohne Mindestteilnehmerzahl. Auf dem zweiten Weg stellen wir für Firmen und Gruppen ab {minGuests} Personen ein Weihnachtsmenü zusammen: süditalienische Festtagsküche mit hausgemachter Pasta, erlesenen Weinen und Panettone zum Dessert, im Gespräch auf Anlass und Budget abgestimmt.",
       introP3: "Die zentrale Lage – nur 5 Minuten vom Königsplatz und Christkindlmarkt – macht das STORIA zum perfekten Ort nach dem Weihnachtsmarkt-Besuch. Am 24. und 25. Dezember ist das Restaurant geschlossen. Ein Gruppenmenü stimmen Sie direkt mit uns ab: telefonisch, per E-Mail oder – ab 20 Gästen – über events-storia.de.",
+      // Externe Citation (E1.5, GEO-Regel 3): Outbound-Link auf die UNESCO-Liste des immateriellen
+      // Kulturerbes. Passt sachlich, weil das Cilento – die Herkunftsregion der Familie Speranza –
+      // die italienische Trägergemeinschaft der mediterranen Ernährung in dieser Liste ist.
+      citationPre: "Die Festtagsküche der Familie Speranza stammt aus dem Cilento in der Provinz Salerno – der italienischen Gemeinschaft, über die die mediterrane Ernährung in die ",
+      citationAnchor: "UNESCO-Liste des immateriellen Kulturerbes",
+      citationPost: " aufgenommen wurde.",
       // Auf einen Blick (E1.3) — Platzhalter {minGuests}/{groupPrice}/{indoorSeats}/{terraceSeats}
       // werden in WeihnachtenMuenchen.tsx aus FACTS gefüllt (eine Quelle für alle Zahlen).
       atAGlanceTitle: "Weihnachten im STORIA auf einen Blick",

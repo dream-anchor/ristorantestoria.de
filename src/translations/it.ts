@@ -1756,15 +1756,25 @@ const itBase = {
       heroBadge2: "🎶 Musica",
       heroBadge3: "🍾 Countdown di Mezzanotte",
       heroDescription: "Vivete un Capodanno indimenticabile in atmosfera italiana: Cena di gala a più portate, musica, champagne di mezzanotte e festa fino a tarda notte – nel cuore della Maxvorstadt.",
+      // TL;DR (E1.5) — reso visibile sopra l'introduzione; i segnaposto vengono riempiti da
+      // FACTS.silvester in SilvesterMuenchen.tsx.
+      tldr: "Il Capodanno al Ristorante STORIA Monaco Maxvorstadt (Karlstraße 47a) è una cena di gala italiana per il passaggio al nuovo anno: menù degustazione di {courses} portate in tre varianti (Vegetale, Mare, Terra) a {price} € a persona, {priceWine} € a persona con abbinamento vini. Inizio alle ore 19:00 con aperitivo di benvenuto, musica e champagne di mezzanotte, da 2 a 100 ospiti. Attività familiare della famiglia Speranza dal 2015, a 5 minuti da Königsplatz. Prenotazioni: +49 89 51519696.",
       heroCta: "Richiedi Capodanno",
       heroCtaInactive: "Registrati per aggiornamenti",
       heroCtaPhone: "089 51519696",
       heroEventsNote: "Per gruppi da 20+ ospiti:",
       heroEventsLink: "events-storia.de",
-      introTitle: "Capodanno a Monaco – La Dolce Vita a Mezzanotte",
-      introP1: "Cercate un ristorante a Monaco per Capodanno? Dal 2015, la famiglia Speranza festeggia l'arrivo del nuovo anno con i suoi ospiti nella Karlstraße. Quello che è iniziato come una piccola cena di Capodanno è diventato uno degli eventi italiani di fine anno più popolari di Monaco Maxvorstadt – con cucina autentica, musica e l'inconfondibile fascino dello STORIA.",
+      // Definition-Lead (E1.5, GEO-Regel 1) — der emotionale Einstieg ist laut
+      // docs/geo-content-guidelines.md § Anti-Pattern verboten.
+      introTitle: "Capodanno a Monaco – la cena di gala italiana del Ristorante STORIA",
+      introP1: "Il Capodanno al Ristorante STORIA è una cena di gala italiana in Karlstraße 47a a Monaco Maxvorstadt: un menù degustazione di {courses} portate in tre varianti a {price} € a persona, {priceWine} € a persona con abbinamento vini, dalle ore 19:00 con aperitivo di benvenuto, musica e champagne di mezzanotte. Dal 2015 la famiglia Speranza festeggia l'arrivo del nuovo anno con i suoi ospiti nella Karlstraße – quella che è iniziata come una piccola cena di Capodanno è diventata uno degli eventi italiani di fine anno più popolari di Monaco Maxvorstadt.",
       introP2: "Il nostro Capodanno non è un evento di massa: puntiamo sulla qualità piuttosto che sulla quantità. Ogni portata viene preparata fresca, il servizio è personale e attento. Per coppie, gruppi di amici e aziende offriamo pacchetti flessibili da 2 a 100 ospiti.",
       introP3: "La posizione centrale nella Maxvorstadt – a soli 5 minuti da Königsplatz e 7 dalla stazione centrale – rende lo STORIA il luogo ideale per il vostro Capodanno. Per feste fino a 20 ospiti, prenotate direttamente al ristorante. Per gruppi più grandi da 20+, richiedete tramite events-storia.de.",
+      // Citazione esterna (E1.5, GEO-Regel 3) — Comité Champagne, l'organismo ufficiale della
+      // denominazione protetta Champagne; si lega allo champagne di mezzanotte di questa pagina.
+      citationPre: "A mezzanotte si brinda con lo champagne: la denominazione di origine protetta Champagne è amministrata dal ",
+      citationAnchor: "Comité Champagne",
+      citationPost: ", l'organismo interprofessionale ufficiale della regione vinicola francese – solo ciò che proviene da lì può chiamarsi champagne.",
       // In sintesi (E1.3) — i segnaposto tra parentesi graffe vengono riempiti da FACTS.silvester.
       atAGlanceTitle: "Il Capodanno allo STORIA in sintesi",
       atAGlanceMenuLabel: "Menù",
@@ -2883,11 +2893,19 @@ const itBase = {
       heroBadge3: "🎄 Menù di Natale per gruppi",
       heroDescription: "Il Natale allo STORIA funziona in due modi: prenotare un tavolo e mangiare alla carta dal nostro menù stagionale – oppure concordare un menù di Natale direttamente con noi, come azienda o come gruppo. In entrambi i casi in un'autentica atmosfera italiana, nel cuore della Maxvorstadt.",
       heroCtaInactive: "Restare aggiornati",
+      // TL;DR (E1.5) — reso visibile sopra l'introduzione; i segnaposto vengono riempiti da FACTS.
+      tldr: "Il Natale al Ristorante STORIA Monaco Maxvorstadt (Karlstraße 47a) funziona in due modi: prenotare un tavolo e mangiare alla carta dal menù stagionale – da 1 persona, senza ordinazione anticipata – oppure un menù di Natale per aziende e gruppi da {minGuests} persone, concordato direttamente con il ristorante, a partire da {groupPrice} € a persona. Il 24 e il 25 dicembre il ristorante è chiuso. {indoorSeats} posti all'interno, {terraceSeats} sulla terrazza coperta. Attività familiare della famiglia Speranza dal 2015, a 5 minuti da Königsplatz. Prenotazioni: +49 89 51519696.",
       // Definition-Lead (E1.5, GEO-Regel 1) + Zwei-Wege-Realität (E1.4).
       introTitle: "Festa di Natale a Monaco – alla carta al tavolo oppure menù di Natale per gruppi",
       introP1: "Il Natale al Ristorante STORIA è un'offerta italiana per le feste in Karlstraße 47a a Monaco Maxvorstadt che funziona in due modi: alla carta dal menù stagionale al tavolo prenotato, da 1 persona – oppure un menù di Natale che aziende e gruppi da {minGuests} persone concordano direttamente con il ristorante, a partire da {groupPrice} € a persona. Dal 2015 la famiglia Speranza del Cilento guida il ristorante; un menù di Natale fisso da ordinare in anticipo non esiste, ed è una scelta voluta.",
       introP2: "Sulla prima strada prenotate semplicemente un tavolo durante l'Avvento e ordinate alla carta dal nostro menù stagionale – senza ordinazione anticipata e senza numero minimo di ospiti. Sulla seconda strada componiamo un menù di Natale per aziende e gruppi da {minGuests} persone: cucina delle feste del Sud Italia con pasta fatta in casa, vini pregiati e panettone come dessert, concordato di volta in volta secondo l'occasione e il budget.",
       introP3: "La posizione centrale – a soli 5 minuti da Königsplatz e dal mercatino di Natale – rende lo STORIA la meta ideale dopo la visita al Christkindlmarkt. Il 24 e il 25 dicembre il ristorante è chiuso. Un menù di gruppo si concorda direttamente con noi: per telefono, via e-mail oppure – da 20 ospiti – tramite events-storia.de.",
+      // Citazione esterna (E1.5, GEO-Regel 3) — lista UNESCO del patrimonio culturale immateriale;
+      // il Cilento, regione d'origine della famiglia Speranza, è la comunità italiana della dieta
+      // mediterranea in quella lista.
+      citationPre: "La cucina delle feste della famiglia Speranza viene dal Cilento, in provincia di Salerno – la comunità italiana attraverso la quale la dieta mediterranea è entrata nella ",
+      citationAnchor: "lista UNESCO del patrimonio culturale immateriale",
+      citationPost: ".",
       // Due strade (E1.4) — i segnaposto vengono riempiti da FACTS.weihnachten.
       twoWaysTitle: "Due modi di festeggiare il Natale allo STORIA",
       twoWaysIntro: "Allo STORIA non esiste un menù di Natale fisso da ordinare in anticipo. Scegliete invece una delle due strade – a seconda che veniate in privato o che festeggiate come azienda o come gruppo.",

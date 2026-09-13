@@ -1796,10 +1796,17 @@ const frBase = {
       heroCtaPhone: "089 51519696",
       heroEventsNote: "Pour groupes de 20+ convives :",
       heroEventsLink: "events-storia.de",
-      introTitle: "Réveillon à Munich – La Dolce Vita à Minuit",
-      introP1: "Vous cherchez un restaurant à Munich pour le Réveillon ? Depuis 2015, la famille Speranza fête le passage à la nouvelle année avec ses convives dans la Karlstraße. Ce qui a commencé comme un petit dîner du Réveillon est devenu l'un des événements italiens du Nouvel An les plus populaires de Munich Maxvorstadt – avec une cuisine authentique, de la musique et le charme inimitable du STORIA.",
+      // Definition-Lead (E1.5, GEO-Regel 1) — der emotionale Einstieg ist laut
+      // docs/geo-content-guidelines.md § Anti-Pattern verboten.
+      introTitle: "Réveillon à Munich – le dîner de gala italien du Ristorante STORIA",
+      introP1: "Le Réveillon au Ristorante STORIA est un dîner de gala italien au Karlstraße 47a à Munich Maxvorstadt : un menu dégustation de {courses} plats en trois variantes à {price} € par personne, {priceWine} € par personne avec accord mets et vins, à partir de 19h00 avec accueil aperitivo, musique et champagne de minuit. Depuis 2015, la famille Speranza fête le passage à la nouvelle année avec ses convives dans la Karlstraße – ce qui a commencé comme un petit dîner du Réveillon est devenu l'un des événements italiens du Nouvel An les plus populaires de Munich Maxvorstadt.",
       introP2: "Notre Réveillon n'est délibérément pas un événement de masse : nous misons sur la qualité plutôt que la quantité. Chaque plat est préparé frais, le service est personnel et attentionné. Pour couples, groupes d'amis et entreprises, nous proposons des formules flexibles de 2 à 100 convives.",
       introP3: "L'emplacement central dans la Maxvorstadt – à seulement 5 minutes de Königsplatz et 7 de la gare centrale – fait du STORIA le lieu idéal pour votre Réveillon. Pour les petites fêtes jusqu'à 20 convives, réservez directement au restaurant. Pour les groupes de 20+, veuillez faire votre demande via events-storia.de.",
+      // Citation externe (E1.5, GEO-Regel 3) — Comité Champagne, l'organisme officiel de
+      // l'appellation protégée Champagne ; correspond au champagne de minuit de cette page.
+      citationPre: "À minuit, nous trinquons au champagne : l'appellation d'origine protégée Champagne est gérée par le ",
+      citationAnchor: "Comité Champagne",
+      citationPost: ", l'organisme interprofessionnel officiel de la région française – seul le vin qui en provient peut s'appeler champagne.",
       // At a glance (E1.3) - die Werte in geschweiften Klammern kommen aus FACTS.silvester.
       atAGlanceTitle: "Le Réveillon au STORIA en un coup d'œil",
       atAGlanceMenuLabel: "Menu",
@@ -1955,7 +1962,8 @@ const frBase = {
       heroBadge2: "\ud83d\udd6f\ufe0f Ambiance Festive",
       heroBadge3: "\ud83c\udf84 Menu de No\u00ebl pour les groupes",
       heroDescription: "No\u00ebl au STORIA fonctionne de deux mani\u00e8res : r\u00e9servez une table et d\u00eenez \u00e0 la carte de notre carte de saison \u2013 ou composez un menu de No\u00ebl directement avec nous, en entreprise ou en groupe. Les deux dans une authentique atmosph\u00e8re italienne, au c\u0153ur de Maxvorstadt.",
-      tldr: "Menus de No\u00ebl au STORIA Munich Maxvorstadt (Karlstra\u00dfe 47a) : Menus de No\u00ebl italiens festifs d\u00e8s 45 \u20ac par personne pour 6\u2013100 invit\u00e9s. P\u00e2tes maison, vins raffin\u00e9s et panettone traditionnel. Entreprise familiale depuis 2015 de la famille Speranza. 5 min de K\u00f6nigsplatz. R\u00e9servation : +49 89 51519696.",
+      // TL;DR (E1.5) \u2014 visible au-dessus de l'intro ; les valeurs entre accolades viennent de FACTS.
+      tldr: "No\u00ebl au Ristorante STORIA Munich Maxvorstadt (Karlstra\u00dfe 47a) fonctionne de deux mani\u00e8res : r\u00e9server une table et d\u00eener \u00e0 la carte de la carte de saison \u2013 d\u00e8s 1 personne, sans commande pr\u00e9alable \u2013 ou un menu de No\u00ebl pour entreprises et groupes d\u00e8s {minGuests} personnes, convenu directement avec le restaurant, \u00e0 partir de {groupPrice} \u20ac par personne. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. {indoorSeats} places \u00e0 l'int\u00e9rieur, {terraceSeats} sur la terrasse couverte. Entreprise familiale de la famille Speranza depuis 2015, \u00e0 5 minutes de K\u00f6nigsplatz. R\u00e9servation : +49 89 51519696.",
       heroCta: "Demander f\u00eate de No\u00ebl",
       heroCtaInactive: "Rester inform\u00e9",
       heroCtaPhone: "089 51519696",
@@ -1966,6 +1974,12 @@ const frBase = {
       introP1: "No\u00ebl au Ristorante STORIA est une offre de f\u00eate italienne au Karlstra\u00dfe 47a \u00e0 Munich Maxvorstadt qui fonctionne de deux mani\u00e8res : \u00e0 la carte, \u00e0 partir de la carte de saison, \u00e0 la table r\u00e9serv\u00e9e, d\u00e8s 1 personne \u2013 ou un menu de No\u00ebl que les entreprises et les groupes d\u00e8s {minGuests} personnes conviennent directement avec le restaurant, \u00e0 partir de {groupPrice} \u20ac par personne. La famille Speranza du Cilento dirige le restaurant depuis 2015 ; il n'existe volontairement aucun menu de No\u00ebl fixe \u00e0 commander \u00e0 l'avance.",
       introP2: "Sur la premi\u00e8re voie, vous r\u00e9servez simplement une table pendant l'Avent et commandez \u00e0 la carte de notre carte de saison \u2013 sans commande pr\u00e9alable, sans nombre minimum de convives. Sur la deuxi\u00e8me voie, nous composons un menu de No\u00ebl pour les entreprises et les groupes d\u00e8s {minGuests} personnes : cuisine festive du sud de l'Italie avec p\u00e2tes maison, vins raffin\u00e9s et panettone en dessert, adapt\u00e9 en concertation \u00e0 l'occasion et au budget.",
       introP3: "L\u2019emplacement central \u2013 \u00e0 5 minutes de K\u00f6nigsplatz et du march\u00e9 de No\u00ebl \u2013 fait du STORIA le lieu id\u00e9al apr\u00e8s la visite du march\u00e9 de No\u00ebl. Le restaurant est ferm\u00e9 les 24 et 25 d\u00e9cembre. Un menu de groupe se convient directement avec nous : par t\u00e9l\u00e9phone, par e-mail ou \u2013 d\u00e8s 20 convives \u2013 via events-storia.de.",
+      // Citation externe (E1.5, GEO-Regel 3) \u2014 liste du patrimoine immat\u00e9riel de l'UNESCO ; le
+      // Cilento, r\u00e9gion d'origine de la famille Speranza, y est la communaut\u00e9 italienne de
+      // la di\u00e8te m\u00e9diterran\u00e9enne.
+      citationPre: "La cuisine des f\u00eates de la famille Speranza vient du Cilento, dans la province de Salerne \u2013 la communaut\u00e9 italienne par laquelle la di\u00e8te m\u00e9diterran\u00e9enne a \u00e9t\u00e9 inscrite sur la ",
+      citationAnchor: "liste du patrimoine culturel immat\u00e9riel de l'UNESCO",
+      citationPost: ".",
       // En un coup d'\u0153il (E1.3) \u2014 les valeurs entre accolades viennent de FACTS.
       atAGlanceTitle: "No\u00ebl au STORIA en un coup d'\u0153il",
       atAGlanceOptionsLabel: "Deux possibilit\u00e9s",
@@ -4110,10 +4124,12 @@ const frExtra = {
       faq7Answer: "Au STORIA, comptez environ 40 à 70 € par personne, boissons comprises, selon le menu. Il n'y a pas de location de salle – vous ne payez que les plats et les boissons.",
     },
     silvester: {
-      tldr: "Réveillon du Nouvel An au STORIA Munich Maxvorstadt (Karlstraße 47a) : dîner de gala italien avec menu de fête à plusieurs plats, accord mets et vins, musique et champagne à minuit. Dès 99 € par personne. Entreprise familiale depuis 2015, gérée par la famille Speranza. À 5 min de Königsplatz. Réservations : +49 89 51519696.",
+      // E1.5 : rendu visible au-dessus de l'intro ; les valeurs entre accolades viennent de FACTS.
+      tldr: "Le Réveillon du Nouvel An au Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) est un dîner de gala italien pour le passage à la nouvelle année : menu dégustation de {courses} plats en trois variantes (Vegetale, Mare, Terra) à {price} € par personne, {priceWine} € par personne avec accord mets et vins. Début à 19h00 avec accueil aperitivo, musique et champagne de minuit, de 2 à 100 convives. Entreprise familiale de la famille Speranza depuis 2015, à 5 minutes de Königsplatz. Réservations : +49 89 51519696.",
     },
     weihnachten: {
-      tldr: "Menu de Noël au STORIA Munich Maxvorstadt (Karlstraße 47a) : menus de Noël italiens festifs dès 45 € par personne pour 6 à 100 convives. Pâtes maison, vins raffinés et panettone traditionnel. Entreprise familiale depuis 2015, gérée par la famille Speranza. À 5 min de Königsplatz. Réservations : +49 89 51519696.",
+      // E1.4/E1.5 : réalité des deux voies, rendue visible ; valeurs issues de FACTS.
+      tldr: "Noël au Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) fonctionne de deux manières : réserver une table et dîner à la carte de la carte de saison – dès 1 personne, sans commande préalable – ou un menu de Noël pour entreprises et groupes dès {minGuests} personnes, convenu directement avec le restaurant, à partir de {groupPrice} € par personne. Le restaurant est fermé les 24 et 25 décembre. {indoorSeats} places à l'intérieur, {terraceSeats} sur la terrasse couverte. Entreprise familiale de la famille Speranza depuis 2015, à 5 minutes de Königsplatz. Réservations : +49 89 51519696.",
     },
     valentinstag: {
       tldr: "Saint-Valentin au STORIA Munich Maxvorstadt (Karlstraße 47a) : dîner italien romantique de la Saint-Valentin avec menu à plusieurs plats aux chandelles, vins raffinés et une rose à table. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
