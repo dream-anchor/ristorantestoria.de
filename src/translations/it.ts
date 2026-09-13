@@ -2450,6 +2450,8 @@ const itBase = {
       related3Desc: "Pizza dal forno a pietra in terrazza",
       related4Title: "🎉 Location Eventi Monaco",
       related4Desc: "Terrazza per feste private",
+      relatedCandlelightTitle: "🕯️ Cena a lume di candela",
+      relatedCandlelightDesc: "Menu per due a lume di candela",
     },
     neapolitanPizza: {
       seoTitle: "Pizza Napoletana Monaco | Forno a Pietra 400°C – STORIA",

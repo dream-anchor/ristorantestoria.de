@@ -1372,6 +1372,7 @@ const frBase = {
       valentineTitle: "Saint-Valentin au STORIA",
       valentineTeaser: "Pour la Saint-Valentin nous proposons un menu spécial – avec des plats exclusifs, accord mets-vins et ambiance romantique pour une soirée inoubliable à deux.",
       valentineLinkText: "Découvrir la Saint-Valentin au STORIA",
+      candlelightLinkText: "Vers le menu aux chandelles",
       // Occasions
       occasionsTitle: "Parfait pour Chaque Occasion Romantique",
       occasion1Title: "💕 Premier Rendez-vous",
@@ -2510,6 +2511,8 @@ const frBase = {
       related3Desc: "Pizza au four à pierre en terrasse",
       related4Title: "🎉 Lieu d\u2019Événement Munich",
       related4Desc: "Terrasse pour fêtes privées",
+      relatedCandlelightTitle: "🕯️ Dîner aux chandelles",
+      relatedCandlelightDesc: "Menu pour deux aux chandelles",
     },
     valentinstag: {
       seoTitle: "Saint-Valentin Munich 2026 – Dîner Romantique | STORIA",
@@ -3373,6 +3376,8 @@ const frBase = {
       related3Desc: "D\u00eener \u00e0 deux",
       related4Title: "\ud83c\udf78 Aperitivo Munich",
       related4Desc: "After-work italien",
+      relatedCandlelightTitle: "🕯️ Dîner aux chandelles",
+      relatedCandlelightDesc: "Menu pour deux aux chandelles",
     },
     pastaFrescaMuenchen: {
       seoTitle: "P\u00e2tes Fra\u00eeches Munich \u2013 Faites Maison \u00e0 STORIA Maxvorstadt",
