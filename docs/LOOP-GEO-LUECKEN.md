@@ -191,11 +191,31 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
       im STORIA", neue Description mit Datum (14. Februar) + Preis (`{price}` via `fillFacts()`)
       statt Werbesprache, alle 4 Sprachen. Prerender-Beleg: `grep -o '<h1[^>]*>.*</h1>'` auf das
       script-bereinigte HTML → „Valentinstag München 2026 – Candle-Light-Dinner im STORIA".
-- [ ] **V3.3** `ReservationBooking` ergänzen (Muster `SilvesterMuenchen.tsx:561`, `defaultDate`
-      14.02.) **zusätzlich** zum bestehenden `SeasonalSignupForm` — NICHT ersetzen. **BLOCKED bis
-      Antoine bestätigt, ob am 14.02. à la carte serviert wird** (sonst ergibt eine
-      Tisch-Reservierungsstrecke keinen Sinn, siehe BLOCKED-Log). — in dieser Iteration ausgelassen
-      (Auftrag), weiterhin BLOCKED.
+- [x] **V3.3** `ReservationBooking` ergänzen (Muster `SilvesterMuenchen.tsx:561`, `defaultDate`
+      14.02.) **zusätzlich** zum bestehenden `SeasonalSignupForm` — NICHT ersetzen.
+      ✓ 13.09.2026 · Commit `5566ff3` · Blocker aufgelöst (Antoine: „am 14.02. gibt es à la carte
+      und Menü") — anders als Silvester deshalb KEINE Zeitfenster-Einschränkung, stattdessen ein
+      erklärender Intro-Text, dass eine Tischbuchung nicht automatisch das Paket-Menü festlegt.
+      Neue Section `id="reservieren"` in `ValentinstagMuenchen.tsx` direkt nach
+      Pakete/Live-Menü, vor CTA-Box/Reasons/Timeline/FAQ/Vormerk-Formular eingefügt —
+      `ReservationBooking` mit `headingLevel="h3"`, `defaultDate` per Datumsvergleich berechnet
+      (14.02. des laufenden Jahres, falls bereits vergangen automatisch `currentYear + 1` —
+      konsistent mit dem im FoodEvent-JSON-LD hart kodierten „2027-02-14"), `onBook={() =>
+      fireLead("valentinstag_reservierung")}`. Neue Keys `reservationTitle`/`reservationIntro`/
+      `reservationNote` in allen 4 Sprachen (de/en/it/fr jeweils vollübersetzt, dem
+      Übersetzungsgrad des restlichen Pakete/CTA-Box-Blocks entsprechend). CTA-Hierarchie-
+      Entscheidung: Hero-/Final-CTA-Buttons NICHT auf `#reservieren` umgebogen (anders als bei
+      Silvester) — die harte Regel nennt explizit die drei bestehenden `#signup-form`-Anker als zu
+      erhaltend, im Zweifel additiv statt zu entfernen; die neue Buchungsstrecke bekommt stattdessen
+      einen eigenen, gleichwertig prominenten Bereich im Seitenfluss statt die bestehende Hero-Logik
+      anzufassen. **`SeasonalSignupForm` vollständig unangetastet**: `git diff --stat -- src/
+      components/SeasonalSignupForm.tsx` leer. Prerender-Beweis (alle 4 Sprachen, script-bereinigtes
+      HTML): `id="reservieren"` und `id="signup-form"` je vorhanden in `dist/valentinstag-muenchen/
+      index.html`, `dist/en/valentines-day-munich/index.html`, `dist/it/san-valentino-monaco/
+      index.html`, `dist/fr/saint-valentin-munich/index.html`; `grep -o '{[a-zA-Z]*}'` → 0 Treffer
+      (keine unaufgelösten Platzhalter); `ReservationBooking` rendert vollständig (Datum/Uhrzeit/
+      Personenzahl-Picker sichtbar im HTML). `npx tsc --noEmit` sauber, `npm run build` 157/157 0
+      Fehler, `npm run lint` 727 Probleme (Baseline unverändert).
 - [x] **V3.4** GEO nachrüsten: Definition-Lead, `tldr` rendern (Schlüssel existiert, `de.ts:2240`),
       autoritativer Outbound-Link, JSON-LD `Event` → `FoodEvent`, kaputte `image`-URL im Schema
       reparieren (zeigt auf `/valentinstag-menue-storia-muenchen.jpg`, die laut Audit nicht in
@@ -280,7 +300,7 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
 
 <!-- Format: DATUM · Kriterium · Grund · was gebraucht wird -->
 - ~~13.09.2026 · V3.3 · à la carte am 14.02. verfügbar?~~ — **beantwortet 13.09.2026**: „am 14.02.
-  gibt es à la carte und Menü" (Antoine). Entsperrt V3.3.
+  gibt es à la carte und Menü" (Antoine). Entsperrt V3.3, umgesetzt in Commit `5566ff3`.
 - ~~13.09.2026 · V3.5 (Faktenfrage) · sind 55 €/85 € noch aktuell?~~ — **bestätigt 13.09.2026**
   (Antoine: „Faktenfragen = stimmen"). Keine Code-Änderung nötig, Werte waren bereits korrekt in
   `FACTS.valentinstag` zentralisiert.
