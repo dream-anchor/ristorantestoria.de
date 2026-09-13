@@ -360,6 +360,40 @@ const enBase = {
     relatedOccasions: "Special Occasions",
     relatedReservation: "Reservation",
   },
+  // Inquiry form on the seasonal pages (E2.2, `AnlassAnfrageForm`).
+  anlassInquiry: {
+    nameLabel: "Name / company",
+    namePlaceholder: "Your name or company",
+    emailLabel: "Email",
+    emailPlaceholder: "your@email.com",
+    phoneLabel: "Phone",
+    phonePlaceholder: "For any follow-up questions",
+    dateLabel: "Preferred date",
+    guestsLabel: "Guests (approx.)",
+    guestsPlaceholder: "e.g. 12",
+    messageLabel: "Your message",
+    messagePlaceholder: "Occasion, time, wishes, open questions …",
+    optionalSuffix: "optional",
+    submitButton: "Send inquiry",
+    submitting: "Sending …",
+    successTitle: "Inquiry sent",
+    successMessage: "Thank you! We will get back to you personally.",
+    errorName: "Please enter a name or company",
+    errorEmail: "Please enter a valid email address",
+    errorMessageRequired: "Please tell us briefly what this is about",
+    errorGuests: "Please enter the number of guests as a number",
+    errorValidation: "Some details could not be processed. Please check the email address, preferred date and number of guests.",
+    errorRateLimit: "Too many inquiries in a short time. Please wait a moment and send your inquiry again.",
+    errorGeneric: "The inquiry could not be sent. Please try again or call us: +49 89 51519696.",
+    errorNetwork: "We could not submit your inquiry just now. Please check your connection – or contact us directly on +49 89 51519696.",
+    honeypotLabel: "Please leave this field empty",
+    privacyNotePre: "By sending this form you agree that we may use your details to process your inquiry. More in our ",
+    privacyNoteLink: "privacy policy",
+    privacyNotePost: ".",
+    altContact: "Prefer to get in touch directly? Phone +49 89 51519696 or email:",
+    unavailableTitle: "Inquiries by phone or email",
+    unavailableText: "The inquiry form is currently unavailable here. Please contact us directly – we answer just as quickly.",
+  },
   christmas: {
     title: "Christmas Menus",
     greeting: "Buon Natale!",
@@ -1814,16 +1848,16 @@ const enBase = {
       heroBadge2: "🎶 Music",
       heroBadge3: "🍾 Midnight Countdown",
       heroDescription: "Experience an unforgettable New Year's Eve in Italian atmosphere: Multi-course gala dinner, music, midnight champagne and party into the night – in the heart of Maxvorstadt.",
-      heroCta: "Enquire about NYE",
-      heroCtaInactive: "Get notified",
-      heroEventsNote: "For groups of 20+ guests:",
-      heroEventsLink: "events-storia.de",
+      // Hero CTAs (E2.3): exactly two, one per intent. Replace heroCta/heroCtaInactive
+      // (events-storia.de / sign-up form) and the heroEventsNote/heroEventsLink footnote.
+      heroCtaReserve: "Reserve a table for New Year's Eve",
+      heroCtaInquiry: "Enquire as a group or company",
       // Definition lead (E1.5, GEO rule 1) — the first sentence defines the entity; the previous
       // emotional opener is an explicit anti-pattern in docs/geo-content-guidelines.md.
       introTitle: "New Year's Eve in Munich – the Italian gala dinner at Ristorante STORIA",
       introP1: "New Year's Eve at Ristorante STORIA is an Italian gala dinner at Karlstraße 47a in Munich Maxvorstadt: a {courses}-course tasting menu in three variants for €{price} per person, €{priceWine} per person with wine pairing, starting at 7:00 pm with an aperitivo reception, music and midnight champagne. Since 2015, the Speranza family has been ringing in the new year with their guests on Karlstraße – what started as a small NYE dinner has become one of Munich Maxvorstadt's most popular Italian New Year's events.",
       introP2: "Our New Year's Eve is deliberately not a mass event: We focus on quality over quantity. Every course is freshly prepared, the service is personal and attentive. For couples, groups of friends and companies, we offer flexible packages from 2 to 100 guests.",
-      introP3: "The central location in Maxvorstadt – just 5 minutes from Königsplatz and 5 minutes from the main station – makes STORIA the ideal venue for your New Year's Eve. For smaller celebrations up to 20 guests, reserve directly at the restaurant. For larger groups of 20+, please enquire via events-storia.de.",
+      introP3: "The central location in Maxvorstadt – just 5 minutes from Königsplatz and 5 minutes from the main station – makes STORIA the ideal venue for your New Year's Eve. Reserve your table right here on this page. For larger groups and companies, use the enquiry form further down – we will get back to you personally.",
       // External citation (E1.5, GEO rule 3) — Comité Champagne, the official trade body of the
       // protected Champagne appellation; matches the midnight champagne on this page.
       citationPre: "At midnight we raise a glass of champagne: the protected designation of origin Champagne is administered by the ",
@@ -1878,10 +1912,18 @@ const enBase = {
       previousMenuIntro: "So you know what to expect: this is what our gala menu looked like at the last turn of the year – three variations to choose from. We are putting together the menu for the coming New Year's Eve right now and expect to publish it in October.",
       previousMenuCoursesLabel: "{courses}-course menu",
       previousMenuNote: "Please note: these dishes are a look back at last season and cannot be booked. The upcoming New Year's Eve menu may differ.",
-      ctaBoxTitle: "Enquire About NYE at STORIA",
-      ctaBoxDesc: "All New Year's Eve packages are individually customisable. Detailed information on menus and prices:",
-      ctaBoxButton: "→ Enquire about NYE on events-storia.de",
-      ctaBoxNote: "Or contact us directly: 089 51519696 · info@ristorantestoria.de · WhatsApp: 0163 6033912",
+      // Reservation (E2.1) — placeholders come from FACTS.silvester. The text has to state
+      // that on 31 December the gala menu is the only option (Antoine, 13 Sept 2026).
+      reservationTitle: "Reserve a table for New Year's Eve",
+      reservationIntro: "On 31 December we serve the gala menu only – there is no à la carte that evening. Booking a table here means booking the {courses}-course gala menu at €{price} per person, or €{priceWine} per person with wine pairing.",
+      reservationNote: "The date is pre-filled with 31 December. For New Year's Eve only table times between 19:00 and 20:00 are available – the evening starts at 19:00 with the aperitivo reception. You complete the reservation itself on OpenTable.",
+      // Inquiry form (E2.2) — framing texts; the field labels live in `anlassInquiry`.
+      inquiryTitle: "Enquire about the New Year's Eve gala",
+      inquiryIntro: "Celebrating with a larger group, questions about the gala menu or special requests? Write to us – we will get back to you personally.",
+      // Contact channels (E2.3) — replace the former CTA box that pointed to events-storia.de.
+      // The channels now appear here only, right behind the enquiry form.
+      contactBoxTitle: "Prefer to talk to us directly?",
+      contactBoxDesc: "Phone, email or WhatsApp – for questions about the gala menu, for special requests, or if you would rather send your enquiry another way.",
       reasonsTitle: "8 Reasons for New Year's Eve at STORIA",
       reason1Title: "🍝 Authentic Italian Gala Dinner",
       reason1Desc: "No standard buffet: Homemade pasta, stone-oven pizza, fresh antipasti. Quality that will delight your guests.",
@@ -1914,7 +1956,8 @@ const enBase = {
       step6Desc: "Digestif, dolci and keep celebrating – as long as you like.",
       faqTitle: "Frequently Asked Questions About NYE at STORIA",
       faq1Question: "When will the NYE menu 2026/2027 be published?",
-      faq1Answer: "Expected in October. Sign up to be notified first!",
+      // E2.3: pointed at the unmounted sign-up form and was a call to action into nowhere.
+      faq1Answer: "Expected in October. You can reserve your table before then; for a larger group, send us your enquiry via the form on this page.",
       faq2Question: "How much does New Year's Eve at STORIA cost?",
       faq2Answer: "From €99 p.p. (Classic) to €150 p.p. (Premium). Exclusive packages on individual request.",
       faq3Question: "How many guests can attend?",
@@ -1929,8 +1972,8 @@ const enBase = {
       faq7Answer: "Of course! Whether a proposal, special decoration or cake – speak to us, we're happy to help discreetly.",
       faq8Question: "Is there parking available?",
       faq8Answer: "Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 spaces, open 24h, 5 minutes walk.",
-      signupTitle: "NYE Programme 2026/2027 – Get Notified",
-      signupDesc: "Our New Year's programme will be published in October. Sign up to be the first to know.",
+      // signupTitle/signupDesc removed with E2.3 — the sign-up block is unmounted on this page.
+      // `t.seasonalSignup.*` stays untouched (Valentine's Day + generic occasion fallback).
       archivedTitle: "Our NYE Menu {year} – A Look Back",
       archivedDisclaimer: "The menu for the upcoming season may differ.",
       relatedTitle: "You Might Also Be Interested In",
@@ -1947,10 +1990,9 @@ const enBase = {
       related6Title: "📞 Contact",
       related6Desc: "Get in touch directly",
       finalCtaTitle: "New Year's Eve at STORIA – Plan Now",
-      finalCtaDesc: "Secure your place for the most unforgettable New Year's celebration in Munich. All packages, menus and prices on our events website.",
-      finalCtaButton: "→ Enquire about NYE on events-storia.de",
-      finalCtaButtonInactive: "→ Get notified",
-      finalCtaAlt: "Or contact us directly:",
+      finalCtaDesc: "Secure your place for New Year's Eve in Munich: reserve a table – or, if you are coming with a larger group, send us an enquiry.",
+      finalCtaButtonReserve: "→ Reserve a table",
+      finalCtaButtonInquiry: "→ Enquire as a group",
     },
     weihnachten: {
       seoTitle: "Christmas Party Munich 2026 – Italian Restaurant | STORIA",
@@ -1962,16 +2004,16 @@ const enBase = {
       heroBadge2: "🕯️ Festive Ambience",
       heroBadge3: "🎄 Christmas menu for groups",
       heroDescription: "Christmas at STORIA works in two ways: reserve a table and dine à la carte from our seasonal menu – or arrange a Christmas menu with us directly as a company or group. Both in an authentically Italian atmosphere in the heart of Maxvorstadt.",
-      heroCta: "Enquire about Christmas party",
-      heroCtaInactive: "Stay in the loop",
-      heroCtaPhone: "089 51519696",
-      heroEventsNote: "For groups of 20+ guests:",
-      heroEventsLink: "events-storia.de",
+      // Hero CTAs (E2.3): exactly two, matching the two routes from E1.4 one to one.
+      // Replace heroCta/heroCtaInactive and the heroEventsNote/heroEventsLink footnote;
+      // `heroCtaPhone` was already unused and goes with them.
+      heroCtaReserve: "Reserve a table during Advent",
+      heroCtaInquiry: "Enquire about a group Christmas menu",
       // Definition lead (E1.5, GEO rule 1) + two-route reality (E1.4).
       introTitle: "Christmas Party in Munich – à la carte at your table or a Christmas menu for groups",
       introP1: "Christmas at Ristorante STORIA is an Italian festive offering at Karlstraße 47a in Munich Maxvorstadt that works in two ways: à la carte from the seasonal menu at your reserved table, from 1 person – or a Christmas menu that companies and groups of {minGuests} or more arrange directly with the restaurant, from €{groupPrice} per person. The Speranza family from Cilento has run the restaurant since 2015; there is deliberately no fixed Christmas menu to pre-order.",
       introP2: "On the first route you simply reserve a table during Advent and order à la carte from our seasonal menu – no pre-order, no minimum number of guests. On the second route we put together a Christmas menu for companies and groups of {minGuests} or more: Southern Italian festive cuisine with homemade pasta, fine wines and Panettone for dessert, tailored in conversation to the occasion and your budget.",
-      introP3: "The central location – just 5 minutes from Königsplatz and the Christmas market – makes STORIA the perfect place after visiting the Christkindlmarkt. The restaurant is closed on 24 and 25 December. Arrange a group menu directly with us: by phone, by email or – from 20 guests – via events-storia.de.",
+      introP3: "The central location – just 5 minutes from Königsplatz and the Christmas market – makes STORIA the perfect place after visiting the Christkindlmarkt. The restaurant is closed on 24 and 25 December. Arrange a group menu directly with us: via the enquiry form further down, by phone or by email.",
       // External citation (E1.5, GEO rule 3) — UNESCO Representative List; Cilento, the Speranza
       // family's home region, is the Italian community behind the Mediterranean diet entry.
       citationPre: "The Speranza family's festive cuisine comes from Cilento in the province of Salerno – the Italian community through which the Mediterranean diet was added to the ",
@@ -2002,6 +2044,14 @@ const enBase = {
       twoWay2Item1: "From {minGuests} people",
       twoWay2Item2: "Menu, schedule and drinks are agreed in conversation",
       twoWay2Item3: "Guide price from €{groupPrice} per person",
+      // Reservation (E2.1) — route 1 as an action. The two closing days are named because
+      // ReservationBooking blocks them in the calendar.
+      reservationTitle: "Reserve a table during Advent",
+      reservationIntro: "Route 1 in short: reserve a table and order à la carte from our seasonal menu – from 1 person, with no pre-order and no menu arrangement.",
+      reservationNote: "The restaurant is closed on 24 and 25 December; those two days cannot be selected in the calendar. You complete the reservation itself on OpenTable.",
+      // Inquiry form (E2.2) — route 2 as an action. {minGuests} comes from FACTS.
+      inquiryTitle: "Enquire about a Christmas menu for groups",
+      inquiryIntro: "Route 2: from {minGuests} people we put your Christmas menu together with you. Send us the occasion, your preferred date and the number of guests – we will come back with a proposal.",
       packagesTitle: "Guidance for your group menu",
       packagesIntro: "The three packages below are not ready-made menus to order, but reference points for scope and price on the second route. What finally reaches the table is decided together in conversation.",
       package1Title: "Christmas Classic",
@@ -2031,10 +2081,10 @@ const enBase = {
       package3Item5: "Full event coordination",
       package3Ideal: "Ideal for: Large corporate Christmas parties (40–100+ guests)",
       package3Price: "On request",
-      ctaBoxTitle: "Enquire About Christmas Party at STORIA",
-      ctaBoxDesc: "All Christmas packages are individually customisable. Detailed information on menus and prices:",
-      ctaBoxButton: "→ Enquire about Christmas party on events-storia.de",
-      ctaBoxNote: "Or contact us directly: 089 51519696 · info@ristorantestoria.de · WhatsApp: 0163 6033912",
+      // Contact channels (E2.3) — replace the former CTA box that pointed to events-storia.de.
+      // The channels now appear here only, right behind the enquiry form.
+      contactBoxTitle: "Prefer to talk to us directly?",
+      contactBoxDesc: "Phone, email or WhatsApp – for a group menu a conversation is often the fastest route anyway, because menu, timing and drinks are agreed together.",
       reasonsTitle: "8 Reasons for Christmas at STORIA",
       reason1Title: "🍝 Authentic Italian festive cuisine",
       reason1Desc: "Traditional Italian festive cuisine: from antipasti to homemade pasta to Panettone – à la carte at your table just as much as in the group menu.",
@@ -2067,7 +2117,7 @@ const enBase = {
       faq1Question: "When should I book our Christmas party?",
       faq1Answer: "The earlier the better! The Advent season fills up quickly. We recommend enquiries from September/October.",
       faq2Question: "What is the minimum number of guests?",
-      faq2Answer: "There are two ways: at your table you dine à la carte from our seasonal menu during Advent – 1 person is enough. A fixed Christmas menu for groups is arranged from 6 people. For larger groups of 20+: events-storia.de.",
+      faq2Answer: "There are two ways: at your table you dine à la carte from our seasonal menu during Advent – 1 person is enough. A fixed Christmas menu for groups is arranged from 6 people; for that, write to us via the enquiry form on this page.",
       faq3Question: "Is there a fixed Christmas menu to pre-order?",
       faq3Answer: "No. During Advent you dine à la carte from our seasonal menu at your table. A Christmas menu is put together individually for companies and groups of 6 or more – tailor-made according to your wishes and budget, arranged by phone or email.",
       faq4Question: "Are there vegetarian/vegan options?",
@@ -2080,8 +2130,8 @@ const enBase = {
       faq7Answer: "Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 spaces, open 24h, 5 minutes walk.",
       faq8Question: "Is STORIA open on Christmas Eve?",
       faq8Answer: "No. The restaurant is closed on 24 and on 25 December. We are happy to welcome you throughout the rest of the Advent season.",
-      signupTitle: "Christmas at STORIA – stay in the loop",
-      signupDesc: "Would you like to hear what is happening at STORIA during Advent? Enter your email address. For a Christmas menu for your group, it is best to contact us directly – by phone on 089 51519696.",
+      // signupTitle/signupDesc removed with E2.3 — the sign-up block is unmounted on this page.
+      // `t.seasonalSignup.*` stays untouched (Valentine's Day + generic occasion fallback).
       archivedTitle: "Our Christmas Menus {year} – A Look Back",
       archivedDisclaimer: "The menus for the upcoming season may differ.",
       relatedTitle: "You Might Also Be Interested In",
@@ -2099,9 +2149,8 @@ const enBase = {
       related6Desc: "Get in touch directly",
       finalCtaTitle: "Christmas Party at STORIA – Plan Now",
       finalCtaDesc: "Secure your preferred date for the most wonderful Christmas party in Munich. A table during Advent only needs a reservation; for a group menu we go through the details together.",
-      finalCtaButton: "→ Enquire about Christmas party on events-storia.de",
-      finalCtaButtonInactive: "→ Stay in the loop",
-      finalCtaAlt: "Or contact us directly:",
+      finalCtaButtonReserve: "→ Reserve a table",
+      finalCtaButtonInquiry: "→ Enquire about a group menu",
       // Standalone SEO page keys
       standaloneSeoTitle: "Christmas Munich 2026 \u2013 Italian Christmas Menu | STORIA",
       standaloneSeoDescription: "Celebrate Christmas in Munich: Festive Italian Christmas menus at Ristorante STORIA Maxvorstadt. From \u20ac45 p.p. for 6\u2013100 guests. Learn more!",

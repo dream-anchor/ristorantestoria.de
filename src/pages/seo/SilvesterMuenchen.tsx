@@ -7,14 +7,15 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
-import SeasonalSignupForm from "@/components/SeasonalSignupForm";
+import ReservationBooking from "@/components/ReservationBooking";
+import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp } from "lucide-react";
+import { Phone, MessageCircle, Mail, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import silvesterHeroImage from "@/assets/silvester-dinner-gala-storia-muenchen.webp";
 import silvesterHeroImage600 from "@/assets/silvester-dinner-gala-storia-muenchen-600w.webp";
@@ -23,7 +24,7 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
-import { EVENTS_LINKS } from "@/lib/eventsLinks";
+import { fireLead } from "@/lib/analytics";
 import { FACTS } from "@/config/facts";
 
 /**
@@ -146,6 +147,16 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
   const effectiveConfig = seasonalConfig || hookConfig!;
   const isActive = !!menu;
   const currentYear = new Date().getFullYear();
+
+  /**
+   * Vorbelegung der Buchungsstrecke auf den 31. Dezember (E2.1).
+   *
+   * Bewusst aus dem laufenden Jahr berechnet statt hart „2026" zu schreiben — die Seite
+   * soll in den Folgejahren ohne Codeänderung weiter das richtige Datum vorbelegen.
+   * Monat 11 = Dezember (0-indiziert). `ReservationBooking` bietet an diesem Datum von
+   * sich aus nur die Slots 19:00–20:00 an (`isNewYearsEve`), passend zum Gala-Abend.
+   */
+  const newYearsEveDate = new Date(currentYear, 11, 31);
 
   // --- Canonical + Hreflang ---
   const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
@@ -357,23 +368,21 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                 <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{s.heroBadge3}</span>
               </div>
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{s.heroDescription}</p>
+              {/* CTA-Hierarchie (E2.3): genau ZWEI Ziele, je Absicht eines — Tisch reservieren
+                  (OpenTable-Strecke `#reservieren`) oder Gruppe/Firma anfragen (Formular
+                  `#anfrage`). Vorher standen hier drei konkurrierende Wege nebeneinander
+                  (events-storia.de, Vormerk-Formular, E-Mail) plus eine Fußnote, die ein viertes
+                  Mal nach events-storia.de führte. Die Fußnote ist ersatzlos entfallen: ihre
+                  Absicht („für Gruppen") ist jetzt der zweite Button. Telefon, E-Mail und WhatsApp
+                  stehen gebündelt an genau einer Stelle, direkt beim Anfrageformular. */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {isActive ? (
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{s.heroCta}</a>
-                  </Button>
-                ) : (
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="#signup-form">{s.heroCtaInactive}</a>
-                  </Button>
-                )}
+                <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
+                  <a href="#reservieren">{s.heroCtaReserve}</a>
+                </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <EmailLink><Mail className="w-5 h-5 mr-2" /> <EmailAddress /></EmailLink>
+                  <a href="#anfrage">{s.heroCtaInquiry}</a>
                 </Button>
               </div>
-              <p className="mt-6 text-white/70 text-sm">
-                {s.heroEventsNote} <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-primary">{s.heroEventsLink}</a>
-              </p>
             </div>
           </div>
         </section>
@@ -497,18 +506,57 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </section>
             )}
 
-            {/* CTA Box */}
+            {/* Reservierung (E2.1) — OpenTable-Strecke im etablierten Landingpage-Muster
+                (`headingLevel="h3"` + `onBook`-Lead-Callback, wie OktoberfestMuenchen.tsx:460
+                und WmPublicViewingMuenchen.tsx:477).
+
+                Der Text darüber muss die Betriebsrealität aussprechen (Festlegung Antoine,
+                13.09.2026): am 31.12. gibt es AUSSCHLIESSLICH das Gala-Menü, kein à la carte.
+                Wer hier einen Tisch bucht, bucht damit das Gala-Menü — das darf niemand erst
+                am Abend erfahren. Gangzahl und Preise kommen über `fillFacts` aus
+                `FACTS.silvester`, damit sie nicht neben „Auf einen Blick" driften können. */}
+            <section className="mb-16" id="reservieren" aria-labelledby="silvester-reservieren">
+              <h2 id="silvester-reservieren" className="text-3xl font-serif font-bold mb-4 text-center">{s.reservationTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{fillFacts(s.reservationIntro)}</p>
+              <ReservationBooking
+                headingLevel="h3"
+                defaultDate={newYearsEveDate}
+                onBook={() => fireLead("silvester_reservierung")}
+              />
+              <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
+            </section>
+
+            {/* Anfrage (E2.2) — eigenes Formular gegen den MAESTRO-Intake-Endpunkt, KEIN
+                MAESTRO-Widget (Festlegung Antoine, 13.09.2026). Für alles, was über eine
+                Tischbuchung hinausgeht: größere Gruppen, Fragen zum Gala-Menü, Sonderwünsche.
+
+                Wunschtermin auf den 31.12. vorbelegt (im Formular erst nach dem Mount, damit
+                das prerenderte HTML stabil bleibt) — an diesem Abend gibt es nur diesen einen
+                Termin. `minGuests` bleibt bei 1: Silvester ist ausdrücklich auch für Paare da
+                („2 bis 100 Gäste", Auf einen Blick). */}
+            <section className="mb-16" id="anfrage" aria-labelledby="silvester-anfrage">
+              <h2 id="silvester-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{s.inquiryTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.inquiryIntro}</p>
+              <div className="max-w-2xl mx-auto">
+                <AnlassAnfrageForm
+                  anlass="silvester"
+                  defaultEventDate={`${currentYear}-12-31`}
+                />
+              </div>
+            </section>
+
+            {/* Kontaktwege (E2.3) — die EINZIGE Stelle der Seite, an der Telefon, E-Mail und
+                WhatsApp stehen. Vorher war dieser Block eine dritte CTA-Box, die nach
+                events-storia.de führte und die Kontaktkanäle zusätzlich in Hero und Final-CTA
+                wiederholte. Jetzt ist er der Ausweichweg für alle, die lieber sprechen als ein
+                Formular auszufüllen — und steht deshalb unmittelbar hinter dem Formular. */}
             <section className="mb-16 bg-primary text-primary-foreground rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-serif font-bold mb-4">{s.ctaBoxTitle}</h2>
-              <p className="mb-6 opacity-90">{s.ctaBoxDesc}</p>
-              <Button size="lg" variant="secondary" asChild>
-                <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer">{s.ctaBoxButton}</a>
-              </Button>
-              <p className="mt-6 opacity-80 text-sm"><PhoneText>{s.ctaBoxNote}</PhoneText></p>
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
+              <h2 className="text-2xl font-serif font-bold mb-4">{s.contactBoxTitle}</h2>
+              <p className="mb-6 opacity-90">{s.contactBoxDesc}</p>
+              <div className="flex flex-wrap justify-center gap-6">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
-                <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 text-[#25D366]"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
+                <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
               </div>
             </section>
 
@@ -552,18 +600,22 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </Accordion>
             </section>
 
-            {/* Email Signup (nur wenn kein Live-Menü aktiv) */}
-            {!isActive && (
-              <section id="signup-form" className="mb-16 scroll-mt-24">
-                <div className="bg-card rounded-lg border border-border p-8 md:p-12 text-center">
-                  <h2 className="text-2xl font-serif font-bold mb-3">{s.signupTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{s.signupDesc}</p>
-                  <div className="max-w-md mx-auto">
-                    <SeasonalSignupForm seasonalEvent="silvester" />
-                  </div>
-                </div>
-              </section>
-            )}
+            {/* Vormerk-Formular AUSGEHÄNGT (E2.3), nicht abgebaut.
+                Hier stand bis E2.3 ein `<section id="signup-form">` mit `<SeasonalSignupForm
+                seasonalEvent="silvester" />`. Seit die Seite eine echte Reservierungsstrecke
+                (`#reservieren`, E2.1) und ein echtes Anfrageformular (`#anfrage`, E2.2) hat, ist
+                „Ich lasse mich vormerken" der schwächste von drei Wegen und nimmt den beiden
+                starken die Aufmerksamkeit weg.
+
+                ENTFERNT wurde ausschließlich dieser Mount-Punkt. Komponente
+                (`src/components/SeasonalSignupForm.tsx`), Edge Functions (`subscribe-seasonal`,
+                `confirm-seasonal`, `unsubscribe-seasonal`, `notify-seasonal-signups`), Tabelle
+                `seasonal_signups`, Admin-Oberfläche (`SeasonalSignupsManager`,
+                `SeasonalNotificationsManager`) und die Bestätigungsseite
+                (`NewsletterBestaetigung.tsx`) bleiben unangetastet — `ValentinstagMuenchen.tsx`
+                und der generische Anlass-Fallback `BesondererAnlass.tsx` rendern das Formular
+                weiterhin und dürfen dabei nicht brechen (harte Regel, Antoine 13.09.2026:
+                „KEIN BESTEHENDES FORMULAR DARF BRECHEN"). */}
 
             {/* Archived Menu (nur wenn kein Live-Menü aktiv) */}
             {!isActive && archivedMenu && (
@@ -578,8 +630,11 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                   <MenuDisplay menuType="special" menuId={archivedMenu.id} showTitle={false} />
                   <div className="mt-6 text-center">
                     <p className="text-sm text-muted-foreground mb-3">{s.archivedDisclaimer}</p>
+                    {/* E2.3: zeigte auf das entfernte `#signup-form`. Der Anker führt jetzt
+                        zurück zur Reservierungsstrecke weiter oben — der ArrowUp stimmt also
+                        weiterhin. */}
                     <Button variant="outline" size="sm" asChild>
-                      <a href="#signup-form"><ArrowUp className="w-4 h-4 mr-2" />{s.heroCtaInactive}</a>
+                      <a href="#reservieren"><ArrowUp className="w-4 h-4 mr-2" />{s.heroCtaReserve}</a>
                     </Button>
                   </div>
                 </div>
@@ -599,24 +654,21 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </div>
             </section>
 
-            {/* Final CTA */}
+            {/* Final CTA (E2.3) — dieselben zwei Ziele wie im Hero, am Fuß der Seite noch einmal
+                angeboten; die Kontaktkanäle stehen NICHT mehr auch hier (einmal gebündelt beim
+                Formular reicht). Die `isActive`-Verzweigung ist entfallen: ob ein Live-Menü
+                hinterlegt ist oder nicht, ändert nichts daran, wie reserviert und angefragt
+                wird. */}
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
-              {isActive ? (
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <a href={EVENTS_LINKS.silvester} target="_blank" rel="noopener noreferrer">{s.finalCtaButton}</a>
+                  <a href="#reservieren">{s.finalCtaButtonReserve}</a>
                 </Button>
-              ) : (
-                <Button size="lg" variant="secondary" asChild>
-                  <a href="#signup-form">{s.finalCtaButtonInactive}</a>
+                <Button size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" asChild>
+                  <a href="#anfrage">{s.finalCtaButtonInquiry}</a>
                 </Button>
-              )}
-              <p className="mt-6 opacity-80 text-sm">{s.finalCtaAlt}</p>
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
-                <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
-                <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
-                <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
               </div>
             </section>
           </article>

@@ -272,20 +272,176 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 ## E2 — Conversion-Umbau
 
-- [ ] **E2.1** `ReservationBooking` auf beiden Seiten einbinden (Landingpage-Muster
+- [x] **E2.1** `ReservationBooking` auf beiden Seiten einbinden (Landingpage-Muster
       `headingLevel="h3"` + `onBook`), optionale Props `defaultDate`/`defaultGuests` ergänzen —
       abwärtskompatibel, `Reservierung.tsx` unverändert.
-- [ ] **E2.2** Neues `AnlassAnfrageForm` gegen `POST /api/public/inquiries` (Vertrag siehe KONZEPT),
+      **Beweis 13.09.2026** (Commit `deef9aa`, Branch `saisonseiten-e2`): `npm run build` grün
+      (157 Seiten prerendert, 0 Errors), `npx tsc --noEmit` ohne Ausgabe, `npm run lint`
+      **727 Probleme = Baseline unverändert**. Im sichtbaren HTML (nach Entfernen ALLER
+      `<script>`-Blöcke) beider Seiten und aller vier Sprachrouten: `id="reservieren"` +
+      Buchungsstrecke mit „Bei OpenTable reservieren". Silvester DE: „Tisch für Silvester
+      reservieren", „Am 31. Dezember servieren wir ausschließlich das Gala-Menü – à la carte
+      gibt es an diesem Abend nicht. Wer hier einen Tisch bucht, bucht damit das
+      4-Gänge-Gala-Menü für 99 € pro Person, mit Weinbegleitung 150 € pro Person.", „Das Datum
+      ist auf den 31. Dezember vorbelegt. Für die Silvesternacht stehen ausschließlich
+      Tischzeiten zwischen 19:00 und 20:00 Uhr zur Wahl …"; EN/IT/FR mit denselben Zahlen
+      („4-course gala menu at €99 per person, or €150 per person with wine pairing",
+      „menù di gala da 4 portate a 99 € a persona", „menu de gala en 4 plats à 99 € par
+      personne"). Weihnachten DE: „Tisch in der Adventszeit reservieren", „Weg 1 in Kurzform:
+      Tisch reservieren und à la carte von der saisonalen Karte essen", „Am 24. und 25. Dezember
+      ist das Restaurant geschlossen; diese beiden Tage lassen sich im Kalender nicht
+      auswählen." (EN „Reserve a table during Advent", IT „Prenota un tavolo durante l'Avvento",
+      FR „Réserver une table pendant l'Avent").
+      **Abwärtskompatibilität bewiesen:** `git diff -- src/pages/Reservierung.tsx` **leer**;
+      `dist/reservierung/index.html`, `dist/oktoberfest-muenchen/index.html` und
+      `dist/wm-2026-public-viewing-muenchen/index.html` rendern unverändert den
+      SSR-Platzhalter „Datum wählen" plus OpenTable-Button. `defaultDate` wird bewusst NICHT
+      als Initial-State gesetzt, sondern im Mount-Effekt aus einem Ref (`initialDateRef`), der
+      den Wert des ersten Renders einfriert: SSR-Hydration-Logik (#425/#422) bleibt intakt und
+      ein späterer Parent-Re-Render überschreibt keine Auswahl des Gastes. `defaultGuests` ist
+      ein konstanter String und damit hydrationsneutral; er ist implementiert und dokumentiert,
+      wird aber von keiner der beiden Seiten gesetzt (kein Fakt rechtfertigt eine andere
+      Vorbelegung als die bisherigen 2 Gäste).
+      **Keine neuen Zahlen:** Gangzahl/Preise über `fillFacts` aus `FACTS.silvester`;
+      „19:00–20:00" ist das Verhalten von `ReservationBooking.isNewYearsEve`, „24./25.12."
+      das von `getClosedDays`. `fireLead` liegt jetzt zentral in `src/lib/analytics.ts`
+      (erbt den Admin-Guard aus `trackEvent`); die drei bestehenden seitenlokalen Kopien
+      wurden nicht angefasst.
+- [x] **E2.2** Neues `AnlassAnfrageForm` gegen `POST /api/public/inquiries` (Vertrag siehe KONZEPT),
       inkl. Honeypot `website`, Unterscheidung 201/202/422/429, Endpunkt-URL per
       `VITE_MAESTRO_INTAKE_URL` statt hart kodiert.
-- [ ] **E2.3** Vormerk-Formular auf beiden Seiten aushängen (nur die zwei Mount-Punkte),
+      **Beweis 13.09.2026** (Commit `0841fae`): `npm run build` grün (157 Seiten prerendert,
+      0 Errors), `npx tsc --noEmit` ohne Ausgabe, `npm run lint` **727 Probleme = Baseline
+      unverändert**. Zwei Builds als Beweis, weil das Verhalten an der Env-Variable hängt:
+      **(a) mit** `VITE_MAESTRO_INTAKE_URL=https://storia.schrittmacher.ai/api/public/inquiries`
+      (nur als Shell-Variable gesetzt, NICHT in `.env` geschrieben) steht das Formular im
+      statischen HTML aller acht Routen — je **2 `<form>`-Elemente** (Vormerk-Formular +
+      neues Formular), `id="anfrage"`, sichtbar „Silvester-Gala anfragen" / „Weihnachtsmenü
+      für Gruppen anfragen" bzw. „Enquire about the New Year's Eve gala" / „Richiedi il menù
+      di Natale per gruppi" / „Demander un menu de Noël pour les groupes", Felder „Name /
+      Firma", „Telefon (optional)", „Wunschtermin (optional)", „Gäste (ca.) (optional)",
+      „Ihre Nachricht", Button „Anfrage senden" (EN „Send inquiry", IT „Invia richiesta",
+      FR „Envoyer la demande"). **(b) ohne** die Variable: je nur **1 `<form>`** (das
+      unangetastete Vormerk-Formular) plus der Ausweichblock „Anfrage per Telefon oder
+      E-Mail" / „Das Anfrageformular steht hier gerade nicht zur Verfügung …", und
+      `grep -c "api/public/inquiries" dist/assets/*.js` → **0 Treffer im gesamten Bundle**
+      (kein hartkodierter Prod-Fallback).
+      **Honeypot, Markup im Wortlaut aus `dist/besondere-anlaesse/silvester/index.html`:**
+      `<div class="hp-field" aria-hidden="true"><label for="anfrage-silvester-website">Dieses Feld bitte frei lassen</label><input id="anfrage-silvester-website" type="text" tabindex="-1" autoComplete="off" name="website"/></div>`
+      — ein echtes Textfeld, ausdrücklich **kein** `type="hidden"`. Versteckt allein per CSS,
+      Regel aus dem gebauten Stylesheet:
+      `.hp-field{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}`.
+      **201/202-Unterscheidung:** beide sind `response.ok === true`, unterschieden wird
+      ausschließlich über `data.id` im Body — mit `id` echter Lead (GA4 `generate_lead`), ohne
+      `id` (Honeypot, stilles Verwerfen) nach außen Erfolg, aber KEIN Lead. 422 → eigene
+      Meldung zu E-Mail/Datum/Gästezahl, 429 → „Zu viele Anfragen in kurzer Zeit …",
+      `fetch`-Reject (Netzwerk/CORS) → eigene Meldung; Telefon und E-Mail stehen in jedem Fall
+      unter dem Formular (`tel:+498951519696` plus `EmailLink`, also ohne Klartext-`mailto:`
+      im HTML — Cloudflare-Obfuskierung).
+      **Vertragstreue:** `guests` als Zahl (`Number.parseInt`), `eventDate` als volles
+      ISO-Datetime — bewusst 12:00 Ortszeit, weil `toISOString()` bei 00:00 MEZ auf den
+      **Vortag** rutschen würde; `sourceDetail` `ristorante_silvester`/`ristorante_weihnachten`,
+      `serviceKind` `"event"`, `language` nur `de`/`en`. Leerer Honeypot wird gar nicht erst
+      mitgeschickt, damit der Server ihn nicht als befüllt werten kann.
+      **Keine Testanfrage abgesetzt** (Vorgabe: kein echter Lead im System).
+- [x] **E2.3** Vormerk-Formular auf beiden Seiten aushängen (nur die zwei Mount-Punkte),
       events-storia-CTAs auf diesen zwei Seiten ersetzen, CTA-Hierarchie vereinheitlichen.
       Beweis: Valentinstag + generische Anlass-Seite rendern das Vormerk-Formular weiterhin.
+      **Beweis 13.09.2026** (Branch `saisonseiten-e2`): `npm run build` grün (157 Seiten
+      prerendert, 0 Errors), `npx tsc --noEmit` ohne Ausgabe, `npm run lint` **727 Probleme =
+      Baseline unverändert**, kein neues Problem. Geändert wurden genau 8 Dateien:
+      `SilvesterMuenchen.tsx`, `WeihnachtenMuenchen.tsx`, `eventsLinks.ts`, die vier
+      Übersetzungsdateien und dieses Loop-Dokument.
+      **Ausgehängt, nicht abgebaut:** entfernt wurden ausschließlich die zwei `<section
+      id="signup-form">`-Mount-Punkte samt `<SeasonalSignupForm seasonalEvent="silvester" |
+      "weihnachten" />`. `git diff` ist LEER für `src/components/SeasonalSignupForm.tsx`,
+      `src/pages/BesondererAnlass.tsx`, `src/pages/seo/ValentinstagMuenchen.tsx`,
+      `src/pages/NewsletterBestaetigung.tsx`, `src/components/admin/SeasonalSignupsManager.tsx`,
+      `src/components/admin/SeasonalNotificationsManager.tsx` und für `supabase/` komplett (die
+      vier Edge Functions `subscribe-seasonal`, `confirm-seasonal`, `unsubscribe-seasonal`,
+      `notify-seasonal-signups` und die Tabelle `seasonal_signups` also unangetastet). Ebenfalls
+      `git diff`-leer, wie von der harten Regel verlangt: `Kontakt.tsx`, `Reservierung.tsx`,
+      `ReservationBooking.tsx`, `GroupInquiryForm.tsx`, `FilmfestMuenchen.tsx`.
+      **Prerender-Beweis, alle 8 Zielrouten** (`dist/besondere-anlaesse/silvester/`,
+      `dist/en/special-occasions/new-years-eve/`, `dist/it/occasioni-speciali/capodanno/`,
+      `dist/fr/occasions-speciales/nouvel-an/`, `dist/weihnachten-muenchen/`,
+      `dist/en/christmas-munich/`, `dist/it/natale-monaco/`, `dist/fr/noel-munich/`), jeweils im
+      **sichtbaren** HTML nach Entfernen ALLER `<script>`-Blöcke: **0 Treffer** für
+      `id="signup-form"` UND **0 Treffer** für `href="#signup-form"` (kein toter Anker), dafür je
+      `id="reservieren"` + `id="anfrage"` und je **2 × `href="#reservieren"` + 2 ×
+      `href="#anfrage"`** (Hero und Final-CTA).
+      **events-storia:** je Zielroute exakt **2** Vorkommen — derselbe Wert wie auf den
+      Kontrollseiten `dist/reservierung/index.html` und `dist/kontakt/index.html` (je 2), die nie
+      seitenbezogene events-storia-Links hatten. Die zwei verbleibenden sind also ausschließlich
+      globales Chrome (Navigation → Catering, Footer → Gutschein-Shop), **0 seitenbezogene**.
+      Vorher-Messung am selben Build-Skript (`git stash`, Baseline gebaut, zurückgeholt):
+      Silvester **7 → 2**, Weihnachten **8 → 2**.
+      **Gegenprobe, dass nichts kaputtging:** `id="signup-form"` + E-Mail-Feld + Anker
+      `href="#signup-form"` weiterhin in allen vier Valentinstag-Routen
+      (`dist/valentinstag-muenchen/`, `dist/en/valentines-day-munich/`,
+      `dist/it/san-valentino-monaco/`, `dist/fr/saint-valentin-munich/`). events-storia-Links
+      weiterhin vorhanden auf `firmenfeier-muenchen` (9), `geburtstagsfeier-muenchen` (5),
+      `catering` (10), `weihnachtsfeier-muenchen` (8) — alle deutlich über dem Chrome-Wert 2.
+      **Generische Anlass-Seite:** ihr Vormerk-Block sitzt in `SeasonalPlaceholder`
+      (`BesondererAnlass.tsx:448`) und greift erst, wenn eine Saisonkonfiguration **kein**
+      veröffentlichtes Menü hat; heute ist keine solche Route prerendert (`grep -rl
+      'id="signup-form"' dist/` liefert genau die vier Valentinstag-Routen). Der Beweis ist
+      deshalb der leere `git diff` der Datei plus die unveränderte Mount-Stelle — nicht eine
+      dist-Datei, die es nicht gibt.
+      **CTA-Hierarchie:** aus bis zu sechs konkurrierenden Zielen sind zwei geworden — Tisch
+      reservieren → `#reservieren`, Gruppe/Firma anfragen → `#anfrage`. Sichtbar im HTML:
+      Silvester „Tisch für Silvester reservieren" / „Gruppe oder Firma anfragen" (Hero) und
+      „→ Tisch reservieren" / „→ Gruppe anfragen" (Final-CTA); Weihnachten „Tisch in der
+      Adventszeit reservieren" / „Weihnachtsmenü für Gruppen anfragen" bzw. „→ Tisch
+      reservieren" / „→ Gruppen-Menü anfragen". Telefon/E-Mail/WhatsApp stehen jetzt **genau
+      einmal** im Seitenkörper, gebündelt direkt hinter dem Anfrageformular („Lieber persönlich
+      sprechen?"): gemessen gegen die Kontrollseite `dist/reservierung/index.html` (3 × `wa.me`,
+      4 × `tel:` allein aus dem Chrome) liegen beide Zielseiten bei 4 bzw. 5 — Differenz **je 1**.
+      Vorher waren es 5 × `wa.me` / 7 × `tel:` (= 2 bzw. 3 im Seitenkörper).
+      **Verwaiste Übersetzungsschlüssel: 25 Stück entfernt**, verteilt auf die vier Sprachdateien
+      und ausschließlich innerhalb der Blöcke `seo.silvester` und `seo.weihnachten` — de 14
+      (silvester `heroCta`, `heroCtaInactive`, `heroEventsNote`, `heroEventsLink`, `ctaBoxTitle`,
+      `ctaBoxDesc`, `ctaBoxButton`, `ctaBoxNote`, `signupTitle`, `signupDesc`, `finalCtaButton`,
+      `finalCtaButtonInactive`, `finalCtaAlt` + weihnachten dieselben plus `heroCtaPhone`), en 14,
+      fr 14, it 6 (Italienisch hatte den Weihnachtsblock ohnehin nur teilweise übersetzt).
+      Gegenprobe vor dem Löschen: dieselben **Namen** leben in `seo.valentinstag`,
+      `seo.firmenfeier`, `seo.geburtstag` und `seo.weihnachtsfeier` weiter und werden dort
+      gelesen — deshalb wurde blockweise gelöscht, nicht per Dateisuche. Gegenprobe danach: ein
+      Skript, das die Blockgrenzen von `silvester`/`weihnachten` in allen vier Dateien bestimmt,
+      findet dort **0** dieser Schlüssel und **0** `events-storia`-Vorkommen in Stringwerten (die
+      13 verbleibenden Treffer sind Kommentarzeilen, die dokumentieren, was ersetzt wurde).
+      `t.seasonalSignup.*` ist unangetastet — diese Schlüssel gehören der Komponente selbst.
+      **Mitgefunden und mitgefixt:** die Silvester-FAQ „Wann wird das Silvester-Menü
+      veröffentlicht?" antwortete in allen vier Sprachen „Lassen Sie sich vormerken, um als
+      Erster informiert zu werden!" — eine Handlungsaufforderung ins Leere, sobald das Formular
+      weg ist. Sie zeigt jetzt auf die zwei realen Wege. Sweep über alle acht Zielrouten: **0
+      Treffer** für „vormerk", „notified", „Registratevi", „Inscrivez-vous", „Auf dem Laufenden
+      bleiben", „stay in the loop".
+      **`src/lib/eventsLinks.ts` nicht gelöscht** — das Preset `silvester` ist jetzt ungenutzt
+      (die Silvesterseite war seine einzige Aufrufstelle) und trägt einen Kommentar, der das
+      festhält und begründet, warum es stehen bleibt; alle übrigen Presets werden von
+      Firmenfeier, Weihnachtsfeier, Hochzeit, Geburtstag, Catering und Reisegruppen weiter
+      gebraucht.
+      **Keine neuen Fakten:** die angefassten Fließtexte (`introP3` beider Seiten, Weihnachts-FAQ
+      `faq2Answer`, Silvester-FAQ `faq1Answer`, `finalCtaDesc` Silvester) haben nur den Verweis
+      „ab 20 Gäste über events-storia.de" durch den Verweis auf das Formular derselben Seite
+      ersetzt; die 20-Gäste-Schwelle war eine reine Weiterleitungsregel zu events-storia und
+      steuert nichts mehr. Preise, Gangzahlen, Kapazitäten und Fristen sind unberührt und kommen
+      weiterhin über `fillFacts()` aus `FACTS`.
 
 ## E2: Branch, Beweis, Merge
 
 - [ ] Branch `saisonseiten-e2` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe
       **inklusive echter Testanfrage** über das Formular (Browser, nicht `curl` — CORS + JS).
+      **PR: https://github.com/dream-anchor/ristorantestoria.de/pull/89** — Branch gepusht,
+      `origin/main` vorher in den Branch gemergt (PR #88, `VITE_MAESTRO_INTAKE_URL` im
+      Deploy-Workflow; Auto-Merge ohne Konflikt, nur `.github/workflows/deploy-ionos.yml`,
+      +6 Zeilen). Damit ist der unter E2.2 vermerkte offene Punkt erledigt: der Produktionsbuild
+      kennt die Intake-URL, das Formular rendert live als Formular und nicht als
+      Telefon/E-Mail-Ausweichblock. Stand nach dem Merge: `npm run build` grün (157 Seiten,
+      0 Errors), `npx tsc --noEmit` sauber, `npm run lint` 727 = Baseline, alle
+      E2.3-Prerender-Prüfungen weiterhin grün.
+      **Merge passiert im Hauptfenster** — hier bewusst nicht abgehakt.
 
 ---
 
@@ -310,6 +466,20 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
   Antoine; bis dahin bleibt 45 € (überall konsistent live), kein Blocker für den Rest von E1
 
 ## Offen, außerhalb des Codes
+
+- **`VITE_MAESTRO_INTAKE_URL` muss in die CI, nicht nur in die lokale `.env`** (13.09.2026, bei
+  E2.2 aufgefallen): Der Produktionsbuild läuft in GitHub Actions
+  (`.github/workflows/deploy-ionos.yml`, Schritt „Build Project (SSG)"); dessen `env:`-Block
+  kennt heute nur `DATABASE_URL` und `VITE_SUPABASE_URL`. Ohne einen dortigen Eintrag
+  (`VITE_MAESTRO_INTAKE_URL: https://storia.schrittmacher.ai/api/public/inquiries` — die URL
+  ist kein Geheimnis, ein Secret ist nicht nötig) rendert die Live-Seite statt des Formulars
+  den Telefon/E-Mail-Ausweichblock. **Vor E2.3 erledigen**, weil E2.3 die bisherigen
+  Vormerk-/events-storia-CTAs entfernt. Workflow bewusst NICHT in diesem Durchgang angefasst:
+  `.github/workflows/` gehört laut Projektregel in einen eigenen, sofortigen PR.
+- **`.env.example` existiert im Repo nicht** — der Eintrag konnte deshalb nicht dort ergänzt
+  werden; die Datei wurde absichtlich nicht neu angelegt. Die Variable ist stattdessen im
+  Kopfkommentar von `src/components/AnlassAnfrageForm.tsx` dokumentiert, inklusive des
+  Hinweises auf den CI-Build.
 
 - **Listicle-Aufnahme** (in-muenchen.de Silvester, Mit Vergnügen Weihnachtsfeier) — größter
   Sichtbarkeitshebel, Betreiber-Aktion, kein Code.

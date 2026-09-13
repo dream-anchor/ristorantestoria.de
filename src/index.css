@@ -166,6 +166,23 @@ All colors MUST be HSL.
   }
 }
 
+/* Honeypot-Feld (AnlassAnfrageForm, E2.2).
+   Das Feld muss als echtes Eingabefeld im Markup stehen — `type="hidden"` wäre wirkungslos,
+   weil Bots hidden-Felder trotzdem ausfüllen (Vorgabe Antoine, 13.09.2026). Es wird deshalb
+   ausschließlich per CSS aus dem Blick genommen: aus dem sichtbaren Bereich geschoben,
+   auf 1×1 px reduziert, unsichtbar und nicht klickbar. `tabindex="-1"` (Markup) hält es
+   zusätzlich aus der Tastaturreihenfolge, `aria-hidden` aus dem Screenreader. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Content-Offset für die mobile Conversion-Leiste (MobileActionBar).
    Verhindert, dass die fixe Bottom-Bar Footer-Inhalte dauerhaft verdeckt
    (u. a. den gesetzlich nötigen Cookie-Settings-Link). */

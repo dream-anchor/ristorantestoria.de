@@ -7,14 +7,15 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
-import SeasonalSignupForm from "@/components/SeasonalSignupForm";
+import ReservationBooking from "@/components/ReservationBooking";
+import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
 import LocalizedLink from "@/components/LocalizedLink";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Phone, MessageCircle, Mail, ExternalLink, ArrowUp } from "lucide-react";
+import { Phone, MessageCircle, Mail, ArrowUp } from "lucide-react";
 import storiaLogo from "@/assets/storia-logo.webp";
 import weihnachtsfeierImage from "@/assets/weihnachtsfeier-italiener-storia-muenchen.webp";
 import weihnachtsfeierImage600 from "@/assets/weihnachtsfeier-italiener-storia-muenchen-600w.webp";
@@ -24,6 +25,7 @@ import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
 import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import allSlugs from "@/config/slugs.json";
+import { fireLead } from "@/lib/analytics";
 import { FACTS } from "@/config/facts";
 
 /**
@@ -301,23 +303,20 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                 <span className="bg-white/20 backdrop-blur px-4 py-2 rounded-full text-white text-sm">{s.heroBadge3}</span>
               </div>
               <p className="text-white/80 mb-8 max-w-2xl mx-auto">{s.heroDescription}</p>
+              {/* CTA-Hierarchie (E2.3): genau ZWEI Ziele — und sie decken sich eins zu eins mit
+                  den zwei Wegen aus E1.4. Weg 1 (à la carte am Tisch) = `#reservieren`, Weg 2
+                  (Gruppen-/Firmenmenü) = `#anfrage`. Vorher führten hier drei konkurrierende
+                  Wege weg (events-storia.de, Vormerk-Formular, E-Mail) plus eine Fußnote als
+                  vierter Weg zu events-storia.de. Die Fußnote ist ersatzlos entfallen: ihre
+                  Absicht („für Gruppen") ist jetzt der zweite Button. */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {isActive ? (
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer"><ExternalLink className="w-5 h-5 mr-2" />{s.heroCta}</a>
-                  </Button>
-                ) : (
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <a href="#signup-form">{s.heroCtaInactive}</a>
-                  </Button>
-                )}
+                <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
+                  <a href="#reservieren">{s.heroCtaReserve}</a>
+                </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
-                  <EmailLink><Mail className="w-5 h-5 mr-2" /> <EmailAddress /></EmailLink>
+                  <a href="#anfrage">{s.heroCtaInquiry}</a>
                 </Button>
               </div>
-              <p className="mt-6 text-white/70 text-sm">
-                {s.heroEventsNote} <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer" className="text-white underline hover:text-primary">{s.heroEventsLink}</a>
-              </p>
             </div>
           </div>
         </section>
@@ -407,6 +406,27 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </div>
             </section>
 
+            {/* Reservierung (E2.1) — das ist WEG 1 der Zwei-Wege-Logik in Handlungsform:
+                Tisch buchen und à la carte von der saisonalen Karte essen. Deshalb steht der
+                Block direkt hinter „Zwei Wege" und vor den Paketen (die nur Orientierung für
+                Weg 2 sind). Muster wie auf den anderen Landingpages: `headingLevel="h3"`
+                plus `onBook`-Lead-Callback.
+
+                KEINE `defaultDate`-Vorbelegung: anders als bei Silvester gibt es hier keinen
+                einzelnen Termin, sondern die ganze Adventszeit — die Komponente bleibt also
+                auf „heute". Der 24. und 25. Dezember sind Ruhetage und werden von
+                `ReservationBooking.getClosedDays` im Kalender automatisch gesperrt; der Text
+                sagt das ausdrücklich, damit es niemand vergeblich versucht. */}
+            <section className="mb-16" id="reservieren" aria-labelledby="weihnachten-reservieren">
+              <h2 id="weihnachten-reservieren" className="text-3xl font-serif font-bold mb-4 text-center">{s.reservationTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.reservationIntro}</p>
+              <ReservationBooking
+                headingLevel="h3"
+                onBook={() => fireLead("weihnachten_reservierung")}
+              />
+              <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
+            </section>
+
             {/* Packages grid (kein Live-Menü aktiv) oder Live-Menü — bis zur K2-Konsolidierung
                 nur auf der Pillar-Route, jetzt auch hier (KONZEPT § 3b: nichts geht verloren,
                 die Standalone-URL wird aufgewertet statt nur redirected). */}
@@ -437,18 +457,35 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </section>
             )}
 
-            {/* CTA Box */}
+            {/* Anfrage (E2.2) — das ist WEG 2 in Handlungsform: das Gruppen-/Firmenmenü, das
+                direkt mit dem Restaurant abgestimmt wird. Steht bewusst DIREKT hinter den
+                Paketen, die nur Orientierung für genau diesen Weg sind. Weg 1 (à la carte am
+                Tisch) läuft über die Reservierungsstrecke weiter oben, nicht über dieses
+                Formular. Eigenes Formular gegen den MAESTRO-Intake-Endpunkt, kein Widget. */}
+            <section className="mb-16" id="anfrage" aria-labelledby="weihnachten-anfrage">
+              <h2 id="weihnachten-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{s.inquiryTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{fillFacts(s.inquiryIntro)}</p>
+              <div className="max-w-2xl mx-auto">
+                <AnlassAnfrageForm
+                  anlass="weihnachten"
+                  minGuests={FACTS.weihnachten.groupMenuMinGuests}
+                />
+              </div>
+            </section>
+
+            {/* Kontaktwege (E2.3) — die EINZIGE Stelle der Seite, an der Telefon, E-Mail und
+                WhatsApp stehen. Vorher war dieser Block eine dritte CTA-Box, die nach
+                events-storia.de führte und die Kontaktkanäle zusätzlich in Hero und Final-CTA
+                wiederholte. Für Weg 2 ist das Gespräch ohnehin der Kern der Sache (das Menü wird
+                besprochen, nicht bestellt) — deshalb steht der Block unmittelbar hinter dem
+                Anfrageformular. */}
             <section className="mb-16 bg-primary text-primary-foreground rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-serif font-bold mb-4">{s.ctaBoxTitle}</h2>
-              <p className="mb-6 opacity-90">{s.ctaBoxDesc}</p>
-              <Button size="lg" variant="secondary" asChild>
-                <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{s.ctaBoxButton}</a>
-              </Button>
-              <p className="mt-6 opacity-80 text-sm"><PhoneText>{s.ctaBoxNote}</PhoneText></p>
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
+              <h2 className="text-2xl font-serif font-bold mb-4">{s.contactBoxTitle}</h2>
+              <p className="mb-6 opacity-90">{s.contactBoxDesc}</p>
+              <div className="flex flex-wrap justify-center gap-6">
                 <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
                 <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
-                <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 text-[#25D366]"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
+                <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
               </div>
             </section>
 
@@ -492,18 +529,22 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </Accordion>
             </section>
 
-            {/* Email Signup (inactive) — K2: bis dahin nur non-standalone, jetzt auch hier */}
-            {!isActive && (
-              <section id="signup-form" className="mb-16 scroll-mt-24">
-                <div className="bg-card rounded-lg border border-border p-8 md:p-12 text-center">
-                  <h2 className="text-2xl font-serif font-bold mb-3">{s.signupTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{s.signupDesc}</p>
-                  <div className="max-w-md mx-auto">
-                    <SeasonalSignupForm seasonalEvent="weihnachten" />
-                  </div>
-                </div>
-              </section>
-            )}
+            {/* Vormerk-Formular AUSGEHÄNGT (E2.3), nicht abgebaut.
+                Hier stand bis E2.3 ein `<section id="signup-form">` mit `<SeasonalSignupForm
+                seasonalEvent="weihnachten" />`. Auf dieser Seite war es zusätzlich sachlich
+                schief: seit E1.4 gibt es gar kein Menü mehr, auf das man sich vormerken lassen
+                könnte — Weg 1 ist eine Reservierung, Weg 2 ein Gespräch. Beide sind jetzt als
+                echte Strecke da (`#reservieren`, `#anfrage`).
+
+                ENTFERNT wurde ausschließlich dieser Mount-Punkt. Komponente
+                (`src/components/SeasonalSignupForm.tsx`), Edge Functions (`subscribe-seasonal`,
+                `confirm-seasonal`, `unsubscribe-seasonal`, `notify-seasonal-signups`), Tabelle
+                `seasonal_signups`, Admin-Oberfläche (`SeasonalSignupsManager`,
+                `SeasonalNotificationsManager`) und die Bestätigungsseite
+                (`NewsletterBestaetigung.tsx`) bleiben unangetastet — `ValentinstagMuenchen.tsx`
+                und der generische Anlass-Fallback `BesondererAnlass.tsx` rendern das Formular
+                weiterhin und dürfen dabei nicht brechen (harte Regel, Antoine 13.09.2026:
+                „KEIN BESTEHENDES FORMULAR DARF BRECHEN"). */}
 
             {/* Archived Menu (inactive) — K2: bis dahin nur non-standalone, jetzt auch hier */}
             {!isActive && archivedMenu && (
@@ -518,8 +559,11 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
                   <MenuDisplay menuType="special" menuId={archivedMenu.id} showTitle={false} />
                   <div className="mt-6 text-center">
                     <p className="text-sm text-muted-foreground mb-3">{s.archivedDisclaimer}</p>
+                    {/* E2.3: zeigte auf das entfernte `#signup-form`. Der Anker führt jetzt
+                        zurück zur Reservierungsstrecke weiter oben — der ArrowUp stimmt also
+                        weiterhin. */}
                     <Button variant="outline" size="sm" asChild>
-                      <a href="#signup-form"><ArrowUp className="w-4 h-4 mr-2" />{s.heroCtaInactive}</a>
+                      <a href="#reservieren"><ArrowUp className="w-4 h-4 mr-2" />{s.heroCtaReserve}</a>
                     </Button>
                   </div>
                 </div>
@@ -539,24 +583,21 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
               </div>
             </section>
 
-            {/* Final CTA */}
+            {/* Final CTA (E2.3) — dieselben zwei Ziele wie im Hero, am Fuß der Seite noch einmal
+                angeboten; die Kontaktkanäle stehen NICHT mehr auch hier (einmal gebündelt beim
+                Formular reicht). Die `isActive`-Verzweigung ist entfallen: ob ein Live-Menü
+                hinterlegt ist oder nicht, ändert nichts daran, wie reserviert und angefragt
+                wird. */}
             <section className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center">
               <h2 className="text-3xl font-serif font-bold mb-4">{s.finalCtaTitle}</h2>
               <p className="mb-8 opacity-90">{s.finalCtaDesc}</p>
-              {isActive ? (
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" variant="secondary" asChild>
-                  <a href="https://www.events-storia.de/" target="_blank" rel="noopener noreferrer">{s.finalCtaButton}</a>
+                  <a href="#reservieren">{s.finalCtaButtonReserve}</a>
                 </Button>
-              ) : (
-                <Button size="lg" variant="secondary" asChild>
-                  <a href="#signup-form">{s.finalCtaButtonInactive}</a>
+                <Button size="lg" variant="outline" className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" asChild>
+                  <a href="#anfrage">{s.finalCtaButtonInquiry}</a>
                 </Button>
-              )}
-              <p className="mt-6 opacity-80 text-sm">{s.finalCtaAlt}</p>
-              <div className="flex flex-wrap justify-center gap-4 mt-4">
-                <a href="tel:+498951519696" className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> 089 51519696</a>
-                <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
-                <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
               </div>
             </section>
           </article>

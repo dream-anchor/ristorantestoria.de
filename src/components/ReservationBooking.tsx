@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -54,9 +54,30 @@ interface ReservationBookingProps {
   headingLevel?: "h2" | "h3";
   /** Wird beim Klick auf „Jetzt buchen" (OpenTable) aufgerufen — z. B. für generate_lead. */
   onBook?: () => void;
+  /**
+   * Optionale Datums-Vorbelegung (E2.1) — z. B. der 31.12. auf der Silvesterseite.
+   *
+   * OHNE diesen Prop verhält sich die Komponente exakt wie vorher: nach dem Mount steht
+   * „heute" im Feld. `src/pages/Reservierung.tsx` rendert sie ohne Props und bleibt damit
+   * unverändert.
+   *
+   * Der Wert wird bewusst NICHT als Initial-State gesetzt, sondern erst im Mount-Effekt
+   * (siehe Kommentar am `date`-State): das prerenderte HTML und der erste Client-Render
+   * müssen identisch den Platzhalter zeigen, sonst gibt es wieder einen
+   * Hydration-Mismatch. Außerdem wird nur der Wert des ERSTEN Renders verwendet — ein
+   * späterer Re-Render der Elternseite (z. B. Sprachwechsel) darf eine vom Gast bereits
+   * getroffene Datumswahl nicht überschreiben.
+   */
+  defaultDate?: Date;
+  /**
+   * Optionale Vorbelegung der Personenzahl (E2.1), als String aus `guestOptions`
+   * ("1"–"8"). Ohne den Prop bleibt es bei "2" wie bisher. Ein Wert außerhalb der Liste
+   * würde im Select leer angezeigt — deshalb nur Werte aus `guestOptions` übergeben.
+   */
+  defaultGuests?: string;
 }
 
-const ReservationBooking = ({ headingLevel = "h2", onBook }: ReservationBookingProps = {}) => {
+const ReservationBooking = ({ headingLevel = "h2", onBook, defaultDate, defaultGuests }: ReservationBookingProps = {}) => {
   const { t, language } = useLanguage();
   const isMobile = useIsMobile();
   // Kein `new Date()` als Initial-State: SSR (Build-Zeitpunkt) und Client-Hydration
@@ -64,9 +85,15 @@ const ReservationBooking = ({ headingLevel = "h2", onBook }: ReservationBookingP
   // (#425/#422). Daher erst NACH dem Mount auf „heute" setzen – SSR & Erst-Render
   // zeigen identisch den Platzhalter, danach wird heute vorbelegt.
   const [date, setDate] = useState<Date | undefined>(undefined);
-  useEffect(() => { setDate(new Date()); }, []);
+  // `defaultDate` wird im Ref eingefroren, damit die Vorbelegung NUR beim ersten Mount
+  // greift (Begründung in der Prop-Doku oben). Ohne den Prop ist das Verhalten
+  // unverändert: nach dem Mount steht „heute" im Feld.
+  const initialDateRef = useRef(defaultDate);
+  useEffect(() => { setDate(initialDateRef.current ?? new Date()); }, []);
   const [time, setTime] = useState("19:00");
-  const [guests, setGuests] = useState("2");
+  // Personenzahl darf direkt aus dem Prop kommen: ein konstanter String rendert auf
+  // Server und Client identisch, es entsteht also kein Hydration-Mismatch.
+  const [guests, setGuests] = useState(defaultGuests ?? "2");
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const HeadingTag = headingLevel;
 

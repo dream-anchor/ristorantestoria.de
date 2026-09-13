@@ -380,6 +380,40 @@ const itBase = {
     relatedOccasions: "Occasioni Speciali",
     relatedReservation: "Prenotazione",
   },
+  // Modulo di richiesta delle pagine stagionali (E2.2, `AnlassAnfrageForm`).
+  anlassInquiry: {
+    nameLabel: "Nome / azienda",
+    namePlaceholder: "Il vostro nome o la vostra azienda",
+    emailLabel: "Email",
+    emailPlaceholder: "vostra@email.it",
+    phoneLabel: "Telefono",
+    phonePlaceholder: "Per eventuali domande",
+    dateLabel: "Data desiderata",
+    guestsLabel: "Ospiti (circa)",
+    guestsPlaceholder: "ad es. 12",
+    messageLabel: "Il vostro messaggio",
+    messagePlaceholder: "Occasione, orario, desideri, domande aperte …",
+    optionalSuffix: "facoltativo",
+    submitButton: "Invia richiesta",
+    submitting: "Invio in corso …",
+    successTitle: "Richiesta inviata",
+    successMessage: "Grazie! Vi risponderemo personalmente.",
+    errorName: "Indicate un nome o un'azienda",
+    errorEmail: "Indicate un indirizzo email valido",
+    errorMessageRequired: "Scriveteci brevemente di cosa si tratta",
+    errorGuests: "Indicate il numero di ospiti come cifra",
+    errorValidation: "Alcuni dati non sono stati accettati. Controllate indirizzo email, data desiderata e numero di ospiti.",
+    errorRateLimit: "Troppe richieste in poco tempo. Attendete un momento e inviate di nuovo la richiesta.",
+    errorGeneric: "Non è stato possibile inviare la richiesta. Riprovate oppure chiamateci: +49 89 51519696.",
+    errorNetwork: "Non siamo riusciti a trasmettere la richiesta. Controllate la connessione oppure contattateci direttamente al +49 89 51519696.",
+    honeypotLabel: "Lasciare vuoto questo campo",
+    privacyNotePre: "Inviando il modulo acconsentite all'utilizzo dei vostri dati per la gestione della richiesta. Maggiori informazioni nell'",
+    privacyNoteLink: "informativa sulla privacy",
+    privacyNotePost: ".",
+    altContact: "Preferite il contatto diretto? Telefono +49 89 51519696 oppure email:",
+    unavailableTitle: "Richieste per telefono o email",
+    unavailableText: "Il modulo di richiesta al momento non è disponibile qui. Contattateci direttamente: rispondiamo con la stessa rapidità.",
+  },
   christmas: {
     title: "Menu di Natale",
     greeting: "Buon Natale!",
@@ -1757,16 +1791,17 @@ const itBase = {
       // TL;DR (E1.5) — reso visibile sopra l'introduzione; i segnaposto vengono riempiti da
       // FACTS.silvester in SilvesterMuenchen.tsx.
       tldr: "Il Capodanno al Ristorante STORIA Monaco Maxvorstadt (Karlstraße 47a) è una cena di gala italiana per il passaggio al nuovo anno: menù degustazione di {courses} portate in tre varianti (Vegetale, Mare, Terra) a {price} € a persona, {priceWine} € a persona con abbinamento vini. Inizio alle ore 19:00 con aperitivo di benvenuto, musica e champagne di mezzanotte, da 2 a 100 ospiti. Attività familiare della famiglia Speranza dal 2015, a 5 minuti da Königsplatz. Prenotazioni: +49 89 51519696.",
-      heroCta: "Richiedi Capodanno",
-      heroCtaInactive: "Registrati per aggiornamenti",
-      heroEventsNote: "Per gruppi da 20+ ospiti:",
-      heroEventsLink: "events-storia.de",
+      // CTA dell'hero (E2.3): esattamente due, una per ogni intenzione. Sostituiscono
+      // heroCta/heroCtaInactive (events-storia.de / modulo di preiscrizione) e la nota
+      // heroEventsNote/heroEventsLink.
+      heroCtaReserve: "Prenota un tavolo per Capodanno",
+      heroCtaInquiry: "Richiedi per gruppo o azienda",
       // Definition-Lead (E1.5, GEO-Regel 1) — der emotionale Einstieg ist laut
       // docs/geo-content-guidelines.md § Anti-Pattern verboten.
       introTitle: "Capodanno a Monaco – la cena di gala italiana del Ristorante STORIA",
       introP1: "Il Capodanno al Ristorante STORIA è una cena di gala italiana in Karlstraße 47a a Monaco Maxvorstadt: un menù degustazione di {courses} portate in tre varianti a {price} € a persona, {priceWine} € a persona con abbinamento vini, dalle ore 19:00 con aperitivo di benvenuto, musica e champagne di mezzanotte. Dal 2015 la famiglia Speranza festeggia l'arrivo del nuovo anno con i suoi ospiti nella Karlstraße – quella che è iniziata come una piccola cena di Capodanno è diventata uno degli eventi italiani di fine anno più popolari di Monaco Maxvorstadt.",
       introP2: "Il nostro Capodanno non è un evento di massa: puntiamo sulla qualità piuttosto che sulla quantità. Ogni portata viene preparata fresca, il servizio è personale e attento. Per coppie, gruppi di amici e aziende offriamo pacchetti flessibili da 2 a 100 ospiti.",
-      introP3: "La posizione centrale nella Maxvorstadt – a soli 5 minuti da Königsplatz e 7 dalla stazione centrale – rende lo STORIA il luogo ideale per il vostro Capodanno. Per feste fino a 20 ospiti, prenotate direttamente al ristorante. Per gruppi più grandi da 20+, richiedete tramite events-storia.de.",
+      introP3: "La posizione centrale nella Maxvorstadt – a soli 5 minuti da Königsplatz e 7 dalla stazione centrale – rende lo STORIA il luogo ideale per il vostro Capodanno. Il vostro tavolo lo prenotate direttamente qui in pagina. Per gruppi più grandi e per le aziende usate il modulo di richiesta qui sotto: vi rispondiamo personalmente.",
       // Citazione esterna (E1.5, GEO-Regel 3) — Comité Champagne, l'organismo ufficiale della
       // denominazione protetta Champagne; si lega allo champagne di mezzanotte di questa pagina.
       citationPre: "A mezzanotte si brinda con lo champagne: la denominazione di origine protetta Champagne è amministrata dal ",
@@ -1821,10 +1856,18 @@ const itBase = {
       previousMenuIntro: "Per darvi un'idea di cosa vi aspetta: così era il nostro menù di gala dell'ultimo passaggio d'anno – tre varianti a scelta. Il menù per il prossimo Capodanno è in preparazione e sarà pubblicato presumibilmente a ottobre.",
       previousMenuCoursesLabel: "Menù a {courses} portate",
       previousMenuNote: "Attenzione: questi piatti sono uno sguardo alla scorsa stagione e non sono prenotabili. Il prossimo menù di Capodanno potrà differire.",
-      ctaBoxTitle: "Richiedi Capodanno allo STORIA",
-      ctaBoxDesc: "Tutti i pacchetti di Capodanno sono personalizzabili. Informazioni dettagliate su menù e prezzi:",
-      ctaBoxButton: "→ Richiedi Capodanno su events-storia.de",
-      ctaBoxNote: "O contattateci direttamente: 089 51519696 · info@ristorantestoria.de · WhatsApp: 0163 6033912",
+      // Prenotazione (E2.1) — i segnaposto {courses}/{price}/{priceWine} vengono da
+      // FACTS.silvester. Il testo deve dire che il 31 dicembre si serve solo il menù di gala.
+      reservationTitle: "Prenota un tavolo per Capodanno",
+      reservationIntro: "Il 31 dicembre serviamo esclusivamente il menù di gala: quella sera non c'è la carta. Chi prenota qui un tavolo prenota quindi il menù di gala da {courses} portate a {price} € a persona, con abbinamento vini {priceWine} € a persona.",
+      reservationNote: "La data è già impostata sul 31 dicembre. Per la notte di Capodanno sono disponibili solo orari tra le 19:00 e le 20:00: la serata inizia alle 19:00 con l'aperitivo di benvenuto. La prenotazione si conclude su OpenTable.",
+      // Modulo di richiesta (E2.2) — testi di cornice; le etichette dei campi sono in `anlassInquiry`.
+      inquiryTitle: "Richiedi la serata di gala di Capodanno",
+      inquiryIntro: "Festeggiate con un gruppo numeroso, avete domande sul menù di gala o desideri particolari? Scriveteci: vi risponderemo personalmente.",
+      // Contatti (E2.3) — sostituiscono la vecchia CTA box che portava a events-storia.de.
+      // I canali compaiono solo qui, subito dopo il modulo di richiesta.
+      contactBoxTitle: "Preferite parlarci direttamente?",
+      contactBoxDesc: "Telefono, e-mail o WhatsApp – per domande sul menù di gala, per richieste particolari o se preferite inviarci la vostra richiesta in un altro modo.",
       reasonsTitle: "8 Motivi per il Capodanno allo STORIA",
       reason1Title: "🍝 Autentica Cena di Gala Italiana",
       reason1Desc: "Nessun buffet standard: pasta fatta in casa, pizza dal forno a pietra, antipasti freschi. Qualità che entusiasma i vostri ospiti.",
@@ -1857,7 +1900,8 @@ const itBase = {
       step6Desc: "Digestivo, dolci e si continua a festeggiare – finché volete.",
       faqTitle: "Domande Frequenti sul Capodanno allo STORIA",
       faq1Question: "Quando verrà pubblicato il menù di Capodanno 2026/2027?",
-      faq1Answer: "Previsto per ottobre. Registratevi per essere i primi a saperlo!",
+      // E2.3: rimandava al modulo di preiscrizione staccato, quindi a un'azione impossibile.
+      faq1Answer: "Previsto per ottobre. Il tavolo potete prenotarlo già prima; per un gruppo più grande inviateci la vostra richiesta tramite il modulo di questa pagina.",
       faq2Question: "Quanto costa il Capodanno allo STORIA?",
       faq2Answer: "Da 99 € a persona (Classic) a 150 € (Premium). Pacchetti esclusivi su richiesta individuale.",
       faq3Question: "Quanti ospiti possono partecipare?",
@@ -1872,8 +1916,8 @@ const itBase = {
       faq7Answer: "Certamente! Che sia una proposta di matrimonio, decorazione speciale o torta – parlateci, siamo felici di aiutare discretamente.",
       faq8Question: "Ci sono parcheggi disponibili?",
       faq8Answer: "Parcheggio Marsstraße (P22), Hirtenstraße 14, 750 posti, aperto 24h, 5 minuti a piedi.",
-      signupTitle: "Programma Capodanno 2026/2027 – Registrati",
-      signupDesc: "Il nostro programma di Capodanno verrà pubblicato ad ottobre. Registratevi per essere i primi ad essere informati.",
+      // signupTitle/signupDesc rimossi con E2.3 — il blocco di preiscrizione è staccato da questa
+      // pagina. `t.seasonalSignup.*` resta intatto (San Valentino + fallback generico).
       archivedTitle: "Il Nostro Menù di Capodanno {year} – Uno Sguardo Indietro",
       archivedDisclaimer: "Il menù per la prossima stagione potrebbe differire.",
       relatedTitle: "Potrebbe Interessarvi Anche",
@@ -1890,10 +1934,9 @@ const itBase = {
       related6Title: "📞 Contatto",
       related6Desc: "Contattateci direttamente",
       finalCtaTitle: "Capodanno allo STORIA – Pianifica Ora",
-      finalCtaDesc: "Assicuratevi il vostro posto per il Capodanno più indimenticabile di Monaco. Tutti i pacchetti, menù e prezzi sul nostro sito eventi.",
-      finalCtaButton: "→ Richiedi Capodanno su events-storia.de",
-      finalCtaButtonInactive: "→ Registrati per aggiornamenti",
-      finalCtaAlt: "O contattateci direttamente:",
+      finalCtaDesc: "Assicuratevi il vostro posto per il Capodanno a Monaco: prenotate un tavolo – oppure, se venite con un gruppo più grande, inviateci una richiesta.",
+      finalCtaButtonReserve: "→ Prenota un tavolo",
+      finalCtaButtonInquiry: "→ Richiedi per un gruppo",
     },
     weihnachtsfeier: {
       seoTitle: "Festa di Natale Monaco | Fino a 300 Ospiti da 45 € – STORIA",
@@ -2889,14 +2932,17 @@ const itBase = {
       heroBadge1: "🍽️ Alla carta al tavolo",
       heroBadge3: "🎄 Menù di Natale per gruppi",
       heroDescription: "Il Natale allo STORIA funziona in due modi: prenotare un tavolo e mangiare alla carta dal nostro menù stagionale – oppure concordare un menù di Natale direttamente con noi, come azienda o come gruppo. In entrambi i casi in un'autentica atmosfera italiana, nel cuore della Maxvorstadt.",
-      heroCtaInactive: "Restare aggiornati",
+      // CTA dell'hero (E2.3): esattamente due, corrispondenti una a una alle due strade (E1.4).
+      // Sostituiscono heroCta/heroCtaInactive e la nota heroEventsNote/heroEventsLink.
+      heroCtaReserve: "Prenota un tavolo durante l'Avvento",
+      heroCtaInquiry: "Richiedi il menù di Natale per gruppi",
       // TL;DR (E1.5) — reso visibile sopra l'introduzione; i segnaposto vengono riempiti da FACTS.
       tldr: "Il Natale al Ristorante STORIA Monaco Maxvorstadt (Karlstraße 47a) funziona in due modi: prenotare un tavolo e mangiare alla carta dal menù stagionale – da 1 persona, senza ordinazione anticipata – oppure un menù di Natale per aziende e gruppi da {minGuests} persone, concordato direttamente con il ristorante, a partire da {groupPrice} € a persona. Il 24 e il 25 dicembre il ristorante è chiuso. {indoorSeats} posti all'interno, {terraceSeats} sulla terrazza coperta. Attività familiare della famiglia Speranza dal 2015, a 5 minuti da Königsplatz. Prenotazioni: +49 89 51519696.",
       // Definition-Lead (E1.5, GEO-Regel 1) + Zwei-Wege-Realität (E1.4).
       introTitle: "Festa di Natale a Monaco – alla carta al tavolo oppure menù di Natale per gruppi",
       introP1: "Il Natale al Ristorante STORIA è un'offerta italiana per le feste in Karlstraße 47a a Monaco Maxvorstadt che funziona in due modi: alla carta dal menù stagionale al tavolo prenotato, da 1 persona – oppure un menù di Natale che aziende e gruppi da {minGuests} persone concordano direttamente con il ristorante, a partire da {groupPrice} € a persona. Dal 2015 la famiglia Speranza del Cilento guida il ristorante; un menù di Natale fisso da ordinare in anticipo non esiste, ed è una scelta voluta.",
       introP2: "Sulla prima strada prenotate semplicemente un tavolo durante l'Avvento e ordinate alla carta dal nostro menù stagionale – senza ordinazione anticipata e senza numero minimo di ospiti. Sulla seconda strada componiamo un menù di Natale per aziende e gruppi da {minGuests} persone: cucina delle feste del Sud Italia con pasta fatta in casa, vini pregiati e panettone come dessert, concordato di volta in volta secondo l'occasione e il budget.",
-      introP3: "La posizione centrale – a soli 5 minuti da Königsplatz e dal mercatino di Natale – rende lo STORIA la meta ideale dopo la visita al Christkindlmarkt. Il 24 e il 25 dicembre il ristorante è chiuso. Un menù di gruppo si concorda direttamente con noi: per telefono, via e-mail oppure – da 20 ospiti – tramite events-storia.de.",
+      introP3: "La posizione centrale – a soli 5 minuti da Königsplatz e dal mercatino di Natale – rende lo STORIA la meta ideale dopo la visita al Christkindlmarkt. Il 24 e il 25 dicembre il ristorante è chiuso. Un menù di gruppo si concorda direttamente con noi: tramite il modulo di richiesta qui sotto, per telefono o via e-mail.",
       // Citazione esterna (E1.5, GEO-Regel 3) — lista UNESCO del patrimonio culturale immateriale;
       // il Cilento, regione d'origine della famiglia Speranza, è la comunità italiana della dieta
       // mediterranea in quella lista.
@@ -2918,15 +2964,27 @@ const itBase = {
       twoWay2Item1: "Da {minGuests} persone",
       twoWay2Item2: "Menù, svolgimento e bevande vengono definiti insieme",
       twoWay2Item3: "Prezzo indicativo da {groupPrice} € a persona",
+      // Prenotazione (E2.1) — è il primo modo, in forma di azione. I due giorni di chiusura
+      // sono nominati perché ReservationBooking li blocca nel calendario.
+      reservationTitle: "Prenota un tavolo durante l'Avvento",
+      reservationIntro: "Il primo modo in breve: prenotare un tavolo e ordinare alla carta dal menù stagionale, da 1 persona, senza preordine e senza accordi sul menù.",
+      reservationNote: "Il 24 e il 25 dicembre il ristorante è chiuso: questi due giorni non sono selezionabili nel calendario. La prenotazione si conclude su OpenTable.",
+      // Modulo di richiesta (E2.2) — è il secondo modo, in forma di azione. {minGuests} da FACTS.
+      inquiryTitle: "Richiedi il menù di Natale per gruppi",
+      inquiryIntro: "Secondo modo: da {minGuests} persone componiamo il vostro menù di Natale insieme a voi. Scriveteci occasione, data desiderata e numero di ospiti: vi risponderemo con una proposta.",
       packagesTitle: "Punti di riferimento per il vostro menù di gruppo",
       packagesIntro: "I tre pacchetti qui sotto non sono menù pronti da ordinare, ma punti di riferimento per entità e prezzo sulla seconda strada. Ciò che arriva davvero in tavola lo decidiamo insieme.",
       faq3Question: "Esiste un menù di Natale fisso da ordinare in anticipo?",
       faq3Answer: "No. Durante l'Avvento al tavolo si mangia alla carta dal nostro menù stagionale. Un menù di Natale lo componiamo individualmente per aziende e gruppi da 6 persone – su misura, secondo i vostri desideri e il vostro budget, concordato per telefono o via e-mail.",
       faq4Answer: "Sì, il menù stagionale comprende piatti vegetariani e ogni menù di gruppo è disponibile anche in variante vegetariana. Opzioni vegane su richiesta.",
       faq8Answer: "No. Il 24 e il 25 dicembre il ristorante è chiuso. Per tutto il resto del periodo dell'Avvento siamo a vostra disposizione.",
-      signupTitle: "Il Natale allo STORIA – restare aggiornati",
-      signupDesc: "Volete sapere che cosa succede allo STORIA durante l'Avvento? Lasciate il vostro indirizzo e-mail. Per un menù di Natale per il vostro gruppo contattateci direttamente – al telefono 089 51519696.",
-      finalCtaButtonInactive: "→ Restare aggiornati",
+      // Contatti (E2.3) — sostituiscono la vecchia CTA box che portava a events-storia.de.
+      contactBoxTitle: "Preferite parlarci direttamente?",
+      contactBoxDesc: "Telefono, e-mail o WhatsApp – per il menù di gruppo la conversazione è spesso la via più rapida, perché menù, svolgimento e bevande si definiscono comunque insieme.",
+      // signupTitle/signupDesc e finalCtaButtonInactive rimossi con E2.3 — il blocco di
+      // preiscrizione è staccato da questa pagina. `t.seasonalSignup.*` resta intatto.
+      finalCtaButtonReserve: "→ Prenota un tavolo",
+      finalCtaButtonInquiry: "→ Richiedi il menù per gruppi",
       standaloneInactiveDesc: "Durante l'Avvento da noi si mangia alla carta dal menù stagionale; un menù di Natale per gruppi lo concordiamo direttamente con voi. Contattateci per la vostra prenotazione o per la vostra richiesta di gruppo.",
       // In sintesi (E1.3) — i segnaposto vengono riempiti da FACTS in WeihnachtenMuenchen.tsx.
       atAGlanceTitle: "Il Natale allo STORIA in sintesi",

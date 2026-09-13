@@ -41,6 +41,16 @@ export const EVENTS_LINKS = {
     occasion: "weihnachtsfeier",
     utm_campaign: "weihnachtsfeier",
   }),
+  /**
+   * DERZEIT UNGENUTZT (seit E2.3, 13.09.2026).
+   *
+   * Die Silvesterseite war die einzige Aufrufstelle dieses Presets; sie führt Gruppen- und
+   * Firmenanfragen jetzt über das eigene Anfrageformular (`#anfrage`, MAESTRO-Intake) statt über
+   * events-storia.de. Der Eintrag bleibt bewusst stehen: ihn zu löschen wäre eine Einbahnstraße —
+   * alle anderen Presets werden von Firmenfeier, Weihnachtsfeier, Hochzeit, Geburtstag, Catering
+   * und Reisegruppen weiterhin gebraucht, und ein späterer Rückweg auf events-storia.de soll
+   * nicht erst die UTM-/Occasion-Logik neu erfinden müssen.
+   */
   silvester: buildEventsAnfrageUrl({
     intent: "inhouse",
     occasion: "sonstiges",

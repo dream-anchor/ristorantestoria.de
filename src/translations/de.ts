@@ -359,6 +359,42 @@ export const de = {
     relatedOccasions: "Besondere Anlässe",
     relatedReservation: "Reservierung",
   },
+  // Anfrageformular der Anlass-Seiten (E2.2, `AnlassAnfrageForm`). Bewusst ein eigener,
+  // anlassunabhängiger Block: die Feldbeschriftungen sind für Silvester und Weihnachten
+  // identisch, nur die Rahmentexte stehen je Seite in `seo.silvester` / `seo.weihnachten`.
+  anlassInquiry: {
+    nameLabel: "Name / Firma",
+    namePlaceholder: "Ihr Name oder Ihre Firma",
+    emailLabel: "E-Mail",
+    emailPlaceholder: "ihre@email.de",
+    phoneLabel: "Telefon",
+    phonePlaceholder: "Für Rückfragen",
+    dateLabel: "Wunschtermin",
+    guestsLabel: "Gäste (ca.)",
+    guestsPlaceholder: "z. B. 12",
+    messageLabel: "Ihre Nachricht",
+    messagePlaceholder: "Anlass, Uhrzeit, Wünsche, offene Fragen …",
+    optionalSuffix: "optional",
+    submitButton: "Anfrage senden",
+    submitting: "Wird gesendet …",
+    successTitle: "Anfrage gesendet",
+    successMessage: "Vielen Dank! Wir melden uns persönlich bei Ihnen zurück.",
+    errorName: "Bitte Name oder Firma angeben",
+    errorEmail: "Bitte eine gültige E-Mail-Adresse angeben",
+    errorMessageRequired: "Bitte schreiben Sie uns kurz, worum es geht",
+    errorGuests: "Bitte die Gästezahl als Zahl angeben",
+    errorValidation: "Einige Angaben konnten nicht verarbeitet werden. Bitte prüfen Sie E-Mail-Adresse, Wunschtermin und Gästezahl.",
+    errorRateLimit: "Zu viele Anfragen in kurzer Zeit. Bitte warten Sie einen Moment und senden Sie die Anfrage dann erneut.",
+    errorGeneric: "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder rufen Sie uns an: +49 89 51519696.",
+    errorNetwork: "Wir konnten die Anfrage gerade nicht übermitteln. Bitte prüfen Sie Ihre Verbindung – oder kontaktieren Sie uns direkt unter +49 89 51519696.",
+    honeypotLabel: "Dieses Feld bitte frei lassen",
+    privacyNotePre: "Mit dem Absenden stimmen Sie zu, dass wir Ihre Angaben zur Bearbeitung der Anfrage verwenden. Näheres in der ",
+    privacyNoteLink: "Datenschutzerklärung",
+    privacyNotePost: ".",
+    altContact: "Lieber direkt? Telefon +49 89 51519696 oder E-Mail:",
+    unavailableTitle: "Anfrage per Telefon oder E-Mail",
+    unavailableText: "Das Anfrageformular steht hier gerade nicht zur Verfügung. Erreichen Sie uns bitte direkt – wir antworten genauso schnell.",
+  },
   christmas: {
     title: "Weihnachtsmenüs",
     greeting: "Buon Natale!",
@@ -1853,10 +1889,10 @@ export const de = {
       // Platzhalter {courses}/{price}/{priceWine} werden in SilvesterMuenchen.tsx aus
       // FACTS.silvester gefüllt, damit die Zahlen dieselbe einzige Quelle haben wie „Auf einen Blick".
       tldr: "Silvester im Ristorante STORIA München Maxvorstadt (Karlstraße 47a) ist ein italienisches Gala-Dinner zum Jahreswechsel: {courses}-Gänge-Degustationsmenü in drei Varianten (Vegetale, Mare, Terra) für {price} € pro Person, mit Weinbegleitung {priceWine} € pro Person. Beginn 19:00 Uhr mit Aperitivo-Empfang, dazu Musik und Mitternachts-Champagner, 2 bis 100 Gäste. Familienbetrieb der Familie Speranza seit 2015, 5 Minuten vom Königsplatz. Reservierung: +49 89 51519696.",
-      heroCta: "Silvester anfragen",
-      heroCtaInactive: "Vormerken lassen",
-      heroEventsNote: "Für Gruppen ab 20 Gäste:",
-      heroEventsLink: "events-storia.de",
+      // Hero-CTAs (E2.3): genau zwei, je Absicht einer. Ersetzen heroCta/heroCtaInactive
+      // (events-storia.de bzw. Vormerk-Formular) und die Fußnote heroEventsNote/heroEventsLink.
+      heroCtaReserve: "Tisch für Silvester reservieren",
+      heroCtaInquiry: "Gruppe oder Firma anfragen",
       // Intro
       // Definition-Lead (E1.5, GEO-Regel 1): Der erste Satz definiert die Entity nach dem Muster
       // „[Entity] ist ein [Kategorie], das [Differenzierung]". Der frühere emotionale Einstieg
@@ -1865,7 +1901,7 @@ export const de = {
       introTitle: "Silvester in München – das italienische Gala-Dinner im Ristorante STORIA",
       introP1: "Silvester im Ristorante STORIA ist ein italienisches Gala-Dinner in der Karlstraße 47a in München Maxvorstadt: ein {courses}-Gänge-Degustationsmenü in drei Varianten für {price} € pro Person, mit Weinbegleitung {priceWine} € pro Person, ab 19:00 Uhr mit Aperitivo-Empfang, Musik und Mitternachts-Champagner. Seit 2015 feiert die Familie Speranza in der Karlstraße mit ihren Gästen ins neue Jahr – aus einem kleinen Silvester-Dinner ist eines der beliebtesten italienischen Silvester-Events in München Maxvorstadt geworden.",
       introP2: "Unser Silvester ist bewusst kein Massenabfertigung: Wir setzen auf Qualität statt Quantität. Jeder Gang wird frisch zubereitet, der Service ist persönlich und aufmerksam. Für Paare, Freundesgruppen und Firmen bieten wir flexible Pakete von 2 bis 100 Gästen.",
-      introP3: "Die zentrale Lage in der Maxvorstadt – nur 5 Minuten vom Königsplatz und 5 Minuten vom Hauptbahnhof – macht das STORIA zum idealen Ort für Ihren Silvesterabend. Für kleinere Feiern bis 20 Gäste reservieren Sie direkt im Restaurant. Für größere Gruppen ab 20 Gäste fragen Sie bitte über events-storia.de an.",
+      introP3: "Die zentrale Lage in der Maxvorstadt – nur 5 Minuten vom Königsplatz und 5 Minuten vom Hauptbahnhof – macht das STORIA zum idealen Ort für Ihren Silvesterabend. Ihren Tisch reservieren Sie direkt hier auf der Seite. Für größere Gruppen und Firmen nutzen Sie das Anfrageformular weiter unten – wir melden uns persönlich zurück.",
       // Externe Citation (E1.5, GEO-Regel 3): mindestens ein Outbound-Link auf eine autoritative,
       // dauerhaft stabile Quelle. Ziel: Comité Champagne, der offizielle Branchenverband der
       // geschützten Ursprungsbezeichnung Champagne — passt zum Mitternachts-Champagner der Seite.
@@ -1924,11 +1960,19 @@ export const de = {
       previousMenuIntro: "Damit Sie einen Eindruck bekommen, was Sie erwartet: So sah unser Gala-Menü zum vergangenen Jahreswechsel aus – drei Varianten zur Wahl. Das Menü für die kommende Silvesternacht stellen wir gerade zusammen und veröffentlichen es voraussichtlich im Oktober.",
       previousMenuCoursesLabel: "{courses} Gänge Menü",
       previousMenuNote: "Bitte beachten: Diese Gerichte sind ein Rückblick auf die vergangene Saison und nicht buchbar. Das kommende Silvester-Menü kann davon abweichen.",
-      // CTA Box
-      ctaBoxTitle: "Silvester im STORIA anfragen",
-      ctaBoxDesc: "Alle Silvester-Pakete sind individuell anpassbar. Detaillierte Informationen zu Menüs und Preisen:",
-      ctaBoxButton: "→ Silvester anfragen auf events-storia.de",
-      ctaBoxNote: "Oder direkt kontaktieren: 089 51519696 · info@ristorantestoria.de · WhatsApp: 0163 6033912",
+      // Reservierung (E2.1) — Platzhalter {courses}/{price}/{priceWine} werden in
+      // SilvesterMuenchen.tsx aus FACTS.silvester gefüllt. Der Text muss aussprechen, dass
+      // am 31.12. ausschließlich das Gala-Menü serviert wird (Festlegung Antoine 13.09.2026).
+      reservationTitle: "Tisch für Silvester reservieren",
+      reservationIntro: "Am 31. Dezember servieren wir ausschließlich das Gala-Menü – à la carte gibt es an diesem Abend nicht. Wer hier einen Tisch bucht, bucht damit das {courses}-Gänge-Gala-Menü für {price} € pro Person, mit Weinbegleitung {priceWine} € pro Person.",
+      reservationNote: "Das Datum ist auf den 31. Dezember vorbelegt. Für die Silvesternacht stehen ausschließlich Tischzeiten zwischen 19:00 und 20:00 Uhr zur Wahl – der Abend beginnt um 19:00 Uhr mit dem Aperitivo-Empfang. Die Reservierung selbst schließen Sie bei OpenTable ab.",
+      // Anfrageformular (E2.2) — Rahmentexte; die Feldbeschriftungen stehen in `anlassInquiry`.
+      inquiryTitle: "Silvester-Gala anfragen",
+      inquiryIntro: "Sie feiern mit einer größeren Gruppe, haben Fragen zum Gala-Menü oder besondere Wünsche? Schreiben Sie uns – wir melden uns persönlich zurück.",
+      // Kontaktwege (E2.3) — ersetzen die frühere CTA-Box, die nach events-storia.de führte.
+      // Die Kanäle stehen jetzt nur noch hier, direkt hinter dem Anfrageformular.
+      contactBoxTitle: "Lieber persönlich sprechen?",
+      contactBoxDesc: "Telefon, E-Mail oder WhatsApp – für Rückfragen zum Gala-Menü, für Sonderwünsche oder wenn Sie Ihre Anfrage lieber direkt loswerden möchten.",
       // 8 Reasons
       reasonsTitle: "8 Gründe für Silvester im STORIA",
       reason1Title: "🍝 Authentisches italienisches Gala-Dinner",
@@ -1964,7 +2008,9 @@ export const de = {
       // FAQ
       faqTitle: "Häufige Fragen zu Silvester im STORIA",
       faq1Question: "Wann wird das Silvester-Menü 2026/2027 veröffentlicht?",
-      faq1Answer: "Voraussichtlich im Oktober. Lassen Sie sich vormerken, um als Erster informiert zu werden!",
+      // E2.3: verwies auf das ausgehängte Vormerk-Formular („Lassen Sie sich vormerken") und war
+      // damit eine Handlungsaufforderung ins Leere. Zeigt jetzt auf die zwei realen Wege der Seite.
+      faq1Answer: "Voraussichtlich im Oktober. Ihren Tisch können Sie schon vorher reservieren; für eine größere Gruppe schicken Sie uns Ihre Anfrage über das Formular auf dieser Seite.",
       faq2Question: "Was kostet Silvester im STORIA?",
       faq2Answer: "Ab 99 € p.P. (Classic) bis 150 € p.P. (Premium). Exklusiv-Pakete auf individuelle Anfrage.",
       faq3Question: "Wie viele Gäste passen rein?",
@@ -1979,9 +2025,8 @@ export const de = {
       faq7Answer: "Natürlich! Ob Heiratsantrag, besondere Dekoration oder Torte – sprechen Sie uns an, wir helfen gerne diskret.",
       faq8Question: "Gibt es Parkmöglichkeiten?",
       faq8Answer: "Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 Stellplätze, 24h geöffnet, 5 Minuten Fußweg.",
-      // Signup (inactive wrapper)
-      signupTitle: "Silvester-Programm 2026/2027 – Jetzt vormerken",
-      signupDesc: "Unser Silvester-Programm wird im Oktober veröffentlicht. Lassen Sie sich vormerken – wir benachrichtigen Sie als Erster.",
+      // Signup-Schlüssel (signupTitle/signupDesc) mit E2.3 entfernt — der Vormerk-Block ist auf
+      // dieser Seite ausgehängt. `t.seasonalSignup.*` bleibt unangetastet (Valentinstag + Fallback).
       // Archived Menu (inactive wrapper)
       archivedTitle: "Unser Silvester-Menü {year} – ein Rückblick",
       archivedDisclaimer: "Das Menü für die kommende Saison kann abweichen.",
@@ -2001,10 +2046,9 @@ export const de = {
       related6Desc: "Direkt Kontakt aufnehmen",
       // Final CTA
       finalCtaTitle: "Silvester im STORIA – Jetzt planen",
-      finalCtaDesc: "Sichern Sie sich Ihren Platz für den unvergesslichsten Jahreswechsel in München. Alle Pakete, Menüs und Preise auf unserer Event-Website.",
-      finalCtaButton: "→ Jetzt Silvester anfragen auf events-storia.de",
-      finalCtaButtonInactive: "→ Vormerken lassen",
-      finalCtaAlt: "Oder kontaktieren Sie uns direkt:",
+      finalCtaDesc: "Sichern Sie sich Ihren Platz für den Jahreswechsel in München: Tisch reservieren – oder, wenn Sie mit einer größeren Gruppe kommen, Anfrage schicken.",
+      finalCtaButtonReserve: "→ Tisch reservieren",
+      finalCtaButtonInquiry: "→ Gruppe anfragen",
     },
     weihnachten: {
       seoTitle: "Weihnachtsmenü München 2026 – Feiern im STORIA",
@@ -2020,18 +2064,18 @@ export const de = {
       // Platzhalter werden in WeihnachtenMuenchen.tsx aus FACTS gefüllt. Inhaltlich auf die
       // Zwei-Wege-Realität umgestellt (E1.4): es gibt KEIN festes Weihnachtsmenü zum Vorbestellen.
       tldr: "Weihnachten im Ristorante STORIA München Maxvorstadt (Karlstraße 47a) funktioniert auf zwei Wegen: Tisch reservieren und à la carte von der saisonalen Karte essen – ab 1 Person, ohne Vorbestellung – oder ein Weihnachtsmenü für Firmen und Gruppen ab {minGuests} Personen, das direkt mit dem Restaurant abgestimmt wird, ab {groupPrice} € pro Person. Am 24. und 25. Dezember ist das Restaurant geschlossen. {indoorSeats} Plätze innen, {terraceSeats} auf der überdachten Terrasse. Familienbetrieb der Familie Speranza seit 2015, 5 Minuten vom Königsplatz. Reservierung: +49 89 51519696.",
-      heroCta: "Weihnachtsfeier anfragen",
-      heroCtaInactive: "Auf dem Laufenden bleiben",
-      heroCtaPhone: "089 51519696",
-      heroEventsNote: "Für Gruppen ab 20 Gäste:",
-      heroEventsLink: "events-storia.de",
+      // Hero-CTAs (E2.3): genau zwei, und sie decken sich eins zu eins mit den zwei Wegen (E1.4).
+      // Ersetzen heroCta/heroCtaInactive (events-storia.de bzw. Vormerk-Formular) und die Fußnote
+      // heroEventsNote/heroEventsLink. `heroCtaPhone` war schon vorher unbenutzt und fällt mit weg.
+      heroCtaReserve: "Tisch in der Adventszeit reservieren",
+      heroCtaInquiry: "Weihnachtsmenü für Gruppen anfragen",
       // Definition-Lead (E1.5, GEO-Regel 1) + Zwei-Wege-Realität (E1.4): Der erste Satz definiert
       // die Entity und benennt sofort beide Wege. Emotionale Einstiege sind laut
       // docs/geo-content-guidelines.md § Anti-Pattern verboten. Platzhalter kommen aus FACTS.
       introTitle: "Weihnachtsfeier in München – à la carte am Tisch oder Weihnachtsmenü für Gruppen",
       introP1: "Weihnachten im Ristorante STORIA ist ein italienisches Festtagsangebot in der Karlstraße 47a in München Maxvorstadt, das auf zwei Wegen funktioniert: à la carte von der saisonalen Karte am reservierten Tisch, ab 1 Person – oder ein Weihnachtsmenü, das Firmen und Gruppen ab {minGuests} Personen direkt mit dem Restaurant abstimmen, ab {groupPrice} € pro Person. Seit 2015 führt die Familie Speranza aus dem Cilento das Restaurant; ein festes Weihnachtsmenü zum Vorbestellen gibt es bewusst nicht.",
       introP2: "Auf dem ersten Weg reservieren Sie in der Adventszeit einfach einen Tisch und essen à la carte von der saisonalen Karte – ohne Vorbestellung, ohne Mindestteilnehmerzahl. Auf dem zweiten Weg stellen wir für Firmen und Gruppen ab {minGuests} Personen ein Weihnachtsmenü zusammen: süditalienische Festtagsküche mit hausgemachter Pasta, erlesenen Weinen und Panettone zum Dessert, im Gespräch auf Anlass und Budget abgestimmt.",
-      introP3: "Die zentrale Lage – nur 5 Minuten vom Königsplatz und Christkindlmarkt – macht das STORIA zum perfekten Ort nach dem Weihnachtsmarkt-Besuch. Am 24. und 25. Dezember ist das Restaurant geschlossen. Ein Gruppenmenü stimmen Sie direkt mit uns ab: telefonisch, per E-Mail oder – ab 20 Gästen – über events-storia.de.",
+      introP3: "Die zentrale Lage – nur 5 Minuten vom Königsplatz und Christkindlmarkt – macht das STORIA zum perfekten Ort nach dem Weihnachtsmarkt-Besuch. Am 24. und 25. Dezember ist das Restaurant geschlossen. Ein Gruppenmenü stimmen Sie direkt mit uns ab: über das Anfrageformular weiter unten, telefonisch oder per E-Mail.",
       // Externe Citation (E1.5, GEO-Regel 3): Outbound-Link auf die UNESCO-Liste des immateriellen
       // Kulturerbes. Passt sachlich, weil das Cilento – die Herkunftsregion der Familie Speranza –
       // die italienische Trägergemeinschaft der mediterranen Ernährung in dieser Liste ist.
@@ -2065,6 +2109,14 @@ export const de = {
       twoWay2Item1: "Ab {minGuests} Personen",
       twoWay2Item2: "Menü, Ablauf und Getränke werden im Gespräch festgelegt",
       twoWay2Item3: "Orientierungspreis ab {groupPrice} € pro Person",
+      // Reservierung (E2.1) — das ist Weg 1 in Handlungsform. Die beiden Ruhetage stehen
+      // ausdrücklich im Hinweis, weil ReservationBooking sie im Kalender sperrt.
+      reservationTitle: "Tisch in der Adventszeit reservieren",
+      reservationIntro: "Weg 1 in Kurzform: Tisch reservieren und à la carte von der saisonalen Karte essen – ab 1 Person, ohne Vorbestellung und ohne Menü-Absprache.",
+      reservationNote: "Am 24. und 25. Dezember ist das Restaurant geschlossen; diese beiden Tage lassen sich im Kalender nicht auswählen. Die Reservierung selbst schließen Sie bei OpenTable ab.",
+      // Anfrageformular (E2.2) — das ist Weg 2 in Handlungsform. {minGuests} kommt aus FACTS.
+      inquiryTitle: "Weihnachtsmenü für Gruppen anfragen",
+      inquiryIntro: "Weg 2: Ab {minGuests} Personen stellen wir Ihr Weihnachtsmenü gemeinsam mit Ihnen zusammen. Schreiben Sie uns Anlass, Wunschtermin und Gästezahl – wir melden uns mit einem Vorschlag zurück.",
       packagesTitle: "Orientierung für Ihr Gruppen-Menü",
       packagesIntro: "Die folgenden drei Pakete sind keine fertigen Menüs zum Bestellen, sondern Anhaltspunkte für Umfang und Preis auf dem zweiten Weg. Was am Ende auf den Tisch kommt, legen wir gemeinsam im Gespräch fest.",
       package1Title: "Weihnachten Classic",
@@ -2094,10 +2146,10 @@ export const de = {
       package3Item5: "Komplette Event-Koordination",
       package3Ideal: "Ideal für: Große Firmenweihnachtsfeiern (40–100+ Gäste)",
       package3Price: "Auf Anfrage",
-      ctaBoxTitle: "Weihnachtsfeier im STORIA anfragen",
-      ctaBoxDesc: "Alle Weihnachts-Pakete sind individuell anpassbar. Detaillierte Informationen zu Menüs und Preisen:",
-      ctaBoxButton: "→ Weihnachtsfeier anfragen auf events-storia.de",
-      ctaBoxNote: "Oder direkt kontaktieren: 089 51519696 · info@ristorantestoria.de · WhatsApp: 0163 6033912",
+      // Kontaktwege (E2.3) — ersetzen die frühere CTA-Box, die nach events-storia.de führte.
+      // Die Kanäle stehen jetzt nur noch hier, direkt hinter dem Anfrageformular.
+      contactBoxTitle: "Lieber persönlich sprechen?",
+      contactBoxDesc: "Telefon, E-Mail oder WhatsApp – gerade beim Gruppen-Menü ist das Gespräch oft der schnellste Weg, weil Menü, Ablauf und Getränke ohnehin gemeinsam festgelegt werden.",
       reasonsTitle: "8 Gründe für Weihnachten im STORIA",
       reason1Title: "🍝 Authentische italienische Festtagsküche",
       reason1Desc: "Traditionelle italienische Festtagsküche: von Antipasti über hausgemachte Pasta bis zum Panettone – à la carte am Tisch genauso wie im Gruppen-Menü.",
@@ -2130,7 +2182,7 @@ export const de = {
       faq1Question: "Wann sollte ich unsere Weihnachtsfeier buchen?",
       faq1Answer: "Je früher, desto besser! Die Adventszeit ist schnell ausgebucht. Wir empfehlen Anfragen ab September/Oktober.",
       faq2Question: "Ab wie vielen Personen kann ich buchen?",
-      faq2Answer: "Es gibt zwei Wege: Am Tisch essen Sie in der Adventszeit à la carte von unserer saisonalen Karte – dafür genügt 1 Person. Ein festes Weihnachtsmenü für Gruppen stellen wir ab 6 Personen zusammen. Für größere Gruppen ab 20 Gästen: events-storia.de.",
+      faq2Answer: "Es gibt zwei Wege: Am Tisch essen Sie in der Adventszeit à la carte von unserer saisonalen Karte – dafür genügt 1 Person. Ein festes Weihnachtsmenü für Gruppen stellen wir ab 6 Personen zusammen; schreiben Sie uns dafür über das Anfrageformular auf dieser Seite.",
       faq3Question: "Gibt es ein festes Weihnachtsmenü zum Vorbestellen?",
       faq3Answer: "Nein. In der Adventszeit essen Sie am Tisch à la carte von unserer saisonalen Karte. Ein Weihnachtsmenü stellen wir für Firmen und Gruppen ab 6 Personen individuell zusammen – maßgeschneidert nach Ihren Wünschen und Ihrem Budget, telefonisch oder per E-Mail abgestimmt.",
       faq4Question: "Gibt es vegetarische/vegane Optionen?",
@@ -2143,8 +2195,8 @@ export const de = {
       faq7Answer: "Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 Stellplätze, 24h geöffnet, 5 Minuten Fußweg.",
       faq8Question: "Ist das STORIA an Heiligabend geöffnet?",
       faq8Answer: "Nein. Am 24. und am 25. Dezember ist das Restaurant geschlossen. In der gesamten übrigen Adventszeit sind wir für Sie da.",
-      signupTitle: "Weihnachten im STORIA – auf dem Laufenden bleiben",
-      signupDesc: "Sie möchten hören, was in der Adventszeit im STORIA los ist? Tragen Sie Ihre E-Mail-Adresse ein. Für ein Weihnachtsmenü für Ihre Gruppe sprechen Sie uns am besten direkt an – telefonisch unter 089 51519696.",
+      // Signup-Schlüssel (signupTitle/signupDesc) mit E2.3 entfernt — der Vormerk-Block ist auf
+      // dieser Seite ausgehängt. `t.seasonalSignup.*` bleibt unangetastet (Valentinstag + Fallback).
       archivedTitle: "Unsere Weihnachtsmenüs {year} – ein Rückblick",
       archivedDisclaimer: "Die Menüs für die kommende Saison können abweichen.",
       relatedTitle: "Das könnte Sie auch interessieren",
@@ -2162,9 +2214,8 @@ export const de = {
       related6Desc: "Direkt Kontakt aufnehmen",
       finalCtaTitle: "Weihnachtsfeier im STORIA – Jetzt planen",
       finalCtaDesc: "Sichern Sie sich Ihren Wunschtermin für die schönste Weihnachtsfeier in München. Für einen Tisch in der Adventszeit genügt eine Reservierung; für ein Gruppen-Menü sprechen wir die Details gemeinsam durch.",
-      finalCtaButton: "→ Jetzt Weihnachtsfeier anfragen auf events-storia.de",
-      finalCtaButtonInactive: "→ Auf dem Laufenden bleiben",
-      finalCtaAlt: "Oder kontaktieren Sie uns direkt:",
+      finalCtaButtonReserve: "→ Tisch reservieren",
+      finalCtaButtonInquiry: "→ Gruppen-Menü anfragen",
       // Standalone SEO page keys
       standaloneSeoTitle: "Weihnachten M\u00fcnchen 2026 \u2013 Italienisches Weihnachtsmen\u00fc | STORIA",
       standaloneSeoDescription: "Weihnachten in M\u00fcnchen feiern: Festliche italienische Weihnachtsmen\u00fcs im Ristorante STORIA Maxvorstadt. Ab 45 \u20ac p.P. f\u00fcr 6\u2013100 G\u00e4ste. Jetzt informieren!",
