@@ -1868,6 +1868,24 @@ const itBase = {
       // I canali compaiono solo qui, subito dopo il modulo di richiesta.
       contactBoxTitle: "Preferite parlarci direttamente?",
       contactBoxDesc: "Telefono, e-mail o WhatsApp – per domande sul menù di gala, per richieste particolari o se preferite inviarci la vostra richiesta in un altro modo.",
+      // Condizioni di cancellazione (E3.1). Volutamente senza link a una pagina "Condizioni per
+      // eventi" — non esiste in questo repository (solo agb-restaurant, agb-gutscheine).
+      cancellationTitle: "Condizioni di cancellazione",
+      cancellationIntro: "Se doveste annullare il vostro evento, si applicano le seguenti penali di cancellazione – calcolate come quota dell'importo prenotato:",
+      cancellationColPeriod: "Tempo prima dell'evento",
+      cancellationColFee: "Penale di cancellazione",
+      cancellationTier1Period: "Più di 30 giorni prima",
+      cancellationTier1Fee: "Gratuito",
+      cancellationTier2Period: "Da 15 a 30 giorni prima",
+      cancellationTier2Fee: "25%",
+      cancellationTier3Period: "Da 8 a 14 giorni prima",
+      cancellationTier3Fee: "50%",
+      cancellationTier4Period: "Da 3 a 7 giorni prima",
+      cancellationTier4Fee: "80%",
+      cancellationTier5Period: "A partire da 48 ore prima, o mancata presentazione",
+      cancellationTier5Fee: "100%",
+      cancellationBasisNote: "Fa fede la data di ricezione della vostra disdetta scritta.",
+      cancellationDepositNote: "Gli acconti già versati vengono detratti dalla penale di cancellazione – un eventuale saldo in vostro favore vi verrà rimborsato. Ne parliamo volentieri con voi al momento della conferma della prenotazione.",
       reasonsTitle: "8 Motivi per il Capodanno allo STORIA",
       reason1Title: "🍝 Autentica Cena di Gala Italiana",
       reason1Desc: "Nessun buffet standard: pasta fatta in casa, pizza dal forno a pietra, antipasti freschi. Qualità che entusiasma i vostri ospiti.",
@@ -1916,6 +1934,9 @@ const itBase = {
       faq7Answer: "Certamente! Che sia una proposta di matrimonio, decorazione speciale o torta – parlateci, siamo felici di aiutare discretamente.",
       faq8Question: "Ci sono parcheggi disponibili?",
       faq8Answer: "Parcheggio Marsstraße (P22), Hirtenstraße 14, 750 posti, aperto 24h, 5 minuti a piedi.",
+      // E3.3: nuova FAQ, nata da E3.1 (condizioni di cancellazione).
+      faq9Question: "Devo versare un acconto – e cosa succede se devo annullare?",
+      faq9Answer: "Per gruppi e richieste più consistenti può essere concordato un acconto. In caso di annullamento si applicano penali scaglionate in base al preavviso – gratuito con più di 30 giorni di anticipo, fino al 100% a partire da 48 ore prima o in caso di mancata presentazione. Dettagli sopra alla voce «Condizioni di cancellazione».",
       // signupTitle/signupDesc rimossi con E2.3 — il blocco di preiscrizione è staccato da questa
       // pagina. `t.seasonalSignup.*` resta intatto (San Valentino + fallback generico).
       archivedTitle: "Il Nostro Menù di Capodanno {year} – Uno Sguardo Indietro",
@@ -2001,6 +2022,25 @@ const itBase = {
       // esistenti, non le sostituisce.
       inquiryTitle: "Richiedi la Tua Festa di Natale",
       inquiryIntro: "State pianificando una festa aziendale o di gruppo? Scriveteci la data desiderata, il numero di ospiti e le vostre idee – discuteremo il menu individualmente con voi.",
+      // Condizioni di cancellazione (E3.1) — colma la lacuna: step3Desc menziona già un acconto
+      // (30%) senza una regola di cancellazione associata. Nessun link a una pagina "Condizioni
+      // per eventi" inesistente.
+      cancellationTitle: "Condizioni di cancellazione",
+      cancellationIntro: "Se doveste annullare la vostra festa, si applicano le seguenti penali di cancellazione – calcolate come quota dell'importo prenotato:",
+      cancellationColPeriod: "Tempo prima della festa",
+      cancellationColFee: "Penale di cancellazione",
+      cancellationTier1Period: "Più di 30 giorni prima",
+      cancellationTier1Fee: "Gratuito",
+      cancellationTier2Period: "Da 15 a 30 giorni prima",
+      cancellationTier2Fee: "25%",
+      cancellationTier3Period: "Da 8 a 14 giorni prima",
+      cancellationTier3Fee: "50%",
+      cancellationTier4Period: "Da 3 a 7 giorni prima",
+      cancellationTier4Fee: "80%",
+      cancellationTier5Period: "A partire da 48 ore prima, o mancata presentazione",
+      cancellationTier5Fee: "100%",
+      cancellationBasisNote: "Fa fede la data di ricezione della vostra disdetta scritta.",
+      cancellationDepositNote: "Il vostro acconto viene detratto dalla penale di cancellazione – un eventuale saldo in vostro favore vi verrà rimborsato. Ne parliamo volentieri con voi al momento della conferma della prenotazione.",
       reasonsTitle: "8 Motivi per la Vostra Festa di Natale al STORIA",
       reason1Title: "🎄 Atmosfera Italiana Festiva",
       reason1Desc: "Le decorazioni natalizie incontrano il fascino italiano. STORIA si trasforma durante l'Avvento in un luogo accogliente e festivo – senza kitsch, con molto stile.",
@@ -2082,6 +2122,9 @@ const itBase = {
       faq7Answer: "Sì, tutti i nostri menu natalizi includono opzioni vegetariane. Menu puramente vegani possono essere preparati su richiesta.",
       faq8Question: "STORIA offre anche cena di Natale per due persone?",
       faq8Answer: "Sì, il nostro menu natalizio è disponibile anche per le coppie. Per una cena di Natale romantica Monaco, vi consigliamo di prenotare.",
+      // E3.3: nuova FAQ, nata da E3.1 (condizioni di cancellazione) — riprende step3Desc.
+      faq9Question: "Cosa succede al mio acconto se devo annullare?",
+      faq9Answer: "Il vostro acconto (30%) viene detratto dalla penale di cancellazione, che dipende dal preavviso con cui annullate – gratuito con più di 30 giorni di anticipo, fino al 100% a partire da 48 ore prima o in caso di mancata presentazione. Un eventuale saldo in vostro favore vi verrà rimborsato. Dettagli sopra alla voce «Condizioni di cancellazione».",
       ctaTitle: "Pianificate Ora la Vostra Festa di Natale Monaco",
       ctaDesc: "Assicuratevi la data desiderata – i posti migliori si esauriscono rapidamente!",
       ctaButton: "\u2192 Prenota festa di Natale ora",
