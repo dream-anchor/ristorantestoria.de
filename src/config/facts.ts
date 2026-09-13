@@ -84,9 +84,8 @@ export const FACTS = {
   // „Menü C – Tradizione (ab 49 €)" und der zugehörigen FAQ auf
   // weihnachtsfeier-muenchen (Commits Feb–Mai 2026) und wurden seitdem überall
   // auf 45 € vereinheitlicht. Im gesamten Repo steht heute kein 49-€-Wert mehr.
-  // Verbleibende offene Frage ist daher NICHT mehr „welcher der beiden Werte",
-  // sondern nur noch, ob 45 € betrieblich korrekt ist — bestätigen kann das nur
-  // Familie Speranza. Bis dahin bleibt 45 € der überall verwendete Wert.
+  // Verbleibende offene Frage war NICHT mehr „welcher der beiden Werte", sondern nur noch, ob
+  // 45 € betrieblich korrekt ist — von Antoine am 13.09.2026 bestätigt ("Faktenfragen = stimmen").
   //
   // Fakt (Antoine, 13.09.2026): Es gibt KEIN festes, vorgegebenes Weihnachtsmenü
   // für Gruppen/Firmen — das wird individuell mit dem Betreiber besprochen (siehe
@@ -104,9 +103,8 @@ export const FACTS = {
   // Zwei Pakete: Classic ab 55 € p.P. (3-Gang-Menü), Premium ab 85 € p.P. (4-Gang-Menü mit
   // Weinbegleitung). Vorher an vier unabhängigen Stellen hart kodiert (JSON-LD-Description, zwei
   // JSON-LD-Offers, package1Price/package2Price, seoDescription) — reine Konsolidierung der
-  // bereits angezeigten Werte. Ob 55 €/85 € betrieblich noch aktuell sind, ist eine offene,
-  // unabhängige Faktenfrage (docs/LOOP-GEO-LUECKEN.md § BLOCKED-Log), NICHT durch diesen Schritt
-  // beantwortet oder verändert.
+  // bereits angezeigten Werte. 55 €/85 € von Antoine am 13.09.2026 als betrieblich aktuell
+  // bestätigt ("Faktenfragen = stimmen").
   valentinstag: {
     price: "55", // € pro Person, Classic-Paket (3-Gang-Menü)
     pricePremium: "85", // € pro Person, Premium-Paket (4-Gang-Menü mit Weinbegleitung)
