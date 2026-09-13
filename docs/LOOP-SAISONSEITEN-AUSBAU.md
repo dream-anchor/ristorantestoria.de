@@ -433,6 +433,15 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 - [ ] Branch `saisonseiten-e2` gepusht, PR erstellt, Diff gegengelesen, gemergt, Live-Stichprobe
       **inklusive echter Testanfrage** über das Formular (Browser, nicht `curl` — CORS + JS).
+      **PR: https://github.com/dream-anchor/ristorantestoria.de/pull/89** — Branch gepusht,
+      `origin/main` vorher in den Branch gemergt (PR #88, `VITE_MAESTRO_INTAKE_URL` im
+      Deploy-Workflow; Auto-Merge ohne Konflikt, nur `.github/workflows/deploy-ionos.yml`,
+      +6 Zeilen). Damit ist der unter E2.2 vermerkte offene Punkt erledigt: der Produktionsbuild
+      kennt die Intake-URL, das Formular rendert live als Formular und nicht als
+      Telefon/E-Mail-Ausweichblock. Stand nach dem Merge: `npm run build` grün (157 Seiten,
+      0 Errors), `npx tsc --noEmit` sauber, `npm run lint` 727 = Baseline, alle
+      E2.3-Prerender-Prüfungen weiterhin grün.
+      **Merge passiert im Hauptfenster** — hier bewusst nicht abgehakt.
 
 ---
 
