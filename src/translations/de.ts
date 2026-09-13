@@ -1413,7 +1413,6 @@ export const de = {
       valentineTitle: "Valentinstag im STORIA",
       valentineTeaser: "Am Valentinstag bieten wir ein spezielles Menü an – mit exklusiven Gängen, Weinbegleitung und romantischem Ambiente für einen unvergesslichen Abend zu zweit.",
       valentineLinkText: "Valentinstag im STORIA entdecken",
-      candlelightLinkText: "Zum Candle-Light-Menü",
       // Occasions
       occasionsTitle: "Perfekt für jeden romantischen Anlass",
       occasion1Title: "💕 Erstes Date",

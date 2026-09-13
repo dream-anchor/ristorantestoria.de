@@ -4176,7 +4176,6 @@ const frExtra = {
     },
     romanticDinner: {
       tldr: "Dîner romantique au STORIA Munich Maxvorstadt (Karlstraße 47a) : dîner italien aux chandelles avec menus dégustation, accords mets et vins et ambiance intime. Idéal pour un anniversaire de couple, une demande en mariage ou une soirée en amoureux. Entreprise familiale depuis 2015, gérée par la famille Speranza. 4,5 étoiles sur plus de 800 avis Google. Réservations : +49 89 51519696.",
-      candlelightLinkText: "Vers le menu aux chandelles",
     },
     eventlocation: {
       tldr: "Lieu d'événements STORIA Munich Maxvorstadt (Karlstraße 47a) : restaurant italien pour fêtes d'entreprise, anniversaires, mariages et fêtes de Noël de 20 à 300 convives. 100 places à l'intérieur + 100 sur la terrasse couverte. Menus personnalisés, service événementiel professionnel. À 5 min de Königsplatz. Entreprise familiale depuis 2015, gérée par la famille Speranza. Demandes : +49 89 51519696.",

@@ -239,9 +239,6 @@ const RomantischesDinner = () => {
               <p className="text-muted-foreground mb-6">{t.seo.romanticDinner.valentineTeaser}</p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <Button asChild><LocalizedLink to="valentinstag-muenchen">{t.seo.romanticDinner.valentineLinkText}</LocalizedLink></Button>
-                {t.seo.romanticDinner.candlelightLinkText && (
-                  <Button asChild variant="outline"><LocalizedLink to="besondere-anlaesse/candlelight-menue">{t.seo.romanticDinner.candlelightLinkText}</LocalizedLink></Button>
-                )}
               </div>
             </section>
 

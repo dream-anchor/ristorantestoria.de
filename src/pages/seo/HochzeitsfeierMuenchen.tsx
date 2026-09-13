@@ -18,7 +18,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { MapPin, Clock, CalendarDays, UtensilsCrossed, Wine, GlassWater, ArrowRight, Heart } from "lucide-react";
 
@@ -32,9 +31,7 @@ import locationDetails from "@/assets/ristorante-storia-uebersicht-details.webp"
 import locationDetails600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
 
 const HochzeitsfeierMuenchen = () => {
-  const { t, language } = useLanguage();
-  // Candle-Light-Dinner ist eine dynamische Anlass-Seite: localized parent + Slug (de: -menue, sonst -menu)
-  const candlelightTo = `${PARENT_SLUGS[language]}/${language === "de" ? "candlelight-menue" : "candlelight-menu"}`;
+  const { t } = useLanguage();
   usePrerenderReady(true);
 
   const s = t.seo.hochzeitsfeier;
@@ -335,7 +332,7 @@ const HochzeitsfeierMuenchen = () => {
                   <span className="font-medium">{s.related4Title}</span>
                   <p className="text-sm text-muted-foreground mt-1">{s.related4Desc}</p>
                 </LocalizedLink>
-                <LocalizedLink to={candlelightTo} className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
+                <LocalizedLink to="romantisches-dinner-muenchen" className="bg-card p-4 rounded-lg border border-border hover:border-primary transition-colors text-center">
                   <span className="font-medium">{s.relatedCandlelightTitle}</span>
                   <p className="text-sm text-muted-foreground mt-1">{s.relatedCandlelightDesc}</p>
                 </LocalizedLink>
