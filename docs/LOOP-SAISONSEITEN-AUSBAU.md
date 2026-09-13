@@ -461,10 +461,82 @@ Wahrheit: weicht dieser Log vom Konzept ab, gilt das Konzept.
 
 ## E3 — Inhaltliche Tiefe
 
-- [ ] **E3.1** Stornobedingungen/Anzahlung (braucht Fakten von Antoine — bis dahin BLOCKED).
-- [ ] **E3.2** Kapazitätsblock in Zahlen + Social Proof (4,5 ★, 800+ Bewertungen aus
-      `storia-entity.ts`).
-- [ ] **E3.3** Bildstrecke + FAQ-Ausbau.
+- [x] **E3.1** Stornobedingungen/Anzahlung — Fakten von Antoine am 13.09.2026 nachgeliefert
+      (Stornostaffel: >30 Tage kostenlos, 15–30 Tage 25 %, 8–14 Tage 50 %, 3–7 Tage 80 %, ab 48h
+      oder No-Show 100 %, maßgeblich der Eingang der schriftlichen Stornierung, Anzahlungen
+      werden verrechnet).
+      **Beweis 13.09.2026** (Branch `saisonseiten-e3`, Commits `98ee53a`/`f7295d5`/`f1a2cc6`):
+      `npm run build` grün (157 Seiten prerendert, 0 Errors), `npx tsc --noEmit` ohne Ausgabe,
+      `npm run lint` **727 Probleme = Baseline unverändert**. Scope-Entscheidung (Antoine
+      bestätigt): Staffel auf `SilvesterMuenchen.tsx` (Gala-Dinner, klar ein bezahltes Event) und
+      `WeihnachtsfeierMuenchen.tsx` (schließt die bisher unbegleitete „Anzahlung (30%) sichert
+      Ihren Termin" aus `step3Desc`) — **nicht** auf `WeihnachtenMuenchen.tsx` (à la carte, keine
+      Anzahlung, eine Stornostaffel wäre dort sachlich irreführend). **Kein Verweis auf eine
+      nicht existierende „AGB für Veranstaltungen"-Seite** — Antoines Originaltext verwies darauf,
+      übernommen wurde stattdessen `cancellationDepositNote`, die auf die Buchungsbestätigung
+      verweist. Sichtbares HTML (Skript-Blöcke via `perl -0pe 's/<script.*?<\/script>//gs'`
+      ausgeklammert), `dist/besondere-anlaesse/silvester/index.html` und
+      `dist/weihnachtsfeier-muenchen/index.html`: je 2× „Stornobedingungen", „Mehr als 30 Tage
+      vorher"/„Kostenlos", „15–30 Tage vorher"/„25 %", „Ab 48 Stunden vorher oder No-Show", 2×
+      „100 %". `grep -ric "agb-veranstaltungen\|agb für veranstaltungen"` → **0 Treffer** auf
+      Silvester, Weihnachtsfeier UND Weihnachten. Alle vier Sprachen geprüft: EN
+      „Cancellation Policy"/„More than 30 days before"/„Free of charge", IT „Condizioni di
+      cancellazione"/„Più di 30 giorni prima"/„Gratuito", FR „Conditions d'annulation" (im
+      HTML als `&#x27;`, Standard-SSR-Escaping) — auf allen 12 Sprach-Routen von Silvester UND
+      Weihnachtsfeier (inkl. der zusätzlichen `christmas-party-munich`/`festa-natale-monaco`/
+      `fete-noel-munich`-Routen).
+- [x] **E3.2** Kapazitätsblock in Zahlen + Social Proof.
+      **Beweis 13.09.2026** (Commits `f7295d5`/`4497682`): Social Proof —
+      `<GoogleReviews />` (Bestandskomponente, zieht echte Daten aus
+      `src/data/google-reviews-*.json`, keine Props) auf `SilvesterMuenchen.tsx` und
+      `WeihnachtenMuenchen.tsx` vor dem FAQ-Abschnitt eingebunden, Muster wie
+      `AperitivoMuenchen.tsx`/`WeihnachtsfeierMuenchen.tsx`. Sichtbares HTML: beide Seiten zeigen
+      „4,5"/„4.5", 6–7× „Bewertung(en)", echte Rezensionstexte — je nach Sprachroute geprüft
+      (DE/EN/IT/FR), 0 Treffer für „undefined" auf allen 12 betroffenen Routen.
+      **Kapazitätsblock — Entscheidung „kein zusätzlicher Bedarf, bereits abgedeckt" für BEIDE
+      Seiten**, nicht nur für Silvester: „Auf einen Blick" (E1.3) nennt auf beiden Seiten bereits
+      die Innen-/Terrassen-Aufschlüsselung (Silvester „2 bis 100 Gäste"; Weihnachten
+      „{indoorSeats} Plätze innen, {terraceSeats} auf der überdachten Terrasse" aus `FACTS`).
+      Für Weihnachten wurde die tiefer gestaffelte Kapazitätslogik von
+      `WeihnachtsfeierMuenchen.tsx` FAQ2 (10–30/30–60/60–100 Personen, private Raummiete) bewusst
+      **nicht** übernommen: das ist Gruppen-/Privatevent-Logik, die mit E4.1 explizit von
+      `weihnachten-muenchen` entfernt wurde (Kannibalisierung weihnachten-muenchen vs.
+      weihnachtsfeier-muenchen aufgelöst) — sie dort erneut einzuführen widerspräche dieser erst
+      am selben Tag getroffenen Entscheidung. Für Silvester (Gala-Dinner, nur 19:00–20:00-Slot)
+      ist ohnehin keine zusätzliche Kapazitätszahl auffindbar. Diese Abweichung von der
+      wörtlichen Aufgabenstellung (die für Weihnachten keinen ausdrücklichen Opt-out nannte) ist
+      hier bewusst dokumentiert statt stillschweigend übergangen.
+- [x] **E3.3** Bildstrecke + FAQ-Ausbau.
+      **Beweis 13.09.2026** (Commits `f7295d5`/`4497682`/`f1a2cc6`): **Bildstrecke** —
+      `PhotoGallery`-Komponente (Bestandskomponente mit Lightbox, Muster:
+      `FirmenfeierMuenchen.tsx`/`RomantischesDinner.tsx`), je 3 Bilder, **ausschließlich bereits
+      vorhandene Projekt-Assets**, keine neuen Bilder generiert/hochgeladen. Silvester:
+      `aperitivo-muenchen-italienische-bar-storia.webp` (Aperitivo-Empfang),
+      `romantisches-dinner-kerzenlicht-storia-muenchen.webp` (Kerzenlicht-Ambiente),
+      `ristorante-storia-uebersicht-details.webp` (Interieur). Weihnachten:
+      `ristorante-storia-uebersicht-gaeste.webp` (Gäste am Tisch),
+      `ristorante-storia-uebersicht.webp` (Restaurant-Ambiente),
+      `gaeste-terrasse-italiener-maxvorstadt-muenchen.webp` (überdachte Terrasse). Bild-Intro/
+      Alt-Texte/Captions bewusst hardcoded Deutsch über alle Sprachrouten hinweg — folgt dem
+      bestehenden Muster von `PhotoGallery`-Einbindungen im Repo (`RomantischesDinner.tsx`,
+      `FirmenfeierMuenchen.tsx` machen es identisch), keine neue Teilübersetzungs-Konvention
+      erfunden. Sichtbares HTML: „Impressionen vom Silvesterabend" bzw. „Impressionen aus dem
+      STORIA" auf beiden Seiten vorhanden.
+      **FAQ-Ausbau** — je eine neue FAQ, entstanden aus E3.1: Silvester FAQ9 „Muss ich eine
+      Anzahlung leisten – und was passiert, wenn ich absagen muss?" (Verweis auf
+      „Stornobedingungen"), Weihnachtsfeier FAQ9 „Was passiert mit meiner Anzahlung, wenn ich
+      absagen muss?" (knüpft an `step3Desc` an). **Bewusst KEINE neue FAQ auf
+      `WeihnachtenMuenchen.tsx`**: weder Storno (E3.1 schließt diese Seite aus) noch Kapazität
+      (E3.2-Entscheidung „bereits abgedeckt") liefern dort einen neuen Fakt, aus dem eine FAQ
+      entstehen könnte — eine erzwungene Frage ohne neuen Inhalt hätte gegen die Vorgabe „keine
+      erfundenen Fakten" verstoßen. FAQPage-Schema-Beweis (Python `json.loads` je Block):
+      Silvester 8→**9** Question/Answer-Paare, Weihnachtsfeier 8→**9**, Weihnachten unverändert
+      **5** (keine Änderung, wie vorgesehen); alle JSON-LD-Blöcke weiterhin syntaktisch gültig
+      (Silvester: 6 `application/ld+json`-Vorkommen, 1× FoodEvent, 1× BreadcrumbList,
+      1× FAQPage — unverändert zu E1.6).
+      Gesamt-Build/Lint für alle drei Kriterien: `npm run build` grün (157/157, 0 Errors),
+      `npx tsc --noEmit` sauber, `npm run lint` 727 Probleme = Baseline (651 Errors/76 Warnings,
+      unverändert).
 
 ## E3: Branch, Beweis, Merge
 
