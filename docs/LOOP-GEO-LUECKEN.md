@@ -172,28 +172,73 @@ Weihnachtsbegriffe ab. AKUT — Buchungssaison läuft laut eigener Seite „ab S
 Entscheidung Antoine: eigenständig, aber auf reine Valentins-Intention zugespitzt. Vorlauf bis
 Januar (Peak Februar 2027, erste echte Saison dieser Seite).
 
-- [ ] **V3.1** Romantik-Generika aus Title/Description/H2/Intro entfernen (Formulierungen wie
+- [x] **V3.1** Romantik-Generika aus Title/Description/H2/Intro entfernen (Formulierungen wie
       „romantisches Restaurant/Dinner München" ohne Valentins-Bezug), durch internen Link auf
       `romantisches-dinner-muenchen` ersetzen. Ziel: die Seite kandidiert nicht mehr gegen die
       eigene stärkere Seite bei generischen Romantik-Queries.
-- [ ] **V3.2** Title/Description auf die Queries mit echtem Volumen zuspitzen (`valentinstag
+      ✓ 13.09.2026 · Commit `75c547a` · `standaloneSeoTitle`/`standaloneSeoDescription`/
+      `standaloneHeroTitle` (H1) geben „Romantisches [italienisches] Dinner" ab (alle 4 Sprachen —
+      `standalone` ist laut `App.tsx` `ValentinstagMuenchenStandalone` der einzige tatsächlich
+      gemountete Zweig, die Änderung betrifft also den live gerenderten Pfad, nicht toten Code).
+      Neuer sichtbarer interner Link im Intro (`introRomanticLinkPre/Anchor/Post`, `LocalizedLink`
+      auf `romantisches-dinner-muenchen`) — Beleg: `grep -o
+      '<a[^>]*romantisches-dinner-muenchen[^>]*>[^<]*</a>' ` auf das script-bereinigte
+      `dist/valentinstag-muenchen/index.html` → Treffer vorhanden.
+- [x] **V3.2** Title/Description auf die Queries mit echtem Volumen zuspitzen (`valentinstag
       münchen` 421 Impr., `valentinstag menü münchen` 186 Impr.) — konkretes Angebotsdetail statt
       Generika, um die CTR von 0,00 % zu heben.
+      ✓ 13.09.2026 · Commit `75c547a` · Neuer Title „Valentinstag München 2026 – Candle-Light-Menü
+      im STORIA", neue Description mit Datum (14. Februar) + Preis (`{price}` via `fillFacts()`)
+      statt Werbesprache, alle 4 Sprachen. Prerender-Beleg: `grep -o '<h1[^>]*>.*</h1>'` auf das
+      script-bereinigte HTML → „Valentinstag München 2026 – Candle-Light-Dinner im STORIA".
 - [ ] **V3.3** `ReservationBooking` ergänzen (Muster `SilvesterMuenchen.tsx:561`, `defaultDate`
       14.02.) **zusätzlich** zum bestehenden `SeasonalSignupForm` — NICHT ersetzen. **BLOCKED bis
       Antoine bestätigt, ob am 14.02. à la carte serviert wird** (sonst ergibt eine
-      Tisch-Reservierungsstrecke keinen Sinn, siehe BLOCKED-Log).
-- [ ] **V3.4** GEO nachrüsten: Definition-Lead, `tldr` rendern (Schlüssel existiert, `de.ts:2240`),
+      Tisch-Reservierungsstrecke keinen Sinn, siehe BLOCKED-Log). — in dieser Iteration ausgelassen
+      (Auftrag), weiterhin BLOCKED.
+- [x] **V3.4** GEO nachrüsten: Definition-Lead, `tldr` rendern (Schlüssel existiert, `de.ts:2240`),
       autoritativer Outbound-Link, JSON-LD `Event` → `FoodEvent`, kaputte `image`-URL im Schema
       reparieren (zeigt auf `/valentinstag-menue-storia-muenchen.jpg`, die laut Audit nicht in
       `public/` existiert — Muster: Silvester nutzt das importierte Hero-Bild selbst, siehe
       `SilvesterMuenchen.tsx` `EVENT_IMAGE_URL`).
-- [ ] **V3.5** Fakten zentralisieren: Valentinstag-Preise (aktuell 55 €/85 € an vier Stellen hart
+      ✓ 13.09.2026 · Commit `75c547a` · `introP1` auf Definition-Lead-Muster umgestellt ("Das
+      Valentinstag-Dinner im STORIA München ist ein italienisches Candle-Light-Menü für Paare am
+      14. Februar..."). TL;DR-Card gerendert (vorher ungenutzter Key, `fillFacts(s.tldr)`, gleiche
+      Position wie bei Silvester/Weihnachten: Card direkt unter der Breadcrumb). Outbound-Link:
+      offizielle Tourismusseite der Stadt Terni
+      (https://turismo.comune.terni.it/en/things-to-do/ternis-st-valentine — Grab des hl. Valentin,
+      Stadtpatron seit 1644) — per `curl -sIL` verifiziert (HTTP/2 200), eigenständig gegenüber
+      champagne.fr (Silvester), UNESCO Mediterranean Diet (Weihnachten) und Accademia Italiana
+      della Cucina (Weihnachtsfeier). JSON-LD: `"@type":"Event"` → `"@type":"FoodEvent"` — Beleg:
+      `grep -o '"@type":"FoodEvent"' dist/valentinstag-muenchen/index.html` → Treffer. `image`-URL
+      zeigt jetzt auf den gehashten Build-Pfad des Hero-Bilds (`EVENT_IMAGE_URL`, Muster
+      `SilvesterMuenchen.tsx`) statt auf die nicht existierende
+      `/valentinstag-menue-storia-muenchen.jpg` — Beleg: `grep -o
+      '"image":\["[^"]*romantisches-dinner[^"]*"\]' dist/valentinstag-muenchen/index.html` →
+      `https://www.ristorantestoria.de/assets/romantisches-dinner-kerzenlicht-storia-muenchen-BC6qce0a.webp`.
+      Alle 4 Sprachen (it.ts: `tldr` hat weiterhin keinen eigenen Override — Teilübersetzungsmuster
+      wie bei Weihnachtsfeier V2.4, fällt korrekt auf den jetzt aktualisierten deutschen
+      Platzhalter-Text zurück; `introP1`/`citationPre/Anchor/Post` dagegen eigens übersetzt, da
+      dieser Teil der Seite in it.ts bereits vollübersetzt war).
+- [x] **V3.5** Fakten zentralisieren: Valentinstag-Preise (aktuell 55 €/85 € an vier Stellen hart
       kodiert: JSON-LD-Description, 2 Offers, `package1Price`/`package2Price`,
       `seoDescription`) in `facts.ts` unter einem neuen `valentinstag`-Block zusammenführen.
       **Reine SSoT-Konsolidierung der bereits live angezeigten Werte** — ändert nichts an den
       Zahlen selbst. Ob 55 €/85 € noch aktuell sind, bleibt eine offene Faktenfrage (BLOCKED-Log),
       unabhängig von der Code-Konsolidierung.
+      ✓ 13.09.2026 · Commit `75c547a` · `FACTS.valentinstag = { price: "55", pricePremium: "85" }`
+      neu in `src/config/facts.ts`. `fillFacts()` (Muster `SilvesterMuenchen.tsx`) in
+      `ValentinstagMuenchen.tsx` neu eingeführt und auf alle vier Fundstellen angewendet:
+      JSON-LD-Description (Template-Literal `${FACTS.valentinstag.price}`), beide JSON-LD-Offers
+      (`${FACTS.valentinstag.price}.00`/`${FACTS.valentinstag.pricePremium}.00`),
+      `package1Price`/`package2Price` (Platzhalter `{price}`/`{pricePremium}` in allen 4 Sprachen),
+      `seoDescription`/`standaloneSeoDescription`. Preise selbst unverändert (55/85), nur
+      zentralisiert. Verifiziert am prerenderten HTML (script-bereinigt): `grep -o
+      '{[a-zA-Z]*}'` → 0 Treffer (keine unaufgelösten Platzhalter); Definition-Lead zeigt „ab 55 €
+      pro Person" korrekt aufgelöst. **Außerhalb des Auftrags-Umfangs belassen** (nicht Teil der
+      „vier Fundstellen"): `reason8Desc`/`faq2Answer` enthalten weiterhin dieselben Literale
+      55 €/85 € hart kodiert — bewusst nicht angefasst, um beim minimalen Eingriff zu bleiben; für
+      eine künftige Iteration vermerkt, kein Blocker.
 
 ## V3: Branch, Beweis, Merge
 
@@ -202,6 +247,11 @@ Januar (Peak Februar 2027, erste echte Saison dieser Seite).
       Anker (Hero/Archived-Menu/Final-CTA) zielen korrekt, `git diff` leer für
       `SeasonalSignupForm.tsx`. Beweis zusätzlich: `FoodEvent`-Schema mit auflösender `image`-URL,
       Definition-Lead, TL;DR gerendert, keine Romantik-Generika mehr in Title/H1.
+      Lokal bereits verifiziert (13.09.2026, Commit `75c547a` auf `geo-luecken-v3`):
+      `id="signup-form"` 1× im ausgelieferten HTML, `git diff --stat -- src/components/
+      SeasonalSignupForm.tsx` leer, `npx tsc --noEmit` sauber, `npm run build` 157/157 0 Fehler,
+      `npm run lint` 727 Probleme (Baseline unverändert). Push/PR/Merge/Live-Stichprobe macht das
+      Hauptfenster.
 
 ---
 
