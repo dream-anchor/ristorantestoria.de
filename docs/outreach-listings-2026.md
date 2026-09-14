@@ -117,6 +117,36 @@ Publisher aktualisieren gerade aktiv („vor 3–5 Tagen"-Timestamps):
 >
 > Beste Grüße, [Name] – Ristorante STORIA
 
+### Vorlage Silvester (in-muenchen.de)
+> **Betreff:** STORIA Maxvorstadt – Silvester-Gala-Dinner für eure Silvester-Liste
+>
+> Hallo [Name/Redaktion],
+>
+> für eure Übersicht der besten Silvester-Locations in München: Das STORIA in der Maxvorstadt
+> (Karlstraße 47a) serviert am 31.12. ein mehrgängiges italienisches Gala-Dinner in drei
+> Varianten (Vegetale, Mare, Terra), mit Aperitivo-Empfang, Musik und Mitternachts-Champagner –
+> stilvoll, aber ohne Club-Trubel. Ideal für Paare und kleine Gruppen, Plätze für 2 bis 100 Gäste.
+>
+> Infos & Menü: https://www.ristorantestoria.de/besondere-anlaesse/silvester/
+> Gern schicke ich euch Fotos in Originalauflösung.
+>
+> Beste Grüße, [Name] – Ristorante STORIA
+
+### Vorlage Weihnachtsfeier (Mit Vergnügen)
+> **Betreff:** STORIA – Location für eure Weihnachtsfeier-Übersicht
+>
+> Hallo [Name],
+>
+> als Ergänzung zu eurer Übersicht für Weihnachtsfeiern in München: Das STORIA in der
+> Maxvorstadt bietet individuelle Business-Menüs für Firmenweihnachtsfeiern und
+> Betriebsweihnachtsfeiern, einen Private Room für kleinere Runden sowie auf Wunsch exklusive
+> Locationnutzung mit Stehempfang bis 300 Gäste – süditalienische Küche, zentral, 5 Gehminuten
+> vom Königsplatz.
+>
+> Infos: https://www.ristorantestoria.de/weihnachtsfeier-muenchen/
+>
+> Beste Grüße, [Name] – Ristorante STORIA
+
 ---
 
 ## Reihenfolge / Priorität
