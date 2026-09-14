@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import {
   Dialog,
@@ -11,11 +15,17 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Bell, Download, Mail, Send, Loader2, CheckCircle2 } from "lucide-react";
+import { Bell, Download, Mail, Send, Loader2, CheckCircle2, Copy, RotateCcw, Save, MailPlus } from "lucide-react";
 import { toast } from "sonner";
 import { useSeasonalSignups, useSeasonalSignupCounts } from "@/hooks/useSeasonalSignups";
 import { useNotifySeasonalSignups, type NotifyPreviewResult } from "@/hooks/useSeasonalNotifications";
 import type { SeasonalSignup } from "@/hooks/useSeasonalSignups";
+import {
+  useSeasonalMailtoTemplates,
+  useSaveSeasonalMailtoTemplate,
+  useMarkSignupsNotified,
+} from "@/hooks/useSeasonalMailtoTemplates";
+import { fillSeasonalMailtoTemplate, buildSeasonalMailtoUrl } from "@/lib/seasonalMailto";
 import Redact from "@/components/admin/Redact";
 
 const EVENT_LABELS: Record<string, string> = {
@@ -25,6 +35,89 @@ const EVENT_LABELS: Record<string, string> = {
 };
 
 const LANG_FLAGS: Record<string, string> = { de: "DE", en: "EN", it: "IT", fr: "FR" };
+
+const DEFAULT_MAILTO_TEMPLATE = { subject: "", body: "" };
+
+// ─── Manuelle Mailto-Vorlage (Ergänzung zum KI-Versand oben) ─────────────────
+//
+// Öffnet ein vorausgefülltes mailto:-Compose-Fenster statt eines automatischen
+// Server-Sendevorgangs — der Admin sieht die Mail vor dem Absenden im eigenen
+// Mail-Client und kann sie von Hand anpassen. Eine Vorlage pro Event (nicht
+// pro Sprache): {{EVENT}} wird beim Öffnen automatisch ersetzt.
+const MailtoTemplateEditor = ({ eventKey }: { eventKey: string }) => {
+  const { data: templates, isLoading } = useSeasonalMailtoTemplates();
+  const saveMutation = useSaveSeasonalMailtoTemplate();
+  const stored = templates?.[eventKey];
+  const [draft, setDraft] = useState(DEFAULT_MAILTO_TEMPLATE);
+
+  useEffect(() => {
+    setDraft({ subject: stored?.subject ?? "", body: stored?.body ?? "" });
+  }, [stored?.subject, stored?.body, eventKey]);
+
+  const isDirty = draft.subject !== (stored?.subject ?? "") || draft.body !== (stored?.body ?? "");
+
+  const handleSave = async () => {
+    try {
+      await saveMutation.mutateAsync({ seasonal_event: eventKey, ...draft });
+      toast.success("Vorlage gespeichert");
+    } catch {
+      toast.error("Fehler beim Speichern der Vorlage");
+    }
+  };
+
+  const handleReset = () => setDraft({ subject: stored?.subject ?? "", body: stored?.body ?? "" });
+
+  if (isLoading) {
+    return <Skeleton className="h-40 w-full mb-6" />;
+  }
+
+  return (
+    <Card className="p-4 space-y-3 mb-6">
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <h3 className="text-sm font-semibold">Mailto-Vorlage — {EVENT_LABELS[eventKey] ?? eventKey}</h3>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            <code className="text-[11px] bg-muted px-1 py-0.5 rounded">{"{{EVENT}}"}</code> wird
+            beim Öffnen automatisch ersetzt. Gilt für alle, die diese Seite öffnen.
+          </p>
+        </div>
+        <Badge
+          variant="outline"
+          className={isDirty ? "border-amber-400 text-amber-700 bg-amber-50" : "border-emerald-300 text-emerald-700 bg-emerald-50"}
+        >
+          {isDirty ? "Ungespeicherte Änderungen" : "Gespeichert"}
+        </Badge>
+      </div>
+      <div className="space-y-1.5">
+        <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground" htmlFor="mailto-subject">Betreff</label>
+        <Input
+          id="mailto-subject"
+          value={draft.subject}
+          onChange={(e) => setDraft((d) => ({ ...d, subject: e.target.value }))}
+        />
+      </div>
+      <div className="space-y-1.5">
+        <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground" htmlFor="mailto-body">Text</label>
+        <Textarea
+          id="mailto-body"
+          value={draft.body}
+          onChange={(e) => setDraft((d) => ({ ...d, body: e.target.value }))}
+          className="min-h-[180px] font-mono text-sm leading-relaxed"
+        />
+      </div>
+      <div className="flex items-center gap-2">
+        <Button size="sm" onClick={handleSave} disabled={saveMutation.isPending || !isDirty}>
+          {saveMutation.isPending ? <Loader2 className="w-4 h-4 mr-1.5 animate-spin" /> : <Save className="w-4 h-4 mr-1.5" />}
+          Vorlage speichern
+        </Button>
+        <Button size="sm" variant="outline" onClick={handleReset} disabled={!isDirty}>
+          <RotateCcw className="w-4 h-4 mr-1.5" />
+          Änderungen verwerfen
+        </Button>
+      </div>
+    </Card>
+  );
+};
 
 // ─── Send Preview Dialog ──────────────────────────────────────────────────────
 
@@ -180,10 +273,88 @@ const SendPreviewDialog = ({
 const SeasonalSignupsManager = () => {
   const [selectedEvent, setSelectedEvent] = useState<string | undefined>(undefined);
   const [sendDialogEvent, setSendDialogEvent] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const { data: signups, isLoading } = useSeasonalSignups(selectedEvent);
   const { data: counts } = useSeasonalSignupCounts();
+  const { data: mailtoTemplates } = useSeasonalMailtoTemplates();
+  const markNotifiedMutation = useMarkSignupsNotified();
 
   const eventKeys = ["valentinstag", "weihnachten", "silvester"];
+
+  const toggleSelected = (id: string, checked: boolean) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (checked) next.add(id); else next.delete(id);
+      return next;
+    });
+  };
+
+  const toggleAllSelected = (rows: SeasonalSignup[], checked: boolean) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      for (const s of rows) {
+        if (checked) next.add(s.id); else next.delete(s.id);
+      }
+      return next;
+    });
+  };
+
+  // mailto: statt Server-Versand — öffnet ein sendebereites Compose-Fenster im
+  // eigenen Mail-Client, verschickt selbst nichts. Muss synchron im Click-Handler
+  // laufen (kein await davor), sonst blockieren Browser den Protokoll-Handoff.
+  const openMailtoFor = (signup: SeasonalSignup) => {
+    const template = mailtoTemplates?.[signup.seasonal_event];
+    if (!template) {
+      toast.error("Keine Mailto-Vorlage für dieses Event hinterlegt");
+      return;
+    }
+    const eventLabel = EVENT_LABELS[signup.seasonal_event] ?? signup.seasonal_event;
+    const subject = fillSeasonalMailtoTemplate(template.subject, eventLabel);
+    const body = fillSeasonalMailtoTemplate(template.body, eventLabel);
+    const url = buildSeasonalMailtoUrl(signup.email, subject, body);
+    const link = document.createElement("a");
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleMailtoSend = (signup: SeasonalSignup) => {
+    openMailtoFor(signup);
+    toast.success(`${signup.email}: E-Mail-Programm geöffnet`);
+    markNotifiedMutation.mutate([signup.id]);
+  };
+
+  const handleMailtoCopy = async (signup: SeasonalSignup) => {
+    const template = mailtoTemplates?.[signup.seasonal_event];
+    if (!template) {
+      toast.error("Keine Mailto-Vorlage für dieses Event hinterlegt");
+      return;
+    }
+    const eventLabel = EVENT_LABELS[signup.seasonal_event] ?? signup.seasonal_event;
+    const subject = fillSeasonalMailtoTemplate(template.subject, eventLabel);
+    const body = fillSeasonalMailtoTemplate(template.body, eventLabel);
+    const text = `An: ${signup.email}\nBetreff: ${subject}\n\n${body}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success("Text kopiert");
+    } catch {
+      toast.error("Kopieren nicht möglich — bitte Text manuell markieren.");
+    }
+  };
+
+  const handleBulkMailtoSend = () => {
+    const selected = (signups ?? []).filter((s) => selectedIds.has(s.id));
+    if (!selected.length) return;
+    // Alle Compose-Fenster synchron hintereinander öffnen, kein await dazwischen
+    // (gleicher Grund wie oben: Browser-Popup-Blocker).
+    for (const signup of selected) {
+      openMailtoFor(signup);
+    }
+    markNotifiedMutation.mutate(selected.map((s) => s.id));
+    toast.success(`${selected.length} E-Mail-Fenster geöffnet`);
+    setSelectedIds(new Set());
+  };
 
   const exportCSV = (data: SeasonalSignup[], eventName: string) => {
     const headers = "Email,Event,Sprache,Anmeldedatum,Benachrichtigt\n";
@@ -226,7 +397,7 @@ const SeasonalSignupsManager = () => {
         <Button
           variant={selectedEvent === undefined ? "default" : "outline"}
           size="sm"
-          onClick={() => setSelectedEvent(undefined)}
+          onClick={() => { setSelectedEvent(undefined); setSelectedIds(new Set()); }}
         >
           Alle
           {totalCount > 0 && <Badge variant="secondary" className="ml-2"><Redact>{totalCount}</Redact></Badge>}
@@ -236,7 +407,7 @@ const SeasonalSignupsManager = () => {
             key={key}
             variant={selectedEvent === key ? "default" : "outline"}
             size="sm"
-            onClick={() => setSelectedEvent(key)}
+            onClick={() => { setSelectedEvent(key); setSelectedIds(new Set()); }}
           >
             {EVENT_LABELS[key]}
             {counts?.[key] && (
@@ -245,6 +416,9 @@ const SeasonalSignupsManager = () => {
           </Button>
         ))}
       </div>
+
+      {/* Manuelle Mailto-Vorlage — nur sinnvoll pro Event, da Text/Betreff je Event unterschiedlich sind */}
+      {selectedEvent && <MailtoTemplateEditor eventKey={selectedEvent} />}
 
       {/* Action Buttons */}
       {selectedEvent && signups && signups.length > 0 && (
@@ -266,6 +440,20 @@ const SeasonalSignupsManager = () => {
         </div>
       )}
 
+      {/* Bulk-Mailto-Leiste */}
+      {selectedIds.size > 0 && (
+        <div className="flex items-center gap-2 rounded-lg border bg-muted/40 px-3 py-1.5 mb-4">
+          <span className="text-xs text-muted-foreground">{selectedIds.size} ausgewählt</span>
+          <Button size="sm" className="h-7 px-2 text-xs" onClick={handleBulkMailtoSend}>
+            <MailPlus className="w-3.5 h-3.5 mr-1.5" />
+            Mailto senden
+          </Button>
+          <Button size="sm" variant="ghost" className="h-7 px-2 text-xs" onClick={() => setSelectedIds(new Set())}>
+            Auswahl aufheben
+          </Button>
+        </div>
+      )}
+
       {/* Signups Table */}
       {isLoading ? (
         <div className="space-y-2">
@@ -278,17 +466,32 @@ const SeasonalSignupsManager = () => {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-10">
+                  <Checkbox
+                    checked={signups.every((s) => selectedIds.has(s.id))}
+                    onCheckedChange={(checked) => toggleAllSelected(signups, checked === true)}
+                    aria-label="Alle sichtbaren Vormerkungen auswählen"
+                  />
+                </TableHead>
                 <TableHead>E-Mail</TableHead>
                 <TableHead>Event</TableHead>
                 <TableHead>Sprache</TableHead>
                 <TableHead>Datum</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Benachrichtigt</TableHead>
+                <TableHead className="text-right">Mailto</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {signups.map((signup) => (
                 <TableRow key={signup.id}>
+                  <TableCell>
+                    <Checkbox
+                      checked={selectedIds.has(signup.id)}
+                      onCheckedChange={(checked) => toggleSelected(signup.id, checked === true)}
+                      aria-label={`${signup.email} auswählen`}
+                    />
+                  </TableCell>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-2">
                       <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
@@ -317,6 +520,28 @@ const SeasonalSignupsManager = () => {
                     {signup.notified_at
                       ? new Date(signup.notified_at).toLocaleDateString("de-DE")
                       : "—"}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <div className="flex justify-end gap-1.5">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-7 px-2 text-xs"
+                        onClick={() => handleMailtoSend(signup)}
+                        title="mailto: öffnen"
+                      >
+                        <Send className="w-3 h-3" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-7 px-2 text-xs"
+                        onClick={() => handleMailtoCopy(signup)}
+                        title="Text kopieren"
+                      >
+                        <Copy className="w-3 h-3" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
