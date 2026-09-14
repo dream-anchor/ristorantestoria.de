@@ -229,7 +229,31 @@ const WeihnachtenMuenchen = ({ standalone, menu, archivedMenu, seasonalConfig }:
           hier oben entfernt wurde. `Restaurant` + `FAQPage` decken beide Seiten korrekt ab.
 
           Kein Ersatz-Schema ohne Event-Charakter nötig: `Restaurant`-Schema (oben) deckt den
-          reinen Gastronomiebetrieb bereits vollständig ab, `FAQPage` (unten) bleibt unverändert. */}
+          reinen Gastronomiebetrieb bereits vollständig ab, `FAQPage` (unten) bleibt unverändert.
+
+          E3.1, NACHTRAG (14.09.2026) — doch ein `Offer`-Schema, aber kein `FoodEvent`: Antoine hat
+          die zuvor offene Faktenfrage beantwortet — die saisonale à-la-carte-Weihnachtskarte hat
+          ANDERS als bei E4.1 angenommen ein festes Zeitfenster (1.–30.12.2026, danach am 31.12.
+          das eigenständige Silvester-Gala-Dinner). Das widerlegt nicht die FoodEvent-Entscheidung
+          oben (die betraf einen fehlenden Termin für einen abgestimmten GRUPPEN-Anlass, hier geht
+          es um den regulären Tischbetrieb mit einer datierten Speisekarten-Gültigkeit) — ein
+          `Offer` mit `validFrom`/`validThrough` beschreibt genau das, ohne ein `startDate` für ein
+          nicht existierendes Einzelereignis zu behaupten. Kein Festpreis: die drei Varianten
+          (Fleisch/Fisch/vegetarisch) sind einzeln à la carte bestellbar, kein Paketpreis
+          vorhanden — `price` deshalb bewusst weggelassen statt erfunden. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Offer",
+        "name": language === "de" ? "Weihnachtsmenü im Ristorante STORIA München" : "Christmas Menu at Ristorante STORIA Munich",
+        "description": language === "de"
+          ? "Saisonale Weihnachtskarte à la carte: Fleisch, Fisch und vegetarische Variante, einzeln bestellbar."
+          : "Seasonal Christmas menu à la carte: meat, fish and vegetarian options, ordered individually.",
+        "validFrom": "2026-12-01",
+        "validThrough": "2026-12-30",
+        "availability": "https://schema.org/InStock",
+        "url": `https://www.ristorantestoria.de${canonicalPath}`,
+        "seller": { "@type": "Restaurant", "name": "Ristorante STORIA", "url": "https://www.ristorantestoria.de/" },
+      }) }} />
 
       {/* FAQ Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
