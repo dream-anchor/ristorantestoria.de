@@ -598,7 +598,7 @@ export const de = {
       oktoberfestTeaser: "19. Sept – 4. Okt 2026 – bayerisch-italienische Freundschaft beim Italiener: Wiesnbier (Maß), Brotzeit & Specials. Ideal für Gruppen.",
     },
     lunch: {
-      seoTitle: "Business Lunch M\u00fcnchen \u2013 3 G\u00e4nge ab 14,90 \u20ac (Mo\u2013Fr) | STORIA",
+      seoTitle: "Mittagsmen\u00fc M\u00fcnchen \u2013 Business Lunch ab 14,90 \u20ac (Mo\u2013Fr) | STORIA",
       seoDescription: "Mittagessen in der Maxvorstadt: Pasta ab 14,50 \u20ac, Pizza ab 12,50 \u20ac, 3-G\u00e4nge-Men\u00fc ab 14,90 \u20ac. Mo\u2013Fr 11:30\u201314:30 Uhr, in 45 Min. zur\u00fcck im B\u00fcro. 5 Min. vom K\u00f6nigsplatz.",
       heroTitle: "Business Lunch M\u00fcnchen \u2013 Italienisches Mittagessen in der Maxvorstadt",
       heroSubtitle: "STORIA M\u00fcnchen \u2022 Zentral & fu\u00dfl\u00e4ufig erreichbar",
@@ -1888,11 +1888,11 @@ export const de = {
     },
     silvester: {
       // SEO
-      seoTitle: "Silvester im Restaurant STORIA München – Gala-Dinner 2026",
-      seoDescription: "Restaurant München Silvester: Italienisches Gala-Dinner im STORIA Maxvorstadt. Ab 99 € p.P. mit Musik, Weinbegleitung & Mitternachts-Champagner.",
+      seoTitle: "Silvester Dinner München – Gala-Dinner im STORIA 2026",
+      seoDescription: "Silvester Dinner München: Italienisches Gala-Dinner im STORIA Maxvorstadt. Ab 99 € p.P. mit Musik, Weinbegleitung & Mitternachts-Champagner.",
       breadcrumb: "Silvester M\u00fcnchen",
       // Hero
-      heroTitle: "Silvester im Restaurant STORIA München – Gala-Dinner 2026",
+      heroTitle: "Silvester Dinner München – Gala-Dinner im STORIA 2026",
       heroSubtitle: "Festliches Silvester-Dinner mit Musik, Weinbegleitung und Mitternachts-Countdown in der Maxvorstadt",
       heroBadge1: "🥂 Gala-Dinner",
       heroBadge2: "🎶 Musik",
@@ -3866,9 +3866,9 @@ export const de = {
     },
     catering: {
       title: 'Catering München – Preise ab 25€, Hochzeit & Events | STORIA',
-      h1: 'Catering München für Hochzeit, Events & Firmenfeiern – STORIA',
+      h1: 'Catering München ab 25 € pro Person – für Hochzeit, Events & Firmenfeiern | STORIA',
       description: 'Italienisches Catering in München: Pizza, Pasta, Antipasti-Buffets für Firmenfeiern, Hochzeiten & Events. Ab 25 € p.P. Lieferung München + 50 km. ☎ 089 51519696',
-      intro: 'Das Ristorante STORIA bietet zwei Formen des Catering-Angebots: Feiern Sie direkt im Restaurant – von einem privaten Dinner f\u00fcr wenige G\u00e4ste bis zur Firmenfeier oder Hochzeit f\u00fcr bis zu 300 Personen (mehr unter Besondere Anl\u00e4sse). Oder buchen Sie unser Au\u00dfer-Haus-Catering: Wir liefern frische Pizza, hausgemachte Pasta und Antipasti-Buffets zu Ihrem Firmenevent, Ihrer Hochzeit oder Ihrem Sommerfest \u2013 in M\u00fcnchen und Umgebung.',
+      intro: 'Das Ristorante STORIA bietet zwei Formen des Catering-Angebots, beide schon ab 25 € pro Person: Feiern Sie direkt im Restaurant – von einem privaten Dinner f\u00fcr wenige G\u00e4ste bis zur Firmenfeier oder Hochzeit f\u00fcr bis zu 300 Personen (mehr unter Besondere Anl\u00e4sse). Oder buchen Sie unser Au\u00dfer-Haus-Catering: Wir liefern frische Pizza, hausgemachte Pasta und Antipasti-Buffets zu Ihrem Firmenevent, Ihrer Hochzeit oder Ihrem Sommerfest \u2013 in M\u00fcnchen und Umgebung.',
       introP2: 'Unser Au\u00dfer-Haus-Catering ist flexibel und passt sich Ihren W\u00fcnschen an. Dabei legen wir besonderen Wert auf frische Zutaten, authentische Rezepturen und eine Pr\u00e4sentation, die Ihre G\u00e4ste begeistert. F\u00fcr strukturierte Event-Pakete, Delivery und Full-Service-Catering mit professioneller Veranstaltungsplanung besuchen Sie unser Event-Portal events-storia.de.',
       breadcrumb: 'Catering & Events',
     },
