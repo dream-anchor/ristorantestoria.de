@@ -1251,6 +1251,27 @@ export type Database = {
         }
         Relationships: []
       }
+      seasonal_mailto_templates: {
+        Row: {
+          body: string
+          seasonal_event: string
+          subject: string
+          updated_at: string | null
+        }
+        Insert: {
+          body?: string
+          seasonal_event: string
+          subject?: string
+          updated_at?: string | null
+        }
+        Update: {
+          body?: string
+          seasonal_event?: string
+          subject?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       seasonal_notification_recipients: {
         Row: {
           email: string
