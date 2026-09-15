@@ -10,12 +10,10 @@ import MenuUploader from "@/components/admin/MenuUploader";
 import MenuStatusCard from "@/components/admin/MenuStatusCard";
 import CollapsibleMenuCard from "@/components/admin/CollapsibleMenuCard";
 import SortableMenuCard from "@/components/admin/SortableMenuCard";
-import { LogOut, ExternalLink, Rocket, Loader2, BarChart3, Sparkles } from "lucide-react";
+import { LogOut, ExternalLink, Rocket, Loader2, BarChart3, Sparkles, Bell } from "lucide-react";
 import SpecialOccasionsManager from "@/components/admin/SpecialOccasionsManager";
 import GroupMenusManager from "@/components/admin/GroupMenusManager";
 import GroupMenuSettingsEditor from "@/components/admin/GroupMenuSettingsEditor";
-import SeasonalSignupsManager from "@/components/admin/SeasonalSignupsManager";
-import SeasonalNotificationsManager from "@/components/admin/SeasonalNotificationsManager";
 import AdminNotificationsBanner from "@/components/admin/AdminNotificationsBanner";
 import ClassificationLog from "@/components/admin/ClassificationLog";
 import SEO from "@/components/SEO";
@@ -171,15 +169,15 @@ const Admin = () => {
       <header className="border-b border-border bg-card">
         <div className="container mx-auto px-4 py-3">
           {/* Row 1: Logo and Buttons */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-y-2">
             <Link to="/">
-              <img 
-                src={storiaLogo} 
-                alt="STORIA" 
-                className="h-8 md:h-10 hover:opacity-80 transition-opacity cursor-pointer" 
+              <img
+                src={storiaLogo}
+                alt="STORIA"
+                className="h-8 md:h-10 hover:opacity-80 transition-opacity cursor-pointer"
               />
             </Link>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap justify-end">
               {/* Demo-Modus Toggle (Auge) */}
               <DemoModeToggle variant="icon" className="hidden sm:flex" />
               {/* Desktop: Full buttons */}
@@ -193,6 +191,12 @@ const Admin = () => {
                 <Link to="/admin/seo/">
                   <Sparkles className="h-4 w-4 mr-2" />
                   SEO Ops
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
+                <Link to="/admin/vormerkungen/">
+                  <Bell className="h-4 w-4 mr-2" />
+                  Vormerkungen
                 </Link>
               </Button>
               <AlertDialog>
@@ -239,6 +243,11 @@ const Admin = () => {
               <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
                 <Link to="/admin/seo/">
                   <Sparkles className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="icon" asChild className="sm:hidden h-10 w-10">
+                <Link to="/admin/vormerkungen/">
+                  <Bell className="h-4 w-4" />
                 </Link>
               </Button>
               <AlertDialog>
@@ -335,12 +344,6 @@ const Admin = () => {
         {/* Gruppenmenüs */}
         <GroupMenusManager />
         <GroupMenuSettingsEditor />
-
-        {/* Saisonale Vormerkungen */}
-        <SeasonalSignupsManager />
-
-        {/* Saisonale Benachrichtigungen */}
-        <SeasonalNotificationsManager />
 
         {/* Slug-Klassifikationen */}
         <ClassificationLog />

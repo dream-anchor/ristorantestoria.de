@@ -80,6 +80,7 @@ const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminResetPassword = lazy(() => import("./pages/AdminResetPassword"));
 const AdminGSC = lazy(() => import("./pages/AdminGSC"));
 const AdminSEO = lazy(() => import("./pages/AdminSEO"));
+const AdminVormerkungen = lazy(() => import("./pages/AdminVormerkungen"));
 
 // Get dehydrated state from SSR (only on client)
 const getDehydratedState = () => {
@@ -250,6 +251,7 @@ const AppRoutes = () => {
         <Route path="/admin/reset-password" element={<AdminResetPassword />} />
         <Route path="/admin/gsc" element={<DemoModeProvider><AdminGSC /></DemoModeProvider>} />
         <Route path="/admin/seo" element={<DemoModeProvider><AdminSEO /></DemoModeProvider>} />
+        <Route path="/admin/vormerkungen" element={<DemoModeProvider><AdminVormerkungen /></DemoModeProvider>} />
 
         {/* /italiener-muenchen → / : echter 301 via public/.htaccess (Keyword-Konsolidierung,
             alle Sprachversionen). Server-Redirect ist die einzige Quelle – keine SPA-Navigate-Route mehr. */}

@@ -32,11 +32,25 @@ const EVENT_LABELS: Record<string, string> = {
   valentinstag: "Valentinstag",
   weihnachten: "Weihnachten",
   silvester: "Silvester",
+  ostermontag: "Ostern",
 };
 
 const LANG_FLAGS: Record<string, string> = { de: "DE", en: "EN", it: "IT", fr: "FR" };
 
 const DEFAULT_MAILTO_TEMPLATE = { subject: "", body: "" };
+
+// Vorschlagstext für Events, die noch keine Zeile in seasonal_mailto_templates
+// haben (z.B. neu ergänzte Events) — erscheint nur als Entwurf im Editor,
+// wird erst durch "Vorlage speichern" tatsächlich persistiert. Solange nicht
+// gespeichert, findet `openMailtoFor` (liest aus der DB) für dieses Event
+// keine Vorlage — der Vorschlag ist also bewusst nur ein Ausfüllvorschlag,
+// kein stiller Ersatz fürs Speichern.
+const FALLBACK_MAILTO_TEMPLATES: Record<string, { subject: string; body: string }> = {
+  ostermontag: {
+    subject: "Ihr Ostermenü im STORIA ist da",
+    body: "Guten Tag,\n\nwir freuen uns, Ihnen mitteilen zu dürfen, dass unser {{EVENT}}-Menü jetzt verfügbar ist. Reservieren Sie gerne Ihren Tisch:\n\nhttps://www.ristorantestoria.de/\n\nWir freuen uns auf Ihren Besuch!\n\nViele Grüße\nIhr Team vom Ristorante STORIA",
+  },
+};
 
 // ─── Manuelle Mailto-Vorlage (Ergänzung zum KI-Versand oben) ─────────────────
 //
@@ -51,7 +65,11 @@ const MailtoTemplateEditor = ({ eventKey }: { eventKey: string }) => {
   const [draft, setDraft] = useState(DEFAULT_MAILTO_TEMPLATE);
 
   useEffect(() => {
-    setDraft({ subject: stored?.subject ?? "", body: stored?.body ?? "" });
+    const fallback = FALLBACK_MAILTO_TEMPLATES[eventKey];
+    setDraft({
+      subject: stored?.subject ?? fallback?.subject ?? "",
+      body: stored?.body ?? fallback?.body ?? "",
+    });
   }, [stored?.subject, stored?.body, eventKey]);
 
   const isDirty = draft.subject !== (stored?.subject ?? "") || draft.body !== (stored?.body ?? "");
@@ -65,7 +83,13 @@ const MailtoTemplateEditor = ({ eventKey }: { eventKey: string }) => {
     }
   };
 
-  const handleReset = () => setDraft({ subject: stored?.subject ?? "", body: stored?.body ?? "" });
+  const handleReset = () => {
+    const fallback = FALLBACK_MAILTO_TEMPLATES[eventKey];
+    setDraft({
+      subject: stored?.subject ?? fallback?.subject ?? "",
+      body: stored?.body ?? fallback?.body ?? "",
+    });
+  };
 
   if (isLoading) {
     return <Skeleton className="h-40 w-full mb-6" />;
@@ -279,7 +303,7 @@ const SeasonalSignupsManager = () => {
   const { data: mailtoTemplates } = useSeasonalMailtoTemplates();
   const markNotifiedMutation = useMarkSignupsNotified();
 
-  const eventKeys = ["valentinstag", "weihnachten", "silvester"];
+  const eventKeys = ["valentinstag", "weihnachten", "silvester", "ostermontag"];
 
   const toggleSelected = (id: string, checked: boolean) => {
     setSelectedIds((prev) => {
