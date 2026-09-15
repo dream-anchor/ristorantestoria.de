@@ -173,6 +173,15 @@ const EditModal = ({ menu: initial, onClose }: EditModalProps) => {
   };
 
   const handleSave = async () => {
+    // Menü-Key ist Pflicht und in der DB UNIQUE (group_menus_menu_key_key) — ohne diese
+    // Prüfung landet ein leeres Feld unbemerkt in der DB (passiert, solange noch kein Eintrag
+    // mit leerem Key existiert) und blockiert jeden weiteren Speicherversuch mit leerem Feld
+    // danach über einen Unique-Constraint-Fehler, den der catch-Block bisher verschluckte.
+    if (!form.menu_key?.trim()) {
+      toast.error("Menü-Key darf nicht leer sein");
+      return;
+    }
+
     const builtItems: Record<Lang, string[]> = {
       de: textToItems(itemsText.de),
       en: textToItems(itemsText.en),
@@ -190,8 +199,12 @@ const EditModal = ({ menu: initial, onClose }: EditModalProps) => {
       await upsert.mutateAsync(payload);
       toast.success(form.id ? "Menü gespeichert" : "Menü erstellt");
       onClose();
-    } catch {
-      toast.error("Fehler beim Speichern");
+    } catch (err) {
+      const message = (err as { code?: string; message?: string })?.code === "23505"
+        ? `Menü-Key "${form.menu_key}" existiert bereits – bitte einen anderen wählen.`
+        : (err as { message?: string })?.message || "Fehler beim Speichern";
+      toast.error(message);
+      console.error("[GroupMenusManager] Speichern fehlgeschlagen:", err);
     }
   };
 
