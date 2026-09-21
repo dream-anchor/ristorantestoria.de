@@ -23,6 +23,17 @@ RewriteRule ^reisegruppen$ https://www.ristorantestoria.de/reisegruppen/ [R=301,
 RewriteRule ^geburtstagsfeier-muenchen$ https://www.ristorantestoria.de/geburtstagsfeier-muenchen/ [R=301,L]
 RewriteRule ^aperitivo-muenchen$ https://www.ristorantestoria.de/aperitivo-muenchen/ [R=301,L]
 
+# Domain versehentlich im Pfad wiederholt, z. B. /ristorantestoria.de/geburtstagsfeier-muenchen/
+# (2 GSC-404-Treffer, 21.09.2026 — Ursache unklar, interner Link oder externe Quelle; Fix pragmatisch
+# statt Ursache blockiert). Analog zur alten Bindestrich-Variante unten (Abschnitt 3, "Alte
+# Subdomain-URL Struktur"), hier aber die Punkt-Variante, die diese nicht abfängt.
+RewriteRule ^ristorantestoria\.de/(.+)$ https://www.ristorantestoria.de/$1 [R=301,L,QSD]
+RewriteRule ^ristorantestoria\.de/?$ https://www.ristorantestoria.de/ [R=301,L,QSD]
+# Bindestrich-Tippfehler ohne "muenchen"-Endung (1 GSC-404-Treffer, 21.09.2026). Ohne diese Regel
+# hängt Abschnitt 4 (Trailing Slash erzwingen) blind einen Slash an den bereits falschen Pfad an,
+# der Folgepfad 404et dann weiterhin.
+RewriteRule ^neapolitanische-pizza-muenchen-/?$ https://www.ristorantestoria.de/neapolitanische-pizza-muenchen/ [R=301,L]
+
 # ============================================
 # 1. Host-Kanonisierung
 # ============================================
