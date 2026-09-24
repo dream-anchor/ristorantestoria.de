@@ -3753,6 +3753,8 @@ const enBase = {
     openingHoursLabel: 'Opening Hours',
     openingHoursText: 'Mon-Fri 9am-1am, Sat-Sun 12pm-1am',
     seoDescription: 'STORIA – Your Italian restaurant in Maxvorstadt Munich near Königsplatz, TU Munich and Pinakothek museums. Ristorante Pizzeria with Neapolitan stone-oven pizza, homemade pasta and aperitivo. Just minutes from the main train station. La Storia – Italian trattoria Munich Karlstraße.',
+    aiImageLabel: 'AI-generated image',
+    aiImageLabelShort: 'AI image',
   },
   faq: [
     {

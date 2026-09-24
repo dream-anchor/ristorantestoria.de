@@ -12,6 +12,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import AiImageBadge from "@/components/AiImageBadge";
 import storiaLogo from "@/assets/storia-logo.webp";
 import neapolitanPizzaHero from "@/assets/neapolitan-pizza-hero.webp";
 import neapolitanPizzaHero600 from "@/assets/neapolitan-pizza-hero-600w.webp";
@@ -124,13 +125,14 @@ const NeapolitanischePizza = () => {
             src={neapolitanPizzaHero}
             srcSet={`${neapolitanPizzaHero600} 600w, ${neapolitanPizzaHero} 1200w`}
             sizes="100vw"
-            alt="Authentische neapolitanische Pizza Margherita aus dem Steinofen"
+            alt="Neapolitanische Pizza Margherita aus dem Steinofen"
             width={1920}
             height={1080}
             loading="eager"
             fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
           />
+          <AiImageBadge />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
           <div className="relative z-10 container mx-auto px-4 text-center">
             <div className="bg-black/40 backdrop-blur-sm rounded-2xl px-8 py-10 md:px-12 md:py-12 max-w-4xl mx-auto text-white">
