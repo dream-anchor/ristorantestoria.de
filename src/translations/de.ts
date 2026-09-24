@@ -3900,8 +3900,8 @@ export const de = {
     openingHoursLabel: 'Öffnungszeiten',
     openingHoursText: 'Mo-Fr 09:00-01:00, Sa-So 12:00-01:00',
     seoDescription: 'STORIA – Ihr Italiener in der Maxvorstadt München nahe Königsplatz, TU München und Pinakotheken. Ristorante Pizzeria mit neapolitanischer Pizza aus dem Steinofen, hausgemachter Pasta und Aperitivo. Nur wenige Gehminuten vom Hauptbahnhof. La Storia – Trattoria München Karlstraße.',
-    aiImageLabel: 'KI-generiertes Bild',
-    aiImageLabelShort: 'KI-Bild',
+    aiImageLabel: 'KI-generierter Inhalt',
+    aiImageLabelShort: 'KI-Inhalt',
   },
   faq: [
     {

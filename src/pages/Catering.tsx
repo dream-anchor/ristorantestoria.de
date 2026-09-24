@@ -11,6 +11,7 @@ import StructuredData from "@/components/StructuredData";
 import LocalizedLink from "@/components/LocalizedLink";
 import GoogleReviews from "@/components/GoogleReviews";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import AiImageBadge from "@/components/AiImageBadge";
 import storiaLogo from "@/assets/storia-logo.webp";
 import sommerfestEvent from "@/assets/sommerfest-event.webp";
 import sommerfestEvent600 from "@/assets/sommerfest-event-600w.webp";
@@ -370,6 +371,7 @@ const Catering = () => {
             className="absolute inset-0 w-full h-full object-cover"
             loading="eager" fetchPriority="high"
           />
+          <AiImageBadge />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/">

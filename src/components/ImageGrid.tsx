@@ -10,6 +10,7 @@ import terrasseImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muench
 import { useLanguage } from "@/contexts/LanguageContext";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
 import LocalizedLink from "@/components/LocalizedLink";
+import AiImageBadge from "@/components/AiImageBadge";
 
 interface ImageCardProps {
   image: string;
@@ -25,9 +26,11 @@ interface ImageCardProps {
   /** Optional: kleinere Bild-Variante(n) für srcSet (Vermeidung von Overfetching). */
   srcSet?: string;
   sizes?: string;
+  /** EU-KI-VO Art. 50: Bild ist KI-generiert/-substanziell-verändert (kein echtes Foto). */
+  aiGenerated?: boolean;
 }
 
-const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug, priority = false, srcSet, sizes }: ImageCardProps) => {
+const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug, priority = false, srcSet, sizes, aiGenerated = false }: ImageCardProps) => {
   const content = (
     <div className={`relative overflow-hidden group ${className}`}>
       <img
@@ -42,6 +45,7 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
         fetchPriority={priority ? "high" : undefined}
         decoding="async"
       />
+      {aiGenerated && <AiImageBadge />}
       {(title || subtitle) && (
         <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 pointer-events-none">
           <div className="bg-neutral-800/60 backdrop-blur-sm px-4 py-3 md:px-5 md:py-4">
@@ -118,6 +122,7 @@ const ImageGrid = () => {
             image={drinksImage}
             alt={t.imageGrid.altCocktails}
             className="aspect-square"
+            aiGenerated
           />
           <ImageCard
             image={aperitivoImage}
