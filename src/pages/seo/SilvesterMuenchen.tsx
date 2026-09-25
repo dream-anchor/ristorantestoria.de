@@ -310,7 +310,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               "@type": "FoodEvent",
               "@id": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/#event",
               "name": "Silvester Gala-Dinner im STORIA München",
-              "description": `Italienisches Gala-Dinner zum Jahreswechsel in der Maxvorstadt: Champagner-Aperitif und ${FACTS.silvester.courses}-Gänge-Degustationsmenü zur Wahl (Vegetale, Mare oder Terra). Ab ${FACTS.silvester.price} € pro Person, mit Weinbegleitung ${FACTS.silvester.priceWithWine} € pro Person — dasselbe Menü, der Unterschied ist nur die Weinbegleitung.`,
+              "description": `Italienisches Gala-Dinner zum Jahreswechsel in der Maxvorstadt: Champagner-Aperitif und ${FACTS.silvester.courses}-Gänge Silvester-Menü zur Wahl (Vegetale, Mare oder Terra). Ab ${FACTS.silvester.price} € pro Person, mit Weinbegleitung ${FACTS.silvester.priceWithWine} € pro Person — dasselbe Menü, der Unterschied ist nur die Weinbegleitung.`,
               "startDate": "2026-12-31T19:00:00+01:00",
               "endDate": "2027-01-01T02:00:00+01:00",
               "eventStatus": "https://schema.org/EventScheduled",
@@ -320,14 +320,14 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "image": [EVENT_IMAGE_URL],
               "offers": [
-                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge-Degustationsmenü`, "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
-                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge-Degustationsmenü mit Weinbegleitung`, "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü`, "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü mit Weinbegleitung`, "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
               ]
             },
             {
               "@type": "Menu",
               "@id": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/#menu",
-              "name": "Degustationsmenüs",
+              "name": "Silvester-Menüs",
               "inLanguage": "de-DE",
               "hasMenuSection": [
                 // E1.2: dieselben drei Menüs, die die Seite jetzt auch sichtbar rendert —

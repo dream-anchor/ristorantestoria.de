@@ -153,6 +153,7 @@ const ImageGrid = () => {
             image={dessertImage}
             alt={t.imageGrid.altDessert}
             className="aspect-square"
+            aiGenerated
           />
           <ImageCard
             image={terrasseImage}

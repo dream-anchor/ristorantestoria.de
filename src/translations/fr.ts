@@ -1839,7 +1839,7 @@ const frBase = {
       // Definition-Lead (E1.5, GEO-Regel 1) — der emotionale Einstieg ist laut
       // docs/geo-content-guidelines.md § Anti-Pattern verboten.
       introTitle: "Réveillon à Munich – le dîner de gala italien du Ristorante STORIA",
-      introP1: "Le Réveillon au Ristorante STORIA est un dîner de gala italien au Karlstraße 47a à Munich Maxvorstadt : un menu dégustation de {courses} plats en trois variantes à {price} € par personne, {priceWine} € par personne avec accord mets et vins, à partir de 19h00 avec accueil aperitivo, musique et champagne de minuit. Depuis 2015, la famille Speranza fête le passage à la nouvelle année avec ses convives dans la Karlstraße – ce qui a commencé comme un petit dîner du Réveillon est devenu l'un des événements italiens du Nouvel An les plus populaires de Munich Maxvorstadt.",
+      introP1: "Le Réveillon au Ristorante STORIA est un dîner de gala italien au Karlstraße 47a à Munich Maxvorstadt : un menu du Réveillon de {courses} plats en trois variantes à {price} € par personne, {priceWine} € par personne avec accord mets et vins, à partir de 19h00 avec accueil aperitivo, musique et champagne de minuit. Depuis 2015, la famille Speranza fête le passage à la nouvelle année avec ses convives dans la Karlstraße – ce qui a commencé comme un petit dîner du Réveillon est devenu l'un des événements italiens du Nouvel An les plus populaires de Munich Maxvorstadt.",
       introP2: "Notre Réveillon n'est délibérément pas un événement de masse : nous misons sur la qualité plutôt que la quantité. Chaque plat est préparé frais, le service est personnel et attentionné. Pour couples, groupes d'amis et entreprises, nous proposons des formules flexibles de 2 à 100 convives.",
       introP3: "L'emplacement central dans la Maxvorstadt – à seulement 5 minutes de Königsplatz et 7 de la gare centrale – fait du STORIA le lieu idéal pour votre Réveillon. Votre table se réserve directement sur cette page. Pour les groupes plus importants et les entreprises, utilisez le formulaire de demande plus bas – nous vous répondons personnellement.",
       // Citation externe (E1.5, GEO-Regel 3) — Comité Champagne, l'organisme officiel de
@@ -4218,7 +4218,7 @@ const frExtra = {
     },
     silvester: {
       // E1.5 : rendu visible au-dessus de l'intro ; les valeurs entre accolades viennent de FACTS.
-      tldr: "Le Réveillon du Nouvel An au Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) est un dîner de gala italien pour le passage à la nouvelle année : menu dégustation de {courses} plats en trois variantes (Vegetale, Mare, Terra) à {price} € par personne, {priceWine} € par personne avec accord mets et vins. Début à 19h00 avec accueil aperitivo, musique et champagne de minuit, de 2 à 100 convives. Entreprise familiale de la famille Speranza depuis 2015, à 5 minutes de Königsplatz. Réservations : +49 89 51519696.",
+      tldr: "Le Réveillon du Nouvel An au Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) est un dîner de gala italien pour le passage à la nouvelle année : menu du Réveillon de {courses} plats en trois variantes (Vegetale, Mare, Terra) à {price} € par personne, {priceWine} € par personne avec accord mets et vins. Début à 19h00 avec accueil aperitivo, musique et champagne de minuit, de 2 à 100 convives. Entreprise familiale de la famille Speranza depuis 2015, à 5 minutes de Königsplatz. Réservations : +49 89 51519696.",
     },
     weihnachten: {
       // E1.4/E1.5 : réalité des deux voies, rendue visible ; valeurs issues de FACTS.

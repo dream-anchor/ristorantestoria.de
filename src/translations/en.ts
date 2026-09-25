@@ -1861,7 +1861,7 @@ const enBase = {
       // Definition lead (E1.5, GEO rule 1) — the first sentence defines the entity; the previous
       // emotional opener is an explicit anti-pattern in docs/geo-content-guidelines.md.
       introTitle: "New Year's Eve in Munich – the Italian gala dinner at Ristorante STORIA",
-      introP1: "New Year's Eve at Ristorante STORIA is an Italian gala dinner at Karlstraße 47a in Munich Maxvorstadt: a {courses}-course tasting menu in three variants for €{price} per person, €{priceWine} per person with wine pairing, starting at 7:00 pm with an aperitivo reception, music and midnight champagne. Since 2015, the Speranza family has been ringing in the new year with their guests on Karlstraße – what started as a small NYE dinner has become one of Munich Maxvorstadt's most popular Italian New Year's events.",
+      introP1: "New Year's Eve at Ristorante STORIA is an Italian gala dinner at Karlstraße 47a in Munich Maxvorstadt: a {courses}-course New Year's Eve menu in three variants for €{price} per person, €{priceWine} per person with wine pairing, starting at 7:00 pm with an aperitivo reception, music and midnight champagne. Since 2015, the Speranza family has been ringing in the new year with their guests on Karlstraße – what started as a small NYE dinner has become one of Munich Maxvorstadt's most popular Italian New Year's events.",
       introP2: "Our New Year's Eve is deliberately not a mass event: We focus on quality over quantity. Every course is freshly prepared, the service is personal and attentive. For couples, groups of friends and companies, we offer flexible packages from 2 to 100 guests.",
       introP3: "The central location in Maxvorstadt – just 5 minutes from Königsplatz and 5 minutes from the main station – makes STORIA the ideal venue for your New Year's Eve. Reserve your table right here on this page. For larger groups and companies, use the enquiry form further down – we will get back to you personally.",
       // External citation (E1.5, GEO rule 3) — Comité Champagne, the official trade body of the
@@ -4237,7 +4237,7 @@ const enExtra = {
     },
     silvester: {
       // E1.5: rendered visibly above the intro; placeholders are filled from FACTS.silvester.
-      tldr: "New Year's Eve at Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) is an Italian gala dinner to see in the new year: a {courses}-course tasting menu in three variants (Vegetale, Mare, Terra) for €{price} per person, €{priceWine} per person with wine pairing. Starts at 7:00 pm with an aperitivo reception, plus music and midnight champagne, 2 to 100 guests. Family-run by the Speranza family since 2015, 5 minutes from Königsplatz. Reservations: +49 89 51519696.",
+      tldr: "New Year's Eve at Ristorante STORIA Munich Maxvorstadt (Karlstraße 47a) is an Italian gala dinner to see in the new year: a {courses}-course New Year's Eve menu in three variants (Vegetale, Mare, Terra) for €{price} per person, €{priceWine} per person with wine pairing. Starts at 7:00 pm with an aperitivo reception, plus music and midnight champagne, 2 to 100 guests. Family-run by the Speranza family since 2015, 5 minutes from Königsplatz. Reservations: +49 89 51519696.",
     },
     weihnachten: {
       // E1.4/E1.5: two-route reality, rendered visibly; placeholders are filled from FACTS.
