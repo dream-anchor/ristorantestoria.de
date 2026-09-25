@@ -111,6 +111,21 @@ const AnlassAnfrageForm = ({ anlass, defaultEventDate, minGuests }: AnlassAnfrag
   const submitLock = useRef(false);
   const initialEventDateRef = useRef(defaultEventDate);
 
+  // Aufruf-Zählung MAESTRO: einmal pro Seitenaufruf, feuert nie blockierend.
+  // Nur die beiden Anfrage-Formulare laut Vorgabe (weihnachten bleibt außen vor).
+  useEffect(() => {
+    if (anlass !== "silvester" && anlass !== "weihnachtsfeier") return;
+    try {
+      navigator.sendBeacon(
+        "https://storia.schrittmacher.ai/api/public/formular-aufruf",
+        new Blob([JSON.stringify({ eingang: SOURCE_DETAIL[anlass] })], { type: "text/plain" }),
+      );
+    } catch {
+      /* Zählung darf das Formular nie blockieren */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Schema im Komponentenkörper, damit die Fehlermeldungen aus den Übersetzungen kommen
   // und nicht — wie in den älteren Formularen — fest auf Deutsch im Schema stehen.
   const formSchema = useMemo(

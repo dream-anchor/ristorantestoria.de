@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PhoneText } from "@/lib/linkifyPhone";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,6 +36,19 @@ const FilmfestInquiryForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Anti-Doppelklick: synchroner Riegel (State-Updates sind async)
   const submitLock = useRef(false);
+
+  // Aufruf-Zählung MAESTRO: einmal pro Seitenaufruf, feuert nie blockierend
+  useEffect(() => {
+    try {
+      navigator.sendBeacon(
+        "https://storia.schrittmacher.ai/api/public/formular-aufruf",
+        new Blob([JSON.stringify({ eingang: "ristorantestoria-filmfest" })], { type: "text/plain" }),
+      );
+    } catch {
+      /* Zählung darf das Formular nie blockieren */
+    }
+  }, []);
+
 
   const {
     register,
