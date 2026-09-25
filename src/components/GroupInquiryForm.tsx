@@ -83,6 +83,18 @@ export const GroupInquiryForm = () => {
     openedAt.current = Date.now();
   }, []);
 
+  // Aufruf-Zählung MAESTRO: einmal pro Seitenaufruf, feuert nie blockierend
+  useEffect(() => {
+    try {
+      navigator.sendBeacon(
+        "https://storia.schrittmacher.ai/api/public/formular-aufruf",
+        new Blob([JSON.stringify({ eingang: "ristorantestoria-reisegruppen" })], { type: "text/plain" }),
+      );
+    } catch {
+      /* Zählung darf das Formular nie blockieren */
+    }
+  }, []);
+
   // Menü-Vorauswahl per Klick auf "Jetzt anfragen" einer Menü-Karte
   useEffect(() => {
     const handler = (e: Event) => {
