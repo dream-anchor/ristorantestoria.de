@@ -1919,6 +1919,21 @@ export type Database = {
         }
         Returns: boolean
       }
+      maestro_vormerkungen_export: {
+        Args: { p_schluessel: string }
+        Returns: {
+          confirmed_at: string
+          consent_at: string
+          consent_ip: string
+          consent_text: string
+          consent_version: string
+          email: string
+          id: string
+          language: string
+          seasonal_event: string
+          status: string
+        }[]
+      }
       normalize_seo_path: { Args: { p_url: string }; Returns: string }
       publish_menu_atomic: {
         Args: { p_staging_menu_id: string; p_target_menu_id?: string }
