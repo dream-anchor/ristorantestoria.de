@@ -562,13 +562,24 @@ export const GroupInquiryForm = () => {
               <FormItem className="flex items-start gap-3">
                 <FormControl>
                   <Checkbox
-                    checked={!!field.value}
-                    onCheckedChange={field.onChange}
+                    id="group-inquiry-privacy"
+                    checked={field.value === true}
+                    onCheckedChange={(v) => field.onChange(v === true)}
                     className="mt-0.5 border-white/40 data-[state=checked]:bg-white data-[state=checked]:text-primary"
                   />
                 </FormControl>
                 <div className="space-y-1">
-                  <FormLabel className="text-primary-foreground/80 text-sm font-normal cursor-pointer leading-relaxed">
+                  <FormLabel
+                    htmlFor="group-inquiry-privacy"
+                    onClick={(e) => {
+                      // Klick auf den Datenschutz-Link darf das Häkchen nicht umschalten
+                      if ((e.target as HTMLElement).closest("a")) return;
+                      // Natives Label-Verhalten unterbinden, sonst doppelt geschaltet
+                      e.preventDefault();
+                      field.onChange(!(field.value === true));
+                    }}
+                    className="text-primary-foreground/80 text-sm font-normal cursor-pointer leading-relaxed"
+                  >
                     {f.privacyText}{" "}
                     <LocalizedLink to="datenschutz" className="underline hover:text-primary-foreground">
                       {f.privacyLink}
