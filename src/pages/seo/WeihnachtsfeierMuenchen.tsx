@@ -116,16 +116,14 @@ const WeihnachtsfeierMuenchen = () => {
   ];
 
   /**
-   * Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Schließt die Lücke, dass
-   * `step3Desc` bereits "Anzahlung (30%) sichert Ihren Termin" erwähnt, ohne dass bisher eine
-   * begleitende Stornoregel dazu auf der Seite stand.
+   * Stornobedingungen (E3.1, seit 28.09.2026 Staffel aus AGB-2026-10 § 13: bis 8 Wochen
+   * kostenfrei, 8.–4. Woche 35 %, danach 70 % des Speisenumsatzes). Begleitet `step3Desc`
+   * (Anzahlung laut Angebot, meist 30 %) mit der zugehörigen Stornoregel.
    */
   const cancellationTiers = [
     { period: w.cancellationTier1Period, fee: w.cancellationTier1Fee },
     { period: w.cancellationTier2Period, fee: w.cancellationTier2Fee },
     { period: w.cancellationTier3Period, fee: w.cancellationTier3Fee },
-    { period: w.cancellationTier4Period, fee: w.cancellationTier4Fee },
-    { period: w.cancellationTier5Period, fee: w.cancellationTier5Fee },
   ];
 
   return (
@@ -299,12 +297,11 @@ const WeihnachtsfeierMuenchen = () => {
               </div>
             </section>
 
-            {/* Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Bewusst OHNE Verweis
-                auf eine "AGB für Veranstaltungen"-Seite: die gibt es im Repo nicht (nur
-                agb-restaurant, agb-gutscheine in slugs.json), ein Link darauf wäre eine 404 bzw.
-                eine falsche Erwartung — siehe `cancellationDepositNote`, die stattdessen auf die
-                Buchungsbestätigung verweist. Schließt die Lücke zu `step3Desc` ("Anzahlung
-                (30%) sichert Ihren Termin"), die bisher ohne begleitende Stornoregel stand. */}
+            {/* Stornobedingungen — seit 28.09.2026 die Staffel aus den gemeinsamen STORIA-AGB
+                (Version AGB-2026-10, § 13), die für ristorantestoria.de und events-storia.de auf
+                EINER Seite stehen: FACTS.agbUrl (https://www.events-storia.de/agb). Anders als
+                bei der Staffel vom 13.09.2026 gibt es damit eine AGB-Seite für Veranstaltungen,
+                deshalb verlinkt der Block jetzt ausdrücklich auf § 13. */}
             <section className="mb-16" aria-labelledby="weihnachtsfeier-storno">
               <Card className="border-border">
                 <CardHeader className="pb-3">
@@ -328,8 +325,16 @@ const WeihnachtsfeierMuenchen = () => {
                       ))}
                     </TableBody>
                   </Table>
-                  <p className="text-sm text-muted-foreground mt-4">{w.cancellationBasisNote}</p>
+                  <p className="text-sm text-muted-foreground mt-4">{w.cancellationThirdPartyNote}</p>
                   <p className="text-sm text-muted-foreground mt-2">{w.cancellationDepositNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{w.cancellationGuestCountNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{w.cancellationBasisNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {w.cancellationAgbPrefix}{" "}
+                    <a href={FACTS.agbUrl} target="_blank" rel="noopener" className="text-primary hover:underline">
+                      {w.cancellationAgbLinkLabel}
+                    </a>
+                  </p>
                 </CardContent>
               </Card>
             </section>

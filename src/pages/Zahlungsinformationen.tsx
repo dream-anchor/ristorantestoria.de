@@ -73,8 +73,8 @@ const Zahlungsinformationen = () => {
               <p>Für Online-Bestellungen (z.B. Gutscheinkauf) akzeptieren wir:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Kreditkarte</strong> (Visa, Mastercard, American Express)</li>
-                <li><strong>PayPal</strong></li>
-                <li><strong>Sofortüberweisung</strong> (Klarna)</li>
+                <li><strong>Apple Pay, Google Pay und Klarna</strong>, je nach Anzeige im Bezahlvorgang</li>
+                <li>Abgewickelt über den Zahlungsdienstleister Stripe Payments Europe Ltd.</li>
               </ul>
             </section>
 
