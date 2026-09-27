@@ -60,7 +60,11 @@ type FormData = z.infer<typeof schema>;
 export const GroupInquiryForm = () => {
   const { t, language } = useLanguage();
   const f = t.groupInquiryForm;
-  const { menus } = useGroupMenus();
+  const { menus, error: menusError } = useGroupMenus();
+  // Fehlerhafter Menü-Abruf darf die Seite niemals zum Absturz bringen.
+  useEffect(() => {
+    if (menusError) console.error("GroupInquiryForm: Menü-Abruf fehlgeschlagen", menusError);
+  }, [menusError]);
   const utmParams = useUtmParams();
   const navigate = useNavigate();
 
@@ -127,7 +131,8 @@ export const GroupInquiryForm = () => {
 
   // Menu options: dynamic from Supabase if available, else fallback
   const adviceOption = { value: "advice", label: f.menuAdvice };
-  const menuOptions =
+  // Nur Optionen mit nicht leerem value rendern — leere Werte crashen Radix Select.
+  const menuOptions = (
     menus.length > 0
       ? [
           adviceOption,
@@ -143,7 +148,8 @@ export const GroupInquiryForm = () => {
           { value: "B", label: f.menuB },
           { value: "C", label: f.menuC },
           { value: "custom", label: f.menuCustom },
-        ];
+        ]
+  ).filter((opt) => typeof opt.value === "string" && opt.value.trim() !== "");
 
   // Convert File to base64 string
   const fileToBase64 = (file: File): Promise<string> =>
@@ -449,6 +455,7 @@ export const GroupInquiryForm = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {menuOptions.length > 0 && (
                   <FormField
                     control={form.control}
                     name="preferred_menu"
@@ -473,6 +480,7 @@ export const GroupInquiryForm = () => {
                       </FormItem>
                     )}
                   />
+                  )}
                   <FormField
                     control={form.control}
                     name="arrival_time"
