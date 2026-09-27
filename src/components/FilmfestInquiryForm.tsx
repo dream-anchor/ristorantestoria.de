@@ -6,7 +6,26 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+
+/**
+ * Endpunkt-URL kommt ausschließlich aus der Build-Env (Muster aus AnlassAnfrageForm).
+ * Fehlt die Variable, läuft der Submit in die vorhandene Fehlermeldung des Formulars.
+ */
+const INTAKE_URL = (import.meta.env.VITE_MAESTRO_INTAKE_URL || "").trim();
+
+/** Der Endpunkt akzeptiert für `language` ausschließlich `"de"` oder `"en"`. */
+const toApiLanguage = (language: string): "de" | "en" => (language === "de" ? "de" : "en");
+
+/**
+ * `<input type="date">` liefert `"2026-12-31"`; der Endpunkt verlangt ein VOLLES
+ * ISO-8601-Datetime. Uhrzeit 12:00 Ortszeit, damit die UTC-Umrechnung nicht auf den
+ * Vortag kippt.
+ */
+const toIsoDateTime = (value?: string): string | undefined => {
+  if (!value) return undefined;
+  const parsed = new Date(`${value}T12:00:00`);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
+};
 
 const FORMAT_OPTIONS = [
   "Premierendinner",
@@ -72,29 +91,50 @@ const FilmfestInquiryForm = () => {
     submitLock.current = true;
     setIsSubmitting(true);
     try {
-      const { data: result, error } = await supabase.functions.invoke(
-        "submit-event-inquiry",
-        {
-          body: {
-            companyName: data.name.trim(),
-            contactName: data.name.trim(),
-            email: data.email.trim().toLowerCase(),
-            phone: data.phone?.trim() || null,
-            guestCount: data.guest_count?.trim() || null,
-            eventType: "filmfest",
-            preferredDate: data.preferred_date || null,
-            message:
-              `Format: ${data.format}` +
-              (data.message?.trim() ? `\n\n${data.message.trim()}` : ""),
-            source: "filmfest-landingpage",
-          },
-        },
-      );
+      // `guests` MUSS als Zahl gesendet werden — ein String liefert 422.
+      const guests = data.guest_count?.trim()
+        ? Number.parseInt(data.guest_count.trim(), 10)
+        : undefined;
+      const hasGuests =
+        typeof guests === "number" && Number.isFinite(guests) && guests > 0;
 
-      if (error || (result && (result as { error?: string }).error)) {
-        throw new Error(
-          (result as { error?: string })?.error || error?.message || "Failed to submit inquiry",
-        );
+      const payload: Record<string, unknown> = {
+        customerName: data.name.trim(),
+        company: data.name.trim(),
+        customerEmail: data.email.trim().toLowerCase(),
+        eventType: "Filmfest",
+        message:
+          `Format: ${data.format}` +
+          (data.message?.trim() ? `\n\n${data.message.trim()}` : ""),
+        sourceDetail: "ristorantestoria-filmfest",
+        serviceKind: "event",
+        language: "de",
+      };
+
+      if (data.phone?.trim()) payload.phone = data.phone.trim();
+
+      const eventDate = toIsoDateTime(data.preferred_date);
+      if (eventDate) payload.eventDate = eventDate;
+
+      if (hasGuests) payload.guests = guests;
+
+      payload.details = {
+        format: data.format,
+        ...(hasGuests ? { groupSize: guests } : {}),
+        originalPage: window.location.pathname,
+        referrer: document.referrer || undefined,
+      };
+
+      const response = await fetch(INTAKE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      // 201 und 202 sind beide response.ok === true und gelten als Erfolg;
+      // 422, 429 und alles andere (sowie Netzwerkfehler im catch) sind Fehler.
+      if (!response.ok) {
+        throw new Error(`Submit failed with status ${response.status}`);
       }
 
       // GA4 Conversion-Event: generate_lead (analog zum Reisegruppen-Formular)
