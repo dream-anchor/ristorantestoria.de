@@ -70,7 +70,7 @@ const AGBRestaurant = () => {
               </a>
             </p>
             <p>
-              Für Tischreservierungen gilt dort Teil D (§ 26–27), unter anderem: Absage oder Änderung
+              Für Tischreservierungen gilt dort Teil D (§§ 26–27), unter anderem: Absage oder Änderung
               bis 24 Stunden vor der reservierten Uhrzeit kostenfrei; den Tisch halten wir 15 Minuten
               ab der reservierten Uhrzeit frei; eine Ausfallpauschale von 25 € pro nicht erschienener
               Person berechnen wir nur, wenn wir bei der Reservierung ausdrücklich darauf hingewiesen

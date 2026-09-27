@@ -39,8 +39,8 @@ RewriteRule ^neapolitanische-pizza-muenchen-/?$ https://www.ristorantestoria.de/
 # Restaurant-AGB-Seite und ihre früheren Sprachvarianten zeigen in EINEM Sprung dorthin
 # (hier in Abschnitt 0, damit weder Host-Kanonisierung noch Trailing-Slash einen Zwischen-Hop
 # einschieben). AGB Gutscheine bleiben unter /agb-gutscheine/ auf dieser Domain.
-RewriteRule ^agb-restaurant/?$ https://www.events-storia.de/agb [R=301,L,QSD]
-RewriteRule ^(en|it|fr)/(agb-restaurant|terms-restaurant|termini-ristorante|cgv-restaurant)/?$ https://www.events-storia.de/agb [R=301,L,QSD]
+RewriteRule ^agb-restaurant/?$ https://www.events-storia.de/agb/ [R=301,L,QSD]
+RewriteRule ^(en|it|fr)/(agb-restaurant|terms-restaurant|termini-ristorante|cgv-restaurant)/?$ https://www.events-storia.de/agb/ [R=301,L,QSD]
 
 # ============================================
 # 1. Host-Kanonisierung

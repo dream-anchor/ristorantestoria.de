@@ -87,16 +87,22 @@ const Widerrufsbelehrung = () => {
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>
-                  Gutscheine, die bereits ganz oder teilweise eingelöst wurden
+                  Verträge über die Lieferung von Speisen und Getränken sowie über
+                  Veranstaltungsleistungen, die zu einem bestimmten Termin erbracht werden
+                  (§ 312g Abs. 2 Nr. 9 BGB), einschließlich Tischreservierungen
                 </li>
                 <li>
-                  Personalisierte Gutscheine, die auf eine bestimmte Person ausgestellt und 
-                  bereits erstellt wurden
-                </li>
-                <li>
-                  Reservierungen und gastronomische Dienstleistungen, die bereits erbracht wurden
+                  Verträge über die Lieferung schnell verderblicher Speisen (§ 312g Abs. 2 Nr. 2 BGB)
                 </li>
               </ul>
+              <p className="mt-3">
+                Für Absagen gelten stattdessen die Regelungen unserer{" "}
+                <a href="https://www.events-storia.de/agb/" className="text-primary hover:underline">AGB</a>{" "}
+                (§ 13 Veranstaltungen, § 23 Online-Shop, § 27 Reservierungen). Beim Kauf von
+                Gutscheinen besteht das gesetzliche Widerrufsrecht von 14 Tagen; es erlischt nicht
+                mit der Erstellung des Gutscheins. Wurde ein Gutschein bereits ganz oder teilweise
+                eingelöst, erstatten wir im Fall des Widerrufs nur den noch nicht eingelösten Betrag.
+              </p>
             </section>
 
             <section>
