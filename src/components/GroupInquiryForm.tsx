@@ -455,6 +455,7 @@ export const GroupInquiryForm = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {menuOptions.length > 0 && (
                   <FormField
                     control={form.control}
                     name="preferred_menu"
@@ -479,6 +480,7 @@ export const GroupInquiryForm = () => {
                       </FormItem>
                     )}
                   />
+                  )}
                   <FormField
                     control={form.control}
                     name="arrival_time"
