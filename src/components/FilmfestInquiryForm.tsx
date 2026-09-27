@@ -6,7 +6,26 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+
+/**
+ * Endpunkt-URL kommt ausschließlich aus der Build-Env (Muster aus AnlassAnfrageForm).
+ * Fehlt die Variable, läuft der Submit in die vorhandene Fehlermeldung des Formulars.
+ */
+const INTAKE_URL = (import.meta.env.VITE_MAESTRO_INTAKE_URL || "").trim();
+
+/** Der Endpunkt akzeptiert für `language` ausschließlich `"de"` oder `"en"`. */
+const toApiLanguage = (language: string): "de" | "en" => (language === "de" ? "de" : "en");
+
+/**
+ * `<input type="date">` liefert `"2026-12-31"`; der Endpunkt verlangt ein VOLLES
+ * ISO-8601-Datetime. Uhrzeit 12:00 Ortszeit, damit die UTC-Umrechnung nicht auf den
+ * Vortag kippt.
+ */
+const toIsoDateTime = (value?: string): string | undefined => {
+  if (!value) return undefined;
+  const parsed = new Date(`${value}T12:00:00`);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
+};
 
 const FORMAT_OPTIONS = [
   "Premierendinner",
