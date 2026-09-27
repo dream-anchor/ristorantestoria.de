@@ -99,6 +99,10 @@ export const GroupInquiryForm = () => {
     },
   });
 
+  // Datenschutz-Häkchen reaktiv lesen: `form.watch()` im Render aktualisiert sich
+  // im aufgeklappten Zustand nicht zuverlässig — useWatch abonniert das Feld direkt.
+  const privacyAccepted = useWatch({ control: form.control, name: "privacy" });
+
   // Reset timer when form mounts
   useEffect(() => {
     openedAt.current = Date.now();
