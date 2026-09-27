@@ -597,7 +597,7 @@ export const GroupInquiryForm = () => {
               type="submit"
               size="lg"
               variant="secondary"
-              disabled={!form.watch("privacy") || isSubmitting}
+              disabled={!privacyAccepted || isSubmitting}
               className="w-full sm:w-auto"
             >
               {isSubmitting ? (
