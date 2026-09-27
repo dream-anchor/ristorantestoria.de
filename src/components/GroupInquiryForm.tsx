@@ -574,6 +574,8 @@ export const GroupInquiryForm = () => {
                     onClick={(e) => {
                       // Klick auf den Datenschutz-Link darf das Häkchen nicht umschalten
                       if ((e.target as HTMLElement).closest("a")) return;
+                      // Natives Label-Verhalten unterbinden, sonst doppelt geschaltet
+                      e.preventDefault();
                       field.onChange(!(field.value === true));
                     }}
                     className="text-primary-foreground/80 text-sm font-normal cursor-pointer leading-relaxed"
