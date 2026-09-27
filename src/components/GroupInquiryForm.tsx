@@ -170,39 +170,107 @@ export const GroupInquiryForm = () => {
 
 
     try {
-      let travelPlanBase64: string | null = null;
-      let travelPlanFilename: string | null = null;
-
+      // a) Reiseplan-PDF: optionaler Upload an den MAESTRO-Intake. Scheitert der
+      // Upload, geht die Anfrage TROTZDEM ohne Anhang raus (kein Fehler für den Gast).
+      let attachments: { uploadId: string; claimToken: string }[] | undefined;
       if (travelPlanFile) {
-        travelPlanBase64 = await fileToBase64(travelPlanFile);
-        travelPlanFilename = travelPlanFile.name;
+        try {
+          const up = await fetch(`${INTAKE_URL}/upload`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              mediaType: "application/pdf",
+              dataBase64: await fileToBase64(travelPlanFile),
+            }),
+          });
+          if (up.ok) {
+            const upData = (await up.json().catch(() => null)) as {
+              data?: { uploadId?: string; claimToken?: string };
+            } | null;
+            const uploadId = upData?.data?.uploadId;
+            const claimToken = upData?.data?.claimToken;
+            if (uploadId && claimToken) {
+              attachments = [{ uploadId, claimToken }];
+            } else {
+              console.error("GroupInquiryForm: Upload-Antwort ohne uploadId/claimToken");
+            }
+          } else {
+            console.error(`GroupInquiryForm: PDF-Upload fehlgeschlagen (Status ${up.status})`);
+          }
+        } catch (upError) {
+          console.error("GroupInquiryForm: PDF-Upload Netzwerkfehler", upError);
+        }
       }
 
-      const response = await fetch(EVENTS_FUNCTION_URL, {
+      // Angezeigte Menü-Bezeichnung (nicht der interne Schlüssel)
+      const menuLabel = data.preferred_menu
+        ? menuOptions.find((opt) => opt.value === data.preferred_menu)?.label
+        : undefined;
+
+      // Nachricht: Gasttext, dann je eine Zeile pro zutreffendem Zusatz,
+      // vom Gasttext durch eine Leerzeile getrennt.
+      const messageLines: string[] = [];
+      if (menuLabel) messageLines.push(`Menü-Wunsch: ${menuLabel}`);
+      if (data.preferred_date_flexible) messageLines.push("Datum flexibel: ja");
+      if (attachments) messageLines.push("Reiseplan (PDF) liegt im Vorgang bei.");
+      const guestMessage = data.message?.trim() ?? "";
+      const message =
+        guestMessage && messageLines.length > 0
+          ? `${guestMessage}\n\n${messageLines.join("\n")}`
+          : guestMessage || (messageLines.length > 0 ? messageLines.join("\n") : undefined);
+
+      const eventDate = toIsoDateTime(data.preferred_date);
+      const arrivalTime = data.arrival_time?.trim()
+        ? data.arrival_time.trim().slice(0, 20)
+        : undefined;
+
+      const details: Record<string, unknown> = {
+        groupSize: data.group_size,
+        dateFlexible: data.preferred_date_flexible ?? false,
+        originalPage: window.location.pathname,
+        referrer: document.referrer || undefined,
+      };
+      if (arrivalTime) details.arrivalTime = arrivalTime;
+      if (menuLabel) details.preferredMenu = menuLabel.slice(0, 500);
+      const utmMap: [keyof typeof utmParams, string][] = [
+        ["utm_source", "utmSource"],
+        ["utm_medium", "utmMedium"],
+        ["utm_campaign", "utmCampaign"],
+        ["utm_term", "utmTerm"],
+        ["utm_content", "utmContent"],
+      ];
+      for (const [from, to] of utmMap) {
+        const val = utmParams[from];
+        if (val) details[to] = val.slice(0, 200);
+      }
+
+      const payload: Record<string, unknown> = {
+        customerName: data.contact_name.trim(),
+        customerEmail: data.email.trim().toLowerCase(),
+        eventType: "Reisegruppe",
+        guests: data.group_size,
+        sourceDetail: "ristorantestoria-reisegruppen",
+        serviceKind: "event",
+        language: toApiLanguage(language),
+        details,
+      };
+      if (data.company_name?.trim()) payload.company = data.company_name.trim();
+      if (data.phone?.trim()) payload.phone = data.phone.trim();
+      if (eventDate) payload.eventDate = eventDate;
+      if (arrivalTime) payload.eventTime = arrivalTime;
+      if (message) payload.message = message;
+      if (attachments) payload.attachments = attachments;
+
+      const response = await fetch(INTAKE_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          companyName: data.company_name?.trim() || null,
-          contactName: data.contact_name.trim(),
-          email: data.email.trim().toLowerCase(),
-          phone: data.phone?.trim() || null,
-          groupSize: data.group_size,
-          preferredDate: data.preferred_date || null,
-          preferredDateFlexible: data.preferred_date_flexible ?? false,
-          arrivalTime: data.arrival_time?.trim() || null,
-          preferredMenu: data.preferred_menu,
-          message: data.message?.trim() || null,
-          travelPlanBase64,
-          travelPlanFilename,
-          language,
-          source: "ristorantestoria-reisegruppen",
-          ...utmParams,
-        }),
+        body: JSON.stringify(payload),
       });
 
+      // 201 und 202 sind beide response.ok === true und gelten als Erfolg;
+      // 422, 429 und alles andere (sowie Netzwerkfehler im catch) sind Fehler.
       if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw new Error((err as Record<string, string>).error ?? "Submit failed");
+        throw new Error(`Submit failed with status ${response.status}`);
       }
 
       // GA4 Conversion-Event: generate_lead
