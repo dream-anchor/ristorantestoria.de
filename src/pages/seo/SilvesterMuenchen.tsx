@@ -244,7 +244,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
   ];
 
   /**
-   * Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Gilt für Silvester, weil die
+   * Stornobedingungen (E3.1; seit 28.09.2026 Staffel aus AGB-2026-10 § 13). Gilt für Silvester, weil die
    * ganze Seite ein bezahltes Gala-Dinner-Event ist (99/150 € p.P.), anders als die reguläre
    * à-la-carte-Tischreservierung auf `weihnachten-muenchen`, wo dieselbe Staffel sachlich falsch
    * wäre (KONZEPT/LOOP-SAISONSEITEN-AUSBAU.md § E3.1).
@@ -253,8 +253,6 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
     { period: s.cancellationTier1Period, fee: s.cancellationTier1Fee },
     { period: s.cancellationTier2Period, fee: s.cancellationTier2Fee },
     { period: s.cancellationTier3Period, fee: s.cancellationTier3Fee },
-    { period: s.cancellationTier4Period, fee: s.cancellationTier4Fee },
-    { period: s.cancellationTier5Period, fee: s.cancellationTier5Fee },
   ];
 
   const relatedLinks = [
@@ -593,11 +591,11 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               </div>
             </section>
 
-            {/* Stornobedingungen (E3.1) — Stornostaffel Antoine, 13.09.2026. Bewusst OHNE Verweis
-                auf eine "AGB für Veranstaltungen"-Seite: die gibt es im Repo nicht (nur
-                agb-restaurant, agb-gutscheine in slugs.json), ein Link darauf wäre eine 404 bzw.
-                eine falsche Erwartung — siehe `cancellationDepositNote`, die stattdessen auf die
-                Buchungsbestätigung verweist. */}
+            {/* Stornobedingungen — seit 28.09.2026 die Staffel aus den gemeinsamen STORIA-AGB
+                (Version AGB-2026-10, § 13), die für ristorantestoria.de und events-storia.de auf
+                EINER Seite stehen: FACTS.agbUrl (https://www.events-storia.de/agb). Anders als
+                bei der Staffel vom 13.09.2026 gibt es damit eine AGB-Seite für Veranstaltungen,
+                deshalb verlinkt der Block jetzt ausdrücklich auf § 13. */}
             <section className="mb-16" aria-labelledby="silvester-storno">
               <Card className="border-border">
                 <CardHeader className="pb-3">
@@ -621,8 +619,16 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                       ))}
                     </TableBody>
                   </Table>
-                  <p className="text-sm text-muted-foreground mt-4">{s.cancellationBasisNote}</p>
+                  <p className="text-sm text-muted-foreground mt-4">{s.cancellationThirdPartyNote}</p>
                   <p className="text-sm text-muted-foreground mt-2">{s.cancellationDepositNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{s.cancellationGuestCountNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{s.cancellationBasisNote}</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {s.cancellationAgbPrefix}{" "}
+                    <a href={FACTS.agbUrl} target="_blank" rel="noopener" className="text-primary hover:underline">
+                      {s.cancellationAgbLinkLabel}
+                    </a>
+                  </p>
                 </CardContent>
               </Card>
             </section>

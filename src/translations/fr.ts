@@ -1900,24 +1900,25 @@ const frBase = {
       // Les canaux n'apparaissent plus qu'ici, juste derrière le formulaire de demande.
       contactBoxTitle: "Vous préférez nous parler directement ?",
       contactBoxDesc: "Téléphone, e-mail ou WhatsApp – pour vos questions sur le menu de gala, pour des souhaits particuliers ou si vous préférez nous transmettre votre demande autrement.",
-      // Conditions d'annulation (E3.1). Volontairement sans lien vers une page « CGV Événements »
-      // — elle n'existe pas dans ce dépôt (seulement agb-restaurant, agb-gutscheine).
+      // Conditions d'annulation — depuis le 28/09/2026 le barème validé par l'avocat des CGV
+      // communes (version AGB-2026-10, § 13) sur events-storia.de/agb ; remplace celui du 13/09/2026.
+      // La page construit le lien à partir de FACTS.agbUrl ; ici seulement préfixe et texte du lien.
       cancellationTitle: "Conditions d'annulation",
-      cancellationIntro: "Si vous devez annuler votre événement, les frais d'annulation suivants s'appliquent – calculés en pourcentage du montant réservé :",
+      cancellationIntro: "Si vous devez annuler votre événement, les frais d'annulation suivants s'appliquent – calculés sur le chiffre d'affaires repas convenu (prix par personne × nombre de personnes réservées) :",
       cancellationColPeriod: "Délai avant l'événement",
       cancellationColFee: "Frais d'annulation",
-      cancellationTier1Period: "Plus de 30 jours avant",
+      cancellationTier1Period: "Jusqu'à 8 semaines avant",
       cancellationTier1Fee: "Gratuit",
-      cancellationTier2Period: "15 à 30 jours avant",
-      cancellationTier2Fee: "25 %",
-      cancellationTier3Period: "8 à 14 jours avant",
-      cancellationTier3Fee: "50 %",
-      cancellationTier4Period: "3 à 7 jours avant",
-      cancellationTier4Fee: "80 %",
-      cancellationTier5Period: "À partir de 48 heures avant, ou non-présentation",
-      cancellationTier5Fee: "100 %",
-      cancellationBasisNote: "La date de réception de votre annulation écrite fait foi.",
-      cancellationDepositNote: "Les acomptes déjà versés sont déduits des frais d'annulation – un éventuel excédent vous est remboursé. Nous en discutons volontiers avec vous lors de la confirmation de votre réservation.",
+      cancellationTier2Period: "Entre la 8e et la 4e semaine avant",
+      cancellationTier2Fee: "35 %",
+      cancellationTier3Period: "Moins de 4 semaines avant",
+      cancellationTier3Fee: "70 %",
+      cancellationThirdPartyNote: "Les prestations déjà commandées auprès de tiers qui ne peuvent plus être annulées gratuitement sont facturées.",
+      cancellationBasisNote: "La date de réception de votre annulation sous forme écrite (p. ex. par e-mail) fait foi. Vous restez libre de prouver que le préjudice subi est moindre.",
+      cancellationDepositNote: "Nous déduisons les acomptes des frais d'annulation – un éventuel excédent vous est remboursé.",
+      cancellationGuestCountNote: "Merci de nous communiquer toute modification du nombre de personnes supérieure à 5 % au plus tard cinq jours ouvrables avant l'événement.",
+      cancellationAgbPrefix: "Conditions complètes :",
+      cancellationAgbLinkLabel: "CGV (AGB) § 13, en allemand",
       reasonsTitle: "8 Raisons de Fêter le Réveillon au STORIA",
       reason1Title: "🍝 Authentique Dîner de Gala Italien",
       reason1Desc: "Pas de buffet standard : pâtes maison, pizza au four à pierre, antipasti frais. Une qualité qui ravira vos convives.",
@@ -1968,7 +1969,7 @@ const frBase = {
       faq8Answer: "Parking Marsstraße (P22), Hirtenstraße 14, 750 places, ouvert 24h, 5 minutes à pied.",
       // E3.3 : nouvelle FAQ, issue de E3.1 (conditions d'annulation).
       faq9Question: "Dois-je verser un acompte – et que se passe-t-il si je dois annuler ?",
-      faq9Answer: "Pour les groupes et les demandes plus importantes, un acompte peut être convenu. En cas d'annulation, des frais d'annulation échelonnés s'appliquent selon le délai avant l'événement – gratuit à plus de 30 jours, jusqu'à 100 % à partir de 48 heures avant ou en cas de non-présentation. Voir « Conditions d'annulation » ci-dessus pour les détails.",
+      faq9Answer: "Pour les groupes et les demandes plus importantes, un acompte peut être convenu ; son montant et son échéance figurent dans le devis. En cas d'annulation : gratuit jusqu'à 8 semaines avant l'événement, 35 % entre la 8e et la 4e semaine, puis 70 % du chiffre d'affaires repas convenu (prix par personne × nombre de personnes réservées). Nous déduisons les acomptes. Voir « Conditions d'annulation » ci-dessus pour les détails.",
       // signupTitle/signupDesc retirés avec E2.3 — le bloc d'inscription est décroché de cette
       // page. `t.seasonalSignup.*` reste intact (Saint-Valentin + page d'occasion générique).
       archivedTitle: "Notre Menu du Réveillon {year} – Rétrospective",
@@ -2225,25 +2226,25 @@ const frBase = {
       // les remplace pas.
       inquiryTitle: "Demander votre Fête de Noël",
       inquiryIntro: "Vous planifiez une fête d'entreprise ou de groupe ? Écrivez-nous la date souhaitée, le nombre d'invités et vos idées – nous discuterons du menu individuellement avec vous.",
-      // Conditions d'annulation (E3.1) — comble le manque : step3Desc mentionne déjà un acompte
-      // (30 %) sans règle d'annulation associée. Pas de lien vers une page « CGV Événements »
-      // inexistante.
+      // Conditions d'annulation — depuis le 28/09/2026 le barème validé par l'avocat des CGV
+      // communes (version AGB-2026-10, § 13) sur events-storia.de/agb ; remplace celui du 13/09/2026.
+      // La page construit le lien à partir de FACTS.agbUrl ; ici seulement préfixe et texte du lien.
       cancellationTitle: "Conditions d'annulation",
-      cancellationIntro: "Si vous devez annuler votre fête, les frais d'annulation suivants s'appliquent – calculés en pourcentage du montant réservé :",
+      cancellationIntro: "Si vous devez annuler votre fête, les frais d'annulation suivants s'appliquent – calculés sur le chiffre d'affaires repas convenu (prix par personne × nombre de personnes réservées) :",
       cancellationColPeriod: "Délai avant la fête",
       cancellationColFee: "Frais d'annulation",
-      cancellationTier1Period: "Plus de 30 jours avant",
+      cancellationTier1Period: "Jusqu'à 8 semaines avant",
       cancellationTier1Fee: "Gratuit",
-      cancellationTier2Period: "15 à 30 jours avant",
-      cancellationTier2Fee: "25 %",
-      cancellationTier3Period: "8 à 14 jours avant",
-      cancellationTier3Fee: "50 %",
-      cancellationTier4Period: "3 à 7 jours avant",
-      cancellationTier4Fee: "80 %",
-      cancellationTier5Period: "À partir de 48 heures avant, ou non-présentation",
-      cancellationTier5Fee: "100 %",
-      cancellationBasisNote: "La date de réception de votre annulation écrite fait foi.",
-      cancellationDepositNote: "Votre acompte est déduit des frais d'annulation – un éventuel excédent vous est remboursé. Nous en discutons volontiers avec vous lors de la confirmation de votre réservation.",
+      cancellationTier2Period: "Entre la 8e et la 4e semaine avant",
+      cancellationTier2Fee: "35 %",
+      cancellationTier3Period: "Moins de 4 semaines avant",
+      cancellationTier3Fee: "70 %",
+      cancellationThirdPartyNote: "Les prestations déjà commandées auprès de tiers qui ne peuvent plus être annulées gratuitement sont facturées.",
+      cancellationBasisNote: "La date de réception de votre annulation sous forme écrite (p. ex. par e-mail) fait foi. Vous restez libre de prouver que le préjudice subi est moindre.",
+      cancellationDepositNote: "Nous déduisons les acomptes des frais d'annulation – un éventuel excédent vous est remboursé.",
+      cancellationGuestCountNote: "Merci de nous communiquer toute modification du nombre de personnes supérieure à 5 % au plus tard cinq jours ouvrables avant la fête.",
+      cancellationAgbPrefix: "Conditions complètes :",
+      cancellationAgbLinkLabel: "CGV (AGB) § 13, en allemand",
       reasonsTitle: "8 Raisons pour Votre Fête de Noël au STORIA",
       reason1Title: "🎄 Ambiance Italienne Festive",
       reason1Desc: "Les décorations de Noël rencontrent le charme italien. STORIA se transforme pendant l\u2019Avent en un lieu chaleureux et festif – sans kitsch, avec beaucoup de style.",
@@ -2269,7 +2270,7 @@ const frBase = {
       // seulement un échange direct (voir menuIntro/faq4Answer).
       step2Desc: "Optionnel : Visitez les lieux en personne. Nous discutons de votre menu de Noël individuel – les menus ci-dessus servent d'indication.",
       step3Title: "Devis et Réservation",
-      step3Desc: "Vous recevez un devis transparent. Après votre confirmation, un acompte (30 %) garantit votre date. Facturation à l\u2019entreprise possible.",
+      step3Desc: "Vous recevez un devis transparent. Après votre confirmation, un acompte (montant selon le devis, généralement 30 %) garantit votre date. Facturation à l’entreprise possible.",
       step4Title: "Coordination Finale",
       step4Desc: "1-2 semaines avant : Coordination finale du programme, plan de table, demandes spéciales. Votre interlocuteur personnel est prêt.",
       step5Title: "Votre Fête de Noël – Buon Natale !",
@@ -2326,7 +2327,7 @@ const frBase = {
       faq8Answer: "Oui, notre menu de Noël est aussi disponible pour les couples. Pour un dîner de Noël romantique Munich, nous recommandons de réserver.",
       // E3.3 : nouvelle FAQ, issue de E3.1 (conditions d'annulation) — fait écho à step3Desc.
       faq9Question: "Que devient mon acompte si je dois annuler ?",
-      faq9Answer: "Votre acompte (30 %) est déduit des frais d'annulation, qui dépendent du délai avant l'événement – gratuit à plus de 30 jours, jusqu'à 100 % à partir de 48 heures avant ou en cas de non-présentation. Un éventuel excédent vous est remboursé. Voir « Conditions d'annulation » ci-dessus pour les détails.",
+      faq9Answer: "Votre acompte (montant selon le devis, généralement 30 %) est déduit des frais d'annulation : l'annulation est gratuite jusqu'à 8 semaines avant la fête ; entre la 8e et la 4e semaine, nous facturons 35 %, puis 70 % du chiffre d'affaires repas convenu (prix par personne × nombre de personnes réservées). Un éventuel excédent vous est remboursé. Voir « Conditions d'annulation » ci-dessus pour les détails.",
       faq10Question: "Le STORIA organise-t-il aussi une fête de Noël d'entreprise pour des équipes plus petites ?",
       faq10Answer: "Oui – pour des espaces séparés à partir de 10 personnes, nous organisons votre fête de Noël d'entreprise sur mesure, d'une petite équipe jusqu'à un grand événement d'entreprise pour 300 invités.",
       ctaTitle: "Planifiez Votre Fête de Noël Munich Maintenant",

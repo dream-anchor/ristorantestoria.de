@@ -1921,24 +1921,25 @@ const enBase = {
       // The channels now appear here only, right behind the enquiry form.
       contactBoxTitle: "Prefer to talk to us directly?",
       contactBoxDesc: "Phone, email or WhatsApp – for questions about the gala menu, for special requests, or if you would rather send your enquiry another way.",
-      // Cancellation policy (E3.1). Deliberately without a link to an "Events Terms" page —
-      // it doesn't exist in this repo (only agb-restaurant, agb-gutscheine).
+      // Cancellation policy — since 28 Sep 2026 the lawyer-reviewed scale from the joint terms
+      // (version AGB-2026-10, § 13) at events-storia.de/agb; replaces the 13 Sep 2026 scale.
+      // The page builds the link from FACTS.agbUrl; only prefix and link text live here.
       cancellationTitle: "Cancellation Policy",
-      cancellationIntro: "If you need to cancel your event, the following cancellation fees apply – calculated as a share of the booked total:",
+      cancellationIntro: "If you need to cancel your event, the following cancellation charges apply – calculated on the agreed food revenue (price per person × number of guests booked):",
       cancellationColPeriod: "Time before the event",
       cancellationColFee: "Cancellation fee",
-      cancellationTier1Period: "More than 30 days before",
+      cancellationTier1Period: "Up to 8 weeks before",
       cancellationTier1Fee: "Free of charge",
-      cancellationTier2Period: "15–30 days before",
-      cancellationTier2Fee: "25%",
-      cancellationTier3Period: "8–14 days before",
-      cancellationTier3Fee: "50%",
-      cancellationTier4Period: "3–7 days before",
-      cancellationTier4Fee: "80%",
-      cancellationTier5Period: "From 48 hours before, or no-show",
-      cancellationTier5Fee: "100%",
-      cancellationBasisNote: "What counts is the date we receive your written cancellation.",
-      cancellationDepositNote: "Any deposit already paid is offset against the cancellation fee – we refund any surplus. We're happy to go through the details when we confirm your booking.",
+      cancellationTier2Period: "Between the 8th and 4th week before",
+      cancellationTier2Fee: "35%",
+      cancellationTier3Period: "Less than 4 weeks before",
+      cancellationTier3Fee: "70%",
+      cancellationThirdPartyNote: "Services we have already commissioned from third parties that can no longer be cancelled free of charge will be charged.",
+      cancellationBasisNote: "What counts is the date we receive your cancellation in text form (e.g. by email). You remain free to prove that the loss incurred was lower.",
+      cancellationDepositNote: "We offset deposits against the cancellation charges – any surplus will be refunded to you.",
+      cancellationGuestCountNote: "Please let us know of any change in the number of guests of more than 5% no later than five working days before the event.",
+      cancellationAgbPrefix: "Full terms:",
+      cancellationAgbLinkLabel: "Terms and Conditions (AGB) § 13, in German",
       reasonsTitle: "8 Reasons for New Year's Eve at STORIA",
       reason1Title: "🍝 Authentic Italian Gala Dinner",
       reason1Desc: "No standard buffet: Homemade pasta, stone-oven pizza, fresh antipasti. Quality that will delight your guests.",
@@ -1989,7 +1990,7 @@ const enBase = {
       faq8Answer: "Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 spaces, open 24h, 5 minutes walk.",
       // E3.3: new FAQ, arising from E3.1 (cancellation policy).
       faq9Question: "Do I need to pay a deposit – and what happens if I have to cancel?",
-      faq9Answer: "For groups and larger enquiries, a deposit can be agreed. If you cancel, staggered cancellation fees apply depending on how far in advance – from free of charge more than 30 days before, up to 100% from 48 hours before or in case of a no-show. See \"Cancellation Policy\" above for details.",
+      faq9Answer: "For groups and larger enquiries, a deposit can be agreed; the amount and due date are stated in the quote. If you cancel: free of charge up to 8 weeks before the event, 35% between the 8th and 4th week, and 70% thereafter of the agreed food revenue (price per person × number of guests booked). We offset deposits. See “Cancellation Policy” above for details.",
       // signupTitle/signupDesc removed with E2.3 — the sign-up block is unmounted on this page.
       // `t.seasonalSignup.*` stays untouched (Valentine's Day + generic occasion fallback).
       archivedTitle: "Our NYE Menu {year} – A Look Back",
@@ -2896,25 +2897,25 @@ const enBase = {
       // was resolved. Adds to the existing events-storia CTAs, does not replace them.
       inquiryTitle: "Inquire About Your Christmas Party",
       inquiryIntro: "Planning a corporate or group celebration? Send us your preferred date, number of guests and ideas – we'll discuss the menu with you individually.",
-      // Cancellation policy (E3.1) — closes the gap that step3Desc already mentions a deposit
-      // (30%) without an accompanying cancellation rule. No link to a non-existent "Events
-      // Terms" page.
+      // Cancellation policy — since 28 Sep 2026 the lawyer-reviewed scale from the joint terms
+      // (version AGB-2026-10, § 13) at events-storia.de/agb; replaces the 13 Sep 2026 scale.
+      // The page builds the link from FACTS.agbUrl; only prefix and link text live here.
       cancellationTitle: "Cancellation Policy",
-      cancellationIntro: "If you need to cancel your celebration, the following cancellation fees apply – calculated as a share of the booked total:",
+      cancellationIntro: "If you need to cancel your celebration, the following cancellation charges apply – calculated on the agreed food revenue (price per person × number of guests booked):",
       cancellationColPeriod: "Time before the celebration",
       cancellationColFee: "Cancellation fee",
-      cancellationTier1Period: "More than 30 days before",
+      cancellationTier1Period: "Up to 8 weeks before",
       cancellationTier1Fee: "Free of charge",
-      cancellationTier2Period: "15–30 days before",
-      cancellationTier2Fee: "25%",
-      cancellationTier3Period: "8–14 days before",
-      cancellationTier3Fee: "50%",
-      cancellationTier4Period: "3–7 days before",
-      cancellationTier4Fee: "80%",
-      cancellationTier5Period: "From 48 hours before, or no-show",
-      cancellationTier5Fee: "100%",
-      cancellationBasisNote: "What counts is the date we receive your written cancellation.",
-      cancellationDepositNote: "Your deposit is offset against the cancellation fee – we refund any surplus. We're happy to go through the details when we confirm your booking.",
+      cancellationTier2Period: "Between the 8th and 4th week before",
+      cancellationTier2Fee: "35%",
+      cancellationTier3Period: "Less than 4 weeks before",
+      cancellationTier3Fee: "70%",
+      cancellationThirdPartyNote: "Services we have already commissioned from third parties that can no longer be cancelled free of charge will be charged.",
+      cancellationBasisNote: "What counts is the date we receive your cancellation in text form (e.g. by email). You remain free to prove that the loss incurred was lower.",
+      cancellationDepositNote: "We offset deposits against the cancellation charges – any surplus will be refunded to you.",
+      cancellationGuestCountNote: "Please let us know of any change in the number of guests of more than 5% no later than five working days before the celebration.",
+      cancellationAgbPrefix: "Full terms:",
+      cancellationAgbLinkLabel: "Terms and Conditions (AGB) § 13, in German",
       reasonsTitle: "8 Reasons for Your Christmas Party at STORIA",
       reason1Title: "🎄 Festive Italian Atmosphere",
       reason1Desc: "Christmas decoration meets Italian flair. STORIA transforms during Advent into a cozy, festive venue – without kitsch, with plenty of style.",
@@ -2940,7 +2941,7 @@ const enBase = {
       // joint conversation (see menuIntro/faq4Answer).
       step2Desc: "Optional: Visit the premises in person. We'll discuss your individual Christmas menu – the menus above serve as orientation.",
       step3Title: "Quote & Booking",
-      step3Desc: "You receive a transparent quote. After your confirmation, a deposit (30%) secures your date. Invoice to company possible.",
+      step3Desc: "You receive a transparent quote. After your confirmation, a deposit (amount as per quote, usually 30%) secures your date. Invoice to company possible.",
       step4Title: "Final Coordination",
       step4Desc: "1-2 weeks before: Final coordination on schedule, seating arrangement, special requests. Your personal contact is ready.",
       step5Title: "Your Christmas Party – Buon Natale!",
@@ -2996,7 +2997,7 @@ const enBase = {
       faq8Answer: "Yes, our Christmas menu is also available for couples. For a romantic Christmas dinner Munich, we recommend making a reservation.",
       // E3.3: new FAQ, arising from E3.1 (cancellation policy) — ties directly into step3Desc.
       faq9Question: "What happens to my deposit if I have to cancel?",
-      faq9Answer: "Your deposit (30%) is offset against the cancellation fee, which depends on how far in advance you cancel – from free of charge more than 30 days before, up to 100% from 48 hours before or in case of a no-show. We refund any surplus. See \"Cancellation Policy\" above for details.",
+      faq9Answer: "Your deposit (amount as per quote, usually 30%) is offset against the cancellation charges: cancelling is free of charge up to 8 weeks before the celebration; between the 8th and 4th week we charge 35%, thereafter 70% of the agreed food revenue (price per person × number of guests booked). We refund any surplus. See “Cancellation Policy” above for details.",
       faq10Question: "Does STORIA also host a company Christmas party for smaller teams?",
       faq10Answer: "Yes – for separate areas from 10 people we organize your company Christmas party individually, from a small team gathering to a large corporate event for up to 300 guests.",
       ctaTitle: "Plan Your Christmas Party Munich Now",

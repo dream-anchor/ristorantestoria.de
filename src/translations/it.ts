@@ -1865,24 +1865,25 @@ const itBase = {
       // I canali compaiono solo qui, subito dopo il modulo di richiesta.
       contactBoxTitle: "Preferite parlarci direttamente?",
       contactBoxDesc: "Telefono, e-mail o WhatsApp – per domande sul menù di gala, per richieste particolari o se preferite inviarci la vostra richiesta in un altro modo.",
-      // Condizioni di cancellazione (E3.1). Volutamente senza link a una pagina "Condizioni per
-      // eventi" — non esiste in questo repository (solo agb-restaurant, agb-gutscheine).
+      // Condizioni di cancellazione — dal 28/09/2026 la scala verificata dall'avvocato delle AGB
+      // comuni (versione AGB-2026-10, § 13) su events-storia.de/agb; sostituisce quella del 13/09/2026.
+      // Il link viene costruito nella pagina da FACTS.agbUrl; qui solo prefisso e testo del link.
       cancellationTitle: "Condizioni di cancellazione",
-      cancellationIntro: "Se doveste annullare il vostro evento, si applicano le seguenti penali di cancellazione – calcolate come quota dell'importo prenotato:",
+      cancellationIntro: "Se doveste annullare il vostro evento, si applicano i seguenti costi di cancellazione – calcolati sul fatturato concordato per il cibo (prezzo a persona × persone prenotate):",
       cancellationColPeriod: "Tempo prima dell'evento",
       cancellationColFee: "Penale di cancellazione",
-      cancellationTier1Period: "Più di 30 giorni prima",
+      cancellationTier1Period: "Fino a 8 settimane prima",
       cancellationTier1Fee: "Gratuito",
-      cancellationTier2Period: "Da 15 a 30 giorni prima",
-      cancellationTier2Fee: "25%",
-      cancellationTier3Period: "Da 8 a 14 giorni prima",
-      cancellationTier3Fee: "50%",
-      cancellationTier4Period: "Da 3 a 7 giorni prima",
-      cancellationTier4Fee: "80%",
-      cancellationTier5Period: "A partire da 48 ore prima, o mancata presentazione",
-      cancellationTier5Fee: "100%",
-      cancellationBasisNote: "Fa fede la data di ricezione della vostra disdetta scritta.",
-      cancellationDepositNote: "Gli acconti già versati vengono detratti dalla penale di cancellazione – un eventuale saldo in vostro favore vi verrà rimborsato. Ne parliamo volentieri con voi al momento della conferma della prenotazione.",
+      cancellationTier2Period: "Tra l'8ª e la 4ª settimana prima",
+      cancellationTier2Fee: "35%",
+      cancellationTier3Period: "Meno di 4 settimane prima",
+      cancellationTier3Fee: "70%",
+      cancellationThirdPartyNote: "I servizi già commissionati a terzi che non possono più essere cancellati gratuitamente vengono addebitati.",
+      cancellationBasisNote: "Fa fede la data di ricezione della vostra disdetta in forma testuale (ad es. via e-mail). Resta salva la possibilità di dimostrare un danno minore.",
+      cancellationDepositNote: "Gli acconti vengono detratti dai costi di cancellazione – un eventuale saldo a vostro favore vi verrà rimborsato.",
+      cancellationGuestCountNote: "Vi preghiamo di comunicarci variazioni del numero di persone superiori al 5% al più tardi cinque giorni lavorativi prima dell'evento.",
+      cancellationAgbPrefix: "Condizioni complete:",
+      cancellationAgbLinkLabel: "Condizioni generali (AGB) § 13, in tedesco",
       reasonsTitle: "8 Motivi per il Capodanno allo STORIA",
       reason1Title: "🍝 Autentica Cena di Gala Italiana",
       reason1Desc: "Nessun buffet standard: pasta fatta in casa, pizza dal forno a pietra, antipasti freschi. Qualità che entusiasma i vostri ospiti.",
@@ -1933,7 +1934,7 @@ const itBase = {
       faq8Answer: "Parcheggio Marsstraße (P22), Hirtenstraße 14, 750 posti, aperto 24h, 5 minuti a piedi.",
       // E3.3: nuova FAQ, nata da E3.1 (condizioni di cancellazione).
       faq9Question: "Devo versare un acconto – e cosa succede se devo annullare?",
-      faq9Answer: "Per gruppi e richieste più consistenti può essere concordato un acconto. In caso di annullamento si applicano penali scaglionate in base al preavviso – gratuito con più di 30 giorni di anticipo, fino al 100% a partire da 48 ore prima o in caso di mancata presentazione. Dettagli sopra alla voce «Condizioni di cancellazione».",
+      faq9Answer: "Per gruppi e richieste più consistenti può essere concordato un acconto; importo e scadenza sono indicati nel preventivo. In caso di annullamento: gratuito fino a 8 settimane prima dell'evento, 35% tra l'8ª e la 4ª settimana, successivamente 70% del fatturato concordato per il cibo (prezzo a persona × persone prenotate). Gli acconti vengono detratti. Dettagli sopra alla voce «Condizioni di cancellazione».",
       // signupTitle/signupDesc rimossi con E2.3 — il blocco di preiscrizione è staccato da questa
       // pagina. `t.seasonalSignup.*` resta intatto (San Valentino + fallback generico).
       archivedTitle: "Il Nostro Menù di Capodanno {year} – Uno Sguardo Indietro",
@@ -2031,25 +2032,25 @@ const itBase = {
       // esistenti, non le sostituisce.
       inquiryTitle: "Richiedi la Tua Festa di Natale",
       inquiryIntro: "State pianificando una festa aziendale o di gruppo? Scriveteci la data desiderata, il numero di ospiti e le vostre idee – discuteremo il menu individualmente con voi.",
-      // Condizioni di cancellazione (E3.1) — colma la lacuna: step3Desc menziona già un acconto
-      // (30%) senza una regola di cancellazione associata. Nessun link a una pagina "Condizioni
-      // per eventi" inesistente.
+      // Condizioni di cancellazione — dal 28/09/2026 la scala verificata dall'avvocato delle AGB
+      // comuni (versione AGB-2026-10, § 13) su events-storia.de/agb; sostituisce quella del 13/09/2026.
+      // Il link viene costruito nella pagina da FACTS.agbUrl; qui solo prefisso e testo del link.
       cancellationTitle: "Condizioni di cancellazione",
-      cancellationIntro: "Se doveste annullare la vostra festa, si applicano le seguenti penali di cancellazione – calcolate come quota dell'importo prenotato:",
+      cancellationIntro: "Se doveste annullare la vostra festa, si applicano i seguenti costi di cancellazione – calcolati sul fatturato concordato per il cibo (prezzo a persona × persone prenotate):",
       cancellationColPeriod: "Tempo prima della festa",
       cancellationColFee: "Penale di cancellazione",
-      cancellationTier1Period: "Più di 30 giorni prima",
+      cancellationTier1Period: "Fino a 8 settimane prima",
       cancellationTier1Fee: "Gratuito",
-      cancellationTier2Period: "Da 15 a 30 giorni prima",
-      cancellationTier2Fee: "25%",
-      cancellationTier3Period: "Da 8 a 14 giorni prima",
-      cancellationTier3Fee: "50%",
-      cancellationTier4Period: "Da 3 a 7 giorni prima",
-      cancellationTier4Fee: "80%",
-      cancellationTier5Period: "A partire da 48 ore prima, o mancata presentazione",
-      cancellationTier5Fee: "100%",
-      cancellationBasisNote: "Fa fede la data di ricezione della vostra disdetta scritta.",
-      cancellationDepositNote: "Il vostro acconto viene detratto dalla penale di cancellazione – un eventuale saldo in vostro favore vi verrà rimborsato. Ne parliamo volentieri con voi al momento della conferma della prenotazione.",
+      cancellationTier2Period: "Tra l'8ª e la 4ª settimana prima",
+      cancellationTier2Fee: "35%",
+      cancellationTier3Period: "Meno di 4 settimane prima",
+      cancellationTier3Fee: "70%",
+      cancellationThirdPartyNote: "I servizi già commissionati a terzi che non possono più essere cancellati gratuitamente vengono addebitati.",
+      cancellationBasisNote: "Fa fede la data di ricezione della vostra disdetta in forma testuale (ad es. via e-mail). Resta salva la possibilità di dimostrare un danno minore.",
+      cancellationDepositNote: "Gli acconti vengono detratti dai costi di cancellazione – un eventuale saldo a vostro favore vi verrà rimborsato.",
+      cancellationGuestCountNote: "Vi preghiamo di comunicarci variazioni del numero di persone superiori al 5% al più tardi cinque giorni lavorativi prima della festa.",
+      cancellationAgbPrefix: "Condizioni complete:",
+      cancellationAgbLinkLabel: "Condizioni generali (AGB) § 13, in tedesco",
       reasonsTitle: "8 Motivi per la Vostra Festa di Natale al STORIA",
       reason1Title: "🎄 Atmosfera Italiana Festiva",
       reason1Desc: "Le decorazioni natalizie incontrano il fascino italiano. STORIA si trasforma durante l'Avvento in un luogo accogliente e festivo – senza kitsch, con molto stile.",
@@ -2075,7 +2076,7 @@ const itBase = {
       // solo un confronto diretto (vedi menuIntro/faq4Answer).
       step2Desc: "Opzionale: Visitate i locali di persona. Discutiamo il vostro menu natalizio individuale – i menu sopra riportati servono come orientamento.",
       step3Title: "Preventivo e Prenotazione",
-      step3Desc: "Ricevete un preventivo trasparente. Dopo la vostra conferma, un acconto (30%) garantisce la vostra data. Fatturazione all'azienda possibile.",
+      step3Desc: "Ricevete un preventivo trasparente. Dopo la vostra conferma, un acconto (importo secondo il preventivo, di solito 30%) garantisce la vostra data. Fatturazione all'azienda possibile.",
       step4Title: "Coordinamento Finale",
       step4Desc: "1-2 settimane prima: Coordinamento finale su programma, disposizione posti, richieste speciali. Il vostro referente personale è pronto.",
       step5Title: "La Vostra Festa di Natale – Buon Natale!",
@@ -2133,7 +2134,7 @@ const itBase = {
       faq8Answer: "Sì, il nostro menu natalizio è disponibile anche per le coppie. Per una cena di Natale romantica Monaco, vi consigliamo di prenotare.",
       // E3.3: nuova FAQ, nata da E3.1 (condizioni di cancellazione) — riprende step3Desc.
       faq9Question: "Cosa succede al mio acconto se devo annullare?",
-      faq9Answer: "Il vostro acconto (30%) viene detratto dalla penale di cancellazione, che dipende dal preavviso con cui annullate – gratuito con più di 30 giorni di anticipo, fino al 100% a partire da 48 ore prima o in caso di mancata presentazione. Un eventuale saldo in vostro favore vi verrà rimborsato. Dettagli sopra alla voce «Condizioni di cancellazione».",
+      faq9Answer: "Il vostro acconto (importo secondo il preventivo, di solito 30%) viene detratto dai costi di cancellazione: l'annullamento è gratuito fino a 8 settimane prima della festa; tra l'8ª e la 4ª settimana addebitiamo il 35%, successivamente il 70% del fatturato concordato per il cibo (prezzo a persona × persone prenotate). Un eventuale saldo a vostro favore vi verrà rimborsato. Dettagli sopra alla voce «Condizioni di cancellazione».",
       faq10Question: "Lo STORIA organizza anche una festa di Natale aziendale per team più piccoli?",
       faq10Answer: "Sì – per aree separate a partire da 10 persone organizziamo la vostra festa di Natale aziendale su misura, dal piccolo team al grande evento aziendale fino a 300 ospiti.",
       ctaTitle: "Pianificate Ora la Vostra Festa di Natale Monaco",

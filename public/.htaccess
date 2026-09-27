@@ -34,6 +34,14 @@ RewriteRule ^ristorantestoria\.de/?$ https://www.ristorantestoria.de/ [R=301,L,Q
 # der Folgepfad 404et dann weiterhin.
 RewriteRule ^neapolitanische-pizza-muenchen-/?$ https://www.ristorantestoria.de/neapolitanische-pizza-muenchen/ [R=301,L]
 
+# AGB-2026-10 (28.09.2026): STORIAs AGB für Veranstaltungen, Catering, Online-Shop und
+# Tischreservierungen stehen gebündelt auf EINER Seite bei events-storia.de. Die alte
+# Restaurant-AGB-Seite und ihre früheren Sprachvarianten zeigen in EINEM Sprung dorthin
+# (hier in Abschnitt 0, damit weder Host-Kanonisierung noch Trailing-Slash einen Zwischen-Hop
+# einschieben). AGB Gutscheine bleiben unter /agb-gutscheine/ auf dieser Domain.
+RewriteRule ^agb-restaurant/?$ https://www.events-storia.de/agb [R=301,L,QSD]
+RewriteRule ^(en|it|fr)/(agb-restaurant|terms-restaurant|termini-ristorante|cgv-restaurant)/?$ https://www.events-storia.de/agb [R=301,L,QSD]
+
 # ============================================
 # 1. Host-Kanonisierung
 # ============================================
@@ -246,9 +254,8 @@ RewriteRule ^en/cookie-policy/?$ /cookie-richtlinie/ [R=301,L]
 RewriteRule ^it/cookie-policy/?$ /cookie-richtlinie/ [R=301,L]
 RewriteRule ^fr/politique-cookies/?$ /cookie-richtlinie/ [R=301,L]
 
-RewriteRule ^en/terms-restaurant/?$ /agb-restaurant/ [R=301,L]
-RewriteRule ^it/termini-ristorante/?$ /agb-restaurant/ [R=301,L]
-RewriteRule ^fr/cgv-restaurant/?$ /agb-restaurant/ [R=301,L]
+# en/terms-restaurant, it/termini-ristorante, fr/cgv-restaurant: siehe Abschnitt 0 (AGB-2026-10),
+# direkt nach https://www.events-storia.de/agb.
 
 RewriteRule ^en/terms-vouchers/?$ /agb-gutscheine/ [R=301,L]
 RewriteRule ^it/termini-buoni/?$ /agb-gutscheine/ [R=301,L]

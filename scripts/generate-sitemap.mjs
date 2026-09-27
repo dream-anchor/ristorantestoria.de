@@ -37,7 +37,9 @@ const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 // Routes to exclude from sitemap (admin, internal)
-const EXCLUDED_ROUTES = ["admin", "admin/login", "menu", "italiener-muenchen"];
+// agb-restaurant (28.09.2026, AGB-2026-10): leitet per 301 auf https://www.events-storia.de/agb
+// weiter (public/.htaccess, Abschnitt 0) — eine Weiterleitungs-URL gehört nicht in die Sitemap.
+const EXCLUDED_ROUTES = ["admin", "admin/login", "menu", "italiener-muenchen", "agb-restaurant"];
 
 // Legal pages — only generate German URLs (no foreign language versions)
 const LEGAL_ONLY_DE = [

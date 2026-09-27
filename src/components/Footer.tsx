@@ -191,7 +191,11 @@ const Footer = () => {
             <span className="opacity-50">·</span>
             <LocalizedLink to="cookie-richtlinie" className="hover:text-primary-foreground transition-colors">{t.legal.cookies}</LocalizedLink>
             <span className="opacity-50">·</span>
-            <LocalizedLink to="agb-restaurant" className="hover:text-primary-foreground transition-colors">{t.legal.agb}</LocalizedLink>
+            {/* AGB-2026-10 (28.09.2026): STORIAs AGB für Veranstaltungen, Catering, Online-Shop und
+                Tischreservierungen stehen gebündelt auf events-storia.de; /agb-restaurant leitet dorthin. */}
+            <a href={FACTS.agbUrl} className="hover:text-primary-foreground transition-colors">{t.legal.agb}</a>
+            <span className="opacity-50">·</span>
+            <LocalizedLink to="agb-gutscheine" className="hover:text-primary-foreground transition-colors">{t.legal.agbVouchers}</LocalizedLink>
             <span className="opacity-50">·</span>
             <LocalizedLink to="lebensmittelhinweise" className="hover:text-primary-foreground transition-colors">{t.legal.foodInfo}</LocalizedLink>
             <span className="opacity-50">·</span>

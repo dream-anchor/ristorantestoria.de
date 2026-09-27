@@ -1977,25 +1977,26 @@ export const de = {
       // Die Kanäle stehen jetzt nur noch hier, direkt hinter dem Anfrageformular.
       contactBoxTitle: "Lieber persönlich sprechen?",
       contactBoxDesc: "Telefon, E-Mail oder WhatsApp – für Rückfragen zum Gala-Menü, für Sonderwünsche oder wenn Sie Ihre Anfrage lieber direkt loswerden möchten.",
-      // Stornobedingungen (E3.1, Stornostaffel Antoine 13.09.2026). Bewusst OHNE Verweis auf eine
-      // "AGB für Veranstaltungen"-Seite — die gibt es im Repo nicht (nur agb-restaurant,
-      // agb-gutscheine in slugs.json), ein Link darauf wäre eine 404 bzw. eine falsche Erwartung.
+      // Stornobedingungen — seit 28.09.2026 die anwaltlich geprüfte Staffel aus den gemeinsamen
+      // AGB (Version AGB-2026-10, § 13) auf events-storia.de/agb; ersetzt die Staffel vom
+      // 13.09.2026. Der Link auf die AGB wird in der Seite aus FACTS.agbUrl gebaut, hier stehen
+      // nur Vorsatz und Linktext.
       cancellationTitle: "Stornobedingungen",
-      cancellationIntro: "Falls Sie Ihr Event absagen müssen, gelten folgende Stornogebühren – berechnet als Anteil der gebuchten Summe:",
+      cancellationIntro: "Falls Sie Ihr Event absagen müssen, gelten folgende Stornokosten – berechnet vom vereinbarten Speisenumsatz (Preis pro Person × gebuchte Personen):",
       cancellationColPeriod: "Zeitpunkt vor dem Event",
       cancellationColFee: "Stornogebühr",
-      cancellationTier1Period: "Mehr als 30 Tage vorher",
-      cancellationTier1Fee: "Kostenlos",
-      cancellationTier2Period: "15–30 Tage vorher",
-      cancellationTier2Fee: "25 %",
-      cancellationTier3Period: "8–14 Tage vorher",
-      cancellationTier3Fee: "50 %",
-      cancellationTier4Period: "3–7 Tage vorher",
-      cancellationTier4Fee: "80 %",
-      cancellationTier5Period: "Ab 48 Stunden vorher oder No-Show",
-      cancellationTier5Fee: "100 %",
-      cancellationBasisNote: "Maßgeblich ist der Eingang Ihrer schriftlichen Stornierung bei uns.",
-      cancellationDepositNote: "Bereits geleistete Anzahlungen werden mit der Stornogebühr verrechnet – ein etwaiger Überschuss wird Ihnen zurückerstattet. Details besprechen wir bei der Buchungsbestätigung.",
+      cancellationTier1Period: "Bis 8 Wochen vorher",
+      cancellationTier1Fee: "Kostenfrei",
+      cancellationTier2Period: "Zwischen der 8. und 4. Woche vorher",
+      cancellationTier2Fee: "35 %",
+      cancellationTier3Period: "Weniger als 4 Wochen vorher",
+      cancellationTier3Fee: "70 %",
+      cancellationThirdPartyNote: "Bereits bei Dritten beauftragte Leistungen, die nicht mehr kostenfrei stornierbar sind, werden berechnet.",
+      cancellationBasisNote: "Maßgeblich ist der Eingang Ihrer Absage in Textform (z. B. per E-Mail) bei uns. Der Nachweis eines geringeren Schadens bleibt Ihnen unbenommen.",
+      cancellationDepositNote: "Anzahlungen verrechnen wir mit den Stornokosten – ein etwaiger Überschuss wird Ihnen erstattet.",
+      cancellationGuestCountNote: "Änderungen der Personenzahl um mehr als 5 % teilen Sie uns bitte spätestens fünf Werktage vor der Veranstaltung mit.",
+      cancellationAgbPrefix: "Vollständige Bedingungen:",
+      cancellationAgbLinkLabel: "AGB § 13",
       // 8 Reasons
       reasonsTitle: "8 Gründe für Silvester im STORIA",
       reason1Title: "🍝 Authentisches italienisches Gala-Dinner",
@@ -2050,7 +2051,7 @@ export const de = {
       faq8Answer: "Parkhaus Marsstraße (P22), Hirtenstraße 14, 750 Stellplätze, 24h geöffnet, 5 Minuten Fußweg.",
       // E3.3: neue FAQ, entstanden aus E3.1 (Stornostaffel).
       faq9Question: "Muss ich eine Anzahlung leisten – und was passiert, wenn ich absagen muss?",
-      faq9Answer: "Für Gruppen und größere Anfragen kann eine Anzahlung vereinbart werden. Bei einer Absage gelten gestaffelte Stornogebühren je nach Zeitpunkt vor dem Event – von kostenlos bei mehr als 30 Tagen Vorlauf bis 100 % ab 48 Stunden vorher oder bei Nichterscheinen. Details finden Sie weiter oben unter „Stornobedingungen“.",
+      faq9Answer: "Für Gruppen und größere Anfragen kann eine Anzahlung vereinbart werden; Höhe und Fälligkeit stehen im Angebot. Bei einer Absage gilt: bis 8 Wochen vor der Veranstaltung kostenfrei, zwischen der 8. und 4. Woche 35 %, danach 70 % des vereinbarten Speisenumsatzes (Preis pro Person × gebuchte Personen). Anzahlungen verrechnen wir. Details finden Sie weiter oben unter „Stornobedingungen“.",
       // Signup-Schlüssel (signupTitle/signupDesc) mit E2.3 entfernt — der Vormerk-Block ist auf
       // dieser Seite ausgehängt. `t.seasonalSignup.*` bleibt unangetastet (Valentinstag + Fallback).
       // Archived Menu (inactive wrapper)
@@ -3020,26 +3021,26 @@ export const de = {
       // dieser Seite gewandert ist. Ergänzt die bestehenden events-storia-CTAs, ersetzt sie nicht.
       inquiryTitle: "Weihnachtsfeier anfragen",
       inquiryIntro: "Planen Sie eine Firmen- oder Gruppenfeier? Schreiben Sie uns Wunschtermin, Gästezahl und Ihre Vorstellungen – das Menü besprechen wir individuell mit Ihnen.",
-      // Stornobedingungen (E3.1, Stornostaffel Antoine 13.09.2026) — schließt die Lücke, dass
-      // step3Desc bereits eine Anzahlung (30%) erwähnt, aber bisher keine begleitende
-      // Stornoregel dazu stand. Bewusst OHNE Verweis auf eine "AGB für Veranstaltungen"-Seite —
-      // die gibt es im Repo nicht (nur agb-restaurant, agb-gutscheine in slugs.json).
+      // Stornobedingungen — seit 28.09.2026 die anwaltlich geprüfte Staffel aus den gemeinsamen
+      // AGB (Version AGB-2026-10, § 13) auf events-storia.de/agb; ersetzt die Staffel vom
+      // 13.09.2026. Der Link auf die AGB wird in der Seite aus FACTS.agbUrl gebaut, hier stehen
+      // nur Vorsatz und Linktext.
       cancellationTitle: "Stornobedingungen",
-      cancellationIntro: "Falls Sie Ihre Feier absagen müssen, gelten folgende Stornogebühren – berechnet als Anteil der gebuchten Summe:",
+      cancellationIntro: "Falls Sie Ihre Feier absagen müssen, gelten folgende Stornokosten – berechnet vom vereinbarten Speisenumsatz (Preis pro Person × gebuchte Personen):",
       cancellationColPeriod: "Zeitpunkt vor der Feier",
       cancellationColFee: "Stornogebühr",
-      cancellationTier1Period: "Mehr als 30 Tage vorher",
-      cancellationTier1Fee: "Kostenlos",
-      cancellationTier2Period: "15–30 Tage vorher",
-      cancellationTier2Fee: "25 %",
-      cancellationTier3Period: "8–14 Tage vorher",
-      cancellationTier3Fee: "50 %",
-      cancellationTier4Period: "3–7 Tage vorher",
-      cancellationTier4Fee: "80 %",
-      cancellationTier5Period: "Ab 48 Stunden vorher oder No-Show",
-      cancellationTier5Fee: "100 %",
-      cancellationBasisNote: "Maßgeblich ist der Eingang Ihrer schriftlichen Stornierung bei uns.",
-      cancellationDepositNote: "Ihre Anzahlung wird mit der Stornogebühr verrechnet – ein etwaiger Überschuss wird Ihnen zurückerstattet. Details besprechen wir bei der Buchungsbestätigung.",
+      cancellationTier1Period: "Bis 8 Wochen vorher",
+      cancellationTier1Fee: "Kostenfrei",
+      cancellationTier2Period: "Zwischen der 8. und 4. Woche vorher",
+      cancellationTier2Fee: "35 %",
+      cancellationTier3Period: "Weniger als 4 Wochen vorher",
+      cancellationTier3Fee: "70 %",
+      cancellationThirdPartyNote: "Bereits bei Dritten beauftragte Leistungen, die nicht mehr kostenfrei stornierbar sind, werden berechnet.",
+      cancellationBasisNote: "Maßgeblich ist der Eingang Ihrer Absage in Textform (z. B. per E-Mail) bei uns. Der Nachweis eines geringeren Schadens bleibt Ihnen unbenommen.",
+      cancellationDepositNote: "Anzahlungen verrechnen wir mit den Stornokosten – ein etwaiger Überschuss wird Ihnen erstattet.",
+      cancellationGuestCountNote: "Änderungen der Personenzahl um mehr als 5 % teilen Sie uns bitte spätestens fünf Werktage vor der Feier mit.",
+      cancellationAgbPrefix: "Vollständige Bedingungen:",
+      cancellationAgbLinkLabel: "AGB § 13",
       reasonsTitle: "8 Gründe für Ihre Weihnachtsfeier im STORIA",
       reason1Title: "🎄 Festliche italienische Atmosphäre",
       reason1Desc: "Weihnachtliche Dekoration trifft auf italienisches Flair. Das STORIA verwandelt sich in der Adventszeit in einen gemütlichen, festlichen Ort – ohne Kitsch, mit viel Stil.",
@@ -3067,7 +3068,7 @@ export const de = {
       // nur ein gemeinsames Gespräch (siehe menuIntro/faq4Answer).
       step2Desc: "Optional: Besichtigen Sie die Räumlichkeiten vor Ort. Wir besprechen Ihr individuelles Weihnachtsmenü – die Menüs weiter oben dienen dabei als Orientierung.",
       step3Title: "Angebot & Buchung",
-      step3Desc: "Sie erhalten ein transparentes Angebot. Nach Ihrer Zusage sichert eine Anzahlung (30%) Ihren Termin. Rechnung an die Firma möglich.",
+      step3Desc: "Sie erhalten ein transparentes Angebot. Nach Ihrer Zusage sichert eine Anzahlung (Höhe laut Angebot, meist 30 %) Ihren Termin. Rechnung an die Firma möglich.",
       step4Title: "Finale Abstimmung",
       step4Desc: "1-2 Wochen vorher: Finale Abstimmung zu Ablauf, Sitzordnung, Sonderwünschen. Ihr persönlicher Ansprechpartner steht bereit.",
       step5Title: "Ihre Weihnachtsfeier – Buon Natale!",
@@ -3123,7 +3124,7 @@ export const de = {
       faq8Answer: "Ja, unser Weihnachtsmenü ist auch für Paare verfügbar. Für ein romantisches Weihnachtsessen München empfehlen wir eine Reservierung.",
       // E3.3: neue FAQ, entstanden aus E3.1 (Stornostaffel) — schließt direkt an step3Desc an.
       faq9Question: "Was passiert mit meiner Anzahlung, wenn ich absagen muss?",
-      faq9Answer: "Ihre Anzahlung (30 %) wird mit der Stornogebühr verrechnet, die sich nach dem Zeitpunkt Ihrer Absage richtet – von kostenlos bei mehr als 30 Tagen Vorlauf bis 100 % ab 48 Stunden vorher oder bei Nichterscheinen. Ein etwaiger Überschuss wird Ihnen zurückerstattet. Details finden Sie weiter oben unter „Stornobedingungen“.",
+      faq9Answer: "Ihre Anzahlung (Höhe laut Angebot, meist 30 %) verrechnen wir mit den Stornokosten: Bis 8 Wochen vor der Feier ist die Absage kostenfrei, zwischen der 8. und 4. Woche berechnen wir 35 %, danach 70 % des vereinbarten Speisenumsatzes (Preis pro Person × gebuchte Personen). Ein etwaiger Überschuss wird Ihnen erstattet. Details finden Sie weiter oben unter „Stornobedingungen“.",
       // V2.2 (GEO-Lücken-Loop, 13.09.2026): "Betriebsweihnachtsfeier" kam auf dieser Seite bisher
       // nicht vor (geprüft, 0 Treffer) — anders als "Firmenweihnachtsfeier", das bereits 9× auf der
       // Seite steht. Eigener FAQ-Eintrag statt Umformulierung bestehender Sätze, exakte

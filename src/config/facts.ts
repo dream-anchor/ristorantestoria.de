@@ -34,6 +34,12 @@ export const FACTS = {
   whatsappTel: "491636033912", // wa.me/-Href (ohne +/Leerzeichen)
   email: STORIA.email, // "info@ristorantestoria.de"
 
+  // ── AGB (28.09.2026, Version AGB-2026-10) ──
+  // STORIAs AGB für Veranstaltungen, Catering, Online-Shop und Tischreservierungen stehen
+  // gebündelt auf EINER Seite bei events-storia.de; /agb-restaurant leitet per 301 dorthin.
+  // Stornostaffel für Veranstaltungen: § 13, Tischreservierungen: § 26–27.
+  agbUrl: "https://www.events-storia.de/agb",
+
   // ── Öffnungszeiten (abgeleitet aus STORIA) ──
   openingHours: {
     weekday: STORIA.openingHours.weekday, // Mo–Fr 09:00–01:00

@@ -258,7 +258,7 @@ const testimonials = [
   },
 ];
 
-const extendedFaqs = [
+const extendedFaqs: { q: string; a: string; link?: { href: string; label: string } }[] = [
   {
     q: "Ab wie vielen Personen bieten Sie Catering an?",
     a: "Unser Catering-Service beginnt ab 20 Personen. Für kleinere Gruppen empfehlen wir die Buchung unserer Eventlocation direkt im Restaurant.",
@@ -309,7 +309,9 @@ const extendedFaqs = [
   },
   {
     q: "Welche Stornobedingungen gelten?",
-    a: "Bis 30 Tage vorher: kostenlos · 14–30 Tage: 25 % · 7–14 Tage: 50 % · 2–7 Tage: 80 % · Unter 48 Std.: 100 % abzgl. ersparter Aufwendungen. Dem Kunden steht der Nachweis frei, dass ein geringerer Schaden entstanden ist (§ 309 Nr. 5b BGB). Vollständige AGB: events-storia.de/agb",
+    a: "Bis 8 Wochen vor der Veranstaltung kostenfrei · zwischen der 8. und 4. Woche 35 % · danach 70 % des vereinbarten Speisenumsatzes (Preis pro Person × gebuchte Personen). Bereits bei Dritten beauftragte Leistungen, die nicht mehr kostenfrei stornierbar sind, werden berechnet. Anzahlungen verrechnen wir. Der Nachweis eines geringeren Schadens bleibt Ihnen unbenommen. Vollständige Bedingungen: AGB § 13.",
+    // AGB-2026-10 (28.09.2026): die gemeinsamen AGB liegen auf events-storia.de/agb.
+    link: { href: FACTS.agbUrl, label: "events-storia.de/agb" },
   },
 ];
 
@@ -323,7 +325,7 @@ const Catering = () => {
     "mainEntity": extendedFaqs.map((faq) => ({
       "@type": "Question",
       "name": faq.q,
-      "acceptedAnswer": { "@type": "Answer", "text": faq.a },
+      "acceptedAnswer": { "@type": "Answer", "text": faq.link ? `${faq.a} ${faq.link.href}` : faq.a },
     })),
   };
 
@@ -606,6 +608,14 @@ const Catering = () => {
                     <AccordionTrigger className="text-left">{faq.q}</AccordionTrigger>
                     <AccordionContent forceMount className="text-base text-muted-foreground pb-5 leading-relaxed data-[state=closed]:hidden">
                       {faq.a}
+                      {faq.link && (
+                        <>
+                          {" "}
+                          <a href={faq.link.href} target="_blank" rel="noopener" className="text-primary hover:underline">
+                            {faq.link.label}
+                          </a>
+                        </>
+                      )}
                     </AccordionContent>
                   </AccordionItem>
                 ))}

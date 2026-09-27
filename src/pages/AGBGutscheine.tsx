@@ -77,8 +77,9 @@ const AGBGutscheine = () => {
               </h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>
-                  <strong>Gültigkeit:</strong> Gutscheine sind 3 Jahre ab Ausstellungsdatum gültig 
-                  (§ 195 BGB). Das Ausstellungsdatum ist auf dem Gutschein vermerkt.
+                  <strong>Gültigkeit:</strong> Gutscheine sind bis zum 31. Dezember des dritten
+                  Jahres nach dem Kauf gültig (regelmäßige Verjährungsfrist, §§ 195, 199 BGB).
+                  Beispiel: Ein im Jahr 2026 gekaufter Gutschein ist bis 31. Dezember 2029 einlösbar.
                 </li>
                 <li>
                   <strong>Keine Barauszahlung:</strong> Eine Auszahlung des Gutscheinwertes in bar 
@@ -102,18 +103,12 @@ const AGBGutscheine = () => {
               <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
                 4. Versand
               </h2>
-              <p><strong>Digitale Gutscheine:</strong></p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Werden per E-Mail als PDF-Datei versendet</li>
-                <li>Versand erfolgt in der Regel innerhalb von 24 Stunden nach Zahlungseingang</li>
-                <li>Keine Versandkosten</li>
-              </ul>
-              
-              <p className="mt-4"><strong>Postalischer Versand:</strong></p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Auf Wunsch versenden wir Gutscheine per Post</li>
-                <li>Versandkosten: 2,50 € (Standardversand)</li>
-                <li>Lieferzeit: 3-5 Werktage</li>
+                <li>Gutscheine werden ausschließlich digital als PDF-Datei per E-Mail an die bei der
+                  Bestellung angegebene Adresse versendet.</li>
+                <li>Der Versand erfolgt automatisch unmittelbar nach erfolgreicher Zahlung, in der
+                  Regel innerhalb weniger Minuten.</li>
+                <li>Es fallen keine Versandkosten an. Einen postalischen Versand bieten wir nicht an.</li>
               </ul>
             </section>
 
@@ -122,17 +117,18 @@ const AGBGutscheine = () => {
                 5. Preise & Zahlungsarten
               </h2>
               <p>
-                Es gelten die zum Zeitpunkt der Bestellung auf unserer Website bzw. im Restaurant 
-                angegebenen Preise. Alle Preise verstehen sich inklusive der gesetzlichen Mehrwertsteuer.
+                Gutscheine verkaufen wir über unseren Gutschein-Shop auf{" "}
+                <a href="https://www.events-storia.de/gutschein/" className="text-primary hover:underline">
+                  events-storia.de/gutschein
+                </a>
+                . Es gilt der bei der Bestellung gewählte Gutscheinbetrag; Preise verstehen sich
+                inklusive der gesetzlichen Mehrwertsteuer.
               </p>
-              <p className="mt-4">Akzeptierte Zahlungsarten:</p>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>Kreditkarte (Visa, Mastercard, American Express)</li>
-                <li>PayPal</li>
-                <li>Sofortüberweisung</li>
-                <li>EC-Karte (bei Kauf im Restaurant)</li>
-                <li>Barzahlung (bei Kauf im Restaurant)</li>
-              </ul>
+              <p className="mt-4">
+                Die Zahlung erfolgt ausschließlich über die im Bestellprozess angebotenen
+                Online-Zahlungsarten. Die Zahlungsabwicklung übernimmt der Zahlungsdienstleister
+                Stripe Payments Europe Ltd.
+              </p>
             </section>
 
             <section>
@@ -153,9 +149,8 @@ const AGBGutscheine = () => {
                 7. Verlust des Gutscheins
               </h2>
               <p>
-                Bei Verlust eines Gutscheins kann kein Ersatz ausgestellt werden. 
-                Wir empfehlen, digitale Gutscheine sicher zu speichern und physische 
-                Gutscheine sorgfältig aufzubewahren.
+                Bei Verlust eines Gutscheins kann kein Ersatz ausgestellt werden.
+                Wir empfehlen, die Gutschein-PDF und die Bestätigungs-E-Mail sicher aufzubewahren.
               </p>
             </section>
 
@@ -171,7 +166,7 @@ const AGBGutscheine = () => {
 
             <section className="mt-12 pt-8 border-t border-border">
               <p className="text-sm text-muted-foreground">
-                Stand: Dezember 2024
+                Stand: 28. September 2026
               </p>
             </section>
           </div>
