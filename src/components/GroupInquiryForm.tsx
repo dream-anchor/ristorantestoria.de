@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUtmParams } from "@/hooks/useUtmParams";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -98,6 +98,10 @@ export const GroupInquiryForm = () => {
       privacy: undefined,
     },
   });
+
+  // Datenschutz-Häkchen reaktiv lesen: `form.watch()` im Render aktualisiert sich
+  // im aufgeklappten Zustand nicht zuverlässig — useWatch abonniert das Feld direkt.
+  const privacyAccepted = useWatch({ control: form.control, name: "privacy" });
 
   // Reset timer when form mounts
   useEffect(() => {
@@ -593,7 +597,7 @@ export const GroupInquiryForm = () => {
               type="submit"
               size="lg"
               variant="secondary"
-              disabled={!form.watch("privacy") || isSubmitting}
+              disabled={!privacyAccepted || isSubmitting}
               className="w-full sm:w-auto"
             >
               {isSubmitting ? (
