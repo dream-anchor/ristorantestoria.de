@@ -1919,6 +1919,15 @@ export type Database = {
         }
         Returns: boolean
       }
+      maestro_saisonmenues_export: {
+        Args: { p_schluessel: string }
+        Returns: {
+          id: string
+          published_at: string
+          seasonal_event: string
+          title: string
+        }[]
+      }
       maestro_vormerkungen_export: {
         Args: { p_schluessel: string }
         Returns: {
