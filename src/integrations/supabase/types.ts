@@ -1922,6 +1922,7 @@ export type Database = {
       maestro_vormerkungen_export: {
         Args: { p_schluessel: string }
         Returns: {
+          confirm_token: string
           confirmed_at: string
           consent_at: string
           consent_ip: string
