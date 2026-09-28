@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
-import EmailLink, { EmailAddress } from "@/components/EmailLink";
-import { PhoneText } from "@/lib/linkifyPhone";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import LegalDocument, { type LegalPart } from "@/components/legal/LegalDocument";
+import impressumText from "@/content/legal/impressum.json";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
+// Text der Speranza GmbH, gemeinsam mit events-storia.de — siehe src/content/legal/README.md.
+// Inhalt nur in der JSON-Datei ändern (und byte-gleich in events-storia.de), nicht hier.
 const Impressum = () => {
   usePrerenderReady(true);
   return (
     <>
       <SEO
         title="Impressum"
-        description="Impressum der Speranza GmbH - Ristorante STORIA München. Rechtliche Angaben, Kontaktdaten und Firmendaten."
+        description="Impressum der Speranza GmbH (Ristorante STORIA und events-storia.de, München): Anbieterkennzeichnung, Kontakt, Registereintrag und Haftungshinweise."
         canonical="/impressum"
         noHreflang
         noIndex={false}
@@ -29,134 +31,28 @@ const Impressum = () => {
       <div className="min-h-screen bg-background">
         <Header />
 
-      <main className="pt-32 pb-20 px-4">
-        <div className="max-w-3xl mx-auto">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
-            <ol className="flex items-center gap-2">
-              <li>
-                <Link to="/" className="hover:text-foreground transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">Impressum</li>
-            </ol>
-          </nav>
+        <main className="pt-32 pb-20 px-4">
+          <div className="max-w-3xl mx-auto">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+              <ol className="flex items-center gap-2">
+                <li>
+                  <Link to="/" className="hover:text-foreground transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>/</li>
+                <li className="text-foreground font-medium">Impressum</li>
+              </ol>
+            </nav>
 
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-6 text-center">
-            Impressum
-          </h1>
+            <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-12 text-center">
+              Impressum
+            </h1>
 
-          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-            Nachfolgend finden Sie die gesetzlichen Pflichtangaben zur Anbieterkennzeichnung des Ristorante STORIA in München sowie weitere rechtliche Informationen gemäß § 5 DDG (Digitale-Dienste-Gesetz). Bei Fragen erreichen Sie uns telefonisch unter +49 89 51519696 oder per E-Mail.
-          </p>
-
-          <div className="prose prose-lg max-w-none space-y-8 text-foreground/90">
-            {/* Firmenadresse */}
-            <section>
-              <p className="font-semibold text-lg">Speranza GmbH</p>
-              <p>
-                Karlstraße 47a<br />
-                80333 München<br />
-                Deutschland
-              </p>
-            </section>
-
-            {/* Kontakt */}
-            <section>
-              <p>
-                <strong>Telefon:</strong>{" "}
-                <a href="tel:+498951519696" className="text-primary hover:underline">
-                  <PhoneText>+49 89 51519696</PhoneText>
-                </a>
-              </p>
-              <p>
-                <strong>E-Mail:</strong>{" "}
-                <EmailLink className="text-primary hover:underline">
-                  <EmailAddress />
-                </EmailLink>
-              </p>
-            </section>
-
-            {/* Vertretung */}
-            <section>
-              <p>
-                <strong>Vertreten durch die Geschäftsführerin:</strong><br />
-                Agnese Lettieri
-              </p>
-            </section>
-
-            {/* Handelsregister */}
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                Registereintrag
-              </h2>
-              <p>
-                Eingetragen im Handelsregister des Amtsgerichts München<br />
-                <strong>Handelsregisternummer:</strong> HRB 209637
-              </p>
-            </section>
-
-            {/* Steuern */}
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                Umsatzsteuer-ID
-              </h2>
-              <p>DE 296024880</p>
-              
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                Steuernummer
-              </h2>
-              <p>143/182/00980</p>
-            </section>
-
-            {/* Inhaltlich Verantwortlicher */}
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                Inhaltlich Verantwortliche gemäß § 18 Abs. 2 MStV
-              </h2>
-              <p>
-                Agnese Lettieri<br />
-                Karlstraße 47a<br />
-                80333 München
-              </p>
-            </section>
-
-            {/* Berufsbezogene Angaben */}
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                Berufsbezogene Angaben
-              </h2>
-              <p>Gewerbebetrieb Gastronomie (nach § 14 GewO angemeldet)</p>
-            </section>
-
-            {/* EU-Streitschlichtung */}
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                EU-Streitschlichtung
-              </h2>
-              <p>
-                Die Europäische Kommission hat die Plattform zur Online-Streitbeilegung (OS) zum
-                20. Juli 2025 eingestellt (Verordnung EU 2024/3228). Informationen zu
-                Streitbeilegungsstellen finden Sie unter:{" "}
-                <a
-                  href="https://consumer-redress.ec.europa.eu/dispute-resolution-bodies_de"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline break-all"
-                >
-                  EU-Streitbeilegungsstellen
-                </a>
-              </p>
-              <p className="mt-4">
-                Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren
-                vor einer Verbraucherschlichtungsstelle teilzunehmen.
-              </p>
-            </section>
+            <LegalDocument parts={impressumText as LegalPart[]} pageTitle="Impressum" />
           </div>
-        </div>
-      </main>
+        </main>
 
         <Footer />
       </div>

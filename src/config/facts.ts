@@ -39,6 +39,8 @@ export const FACTS = {
   // gebündelt auf EINER Seite bei events-storia.de; /agb-restaurant leitet per 301 dorthin.
   // Stornostaffel für Veranstaltungen: § 13, Tischreservierungen: § 26–27.
   agbUrl: "https://www.events-storia.de/agb/",
+  // Gutscheine: Teil E der gemeinsamen AGB (ab § 28); /agb-gutscheine leitet per 301 dorthin.
+  agbVouchersUrl: "https://www.events-storia.de/agb/#paragraf-28",
 
   // ── Öffnungszeiten (abgeleitet aus STORIA) ──
   openingHours: {

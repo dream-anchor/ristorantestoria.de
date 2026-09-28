@@ -195,7 +195,7 @@ const Footer = () => {
                 Tischreservierungen stehen gebündelt auf events-storia.de; /agb-restaurant leitet dorthin. */}
             <a href={FACTS.agbUrl} className="hover:text-primary-foreground transition-colors">{t.legal.agb}</a>
             <span className="opacity-50">·</span>
-            <LocalizedLink to="agb-gutscheine" className="hover:text-primary-foreground transition-colors">{t.legal.agbVouchers}</LocalizedLink>
+            <a href={FACTS.agbVouchersUrl} className="hover:text-primary-foreground transition-colors">{t.legal.agbVouchers}</a>
             <span className="opacity-50">·</span>
             <LocalizedLink to="lebensmittelhinweise" className="hover:text-primary-foreground transition-colors">{t.legal.foodInfo}</LocalizedLink>
             <span className="opacity-50">·</span>

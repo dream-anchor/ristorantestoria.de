@@ -161,7 +161,16 @@ npm run prerender    # SSG für SEO — KRITISCH
 - Video: `preload="none"`
 
 ## Rechtliche Seiten (NUR Deutsch)
-- impressum, datenschutz, cookie-richtlinie, agb-restaurant, agb-gutscheine, widerrufsbelehrung, zahlungsinformationen, lebensmittelhinweise, haftungsausschluss
+- impressum, datenschutz, cookie-richtlinie, lebensmittelhinweise
+- **AGB (inkl. Gutscheine als Teil E ab § 28, Zahlungsinformationen in § 4) und Widerrufsbelehrung
+  liegen nur auf events-storia.de** (`/agb/`, `/widerrufsbelehrung/`). Hier gibt es dafür keine
+  Seiten mehr: `/agb-restaurant`, `/agb-gutscheine`, `/zahlungsinformationen`, `/widerrufsbelehrung`
+  leiten per 301 dorthin, `/haftungsausschluss` auf `/impressum/` (`public/.htaccess`, Abschnitt 0).
+  Links darauf über `FACTS.agbUrl` / `FACTS.agbVouchersUrl` (`src/config/facts.ts`).
+- **Texte von Impressum, Datenschutz und Cookie-Richtlinie** stehen als JSON in `src/content/legal/`
+  (gerendert von `src/components/legal/LegalDocument.tsx`) und gelten für beide Websites. Hauptfassung
+  ist `events-storia.de/src/content/legal/` — die Dateien hier müssen **byte-gleich** bleiben
+  (`cmp` vor jedem Commit); Text nie direkt in den Seiten-Komponenten ändern.
 - `noHreflang` im `<SEO>`-Tag
 - `LEGAL_ONLY_DE` konsistent in: `routes.ts`, `App.tsx`, `generate-sitemap.mjs`
 - `.htaccess`: 301-Redirects alter übersetzter URLs → DE

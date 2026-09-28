@@ -77,9 +77,9 @@ const AGBRestaurant = () => {
               haben.
             </p>
             <p>
-              Für Gutscheine gelten weiterhin unsere{" "}
-              <a href="/agb-gutscheine/" className="text-primary hover:underline">
-                AGB Gutscheine
+              Für Gutscheine gilt Teil E derselben AGB{" "}
+              <a href={FACTS.agbVouchersUrl} className="text-primary hover:underline">
+                (ab § 28)
               </a>.
             </p>
           </div>
