@@ -67,11 +67,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import CookieRichtlinie from "./pages/CookieRichtlinie";
 import AGBRestaurant from "./pages/AGBRestaurant";
-import AGBGutscheine from "./pages/AGBGutscheine";
-import Widerrufsbelehrung from "./pages/Widerrufsbelehrung";
-import Zahlungsinformationen from "./pages/Zahlungsinformationen";
 import Lebensmittelhinweise from "./pages/Lebensmittelhinweise";
-import Haftungsausschluss from "./pages/Haftungsausschluss";
 import Barrierefreiheit from "./pages/Barrierefreiheit";
 
 // Lazy: Admin (enthält Recharts, schwere Hooks — nie pre-rendered, nie von Besuchern geladen)
@@ -134,11 +130,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   datenschutz: Datenschutz,
   "cookie-richtlinie": CookieRichtlinie,
   "agb-restaurant": AGBRestaurant,
-  "agb-gutscheine": AGBGutscheine,
-  widerrufsbelehrung: Widerrufsbelehrung,
-  zahlungsinformationen: Zahlungsinformationen,
   lebensmittelhinweise: Lebensmittelhinweise,
-  haftungsausschluss: Haftungsausschluss,
   barrierefreiheit: Barrierefreiheit,
   "lunch-muenchen-maxvorstadt": LunchMuenchen,
   "aperitivo-muenchen": AperitivoMuenchen,
@@ -175,8 +167,7 @@ type Language = "de" | "en" | "it" | "fr";
 // Legal pages — only exist in German, foreign language routes redirect to DE
 const LEGAL_ONLY_DE = new Set([
   "impressum", "datenschutz", "cookie-richtlinie",
-  "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
-  "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+  "agb-restaurant", "lebensmittelhinweise",
   "barrierefreiheit",
 ]);
 

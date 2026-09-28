@@ -6,6 +6,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
+import LocalizedLink from "@/components/LocalizedLink";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /**
  * Endpunkt-URL kommt ausschließlich aus der Build-Env (Muster aus AnlassAnfrageForm).
@@ -51,6 +53,10 @@ type FormData = z.infer<typeof formSchema>;
 
 const FilmfestInquiryForm = () => {
   const { toast } = useToast();
+  // Datenschutzhinweis unter dem Absenden-Knopf: dieselben Texte wie im Anlass-Formular
+  // (t.anlassInquiry.privacyNote*), in allen vier Sprachen vorhanden.
+  const { t } = useLanguage();
+  const f = t.anlassInquiry;
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Anti-Doppelklick: synchroner Riegel (State-Updates sind async)
@@ -264,6 +270,13 @@ const FilmfestInquiryForm = () => {
           </>
         )}
       </Button>
+      <p className="text-xs text-[hsl(36_18%_55%)] mt-3 text-center">
+        {f.privacyNotePre}
+        <LocalizedLink to="datenschutz" className="underline hover:no-underline">
+          {f.privacyNoteLink}
+        </LocalizedLink>
+        {f.privacyNotePost}
+      </p>
       <p className="text-xs text-[hsl(36_18%_55%)] mt-3 text-center">
         Alternativ erreichen Sie uns direkt unter <PhoneText>+49 89 51519696</PhoneText>.
       </p>

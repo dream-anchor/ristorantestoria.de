@@ -38,9 +38,22 @@ RewriteRule ^neapolitanische-pizza-muenchen-/?$ https://www.ristorantestoria.de/
 # Tischreservierungen stehen gebündelt auf EINER Seite bei events-storia.de. Die alte
 # Restaurant-AGB-Seite und ihre früheren Sprachvarianten zeigen in EINEM Sprung dorthin
 # (hier in Abschnitt 0, damit weder Host-Kanonisierung noch Trailing-Slash einen Zwischen-Hop
-# einschieben). AGB Gutscheine bleiben unter /agb-gutscheine/ auf dieser Domain.
+# einschieben).
 RewriteRule ^agb-restaurant/?$ https://www.events-storia.de/agb/ [R=301,L,QSD]
 RewriteRule ^(en|it|fr)/(agb-restaurant|terms-restaurant|termini-ristorante|cgv-restaurant)/?$ https://www.events-storia.de/agb/ [R=301,L,QSD]
+
+# Rechtsseiten-2026-10 (28.09.2026): Gutschein-AGB (Teil E, ab § 28), Zahlungsinformationen (§ 4)
+# und Widerrufsbelehrung stehen nur noch auf events-storia.de; der Haftungsausschluss ist Teil des
+# Impressums. Alte DE-URLs und frühere Sprachvarianten zeigen in EINEM Sprung aufs Ziel.
+# NE: das #-Fragment darf nicht zu %23 kodiert werden.
+RewriteRule ^agb-gutscheine/?$ https://www.events-storia.de/agb/#paragraf-28 [R=301,L,NE,QSD]
+RewriteRule ^(en/terms-vouchers|it/termini-buoni|fr/cgv-bons|(en|it|fr)/agb-gutscheine)/?$ https://www.events-storia.de/agb/#paragraf-28 [R=301,L,NE,QSD]
+RewriteRule ^widerrufsbelehrung/?$ https://www.events-storia.de/widerrufsbelehrung/ [R=301,L,QSD]
+RewriteRule ^(en/cancellation-policy|it/diritto-recesso|fr/droit-retractation|(en|it|fr)/widerrufsbelehrung)/?$ https://www.events-storia.de/widerrufsbelehrung/ [R=301,L,QSD]
+RewriteRule ^zahlungsinformationen/?$ https://www.events-storia.de/agb/#paragraf-4 [R=301,L,NE,QSD]
+RewriteRule ^(en/payment-info|it/info-pagamento|fr/infos-paiement|(en|it|fr)/zahlungsinformationen)/?$ https://www.events-storia.de/agb/#paragraf-4 [R=301,L,NE,QSD]
+RewriteRule ^haftungsausschluss/?$ https://www.ristorantestoria.de/impressum/ [R=301,L,QSD]
+RewriteRule ^((en|it)/disclaimer|fr/avertissement|(en|it|fr)/haftungsausschluss)/?$ https://www.ristorantestoria.de/impressum/ [R=301,L,QSD]
 
 # ============================================
 # 1. Host-Kanonisierung
@@ -257,25 +270,14 @@ RewriteRule ^fr/politique-cookies/?$ /cookie-richtlinie/ [R=301,L]
 # en/terms-restaurant, it/termini-ristorante, fr/cgv-restaurant: siehe Abschnitt 0 (AGB-2026-10),
 # direkt nach https://www.events-storia.de/agb.
 
-RewriteRule ^en/terms-vouchers/?$ /agb-gutscheine/ [R=301,L]
-RewriteRule ^it/termini-buoni/?$ /agb-gutscheine/ [R=301,L]
-RewriteRule ^fr/cgv-bons/?$ /agb-gutscheine/ [R=301,L]
-
-RewriteRule ^en/cancellation-policy/?$ /widerrufsbelehrung/ [R=301,L]
-RewriteRule ^it/diritto-recesso/?$ /widerrufsbelehrung/ [R=301,L]
-RewriteRule ^fr/droit-retractation/?$ /widerrufsbelehrung/ [R=301,L]
-
-RewriteRule ^en/payment-info/?$ /zahlungsinformationen/ [R=301,L]
-RewriteRule ^it/info-pagamento/?$ /zahlungsinformationen/ [R=301,L]
-RewriteRule ^fr/infos-paiement/?$ /zahlungsinformationen/ [R=301,L]
+# en/terms-vouchers, en/cancellation-policy, en/payment-info (und it/fr-Varianten): siehe
+# Abschnitt 0 (Rechtsseiten-2026-10), direkt nach events-storia.de.
 
 RewriteRule ^en/food-info/?$ /lebensmittelhinweise/ [R=301,L]
 RewriteRule ^it/info-alimenti/?$ /lebensmittelhinweise/ [R=301,L]
 RewriteRule ^fr/infos-alimentaires/?$ /lebensmittelhinweise/ [R=301,L]
 
-RewriteRule ^en/disclaimer/?$ /haftungsausschluss/ [R=301,L]
-RewriteRule ^it/disclaimer/?$ /haftungsausschluss/ [R=301,L]
-RewriteRule ^fr/avertissement/?$ /haftungsausschluss/ [R=301,L]
+# en/disclaimer, it/disclaimer, fr/avertissement: siehe Abschnitt 0 → /impressum/.
 
 # ============================================
 # 9. Error Documents

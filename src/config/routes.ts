@@ -14,8 +14,7 @@ export const DEFAULT_LANGUAGE: Language = "de";
 // Legal pages — German only, no translated URLs
 const LEGAL_ONLY_DE = new Set([
   "impressum", "datenschutz", "cookie-richtlinie",
-  "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
-  "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+  "agb-restaurant", "lebensmittelhinweise",
 ]);
 
 // Get slugs for a specific language

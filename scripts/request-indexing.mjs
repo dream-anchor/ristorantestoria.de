@@ -51,7 +51,6 @@ const PRIORITY_URLS = [
   "/besondere-anlaesse/",
   "/besondere-anlaesse/valentinstag-menue/",
   "/lebensmittelhinweise/",
-  "/widerrufsbelehrung/",
 ].map(p => SITE_URL + p);
 
 // ── Service Account Credentials ──

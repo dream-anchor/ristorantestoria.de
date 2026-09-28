@@ -44,8 +44,7 @@ const EXCLUDED_ROUTES = ["admin", "admin/login", "menu", "italiener-muenchen", "
 // Legal pages — only generate German URLs (no foreign language versions)
 const LEGAL_ONLY_DE = [
   "impressum", "datenschutz", "cookie-richtlinie",
-  "agb-restaurant", "agb-gutscheine", "widerrufsbelehrung",
-  "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss",
+  "agb-restaurant", "lebensmittelhinweise",
   "barrierefreiheit",
 ];
 
@@ -55,8 +54,7 @@ const getPriority = (baseSlug) => {
   if (["reservierung", "speisekarte", "menu", "mittags-menu", "getraenke"].includes(baseSlug)) return "0.9";
   if (["kontakt", "ueber-uns", "besondere-anlaesse", "catering"].includes(baseSlug)) return "0.8";
   if (baseSlug.includes("muenchen")) return "0.7"; // SEO landing pages
-  if (["impressum", "datenschutz", "cookie-richtlinie", "agb-restaurant", "agb-gutscheine", 
-       "widerrufsbelehrung", "zahlungsinformationen", "lebensmittelhinweise", "haftungsausschluss"].includes(baseSlug)) return "0.3";
+  if (["impressum", "datenschutz", "cookie-richtlinie", "agb-restaurant", "lebensmittelhinweise"].includes(baseSlug)) return "0.3";
   return "0.6";
 };
 

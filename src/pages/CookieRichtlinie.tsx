@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom";
-import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import LegalDocument, { type LegalPart } from "@/components/legal/LegalDocument";
+import cookieText from "@/content/legal/cookies.json";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 
+// Text der Speranza GmbH, gemeinsam mit events-storia.de — siehe src/content/legal/README.md.
+// Inhalt nur in der JSON-Datei ändern (und byte-gleich in events-storia.de), nicht hier.
 const CookieRichtlinie = () => {
   usePrerenderReady(true);
   return (
     <>
       <SEO
         title="Cookie-Richtlinie"
-        description="Cookie-Richtlinie von STORIA Restaurant München. Informationen zu Cookies, Consent-System und Ihren Wahlmöglichkeiten gemäß DSGVO und TTDSG."
+        description="Cookie-Richtlinie von STORIA Restaurant München. Informationen zu Cookies, Einwilligung und Ihren Wahlmöglichkeiten gemäß DSGVO und TDDDG."
         canonical="/cookie-richtlinie"
         noHreflang
       />
@@ -24,171 +27,34 @@ const CookieRichtlinie = () => {
           { name: 'Cookie-Richtlinie', url: '/cookie-richtlinie' }
         ]}
       />
-    <div className="min-h-screen bg-background">
-      <Header />
+      <div className="min-h-screen bg-background">
+        <Header />
 
-      <main className="pt-32 pb-20 px-4">
-        <div className="max-w-3xl mx-auto">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
-            <ol className="flex items-center gap-2">
-              <li>
-                <Link to="/" className="hover:text-foreground transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">Cookie-Richtlinie</li>
-            </ol>
-          </nav>
-
-          <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-12 text-center">
-            Cookie-Richtlinie
-          </h1>
-          
-          <div className="prose prose-lg max-w-none space-y-8 text-foreground/90">
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                1. Funktionsweise unseres Consent-Systems
-              </h2>
-              <p>
-                Unser DSGVO- und TTDSG-konformes Consent-System unterteilt Cookies in folgende Kategorien 
-                und ermöglicht Ihnen eine transparente Auswahl:
-              </p>
-            </section>
-
-            <section>
-              <h3 className="text-lg font-serif font-semibold text-foreground mt-6 mb-2">
-                Notwendige Cookies
-              </h3>
-              <p>
-                Diese Cookies sind für den technischen Betrieb der Website erforderlich. Sie ermöglichen 
-                grundlegende Funktionen wie die Navigation und den Zugang zu geschützten Bereichen der Website. 
-                Ohne diese Cookies kann die Website nicht ordnungsgemäß funktionieren.
-              </p>
-              <p>
-                <strong>Rechtsgrundlage:</strong> Berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO)
-              </p>
-            </section>
-
-            <section>
-              <h3 className="text-lg font-serif font-semibold text-foreground mt-6 mb-2">
-                Statistik-Cookies
-              </h3>
-              <p>
-                Diese Cookies helfen uns zu verstehen, wie Besucher mit der Website interagieren, 
-                indem sie Informationen anonym sammeln und melden. Die Daten werden zur Verbesserung 
-                unserer Website genutzt.
-              </p>
-              <p>
-                <strong>Rechtsgrundlage:</strong> Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)
-              </p>
-            </section>
-
-            <section>
-              <h3 className="text-lg font-serif font-semibold text-foreground mt-6 mb-2">
-                Marketing-Cookies
-              </h3>
-              <p>
-                Diese Cookies werden verwendet, um Besucher über Websites hinweg zu verfolgen. 
-                Die Absicht ist, Anzeigen zu zeigen, die für den einzelnen Benutzer relevant und 
-                ansprechend sind.
-              </p>
-              <p>
-                <strong>Rechtsgrundlage:</strong> Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)
-              </p>
-            </section>
-
-            <section>
-              <h3 className="text-lg font-serif font-semibold text-foreground mt-6 mb-2">
-                Externe Dienste
-              </h3>
-              <p>
-                Diese Kategorie umfasst Dienste von Drittanbietern, die in unsere Website eingebettet sind:
-              </p>
-              <ul className="list-disc pl-6 space-y-2">
+        <main className="pt-32 pb-20 px-4">
+          <div className="max-w-3xl mx-auto">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+              <ol className="flex items-center gap-2">
                 <li>
-                  <strong>Google Maps:</strong> Zur Anzeige unseres Standorts. Bei Aktivierung werden 
-                  Daten an Google übertragen.
+                  <Link to="/" className="hover:text-foreground transition-colors">
+                    Home
+                  </Link>
                 </li>
-                <li>
-                  <strong>OpenTable:</strong> Für unser Online-Reservierungssystem. Bei Aktivierung werden 
-                  Daten an OpenTable übertragen.
-                </li>
-              </ul>
-              <p className="mt-4">
-                <strong>Rechtsgrundlage:</strong> Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)
-              </p>
-            </section>
+                <li>/</li>
+                <li className="text-foreground font-medium">Cookie-Richtlinie</li>
+              </ol>
+            </nav>
 
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                2. Widerruf der Einwilligung
-              </h2>
-              <p>
-                Sie können Ihre Cookie-Einstellungen jederzeit ändern oder widerrufen. 
-                Klicken Sie dazu auf das Cookie-Symbol unten links auf der Seite oder nutzen Sie 
-                den Button „Cookie-Einstellungen ändern".
-              </p>
-              <p>
-                Ihre Einwilligung wird in Ihrem Browser gespeichert und kann jederzeit durch 
-                Löschen der Browser-Cookies widerrufen werden.
-              </p>
-            </section>
+            <h1 className="text-4xl md:text-5xl font-serif font-semibold text-foreground mb-12 text-center">
+              Cookie-Richtlinie
+            </h1>
 
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                3. Speicherdauer
-              </h2>
-              <p>
-                Ihre Einwilligungsentscheidung wird für 12 Monate gespeichert. Nach Ablauf dieser 
-                Frist werden Sie erneut um Ihre Einwilligung gebeten.
-              </p>
-              <p>
-                Gespeicherte Einwilligungsdaten:
-              </p>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>Zeitpunkt der Einwilligung</li>
-                <li>Zustand pro Cookie-Kategorie</li>
-                <li>Version des Consent-Banners</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                4. Technische Umsetzung
-              </h2>
-              <p>
-                Unser Consent-System blockiert technisch das Laden von nicht-notwendigen Cookies 
-                und externen Diensten, bis Sie aktiv Ihre Einwilligung erteilen (Opt-In). 
-                Dies entspricht den Anforderungen des EuGH-Urteils „Planet49" sowie der aktuellen 
-                deutschen Rechtsprechung (BGH, OLG Rostock 2023).
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-serif font-semibold text-foreground mt-8 mb-3">
-                5. Kontakt
-              </h2>
-              <p>
-                Bei Fragen zu unserer Cookie-Richtlinie kontaktieren Sie uns bitte:
-              </p>
-              <p className="mt-2">
-                Speranza GmbH<br />
-                Karlstraße 47a<br />
-                80333 München<br />
-                E-Mail:{" "}
-                <EmailLink className="text-primary hover:underline">
-                  <EmailAddress />
-                </EmailLink>
-              </p>
-            </section>
+            <LegalDocument parts={cookieText as LegalPart[]} pageTitle="Cookie-Richtlinie" />
           </div>
-        </div>
-      </main>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
     </>
   );
 };
