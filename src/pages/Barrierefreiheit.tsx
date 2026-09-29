@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import EmailLink, { EmailAddress } from "@/components/EmailLink";
-import { PhoneText } from "@/lib/linkifyPhone";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import SEO from "@/components/SEO";
@@ -75,7 +74,7 @@ const Barrierefreiheit = () => {
                 <p>
                   Telefon:{" "}
                   <a href="tel:+498951519696" className="text-primary hover:underline">
-                    <PhoneText>+49 89 51519696</PhoneText>
+                    +49 89 51519696
                   </a>
                 </p>
               </address>
