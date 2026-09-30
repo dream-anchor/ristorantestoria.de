@@ -1,0 +1,2715 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAESTRO — Backoffice</title>
+<style>
+/* ============================================================
+   MAESTRO Design System — Tokens
+   ============================================================ */
+:root{
+  --bg:#FAF7F2;
+  --bg-sunken:#F3EEE5;
+  --surface:#FFFFFF;
+  --surface-2:#FDFBF7;
+  --border:#EAE3D8;
+  --border-strong:#D9CFC0;
+  --ink:#2A2521;
+  --ink-2:#6E655B;
+  --ink-3:#A2988B;
+  --accent:#C2410C;
+  --accent-hover:#A8380A;
+  --accent-soft:#F9EAE0;
+  --accent-soft-border:#F0D5C3;
+  --on-accent:#FFF9F5;
+  --good:#15803D;      --good-soft:#E6F3EA;   --good-border:#C9E5D2;
+  --warn:#B45309;      --warn-soft:#FCF2E2;   --warn-border:#F1DDBB;
+  --bad:#B91C1C;       --bad-soft:#FBEAEA;    --bad-border:#F0CFCF;
+  --info:#1D4ED8;      --info-soft:#E9EFFC;   --info-border:#CDDBF6;
+  --neutral-soft:#EFEAE1; --neutral-border:#DED6C8;
+  --chart:#C2410C;
+  --chart-muted:#E5B8A0;
+  --shadow-sm:0 1px 2px rgba(58,42,30,.06),0 1px 6px rgba(58,42,30,.05);
+  --shadow-md:0 2px 6px rgba(58,42,30,.07),0 10px 28px rgba(58,42,30,.09);
+  --shadow-lg:0 6px 16px rgba(35,24,16,.14),0 24px 60px rgba(35,24,16,.18);
+  --r-sm:8px; --r-md:10px; --r-lg:14px;
+  --font-ui:"Inter","SF Pro Text",ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+  --font-display:"Fraunces","Iowan Old Style",Georgia,"Times New Roman",serif;
+  --sidebar-w:236px;
+  --topbar-h:60px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#171310; --bg-sunken:#100D0B;
+    --surface:#211C18; --surface-2:#272119;
+    --border:#352D25; --border-strong:#483E33;
+    --ink:#EFE8DF; --ink-2:#ADA294; --ink-3:#7C7266;
+    --accent:#E06A34; --accent-hover:#EB7B47;
+    --accent-soft:#3A251A; --accent-soft-border:#553524;
+    --on-accent:#FFF6F0;
+    --good:#5BBE7E; --good-soft:#1D2E23; --good-border:#2F4A38;
+    --warn:#E3A343; --warn-soft:#332818; --warn-border:#544126;
+    --bad:#E17070;  --bad-soft:#361D1D;  --bad-border:#563030;
+    --info:#7AA2EF; --info-soft:#1D2638; --info-border:#2F4160;
+    --neutral-soft:#2C2620; --neutral-border:#3E362D;
+    --chart:#E06A34; --chart-muted:#6B4732;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    --shadow-md:0 2px 8px rgba(0,0,0,.45),0 12px 32px rgba(0,0,0,.35);
+    --shadow-lg:0 8px 20px rgba(0,0,0,.5),0 28px 70px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#FAF7F2; --bg-sunken:#F3EEE5;
+  --surface:#FFFFFF; --surface-2:#FDFBF7;
+  --border:#EAE3D8; --border-strong:#D9CFC0;
+  --ink:#2A2521; --ink-2:#6E655B; --ink-3:#A2988B;
+  --accent:#C2410C; --accent-hover:#A8380A;
+  --accent-soft:#F9EAE0; --accent-soft-border:#F0D5C3;
+  --on-accent:#FFF9F5;
+  --good:#15803D; --good-soft:#E6F3EA; --good-border:#C9E5D2;
+  --warn:#B45309; --warn-soft:#FCF2E2; --warn-border:#F1DDBB;
+  --bad:#B91C1C;  --bad-soft:#FBEAEA;  --bad-border:#F0CFCF;
+  --info:#1D4ED8; --info-soft:#E9EFFC; --info-border:#CDDBF6;
+  --neutral-soft:#EFEAE1; --neutral-border:#DED6C8;
+  --chart:#C2410C; --chart-muted:#E5B8A0;
+  --shadow-sm:0 1px 2px rgba(58,42,30,.06),0 1px 6px rgba(58,42,30,.05);
+  --shadow-md:0 2px 6px rgba(58,42,30,.07),0 10px 28px rgba(58,42,30,.09);
+  --shadow-lg:0 6px 16px rgba(35,24,16,.14),0 24px 60px rgba(35,24,16,.18);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#171310; --bg-sunken:#100D0B;
+  --surface:#211C18; --surface-2:#272119;
+  --border:#352D25; --border-strong:#483E33;
+  --ink:#EFE8DF; --ink-2:#ADA294; --ink-3:#7C7266;
+  --accent:#E06A34; --accent-hover:#EB7B47;
+  --accent-soft:#3A251A; --accent-soft-border:#553524;
+  --on-accent:#FFF6F0;
+  --good:#5BBE7E; --good-soft:#1D2E23; --good-border:#2F4A38;
+  --warn:#E3A343; --warn-soft:#332818; --warn-border:#544126;
+  --bad:#E17070;  --bad-soft:#361D1D;  --bad-border:#563030;
+  --info:#7AA2EF; --info-soft:#1D2638; --info-border:#2F4160;
+  --neutral-soft:#2C2620; --neutral-border:#3E362D;
+  --chart:#E06A34; --chart-muted:#6B4732;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:0 2px 8px rgba(0,0,0,.45),0 12px 32px rgba(0,0,0,.35);
+  --shadow-lg:0 8px 20px rgba(0,0,0,.5),0 28px 70px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font-ui);
+  background:var(--bg);
+  color:var(--ink);
+  font-size:14px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{margin:0;font-weight:600;line-height:1.25;text-wrap:balance}
+p{margin:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;padding:0}
+input,select,textarea{font:inherit;color:inherit}
+svg.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+::placeholder{color:var(--ink-3)}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-2)}
+.small{font-size:12.5px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ============================================================
+   Buttons, inputs, controls
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:9px 16px;border-radius:var(--r-sm);font-weight:550;font-size:13.5px;
+  border:1px solid transparent;transition:background .15s,border-color .15s,box-shadow .15s;
+  white-space:nowrap;
+}
+.btn .ic{width:16px;height:16px}
+.btn-primary{background:var(--accent);color:var(--on-accent);box-shadow:var(--shadow-sm)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-secondary{background:var(--surface);border-color:var(--border-strong);color:var(--ink)}
+.btn-secondary:hover{border-color:var(--ink-3);background:var(--surface-2)}
+.btn-ghost{color:var(--ink-2);padding:9px 10px}
+.btn-ghost:hover{background:var(--neutral-soft);color:var(--ink)}
+.btn-danger-ghost{color:var(--bad)}
+.btn-danger-ghost:hover{background:var(--bad-soft)}
+.btn-lg{padding:12px 22px;font-size:15px;border-radius:var(--r-md)}
+.btn-full{width:100%}
+.icon-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:var(--r-sm);color:var(--ink-2);
+  transition:background .15s,color .15s;position:relative;
+}
+.icon-btn:hover{background:var(--neutral-soft);color:var(--ink)}
+
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:12.5px;font-weight:600;color:var(--ink-2);letter-spacing:.01em}
+.input,.select,.textarea{
+  width:100%;padding:9px 12px;border-radius:var(--r-sm);
+  border:1px solid var(--border-strong);background:var(--surface);
+  transition:border-color .15s,box-shadow .15s;
+}
+.input:focus,.select:focus,.textarea:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent);
+}
+.textarea{min-height:88px;resize:vertical}
+.select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:32px}
+.field .hint{font-size:12px;color:var(--ink-3)}
+.field.invalid .input{border-color:var(--bad);box-shadow:0 0 0 3px color-mix(in srgb,var(--bad) 15%,transparent)}
+.field.invalid .error-msg{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--bad)}
+.error-msg{display:none}
+.field.invalid .error-msg .ic{width:13px;height:13px}
+
+/* Switch */
+.switch{position:relative;width:38px;height:22px;flex:none;border-radius:999px;background:var(--border-strong);transition:background .18s;border:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s}
+.switch[aria-checked="true"]{background:var(--accent)}
+.switch[aria-checked="true"]::after{transform:translateX(16px)}
+
+/* Search */
+.searchbox{position:relative;display:flex;align-items:center}
+.searchbox .ic{position:absolute;left:11px;width:15px;height:15px;color:var(--ink-3);pointer-events:none}
+.searchbox input{
+  width:100%;padding:8px 12px 8px 34px;border-radius:var(--r-sm);
+  border:1px solid var(--border);background:var(--surface);
+  transition:border-color .15s,box-shadow .15s;
+}
+.searchbox input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent)}
+
+/* ============================================================
+   Pills, badges, avatars
+   ============================================================ */
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:2.5px 9px;border-radius:999px;font-size:11.5px;font-weight:600;
+  letter-spacing:.015em;white-space:nowrap;border:1px solid transparent;
+}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.pill-neutral{background:var(--neutral-soft);border-color:var(--neutral-border);color:var(--ink-2)}
+.pill-info{background:var(--info-soft);border-color:var(--info-border);color:var(--info)}
+.pill-warn{background:var(--warn-soft);border-color:var(--warn-border);color:var(--warn)}
+.pill-good{background:var(--good-soft);border-color:var(--good-border);color:var(--good)}
+.pill-bad{background:var(--bad-soft);border-color:var(--bad-border);color:var(--bad)}
+.pill-accent{background:var(--accent-soft);border-color:var(--accent-soft-border);color:var(--accent)}
+
+.role-badge{display:inline-flex;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:650;letter-spacing:.04em;text-transform:uppercase}
+.role-owner{background:var(--accent-soft);color:var(--accent)}
+.role-admin{background:var(--info-soft);color:var(--info)}
+.role-staff{background:var(--neutral-soft);color:var(--ink-2)}
+
+.avatar{
+  width:32px;height:32px;border-radius:50%;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);color:var(--accent);
+  font-size:12px;font-weight:650;letter-spacing:.02em;
+}
+.avatar.lg{width:44px;height:44px;font-size:15px}
+.avatar.alt1{background:var(--info-soft);color:var(--info)}
+.avatar.alt2{background:var(--good-soft);color:var(--good)}
+.avatar.alt3{background:var(--warn-soft);color:var(--warn)}
+
+/* ============================================================
+   Cards / panels
+   ============================================================ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
+.card-pad{padding:18px 20px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.card-head h3{font-size:14.5px;font-weight:650}
+.card-head .link-more{font-size:12.5px;font-weight:550}
+
+/* KPI tiles */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:16px 18px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.kpi .kpi-label{font-size:12px;font-weight:600;color:var(--ink-2);letter-spacing:.02em}
+.kpi .kpi-value{font-size:25px;font-weight:650;letter-spacing:-.01em;line-height:1.1}
+.kpi .kpi-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:22px}
+.kpi .delta{display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.kpi .delta .ic{width:12px;height:12px}
+.delta.up{color:var(--good)} .delta.down{color:var(--bad)} .delta.flat{color:var(--ink-3)}
+.spark{width:64px;height:22px;flex:none}
+.spark polyline{fill:none;stroke:var(--chart);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.spark .spark-fill{fill:var(--chart);opacity:.12;stroke:none}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+.table-wrap{overflow-x:auto;border-radius:0 0 var(--r-lg) var(--r-lg)}
+table.dt{width:100%;border-collapse:collapse;font-size:13.5px}
+.dt thead th{
+  text-align:left;font-size:11.5px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-3);padding:10px 16px;border-bottom:1px solid var(--border);white-space:nowrap;
+  background:var(--surface-2);
+}
+.dt thead th.sortable{cursor:pointer}
+.dt thead th.sortable:hover{color:var(--ink)}
+.dt thead th .sort-ic{display:inline-block;vertical-align:-1px;margin-left:3px;opacity:.8}
+.dt tbody td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.dt tbody tr{transition:background .12s;cursor:pointer}
+.dt tbody tr:hover{background:var(--surface-2)}
+.dt tbody tr:last-child td{border-bottom:none}
+.dt .cell-main{display:block;font-weight:600;color:var(--ink)}
+.dt .cell-sub{display:block;font-size:12px;color:var(--ink-2);margin-top:1px}
+.dt span .cell-main{display:inline}
+.dt td.num,.dt th.num{text-align:right}
+.dt .excerpt{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
+
+/* Tabs (status filter + settings) */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  padding:9px 14px;font-size:13px;font-weight:550;color:var(--ink-2);
+  border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:7px;transition:color .12s;
+}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab .count{background:var(--neutral-soft);color:var(--ink-2);border-radius:999px;padding:0 7px;font-size:11px;font-weight:650;line-height:18px}
+.tab[aria-selected="true"] .count{background:var(--accent-soft);color:var(--accent)}
+
+/* Segmented control */
+.seg{display:inline-flex;background:var(--bg-sunken);border:1px solid var(--border);border-radius:var(--r-sm);padding:3px;gap:2px}
+.seg button{padding:6px 13px;border-radius:6px;font-size:12.5px;font-weight:600;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+.seg button .ic{width:14px;height:14px}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+
+/* ============================================================
+   Layout: shell, sidebar, topbar
+   ============================================================ */
+#view-app{display:flex;min-height:100vh}
+.sidebar{
+  width:var(--sidebar-w);flex:none;position:sticky;top:0;height:100vh;
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:30;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:18px 18px 14px}
+.brand .logo-mark{
+  width:34px;height:34px;border-radius:9px;flex:none;
+  background:linear-gradient(135deg,var(--accent),#8F2F08);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--font-display);font-weight:600;font-size:17px;
+  box-shadow:var(--shadow-sm);
+}
+.brand .brand-name{font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:.06em}
+.side-nav{flex:1;padding:6px 10px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.side-nav .nav-item{
+  display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:var(--r-sm);
+  font-size:13.5px;font-weight:550;color:var(--ink-2);width:100%;text-align:left;
+  transition:background .13s,color .13s;
+}
+.side-nav .nav-item .ic{width:18px;height:18px;color:var(--ink-3);transition:color .13s}
+.side-nav .nav-item:hover{background:var(--neutral-soft);color:var(--ink)}
+.side-nav .nav-item:hover .ic{color:var(--ink)}
+.side-nav .nav-item[aria-current="page"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.side-nav .nav-item[aria-current="page"] .ic{color:var(--accent)}
+.side-nav .nav-badge{margin-left:auto;background:var(--accent);color:var(--on-accent);border-radius:999px;font-size:10.5px;font-weight:700;padding:1px 7px;line-height:16px}
+.side-foot{border-top:1px solid var(--border);padding:12px 10px;display:flex;flex-direction:column;gap:4px}
+.tenant-switch{
+  display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r-sm);
+  width:100%;text-align:left;transition:background .13s;
+}
+.tenant-switch:hover{background:var(--neutral-soft)}
+.tenant-switch .tenant-logo{
+  width:30px;height:30px;border-radius:8px;flex:none;background:var(--bg-sunken);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--accent);
+}
+.tenant-switch .tenant-meta{flex:1;min-width:0}
+.tenant-switch .tenant-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tenant-switch .tenant-sub{font-size:11px;color:var(--ink-3)}
+.tenant-switch .ic{width:14px;height:14px;color:var(--ink-3)}
+
+.main-col{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{
+  height:var(--topbar-h);position:sticky;top:0;z-index:25;
+  background:color-mix(in srgb,var(--bg) 86%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:14px;padding:0 24px;
+}
+.topbar .global-search{flex:1;max-width:420px}
+.topbar .global-search input{background:var(--surface)}
+.topbar .kbd{
+  position:absolute;right:9px;top:50%;transform:translateY(-50%);
+  font-size:10.5px;color:var(--ink-3);border:1px solid var(--border);border-radius:5px;
+  padding:1px 5px;background:var(--surface-2);
+}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:6px}
+.notif-dot{position:absolute;top:7px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.user-menu{display:flex;align-items:center;gap:10px;padding:5px 8px 5px 6px;border-radius:var(--r-sm);transition:background .13s}
+.user-menu:hover{background:var(--neutral-soft)}
+.user-menu .user-meta{text-align:left;line-height:1.2}
+.user-menu .user-name{font-size:13px;font-weight:600}
+.user-menu .user-role{font-size:11px;color:var(--ink-3)}
+.user-menu .ic{width:14px;height:14px;color:var(--ink-3)}
+
+.content{flex:1;padding:26px 28px 90px;max-width:1360px;width:100%;margin:0 auto}
+
+/* Page header */
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.page-head h1{font-family:var(--font-display);font-size:27px;font-weight:600;letter-spacing:-.005em}
+.page-head .page-sub{color:var(--ink-2);font-size:13.5px;margin-top:3px}
+.page-actions{display:flex;gap:9px;flex-wrap:wrap}
+
+/* Screens */
+.screen{display:none}
+.screen.active{display:block;animation:screenIn .22s ease}
+@keyframes screenIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* Toolbar row above tables */
+.list-toolbar{display:flex;align-items:center;gap:12px;padding:14px 16px;flex-wrap:wrap}
+.list-toolbar .searchbox{flex:1;min-width:200px;max-width:340px}
+
+/* ============================================================
+   Empty / loading / error states
+   ============================================================ */
+.state-block{display:none;padding:52px 24px;text-align:center}
+.state-block .state-art{margin:0 auto 16px;width:104px;height:84px;color:var(--ink-3)}
+.state-block h4{font-size:15.5px;font-weight:650;margin-bottom:5px}
+.state-block p{color:var(--ink-2);font-size:13px;max-width:380px;margin:0 auto 16px}
+.skeleton-block{display:none;padding:8px 16px 16px}
+.sk-row{display:flex;align-items:center;gap:16px;padding:13px 0;border-bottom:1px solid var(--border)}
+.sk-row:last-child{border-bottom:none}
+.sk{background:linear-gradient(90deg,var(--neutral-soft) 25%,var(--bg-sunken) 40%,var(--neutral-soft) 55%);background-size:400% 100%;animation:shimmer 1.4s infinite linear;border-radius:6px;height:13px}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:-100% 0}}
+.sk.c{width:32px;height:32px;border-radius:50%;flex:none}
+.sk.w1{width:18%}.sk.w2{width:10%}.sk.w3{width:14%}.sk.w4{width:22%}.sk.w5{width:8%}
+#app[data-liststate="loading"] .list-live{display:none}
+#app[data-liststate="loading"] .skeleton-block{display:block}
+#app[data-liststate="empty"] .list-live{display:none}
+#app[data-liststate="empty"] .state-empty{display:block}
+#app[data-liststate="error"] .list-live{display:none}
+#app[data-liststate="error"] .state-error{display:block}
+#app[data-liststate="empty"] .hide-when-empty,
+#app[data-liststate="loading"] .hide-when-empty,
+#app[data-liststate="error"] .hide-when-empty{display:none}
+
+/* ============================================================
+   Dashboard specifics
+   ============================================================ */
+.dash-grid{display:grid;grid-template-columns:5fr 4fr;gap:16px;margin-top:16px}
+.todo-item{display:flex;gap:12px;padding:13px 20px;border-bottom:1px solid var(--border);align-items:flex-start}
+.todo-item:last-child{border-bottom:none}
+.todo-ic{width:32px;height:32px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center}
+.todo-ic .ic{width:16px;height:16px}
+.todo-ic.warn{background:var(--warn-soft);color:var(--warn)}
+.todo-ic.bad{background:var(--bad-soft);color:var(--bad)}
+.todo-ic.info{background:var(--info-soft);color:var(--info)}
+.todo-body{flex:1;min-width:0}
+.todo-body .todo-title{display:block;font-weight:600;font-size:13.5px}
+.todo-body .todo-sub{display:block;font-size:12.5px;color:var(--ink-2);margin-top:1px}
+.todo-item .btn{align-self:center}
+
+.tl{list-style:none;margin:0;padding:6px 20px 14px}
+.tl-item{display:flex;gap:14px;position:relative;padding:10px 0}
+.tl-item:not(:last-child)::before{content:"";position:absolute;left:21px;top:52px;bottom:-6px;width:2px;background:var(--border);border-radius:2px}
+.tl-date{
+  width:43px;height:43px;flex:none;border-radius:10px;background:var(--bg-sunken);border:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;z-index:1;
+}
+.tl-date .d{font-size:15px;font-weight:700}
+.tl-date .m{font-size:9.5px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.tl-body{flex:1;min-width:0;padding-top:2px}
+.tl-body .tl-title{display:block;font-weight:600;font-size:13.5px}
+.tl-body .tl-sub{display:block;font-size:12.5px;color:var(--ink-2)}
+.tl-item .pill{align-self:center}
+
+.chart-grid{display:grid;grid-template-columns:5fr 4fr;gap:16px;margin-top:16px}
+.chart-body{padding:14px 20px 18px;position:relative}
+.bar-chart{width:100%;height:190px;display:block}
+.bar-chart .grid-line{stroke:var(--border);stroke-width:1}
+.bar-chart .axis-label{fill:var(--ink-3);font-size:10.5px;font-family:var(--font-ui)}
+.bar-chart .bar{fill:var(--chart-muted);rx:4;transition:opacity .12s;cursor:pointer}
+.bar-chart .bar.current{fill:var(--chart)}
+.bar-chart .bar:hover{opacity:.82}
+.bar-chart .bar-value{fill:var(--ink-2);font-size:10.5px;font-weight:600;text-anchor:middle;font-family:var(--font-ui)}
+.chart-tip{
+  position:fixed;z-index:90;pointer-events:none;display:none;
+  background:var(--ink);color:var(--bg);padding:6px 10px;border-radius:8px;
+  font-size:12px;font-weight:600;box-shadow:var(--shadow-md);white-space:nowrap;
+}
+.chart-tip .tip-sub{display:block;font-weight:500;opacity:.75;font-size:11px}
+
+.funnel{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.funnel-step .f-head{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;margin-bottom:5px}
+.funnel-step .f-head .f-n{color:var(--ink-2)}
+.funnel-track{height:26px;background:var(--bg-sunken);border-radius:7px;overflow:hidden;border:1px solid var(--border)}
+.funnel-fill{height:100%;border-radius:6px;background:var(--chart);opacity:.9}
+.funnel-step:nth-child(2) .funnel-fill{opacity:.72}
+.funnel-step:nth-child(3) .funnel-fill{opacity:.55}
+.funnel-conv{font-size:11.5px;color:var(--ink-3);margin-top:4px;display:flex;align-items:center;gap:5px}
+.funnel-conv .ic{width:12px;height:12px}
+
+/* ============================================================
+   Drawer
+   ============================================================ */
+.drawer-backdrop{
+  position:fixed;inset:0;background:rgba(24,16,10,.42);z-index:60;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(480px,100vw);z-index:61;
+  background:var(--surface);border-left:1px solid var(--border);box-shadow:var(--shadow-lg);
+  transform:translateX(102%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+}
+#app.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
+.drawer.open{transform:none}
+.drawer-head{display:flex;align-items:flex-start;gap:12px;padding:18px 20px;border-bottom:1px solid var(--border)}
+.drawer-head .drawer-title{font-family:var(--font-display);font-size:19px;font-weight:600}
+.drawer-head .drawer-sub{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.drawer-body{flex:1;overflow-y:auto;padding:18px 20px}
+.drawer-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:9px;background:var(--surface-2)}
+.drawer-foot .btn{flex:1}
+
+.kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px 16px;margin:0}
+.kv-grid dt{font-size:11px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1px}
+.kv-grid dd{margin:0;font-size:13.5px;font-weight:550}
+.section-label{font-size:11.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:20px 0 9px}
+.section-label:first-child{margin-top:0}
+
+.msg-quote{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);
+  padding:13px 15px;font-size:13.5px;color:var(--ink);line-height:1.6;
+}
+.activity{list-style:none;margin:0;padding:0}
+.activity li{display:flex;gap:11px;padding:8px 0;position:relative}
+.activity li:not(:last-child)::before{content:"";position:absolute;left:6px;top:26px;bottom:-4px;width:2px;background:var(--border)}
+.activity .a-dot{width:14px;height:14px;border-radius:50%;flex:none;margin-top:3px;border:3px solid var(--surface);box-shadow:0 0 0 1.5px var(--border);background:var(--ink-3);z-index:1}
+.activity .a-dot.accent{background:var(--accent);box-shadow:0 0 0 1.5px var(--accent-soft-border)}
+.activity .a-dot.good{background:var(--good)}
+.activity .a-text{font-size:13px}
+.activity .a-time{font-size:11.5px;color:var(--ink-3)}
+
+/* ============================================================
+   Angebots-Builder
+   ============================================================ */
+.builder-layout{display:grid;grid-template-columns:250px minmax(0,1fr) 310px;gap:16px;align-items:start}
+.ctx-card .kv-grid{grid-template-columns:1fr}
+.option-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.option-tab{
+  flex:1;min-width:130px;text-align:left;padding:11px 13px;border-radius:var(--r-md);
+  border:1.5px solid var(--border);background:var(--surface);transition:border-color .15s,background .15s;
+}
+.option-tab .ot-key{display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--ink-3)}
+.option-tab .ot-name{display:block;font-weight:650;font-size:13.5px;margin-top:1px}
+.option-tab .ot-price{display:block;font-size:12px;color:var(--ink-2);margin-top:1px}
+.option-tab[aria-selected="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.option-tab[aria-selected="true"] .ot-key{color:var(--accent)}
+.pos-cat{padding:12px 18px 4px;display:flex;align-items:center;justify-content:space-between}
+.pos-cat h4{font-size:12px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.pos-row{display:grid;grid-template-columns:minmax(0,1fr) 68px 92px 92px 52px 30px;gap:10px;align-items:center;padding:9px 18px;border-bottom:1px solid var(--border)}
+.pos-row:last-of-type{border-bottom:none}
+.pos-row .input{padding:7px 10px;font-size:13px}
+.pos-row .pos-name{font-weight:550;font-size:13.5px;min-width:0}
+.pos-row .pos-name .pos-desc{font-size:11.5px;color:var(--ink-3);font-weight:400}
+.pos-row .pos-sum{font-weight:600;text-align:right}
+.pos-row .pos-vat{font-size:12px;color:var(--ink-3);text-align:right}
+.pos-head{display:grid;grid-template-columns:minmax(0,1fr) 68px 92px 92px 52px 30px;gap:10px;padding:10px 18px 6px;font-size:10.5px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.pos-head span:nth-child(n+2){text-align:right}
+.add-pos{margin:10px 18px 16px}
+.summary-row{display:flex;justify-content:space-between;font-size:13.5px;padding:5px 0}
+.summary-row.total{font-size:16.5px;font-weight:700;border-top:1px solid var(--border);margin-top:8px;padding-top:11px}
+.summary-row .muted{font-size:12.5px}
+.pp-line{display:flex;justify-content:space-between;background:var(--accent-soft);border:1px solid var(--accent-soft-border);border-radius:var(--r-sm);padding:8px 12px;margin-top:12px;font-weight:650;color:var(--accent);font-size:13px}
+.version-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.version-item:last-child{border-bottom:none}
+.version-item .v-tag{font-weight:700;font-size:11.5px;background:var(--neutral-soft);border-radius:6px;padding:2px 8px}
+.version-item.current .v-tag{background:var(--accent-soft);color:var(--accent)}
+.preview-mini{
+  border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;background:var(--bg);
+}
+.preview-mini .pm-head{background:linear-gradient(135deg,#3B2A1E,#1F1611);padding:14px;color:#F5EDE3;text-align:center}
+.preview-mini .pm-head .pm-logo{width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.14);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:13px;margin-bottom:5px}
+.preview-mini .pm-title{font-family:var(--font-display);font-size:13.5px}
+.preview-mini .pm-sub{font-size:10.5px;opacity:.7}
+.preview-mini .pm-body{padding:10px;display:flex;flex-direction:column;gap:6px}
+.preview-mini .pm-opt{border:1px solid var(--border);border-radius:8px;padding:7px 9px;font-size:11px;display:flex;justify-content:space-between;background:var(--surface)}
+.preview-mini .pm-opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+
+/* ============================================================
+   Stepper
+   ============================================================ */
+.stepper{display:flex;align-items:flex-start;gap:0;margin:4px 0 8px}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;min-width:70px}
+.step:not(:last-child)::after{content:"";position:absolute;top:13px;left:calc(50% + 16px);right:calc(-50% + 16px);height:2px;background:var(--border);border-radius:2px}
+.step.done:not(:last-child)::after{background:var(--good)}
+.step .step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg-sunken);border:2px solid var(--border-strong);color:var(--ink-3);font-size:11.5px;font-weight:700;z-index:1}
+.step .step-dot .ic{width:13px;height:13px}
+.step.done .step-dot{background:var(--good);border-color:var(--good);color:#fff}
+.step.current .step-dot{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.step .step-label{font-size:11.5px;font-weight:600;color:var(--ink-3);margin-top:6px;text-align:center}
+.step.done .step-label{color:var(--good)}
+.step.current .step-label{color:var(--accent)}
+
+/* Checklist */
+.check-item{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px}
+.check-item:last-child{border-bottom:none}
+.check-box{width:19px;height:19px;border-radius:6px;border:1.5px solid var(--border-strong);flex:none;display:flex;align-items:center;justify-content:center;color:transparent;background:var(--surface);transition:all .15s;cursor:pointer}
+.check-item.done .check-box{background:var(--good);border-color:var(--good);color:#fff}
+.check-item.done .check-label{color:var(--ink-3);text-decoration:line-through}
+.check-item .check-meta{margin-left:auto;font-size:11.5px;color:var(--ink-3)}
+
+/* ============================================================
+   Kalender
+   ============================================================ */
+.cal-head{display:flex;align-items:center;gap:12px;padding:14px 16px;flex-wrap:wrap}
+.cal-title{font-family:var(--font-display);font-size:18px;font-weight:600;min-width:150px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--border)}
+.cal-dow{padding:8px 10px;font-size:11px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--border);text-align:left}
+.cal-cell{min-height:96px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);padding:6px 7px;position:relative;transition:background .12s}
+.cal-cell:nth-child(7n){border-right:none}
+.cal-cell:hover{background:var(--surface-2)}
+.cal-cell .cal-day{font-size:12px;font-weight:600;color:var(--ink-2);width:23px;height:23px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+.cal-cell.other .cal-day{color:var(--ink-3);opacity:.5}
+.cal-cell.today .cal-day{background:var(--accent);color:var(--on-accent)}
+.cal-chip{
+  display:flex;align-items:center;gap:5px;margin-top:4px;padding:2.5px 7px;border-radius:6px;
+  font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  border:1px solid transparent;cursor:pointer;width:100%;text-align:left;
+}
+.cal-chip::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}
+.cal-chip.good{background:var(--good-soft);border-color:var(--good-border);color:var(--good)}
+.cal-chip.warn{background:var(--warn-soft);border-color:var(--warn-border);color:var(--warn)}
+.cal-chip.bad{background:var(--bad-soft);border-color:var(--bad-border);color:var(--bad)}
+.cal-chip.neutral{background:var(--neutral-soft);border-color:var(--neutral-border);color:var(--ink-2)}
+.cal-legend{display:flex;gap:16px;padding:12px 16px;border-top:1px solid var(--border);flex-wrap:wrap}
+.cal-legend .lg{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2)}
+.cal-legend .lg i{width:9px;height:9px;border-radius:3px;display:inline-block}
+
+/* ============================================================
+   Einstellungen
+   ============================================================ */
+.settings-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.settings-panel{display:none;padding-top:20px}
+.settings-panel.active{display:block}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.module-card{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.module-card .mod-head{display:flex;align-items:center;gap:11px}
+.module-card .mod-ic{width:36px;height:36px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--bg-sunken);border:1px solid var(--border);color:var(--ink-2)}
+.module-card .mod-ic .ic{width:18px;height:18px}
+.module-card .mod-name{font-weight:650;font-size:14px}
+.module-card .mod-desc{font-size:12.5px;color:var(--ink-2);flex:1}
+.module-card .mod-foot{display:flex;align-items:center;justify-content:space-between}
+.module-card .mod-status{font-size:12px;font-weight:600;color:var(--ink-3)}
+.module-card.on .mod-status{color:var(--good)}
+.member-row{display:flex;align-items:center;gap:13px;padding:13px 20px;border-bottom:1px solid var(--border)}
+.member-row:last-child{border-bottom:none}
+.member-row .m-meta{flex:1;min-width:0}
+.member-row .m-name{font-weight:600;font-size:13.5px}
+.member-row .m-mail{font-size:12.5px;color:var(--ink-2)}
+.swatch-row{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{width:34px;height:34px;border-radius:10px;border:2px solid transparent;cursor:pointer;position:relative}
+.swatch.sel{border-color:var(--ink);box-shadow:0 0 0 2px var(--surface) inset}
+.logo-drop{
+  border:1.5px dashed var(--border-strong);border-radius:var(--r-md);padding:22px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink-3);font-size:12.5px;
+  background:var(--surface-2);
+}
+.stripe-status{display:flex;align-items:center;gap:13px;padding:15px 18px;border:1px solid var(--good-border);background:var(--good-soft);border-radius:var(--r-md)}
+.stripe-status .ic{color:var(--good)}
+
+/* ============================================================
+   Toast
+   ============================================================ */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,16px);z-index:95;
+  background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:11px;
+  font-size:13.5px;font-weight:550;box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:9px;opacity:0;pointer-events:none;
+  transition:opacity .22s,transform .22s;max-width:min(480px,90vw);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast .ic{width:16px;height:16px;color:var(--good)}
+
+/* ============================================================
+   Login
+   ============================================================ */
+#view-login{
+  position:fixed;inset:0;z-index:70;display:none;
+  align-items:center;justify-content:center;padding:24px;
+  background:
+    radial-gradient(1100px 600px at 12% -8%,rgba(194,65,12,.34),transparent 60%),
+    radial-gradient(900px 620px at 96% 108%,rgba(140,84,33,.4),transparent 55%),
+    radial-gradient(500px 380px at 82% 12%,rgba(226,150,72,.16),transparent 60%),
+    linear-gradient(160deg,#221610,#160F0B 55%,#1E130C);
+}
+#view-login.active{display:flex}
+#view-login::before{
+  content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1.5px);
+  background-size:26px 26px;
+}
+.login-tagline{
+  position:absolute;bottom:26px;left:0;right:0;text-align:center;
+  color:rgba(245,235,222,.5);font-size:12.5px;letter-spacing:.03em;
+}
+.login-card{
+  position:relative;width:100%;max-width:400px;background:var(--surface);
+  border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-lg);
+  padding:34px 34px 28px;
+}
+.login-card .logo-mark{
+  width:46px;height:46px;border-radius:13px;margin:0 auto 14px;
+  background:linear-gradient(135deg,#C2410C,#8F2F08);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--font-display);font-weight:600;font-size:23px;
+  box-shadow:0 6px 18px rgba(194,65,12,.35);
+}
+.login-card h1{font-family:var(--font-display);font-size:23px;text-align:center;letter-spacing:.1em}
+.login-card .login-sub{text-align:center;color:var(--ink-2);font-size:13px;margin:5px 0 24px}
+.divider{display:flex;align-items:center;gap:12px;color:var(--ink-3);font-size:12px;margin:16px 0}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--border)}
+.btn-google{width:100%;background:var(--surface);border:1px solid var(--border-strong);color:var(--ink);font-weight:550}
+.btn-google:hover{background:var(--surface-2)}
+.login-foot{text-align:center;font-size:13px;color:var(--ink-2);margin-top:20px}
+.forgot-row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;margin:-6px 0 16px}
+
+/* ============================================================
+   Öffentliche Angebotsseite
+   ============================================================ */
+#view-public{position:fixed;inset:0;z-index:70;display:none;overflow-y:auto;background:var(--bg)}
+#view-public.active{display:block}
+.pub-hero{
+  background:
+    radial-gradient(900px 420px at 85% -20%,rgba(226,150,72,.28),transparent 60%),
+    radial-gradient(700px 420px at 8% 118%,rgba(194,65,12,.3),transparent 55%),
+    linear-gradient(150deg,#2A1B12,#1A110B 60%,#241509);
+  color:#F7EFE4;padding:52px 24px 88px;text-align:center;position:relative;
+}
+.pub-hero::before{content:"";position:absolute;inset:0;opacity:.4;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1.5px);background-size:24px 24px;pointer-events:none}
+.pub-hero .tenant-logo-lg{
+  width:52px;height:52px;border-radius:14px;margin:0 auto 14px;position:relative;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:24px;color:#F2C89B;
+}
+.pub-hero .pub-tenant{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,239,228,.65);position:relative}
+.pub-hero h1{font-family:var(--font-display);font-size:clamp(27px,5vw,38px);font-weight:600;margin:10px 0 8px;position:relative}
+.pub-hero .pub-meta{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:13.5px;color:rgba(247,239,228,.8);position:relative}
+.pub-hero .pub-meta span{display:inline-flex;align-items:center;gap:6px}
+.pub-hero .pub-meta .ic{width:15px;height:15px;opacity:.75}
+.pub-wrap{max-width:960px;margin:-52px auto 0;padding:0 20px 60px;position:relative}
+.pub-intro{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-md);
+  padding:22px 26px;font-size:14.5px;line-height:1.7;color:var(--ink);margin-bottom:26px;
+}
+.pub-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.pub-opt{
+  background:var(--surface);border:2px solid var(--border);border-radius:16px;overflow:hidden;
+  cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s;
+  display:flex;flex-direction:column;text-align:left;position:relative;
+}
+.pub-opt:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.pub-opt.sel{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent),var(--shadow-md)}
+.pub-opt .opt-photo{height:130px;position:relative;display:flex;align-items:flex-end;padding:12px}
+.pub-opt .opt-photo.p1{background:radial-gradient(280px 160px at 30% 20%,rgba(255,214,150,.5),transparent 70%),linear-gradient(140deg,#B4562A,#7A3413 65%,#5C260C)}
+.pub-opt .opt-photo.p2{background:radial-gradient(280px 160px at 70% 15%,rgba(255,230,170,.45),transparent 70%),linear-gradient(140deg,#8C6A2F,#5F431B 60%,#463012)}
+.pub-opt .opt-photo.p3{background:radial-gradient(280px 160px at 40% 10%,rgba(255,190,160,.4),transparent 70%),linear-gradient(140deg,#6E3A4C,#472233 65%,#33171F)}
+.pub-opt .opt-photo::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1.2px,transparent 1.6px);background-size:18px 18px;opacity:.55}
+.pub-opt .opt-photo .opt-tag{position:relative;z-index:1;background:rgba(20,12,7,.55);backdrop-filter:blur(4px);color:#F7EFE4;font-size:11px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.pub-opt .opt-radio{
+  position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;z-index:2;
+  border:2px solid rgba(255,255,255,.85);background:rgba(20,12,7,.3);transition:all .15s;
+  display:flex;align-items:center;justify-content:center;color:transparent;
+}
+.pub-opt.sel .opt-radio{background:var(--accent);border-color:#fff;color:#fff}
+.pub-opt .opt-radio .ic{width:13px;height:13px}
+.pub-opt .opt-body{padding:16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.pub-opt h3{font-family:var(--font-display);font-size:18.5px;font-weight:600}
+.pub-opt .opt-menu{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--ink-2);flex:1}
+.pub-opt .opt-menu li{display:flex;gap:8px}
+.pub-opt .opt-menu li::before{content:"·";color:var(--accent);font-weight:700}
+.pub-opt .opt-price{border-top:1px solid var(--border);padding-top:12px;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:2px 10px}
+.pub-opt .opt-pp{font-size:19px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+.pub-opt .opt-pp small{font-size:11.5px;font-weight:550;color:var(--ink-2);letter-spacing:0}
+.pub-opt .opt-total{font-size:12px;color:var(--ink-2)}
+.pub-confirm{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-sm);padding:22px 26px;margin-top:26px}
+.pub-trust{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:30px;color:var(--ink-2);font-size:13px}
+.pub-trust span{display:inline-flex;align-items:center;gap:7px}
+.pub-trust .ic{width:15px;height:15px;color:var(--ink-3)}
+.pub-powered{text-align:center;margin-top:22px;font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
+
+/* ============================================================
+   Prototype toolbar
+   ============================================================ */
+.proto-bar{
+  position:fixed;bottom:18px;right:18px;z-index:80;
+  background:var(--surface);border:1px solid var(--border);border-radius:13px;box-shadow:var(--shadow-md);
+  padding:8px 10px;display:flex;align-items:center;gap:7px;font-size:12px;
+}
+.proto-bar .proto-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-right:2px}
+.proto-bar .select{width:auto;padding:5px 26px 5px 9px;font-size:12px;border-radius:7px}
+.proto-bar .btn{padding:5.5px 10px;font-size:12px;border-radius:7px}
+.proto-bar .icon-btn{width:30px;height:30px}
+.proto-bar .icon-btn .ic{width:15px;height:15px}
+
+/* ============================================================
+   Mobile tab bar + responsive
+   ============================================================ */
+.tabbar{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:color-mix(in srgb,var(--surface) 92%,transparent);
+  backdrop-filter:blur(12px);border-top:1px solid var(--border);
+  padding:6px 8px calc(8px + env(safe-area-inset-bottom));
+  grid-template-columns:repeat(5,1fr);gap:2px;
+}
+.tabbar .tab-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;border-radius:9px;font-size:10px;font-weight:600;color:var(--ink-3)}
+.tabbar .tab-item .ic{width:20px;height:20px}
+.tabbar .tab-item[aria-current="page"]{color:var(--accent)}
+
+@media (max-width:1160px){
+  .builder-layout{grid-template-columns:minmax(0,1fr) 300px}
+  .builder-layout .ctx-col{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+}
+@media (max-width:960px){
+  .sidebar{display:none}
+  .tabbar{display:grid}
+  .content{padding:20px 16px 120px}
+  .dash-grid,.chart-grid{grid-template-columns:1fr}
+  .builder-layout{grid-template-columns:1fr}
+  .builder-layout .ctx-col{grid-template-columns:1fr}
+  .topbar{padding:0 14px}
+  .topbar .global-search{max-width:none}
+  .user-menu .user-meta{display:none}
+  .kv-grid{grid-template-columns:1fr 1fr}
+  .cal-cell{min-height:64px;padding:4px}
+  .cal-chip{font-size:0;padding:0;height:7px;border-radius:4px;margin-top:3px}
+  .cal-chip::before{display:none}
+  /* Tabellen werden zu Karten */
+  .dt thead{display:none}
+  .dt,.dt tbody,.dt tr,.dt td{display:block;width:100%}
+  .dt tbody tr{border:1px solid var(--border);border-radius:var(--r-md);margin:10px 14px;background:var(--surface);box-shadow:var(--shadow-sm);padding:6px 0}
+  .dt tbody td{border-bottom:none;padding:5px 16px;display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+  .dt tbody td.num{text-align:right}
+  .dt tbody td[data-th]::before{content:attr(data-th);font-size:11px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);flex:none}
+  .dt .excerpt{max-width:none;white-space:normal}
+  .pos-head{display:none}
+  .pos-row{grid-template-columns:1fr 1fr;row-gap:6px}
+  .kpi .kpi-value{font-size:21px}
+  .page-head h1{font-size:23px}
+}
+@media (max-width:560px){
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .option-tabs{flex-direction:column}
+  .drawer{width:100vw}
+  .pub-hero{padding:40px 18px 76px}
+  .login-card{padding:26px 22px 22px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     Icon-Sprite
+     ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M21 12h-5l-2 3h-4l-2-3H3"/><path d="M5.5 5h13l2.5 7v6a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18v-6z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a1.5 1.5 0 0 0-1.5 1.5v15A1.5 1.5 0 0 0 7 21h10a1.5 1.5 0 0 0 1.5-1.5V7.5z"/><path d="M14 3v4.5h4.5"/><path d="M9 12.5h6M9 16h6"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M7 3v7a2 2 0 0 1-2 2 2 2 0 0 1-2-2V3"/><path d="M5 12v9M7 3v18" opacity="0"/><path d="M5 12v9"/><path d="M18 3c-2 1.5-3 4-3 7v2h3.5"/><path d="M18.5 3v18"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M8 3v4M16 3v4M3.5 10h17"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16.5 4.9a3.5 3.5 0 0 1 0 6.2"/><path d="M18 14.7c1.9.7 3 2.3 3 4.3"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></symbol>
+    <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09c0 .68.4 1.3 1.03 1.56a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9c.26.63.88 1.03 1.56 1.03H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1.03z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8.5a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14.5 18 8.5"/><path d="M10.3 20a2 2 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-chev-d" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M21 16.5v2.6a1.8 1.8 0 0 1-2 1.8 17.6 17.6 0 0 1-7.7-2.7 17.3 17.3 0 0 1-5.5-5.5A17.6 17.6 0 0 1 3.1 5a1.8 1.8 0 0 1 1.8-2h2.6a1.8 1.8 0 0 1 1.8 1.6c.1.9.35 1.85.7 2.7a1.8 1.8 0 0 1-.4 1.9L8.5 10.3a14.4 14.4 0 0 0 5.2 5.2l1.1-1.1a1.8 1.8 0 0 1 1.9-.4c.85.35 1.8.6 2.7.7a1.8 1.8 0 0 1 1.6 1.8"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19.5 10c0 5.2-7.5 11-7.5 11S4.5 15.2 4.5 10a7.5 7.5 0 0 1 15 0"/><circle cx="12" cy="10" r="2.7"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 4.2 2.7 17.5A2 2 0 0 0 4.4 20.5h15.2a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0"/><path d="M12 9.5v4.5M12 17.2v.1"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 7.8v.1"/></symbol>
+    <symbol id="i-arr-u" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+    <symbol id="i-arr-d" viewBox="0 0 24 24"><path d="M12 5v14m6-6-6 6-6-6"/></symbol>
+    <symbol id="i-arr-r" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10.5 13.5"/><path d="M21 3 14 21l-3.5-7.5L3 10z"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 5H5.5A1.5 1.5 0 0 0 4 6.5v12A1.5 1.5 0 0 0 5.5 20h12a1.5 1.5 0 0 0 1.5-1.5V13"/><path d="M17.3 3.7a2 2 0 0 1 2.9 2.9L12 14.8l-4 1 1-4z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9.5 7V4.8A1 1 0 0 1 10.5 4h3a1 1 0 0 1 1 .8V7m3.5 0-.8 12.2a1.5 1.5 0 0 1-1.5 1.4H8.3a1.5 1.5 0 0 1-1.5-1.4L6 7"/><path d="M10 11.5v5M14 11.5v5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2.5 12h2M19.5 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4.5" y="3.5" width="15" height="17" rx="1.5"/><path d="M4.5 20.5h15M9 7.5h1.5M13.5 7.5H15M9 11h1.5M13.5 11H15M9 14.5h1.5M13.5 14.5H15M10.5 20.5v-3h3v3"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5V15m-5-4.5 5 5 5-5"/><path d="M4 18.5V20a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5 11 13"/><path d="M19.5 14v4.5a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 18.5V6a1.5 1.5 0 0 1 1.5-1.5H10"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9L14.5 20H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M14.5 20v-4a1.5 1.5 0 0 1 1.5-1.5h4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 5.5V10h-4.5"/><path d="M3.8 14.5a8.3 8.3 0 0 0 14 3.2L20 15.5M20 10l-2-2.3a8.3 8.3 0 0 0-14 3.3"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M20.5 14.5a2 2 0 0 1-2 2H8l-4.5 4V5.5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-euro" viewBox="0 0 24 24"><path d="M18 5.8A7.4 7.4 0 0 0 12.8 4C8.9 4 5.8 7.6 5.8 12s3.1 8 7 8c2 0 3.9-.7 5.2-1.8"/><path d="M3.5 10h9M3.5 14h8"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3.5 13.8 9 19.5 11 13.8 13 12 18.5 10.2 13 4.5 11 10.2 9z"/><path d="M18.5 16.5l.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7z"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13.5 3 5 13.5h5.5L10 21l8.5-10.5H13z"/></symbol>
+    <symbol id="i-sign" viewBox="0 0 24 24"><path d="M3.5 20.5c2.5 0 4-4.5 5.5-4.5s1 2.5 2.5 2.5 2.2-3 3.5-3 1.5 1.8 5.5 1.8"/><path d="M14.5 4.6a2.1 2.1 0 0 1 3 3L9 16l-4 1 1-4z"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="18.5" cy="12" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 21.5s7.5-3.5 7.5-9.5V5.5L12 2.8 4.5 5.5V12c0 6 7.5 9.5 7.5 9.5"/><path d="m8.8 11.8 2.2 2.2 4.2-4.5"/></symbol>
+    <symbol id="i-sort" viewBox="0 0 24 24"><path d="m8 9 4-4 4 4M8 15l4 4 4-4"/></symbol>
+    <symbol id="i-google" viewBox="0 0 24 24"><path d="M21.35 11.1H12v3.7h5.35c-.5 2.45-2.6 3.85-5.35 3.85a5.85 5.85 0 1 1 0-11.7c1.5 0 2.85.55 3.9 1.45l2.75-2.75A9.53 9.53 0 0 0 12 2.4a9.6 9.6 0 1 0 0 19.2c4.8 0 9.15-3.5 9.15-9.6 0-.3-.02-.6-.05-.9z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-empty-art" viewBox="0 0 120 96"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".7"><rect x="24" y="22" width="72" height="56" rx="6"/><path d="M24 38h72" opacity=".5"/><circle cx="34" cy="30" r="2.2" fill="currentColor" stroke="none" opacity=".5"/><circle cx="42" cy="30" r="2.2" fill="currentColor" stroke="none" opacity=".5"/><path d="M46 56h28M52 64h16" opacity=".55"/><circle cx="60" cy="52" r="16" opacity="0"/><path d="M96 74l10 10" opacity="0"/></g><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".9"><circle cx="88" cy="66" r="13"/><path d="m97.5 75.5 8.5 8.5"/></g></symbol>
+    <symbol id="i-error-art" viewBox="0 0 120 96"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".8"><path d="M60 18 22 78h76z"/><path d="M60 40v18M60 66v.5"/><path d="M28 30c-4 2-7 6-8 10M92 22c5 1 9 4 11 8" opacity=".4"/></g></symbol>
+  </defs>
+</svg>
+
+<div id="app" data-liststate="normal">
+
+<!-- ============================================================
+     1) LOGIN
+     ============================================================ -->
+<div id="view-login" class="auth-screen">
+  <div class="login-card">
+    <div class="logo-mark">M</div>
+    <h1>MAESTRO</h1>
+    <p class="login-sub">Das Backoffice für Gastronomie &amp; Catering</p>
+    <form onsubmit="return false">
+      <div class="field">
+        <label for="login-mail">E-Mail</label>
+        <input class="input" id="login-mail" type="email" placeholder="name@betrieb.de" autocomplete="username">
+      </div>
+      <div class="field invalid">
+        <label for="login-pw">Passwort</label>
+        <input class="input" id="login-pw" type="password" value="••••••" autocomplete="current-password">
+        <span class="error-msg"><svg class="ic"><use href="#i-alert"/></svg>Passwort muss mindestens 8 Zeichen lang sein.</span>
+      </div>
+      <div class="forgot-row">
+        <span></span>
+        <a href="#">Passwort vergessen?</a>
+      </div>
+      <button class="btn btn-primary btn-lg btn-full" type="submit" data-goto="dashboard" data-toast="Willkommen zurück, Marco!">Anmelden</button>
+      <div class="divider">oder</div>
+      <button class="btn btn-google btn-lg" type="button" data-goto="dashboard" data-toast="Mit Google angemeldet">
+        <svg class="ic" style="color:#4285F4"><use href="#i-google"/></svg>
+        Mit Google anmelden
+      </button>
+    </form>
+    <p class="login-foot">Noch kein Konto? <a href="#"><strong>Konto erstellen</strong></a></p>
+  </div>
+  <p class="login-tagline">Anfrage → Angebot → Veranstaltung → Zahlung. Ein Werkzeug für alles.</p>
+</div>
+
+<!-- ============================================================
+     5) ÖFFENTLICHE ANGEBOTSSEITE (Kundenansicht)
+     ============================================================ -->
+<div id="view-public" class="public-screen">
+  <header class="pub-hero">
+    <div class="tenant-logo-lg">F</div>
+    <p class="pub-tenant">Fontana Catering · München</p>
+    <h1>Ihr Angebot: Sommerfest Brandwerk GmbH</h1>
+    <div class="pub-meta">
+      <span><svg class="ic"><use href="#i-calendar"/></svg>Freitag, 24. Juli 2026</span>
+      <span><svg class="ic"><use href="#i-users"/></svg>80 Gäste</span>
+      <span><svg class="ic"><use href="#i-pin"/></svg>Dachterrasse Brandwerk GmbH</span>
+    </div>
+  </header>
+
+  <div class="pub-wrap">
+    <div class="pub-intro">
+      <strong>Liebe Frau Hartmann,</strong><br>
+      vielen Dank für Ihre Anfrage! Für Ihr Sommerfest haben wir drei Varianten zusammengestellt —
+      von klassisch bis besonders. Wählen Sie einfach die Variante, die Ihnen am besten gefällt.
+      Alle Preise verstehen sich inklusive Anlieferung, Auf- und Abbau.
+    </div>
+
+    <div class="pub-options" role="radiogroup" aria-label="Angebotsvarianten">
+      <button class="pub-opt" role="radio" aria-checked="false" data-opt="Klassisches Buffet">
+        <div class="opt-photo p1">
+          <span class="opt-radio"><svg class="ic"><use href="#i-check"/></svg></span>
+          <span class="opt-tag">Option A</span>
+        </div>
+        <div class="opt-body">
+          <h3>Klassisches Buffet</h3>
+          <ul class="opt-menu">
+            <li>Antipasti-Variation &amp; hausgebackenes Focaccia</li>
+            <li>Zwei warme Hauptgerichte (Fleisch &amp; vegetarisch)</li>
+            <li>Saisonale Beilagen &amp; Salate</li>
+            <li>Dessertbuffet mit Tiramisù &amp; Obst</li>
+          </ul>
+          <div class="opt-price">
+            <span class="opt-pp num">57,00&nbsp;€ <small>/ Person</small></span>
+            <span class="opt-total num">4.560,00&nbsp;€ gesamt</span>
+          </div>
+        </div>
+      </button>
+
+      <button class="pub-opt sel" role="radio" aria-checked="true" data-opt="Fingerfood Deluxe">
+        <div class="opt-photo p2">
+          <span class="opt-radio"><svg class="ic"><use href="#i-check"/></svg></span>
+          <span class="opt-tag">Option B · Empfehlung</span>
+        </div>
+        <div class="opt-body">
+          <h3>Fingerfood Deluxe</h3>
+          <ul class="opt-menu">
+            <li>12 Fingerfood-Kreationen, warm &amp; kalt</li>
+            <li>Antipasti-Station mit Live-Anrichten</li>
+            <li>Aperitivo-Paket (3 Std.): Spritz, Wein, alkoholfrei</li>
+            <li>Servicepersonal &amp; Stehtische inklusive</li>
+          </ul>
+          <div class="opt-price">
+            <span class="opt-pp num">77,89&nbsp;€ <small>/ Person</small></span>
+            <span class="opt-total num">6.230,84&nbsp;€ gesamt</span>
+          </div>
+        </div>
+      </button>
+
+      <button class="pub-opt" role="radio" aria-checked="false" data-opt="Flying Dinner">
+        <div class="opt-photo p3">
+          <span class="opt-radio"><svg class="ic"><use href="#i-check"/></svg></span>
+          <span class="opt-tag">Option C</span>
+        </div>
+        <div class="opt-body">
+          <h3>Flying Dinner</h3>
+          <ul class="opt-menu">
+            <li>6 servierte Gänge in Häppchenform</li>
+            <li>Weinbegleitung durch unseren Sommelier</li>
+            <li>Espresso-Bar &amp; Digestif zum Abschluss</li>
+            <li>Volles Service-Team, Eindecken &amp; Dekoration</li>
+          </ul>
+          <div class="opt-price">
+            <span class="opt-pp num">111,75&nbsp;€ <small>/ Person</small></span>
+            <span class="opt-total num">8.940,00&nbsp;€ gesamt</span>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <div class="pub-confirm">
+      <div class="field">
+        <label for="pub-msg">Nachricht an Fontana Catering (optional)</label>
+        <textarea class="textarea" id="pub-msg" placeholder="z. B. Rückfragen zu Allergenen, Änderungswünsche …"></textarea>
+      </div>
+      <button class="btn btn-primary btn-lg btn-full" id="pub-accept" data-toast="Vielen Dank! Ihre Auswahl „Fingerfood Deluxe“ wurde an Fontana Catering übermittelt.">
+        <svg class="ic"><use href="#i-check"/></svg>
+        Dieses Angebot annehmen
+      </button>
+      <p class="small muted" style="text-align:center;margin-top:10px">
+        Mit der Annahme beauftragen Sie Fontana Catering verbindlich. Angebot gültig bis 18.07.2026.
+      </p>
+    </div>
+
+    <div class="pub-trust">
+      <span><svg class="ic"><use href="#i-building"/></svg>Fontana Catering GmbH, Karlstraße 47a, 80333 München</span>
+      <span><svg class="ic"><use href="#i-phone"/></svg>+49 89 51519696</span>
+      <span><svg class="ic"><use href="#i-mail"/></svg>events@fontana-catering.de</span>
+    </div>
+    <p class="pub-powered">Erstellt mit MAESTRO · Angebot Nr. AG-2026-0087 · v2</p>
+  </div>
+</div>
+<!-- ============================================================
+     APP-SHELL
+     ============================================================ -->
+<div id="view-app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo-mark">M</div>
+      <span class="brand-name">MAESTRO</span>
+    </div>
+    <nav class="side-nav" aria-label="Hauptnavigation">
+      <button class="nav-item" data-goto="dashboard" aria-current="page"><svg class="ic"><use href="#i-grid"/></svg>Übersicht</button>
+      <button class="nav-item" data-goto="anfragen"><svg class="ic"><use href="#i-inbox"/></svg>Anfragen<span class="nav-badge">7</span></button>
+      <button class="nav-item" data-goto="angebote"><svg class="ic"><use href="#i-file"/></svg>Angebote</button>
+      <button class="nav-item" data-goto="veranstaltungen"><svg class="ic"><use href="#i-utensils"/></svg>Veranstaltungen</button>
+      <button class="nav-item" data-goto="kalender"><svg class="ic"><use href="#i-calendar"/></svg>Kalender</button>
+      <button class="nav-item" data-goto="kunden"><svg class="ic"><use href="#i-users"/></svg>Kunden</button>
+      <button class="nav-item" data-goto="zahlungen"><svg class="ic"><use href="#i-card"/></svg>Zahlungen</button>
+      <button class="nav-item" data-goto="einstellungen"><svg class="ic"><use href="#i-cog"/></svg>Einstellungen</button>
+    </nav>
+    <div class="side-foot">
+      <button class="tenant-switch" title="Betrieb wechseln">
+        <span class="tenant-logo">F</span>
+        <span class="tenant-meta">
+          <span class="tenant-name">Fontana Catering</span>
+          <span class="tenant-sub">München · 2 Betriebe</span>
+        </span>
+        <svg class="ic"><use href="#i-chev-d"/></svg>
+      </button>
+      <button class="tenant-switch" data-goto="login" title="Abmelden">
+        <span class="avatar">MF</span>
+        <span class="tenant-meta">
+          <span class="tenant-name">Marco Fontana</span>
+          <span class="tenant-sub">Owner</span>
+        </span>
+        <svg class="ic"><use href="#i-chev-r"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-col">
+    <header class="topbar">
+      <div class="searchbox global-search" style="position:relative">
+        <svg class="ic"><use href="#i-search"/></svg>
+        <input type="search" placeholder="Suchen: Kunden, Anfragen, Veranstaltungen …" aria-label="Globale Suche">
+        <span class="kbd">⌘K</span>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="theme-toggle" title="Hell-/Dunkelmodus umschalten" aria-label="Design umschalten">
+          <svg class="ic icon-moon"><use href="#i-moon"/></svg>
+          <svg class="ic icon-sun" style="display:none"><use href="#i-sun"/></svg>
+        </button>
+        <button class="icon-btn" title="Benachrichtigungen" aria-label="Benachrichtigungen (3 neue)">
+          <svg class="ic"><use href="#i-bell"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+        <button class="user-menu">
+          <span class="avatar">MF</span>
+          <span class="user-meta">
+            <span class="user-name">Marco Fontana</span><br>
+            <span class="user-role">Owner · Fontana Catering</span>
+          </span>
+          <svg class="ic"><use href="#i-chev-d"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ============================================================
+           2) ÜBERSICHT (Dashboard)
+           ============================================================ -->
+      <section class="screen active" id="screen-dashboard" aria-label="Übersicht">
+        <div class="page-head">
+          <div>
+            <h1>Willkommen zurück, Marco</h1>
+            <p class="page-sub">Samstag, 5. Juli 2026 · Hier ist der Stand deines Betriebs.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-goto="kalender"><svg class="ic"><use href="#i-calendar"/></svg>Kalender</button>
+            <button class="btn btn-primary" data-goto="anfragen"><svg class="ic"><use href="#i-plus"/></svg>Anfrage anlegen</button>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <span class="kpi-label">Offene Anfragen</span>
+            <span class="kpi-value num">7</span>
+            <span class="kpi-foot">
+              <span class="delta up"><svg class="ic"><use href="#i-arr-u"/></svg>+2 diese Woche</span>
+              <svg class="spark" viewBox="0 0 64 22" aria-hidden="true"><polygon class="spark-fill" points="2,16 12,13 22,15 32,10 42,11 52,7 62,4 62,22 2,22"/><polyline points="2,16 12,13 22,15 32,10 42,11 52,7 62,4"/></svg>
+            </span>
+          </div>
+          <div class="kpi">
+            <span class="kpi-label">Ausstehende Angebote</span>
+            <span class="kpi-value num">4</span>
+            <span class="kpi-foot">
+              <span class="delta down"><svg class="ic"><use href="#i-arr-d"/></svg>−1 seit gestern</span>
+              <svg class="spark" viewBox="0 0 64 22" aria-hidden="true"><polygon class="spark-fill" points="2,8 12,10 22,7 32,12 42,10 52,14 62,12 62,22 2,22"/><polyline points="2,8 12,10 22,7 32,12 42,10 52,14 62,12"/></svg>
+            </span>
+          </div>
+          <div class="kpi">
+            <span class="kpi-label">Veranstaltungen · 30 Tage</span>
+            <span class="kpi-value num">9</span>
+            <span class="kpi-foot">
+              <span class="delta up"><svg class="ic"><use href="#i-arr-u"/></svg>+3 ggü. Vormonat</span>
+              <svg class="spark" viewBox="0 0 64 22" aria-hidden="true"><polygon class="spark-fill" points="2,17 12,15 22,16 32,12 42,13 52,8 62,5 62,22 2,22"/><polyline points="2,17 12,15 22,16 32,12 42,13 52,8 62,5"/></svg>
+            </span>
+          </div>
+          <div class="kpi">
+            <span class="kpi-label">Umsatz laufender Monat</span>
+            <span class="kpi-value num">48.250&nbsp;€</span>
+            <span class="kpi-foot">
+              <span class="delta up"><svg class="ic"><use href="#i-arr-u"/></svg>+12&nbsp;% ggü. Juni</span>
+              <svg class="spark" viewBox="0 0 64 22" aria-hidden="true"><polygon class="spark-fill" points="2,15 12,12 22,14 32,9 42,10 52,6 62,3 62,22 2,22"/><polyline points="2,15 12,12 22,14 32,9 42,10 52,6 62,3"/></svg>
+            </span>
+          </div>
+          <div class="kpi">
+            <span class="kpi-label">Offene Zahlungen</span>
+            <span class="kpi-value num">12.680&nbsp;€</span>
+            <span class="kpi-foot">
+              <span class="delta flat">3 Belege · 1 überfällig</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="card">
+            <div class="card-head">
+              <h3>Zu erledigen</h3>
+              <span class="pill pill-warn">4 Aufgaben</span>
+            </div>
+            <div>
+              <div class="todo-item">
+                <span class="todo-ic warn"><svg class="ic"><use href="#i-clock"/></svg></span>
+                <span class="todo-body">
+                  <span class="todo-title">Anfrage ohne Angebot seit 52 Std.</span>
+                  <span class="todo-sub">Sommerfest Brandwerk GmbH · 80 Gäste · Fingerfood-Buffet</span>
+                </span>
+                <button class="btn btn-secondary" data-goto="angebote">Angebot erstellen</button>
+              </div>
+              <div class="todo-item">
+                <span class="todo-ic warn"><svg class="ic"><use href="#i-clock"/></svg></span>
+                <span class="todo-body">
+                  <span class="todo-title">Anfrage ohne Angebot seit 49 Std.</span>
+                  <span class="todo-sub">Kanzlei-Jubiläum Vogel &amp; Partner · 35 Gäste</span>
+                </span>
+                <button class="btn btn-secondary" data-goto="angebote">Angebot erstellen</button>
+              </div>
+              <div class="todo-item">
+                <span class="todo-ic bad"><svg class="ic"><use href="#i-alert"/></svg></span>
+                <span class="todo-body">
+                  <span class="todo-title">Zahlung überfällig seit 3 Tagen</span>
+                  <span class="todo-sub">Anzahlung Firmenfeier TechnikWerk AG · 2.900,00&nbsp;€</span>
+                </span>
+                <button class="btn btn-secondary" data-goto="zahlungen">Erinnern</button>
+              </div>
+              <div class="todo-item">
+                <span class="todo-ic info"><svg class="ic"><use href="#i-euro"/></svg></span>
+                <span class="todo-body">
+                  <span class="todo-title">Restzahlung fällig am 08.07.</span>
+                  <span class="todo-sub">Hochzeit Öztürk · 4.320,00&nbsp;€ · Rechnung RE-2026-0142</span>
+                </span>
+                <button class="btn btn-secondary" data-goto="zahlungen">Ansehen</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>Anstehende Veranstaltungen</h3>
+              <a class="link-more" href="#" data-goto="veranstaltungen">Alle ansehen</a>
+            </div>
+            <ul class="tl">
+              <li class="tl-item">
+                <span class="tl-date"><span class="d num">09</span><span class="m">Jul</span></span>
+                <span class="tl-body">
+                  <span class="tl-title">Business-Lunch Allianz</span>
+                  <span class="tl-sub">Allianz SE · 45 Gäste · Salon STORIA</span>
+                </span>
+                <span class="pill pill-good">Bestätigt</span>
+              </li>
+              <li class="tl-item">
+                <span class="tl-date"><span class="d num">12</span><span class="m">Jul</span></span>
+                <span class="tl-body">
+                  <span class="tl-title">Geburtstagsdinner „60“</span>
+                  <span class="tl-sub">Familie Brunner · 25 Gäste · Restaurant</span>
+                </span>
+                <span class="pill pill-good">Bestätigt</span>
+              </li>
+              <li class="tl-item">
+                <span class="tl-date"><span class="d num">18</span><span class="m">Jul</span></span>
+                <span class="tl-body">
+                  <span class="tl-title">Produkt-Launch „Neo Mobility“</span>
+                  <span class="tl-sub">Neo Mobility GmbH · 120 Gäste · Werk 2</span>
+                </span>
+                <span class="pill pill-warn">Angefragt</span>
+              </li>
+              <li class="tl-item">
+                <span class="tl-date"><span class="d num">24</span><span class="m">Jul</span></span>
+                <span class="tl-body">
+                  <span class="tl-title">Sommerfest Brandwerk</span>
+                  <span class="tl-sub">Brandwerk GmbH · 80 Gäste · Dachterrasse</span>
+                </span>
+                <span class="pill pill-warn">Angefragt</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="card">
+            <div class="card-head">
+              <h3>Umsatz · letzte 6 Monate</h3>
+              <span class="small muted num">Summe 237.150&nbsp;€</span>
+            </div>
+            <div class="chart-body">
+              <svg class="bar-chart" viewBox="0 0 520 190" role="img" aria-label="Balkendiagramm: Umsatz Februar bis Juli 2026, steigend von 31.200 auf 48.250 Euro">
+                <line class="grid-line" x1="36" y1="150" x2="508" y2="150"/>
+                <line class="grid-line" x1="36" y1="100" x2="508" y2="100" opacity=".6"/>
+                <line class="grid-line" x1="36" y1="50" x2="508" y2="50" opacity=".6"/>
+                <text class="axis-label" x="30" y="153" text-anchor="end">0</text>
+                <text class="axis-label" x="30" y="103" text-anchor="end">25k</text>
+                <text class="axis-label" x="30" y="53" text-anchor="end">50k</text>
+                <rect class="bar" x="56"  y="87.6" width="42" height="62.4" rx="4" data-tip="Februar 2026" data-val="31.200 €"/>
+                <rect class="bar" x="132" y="76.4" width="42" height="73.6" rx="4" data-tip="März 2026" data-val="36.800 €"/>
+                <rect class="bar" x="208" y="83.2" width="42" height="66.8" rx="4" data-tip="April 2026" data-val="33.400 €"/>
+                <rect class="bar" x="284" y="66.2" width="42" height="83.8" rx="4" data-tip="Mai 2026" data-val="41.900 €"/>
+                <rect class="bar" x="360" y="58.8" width="42" height="91.2" rx="4" data-tip="Juni 2026" data-val="45.600 €"/>
+                <rect class="bar current" x="436" y="53.5" width="42" height="96.5" rx="4" data-tip="Juli 2026 · laufend" data-val="48.250 €"/>
+                <text class="bar-value" x="457" y="45">48,3k</text>
+                <text class="axis-label" x="77"  y="168" text-anchor="middle">Feb</text>
+                <text class="axis-label" x="153" y="168" text-anchor="middle">Mär</text>
+                <text class="axis-label" x="229" y="168" text-anchor="middle">Apr</text>
+                <text class="axis-label" x="305" y="168" text-anchor="middle">Mai</text>
+                <text class="axis-label" x="381" y="168" text-anchor="middle">Jun</text>
+                <text class="axis-label" x="457" y="168" text-anchor="middle" font-weight="600">Jul</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>Anfragen-Funnel · letzte 90 Tage</h3>
+            </div>
+            <div class="funnel">
+              <div class="funnel-step">
+                <div class="f-head"><span>Neu eingegangen</span><span class="f-n num">32</span></div>
+                <div class="funnel-track"><div class="funnel-fill" style="width:100%"></div></div>
+              </div>
+              <div class="funnel-step">
+                <div class="f-head"><span>Angebot gesendet</span><span class="f-n num">19</span></div>
+                <div class="funnel-track"><div class="funnel-fill" style="width:59%"></div></div>
+                <div class="funnel-conv"><svg class="ic"><use href="#i-arr-d"/></svg>59&nbsp;% erhalten ein Angebot</div>
+              </div>
+              <div class="funnel-step">
+                <div class="f-head"><span>Gewonnen</span><span class="f-n num">11</span></div>
+                <div class="funnel-track"><div class="funnel-fill" style="width:34%"></div></div>
+                <div class="funnel-conv"><svg class="ic"><use href="#i-arr-d"/></svg>58&nbsp;% der Angebote werden angenommen</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           3) ANFRAGEN — Liste
+           ============================================================ -->
+      <section class="screen" id="screen-anfragen" aria-label="Anfragen">
+        <div class="page-head">
+          <div>
+            <h1>Anfragen</h1>
+            <p class="page-sub">Alle Event-Anfragen deines Betriebs — von Website, E-Mail, Telefon &amp; Social.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-toast="Neue Anfrage angelegt (Entwurf)"><svg class="ic"><use href="#i-plus"/></svg>Anfrage anlegen</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-toolbar hide-when-empty">
+            <div class="searchbox">
+              <svg class="ic"><use href="#i-search"/></svg>
+              <input type="search" placeholder="Nach Kunde, Anlass, Ort suchen …" aria-label="Anfragen durchsuchen">
+            </div>
+            <select class="select" style="width:auto" aria-label="Zeitraum">
+              <option>Letzte 90 Tage</option><option>Letzte 30 Tage</option><option>Dieses Jahr</option>
+            </select>
+            <select class="select" style="width:auto" aria-label="Quelle">
+              <option>Alle Quellen</option><option>Website</option><option>E-Mail</option><option>Telefon</option><option>Instagram</option><option>Empfehlung</option>
+            </select>
+          </div>
+          <div class="tabs hide-when-empty" role="tablist" aria-label="Status-Filter">
+            <button class="tab" role="tab" aria-selected="true">Alle <span class="count">14</span></button>
+            <button class="tab" role="tab" aria-selected="false">Neu <span class="count">4</span></button>
+            <button class="tab" role="tab" aria-selected="false">In Bearbeitung <span class="count">3</span></button>
+            <button class="tab" role="tab" aria-selected="false">Angebot gesendet <span class="count">4</span></button>
+            <button class="tab" role="tab" aria-selected="false">Gewonnen <span class="count">2</span></button>
+            <button class="tab" role="tab" aria-selected="false">Verloren <span class="count">1</span></button>
+          </div>
+
+          <div class="list-live table-wrap">
+            <table class="dt">
+              <thead>
+                <tr>
+                  <th class="sortable">Kunde <svg class="ic sort-ic" style="width:11px;height:11px"><use href="#i-sort"/></svg></th>
+                  <th class="num">Gäste</th>
+                  <th>Anlass</th>
+                  <th class="sortable">Wunschdatum <svg class="ic sort-ic" style="width:11px;height:11px"><use href="#i-sort"/></svg></th>
+                  <th>Status</th>
+                  <th>Nachricht</th>
+                  <th class="sortable">Eingegangen <svg class="ic sort-ic" style="width:11px;height:11px"><use href="#i-sort"/></svg></th>
+                  <th>Quelle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-drawer="drawer-anfrage">
+                  <td><span class="cell-main">Lena Hartmann</span><span class="cell-sub">Brandwerk GmbH</span></td>
+                  <td class="num" data-th="Gäste">80</td>
+                  <td data-th="Anlass">Sommerfest</td>
+                  <td class="num" data-th="Wunschdatum">24.07.2026</td>
+                  <td data-th="Status"><span class="pill pill-info">Neu</span></td>
+                  <td data-th="Nachricht"><span class="excerpt">Wir planen unser Sommerfest auf der Dachterrasse und suchen ein Fingerfood-Buffet mit …</span></td>
+                  <td data-th="Eingegangen">vor 2 Std.</td>
+                  <td data-th="Quelle">Website</td>
+                </tr>
+                <tr data-drawer="drawer-anfrage">
+                  <td><span class="cell-main">Tobias Renner</span><span class="cell-sub">TechnikWerk AG</span></td>
+                  <td class="num" data-th="Gäste">140</td>
+                  <td data-th="Anlass">Weihnachtsfeier</td>
+                  <td class="num" data-th="Wunschdatum">11.12.2026</td>
+                  <td data-th="Status"><span class="pill pill-info">Neu</span></td>
+                  <td data-th="Nachricht"><span class="excerpt">Für unsere Weihnachtsfeier suchen wir ein warmes Buffet mit vegetarischen Optionen …</span></td>
+                  <td data-th="Eingegangen">vor 5 Std.</td>
+                  <td data-th="Quelle">Telefon</td>
+                </tr>
+                <tr data-drawer="drawer-anfrage">
+                  <td><span class="cell-main">Dr. Markus Vogel</span><span class="cell-sub">Kanzlei Vogel &amp; Partner</span></td>
+                  <td class="num" data-th="Gäste">35</td>
+                  <td data-th="Anlass">Kanzlei-Jubiläum</td>
+                  <td class="num" data-th="Wunschdatum">12.09.2026</td>
+                  <td data-th="Status"><span class="pill pill-warn">In Bearbeitung</span></td>
+                  <td data-th="Nachricht"><span class="excerpt">Zum 25-jährigen Bestehen unserer Kanzlei möchten wir ein gesetztes Dinner …</span></td>
+                  <td data-th="Eingegangen">vor 1 Tag</td>
+                  <td data-th="Quelle">E-Mail</td>
+                </tr>
+                <tr data-drawer="drawer-anfrage">
+                  <td><span class="cell-main">Sarah Öztürk</span><span class="cell-sub">Privat</span></td>
+                  <td class="num" data-th="Gäste">60</td>
+                  <td data-th="Anlass">Hochzeit</td>
+                  <td class="num" data-th="Wunschdatum">03.10.2026</td>
+                  <td data-th="Status"><span class="pill pill-accent">Angebot gesendet</span></td>
+                  <td data-th="Nachricht"><span class="excerpt">Wir heiraten standesamtlich und feiern anschließend in der Alten Kongresshalle …</span></td>
+                  <td data-th="Eingegangen">vor 3 Tagen</td>
+                  <td data-th="Quelle">Instagram</td>
+                </tr>
+                <tr data-drawer="drawer-anfrage">
+                  <td><span class="cell-main">Familie Brunner</span><span class="cell-sub">Privat</span></td>
+                  <td class="num" data-th="Gäste">25</td>
+                  <td data-th="Anlass">Geburtstag (60.)</td>
+                  <td class="num" data-th="Wunschdatum">12.07.2026</td>
+                  <td data-th="Status"><span class="pill pill-good">Gewonnen</span></td>
+                  <td data-th="Nachricht"><span class="excerpt">Zum 60. Geburtstag meines Mannes hätten wir gern ein italienisches Menü …</span></td>
+                  <td data-th="Eingegangen">vor 1 Woche</td>
+                  <td data-th="Quelle">Empfehlung</td>
+                </tr>
+                <tr data-drawer="drawer-anfrage">
+                  <td><span class="cell-main">Julia Steinbach</span><span class="cell-sub">Galerie Steinbach</span></td>
+                  <td class="num" data-th="Gäste">90</td>
+                  <td data-th="Anlass">Vernissage</td>
+                  <td class="num" data-th="Wunschdatum">28.08.2026</td>
+                  <td data-th="Status"><span class="pill pill-bad">Verloren</span></td>
+                  <td data-th="Nachricht"><span class="excerpt">Für die Eröffnung unserer Herbstausstellung suchen wir Aperitivo-Catering …</span></td>
+                  <td data-th="Eingegangen">vor 2 Wochen</td>
+                  <td data-th="Quelle">Website</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="skeleton-block" aria-hidden="true">
+            <div class="sk-row"><span class="sk c"></span><span class="sk w1"></span><span class="sk w5"></span><span class="sk w3"></span><span class="sk w2"></span><span class="sk w4"></span></div>
+            <div class="sk-row"><span class="sk c"></span><span class="sk w4"></span><span class="sk w2"></span><span class="sk w1"></span><span class="sk w5"></span><span class="sk w3"></span></div>
+            <div class="sk-row"><span class="sk c"></span><span class="sk w3"></span><span class="sk w1"></span><span class="sk w5"></span><span class="sk w2"></span><span class="sk w4"></span></div>
+            <div class="sk-row"><span class="sk c"></span><span class="sk w1"></span><span class="sk w4"></span><span class="sk w2"></span><span class="sk w3"></span><span class="sk w5"></span></div>
+          </div>
+          <div class="state-block state-empty">
+            <svg class="state-art"><use href="#i-empty-art"/></svg>
+            <h4>Noch keine Anfragen</h4>
+            <p>Sobald Kunden über dein Anfrageformular, per E-Mail oder Telefon anfragen, erscheinen sie hier.</p>
+            <button class="btn btn-primary" data-toast="Neue Anfrage angelegt (Entwurf)"><svg class="ic"><use href="#i-plus"/></svg>Erste Anfrage anlegen</button>
+          </div>
+          <div class="state-block state-error">
+            <svg class="state-art" style="color:var(--bad)"><use href="#i-error-art"/></svg>
+            <h4>Anfragen konnten nicht geladen werden</h4>
+            <p>Es gab ein Problem bei der Verbindung. Bitte versuche es erneut — deine Daten sind sicher.</p>
+            <button class="btn btn-secondary" data-toast="Liste wird neu geladen …"><svg class="ic"><use href="#i-refresh"/></svg>Erneut versuchen</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           4) ANGEBOTS-BUILDER
+           ============================================================ -->
+      <section class="screen" id="screen-angebote" aria-label="Angebots-Builder">
+        <div class="page-head">
+          <div>
+            <h1>Angebot AG-2026-0087</h1>
+            <p class="page-sub">Sommerfest Brandwerk GmbH · Entwurf v2 · zuletzt gespeichert vor 4 Min.</p>
+          </div>
+          <div class="page-actions">
+            <span class="pill pill-neutral" style="align-self:center">Entwurf</span>
+            <button class="btn btn-secondary" data-toast="Entwurf gespeichert">Als Entwurf speichern</button>
+            <button class="btn btn-primary" data-toast="Angebot gesendet — sicherer Link an l.hartmann@brandwerk.de"><svg class="ic"><use href="#i-send"/></svg>An Kunden senden</button>
+          </div>
+        </div>
+
+        <div class="builder-layout">
+          <div class="ctx-col" style="display:flex;flex-direction:column;gap:14px">
+            <div class="card card-pad ctx-card">
+              <p class="section-label">Kontext</p>
+              <dl class="kv-grid">
+                <div><dt>Kunde</dt><dd>Lena Hartmann<br><span class="muted small">Brandwerk GmbH</span></dd></div>
+                <div><dt>Anlass</dt><dd>Sommerfest</dd></div>
+                <div><dt>Datum</dt><dd class="num">Fr, 24.07.2026 · ab 17 Uhr</dd></div>
+                <div><dt>Gäste</dt><dd class="num">80 Personen</dd></div>
+                <div><dt>Ort</dt><dd>Dachterrasse Brandwerk GmbH, München</dd></div>
+                <div><dt>Budget-Rahmen</dt><dd class="num">ca. 6.000–8.000&nbsp;€</dd></div>
+              </dl>
+              <button class="btn btn-ghost" style="margin-top:12px" data-drawer-open="drawer-anfrage"><svg class="ic"><use href="#i-inbox"/></svg>Zur Anfrage</button>
+            </div>
+            <div class="card card-pad">
+              <p class="section-label">Versionen</p>
+              <div class="version-item current">
+                <span class="v-tag">v2</span>
+                <span style="flex:1">Aktueller Entwurf</span>
+                <span class="small muted">heute</span>
+              </div>
+              <div class="version-item">
+                <span class="v-tag">v1</span>
+                <span style="flex:1">Gesendet an Kunde</span>
+                <span class="small muted num">01.07.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-pad" style="padding-bottom:0">
+              <p class="section-label">Varianten für den Kunden</p>
+              <div class="option-tabs" role="tablist" aria-label="Angebotsvarianten">
+                <button class="option-tab" role="tab" aria-selected="false">
+                  <span class="ot-key">OPTION A</span>
+                  <span class="ot-name">Klassisches Buffet</span>
+                  <span class="ot-price num">4.560,00&nbsp;€ · 57,00&nbsp;€/P.</span>
+                </button>
+                <button class="option-tab" role="tab" aria-selected="true">
+                  <span class="ot-key">OPTION B</span>
+                  <span class="ot-name">Fingerfood Deluxe</span>
+                  <span class="ot-price num">6.230,84&nbsp;€ · 77,89&nbsp;€/P.</span>
+                </button>
+                <button class="option-tab" role="tab" aria-selected="false">
+                  <span class="ot-key">OPTION C</span>
+                  <span class="ot-name">Flying Dinner</span>
+                  <span class="ot-price num">8.940,00&nbsp;€ · 111,75&nbsp;€/P.</span>
+                </button>
+                <button class="btn btn-ghost" style="align-self:center" data-toast="Neue Variante D angelegt"><svg class="ic"><use href="#i-plus"/></svg></button>
+              </div>
+            </div>
+
+            <div class="pos-head"><span>Position</span><span>Menge</span><span>Einzelpreis</span><span>Summe</span><span>MwSt.</span><span></span></div>
+
+            <div class="pos-cat"><h4>Fingerfood</h4></div>
+            <div class="pos-row">
+              <span class="pos-name">Fingerfood Deluxe Paket<br><span class="pos-desc">12 Kreationen, warm &amp; kalt, inkl. Geschirr</span></span>
+              <input class="input num" value="80" aria-label="Menge">
+              <input class="input num" value="29,00 €" aria-label="Einzelpreis">
+              <span class="pos-sum num">2.320,00&nbsp;€</span>
+              <span class="pos-vat num">19&nbsp;%</span>
+              <button class="icon-btn btn-danger-ghost" style="width:28px;height:28px" title="Position entfernen"><svg class="ic" style="width:14px;height:14px"><use href="#i-trash"/></svg></button>
+            </div>
+            <div class="pos-row">
+              <span class="pos-name">Antipasti-Station<br><span class="pos-desc">Live-Anrichten, ital. Spezialitäten</span></span>
+              <input class="input num" value="80" aria-label="Menge">
+              <input class="input num" value="6,50 €" aria-label="Einzelpreis">
+              <span class="pos-sum num">520,00&nbsp;€</span>
+              <span class="pos-vat num">19&nbsp;%</span>
+              <button class="icon-btn btn-danger-ghost" style="width:28px;height:28px" title="Position entfernen"><svg class="ic" style="width:14px;height:14px"><use href="#i-trash"/></svg></button>
+            </div>
+
+            <div class="pos-cat"><h4>Getränke</h4></div>
+            <div class="pos-row">
+              <span class="pos-name">Aperitivo-Paket (3 Std.)<br><span class="pos-desc">Spritz, offene Weine, alkoholfreie Getränke</span></span>
+              <input class="input num" value="80" aria-label="Menge">
+              <input class="input num" value="11,50 €" aria-label="Einzelpreis">
+              <span class="pos-sum num">920,00&nbsp;€</span>
+              <span class="pos-vat num">19&nbsp;%</span>
+              <button class="icon-btn btn-danger-ghost" style="width:28px;height:28px" title="Position entfernen"><svg class="ic" style="width:14px;height:14px"><use href="#i-trash"/></svg></button>
+            </div>
+
+            <div class="pos-cat"><h4>Personal</h4></div>
+            <div class="pos-row">
+              <span class="pos-name">Servicekraft (6 Std. inkl. An-/Abfahrt)</span>
+              <input class="input num" value="6" aria-label="Menge">
+              <input class="input num" value="210,00 €" aria-label="Einzelpreis">
+              <span class="pos-sum num">1.260,00&nbsp;€</span>
+              <span class="pos-vat num">19&nbsp;%</span>
+              <button class="icon-btn btn-danger-ghost" style="width:28px;height:28px" title="Position entfernen"><svg class="ic" style="width:14px;height:14px"><use href="#i-trash"/></svg></button>
+            </div>
+
+            <div class="pos-cat"><h4>Miete &amp; Equipment</h4></div>
+            <div class="pos-row">
+              <span class="pos-name">Stehtisch inkl. Husse</span>
+              <input class="input num" value="12" aria-label="Menge">
+              <input class="input num" value="18,00 €" aria-label="Einzelpreis">
+              <span class="pos-sum num">216,00&nbsp;€</span>
+              <span class="pos-vat num">19&nbsp;%</span>
+              <button class="icon-btn btn-danger-ghost" style="width:28px;height:28px" title="Position entfernen"><svg class="ic" style="width:14px;height:14px"><use href="#i-trash"/></svg></button>
+            </div>
+
+            <button class="btn btn-secondary add-pos" data-toast="Position hinzugefügt"><svg class="ic"><use href="#i-plus"/></svg>Position hinzufügen · Menü-Pakete, Buffet, Fingerfood, Getränke, Personal, Miete</button>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card card-pad">
+              <p class="section-label">Zusammenfassung · Option B</p>
+              <div class="summary-row"><span class="muted">Zwischensumme (netto)</span><span class="num">5.236,00&nbsp;€</span></div>
+              <div class="summary-row"><span class="muted">MwSt. 19&nbsp;%</span><span class="num">994,84&nbsp;€</span></div>
+              <div class="summary-row total"><span>Gesamt</span><span class="num">6.230,84&nbsp;€</span></div>
+              <div class="pp-line"><span>Preis pro Person</span><span class="num">77,89&nbsp;€</span></div>
+            </div>
+            <div class="card card-pad">
+              <p class="section-label">Live-Vorschau · Kundenseite</p>
+              <div class="preview-mini">
+                <div class="pm-head">
+                  <span class="pm-logo">F</span>
+                  <div class="pm-title">Sommerfest Brandwerk GmbH</div>
+                  <div class="pm-sub">24. Juli 2026 · 80 Gäste</div>
+                </div>
+                <div class="pm-body">
+                  <div class="pm-opt"><span>A · Klassisches Buffet</span><span class="num">57,00&nbsp;€/P.</span></div>
+                  <div class="pm-opt sel"><span>B · Fingerfood Deluxe</span><span class="num">77,89&nbsp;€/P.</span></div>
+                  <div class="pm-opt"><span>C · Flying Dinner</span><span class="num">111,75&nbsp;€/P.</span></div>
+                </div>
+              </div>
+              <button class="btn btn-ghost" style="margin-top:10px;width:100%" data-goto="public"><svg class="ic"><use href="#i-external"/></svg>Kundenansicht öffnen</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           6) VERANSTALTUNGEN — Liste
+           ============================================================ -->
+      <section class="screen" id="screen-veranstaltungen" aria-label="Veranstaltungen">
+        <div class="page-head">
+          <div>
+            <h1>Veranstaltungen</h1>
+            <p class="page-sub">Alle bestätigten und angefragten Events deines Betriebs.</p>
+          </div>
+          <div class="page-actions">
+            <div class="seg" role="group" aria-label="Ansicht">
+              <button aria-pressed="true"><svg class="ic"><use href="#i-file"/></svg>Liste</button>
+              <button aria-pressed="false" data-goto="kalender"><svg class="ic"><use href="#i-calendar"/></svg>Kalender</button>
+            </div>
+            <button class="btn btn-primary" data-toast="Neue Veranstaltung angelegt"><svg class="ic"><use href="#i-plus"/></svg>Veranstaltung</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-toolbar hide-when-empty">
+            <div class="searchbox">
+              <svg class="ic"><use href="#i-search"/></svg>
+              <input type="search" placeholder="Nach Veranstaltung oder Kunde suchen …" aria-label="Veranstaltungen durchsuchen">
+            </div>
+            <select class="select" style="width:auto" aria-label="Status filtern">
+              <option>Alle Status</option><option>Angefragt</option><option>Bestätigt</option><option>Durchgeführt</option><option>Storniert</option>
+            </select>
+          </div>
+          <div class="list-live table-wrap">
+            <table class="dt">
+              <thead>
+                <tr>
+                  <th class="sortable">Veranstaltung <svg class="ic sort-ic" style="width:11px;height:11px"><use href="#i-sort"/></svg></th>
+                  <th class="sortable">Datum <svg class="ic sort-ic" style="width:11px;height:11px"><use href="#i-sort"/></svg></th>
+                  <th>Kunde</th>
+                  <th class="num">Gäste</th>
+                  <th>Ort</th>
+                  <th>Status</th>
+                  <th class="num">Wert</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-goto="event-detail">
+                  <td><span class="cell-main">Hochzeit Öztürk</span><span class="cell-sub">Servierte Menüs · Weinbegleitung</span></td>
+                  <td class="num" data-th="Datum">03.10.2026</td>
+                  <td data-th="Kunde">Sarah Öztürk</td>
+                  <td class="num" data-th="Gäste">60</td>
+                  <td data-th="Ort">Alte Kongresshalle</td>
+                  <td data-th="Status"><span class="pill pill-good">Bestätigt</span></td>
+                  <td class="num" data-th="Wert">7.200,00&nbsp;€</td>
+                </tr>
+                <tr data-goto="event-detail">
+                  <td><span class="cell-main">Business-Lunch Allianz</span><span class="cell-sub">3-Gänge-Lunch · Salon</span></td>
+                  <td class="num" data-th="Datum">09.07.2026</td>
+                  <td data-th="Kunde">Allianz SE</td>
+                  <td class="num" data-th="Gäste">45</td>
+                  <td data-th="Ort">STORIA, Salon</td>
+                  <td data-th="Status"><span class="pill pill-good">Bestätigt</span></td>
+                  <td class="num" data-th="Wert">3.150,00&nbsp;€</td>
+                </tr>
+                <tr data-goto="event-detail">
+                  <td><span class="cell-main">Geburtstagsdinner „60“</span><span class="cell-sub">Italienisches Menü</span></td>
+                  <td class="num" data-th="Datum">12.07.2026</td>
+                  <td data-th="Kunde">Familie Brunner</td>
+                  <td class="num" data-th="Gäste">25</td>
+                  <td data-th="Ort">Restaurant</td>
+                  <td data-th="Status"><span class="pill pill-good">Bestätigt</span></td>
+                  <td class="num" data-th="Wert">1.870,00&nbsp;€</td>
+                </tr>
+                <tr data-goto="event-detail">
+                  <td><span class="cell-main">Produkt-Launch „Neo Mobility“</span><span class="cell-sub">Flying Buffet · Abendveranstaltung</span></td>
+                  <td class="num" data-th="Datum">18.07.2026</td>
+                  <td data-th="Kunde">Neo Mobility GmbH</td>
+                  <td class="num" data-th="Gäste">120</td>
+                  <td data-th="Ort">Werk 2, München</td>
+                  <td data-th="Status"><span class="pill pill-warn">Angefragt</span></td>
+                  <td class="num" data-th="Wert">9.480,00&nbsp;€</td>
+                </tr>
+                <tr data-goto="event-detail">
+                  <td><span class="cell-main">Sommerfest Brandwerk</span><span class="cell-sub">Fingerfood Deluxe · Dachterrasse</span></td>
+                  <td class="num" data-th="Datum">24.07.2026</td>
+                  <td data-th="Kunde">Brandwerk GmbH</td>
+                  <td class="num" data-th="Gäste">80</td>
+                  <td data-th="Ort">Dachterrasse Kunde</td>
+                  <td data-th="Status"><span class="pill pill-warn">Angefragt</span></td>
+                  <td class="num" data-th="Wert">6.230,84&nbsp;€</td>
+                </tr>
+                <tr data-goto="event-detail">
+                  <td><span class="cell-main">Frühlingsfest Stadtwerke</span><span class="cell-sub">Buffet · 200 P. · Zeltbetrieb</span></td>
+                  <td class="num" data-th="Datum">14.05.2026</td>
+                  <td data-th="Kunde">SWM</td>
+                  <td class="num" data-th="Gäste">200</td>
+                  <td data-th="Ort">Betriebsgelände</td>
+                  <td data-th="Status"><span class="pill pill-neutral">Durchgeführt</span></td>
+                  <td class="num" data-th="Wert">14.600,00&nbsp;€</td>
+                </tr>
+                <tr data-goto="event-detail">
+                  <td><span class="cell-main">Vernissage Steinbach</span><span class="cell-sub">Aperitivo-Catering</span></td>
+                  <td class="num" data-th="Datum">28.05.2026</td>
+                  <td data-th="Kunde">Galerie Steinbach</td>
+                  <td class="num" data-th="Gäste">90</td>
+                  <td data-th="Ort">Galerie, Schwabing</td>
+                  <td data-th="Status"><span class="pill pill-bad">Storniert</span></td>
+                  <td class="num muted" data-th="Wert">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skeleton-block" aria-hidden="true">
+            <div class="sk-row"><span class="sk w4"></span><span class="sk w2"></span><span class="sk w3"></span><span class="sk w5"></span><span class="sk w2"></span></div>
+            <div class="sk-row"><span class="sk w3"></span><span class="sk w5"></span><span class="sk w4"></span><span class="sk w2"></span><span class="sk w1"></span></div>
+            <div class="sk-row"><span class="sk w4"></span><span class="sk w1"></span><span class="sk w2"></span><span class="sk w3"></span><span class="sk w5"></span></div>
+          </div>
+          <div class="state-block state-empty">
+            <svg class="state-art"><use href="#i-empty-art"/></svg>
+            <h4>Keine Veranstaltungen geplant</h4>
+            <p>Gewonnene Anfragen werden automatisch zu Veranstaltungen — oder lege eine manuell an.</p>
+            <button class="btn btn-primary" data-toast="Neue Veranstaltung angelegt"><svg class="ic"><use href="#i-plus"/></svg>Veranstaltung anlegen</button>
+          </div>
+          <div class="state-block state-error">
+            <svg class="state-art" style="color:var(--bad)"><use href="#i-error-art"/></svg>
+            <h4>Veranstaltungen konnten nicht geladen werden</h4>
+            <p>Es gab ein Problem bei der Verbindung. Bitte versuche es erneut.</p>
+            <button class="btn btn-secondary" data-toast="Liste wird neu geladen …"><svg class="ic"><use href="#i-refresh"/></svg>Erneut versuchen</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           6b) VERANSTALTUNG — Detail
+           ============================================================ -->
+      <section class="screen" id="screen-event-detail" aria-label="Veranstaltung Detail">
+        <div class="page-head">
+          <div>
+            <button class="btn btn-ghost" data-goto="veranstaltungen" style="margin:-6px 0 6px -10px"><svg class="ic"><use href="#i-chev-l"/></svg>Alle Veranstaltungen</button>
+            <h1>Hochzeit Öztürk</h1>
+            <p class="page-sub num">Samstag, 3. Oktober 2026 · Alte Kongresshalle München · 60 Gäste</p>
+          </div>
+          <div class="page-actions">
+            <span class="pill pill-good" style="align-self:center">Bestätigt</span>
+            <button class="btn btn-secondary" data-toast="Status-Menü geöffnet">Status ändern</button>
+            <button class="btn btn-primary" data-drawer-open="drawer-zahlung"><svg class="ic"><use href="#i-euro"/></svg>Zahlung anfordern</button>
+          </div>
+        </div>
+
+        <div class="card card-pad" style="margin-bottom:16px">
+          <div class="stepper">
+            <div class="step done"><span class="step-dot"><svg class="ic"><use href="#i-check"/></svg></span><span class="step-label">Angefragt</span></div>
+            <div class="step current"><span class="step-dot">2</span><span class="step-label">Bestätigt</span></div>
+            <div class="step"><span class="step-dot">3</span><span class="step-label">Durchgeführt</span></div>
+            <div class="step"><span class="step-dot">4</span><span class="step-label">Abgerechnet</span></div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div class="card card-pad">
+              <p class="section-label">Eckdaten</p>
+              <dl class="kv-grid">
+                <div><dt>Kunde</dt><dd>Sarah Öztürk · <a href="#" data-goto="kunde-detail">Profil</a></dd></div>
+                <div><dt>Wert</dt><dd class="num">7.200,00&nbsp;€ brutto</dd></div>
+                <div><dt>Beginn</dt><dd class="num">15:30 Uhr (Aufbau ab 12:00)</dd></div>
+                <div><dt>Format</dt><dd>Serviertes 4-Gänge-Menü</dd></div>
+                <div><dt>Ort</dt><dd>Alte Kongresshalle, Theresienhöhe 15</dd></div>
+                <div><dt>Angebot</dt><dd><a href="#" data-goto="angebote">AG-2026-0071 · v3 (angenommen)</a></dd></div>
+              </dl>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>Aufgaben-Checkliste</h3><span class="pill pill-warn">2 offen</span></div>
+              <div class="card-pad" style="padding-top:4px">
+                <div class="check-item done">
+                  <button class="check-box" aria-label="Aufgabe umschalten"><svg class="ic" style="width:12px;height:12px"><use href="#i-check"/></svg></button>
+                  <span class="check-label">Personal einplanen (4 Service, 2 Küche)</span>
+                  <span class="check-meta">Anna · 28.06.</span>
+                </div>
+                <div class="check-item done">
+                  <button class="check-box" aria-label="Aufgabe umschalten"><svg class="ic" style="width:12px;height:12px"><use href="#i-check"/></svg></button>
+                  <span class="check-label">Equipment reservieren (Geschirr, Gläser, Hussen)</span>
+                  <span class="check-meta">Luca · 30.06.</span>
+                </div>
+                <div class="check-item">
+                  <button class="check-box" aria-label="Aufgabe umschalten"><svg class="ic" style="width:12px;height:12px"><use href="#i-check"/></svg></button>
+                  <span class="check-label">Menü final mit Brautpaar abstimmen</span>
+                  <span class="check-meta">bis 15.09.</span>
+                </div>
+                <div class="check-item">
+                  <button class="check-box" aria-label="Aufgabe umschalten"><svg class="ic" style="width:12px;height:12px"><use href="#i-check"/></svg></button>
+                  <span class="check-label">Anfahrt, Ladezone &amp; Aufbauzeiten klären</span>
+                  <span class="check-meta">bis 25.09.</span>
+                </div>
+                <button class="btn btn-ghost" style="margin-top:8px"><svg class="ic"><use href="#i-plus"/></svg>Aufgabe hinzufügen</button>
+              </div>
+            </div>
+            <div class="card card-pad">
+              <p class="section-label">Notizen</p>
+              <div class="msg-quote">Brautpaar wünscht vegetarische Alternative für 8 Gäste; Tischrede zwischen Gang 2 und 3 einplanen. Kontakt vor Ort: Trauzeugin Melis (+49 176 …).</div>
+              <button class="btn btn-ghost" style="margin-top:10px"><svg class="ic"><use href="#i-edit"/></svg>Bearbeiten</button>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div class="card">
+              <div class="card-head"><h3>Zahlungen</h3><a class="link-more" href="#" data-goto="zahlungen">Alle Zahlungen</a></div>
+              <div class="card-pad" style="padding-top:8px">
+                <div class="check-item" style="border-bottom:1px solid var(--border)">
+                  <span class="todo-ic" style="background:var(--good-soft);color:var(--good)"><svg class="ic"><use href="#i-check"/></svg></span>
+                  <span style="flex:1">Anzahlung (40&nbsp;%)<br><span class="small muted num">RE-2026-0118 · bezahlt am 12.06.</span></span>
+                  <span class="num" style="font-weight:650">2.880,00&nbsp;€</span>
+                </div>
+                <div class="check-item">
+                  <span class="todo-ic warn"><svg class="ic"><use href="#i-clock"/></svg></span>
+                  <span style="flex:1">Restzahlung<br><span class="small muted num">RE-2026-0142 · fällig 08.07.</span></span>
+                  <span class="num" style="font-weight:650">4.320,00&nbsp;€</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>Dokumente</h3><button class="btn btn-ghost"><svg class="ic"><use href="#i-plus"/></svg></button></div>
+              <div class="card-pad" style="padding-top:8px">
+                <div class="check-item" style="border-bottom:1px solid var(--border)">
+                  <svg class="ic" style="color:var(--ink-3)"><use href="#i-file"/></svg>
+                  <span style="flex:1">Angebot_v3_angenommen.pdf</span>
+                  <button class="icon-btn" style="width:28px;height:28px" title="Herunterladen"><svg class="ic" style="width:14px;height:14px"><use href="#i-download"/></svg></button>
+                </div>
+                <div class="check-item" style="border-bottom:1px solid var(--border)">
+                  <svg class="ic" style="color:var(--ink-3)"><use href="#i-file"/></svg>
+                  <span style="flex:1">Lageplan_Kongresshalle.pdf</span>
+                  <button class="icon-btn" style="width:28px;height:28px" title="Herunterladen"><svg class="ic" style="width:14px;height:14px"><use href="#i-download"/></svg></button>
+                </div>
+                <div class="check-item">
+                  <svg class="ic" style="color:var(--ink-3)"><use href="#i-sign"/></svg>
+                  <span style="flex:1">Vertrag_unterschrieben.pdf</span>
+                  <button class="icon-btn" style="width:28px;height:28px" title="Herunterladen"><svg class="ic" style="width:14px;height:14px"><use href="#i-download"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           7) KALENDER
+           ============================================================ -->
+      <section class="screen" id="screen-kalender" aria-label="Kalender">
+        <div class="page-head">
+          <div>
+            <h1>Kalender</h1>
+            <p class="page-sub">Alle Veranstaltungen im Überblick — Farbe zeigt den Status.</p>
+          </div>
+          <div class="page-actions">
+            <div class="seg" role="group" aria-label="Ansicht">
+              <button aria-pressed="true">Monat</button>
+              <button aria-pressed="false">Woche</button>
+            </div>
+            <select class="select" style="width:auto" aria-label="Status filtern">
+              <option>Alle Status</option><option>Angefragt</option><option>Bestätigt</option><option>Durchgeführt</option><option>Storniert</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="cal-head">
+            <button class="icon-btn" aria-label="Vorheriger Monat"><svg class="ic"><use href="#i-chev-l"/></svg></button>
+            <span class="cal-title">Juli 2026</span>
+            <button class="icon-btn" aria-label="Nächster Monat"><svg class="ic"><use href="#i-chev-r"/></svg></button>
+            <button class="btn btn-secondary" style="margin-left:auto">Heute</button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-dow">Mo</div><div class="cal-dow">Di</div><div class="cal-dow">Mi</div><div class="cal-dow">Do</div><div class="cal-dow">Fr</div><div class="cal-dow">Sa</div><div class="cal-dow">So</div>
+            <div class="cal-cell other"><span class="cal-day num">29</span></div>
+            <div class="cal-cell other"><span class="cal-day num">30</span></div>
+            <div class="cal-cell"><span class="cal-day num">1</span></div>
+            <div class="cal-cell"><span class="cal-day num">2</span></div>
+            <div class="cal-cell"><span class="cal-day num">3</span></div>
+            <div class="cal-cell"><span class="cal-day num">4</span></div>
+            <div class="cal-cell today"><span class="cal-day num">5</span><button class="cal-chip neutral" data-goto="event-detail" title="Weinprobe privat · durchgeführt">Weinprobe privat</button></div>
+            <div class="cal-cell"><span class="cal-day num">6</span></div>
+            <div class="cal-cell"><span class="cal-day num">7</span></div>
+            <div class="cal-cell"><span class="cal-day num">8</span></div>
+            <div class="cal-cell"><span class="cal-day num">9</span><button class="cal-chip good" data-goto="event-detail" title="Business-Lunch Allianz · bestätigt">Lunch Allianz · 45</button></div>
+            <div class="cal-cell"><span class="cal-day num">10</span></div>
+            <div class="cal-cell"><span class="cal-day num">11</span></div>
+            <div class="cal-cell"><span class="cal-day num">12</span><button class="cal-chip good" data-goto="event-detail" title="Geburtstagsdinner Brunner · bestätigt">Geburtstag „60“ · 25</button></div>
+            <div class="cal-cell"><span class="cal-day num">13</span></div>
+            <div class="cal-cell"><span class="cal-day num">14</span></div>
+            <div class="cal-cell"><span class="cal-day num">15</span></div>
+            <div class="cal-cell"><span class="cal-day num">16</span></div>
+            <div class="cal-cell"><span class="cal-day num">17</span></div>
+            <div class="cal-cell"><span class="cal-day num">18</span><button class="cal-chip warn" data-goto="event-detail" title="Produkt-Launch Neo Mobility · angefragt">Launch Neo · 120</button></div>
+            <div class="cal-cell"><span class="cal-day num">19</span></div>
+            <div class="cal-cell"><span class="cal-day num">20</span></div>
+            <div class="cal-cell"><span class="cal-day num">21</span></div>
+            <div class="cal-cell"><span class="cal-day num">22</span></div>
+            <div class="cal-cell"><span class="cal-day num">23</span></div>
+            <div class="cal-cell"><span class="cal-day num">24</span><button class="cal-chip warn" data-goto="event-detail" title="Sommerfest Brandwerk · angefragt">Sommerfest · 80</button></div>
+            <div class="cal-cell"><span class="cal-day num">25</span></div>
+            <div class="cal-cell"><span class="cal-day num">26</span></div>
+            <div class="cal-cell"><span class="cal-day num">27</span></div>
+            <div class="cal-cell"><span class="cal-day num">28</span></div>
+            <div class="cal-cell"><span class="cal-day num">29</span></div>
+            <div class="cal-cell"><span class="cal-day num">30</span><button class="cal-chip good" data-goto="event-detail" title="Aperitivo privat · bestätigt">Aperitivo · 18</button></div>
+            <div class="cal-cell"><span class="cal-day num">31</span></div>
+            <div class="cal-cell other"><span class="cal-day num">1</span></div>
+            <div class="cal-cell other"><span class="cal-day num">2</span></div>
+          </div>
+          <div class="cal-legend">
+            <span class="lg"><i style="background:var(--warn)"></i>Angefragt</span>
+            <span class="lg"><i style="background:var(--good)"></i>Bestätigt</span>
+            <span class="lg"><i style="background:var(--ink-3)"></i>Durchgeführt</span>
+            <span class="lg"><i style="background:var(--bad)"></i>Storniert</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           8) KUNDEN — Liste
+           ============================================================ -->
+      <section class="screen" id="screen-kunden" aria-label="Kunden">
+        <div class="page-head">
+          <div>
+            <h1>Kunden</h1>
+            <p class="page-sub">Alle Kontakte mit Historie, Umsatz und letzten Aktivitäten.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-toast="Neuer Kunde angelegt"><svg class="ic"><use href="#i-plus"/></svg>Kunde anlegen</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-toolbar hide-when-empty">
+            <div class="searchbox">
+              <svg class="ic"><use href="#i-search"/></svg>
+              <input type="search" placeholder="Nach Name, Firma oder E-Mail suchen …" aria-label="Kunden durchsuchen">
+            </div>
+            <select class="select" style="width:auto" aria-label="Sortierung">
+              <option>Sortieren: Letzter Kontakt</option><option>Umsatz gesamt</option><option>Anzahl Events</option><option>Name A–Z</option>
+            </select>
+          </div>
+          <div class="list-live table-wrap">
+            <table class="dt">
+              <thead>
+                <tr>
+                  <th>Name</th><th>Firma</th><th>E-Mail</th><th>Telefon</th>
+                  <th class="num">Events</th><th class="num">Umsatz gesamt</th><th>Letzter Kontakt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-goto="kunde-detail">
+                  <td><span style="display:flex;align-items:center;gap:10px"><span class="avatar">LH</span><span class="cell-main">Lena Hartmann</span></span></td>
+                  <td data-th="Firma">Brandwerk GmbH</td>
+                  <td data-th="E-Mail">l.hartmann@brandwerk.de</td>
+                  <td data-th="Telefon" class="num">+49 89 4411 220</td>
+                  <td class="num" data-th="Events">3</td>
+                  <td class="num" data-th="Umsatz">14.220,00&nbsp;€</td>
+                  <td data-th="Letzter Kontakt">vor 2 Std.</td>
+                </tr>
+                <tr data-goto="kunde-detail">
+                  <td><span style="display:flex;align-items:center;gap:10px"><span class="avatar alt1">PK</span><span class="cell-main">Petra Kaindl</span></span></td>
+                  <td data-th="Firma">Allianz SE</td>
+                  <td data-th="E-Mail">petra.kaindl@allianz.de</td>
+                  <td data-th="Telefon" class="num">+49 89 3800 0</td>
+                  <td class="num" data-th="Events">6</td>
+                  <td class="num" data-th="Umsatz">21.360,00&nbsp;€</td>
+                  <td data-th="Letzter Kontakt">vor 1 Woche</td>
+                </tr>
+                <tr data-goto="kunde-detail">
+                  <td><span style="display:flex;align-items:center;gap:10px"><span class="avatar alt2">JF</span><span class="cell-main">Jonas Feld</span></span></td>
+                  <td data-th="Firma">Stadtwerke München</td>
+                  <td data-th="E-Mail">j.feld@swm.de</td>
+                  <td data-th="Telefon" class="num">+49 89 2361 0</td>
+                  <td class="num" data-th="Events">4</td>
+                  <td class="num" data-th="Umsatz">32.150,00&nbsp;€</td>
+                  <td data-th="Letzter Kontakt">vor 3 Wochen</td>
+                </tr>
+                <tr data-goto="kunde-detail">
+                  <td><span style="display:flex;align-items:center;gap:10px"><span class="avatar alt3">SÖ</span><span class="cell-main">Sarah Öztürk</span></span></td>
+                  <td data-th="Firma" class="muted">Privat</td>
+                  <td data-th="E-Mail">sarah.oeztuerk@web.de</td>
+                  <td data-th="Telefon" class="num">+49 171 5566 780</td>
+                  <td class="num" data-th="Events">2</td>
+                  <td class="num" data-th="Umsatz">9.080,00&nbsp;€</td>
+                  <td data-th="Letzter Kontakt">vor 3 Tagen</td>
+                </tr>
+                <tr data-goto="kunde-detail">
+                  <td><span style="display:flex;align-items:center;gap:10px"><span class="avatar alt1">MV</span><span class="cell-main">Dr. Markus Vogel</span></span></td>
+                  <td data-th="Firma">Kanzlei Vogel &amp; Partner</td>
+                  <td data-th="E-Mail">vogel@vogel-partner.law</td>
+                  <td data-th="Telefon" class="num">+49 89 2919 44</td>
+                  <td class="num" data-th="Events">2</td>
+                  <td class="num" data-th="Umsatz">5.640,00&nbsp;€</td>
+                  <td data-th="Letzter Kontakt">vor 1 Tag</td>
+                </tr>
+                <tr data-goto="kunde-detail">
+                  <td><span style="display:flex;align-items:center;gap:10px"><span class="avatar alt2">HB</span><span class="cell-main">Helga Brunner</span></span></td>
+                  <td data-th="Firma" class="muted">Privat</td>
+                  <td data-th="E-Mail">familie.brunner@gmx.de</td>
+                  <td data-th="Telefon" class="num">+49 160 9922 415</td>
+                  <td class="num" data-th="Events">1</td>
+                  <td class="num" data-th="Umsatz">1.870,00&nbsp;€</td>
+                  <td data-th="Letzter Kontakt">vor 1 Woche</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skeleton-block" aria-hidden="true">
+            <div class="sk-row"><span class="sk c"></span><span class="sk w1"></span><span class="sk w4"></span><span class="sk w3"></span><span class="sk w2"></span></div>
+            <div class="sk-row"><span class="sk c"></span><span class="sk w3"></span><span class="sk w1"></span><span class="sk w4"></span><span class="sk w5"></span></div>
+            <div class="sk-row"><span class="sk c"></span><span class="sk w4"></span><span class="sk w2"></span><span class="sk w1"></span><span class="sk w3"></span></div>
+          </div>
+          <div class="state-block state-empty">
+            <svg class="state-art"><use href="#i-empty-art"/></svg>
+            <h4>Noch keine Kunden</h4>
+            <p>Kunden werden automatisch aus Anfragen angelegt — oder erfasse den ersten Kontakt manuell.</p>
+            <button class="btn btn-primary" data-toast="Neuer Kunde angelegt"><svg class="ic"><use href="#i-plus"/></svg>Kunde anlegen</button>
+          </div>
+          <div class="state-block state-error">
+            <svg class="state-art" style="color:var(--bad)"><use href="#i-error-art"/></svg>
+            <h4>Kunden konnten nicht geladen werden</h4>
+            <p>Es gab ein Problem bei der Verbindung. Bitte versuche es erneut.</p>
+            <button class="btn btn-secondary" data-toast="Liste wird neu geladen …"><svg class="ic"><use href="#i-refresh"/></svg>Erneut versuchen</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           8b) KUNDE — Detail
+           ============================================================ -->
+      <section class="screen" id="screen-kunde-detail" aria-label="Kunde Detail">
+        <div class="page-head">
+          <div>
+            <button class="btn btn-ghost" data-goto="kunden" style="margin:-6px 0 6px -10px"><svg class="ic"><use href="#i-chev-l"/></svg>Alle Kunden</button>
+            <h1 style="display:flex;align-items:center;gap:12px"><span class="avatar lg">LH</span>Lena Hartmann</h1>
+            <p class="page-sub">Marketing-Leitung · Brandwerk GmbH · Kundin seit März 2025</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-toast="E-Mail-Entwurf geöffnet"><svg class="ic"><use href="#i-mail"/></svg>Anschreiben</button>
+            <button class="btn btn-primary" data-goto="angebote"><svg class="ic"><use href="#i-file"/></svg>Angebot erstellen</button>
+          </div>
+        </div>
+
+        <div class="kpi-row" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+          <div class="kpi"><span class="kpi-label">Lifetime-Umsatz</span><span class="kpi-value num">14.220&nbsp;€</span></div>
+          <div class="kpi"><span class="kpi-label">Veranstaltungen</span><span class="kpi-value num">3</span></div>
+          <div class="kpi"><span class="kpi-label">Ø Auftragswert</span><span class="kpi-value num">4.740&nbsp;€</span></div>
+          <div class="kpi"><span class="kpi-label">Offene Angebote</span><span class="kpi-value num">1</span></div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="card">
+            <div class="card-head"><h3>Historie</h3><span class="small muted">Anfragen · Angebote · Events · Zahlungen</span></div>
+            <div class="card-pad">
+              <ul class="activity">
+                <li>
+                  <span class="a-dot accent"></span>
+                  <span style="flex:1"><span class="a-text"><strong>Anfrage eingegangen:</strong> Sommerfest, 80 Gäste, Fingerfood-Buffet</span><br><span class="a-time">Heute, 09:24 · Website</span></span>
+                </li>
+                <li>
+                  <span class="a-dot"></span>
+                  <span style="flex:1"><span class="a-text"><strong>Angebot v1 gesendet:</strong> AG-2026-0087 · 3 Varianten</span><br><span class="a-time">01.07.2026 · von Anna</span></span>
+                </li>
+                <li>
+                  <span class="a-dot good"></span>
+                  <span style="flex:1"><span class="a-text"><strong>Zahlung eingegangen:</strong> 3.990,00&nbsp;€ · Frühjahrs-Teamtag</span><br><span class="a-time">28.03.2026 · Überweisung</span></span>
+                </li>
+                <li>
+                  <span class="a-dot good"></span>
+                  <span style="flex:1"><span class="a-text"><strong>Veranstaltung durchgeführt:</strong> Frühjahrs-Teamtag, 45 Gäste</span><br><span class="a-time">21.03.2026</span></span>
+                </li>
+                <li>
+                  <span class="a-dot"></span>
+                  <span style="flex:1"><span class="a-text"><strong>Angebot angenommen:</strong> Weihnachtsessen Team, 30 Gäste</span><br><span class="a-time">02.11.2025</span></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div class="card card-pad">
+              <p class="section-label">Kontakt</p>
+              <dl class="kv-grid" style="grid-template-columns:1fr">
+                <div><dt>E-Mail</dt><dd><a href="#">l.hartmann@brandwerk.de</a></dd></div>
+                <div><dt>Telefon</dt><dd class="num">+49 89 4411 220</dd></div>
+                <div><dt>Firma</dt><dd>Brandwerk GmbH, Leopoldstraße 88, 80802 München</dd></div>
+                <div><dt>Rechnungsadresse</dt><dd>buchhaltung@brandwerk.de</dd></div>
+              </dl>
+            </div>
+            <div class="card card-pad">
+              <p class="section-label">Notizen</p>
+              <div class="msg-quote">Bevorzugt vegetarische Optionen im Angebot. Rechnungen immer zusätzlich an die Buchhaltung senden. Sehr zufrieden mit dem Teamtag im März — Referenz möglich.</div>
+              <button class="btn btn-ghost" style="margin-top:10px"><svg class="ic"><use href="#i-edit"/></svg>Bearbeiten</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           9) ZAHLUNGEN
+           ============================================================ -->
+      <section class="screen" id="screen-zahlungen" aria-label="Zahlungen">
+        <div class="page-head">
+          <div>
+            <h1>Zahlungen</h1>
+            <p class="page-sub">Anzahlungen, Restzahlungen und Erstattungen — verknüpft mit Events &amp; Stripe.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" data-toast="Export wird erstellt …"><svg class="ic"><use href="#i-download"/></svg>Export</button>
+            <button class="btn btn-primary" data-drawer-open="drawer-zahlung"><svg class="ic"><use href="#i-plus"/></svg>Zahlung anfordern</button>
+          </div>
+        </div>
+
+        <div class="kpi-row" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:16px">
+          <div class="kpi">
+            <span class="kpi-label">Bezahlt diesen Monat</span>
+            <span class="kpi-value num" style="color:var(--good)">18.940&nbsp;€</span>
+            <span class="kpi-foot"><span class="delta up"><svg class="ic"><use href="#i-arr-u"/></svg>+8&nbsp;% ggü. Juni</span></span>
+          </div>
+          <div class="kpi">
+            <span class="kpi-label">Offen</span>
+            <span class="kpi-value num" style="color:var(--warn)">12.680&nbsp;€</span>
+            <span class="kpi-foot"><span class="delta flat">3 Belege · 1 überfällig</span></span>
+          </div>
+          <div class="kpi">
+            <span class="kpi-label">Erstattet</span>
+            <span class="kpi-value num">640&nbsp;€</span>
+            <span class="kpi-foot"><span class="delta flat">1 Beleg</span></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-toolbar hide-when-empty">
+            <div class="searchbox">
+              <svg class="ic"><use href="#i-search"/></svg>
+              <input type="search" placeholder="Nach Beleg, Event oder Kunde suchen …" aria-label="Zahlungen durchsuchen">
+            </div>
+            <select class="select" style="width:auto" aria-label="Status filtern">
+              <option>Alle Status</option><option>Bezahlt</option><option>Offen</option><option>Fehlgeschlagen</option><option>Erstattet</option>
+            </select>
+            <select class="select" style="width:auto" aria-label="Methode filtern">
+              <option>Alle Methoden</option><option>Stripe (Karte)</option><option>Stripe (Link)</option><option>Überweisung</option>
+            </select>
+          </div>
+          <div class="list-live table-wrap">
+            <table class="dt">
+              <thead>
+                <tr>
+                  <th>Beleg / Event</th><th>Kunde</th><th class="num">Betrag</th><th>Status</th>
+                  <th class="sortable">Datum / Fälligkeit <svg class="ic sort-ic" style="width:11px;height:11px"><use href="#i-sort"/></svg></th><th>Methode</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-drawer="drawer-zahlung">
+                  <td><span class="cell-main num">RE-2026-0142</span><span class="cell-sub">Hochzeit Öztürk · Restzahlung</span></td>
+                  <td data-th="Kunde">Sarah Öztürk</td>
+                  <td class="num" data-th="Betrag">4.320,00&nbsp;€</td>
+                  <td data-th="Status"><span class="pill pill-warn">Offen</span></td>
+                  <td class="num" data-th="Fälligkeit">fällig 08.07.2026</td>
+                  <td data-th="Methode">Überweisung</td>
+                </tr>
+                <tr data-drawer="drawer-zahlung">
+                  <td><span class="cell-main num">RE-2026-0139</span><span class="cell-sub">Firmenfeier TechnikWerk · Anzahlung</span></td>
+                  <td data-th="Kunde">TechnikWerk AG</td>
+                  <td class="num" data-th="Betrag">2.900,00&nbsp;€</td>
+                  <td data-th="Status"><span class="pill pill-warn">Überfällig</span></td>
+                  <td class="num" data-th="Fälligkeit">fällig 02.07.2026</td>
+                  <td data-th="Methode">Rechnung</td>
+                </tr>
+                <tr data-drawer="drawer-zahlung">
+                  <td><span class="cell-main num">RE-2026-0141</span><span class="cell-sub">Business-Lunch Allianz</span></td>
+                  <td data-th="Kunde">Allianz SE</td>
+                  <td class="num" data-th="Betrag">3.150,00&nbsp;€</td>
+                  <td data-th="Status"><span class="pill pill-good">Bezahlt</span></td>
+                  <td class="num" data-th="Datum">02.07.2026</td>
+                  <td data-th="Methode">Stripe (Karte)</td>
+                </tr>
+                <tr data-drawer="drawer-zahlung">
+                  <td><span class="cell-main num">RE-2026-0138</span><span class="cell-sub">Geburtstagsdinner Brunner · Anzahlung</span></td>
+                  <td data-th="Kunde">Familie Brunner</td>
+                  <td class="num" data-th="Betrag">560,00&nbsp;€</td>
+                  <td data-th="Status"><span class="pill pill-good">Bezahlt</span></td>
+                  <td class="num" data-th="Datum">28.06.2026</td>
+                  <td data-th="Methode">Stripe (Link)</td>
+                </tr>
+                <tr data-drawer="drawer-zahlung">
+                  <td><span class="cell-main num">RE-2026-0136</span><span class="cell-sub">Frühlingsfest SWM · Schlussrechnung</span></td>
+                  <td data-th="Kunde">Stadtwerke München</td>
+                  <td class="num" data-th="Betrag">8.760,00&nbsp;€</td>
+                  <td data-th="Status"><span class="pill pill-good">Bezahlt</span></td>
+                  <td class="num" data-th="Datum">21.06.2026</td>
+                  <td data-th="Methode">Überweisung</td>
+                </tr>
+                <tr data-drawer="drawer-zahlung">
+                  <td><span class="cell-main num">RE-2026-0134</span><span class="cell-sub">Weinprobe privat</span></td>
+                  <td data-th="Kunde">C. Lindner</td>
+                  <td class="num" data-th="Betrag">640,00&nbsp;€</td>
+                  <td data-th="Status"><span class="pill pill-info">Erstattet</span></td>
+                  <td class="num" data-th="Datum">15.06.2026</td>
+                  <td data-th="Methode">Stripe (Karte)</td>
+                </tr>
+                <tr data-drawer="drawer-zahlung">
+                  <td><span class="cell-main num">RE-2026-0131</span><span class="cell-sub">Vernissage Steinbach · Anzahlung</span></td>
+                  <td data-th="Kunde">Galerie Steinbach</td>
+                  <td class="num" data-th="Betrag">1.420,00&nbsp;€</td>
+                  <td data-th="Status"><span class="pill pill-bad">Fehlgeschlagen</span></td>
+                  <td class="num" data-th="Datum">11.06.2026</td>
+                  <td data-th="Methode">Stripe (Karte)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="skeleton-block" aria-hidden="true">
+            <div class="sk-row"><span class="sk w2"></span><span class="sk w4"></span><span class="sk w1"></span><span class="sk w3"></span><span class="sk w5"></span></div>
+            <div class="sk-row"><span class="sk w3"></span><span class="sk w1"></span><span class="sk w5"></span><span class="sk w2"></span><span class="sk w4"></span></div>
+            <div class="sk-row"><span class="sk w1"></span><span class="sk w3"></span><span class="sk w2"></span><span class="sk w4"></span><span class="sk w5"></span></div>
+          </div>
+          <div class="state-block state-empty">
+            <svg class="state-art"><use href="#i-empty-art"/></svg>
+            <h4>Noch keine Zahlungen</h4>
+            <p>Sobald du Rechnungen stellst oder Stripe-Zahlungslinks versendest, erscheinen sie hier.</p>
+            <button class="btn btn-primary" data-drawer-open="drawer-zahlung"><svg class="ic"><use href="#i-plus"/></svg>Erste Zahlung anfordern</button>
+          </div>
+          <div class="state-block state-error">
+            <svg class="state-art" style="color:var(--bad)"><use href="#i-error-art"/></svg>
+            <h4>Zahlungen konnten nicht geladen werden</h4>
+            <p>Es gab ein Problem bei der Verbindung. Bitte versuche es erneut.</p>
+            <button class="btn btn-secondary" data-toast="Liste wird neu geladen …"><svg class="ic"><use href="#i-refresh"/></svg>Erneut versuchen</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           10) EINSTELLUNGEN
+           ============================================================ -->
+      <section class="screen" id="screen-einstellungen" aria-label="Einstellungen">
+        <div class="page-head">
+          <div>
+            <h1>Einstellungen</h1>
+            <p class="page-sub">Betrieb, Team, Zahlungen, Module und Branding.</p>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Einstellungs-Bereiche" id="settings-tabs">
+          <button class="tab" role="tab" aria-selected="true" data-panel="set-betrieb">Betrieb</button>
+          <button class="tab" role="tab" aria-selected="false" data-panel="set-team">Team &amp; Rollen</button>
+          <button class="tab" role="tab" aria-selected="false" data-panel="set-zahlungen">Zahlungen</button>
+          <button class="tab" role="tab" aria-selected="false" data-panel="set-module">Module</button>
+          <button class="tab" role="tab" aria-selected="false" data-panel="set-branding">Angebots-Vorlagen &amp; Branding</button>
+        </div>
+
+        <div class="settings-panel active" id="set-betrieb" role="tabpanel">
+          <div class="card card-pad" style="max-width:640px">
+            <div class="field">
+              <label for="set-name">Name des Betriebs</label>
+              <input class="input" id="set-name" value="Fontana Catering GmbH">
+            </div>
+            <div class="field">
+              <label for="set-street">Adresse</label>
+              <input class="input" id="set-street" value="Karlstraße 47a">
+            </div>
+            <div style="display:grid;grid-template-columns:120px 1fr;gap:12px">
+              <div class="field"><label for="set-zip">PLZ</label><input class="input num" id="set-zip" value="80333"></div>
+              <div class="field"><label for="set-city">Stadt</label><input class="input" id="set-city" value="München"></div>
+            </div>
+            <div class="field">
+              <label for="set-tel">Telefon (öffentlich)</label>
+              <input class="input num" id="set-tel" value="+49 89 51519696">
+              <span class="hint">Wird auf der öffentlichen Angebotsseite als Kontakt angezeigt.</span>
+            </div>
+            <div class="field">
+              <label>Logo</label>
+              <div class="logo-drop">
+                <span class="tenant-logo" style="width:44px;height:44px;font-size:20px">F</span>
+                <span>Logo hierher ziehen oder <a href="#">Datei auswählen</a> · PNG/SVG, min. 256px</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:9px;margin-top:6px">
+              <button class="btn btn-secondary">Verwerfen</button>
+              <button class="btn btn-primary" data-toast="Betriebsdaten gespeichert">Speichern</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-panel" id="set-team" role="tabpanel">
+          <div class="card" style="max-width:760px">
+            <div class="card-head">
+              <h3>Mitglieder <span class="muted" style="font-weight:400">· 4</span></h3>
+              <button class="btn btn-primary" data-toast="Einladung an sophie.krueger@fontana-catering.de gesendet"><svg class="ic"><use href="#i-plus"/></svg>Mitglied einladen</button>
+            </div>
+            <div>
+              <div class="member-row">
+                <span class="avatar">MF</span>
+                <span class="m-meta"><span class="m-name">Marco Fontana</span><br><span class="m-mail">marco@fontana-catering.de</span></span>
+                <span class="role-badge role-owner">Owner</span>
+                <button class="icon-btn" title="Aktionen" aria-label="Aktionen für Marco Fontana"><svg class="ic"><use href="#i-more"/></svg></button>
+              </div>
+              <div class="member-row">
+                <span class="avatar alt1">AW</span>
+                <span class="m-meta"><span class="m-name">Anna Weber</span><br><span class="m-mail">anna@fontana-catering.de</span></span>
+                <span class="role-badge role-admin">Admin</span>
+                <button class="icon-btn" title="Aktionen" aria-label="Aktionen für Anna Weber"><svg class="ic"><use href="#i-more"/></svg></button>
+              </div>
+              <div class="member-row">
+                <span class="avatar alt2">LB</span>
+                <span class="m-meta"><span class="m-name">Luca Bianchi</span><br><span class="m-mail">luca@fontana-catering.de</span></span>
+                <span class="role-badge role-staff">Staff</span>
+                <button class="icon-btn" title="Aktionen" aria-label="Aktionen für Luca Bianchi"><svg class="ic"><use href="#i-more"/></svg></button>
+              </div>
+              <div class="member-row" style="opacity:.65">
+                <span class="avatar alt3">SK</span>
+                <span class="m-meta"><span class="m-name">Sophie Krüger <span class="pill pill-warn" style="margin-left:6px">Einladung ausstehend</span></span><br><span class="m-mail">sophie.krueger@fontana-catering.de</span></span>
+                <span class="role-badge role-staff">Staff</span>
+                <button class="icon-btn" title="Aktionen" aria-label="Aktionen für Sophie Krüger"><svg class="ic"><use href="#i-more"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <p class="small muted" style="margin-top:12px;max-width:760px">
+            <strong>Owner</strong> verwaltet Abrechnung &amp; Betrieb · <strong>Admin</strong> verwaltet Team, Angebote &amp; Zahlungen · <strong>Staff</strong> bearbeitet Anfragen &amp; Veranstaltungen.
+          </p>
+        </div>
+
+        <div class="settings-panel" id="set-zahlungen" role="tabpanel">
+          <div style="max-width:640px;display:flex;flex-direction:column;gap:14px">
+            <div class="stripe-status">
+              <svg class="ic" style="width:22px;height:22px"><use href="#i-shield"/></svg>
+              <span style="flex:1">
+                <strong>Stripe verbunden</strong><br>
+                <span class="small muted num">acct_1NxK4… · Auszahlungen wöchentlich (Mo) · Letzte Auszahlung: 1.240,00&nbsp;€ am 01.07.</span>
+              </span>
+              <button class="btn btn-secondary">Verwalten</button>
+            </div>
+            <div class="card card-pad">
+              <p class="section-label">Zahlungsbedingungen (Standard)</p>
+              <div class="field">
+                <label for="set-deposit">Anzahlung bei Auftragsbestätigung</label>
+                <select class="select" id="set-deposit"><option>40 % des Auftragswerts</option><option>30 %</option><option>50 %</option><option>Keine Anzahlung</option></select>
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label for="set-due">Restzahlung fällig</label>
+                <select class="select" id="set-due"><option>7 Tage nach Veranstaltung</option><option>14 Tage nach Veranstaltung</option><option>Vor der Veranstaltung</option></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-panel" id="set-module" role="tabpanel">
+          <div class="module-grid">
+            <div class="card module-card on">
+              <div class="mod-head"><span class="mod-ic"><svg class="ic"><use href="#i-file"/></svg></span><span class="mod-name">LexOffice</span></div>
+              <p class="mod-desc">Rechnungen automatisch in LexOffice erzeugen und mit Zahlungen abgleichen.</p>
+              <div class="mod-foot"><span class="mod-status">Aktiv · verbunden</span><button class="switch" role="switch" aria-checked="true" aria-label="LexOffice umschalten"></button></div>
+            </div>
+            <div class="card module-card on">
+              <div class="mod-head"><span class="mod-ic"><svg class="ic"><use href="#i-mail"/></svg></span><span class="mod-name">E-Mail-Sync (IMAP)</span></div>
+              <p class="mod-desc">Anfragen aus deinem Postfach automatisch erkennen und als Anfrage anlegen.</p>
+              <div class="mod-foot"><span class="mod-status">Aktiv · events@fontana-catering.de</span><button class="switch" role="switch" aria-checked="true" aria-label="E-Mail-Sync umschalten"></button></div>
+            </div>
+            <div class="card module-card">
+              <div class="mod-head"><span class="mod-ic"><svg class="ic"><use href="#i-msg"/></svg></span><span class="mod-name">WhatsApp</span></div>
+              <p class="mod-desc">Angebote und Erinnerungen direkt per WhatsApp Business an Kunden senden.</p>
+              <div class="mod-foot"><span class="mod-status">Inaktiv</span><button class="switch" role="switch" aria-checked="false" aria-label="WhatsApp umschalten"></button></div>
+            </div>
+            <div class="card module-card">
+              <div class="mod-head"><span class="mod-ic"><svg class="ic"><use href="#i-sign"/></svg></span><span class="mod-name">E-Signatur</span></div>
+              <p class="mod-desc">Verträge digital unterschreiben lassen — rechtssicher, direkt auf der Angebotsseite.</p>
+              <div class="mod-foot"><span class="mod-status">Inaktiv</span><button class="switch" role="switch" aria-checked="false" aria-label="E-Signatur umschalten"></button></div>
+            </div>
+            <div class="card module-card on">
+              <div class="mod-head"><span class="mod-ic"><svg class="ic"><use href="#i-sparkle"/></svg></span><span class="mod-name">KI-Assistent <span class="pill pill-info" style="margin-left:4px">Beta</span></span></div>
+              <p class="mod-desc">Angebotsentwürfe und Antwortvorschläge automatisch aus der Anfrage generieren.</p>
+              <div class="mod-foot"><span class="mod-status">Aktiv</span><button class="switch" role="switch" aria-checked="true" aria-label="KI-Assistent umschalten"></button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-panel" id="set-branding" role="tabpanel">
+          <div class="dash-grid" style="max-width:980px">
+            <div class="card card-pad">
+              <p class="section-label">Akzentfarbe der Angebotsseite</p>
+              <div class="swatch-row" role="radiogroup" aria-label="Akzentfarbe">
+                <button class="swatch sel" style="background:#C2410C" title="Terracotta (aktiv)" aria-label="Terracotta"></button>
+                <button class="swatch" style="background:#5B6B3C" title="Oliv" aria-label="Oliv"></button>
+                <button class="swatch" style="background:#7C2D3E" title="Bordeaux" aria-label="Bordeaux"></button>
+                <button class="swatch" style="background:#1E5F6E" title="Ozean" aria-label="Ozean"></button>
+                <button class="swatch" style="background:#8A6D3B" title="Bronze" aria-label="Bronze"></button>
+              </div>
+              <p class="section-label" style="margin-top:22px">Logo für Angebotsseite</p>
+              <div class="logo-drop">
+                <span class="tenant-logo" style="width:44px;height:44px;font-size:20px">F</span>
+                <span>Logo hierher ziehen oder <a href="#">Datei auswählen</a></span>
+              </div>
+              <p class="section-label" style="margin-top:22px">Standard-Begrüßungstext</p>
+              <textarea class="textarea">Vielen Dank für Ihre Anfrage! Wir haben Ihnen folgende Varianten zusammengestellt …</textarea>
+              <div style="display:flex;justify-content:flex-end;margin-top:12px">
+                <button class="btn btn-primary" data-toast="Branding gespeichert">Speichern</button>
+              </div>
+            </div>
+            <div class="card card-pad">
+              <p class="section-label">Vorschau</p>
+              <div class="preview-mini">
+                <div class="pm-head">
+                  <span class="pm-logo">F</span>
+                  <div class="pm-title">Ihr Angebot: Sommerfest</div>
+                  <div class="pm-sub">Fontana Catering · München</div>
+                </div>
+                <div class="pm-body">
+                  <div class="pm-opt"><span>A · Klassisches Buffet</span><span class="num">57,00&nbsp;€/P.</span></div>
+                  <div class="pm-opt sel"><span>B · Fingerfood Deluxe</span><span class="num">77,89&nbsp;€/P.</span></div>
+                  <div class="pm-opt"><span>C · Flying Dinner</span><span class="num">111,75&nbsp;€/P.</span></div>
+                </div>
+              </div>
+              <button class="btn btn-ghost" style="margin-top:10px;width:100%" data-goto="public"><svg class="ic"><use href="#i-external"/></svg>Angebotsseite ansehen</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Mobile Tab-Bar -->
+  <nav class="tabbar" aria-label="Navigation (mobil)">
+    <button class="tab-item" data-goto="dashboard" aria-current="page"><svg class="ic"><use href="#i-grid"/></svg>Übersicht</button>
+    <button class="tab-item" data-goto="anfragen"><svg class="ic"><use href="#i-inbox"/></svg>Anfragen</button>
+    <button class="tab-item" data-goto="kalender"><svg class="ic"><use href="#i-calendar"/></svg>Kalender</button>
+    <button class="tab-item" data-goto="zahlungen"><svg class="ic"><use href="#i-card"/></svg>Zahlungen</button>
+    <button class="tab-item" data-goto="einstellungen"><svg class="ic"><use href="#i-cog"/></svg>Mehr</button>
+  </nav>
+</div><!-- /view-app -->
+
+<!-- ============================================================
+     3b) ANFRAGE — Detail (Drawer)
+     ============================================================ -->
+<div class="drawer-backdrop" data-drawer-close></div>
+<aside class="drawer" id="drawer-anfrage" aria-label="Anfrage Detail" role="dialog" aria-modal="true">
+  <div class="drawer-head">
+    <div style="flex:1">
+      <span class="pill pill-info" style="margin-bottom:7px">Neu</span>
+      <div class="drawer-title">Sommerfest · 80 Gäste</div>
+      <p class="drawer-sub">Eingegangen heute, 09:24 · Quelle: Website-Formular</p>
+    </div>
+    <button class="icon-btn" data-drawer-close aria-label="Schließen"><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-body">
+    <p class="section-label">Kunde</p>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <span class="avatar lg">LH</span>
+      <span style="flex:1">
+        <strong>Lena Hartmann</strong><br>
+        <span class="small muted">Marketing-Leitung · Brandwerk GmbH</span>
+      </span>
+      <a class="small" href="#" data-goto="kunde-detail">Profil</a>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap" class="small muted">
+      <span style="display:inline-flex;align-items:center;gap:5px"><svg class="ic" style="width:14px;height:14px"><use href="#i-mail"/></svg>l.hartmann@brandwerk.de</span>
+      <span style="display:inline-flex;align-items:center;gap:5px"><svg class="ic" style="width:14px;height:14px"><use href="#i-phone"/></svg><span class="num">+49 89 4411 220</span></span>
+    </div>
+
+    <p class="section-label">Eckdaten</p>
+    <dl class="kv-grid">
+      <div><dt>Anlass</dt><dd>Sommerfest</dd></div>
+      <div><dt>Wunschdatum</dt><dd class="num">Fr, 24.07.2026 · ab 17 Uhr</dd></div>
+      <div><dt>Gäste</dt><dd class="num">80 Personen</dd></div>
+      <div><dt>Ort</dt><dd>Dachterrasse Brandwerk GmbH</dd></div>
+      <div><dt>Budget</dt><dd class="num">ca. 6.000–8.000&nbsp;€</dd></div>
+      <div><dt>Format</dt><dd>Fingerfood-Buffet</dd></div>
+    </dl>
+
+    <p class="section-label">Nachricht</p>
+    <div class="msg-quote">
+      Hallo, wir planen unser diesjähriges Sommerfest auf unserer Dachterrasse und suchen ein
+      Fingerfood-Buffet mit Aperitivo-Getränken für ca. 80 Kolleginnen und Kollegen. Wichtig wären
+      uns einige vegetarische und vegane Optionen. Könnten Sie uns ein Angebot mit 2–3 Varianten
+      machen? Budget liegt bei etwa 6.000–8.000&nbsp;€. Viele Grüße, Lena Hartmann
+    </div>
+
+    <p class="section-label">Aktivität</p>
+    <ul class="activity">
+      <li>
+        <span class="a-dot accent"></span>
+        <span style="flex:1"><span class="a-text">Anfrage über Website-Formular eingegangen</span><br><span class="a-time">Heute, 09:24</span></span>
+      </li>
+      <li>
+        <span class="a-dot"></span>
+        <span style="flex:1"><span class="a-text">Automatische Eingangsbestätigung an Kundin gesendet</span><br><span class="a-time">Heute, 09:25</span></span>
+      </li>
+      <li>
+        <span class="a-dot"></span>
+        <span style="flex:1"><span class="a-text">Anna hat sich die Anfrage zugewiesen</span><br><span class="a-time">Heute, 10:02</span></span>
+      </li>
+    </ul>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-secondary" data-toast="Status-Menü geöffnet">Status ändern</button>
+    <button class="btn btn-secondary" data-toast="E-Mail-Entwurf geöffnet"><svg class="ic"><use href="#i-mail"/></svg>Anschreiben</button>
+    <button class="btn btn-primary" data-goto="angebote"><svg class="ic"><use href="#i-file"/></svg>Angebot erstellen</button>
+  </div>
+</aside>
+
+<!-- ============================================================
+     9b) ZAHLUNG — Detail (Drawer)
+     ============================================================ -->
+<aside class="drawer" id="drawer-zahlung" aria-label="Zahlung Detail" role="dialog" aria-modal="true">
+  <div class="drawer-head">
+    <div style="flex:1">
+      <span class="pill pill-warn" style="margin-bottom:7px">Offen</span>
+      <div class="drawer-title num">RE-2026-0142</div>
+      <p class="drawer-sub">Hochzeit Öztürk · Restzahlung · fällig 08.07.2026</p>
+    </div>
+    <button class="icon-btn" data-drawer-close aria-label="Schließen"><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-body">
+    <p class="section-label">Betragsaufschlüsselung</p>
+    <div class="card card-pad" style="box-shadow:none">
+      <div class="summary-row"><span class="muted">Auftragswert (brutto)</span><span class="num">7.200,00&nbsp;€</span></div>
+      <div class="summary-row"><span class="muted">Anzahlung 40&nbsp;% (bezahlt 12.06.)</span><span class="num">−2.880,00&nbsp;€</span></div>
+      <div class="summary-row total"><span>Restzahlung</span><span class="num">4.320,00&nbsp;€</span></div>
+      <div class="summary-row"><span class="muted small">davon MwSt. 19&nbsp;%</span><span class="num small muted">689,75&nbsp;€</span></div>
+    </div>
+
+    <p class="section-label">Details</p>
+    <dl class="kv-grid">
+      <div><dt>Kunde</dt><dd>Sarah Öztürk</dd></div>
+      <div><dt>Veranstaltung</dt><dd><a href="#" data-goto="event-detail">Hochzeit Öztürk · 03.10.</a></dd></div>
+      <div><dt>Methode</dt><dd>Überweisung / Stripe-Link</dd></div>
+      <div><dt>Fälligkeit</dt><dd class="num">08.07.2026</dd></div>
+      <div><dt>Stripe-Referenz</dt><dd class="num">pi_3PkX9aFz2…</dd></div>
+      <div><dt>Rechnung</dt><dd><a href="#">RE-2026-0142.pdf <svg class="ic" style="width:12px;height:12px;vertical-align:-1px"><use href="#i-external"/></svg></a></dd></div>
+    </dl>
+
+    <p class="section-label">Verlauf</p>
+    <ul class="activity">
+      <li>
+        <span class="a-dot"></span>
+        <span style="flex:1"><span class="a-text">Rechnung erstellt und an Kundin gesendet</span><br><span class="a-time">24.06.2026 · via LexOffice</span></span>
+      </li>
+      <li>
+        <span class="a-dot"></span>
+        <span style="flex:1"><span class="a-text">Zahlungslink aufgerufen (nicht abgeschlossen)</span><br><span class="a-time">30.06.2026</span></span>
+      </li>
+    </ul>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-secondary" data-toast="Zahlungserinnerung an sarah.oeztuerk@web.de gesendet"><svg class="ic"><use href="#i-bell"/></svg>Erinnern</button>
+    <button class="btn btn-primary" data-toast="Zahlung als bezahlt markiert"><svg class="ic"><use href="#i-check"/></svg>Als bezahlt markieren</button>
+  </div>
+</aside>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg class="ic"><use href="#i-check"/></svg>
+  <span id="toast-text">Gespeichert</span>
+</div>
+
+<!-- Chart-Tooltip -->
+<div class="chart-tip" id="chart-tip"></div>
+
+<!-- Prototyp-Leiste -->
+<div class="proto-bar" aria-label="Prototyp-Steuerung">
+  <span class="proto-label">Prototyp</span>
+  <button class="btn btn-secondary" data-goto="login">Login</button>
+  <button class="btn btn-secondary" data-goto="public">Kundenansicht</button>
+  <select class="select" id="liststate-select" aria-label="Listen-Zustand simulieren">
+    <option value="normal">Daten</option>
+    <option value="loading">Laden</option>
+    <option value="empty">Leer</option>
+    <option value="error">Fehler</option>
+  </select>
+  <button class="icon-btn" id="proto-theme" title="Hell-/Dunkelmodus" aria-label="Design umschalten">
+    <svg class="ic icon-moon"><use href="#i-moon"/></svg>
+    <svg class="ic icon-sun" style="display:none"><use href="#i-sun"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  var app = document.getElementById('app');
+  var root = document.documentElement;
+
+  /* ---------- Navigation ---------- */
+  var SCREENS = ['dashboard','anfragen','angebote','veranstaltungen','event-detail','kalender','kunden','kunde-detail','zahlungen','einstellungen'];
+  var NAV_MAP = { 'event-detail':'veranstaltungen', 'kunde-detail':'kunden', 'angebote':'angebote' };
+
+  function goto(name) {
+    closeDrawers();
+    var login = document.getElementById('view-login');
+    var pub = document.getElementById('view-public');
+    login.classList.toggle('active', name === 'login');
+    pub.classList.toggle('active', name === 'public');
+    if (name === 'login' || name === 'public') {
+      document.body.style.overflow = 'hidden';
+      if (name === 'public') { document.body.style.overflow = ''; pub.scrollTop = 0; }
+      history.replaceState(null, '', '#' + name);
+      return;
+    }
+    document.body.style.overflow = '';
+    if (SCREENS.indexOf(name) === -1) name = 'dashboard';
+    document.querySelectorAll('.screen').forEach(function (s) {
+      s.classList.toggle('active', s.id === 'screen-' + name);
+    });
+    var navName = NAV_MAP[name] || name;
+    document.querySelectorAll('.side-nav .nav-item').forEach(function (b) {
+      if (b.dataset.goto === navName) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    document.querySelectorAll('.tabbar .tab-item').forEach(function (b) {
+      if (b.dataset.goto === navName) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    history.replaceState(null, '', '#' + name);
+    window.scrollTo({ top: 0 });
+  }
+
+  /* ---------- Drawer ---------- */
+  function closeDrawers() {
+    document.querySelectorAll('.drawer.open').forEach(function (d) { d.classList.remove('open'); });
+    app.classList.remove('drawer-open');
+  }
+  function openDrawer(id) {
+    closeDrawers();
+    var d = document.getElementById(id);
+    if (!d) return;
+    d.classList.add('open');
+    app.classList.add('drawer-open');
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawers(); });
+
+  /* ---------- Toast ---------- */
+  var toastTimer;
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    document.getElementById('toast-text').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('show'); }, 3200);
+  }
+
+  /* ---------- Delegierte Klicks ---------- */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-goto],[data-drawer],[data-drawer-open],[data-drawer-close],[data-toast],.tab,.seg button,.option-tab,.switch,.check-box,.pub-opt,.swatch');
+    if (!el) return;
+
+    if (el.hasAttribute('data-toast')) toast(el.getAttribute('data-toast'));
+
+    if (el.hasAttribute('data-drawer-close') || el.classList.contains('drawer-backdrop')) { closeDrawers(); return; }
+    if (el.hasAttribute('data-drawer-open')) { openDrawer(el.getAttribute('data-drawer-open')); return; }
+    if (el.hasAttribute('data-drawer')) { openDrawer(el.getAttribute('data-drawer')); return; }
+    if (el.hasAttribute('data-goto')) { e.preventDefault(); goto(el.getAttribute('data-goto')); return; }
+
+    /* Tabs (Statusfilter + Einstellungen) */
+    if (el.classList.contains('tab') && el.getAttribute('role') === 'tab') {
+      var group = el.parentElement;
+      group.querySelectorAll('.tab').forEach(function (t) { t.setAttribute('aria-selected', t === el ? 'true' : 'false'); });
+      if (el.dataset.panel) {
+        document.querySelectorAll('.settings-panel').forEach(function (p) {
+          p.classList.toggle('active', p.id === el.dataset.panel);
+        });
+      }
+      return;
+    }
+
+    /* Segmented control */
+    if (el.parentElement && el.parentElement.classList.contains('seg')) {
+      el.parentElement.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b === el ? 'true' : 'false'); });
+      return;
+    }
+
+    /* Angebots-Varianten (Builder) */
+    if (el.classList.contains('option-tab')) {
+      el.parentElement.querySelectorAll('.option-tab').forEach(function (t) { t.setAttribute('aria-selected', t === el ? 'true' : 'false'); });
+      return;
+    }
+
+    /* Switch */
+    if (el.classList.contains('switch')) {
+      var on = el.getAttribute('aria-checked') === 'true';
+      el.setAttribute('aria-checked', on ? 'false' : 'true');
+      var card = el.closest('.module-card');
+      if (card) {
+        card.classList.toggle('on', !on);
+        var status = card.querySelector('.mod-status');
+        if (status) status.textContent = on ? 'Inaktiv' : 'Aktiv';
+        toast((on ? 'Modul deaktiviert: ' : 'Modul aktiviert: ') + card.querySelector('.mod-name').textContent.trim());
+      }
+      return;
+    }
+
+    /* Checkliste */
+    if (el.classList.contains('check-box')) {
+      el.closest('.check-item').classList.toggle('done');
+      return;
+    }
+
+    /* Öffentliche Angebotsseite: Option wählen */
+    if (el.classList.contains('pub-opt')) {
+      document.querySelectorAll('.pub-opt').forEach(function (o) {
+        var sel = o === el;
+        o.classList.toggle('sel', sel);
+        o.setAttribute('aria-checked', sel ? 'true' : 'false');
+      });
+      var accept = document.getElementById('pub-accept');
+      if (accept) accept.setAttribute('data-toast', 'Vielen Dank! Ihre Auswahl „' + el.dataset.opt + '“ wurde an Fontana Catering übermittelt.');
+      return;
+    }
+
+    /* Branding-Swatches */
+    if (el.classList.contains('swatch')) {
+      el.parentElement.querySelectorAll('.swatch').forEach(function (s) { s.classList.toggle('sel', s === el); });
+      return;
+    }
+  });
+
+  /* ---------- Theme ---------- */
+  function applyThemeIcons() {
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.querySelectorAll('.icon-moon').forEach(function (i) { i.style.display = dark ? 'none' : ''; });
+    document.querySelectorAll('.icon-sun').forEach(function (i) { i.style.display = dark ? '' : 'none'; });
+  }
+  function toggleTheme() {
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    applyThemeIcons();
+  }
+  var tt = document.getElementById('theme-toggle');
+  var pt = document.getElementById('proto-theme');
+  if (tt) tt.addEventListener('click', toggleTheme);
+  if (pt) pt.addEventListener('click', toggleTheme);
+  applyThemeIcons();
+
+  /* ---------- Listen-Zustände ---------- */
+  var ls = document.getElementById('liststate-select');
+  if (ls) ls.addEventListener('change', function () { app.setAttribute('data-liststate', ls.value); });
+
+  /* ---------- Chart-Tooltip ---------- */
+  var tip = document.getElementById('chart-tip');
+  document.querySelectorAll('.bar-chart .bar').forEach(function (bar) {
+    bar.addEventListener('mousemove', function (e) {
+      tip.innerHTML = '<span class="num">' + bar.dataset.val + '</span><span class="tip-sub">' + bar.dataset.tip + '</span>';
+      tip.style.display = 'block';
+      tip.style.left = Math.min(e.clientX + 14, window.innerWidth - 150) + 'px';
+      tip.style.top = (e.clientY - 14) + 'px';
+    });
+    bar.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+  });
+
+  /* ---------- Initial: Hash respektieren ---------- */
+  var initial = (location.hash || '').replace('#', '');
+  if (initial) goto(initial);
+})();
+</script>
+
+</body>
+</html>
