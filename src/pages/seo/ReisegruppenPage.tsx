@@ -24,6 +24,8 @@ import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useG
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
 import GroupInquiryForm from "@/components/GroupInquiryForm";
+import MaestroWidget from "@/components/MaestroWidget";
+import StickyGroupInquiryButton from "@/components/StickyGroupInquiryButton";
 import MenuItemsList from "@/components/MenuItemsList";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
 import {
@@ -56,6 +58,9 @@ export const scrollToInquiryForm = (menuKey?: string) => {
   document.getElementById("anfrageformular")?.scrollIntoView({ behavior: "smooth" });
 };
 
+/** Deutsche Seite: Anfrage läuft über das MAESTRO-Widget (Widget „Ristorante - Reisegruppen“). */
+const MAESTRO_WIDGET_DE = "be84b421-ac13-444e-8c40-1f01e5878347";
+
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
 import groupHero from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
@@ -66,6 +71,7 @@ const ReisegruppenPage = () => {
   usePrerenderReady(true);
 
   const rg = t.reisegruppen;
+  const useMaestro = language === "de";
   const ml = menuListLabels[language as keyof typeof menuListLabels] ?? menuListLabels.de;
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
@@ -410,10 +416,10 @@ const ReisegruppenPage = () => {
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
                   asChild
                 >
-                  <a href="#anfrageformular">{rg.heroCta1}</a>
+                  <a href={useMaestro ? "#gruppe-anfragen" : "#anfrageformular"}>{rg.heroCta1}</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
-                  <a href="#anfrageformular">{rg.heroCta2}</a>
+                  <a href={useMaestro ? "#gruppenmenus" : "#anfrageformular"}>{rg.heroCta2}</a>
                 </Button>
               </div>
             </div>
@@ -447,6 +453,18 @@ const ReisegruppenPage = () => {
         <Navigation />
 
         <main className="flex-grow">
+
+          {/* SECTION 1b (nur DE): MAESTRO-Anfrage-Widget im ersten Drittel der Seite */}
+          {useMaestro && (
+            <section className="py-12 md:py-16 bg-secondary/30">
+              <div className="container mx-auto px-4 max-w-3xl">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
+                  Jetzt unverbindlich anfragen
+                </h2>
+                <MaestroWidget widgetId={MAESTRO_WIDGET_DE} lang="de" />
+              </div>
+            </section>
+          )}
 
           {/* SECTION 2: Einleitungstext */}
           <section className="py-16 md:py-20">
@@ -576,14 +594,23 @@ const ReisegruppenPage = () => {
                         </p>
                       </div>
                       <div className="px-6 pb-5">
-                        <Button
-                          type="button"
-                          className="w-full"
-                          onClick={() => scrollToInquiryForm(menu.menu_key)}
-                        >
-                          <Send className="w-4 h-4 mr-2" />
-                          {ml.inquire}
-                        </Button>
+                        {useMaestro ? (
+                          <Button className="w-full" asChild>
+                            <a href="#gruppe-anfragen" data-maestro-menue={menu.menu_key.toLowerCase()}>
+                              <Send className="w-4 h-4 mr-2" />
+                              {ml.inquire}
+                            </a>
+                          </Button>
+                        ) : (
+                          <Button
+                            type="button"
+                            className="w-full"
+                            onClick={() => scrollToInquiryForm(menu.menu_key)}
+                          >
+                            <Send className="w-4 h-4 mr-2" />
+                            {ml.inquire}
+                          </Button>
+                        )}
                       </div>
                       <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
                         <p className="text-xl font-bold text-primary leading-snug">
@@ -759,15 +786,17 @@ const ReisegruppenPage = () => {
           {/* SECTION 9: Google Reviews */}
           <GoogleReviews />
 
-          {/* SECTION 9.5: Anfrageformular */}
-          <section id="anfrageformular" className="py-16 md:py-20 bg-primary text-primary-foreground scroll-mt-24">
-            <div className="container mx-auto px-4 max-w-3xl">
-              <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
-                Jetzt unverbindlich anfragen
-              </h2>
-              <GroupInquiryForm />
-            </div>
-          </section>
+          {/* SECTION 9.5: Altes Anfrageformular (nur EN/IT/FR; DE nutzt das MAESTRO-Widget oben) */}
+          {!useMaestro && (
+            <section id="anfrageformular" className="py-16 md:py-20 bg-primary text-primary-foreground scroll-mt-24">
+              <div className="container mx-auto px-4 max-w-3xl">
+                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
+                  Jetzt unverbindlich anfragen
+                </h2>
+                <GroupInquiryForm />
+              </div>
+            </section>
+          )}
 
 
           {/* SECTION 10: CTA Kontakt */}
@@ -881,6 +910,7 @@ const ReisegruppenPage = () => {
         </main>
 
         <Footer />
+        {useMaestro && <StickyGroupInquiryButton label="Gruppe anfragen" targetId="gruppe-anfragen" />}
       </div>
     </>
   );
