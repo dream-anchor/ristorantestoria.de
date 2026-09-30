@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type CSSProperties } from "react";
 
 const WIDGET_SRC = "https://storia.schrittmacher.ai/api/public/widgets/v1/maestro.js";
 
@@ -45,14 +45,27 @@ const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight
     document.body.appendChild(script);
   }, []);
 
+  // Stil-Block aus dem freigegebenen MAESTRO-Entwurf 6 (Einbau-Schnipsel): ohne ihn nimmt der Loader die
+  // Farbe des ersten Knopfs der Seite (hier weiss) - Auswahl und Absende-Knopf wurden unsichtbar.
+  const stil = {
+    minHeight,
+    "--maestro-accent": "#931F23",
+    "--maestro-knopf-text": "#fff",
+    "--maestro-font": "Inter, system-ui, sans-serif",
+    "--maestro-radius": "4px",
+  } as CSSProperties;
+
   return (
-    <div
-      id={anchorId}
-      data-maestro-widget={widgetId}
-      lang={lang}
-      style={{ minHeight }}
-      className="scroll-mt-40"
-    />
+    <>
+      <style>{`[data-maestro-widget]::part(titel){font-family:"Playfair Display",Georgia,serif}`}</style>
+      <div
+        id={anchorId}
+        data-maestro-widget={widgetId}
+        lang={lang}
+        style={stil}
+        className="scroll-mt-40"
+      />
+    </>
   );
 };
 
