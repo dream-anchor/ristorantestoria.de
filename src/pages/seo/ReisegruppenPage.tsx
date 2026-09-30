@@ -355,7 +355,7 @@ const ReisegruppenPage = () => {
         <Header />
 
         {/* SECTION 1: Hero */}
-        <section className="relative h-[70vh] min-h-[440px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[max(70vh,440px)] py-16 flex items-center justify-center overflow-hidden">
           <img
             src={groupHero}
             srcSet={`${groupHero600} 600w, ${groupHero} 1400w`}

@@ -77,7 +77,7 @@ const ItalienerHauptbahnhofMuenchen = () => {
         <Header />
 
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[max(70vh,500px)] py-16 flex items-center justify-center overflow-hidden">
           <img
             src={heroImage}
             srcSet={`${heroImage600} 600w, ${heroImage} 1200w`}

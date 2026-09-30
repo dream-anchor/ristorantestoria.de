@@ -77,7 +77,7 @@ const PastaFrescaMuenchen = () => {
         <Header />
 
         {/* Hero Section */}
-        <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[max(80vh,600px)] py-16 flex items-center justify-center overflow-hidden">
           <img
             src={pastaHero}
             alt="Hausgemachte frische Pasta im Ristorante STORIA München"

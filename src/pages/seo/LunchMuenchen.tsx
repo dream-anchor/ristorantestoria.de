@@ -105,7 +105,7 @@ const LunchMuenchen = () => {
         <Header />
         
         {/* Hero Section with Full Image */}
-        <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[max(80vh,600px)] py-16 flex items-center justify-center overflow-hidden">
           <img
             src={businessLunchAtmosphere}
             srcSet={`${businessLunchAtmosphere600} 600w, ${businessLunchAtmosphere} 1200w`}

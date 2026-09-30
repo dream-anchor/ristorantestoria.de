@@ -175,7 +175,7 @@ const AperitivoMuenchen = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[max(70vh,500px)] py-16 flex items-center justify-center overflow-hidden">
           <img
             src={cocktailsImage}
             srcSet={`${cocktailsImage600} 600w, ${cocktailsImage} 1200w`}

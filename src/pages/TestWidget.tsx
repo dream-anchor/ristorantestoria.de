@@ -69,7 +69,7 @@ const TestWidget = () => {
         <Header />
 
         {/* Hero */}
-        <section className="relative h-[60vh] min-h-[480px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[max(60vh,480px)] py-16 flex items-center justify-center overflow-hidden">
           <img
             src={heroImage}
             alt="Innenansicht des Ristorante STORIA in München"

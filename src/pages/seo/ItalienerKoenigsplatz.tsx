@@ -84,7 +84,7 @@ const ItalienerKoenigsplatz = () => {
         <Header />
 
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[max(70vh,500px)] py-16 flex items-center justify-center overflow-hidden">
           <img
             src={aussenHero}
             srcSet={`${aussenHero600} 600w, ${aussenHero} 1200w`}
