@@ -433,7 +433,7 @@ const EventlocationMuenchen = () => {
                 </LocalizedLink>
                 <LocalizedLink to="reisegruppen-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">Gastronomie für Reisegruppen</h3>
-                  <p className="text-muted-foreground text-sm">Spezialisierte Gruppenmenüs für 20–100 Personen, Reiseleiter isst gratis.</p>
+                  <p className="text-muted-foreground text-sm">Spezialisierte Gruppenmenüs für 10–100 Personen, Reiseleitung isst ab 25 Personen gratis.</p>
                 </LocalizedLink>
                 <LocalizedLink to="faq" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.internalLinks.faqLink}</h3>
