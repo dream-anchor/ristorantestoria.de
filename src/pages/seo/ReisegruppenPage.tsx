@@ -58,8 +58,16 @@ export const scrollToInquiryForm = (menuKey?: string) => {
   document.getElementById("anfrageformular")?.scrollIntoView({ behavior: "smooth" });
 };
 
-/** Deutsche Seite: Anfrage läuft über das MAESTRO-Widget (Widget „Ristorante - Reisegruppen“). */
-const MAESTRO_WIDGET_DE = "be84b421-ac13-444e-8c40-1f01e5878347";
+/**
+ * Anfrage läuft in allen vier Sprachen über das MAESTRO-Widget der jeweiligen Sprache
+ * (DE seit 30.09.2026, EN/IT/FR seit 01.10.2026 nach Übersetzung der Datenschutzerklärung).
+ */
+const MAESTRO_WIDGETS: Record<string, { id: string; titel: string; knopf: string }> = {
+  de: { id: "be84b421-ac13-444e-8c40-1f01e5878347", titel: "Jetzt unverbindlich anfragen", knopf: "Gruppe anfragen" },
+  en: { id: "d211d689-486c-415b-9db0-003bec7eece5", titel: "Request your free quote", knopf: "Request a group quote" },
+  it: { id: "92d7058c-11e2-4542-93f7-dc5bfa8166f7", titel: "Richiedi ora un preventivo senza impegno", knopf: "Richiedi per il gruppo" },
+  fr: { id: "171d7c1e-dc3b-46dd-bdf3-8ba665343f96", titel: "Demandez votre devis sans engagement", knopf: "Demander pour le groupe" },
+};
 
 // Images
 import storiaLogo from "@/assets/storia-logo.webp";
@@ -71,7 +79,8 @@ const ReisegruppenPage = () => {
   usePrerenderReady(true);
 
   const rg = t.reisegruppen;
-  const useMaestro = language === "de";
+  const maestro = MAESTRO_WIDGETS[language];
+  const useMaestro = Boolean(maestro);
   const ml = menuListLabels[language as keyof typeof menuListLabels] ?? menuListLabels.de;
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
@@ -454,14 +463,14 @@ const ReisegruppenPage = () => {
 
         <main className="flex-grow">
 
-          {/* SECTION 1b (nur DE): MAESTRO-Anfrage-Widget im ersten Drittel der Seite */}
-          {useMaestro && (
+          {/* SECTION 1b: MAESTRO-Anfrage-Widget im ersten Drittel der Seite */}
+          {maestro && (
             <section className="py-12 md:py-16 bg-secondary/30">
               <div className="container mx-auto px-4 max-w-3xl">
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
-                  Jetzt unverbindlich anfragen
+                  {maestro.titel}
                 </h2>
-                <MaestroWidget widgetId={MAESTRO_WIDGET_DE} lang="de" />
+                <MaestroWidget widgetId={maestro.id} lang={language} />
               </div>
             </section>
           )}
@@ -910,7 +919,7 @@ const ReisegruppenPage = () => {
         </main>
 
         <Footer />
-        {useMaestro && <StickyGroupInquiryButton label="Gruppe anfragen" targetId="gruppe-anfragen" />}
+        {maestro && <StickyGroupInquiryButton label={maestro.knopf} targetId="gruppe-anfragen" />}
       </div>
     </>
   );
