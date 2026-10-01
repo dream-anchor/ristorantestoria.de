@@ -1,0 +1,387 @@
+[
+ {
+  "title": "General",
+  "sections": [
+   {
+    "title": "1. Scope",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "This privacy policy applies to the websites www.ristorantestoria.de and www.events-storia.de, to our offer pages and the customer portal at storia.schrittmacher.ai, and to communication with us by email, telephone and WhatsApp. It informs you which personal data we process, for what purposes, and what rights you have."
+     }
+    ]
+   },
+   {
+    "title": "2. Controller",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Speranza GmbH, Karlstraße 47a, 80333 Munich, represented by its managing director Agnese Lettieri. Telephone +49 89 51519696, email info@ristorantestoria.de or info@events-storia.de."
+     },
+     {
+      "type": "p",
+      "text": "For all questions about data protection and for exercising your rights, you can reach us using these contact details."
+     }
+    ]
+   },
+   {
+    "title": "3. Legal bases",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "We process personal data on the following bases under the General Data Protection Regulation (GDPR):"
+     },
+     {
+      "type": "ul",
+      "items": [
+       {
+        "text": "Art. 6(1)(a) GDPR – your consent, for example for statistics services, external content, the newsletter or a request for a review;",
+        "sub": []
+       },
+       {
+        "text": "Art. 6(1)(b) GDPR – initiation and performance of a contract, for example for enquiries, offers, orders, reservations and vouchers;",
+        "sub": []
+       },
+       {
+        "text": "Art. 6(1)(c) GDPR – legal obligations, in particular retention obligations under commercial and tax law;",
+        "sub": []
+       },
+       {
+        "text": "Art. 6(1)(f) GDPR – our legitimate interests, for example in the secure operation of the websites, the efficient handling of enquiries and in proving that contracts have been concluded.",
+        "sub": []
+       }
+      ]
+     },
+     {
+      "type": "p",
+      "text": "For storing information on your end device and accessing it, § 25 of the German Telecommunications Digital Services Data Protection Act (TDDDG) additionally applies: technically necessary operations take place under § 25(2) no. 2 TDDDG, all others only with your consent under § 25(1) TDDDG."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Websites and hosting",
+  "sections": [
+   {
+    "title": "4. Provision of the websites and server log files",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Both websites are hosted by IONOS SE, Montabaur. When you access a website, the server automatically processes your IP address, date and time, the page accessed, referrer URL, browser and operating system. This is technically necessary to deliver the pages and to ensure security (Art. 6(1)(f) GDPR). The log files are deleted after a short time unless they are needed to investigate a security incident. A data processing agreement is in place with IONOS."
+     },
+     {
+      "type": "p",
+      "text": "We embed fonts locally; no data is transmitted to third parties for this purpose when a page is accessed."
+     }
+    ]
+   },
+   {
+    "title": "5. Website databases",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "We store orders, enquiries, vouchers and customer accounts from events-storia.de, as well as seasonal pre-registrations and content from ristorantestoria.de, in databases of Supabase, Inc., USA. A data processing agreement is in place with Supabase; transfers to the USA take place on the basis of the EU Standard Contractual Clauses."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Enquiries and communication",
+  "sections": [
+   {
+    "title": "6. Enquiries by form, email, telephone and WhatsApp",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "If you contact us via a form, by email, by telephone or via WhatsApp, we process your details (e.g. name, company, email address, telephone number, date, number of persons, requests and uploaded files) in order to answer your enquiry and prepare an offer (Art. 6(1)(b) GDPR)."
+     },
+     {
+      "type": "p",
+      "text": "We manage enquiries, offers, bookings and the related email correspondence in the MAESTRO software of Dream & Anchor Handelsgesellschaft mbH, which acts as a processor on our behalf. MAESTRO runs on servers of Cloudflare, Inc. (USA) and uses a database of Neon Inc. with a server location in Frankfurt am Main. Our email mailboxes are hosted at IONOS; a server of Contabo GmbH (Germany) is used to transfer incoming emails into MAESTRO. Transfers to the USA take place on the basis of the EU-US Data Privacy Framework or the EU Standard Contractual Clauses."
+     },
+     {
+      "type": "p",
+      "text": "If you start a form in MAESTRO and do not submit it, we only store the email address you have already entered for a maximum of 14 days, in order to be able to help you if needed. To prevent abuse, we process the IP address briefly and delete it after one day at the latest."
+     },
+     {
+      "type": "p",
+      "text": "If you write to us via WhatsApp, Meta Platforms Ireland Limited, Merrion Road, Dublin 4, Ireland, additionally processes your messages and your telephone number. We inform our team about new enquiries in part via WhatsApp; these internal notifications contain the name and contact details of the person making the enquiry."
+     }
+    ]
+   },
+   {
+    "title": "7. Use of artificial intelligence",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "To process enquiries and emails more quickly, we have their content analysed by AI models of Anthropic PBC, USA: the AI identifies the request, transfers details such as date and number of persons into the enquiry, and drafts offers and replies. Every reply and every offer is reviewed and sent by an employee; no automated decisions within the meaning of Art. 22 GDPR take place. The legal basis is Art. 6(1)(b) and (f) GDPR. The transfer to the USA takes place on the basis of the EU Standard Contractual Clauses."
+     },
+     {
+      "type": "p",
+      "text": "The enquiry assistant on events-storia.de uses an AI model from Google, which is connected via the service of the provider Lovable (Sweden). Your inputs in the assistant and uploaded files are processed for this purpose and passed on to us as an enquiry."
+     }
+    ]
+   },
+   {
+    "title": "8. Business enquiries: comparison with public sources",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "If you state a company in an enquiry, we compare its master data with publicly accessible sources: the commercial register and company register or the Federal Gazette (Bundesanzeiger), the legal notice of the company website, the confirmation of the VAT identification number with the Federal Central Tax Office (Bundeszentralamt für Steuern), the LEI directory of GLEIF and Google Places (Google Ireland Limited; only the company name and location are transmitted). This enables us to ensure correct invoicing and company data (Art. 6(1)(f) GDPR). Depending on the source, the retrieved data is deleted after three to twelve months. We do not carry out this comparison for enquiries from private individuals without a company name."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Offers, bookings and payments",
+  "sections": [
+   {
+    "title": "9. Offer page, cost acceptance and customer portal",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "You receive our offers as a link to a personal offer page. When the page is merely opened, we only store how often and when it was last opened, but no IP address. If you accept an offer, decline it or ask for changes, we store the time, IP address and browser identifier as proof of your declaration (Art. 6(1)(b) and (f) GDPR)."
+     },
+     {
+      "type": "p",
+      "text": "For a cost acceptance or order declaration, we use the signature service eSignatures.io. In doing so, name, email address, mobile number, billing address as well as event and amount data are transmitted; for confirmation you receive a code by SMS."
+     },
+     {
+      "type": "p",
+      "text": "In the customer portal you log in via a login link sent by email, which is valid for 20 minutes. When you log in, we store your IP address and browser identifier to secure your access."
+     }
+    ]
+   },
+   {
+    "title": "10. Online shop, customer account and delivery",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "For orders in the online shop on events-storia.de, we process your name, contact details, delivery and billing address, delivery details, the order and your comments (Art. 6(1)(b) GDPR)."
+     },
+     {
+      "type": "p",
+      "text": "To calculate the delivery distance, we transmit the delivery address to the openrouteservice service of Heidelberg Institute for Geoinformation Technology (HeiGIT) gGmbH, Heidelberg."
+     },
+     {
+      "type": "p",
+      "text": "If you create a customer account, we store your name, email address, an encrypted password and, voluntarily, your telephone number, company and addresses, so that you can view orders and invoices. You can request the deletion of your account at any time by email."
+     },
+     {
+      "type": "p",
+      "text": "During the ordering process, your browser temporarily holds the form data you have entered until the order is completed. If you select “Save my data for future visits on this device”, your name, email address, telephone number and company remain stored in your browser for 30 days; this data is not transmitted to us as a result."
+     }
+    ]
+   },
+   {
+    "title": "11. Payments",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Online payments are processed by Stripe Payments Europe Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Ireland. Depending on the payment method selected (e.g. credit card, SEPA direct debit, Apple Pay, Google Pay, Klarna), Stripe processes your payment data and, where applicable, forwards it to the respective payment provider; Klarna may carry out a credit check in this context. You enter card details directly with Stripe; we do not receive them."
+     },
+     {
+      "type": "p",
+      "text": "For purchases on invoice by business customers, we use Billie GmbH, Charlottenstraße 4, 10969 Berlin. Billie receives the company name, legal form, business address, the orderer’s name and email address and the order data, and carries out an automated credit check."
+     },
+     {
+      "type": "p",
+      "text": "We create invoices with Lexware Office of Haufe-Lexware GmbH & Co. KG, Freiburg. The legal basis is Art. 6(1)(b) and (c) GDPR."
+     }
+    ]
+   },
+   {
+    "title": "12. Vouchers",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "When you purchase a voucher, we process the name and email address of the purchaser and, where applicable, the name, email address and greeting message for the recipient, in order to issue and send the voucher (Art. 6(1)(b) GDPR). Payment is made via Stripe."
+     }
+    ]
+   },
+   {
+    "title": "13. Table reservations via OpenTable",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "For table reservations, we redirect you to the OpenTable website (OpenTable, Inc., USA; in the EU OpenTable International Ltd.). OpenTable processes your reservation data under its own responsibility in accordance with its privacy policy: www.opentable.de/legal/privacy-policy."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Emails and newsletter",
+  "sections": [
+   {
+    "title": "14. Sending of emails",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "We send offers, confirmations, reminders and invoices via Sendinblue SAS (Brevo), Paris, France. Emails from the online shop and about payments from events-storia.de are sent via Resend, Inc., USA, or, as a fallback, via IONOS. Transfers to the USA take place on the basis of the EU Standard Contractual Clauses."
+     }
+    ]
+   },
+   {
+    "title": "15. Seasonal pre-registration and newsletter",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "If you sign up on ristorantestoria.de for information about seasonal offers, you first receive an email with a confirmation link (double opt-in). We store your email address as well as the time, IP address and wording of your consent as proof (Art. 6(1)(a) and (c) GDPR). These emails are sent via Brevo. You can unsubscribe at any time via the unsubscribe link in every email or by sending us a message."
+     }
+    ]
+   },
+   {
+    "title": "16. Request for a review",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "If you have consented, we will ask you once by email after your event to leave a review on Google. We send at most one such email per address within twelve months and, when the link is clicked, we record only the date, not the IP address. You can object to the review request at any time; we will then store your address in encrypted form in a block list."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "External content and statistics",
+  "sections": [
+   {
+    "title": "17. Consent management",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "On your first visit, we ask which categories you consent to: statistics, marketing and external content. We store your selection in your browser for twelve months. You can change or withdraw it at any time via the cookie icon on the page. Details can be found in our Cookie Policy."
+     }
+    ]
+   },
+   {
+    "title": "18. Google Analytics",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "With your consent (category Statistics), we use Google Analytics 4 of Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland, to evaluate the use of our websites. In doing so, cookies are set and usage data such as pages viewed, time spent, device and browser data, approximate location and clicks on telephone or WhatsApp links are processed. IP addresses are not stored by Google Analytics 4. The data may be transferred to Google LLC in the USA; Google is certified under the EU-US Data Privacy Framework. The legal basis is Art. 6(1)(a) GDPR and § 25(1) TDDDG. Without your consent, Google Analytics is not loaded."
+     }
+    ]
+   },
+   {
+    "title": "19. Microsoft Clarity",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "On events-storia.de, with your consent (category Statistics), we use Microsoft Clarity of Microsoft Ireland Operations Limited, Dublin, Ireland. Clarity records mouse movements, clicks and scrolling behaviour in order to create heatmaps and session recordings. The data may be transferred to the USA; Microsoft is certified under the EU-US Data Privacy Framework."
+     }
+    ]
+   },
+   {
+    "title": "20. Google Maps",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "With your consent (category External content), we embed maps from Google Maps of Google Ireland Limited. When the map is loaded, your IP address and browser data are transmitted to Google, possibly also to the USA."
+     }
+    ]
+   },
+   {
+    "title": "21. Reviews",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "On ristorantestoria.de, we display public Google reviews, which we retrieve ourselves and store on our server; no data is transmitted to Google when they are displayed. On events-storia.de, we display reviews with your consent (category External content) via a widget of Elfsight LLC, USA. When the widget is loaded, your IP address and browser data are transmitted to Elfsight."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Retention periods, recipients and your rights",
+  "sections": [
+   {
+    "title": "22. Retention periods",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "We store personal data only for as long as is necessary for the respective purpose:"
+     },
+     {
+      "type": "ul",
+      "items": [
+       {
+        "text": "Enquiries without a contract being concluded: up to twelve months after the last contact;",
+        "sub": []
+       },
+       {
+        "text": "Contracts, invoices and business correspondence: until the statutory retention periods of six to ten years have expired (§ 257 of the German Commercial Code (HGB), § 147 of the German Fiscal Code (AO));",
+        "sub": []
+       },
+       {
+        "text": "Proof of consent: for as long as the consent exists and beyond that to the extent we need it as evidence;",
+        "sub": []
+       },
+       {
+        "text": "Customer account: until the account is deleted, subject to retention periods.",
+        "sub": []
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "23. Recipients",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Your data is received only by the service providers named in this policy, to the extent necessary for the respective purpose, and by public authorities to the extent we are legally obliged to do so. Data processing agreements under Art. 28 GDPR are in place with all service providers acting on our behalf. We do not sell personal data."
+     }
+    ]
+   },
+   {
+    "title": "24. Your rights",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "You have the right of access (Art. 15 GDPR), rectification (Art. 16 GDPR), erasure (Art. 17 GDPR), restriction of processing (Art. 18 GDPR) and data portability (Art. 20 GDPR). You can withdraw any consent you have given at any time with effect for the future (Art. 7(3) GDPR)."
+     },
+     {
+      "type": "p",
+      "text": "You also have the right to lodge a complaint with a supervisory authority. The authority responsible for us is the Bavarian State Office for Data Protection Supervision (Bayerisches Landesamt für Datenschutzaufsicht), Promenade 18, 91522 Ansbach."
+     }
+    ]
+   },
+   {
+    "title": "25. Right to object under Art. 21 GDPR",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "If we process your data on the basis of legitimate interests (Art. 6(1)(f) GDPR), you may object to this processing at any time on grounds relating to your particular situation. You may object to advertising by email at any time without giving reasons. An informal message to info@ristorantestoria.de or info@events-storia.de is sufficient.",
+      "strong": true
+     }
+    ]
+   },
+   {
+    "title": "26. Obligation to provide data and automated decisions",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Providing your contact details is necessary for processing an enquiry and concluding a contract; without them we cannot process your enquiry. We do not make automated decisions under Art. 22 GDPR. If you choose to pay on invoice or by Klarna, Billie or Klarna, respectively, decide on the availability of this payment method on the basis of their credit check."
+     }
+    ]
+   },
+   {
+    "title": "27. Security and changes",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "We transmit all data in encrypted form (TLS). We will amend this privacy policy if our services or the legal situation change."
+     },
+     {
+      "type": "p",
+      "text": "As of: 28 September 2026"
+     }
+    ]
+   }
+  ]
+ }
+]

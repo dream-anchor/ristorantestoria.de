@@ -259,9 +259,8 @@ RewriteRule ^en/imprint/?$ /impressum/ [R=301,L]
 RewriteRule ^it/note-legali/?$ /impressum/ [R=301,L]
 RewriteRule ^fr/mentions-legales/?$ /impressum/ [R=301,L]
 
-RewriteRule ^en/privacy-policy/?$ /datenschutz/ [R=301,L]
-RewriteRule ^it/privacy/?$ /datenschutz/ [R=301,L]
-RewriteRule ^fr/confidentialite/?$ /datenschutz/ [R=301,L]
+# Datenschutz: EN/IT/FR (/en/privacy-policy/, /it/privacy/, /fr/confidentialite/) sind eigene
+# Seiten (Übersetzung nur zur Information) und werden NICHT mehr umgeleitet.
 
 RewriteRule ^en/cookie-policy/?$ /cookie-richtlinie/ [R=301,L]
 RewriteRule ^it/cookie-policy/?$ /cookie-richtlinie/ [R=301,L]

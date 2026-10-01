@@ -42,8 +42,9 @@ const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 const EXCLUDED_ROUTES = ["admin", "admin/login", "menu", "italiener-muenchen", "agb-restaurant"];
 
 // Legal pages — only generate German URLs (no foreign language versions)
+// ("datenschutz" ist bewusst nicht dabei: es gibt unverbindliche Übersetzungen EN/IT/FR.)
 const LEGAL_ONLY_DE = [
-  "impressum", "datenschutz", "cookie-richtlinie",
+  "impressum", "cookie-richtlinie",
   "agb-restaurant", "lebensmittelhinweise",
   "barrierefreiheit",
 ];

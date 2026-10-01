@@ -164,9 +164,11 @@ import rawSlugs from "@/config/runtime-slugs.json";
 const slugMaps = rawSlugs as Record<"de" | "en" | "it" | "fr", Record<string, string>>;
 type Language = "de" | "en" | "it" | "fr";
 
-// Legal pages — only exist in German, foreign language routes redirect to DE
+// Legal pages — only exist in German, foreign language routes redirect to DE.
+// Ausnahme "datenschutz": hat Übersetzungen EN/IT/FR (nur zur Information, mit Hinweis auf die
+// verbindliche deutsche Fassung) und wird deshalb nicht umgeleitet.
 const LEGAL_ONLY_DE = new Set([
-  "impressum", "datenschutz", "cookie-richtlinie",
+  "impressum", "cookie-richtlinie",
   "agb-restaurant", "lebensmittelhinweise",
   "barrierefreiheit",
 ]);

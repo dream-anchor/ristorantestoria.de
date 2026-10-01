@@ -11,9 +11,11 @@ const slugMaps = rawSlugs as Record<Language, Record<string, string>>;
 export const SUPPORTED_LANGUAGES: Language[] = ["de", "en", "it", "fr"];
 export const DEFAULT_LANGUAGE: Language = "de";
 
-// Legal pages — German only, no translated URLs
+// Legal pages — German only, no translated URLs.
+// Ausnahme "datenschutz": EN/IT/FR haben eine unverbindliche Übersetzung nur zur Information
+// (/en/privacy-policy/, /it/privacy/, /fr/confidentialite/); verbindlich ist die deutsche Fassung.
 const LEGAL_ONLY_DE = new Set([
-  "impressum", "datenschutz", "cookie-richtlinie",
+  "impressum", "cookie-richtlinie",
   "agb-restaurant", "lebensmittelhinweise",
 ]);
 

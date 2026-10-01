@@ -1,0 +1,387 @@
+[
+ {
+  "title": "Généralités",
+  "sections": [
+   {
+    "title": "1. Champ d’application",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "La présente politique de confidentialité s’applique aux sites web www.ristorantestoria.de et www.events-storia.de, à nos pages d’offres et au portail clients accessible à l’adresse storia.schrittmacher.ai, ainsi qu’à la communication avec nous par e-mail, par téléphone et par WhatsApp. Elle vous informe des données personnelles que nous traitons, des finalités de ce traitement et des droits dont vous disposez."
+     }
+    ]
+   },
+   {
+    "title": "2. Responsable du traitement",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Speranza GmbH, Karlstraße 47a, 80333 Munich, représentée par sa gérante Agnese Lettieri. Téléphone +49 89 51519696, e-mail info@ristorantestoria.de ou info@events-storia.de."
+     },
+     {
+      "type": "p",
+      "text": "Pour toute question relative à la protection des données et à l’exercice de vos droits, vous pouvez nous joindre à ces coordonnées."
+     }
+    ]
+   },
+   {
+    "title": "3. Bases juridiques",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Nous traitons des données personnelles sur les bases suivantes du Règlement général sur la protection des données (RGPD) :"
+     },
+     {
+      "type": "ul",
+      "items": [
+       {
+        "text": "article 6, paragraphe 1, point a), du RGPD – votre consentement, par exemple pour les services statistiques, les contenus externes, la newsletter ou une demande d’avis ;",
+        "sub": []
+       },
+       {
+        "text": "article 6, paragraphe 1, point b), du RGPD – préparation et exécution d’un contrat, par exemple pour les demandes, offres, commandes, réservations et bons cadeaux ;",
+        "sub": []
+       },
+       {
+        "text": "article 6, paragraphe 1, point c), du RGPD – obligations légales, en particulier les obligations de conservation prévues par le droit commercial et fiscal ;",
+        "sub": []
+       },
+       {
+        "text": "article 6, paragraphe 1, point f), du RGPD – nos intérêts légitimes, par exemple à un fonctionnement sécurisé des sites web, à un traitement efficace des demandes et à la preuve de la conclusion des contrats.",
+        "sub": []
+       }
+      ]
+     },
+     {
+      "type": "p",
+      "text": "Pour l’enregistrement d’informations sur votre terminal et l’accès à celles-ci, le § 25 de la loi allemande sur la protection des données dans les télécommunications et les services numériques (TDDDG) s’applique en outre : les opérations techniquement nécessaires reposent sur le § 25, alinéa 2, point 2 TDDDG, toutes les autres uniquement sur votre consentement au titre du § 25, alinéa 1 TDDDG."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Sites web et hébergement",
+  "sections": [
+   {
+    "title": "4. Mise à disposition des sites web et fichiers journaux du serveur",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Les deux sites web sont hébergés par IONOS SE, Montabaur. Lors de l’accès, le serveur traite automatiquement l’adresse IP, la date et l’heure, la page consultée, l’URL de provenance (référent), le navigateur et le système d’exploitation. Cela est techniquement nécessaire pour fournir les pages et garantir la sécurité (article 6, paragraphe 1, point f), du RGPD). Les fichiers journaux sont supprimés après un court délai, sauf s’ils sont nécessaires pour élucider un incident de sécurité. Un contrat de sous-traitance est conclu avec IONOS."
+     },
+     {
+      "type": "p",
+      "text": "Nous intégrons les polices de caractères en local ; aucune donnée n’est donc transmise à des tiers à ce titre lors de l’accès à la page."
+     }
+    ]
+   },
+   {
+    "title": "5. Bases de données des sites web",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Nous enregistrons les commandes, demandes, bons cadeaux et comptes clients de events-storia.de, ainsi que les préinscriptions saisonnières et les contenus de ristorantestoria.de, dans des bases de données de Supabase, Inc., États-Unis. Un contrat de sous-traitance est conclu avec Supabase ; le transfert vers les États-Unis repose sur les clauses contractuelles types de l’UE."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Demandes et communication",
+  "sections": [
+   {
+    "title": "6. Demandes par formulaire, e-mail, téléphone et WhatsApp",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Lorsque vous nous contactez par formulaire, par e-mail, par téléphone ou par WhatsApp, nous traitons vos informations (par ex. nom, entreprise, adresse e-mail, numéro de téléphone, date, nombre de personnes, souhaits et fichiers téléversés) afin de répondre à votre demande et d’établir une offre (article 6, paragraphe 1, point b), du RGPD)."
+     },
+     {
+      "type": "p",
+      "text": "Nous gérons les demandes, offres, réservations et la correspondance par e-mail correspondante dans le logiciel MAESTRO de Dream & Anchor Handelsgesellschaft mbH, qui intervient pour notre compte en tant que sous-traitant. MAESTRO fonctionne sur des serveurs de Cloudflare, Inc. (États-Unis) et utilise une base de données de Neon Inc. dont le serveur est situé à Francfort-sur-le-Main. Nos boîtes e-mail sont hébergées chez IONOS ; un serveur de Contabo GmbH (Allemagne) est utilisé pour la reprise des e-mails entrants dans MAESTRO. Les transferts vers les États-Unis reposent sur le cadre de protection des données UE-États-Unis (EU-US Data Privacy Framework) ou sur les clauses contractuelles types de l’UE."
+     },
+     {
+      "type": "p",
+      "text": "Si vous commencez un formulaire dans MAESTRO sans l’envoyer, nous enregistrons uniquement l’adresse e-mail déjà saisie, pour 14 jours au maximum, afin de pouvoir vous aider si nécessaire. Pour prévenir les abus, nous traitons l’adresse IP de manière brève et la supprimons au plus tard après un jour."
+     },
+     {
+      "type": "p",
+      "text": "Si vous nous écrivez par WhatsApp, Meta Platforms Ireland Limited, Merrion Road, Dublin 4, Irlande, traite en outre vos messages et votre numéro de téléphone. Nous informons notre équipe des nouvelles demandes en partie par WhatsApp ; ces notifications internes contiennent le nom et les coordonnées de la personne à l’origine de la demande."
+     }
+    ]
+   },
+   {
+    "title": "7. Recours à l’intelligence artificielle",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Afin de traiter plus rapidement les demandes et les e-mails, nous en faisons analyser le contenu par des modèles d’IA d’Anthropic PBC, États-Unis : l’IA identifie l’objet de la demande, reprend dans la demande des informations telles que la date et le nombre de personnes, et rédige des projets d’offres et de réponses. Chaque réponse et chaque offre est vérifiée et envoyée par un collaborateur ; il n’est pas pris de décision automatisée au sens de l’article 22 du RGPD. La base juridique est l’article 6, paragraphe 1, points b) et f), du RGPD. Le transfert vers les États-Unis repose sur les clauses contractuelles types de l’UE."
+     },
+     {
+      "type": "p",
+      "text": "L’assistant de demande sur events-storia.de utilise un modèle d’IA de Google, relié par le service du fournisseur Lovable (Suède). Vos saisies dans l’assistant et les fichiers téléversés sont traités à cette fin et nous sont transmis sous forme de demande."
+     }
+    ]
+   },
+   {
+    "title": "8. Demandes professionnelles : recoupement avec des sources publiques",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Si vous indiquez une entreprise dans votre demande, nous recoupons ses données de base avec des sources accessibles au public : registre du commerce et registre des entreprises, ou Bundesanzeiger (Journal officiel fédéral), mentions légales du site web de l’entreprise, confirmation du numéro d’identification TVA auprès de l’Office fédéral central des impôts (Bundeszentralamt für Steuern), répertoire LEI de la GLEIF et Google Places (Google Ireland Limited ; seuls le nom de l’entreprise et la localité sont transmis). Nous garantissons ainsi l’exactitude des données de facturation et des données de l’entreprise (article 6, paragraphe 1, point f), du RGPD). Selon la source, les données récupérées sont supprimées après trois à douze mois. Nous n’effectuons pas ce recoupement pour les demandes de particuliers n’indiquant pas d’entreprise."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Offres, réservations et paiements",
+  "sections": [
+   {
+    "title": "9. Page d’offre, prise en charge des coûts et portail clients",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Vous recevez nos offres sous la forme d’un lien vers une page d’offre personnelle. Lors de la simple consultation, nous enregistrons uniquement le nombre de fois où la page a été ouverte et la date de sa dernière ouverture, mais pas l’adresse IP. Si vous acceptez une offre, la refusez ou demandez des modifications, nous enregistrons la date et l’heure, l’adresse IP et l’identifiant du navigateur comme preuve de votre déclaration (article 6, paragraphe 1, points b) et f), du RGPD)."
+     },
+     {
+      "type": "p",
+      "text": "Pour une déclaration de prise en charge des coûts ou de commande, nous utilisons le service de signature eSignatures.io. À cette occasion, le nom, l’adresse e-mail, le numéro de portable, l’adresse de facturation ainsi que les données relatives à l’événement et aux montants sont transmis ; pour la confirmation, vous recevez un code par SMS."
+     },
+     {
+      "type": "p",
+      "text": "Dans le portail clients, vous vous connectez au moyen d’un lien de connexion envoyé par e-mail, valable 20 minutes. Lors de la connexion, nous enregistrons l’adresse IP et l’identifiant du navigateur afin de sécuriser votre accès."
+     }
+    ]
+   },
+   {
+    "title": "10. Boutique en ligne, compte client et livraison",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Pour les commandes dans la boutique en ligne sur events-storia.de, nous traitons le nom, les coordonnées, l’adresse de livraison et de facturation, les détails de la livraison, la commande et vos remarques (article 6, paragraphe 1, point b), du RGPD)."
+     },
+     {
+      "type": "p",
+      "text": "Pour calculer la distance de livraison, nous transmettons l’adresse de livraison au service openrouteservice de l’Heidelberg Institute for Geoinformation Technology (HeiGIT) gGmbH, Heidelberg."
+     },
+     {
+      "type": "p",
+      "text": "Si vous créez un compte client, nous enregistrons votre nom, votre adresse e-mail, un mot de passe chiffré ainsi que, à titre facultatif, votre numéro de téléphone, votre entreprise et vos adresses, afin que vous puissiez consulter vos commandes et factures. Vous pouvez demander à tout moment, par e-mail, la suppression de votre compte."
+     },
+     {
+      "type": "p",
+      "text": "Pendant le processus de commande, votre navigateur conserve temporairement les données de formulaire saisies jusqu’à la finalisation de la commande. Si vous sélectionnez « Enregistrer mes données pour mes prochaines visites sur cet appareil », le nom, l’adresse e-mail, le numéro de téléphone et l’entreprise restent enregistrés dans votre navigateur pendant 30 jours ; ces données ne nous sont pas transmises de ce fait."
+     }
+    ]
+   },
+   {
+    "title": "11. Paiements",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Les paiements en ligne sont traités par Stripe Payments Europe Ltd., 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Irlande. Selon le mode de paiement choisi (par ex. carte de crédit, prélèvement SEPA, Apple Pay, Google Pay, Klarna), Stripe traite vos données de paiement et les transmet le cas échéant au prestataire de paiement concerné ; Klarna peut à cette occasion procéder à une vérification de solvabilité. Vous saisissez les données de votre carte directement auprès de Stripe, nous ne les recevons pas."
+     },
+     {
+      "type": "p",
+      "text": "Pour l’achat sur facture par des clients professionnels, nous faisons appel à Billie GmbH, Charlottenstraße 4, 10969 Berlin. Billie reçoit la raison sociale, la forme juridique, l’adresse professionnelle, le nom et l’adresse e-mail de la personne qui passe la commande ainsi que les données de la commande, et procède à une vérification automatisée de solvabilité."
+     },
+     {
+      "type": "p",
+      "text": "Nous établissons les factures avec Lexware Office de Haufe-Lexware GmbH & Co. KG, Fribourg-en-Brisgau. La base juridique est l’article 6, paragraphe 1, points b) et c), du RGPD."
+     }
+    ]
+   },
+   {
+    "title": "12. Bons cadeaux",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Lors de l’achat d’un bon cadeau, nous traitons le nom et l’adresse e-mail de l’acheteur ainsi que, le cas échéant, le nom, l’adresse e-mail et le message de vœux de la personne qui reçoit le cadeau, afin d’émettre et d’envoyer le bon (article 6, paragraphe 1, point b), du RGPD). Le paiement s’effectue par l’intermédiaire de Stripe."
+     }
+    ]
+   },
+   {
+    "title": "13. Réservations de table via OpenTable",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Pour les réservations de table, nous vous redirigeons vers le site d’OpenTable (OpenTable, Inc., États-Unis ; dans l’UE, OpenTable International Ltd.). OpenTable traite vos données de réservation sous sa propre responsabilité, conformément à sa politique de confidentialité : www.opentable.de/legal/privacy-policy."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "E-mails et newsletter",
+  "sections": [
+   {
+    "title": "14. Envoi d’e-mails",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Nous envoyons les offres, confirmations, rappels et factures par l’intermédiaire de Sendinblue SAS (Brevo), Paris, France. Les e-mails de la boutique en ligne et ceux relatifs aux paiements de events-storia.de sont envoyés par l’intermédiaire de Resend, Inc., États-Unis, à défaut par IONOS. Les transferts vers les États-Unis reposent sur les clauses contractuelles types de l’UE."
+     }
+    ]
+   },
+   {
+    "title": "15. Préinscription saisonnière et newsletter",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Si vous vous inscrivez sur ristorantestoria.de pour recevoir des informations sur les offres saisonnières, vous recevez d’abord un e-mail contenant un lien de confirmation (double opt-in). Nous enregistrons votre adresse e-mail ainsi que la date et l’heure, l’adresse IP et le texte de votre consentement à titre de preuve (article 6, paragraphe 1, points a) et c), du RGPD). Ces e-mails sont envoyés par l’intermédiaire de Brevo. Vous pouvez vous désinscrire à tout moment au moyen du lien de désinscription figurant dans chaque e-mail ou par message adressé à nous."
+     }
+    ]
+   },
+   {
+    "title": "16. Demande d’avis",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Si vous y avez consenti, nous vous demandons une seule fois, par e-mail, après votre événement, de laisser un avis sur Google. Nous n’envoyons au maximum qu’un seul e-mail de ce type par adresse en douze mois et, lors du clic sur le lien, nous enregistrons uniquement la date, pas l’adresse IP. Vous pouvez vous opposer à tout moment à la demande d’avis ; nous enregistrons alors votre adresse sous forme chiffrée dans une liste d’exclusion."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Contenus externes et statistiques",
+  "sections": [
+   {
+    "title": "17. Gestion du consentement",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Lors de votre première visite, nous vous demandons à quelles catégories vous consentez : statistiques, marketing et contenus externes. Nous enregistrons votre choix dans votre navigateur pendant douze mois. Vous pouvez le modifier ou le révoquer à tout moment via l’icône de cookie présente sur la page. Vous trouverez les détails dans notre politique relative aux cookies."
+     }
+    ]
+   },
+   {
+    "title": "18. Google Analytics",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Avec votre consentement (catégorie Statistiques), nous utilisons Google Analytics 4 de Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlande, afin d’analyser l’utilisation de nos sites web. Des cookies sont alors déposés et des données d’utilisation telles que les pages consultées, la durée de consultation, les données relatives à l’appareil et au navigateur, la localisation approximative et les clics sur les liens de téléphone ou de WhatsApp sont traitées. Les adresses IP ne sont pas enregistrées par Google Analytics 4. Les données peuvent être transmises à Google LLC aux États-Unis ; Google est certifiée au titre du cadre de protection des données UE-États-Unis (EU-US Data Privacy Framework). La base juridique est l’article 6, paragraphe 1, point a), du RGPD et le § 25, alinéa 1 TDDDG. Sans votre consentement, Google Analytics n’est pas chargé."
+     }
+    ]
+   },
+   {
+    "title": "19. Microsoft Clarity",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Sur events-storia.de, nous utilisons, avec votre consentement (catégorie Statistiques), Microsoft Clarity de Microsoft Ireland Operations Limited, Dublin, Irlande. Clarity enregistre les mouvements de la souris, les clics et le comportement de défilement afin de créer des cartes thermiques (heatmaps) et des enregistrements de session. Les données peuvent être transmises aux États-Unis ; Microsoft est certifiée au titre du cadre de protection des données UE-États-Unis (EU-US Data Privacy Framework)."
+     }
+    ]
+   },
+   {
+    "title": "20. Google Maps",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Avec votre consentement (catégorie Contenus externes), nous intégrons des cartes Google Maps de Google Ireland Limited. Lors du chargement de la carte, votre adresse IP et les données de votre navigateur sont transmises à Google, le cas échéant également aux États-Unis."
+     }
+    ]
+   },
+   {
+    "title": "21. Avis",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Sur ristorantestoria.de, nous affichons des avis Google publics, que nous récupérons nous-mêmes et enregistrons sur notre serveur ; lors de leur affichage, aucune donnée n’est transmise à Google. Sur events-storia.de, nous affichons des avis avec votre consentement (catégorie Contenus externes) au moyen d’un widget d’Elfsight LLC, États-Unis. Lors du chargement du widget, votre adresse IP et les données de votre navigateur sont transmises à Elfsight."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Durée de conservation, destinataires et vos droits",
+  "sections": [
+   {
+    "title": "22. Durée de conservation",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Nous ne conservons les données personnelles que le temps nécessaire à la finalité concernée :"
+     },
+     {
+      "type": "ul",
+      "items": [
+       {
+        "text": "demandes sans conclusion de contrat : jusqu’à douze mois après le dernier contact ;",
+        "sub": []
+       },
+       {
+        "text": "contrats, factures et correspondance commerciale : jusqu’à l’expiration des délais légaux de conservation de six à dix ans (§ 257 HGB – code de commerce allemand, § 147 AO – code des impôts allemand) ;",
+        "sub": []
+       },
+       {
+        "text": "preuves du consentement : aussi longtemps que le consentement existe et au-delà, dans la mesure où nous en avons besoin à titre de preuve ;",
+        "sub": []
+       },
+       {
+        "text": "compte client : jusqu’à la suppression du compte, sous réserve des délais de conservation.",
+        "sub": []
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "title": "23. Destinataires",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Vos données ne sont reçues que par les prestataires mentionnés dans la présente politique, dans la mesure nécessaire à la finalité concernée, ainsi que par les autorités, dans la mesure où la loi nous y oblige. Des contrats de sous-traitance au titre de l’article 28 du RGPD sont conclus avec tous les prestataires intervenant pour notre compte. Nous ne vendons pas de données personnelles."
+     }
+    ]
+   },
+   {
+    "title": "24. Vos droits",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Vous avez le droit d’accès (article 15 du RGPD), de rectification (article 16 du RGPD), d’effacement (article 17 du RGPD), à la limitation du traitement (article 18 du RGPD) et à la portabilité des données (article 20 du RGPD). Vous pouvez retirer à tout moment, avec effet pour l’avenir, un consentement donné (article 7, paragraphe 3, du RGPD)."
+     },
+     {
+      "type": "p",
+      "text": "Vous avez en outre le droit d’introduire une réclamation auprès d’une autorité de contrôle. L’autorité compétente pour nous est le Bayerisches Landesamt für Datenschutzaufsicht (Office bavarois de contrôle de la protection des données), Promenade 18, 91522 Ansbach."
+     }
+    ]
+   },
+   {
+    "title": "25. Droit d’opposition au titre de l’article 21 du RGPD",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Si nous traitons vos données sur la base d’intérêts légitimes (article 6, paragraphe 1, point f), du RGPD), vous pouvez vous opposer à tout moment à ce traitement pour des raisons tenant à votre situation particulière. Vous pouvez à tout moment vous opposer, sans indication de motifs, à la publicité par e-mail. Un simple message à info@ristorantestoria.de ou à info@events-storia.de suffit.",
+      "strong": true
+     }
+    ]
+   },
+   {
+    "title": "26. Obligation de fournir des données et décisions automatisées",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "La communication de vos coordonnées est nécessaire pour le traitement d’une demande et la conclusion d’un contrat ; sans elle, nous ne pouvons pas traiter votre demande. Nous ne prenons pas de décisions automatisées au sens de l’article 22 du RGPD. Si vous choisissez l’achat sur facture ou Klarna, Billie ou Klarna décident respectivement, sur la base de leur vérification de solvabilité, de la disponibilité de ce mode de paiement."
+     }
+    ]
+   },
+   {
+    "title": "27. Sécurité et modifications",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "Nous transmettons toutes les données de manière chiffrée (TLS). Nous adaptons la présente politique de confidentialité lorsque nos services ou la situation juridique évoluent."
+     },
+     {
+      "type": "p",
+      "text": "Version du 28 septembre 2026"
+     }
+    ]
+   }
+  ]
+ }
+]
