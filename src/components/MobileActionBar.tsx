@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Phone, UtensilsCrossed } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -23,12 +24,103 @@ import { trackEvent } from "@/lib/analytics";
  * Doppelzählung: alle Links tragen `data-no-global-track` und feuern
  * `trackEvent` selbst genau einmal. Die globale Delegation in
  * GoogleAnalytics.tsx überspringt Elemente innerhalb `[data-no-global-track]`.
+ *
+ * Ausblenden (Antoine, 01.10.2026): Sobald jemand in ein MAESTRO-Formular
+ * (`[data-maestro-widget]`) tippt, verschwindet die Leiste, damit „Reservieren“
+ * nicht wie der nächste Schritt wirkt. Nach dem Absenden (Ereignis
+ * `MAESTRO_INQUIRY_SUBMITTED` des Widgets) oder wenn das Formular ganz aus dem
+ * Bild gescrollt ist, kommt sie zurück. Zusätzlich bleibt sie weg, solange ein
+ * Eingabefeld den Fokus hat: bei offener Handy-Tastatur schwebt eine fixe
+ * Leiste sonst mitten im Bildschirm (iOS).
  */
+const EINGABE =
+  'input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]), textarea, select';
+
+const imWidget = (e: Event) =>
+  e.composedPath().some((n) => n instanceof Element && n.hasAttribute("data-maestro-widget"));
+
+/** Fokus auch in offenen Shadow-DOMs (das Widget rendert in einen) auflösen. */
+const tastaturOffen = () => {
+  let el: Element | null = document.activeElement;
+  while (el?.shadowRoot?.activeElement) el = el.shadowRoot.activeElement;
+  return el instanceof HTMLElement && (el.matches(EINGABE) || el.isContentEditable);
+};
+
 const MobileActionBar = () => {
   const isMobile = useIsMobile();
   const { language, t } = useLanguage();
   const { showBanner } = useCookieConsent();
   const location = useLocation();
+  const [imFormular, setImFormular] = useState(false);
+  const [abgeschickt, setAbgeschickt] = useState(false);
+  const [tastatur, setTastatur] = useState(false);
+
+  useEffect(() => {
+    setImFormular(false);
+    setAbgeschickt(false);
+    setTastatur(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    let fokusZeit: ReturnType<typeof setTimeout> | undefined;
+    // Fokuswechsel INNERHALB eines Shadow-DOMs erreichen das Dokument nicht (das Ereignis endet an
+    // der Shadow-Grenze, weil Ziel und relatedTarget beide auf den Host zeigen). Darum hören wir
+    // zusätzlich an jedem Shadow-Root, den eine Berührung trifft.
+    const roots = new Set<ShadowRoot>();
+    // Formular ganz aus dem Bild gescrollt (abgebrochen): Leiste wieder zeigen. Beobachtet wird das
+    // berührte Formular selbst - es entsteht oft erst nach dieser Leiste (Seite lädt nach).
+    const beobachter =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver((eintraege) => {
+            if (eintraege.every((x) => !x.isIntersecting)) setImFormular(false);
+          });
+    const beiBeruehrung = (e: Event) => {
+      if (!imWidget(e)) return;
+      setImFormular(true);
+      for (const n of e.composedPath()) {
+        if (n instanceof Element && n.hasAttribute("data-maestro-widget")) beobachter?.observe(n);
+        if (n instanceof ShadowRoot && !roots.has(n)) {
+          roots.add(n);
+          n.addEventListener("focusin", beiFokus);
+          n.addEventListener("focusout", beiFokusWeg);
+        }
+      }
+    };
+    const beiFokus = (e: Event) => {
+      if (imWidget(e)) setImFormular(true);
+      setTastatur(tastaturOffen());
+    };
+    // Kurz warten: beim Wechsel ins nächste Feld folgt focusin direkt, sonst flackert die Leiste.
+    const beiFokusWeg = () => {
+      clearTimeout(fokusZeit);
+      fokusZeit = setTimeout(() => setTastatur(tastaturOffen()), 150);
+    };
+    const beiAbsenden = () => {
+      setAbgeschickt(true);
+      setImFormular(false);
+    };
+    document.addEventListener("pointerdown", beiBeruehrung, true);
+    document.addEventListener("focusin", beiFokus, true);
+    document.addEventListener("focusout", beiFokusWeg, true);
+    window.addEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
+
+    return () => {
+      clearTimeout(fokusZeit);
+      document.removeEventListener("pointerdown", beiBeruehrung, true);
+      document.removeEventListener("focusin", beiFokus, true);
+      document.removeEventListener("focusout", beiFokusWeg, true);
+      window.removeEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
+      beobachter?.disconnect();
+      roots.forEach((r) => {
+        r.removeEventListener("focusin", beiFokus);
+        r.removeEventListener("focusout", beiFokusWeg);
+      });
+    };
+  }, [isMobile, location.pathname]);
+
+  const ausgeblendet = tastatur || (imFormular && !abgeschickt);
 
   if (!isMobile) return null;
   if (location.pathname.startsWith("/admin")) return null;
@@ -42,7 +134,10 @@ const MobileActionBar = () => {
     <nav
       aria-label={t.floatingActions.reserve}
       data-no-global-track
-      className="fixed inset-x-0 bottom-0 z-40 flex items-stretch border-t border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 md:hidden"
+      aria-hidden={ausgeblendet || undefined}
+      className={`fixed inset-x-0 bottom-0 z-40 flex items-stretch border-t border-border bg-card/95 backdrop-blur transition-transform duration-200 supports-[backdrop-filter]:bg-card/80 md:hidden ${
+        ausgeblendet ? "translate-y-full" : ""
+      }`}
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <a
