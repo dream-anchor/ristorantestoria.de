@@ -8,7 +8,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import ReservationBooking from "@/components/ReservationBooking";
-import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
+import AnlassMaestroWidget from "@/components/AnlassMaestroWidget";
 import GoogleReviews from "@/components/GoogleReviews";
 import PhotoGallery from "@/components/PhotoGallery";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -572,22 +572,14 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
             </section>
 
-            {/* Anfrage (E2.2) — eigenes Formular gegen den MAESTRO-Intake-Endpunkt, KEIN
-                MAESTRO-Widget (Festlegung Antoine, 13.09.2026). Für alles, was über eine
-                Tischbuchung hinausgeht: größere Gruppen, Fragen zum Gala-Menü, Sonderwünsche.
-
-                Wunschtermin auf den 31.12. vorbelegt (im Formular erst nach dem Mount, damit
-                das prerenderte HTML stabil bleibt) — an diesem Abend gibt es nur diesen einen
-                Termin. `minGuests` bleibt bei 1: Silvester ist ausdrücklich auch für Paare da
-                („2 bis 100 Gäste", Auf einen Blick). */}
+            {/* Anfrage — seit 01.10.2026 das MAESTRO-Anlass-Widget (Punkt 133) statt des eigenen
+                Formulars. Für alles, was über eine Tischbuchung hinausgeht: größere Gruppen,
+                Fragen zum Gala-Menü, Sonderwünsche. */}
             <section className="mb-16" id="anfrage" aria-labelledby="silvester-anfrage">
               <h2 id="silvester-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{s.inquiryTitle}</h2>
               <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.inquiryIntro}</p>
               <div className="max-w-2xl mx-auto">
-                <AnlassAnfrageForm
-                  anlass="silvester"
-                  defaultEventDate={`${currentYear}-12-31`}
-                />
+                <AnlassMaestroWidget anlass="silvester" lang={language} />
               </div>
             </section>
 

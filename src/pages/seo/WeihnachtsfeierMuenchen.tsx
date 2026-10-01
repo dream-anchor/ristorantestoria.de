@@ -7,7 +7,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
-import AnlassAnfrageForm from "@/components/AnlassAnfrageForm";
+import AnlassMaestroWidget from "@/components/AnlassMaestroWidget";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -45,7 +45,7 @@ const fillFacts = (text: string): string =>
     .replace(/\{standing\}/g, String(FACTS.capacity.standing));
 
 const WeihnachtsfeierMuenchen = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   usePrerenderReady(true);
   const w = t.seo.weihnachtsfeier;
 
@@ -276,24 +276,17 @@ const WeihnachtsfeierMuenchen = () => {
               <p className="text-center text-muted-foreground mt-6 text-sm"><PhoneText>{w.menuPriceNote}</PhoneText></p>
             </section>
 
-            {/* Anfrage (E4.2, docs/LOOP-SAISONSEITEN-AUSBAU.md § E4) — der Gruppen-/Firmen-Weg,
-                der bei der Kannibalisierungs-Auflösung von weihnachten-muenchen zu dieser Seite
-                gewandert ist. Eigener `anlass="weihnachtsfeier"` (nicht "weihnachten"), damit
-                `sourceDetail` als `ristorante_weihnachtsfeier` unterscheidbar bleibt — siehe
-                AnlassAnfrageForm.tsx. Steht bewusst direkt hinter den Menü-Beispielen: wer die
-                Orientierung oben gesehen hat, kann hier sofort anfragen.
+            {/* Anfrage — seit 01.10.2026 das MAESTRO-Anlass-Widget (Punkt 133) statt des eigenen
+                Formulars, Eingang `ristorante_weihnachtsfeier`. Steht bewusst direkt hinter den
+                Menü-Beispielen: wer die Orientierung oben gesehen hat, kann hier sofort anfragen.
 
-                Events-storia-CTAs (Hero, Final-CTA) bleiben unverändert bestehen — diese Seite ist
-                NICHT Teil des MAESTRO-Ersatzes aus E2.3 (dort war ausdrücklich nur
-                weihnachten-muenchen gemeint). Das Formular ist ein zusätzlicher Weg, kein Ersatz. */}
+                Events-storia-CTAs (Hero, Final-CTA) bleiben unverändert bestehen — das Widget ist
+                ein zusätzlicher Weg, kein Ersatz. */}
             <section className="mb-16" id="anfrage" aria-labelledby="weihnachtsfeier-anfrage">
               <h2 id="weihnachtsfeier-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{w.inquiryTitle}</h2>
               <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{w.inquiryIntro}</p>
               <div className="max-w-2xl mx-auto">
-                <AnlassAnfrageForm
-                  anlass="weihnachtsfeier"
-                  minGuests={FACTS.weihnachten.groupMenuMinGuests}
-                />
+                <AnlassMaestroWidget anlass="weihnachtsfeier" lang={language} />
               </div>
             </section>
 
