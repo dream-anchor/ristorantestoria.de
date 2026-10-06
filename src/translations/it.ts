@@ -3323,6 +3323,8 @@ const itBase = {
     "firmenfeier-muenchen": "evento-aziendale-monaco",
     "oktoberfest-muenchen": "oktoberfest-monaco",
     "filmfest-muenchen": "filmfest-muenchen",
+    "messe-muenchen": "ristorante-fiera-monaco",
+    "messe-muenchen/bauma": "ristorante-fiera-monaco/bauma",
     "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
     "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",

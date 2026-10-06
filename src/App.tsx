@@ -39,6 +39,8 @@ import EventlocationMuenchen from "./pages/seo/EventlocationMuenchen";
 import FirmenfeierMuenchen from "./pages/seo/FirmenfeierMuenchen";
 import OktoberfestMuenchen from "./pages/seo/OktoberfestMuenchen";
 import FilmfestMuenchen from "./pages/seo/FilmfestMuenchen";
+import MesseMuenchen from "./pages/seo/MesseMuenchen";
+import MesseBauma from "./pages/seo/MesseBauma";
 import WmPublicViewingMuenchen from "./pages/seo/WmPublicViewingMuenchen";
 import GeburtstagsfeierMuenchen from "./pages/seo/GeburtstagsfeierMuenchen";
 import NeapolitanischePizza from "./pages/seo/NeapolitanischePizza";
@@ -139,6 +141,8 @@ const routeComponents: Record<string, React.ComponentType> = {
   "firmenfeier-muenchen": FirmenfeierMuenchen,
   "oktoberfest-muenchen": OktoberfestMuenchen,
   "filmfest-muenchen": FilmfestMuenchen,
+  "messe-muenchen": MesseMuenchen,
+  "messe-muenchen/bauma": MesseBauma,
   "wm-2026-public-viewing-muenchen": WmPublicViewingMuenchen,
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,

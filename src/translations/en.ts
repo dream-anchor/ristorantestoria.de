@@ -3664,6 +3664,8 @@ const enBase = {
     "firmenfeier-muenchen": "corporate-event-munich",
     "oktoberfest-muenchen": "oktoberfest-munich",
     "filmfest-muenchen": "filmfest-muenchen",
+    "messe-muenchen": "trade-fair-munich-restaurant",
+    "messe-muenchen/bauma": "trade-fair-munich-restaurant/bauma",
     "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "birthday-party-munich",
     "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",

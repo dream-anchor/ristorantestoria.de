@@ -3809,6 +3809,8 @@ export const de = {
     "firmenfeier-muenchen": "firmenfeier-muenchen",
     "oktoberfest-muenchen": "oktoberfest-muenchen",
     "filmfest-muenchen": "filmfest-muenchen",
+    "messe-muenchen": "messe-muenchen",
+    "messe-muenchen/bauma": "messe-muenchen/bauma",
     "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",

@@ -3650,6 +3650,8 @@ const frBase = {
     "firmenfeier-muenchen": "evenement-entreprise-munich",
     "oktoberfest-muenchen": "oktoberfest-munich",
     "filmfest-muenchen": "filmfest-muenchen",
+    "messe-muenchen": "restaurant-salon-munich",
+    "messe-muenchen/bauma": "restaurant-salon-munich/bauma",
     "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
     "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
