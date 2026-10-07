@@ -67,7 +67,10 @@ async function getAccessToken(): Promise<string> {
         grant_type: "refresh_token",
       }),
     });
-    const refreshed = await res.json() as { access_token: string; expires_in: number };
+    const refreshed = await res.json() as { access_token?: string; expires_in?: number; error?: string; error_description?: string };
+    if (!res.ok || !refreshed.access_token) {
+      throw new Error(`OAuth Token-Refresh fehlgeschlagen (${res.status}): ${refreshed.error} — ${refreshed.error_description}. Re-Auth nötig: npx tsx scripts/gbp-auth-test.ts`);
+    }
     accessToken = refreshed.access_token;
     tokens.access_token = accessToken;
     tokens.expiry_date = Date.now() + refreshed.expires_in * 1000;
