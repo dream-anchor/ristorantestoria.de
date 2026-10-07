@@ -613,6 +613,9 @@ async function generateRoutesToPrerender() {
           ${helmet.script ? helmet.script.toString() : ""}
         `;
         finalHtml = finalHtml.replace("</head>", `${helmetHtml}</head>`);
+        // <html lang> der aktiven Sprache statt des statischen lang="de" aus index.html
+        const htmlAttrs = helmet.htmlAttributes ? helmet.htmlAttributes.toString() : "";
+        if (htmlAttrs) finalHtml = finalHtml.replace(/<html[^>]*>/, `<html ${htmlAttrs}>`);
       }
 
       // 4. Determine File Path (Fix for IONOS 403)
