@@ -8,7 +8,7 @@ import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import AnlassMaestroWidget from "@/components/AnlassMaestroWidget";
-import { useMaestroTitel } from "@/components/MaestroWidget";
+import { useMaestroGesendet, useMaestroTitel } from "@/components/MaestroWidget";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -50,6 +50,7 @@ const WeihnachtsfeierMuenchen = () => {
   usePrerenderReady(true);
   const w = t.seo.weihnachtsfeier;
   const anfrageTitel = useMaestroTitel(w.inquiryTitle, language);
+  const anfrageGesendet = useMaestroGesendet();
 
   // "Auf einen Blick" (V2.3) — Muster wie WeihnachtenMuenchen.tsx/SilvesterMuenchen.tsx.
   const atAGlance = [
@@ -286,7 +287,7 @@ const WeihnachtsfeierMuenchen = () => {
                 ein zusätzlicher Weg, kein Ersatz. */}
             <section className="mb-16" id="anfrage" aria-labelledby="weihnachtsfeier-anfrage">
               <h2 id="weihnachtsfeier-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{anfrageTitel}</h2>
-              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{w.inquiryIntro}</p>
+              {!anfrageGesendet && <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{w.inquiryIntro}</p>}
               <div className="max-w-2xl mx-auto">
                 <AnlassMaestroWidget anlass="weihnachtsfeier" lang={language} />
               </div>

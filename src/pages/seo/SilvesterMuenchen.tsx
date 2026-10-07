@@ -9,7 +9,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import ReservationBooking from "@/components/ReservationBooking";
 import AnlassMaestroWidget from "@/components/AnlassMaestroWidget";
-import { useMaestroTitel } from "@/components/MaestroWidget";
+import { useMaestroGesendet, useMaestroTitel } from "@/components/MaestroWidget";
 import GoogleReviews from "@/components/GoogleReviews";
 import PhotoGallery from "@/components/PhotoGallery";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -153,6 +153,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
   usePrerenderReady(true);
   const s = t.seo.silvester;
   const anfrageTitel = useMaestroTitel(s.inquiryTitle, language);
+  const anfrageGesendet = useMaestroGesendet();
   // `useSeasonalMenuActive` liefert nur noch den defensiven Fallback für `effectiveConfig`, falls
   // `seasonalConfig` nicht übergeben wird. Sein `isActive` speiste ausschließlich den
   // standalone-Zweig (E1.7) — `isActive` ist hier jetzt rein datengetrieben, wie bei Weihnachten.
@@ -580,7 +581,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                 Fragen zum Gala-Menü, Sonderwünsche. */}
             <section className="mb-16" id="anfrage" aria-labelledby="silvester-anfrage">
               <h2 id="silvester-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{anfrageTitel}</h2>
-              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.inquiryIntro}</p>
+              {!anfrageGesendet && <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.inquiryIntro}</p>}
               <div className="max-w-2xl mx-auto">
                 <AnlassMaestroWidget anlass="silvester" lang={language} />
               </div>

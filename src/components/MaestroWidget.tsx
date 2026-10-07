@@ -54,17 +54,21 @@ const DANKE: Record<string, string> = {
 
 /**
  * Abschnittsüberschrift über einem MAESTRO-Widget: nach dem Absenden (Widget-Event
- * `MAESTRO_INQUIRY_SUBMITTED` auf `window`) steht dort der Dank statt „Jetzt anfragen“.
+ * `MAESTRO_INQUIRY_SUBMITTED` auf `window`) steht dort der Dank statt „Jetzt anfragen“;
+ * `useMaestroGesendet` blendet zugleich den Einleitungstext aus.
  */
-export const useMaestroTitel = (titel: string, lang: string) => {
+export const useMaestroGesendet = () => {
   const [gesendet, setGesendet] = useState(false);
   useEffect(() => {
     const beiAbsenden = () => setGesendet(true);
     window.addEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
     return () => window.removeEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
   }, []);
-  return gesendet ? DANKE[lang] ?? DANKE.de : titel;
+  return gesendet;
 };
+
+export const useMaestroTitel = (titel: string, lang: string) =>
+  useMaestroGesendet() ? DANKE[lang] ?? DANKE.de : titel;
 
 const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight = "560px" }: MaestroWidgetProps) => {
   useMaestroLoader();
