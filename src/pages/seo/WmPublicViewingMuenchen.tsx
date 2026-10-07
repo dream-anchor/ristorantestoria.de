@@ -18,6 +18,7 @@ import { isWmActive, isWmFilmfestOverlap } from "@/config/seasonalFlags";
 import { wmContent } from "./wmContent";
 import { wmSpieleUpcoming, wmSpielePast, wmWeekday, wmDateLabel, wmKickoff, wmRundeLabel, wmHinweisLabel, wmErgebnisLabel, buildWmEventSchema } from "./wmSpiele";
 import storiaLogo from "@/assets/storia-logo.webp";
+import KiBild from "@/components/KiBild";
 import heroImg from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen.webp";
 import heroImg600 from "@/assets/wm-2026-public-viewing-terrasse-storia-muenchen-600w.webp";
 import innenImg from "@/assets/wm-2026-fussball-uebertragung-innen-storia-muenchen.webp";
@@ -310,11 +311,11 @@ const WmPublicViewingMuenchen = () => {
               )}
             </Reveal>
             <Reveal delay={0.1} className="wm-angebot-img">
-              <img
+              <KiBild
+                datei="wm-2026-fussball-uebertragung-innen-storia-muenchen.webp"
                 src={innenImg}
                 srcSet={`${innenImg600} 600w, ${innenImg} 1672w`}
                 sizes="(max-width: 900px) 100vw, 50vw"
-                alt="WM-Übertragung im Innenraum des STORIA München mit Großbildleinwand"
                 loading="lazy"
               />
             </Reveal>
@@ -620,7 +621,7 @@ const wmStyles = `
 .wm-list{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:16px;}
 .wm-list li{position:relative;padding-left:30px;font-size:1.06rem;color:rgba(244,236,224,.82);line-height:1.5;}
 .wm-list li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--amber-bright),var(--rust));}
-.wm-angebot-img{border-radius:20px;overflow:hidden;border:1px solid var(--line);}
+.wm-angebot-img{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);}
 .wm-angebot-img img{display:block;width:100%;height:100%;object-fit:cover;}
 .wm-inline-link{color:var(--amber-bright);text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
 .wm-inline-link:hover{color:var(--bone);}

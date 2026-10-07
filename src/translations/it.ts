@@ -3412,8 +3412,6 @@ const itBase = {
     openingHoursLabel: 'Orari di apertura',
     openingHoursText: 'Lun-Ven 09:00-01:00, Sab-Dom 12:00-01:00',
     seoDescription: 'STORIA – Il vostro ristorante italiano a Maxvorstadt Monaco vicino a Königsplatz, TU Monaco e musei Pinakothek. Ristorante Pizzeria con pizza napoletana dal forno a pietra, pasta fatta in casa e aperitivo. A pochi minuti dalla stazione centrale. La Storia – Trattoria italiana Monaco Karlstraße.',
-    aiImageLabel: 'Contenuto generato dall\'IA',
-    aiImageLabelShort: 'Contenuto IA',
   },
   faq: [
     {
