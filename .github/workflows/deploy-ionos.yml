@@ -19,6 +19,9 @@ on:
       - 'docs/**'
       - '.gitignore'
       - 'LICENSE'
+  # Vom Auto-Merge-Workflow (automerge.yml) angestossen: Merges mit dem GITHUB_TOKEN
+  # loesen kein `push` aus, `workflow_dispatch` schon.
+  workflow_dispatch:
   workflow_run:
     workflows: ["Fetch Google Reviews (Daily)", "Update WM Fixtures (Daily)"]
     types:
@@ -28,7 +31,7 @@ on:
 
 jobs:
   deploy:
-    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
