@@ -321,6 +321,55 @@ derselben GSC-API-Abfrage wiederholbar (Query+Page-Dimension, `sc-domain:ristora
   „valentinstag menü münchen" stabil oder besser? Rankt die Seite noch bei den drei
   Romantik-Generika-Queries, oder ist die Übergabe an `romantisches-dinner-muenchen` sichtbar? |
 
+### September 2026 — Monatsreview (21.09.2026, automatisiert)
+
+**Einordnung:** September ist keiner der beiden GEO-Lücken-Loop-Review-Termine (Dezember 2026 für
+Weihnachtsfeier-Cluster, März 2027 für Valentinstag-Cluster, siehe oben) → dieser Lauf ist der
+leichte allgemeine Gesundheitscheck, kein Cluster-Vergleich.
+
+**GSC-Gesamtzahlen, 28 Tage (22.08.–18.09.2026, `sc-domain:ristorantestoria.de`, dimensions=[]):**
+
+| KPI | Mai 2026 (letzter Log-Wert) | Juni-Ziel (aus „Juni 2026 — Ziele") | September 2026 (dieser Check) |
+|-----|------------------------------|--------------------------------------|-------------------------------|
+| Klicks/28 Tage | 819 | 950+ | **1.486** |
+| Impressionen/28 Tage | 30.702 | 32.000+ | **57.682** |
+| CTR gesamt | 2,67% | 3,0%+ | **2,58%** |
+| Ø Position | 12,9 | 12,0 oder besser | **11,07** |
+
+Hinweis: Für Juli/August steht kein Eintrag in diesem Log — Vergleichsbasis ist daher der letzte
+dokumentierte Ist-Wert (Mai) plus das nie explizit abgehakte Juni-Ziel.
+
+**Bewertung:** Klicks und Impressionen haben sich seit Mai deutlich mehr als verdoppelt (Impr.
++88 %, Klicks +81 %) und liegen weit über dem Juni-Ziel — plausibel im Zusammenhang mit den seit
+12./13.09. gemergten Striking-Distance- und GEO-Lücken-Maßnahmen sowie dem Ende der Sandbox-Phase
+laut „SEO-Kontext" unten. Ø Position hat sich auf 11,07 verbessert (besser als Mai und besser als
+das Juni-Ziel von 12,0). **CTR ist mit 2,58 % leicht unter dem Mai-Wert (2,67%) und weiter unter
+dem 3,0%-Ziel** — bei mehr als verdoppelten Impressionen ist ein leichter CTR-Rückgang statistisch
+nicht ungewöhnlich (mehr Long-Tail-Impressionen mit schwächerer Klickwahrscheinlichkeit), sollte
+aber beim nächsten Review nicht ignoriert werden, falls der Trend anhält.
+
+**Grober 404-Check (Seiten-Dimension aus derselben GSC-Abfrage, keine Vollprüfung):** Von den
+Top-Seiten mit Impressionen zwei echte 404-Kandidaten mit je 1 Impression gefunden und per `curl`
+verifiziert:
+- `https://www.ristorantestoria.de/ristorantestoria.de/geburtstagsfeier-muenchen/` (verdoppelter
+  Domain-Pfad — HTTP 404) und dasselbe Muster bei
+  `.../ristorantestoria.de/wm-2026-public-viewing-muenchen/` (1 Impr., nicht einzeln verifiziert,
+  gleiches Muster) — deutet auf eine fehlerhafte URL-Konstruktion irgendwo (interner Link oder
+  externe Quelle), die den Domain-Teil verdoppelt.
+- `https://www.ristorantestoria.de/neapolitanische-pizza-muenchen-` (Bindestrich-Tippfehler am
+  Ende — HTTP 404).
+
+Beide mit vernachlässigbarem Volumen (je 1 Impression/28 Tage) — kein Handlungsbedarf, nur zur
+Kenntnis genommen. Stichprobenartig zusätzlich geprüft: `/besondere-anlaesse/valentinstag-menue/`
+(186 Impr., 0 Klicks, Pos. 50,8) — **kein 404, sondern korrekter 301-Redirect** auf
+`/valentinstag-muenchen/` (bestätigt per `curl -I`), die K3-Konsolidierung aus dem GEO-Lücken-Loop
+greift weiterhin, die Impressionen sind Alt-URL-Restindexierung. Fehlende Trailing-Slash-URLs
+(`/firmenfeier-muenchen`, `/geburtstagsfeier-muenchen`, `/geburtstag-muenchen`) redirecten
+korrekt 301 auf die kanonische Trailing-Slash-Version.
+
+**Offene Punkte für den nächsten Check:** CTR-Trend weiterbeobachten; kein Cluster-Deep-Dive nötig
+vor Dezember 2026.
+
 ---
 
 ## SEO-Kontext
