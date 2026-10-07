@@ -1,0 +1,50 @@
+name: Auto-Merge (Label automerge)
+
+# PR bekommt das Label `automerge` -> Typecheck + Build -> nur bei Gruen Squash-Merge
+# und IONOS-Deploy anstossen. Ohne Label passiert nichts.
+# Deploy wird ausdruecklich angestossen, weil ein Merge mit GITHUB_TOKEN keinen
+# push-Workflow ausloest (workflow_dispatch ist davon ausgenommen).
+
+on:
+  pull_request:
+    types: [labeled, opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: automerge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pruefen-und-mergen:
+    if: >-
+      contains(github.event.pull_request.labels.*.name, 'automerge') &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Typecheck
+        run: npx tsc -p tsconfig.app.json --noEmit
+      - name: Build (wie im Deploy)
+        run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_MAESTRO_INTAKE_URL: https://storia.schrittmacher.ai/api/public/inquiries
+      - name: Squash-Merge und Deploy anstossen
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          gh pr merge "$PR" --squash --match-head-commit "$SHA" --repo "$GITHUB_REPOSITORY"
+          gh workflow run deploy-ionos.yml --ref main --repo "$GITHUB_REPOSITORY"
