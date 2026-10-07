@@ -29,6 +29,7 @@ import candlelightImage from "@/assets/romantisches-dinner-kerzenlicht-storia-mu
 import candlelightImage600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
 import interiorDetailsImage from "@/assets/ristorante-storia-uebersicht-details.webp";
 import interiorDetailsImage600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
+import KiBild from "@/components/KiBild";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
@@ -385,7 +386,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
 
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <img src={silvesterHeroImage} srcSet={`${silvesterHeroImage600} 600w, ${silvesterHeroImage} 1200w`} sizes="100vw" alt={s.heroTitle} className="absolute inset-0 w-full h-full object-cover" loading="eager" fetchPriority="high" width={1200} height={800} />
+          <KiBild datei="silvester-dinner-gala-storia-muenchen.webp" src={silvesterHeroImage} srcSet={`${silvesterHeroImage600} 600w, ${silvesterHeroImage} 1200w`} sizes="100vw" className="absolute inset-0 w-full h-full object-cover" loading="eager" fetchPriority="high" width={1200} height={800} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/"><img src={storiaLogo} alt="STORIA Logo" loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert" /></Link>
@@ -483,7 +484,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Aperitivo-Empfang, festliches Ambiente und stilvolles Interieur – ein Eindruck vom Rahmen Ihres Silvesterabends im STORIA.</p>
               <PhotoGallery columns={3} images={[
                 { src: aperitivoBarImage, srcSet: `${aperitivoBarImage600} 600w, ${aperitivoBarImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Aperitivo-Empfang im Ristorante STORIA München – stilvolle Bar-Atmosphäre", caption: "Aperitivo-Empfang · Bar" },
-                { src: candlelightImage, srcSet: `${candlelightImage600} 600w, ${candlelightImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Festliches Kerzenlicht-Ambiente im Ristorante STORIA München", caption: "Festliches Ambiente · Kerzenlicht" },
+                { src: candlelightImage, ki: "romantisches-dinner-kerzenlicht-storia-muenchen.webp", srcSet: `${candlelightImage600} 600w, ${candlelightImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Festliches Kerzenlicht-Ambiente im Ristorante STORIA München", caption: "Festliches Ambiente · Kerzenlicht" },
                 { src: interiorDetailsImage, srcSet: `${interiorDetailsImage600} 600w, ${interiorDetailsImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Elegantes Interieur des Ristorante STORIA München in der Maxvorstadt", caption: "Interieur · Details" },
               ]} />
             </section>

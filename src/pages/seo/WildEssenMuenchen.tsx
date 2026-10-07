@@ -9,6 +9,7 @@ import StructuredData from "@/components/StructuredData";
 import GoogleReviews from "@/components/GoogleReviews";
 import ConsentGoogleMaps from "@/components/ConsentGoogleMaps";
 import { Button } from "@/components/ui/button";
+import KiBild from "@/components/KiBild";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { 
@@ -199,11 +200,10 @@ const WildEssenMuenchen = () => {
         
         {/* Hero Section */}
         <section className="relative min-h-[max(80vh,600px)] py-16 flex items-center justify-center overflow-hidden">
-          <img
+          <KiBild datei="wild-venison-hero.webp"
             src={wildVenisonHero}
             srcSet={`${wildVenisonHero600} 600w, ${wildVenisonHero} 1200w`}
             sizes="100vw"
-            alt={t.seo.wild.heroImageAlt}
             width={1200}
             height={800}
             loading="eager"

@@ -37,21 +37,6 @@ export const KI_BILDER = {
       fr: "Salle intérieure du restaurant. Un écran pour les matchs de football a été intégré à la photo par IA à titre d'illustration.",
     },
   },
-  "wm-2026-public-viewing-terrasse-storia-muenchen.webp": {
-    kategorie: "ki-bearbeitet",
-    caption: {
-      de: "Visualisierung: Die Leinwand für die Fußballübertragung wurde zur Veranschaulichung per KI in das Foto der Terrasse eingefügt.",
-      en: "Visualisation: the screen for the football broadcast was added to this photo of the terrace using AI for illustration purposes.",
-      it: "Visualizzazione: lo schermo per la trasmissione delle partite è stato inserito con l'IA nella foto della terrazza a scopo illustrativo.",
-      fr: "Visualisation : l'écran pour la retransmission des matchs a été ajouté par IA à la photo de la terrasse à titre d'illustration.",
-    },
-    alt: {
-      de: "Überdachte Terrasse des STORIA in der Karlstraße. Eine Leinwand für Fußballübertragungen wurde zur Veranschaulichung per KI in das Foto montiert.",
-      en: "Covered terrace at STORIA on Karlstraße. A screen for football broadcasts was added to the photo using AI for illustration purposes.",
-      it: "Terrazza coperta dello STORIA in Karlstraße. Uno schermo per le partite di calcio è stato inserito nella foto con l'IA a scopo illustrativo.",
-      fr: "Terrasse couverte du STORIA, Karlstraße. Un écran pour les matchs de football a été intégré à la photo par IA à titre d'illustration.",
-    },
-  },
   "tiramisu.webp": {
     kategorie: "ki-bearbeitet",
     caption: {
@@ -125,6 +110,84 @@ export const KI_BILDER = {
       en: "Pizza with burrata, AI-generated illustrative video.",
       it: "Pizza con burrata, video illustrativo generato con l'IA.",
       fr: "Pizza à la burrata, vidéo d'illustration générée par IA.",
+    },
+  },
+  // Auch public/wm-2026-public-viewing-muenchen-og.jpg (og:image, gleiche Montage) — Hinweis siehe Doku.
+  "wm-2026-public-viewing-terrasse-storia-muenchen.webp": {
+    kategorie: "ki-bearbeitet",
+    caption: {
+      de: "Visualisierung: Die Leinwand auf der Terrasse wurde zur Veranschaulichung per KI in das Foto eingefügt.",
+      en: "Visualisation: the screen on the terrace was added to this photo using AI for illustration purposes.",
+      it: "Visualizzazione: lo schermo sulla terrazza è stato inserito nella foto con l'IA a scopo illustrativo.",
+      fr: "Visualisation : l'écran sur la terrasse a été ajouté à la photo par IA à titre d'illustration.",
+    },
+    alt: {
+      de: "Gäste auf der überdachten Terrasse des STORIA in der Karlstraße in München. Die Leinwand mit dem Fußballspiel wurde zur Veranschaulichung per KI eingefügt.",
+      en: "Guests on the covered terrace of STORIA on Karlstraße in Munich. The screen showing the football match was added using AI for illustration purposes.",
+      it: "Ospiti sulla terrazza coperta dello STORIA in Karlstraße a Monaco. Lo schermo con la partita è stato inserito con l'IA a scopo illustrativo.",
+      fr: "Clients sur la terrasse couverte du STORIA, Karlstraße à Munich. L'écran diffusant le match a été ajouté par IA à titre d'illustration.",
+    },
+  },
+  // Bytegleiche Kopie, nicht eingebunden: src/assets/romantisches-dinner-hero.webp.
+  "romantisches-dinner-kerzenlicht-storia-muenchen.webp": {
+    kategorie: "ki-generiert",
+    caption: {
+      de: "Symbolbild: Tisch bei Kerzenlicht, mit KI erstellt. Kein Foto aus unserem Restaurant.",
+      en: "Illustrative image: candlelit table, created with AI. Not a photo of our restaurant.",
+      it: "Immagine illustrativa: tavolo a lume di candela, creata con l'IA. Non è una foto del nostro ristorante.",
+      fr: "Image d'illustration : table aux chandelles créée par IA. Ce n'est pas une photo de notre restaurant.",
+    },
+    alt: {
+      de: "Gedeckter Tisch für zwei mit Kerze, Rotwein und Rosen, KI-generiertes Symbolbild.",
+      en: "Table for two with candle, red wine and roses, AI-generated illustrative image.",
+      it: "Tavolo per due con candela, vino rosso e rose, immagine illustrativa generata con l'IA.",
+      fr: "Table pour deux avec bougie, vin rouge et roses, image d'illustration générée par IA.",
+    },
+  },
+  "wild-venison-hero.webp": {
+    kategorie: "ki-generiert",
+    caption: {
+      de: "Symbolbild: Wildgericht, mit KI erstellt. Kein Foto aus unserer Küche.",
+      en: "Illustrative image: game dish, created with AI. Not a photo from our kitchen.",
+      it: "Immagine illustrativa: piatto di selvaggina, creata con l'IA. Non è una foto della nostra cucina.",
+      fr: "Image d'illustration : plat de gibier créé par IA. Ce n'est pas une photo de notre cuisine.",
+    },
+    alt: {
+      de: "Rehrücken mit Wurzelgemüse und Rotweinjus, KI-generiertes Symbolbild.",
+      en: "Saddle of venison with root vegetables and red wine jus, AI-generated illustrative image.",
+      it: "Sella di capriolo con verdure e salsa al vino rosso, immagine illustrativa generata con l'IA.",
+      fr: "Selle de chevreuil, légumes racines et jus au vin rouge, image d'illustration générée par IA.",
+    },
+  },
+  "silvester-dinner-gala-storia-muenchen.webp": {
+    kategorie: "ki-generiert",
+    caption: {
+      de: "Symbolbild: Silvester-Dinner, mit KI erstellt. Kein Foto einer echten STORIA-Veranstaltung.",
+      en: "Illustrative image: New Year's Eve dinner, created with AI. Not a photo of a real STORIA event.",
+      it: "Immagine illustrativa: cena di Capodanno, creata con l'IA. Non è una foto di un vero evento STORIA.",
+      fr: "Image d'illustration : dîner du Nouvel An créé par IA. Ce n'est pas une photo d'un véritable événement STORIA.",
+    },
+    alt: {
+      de: "Festlich gedeckter Tisch mit Champagner und Partyhüten zu Silvester, KI-generiertes Symbolbild.",
+      en: "Festive table with champagne and party hats for New Year's Eve, AI-generated illustrative image.",
+      it: "Tavola festiva con champagne e cappellini per Capodanno, immagine illustrativa generata con l'IA.",
+      fr: "Table festive avec champagne et chapeaux de fête pour le Nouvel An, image d'illustration générée par IA.",
+    },
+  },
+  // Derzeit nicht eingebunden; beim Einbau gilt diese Kennzeichnung.
+  "chefs.webp": {
+    kategorie: "ki-generiert",
+    caption: {
+      de: "Symbolbild: Köche, mit KI erstellt. Kein Foto unseres Teams.",
+      en: "Illustrative image: chefs, created with AI. Not a photo of our team.",
+      it: "Immagine illustrativa: cuochi, creata con l'IA. Non è una foto del nostro team.",
+      fr: "Image d'illustration : cuisiniers créés par IA. Ce n'est pas une photo de notre équipe.",
+    },
+    alt: {
+      de: "Köche in der Küche, KI-generiertes Symbolbild.",
+      en: "Chefs in the kitchen, AI-generated illustrative image.",
+      it: "Cuochi in cucina, immagine illustrativa generata con l'IA.",
+      fr: "Cuisiniers en cuisine, image d'illustration générée par IA.",
     },
   },
 } satisfies Record<string, KiBildEintrag>;

@@ -66,11 +66,20 @@ Auch Hero-Hintergrundbilder bekommen Badge und Caption sichtbar im Hero.
 | `cocktails.webp` | KI-generiert | Startseite (Bildraster) | PR #124 |
 | `sommerfest-event.webp` (+600w) | KI-generiert | /catering/ (Hero) | PR #124 |
 | `pizza-burrata-steinofen-storia-muenchen.mp4` (+ Poster .jpg) | KI-generiert | Startseite (Video) | PR #124 |
+| `wm-2026-public-viewing-terrasse-storia-muenchen.webp` (+600w) | KI-bearbeitet | /wm-2026-public-viewing-muenchen/ (Hero) | Antoine 07.10.2026 („Ja, per KI eingefügt“) |
+| `public/wm-2026-public-viewing-muenchen-og.jpg` | KI-bearbeitet | og:image der WM-Seite | Antoine 07.10.2026, siehe Hinweis unten |
+| `romantisches-dinner-kerzenlicht-storia-muenchen.webp` (+600w) | KI-generiert | /romantisches-dinner-muenchen/, /valentinstag-muenchen/, /filmfest-muenchen/ (Hero), /besondere-anlaesse/silvester/ (Galerie), Besondere-Anlässe-Seite (Valentinstag-Hero) | Antoine 07.10.2026 („Alle KI, kennzeichnen“); bytegleich mit `romantisches-dinner-hero.webp` |
+| `romantisches-dinner-hero.webp` | KI-generiert | nicht eingebunden (Kopie des Kerzenlicht-Bilds, gleicher Register-Eintrag) | Antoine 07.10.2026 |
+| `wild-venison-hero.webp` (+600w) | KI-generiert | /wild-essen-muenchen/ (Hero) | Antoine 07.10.2026 |
+| `silvester-dinner-gala-storia-muenchen.webp` (+600w) | KI-generiert | /besondere-anlaesse/silvester/ (Hero), Besondere-Anlässe-Seite (Silvester-Hero) | Antoine 07.10.2026 |
+| `chefs.webp` | KI-generiert | nicht eingebunden; Register-Eintrag gilt beim Einbau | Antoine 07.10.2026 |
 
-**Unsicher, noch nicht eingestuft (Antoine fragen):**
-- `wm-2026-public-viewing-terrasse-storia-muenchen.webp` (WM-Hero) und `public/wm-2026-public-viewing-muenchen-og.jpg`: Leinwand zwischen den Terrassensäulen, gleiche Machart wie das Innenbild.
-- `romantisches-dinner-hero.webp`, `wild-venison-hero.webp`, `silvester-dinner-gala-storia-muenchen.webp`: stilistischer Verdacht.
-- `chefs.webp`: stilistischer Verdacht; das Bild wird derzeit nicht gerendert.
+Offene Einstufungen: keine (Stand 07.10.2026).
+
+**OG-Bild der WM-Seite:** Metadaten sind in `wm-2026-public-viewing-muenchen-og.jpg` nicht eingebettet,
+weil im Build kein exiftool läuft. Wer sie nachträglich setzen will, nimmt den exiftool-Befehl oben mit
+`compositeWithTrainedAlgorithmicMedia`. Bis dahin gilt: Wird die Seite in Social Media geteilt, gehört
+„Leinwand per KI eingefügt“ in den Begleittext des Posts.
 
 ## Textbausteine
 
