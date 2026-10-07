@@ -37,6 +37,21 @@ export const KI_BILDER = {
       fr: "Salle intérieure du restaurant. Un écran pour les matchs de football a été intégré à la photo par IA à titre d'illustration.",
     },
   },
+  "wm-2026-public-viewing-terrasse-storia-muenchen.webp": {
+    kategorie: "ki-bearbeitet",
+    caption: {
+      de: "Visualisierung: Die Leinwand für die Fußballübertragung wurde zur Veranschaulichung per KI in das Foto der Terrasse eingefügt.",
+      en: "Visualisation: the screen for the football broadcast was added to this photo of the terrace using AI for illustration purposes.",
+      it: "Visualizzazione: lo schermo per la trasmissione delle partite è stato inserito con l'IA nella foto della terrazza a scopo illustrativo.",
+      fr: "Visualisation : l'écran pour la retransmission des matchs a été ajouté par IA à la photo de la terrasse à titre d'illustration.",
+    },
+    alt: {
+      de: "Überdachte Terrasse des STORIA in der Karlstraße. Eine Leinwand für Fußballübertragungen wurde zur Veranschaulichung per KI in das Foto montiert.",
+      en: "Covered terrace at STORIA on Karlstraße. A screen for football broadcasts was added to the photo using AI for illustration purposes.",
+      it: "Terrazza coperta dello STORIA in Karlstraße. Uno schermo per le partite di calcio è stato inserito nella foto con l'IA a scopo illustrativo.",
+      fr: "Terrasse couverte du STORIA, Karlstraße. Un écran pour les matchs de football a été intégré à la photo par IA à titre d'illustration.",
+    },
+  },
   "tiramisu.webp": {
     kategorie: "ki-bearbeitet",
     caption: {

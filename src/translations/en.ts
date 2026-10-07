@@ -85,8 +85,8 @@ const enBase = {
     pizzaMunich: "Pizza Munich",
     pastaFrescaMuenchen: "Fresh Pasta Munich",
     dailyLunchMenu: "Lunch Menu",
-    wmPublicViewing: "2026 World Cup Public Viewing",
-    wmPublicViewingDesc: "Football public viewing on our terrace – catch the matches and the final live with us.",
+    wmPublicViewing: "Public Viewing Munich",
+    wmPublicViewingDesc: "Every EURO 2028 and 2030 World Cup match live, inside and in summer on the terrace.",
   },
   eventForm: {
     title: "Event Inquiry",
@@ -263,6 +263,7 @@ const enBase = {
     eventsGroupsTitle: "Events & Groups",
     eventsGroupsLinks: [
       { label: "Oktoberfest Munich", slug: "oktoberfest-muenchen" },
+      { label: "Public Viewing Munich", slug: "public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Group Dining Munich", slug: "reisegruppen-muenchen" },
       { label: "Corporate Events Munich", slug: "firmenfeier-muenchen" },
@@ -3666,7 +3667,7 @@ const enBase = {
     "filmfest-muenchen": "filmfest-muenchen",
     "messe-muenchen": "trade-fair-munich-restaurant",
     "messe-muenchen/bauma": "trade-fair-munich-restaurant/bauma",
-    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
+    "public-viewing-muenchen": "public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "birthday-party-munich",
     "neapolitanische-pizza-muenchen": "neapolitan-pizza-munich",
     "wild-essen-muenchen": "game-dishes-munich",
