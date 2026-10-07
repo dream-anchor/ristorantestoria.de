@@ -23,7 +23,6 @@ export interface PvContent {
   breadcrumb: string;
   hero: { eyebrow: string; h1Pre: string; h1Em: string; intro: string; ctaReserve: string; ctaWhatsapp: string };
   toc: { label: string; items: Row[] };
-  heroAlt: string;
   wm2026: { kicker: string; h2: string; body: string; figcaption: string; h3: string; results: Row[]; grazie: string };
   y2027: { kicker: string; h2: string; body: string; facts: Row[]; src: string };
   em2028: {
@@ -80,7 +79,7 @@ const de: PvContent = {
     title: "Public Viewing München – Fußball live im STORIA",
     description:
       "Public Viewing in der Maxvorstadt, wenige Minuten vom Königsplatz: alle Spiele der EM 2028 (9.6.–9.7.) und WM 2030 live im italienischen Restaurant.",
-    ogAlt: "Public Viewing auf der Terrasse des STORIA München",
+    ogAlt: "Public Viewing auf der Terrasse des STORIA München (Leinwand per KI ins Foto eingefügt)",
   },
   breadcrumb: "Public Viewing München",
   hero: {
@@ -104,7 +103,6 @@ const de: PvContent = {
       ["fragen", "Fragen"],
     ],
   },
-  heroAlt: "Gäste auf der überdachten Terrasse des STORIA in der Karlstraße beim Public Viewing",
   wm2026: {
     kicker: "Rückblick",
     h2: "So war die WM 2026 im STORIA",
@@ -230,7 +228,7 @@ const en: PvContent = {
     title: "Public Viewing Munich – Live Football at STORIA",
     description:
       "Public viewing in Munich's Maxvorstadt near Königsplatz: every EURO 2028 (9 June–9 July) and 2030 World Cup match live. England, Scotland, Wales & Ireland fans welcome.",
-    ogAlt: "Public viewing on the terrace at STORIA Munich",
+    ogAlt: "Public viewing on the terrace at STORIA Munich (screen added to the photo using AI)",
   },
   breadcrumb: "Public Viewing Munich",
   hero: {
@@ -254,7 +252,6 @@ const en: PvContent = {
       ["fragen", "FAQ"],
     ],
   },
-  heroAlt: "Guests on the covered terrace at STORIA on Karlstraße during public viewing",
   wm2026: {
     kicker: "Looking back",
     h2: "The 2026 World Cup at STORIA",
@@ -383,7 +380,7 @@ const it: PvContent = {
     title: "Public Viewing Monaco – Calcio in diretta allo STORIA",
     description:
       "Public viewing nella Maxvorstadt, a pochi minuti da Königsplatz: tutte le partite di EURO 2028 (9.6.–9.7.) e dei Mondiali 2030 in diretta nel ristorante italiano.",
-    ogAlt: "Public viewing sulla terrazza dello STORIA Monaco",
+    ogAlt: "Public viewing sulla terrazza dello STORIA Monaco (schermo inserito nella foto con l'IA)",
   },
   breadcrumb: "Public Viewing Monaco",
   hero: {
@@ -407,7 +404,6 @@ const it: PvContent = {
       ["fragen", "Domande"],
     ],
   },
-  heroAlt: "Ospiti sulla terrazza coperta dello STORIA in Karlstraße durante il public viewing",
   wm2026: {
     kicker: "Uno sguardo indietro",
     h2: "Così sono stati i Mondiali 2026 allo STORIA",
@@ -532,7 +528,7 @@ const fr: PvContent = {
     title: "Public Viewing Munich – Football en direct au STORIA",
     description:
       "Public viewing dans la Maxvorstadt, à quelques minutes de Königsplatz : tous les matchs de l'EURO 2028 (9.6–9.7) et de la Coupe du monde 2030 en direct au restaurant italien.",
-    ogAlt: "Public viewing sur la terrasse du STORIA Munich",
+    ogAlt: "Public viewing sur la terrasse du STORIA Munich (écran ajouté à la photo par IA)",
   },
   breadcrumb: "Public Viewing Munich",
   hero: {
@@ -556,7 +552,6 @@ const fr: PvContent = {
       ["fragen", "Questions"],
     ],
   },
-  heroAlt: "Clients sur la terrasse couverte du STORIA, Karlstraße, pendant le public viewing",
   wm2026: {
     kicker: "Rétrospective",
     h2: "La Coupe du monde 2026 au STORIA",

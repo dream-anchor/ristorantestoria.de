@@ -112,11 +112,11 @@ const WmPublicViewingMuenchen = () => {
 
         {/* HERO */}
         <section className="wm-hero" id="top">
-          <img
+          <KiBild
+            datei="wm-2026-public-viewing-terrasse-storia-muenchen.webp"
             src={heroImg}
             srcSet={`${heroImg600} 600w, ${heroImg} 1672w`}
             sizes="100vw"
-            alt={c.heroAlt}
             className="wm-hero-img"
             loading="eager"
             fetchPriority="high"
