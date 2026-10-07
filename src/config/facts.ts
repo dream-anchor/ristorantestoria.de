@@ -62,10 +62,9 @@ export const FACTS = {
 
   // ── Kapazität — Werte exakt wie auf der Startseite ──
   // Sitzplätze: 100 innen + 100 auf der Terrasse (unverändert).
-  // Stehempfang: einheitlich bis zu 300 Gäste – unabhängig davon, ob innen,
-  // außen oder gemischt (Fakten-Klärung Antoine, 2026-09-02). Die zuvor hier
-  // dokumentierte, uneinheitliche "180 pro Bereich"-Angabe war falsch und
-  // wurde branchweit auf 300 korrigiert (siehe PR fix-standing-capacity-300).
+  // Stehempfang: bis zu 200 Gäste stehend oder 100 sitzend (Fakten-Klärung
+  // Antoine, 2026-10-07, mit der Messe-Seite). Vorher 300 (Klärung 2026-09-02);
+  // fest im Text stehende "300" in den Übersetzungen sind noch nicht angeglichen.
   capacity: {
     indoorSeats: STORIA.capacity.indoor.seats, // Innenbereich, Sitzplätze
     terraceSeats: STORIA.capacity.terrace.seats, // Terrasse, Sitzplätze

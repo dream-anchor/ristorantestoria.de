@@ -29,7 +29,7 @@ interface MaestroWidgetProps {
  * neue Platzhalter bliebe leer. Darum: Flag zurücksetzen und das Script neu
  * einhängen. Bereits initialisierte Elemente markiert der Loader selbst.
  */
-const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight = "560px" }: MaestroWidgetProps) => {
+export const useMaestroLoader = () =>
   useEffect(() => {
     const w = window as LoaderWindow;
     const existing = document.querySelector<HTMLScriptElement>(`script[src="${WIDGET_SRC}"]`);
@@ -44,6 +44,9 @@ const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight
     script.defer = true;
     document.body.appendChild(script);
   }, []);
+
+const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight = "560px" }: MaestroWidgetProps) => {
+  useMaestroLoader();
 
   // Stil-Block aus dem freigegebenen MAESTRO-Entwurf 6 (Einbau-Schnipsel): ohne ihn nimmt der Loader die
   // Farbe des ersten Knopfs der Seite (hier weiss) - Auswahl und Absende-Knopf wurden unsichtbar.
@@ -67,6 +70,12 @@ const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight
       />
     </>
   );
+};
+
+/** Paket-Karten einer MAESTRO-Website-Kategorie (Loader-Platzhalter data-maestro-pakete, ohne Widget-Zeile). */
+export const MaestroPakete = ({ kategorie, lang }: { kategorie: string; lang: string }) => {
+  useMaestroLoader();
+  return <div data-maestro-pakete={kategorie} data-maestro-lang={lang} style={{ "--maestro-accent": "#931F23" } as CSSProperties} />;
 };
 
 export default MaestroWidget;

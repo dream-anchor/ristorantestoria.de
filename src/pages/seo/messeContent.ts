@@ -99,12 +99,12 @@ const de = {
   hub: {
     seoTitle: "Messe-Dinner München – Firmenessen im STORIA, Innenstadt",
     seoDescription:
-      "Firmenessen zur Messe München: mit der U2 ohne Umstieg ins STORIA, Karlstraße 47a. Degustationsmenüs ab 59 € p. P., sitzend bis 200, stehend bis 400 Gäste.",
+      "Firmenessen zur Messe München: mit der U2 ohne Umstieg ins STORIA, Karlstraße 47a. Degustationsmenüs ab 59 € p. P., bis 200 Gäste stehend oder 100 sitzend.",
     breadcrumb: "Messe München",
     kicker: "Messe-Dinner München",
     h1: "Firmenessen zur Messe München – in der Innenstadt, eine U-Bahn-Linie entfernt",
     intro:
-      "Das STORIA liegt in der Karlstraße 47a in der Maxvorstadt. Von der Messe München in Riem fahren Sie mit der U2 ohne Umsteigen bis Königsplatz, von dort sind es drei bis vier Minuten zu Fuß. Wir richten Ihr Gruppenessen für bis zu 400 Gäste im Stehen aus, sitzend für 100 Gäste im Winter und 200 im Sommer mit Terrasse.",
+      "Das STORIA liegt in der Karlstraße 47a in der Maxvorstadt. Von der Messe München in Riem fahren Sie mit der U2 ohne Umsteigen bis Königsplatz, von dort sind es drei bis vier Minuten zu Fuß. Wir richten Ihr Gruppenessen für bis zu 200 Gäste stehend oder 100 sitzend aus.",
     ctaAnfrage: "Messeabend anfragen",
     ctaMenues: "Menüs ansehen",
     blickTitel: "Auf einen Blick",
@@ -113,7 +113,7 @@ const de = {
       ["Adresse", "Karlstraße 47a, 80333 München (Maxvorstadt)"],
       ["Von der Messe München", "U2 ab Messestadt West oder Ost bis Königsplatz, ohne Umsteigen, 23–24 Min. Fahrt plus 3–4 Min. Fußweg"],
       ["In der Nähe", "U-Bahn Königsplatz (U2) · Tram 20/21, Haltestelle Karlstraße, 1 Min. · Hauptbahnhof 5–8 Min. zu Fuß"],
-      ["Plätze", "stehend bis 400 Gäste (innen und außen) · sitzend 100 im Winter, 200 im Sommer mit Terrasse"],
+      ["Plätze", "bis 200 Gäste stehend oder 100 sitzend"],
       ["Menüs", "4 Gänge «Vegetale» 59 €, «Mare» und «Terra» je 68 € p. P. inkl. MwSt.; mit Weinbegleitung 89 € bzw. 96 €"],
       ["Öffnungszeiten", "Mo–Fr 9–1 Uhr, Sa–So 12–1 Uhr · Küche bis 22 Uhr, später nach Vereinbarung"],
       ["Sprachen", "Service auf Deutsch, Englisch und Italienisch"],
@@ -126,9 +126,7 @@ const de = {
     speisekarteLink: "vollständigen Speisekarte",
     platzTitel: "Platz für Ihre Gruppe",
     platzP1:
-      "Im Winter decken wir innen für bis zu 100 Gäste an Tischen ein. Im Sommer kommt die Terrasse dazu, dann sitzen bis zu 200 Gäste. Für einen Empfang im Stehen haben innen und außen zusammen bis zu 400 Gäste Platz.",
-    platzP2:
-      "Bei kaltem oder nassem Wetter stellen wir gegen Aufpreis gern ein Zelt auf. Dafür erstellen wir Ihnen ein individuelles Angebot nach Ihren Wünschen.",
+      "Im STORIA haben bis zu 200 Gäste stehend oder 100 sitzend Platz.",
     hausTitel: "Das ganze Haus für Ihre Firma",
     hausP: "Das ganze STORIA können Sie auf Anfrage exklusiv mieten; den Preis nennen wir Ihnen im Angebot.",
     ablaufTitel: "So läuft Ihr Messeabend",
@@ -186,7 +184,7 @@ const de = {
     faqTitel: "Häufige Fragen zum Firmenessen während der Messe",
     faq: [
       { q: "Wie kommen wir von der Messe München ins STORIA?", a: "Von der Messe München fahren Sie mit der U2 ohne Umsteigen bis Königsplatz (23 Min. ab Messestadt West, 24 Min. ab Messestadt Ost) und gehen von dort 3–4 Minuten zur Karlstraße 47a. Mit dem Taxi brauchen Sie je nach Verkehr 20–30 Minuten." },
-      { q: "Wie viele Gäste passen ins STORIA?", a: "Im STORIA haben bis zu 400 Gäste im Stehen Platz, innen und außen zusammen. Sitzend sind es im Winter 100 Gäste innen, im Sommer mit Terrasse 200." },
+      { q: "Wie viele Gäste passen ins STORIA?", a: "Im STORIA haben bis zu 200 Gäste stehend oder 100 sitzend Platz." },
       { q: "Was kostet ein Firmenessen im STORIA?", a: "Unsere Menüs mit vier Gängen kosten 59 € («Vegetale») oder 68 € («Mare», «Terra») pro Person inklusive Mehrwertsteuer, mit Weinbegleitung 89 € bzw. 96 €. Weitere Getränke berechnen wir nach Karte; alles Weitere steht in Ihrem persönlichen Angebot." },
       { q: "Gibt es eine Getränkepauschale?", a: "Eine Getränkepauschale stellen wir Ihnen auf Anfrage zusammen. Zu jedem Menü bieten wir außerdem eine passende Weinbegleitung an." },
       { q: "Gibt es vegetarische und vegane Gerichte? Wie gehen Sie mit Allergien um?", a: "Das Menü «Vegetale» ist vegetarisch; eine vegane Variante bereiten wir auf Anfrage zu. Informationen zu Allergenen und Zusatzstoffen erhalten Sie auf Anfrage; nennen Sie uns Allergien und Unverträglichkeiten Ihrer Gäste bitte schon bei der Anfrage." },
@@ -195,7 +193,6 @@ const de = {
       { q: "Können wir auf die Firma bezahlen?", a: "Sie erhalten eine Rechnung auf Ihre Firmenadresse mit ausgewiesener Mehrwertsteuer. Bezahlen können Sie per Überweisung auf Rechnung oder online mit Karte." },
       { q: "Wie hoch ist die Anzahlung, und bis wann können wir stornieren?", a: "Anzahlung und Stornobedingungen stehen in Ihrem persönlichen Angebot, bevor Sie verbindlich zusagen." },
       { q: "Gibt es Service und Speisekarten auf Englisch?", a: "Unser Team bedient Sie auf Deutsch, Englisch und Italienisch. Auch unsere Speisekarte gibt es auf Englisch." },
-      { q: "Können wir auch draußen feiern, wenn es kalt ist?", a: "Bei kaltem oder nassem Wetter stellen wir gegen Aufpreis gern ein Zelt auf. Dafür erstellen wir Ihnen ein individuelles Angebot nach Ihren Wünschen." },
       { q: "Gibt es Technik für eine Rede, etwa ein Mikrofon?", a: "Für Reden und Präsentationen stehen im STORIA ein Mikrofon, Lautsprecher und ein Bildschirm bereit." },
       { q: "Können wir das Restaurant vorher besichtigen?", a: "Gern zeigen wir Ihnen das STORIA vorab; den Termin vereinbaren wir nach Absprache." },
       { q: "Ist das STORIA barrierefrei?", a: "Das STORIA hat einen stufenlosen Zugang und ein barrierefreies WC." },
@@ -237,7 +234,7 @@ const de = {
       ["3.–9. April 2028", "nächste bauma (Stand 10/2026)"],
       ["rund 600.000", "Besucher 2025 laut Veranstalter"],
       ["U2", "ohne Umsteigen, rund 30 Min. bis zu uns"],
-      ["bis 400", "Gäste stehend · sitzend 100 im Winter, 200 im Sommer"],
+      ["bis 200", "Gäste stehend oder 100 sitzend"],
     ] as [string, string][],
     andersTitel: "Was bei der bauma anders ist",
     andersP1:
@@ -277,12 +274,12 @@ const en: MesseTexte = {
   hub: {
     seoTitle: "Trade Fair Dinner Munich – Group Dining at STORIA, City Centre",
     seoDescription:
-      "Corporate dinner during Messe München: take the U2 with no change to STORIA, Karlstraße 47a. Tasting menus from €59 p.p., up to 200 seated, 400 standing.",
+      "Corporate dinner during Messe München: take the U2 with no change to STORIA, Karlstraße 47a. Tasting menus from €59 p.p., up to 200 guests standing or 100 seated.",
     breadcrumb: "Messe München",
     kicker: "Trade fair dinner Munich",
     h1: "Corporate dinner during Messe München – in the city centre, one metro line away",
     intro:
-      "STORIA is at Karlstraße 47a in Munich's Maxvorstadt district. From Messe München in Riem, take the U2 with no change to Königsplatz; from there it is a three to four minute walk. We host your group for up to 400 guests standing, and seated for 100 guests in winter and 200 in summer including the terrace.",
+      "STORIA is at Karlstraße 47a in Munich's Maxvorstadt district. From Messe München in Riem, take the U2 with no change to Königsplatz; from there it is a three to four minute walk. We host your group for up to 200 guests standing or 100 seated.",
     ctaAnfrage: "Request a trade fair dinner",
     ctaMenues: "See the menus",
     blickTitel: "At a glance",
@@ -291,7 +288,7 @@ const en: MesseTexte = {
       ["Address", "Karlstraße 47a, 80333 Munich (Maxvorstadt)"],
       ["From Messe München", "U2 from Messestadt West or Ost to Königsplatz, no change, 23–24 min ride plus a 3–4 min walk"],
       ["Nearby", "U-Bahn Königsplatz (U2) · Tram 20/21, Karlstraße stop, 1 min · Munich Central Station 5–8 min on foot"],
-      ["Capacity", "up to 400 guests standing (indoors and outdoors combined) · seated: 100 in winter, 200 in summer including the terrace"],
+      ["Capacity", "up to 200 guests standing or 100 seated"],
       ["Menus", "4 courses «Vegetale» €59, «Sea» and «Land» €68 each per person incl. VAT; with wine pairing €89 or €96"],
       ["Opening hours", "Mon–Fri 9 am–1 am, Sat–Sun 12 pm–1 am · kitchen until 10 pm, later by arrangement"],
       ["Languages", "Service in German, English and Italian"],
@@ -304,9 +301,7 @@ const en: MesseTexte = {
     speisekarteLink: "full menu",
     platzTitel: "Room for your group",
     platzP1:
-      "In winter we set tables indoors for up to 100 guests. In summer the terrace is added, seating up to 200 guests. For a standing reception, indoors and outdoors together hold up to 400 guests.",
-    platzP2:
-      "In cold or wet weather we are happy to put up a marquee for an additional charge – we will prepare an individual quote tailored to your needs.",
+      "STORIA holds up to 200 guests standing or 100 seated.",
     hausTitel: "The whole restaurant for your company",
     hausP: "You can hire the whole of STORIA exclusively on request; we will state the price in your quote.",
     ablaufTitel: "How your trade fair evening works",
@@ -364,7 +359,7 @@ const en: MesseTexte = {
     faqTitel: "Frequently asked questions about corporate dining during trade fairs",
     faq: [
       { q: "How do we get from Messe München to STORIA?", a: "From Messe München, take the U2 with no change to Königsplatz (23 min from Messestadt West, 24 min from Messestadt Ost) and walk 3–4 minutes to Karlstraße 47a. By taxi it takes 20–30 minutes depending on traffic." },
-      { q: "How many guests does STORIA hold?", a: "STORIA holds up to 400 guests standing, indoors and outdoors combined. Seated, it is 100 guests indoors in winter and 200 in summer including the terrace." },
+      { q: "How many guests does STORIA hold?", a: "STORIA holds up to 200 guests standing or 100 seated." },
       { q: "How much does a corporate dinner at STORIA cost?", a: "Our four-course menus cost €59 («Vegetale») or €68 («Sea», «Land») per person including VAT, with wine pairing €89 or €96. Other drinks are charged as per the menu; everything else is set out in your personal quote." },
       { q: "Do you offer a drinks package?", a: "We put together a drinks package for you on request. We also offer a matching wine pairing with every menu." },
       { q: "Are there vegetarian and vegan dishes? How do you handle allergies?", a: "The «Vegetale» menu is vegetarian; a vegan version is available on request. Information on allergens and additives is available on request; please let us know about your guests' allergies and intolerances when you send your request." },
@@ -373,7 +368,6 @@ const en: MesseTexte = {
       { q: "Can we pay on the company account?", a: "You receive an invoice to your company address with VAT shown separately. You can pay by bank transfer on invoice or online by card." },
       { q: "How much is the deposit, and until when can we cancel?", a: "The deposit and cancellation terms are set out in your personal quote before you confirm." },
       { q: "Is service and the menu available in English?", a: "Our team serves you in German, English and Italian. Our menu is also available in English." },
-      { q: "Can we celebrate outdoors when it is cold?", a: "In cold or wet weather we are happy to put up a marquee for an additional charge – we will prepare an individual quote tailored to your needs." },
       { q: "Is there equipment for a speech, such as a microphone?", a: "For speeches and presentations, STORIA provides a microphone, speakers and a screen." },
       { q: "Can we view the restaurant beforehand?", a: "We are happy to show you around STORIA in advance; we will arrange a time with you." },
       { q: "Is STORIA accessible?", a: "STORIA has step-free access and an accessible toilet." },
@@ -415,7 +409,7 @@ const en: MesseTexte = {
       ["3–9 April 2028", "next bauma (as of 10/2026)"],
       ["around 600,000", "visitors in 2025 according to the organiser"],
       ["U2", "no change, about 30 min to us"],
-      ["up to 400", "guests standing · seated 100 in winter, 200 in summer"],
+      ["up to 200", "guests standing or 100 seated"],
     ],
     andersTitel: "What is different about bauma",
     andersP1:
@@ -453,12 +447,12 @@ const it: MesseTexte = {
   hub: {
     seoTitle: "Cena in fiera a Monaco – cena aziendale allo STORIA, in centro",
     seoDescription:
-      "Cena aziendale durante la Messe München: con la U2 senza cambi allo STORIA, Karlstraße 47a. Menu degustazione da 59 € a persona, fino a 200 seduti, 400 in piedi.",
+      "Cena aziendale durante la Messe München: con la U2 senza cambi allo STORIA, Karlstraße 47a. Menu degustazione da 59 € a persona, fino a 200 ospiti in piedi o 100 seduti.",
     breadcrumb: "Messe München",
     kicker: "Cena in fiera a Monaco",
     h1: "Cena aziendale durante la Messe München – in centro, a una sola linea di metropolitana",
     intro:
-      "Lo STORIA si trova in Karlstraße 47a, nel quartiere Maxvorstadt. Dalla Messe München a Riem prendete la U2 senza cambi fino a Königsplatz; da lì sono tre-quattro minuti a piedi. Organizziamo la vostra cena di gruppo per fino a 400 ospiti in piedi, seduti per 100 ospiti in inverno e 200 in estate con la terrazza.",
+      "Lo STORIA si trova in Karlstraße 47a, nel quartiere Maxvorstadt. Dalla Messe München a Riem prendete la U2 senza cambi fino a Königsplatz; da lì sono tre-quattro minuti a piedi. Organizziamo la vostra cena di gruppo per fino a 200 ospiti in piedi o 100 seduti.",
     ctaAnfrage: "Richiedi una serata in fiera",
     ctaMenues: "Vedi i menu",
     blickTitel: "In breve",
@@ -467,7 +461,7 @@ const it: MesseTexte = {
       ["Indirizzo", "Karlstraße 47a, 80333 Monaco di Baviera (Maxvorstadt)"],
       ["Dalla Messe München", "U2 da Messestadt West o Ost fino a Königsplatz, senza cambi, 23–24 min di viaggio più 3–4 min a piedi"],
       ["Nelle vicinanze", "Metro Königsplatz (U2) · Tram 20/21, fermata Karlstraße, 1 min · Stazione centrale 5–8 min a piedi"],
-      ["Posti", "fino a 400 ospiti in piedi (interno ed esterno insieme) · seduti 100 in inverno, 200 in estate con la terrazza"],
+      ["Posti", "fino a 200 ospiti in piedi o 100 seduti"],
       ["Menu", "4 portate «Vegetale» 59 €, «Mare» e «Terra» 68 € ciascuno a persona IVA inclusa; con abbinamento vini 89 € o 96 €"],
       ["Orari", "lun–ven 9–1, sab–dom 12–1 · cucina fino alle 22, più tardi su accordo"],
       ["Lingue", "servizio in tedesco, inglese e italiano"],
@@ -480,9 +474,7 @@ const it: MesseTexte = {
     speisekarteLink: "menu completo",
     platzTitel: "Spazio per il vostro gruppo",
     platzP1:
-      "In inverno apparecchiamo all'interno per fino a 100 ospiti. In estate si aggiunge la terrazza e i posti a sedere diventano 200. Per un ricevimento in piedi, interno ed esterno insieme accolgono fino a 400 ospiti.",
-    platzP2:
-      "In caso di freddo o maltempo possiamo allestire una tensostruttura con un supplemento: le prepariamo volentieri un'offerta personalizzata in base alle sue esigenze.",
+      "Lo STORIA accoglie fino a 200 ospiti in piedi o 100 seduti.",
     hausTitel: "Tutto il ristorante per la vostra azienda",
     hausP: "Su richiesta potete affittare in esclusiva tutto lo STORIA; il prezzo è indicato nell'offerta.",
     ablaufTitel: "Come si svolge la vostra serata in fiera",
@@ -540,7 +532,7 @@ const it: MesseTexte = {
     faqTitel: "Domande frequenti sulla cena aziendale durante la fiera",
     faq: [
       { q: "Come arriviamo dalla Messe München allo STORIA?", a: "Dalla Messe München prendete la U2 senza cambi fino a Königsplatz (23 min da Messestadt West, 24 min da Messestadt Ost) e da lì sono 3–4 minuti a piedi fino a Karlstraße 47a. In taxi servono 20–30 minuti a seconda del traffico." },
-      { q: "Quanti ospiti può accogliere lo STORIA?", a: "Lo STORIA accoglie fino a 400 ospiti in piedi, interno ed esterno insieme. Seduti sono 100 ospiti all'interno in inverno e 200 in estate con la terrazza." },
+      { q: "Quanti ospiti può accogliere lo STORIA?", a: "Lo STORIA accoglie fino a 200 ospiti in piedi o 100 seduti." },
       { q: "Quanto costa una cena aziendale allo STORIA?", a: "I nostri menu di quattro portate costano 59 € («Vegetale») o 68 € («Mare», «Terra») a persona IVA inclusa, con abbinamento vini 89 € o 96 €. Le altre bevande sono conteggiate secondo la carta; tutto il resto è indicato nella vostra offerta personale." },
       { q: "C'è un forfait bevande?", a: "Su richiesta vi prepariamo un forfait bevande. Per ogni menu offriamo inoltre un abbinamento vini adatto." },
       { q: "Ci sono piatti vegetariani e vegani? Come gestite le allergie?", a: "Il menu «Vegetale» è vegetariano; una variante vegana è disponibile su richiesta. Informazioni su allergeni e additivi sono disponibili su richiesta; vi preghiamo di indicarci allergie e intolleranze dei vostri ospiti già nella richiesta." },
@@ -549,7 +541,6 @@ const it: MesseTexte = {
       { q: "Possiamo pagare a carico dell'azienda?", a: "Ricevete una fattura intestata alla vostra azienda con IVA indicata. Potete pagare con bonifico su fattura oppure online con carta." },
       { q: "A quanto ammonta l'acconto e fino a quando possiamo cancellare?", a: "Acconto e condizioni di cancellazione sono indicati nella vostra offerta personale, prima della conferma vincolante." },
       { q: "Il servizio e il menu sono disponibili in inglese?", a: "Il nostro team vi serve in tedesco, inglese e italiano. Anche il nostro menu è disponibile in inglese." },
-      { q: "Possiamo festeggiare all'aperto anche quando fa freddo?", a: "In caso di freddo o maltempo possiamo allestire una tensostruttura con un supplemento: le prepariamo volentieri un'offerta personalizzata in base alle sue esigenze." },
       { q: "C'è l'attrezzatura per un discorso, ad esempio un microfono?", a: "Per discorsi e presentazioni lo STORIA mette a disposizione microfono, altoparlanti e uno schermo." },
       { q: "Possiamo visitare il ristorante in anticipo?", a: "Vi mostriamo volentieri lo STORIA in anticipo; concordiamo l'appuntamento insieme." },
       { q: "Lo STORIA è accessibile?", a: "Lo STORIA ha un accesso senza gradini e un bagno accessibile." },
@@ -591,7 +582,7 @@ const it: MesseTexte = {
       ["3–9 aprile 2028", "prossima bauma (aggiornato a 10/2026)"],
       ["circa 600.000", "visitatori nel 2025 secondo l'organizzatore"],
       ["U2", "senza cambi, circa 30 min fino a noi"],
-      ["fino a 400", "ospiti in piedi · seduti 100 in inverno, 200 in estate"],
+      ["fino a 200", "ospiti in piedi o 100 seduti"],
     ],
     andersTitel: "Cosa rende diversa la bauma",
     andersP1:
@@ -629,12 +620,12 @@ const fr: MesseTexte = {
   hub: {
     seoTitle: "Dîner salon Munich – repas d'entreprise au STORIA, centre-ville",
     seoDescription:
-      "Repas d'entreprise pendant un salon à la Messe München : en U2 sans changement jusqu'au STORIA, Karlstraße 47a. Menus dégustation dès 59 € p. p., jusqu'à 200 assis, 400 debout.",
+      "Repas d'entreprise pendant un salon à la Messe München : en U2 sans changement jusqu'au STORIA, Karlstraße 47a. Menus dégustation dès 59 € p. p., jusqu'à 200 personnes debout ou 100 assises.",
     breadcrumb: "Messe München",
     kicker: "Dîner salon Munich",
     h1: "Repas d'entreprise pendant la Messe München – au centre-ville, à une ligne de métro",
     intro:
-      "Le STORIA se trouve Karlstraße 47a, dans le quartier de Maxvorstadt. Depuis la Messe München à Riem, prenez la U2 sans changement jusqu'à Königsplatz ; de là, il reste trois à quatre minutes à pied. Nous accueillons votre groupe jusqu'à 400 personnes debout, et assis 100 personnes en hiver, 200 en été avec la terrasse.",
+      "Le STORIA se trouve Karlstraße 47a, dans le quartier de Maxvorstadt. Depuis la Messe München à Riem, prenez la U2 sans changement jusqu'à Königsplatz ; de là, il reste trois à quatre minutes à pied. Nous accueillons votre groupe jusqu'à 200 personnes debout ou 100 assises.",
     ctaAnfrage: "Demander une soirée salon",
     ctaMenues: "Voir les menus",
     blickTitel: "En bref",
@@ -643,7 +634,7 @@ const fr: MesseTexte = {
       ["Adresse", "Karlstraße 47a, 80333 Munich (Maxvorstadt)"],
       ["Depuis la Messe München", "U2 depuis Messestadt West ou Ost jusqu'à Königsplatz, sans changement, 23–24 min de trajet plus 3–4 min à pied"],
       ["À proximité", "Métro Königsplatz (U2) · Tram 20/21, arrêt Karlstraße, 1 min · Gare centrale 5–8 min à pied"],
-      ["Capacité", "jusqu'à 400 personnes debout (intérieur et extérieur ensemble) · assis 100 en hiver, 200 en été avec la terrasse"],
+      ["Capacité", "jusqu'à 200 personnes debout ou 100 assises"],
       ["Menus", "4 plats «Végétal» 59 €, «Mer» et «Terre» 68 € chacun par personne TVA incluse ; avec accord mets et vins 89 € ou 96 €"],
       ["Horaires", "lun–ven 9 h–1 h, sam–dim 12 h–1 h · cuisine jusqu'à 22 h, plus tard sur accord"],
       ["Langues", "service en allemand, anglais et italien"],
@@ -656,9 +647,7 @@ const fr: MesseTexte = {
     speisekarteLink: "carte complète",
     platzTitel: "De la place pour votre groupe",
     platzP1:
-      "En hiver, nous dressons les tables à l'intérieur pour 100 personnes maximum. En été, la terrasse s'y ajoute et jusqu'à 200 personnes peuvent s'asseoir. Pour une réception debout, l'intérieur et l'extérieur accueillent ensemble jusqu'à 400 personnes.",
-    platzP2:
-      "Par temps froid ou humide, nous installons volontiers une tente moyennant supplément ; nous vous préparons une offre personnalisée selon vos souhaits.",
+      "Le STORIA accueille jusqu'à 200 personnes debout ou 100 assises.",
     hausTitel: "Tout le restaurant pour votre entreprise",
     hausP: "Vous pouvez privatiser l'ensemble du STORIA sur demande ; le prix figure dans votre offre.",
     ablaufTitel: "Le déroulement de votre soirée salon",
@@ -716,7 +705,7 @@ const fr: MesseTexte = {
     faqTitel: "Questions fréquentes sur le repas d'entreprise pendant un salon",
     faq: [
       { q: "Comment aller de la Messe München au STORIA ?", a: "Depuis la Messe München, prenez la U2 sans changement jusqu'à Königsplatz (23 min depuis Messestadt West, 24 min depuis Messestadt Ost), puis marchez 3–4 minutes jusqu'à la Karlstraße 47a. En taxi, comptez 20–30 minutes selon la circulation." },
-      { q: "Combien de personnes le STORIA peut-il accueillir ?", a: "Le STORIA accueille jusqu'à 400 personnes debout, intérieur et extérieur ensemble. Assis, ce sont 100 personnes à l'intérieur en hiver et 200 en été avec la terrasse." },
+      { q: "Combien de personnes le STORIA peut-il accueillir ?", a: "Le STORIA accueille jusqu'à 200 personnes debout ou 100 assises." },
       { q: "Combien coûte un repas d'entreprise au STORIA ?", a: "Nos menus de quatre plats coûtent 59 € («Végétal») ou 68 € («Mer», «Terre») par personne TVA incluse, avec accord mets et vins 89 € ou 96 €. Les autres boissons sont facturées selon la carte ; tout le reste figure dans votre offre personnelle." },
       { q: "Proposez-vous un forfait boissons ?", a: "Nous composons un forfait boissons sur demande. Nous proposons aussi un accord mets et vins pour chaque menu." },
       { q: "Y a-t-il des plats végétariens et végans ? Comment gérez-vous les allergies ?", a: "Le menu «Végétal» est végétarien ; une version végane est possible sur demande. Les informations sur les allergènes et additifs sont disponibles sur demande ; merci de nous indiquer les allergies et intolérances de vos invités dès votre demande." },
@@ -725,7 +714,6 @@ const fr: MesseTexte = {
       { q: "Pouvons-nous payer au nom de l'entreprise ?", a: "Vous recevez une facture à l'adresse de votre entreprise, TVA indiquée. Vous pouvez payer par virement sur facture ou en ligne par carte." },
       { q: "Quel est le montant de l'acompte et jusqu'à quand pouvons-nous annuler ?", a: "L'acompte et les conditions d'annulation figurent dans votre offre personnelle, avant votre engagement définitif." },
       { q: "Le service et la carte sont-ils disponibles en anglais ?", a: "Notre équipe vous sert en allemand, en anglais et en italien. Notre carte existe aussi en anglais." },
-      { q: "Pouvons-nous faire la fête dehors quand il fait froid ?", a: "Par temps froid ou humide, nous installons volontiers une tente moyennant supplément ; nous vous préparons une offre personnalisée selon vos souhaits." },
       { q: "Y a-t-il du matériel pour un discours, par exemple un micro ?", a: "Pour les discours et présentations, le STORIA met à disposition un micro, des haut-parleurs et un écran." },
       { q: "Pouvons-nous visiter le restaurant avant ?", a: "Nous vous faisons volontiers visiter le STORIA à l'avance ; nous convenons ensemble d'un rendez-vous." },
       { q: "Le STORIA est-il accessible ?", a: "Le STORIA dispose d'un accès de plain-pied et de toilettes accessibles." },
@@ -767,7 +755,7 @@ const fr: MesseTexte = {
       ["3–9 avril 2028", "prochaine bauma (état 10/2026)"],
       ["environ 600 000", "visiteurs en 2025 selon l'organisateur"],
       ["U2", "sans changement, env. 30 min jusqu'à nous"],
-      ["jusqu'à 400", "personnes debout · assis 100 en hiver, 200 en été"],
+      ["jusqu'à 200", "personnes debout ou 100 assises"],
     ],
     andersTitel: "Ce qui distingue la bauma",
     andersP1:

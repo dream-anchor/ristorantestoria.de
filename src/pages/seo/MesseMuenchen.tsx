@@ -12,6 +12,7 @@ import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { getLocalizedPath } from "@/config/routes";
 import { FACTS } from "@/config/facts";
+import { MaestroPakete } from "@/components/MaestroWidget";
 import { messeContent, PREISE, eur, dauer, kalender, HOTELS_ZENTRAL, HOTELS_MESSE, type MesseTexte } from "./messeContent";
 
 export const faqSchema = (faq: { q: string; a: string }[]) => ({
@@ -132,13 +133,14 @@ const MesseMuenchen = () => {
               <H2 id="menues">{h.menuesTitel}</H2>
               <p className="mb-6 text-muted-foreground">{h.menuesIntro}</p>
               <MenueKarten m={c.menue} lang={language} detail />
+              {/* Zusatz: live aus MAESTRO (Kategorie messe); der statische Inhalt oben bleibt im Prerender-HTML. */}
+              <div className="mt-8"><MaestroPakete kategorie="messe" lang={language} /></div>
               <p className="text-sm text-muted-foreground mt-4">{h.allergene} <LocalizedLink to="speisekarte" className="underline">{h.speisekarteLink}</LocalizedLink>.</p>
             </section>
 
             <section className="mb-16">
               <H2>{h.platzTitel}</H2>
-              <p className="mb-4">{h.platzP1}</p>
-              <p className="mb-6">{h.platzP2}</p>
+              <p className="mb-6">{h.platzP1}</p>
               <h3 className="text-xl font-serif font-bold mb-2">{h.hausTitel}</h3>
               <p>{h.hausP}</p>
             </section>
