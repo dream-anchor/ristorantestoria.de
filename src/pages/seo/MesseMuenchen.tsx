@@ -12,7 +12,7 @@ import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { getLocalizedPath } from "@/config/routes";
 import { FACTS } from "@/config/facts";
-import { MaestroPakete } from "@/components/MaestroWidget";
+import MaestroWidget, { MaestroPakete } from "@/components/MaestroWidget";
 import { messeContent, PREISE, eur, dauer, kalender, HOTELS_ZENTRAL, HOTELS_MESSE, type MesseTexte } from "./messeContent";
 
 export const faqSchema = (faq: { q: string; a: string }[]) => ({
@@ -66,12 +66,21 @@ const KONTAKT: Record<Language, { tel: string; mail: string }> = {
   fr: { tel: "Téléphone", mail: "E-mail" },
 };
 
-// ponytail: Kontaktwege statt Formular — es gibt in MAESTRO noch kein Messe-Anfrage-Widget.
-// Sobald eines existiert, hier <MaestroWidget widgetId=… lang={language} anchorId="anfrage" /> einsetzen.
+// MAESTRO-Formular „Messe“ je Sprache (sql/683, Eingang ristorante_messe).
+const MESSE_FORMULAR: Record<Language, string> = {
+  de: "33f98d2a-ace2-4c66-838a-020e6fe93c73",
+  en: "9af74aa4-a736-458e-914e-504736fde102",
+  it: "5190e994-5860-439a-839d-e472cf08fd38",
+  fr: "23d6fb27-59a7-48ef-a42f-89e033bfdc02",
+};
+
 export const AnfrageBlock = ({ titel, lead, lang }: { titel: string; lead: string; lang: Language }) => (
   <section id="anfrage" className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center mb-16 scroll-mt-24">
     <h2 className="text-3xl font-serif font-bold mb-4">{titel}</h2>
     <p className="mb-8 opacity-90">{lead}</p>
+    <div className="bg-background text-foreground rounded-xl p-4 md:p-8 mb-8 text-left">
+      <MaestroWidget widgetId={MESSE_FORMULAR[lang]} lang={lang} anchorId="messe-formular" />
+    </div>
     <div className="flex flex-wrap justify-center gap-6">
       <a href={`tel:${FACTS.phoneTel}`} className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> {KONTAKT[lang].tel}: {FACTS.phoneFormatted}</a>
       <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
@@ -132,9 +141,8 @@ const MesseMuenchen = () => {
             <section className="mb-16">
               <H2 id="menues">{h.menuesTitel}</H2>
               <p className="mb-6 text-muted-foreground">{h.menuesIntro}</p>
-              <MenueKarten m={c.menue} lang={language} detail />
-              {/* Zusatz: live aus MAESTRO (Kategorie messe); der statische Inhalt oben bleibt im Prerender-HTML. */}
-              <div className="mt-8"><MaestroPakete kategorie="messe" lang={language} /></div>
+              {/* Live aus MAESTRO (Kategorie messe); die statischen Karten sind der Fallback im Prerender-HTML. */}
+              <MaestroPakete kategorie="messe" lang={language}><MenueKarten m={c.menue} lang={language} detail /></MaestroPakete>
               <p className="text-sm text-muted-foreground mt-4">{h.allergene} <LocalizedLink to="speisekarte" className="underline">{h.speisekarteLink}</LocalizedLink>.</p>
             </section>
 

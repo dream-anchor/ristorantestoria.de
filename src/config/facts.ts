@@ -64,7 +64,7 @@ export const FACTS = {
   // Sitzplätze: 100 innen + 100 auf der Terrasse (unverändert).
   // Stehempfang: bis zu 200 Gäste stehend oder 100 sitzend (Fakten-Klärung
   // Antoine, 2026-10-07, mit der Messe-Seite). Vorher 300 (Klärung 2026-09-02);
-  // fest im Text stehende "300" in den Übersetzungen sind noch nicht angeglichen.
+  // Feste Textstellen (Übersetzungen, llms*.txt) am 2026-10-07 auf 200 angeglichen.
   capacity: {
     indoorSeats: STORIA.capacity.indoor.seats, // Innenbereich, Sitzplätze
     terraceSeats: STORIA.capacity.terrace.seats, // Terrasse, Sitzplätze

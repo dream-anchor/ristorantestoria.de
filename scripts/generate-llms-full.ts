@@ -66,11 +66,11 @@ URL: https://www.ristorantestoria.de/terrasse-muenchen/
 
 ### Firmenfeier München
 URL: https://www.ristorantestoria.de/firmenfeier-muenchen/
-Bis zu 300 Personen (stehend) oder 200 Sitzplätze (innen + Terrasse). Individuelle Menüpakete, flexibel gestaltbar.
+Bis zu 200 Personen (stehend) oder 200 Sitzplätze (innen + Terrasse). Individuelle Menüpakete, flexibel gestaltbar.
 
 ### Geburtstagsfeier München
 URL: https://www.ristorantestoria.de/geburtstagsfeier-muenchen/
-Private Events ab 6 bis 300 Personen. Individuelle Menüs auf Anfrage.
+Private Events ab 6 bis 200 Personen. Individuelle Menüs auf Anfrage.
 
 ### Wild essen München
 URL: https://www.ristorantestoria.de/wild-essen-muenchen/
@@ -78,7 +78,7 @@ Saisonale Wildspezialitäten September–Februar: Cinghiale (Wildschwein), Capri
 
 ### Reisegruppen München
 URL: https://www.ristorantestoria.de/reisegruppen-muenchen/
-Gruppenmenüs und Sonderkonditionen für Reiseveranstalter. Kapazität bis 300 Personen.
+Gruppenmenüs und Sonderkonditionen für Reiseveranstalter. Kapazität bis 200 Personen.
 
 ### Eventlocation München Maxvorstadt
 URL: https://www.ristorantestoria.de/eventlocation-muenchen-maxvorstadt/

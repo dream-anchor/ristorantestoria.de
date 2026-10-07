@@ -103,7 +103,7 @@ const BesondereAnlaesse = () => {
       {
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "Für wie viele Gäste ist das STORIA als Eventlocation geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Wir bieten Platz von der intimen Runde bis zu 300 Gästen – im Restaurant, in einem separaten Bereich oder bei schönem Wetter auf der Terrasse." } },
+          { "@type": "Question", "name": "Für wie viele Gäste ist das STORIA als Eventlocation geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Wir bieten Platz von der intimen Runde bis zu 200 Gästen – im Restaurant, in einem separaten Bereich oder bei schönem Wetter auf der Terrasse." } },
           { "@type": "Question", "name": "Gibt es vegetarische und vegane Menüvarianten?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Alle Event-Menüs lassen sich vegetarisch oder vegan gestalten – sagen Sie uns bei der Reservierung einfach Ihre Wünsche und Unverträglichkeiten." } },
           { "@type": "Question", "name": "Wie weit im Voraus sollte ich reservieren?", "acceptedAnswer": { "@type": "Answer", "text": "Für Feiertage wie Silvester, Weihnachten und den Valentinstag empfehlen wir eine Reservierung mehrere Wochen im Voraus. Für kleinere Anlässe genügen oft wenige Tage." } },
           { "@type": "Question", "name": "Kann ich einen separaten Bereich exklusiv buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, das STORIA verfügt über einen separaten Bereich, der für Firmenfeiern und private Anlässe exklusiv reserviert werden kann." } }
@@ -190,7 +190,7 @@ const BesondereAnlaesse = () => {
               <div className="mt-8 p-6 rounded-2xl bg-card border">
                 <h2 className="text-lg font-semibold mb-3">Auf einen Blick</h2>
                 <ul className="grid gap-2 sm:grid-cols-2 text-sm text-muted-foreground">
-                  <li>Kapazität bis 300 Gäste</li>
+                  <li>Kapazität bis 200 Gäste</li>
                   <li>Maxvorstadt / Königsplatz</li>
                   <li>5 Min. vom Hauptbahnhof</li>
                   <li>Sprachen DE/EN/IT</li>

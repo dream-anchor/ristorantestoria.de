@@ -1,4 +1,4 @@
-import { useEffect, type CSSProperties } from "react";
+import { useEffect, type CSSProperties, type ReactNode } from "react";
 
 const WIDGET_SRC = "https://storia.schrittmacher.ai/api/public/widgets/v1/maestro.js";
 
@@ -72,10 +72,14 @@ const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight
   );
 };
 
-/** Paket-Karten einer MAESTRO-Website-Kategorie (Loader-Platzhalter data-maestro-pakete, ohne Widget-Zeile). */
-export const MaestroPakete = ({ kategorie, lang }: { kategorie: string; lang: string }) => {
+/**
+ * Paket-Karten einer MAESTRO-Website-Kategorie (Loader-Platzhalter data-maestro-pakete, ohne Widget-Zeile).
+ * children = statischer Fallback im vorgerenderten HTML: bleibt sichtbar (per <slot>), bis der Loader echte
+ * Karten rendert; schlaegt das fehl, bleibt er stehen. Kein versteckter Text.
+ */
+export const MaestroPakete = ({ kategorie, lang, children }: { kategorie: string; lang: string; children?: ReactNode }) => {
   useMaestroLoader();
-  return <div data-maestro-pakete={kategorie} data-maestro-lang={lang} style={{ "--maestro-accent": "#931F23" } as CSSProperties} />;
+  return <div data-maestro-pakete={kategorie} data-maestro-lang={lang} style={{ "--maestro-accent": "#931F23" } as CSSProperties}>{children}</div>;
 };
 
 export default MaestroWidget;

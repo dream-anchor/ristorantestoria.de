@@ -133,7 +133,7 @@ const de: FilmfestContent = {
   seo: {
     title: "Filmfest München 2026 — Eventlocation STORIA",
     description:
-      "Eventlocation 6 Gehminuten vom Festivalzentrum: Premierendinner, Empfänge & Cast-Dinner im STORIA München beim Filmfest 2026 (26.6.–5.7.). Bis 300 Gäste.",
+      "Eventlocation 6 Gehminuten vom Festivalzentrum: Premierendinner, Empfänge & Cast-Dinner im STORIA München beim Filmfest 2026 (26.6.–5.7.). Bis 200 Gäste.",
   },
   breadcrumbLabel: "Filmfest München 2026",
   structuredEvent: {
@@ -171,7 +171,7 @@ const de: FilmfestContent = {
 
   stats: [
     { n: "6 Min.", l: "Fußweg zum Festivalzentrum Amerikahaus" },
-    { n: "bis 300", l: "Plätze stehend · 200 Sitzplätze gesamt (Innen und außen)" },
+    { n: "bis 200", l: "Plätze stehend · 200 Sitzplätze gesamt (Innen und außen)" },
     { n: "aus einer Hand", l: "Küche, Service & Eventplanung im Haus" },
     { n: "seit 2015", l: "Familie Speranza · 4,5★ aus 810 Google-Bewertungen" },
   ],
@@ -179,7 +179,7 @@ const de: FilmfestContent = {
   intro: {
     pre: "Das Ristorante STORIA ist ein familiengeführtes italienisches Restaurant in der Karlstraße 47a, München Maxvorstadt — sechs Gehminuten vom Festivalzentrum Amerikahaus und damit eine Eventlocation für Premierendinner, Verleiher-Empfänge, Cast-&-Crew-Dinner und Branchen-Networking während des ",
     linkLabel: "Filmfest München 2026",
-    post: " (26. Juni – 5. Juli 2026). Küche, Service und Eventplanung kommen aus einer Hand; bis zu 200 Gäste sitzend und 300 beim Stehempfang finden hier Platz.",
+    post: " (26. Juni – 5. Juli 2026). Küche, Service und Eventplanung kommen aus einer Hand; bis zu 200 Gäste sitzend und 200 beim Stehempfang finden hier Platz.",
   },
 
   formateSection: {
@@ -224,10 +224,10 @@ const de: FilmfestContent = {
   scenarioHead: { format: "Format", seating: "Bestuhlung", guests: "Empfohlene Gästezahl" },
   scenario: [
     ["Gesetztes Premierendinner", "Tafel / Bankett", "20 – 120 Gäste"],
-    ["Stehempfang mit Flying Buffet", "Steh / Lounge", "bis 300 Gäste"],
+    ["Stehempfang mit Flying Buffet", "Steh / Lounge", "bis 200 Gäste"],
     ["Presse-Lunch / Junket", "separierter Bereich", "10 – 40 Gäste"],
     ["Intimes Cast-Dinner", "Private Room", "6 – 24 Gäste"],
-    ["Exklusiv-Anmietung (ganzes Haus)", "kombiniert", "bis 200 sitzend / 300 stehend"],
+    ["Exklusiv-Anmietung (ganzes Haus)", "kombiniert", "bis 200 sitzend / 200 stehend"],
   ],
 
   cateringSection: {
@@ -310,7 +310,7 @@ const de: FilmfestContent = {
     {
       question: "Für wie viele Gäste ist das STORIA geeignet?",
       answer:
-        "Das STORIA bietet 100 Sitzplätze im Innenraum und 100 auf der überdachten Innenhof-Terrasse — insgesamt bis zu 200 sitzende Gäste. Beim Stehempfang mit Flying Buffet sind bis zu 300 Gäste möglich. Intime Cast-Dinner im Private Room funktionieren ab sechs Personen.",
+        "Das STORIA bietet 100 Sitzplätze im Innenraum und 100 auf der überdachten Innenhof-Terrasse — insgesamt bis zu 200 sitzende Gäste. Beim Stehempfang mit Flying Buffet sind bis zu 200 Gäste möglich. Intime Cast-Dinner im Private Room funktionieren ab sechs Personen.",
     },
     {
       question: "Bietet das STORIA Catering für Cast-&-Crew-Dinner an?",
@@ -339,7 +339,7 @@ const en: FilmfestContent = {
   seo: {
     title: "Filmfest München 2026 — STORIA Event Venue",
     description:
-      "Event venue 6 minutes' walk from the festival centre: premiere dinners, receptions & cast dinners at STORIA Munich during Filmfest 2026 (26 Jun–5 Jul). Up to 300 guests.",
+      "Event venue 6 minutes' walk from the festival centre: premiere dinners, receptions & cast dinners at STORIA Munich during Filmfest 2026 (26 Jun–5 Jul). Up to 200 guests.",
   },
   breadcrumbLabel: "Filmfest München 2026",
   structuredEvent: {
@@ -377,7 +377,7 @@ const en: FilmfestContent = {
 
   stats: [
     { n: "6 min", l: "Walk to the Amerikahaus festival centre" },
-    { n: "up to 300", l: "Standing places · 200 seats in total (indoors and out)" },
+    { n: "up to 200", l: "Standing places · 200 seats in total (indoors and out)" },
     { n: "single hand", l: "Kitchen, service & event planning all in-house" },
     { n: "since 2015", l: "The Speranza family · 4.5★ from 810 Google reviews" },
   ],
@@ -385,7 +385,7 @@ const en: FilmfestContent = {
   intro: {
     pre: "Ristorante STORIA is a family-run Italian restaurant at Karlstraße 47a, Munich Maxvorstadt — six minutes' walk from the Amerikahaus festival centre, and thus an event venue for premiere dinners, distributor receptions, cast & crew dinners and industry networking during ",
     linkLabel: "Filmfest München 2026",
-    post: " (26 June – 5 July 2026). Kitchen, service and event planning come from a single hand; up to 200 guests seated and 300 for a standing reception find their place here.",
+    post: " (26 June – 5 July 2026). Kitchen, service and event planning come from a single hand; up to 200 guests seated and 200 for a standing reception find their place here.",
   },
 
   formateSection: {
@@ -430,10 +430,10 @@ const en: FilmfestContent = {
   scenarioHead: { format: "Format", seating: "Seating", guests: "Recommended guests" },
   scenario: [
     ["Seated premiere dinner", "Banquet table", "20 – 120 guests"],
-    ["Standing reception with flying buffet", "Standing / lounge", "up to 300 guests"],
+    ["Standing reception with flying buffet", "Standing / lounge", "up to 200 guests"],
     ["Press lunch / junket", "separate area", "10 – 40 guests"],
     ["Intimate cast dinner", "Private Room", "6 – 24 guests"],
-    ["Exclusive hire (whole house)", "combined", "up to 200 seated / 300 standing"],
+    ["Exclusive hire (whole house)", "combined", "up to 200 seated / 200 standing"],
   ],
 
   cateringSection: {
@@ -516,7 +516,7 @@ const en: FilmfestContent = {
     {
       question: "How many guests can STORIA accommodate?",
       answer:
-        "STORIA offers 100 seats indoors and 100 on the covered courtyard terrace — up to 200 seated guests in total. For a standing reception with a flying buffet, up to 300 guests are possible. Intimate cast dinners in the Private Room work from six people upwards.",
+        "STORIA offers 100 seats indoors and 100 on the covered courtyard terrace — up to 200 seated guests in total. For a standing reception with a flying buffet, up to 200 guests are possible. Intimate cast dinners in the Private Room work from six people upwards.",
     },
     {
       question: "Does STORIA offer catering for cast & crew dinners?",
@@ -545,7 +545,7 @@ const it: FilmfestContent = {
   seo: {
     title: "Filmfest München 2026 — Location Eventi STORIA",
     description:
-      "Location a 6 minuti a piedi dal centro del festival: cene di premiere, ricevimenti e cene per cast allo STORIA di Monaco durante il Filmfest 2026 (26.6–5.7). Fino a 300 ospiti.",
+      "Location a 6 minuti a piedi dal centro del festival: cene di premiere, ricevimenti e cene per cast allo STORIA di Monaco durante il Filmfest 2026 (26.6–5.7). Fino a 200 ospiti.",
   },
   breadcrumbLabel: "Filmfest München 2026",
   structuredEvent: {
@@ -583,7 +583,7 @@ const it: FilmfestContent = {
 
   stats: [
     { n: "6 min", l: "A piedi fino al centro del festival Amerikahaus" },
-    { n: "fino a 300", l: "Posti in piedi · 200 posti a sedere in totale (interno ed esterno)" },
+    { n: "fino a 200", l: "Posti in piedi · 200 posti a sedere in totale (interno ed esterno)" },
     { n: "un'unica regia", l: "Cucina, servizio e organizzazione eventi in casa" },
     { n: "dal 2015", l: "Famiglia Speranza · 4,5★ su 810 recensioni Google" },
   ],
@@ -591,7 +591,7 @@ const it: FilmfestContent = {
   intro: {
     pre: "Il Ristorante STORIA è un ristorante italiano a conduzione familiare in Karlstraße 47a, nella Maxvorstadt di Monaco di Baviera — a sei minuti a piedi dal centro del festival Amerikahaus, e quindi una location per cene di premiere, ricevimenti per distributori, cene per cast & crew e networking di settore durante il ",
     linkLabel: "Filmfest München 2026",
-    post: " (26 giugno – 5 luglio 2026). Cucina, servizio e organizzazione eventi arrivano da un'unica regia; trovano posto fino a 200 ospiti seduti e 300 con ricevimento in piedi.",
+    post: " (26 giugno – 5 luglio 2026). Cucina, servizio e organizzazione eventi arrivano da un'unica regia; trovano posto fino a 200 ospiti seduti e 200 con ricevimento in piedi.",
   },
 
   formateSection: {
@@ -636,10 +636,10 @@ const it: FilmfestContent = {
   scenarioHead: { format: "Formato", seating: "Disposizione", guests: "Ospiti consigliati" },
   scenario: [
     ["Cena di premiere seduta", "Tavolata / banchetto", "20 – 120 ospiti"],
-    ["Ricevimento in piedi con flying buffet", "In piedi / lounge", "fino a 300 ospiti"],
+    ["Ricevimento in piedi con flying buffet", "In piedi / lounge", "fino a 200 ospiti"],
     ["Pranzo stampa / junket", "area separata", "10 – 40 ospiti"],
     ["Cena cast intima", "Private Room", "6 – 24 ospiti"],
-    ["Affitto esclusivo (tutta la casa)", "combinato", "fino a 200 seduti / 300 in piedi"],
+    ["Affitto esclusivo (tutta la casa)", "combinato", "fino a 200 seduti / 200 in piedi"],
   ],
 
   cateringSection: {
@@ -722,7 +722,7 @@ const it: FilmfestContent = {
     {
       question: "Per quanti ospiti è adatto lo STORIA?",
       answer:
-        "Lo STORIA offre 100 posti a sedere nella sala interna e 100 sulla terrazza coperta del cortile — in totale fino a 200 ospiti seduti. Con il ricevimento in piedi e flying buffet sono possibili fino a 300 ospiti. Le cene cast intime nel Private Room funzionano a partire da sei persone.",
+        "Lo STORIA offre 100 posti a sedere nella sala interna e 100 sulla terrazza coperta del cortile — in totale fino a 200 ospiti seduti. Con il ricevimento in piedi e flying buffet sono possibili fino a 200 ospiti. Le cene cast intime nel Private Room funzionano a partire da sei persone.",
     },
     {
       question: "Lo STORIA offre catering per cene cast & crew?",
@@ -751,7 +751,7 @@ const fr: FilmfestContent = {
   seo: {
     title: "Filmfest München 2026 — Lieu d'Événement STORIA",
     description:
-      "Lieu à 6 minutes à pied du centre du festival : dîners de première, réceptions et dîners d'équipe au STORIA Munich pendant le Filmfest 2026 (26.6–5.7). Jusqu'à 300 invités.",
+      "Lieu à 6 minutes à pied du centre du festival : dîners de première, réceptions et dîners d'équipe au STORIA Munich pendant le Filmfest 2026 (26.6–5.7). Jusqu'à 200 invités.",
   },
   breadcrumbLabel: "Filmfest München 2026",
   structuredEvent: {
@@ -789,7 +789,7 @@ const fr: FilmfestContent = {
 
   stats: [
     { n: "6 min", l: "À pied jusqu'au centre du festival Amerikahaus" },
-    { n: "jusqu'à 300", l: "Places debout · 200 places assises au total (intérieur et extérieur)" },
+    { n: "jusqu'à 200", l: "Places debout · 200 places assises au total (intérieur et extérieur)" },
     { n: "d'une seule main", l: "Cuisine, service & organisation d'événements en interne" },
     { n: "depuis 2015", l: "Famille Speranza · 4,5★ sur 810 avis Google" },
   ],
@@ -797,7 +797,7 @@ const fr: FilmfestContent = {
   intro: {
     pre: "Le Ristorante STORIA est un restaurant italien familial situé Karlstraße 47a, dans la Maxvorstadt de Munich — à six minutes à pied du centre du festival Amerikahaus, et donc un lieu d'événement pour dîners de première, réceptions distributeurs, dîners cast & crew et networking professionnel pendant le ",
     linkLabel: "Filmfest München 2026",
-    post: " (26 juin – 5 juillet 2026). Cuisine, service et organisation viennent d'une seule main ; jusqu'à 200 invités assis et 300 en réception debout trouvent ici leur place.",
+    post: " (26 juin – 5 juillet 2026). Cuisine, service et organisation viennent d'une seule main ; jusqu'à 200 invités assis et 200 en réception debout trouvent ici leur place.",
   },
 
   formateSection: {
@@ -842,10 +842,10 @@ const fr: FilmfestContent = {
   scenarioHead: { format: "Format", seating: "Disposition", guests: "Nombre d'invités conseillé" },
   scenario: [
     ["Dîner de première assis", "Tablée / banquet", "20 – 120 invités"],
-    ["Réception debout avec flying buffet", "Debout / lounge", "jusqu'à 300 invités"],
+    ["Réception debout avec flying buffet", "Debout / lounge", "jusqu'à 200 invités"],
     ["Déjeuner presse / junket", "espace séparé", "10 – 40 invités"],
     ["Dîner cast intime", "Private Room", "6 – 24 invités"],
-    ["Privatisation exclusive (toute la maison)", "combiné", "jusqu'à 200 assis / 300 debout"],
+    ["Privatisation exclusive (toute la maison)", "combiné", "jusqu'à 200 assis / 200 debout"],
   ],
 
   cateringSection: {
@@ -928,7 +928,7 @@ const fr: FilmfestContent = {
     {
       question: "Pour combien d'invités le STORIA est-il adapté ?",
       answer:
-        "Le STORIA offre 100 places assises en salle intérieure et 100 sur la terrasse couverte de la cour — soit jusqu'à 200 invités assis au total. Pour une réception debout avec flying buffet, jusqu'à 300 invités sont possibles. Les dîners cast intimes dans le Private Room fonctionnent à partir de six personnes.",
+        "Le STORIA offre 100 places assises en salle intérieure et 100 sur la terrasse couverte de la cour — soit jusqu'à 200 invités assis au total. Pour une réception debout avec flying buffet, jusqu'à 200 invités sont possibles. Les dîners cast intimes dans le Private Room fonctionnent à partir de six personnes.",
     },
     {
       question: "Le STORIA propose-t-il un traiteur pour les dîners cast & crew ?",

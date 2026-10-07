@@ -282,7 +282,7 @@ const GeburtstagsfeierMuenchen = () => {
                 </LocalizedLink>
                 <LocalizedLink to="hochzeitsfeier-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.internalLinks.weddingMunich}</h3>
-                  <p className="text-muted-foreground text-sm">Auch Hochzeitsfeiern im STORIA – bis 300 Gäste, individuelles Menü.</p>
+                  <p className="text-muted-foreground text-sm">Auch Hochzeitsfeiern im STORIA – bis 200 Gäste, individuelles Menü.</p>
                 </LocalizedLink>
                 <LocalizedLink to="reisegruppen-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">Sie organisieren eine Reisegruppe?</h3>
