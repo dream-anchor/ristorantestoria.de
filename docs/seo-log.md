@@ -305,6 +305,52 @@ carte serviert wird.
 | ~~/weihnachtsfeier-muenchen/ live~~ | Okt 2026 | ✅ Erledigt — Seite ist seit E4.2 (13.09.2026,
   PR #93) live, Eintrag war veraltet |
 
+### Oktober 2026 — Leichter Gesundheitscheck (automatisiert, 01.10.2026)
+
+**Hinweis:** Oktober ist kein GEO-Lücken-Loop-Prüftermin (die sind für Dezember 2026/März 2027
+angelegt, siehe unten) — daher nur der allgemeine, leichte Check wie unten beschrieben, kein
+Cluster-Vergleich.
+
+**GSC-Zahlen (letzte 28 vollständige Tage, 02.09.–29.09.2026, `sc-domain:ristorantestoria.de`,
+`dimensions=[]`):**
+
+| KPI | Mai 2026 (letzter dokumentierter Wert) | Oktober 2026 (02.09.–29.09.2026) |
+|-----|------|------|
+| Klicks/28 Tage | 819 | **1.539** |
+| Impressionen/28 Tage | 30.702 | **59.665** |
+| CTR gesamt | 2,67% | **2,58%** |
+| Ø Position | 12,9 | **10,21** |
+
+Einordnung: Klicks fast verdoppelt, Impressionen fast verdoppelt, Ø Position deutlich verbessert
+(12,9 → 10,2). CTR liegt mit 2,58% leicht unter dem Mai-Wert (2,67%) und unter dem nie erreichten
+Juni-Ziel (3,0%+) — bei nahezu doppelter Impressionsbasis ist das plausibel (mehr Long-Tail-/
+Striking-Distance-Impressionen bei niedrigerer individueller CTR) und kein Alarmsignal für sich
+genommen. Kein direkter Vormonats-Wert (September) dokumentiert, daher Vergleich gegen den letzten
+in dieser Datei festgehaltenen Wert (Mai).
+
+**404-Kandidaten-Grobcheck:** Seiten-Dimension derselben 28-Tage-Abfrage nach auffälligen
+Impressions-Trägern mit vermutet fehlerhaften URLs durchsucht, Verdachtsfälle per `curl -D -`
+(ohne `-L`, echte Statuscodes) geprüft:
+
+| URL | Impr. | Pos. | Status | Befund |
+|---|---|---|---|---|
+| `/besondere-anlaesse/valentinstag-menue/` | 115 | 49,1 | 301 → `/valentinstag-muenchen/` | Korrekt (Legacy-Redirect aus K3, funktioniert wie dokumentiert) |
+| `/agb-restaurant/` | 32 | 14,8 | 301 → events-storia.de | Korrekt (dokumentierter Redirect, siehe CLAUDE.md) |
+| `/cookie-richtlinie/` | 10 | 76,1 | 200 | Rechtsseite, erwartet schlechte Position |
+| `/haftungsausschluss/` | 8 | 61,9 | 301 → `/impressum/` | Korrekt (dokumentierter Redirect) |
+| `/oktoberfest-muenchen/italiener-muenchen/` | 1 | 1,0 | **echtes 404** | Verschachtelter Pfad ohne internes Linkziel — kein internes Linkmuster gefunden, vermutlich externe Fehlverlinkung/geratene URL. 1 Impr., 0 Klicks — nicht aktionabel |
+| `/en/romantic-dinner-music/` | 1 | 1,0 | **echtes 404** | Vermutlicher Tippfehler „music" statt „munich" in einer externen Quelle. 1 Impr., 0 Klicks — nicht aktionabel |
+| `/neapolitanische-pizza-muenchen-` (Trailing-Dash) | 1 | 1,0 | 301 (korrekt) | Kein Problem |
+| `/geburtstagsfeier-muenchen` (ohne Slash) | 2 | 1,0 | 301 (korrekt) | Kein Problem |
+
+**Ergebnis:** Zwei echte 404 gefunden, beide mit 1 Impression/0 Klicks und ohne erkennbares
+internes Linkziel (externe Fehlverlinkung) — kein Handlungsbedarf, kein Vollaudit nötig. Keine
+sonstigen Auffälligkeiten.
+
+**Nicht Teil dieses Checks:** GEO-Lücken-Loop-Cluster-Vergleich (Weihnachtsfeier/Valentinstag) —
+nächster Termin Dezember 2026, siehe unten. Ebenfalls unberührt: Striking-Distance-Review-Fenster
+07.10.–04.11.2026 (separates Thema, siehe § „2026-09 — September" oben).
+
 ### GEO-Lücken-Loop — Review-Termine (angelegt 13.09.2026)
 
 Baseline-Zahlen für den Vergleich stehen oben unter „GEO-Lücken-Loop V2"/„V3". Beide Termine mit
