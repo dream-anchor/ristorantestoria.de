@@ -24,7 +24,7 @@ import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useG
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
 import GroupInquiryForm from "@/components/GroupInquiryForm";
-import MaestroWidget from "@/components/MaestroWidget";
+import MaestroWidget, { useMaestroTitel } from "@/components/MaestroWidget";
 import StickyGroupInquiryButton from "@/components/StickyGroupInquiryButton";
 import MenuItemsList from "@/components/MenuItemsList";
 import type { GroupMenu } from "@/hooks/useGroupMenus";
@@ -81,6 +81,7 @@ const ReisegruppenPage = () => {
   const rg = t.reisegruppen;
   const maestro = MAESTRO_WIDGETS[language];
   const useMaestro = Boolean(maestro);
+  const maestroTitel = useMaestroTitel(maestro?.titel ?? "", language);
   const ml = menuListLabels[language as keyof typeof menuListLabels] ?? menuListLabels.de;
   const { menus, settings } = useGroupMenus();
   const utmParams = useUtmParams();
@@ -468,7 +469,7 @@ const ReisegruppenPage = () => {
             <section className="py-12 md:py-16 bg-secondary/30">
               <div className="container mx-auto px-4 max-w-3xl">
                 <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
-                  {maestro.titel}
+                  {maestroTitel}
                 </h2>
                 <MaestroWidget widgetId={maestro.id} lang={language} />
               </div>
