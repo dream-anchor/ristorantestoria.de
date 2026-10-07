@@ -149,7 +149,7 @@ async function getRecentClusters(): Promise<string[]> {
 
 async function pickPostFromDB(pool: "A" | "B", season: string, themeSlot: string | null, recentIds: number[]) {
   // Pool A: theme_slot muss passen. Pool B: kein theme_slot-Filter.
-  const slotFilter = themeSlot
+  const slotFilter = (pool === "A" && themeSlot)
     ? sql`AND theme_slot = ${themeSlot}`
     : sql``;
 
