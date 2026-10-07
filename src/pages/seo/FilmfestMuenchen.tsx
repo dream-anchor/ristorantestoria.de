@@ -375,7 +375,7 @@ const FilmfestMuenchen = () => {
                 <>
                   {" "}
                   {c.outbound.crossWmPre}
-                  <LocalizedLink to="wm-2026-public-viewing-muenchen">
+                  <LocalizedLink to="public-viewing-muenchen">
                     {c.outbound.crossWmAnchor}
                   </LocalizedLink>
                   {c.outbound.crossWmPost}

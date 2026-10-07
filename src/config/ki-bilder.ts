@@ -37,6 +37,22 @@ export const KI_BILDER = {
       fr: "Salle intérieure du restaurant. Un écran pour les matchs de football a été intégré à la photo par IA à titre d'illustration.",
     },
   },
+  // Auch public/wm-2026-public-viewing-muenchen-og.jpg (og:image, gleiche Montage) — Hinweis siehe Doku.
+  "wm-2026-public-viewing-terrasse-storia-muenchen.webp": {
+    kategorie: "ki-bearbeitet",
+    caption: {
+      de: "Visualisierung: Die Leinwand für die Fußballübertragung wurde zur Veranschaulichung per KI in das Foto der Terrasse eingefügt.",
+      en: "Visualisation: the screen for the football broadcast was added to this photo of the terrace using AI for illustration purposes.",
+      it: "Visualizzazione: lo schermo per la trasmissione delle partite è stato inserito con l'IA nella foto della terrazza a scopo illustrativo.",
+      fr: "Visualisation : l'écran pour la retransmission des matchs a été ajouté par IA à la photo de la terrasse à titre d'illustration.",
+    },
+    alt: {
+      de: "Überdachte Terrasse des STORIA in der Karlstraße. Eine Leinwand für Fußballübertragungen wurde zur Veranschaulichung per KI in das Foto montiert.",
+      en: "Covered terrace at STORIA on Karlstraße. A screen for football broadcasts was added to the photo using AI for illustration purposes.",
+      it: "Terrazza coperta dello STORIA in Karlstraße. Uno schermo per le partite di calcio è stato inserito nella foto con l'IA a scopo illustrativo.",
+      fr: "Terrasse couverte du STORIA, Karlstraße. Un écran pour les matchs de football a été intégré à la photo par IA à titre d'illustration.",
+    },
+  },
   "tiramisu.webp": {
     kategorie: "ki-bearbeitet",
     caption: {
@@ -110,22 +126,6 @@ export const KI_BILDER = {
       en: "Pizza with burrata, AI-generated illustrative video.",
       it: "Pizza con burrata, video illustrativo generato con l'IA.",
       fr: "Pizza à la burrata, vidéo d'illustration générée par IA.",
-    },
-  },
-  // Auch public/wm-2026-public-viewing-muenchen-og.jpg (og:image, gleiche Montage) — Hinweis siehe Doku.
-  "wm-2026-public-viewing-terrasse-storia-muenchen.webp": {
-    kategorie: "ki-bearbeitet",
-    caption: {
-      de: "Visualisierung: Die Leinwand auf der Terrasse wurde zur Veranschaulichung per KI in das Foto eingefügt.",
-      en: "Visualisation: the screen on the terrace was added to this photo using AI for illustration purposes.",
-      it: "Visualizzazione: lo schermo sulla terrazza è stato inserito nella foto con l'IA a scopo illustrativo.",
-      fr: "Visualisation : l'écran sur la terrasse a été ajouté à la photo par IA à titre d'illustration.",
-    },
-    alt: {
-      de: "Gäste auf der überdachten Terrasse des STORIA in der Karlstraße in München. Die Leinwand mit dem Fußballspiel wurde zur Veranschaulichung per KI eingefügt.",
-      en: "Guests on the covered terrace of STORIA on Karlstraße in Munich. The screen showing the football match was added using AI for illustration purposes.",
-      it: "Ospiti sulla terrazza coperta dello STORIA in Karlstraße a Monaco. Lo schermo con la partita è stato inserito con l'IA a scopo illustrativo.",
-      fr: "Clients sur la terrasse couverte du STORIA, Karlstraße à Munich. L'écran diffusant le match a été ajouté par IA à titre d'illustration.",
     },
   },
   // Bytegleiche Kopie, nicht eingebunden: src/assets/romantisches-dinner-hero.webp.

@@ -60,13 +60,13 @@ Auch Hero-Hintergrundbilder bekommen Badge und Caption sichtbar im Hero.
 
 | Datei | Kategorie | Seite(n) | Beleg |
 |---|---|---|---|
-| `wm-2026-fussball-uebertragung-innen-storia-muenchen.webp` (+600w) | KI-bearbeitet | /wm-2026-public-viewing-muenchen/ | Antoine 07.10.2026 (Leinwand eingefügt) |
+| `wm-2026-fussball-uebertragung-innen-storia-muenchen.webp` (+600w) | KI-bearbeitet | /public-viewing-muenchen/ | Antoine 07.10.2026 (Leinwand eingefügt) |
 | `tiramisu.webp` | KI-bearbeitet | Startseite (Bildraster) | Antoine, PR #125 |
 | `neapolitan-pizza-hero.webp` (+600w) | KI-generiert | /pizza-muenchen/, /neapolitanische-pizza-muenchen/ | PR #123 |
 | `cocktails.webp` | KI-generiert | Startseite (Bildraster) | PR #124 |
 | `sommerfest-event.webp` (+600w) | KI-generiert | /catering/ (Hero) | PR #124 |
 | `pizza-burrata-steinofen-storia-muenchen.mp4` (+ Poster .jpg) | KI-generiert | Startseite (Video) | PR #124 |
-| `wm-2026-public-viewing-terrasse-storia-muenchen.webp` (+600w) | KI-bearbeitet | /wm-2026-public-viewing-muenchen/ (Hero) | Antoine 07.10.2026 („Ja, per KI eingefügt“) |
+| `wm-2026-public-viewing-terrasse-storia-muenchen.webp` (+600w) | KI-bearbeitet | /public-viewing-muenchen/ (Hero) | Antoine 07.10.2026 („Ja, per KI eingefügt“) |
 | `public/wm-2026-public-viewing-muenchen-og.jpg` | KI-bearbeitet | og:image der WM-Seite | Antoine 07.10.2026, siehe Hinweis unten |
 | `romantisches-dinner-kerzenlicht-storia-muenchen.webp` (+600w) | KI-generiert | /romantisches-dinner-muenchen/, /valentinstag-muenchen/, /filmfest-muenchen/ (Hero), /besondere-anlaesse/silvester/ (Galerie), Besondere-Anlässe-Seite (Valentinstag-Hero) | Antoine 07.10.2026 („Alle KI, kennzeichnen“); bytegleich mit `romantisches-dinner-hero.webp` |
 | `romantisches-dinner-hero.webp` | KI-generiert | nicht eingebunden (Kopie des Kerzenlicht-Bilds, gleicher Register-Eintrag) | Antoine 07.10.2026 |
