@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "@/contexts/LanguageContext";
-import allSlugs from "@/config/slugs.json";
+// runtime-slugs.json = slugs.json + Silvester-/Legal-Slugs (Obermenge, gleiche Werte)
+import allSlugs from "@/config/runtime-slugs.json";
 
 const BASE_URL = "https://www.ristorantestoria.de";
 const LANGUAGES = ["de", "en", "it", "fr"] as const;
@@ -147,16 +148,25 @@ const SEO = ({
     ? (title.includes('STORIA') ? title : `${title} – STORIA München`)
     : "STORIA – Ristorante Pizzeria Bar München";
 
-  // Kanonische URL normalisiert
-  const canonicalUrl = canonical
-    ? buildCanonicalUrl(canonical)
-    : `${BASE_URL}/`;
+  // hreflang-URLs: explizite Overrides > automatische Berechnung aus slugs.json > Fallback auf Homepage
+  const computedHreflang = !hreflangUrls && canonical ? computeHreflangFromCanonical(canonical) : null;
+
+  // Kanonische URL — selbstreferenzierend in der aktiven Sprache. Viele Seiten übergeben den
+  // DE-Pfad; ohne Lokalisierung zeigten EN/IT/FR-Seiten per canonical auf die DE-URL und
+  // widersprachen ihrem eigenen hreflang. Quelle ist derselbe hreflang-Eintrag der Sprache,
+  // damit canonical und hreflang nie auseinanderlaufen.
+  const ownLangUrl = hreflangUrls?.[language as keyof typeof hreflangUrls]
+    || computedHreflang?.[language];
+  const homeUrl = language === "de" ? `${BASE_URL}/` : `${BASE_URL}/${language}/`;
+  const canonicalUrl = ownLangUrl
+    ? buildCanonicalUrl(ownLangUrl)
+    : !canonical || canonical === "/"
+      ? homeUrl
+      : buildCanonicalUrl(canonical);
 
   // OG-Image Fallback
   const ogImageUrl = ogImage || `${BASE_URL}/og-image.jpg`;
 
-  // hreflang-URLs: explizite Overrides > automatische Berechnung aus slugs.json > Fallback auf Homepage
-  const computedHreflang = !hreflangUrls && canonical ? computeHreflangFromCanonical(canonical) : null;
   const effectiveHreflang = {
     de: hreflangUrls?.de || computedHreflang?.de || `${BASE_URL}${canonical ? normalizeTrailingSlash(canonical.startsWith("/") ? canonical.split("?")[0].split("#")[0] : "/" + canonical.split("?")[0].split("#")[0]) : "/"}`,
     en: hreflangUrls?.en || computedHreflang?.en || `${BASE_URL}/en/`,

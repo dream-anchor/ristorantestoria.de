@@ -251,6 +251,7 @@ const BesondererAnlass = () => {
         title={menuTitle}
         description={getSeoDescription()}
         canonical={canonicalPath}
+        hreflangUrls={Object.fromEntries(alternates.map((a) => [a.lang, a.url]))}
       />
       <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
@@ -393,6 +394,7 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
         title={seasonalTitle}
         description={seoDescription}
         canonical={canonicalPath}
+        hreflangUrls={Object.fromEntries(alternates.map((a) => [a.lang, a.url]))}
       />
       <StructuredData type="restaurant" includeReviews={false} />
       <StructuredData
