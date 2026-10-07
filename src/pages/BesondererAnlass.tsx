@@ -23,6 +23,8 @@ import weihnachtsfeierImage from "@/assets/weihnachtsfeier-italiener-storia-muen
 import romantischesDinnerImage from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen.webp";
 import silvesterHeroImage from "@/assets/silvester-dinner-gala-storia-muenchen.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
+import KiBild from "@/components/KiBild";
+import type { KiBildDatei } from "@/config/ki-bilder";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
 import { useSpecialMenuBySlug } from "@/hooks/useSpecialMenus";
 import { useArchivedSeasonalMenu } from "@/hooks/useArchivedSeasonalMenu";
@@ -34,6 +36,11 @@ import { ArrowUp, Utensils, Calendar, BookOpen } from "lucide-react";
 import SilvesterMuenchen from "@/pages/seo/SilvesterMuenchen";
 
 // Map seasonal event keys to hero images
+const SEASONAL_HERO_KI: Record<string, KiBildDatei> = {
+  valentinstag: "romantisches-dinner-kerzenlicht-storia-muenchen.webp",
+  silvester: "silvester-dinner-gala-storia-muenchen.webp",
+};
+
 const SEASONAL_HERO_IMAGES: Record<string, string> = {
   valentinstag: romantischesDinnerImage,
   weihnachten: weihnachtsfeierImage,
@@ -344,6 +351,7 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
   const faqItems = config.faq?.[language] || config.faq?.de || [];
   const expectedMonth = config.expectedMonth?.[language] || config.expectedMonth?.de || '';
   const heroImage = SEASONAL_HERO_IMAGES[config.key] || storiaLogo;
+  const heroKi = SEASONAL_HERO_KI[config.key];
 
   const parentSlug = PARENT_SLUGS[language] || PARENT_SLUGS.de;
   const seasonalSlug = config.slugs[language] || config.slugs.de;
@@ -416,13 +424,23 @@ const SeasonalPlaceholder = ({ config, archivedMenu }: SeasonalPlaceholderProps)
 
         {/* Hero Section with seasonal image */}
         <div className="relative w-full h-64 md:h-80 overflow-hidden">
-          <img
-            src={heroImage}
-            alt={seasonalTitle}
-            className="w-full h-full object-cover"
-            loading="eager"
-            fetchPriority="high"
-          />
+          {heroKi ? (
+            <KiBild
+              datei={heroKi}
+              src={heroImage}
+              className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+            />
+          ) : (
+            <img
+              src={heroImage}
+              alt={seasonalTitle}
+              className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+            />
+          )}
           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <div className="text-center px-4">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-white tracking-wide">

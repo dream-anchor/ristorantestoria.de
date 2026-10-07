@@ -11,6 +11,7 @@ import LocalizedLink from "@/components/LocalizedLink";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useAlternateLinks } from "@/contexts/AlternateLinksContext";
+import KiBild from "@/components/KiBild";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { getLocalizedPath } from "@/config/routes";
 import { isWmFilmfestOverlap } from "@/config/seasonalFlags";
@@ -190,11 +191,10 @@ const FilmfestMuenchen = () => {
 
         {/* HERO */}
         <header className="ff-hero" id="top">
-          <img
+          <KiBild datei="romantisches-dinner-kerzenlicht-storia-muenchen.webp"
             src={heroImg}
             srcSet={`${heroImg600} 600w, ${heroImg} 1400w`}
             sizes="100vw"
-            alt={c.hero.heroImgAlt}
             className="ff-hero-img"
             loading="eager"
             fetchPriority="high"

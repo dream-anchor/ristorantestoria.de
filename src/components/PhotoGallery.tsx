@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { KiHinweis, kiAlt } from "@/components/KiBild";
+import { KI_BILDER, type KiBildDatei } from "@/config/ki-bilder";
 
 export interface GalleryImage {
   src: string;
@@ -8,6 +11,8 @@ export interface GalleryImage {
   sizes?: string;
   alt: string;
   caption?: string;
+  /** KI-Bild laut Register: Badge + Caption, alt kommt dann aus dem Register. */
+  ki?: KiBildDatei;
 }
 
 interface PhotoGalleryProps {
@@ -18,6 +23,8 @@ interface PhotoGalleryProps {
 }
 
 const PhotoGallery = ({ images, columns = 2, className, imgClassName }: PhotoGalleryProps) => {
+  const { language } = useLanguage();
+  const altOf = (img: GalleryImage) => (img.ki ? kiAlt(img.ki, language) : img.alt);
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState(0);
 
@@ -48,14 +55,17 @@ const PhotoGallery = ({ images, columns = 2, className, imgClassName }: PhotoGal
             className="overflow-hidden rounded-xl cursor-zoom-in"
             onClick={() => { setCurrent(i); setOpen(true); }}
           >
-            <img
-              src={img.src}
-              srcSet={img.srcSet}
-              sizes={img.sizes}
-              alt={img.alt}
-              className={imgClassName ?? "w-full h-72 object-cover hover:scale-105 transition-transform duration-500"}
-              loading="lazy"
-            />
+            <div className="relative overflow-hidden">
+              <img
+                src={img.src}
+                srcSet={img.srcSet}
+                sizes={img.sizes}
+                alt={altOf(img)}
+                className={imgClassName ?? "w-full h-72 object-cover hover:scale-105 transition-transform duration-500"}
+                loading="lazy"
+              />
+              {img.ki && <KiHinweis datei={img.ki} />}
+            </div>
             {img.caption && (
               <figcaption className="text-xs text-muted-foreground mt-2 text-center">{img.caption}</figcaption>
             )}
@@ -83,7 +93,7 @@ const PhotoGallery = ({ images, columns = 2, className, imgClassName }: PhotoGal
               src={images[current].src}
               srcSet={images[current].srcSet}
               sizes="95vw"
-              alt={images[current].alt}
+              alt={altOf(images[current])}
               className="max-w-full max-h-[75vh] object-contain"
             />
 
@@ -111,6 +121,9 @@ const PhotoGallery = ({ images, columns = 2, className, imgClassName }: PhotoGal
           <div className="shrink-0 pb-3 px-4 text-center">
             {images[current].caption && (
               <p className="text-xs text-white/60 mb-2">{images[current].caption}</p>
+            )}
+            {images[current].ki && (
+              <p className="text-xs text-white/60 mb-2">{KI_BILDER[images[current].ki!].caption[language]}</p>
             )}
             {images.length > 1 && (
               <div className="flex justify-center gap-1.5">
