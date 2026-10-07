@@ -70,7 +70,7 @@ const STATIC_PAGES = {
 
   firmenfeier: {
     title: "Firmenfeier München – STORIA",
-    description: "Team-Events, Weihnachtsfeiern & Business-Dinner für 6-300 Personen. Überdachte Terrasse. Zentral am Hauptbahnhof.",
+    description: "Team-Events, Weihnachtsfeiern & Business-Dinner bis 200 stehend / 100 sitzend. Zentral am Hauptbahnhof.",
     content: "Seit 1995. Individuelle Menüs. Professioneller Service. +49 89 51519696"
   },
 

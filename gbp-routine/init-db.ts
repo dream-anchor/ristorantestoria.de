@@ -134,7 +134,7 @@ async function main() {
        'reserve', 'https://ristorantestoria.de/reservierung', ARRAY['pasta','abend','innenraum'], 'autumn'),
       ('B', '4-Gänge-Menü Mare: Hummersalat, Tagliolini mit Trüffel, Saltimbocca vom Seeteufel, Schokoladen-Soufflé. 78 € / 108 € mit Weinbegleitung.',
        'reserve', 'https://ristorantestoria.de/reservierung', ARRAY['fisch','abend','innenraum'], 'allyear'),
-      ('B', 'Firmenfeier in München? Im STORIA passen 6 bis 300 Personen — von intimer Runde bis großem Event. Karlstraße, Maxvorstadt.',
+      ('B', 'Firmenfeier in München? Im STORIA feiern Sie bis 200 stehend / 100 sitzend — von intimer Runde bis großem Event. Karlstraße, Maxvorstadt.',
        'learn_more', 'https://ristorantestoria.de/firmenfeier-muenchen', ARRAY['innenraum','abend'], 'allyear'),
       ('B', 'Adventszeit im STORIA: Trüffel-Pasta, italienische Weine, ruhiger Innenhof — die Pause zwischen Christkindlmarkt und Büro.',
        'reserve', 'https://ristorantestoria.de/reservierung', ARRAY['pasta','abend','innenraum'], 'winter'),
