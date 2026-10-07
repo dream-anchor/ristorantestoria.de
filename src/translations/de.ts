@@ -83,8 +83,8 @@ export const de = {
     pizzaMunich: "Pizza M\u00fcnchen",
     pastaFrescaMuenchen: "Frische Pasta M\u00fcnchen",
     dailyLunchMenu: "Mittagsmen\u00fc",
-    wmPublicViewing: "WM 2026 Public Viewing",
-    wmPublicViewingDesc: "Fu\u00dfball-Public-Viewing auf der Terrasse \u2013 Spiele & Finale live bei uns verfolgen.",
+    wmPublicViewing: "Public Viewing München",
+    wmPublicViewingDesc: "Alle Spiele der EM 2028 und WM 2030 live, im Restaurant und im Sommer auf der Terrasse.",
   },
   eventForm: {
     title: "Event-Anfrage",
@@ -261,7 +261,7 @@ export const de = {
     eventsGroupsTitle: "Anlässe & Gruppen",
     eventsGroupsLinks: [
       { label: "Oktoberfest München", slug: "oktoberfest-muenchen" },
-      { label: "WM 2026 Public Viewing", slug: "wm-2026-public-viewing-muenchen" },
+      { label: "Public Viewing München", slug: "public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Restaurant für Reisegruppen", slug: "reisegruppen-muenchen" },
       { label: "Firmenfeier München", slug: "firmenfeier-muenchen" },
@@ -3811,7 +3811,7 @@ export const de = {
     "filmfest-muenchen": "filmfest-muenchen",
     "messe-muenchen": "messe-muenchen",
     "messe-muenchen/bauma": "messe-muenchen/bauma",
-    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
+    "public-viewing-muenchen": "public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "geburtstagsfeier-muenchen",
     "neapolitanische-pizza-muenchen": "neapolitanische-pizza-muenchen",
     "wild-essen-muenchen": "wild-essen-muenchen",

@@ -164,7 +164,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "filmfest-muenchen": FilmfestMuenchen,
   "messe-muenchen": MesseMuenchen,
   "messe-muenchen/bauma": MesseBauma,
-  "wm-2026-public-viewing-muenchen": WmPublicViewingMuenchen,
+  "public-viewing-muenchen": WmPublicViewingMuenchen,
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
   "wild-essen-muenchen": WildEssenMuenchen,

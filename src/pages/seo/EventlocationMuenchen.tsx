@@ -427,7 +427,7 @@ const EventlocationMuenchen = () => {
                     <p className="text-muted-foreground text-sm">19. Sept – 4. Okt 2026: Wiesnbier, Brotzeit & bayerisch-italienische Specials – ideal für Gruppen und Firmenevents zur Wiesn-Zeit.</p>
                   </LocalizedLink>
                 )}
-                <LocalizedLink to="wm-2026-public-viewing-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
+                <LocalizedLink to="public-viewing-muenchen" className="bg-card border rounded-lg p-6 hover:border-primary transition-colors">
                   <h3 className="font-semibold mb-2">{t.internalLinks.wmPublicViewing}</h3>
                   <p className="text-muted-foreground text-sm">{t.internalLinks.wmPublicViewingDesc}</p>
                 </LocalizedLink>

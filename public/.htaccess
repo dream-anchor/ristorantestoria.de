@@ -131,11 +131,11 @@ RewriteRule ^fr/occasions-speciales/brunch-de-paques/?$ /fr/occasions-speciales/
 # Alte Subdomain-URL Struktur
 RewriteRule ^ristorantestoria-de/(.+)$ /$1 [R=301,L,QSD]
 RewriteRule ^ristorantestoria-de/?$ / [R=301,L,QSD]
-# /menu → /speisekarte (Thin Content entfernt)
+# /menu → Speisekarte der jeweiligen Sprache (Thin Content entfernt)
 RewriteRule ^menu/?$ /speisekarte/ [R=301,L]
-RewriteRule ^en/menu/?$ /speisekarte/ [R=301,L]
-RewriteRule ^it/menu/?$ /speisekarte/ [R=301,L]
-RewriteRule ^fr/menu/?$ /speisekarte/ [R=301,L]
+RewriteRule ^en/menu/?$ /en/food-menu/ [R=301,L]
+RewriteRule ^it/menu/?$ /it/menu-cibo/ [R=301,L]
+RewriteRule ^fr/menu/?$ /fr/carte/ [R=301,L]
 
 # ============================================
 # 4. Legacy CMS Redirects (WordPress)
@@ -251,6 +251,12 @@ RewriteRule ^it/occasioni-speciali/silvesterparty/?$ /it/occasioni-speciali/capo
 RewriteRule ^it/occasioni-speciali/capodanno-party/?$ /it/occasioni-speciali/capodanno/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/silvesterparty/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
 RewriteRule ^fr/occasions-speciales/nouvel-an-party/?$ /fr/occasions-speciales/nouvel-an/ [R=301,L]
+
+# WM 2026 Public Viewing → evergreen Public Viewing (nach dem Finale 19.7.2026 umgebaut)
+RewriteRule ^wm-2026-public-viewing-muenchen/?$ /public-viewing-muenchen/ [R=301,L]
+RewriteRule ^en/wm-2026-public-viewing-muenchen/?$ /en/public-viewing-muenchen/ [R=301,L]
+RewriteRule ^it/wm-2026-public-viewing-muenchen/?$ /it/public-viewing-muenchen/ [R=301,L]
+RewriteRule ^fr/wm-2026-public-viewing-muenchen/?$ /fr/public-viewing-muenchen/ [R=301,L]
 
 # ============================================
 # 8. Legal Pages — Nur DE

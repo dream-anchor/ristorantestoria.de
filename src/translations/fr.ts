@@ -85,8 +85,8 @@ const frBase = {
     pizzaMunich: "Pizza Munich",
     pastaFrescaMuenchen: "Pâtes Fraîches Munich",
     dailyLunchMenu: "Menu Déjeuner",
-    wmPublicViewing: "Coupe du monde 2026 en direct",
-    wmPublicViewingDesc: "Suivez la Coupe du monde sur notre terrasse – matchs et finale en direct.",
+    wmPublicViewing: "Public Viewing Munich",
+    wmPublicViewingDesc: "Tous les matchs de l'EURO 2028 et de la Coupe du monde 2030 en direct, en salle et l'été en terrasse.",
   },
   eventForm: {
     title: "Demande d'événement",
@@ -263,6 +263,7 @@ const frBase = {
     eventsGroupsTitle: "Événements & Groupes",
     eventsGroupsLinks: [
       { label: "Oktoberfest Munich", slug: "oktoberfest-muenchen" },
+      { label: "Public Viewing Munich", slug: "public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Groupes Touristiques Munich", slug: "reisegruppen-muenchen" },
       { label: "Événements d'Entreprise Munich", slug: "firmenfeier-muenchen" },
@@ -3652,7 +3653,7 @@ const frBase = {
     "filmfest-muenchen": "filmfest-muenchen",
     "messe-muenchen": "restaurant-salon-munich",
     "messe-muenchen/bauma": "restaurant-salon-munich/bauma",
-    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
+    "public-viewing-muenchen": "public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "fete-anniversaire-munich",
     "neapolitanische-pizza-muenchen": "pizza-napolitaine-munich",
     "wild-essen-muenchen": "gibier-munich",

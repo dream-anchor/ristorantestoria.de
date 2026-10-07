@@ -108,8 +108,8 @@ const itBase = {
     pizzaMunich: "Pizza Monaco",
     pastaFrescaMuenchen: "Pasta Fresca Monaco",
     dailyLunchMenu: "Menu Pranzo",
-    wmPublicViewing: "Mondiali 2026 in diretta",
-    wmPublicViewingDesc: "Guarda le partite dei Mondiali sulla nostra terrazza – finale compreso.",
+    wmPublicViewing: "Public Viewing Monaco",
+    wmPublicViewingDesc: "Tutte le partite di EURO 2028 e dei Mondiali 2030 in diretta, in sala e d'estate in terrazza.",
   },
   eventForm: {
     title: "Richiesta Evento",
@@ -283,6 +283,7 @@ const itBase = {
     eventsGroupsTitle: "Occasioni & Gruppi",
     eventsGroupsLinks: [
       { label: "Oktoberfest Monaco", slug: "oktoberfest-muenchen" },
+      { label: "Public Viewing Monaco", slug: "public-viewing-muenchen" },
       { label: "Filmfest München", slug: "filmfest-muenchen" },
       { label: "Gruppi Turistici Monaco", slug: "reisegruppen-muenchen" },
       { label: "Feste Aziendali Monaco", slug: "firmenfeier-muenchen" },
@@ -3325,7 +3326,7 @@ const itBase = {
     "filmfest-muenchen": "filmfest-muenchen",
     "messe-muenchen": "ristorante-fiera-monaco",
     "messe-muenchen/bauma": "ristorante-fiera-monaco/bauma",
-    "wm-2026-public-viewing-muenchen": "wm-2026-public-viewing-muenchen",
+    "public-viewing-muenchen": "public-viewing-muenchen",
     "geburtstagsfeier-muenchen": "festa-compleanno-monaco",
     "neapolitanische-pizza-muenchen": "pizza-napoletana-monaco",
     "wild-essen-muenchen": "selvaggina-monaco",

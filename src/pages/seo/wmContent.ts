@@ -1,737 +1,679 @@
 import type { Language } from "@/contexts/LanguageContext";
+import { FACTS } from "@/config/facts";
 
-/** Turnierphase: phase + zeit (Monatsnamen) werden übersetzt. */
-interface TurnierText {
-  phase: string;
-  zeit: string;
-}
+/**
+ * Inhalte /public-viewing-muenchen/ (Phase „Vorlauf“ bis zum EM-2028-Spielplan).
+ * Konzept: entwuerfe/konzept-em2028-wm2030.md, Mockup v3 freigegeben 07.10.2026.
+ * Fakten (Termine, Stadien, Ergebnisse) geprüft 07.10.2026, siehe src/config/turniere.ts.
+ * Kapazität nur aus FACTS.
+ */
+
+const STAND = FACTS.capacity.standing; // 200
+const SITZ = FACTS.capacity.indoorSeats; // 100
+const AUSSEN = FACTS.publicViewing.terrasseAussen; // 100
 
 interface FaqItem {
   question: string;
   answer: string;
 }
+type Row = [string, string];
 
-export interface WmContent {
-  seo: { title: string; description: string };
-  nav: {
-    angebot: string;
-    spiele: string;
-    turnier: string;
-    reservieren: string;
-  };
-  hero: {
-    eyebrow: string;
-    h1: { pre: string; em: string; post: string };
-    sub: string;
-    ctaReserve: string;
-    ctaWhatsapp: string;
-  };
-  angebot: {
-    eyebrow: string;
+export interface PvContent {
+  seo: { title: string; description: string; ogAlt: string };
+  breadcrumb: string;
+  hero: { eyebrow: string; h1Pre: string; h1Em: string; intro: string; ctaReserve: string; ctaWhatsapp: string };
+  toc: { label: string; items: Row[] };
+  heroAlt: string;
+  wm2026: { kicker: string; h2: string; body: string; figcaption: string; h3: string; results: Row[]; grazie: string };
+  y2027: { kicker: string; h2: string; body: string; facts: Row[]; src: string };
+  em2028: {
+    kicker: string;
     h2: string;
-    items: string[];
-    /** Exakte Teilzeichenkette in items, die als Link auf die Speisekarte gerendert wird. */
-    menuPhrase: string;
+    cd: { label: string; range: string; daysLeft: string; running: string };
+    body: string;
+    fans?: { title: string; text: string };
+    h3Hosts: string;
+    hosts: Row[];
+    h3Dates: string;
+    dates: Row[];
+    h3Venues: string;
+    venues: Row[];
+    src: string;
+    ctaText: string;
+    ctaButton: string;
   };
-  /** Temporärer Cross-Link zur Filmfest-Seite – nur im Überschneidungszeitraum sichtbar. */
-  crossFilmfest: { pre: string; anchor: string; post: string };
-  /** Long-Tail-Prosa (public viewing maxvorstadt + Spieltag-Intent) – optional, derzeit nur DE. */
-  longtail?: {
-    eyebrow: string;
-    h2: string;
-    blocks: { lead: string; body: string }[];
-  };
-  /**
-   * Evergreen-Abschnitt zum WM/EM-Zwei-Jahres-Rhythmus. Zahlt bewusst schon jetzt auf die
-   * spätere Umwidmung dieser Seite zum SEO/GEO-Platzhalter für die EM 2028 ein (Content-Tiefe
-   * statt Title/H1/URL-Änderung – die bleiben bis zum eigentlichen Umbau auf WM 2026 fokussiert).
-   */
-  zyklus: {
-    eyebrow: string;
-    h2: string;
-    blocks: { lead: string; body: string }[];
-  };
-  /** Spiel-Daten (Teams, Termine, Orte) liegen in wmSpiele.ts – hier nur Rahmentexte. */
-  spiele: {
-    eyebrow: string;
-    h2: string;
-    vs: string;
-    mesz: string;
-    note: string;
-    /** Label auf offenen K.-o.-Slot-Karten, wenn Gegner/Teams noch nicht feststehen. */
-    offen: string;
-    /** Überschrift über der kompakten Liste bereits gespielter Spiele. */
-    ergebnisseHead: string;
-  };
-  turnier: {
-    eyebrow: string;
-    h2: string;
-    items: TurnierText[];
-  };
-  reservieren: {
-    eyebrow: string;
-    h2: string;
-    lead: string;
-    ctaReserve: string;
-    ctaWhatsapp: string;
-  };
-  anfahrt: {
-    eyebrow: string;
-    h2: string;
-    lead: string;
-    callLabel: string;
-    callSub: string;
-    whatsappLabel: string;
-    whatsappSub: string;
-    directionsLabel: string;
-    directionsSub: string;
-    restaurantLabel: string;
-    restaurantSub: string;
-  };
-  faq: {
-    eyebrow: string;
-    h2: string;
-    items: FaqItem[];
-    disclaimer: string;
-  };
-  /** Nach-Turnier-Abschluss – nur bei !isWmActive() sichtbar. Title/H1 der Seite bleiben. */
-  abschluss: {
-    eyebrow: string;
+  wm2030: { kicker: string; h2: string; body: string; hosts: Row[]; src: string };
+  restaurant: {
     h2: string;
     body: string;
-    linksLead: string;
-    linkOktoberfest: string;
-    linkTerrasse: string;
+    h3Reserve: string;
+    reserveHint: string;
+    h3Groups: string;
+    groups: string;
+    groupsLink: string;
   };
-  /** Kompakter Hinweis, der nach dem Turnier den Spielplan-Block ersetzt. */
-  spieleClosed: string;
+  newsletter: { h2: string; body: string };
+  anfahrt: { h2: string; body: string; hbfPre: string; hbfAnchor: string; hbfPost: string };
+  kurz: { h2: string; items: string[] };
+  faq: { h2: string; items: FaqItem[]; disclaimer: string };
 }
 
-export const wmContent: Record<Language, WmContent> = {
-  de: {
-    seo: {
-      title: "WM 2026 Public Viewing München – alle Spiele live | STORIA",
-      description:
-        "Alle Spiele der WM 2026 live auf der überdachten Terrasse in der Maxvorstadt. Süditalienische Küche, Aperitivo, bei schlechtem Wetter drinnen. Tisch reservieren.",
-    },
-    nav: {
-      angebot: "Was läuft",
-      spiele: "Die größten Spiele",
-      turnier: "Turnier",
-      reservieren: "Tisch reservieren",
-    },
-    hero: {
-      eyebrow: "WM 2026 · 11. Juni – 19. Juli · Maxvorstadt",
-      h1: {
-        pre: "WM 2026 Public Viewing in der Maxvorstadt – alle Spiele im ",
-        em: "STORIA",
-        post: "",
-      },
-      sub: "Italien ist 2026 nicht dabei, zum dritten Mal in Folge. Bei uns läuft die WM trotzdem – von der Eröffnung am 11. Juni bis zum Finale am 19. Juli. Alle Spiele, auf der überdachten Terrasse in der Karlstraße. Dazu süditalienische Küche, ein Glas Wein, ein Aperitivo. An Spieltagen wird es voll, reserviert also besser vorher.",
-      ctaReserve: "Tisch reservieren →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    angebot: {
-      eyebrow: "Was bei uns läuft",
-      h2: "Fußball schauen, italienisch genießen.",
-      items: [
-        "Alle Spiele der WM 2026, von der Gruppenphase bis zum Finale.",
-        "Übertragung auf der überdachten Terrasse. Bei schlechtem Wetter zeigen wir drinnen weiter.",
-        "Keine Sportkneipe: süditalienische Küche, eigene Weinkarte, Aperitivo zum Anstoß.",
-        "Reservierung empfohlen, besonders an den K.-o.-Abenden ab dem Viertelfinale.",
-      ],
-      menuPhrase: "süditalienische Küche",
-    },
-    crossFilmfest: {
-      pre: "Mehr als Fußball – vom 26. Juni bis 5. Juli läuft bei uns das ",
-      anchor: "Filmfest München zeitgleich",
-      post: ". Premierendinner und Branchenabende im selben Haus.",
-    },
-    longtail: {
-      eyebrow: "Public Viewing · Maxvorstadt",
-      h2: "Mitten in der Stadt, mit Tisch statt Gedränge.",
-      blocks: [
-        {
-          lead: "Public Viewing in der Maxvorstadt.",
-          body: "Mitten zwischen Königsplatz und Hauptbahnhof zeigen wir alle Spiele der WM 2026 – auf der überdachten Terrasse und drinnen. Wenige Gehminuten von Stiglmaierplatz und Theresienwiese, mit Tisch statt Gedränge. Wer das Spiel mit echter italienischer Küche statt Stadionwurst sehen will, sitzt bei uns richtig.",
-        },
-        {
-          lead: "An den großen Spieltagen vorher reservieren.",
-          body: "Läuft ein Achtel-, Viertel- oder Halbfinale, ist die Terrasse schnell voll. Sichern Sie sich Ihren Tisch vorab – dann bleibt vor dem Anpfiff noch Zeit für einen Aperitivo.",
-        },
-      ],
-    },
-    zyklus: {
-      eyebrow: "WM & EM · Der Rhythmus des Fußballs",
-      h2: "Nach der WM ist vor der EM.",
-      blocks: [
-        {
-          lead: "Alle zwei Jahre ein großes Turnier.",
-          body: "Seit den 1960er-Jahren wechseln sich Fußball-Weltmeisterschaft und Fußball-Europameisterschaft im Zwei-Jahres-Rhythmus ab: WM 2022, EM 2024, WM 2026 – und im Sommer 2028 die nächste Europameisterschaft. Für uns ist Public Viewing deshalb kein einmaliges Ereignis, sondern gelebte Praxis: Läuft ein großes Turnier, läuft es auf unserer Terrasse.",
-        },
-        {
-          lead: "Nach der WM: die EM 2028.",
-          body: "Die nächste Europameisterschaft findet 2028 im Vereinigten Königreich und in Irland statt. Auch dafür öffnen wir wieder die Terrasse in der Karlstraße – Termine und Spielplan folgen, sobald die UEFA sie veröffentlicht. Bis dahin bleibt diese Seite unsere Adresse für jedes große Turnier.",
-        },
-      ],
-    },
-    spiele: {
-      eyebrow: "Die größten Spiele · K.-o.-Phase",
-      h2: "Vom Achtelfinale bis zum Finale – live bei uns.",
-      vs: "gegen",
-      mesz: "MESZ",
-      note: "Alle Zeiten in MESZ. Alle Paarungen stehen fest – zum Abschluss zeigen wir das Spiel um Platz 3 und das Finale Spanien gegen Argentinien.",
-      offen: "Gegner stehen noch nicht fest",
-      ergebnisseHead: "Bereits gespielt",
-    },
-    turnier: {
-      eyebrow: "So läuft das Turnier",
-      h2: "Von Mexiko-Stadt bis New Jersey.",
-      items: [
-        { phase: "Eröffnung", zeit: "11. Juni · 21:00" },
-        { phase: "Gruppenphase", zeit: "11. – 27. Juni" },
-        { phase: "Sechzehntelfinale", zeit: "28.6. – 3.7." },
-        { phase: "Achtelfinale", zeit: "4. – 7. Juli" },
-        { phase: "Viertelfinale", zeit: "9. – 11. Juli" },
-        { phase: "Halbfinale", zeit: "14. / 15. Juli" },
-        { phase: "Finale", zeit: "19. Juli · 21:00" },
-      ],
-    },
-    reservieren: {
-      eyebrow: "Platz sichern",
-      h2: "Reservieren",
-      lead: "An Spieltagen sind die Tische schnell vergeben, bei den K.-o.-Spielen besonders. Sichert euch euren Platz auf der Terrasse oder drinnen – eine kurze Reservierung genügt.",
-      ctaReserve: "Tisch reservieren →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    anfahrt: {
-      eyebrow: "Anfahrt",
-      h2: "Mitten in der Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 München. Telefon +49 89 51519696. Die Tram 20 und 21 hält an der Karlstraße direkt vor der Tür.",
-      callLabel: "Direkt anrufen",
-      callSub: "+49 89 51519696",
-      whatsappLabel: "WhatsApp",
-      whatsappSub: "Schnelle Reservierungsanfrage",
-      directionsLabel: "Anfahrt",
-      directionsSub: "Karlstraße 47a · 80333 München",
-      restaurantLabel: "Restaurant",
-      restaurantSub: "ristorantestoria.de",
-    },
-    faq: {
-      eyebrow: "Häufige Fragen",
-      h2: "WM 2026 im STORIA – kurz erklärt.",
-      items: [
-        {
-          question: "Werden alle Spiele gezeigt?",
-          answer: "Ja. Wir übertragen alle Spiele der WM 2026, von der Gruppenphase bis zum Finale.",
-        },
-        {
-          question: "Muss ich reservieren?",
-          answer:
-            "Empfohlen, vor allem an Spieltagen und bei den K.-o.-Spielen. Reservieren geht über das Formular oder per WhatsApp.",
-        },
-        {
-          question: "Was passiert bei schlechtem Wetter?",
-          answer:
-            "Die Terrasse ist wirklich überdacht – nicht mit einer Markise oder einem Sonnensegel, sondern fest ins Gebäude integriert: Das Haus setzt sich über ihr fort wie ein richtiges Dach. Ein kurzer Schauer ist bei uns also kein Problem, und ist es warm, merkt man davon kaum etwas – drinnen und draußen zugleich zu sitzen, ist in München eine Seltenheit. Wird es doch zu ungemütlich, zeigen wir die Spiele drinnen.",
-        },
-        {
-          question: "Zeigt ihr auch die Deutschland-Spiele?",
-          answer:
-            "Deutschland ist im Sechzehntelfinale gegen Paraguay ausgeschieden (3:4 n. E.). Alle Gruppenspiele und das Sechzehntelfinale haben wir natürlich gezeigt – und übertragen weiterhin jedes K.-o.-Spiel bis zum Finale.",
-        },
-        {
-          question: "Was ist mit Spielen mitten in der Nacht?",
-          answer:
-            "Einige K.-o.-Spiele stoßen erst nach unserer Schließzeit an, z. B. um 2:00 oder 2:30 Uhr MESZ. Diese sind in der Spieletabelle mit dem Hinweis „Außerhalb unserer Öffnungszeiten\" markiert – die zeigen wir leider nicht live.",
-        },
-        {
-          question: "Wann ist das nächste große Fußballturnier nach der WM 2026?",
-          answer:
-            "Die UEFA Euro 2028, ausgetragen im Vereinigten Königreich und in Irland, im Sommer 2028. Weltmeisterschaft und Europameisterschaft wechseln sich im Zwei-Jahres-Rhythmus ab – wir zeigen beide live im STORIA.",
-        },
-        {
-          question: "Kann ich auch nur etwas trinken kommen?",
-          answer:
-            "Ja. Aperitivo, Wein oder ein Bier zum Spiel sind kein Problem. Plätze sind an Spieltagen gefragt, darum besser kurz reservieren.",
-        },
-        {
-          question: "Wo genau ist STORIA?",
-          answer:
-            "In der Maxvorstadt, Karlstraße 47a, 80333 München. Tram 20 und 21, Haltestelle Karlstraße, direkt vor dem Restaurant.",
-        },
-      ],
-      disclaimer:
-        "Eine Sonderseite zur Fußball-Weltmeisterschaft 2026 (11. Juni – 19. Juli). Diese Seite steht in keiner offiziellen Verbindung zur FIFA. Spielzeiten und Übertragungen ohne Gewähr.",
-    },
-    abschluss: {
-      eyebrow: "WM 2026 · Abpfiff",
-      h2: "Das war die WM 2026 im STORIA – grazie!",
-      body: "Vier Wochen Fußball auf der überdachten Terrasse, von der Eröffnung bis zum Finale – danke, dass ihr dabei wart. Es war laut, es war voll, es war ein Fest. Bis zum nächsten großen Turnier bleibt bei uns alles, was den Sommer ausmacht: Aperitivo, süditalienische Küche und ein Platz unter unserem echten Terrassendach.",
-      linksLead: "Weiter im STORIA:",
-      linkOktoberfest: "Oktoberfest im STORIA",
-      linkTerrasse: "Unsere überdachte Terrasse",
-    },
-    spieleClosed:
-      "Die WM 2026 ist vorbei – von der Eröffnung bis zum Finale liefen alle Spiele live auf unserer überdachten Terrasse. Der Spielplan ist damit abgeschlossen.",
+const VENUES: Row[] = [
+  ["Cardiff", "National Stadium of Wales"],
+  ["Dublin", "Dublin Arena"],
+  ["Glasgow", "Hampden Park"],
+  ["Newcastle", "St James' Park"],
+  ["Manchester", "Manchester City Stadium"],
+  ["Liverpool", "Everton Stadium"],
+  ["Birmingham", "Villa Park"],
+  ["London", "Tottenham Hotspur Stadium"],
+  ["London", "Wembley-Stadion"],
+];
+const venues = (london: string, wembley: string, dublin = "Dublin"): Row[] =>
+  VENUES.map(([c, s]) => [
+    c === "London" ? london : c === "Dublin" ? dublin : c,
+    s === "Wembley-Stadion" ? wembley : s,
+  ]);
+
+const de: PvContent = {
+  seo: {
+    title: "Public Viewing München – Fußball live im STORIA",
+    description:
+      "Public Viewing in der Maxvorstadt, wenige Minuten vom Königsplatz: alle Spiele der EM 2028 (9.6.–9.7.) und WM 2030 live im italienischen Restaurant.",
+    ogAlt: "Public Viewing auf der Terrasse des STORIA München",
   },
-  en: {
-    seo: {
-      title: "World Cup 2026 Public Viewing Munich – live at STORIA",
-      description:
-        "Every World Cup 2026 match live on our covered terrace in Maxvorstadt. Southern Italian food, aperitivo, indoors if the weather turns. Book a table.",
-    },
-    nav: {
-      angebot: "What's on",
-      spiele: "The biggest matches",
-      turnier: "Tournament",
-      reservieren: "Book a table",
-    },
-    hero: {
-      eyebrow: "World Cup 2026 · 11 June – 19 July · Maxvorstadt",
-      h1: {
-        pre: "World Cup 2026 public viewing in Maxvorstadt – every match at ",
-        em: "STORIA",
-        post: "",
-      },
-      sub: "Italy aren't in it in 2026, for the third time running. We're showing the World Cup anyway – from the opening match on 11 June to the final on 19 July. Every game, on the covered terrace on Karlstraße. Plus southern Italian food, a glass of wine, an aperitivo. Match days get busy, so it's best to book ahead.",
-      ctaReserve: "Book a table →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    angebot: {
-      eyebrow: "What's on here",
-      h2: "Watch the football, enjoy the Italian.",
-      items: [
-        "Every World Cup 2026 match, from the group stage to the final.",
-        "Shown on the covered terrace. If the weather turns, we carry on inside.",
-        "Not a sports bar: southern Italian cooking, our own wine list, an aperitivo at kick-off.",
-        "Booking recommended, especially on knockout evenings from the quarter-finals on.",
-      ],
-      menuPhrase: "southern Italian cooking",
-    },
-    crossFilmfest: {
-      pre: "More than football – from 26 June to 5 July we also host ",
-      anchor: "Filmfest München at the same time",
-      post: ". Premiere dinners and industry evenings under one roof.",
-    },
-    zyklus: {
-      eyebrow: "World Cup & Euro · Football's two-year rhythm",
-      h2: "Once the World Cup ends, the Euros are already on the horizon.",
-      blocks: [
-        {
-          lead: "A major tournament every two years.",
-          body: "The World Cup and the European Championship have alternated every two years since the 1960s: World Cup 2022, Euro 2024, World Cup 2026 – and the next Euro in summer 2028. For us, public viewing isn't a one-off event, it's a habit: whenever a major tournament is on, it's on at STORIA.",
-        },
-        {
-          lead: "After the World Cup: Euro 2028.",
-          body: "The next European Championship takes place in 2028 in the United Kingdom and Ireland. We'll open the terrace on Karlstraße for that too – dates and fixtures to follow once UEFA confirms them. Until then, this page stays our home for every major tournament.",
-        },
-      ],
-    },
-    spiele: {
-      eyebrow: "The biggest matches · Knockout stage",
-      h2: "From the round of 16 to the final – live with us.",
-      vs: "vs",
-      mesz: "CEST",
-      note: "All times in CEST. All fixtures are confirmed – we round off the tournament with the third-place match and the Spain v Argentina final.",
-      offen: "Opponents to be confirmed",
-      ergebnisseHead: "Already played",
-    },
-    turnier: {
-      eyebrow: "How the tournament runs",
-      h2: "From Mexico City to New Jersey.",
-      items: [
-        { phase: "Opening", zeit: "11 June · 21:00" },
-        { phase: "Group stage", zeit: "11 – 27 June" },
-        { phase: "Round of 32", zeit: "28 June – 3 July" },
-        { phase: "Round of 16", zeit: "4 – 7 July" },
-        { phase: "Quarter-finals", zeit: "9 – 11 July" },
-        { phase: "Semi-finals", zeit: "14 / 15 July" },
-        { phase: "Final", zeit: "19 July · 21:00" },
-      ],
-    },
-    reservieren: {
-      eyebrow: "Secure your spot",
-      h2: "Book a table",
-      lead: "On match days tables go fast, especially for the knockout games. Grab your spot on the terrace or inside – a quick booking is all it takes.",
-      ctaReserve: "Book a table →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    anfahrt: {
-      eyebrow: "Getting here",
-      h2: "Right in the heart of Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 Munich. Phone +49 89 51519696. Trams 20 and 21 stop on Karlstraße right outside the door.",
-      callLabel: "Call us directly",
-      callSub: "+49 89 51519696",
-      whatsappLabel: "WhatsApp",
-      whatsappSub: "Quick booking enquiry",
-      directionsLabel: "Directions",
-      directionsSub: "Karlstraße 47a · 80333 Munich",
-      restaurantLabel: "Restaurant",
-      restaurantSub: "ristorantestoria.de",
-    },
-    faq: {
-      eyebrow: "Frequently asked",
-      h2: "World Cup 2026 at STORIA – the short version.",
-      items: [
-        {
-          question: "Do you show every match?",
-          answer: "Yes. We show every match of the World Cup 2026, from the group stage to the final.",
-        },
-        {
-          question: "Do I need to book?",
-          answer:
-            "Recommended, especially on match days and for the knockout games. Book via the form or over WhatsApp.",
-        },
-        {
-          question: "What happens if the weather turns?",
-          answer:
-            "The terrace is genuinely covered — not by an awning or a sail canopy, but built right into the building: the house continues over it like a proper roof. A short rain shower is no problem at all, and on a warm evening you'll barely notice it's raining — sitting outside under a real roof is a rarity in Munich. If it does get too much, we show the matches inside.",
-        },
-        {
-          question: "Do you show Germany's matches too?",
-          answer:
-            "Germany were eliminated in the round of 32 against Paraguay (3-4 on penalties). We showed all three group games and that match, of course – and we're still showing every knockout game through to the final.",
-        },
-        {
-          question: "What about matches in the middle of the night?",
-          answer:
-            "A few knockout matches kick off after we've closed, for example at 2:00 or 2:30 am CEST. These are marked in the match schedule with an \"Outside our opening hours\" note – we're not able to show those live.",
-        },
-        {
-          question: "When's the next major tournament after the 2026 World Cup?",
-          answer:
-            "UEFA Euro 2028, held in the United Kingdom and Ireland, in summer 2028. The World Cup and the Euros alternate every two years – and we show both live at STORIA.",
-        },
-        {
-          question: "Can I just come for a drink?",
-          answer:
-            "Of course. An aperitivo, a wine or a beer with the game is no problem. Seats are in demand on match days, so it's best to book briefly.",
-        },
-        {
-          question: "Where exactly is STORIA?",
-          answer:
-            "In Maxvorstadt, Karlstraße 47a, 80333 Munich. Trams 20 and 21, Karlstraße stop, right outside the restaurant.",
-        },
-      ],
-      disclaimer:
-        "A special page for the 2026 FIFA World Cup (11 June – 19 July). This page has no official connection to FIFA. Kick-off times and broadcasts subject to change.",
-    },
-    abschluss: {
-      eyebrow: "World Cup 2026 · Final whistle",
-      h2: "That was the World Cup 2026 at STORIA – grazie!",
-      body: "Four weeks of football on the covered terrace, from the opening match to the final – thank you for being part of it. It was loud, it was busy, it was a joy. Until the next big tournament, everything that makes summer here stays: aperitivo, southern Italian food and a seat under our real terrace roof.",
-      linksLead: "More at STORIA:",
-      linkOktoberfest: "Oktoberfest at STORIA",
-      linkTerrasse: "Our covered terrace",
-    },
-    spieleClosed:
-      "The World Cup 2026 is over – from the opening match to the final, every game was live on our covered terrace. The fixture list is now closed.",
+  breadcrumb: "Public Viewing München",
+  hero: {
+    eyebrow: "EM 2028 · 9. Juni – 9. Juli · Maxvorstadt",
+    h1Pre: "Public Viewing in München – EM 2028 und WM 2030 im ",
+    h1Em: "STORIA",
+    intro:
+      "Das STORIA ist ein italienisches Restaurant in der Karlstraße 47a in der Maxvorstadt, wenige Gehminuten vom Königsplatz. Wir zeigen alle Spiele der EM 2028 und der WM 2030 live, im Restaurant und im Sommer auf der Terrasse. Dazu Pizza, Pasta und Aperitivo. An Spieltagen wird es voll, reservieren Sie also besser vorher.",
+    ctaReserve: "Tisch reservieren →",
+    ctaWhatsapp: "WhatsApp",
   },
-  it: {
-    seo: {
-      title: "Mondiali 2026 in diretta a Monaco di Baviera | STORIA",
-      description:
-        "Tutte le partite dei Mondiali 2026 in diretta sulla terrazza coperta in Maxvorstadt. Cucina del Sud Italia, aperitivo, al chiuso se piove. Prenota un tavolo.",
-    },
-    nav: {
-      angebot: "Cosa c'è",
-      spiele: "Le partite più grandi",
-      turnier: "Torneo",
-      reservieren: "Prenota un tavolo",
-    },
-    hero: {
-      eyebrow: "Mondiali 2026 · 11 giugno – 19 luglio · Maxvorstadt",
-      h1: {
-        pre: "Mondiali 2026 in diretta in Maxvorstadt – tutte le partite allo ",
-        em: "STORIA",
-        post: "",
-      },
-      sub: "L'Italia non c'è nel 2026, per la terza volta di fila. Da noi i Mondiali si vedono lo stesso – dalla partita inaugurale dell'11 giugno fino alla finale del 19 luglio. Tutte le partite, sulla terrazza coperta in Karlstraße. E poi cucina del Sud Italia, un bicchiere di vino, un aperitivo. Nei giorni di partita si riempie, quindi meglio prenotare prima.",
-      ctaReserve: "Prenota un tavolo →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    angebot: {
-      eyebrow: "Cosa offriamo",
-      h2: "Guardare il calcio, gustare l'Italia.",
-      items: [
-        "Tutte le partite dei Mondiali 2026, dalla fase a gironi alla finale.",
-        "Trasmissione sulla terrazza coperta. Se il tempo peggiora, continuiamo al chiuso.",
-        "Non un pub sportivo: cucina del Sud Italia, carta dei vini nostra, aperitivo al fischio d'inizio.",
-        "Prenotazione consigliata, soprattutto nelle serate a eliminazione diretta dai quarti in poi.",
-      ],
-      menuPhrase: "cucina del Sud Italia",
-    },
-    crossFilmfest: {
-      pre: "Più del calcio – dal 26 giugno al 5 luglio da noi c'è anche il ",
-      anchor: "Filmfest München in contemporanea",
-      post: ". Cene di premiere e serate di settore nella stessa casa.",
-    },
-    zyklus: {
-      eyebrow: "Mondiali & Europei · Il ritmo del calcio",
-      h2: "Finiti i Mondiali, si guarda già agli Europei.",
-      blocks: [
-        {
-          lead: "Un grande torneo ogni due anni.",
-          body: "Dagli anni '60, Mondiali ed Europei si alternano ogni due anni: Mondiali 2022, Europei 2024, Mondiali 2026 – e i prossimi Europei nell'estate 2028. Per noi il public viewing non è un evento isolato, ma un'abitudine: quando c'è un grande torneo, si vede allo STORIA.",
-        },
-        {
-          lead: "Dopo i Mondiali: Euro 2028.",
-          body: "I prossimi Campionati Europei si giocheranno nel 2028 nel Regno Unito e in Irlanda. Anche per quell'occasione riapriremo la terrazza in Karlstraße – date e calendario appena la UEFA li renderà noti. Fino ad allora, questa pagina resta il nostro punto di riferimento per ogni grande torneo.",
-        },
-      ],
-    },
-    spiele: {
-      eyebrow: "Le partite più grandi · Fase a eliminazione",
-      h2: "Dagli ottavi alla finale – in diretta da noi.",
-      vs: "contro",
-      mesz: "ora di Roma",
-      note: "Tutti gli orari sono ora di Roma. Tutti gli accoppiamenti sono definiti – per chiudere trasmettiamo la finale per il 3º posto e la finale Spagna-Argentina.",
-      offen: "Avversari da definire",
-      ergebnisseHead: "Già giocate",
-    },
-    turnier: {
-      eyebrow: "Come si svolge il torneo",
-      h2: "Da Città del Messico al New Jersey.",
-      items: [
-        { phase: "Inaugurazione", zeit: "11 giugno · 21:00" },
-        { phase: "Fase a gironi", zeit: "11 – 27 giugno" },
-        { phase: "Sedicesimi", zeit: "28 giugno – 3 luglio" },
-        { phase: "Ottavi", zeit: "4 – 7 luglio" },
-        { phase: "Quarti", zeit: "9 – 11 luglio" },
-        { phase: "Semifinali", zeit: "14 / 15 luglio" },
-        { phase: "Finale", zeit: "19 luglio · 21:00" },
-      ],
-    },
-    reservieren: {
-      eyebrow: "Assicurati il posto",
-      h2: "Prenota",
-      lead: "Nei giorni di partita i tavoli si esauriscono in fretta, ancora di più per le gare a eliminazione diretta. Assicurati il tuo posto in terrazza o al chiuso – basta una breve prenotazione.",
-      ctaReserve: "Prenota un tavolo →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    anfahrt: {
-      eyebrow: "Come arrivare",
-      h2: "Nel cuore di Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 Monaco di Baviera. Telefono +49 89 51519696. I tram 20 e 21 fermano in Karlstraße proprio davanti all'ingresso.",
-      callLabel: "Chiama subito",
-      callSub: "+49 89 51519696",
-      whatsappLabel: "WhatsApp",
-      whatsappSub: "Richiesta rapida di prenotazione",
-      directionsLabel: "Come arrivare",
-      directionsSub: "Karlstraße 47a · 80333 Monaco di Baviera",
-      restaurantLabel: "Ristorante",
-      restaurantSub: "ristorantestoria.de",
-    },
-    faq: {
-      eyebrow: "Domande frequenti",
-      h2: "Mondiali 2026 allo STORIA – in breve.",
-      items: [
-        {
-          question: "Trasmettete tutte le partite?",
-          answer: "Sì. Trasmettiamo tutte le partite dei Mondiali 2026, dalla fase a gironi alla finale.",
-        },
-        {
-          question: "Devo prenotare?",
-          answer:
-            "Consigliato, soprattutto nei giorni di partita e per le gare a eliminazione diretta. Si prenota dal modulo o via WhatsApp.",
-        },
-        {
-          question: "Cosa succede se il tempo peggiora?",
-          answer:
-            "La terrazza è davvero coperta – non con una tenda o un telo parasole, ma integrata nell'edificio stesso: la casa si prolunga sopra di essa come un vero tetto. Un breve acquazzone non è un problema, e se fa caldo non ve ne accorgerete quasi. Sedersi all'aperto sotto un tetto vero è una rarità a Monaco di Baviera. Se il tempo peggiora comunque, mostriamo le partite al chiuso.",
-        },
-        {
-          question: "Mostrate anche le partite della Germania?",
-          answer:
-            "La Germania è stata eliminata nei sedicesimi contro il Paraguay (3-4 ai rigori). Abbiamo trasmesso tutte e tre le gare del girone e anche quella partita – e continuiamo a trasmettere ogni partita a eliminazione diretta fino alla finale.",
-        },
-        {
-          question: "E le partite nel cuore della notte?",
-          answer:
-            "Alcune partite a eliminazione diretta iniziano dopo la nostra chiusura, ad esempio alle 2:00 o alle 2:30 (ora di Roma). Nel calendario sono contrassegnate con l'indicazione \"Fuori dai nostri orari di apertura\" – purtroppo non possiamo trasmetterle dal vivo.",
-        },
-        {
-          question: "Quando si gioca il prossimo grande torneo dopo i Mondiali 2026?",
-          answer:
-            "Gli Europei UEFA 2028, che si disputeranno nel Regno Unito e in Irlanda nell'estate 2028. Mondiali ed Europei si alternano ogni due anni – e li trasmettiamo entrambi dal vivo allo STORIA.",
-        },
-        {
-          question: "Posso venire solo per bere qualcosa?",
-          answer:
-            "Certo. Un aperitivo, un vino o una birra durante la partita non sono un problema. Nei giorni di partita i posti vanno a ruba, quindi meglio prenotare un attimo.",
-        },
-        {
-          question: "Dove si trova esattamente lo STORIA?",
-          answer:
-            "In Maxvorstadt, Karlstraße 47a, 80333 Monaco di Baviera. Tram 20 e 21, fermata Karlstraße, proprio davanti al ristorante.",
-        },
-      ],
-      disclaimer:
-        "Una pagina speciale dedicata ai Mondiali di calcio 2026 (11 giugno – 19 luglio). Questa pagina non ha alcun legame ufficiale con la FIFA. Orari delle partite e trasmissioni salvo modifiche.",
-    },
-    abschluss: {
-      eyebrow: "Mondiali 2026 · Fischio finale",
-      h2: "Questi erano i Mondiali 2026 allo STORIA – grazie!",
-      body: "Quattro settimane di calcio sulla terrazza coperta, dalla partita inaugurale alla finale – grazie di esserci stati. È stato rumoroso, pieno, una festa. Fino al prossimo grande torneo resta tutto ciò che rende l'estate da noi: aperitivo, cucina del Sud Italia e un posto sotto il nostro vero tetto in terrazza.",
-      linksLead: "Continua allo STORIA:",
-      linkOktoberfest: "Oktoberfest allo STORIA",
-      linkTerrasse: "La nostra terrazza coperta",
-    },
-    spieleClosed:
-      "I Mondiali 2026 sono finiti – dalla partita inaugurale alla finale, tutte le gare sono andate in diretta sulla nostra terrazza coperta. Il calendario è così concluso.",
+  toc: {
+    label: "Auf dieser Seite",
+    items: [
+      ["wm-2026", "WM 2026"],
+      ["fussball-2027", "2027"],
+      ["em-2028", "EM 2028"],
+      ["wm-2030", "WM 2030"],
+      ["reservieren", "Reservieren"],
+      ["anfahrt", "Anfahrt"],
+      ["fragen", "Fragen"],
+    ],
   },
-  fr: {
-    seo: {
-      title: "Coupe du monde 2026 en direct à Munich | STORIA",
-      description:
-        "Tous les matchs de la Coupe du monde 2026 en direct sur la terrasse couverte à Maxvorstadt. Cuisine du sud de l'Italie, apéritif, à l'intérieur s'il pleut.",
-    },
-    nav: {
-      angebot: "Au programme",
-      spiele: "Les plus grands matchs",
-      turnier: "Tournoi",
-      reservieren: "Réserver une table",
-    },
-    hero: {
-      eyebrow: "Coupe du monde 2026 · 11 juin – 19 juillet · Maxvorstadt",
-      h1: {
-        pre: "Coupe du monde 2026 en direct à Maxvorstadt – tous les matchs au ",
-        em: "STORIA",
-        post: "",
-      },
-      sub: "L'Italie n'y est pas en 2026, pour la troisième fois d'affilée. Chez nous, la Coupe du monde passe quand même – du match d'ouverture le 11 juin jusqu'à la finale le 19 juillet. Tous les matchs, sur la terrasse couverte de la Karlstraße. Avec une cuisine du sud de l'Italie, un verre de vin, un apéritif. Les jours de match, c'est plein, alors mieux vaut réserver avant.",
-      ctaReserve: "Réserver une table →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    angebot: {
-      eyebrow: "Ce qu'on propose",
-      h2: "Regarder le foot, savourer l'Italie.",
-      items: [
-        "Tous les matchs de la Coupe du monde 2026, de la phase de groupes à la finale.",
-        "Diffusion sur la terrasse couverte. Si le temps se gâte, on continue à l'intérieur.",
-        "Pas un bar à sport : cuisine du sud de l'Italie, notre propre carte des vins, un apéritif au coup d'envoi.",
-        "Réservation conseillée, surtout les soirs de matchs à élimination directe à partir des quarts.",
-      ],
-      menuPhrase: "cuisine du sud de l'Italie",
-    },
-    crossFilmfest: {
-      pre: "Plus que le football – du 26 juin au 5 juillet, c'est aussi le ",
-      anchor: "Filmfest München en parallèle",
-      post: ". Dîners de première et soirées de l'industrie sous le même toit.",
-    },
-    zyklus: {
-      eyebrow: "Coupe du monde & Euro · Le rythme du football",
-      h2: "La Coupe du monde à peine finie, l'Euro pointe déjà.",
-      blocks: [
-        {
-          lead: "Un grand tournoi tous les deux ans.",
-          body: "Depuis les années 1960, la Coupe du monde et l'Euro s'alternent tous les deux ans : Coupe du monde 2022, Euro 2024, Coupe du monde 2026 – puis le prochain Euro à l'été 2028. Chez nous, le public viewing n'est pas un événement isolé mais une habitude : dès qu'un grand tournoi a lieu, on le voit au STORIA.",
-        },
-        {
-          lead: "Après la Coupe du monde : l'Euro 2028.",
-          body: "Le prochain Championnat d'Europe se déroulera en 2028 au Royaume-Uni et en Irlande. Nous rouvrirons la terrasse de la Karlstraße pour l'occasion aussi – dates et calendrier suivront dès que l'UEFA les publiera. D'ici là, cette page reste notre adresse pour chaque grand tournoi.",
-        },
-      ],
-    },
-    spiele: {
-      eyebrow: "Les plus grands matchs · Phase à élimination",
-      h2: "Des huitièmes à la finale – en direct chez nous.",
-      vs: "contre",
-      mesz: "heure de Paris",
-      note: "Tous les horaires à l'heure de Paris. Toutes les affiches sont connues – pour finir, nous diffusons le match pour la 3e place et la finale Espagne-Argentine.",
-      offen: "Adversaires à définir",
-      ergebnisseHead: "Déjà joués",
-    },
-    turnier: {
-      eyebrow: "Comment se déroule le tournoi",
-      h2: "De Mexico au New Jersey.",
-      items: [
-        { phase: "Ouverture", zeit: "11 juin · 21:00" },
-        { phase: "Phase de groupes", zeit: "11 – 27 juin" },
-        { phase: "Seizièmes", zeit: "28 juin – 3 juillet" },
-        { phase: "Huitièmes", zeit: "4 – 7 juillet" },
-        { phase: "Quarts", zeit: "9 – 11 juillet" },
-        { phase: "Demi-finales", zeit: "14 / 15 juillet" },
-        { phase: "Finale", zeit: "19 juillet · 21:00" },
-      ],
-    },
-    reservieren: {
-      eyebrow: "Réservez votre place",
-      h2: "Réserver",
-      lead: "Les jours de match, les tables partent vite, surtout pour les matchs à élimination directe. Réservez votre place sur la terrasse ou à l'intérieur – une courte réservation suffit.",
-      ctaReserve: "Réserver une table →",
-      ctaWhatsapp: "WhatsApp",
-    },
-    anfahrt: {
-      eyebrow: "Accès",
-      h2: "En plein cœur de Maxvorstadt.",
-      lead: "STORIA, Karlstraße 47a, 80333 Munich. Téléphone +49 89 51519696. Les trams 20 et 21 s'arrêtent sur la Karlstraße, juste devant la porte.",
-      callLabel: "Appeler directement",
-      callSub: "+49 89 51519696",
-      whatsappLabel: "WhatsApp",
-      whatsappSub: "Demande de réservation rapide",
-      directionsLabel: "Accès",
-      directionsSub: "Karlstraße 47a · 80333 Munich",
-      restaurantLabel: "Restaurant",
-      restaurantSub: "ristorantestoria.de",
-    },
-    faq: {
-      eyebrow: "Questions fréquentes",
-      h2: "Coupe du monde 2026 au STORIA – en bref.",
-      items: [
-        {
-          question: "Diffusez-vous tous les matchs ?",
-          answer: "Oui. Nous diffusons tous les matchs de la Coupe du monde 2026, de la phase de groupes à la finale.",
-        },
-        {
-          question: "Dois-je réserver ?",
-          answer:
-            "Conseillé, surtout les jours de match et pour les matchs à élimination directe. La réservation se fait via le formulaire ou par WhatsApp.",
-        },
-        {
-          question: "Que se passe-t-il s'il pleut ?",
-          answer:
-            "La terrasse est vraiment couverte – pas par un store ou une voile d'ombrage, mais intégrée directement au bâtiment : la maison se prolonge au-dessus comme un vrai toit. Une petite averse n'est donc pas un problème, et s'il fait chaud, on ne s'en aperçoit presque pas – s'asseoir dehors sous un vrai toit est une rareté à Munich. Si le temps devient vraiment désagréable, nous diffusons les matchs à l'intérieur.",
-        },
-        {
-          question: "Diffusez-vous aussi les matchs de l'Allemagne ?",
-          answer:
-            "L'Allemagne a été éliminée en seizièmes de finale contre le Paraguay (3-4 aux tirs au but). Nous avons bien sûr diffusé les trois matchs de groupe et ce match-là – et nous continuons à diffuser chaque match à élimination directe jusqu'à la finale.",
-        },
-        {
-          question: "Et les matchs en pleine nuit ?",
-          answer:
-            "Certains matchs à élimination directe débutent après notre fermeture, par exemple à 2h00 ou 2h30 (heure de Paris). Ils sont signalés dans le calendrier par la mention « En dehors de nos heures d'ouverture » – nous ne pouvons malheureusement pas les diffuser en direct.",
-        },
-        {
-          question: "Quel est le prochain grand tournoi après la Coupe du monde 2026 ?",
-          answer:
-            "L'Euro UEFA 2028, organisé au Royaume-Uni et en Irlande, à l'été 2028. La Coupe du monde et l'Euro s'alternent tous les deux ans – nous diffusons les deux en direct au STORIA.",
-        },
-        {
-          question: "Puis-je venir juste pour boire un verre ?",
-          answer:
-            "Bien sûr. Un apéritif, un vin ou une bière pendant le match, pas de souci. Les places sont prisées les jours de match, alors mieux vaut réserver un instant.",
-        },
-        {
-          question: "Où se trouve exactement le STORIA ?",
-          answer:
-            "À Maxvorstadt, Karlstraße 47a, 80333 Munich. Trams 20 et 21, arrêt Karlstraße, juste devant le restaurant.",
-        },
-      ],
-      disclaimer:
-        "Une page spéciale consacrée à la Coupe du monde de football 2026 (11 juin – 19 juillet). Cette page n'a aucun lien officiel avec la FIFA. Horaires des matchs et diffusions sous réserve de modifications.",
-    },
-    abschluss: {
-      eyebrow: "Coupe du monde 2026 · Coup de sifflet final",
-      h2: "C'était la Coupe du monde 2026 au STORIA – grazie !",
-      body: "Quatre semaines de football sur la terrasse couverte, du match d'ouverture à la finale – merci d'avoir été là. C'était bruyant, c'était plein, c'était une fête. Jusqu'au prochain grand tournoi, tout ce qui fait l'été chez nous reste : apéritif, cuisine du sud de l'Italie et une place sous notre vrai toit de terrasse.",
-      linksLead: "À suivre au STORIA :",
-      linkOktoberfest: "Oktoberfest au STORIA",
-      linkTerrasse: "Notre terrasse couverte",
-    },
-    spieleClosed:
-      "La Coupe du monde 2026 est terminée – du match d'ouverture à la finale, tous les matchs ont été diffusés en direct sur notre terrasse couverte. Le calendrier est désormais clos.",
+  heroAlt: "Gäste auf der überdachten Terrasse des STORIA in der Karlstraße beim Public Viewing",
+  wm2026: {
+    kicker: "Rückblick",
+    h2: "So war die WM 2026 im STORIA",
+    body:
+      "Die Fußball-Weltmeisterschaft 2026 in den USA, Kanada und Mexiko war die erste mit 48 Mannschaften. Wegen der Zeitverschiebung liefen viele Spiele am späten Abend oder in der Nacht. Im STORIA liefen bei der WM 2026 alle Spiele live, vom Eröffnungsspiel bis zum Finale.",
+    figcaption: "WM 2026 im STORIA: Übertragung im Restaurant.",
+    h3: "Das Finale: Spanien wird Weltmeister",
+    results: [
+      ["Spanien – Argentinien 1:0 n. V.", "Finale am 19. Juli 2026. Ferran Torres traf in der 106. Minute, Spanien gewann seinen zweiten WM-Titel."],
+      ["Deutschland – Paraguay 1:1 n. V., 3:4 i. E.", "Für die deutsche Mannschaft endete das Turnier am 29. Juni 2026 im Sechzehntelfinale."],
+    ],
+    grazie: "Grazie a tutti, die mit uns gefiebert haben.",
+  },
+  y2027: {
+    kicker: "Ausblick",
+    h2: "2027: Fußball schauen in München ohne großes Turnier",
+    body:
+      "2027 gibt es keine Welt- oder Europameisterschaft der Männer. Langweilig wird es trotzdem nicht. Im STORIA zeigen wir auch zwischen den Turnieren Fußball, zum Beispiel Champions League, DFB-Pokal und Länderspiele.",
+    facts: [
+      ["Champions League", "Finale am Samstag, 5. Juni 2027, im Estadio Metropolitano in Madrid"],
+      ["Nations League", "Finalrunde vom 9. bis 13. Juni 2027, Gastgeber noch offen"],
+      ["Weg zur EM 2028", "Die Auslosung der Qualifikation ist am 6. Dezember 2026 in Belfast"],
+    ],
+    src: "Quellen: UEFA (Champions-League-Finale 2027, EM-Qualifikation), Wikipedia (Nations League Finals 2027).",
+  },
+  em2028: {
+    kicker: "Nächstes Turnier",
+    h2: "EM 2028 Public Viewing in München",
+    cd: { label: "EM 2028:", range: "9. Juni bis 9. Juli 2028", daysLeft: "noch {n} Tage", running: "läuft" },
+    body:
+      "Die Fußball-Europameisterschaft 2028 findet in England, Schottland, Wales und Irland statt. 24 Mannschaften bestreiten 51 Spiele. Im STORIA zeigen wir alle 51 Spiele live.",
+    h3Hosts: "Die Gastgeberländer",
+    hosts: [
+      ["England", "London, Manchester, Liverpool, Birmingham, Newcastle"],
+      ["Schottland", "Glasgow"],
+      ["Wales", "Cardiff, Eröffnungsspiel"],
+      ["Irland", "Dublin"],
+    ],
+    h3Dates: "Die Termine",
+    dates: [
+      ["Turnierzeitraum", "9. Juni bis 9. Juli 2028"],
+      ["Eröffnungsspiel", "Cardiff, National Stadium of Wales"],
+      ["Halbfinals", "4. und 5. Juli 2028, Wembley-Stadion, London"],
+      ["Finale", "Sonntag, 9. Juli 2028, Wembley-Stadion, London"],
+    ],
+    h3Venues: "Die neun Stadien",
+    venues: VENUES,
+    src: "Quelle: UEFA. Der Spielplan mit Anstoßzeiten folgt nach der Auslosung; dann ergänzen wir ihn hier.",
+    ctaText: "Sobald die Vorreservierung öffnet, sagen wir Bescheid.",
+    ctaButton: "Newsletter eintragen",
+  },
+  wm2030: {
+    kicker: "Ausblick",
+    h2: "WM 2030 in München schauen: 100 Jahre Weltmeisterschaft",
+    body:
+      "Die Fußball-Weltmeisterschaft 2030 wird in Spanien, Portugal und Marokko ausgetragen. Zum 100-jährigen Jubiläum der ersten WM 1930 in Uruguay gibt es zum Auftakt je ein Spiel in Uruguay, Argentinien und Paraguay. Gespielt wird im Juni und Juli 2030. Im STORIA zeigen wir alle Spiele der WM 2030 live.",
+    hosts: [
+      ["Spanien", "u. a. Madrid, Barcelona, Sevilla, Bilbao, Málaga"],
+      ["Portugal", "Lissabon, Porto"],
+      ["Marokko", "u. a. Casablanca, Rabat, Marrakesch, Tanger"],
+      ["Südamerika", "Jubiläumsspiele in Uruguay, Argentinien, Paraguay"],
+    ],
+    src: "Quellen: FIFA, Wikipedia „2030 FIFA World Cup“. Die Stadionliste ist vorläufig; die endgültigen Spielorte nennen wir, sobald die FIFA sie bestätigt.",
+  },
+  restaurant: {
+    h2: "Fußball schauen im italienischen Restaurant",
+    body: `Im STORIA gibt es zum Spiel echte italienische Küche: Pizza, Pasta und Aperitivo. Die Spiele laufen im Restaurant und im Sommer auf der Terrasse (bis ${AUSSEN} Personen außen). Die Terrasse ist fest überdacht; wird es zu ungemütlich, zeigen wir drinnen weiter.`,
+    h3Reserve: "Tisch reservieren",
+    reserveHint:
+      "Die Reservierung für die EM-Spiele öffnet mit dem Spielplan. Einen Tisch für jeden anderen Abend können Sie jetzt schon anfragen.",
+    h3Groups: "Für Gruppen und Firmen",
+    groups: `Im Restaurant bis ${STAND} stehend / ${SITZ} sitzend, im Sommer auf der Terrasse bis ${AUSSEN} Personen außen.`,
+    groupsLink: "Gruppenanfrage über events-storia.de",
+  },
+  newsletter: {
+    h2: "Rechtzeitig Bescheid bekommen",
+    body: "Wir melden uns, sobald die Vorreservierung für die EM 2028 öffnet. Kein Spam, nur dieser eine Anlass.",
+  },
+  anfahrt: {
+    h2: "Anfahrt: Maxvorstadt, nahe Königsplatz",
+    body:
+      "Das STORIA liegt in der Karlstraße 47a, 80333 München. Die Tramhaltestelle Karlstraße (Linien 20 und 21) ist direkt vor der Tür, eine Station vom Münchner Hauptbahnhof. Zum Königsplatz sind es wenige Gehminuten.",
+    hbfPre: "Auch praktisch, wenn Sie mit dem Zug kommen: ",
+    hbfAnchor: "Italiener nahe Hauptbahnhof",
+    hbfPost: ".",
+  },
+  kurz: {
+    h2: "Das Wichtigste in Kürze",
+    items: [
+      "Das STORIA ist ein italienisches Restaurant in der Karlstraße 47a, 80333 München (Maxvorstadt), wenige Gehminuten vom Königsplatz.",
+      "Das STORIA zeigt alle Spiele der EM 2028 und der WM 2030 live.",
+      "Bei der WM 2026 liefen im STORIA alle Spiele.",
+      "Die EM 2028 findet vom 9. Juni bis 9. Juli 2028 in England, Schottland, Wales und Irland statt; das Finale ist im Wembley-Stadion.",
+      "Die WM 2030 findet im Juni und Juli 2030 in Spanien, Portugal und Marokko statt, mit Jubiläumsspielen in Uruguay, Argentinien und Paraguay.",
+      `Das STORIA zeigt die Spiele im Restaurant und im Sommer auf der überdachten Terrasse (bis ${AUSSEN} Personen außen).`,
+      `Für Gruppen bietet das STORIA im Restaurant Platz für bis zu ${STAND} Gäste stehend oder ${SITZ} sitzend.`,
+    ],
+  },
+  faq: {
+    h2: "Häufige Fragen zum Public Viewing in München",
+    items: [
+      { question: "Wo kann man in München Public Viewing schauen?", answer: "Zum Beispiel im STORIA in der Maxvorstadt, wenige Gehminuten vom Königsplatz. Das italienische Restaurant zeigt alle Spiele der EM 2028 und der WM 2030." },
+      { question: "Wann ist die EM 2028?", answer: "Vom 9. Juni bis 9. Juli 2028. Das Eröffnungsspiel ist in Cardiff, das Finale im Wembley-Stadion in London." },
+      { question: "Wo findet die EM 2028 statt?", answer: "In England, Schottland, Wales und Irland, in neun Stadien in Cardiff, Dublin, Glasgow, Newcastle, Manchester, Liverpool, Birmingham und London." },
+      { question: "Zeigt das STORIA alle Spiele der EM 2028?", answer: "Ja, alle 51 Spiele laufen live." },
+      { question: "Wann und wo ist die WM 2030?", answer: "Im Juni und Juli 2030 in Spanien, Portugal und Marokko. Die ersten Spiele finden zum 100-jährigen WM-Jubiläum in Uruguay, Argentinien und Paraguay statt." },
+      { question: "Zeigt das STORIA die WM 2030?", answer: "Ja, alle Spiele der WM 2030 laufen live." },
+      { question: "Wer wurde Weltmeister 2026?", answer: "Spanien, mit 1:0 nach Verlängerung gegen Argentinien im Finale am 19. Juli 2026." },
+      { question: "Wo ist das Champions-League-Finale 2027?", answer: "Am 5. Juni 2027 im Estadio Metropolitano in Madrid." },
+      { question: "Kann man für Public Viewing reservieren? Ab wann?", answer: "Die Vorreservierung öffnet voraussichtlich mit dem EM-Spielplan. Wer sich in den Newsletter einträgt, erfährt es zuerst." },
+      { question: "Wie viele Gäste passen hinein, auch für Gruppen?", answer: `Im Restaurant bis ${STAND} stehend / ${SITZ} sitzend, im Sommer auf der Terrasse bis ${AUSSEN} Personen außen. Gruppenanfragen laufen über events-storia.de.` },
+      { question: "Was passiert bei schlechtem Wetter?", answer: "Die Terrasse ist fest überdacht: Das Haus setzt sich über ihr fort wie ein richtiges Dach. Ein kurzer Schauer ist also kein Problem. Wird es doch zu ungemütlich, zeigen wir die Spiele drinnen." },
+      { question: "Wie kommt man hin?", answer: "Mit der Tram 20 oder 21 bis Karlstraße, eine Station vom Hauptbahnhof." },
+      { question: "Kostet das Public Viewing Eintritt?", answer: "Kein Eintritt." },
+    ],
+    disclaimer:
+      "Das STORIA steht in keiner Verbindung zu UEFA oder FIFA. „EM 2028“ und „WM 2030“ dienen nur der Beschreibung der übertragenen Turniere.",
   },
 };
+
+const en: PvContent = {
+  seo: {
+    title: "Public Viewing Munich – Live Football at STORIA",
+    description:
+      "Public viewing in Munich's Maxvorstadt near Königsplatz: every EURO 2028 (9 June–9 July) and 2030 World Cup match live. England, Scotland, Wales & Ireland fans welcome.",
+    ogAlt: "Public viewing on the terrace at STORIA Munich",
+  },
+  breadcrumb: "Public Viewing Munich",
+  hero: {
+    eyebrow: "EURO 2028 · 9 June – 9 July · Maxvorstadt",
+    h1Pre: "Public Viewing in Munich – EURO 2028 and the 2030 World Cup at ",
+    h1Em: "STORIA",
+    intro:
+      "STORIA is an Italian restaurant at Karlstraße 47a in Munich's Maxvorstadt, a few minutes' walk from Königsplatz. We show every match of EURO 2028 and the 2030 World Cup live, inside and in summer on the terrace. With pizza, pasta and aperitivo. Match days get busy, so it's best to book ahead.",
+    ctaReserve: "Book a table →",
+    ctaWhatsapp: "WhatsApp",
+  },
+  toc: {
+    label: "On this page",
+    items: [
+      ["wm-2026", "World Cup 2026"],
+      ["fussball-2027", "2027"],
+      ["em-2028", "EURO 2028"],
+      ["wm-2030", "World Cup 2030"],
+      ["reservieren", "Book"],
+      ["anfahrt", "Getting here"],
+      ["fragen", "FAQ"],
+    ],
+  },
+  heroAlt: "Guests on the covered terrace at STORIA on Karlstraße during public viewing",
+  wm2026: {
+    kicker: "Looking back",
+    h2: "The 2026 World Cup at STORIA",
+    body:
+      "The 2026 World Cup in the USA, Canada and Mexico was the first with 48 teams. Because of the time difference, many matches kicked off late in the evening or at night. At STORIA we showed every match of the 2026 World Cup live, from the opening game to the final.",
+    figcaption: "World Cup 2026 at STORIA: the broadcast inside the restaurant.",
+    h3: "The final: Spain are world champions",
+    results: [
+      ["Spain – Argentina 1–0 a.e.t.", "Final on 19 July 2026. Ferran Torres scored in the 106th minute and Spain won their second World Cup."],
+      ["Germany – Paraguay 1–1 a.e.t., 3–4 on penalties", "Germany went out in the round of 32 on 29 June 2026."],
+    ],
+    grazie: "Grazie a tutti – thanks to everyone who cheered with us.",
+  },
+  y2027: {
+    kicker: "Looking ahead",
+    h2: "2027: watching football in Munich without a major tournament",
+    body:
+      "There is no men's World Cup or European Championship in 2027. It won't be boring, though. Between tournaments STORIA shows football too, such as the Champions League, the DFB-Pokal and international matches.",
+    facts: [
+      ["Champions League", "Final on Saturday 5 June 2027 at the Estadio Metropolitano in Madrid"],
+      ["Nations League", "Finals from 9 to 13 June 2027, host still to be confirmed"],
+      ["Road to EURO 2028", "The qualifying draw takes place on 6 December 2026 in Belfast"],
+    ],
+    src: "Sources: UEFA (2027 Champions League final, EURO qualifying), Wikipedia (2027 Nations League Finals).",
+  },
+  em2028: {
+    kicker: "Next tournament",
+    h2: "EURO 2028 public viewing in Munich",
+    cd: { label: "EURO 2028:", range: "9 June to 9 July 2028", daysLeft: "{n} days to go", running: "under way" },
+    body:
+      "UEFA EURO 2028 takes place in England, Scotland, Wales and Ireland. 24 teams play 51 matches. At STORIA we show all 51 matches live.",
+    fans: {
+      title: "EURO 2028 in Munich: England, Scotland, Wales and Ireland fans welcome.",
+      text: "Every EURO 2028 match live at STORIA, an Italian restaurant in Munich's Maxvorstadt near Königsplatz. Inside, and in summer on our covered terrace. Pizza, pasta and aperitivo, no entry fee.",
+    },
+    h3Hosts: "The host nations",
+    hosts: [
+      ["England", "London, Manchester, Liverpool, Birmingham, Newcastle"],
+      ["Scotland", "Glasgow"],
+      ["Wales", "Cardiff, opening match"],
+      ["Ireland", "Dublin"],
+    ],
+    h3Dates: "Key dates",
+    dates: [
+      ["Tournament", "9 June to 9 July 2028"],
+      ["Opening match", "Cardiff, National Stadium of Wales"],
+      ["Semi-finals", "4 and 5 July 2028, Wembley Stadium, London"],
+      ["Final", "Sunday 9 July 2028, Wembley Stadium, London"],
+    ],
+    h3Venues: "The nine stadiums",
+    venues: venues("London", "Wembley Stadium"),
+    src: "Source: UEFA. The match schedule with kick-off times follows the draw; we'll add it here then.",
+    ctaText: "We'll let you know as soon as advance booking opens.",
+    ctaButton: "Join the newsletter",
+  },
+  wm2030: {
+    kicker: "Looking ahead",
+    h2: "Watch the 2030 World Cup in Munich: 100 years of the World Cup",
+    body:
+      "The 2030 World Cup will be held in Spain, Portugal and Morocco. To mark 100 years since the first World Cup in Uruguay in 1930, the tournament opens with one match each in Uruguay, Argentina and Paraguay. It is played in June and July 2030. At STORIA we show every match of the 2030 World Cup live.",
+    hosts: [
+      ["Spain", "incl. Madrid, Barcelona, Seville, Bilbao, Málaga"],
+      ["Portugal", "Lisbon, Porto"],
+      ["Morocco", "incl. Casablanca, Rabat, Marrakesh, Tangier"],
+      ["South America", "Centenary matches in Uruguay, Argentina, Paraguay"],
+    ],
+    src: "Sources: FIFA, Wikipedia “2030 FIFA World Cup”. The stadium list is provisional; we'll name the final venues once FIFA confirms them.",
+  },
+  restaurant: {
+    h2: "Watching football in an Italian restaurant",
+    body: `At STORIA the match comes with real Italian food: pizza, pasta and aperitivo. Matches are shown inside and in summer on the terrace (up to ${AUSSEN} people outside). The terrace is permanently covered; if it gets too uncomfortable, we carry on inside.`,
+    h3Reserve: "Book a table",
+    reserveHint: "Booking for the EURO matches opens with the match schedule. You can already request a table for any other evening.",
+    h3Groups: "For groups and companies",
+    groups: `Inside up to ${STAND} standing / ${SITZ} seated, in summer on the terrace up to ${AUSSEN} people outside.`,
+    groupsLink: "Group enquiry via events-storia.de",
+  },
+  newsletter: {
+    h2: "Be the first to know",
+    body: "We'll get in touch as soon as advance booking for EURO 2028 opens. No spam, just this one occasion.",
+  },
+  anfahrt: {
+    h2: "Getting here: Maxvorstadt, near Königsplatz",
+    body:
+      "STORIA is at Karlstraße 47a, 80333 Munich. The Karlstraße tram stop (lines 20 and 21) is right outside, one stop from Munich Central Station. Königsplatz is a few minutes' walk away.",
+    hbfPre: "Handy if you arrive by train: ",
+    hbfAnchor: "Italian restaurant near Munich Central Station",
+    hbfPost: ".",
+  },
+  kurz: {
+    h2: "Key facts",
+    items: [
+      "STORIA is an Italian restaurant at Karlstraße 47a, 80333 Munich (Maxvorstadt), a few minutes' walk from Königsplatz.",
+      "STORIA shows every match of EURO 2028 and the 2030 World Cup live.",
+      "STORIA showed every match of the 2026 World Cup.",
+      "EURO 2028 runs from 9 June to 9 July 2028 in England, Scotland, Wales and Ireland; the final is at Wembley Stadium.",
+      "The 2030 World Cup takes place in June and July 2030 in Spain, Portugal and Morocco, with centenary matches in Uruguay, Argentina and Paraguay.",
+      `STORIA shows the matches inside and in summer on the covered terrace (up to ${AUSSEN} people outside).`,
+      `For groups, STORIA has room inside for up to ${STAND} guests standing or ${SITZ} seated.`,
+    ],
+  },
+  faq: {
+    h2: "Frequently asked questions about public viewing in Munich",
+    items: [
+      { question: "Where can I watch public viewing in Munich?", answer: "For example at STORIA in the Maxvorstadt, a few minutes' walk from Königsplatz. The Italian restaurant shows every match of EURO 2028 and the 2030 World Cup." },
+      { question: "When is EURO 2028?", answer: "From 9 June to 9 July 2028. The opening match is in Cardiff, the final at Wembley Stadium in London." },
+      { question: "Where is EURO 2028 held?", answer: "In England, Scotland, Wales and Ireland, at nine stadiums in Cardiff, Dublin, Glasgow, Newcastle, Manchester, Liverpool, Birmingham and London." },
+      { question: "Does STORIA show every EURO 2028 match?", answer: "Yes, all 51 matches are shown live." },
+      { question: "When and where is the 2030 World Cup?", answer: "In June and July 2030 in Spain, Portugal and Morocco. The first matches are played in Uruguay, Argentina and Paraguay to mark 100 years of the World Cup." },
+      { question: "Does STORIA show the 2030 World Cup?", answer: "Yes, every match of the 2030 World Cup is shown live." },
+      { question: "Who won the 2026 World Cup?", answer: "Spain, beating Argentina 1–0 after extra time in the final on 19 July 2026." },
+      { question: "Where is the 2027 Champions League final?", answer: "On 5 June 2027 at the Estadio Metropolitano in Madrid." },
+      { question: "Can I book for public viewing? From when?", answer: "Advance booking is expected to open with the EURO match schedule. Newsletter subscribers hear about it first." },
+      { question: "How many guests fit in, including groups?", answer: `Inside up to ${STAND} standing / ${SITZ} seated, in summer on the terrace up to ${AUSSEN} people outside. Group enquiries go through events-storia.de.` },
+      { question: "What happens if the weather is bad?", answer: "The terrace is permanently covered: the building extends over it like a proper roof, so a short shower is no problem. If it does get too uncomfortable, we show the matches inside." },
+      { question: "How do I get there?", answer: "Take tram 20 or 21 to Karlstraße, one stop from Munich Central Station." },
+      { question: "Is there an entry fee for public viewing?", answer: "No entry fee." },
+    ],
+    disclaimer:
+      "STORIA is not affiliated with UEFA or FIFA. “EURO 2028” and “World Cup 2030” are used only to describe the tournaments being shown.",
+  },
+};
+
+const it: PvContent = {
+  seo: {
+    title: "Public Viewing Monaco – Calcio in diretta allo STORIA",
+    description:
+      "Public viewing nella Maxvorstadt, a pochi minuti da Königsplatz: tutte le partite di EURO 2028 (9.6.–9.7.) e dei Mondiali 2030 in diretta nel ristorante italiano.",
+    ogAlt: "Public viewing sulla terrazza dello STORIA Monaco",
+  },
+  breadcrumb: "Public Viewing Monaco",
+  hero: {
+    eyebrow: "EURO 2028 · 9 giugno – 9 luglio · Maxvorstadt",
+    h1Pre: "Public Viewing a Monaco – EURO 2028 e Mondiali 2030 allo ",
+    h1Em: "STORIA",
+    intro:
+      "Lo STORIA è un ristorante italiano in Karlstraße 47a, nella Maxvorstadt, a pochi minuti a piedi da Königsplatz. Trasmettiamo in diretta tutte le partite di EURO 2028 e dei Mondiali 2030, in sala e d'estate in terrazza. Con pizza, pasta e aperitivo. Nei giorni di partita c'è molta gente: meglio prenotare.",
+    ctaReserve: "Prenota un tavolo →",
+    ctaWhatsapp: "WhatsApp",
+  },
+  toc: {
+    label: "In questa pagina",
+    items: [
+      ["wm-2026", "Mondiali 2026"],
+      ["fussball-2027", "2027"],
+      ["em-2028", "EURO 2028"],
+      ["wm-2030", "Mondiali 2030"],
+      ["reservieren", "Prenotare"],
+      ["anfahrt", "Come arrivare"],
+      ["fragen", "Domande"],
+    ],
+  },
+  heroAlt: "Ospiti sulla terrazza coperta dello STORIA in Karlstraße durante il public viewing",
+  wm2026: {
+    kicker: "Uno sguardo indietro",
+    h2: "Così sono stati i Mondiali 2026 allo STORIA",
+    body:
+      "I Mondiali 2026 in USA, Canada e Messico sono stati i primi con 48 squadre. Per via del fuso orario molte partite si giocavano in tarda serata o di notte. Allo STORIA abbiamo trasmesso in diretta tutte le partite dei Mondiali 2026, dalla gara d'apertura alla finale.",
+    figcaption: "Mondiali 2026 allo STORIA: la diretta in sala.",
+    h3: "La finale: la Spagna è campione del mondo",
+    results: [
+      ["Spagna – Argentina 1:0 d.t.s.", "Finale del 19 luglio 2026. Ferran Torres ha segnato al 106° minuto, la Spagna ha vinto il suo secondo titolo mondiale."],
+      ["Germania – Paraguay 1:1 d.t.s., 3:4 ai rigori", "Per la Germania il torneo si è chiuso il 29 giugno 2026 nei sedicesimi di finale."],
+    ],
+    grazie: "Grazie a tutti quelli che hanno tifato con noi.",
+  },
+  y2027: {
+    kicker: "Uno sguardo avanti",
+    h2: "2027: guardare il calcio a Monaco senza un grande torneo",
+    body:
+      "Nel 2027 non ci sono Mondiali né Europei maschili. Ma non ci si annoia. Anche tra un torneo e l'altro allo STORIA trasmettiamo calcio, per esempio Champions League, DFB-Pokal e partite delle nazionali.",
+    facts: [
+      ["Champions League", "Finale sabato 5 giugno 2027 all'Estadio Metropolitano di Madrid"],
+      ["Nations League", "Fase finale dal 9 al 13 giugno 2027, sede ancora da definire"],
+      ["Verso EURO 2028", "Il sorteggio delle qualificazioni è il 6 dicembre 2026 a Belfast"],
+    ],
+    src: "Fonti: UEFA (finale di Champions League 2027, qualificazioni EURO), Wikipedia (Nations League Finals 2027).",
+  },
+  em2028: {
+    kicker: "Prossimo torneo",
+    h2: "EURO 2028 in public viewing a Monaco",
+    cd: { label: "EURO 2028:", range: "dal 9 giugno al 9 luglio 2028", daysLeft: "ancora {n} giorni", running: "in corso" },
+    body:
+      "Il Campionato europeo 2028 si gioca in Inghilterra, Scozia, Galles e Irlanda. 24 squadre disputano 51 partite. Allo STORIA le trasmettiamo tutte e 51 in diretta.",
+    h3Hosts: "I paesi ospitanti",
+    hosts: [
+      ["Inghilterra", "Londra, Manchester, Liverpool, Birmingham, Newcastle"],
+      ["Scozia", "Glasgow"],
+      ["Galles", "Cardiff, partita d'apertura"],
+      ["Irlanda", "Dublino"],
+    ],
+    h3Dates: "Le date",
+    dates: [
+      ["Torneo", "dal 9 giugno al 9 luglio 2028"],
+      ["Partita d'apertura", "Cardiff, National Stadium of Wales"],
+      ["Semifinali", "4 e 5 luglio 2028, stadio di Wembley, Londra"],
+      ["Finale", "domenica 9 luglio 2028, stadio di Wembley, Londra"],
+    ],
+    h3Venues: "I nove stadi",
+    venues: venues("Londra", "Stadio di Wembley", "Dublino"),
+    src: "Fonte: UEFA. Il calendario con gli orari segue dopo il sorteggio; lo aggiungeremo qui.",
+    ctaText: "Appena si apre la prenotazione anticipata, vi avvisiamo.",
+    ctaButton: "Iscriviti alla newsletter",
+  },
+  wm2030: {
+    kicker: "Uno sguardo avanti",
+    h2: "Guardare i Mondiali 2030 a Monaco: 100 anni di Coppa del Mondo",
+    body:
+      "I Mondiali 2030 si giocano in Spagna, Portogallo e Marocco. Per i 100 anni del primo Mondiale del 1930 in Uruguay, il torneo si apre con una partita ciascuno in Uruguay, Argentina e Paraguay. Si gioca a giugno e luglio 2030. Allo STORIA trasmettiamo in diretta tutte le partite dei Mondiali 2030.",
+    hosts: [
+      ["Spagna", "tra cui Madrid, Barcellona, Siviglia, Bilbao, Malaga"],
+      ["Portogallo", "Lisbona, Porto"],
+      ["Marocco", "tra cui Casablanca, Rabat, Marrakech, Tangeri"],
+      ["Sudamerica", "Partite del centenario in Uruguay, Argentina, Paraguay"],
+    ],
+    src: "Fonti: FIFA, Wikipedia „2030 FIFA World Cup“. L'elenco degli stadi è provvisorio; indicheremo le sedi definitive appena la FIFA le conferma.",
+  },
+  restaurant: {
+    h2: "Guardare il calcio in un ristorante italiano",
+    body: `Allo STORIA la partita si guarda con vera cucina italiana: pizza, pasta e aperitivo. Le partite vanno in onda in sala e d'estate in terrazza (fino a ${AUSSEN} persone all'aperto). La terrazza è coperta in modo fisso; se diventa troppo scomodo, continuiamo dentro.`,
+    h3Reserve: "Prenota un tavolo",
+    reserveHint: "La prenotazione per le partite di EURO 2028 si apre con il calendario. Per qualsiasi altra sera potete già richiedere un tavolo.",
+    h3Groups: "Per gruppi e aziende",
+    groups: `In sala fino a ${STAND} persone in piedi / ${SITZ} sedute, d'estate in terrazza fino a ${AUSSEN} persone all'aperto.`,
+    groupsLink: "Richiesta per gruppi su events-storia.de",
+  },
+  newsletter: {
+    h2: "Essere avvisati in tempo",
+    body: "Vi scriviamo appena si apre la prenotazione anticipata per EURO 2028. Niente spam, solo questa occasione.",
+  },
+  anfahrt: {
+    h2: "Come arrivare: Maxvorstadt, vicino a Königsplatz",
+    body:
+      "Lo STORIA si trova in Karlstraße 47a, 80333 Monaco. La fermata del tram Karlstraße (linee 20 e 21) è davanti alla porta, a una fermata dalla stazione centrale. Königsplatz è a pochi minuti a piedi.",
+    hbfPre: "Comodo anche se arrivate in treno: ",
+    hbfAnchor: "ristorante italiano vicino alla stazione centrale",
+    hbfPost: ".",
+  },
+  kurz: {
+    h2: "In breve",
+    items: [
+      "Lo STORIA è un ristorante italiano in Karlstraße 47a, 80333 Monaco (Maxvorstadt), a pochi minuti a piedi da Königsplatz.",
+      "Lo STORIA trasmette in diretta tutte le partite di EURO 2028 e dei Mondiali 2030.",
+      "Ai Mondiali 2026 lo STORIA ha trasmesso tutte le partite.",
+      "EURO 2028 si gioca dal 9 giugno al 9 luglio 2028 in Inghilterra, Scozia, Galles e Irlanda; la finale è a Wembley.",
+      "I Mondiali 2030 si giocano a giugno e luglio 2030 in Spagna, Portogallo e Marocco, con partite del centenario in Uruguay, Argentina e Paraguay.",
+      `Lo STORIA trasmette le partite in sala e d'estate sulla terrazza coperta (fino a ${AUSSEN} persone all'aperto).`,
+      `Per i gruppi lo STORIA offre in sala posto per fino a ${STAND} ospiti in piedi o ${SITZ} seduti.`,
+    ],
+  },
+  faq: {
+    h2: "Domande frequenti sul public viewing a Monaco",
+    items: [
+      { question: "Dove si può guardare il public viewing a Monaco?", answer: "Per esempio allo STORIA nella Maxvorstadt, a pochi minuti a piedi da Königsplatz. Il ristorante italiano trasmette tutte le partite di EURO 2028 e dei Mondiali 2030." },
+      { question: "Quando si gioca EURO 2028?", answer: "Dal 9 giugno al 9 luglio 2028. La partita d'apertura è a Cardiff, la finale allo stadio di Wembley a Londra." },
+      { question: "Dove si gioca EURO 2028?", answer: "In Inghilterra, Scozia, Galles e Irlanda, in nove stadi a Cardiff, Dublino, Glasgow, Newcastle, Manchester, Liverpool, Birmingham e Londra." },
+      { question: "Lo STORIA trasmette tutte le partite di EURO 2028?", answer: "Sì, tutte le 51 partite in diretta." },
+      { question: "Quando e dove si giocano i Mondiali 2030?", answer: "A giugno e luglio 2030 in Spagna, Portogallo e Marocco. Le prime partite si giocano in Uruguay, Argentina e Paraguay per i 100 anni dei Mondiali." },
+      { question: "Lo STORIA trasmette i Mondiali 2030?", answer: "Sì, tutte le partite dei Mondiali 2030 in diretta." },
+      { question: "Chi ha vinto i Mondiali 2026?", answer: "La Spagna, 1:0 dopo i tempi supplementari contro l'Argentina nella finale del 19 luglio 2026." },
+      { question: "Dove si gioca la finale di Champions League 2027?", answer: "Il 5 giugno 2027 all'Estadio Metropolitano di Madrid." },
+      { question: "Si può prenotare per il public viewing? Da quando?", answer: "La prenotazione anticipata si apre presumibilmente con il calendario di EURO 2028. Chi si iscrive alla newsletter lo sa per primo." },
+      { question: "Quante persone ci stanno, anche per gruppi?", answer: `In sala fino a ${STAND} persone in piedi / ${SITZ} sedute, d'estate in terrazza fino a ${AUSSEN} persone all'aperto. Le richieste per gruppi passano da events-storia.de.` },
+      { question: "Cosa succede se il tempo è brutto?", answer: "La terrazza è coperta in modo fisso: l'edificio prosegue sopra di essa come un vero tetto. Un breve acquazzone non è un problema. Se diventa troppo scomodo, trasmettiamo le partite dentro." },
+      { question: "Come si arriva?", answer: "Con il tram 20 o 21 fino a Karlstraße, a una fermata dalla stazione centrale." },
+      { question: "Il public viewing ha un biglietto d'ingresso?", answer: "Nessun biglietto d'ingresso." },
+    ],
+    disclaimer:
+      "Lo STORIA non ha alcun legame con UEFA o FIFA. „EURO 2028“ e „Mondiali 2030“ servono solo a descrivere i tornei trasmessi.",
+  },
+};
+
+const fr: PvContent = {
+  seo: {
+    title: "Public Viewing Munich – Football en direct au STORIA",
+    description:
+      "Public viewing dans la Maxvorstadt, à quelques minutes de Königsplatz : tous les matchs de l'EURO 2028 (9.6–9.7) et de la Coupe du monde 2030 en direct au restaurant italien.",
+    ogAlt: "Public viewing sur la terrasse du STORIA Munich",
+  },
+  breadcrumb: "Public Viewing Munich",
+  hero: {
+    eyebrow: "EURO 2028 · 9 juin – 9 juillet · Maxvorstadt",
+    h1Pre: "Public Viewing à Munich – EURO 2028 et Coupe du monde 2030 au ",
+    h1Em: "STORIA",
+    intro:
+      "Le STORIA est un restaurant italien au 47a Karlstraße, dans la Maxvorstadt, à quelques minutes à pied de Königsplatz. Nous diffusons en direct tous les matchs de l'EURO 2028 et de la Coupe du monde 2030, en salle et l'été en terrasse. Avec pizza, pâtes et aperitivo. Les jours de match, il y a du monde : mieux vaut réserver.",
+    ctaReserve: "Réserver une table →",
+    ctaWhatsapp: "WhatsApp",
+  },
+  toc: {
+    label: "Sur cette page",
+    items: [
+      ["wm-2026", "Coupe du monde 2026"],
+      ["fussball-2027", "2027"],
+      ["em-2028", "EURO 2028"],
+      ["wm-2030", "Coupe du monde 2030"],
+      ["reservieren", "Réserver"],
+      ["anfahrt", "Accès"],
+      ["fragen", "Questions"],
+    ],
+  },
+  heroAlt: "Clients sur la terrasse couverte du STORIA, Karlstraße, pendant le public viewing",
+  wm2026: {
+    kicker: "Rétrospective",
+    h2: "La Coupe du monde 2026 au STORIA",
+    body:
+      "La Coupe du monde 2026 aux États-Unis, au Canada et au Mexique a été la première à 48 équipes. À cause du décalage horaire, beaucoup de matchs se jouaient tard le soir ou la nuit. Au STORIA, tous les matchs de la Coupe du monde 2026 ont été diffusés en direct, du match d'ouverture à la finale.",
+    figcaption: "Coupe du monde 2026 au STORIA : la retransmission en salle.",
+    h3: "La finale : l'Espagne championne du monde",
+    results: [
+      ["Espagne – Argentine 1-0 a.p.", "Finale du 19 juillet 2026. Ferran Torres a marqué à la 106e minute, l'Espagne a remporté son deuxième titre mondial."],
+      ["Allemagne – Paraguay 1-1 a.p., 3-4 t.a.b.", "Pour l'Allemagne, le tournoi s'est arrêté le 29 juin 2026 en seizièmes de finale."],
+    ],
+    grazie: "Grazie a tutti – merci à tous ceux qui ont vibré avec nous.",
+  },
+  y2027: {
+    kicker: "Perspectives",
+    h2: "2027 : regarder le football à Munich sans grand tournoi",
+    body:
+      "En 2027, il n'y a ni Coupe du monde ni Euro masculins. On ne s'ennuiera pas pour autant. Entre les tournois, le STORIA diffuse aussi du football, par exemple la Ligue des champions, la DFB-Pokal et les matchs internationaux.",
+    facts: [
+      ["Ligue des champions", "Finale le samedi 5 juin 2027 à l'Estadio Metropolitano de Madrid"],
+      ["Ligue des nations", "Phase finale du 9 au 13 juin 2027, pays hôte encore à désigner"],
+      ["En route vers l'EURO 2028", "Le tirage des qualifications a lieu le 6 décembre 2026 à Belfast"],
+    ],
+    src: "Sources : UEFA (finale de la Ligue des champions 2027, qualifications EURO), Wikipedia (Nations League Finals 2027).",
+  },
+  em2028: {
+    kicker: "Prochain tournoi",
+    h2: "EURO 2028 en public viewing à Munich",
+    cd: { label: "EURO 2028 :", range: "du 9 juin au 9 juillet 2028", daysLeft: "encore {n} jours", running: "en cours" },
+    body:
+      "Le Championnat d'Europe 2028 se joue en Angleterre, en Écosse, au pays de Galles et en Irlande. 24 équipes disputent 51 matchs. Au STORIA, nous diffusons les 51 matchs en direct.",
+    h3Hosts: "Les pays hôtes",
+    hosts: [
+      ["Angleterre", "Londres, Manchester, Liverpool, Birmingham, Newcastle"],
+      ["Écosse", "Glasgow"],
+      ["Pays de Galles", "Cardiff, match d'ouverture"],
+      ["Irlande", "Dublin"],
+    ],
+    h3Dates: "Les dates",
+    dates: [
+      ["Tournoi", "du 9 juin au 9 juillet 2028"],
+      ["Match d'ouverture", "Cardiff, National Stadium of Wales"],
+      ["Demi-finales", "4 et 5 juillet 2028, stade de Wembley, Londres"],
+      ["Finale", "dimanche 9 juillet 2028, stade de Wembley, Londres"],
+    ],
+    h3Venues: "Les neuf stades",
+    venues: venues("Londres", "Stade de Wembley"),
+    src: "Source : UEFA. Le calendrier avec les heures de coup d'envoi suivra le tirage au sort ; nous l'ajouterons ici.",
+    ctaText: "Nous vous prévenons dès l'ouverture des pré-réservations.",
+    ctaButton: "S'inscrire à la newsletter",
+  },
+  wm2030: {
+    kicker: "Perspectives",
+    h2: "Regarder la Coupe du monde 2030 à Munich : 100 ans de Coupe du monde",
+    body:
+      "La Coupe du monde 2030 se jouera en Espagne, au Portugal et au Maroc. Pour les 100 ans de la première Coupe du monde, en 1930 en Uruguay, le tournoi s'ouvre avec un match chacun en Uruguay, en Argentine et au Paraguay. Elle se joue en juin et juillet 2030. Au STORIA, nous diffusons en direct tous les matchs de la Coupe du monde 2030.",
+    hosts: [
+      ["Espagne", "notamment Madrid, Barcelone, Séville, Bilbao, Malaga"],
+      ["Portugal", "Lisbonne, Porto"],
+      ["Maroc", "notamment Casablanca, Rabat, Marrakech, Tanger"],
+      ["Amérique du Sud", "Matchs du centenaire en Uruguay, Argentine, Paraguay"],
+    ],
+    src: "Sources : FIFA, Wikipedia « 2030 FIFA World Cup ». La liste des stades est provisoire ; nous indiquerons les sites définitifs dès que la FIFA les confirmera.",
+  },
+  restaurant: {
+    h2: "Regarder le football dans un restaurant italien",
+    body: `Au STORIA, le match se regarde avec une vraie cuisine italienne : pizza, pâtes et aperitivo. Les matchs sont diffusés en salle et l'été en terrasse (jusqu'à ${AUSSEN} personnes dehors). La terrasse est couverte en dur ; si cela devient trop inconfortable, on continue à l'intérieur.`,
+    h3Reserve: "Réserver une table",
+    reserveHint: "La réservation pour les matchs de l'EURO ouvre avec le calendrier. Pour tout autre soir, vous pouvez déjà demander une table.",
+    h3Groups: "Pour les groupes et entreprises",
+    groups: `En salle jusqu'à ${STAND} personnes debout / ${SITZ} assises, l'été en terrasse jusqu'à ${AUSSEN} personnes dehors.`,
+    groupsLink: "Demande de groupe via events-storia.de",
+  },
+  newsletter: {
+    h2: "Être prévenu à temps",
+    body: "Nous vous écrivons dès l'ouverture des pré-réservations pour l'EURO 2028. Pas de spam, seulement cette occasion.",
+  },
+  anfahrt: {
+    h2: "Accès : Maxvorstadt, près de Königsplatz",
+    body:
+      "Le STORIA se trouve au 47a Karlstraße, 80333 Munich. L'arrêt de tram Karlstraße (lignes 20 et 21) est juste devant la porte, à un arrêt de la gare centrale de Munich. Königsplatz est à quelques minutes à pied.",
+    hbfPre: "Pratique si vous arrivez en train : ",
+    hbfAnchor: "restaurant italien près de la gare centrale",
+    hbfPost: ".",
+  },
+  kurz: {
+    h2: "L'essentiel en bref",
+    items: [
+      "Le STORIA est un restaurant italien au 47a Karlstraße, 80333 Munich (Maxvorstadt), à quelques minutes à pied de Königsplatz.",
+      "Le STORIA diffuse en direct tous les matchs de l'EURO 2028 et de la Coupe du monde 2030.",
+      "Pendant la Coupe du monde 2026, le STORIA a diffusé tous les matchs.",
+      "L'EURO 2028 a lieu du 9 juin au 9 juillet 2028 en Angleterre, en Écosse, au pays de Galles et en Irlande ; la finale se joue à Wembley.",
+      "La Coupe du monde 2030 a lieu en juin et juillet 2030 en Espagne, au Portugal et au Maroc, avec des matchs du centenaire en Uruguay, en Argentine et au Paraguay.",
+      `Le STORIA diffuse les matchs en salle et l'été sur la terrasse couverte (jusqu'à ${AUSSEN} personnes dehors).`,
+      `Pour les groupes, le STORIA accueille en salle jusqu'à ${STAND} personnes debout ou ${SITZ} assises.`,
+    ],
+  },
+  faq: {
+    h2: "Questions fréquentes sur le public viewing à Munich",
+    items: [
+      { question: "Où regarder un public viewing à Munich ?", answer: "Par exemple au STORIA, dans la Maxvorstadt, à quelques minutes à pied de Königsplatz. Le restaurant italien diffuse tous les matchs de l'EURO 2028 et de la Coupe du monde 2030." },
+      { question: "Quand a lieu l'EURO 2028 ?", answer: "Du 9 juin au 9 juillet 2028. Le match d'ouverture a lieu à Cardiff, la finale au stade de Wembley à Londres." },
+      { question: "Où se joue l'EURO 2028 ?", answer: "En Angleterre, en Écosse, au pays de Galles et en Irlande, dans neuf stades à Cardiff, Dublin, Glasgow, Newcastle, Manchester, Liverpool, Birmingham et Londres." },
+      { question: "Le STORIA diffuse-t-il tous les matchs de l'EURO 2028 ?", answer: "Oui, les 51 matchs sont diffusés en direct." },
+      { question: "Quand et où a lieu la Coupe du monde 2030 ?", answer: "En juin et juillet 2030 en Espagne, au Portugal et au Maroc. Les premiers matchs se jouent en Uruguay, en Argentine et au Paraguay pour les 100 ans de la Coupe du monde." },
+      { question: "Le STORIA diffuse-t-il la Coupe du monde 2030 ?", answer: "Oui, tous les matchs de la Coupe du monde 2030 sont diffusés en direct." },
+      { question: "Qui a gagné la Coupe du monde 2026 ?", answer: "L'Espagne, victorieuse 1-0 après prolongation contre l'Argentine en finale le 19 juillet 2026." },
+      { question: "Où se joue la finale de la Ligue des champions 2027 ?", answer: "Le 5 juin 2027 à l'Estadio Metropolitano de Madrid." },
+      { question: "Peut-on réserver pour le public viewing ? À partir de quand ?", answer: "Les pré-réservations ouvriront probablement avec le calendrier de l'EURO. Les abonnés à la newsletter seront prévenus en premier." },
+      { question: "Combien de personnes peuvent venir, y compris en groupe ?", answer: `En salle jusqu'à ${STAND} personnes debout / ${SITZ} assises, l'été en terrasse jusqu'à ${AUSSEN} personnes dehors. Les demandes de groupe passent par events-storia.de.` },
+      { question: "Que se passe-t-il en cas de mauvais temps ?", answer: "La terrasse est couverte en dur : le bâtiment se prolonge au-dessus comme un vrai toit. Une averse n'est donc pas un problème. Si cela devient trop inconfortable, nous diffusons les matchs à l'intérieur." },
+      { question: "Comment venir ?", answer: "Avec le tram 20 ou 21 jusqu'à l'arrêt Karlstraße, à un arrêt de la gare centrale." },
+      { question: "Le public viewing est-il payant ?", answer: "Entrée gratuite." },
+    ],
+    disclaimer:
+      "Le STORIA n'a aucun lien avec l'UEFA ou la FIFA. « EURO 2028 » et « Coupe du monde 2030 » servent uniquement à désigner les tournois diffusés.",
+  },
+};
+
+export const wmContent: Record<Language, PvContent> = { de, en, it, fr };
