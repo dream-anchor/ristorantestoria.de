@@ -1,4 +1,4 @@
-import { useEffect, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 
 const WIDGET_SRC = "https://storia.schrittmacher.ai/api/public/widgets/v1/maestro.js";
 
@@ -44,6 +44,31 @@ export const useMaestroLoader = () =>
     script.defer = true;
     document.body.appendChild(script);
   }, []);
+
+const DANKE: Record<string, string> = {
+  de: "Danke! Ihre Anfrage ist bei uns angekommen.",
+  en: "Thank you! Your enquiry has arrived.",
+  it: "Grazie! La sua richiesta è arrivata.",
+  fr: "Merci ! Votre demande nous est bien parvenue.",
+};
+
+/**
+ * Abschnittsüberschrift über einem MAESTRO-Widget: nach dem Absenden (Widget-Event
+ * `MAESTRO_INQUIRY_SUBMITTED` auf `window`) steht dort der Dank statt „Jetzt anfragen“;
+ * `useMaestroGesendet` blendet zugleich den Einleitungstext aus.
+ */
+export const useMaestroGesendet = () => {
+  const [gesendet, setGesendet] = useState(false);
+  useEffect(() => {
+    const beiAbsenden = () => setGesendet(true);
+    window.addEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
+    return () => window.removeEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
+  }, []);
+  return gesendet;
+};
+
+export const useMaestroTitel = (titel: string, lang: string) =>
+  useMaestroGesendet() ? DANKE[lang] ?? DANKE.de : titel;
 
 const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight = "560px" }: MaestroWidgetProps) => {
   useMaestroLoader();
