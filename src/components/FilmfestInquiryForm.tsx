@@ -128,7 +128,6 @@ const FilmfestInquiryForm = () => {
         format: data.format,
         ...(hasGuests ? { groupSize: guests } : {}),
         originalPage: window.location.pathname,
-        referrer: document.referrer || undefined,
       };
 
       const response = await fetch(INTAKE_URL, {

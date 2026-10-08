@@ -23,7 +23,6 @@ import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
-import GroupInquiryForm from "@/components/GroupInquiryForm";
 import MaestroWidget, { useMaestroTitel } from "@/components/MaestroWidget";
 import StickyGroupInquiryButton from "@/components/StickyGroupInquiryButton";
 import MenuItemsList from "@/components/MenuItemsList";
@@ -50,14 +49,6 @@ const menuListLabels = {
   fr: { more: "Afficher plus", less: "Afficher moins", inquire: "Demander maintenant" },
 } as const;
 
-/** Scrollt zum Anfrageformular und wählt das Menü im Formular vor. */
-export const scrollToInquiryForm = (menuKey?: string) => {
-  if (menuKey) {
-    window.dispatchEvent(new CustomEvent("storia:preselect-menu", { detail: menuKey }));
-  }
-  document.getElementById("anfrageformular")?.scrollIntoView({ behavior: "smooth" });
-};
-
 /**
  * Anfrage läuft in allen vier Sprachen über das MAESTRO-Widget der jeweiligen Sprache
  * (DE seit 30.09.2026, EN/IT/FR seit 01.10.2026 nach Übersetzung der Datenschutzerklärung).
@@ -80,7 +71,6 @@ const ReisegruppenPage = () => {
 
   const rg = t.reisegruppen;
   const maestro = MAESTRO_WIDGETS[language];
-  const useMaestro = Boolean(maestro);
   const maestroTitel = useMaestroTitel(maestro?.titel ?? "", language);
   const ml = menuListLabels[language as keyof typeof menuListLabels] ?? menuListLabels.de;
   const { menus, settings } = useGroupMenus();
@@ -129,7 +119,7 @@ const ReisegruppenPage = () => {
       duration: { de: rg.menuBDuration, en: rg.menuBDuration, it: rg.menuBDuration, fr: rg.menuBDuration },
       price_label: { de: rg.menuBPrice, en: rg.menuBPrice, it: rg.menuBPrice, fr: rg.menuBPrice },
       price_note: { de: rg.menuBPriceNote, en: rg.menuBPriceNote, it: rg.menuBPriceNote, fr: rg.menuBPriceNote },
-      price_amount: 35, sort_order: 1, is_active: true, created_at: "", updated_at: "",
+      price_amount: 45, sort_order: 1, is_active: true, created_at: "", updated_at: "",
     },
     {
       id: "fallback-C", menu_key: "C",
@@ -140,7 +130,7 @@ const ReisegruppenPage = () => {
       duration: { de: rg.menuCDuration, en: rg.menuCDuration, it: rg.menuCDuration, fr: rg.menuCDuration },
       price_label: { de: rg.menuCPrice, en: rg.menuCPrice, it: rg.menuCPrice, fr: rg.menuCPrice },
       price_note: { de: rg.menuCPriceNote, en: rg.menuCPriceNote, it: rg.menuCPriceNote, fr: rg.menuCPriceNote },
-      price_amount: 49, sort_order: 2, is_active: true, created_at: "", updated_at: "",
+      price_amount: 67, sort_order: 2, is_active: true, created_at: "", updated_at: "",
     },
   ];
 
@@ -426,10 +416,10 @@ const ReisegruppenPage = () => {
                   className="bg-primary text-primary-foreground hover:bg-primary/90"
                   asChild
                 >
-                  <a href={useMaestro ? "#gruppe-anfragen" : "#anfrageformular"}>{rg.heroCta1}</a>
+                  <a href="#gruppe-anfragen">{rg.heroCta1}</a>
                 </Button>
                 <Button size="lg" variant="outlineWhite" asChild>
-                  <a href={useMaestro ? "#gruppenmenus" : "#anfrageformular"}>{rg.heroCta2}</a>
+                  <a href="#gruppenmenus">{rg.heroCta2}</a>
                 </Button>
               </div>
             </div>
@@ -604,23 +594,12 @@ const ReisegruppenPage = () => {
                         </p>
                       </div>
                       <div className="px-6 pb-5">
-                        {useMaestro ? (
-                          <Button className="w-full" asChild>
-                            <a href="#gruppe-anfragen" data-maestro-menue={menu.menu_key.toLowerCase()}>
-                              <Send className="w-4 h-4 mr-2" />
-                              {ml.inquire}
-                            </a>
-                          </Button>
-                        ) : (
-                          <Button
-                            type="button"
-                            className="w-full"
-                            onClick={() => scrollToInquiryForm(menu.menu_key)}
-                          >
+                        <Button className="w-full" asChild>
+                          <a href="#gruppe-anfragen" data-maestro-menue={menu.menu_key.toLowerCase()}>
                             <Send className="w-4 h-4 mr-2" />
                             {ml.inquire}
-                          </Button>
-                        )}
+                          </a>
+                        </Button>
                       </div>
                       <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
                         <p className="text-xl font-bold text-primary leading-snug">
@@ -795,19 +774,6 @@ const ReisegruppenPage = () => {
 
           {/* SECTION 9: Google Reviews */}
           <GoogleReviews />
-
-          {/* SECTION 9.5: Altes Anfrageformular (nur EN/IT/FR; DE nutzt das MAESTRO-Widget oben) */}
-          {!useMaestro && (
-            <section id="anfrageformular" className="py-16 md:py-20 bg-primary text-primary-foreground scroll-mt-24">
-              <div className="container mx-auto px-4 max-w-3xl">
-                <h2 className="text-2xl md:text-3xl font-serif font-semibold text-center mb-8">
-                  Jetzt unverbindlich anfragen
-                </h2>
-                <GroupInquiryForm />
-              </div>
-            </section>
-          )}
-
 
           {/* SECTION 10: CTA Kontakt */}
           <section className="py-16 md:py-20 bg-primary text-primary-foreground">
