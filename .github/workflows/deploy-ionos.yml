@@ -28,10 +28,15 @@ on:
       - completed
     branches:
       - main
+  # MAESTRO meldet eine neu veroeffentlichte Speisekarte (apps/api/src/lib/speisekarte-neubau.ts
+  # in maestro-cloud, Token SPEISEKARTE_NEUBAU_TOKEN): Neubau, damit die statischen Seiten die
+  # neue Karte tragen. Nachts gleicht MAESTRO zusaetzlich ab und stoesst nur bei Aenderung an.
+  repository_dispatch:
+    types: [maestro_speisekarte]
 
 jobs:
   deploy:
-    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     concurrency:
