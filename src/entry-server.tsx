@@ -7,6 +7,9 @@ import App from './App'
 import { parseLocalizedPath } from './config/routes'
 import { loadTranslations } from './translations'
 
+// Für prerender.js (P8): Speisekarte aus MAESTRO laden, gleiche Logik wie im Client.
+export { ladeMaestroMenu, maestroSpeisekarteAktiv } from './lib/maestroSpeisekarte'
+
 interface SpecialMenuData {
   basicMenu: any;
   fullMenu: any;
