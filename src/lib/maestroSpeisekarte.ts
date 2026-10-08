@@ -22,9 +22,11 @@ interface Position {
   beschreibung: string | null;
   preis_cents: number | null;
   preis_text: string | null;
+  preis_hinweis?: string | null;
 }
 interface Kategorie {
   name: string;
+  ab_preis?: { cents: number; text: string } | null;
   positionen: Position[];
 }
 interface Karte {
@@ -112,11 +114,49 @@ export async function ladeMaestroKarten(): Promise<Record<Sprache, SpeisekarteAn
 // Ein Ladevorgang je Build bzw. Seitenaufruf, egal wie viele Seiten (food/drinks/lunch) fragen.
 let geladen: ReturnType<typeof ladeMaestroKarten> | null = null;
 
-/** Alle Seiten mit Speisekarte zeigen bei aktivem Schalter dieselben Karten als Reiter. */
-export async function ladeMaestroMenu(menuType: string) {
-  geladen ??= ladeMaestroKarten().catch((e) => {
+const alleKarten = () =>
+  (geladen ??= ladeMaestroKarten().catch((e) => {
     geladen = null; // Fehler nicht festhalten
     throw e;
-  });
-  return zusammenfuehren(menuType, await geladen);
+  }));
+
+/** Alle Seiten mit Speisekarte zeigen bei aktivem Schalter dieselben Karten als Reiter. */
+export async function ladeMaestroMenu(menuType: string) {
+  return zusammenfuehren(menuType, await alleKarten());
+}
+
+/**
+ * Messe-Seite (147/P9, Antoine 08.10.2026): „Preise kommen immer aus den Menüs der Speisekarten.“
+ * Liefert die Menü-Positionen der veröffentlichten Karten in einer Sprache samt „ab“-Preis — der
+ * „ab“-Preis ist das `ab_preis` der Menü-Kategorie aus MAESTRO (@maestro/pricing), hier wird nichts gerechnet.
+ * Fehlt die Menü-Kategorie oder ist sie mehrdeutig, wird geworfen (Prerender scheitert laut).
+ */
+// ponytail: Menü-Kategorie = Kategoriename (deutsch) enthält „Menü“/„Menu“; sobald MAESTRO ein eigenes
+// Kennzeichen liefert (z. B. Kartenart „Menüs“), hier umstellen.
+export const IST_MENUE_KATEGORIE = /men[uü]/i;
+
+export function messeMenues(karten: Record<Sprache, SpeisekarteAntwort>[], sprache: Sprache) {
+  const treffer = karten.flatMap((k) =>
+    k.de.data.karten[0]?.kategorien
+      ?.map((kat, i) => ({ de: kat, lokal: k[sprache].data.karten[0]?.kategorien?.[i] ?? kat }))
+      .filter((x) => IST_MENUE_KATEGORIE.test(x.de.name) && x.de.positionen.length) ?? [],
+  );
+  if (treffer.length !== 1) throw new Error(`MAESTRO-Messe: ${treffer.length} Menü-Kategorien gefunden, erwartet genau 1`);
+  const { lokal } = treffer[0];
+  if (!lokal.ab_preis) throw new Error("MAESTRO-Messe: Menü-Kategorie ohne ab_preis");
+  return {
+    kategorie: lokal.name,
+    ab_preis: lokal.ab_preis,
+    menues: lokal.positionen.map((p) => ({
+      name: p.name,
+      gaenge: p.beschreibung,
+      preis_cents: p.preis_cents,
+      preis_text: p.preis_text,
+      preis_hinweis: p.preis_hinweis ?? null, // z. B. Weinbegleitung, wie auf der Karte eingetragen
+    })),
+  };
+}
+
+export async function ladeMaestroMesseMenues(sprache: Sprache) {
+  return messeMenues(await alleKarten(), sprache);
 }

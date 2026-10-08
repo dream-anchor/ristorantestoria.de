@@ -1,7 +1,7 @@
 // Selbsttest P8: dynamische Kartenliste + Zusammenführung der Sprachantworten ins Menu-Format
 // (Testdaten, keine echten Karten). Aufruf: node --experimental-strip-types scripts/test-maestro-speisekarte.ts
 import assert from "node:assert/strict";
-import { zusammenfuehren, ladeMaestroMenu, maestroSpeisekarteAktiv } from "../src/lib/maestroSpeisekarte.ts";
+import { zusammenfuehren, ladeMaestroMenu, maestroSpeisekarteAktiv, messeMenues } from "../src/lib/maestroSpeisekarte.ts";
 
 const antwort = (slug: string, name: string, lang: string, kat: string, pos: string, text: string | null) => ({
   data: {
@@ -72,4 +72,24 @@ await assert.rejects(frisch.ladeMaestroMenu("food"), /keine veröffentlichte/);
 delete antworten["/api/public/speisekarten"];
 await assert.rejects(frisch.ladeMaestroMenu("food"), /HTTP 404/); // Fehler wird nicht festgehalten
 
-console.log("OK maestroSpeisekarte: 23 Prüfungen grün");
+// Messe-Seite: Menüs + „ab“-Preis kommen aus der Menü-Kategorie der Karte, ab_preis unverändert von MAESTRO.
+const mitMenues = (l: string) => ({
+  data: { sprache: l, stand: "m", html: "", karten: [{ slug: "speisekarte", name: "Speisekarte", kategorien: [
+    { name: l === "de" ? "Vorspeisen" : "Starters", ab_preis: null, positionen: [{ name: "Vitello", beschreibung: null, preis_cents: 1900, preis_text: "19 €" }] },
+    { name: l === "de" ? "Degustationsmenüs" : "Tasting menus", ab_preis: { cents: 5900, text: `ab 59 € (${l})` }, positionen: [
+      { name: "Vegetale", beschreibung: "4 Gänge", preis_cents: 5900, preis_text: "59 €", preis_hinweis: "mit Weinbegleitung 89 €" },
+      { name: "Mare", beschreibung: "4 Gänge", preis_cents: 6800, preis_text: "68 €" },
+    ] },
+  ] }] },
+});
+const karteMitMenues = Object.fromEntries(["de", "en", "it", "fr"].map((l) => [l, mitMenues(l)])) as any;
+const messe = messeMenues([sushi as any, karteMitMenues], "en");
+assert.equal(messe.kategorie, "Tasting menus");
+assert.deepEqual(messe.ab_preis, { cents: 5900, text: "ab 59 € (en)" });
+assert.deepEqual(messe.menues.map((x) => x.name), ["Vegetale", "Mare"]);
+assert.equal(messe.menues[0].preis_hinweis, "mit Weinbegleitung 89 €");
+assert.equal(messe.menues[1].preis_hinweis, null);
+assert.throws(() => messeMenues([sushi as any], "de"), /0 Menü-Kategorien/); // Menü fehlt -> laut, nie alter Preis
+assert.throws(() => messeMenues([karteMitMenues, karteMitMenues], "de"), /2 Menü-Kategorien/);
+
+console.log("OK maestroSpeisekarte: 30 Prüfungen grün");
