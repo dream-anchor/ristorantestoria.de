@@ -10,7 +10,8 @@ import terrasseImage from "@/assets/gaeste-terrasse-italiener-maxvorstadt-muench
 import { useLanguage } from "@/contexts/LanguageContext";
 import { EVENTS_LINKS } from "@/lib/eventsLinks";
 import LocalizedLink from "@/components/LocalizedLink";
-import AiImageBadge from "@/components/AiImageBadge";
+import { KiHinweis, kiAlt } from "@/components/KiBild";
+import type { KiBildDatei } from "@/config/ki-bilder";
 
 interface ImageCardProps {
   image: string;
@@ -26,18 +27,19 @@ interface ImageCardProps {
   /** Optional: kleinere Bild-Variante(n) für srcSet (Vermeidung von Overfetching). */
   srcSet?: string;
   sizes?: string;
-  /** EU-KI-VO Art. 50: Bild ist KI-generiert/-substanziell-verändert (kein echtes Foto). */
-  aiGenerated?: boolean;
+  /** KI-Bild laut src/config/ki-bilder.ts: alt, Badge und Caption kommen aus dem Register. */
+  kiDatei?: KiBildDatei;
 }
 
-const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug, priority = false, srcSet, sizes, aiGenerated = false }: ImageCardProps) => {
+const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName = "", externalLink, internalSlug, priority = false, srcSet, sizes, kiDatei }: ImageCardProps) => {
+  const { language } = useLanguage();
   const content = (
     <div className={`relative overflow-hidden group ${className}`}>
       <img
         src={image}
         srcSet={srcSet}
         sizes={srcSet ? sizes : undefined}
-        alt={alt}
+        alt={kiDatei ? kiAlt(kiDatei, language) : alt}
         width={400}
         height={400}
         className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageClassName}`}
@@ -45,7 +47,7 @@ const ImageCard = ({ image, alt, title, subtitle, className = "", imageClassName
         fetchPriority={priority ? "high" : undefined}
         decoding="async"
       />
-      {aiGenerated && <AiImageBadge />}
+      {kiDatei && <KiHinweis datei={kiDatei} />}
       {(title || subtitle) && (
         <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 pointer-events-none">
           <div className="bg-neutral-800/60 backdrop-blur-sm px-4 py-3 md:px-5 md:py-4">
@@ -122,7 +124,7 @@ const ImageGrid = () => {
             image={drinksImage}
             alt={t.imageGrid.altCocktails}
             className="aspect-square"
-            aiGenerated
+            kiDatei="cocktails.webp"
           />
           <ImageCard
             image={aperitivoImage}
@@ -153,7 +155,7 @@ const ImageGrid = () => {
             image={dessertImage}
             alt={t.imageGrid.altDessert}
             className="aspect-square"
-            aiGenerated
+            kiDatei="tiramisu.webp"
           />
           <ImageCard
             image={terrasseImage}

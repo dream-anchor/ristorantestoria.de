@@ -1,6 +1,7 @@
 import { useMenu, useMenuById, MenuType } from "@/hooks/useMenu";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MaestroSpeisekarte } from "@/components/MaestroWidget";
 import { Fragment, ReactNode } from "react";
 
 interface MenuDisplayProps {
@@ -63,6 +64,15 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true, interstitialCta, inte
             {t.menuDisplay?.callForMenu || "Rufen Sie uns an: 089 51519696"}
           </a>
         </div>
+      </div>
+    );
+  }
+
+  // P8: MAESTRO-Karte -> fertiges HTML-Fragment über das Speisekarten-Widget (gleiches preis_layout wie im Widget).
+  if (menu.maestro) {
+    return (
+      <div className="max-w-3xl mx-auto">
+        <MaestroSpeisekarte slug={menu.maestro.slug} lang={language} html={menu.maestro.html[language] ?? menu.maestro.html.de} />
       </div>
     );
   }

@@ -42,8 +42,8 @@ const PREVIEWS = [
   },
   {
     id: 8, pool: "B", slot: "event",
-    current: "Firmenfeier in München? Im STORIA passen 6 bis 300 Personen — von intimer Runde bis großem Event. Karlstraße, Maxvorstadt.",
-    usp_missing: "keine USP-Phrase, Kapazität 300 widerspricht Fakten (max 180 Gäste)",
+    current: "Firmenfeier in München? Im STORIA feiern Sie bis 200 stehend / 100 sitzend — von intimer Runde bis großem Event. Karlstraße, Maxvorstadt.",
+    usp_missing: "keine USP-Phrase, alte Kapazitätsangabe falsch (korrekt: bis 200 stehend / 100 sitzend)",
     A: "Firmenfeier in München? Im STORIA Karlstraße passen bis 180 Gäste — von intimer Runde bis großem Event. Überdachte Terrasse, wetterfest. Maxvorstadt.",
     B: "Bis 180 Gäste in der Maxvorstadt: das STORIA Karlstraße eignet sich für Firmenfeiern, Geburtstage und Events. Überdachte Terrasse, Raucher willkommen.",
   },

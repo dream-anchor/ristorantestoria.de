@@ -85,7 +85,13 @@ function findSpecialMenuInFallback(slug) {
  * Fetch complete menu data (menu + categories + items) for SSR
  * Falls back to static JSON if Supabase is unavailable
  */
-async function fetchCompleteMenuData(menuType) {
+async function fetchCompleteMenuData(menuType, maestro) {
+  // P8: Schalter an -> MAESTRO ist die einzige Quelle, kein Fallback. Ein Fehler wirft, die Route zählt
+  // als Fehler und der Build endet mit Exit 1 -> kein Deploy, die alte Seite bleibt online.
+  if (maestro?.maestroSpeisekarteAktiv()) {
+    console.log(`📥 ${menuType}: Speisekarte aus MAESTRO`);
+    return maestro.ladeMaestroMenu(menuType);
+  }
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     const fallback = MENU_FALLBACKS[menuType];
     if (fallback) {
@@ -547,7 +553,8 @@ async function generateRoutesToPrerender() {
 // Main execution
 (async () => {
   const template = fs.readFileSync(toAbsolute("dist/index.html"), "utf-8");
-  const { render } = await import("./dist/server/entry-server.js");
+  const { render, ladeMaestroMenu, maestroSpeisekarteAktiv } = await import("./dist/server/entry-server.js");
+  const maestro = { ladeMaestroMenu, maestroSpeisekarteAktiv };
 
   const routesToPrerender = await generateRoutesToPrerender();
   
@@ -571,7 +578,7 @@ async function generateRoutesToPrerender() {
       if (menuType) {
         if (!menuDataCache[menuType]) {
           console.log(`📥 Fetching ${menuType} menu data for SSR...`);
-          menuDataCache[menuType] = await fetchCompleteMenuData(menuType);
+          menuDataCache[menuType] = await fetchCompleteMenuData(menuType, maestro);
         }
         menuData = menuDataCache[menuType];
       }
@@ -613,6 +620,9 @@ async function generateRoutesToPrerender() {
           ${helmet.script ? helmet.script.toString() : ""}
         `;
         finalHtml = finalHtml.replace("</head>", `${helmetHtml}</head>`);
+        // <html lang> der aktiven Sprache statt des statischen lang="de" aus index.html
+        const htmlAttrs = helmet.htmlAttributes ? helmet.htmlAttributes.toString() : "";
+        if (htmlAttrs) finalHtml = finalHtml.replace(/<html[^>]*>/, `<html ${htmlAttrs}>`);
       }
 
       // 4. Determine File Path (Fix for IONOS 403)

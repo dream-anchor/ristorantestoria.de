@@ -52,6 +52,13 @@ die man ohne Lesen falsch macht:
 **IMMER über OpenRouter** (erreichbar via Composio). Nicht Pixelcut/Higsfield für Bild-Edits nutzen.
 Bild-zu-Bild-Editing (z. B. Fotos anpassen) läuft über OpenRouter-Bildmodelle (z. B. Gemini Flash Image / „nano-banana").
 
+## KI-Bilder kennzeichnen (PFLICHT bei jeder Bild-Arbeit)
+**Vor jedem Einbau, Tausch oder jeder Bearbeitung eines Bildes/Videos `docs/KI-BILDER-KENNZEICHNUNG.md` lesen.**
+Jedes Bild wird vor dem Einbau eingestuft (echtes Foto / KI-bearbeitet / KI-generiert). Jedes KI-Bild
+steht im Register `src/config/ki-bilder.ts` und wird nur über `src/components/KiBild.tsx`
+(`<KiBild>` bzw. `<KiHinweis>`) eingebaut: sichtbares Badge, Caption und alt in allen 4 Sprachen,
+vorgerendert. Unsichere Bilder nicht raten, sondern Antoine fragen.
+
 ## Google Business Profile (GBP) API
 
 **Status:** Aktiv, OAuth eingerichtet (Mai 2026)

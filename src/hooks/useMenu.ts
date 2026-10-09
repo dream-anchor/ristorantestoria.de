@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import foodFallback from "@/data/menu-food-fallback.json";
 import drinksFallback from "@/data/menu-drinks-fallback.json";
 import lunchFallback from "@/data/menu-lunch-fallback.json";
+import { ladeMaestroMenu, maestroSpeisekarteAktiv } from "@/lib/maestroSpeisekarte";
 
 const MENU_FALLBACKS: Record<string, Menu> = {
   food: foodFallback as unknown as Menu,
@@ -57,6 +58,8 @@ export interface Menu {
   subtitle_fr: string | null;
   is_published: boolean;
   categories: MenuCategory[];
+  /** Nur bei MAESTRO-Karten (P8): fertiges HTML-Fragment je Sprache fürs Speisekarten-Widget. */
+  maestro?: { slug: string; stand: string; html: Record<string, string> };
 }
 
 // Shared function to fetch menu data by ID
@@ -152,6 +155,9 @@ export const useMenu = (menuType: MenuType) => {
   return useQuery({
     queryKey: ['menu', menuType],
     queryFn: async (): Promise<Menu | null> => {
+      if (maestroSpeisekarteAktiv() && menuType in { food: 1, drinks: 1, lunch: 1 }) {
+        return (await ladeMaestroMenu(menuType)) as Menu; // ohne Fallback: Fehler bleibt sichtbar
+      }
       if (!supabase) return MENU_FALLBACKS[menuType] ?? null;
       // Fetch menu by type
       const { data: menu, error: menuError } = await supabase

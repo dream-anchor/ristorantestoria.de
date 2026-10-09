@@ -14,7 +14,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "fetch-reviews": "node scripts/fetch-google-reviews.mjs",
-    "update-wm": "node scripts/update-wm-fixtures.mjs",
     "generate:llms-full": "npx tsx scripts/generate-llms-full.ts",
     "geo:monitor": "node scripts/geo-monitor.mjs",
     "geo:report": "node scripts/geo-monitor.mjs --report",

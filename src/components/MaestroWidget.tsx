@@ -1,4 +1,4 @@
-import { useEffect, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 
 const WIDGET_SRC = "https://storia.schrittmacher.ai/api/public/widgets/v1/maestro.js";
 
@@ -45,6 +45,31 @@ export const useMaestroLoader = () =>
     document.body.appendChild(script);
   }, []);
 
+const DANKE: Record<string, string> = {
+  de: "Danke! Ihre Anfrage ist bei uns angekommen.",
+  en: "Thank you! Your enquiry has arrived.",
+  it: "Grazie! La sua richiesta è arrivata.",
+  fr: "Merci ! Votre demande nous est bien parvenue.",
+};
+
+/**
+ * Abschnittsüberschrift über einem MAESTRO-Widget: nach dem Absenden (Widget-Event
+ * `MAESTRO_INQUIRY_SUBMITTED` auf `window`) steht dort der Dank statt „Jetzt anfragen“;
+ * `useMaestroGesendet` blendet zugleich den Einleitungstext aus.
+ */
+export const useMaestroGesendet = () => {
+  const [gesendet, setGesendet] = useState(false);
+  useEffect(() => {
+    const beiAbsenden = () => setGesendet(true);
+    window.addEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
+    return () => window.removeEventListener("MAESTRO_INQUIRY_SUBMITTED", beiAbsenden);
+  }, []);
+  return gesendet;
+};
+
+export const useMaestroTitel = (titel: string, lang: string) =>
+  useMaestroGesendet() ? DANKE[lang] ?? DANKE.de : titel;
+
 const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight = "560px" }: MaestroWidgetProps) => {
   useMaestroLoader();
 
@@ -80,6 +105,16 @@ const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight
 export const MaestroPakete = ({ kategorie, lang, children }: { kategorie: string; lang: string; children?: ReactNode }) => {
   useMaestroLoader();
   return <div data-maestro-pakete={kategorie} data-maestro-lang={lang} style={{ "--maestro-accent": "#931F23" } as CSSProperties}>{children}</div>;
+};
+
+/**
+ * Speisekarte aus MAESTRO (Loader-Teil `speisekarte`). Das HTML-Fragment der API steht schon im
+ * vorgerenderten HTML (SEO, kein Layout-Sprung); der Loader erkennt am gleichen data-maestro-stand,
+ * dass nichts neu zu rendern ist, und aktualisiert nur, wenn die Karte inzwischen neuer ist.
+ */
+export const MaestroSpeisekarte = ({ slug, lang, html }: { slug: string; lang: string; html: string }) => {
+  useMaestroLoader();
+  return <div data-maestro-speisekarte={slug} data-maestro-lang={lang} style={{ "--maestro-accent": "#931F23" } as CSSProperties} dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
 export default MaestroWidget;

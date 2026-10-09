@@ -9,6 +9,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import ReservationBooking from "@/components/ReservationBooking";
 import AnlassMaestroWidget from "@/components/AnlassMaestroWidget";
+import { useMaestroGesendet, useMaestroTitel } from "@/components/MaestroWidget";
 import GoogleReviews from "@/components/GoogleReviews";
 import PhotoGallery from "@/components/PhotoGallery";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -29,6 +30,7 @@ import candlelightImage from "@/assets/romantisches-dinner-kerzenlicht-storia-mu
 import candlelightImage600 from "@/assets/romantisches-dinner-kerzenlicht-storia-muenchen-600w.webp";
 import interiorDetailsImage from "@/assets/ristorante-storia-uebersicht-details.webp";
 import interiorDetailsImage600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
+import KiBild from "@/components/KiBild";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { useSeasonalMenuActive } from "@/hooks/useSeasonalMenuActive";
@@ -150,6 +152,8 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
   const { t, language } = useLanguage();
   usePrerenderReady(true);
   const s = t.seo.silvester;
+  const anfrageTitel = useMaestroTitel(s.inquiryTitle, language);
+  const anfrageGesendet = useMaestroGesendet();
   // `useSeasonalMenuActive` liefert nur noch den defensiven Fallback für `effectiveConfig`, falls
   // `seasonalConfig` nicht übergeben wird. Sein `isActive` speiste ausschließlich den
   // standalone-Zweig (E1.7) — `isActive` ist hier jetzt rein datengetrieben, wie bei Weihnachten.
@@ -385,7 +389,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
 
         {/* Hero */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <img src={silvesterHeroImage} srcSet={`${silvesterHeroImage600} 600w, ${silvesterHeroImage} 1200w`} sizes="100vw" alt={s.heroTitle} className="absolute inset-0 w-full h-full object-cover" loading="eager" fetchPriority="high" width={1200} height={800} />
+          <KiBild datei="silvester-dinner-gala-storia-muenchen.webp" src={silvesterHeroImage} srcSet={`${silvesterHeroImage600} 600w, ${silvesterHeroImage} 1200w`} sizes="100vw" className="absolute inset-0 w-full h-full object-cover" loading="eager" fetchPriority="high" width={1200} height={800} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
           <div className="relative z-10 container mx-auto px-4 py-16 text-center">
             <Link to="/"><img src={storiaLogo} alt="STORIA Logo" loading="eager" className="h-20 md:h-28 w-auto mx-auto mb-6 brightness-0 invert" /></Link>
@@ -483,7 +487,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">Aperitivo-Empfang, festliches Ambiente und stilvolles Interieur – ein Eindruck vom Rahmen Ihres Silvesterabends im STORIA.</p>
               <PhotoGallery columns={3} images={[
                 { src: aperitivoBarImage, srcSet: `${aperitivoBarImage600} 600w, ${aperitivoBarImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Aperitivo-Empfang im Ristorante STORIA München – stilvolle Bar-Atmosphäre", caption: "Aperitivo-Empfang · Bar" },
-                { src: candlelightImage, srcSet: `${candlelightImage600} 600w, ${candlelightImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Festliches Kerzenlicht-Ambiente im Ristorante STORIA München", caption: "Festliches Ambiente · Kerzenlicht" },
+                { src: candlelightImage, ki: "romantisches-dinner-kerzenlicht-storia-muenchen.webp", srcSet: `${candlelightImage600} 600w, ${candlelightImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Festliches Kerzenlicht-Ambiente im Ristorante STORIA München", caption: "Festliches Ambiente · Kerzenlicht" },
                 { src: interiorDetailsImage, srcSet: `${interiorDetailsImage600} 600w, ${interiorDetailsImage} 1400w`, sizes: "(max-width: 768px) 100vw, 33vw", alt: "Elegantes Interieur des Ristorante STORIA München in der Maxvorstadt", caption: "Interieur · Details" },
               ]} />
             </section>
@@ -576,8 +580,8 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                 Formulars. Für alles, was über eine Tischbuchung hinausgeht: größere Gruppen,
                 Fragen zum Gala-Menü, Sonderwünsche. */}
             <section className="mb-16" id="anfrage" aria-labelledby="silvester-anfrage">
-              <h2 id="silvester-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{s.inquiryTitle}</h2>
-              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.inquiryIntro}</p>
+              <h2 id="silvester-anfrage" className="text-3xl font-serif font-bold mb-4 text-center">{anfrageTitel}</h2>
+              {!anfrageGesendet && <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.inquiryIntro}</p>}
               <div className="max-w-2xl mx-auto">
                 <AnlassMaestroWidget anlass="silvester" lang={language} />
               </div>

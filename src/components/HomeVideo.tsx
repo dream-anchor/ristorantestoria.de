@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Helmet } from "@/lib/helmetAsync";
 import { STORIA } from "@/config/storia-entity";
-import AiImageBadge from "@/components/AiImageBadge";
+import { KiHinweis } from "@/components/KiBild";
 
 const VIDEO_PATH = "/pizza-burrata-steinofen-storia-muenchen.mp4";
 const POSTER_PATH = "/pizza-burrata-steinofen-storia-muenchen.jpg";
@@ -54,7 +54,7 @@ const HomeVideo = () => {
       <div className="container mx-auto px-4">
         <figure className="max-w-[1100px] mx-auto m-0">
           <div className="relative overflow-hidden rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-white/40">
-            <AiImageBadge />
+            <KiHinweis datei="pizza-burrata-steinofen-storia-muenchen.mp4" />
             <video
               ref={videoRef}
               className="w-full h-auto block"

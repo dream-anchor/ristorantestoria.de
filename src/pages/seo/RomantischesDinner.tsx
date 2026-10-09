@@ -18,6 +18,7 @@ import restaurantUebersicht from "@/assets/ristorante-storia-uebersicht.webp";
 import restaurantUebersicht600 from "@/assets/ristorante-storia-uebersicht-600w.webp";
 import locationDetails from "@/assets/ristorante-storia-uebersicht-details.webp";
 import locationDetails600 from "@/assets/ristorante-storia-uebersicht-details-600w.webp";
+import KiBild from "@/components/KiBild";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -131,11 +132,10 @@ const RomantischesDinner = () => {
         
         {/* Hero Section */}
         <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-          <img
+          <KiBild datei="romantisches-dinner-kerzenlicht-storia-muenchen.webp"
             src={romanticDinnerHero}
             srcSet={`${romanticDinnerHero600} 600w, ${romanticDinnerHero} 1200w`}
             sizes="100vw"
-            alt={t.seo.romanticDinner.heroTitle}
             width={1920}
             height={1080}
             loading="eager"

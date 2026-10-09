@@ -67,7 +67,10 @@ async function getAccessToken(): Promise<string> {
         grant_type: "refresh_token",
       }),
     });
-    const refreshed = await res.json() as { access_token: string; expires_in: number };
+    const refreshed = await res.json() as { access_token?: string; expires_in?: number; error?: string; error_description?: string };
+    if (!res.ok || !refreshed.access_token) {
+      throw new Error(`OAuth Token-Refresh fehlgeschlagen (${res.status}): ${refreshed.error} — ${refreshed.error_description}. Re-Auth nötig: npx tsx scripts/gbp-auth-test.ts`);
+    }
     accessToken = refreshed.access_token;
     tokens.access_token = accessToken;
     tokens.expiry_date = Date.now() + refreshed.expires_in * 1000;
@@ -149,7 +152,7 @@ async function getRecentClusters(): Promise<string[]> {
 
 async function pickPostFromDB(pool: "A" | "B", season: string, themeSlot: string | null, recentIds: number[]) {
   // Pool A: theme_slot muss passen. Pool B: kein theme_slot-Filter.
-  const slotFilter = themeSlot
+  const slotFilter = (pool === "A" && themeSlot)
     ? sql`AND theme_slot = ${themeSlot}`
     : sql``;
 
@@ -327,11 +330,12 @@ async function generatePoolCPost(weekday: string, season: string, themeSlot: str
 // Kein Fallback auf "irgendein Bild" — Post wird dann übersprungen + Slack-Alert.
 
 async function pickImage(tags: string[], season: string, minRepetitionDays = 21) {
-  // Primär: Tag + Season + Repetition-Check
+  // season='allyear' bedeutet: jede Bildseason akzeptabel (kein Season-Filter)
+  // season='spring' etc.: nur 'allyear'- und matching-season Bilder
   const [match] = await sql`
     SELECT * FROM gbp_images
     WHERE tags && ${tags}::text[]
-      AND (season = 'allyear' OR season = ${season})
+      AND (${season} = 'allyear' OR season = 'allyear' OR season = ${season})
       AND is_active = TRUE
       AND (last_used IS NULL OR last_used < NOW() - ${minRepetitionDays} * INTERVAL '1 day')
     ORDER BY COALESCE(last_used, '2000-01-01') ASC
@@ -343,7 +347,7 @@ async function pickImage(tags: string[], season: string, minRepetitionDays = 21)
   const [anyTagMatch] = await sql`
     SELECT id FROM gbp_images
     WHERE tags && ${tags}::text[]
-      AND (season = 'allyear' OR season = ${season})
+      AND (${season} = 'allyear' OR season = 'allyear' OR season = ${season})
       AND is_active = TRUE
     LIMIT 1
   `;

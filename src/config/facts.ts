@@ -71,6 +71,16 @@ export const FACTS = {
     standing: STORIA.capacity.indoor.standing, // Stehempfang, einheitlich (innen/außen/gemischt)
   },
 
+  // ── Public Viewing (/public-viewing-muenchen/, Antoine 2026-10-07) ──
+  // Alle Spiele von EM 2028 und WM 2030, kein Eintritt. Terrasse im Sommer bis 100 außen.
+  // Kapazitätstexte innen kommen ausschließlich aus `capacity` oben.
+  publicViewing: {
+    alleSpiele: true,
+    eintritt: "frei",
+    terrasseAussen: 100,
+    nearestStop: "Karlstraße (Tram 20/21)",
+  },
+
   // ── Silvester Gala-Dinner — SSoT (Fakten-Festlegung Antoine, 2026-09-13) ──
   // Es gibt EIN Gala-Menü mit VIER Gängen. Es kostet 99 € pro Person, mit
   // Weinbegleitung 150 € pro Person. Der Unterschied zwischen den beiden

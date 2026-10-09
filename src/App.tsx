@@ -4,6 +4,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider, HydrationBoundary } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
+import SEO from "./components/SEO";
+import { useLanguage } from "./contexts/LanguageContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AlternateLinksProvider } from "@/contexts/AlternateLinksContext";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
@@ -80,6 +82,25 @@ const AdminGSC = lazy(() => import("./pages/AdminGSC"));
 const AdminSEO = lazy(() => import("./pages/AdminSEO"));
 const AdminVormerkungen = lazy(() => import("./pages/AdminVormerkungen"));
 
+// /menu ist eine Weiterleitung auf die Speisekarte der jeweiligen Sprache. Das vorgerenderte
+// HTML bekommt trotzdem selbstreferenzierendes canonical und passendes html lang (vorher
+// lang="de" und kein canonical auf /en|it|fr/menu/).
+const MENU_ZIEL: Record<string, string> = {
+  de: "/speisekarte/",
+  en: "/en/food-menu/",
+  it: "/it/menu-cibo/",
+  fr: "/fr/carte/",
+};
+const MenuRedirect = () => {
+  const { language } = useLanguage();
+  return (
+    <>
+      <SEO canonical="/menu/" title="Speisekarte" />
+      <Navigate to={MENU_ZIEL[language] ?? "/speisekarte/"} replace />
+    </>
+  );
+};
+
 // Get dehydrated state from SSR (only on client)
 const getDehydratedState = () => {
   if (typeof window !== "undefined" && (window as any).__REACT_QUERY_STATE__) {
@@ -143,7 +164,7 @@ const routeComponents: Record<string, React.ComponentType> = {
   "filmfest-muenchen": FilmfestMuenchen,
   "messe-muenchen": MesseMuenchen,
   "messe-muenchen/bauma": MesseBauma,
-  "wm-2026-public-viewing-muenchen": WmPublicViewingMuenchen,
+  "public-viewing-muenchen": WmPublicViewingMuenchen,
   "geburtstagsfeier-muenchen": GeburtstagsfeierMuenchen,
   "neapolitanische-pizza-muenchen": NeapolitanischePizza,
   "wild-essen-muenchen": WildEssenMuenchen,
@@ -271,11 +292,11 @@ const AppRoutes = () => {
         <Route path="/fr/confirmation-newsletter" element={<NewsletterBestaetigung lang="fr" />} />
         <Route path="/fr/confirmation-newsletter/" element={<NewsletterBestaetigung lang="fr" />} />
 
-        {/* /menu → /speisekarte (thin content page removed) */}
-        <Route path="/menu" element={<Navigate to="/speisekarte/" replace />} />
-        <Route path="/en/menu" element={<Navigate to="/speisekarte/" replace />} />
-        <Route path="/it/menu" element={<Navigate to="/speisekarte/" replace />} />
-        <Route path="/fr/menu" element={<Navigate to="/speisekarte/" replace />} />
+        {/* /menu → Speisekarte der jeweiligen Sprache (thin content page removed) */}
+        <Route path="/menu" element={<MenuRedirect />} />
+        <Route path="/en/menu" element={<MenuRedirect />} />
+        <Route path="/it/menu" element={<MenuRedirect />} />
+        <Route path="/fr/menu" element={<MenuRedirect />} />
 
         {/* Legacy URL redirects (previously in .htaccess) */}
         <Route path="/mittagsmenu" element={<Navigate to="/mittags-menu/" replace />} />

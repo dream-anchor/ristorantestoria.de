@@ -12,7 +12,7 @@ import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { getLocalizedPath } from "@/config/routes";
 import { FACTS } from "@/config/facts";
-import MaestroWidget, { MaestroPakete } from "@/components/MaestroWidget";
+import MaestroWidget, { MaestroPakete, useMaestroGesendet, useMaestroTitel } from "@/components/MaestroWidget";
 import { messeContent, PREISE, eur, dauer, kalender, HOTELS_ZENTRAL, HOTELS_MESSE, type MesseTexte } from "./messeContent";
 
 export const faqSchema = (faq: { q: string; a: string }[]) => ({
@@ -74,10 +74,13 @@ const MESSE_FORMULAR: Record<Language, string> = {
   fr: "23d6fb27-59a7-48ef-a42f-89e033bfdc02",
 };
 
-export const AnfrageBlock = ({ titel, lead, lang }: { titel: string; lead: string; lang: Language }) => (
+export const AnfrageBlock = ({ titel, lead, lang }: { titel: string; lead: string; lang: Language }) => {
+  const anzeigeTitel = useMaestroTitel(titel, lang);
+  const gesendet = useMaestroGesendet();
+  return (
   <section id="anfrage" className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center mb-16 scroll-mt-24">
-    <h2 className="text-3xl font-serif font-bold mb-4">{titel}</h2>
-    <p className="mb-8 opacity-90">{lead}</p>
+    <h2 className="text-3xl font-serif font-bold mb-4">{anzeigeTitel}</h2>
+    {!gesendet && <p className="mb-8 opacity-90">{lead}</p>}
     <div className="bg-background text-foreground rounded-xl p-4 md:p-8 mb-8 text-left">
       <MaestroWidget widgetId={MESSE_FORMULAR[lang]} lang={lang} anchorId="messe-formular" />
     </div>
@@ -87,7 +90,8 @@ export const AnfrageBlock = ({ titel, lead, lang }: { titel: string; lead: strin
       <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
     </div>
   </section>
-);
+  );
+};
 
 const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
   <h2 id={id} className="text-3xl font-serif font-bold mb-6 scroll-mt-24">{children}</h2>

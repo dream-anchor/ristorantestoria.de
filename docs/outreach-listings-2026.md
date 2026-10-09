@@ -31,9 +31,9 @@ Ristorante STORIA · Karlstraße 47a · 80333 München · Tel +49 89 51519696 ·
 
 **Listing-Content für die Event-Portale (vorbereitet):**
 - Name: Ristorante STORIA · Kategorie: Restaurant / Eventlocation
-- Kapazität: 100 Plätze innen + 100 überdachte Terrasse, Stehempfang bis 300 Gäste, Private Room
+- Kapazität: bis 200 stehend / 100 sitzend, Private Room
 - Menüs ab 45 €/Person · Lage: Maxvorstadt, 5 Min. vom Königsplatz
-- Fotos: Private Room, Terrasse, Steinofen · Link → /firmenfeier-muenchen/
+- Fotos: Private Room, Steinofen · Link → /firmenfeier-muenchen/
 
 ---
 
@@ -110,7 +110,7 @@ Publisher aktualisieren gerade aktiv („vor 3–5 Tagen"-Timestamps):
 > Hallo [Name],
 >
 > als Ergänzung zu eurer Übersicht für Firmenfeiern in München: Das STORIA in der Maxvorstadt
-> bietet **100 Plätze innen + 100 auf der überdachten Terrasse**, Stehempfang bis 300 Gäste,
+> bietet **bis 200 stehend / 100 sitzend**,
 > Menüs ab 45 €/Person und einen Private Room. Zentral, 5 Min. vom Königsplatz.
 >
 > Infos: https://www.ristorantestoria.de/firmenfeier-muenchen/
@@ -140,7 +140,7 @@ Publisher aktualisieren gerade aktiv („vor 3–5 Tagen"-Timestamps):
 > als Ergänzung zu eurer Übersicht für Weihnachtsfeiern in München: Das STORIA in der
 > Maxvorstadt bietet individuelle Business-Menüs für Firmenweihnachtsfeiern und
 > Betriebsweihnachtsfeiern, einen Private Room für kleinere Runden sowie auf Wunsch exklusive
-> Locationnutzung mit Stehempfang bis 300 Gäste – süditalienische Küche, zentral, 5 Gehminuten
+> Locationnutzung mit Stehempfang (bis 200 stehend / 100 sitzend) – süditalienische Küche, zentral, 5 Gehminuten
 > vom Königsplatz.
 >
 > Infos: https://www.ristorantestoria.de/weihnachtsfeier-muenchen/
