@@ -10,6 +10,8 @@ import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { getLocalizedPath } from "@/config/routes";
 import MaestroWidget, { MaestroPakete, useMaestroGesendet, useMaestroTitel } from "@/components/MaestroWidget";
+import heroBild from "@/assets/firmenfeier-eventlocation-storia-muenchen.webp";
+import heroBild600 from "@/assets/firmenfeier-eventlocation-storia-muenchen-600w.webp";
 import { messeContent, PREISE, eur, dauer, kalender, HOTELS_ZENTRAL, HOTELS_MESSE, type MesseTexte } from "./messeContent";
 
 export const faqSchema = (faq: { q: string; a: string }[]) => ({
@@ -18,18 +20,22 @@ export const faqSchema = (faq: { q: string; a: string }[]) => ({
   mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
 });
 
+export const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
+  <h2 id={id} className="text-2xl md:text-[30px] leading-tight font-serif font-bold mb-6 scroll-mt-24">{children}</h2>
+);
+
 export const Tabelle = ({ kopf, zeilen }: { kopf: string[]; zeilen: (string | null)[][] }) => (
   <div className="overflow-x-auto">
-    <table className="w-full text-sm border-collapse">
+    <table className="w-full text-[15px] border-collapse bg-card border border-border rounded overflow-hidden">
       <thead>
-        <tr className="border-b border-border text-left">
-          {kopf.map((k) => <th key={k} className="py-2 pr-4 font-semibold">{k}</th>)}
+        <tr className="text-left bg-muted">
+          {kopf.map((k) => <th key={k} className="px-3 py-3 text-sm font-semibold border-b border-border">{k}</th>)}
         </tr>
       </thead>
       <tbody>
         {zeilen.map((z, i) => (
-          <tr key={i} className="border-b border-border/50 align-top">
-            {z.map((c, j) => <td key={j} className="py-2 pr-4">{c ?? "–"}</td>)}
+          <tr key={i} className="border-b border-border last:border-0 align-top">
+            {z.map((c, j) => <td key={j} className="px-3 py-3">{c ?? "–"}</td>)}
           </tr>
         ))}
       </tbody>
@@ -37,20 +43,64 @@ export const Tabelle = ({ kopf, zeilen }: { kopf: string[]; zeilen: (string | nu
   </div>
 );
 
+const knopf = "h-auto px-6 py-3 text-sm uppercase tracking-[.1em] font-semibold rounded";
+
+export const Hero = ({ kicker, h1, intro, ctaAnfrage, ctaMenues, bild, bild600, alt }: { kicker: string; h1: string; intro: string; ctaAnfrage: string; ctaMenues: string; bild: string; bild600: string; alt: string }) => (
+  <section className="py-8 md:py-14 font-sans">
+    <div className="container mx-auto px-4 max-w-5xl grid md:grid-cols-[1.1fr_.9fr] gap-6 md:gap-10 items-center">
+      <img src={bild} srcSet={`${bild600} 600w, ${bild} 1200w`} sizes="(min-width: 768px) 440px, 100vw" alt={alt} className="w-full aspect-[16/10] md:aspect-[4/3] object-cover rounded md:order-2" loading="eager" fetchPriority="high" />
+      <div>
+        <p className="font-display text-xl text-muted-foreground mb-2">{kicker}</p>
+        <h1 className="text-[30px] md:text-[44px] leading-tight font-serif font-bold mb-5">{h1}</h1>
+        <p className="text-base md:text-lg mb-8">{intro}</p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Button asChild className={knopf}><a href="#anfrage">{ctaAnfrage}</a></Button>
+          <Button variant="outline" asChild className={`${knopf} border-primary text-primary bg-transparent hover:bg-primary/5 hover:text-primary`}><a href="#menues">{ctaMenues}</a></Button>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+export const Zitat = ({ children }: { children: React.ReactNode }) => (
+  <p className="font-display text-[22px] md:text-[26px] leading-snug border-l-4 border-foreground/70 pl-5 my-6">{children}</p>
+);
+
+const Plus = () => (
+  <span aria-hidden className="text-xl leading-none text-muted-foreground shrink-0"><span className="group-open:hidden">+</span><span className="hidden group-open:inline">–</span></span>
+);
+const summaryKlasse = "flex items-center justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 py-4";
+
+export const Aufklapper = ({ titel, children }: { titel: string; children: React.ReactNode }) => (
+  <details className="group bg-card border border-border rounded">
+    <summary className={summaryKlasse}><h3 className="font-serif font-semibold text-lg">{titel}</h3><Plus /></summary>
+    <div className="px-5 pb-5">{children}</div>
+  </details>
+);
+
+export const Faq = ({ titel, faq }: { titel: string; faq: { q: string; a: string }[] }) => (
+  <section className="mb-16">
+    <H2>{titel}</H2>
+    <div className="space-y-2">
+      {faq.map((f) => <Aufklapper key={f.q} titel={f.q}><p>{f.a}</p></Aufklapper>)}
+    </div>
+  </section>
+);
+
 export const MenueKarten = ({ m, lang, detail }: { m: MesseTexte["menue"]; lang: Language; detail: boolean }) => (
   <div className="grid md:grid-cols-3 gap-6">
     {m.menues.map((menue) => (
-      <div key={menue.key} className="border border-border rounded-xl p-6 bg-card flex flex-col">
-        <h3 className="text-xl font-serif font-bold">{menue.name}</h3>
-        <p className="text-sm text-muted-foreground mb-3">{menue.art}</p>
-        <p className="text-2xl font-bold">{eur(PREISE[menue.key].menue, lang)} <span className="text-sm font-normal text-muted-foreground">{m.proPerson}</span></p>
-        <p className="text-sm mb-4">{m.mitWein}: {eur(PREISE[menue.key].wein, lang)}</p>
+      <div key={menue.key} className="border border-border rounded p-5 bg-card flex flex-col">
+        <h3 className="text-[22px] font-serif font-semibold">{menue.name}</h3>
+        <p className="text-xs uppercase tracking-[.1em] text-muted-foreground mb-3">{detail ? m.gaenge4 : menue.art}</p>
+        <p className="mb-3"><span className="text-[30px] font-serif font-semibold">{eur(PREISE[menue.key].menue, lang)}</span> <span className="text-xs text-muted-foreground">{m.proPerson}</span></p>
         {detail && (
-          <ul className="text-sm space-y-1 list-disc pl-5 mb-4 flex-grow">
+          <ul className="text-sm space-y-1 list-disc pl-5 mb-4">
             {menue.gaenge.map((g) => <li key={g}>{g}</li>)}
           </ul>
         )}
-        <Button variant="outline" asChild className="mt-auto"><a href="#anfrage">{m.anfragen}</a></Button>
+        <p className="text-xs text-muted-foreground mt-auto mb-3">{m.mitWein} {eur(PREISE[menue.key].wein, lang)} {m.proPerson.replace(/,?\s*(inkl|incl|IVA|TVA)\b.*$/, "")}</p>
+        <Button asChild className={`${knopf} w-full`}><a href="#anfrage">{m.anfragen}</a></Button>
       </div>
     ))}
   </div>
@@ -89,10 +139,6 @@ export const AnfrageBlock = ({ titel, lead, lang }: { titel: string; lead: strin
   );
 };
 
-const H2 = ({ children, id }: { children: React.ReactNode; id?: string }) => (
-  <h2 id={id} className="text-3xl font-serif font-bold mb-6 scroll-mt-24">{children}</h2>
-);
-
 const MesseMuenchen = () => {
   const { t, language } = useLanguage();
   usePrerenderReady(true);
@@ -109,30 +155,20 @@ const MesseMuenchen = () => {
 
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <section className="bg-secondary/40 py-16">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <p className="text-sm uppercase tracking-widest text-primary mb-3">{h.kicker}</p>
-            <h1 className="text-3xl md:text-5xl font-serif font-bold mb-6">{h.h1}</h1>
-            <p className="text-lg text-muted-foreground mb-8 max-w-3xl">{h.intro}</p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" asChild><a href="#anfrage">{h.ctaAnfrage}</a></Button>
-              <Button size="lg" variant="outline" asChild><a href="#menues">{h.ctaMenues}</a></Button>
-            </div>
-          </div>
-        </section>
+        <Hero kicker={h.kicker} h1={h.h1} intro={h.intro} ctaAnfrage={h.ctaAnfrage} ctaMenues={h.ctaMenues} bild={heroBild} bild600={heroBild600} alt={`STORIA, Karlstraße 47a – ${h.kicker}`} />
         <Navigation />
 
         <main className="container mx-auto px-4 py-12 flex-grow">
-          <article className="max-w-5xl mx-auto">
+          <article className="max-w-5xl mx-auto font-sans">
             <BreadcrumbNav crumbs={[{ label: t.breadcrumb.home, href: language === "de" ? "/" : `/${language}/` }, { label: h.breadcrumb }]} />
 
-            <section className="mb-16 border border-border rounded-xl p-6 bg-card">
+            <section className="mb-16 border border-border rounded p-6 bg-card">
               <h2 className="text-2xl font-serif font-bold mb-4">{h.blickTitel}</h2>
-              <dl className="grid md:grid-cols-[14rem_1fr] gap-x-6 gap-y-2 text-sm">
+              <dl className="grid md:grid-cols-[200px_1fr] gap-x-6 gap-y-2 text-[15px]">
                 {h.blick.map(([k, v]) => (
                   <div key={k} className="contents">
                     <dt className="font-semibold">{k}</dt>
-                    <dd className="text-muted-foreground mb-2 md:mb-0">{v}</dd>
+                    <dd className="mb-2 md:mb-0">{v}</dd>
                   </div>
                 ))}
               </dl>
@@ -148,78 +184,79 @@ const MesseMuenchen = () => {
 
             <section className="mb-16">
               <H2>{h.platzTitel}</H2>
-              <p className="mb-6">{h.platzP1}</p>
-              <h3 className="text-xl font-serif font-bold mb-2">{h.hausTitel}</h3>
-              <p>{h.hausP}</p>
+              <div className="grid md:grid-cols-2 gap-8 items-start">
+                <p>{h.platzP1}</p>
+                <div className="border border-border rounded p-6 bg-card">
+                  <h3 className="text-lg font-serif font-semibold mb-2">{h.hausTitel}</h3>
+                  <p>{h.hausP}</p>
+                </div>
+              </div>
             </section>
 
             <section className="mb-16">
               <H2>{h.ablaufTitel}</H2>
-              <ol className="grid md:grid-cols-4 gap-6">
-                {h.ablauf.map(([titel, text], i) => (
-                  <li key={titel} className="border border-border rounded-xl p-5 bg-card">
-                    <span className="text-primary font-bold">{i + 1}</span>
-                    <h3 className="font-semibold mb-1">{titel}</h3>
-                    <p className="text-sm text-muted-foreground">{text}</p>
-                  </li>
+              <ol className="list-decimal pl-5 space-y-2">
+                {h.ablauf.map(([titel, text]) => (
+                  <li key={titel}><strong>{titel}:</strong> {text}</li>
                 ))}
               </ol>
             </section>
 
             <section className="mb-16">
               <H2 id="anfahrt">{h.anfahrtTitel}</H2>
-              <p className="font-semibold mb-4">{h.anfahrtLead}</p>
-              <ol className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                {h.schritte.map(([nr, titel, text]) => (
-                  <li key={titel} className="border border-border rounded-xl p-4 bg-card">
-                    <span className="inline-block w-7 h-7 rounded-full bg-primary text-primary-foreground text-center leading-7 text-sm font-bold mb-2">{nr}</span>
-                    <p className="font-semibold">{titel}</p>
-                    <p className="text-sm text-muted-foreground">{text}</p>
+              <p className="text-muted-foreground -mt-4 mb-4">{h.anfahrtLead}</p>
+              <ol className="grid sm:grid-cols-4 gap-4 sm:gap-0 my-6">
+                {h.schritte.map(([nr, titel, text], i) => (
+                  <li key={titel} className="relative grid grid-cols-[46px_1fr] gap-3 items-center sm:block sm:text-center sm:px-2">
+                    {i < h.schritte.length - 1 && <span aria-hidden className="sm:hidden absolute left-[22px] top-[23px] -bottom-4 w-[3px] bg-foreground" />}
+                    {i > 0 && <span aria-hidden className="hidden sm:block absolute top-[22px] -left-1/2 w-full h-[3px] bg-foreground" />}
+                    <span className={`relative z-10 w-[46px] h-[46px] rounded-full border-2 border-foreground grid place-items-center text-sm font-semibold sm:mx-auto sm:mb-2.5 ${nr === "S" ? "bg-foreground text-background" : "bg-card"}`}>{nr}</span>
+                    <div>
+                      <p className="font-semibold">{titel}</p>
+                      <p className="text-[13px] text-muted-foreground">{text}</p>
+                    </div>
                   </li>
                 ))}
               </ol>
-              <p className="mb-6">{h.anfahrtSatz}</p>
+              <Zitat>{h.anfahrtSatz}</Zitat>
               <Tabelle kopf={h.wegKopf} zeilen={h.wege} />
               <p className="text-xs text-muted-foreground mt-2">{h.anfahrtHinweis}</p>
             </section>
 
-            <section className="mb-16 space-y-4">
-              <p className="text-xs text-muted-foreground">{h.hotelStand}</p>
-              <details className="border border-border rounded-xl p-4 bg-card">
-                <summary className="font-serif font-bold text-lg cursor-pointer">{h.hotelsZentralTitel}</summary>
-                <div className="mt-4"><Tabelle kopf={h.hotelsZentralKopf} zeilen={HOTELS_ZENTRAL.map(([n, a, m, min, taxi]) => [n, a, `${m} · ${dauer(language, min, false)}`, taxi && dauer(language, taxi, false)])} /></div>
-              </details>
-              <details className="border border-border rounded-xl p-4 bg-card">
-                <summary className="font-serif font-bold text-lg cursor-pointer">{h.hotelsMesseTitel}</summary>
-                <p className="mt-4 text-sm">{h.hotelsMesseLead}</p>
-                <div className="mt-4"><Tabelle kopf={h.hotelsMesseKopf} zeilen={HOTELS_MESSE.map(([n, a, oepnv, linie, taxi]) => [n, a, `${dauer(language, oepnv, false)}${linie ? ` (${linie})` : ""}`, dauer(language, taxi, false)])} /></div>
-              </details>
+            <section className="mb-16 space-y-2">
+              <p className="text-xs text-muted-foreground mb-2">{h.hotelStand}</p>
+              <Aufklapper titel={h.hotelsZentralTitel}>
+                <Tabelle kopf={h.hotelsZentralKopf} zeilen={HOTELS_ZENTRAL.map(([n, a, m, min, taxi]) => [n, a, `${m} · ${dauer(language, min, false)}`, taxi && dauer(language, taxi, false)])} />
+              </Aufklapper>
+              <Aufklapper titel={h.hotelsMesseTitel}>
+                <p className="mb-4 text-sm">{h.hotelsMesseLead}</p>
+                <Tabelle kopf={h.hotelsMesseKopf} zeilen={HOTELS_MESSE.map(([n, a, oepnv, linie, taxi]) => [n, a, `${dauer(language, oepnv, false)}${linie ? ` (${linie})` : ""}`, dauer(language, taxi, false)])} />
+              </Aufklapper>
             </section>
 
             <section className="mb-16 grid md:grid-cols-2 gap-8">
-              <div>
-                <h2 className="text-2xl font-serif font-bold mb-3">{h.nachTitel}</h2>
+              <div className="border border-border rounded p-6 bg-card">
+                <h2 className="text-2xl md:text-[30px] leading-tight font-serif font-bold mb-3">{h.nachTitel}</h2>
                 <p>{h.nachP}</p>
               </div>
-              <div>
-                <h2 className="text-2xl font-serif font-bold mb-3">{h.planTitel}</h2>
+              <div className="border border-border rounded p-6 bg-card">
+                <h2 className="text-2xl md:text-[30px] leading-tight font-serif font-bold mb-3">{h.planTitel}</h2>
                 <p>{h.planP}</p>
               </div>
             </section>
 
             <section className="mb-16">
               <H2>{h.naechsteTitel}</H2>
-              <p className="text-xs text-muted-foreground mb-4">{h.naechsteStand}</p>
-              <div className="grid md:grid-cols-3 gap-6">
+              <p className="inline-block text-xs text-muted-foreground bg-secondary border border-border rounded-full px-3 py-1 -mt-2 mb-4">{h.naechsteStand}</p>
+              <div className="grid md:grid-cols-3 gap-4">
                 {h.naechste.map((m) => (
-                  <div key={m.id} className="border border-border rounded-xl p-6 bg-card">
-                    <h3 className="text-xl font-serif font-bold">{m.name}</h3>
-                    <p className="text-sm text-muted-foreground">{m.branche}</p>
-                    <p className="font-semibold my-2">{m.termin}</p>
-                    <p className="text-sm mb-3">{m.text}</p>
+                  <div key={m.id} className="border border-border rounded p-5 bg-card">
+                    <h3 className="text-xl font-serif font-semibold">{m.name}</h3>
+                    <p className="text-[13px] text-muted-foreground">{m.branche} · {m.termin}</p>
+                    <p className="my-3">{m.text}</p>
                     {m.id === "bauma"
-                      ? <LocalizedLink to="messe-muenchen/bauma" className="text-primary underline text-sm">{m.link}</LocalizedLink>
-                      : <a href="#messekalender" className="text-primary underline text-sm">{m.link}</a>}
+                      ? <LocalizedLink to="messe-muenchen/bauma" className="text-primary underline">{m.link}</LocalizedLink>
+                      : <a href="#messekalender" className="text-primary underline">{m.link}</a>}
                   </div>
                 ))}
               </div>
@@ -229,20 +266,10 @@ const MesseMuenchen = () => {
               <H2 id="messekalender">{h.kalenderTitel}</H2>
               <p className="mb-4 text-muted-foreground">{h.kalenderLead}</p>
               <Tabelle kopf={h.kalenderKopf} zeilen={kalender(language).map((k) => [k.monat, k.name, k.branche, k.turnus])} />
-              <Button className="mt-6" asChild><a href="#anfrage">{h.kalenderCta}</a></Button>
+              <Button className={`${knopf} mt-6`} asChild><a href="#anfrage">{h.kalenderCta}</a></Button>
             </section>
 
-            <section className="mb-16">
-              <H2>{h.faqTitel}</H2>
-              <div className="space-y-6">
-                {h.faq.map((f) => (
-                  <div key={f.q}>
-                    <h3 className="font-semibold text-lg mb-1">{f.q}</h3>
-                    <p className="text-muted-foreground">{f.a}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
+            <Faq titel={h.faqTitel} faq={h.faq} />
 
             <AnfrageBlock titel={h.formTitel} lead={h.formLead} lang={language} />
 
