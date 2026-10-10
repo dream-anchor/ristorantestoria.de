@@ -85,6 +85,8 @@ const MesseBauma = () => {
               <h2 className="text-3xl font-serif font-bold mb-6">{b.andersTitel}</h2>
               <p className="mb-4">{b.andersP1}</p>
               <p>{b.andersP2}</p>
+              <h3 className="text-xl font-serif font-bold mt-6 mb-2">{b.beispieleTitel}</h3>
+              <ul className="list-disc pl-5 space-y-1">{b.beispiele.map((x) => <li key={x}>{x}</li>)}</ul>
             </section>
 
             <section className="mb-16">

@@ -5,13 +5,10 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import LocalizedLink from "@/components/LocalizedLink";
-import EmailLink, { EmailAddress } from "@/components/EmailLink";
 import { Button } from "@/components/ui/button";
-import { Phone, MessageCircle, Mail } from "lucide-react";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
 import { getLocalizedPath } from "@/config/routes";
-import { FACTS } from "@/config/facts";
 import MaestroWidget, { MaestroPakete, useMaestroGesendet, useMaestroTitel } from "@/components/MaestroWidget";
 import { messeContent, PREISE, eur, dauer, kalender, HOTELS_ZENTRAL, HOTELS_MESSE, type MesseTexte } from "./messeContent";
 
@@ -59,11 +56,12 @@ export const MenueKarten = ({ m, lang, detail }: { m: MesseTexte["menue"]; lang:
   </div>
 );
 
-const KONTAKT: Record<Language, { tel: string; mail: string }> = {
-  de: { tel: "Telefon", mail: "E-Mail" },
-  en: { tel: "Phone", mail: "Email" },
-  it: { tel: "Telefono", mail: "E-mail" },
-  fr: { tel: "Téléphone", mail: "E-mail" },
+// Datenschutzhinweis am Formular (Art. 13 DSGVO); das Widget selbst zeigt keinen.
+const DATENSCHUTZ: Record<Language, [string, string]> = {
+  de: ["Wir verwenden Ihre Angaben nur, um Ihre Anfrage zu bearbeiten. Mehr dazu in unserer ", "Datenschutzerklärung"],
+  en: ["We only use your details to process your request. More in our ", "privacy policy"],
+  it: ["Usiamo i vostri dati solo per elaborare la richiesta. Maggiori informazioni nella nostra ", "informativa sulla privacy"],
+  fr: ["Nous utilisons vos données uniquement pour traiter votre demande. Plus d'informations dans notre ", "politique de confidentialité"],
 };
 
 // MAESTRO-Formular „Messe“ je Sprache (sql/683, Eingang ristorante_messe).
@@ -81,14 +79,12 @@ export const AnfrageBlock = ({ titel, lead, lang }: { titel: string; lead: strin
   <section id="anfrage" className="bg-primary text-primary-foreground rounded-xl p-8 md:p-12 text-center mb-16 scroll-mt-24">
     <h2 className="text-3xl font-serif font-bold mb-4">{anzeigeTitel}</h2>
     {!gesendet && <p className="mb-8 opacity-90">{lead}</p>}
-    <div className="bg-background text-foreground rounded-xl p-4 md:p-8 mb-8 text-left">
+    <div className="bg-background text-foreground rounded-xl p-4 md:p-8 text-left">
       <MaestroWidget widgetId={MESSE_FORMULAR[lang]} lang={lang} anchorId="messe-formular" />
     </div>
-    <div className="flex flex-wrap justify-center gap-6">
-      <a href={`tel:${FACTS.phoneTel}`} className="flex items-center gap-2 hover:opacity-80"><Phone className="w-4 h-4" /> {KONTAKT[lang].tel}: {FACTS.phoneFormatted}</a>
-      <EmailLink className="flex items-center gap-2 hover:opacity-80"><Mail className="w-4 h-4" /> <EmailAddress /></EmailLink>
-      <a href="https://wa.me/491636033912" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80"><MessageCircle className="w-4 h-4" /> WhatsApp</a>
-    </div>
+    <p className="mt-6 text-sm opacity-90">
+      {DATENSCHUTZ[lang][0]}<LocalizedLink to="datenschutz" className="underline">{DATENSCHUTZ[lang][1]}</LocalizedLink>.
+    </p>
   </section>
   );
 };
