@@ -338,6 +338,10 @@ const SeasonalSignupsManager = () => {
   // mailto: statt Server-Versand — öffnet ein sendebereites Compose-Fenster im
   // eigenen Mail-Client, verschickt selbst nichts. Muss synchron im Click-Handler
   // laufen (kein await davor), sonst blockieren Browser den Protokoll-Handoff.
+  // target="_blank" erzwingt bei jedem Aufruf ein neues Tab/Fenster (Antoine,
+  // 13.10.2026) — ohne target nutzt der registrierte Webmail-Handler (IONOS/
+  // OX App Suite) sonst teils ein bereits offenes Compose-Tab weiter statt
+  // eines für jeden Versand.
   const openMailtoFor = (signup: SeasonalSignup) => {
     const content = buildMailtoContent(signup);
     if (!content) {
@@ -347,6 +351,8 @@ const SeasonalSignupsManager = () => {
     const url = buildSeasonalMailtoUrl(signup.email, content.subject);
     const link = document.createElement("a");
     link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
