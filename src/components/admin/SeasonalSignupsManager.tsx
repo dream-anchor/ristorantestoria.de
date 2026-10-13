@@ -370,13 +370,23 @@ const SeasonalSignupsManager = () => {
   const handleBulkMailtoSend = () => {
     const selected = (signups ?? []).filter((s) => selectedIds.has(s.id));
     if (!selected.length) return;
-    // Alle Compose-Fenster synchron hintereinander öffnen, kein await dazwischen
-    // (gleicher Grund wie oben: Browser-Popup-Blocker).
-    for (const signup of selected) {
-      openMailtoFor(signup);
-    }
+    // Bug gefunden (13.10.2026): mailto:-Links dürfen NICHT ohne Pause in einer
+    // synchronen Schleife geöffnet werden — das Betriebssystem/der Mail-Client
+    // verarbeitet schnell aufeinanderfolgende mailto:-Protokoll-Aufrufe nicht
+    // zuverlässig einzeln (Apple-Events bzw. Custom-Protocol-Handler werden
+    // bei zu dichter Folge zusammengefasst/verworfen), wodurch Betreff und Text
+    // bei allen außer dem ersten Compose-Fenster leer blieben. Erstes Fenster
+    // bleibt synchron im Click-Handler (Popup-Blocker-Grund wie bei Einzelversand),
+    // alle weiteren folgen zeitversetzt per setTimeout.
+    selected.forEach((signup, index) => {
+      if (index === 0) {
+        openMailtoFor(signup);
+      } else {
+        setTimeout(() => openMailtoFor(signup), index * 700);
+      }
+    });
     markNotifiedMutation.mutate(selected.map((s) => s.id));
-    toast.success(`${selected.length} E-Mail-Fenster geöffnet`);
+    toast.success(`${selected.length} E-Mail-Fenster werden geöffnet (zeitversetzt, bitte kurz warten)`);
     setSelectedIds(new Set());
   };
 
