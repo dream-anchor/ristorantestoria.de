@@ -323,19 +323,29 @@ const SeasonalSignupsManager = () => {
     });
   };
 
+  // Baut Betreff/Text/Zwischenablage-Text einmal zentral, statt die
+  // {{EVENT}}-Ersetzung dreimal zu duplizieren (openMailtoFor, handleMailtoCopy
+  // und der automatische Clipboard-Fallback nutzen dieselbe Quelle).
+  const buildMailtoContent = (signup: SeasonalSignup) => {
+    const template = mailtoTemplates?.[signup.seasonal_event];
+    if (!template) return null;
+    const eventLabel = EVENT_LABELS[signup.seasonal_event] ?? signup.seasonal_event;
+    const subject = fillSeasonalMailtoTemplate(template.subject, eventLabel);
+    const body = fillSeasonalMailtoTemplate(template.body, eventLabel);
+    const clipboardText = `An: ${signup.email}\nBetreff: ${subject}\n\n${body}`;
+    return { subject, body, clipboardText };
+  };
+
   // mailto: statt Server-Versand — öffnet ein sendebereites Compose-Fenster im
   // eigenen Mail-Client, verschickt selbst nichts. Muss synchron im Click-Handler
   // laufen (kein await davor), sonst blockieren Browser den Protokoll-Handoff.
   const openMailtoFor = (signup: SeasonalSignup) => {
-    const template = mailtoTemplates?.[signup.seasonal_event];
-    if (!template) {
+    const content = buildMailtoContent(signup);
+    if (!content) {
       toast.error("Keine Mailto-Vorlage für dieses Event hinterlegt");
       return;
     }
-    const eventLabel = EVENT_LABELS[signup.seasonal_event] ?? signup.seasonal_event;
-    const subject = fillSeasonalMailtoTemplate(template.subject, eventLabel);
-    const body = fillSeasonalMailtoTemplate(template.body, eventLabel);
-    const url = buildSeasonalMailtoUrl(signup.email, subject, body);
+    const url = buildSeasonalMailtoUrl(signup.email, content.subject, content.body);
     const link = document.createElement("a");
     link.href = url;
     document.body.appendChild(link);
@@ -343,24 +353,36 @@ const SeasonalSignupsManager = () => {
     document.body.removeChild(link);
   };
 
+  // Fund 13.10.2026 (Antoine, IONOS-Webmail-Betreiber): Chrome hat
+  // mailbusiness.ionos.de als mailto:-Handler registriert (OX App Suite).
+  // Dessen interne Übernahme des mailto:-Links doppelkodiert den Body und
+  // verschluckt den Betreff komplett — das passiert NACH unserem korrekten,
+  // einfach kodierten Link, außerhalb unseres Codes (gegengeprüft: unser
+  // buildSeasonalMailtoUrl liefert nachweislich sauberes subject=/body=).
+  // Da der Betreiber dauerhaft bei Webmail bleibt (kein Handler-Wechsel in
+  // Chrome gewünscht), kopieren wir beim Einzelversand den Text zusätzlich
+  // automatisch in die Zwischenablage — Fallback zum Einfügen ohne Extra-Klick.
   const handleMailtoSend = (signup: SeasonalSignup) => {
+    const content = buildMailtoContent(signup);
+    // Zuerst kopieren, DANACH erst mailto öffnen: der mailto-Handoff kann dem Tab
+    // den Fokus entziehen (externe App/Webmail-Tab), und Clipboard-Writes ohne
+    // Dokumentfokus schlagen in manchen Browsern fehl.
+    if (content) {
+      navigator.clipboard.writeText(content.clipboardText).catch(() => {});
+    }
     openMailtoFor(signup);
-    toast.success(`${signup.email}: E-Mail-Programm geöffnet`);
+    toast.success(`${signup.email}: E-Mail-Programm geöffnet, Text zusätzlich in Zwischenablage (falls Betreff/Text leer ankommen: einfügen)`);
     markNotifiedMutation.mutate([signup.id]);
   };
 
   const handleMailtoCopy = async (signup: SeasonalSignup) => {
-    const template = mailtoTemplates?.[signup.seasonal_event];
-    if (!template) {
+    const content = buildMailtoContent(signup);
+    if (!content) {
       toast.error("Keine Mailto-Vorlage für dieses Event hinterlegt");
       return;
     }
-    const eventLabel = EVENT_LABELS[signup.seasonal_event] ?? signup.seasonal_event;
-    const subject = fillSeasonalMailtoTemplate(template.subject, eventLabel);
-    const body = fillSeasonalMailtoTemplate(template.body, eventLabel);
-    const text = `An: ${signup.email}\nBetreff: ${subject}\n\n${body}`;
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(content.clipboardText);
       toast.success("Text kopiert");
     } catch {
       toast.error("Kopieren nicht möglich — bitte Text manuell markieren.");
