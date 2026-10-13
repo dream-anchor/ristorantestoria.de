@@ -338,10 +338,12 @@ const SeasonalSignupsManager = () => {
   // mailto: statt Server-Versand — öffnet ein sendebereites Compose-Fenster im
   // eigenen Mail-Client, verschickt selbst nichts. Muss synchron im Click-Handler
   // laufen (kein await davor), sonst blockieren Browser den Protokoll-Handoff.
-  // target="_blank" erzwingt bei jedem Aufruf ein neues Tab/Fenster (Antoine,
-  // 13.10.2026) — ohne target nutzt der registrierte Webmail-Handler (IONOS/
-  // OX App Suite) sonst teils ein bereits offenes Compose-Tab weiter statt
-  // eines für jeden Versand.
+  // Fund 14.10.2026: <a target="_blank"> reichte NICHT — beim registrierten
+  // Webmail-Handler (IONOS/OX App Suite) entscheidet Chrome bei externen
+  // Protokoll-Handoffs selbst über Tab-Wiederverwendung, unabhängig vom
+  // target-Attribut. window.open() mit eindeutigem, pro Versand neu
+  // generiertem Fenster-Namen (statt immer demselben "_blank") zwingt Chrome
+  // zuverlässig zu einem wirklich neuen Fenster/Tab statt eines wiederverwendeten.
   const openMailtoFor = (signup: SeasonalSignup) => {
     const content = buildMailtoContent(signup);
     if (!content) {
@@ -349,13 +351,8 @@ const SeasonalSignupsManager = () => {
       return;
     }
     const url = buildSeasonalMailtoUrl(signup.email, content.subject);
-    const link = document.createElement("a");
-    link.href = url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const windowName = `storia-mailto-${signup.id}-${Date.now()}`;
+    window.open(url, windowName, "noopener,noreferrer");
   };
 
   // Fund 13.10.2026 (Antoine, IONOS-Webmail-Betreiber): Chrome hat
