@@ -34,6 +34,28 @@ export function getLocalizedText(
   return jsonb[language] ?? jsonb["de"] ?? Object.values(jsonb)[0] ?? "";
 }
 
+const EURO_AMOUNT = /€\s?\d+(?:[.,]\d+)?|\d+(?:[.,]\d+)?\s?€/g;
+const NUMBER = /\d+(?:[.,]\d+)?/;
+
+/**
+ * Preisangabe in der Zielsprache — die Beträge kommen IMMER aus der DE-Fassung (eine
+ * Preisquelle, EN/FR/IT haben exakt die DE-Preise). Nur Wortlaut/Format stammt aus der
+ * Übersetzung. Passt die Zahl der €-Beträge nicht zusammen, wird die DE-Fassung gezeigt
+ * statt eines möglicherweise veralteten Preises.
+ */
+export function getLocalizedPrice(
+  jsonb: Record<string, string> | null | undefined,
+  language: string
+): string {
+  const de = jsonb?.de ?? "";
+  const text = getLocalizedText(jsonb, language);
+  if (language === "de" || !de) return text;
+  const deAmounts = (de.match(EURO_AMOUNT) ?? []).map((m) => m.match(NUMBER)![0]);
+  if ((text.match(EURO_AMOUNT) ?? []).length !== deAmounts.length) return de;
+  let i = 0;
+  return text.replace(EURO_AMOUNT, (m) => m.replace(NUMBER, deAmounts[i++]));
+}
+
 /** Extract a localized string array from a JSONB field. */
 export function getLocalizedArray(
   jsonb: Record<string, string[]> | null | undefined,
