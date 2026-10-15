@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5"
+    PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
@@ -1836,6 +1836,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      silvester_waitlist: {
+        Row: {
+          consent_at: string | null
+          consent_text: string | null
+          created_at: string
+          email: string | null
+          guests: string
+          id: string
+          language: string
+          message: string | null
+          name: string
+          phone: string | null
+          status: string
+          time_pref: string
+          updated_at: string
+        }
+        Insert: {
+          consent_at?: string | null
+          consent_text?: string | null
+          created_at?: string
+          email?: string | null
+          guests: string
+          id?: string
+          language?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          status?: string
+          time_pref?: string
+          updated_at?: string
+        }
+        Update: {
+          consent_at?: string | null
+          consent_text?: string | null
+          created_at?: string
+          email?: string | null
+          guests?: string
+          id?: string
+          language?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          status?: string
+          time_pref?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       slug_classifications: {
         Row: {
