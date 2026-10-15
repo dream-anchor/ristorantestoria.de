@@ -15,6 +15,8 @@ import { useSeasonalMailtoTemplates } from "@/hooks/useSeasonalMailtoTemplates";
 import { buildSeasonalMailtoUrl, fillSeasonalMailtoTemplate } from "@/lib/seasonalMailto";
 import { WAITLIST_GUESTS } from "@/components/SilvesterWaitlistForm";
 import Redact from "@/components/admin/Redact";
+import { Switch } from "@/components/ui/switch";
+import { useSetSilvesterAusgebucht, useSilvesterAusgebucht } from "@/hooks/useSilvesterAusgebucht";
 
 type Entry = Tables<"silvester_waitlist">;
 type Status = "wartet" | "angeboten" | "bestaetigt" | "abgesagt";
@@ -37,6 +39,8 @@ const SilvesterWaitlistManager = () => {
   const [addOpen, setAddOpen] = useState(false);
   const [draft, setDraft] = useState({ name: "", email: "", phone: "", guests: "2", message: "" });
   const { data: templates } = useSeasonalMailtoTemplates();
+  const ausgebucht = useSilvesterAusgebucht();
+  const setAusgebucht = useSetSilvesterAusgebucht();
 
   const { data: entries, isLoading } = useQuery({
     queryKey: ["silvester-waitlist"],
@@ -143,6 +147,24 @@ const SilvesterWaitlistManager = () => {
           </Button>
         </div>
       </div>
+      <label className="flex items-center justify-between gap-4 rounded-md border p-3 mb-4 cursor-pointer">
+        <span>
+          <span className="block text-sm font-medium">Silvester ausgebucht</span>
+          <span className="block text-xs text-muted-foreground">
+            {ausgebucht ? "An: Webseite zeigt die Warteliste statt der Tischbuchung." : "Aus: Webseite zeigt die Tischbuchung."}
+          </span>
+        </span>
+        <Switch
+          checked={ausgebucht}
+          disabled={setAusgebucht.isPending}
+          onCheckedChange={(v) =>
+            setAusgebucht.mutate(v, {
+              onSuccess: () => toast.success(v ? "Silvester steht auf ausgebucht" : "Silvester ist wieder buchbar"),
+              onError: () => toast.error("Schalter konnte nicht gespeichert werden"),
+            })
+          }
+        />
+      </label>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {(["alle", "wartet", "angeboten", "bestaetigt", "abgesagt"] as const).map((s) => (

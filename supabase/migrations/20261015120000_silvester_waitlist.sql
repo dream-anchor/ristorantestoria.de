@@ -51,3 +51,10 @@ INSERT INTO public.seasonal_mailto_templates (seasonal_event, subject, body) VAL
     E'Guten Tag,\n\nSie stehen auf unserer Warteliste für {{EVENT}} – es ist ein Tisch frei geworden. Wenn Sie ihn möchten, antworten Sie bitte kurz auf diese E-Mail oder rufen Sie uns an unter 089 51519696.\n\nViele Grüße\nIhr Team vom Ristorante STORIA'
   )
 ON CONFLICT (seasonal_event) DO NOTHING;
+
+-- Schalter „Silvester ausgebucht“ (Admin → Vormerkungen → Silvester). Vorhandene Tabelle
+-- group_menu_settings: anon liest (Policy "Public read"), schreiben nur Admins.
+-- Startwert true = Warteliste statt Anmeldung (Antoine 15.10.2026: „ab jetzt auf Warteliste“).
+INSERT INTO public.group_menu_settings (setting_key, setting_value) VALUES
+  ('silvester_ausgebucht', 'true'::jsonb)
+ON CONFLICT (setting_key) DO NOTHING;

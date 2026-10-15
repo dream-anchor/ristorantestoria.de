@@ -550,6 +550,22 @@ async function generateRoutesToPrerender() {
   return routes;
 }
 
+/** Admin-Schalter „Silvester ausgebucht“ (group_menu_settings); null = nicht ladbar → Fallback FACTS. */
+async function fetchSilvesterAusgebucht() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/group_menu_settings?setting_key=eq.silvester_ausgebucht&select=setting_value`,
+      { headers: { apikey: SUPABASE_ANON_KEY, "Content-Type": "application/json" } }
+    );
+    if (!res.ok) return null;
+    const rows = await res.json();
+    return rows.length ? rows[0].setting_value === true : null;
+  } catch {
+    return null;
+  }
+}
+
 // Main execution
 (async () => {
   const template = fs.readFileSync(toAbsolute("dist/index.html"), "utf-8");
@@ -557,6 +573,8 @@ async function generateRoutesToPrerender() {
   const maestro = { ladeMaestroMenu, maestroSpeisekarteAktiv };
 
   const routesToPrerender = await generateRoutesToPrerender();
+  const silvesterAusgebucht = await fetchSilvesterAusgebucht();
+  console.log(`🎆 Silvester ausgebucht (Admin-Schalter): ${silvesterAusgebucht ?? "nicht geladen → Fallback"}`);
   
   // Ensure root is always rendered
   if (!routesToPrerender.includes('/')) routesToPrerender.push('/');
@@ -595,7 +613,7 @@ async function generateRoutesToPrerender() {
       }
 
       // 3. Render App & get Helmet data (with menu data context)
-      const { html, helmet, dehydratedState } = await render(url, { menuData, menuType, specialMenuData });
+      const { html, helmet, dehydratedState } = await render(url, { menuData, menuType, specialMenuData, silvesterAusgebucht });
 
       // 3. Inject HTML into Template
       // Match <div id="root"> with optional <!--app-html--> marker or whitespace, then closing </div>

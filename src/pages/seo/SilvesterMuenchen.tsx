@@ -39,6 +39,7 @@ import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import { fireLead } from "@/lib/analytics";
 import { FACTS } from "@/config/facts";
+import { useSilvesterAusgebucht } from "@/hooks/useSilvesterAusgebucht";
 
 /**
  * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
@@ -152,6 +153,7 @@ interface SilvesterMuenchenProps {
 const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuenchenProps) => {
   const { t, language } = useLanguage();
   usePrerenderReady(true);
+  const ausgebucht = useSilvesterAusgebucht();
   const s = t.seo.silvester;
   const anfrageTitel = useMaestroTitel(s.inquiryTitle, language);
   const anfrageGesendet = useMaestroGesendet();
@@ -323,8 +325,8 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "image": [EVENT_IMAGE_URL],
               "offers": [
-                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü`, "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR", "availability": FACTS.silvester.ausgebucht ? "https://schema.org/SoldOut" : "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
-                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü mit Weinbegleitung`, "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR", "availability": FACTS.silvester.ausgebucht ? "https://schema.org/SoldOut" : "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü`, "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR", "availability": ausgebucht ? "https://schema.org/SoldOut" : "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü mit Weinbegleitung`, "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR", "availability": ausgebucht ? "https://schema.org/SoldOut" : "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
               ]
             },
             {
@@ -413,9 +415,9 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                   Absicht („für Gruppen") ist jetzt der zweite Button. Telefon, E-Mail und WhatsApp
                   stehen gebündelt an genau einer Stelle, direkt beim Anfrageformular. */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                {/* Ausgebucht (FACTS.silvester.ausgebucht): erster CTA führt zur Warteliste statt zur Tischbuchung */}
+                {/* Ausgebucht (Admin-Schalter, useSilvesterAusgebucht): erster CTA führt zur Warteliste statt zur Tischbuchung */}
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  {FACTS.silvester.ausgebucht
+                  {ausgebucht
                     ? <a href="#warteliste">{s.waitlist.heroCtaWaitlist}</a>
                     : <a href="#reservieren">{s.heroCtaReserve}</a>}
                 </Button>
@@ -569,7 +571,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                 Wer hier einen Tisch bucht, bucht damit das Gala-Menü — das darf niemand erst
                 am Abend erfahren. Gangzahl und Preise kommen über `fillFacts` aus
                 `FACTS.silvester`, damit sie nicht neben „Auf einen Blick" driften können. */}
-            {FACTS.silvester.ausgebucht ? (
+            {ausgebucht ? (
             <section className="mb-16" id="warteliste" aria-labelledby="silvester-warteliste">
               <div className="text-center mb-4"><Badge variant="secondary">{s.waitlist.waitlistBadge}</Badge></div>
               <h2 id="silvester-warteliste" className="text-3xl font-serif font-bold mb-4 text-center">{s.waitlist.waitlistTitle}</h2>
