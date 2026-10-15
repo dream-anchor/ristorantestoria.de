@@ -9,6 +9,7 @@ import StructuredData from "@/components/StructuredData";
 import MenuDisplay from "@/components/MenuDisplay";
 import ReservationBooking from "@/components/ReservationBooking";
 import AnlassMaestroWidget from "@/components/AnlassMaestroWidget";
+import SilvesterWaitlistForm from "@/components/SilvesterWaitlistForm";
 import { useMaestroGesendet, useMaestroTitel } from "@/components/MaestroWidget";
 import GoogleReviews from "@/components/GoogleReviews";
 import PhotoGallery from "@/components/PhotoGallery";
@@ -38,6 +39,7 @@ import { PARENT_SLUGS } from "@/config/seasonalMenus";
 import type { SeasonalMenuConfig } from "@/config/seasonalMenus";
 import { fireLead } from "@/lib/analytics";
 import { FACTS } from "@/config/facts";
+import { useSilvesterAusgebucht } from "@/hooks/useSilvesterAusgebucht";
 
 /**
  * Absolute Bild-URL für das Event-JSON-LD (E1.1, Widerspruch 6).
@@ -151,6 +153,7 @@ interface SilvesterMuenchenProps {
 const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuenchenProps) => {
   const { t, language } = useLanguage();
   usePrerenderReady(true);
+  const ausgebucht = useSilvesterAusgebucht();
   const s = t.seo.silvester;
   const anfrageTitel = useMaestroTitel(s.inquiryTitle, language);
   const anfrageGesendet = useMaestroGesendet();
@@ -322,8 +325,8 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               "performer": { "@id": "https://www.ristorantestoria.de/#restaurant" },
               "image": [EVENT_IMAGE_URL],
               "offers": [
-                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü`, "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
-                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü mit Weinbegleitung`, "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü`, "price": `${FACTS.silvester.price}.00`, "priceCurrency": "EUR", "availability": ausgebucht ? "https://schema.org/SoldOut" : "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" },
+                { "@type": "Offer", "name": `${FACTS.silvester.courses}-Gänge Silvester-Menü mit Weinbegleitung`, "price": `${FACTS.silvester.priceWithWine}.00`, "priceCurrency": "EUR", "availability": ausgebucht ? "https://schema.org/SoldOut" : "https://schema.org/InStock", "url": "https://www.ristorantestoria.de/besondere-anlaesse/silvester/", "validFrom": "2026-11-01" }
               ]
             },
             {
@@ -412,8 +415,11 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                   Absicht („für Gruppen") ist jetzt der zweite Button. Telefon, E-Mail und WhatsApp
                   stehen gebündelt an genau einer Stelle, direkt beim Anfrageformular. */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {/* Ausgebucht (Admin-Schalter, useSilvesterAusgebucht): erster CTA führt zur Warteliste statt zur Tischbuchung */}
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="#reservieren">{s.heroCtaReserve}</a>
+                  {ausgebucht
+                    ? <a href="#warteliste">{s.waitlist.heroCtaWaitlist}</a>
+                    : <a href="#reservieren">{s.heroCtaReserve}</a>}
                 </Button>
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
                   <a href="#anfrage">{s.heroCtaInquiry}</a>
@@ -565,6 +571,16 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
                 Wer hier einen Tisch bucht, bucht damit das Gala-Menü — das darf niemand erst
                 am Abend erfahren. Gangzahl und Preise kommen über `fillFacts` aus
                 `FACTS.silvester`, damit sie nicht neben „Auf einen Blick" driften können. */}
+            {ausgebucht ? (
+            <section className="mb-16" id="warteliste" aria-labelledby="silvester-warteliste">
+              <div className="text-center mb-4"><Badge variant="secondary">{s.waitlist.waitlistBadge}</Badge></div>
+              <h2 id="silvester-warteliste" className="text-3xl font-serif font-bold mb-4 text-center">{s.waitlist.waitlistTitle}</h2>
+              <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{s.waitlist.waitlistIntro}</p>
+              <Card className="max-w-2xl mx-auto"><CardContent className="p-6 md:p-8">
+                <SilvesterWaitlistForm />
+              </CardContent></Card>
+            </section>
+            ) : (
             <section className="mb-16" id="reservieren" aria-labelledby="silvester-reservieren">
               <h2 id="silvester-reservieren" className="text-3xl font-serif font-bold mb-4 text-center">{s.reservationTitle}</h2>
               <p className="text-muted-foreground text-center mb-8 max-w-3xl mx-auto">{fillFacts(s.reservationIntro)}</p>
@@ -575,6 +591,7 @@ const SilvesterMuenchen = ({ menu, archivedMenu, seasonalConfig }: SilvesterMuen
               />
               <p className="text-sm text-muted-foreground text-center mt-6 max-w-3xl mx-auto">{s.reservationNote}</p>
             </section>
+            )}
 
             {/* Anfrage — seit 01.10.2026 das MAESTRO-Anlass-Widget (Punkt 133) statt des eigenen
                 Formulars. Für alles, was über eine Tischbuchung hinausgeht: größere Gruppen,

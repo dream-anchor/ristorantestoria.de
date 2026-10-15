@@ -20,6 +20,7 @@ interface RenderContext {
   menuData?: any;
   menuType?: string;
   specialMenuData?: SpecialMenuData;
+  silvesterAusgebucht?: boolean | null;
 }
 
 export async function render(url: string, context: RenderContext = {}) {
@@ -53,6 +54,11 @@ export async function render(url: string, context: RenderContext = {}) {
     queryClient.setQueryData(['special-menu', slug, undefined], basicMenu)
     // For useMenuById hook (used by MenuDisplay)
     queryClient.setQueryData(['menu-by-id', basicMenu.id], fullMenu)
+  }
+
+  // Admin-Schalter „Silvester ausgebucht“ (gleicher Key wie useSilvesterAusgebucht)
+  if (typeof context.silvesterAusgebucht === 'boolean') {
+    queryClient.setQueryData(['silvester-ausgebucht'], context.silvesterAusgebucht)
   }
 
   const html = ReactDOMServer.renderToString(

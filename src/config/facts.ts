@@ -93,6 +93,9 @@ export const FACTS = {
     courses: 4, // Gangzahl – identisch mit und ohne Weinbegleitung
     price: "99", // € pro Person, ohne Weinbegleitung
     priceWithWine: "150", // € pro Person, inkl. Weinbegleitung
+    // Nur Fallback: maßgeblich ist der Admin-Schalter (group_menu_settings.silvester_ausgebucht,
+    // useSilvesterAusgebucht). true → Warteliste statt Tischbuchung.
+    ausgebucht: true,
   },
 
   // ── Weihnachten ──
