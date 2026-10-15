@@ -71,6 +71,10 @@ jobs:
           # nicht ein, sondern zeigt einen Telefon/E-Mail-Ausweichblock — der Build bleibt also
           # grün, aber die Formulare fehlen live.
           VITE_MAESTRO_INTAKE_URL: https://storia.schrittmacher.ai/api/public/inquiries
+          # P8 Speisekarten-Neubau: Repo-Variable (kein Secret) MAESTRO_SPEISEKARTE=1 schaltet die
+          # Standardkarten (Speisekarte/Getraenke/Mittagsmenue) auf /api/public/speisekarte um. Ohne sie
+          # bleibt der Supabase-Weg. Ist die API dann gestoert oder die Karte leer, scheitert der Build.
+          VITE_MAESTRO_SPEISEKARTE: ${{ vars.MAESTRO_SPEISEKARTE }}
 
       - name: Copy .htaccess files to dist
         run: |
