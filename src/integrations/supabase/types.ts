@@ -1837,6 +1837,54 @@ export type Database = {
           },
         ]
       }
+      silvester_waitlist: {
+        Row: {
+          consent_at: string | null
+          consent_text: string | null
+          created_at: string
+          email: string | null
+          guests: string
+          id: string
+          language: string
+          message: string | null
+          name: string
+          phone: string | null
+          status: string
+          time_pref: string
+          updated_at: string
+        }
+        Insert: {
+          consent_at?: string | null
+          consent_text?: string | null
+          created_at?: string
+          email?: string | null
+          guests: string
+          id?: string
+          language?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          status?: string
+          time_pref?: string
+          updated_at?: string
+        }
+        Update: {
+          consent_at?: string | null
+          consent_text?: string | null
+          created_at?: string
+          email?: string | null
+          guests?: string
+          id?: string
+          language?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          status?: string
+          time_pref?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       slug_classifications: {
         Row: {
           classified_as: string | null
