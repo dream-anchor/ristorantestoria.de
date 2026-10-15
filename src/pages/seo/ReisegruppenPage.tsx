@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePrerenderReady } from "@/hooks/usePrerenderReady";
-import { useGroupMenus, getLocalizedText, getLocalizedArray } from "@/hooks/useGroupMenus";
+import { useGroupMenus, getLocalizedText, getLocalizedArray, getLocalizedPrice } from "@/hooks/useGroupMenus";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { trackEvent } from "@/lib/analytics";
 import MaestroWidget, { useMaestroTitel } from "@/components/MaestroWidget";
@@ -603,7 +603,7 @@ const ReisegruppenPage = () => {
                       </div>
                       <div className={`px-6 py-4 border-t ${isFeatured ? "border-primary/20 bg-primary/5" : "border-border bg-secondary/20"}`}>
                         <p className="text-xl font-bold text-primary leading-snug">
-                          {getLocalizedText(menu.price_label, language)}
+                          {getLocalizedPrice(menu.price_label, language)}
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {getLocalizedText(menu.price_note, language)}
