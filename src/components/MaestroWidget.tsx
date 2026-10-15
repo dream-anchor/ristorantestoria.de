@@ -85,7 +85,9 @@ const MaestroWidget = ({ widgetId, lang, anchorId = "gruppe-anfragen", minHeight
 
   return (
     <>
-      <style>{`[data-maestro-widget]::part(titel){font-family:"Playfair Display",Georgia,serif}`}</style>
+      {/* dangerouslySetInnerHTML statt Text-Kind: renderToString maskiert " im <style> zu &quot; (im Browser kein
+          Entity-Decoding in <style>) - Hydrationsfehler #425/#418/#422 und kaputtes CSS im Prerender. */}
+      <style dangerouslySetInnerHTML={{ __html: `[data-maestro-widget]::part(titel){font-family:"Playfair Display",Georgia,serif}` }} />
       <div
         id={anchorId}
         data-maestro-widget={widgetId}
