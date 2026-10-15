@@ -5,7 +5,7 @@ const corsHeaders = {
 };
 
 const HUB_URL = "https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/report-system-error";
-const SHARED_SECRET = "a7f3d8e2c9b14056ef8a3d7c2b9e1f4d8a6c3b9e7f2d5a8c1b4e9f3d6a8c2b7e5f1d9a4c";
+const SHARED_SECRET = Deno.env.get("SYSTEM_HEALTH_SHARED_SECRET");
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -23,6 +23,14 @@ Deno.serve(async (req) => {
     if (!source || !message) {
       return new Response(JSON.stringify({ error: "missing_fields" }), {
         status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!SHARED_SECRET) {
+      console.warn("[report-error] SYSTEM_HEALTH_SHARED_SECRET fehlt, Hub-Meldung uebersprungen:", source, message);
+      return new Response(JSON.stringify({ ok: false, skipped: "hub_secret_missing" }), {
+        status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
