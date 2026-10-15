@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, LogOut } from "lucide-react";
 import SeasonalSignupsManager from "@/components/admin/SeasonalSignupsManager";
 import SeasonalNotificationsManager from "@/components/admin/SeasonalNotificationsManager";
+import SilvesterWaitlistManager from "@/components/admin/SilvesterWaitlistManager";
 import SEO from "@/components/SEO";
 import storiaLogo from "@/assets/storia-logo.webp";
 import { toast } from "sonner";
@@ -100,6 +101,7 @@ export default function AdminVormerkungen() {
       {/* Main Content */}
       <main className="pt-12 container mx-auto px-4 pb-16">
         <DemoModeBanner />
+        <SilvesterWaitlistManager />
         <SeasonalSignupsManager />
         <SeasonalNotificationsManager />
       </main>

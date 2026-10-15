@@ -33,6 +33,7 @@ const EVENT_LABELS: Record<string, string> = {
   weihnachten: "Weihnachten",
   silvester: "Silvester",
   ostermontag: "Ostern",
+  silvester_warteliste: "Silvester",
 };
 
 const LANG_FLAGS: Record<string, string> = { de: "DE", en: "EN", it: "IT", fr: "FR" };
@@ -58,7 +59,7 @@ const FALLBACK_MAILTO_TEMPLATES: Record<string, { subject: string; body: string 
 // Server-Sendevorgangs — der Admin sieht die Mail vor dem Absenden im eigenen
 // Mail-Client und kann sie von Hand anpassen. Eine Vorlage pro Event (nicht
 // pro Sprache): {{EVENT}} wird beim Öffnen automatisch ersetzt.
-const MailtoTemplateEditor = ({ eventKey }: { eventKey: string }) => {
+export const MailtoTemplateEditor = ({ eventKey }: { eventKey: string }) => {
   const { data: templates, isLoading } = useSeasonalMailtoTemplates();
   const saveMutation = useSaveSeasonalMailtoTemplate();
   const stored = templates?.[eventKey];
@@ -113,17 +114,17 @@ const MailtoTemplateEditor = ({ eventKey }: { eventKey: string }) => {
         </Badge>
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground" htmlFor="mailto-subject">Betreff</label>
+        <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground" htmlFor={`mailto-subject-${eventKey}`}>Betreff</label>
         <Input
-          id="mailto-subject"
+          id={`mailto-subject-${eventKey}`}
           value={draft.subject}
           onChange={(e) => setDraft((d) => ({ ...d, subject: e.target.value }))}
         />
       </div>
       <div className="space-y-1.5">
-        <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground" htmlFor="mailto-body">Text</label>
+        <label className="text-xs font-medium uppercase tracking-wide text-muted-foreground" htmlFor={`mailto-body-${eventKey}`}>Text</label>
         <Textarea
-          id="mailto-body"
+          id={`mailto-body-${eventKey}`}
           value={draft.body}
           onChange={(e) => setDraft((d) => ({ ...d, body: e.target.value }))}
           className="min-h-[180px] font-mono text-sm leading-relaxed"
