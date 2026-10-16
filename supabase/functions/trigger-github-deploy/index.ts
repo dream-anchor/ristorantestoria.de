@@ -267,6 +267,11 @@ async function generateSeoHtml(supabaseUrl: string, serviceRoleKey: string): Pro
 
 
 async function reportEdgeError(source: string, message: string, payload?: unknown) {
+  const sharedSecret = Deno.env.get("SYSTEM_HEALTH_SHARED_SECRET");
+  if (!sharedSecret) {
+    console.warn("[reportEdgeError] SYSTEM_HEALTH_SHARED_SECRET fehlt, Hub-Meldung uebersprungen:", source, message);
+    return;
+  }
   try {
     await fetch("https://sovlfqncotxcjqseeawp.supabase.co/functions/v1/report-system-error", {
       method: "POST",
@@ -277,7 +282,7 @@ async function reportEdgeError(source: string, message: string, payload?: unknow
         severity: "critical",
         message,
         payload: payload ?? null,
-        shared_secret: "a7f3d8e2c9b14056ef8a3d7c2b9e1f4d8a6c3b9e7f2d5a8c1b4e9f3d6a8c2b7e5f1d9a4c",
+        shared_secret: sharedSecret,
       }),
     });
   } catch (_) { /* silent */ }
