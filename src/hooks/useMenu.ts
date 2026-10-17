@@ -58,8 +58,8 @@ export interface Menu {
   subtitle_fr: string | null;
   is_published: boolean;
   categories: MenuCategory[];
-  /** Nur bei MAESTRO-Karten (P8): fertiges HTML-Fragment je Sprache fürs Speisekarten-Widget. */
-  maestro?: { slug: string; stand: string; html: Record<string, string> };
+  /** Nur bei MAESTRO (P8): alle veröffentlichten Karten als Reiter, je Karte fertiges HTML-Fragment je Sprache. */
+  maestro?: { karten: { slug: string; name: string; stand: string; html: Record<string, string> }[] };
 }
 
 // Shared function to fetch menu data by ID

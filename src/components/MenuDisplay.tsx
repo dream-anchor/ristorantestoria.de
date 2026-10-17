@@ -2,7 +2,47 @@ import { useMenu, useMenuById, MenuType } from "@/hooks/useMenu";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MaestroSpeisekarte } from "@/components/MaestroWidget";
-import { Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
+import type { Menu } from "@/hooks/useMenu";
+
+/**
+ * Reiter aus der MAESTRO-Kartenliste (Name/Reihenfolge aus MAESTRO). Alle Karten stehen im
+ * vorgerenderten HTML (SEO), nur die gewählte ist sichtbar. #<slug> in der Adresse wählt eine Karte vor.
+ */
+const MaestroKartenReiter = ({ karten, lang }: { karten: NonNullable<Menu["maestro"]>["karten"]; lang: string }) => {
+  const [aktiv, setAktiv] = useState(karten[0]?.slug);
+  useEffect(() => {
+    const h = decodeURIComponent(window.location.hash.slice(1));
+    if (karten.some((k) => k.slug === h)) setAktiv(h);
+  }, [karten]);
+  return (
+    <div className="max-w-3xl mx-auto">
+      {karten.length > 1 && (
+        <div role="tablist" className="flex flex-wrap justify-center gap-2 mb-8">
+          {karten.map((k) => (
+            <button
+              key={k.slug}
+              role="tab"
+              type="button"
+              id={`reiter-${k.slug}`}
+              aria-selected={aktiv === k.slug}
+              aria-controls={`karte-${k.slug}`}
+              onClick={() => setAktiv(k.slug)}
+              className={`px-5 py-2 rounded-full border text-sm font-medium transition-colors ${aktiv === k.slug ? "bg-primary text-primary-foreground border-primary" : "border-border hover:bg-secondary"}`}
+            >
+              {k.name}
+            </button>
+          ))}
+        </div>
+      )}
+      {karten.map((k) => (
+        <div key={k.slug} id={`karte-${k.slug}`} role="tabpanel" aria-labelledby={`reiter-${k.slug}`} hidden={aktiv !== k.slug}>
+          <MaestroSpeisekarte slug={k.slug} lang={lang} html={k.html[lang] ?? k.html.de} />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 interface MenuDisplayProps {
   menuType: MenuType;
@@ -68,14 +108,8 @@ const MenuDisplay = ({ menuType, menuId, showTitle = true, interstitialCta, inte
     );
   }
 
-  // P8: MAESTRO-Karte -> fertiges HTML-Fragment über das Speisekarten-Widget (gleiches preis_layout wie im Widget).
-  if (menu.maestro) {
-    return (
-      <div className="max-w-3xl mx-auto">
-        <MaestroSpeisekarte slug={menu.maestro.slug} lang={language} html={menu.maestro.html[language] ?? menu.maestro.html.de} />
-      </div>
-    );
-  }
+  // P8: alle veröffentlichten MAESTRO-Karten als Reiter, je Karte das fertige HTML-Fragment des Speisekarten-Widgets.
+  if (menu.maestro) return <MaestroKartenReiter karten={menu.maestro.karten} lang={language} />;
 
   // Get localized title and subtitle
   const menuTitle = getLocalizedText(menu.title, menu.title_en, menu.title_it, menu.title_fr);

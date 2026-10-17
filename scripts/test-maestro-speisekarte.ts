@@ -1,40 +1,95 @@
-// Selbsttest P8: Zusammenführung der vier Sprachantworten ins Menu-Format (Testdaten, keine echten Karten).
-// Aufruf: node --experimental-strip-types scripts/test-maestro-speisekarte.ts
+// Selbsttest P8: dynamische Kartenliste + Zusammenführung der Sprachantworten ins Menu-Format
+// (Testdaten, keine echten Karten). Aufruf: node --experimental-strip-types scripts/test-maestro-speisekarte.ts
 import assert from "node:assert/strict";
-import { zusammenfuehren, maestroSpeisekarteAktiv } from "../src/lib/maestroSpeisekarte.ts";
+import { zusammenfuehren, ladeMaestroMenu, maestroSpeisekarteAktiv, messeMenues } from "../src/lib/maestroSpeisekarte.ts";
 
-const antwort = (lang: string, kat: string, pos: string, text: string | null) => ({
+const antwort = (slug: string, name: string, lang: string, kat: string, pos: string, text: string | null) => ({
   data: {
     sprache: lang,
-    stand: "abc",
-    html: `<div class="maestro-speisekarte" data-maestro-stand="abc">${lang}</div>`,
-    karten: [{ slug: "testkarte", name: "Testkarte", kategorien: [
+    stand: `st-${slug}`,
+    html: `<div class="maestro-speisekarte" data-maestro-stand="st-${slug}">${slug}-${lang}</div>`,
+    karten: [{ slug, name, kategorien: [
       { name: kat, positionen: [{ name: pos, beschreibung: `B-${lang}`, preis_cents: 1250, preis_text: text }] },
     ] }],
   },
 });
+const sprachen = (slug: string, name: string, kat: Record<string, string>) =>
+  Object.fromEntries(["de", "en", "it", "fr"].map((l) => [l, antwort(slug, name, l, kat[l], `Pos-${l}`, l === "it" ? "a partire da" : null)]));
 
-const m = zusammenfuehren("food", {
-  de: antwort("de", "Vorspeisen", "Suppe", null),
-  en: antwort("en", "Starters", "Soup", null),
-  it: antwort("it", "Antipasti", "Zuppa", "a partire da"),
-  fr: antwort("fr", "Entrées", "Soupe", null),
-} as any);
+const sushi = sprachen("sushi", "Sushi", { de: "Maki", en: "Maki rolls", it: "Maki", fr: "Makis" });
+const aperitivo = sprachen("aperitivo", "Aperitivo", { de: "Spritz", en: "Spritz", it: "Spritz", fr: "Spritz" });
 
-assert.equal(m.title, "Testkarte");
-assert.equal(m.title_fr, "Testkarte");
-assert.equal(m.categories[0].name_en, "Starters");
+const m = zusammenfuehren("food", [sushi, aperitivo] as any);
+assert.equal(m.title, "Sushi · Aperitivo");
+assert.equal(m.title_fr, "Sushi · Aperitivo");
+assert.equal(m.categories.length, 2);
+assert.equal(m.categories[0].name_en, "Maki rolls");
+assert.equal(m.categories[1].id, "maestro-aperitivo-0");
+assert.equal(m.categories[1].sort_order, 1);
 const item = m.categories[0].items[0];
-assert.equal(item.name_it, "Zuppa");
+assert.equal(item.name_it, "Pos-it");
 assert.equal(item.description_fr, "B-fr");
 assert.equal(item.price, 12.5);
 assert.equal(item.price_display_it, "a partire da");
 assert.equal(item.price_display, null);
-assert.equal(m.maestro.slug, "testkarte");
-assert.match(m.maestro.html.en, /data-maestro-stand="abc">en</);
+assert.deepEqual(m.maestro.karten.map((k) => k.slug), ["sushi", "aperitivo"]);
+assert.equal(m.maestro.karten[1].name, "Aperitivo");
+assert.match(m.maestro.karten[0].html.en, /st-sushi">sushi-en</);
 
 const leer = { data: { sprache: "de", stand: "x", html: "", karten: [] } };
-assert.throws(() => zusammenfuehren("food", { de: leer, en: leer, it: leer, fr: leer } as any), /leer/);
+assert.throws(() => zusammenfuehren("food", [{ de: leer, en: leer, it: leer, fr: leer }] as any), /leer/);
+assert.throws(() => zusammenfuehren("food", []), /keine veröffentlichte/);
 assert.equal(maestroSpeisekarteAktiv(), false); // ohne Build-Variable bleibt der alte Weg
 
-console.log("OK maestroSpeisekarte: 12 Prüfungen grün");
+// Entdeckung über die Kartenliste: Slugs kommen aus /api/public/speisekarten, nicht aus dem Code.
+const abrufe: string[] = [];
+const antworten: Record<string, unknown> = {
+  "/api/public/speisekarten": { data: { karten: [
+    { slug: "sushi", name: "Sushi", kartenart: null },
+    { slug: "aperitivo", name: "Aperitivo", kartenart: { id: "x", name: "Bar" } },
+  ] } },
+};
+for (const [slug, k] of [["sushi", sushi], ["aperitivo", aperitivo]] as const)
+  for (const l of ["de", "en", "it", "fr"]) antworten[`/api/public/speisekarte?karte=${slug}&lang=${l}`] = (k as any)[l];
+globalThis.fetch = (async (url: string) => {
+  const pfad = url.replace(/^https:\/\/[^/]+/, "");
+  abrufe.push(pfad);
+  const body = antworten[pfad];
+  return { ok: !!body, status: body ? 200 : 404, json: async () => body } as Response;
+}) as typeof fetch;
+
+const geladen = await ladeMaestroMenu("drinks");
+assert.deepEqual(geladen.maestro.karten.map((k) => k.name), ["Sushi", "Aperitivo"]);
+assert.equal(geladen.menu_type, "drinks");
+assert.equal(abrufe.length, 9); // 1 Liste + 2 Karten x 4 Sprachen
+await ladeMaestroMenu("lunch");
+assert.equal(abrufe.length, 9); // zweite Seite nutzt denselben Ladevorgang
+
+// Leere Liste bzw. gestörte API -> laut scheitern (Prerender bricht ab). Neues Modul, frischer Zwischenspeicher.
+antworten["/api/public/speisekarten"] = { data: { karten: [] } };
+const frisch = await import("../src/lib/maestroSpeisekarte.ts?leer");
+await assert.rejects(frisch.ladeMaestroMenu("food"), /keine veröffentlichte/);
+delete antworten["/api/public/speisekarten"];
+await assert.rejects(frisch.ladeMaestroMenu("food"), /HTTP 404/); // Fehler wird nicht festgehalten
+
+// Messe-Seite: Menüs + „ab“-Preis kommen aus der Menü-Kategorie der Karte, ab_preis unverändert von MAESTRO.
+const mitMenues = (l: string) => ({
+  data: { sprache: l, stand: "m", html: "", karten: [{ slug: "speisekarte", name: "Speisekarte", kategorien: [
+    { name: l === "de" ? "Vorspeisen" : "Starters", ab_preis: null, positionen: [{ name: "Vitello", beschreibung: null, preis_cents: 1900, preis_text: "19 €" }] },
+    { name: l === "de" ? "Degustationsmenüs" : "Tasting menus", ab_preis: { cents: 5900, text: `ab 59 € (${l})` }, positionen: [
+      { name: "Vegetale", beschreibung: "4 Gänge", preis_cents: 5900, preis_text: "59 €", preis_hinweis: "mit Weinbegleitung 89 €" },
+      { name: "Mare", beschreibung: "4 Gänge", preis_cents: 6800, preis_text: "68 €" },
+    ] },
+  ] }] },
+});
+const karteMitMenues = Object.fromEntries(["de", "en", "it", "fr"].map((l) => [l, mitMenues(l)])) as any;
+const messe = messeMenues([sushi as any, karteMitMenues], "en");
+assert.equal(messe.kategorie, "Tasting menus");
+assert.deepEqual(messe.ab_preis, { cents: 5900, text: "ab 59 € (en)" });
+assert.deepEqual(messe.menues.map((x) => x.name), ["Vegetale", "Mare"]);
+assert.equal(messe.menues[0].preis_hinweis, "mit Weinbegleitung 89 €");
+assert.equal(messe.menues[1].preis_hinweis, null);
+assert.throws(() => messeMenues([sushi as any], "de"), /0 Menü-Kategorien/); // Menü fehlt -> laut, nie alter Preis
+assert.throws(() => messeMenues([karteMitMenues, karteMitMenues], "de"), /2 Menü-Kategorien/);
+
+console.log("OK maestroSpeisekarte: 30 Prüfungen grün");
